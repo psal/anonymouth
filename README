@@ -9,13 +9,7 @@ http://psal.cs.drexel.edu/
 
 JStylo
 - Authorship recognition analysis tool
-- Version: 0.0.1
-For further details look in jstylo.txt
-
-Anonymouth
-- Authorship recognition evasion tool
-- Version: 0.0.2
-For further details look in anonymouth.txt 
+- Version: 1.1
 
 ----------------------------------------------------
 
@@ -23,7 +17,6 @@ License:
 
 JSAN, JStylo and Anonymouth are released under the AGPL v3.0, a copy should be included 
 if not it can be found at http://www.gnu.org/licenses/agpl.html
-
 
 Usage:
 
@@ -36,4 +29,3 @@ Note:
 For usage with large corpora or feature sets, it is recommended
 to increase the JVM heap size using the -Xmx option.
  
-
