@@ -1,0 +1,94 @@
+<!--	FIXME: This will not work on Windows outside of Cygwin. -->
+
+<project name="JGAAP" default="run-gui" basedir=".">
+
+	<path id="classpath">
+		<fileset dir="../lib/external">
+			<include name="*.jar"/>
+			<exclude name="junit.jar"/>
+		</fileset>
+	</path>
+
+	<path id="run-classpath">
+		<path refid="classpath" />
+		<pathelement location="../bin" />
+	</path>
+
+	<path id="test-classpath">
+		<pathelement location="../lib/external/junit.jar" />
+		<path refid="run-classpath" />
+	</path>
+
+	<target name="clean">
+		<delete dir="unittest_logs" />
+		<delete dir="../bin/com" />
+		<delete dir="../bin/WordSegment" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="../bin" />
+	</target>
+
+	<target name="build" depends="init">
+		<javac sourcepath="" srcdir="." destdir="../bin" debug="true" includeantruntime="false">
+			<classpath refid="classpath" />
+
+			<include name="WordSegment/*.java" />
+			<include name="com/jgaap/*.java" />
+			<include name="com/jgaap/generics/*.java" />
+			<include name="com/jgaap/eventDrivers/*.java" />
+			<include name="com/jgaap/eventCullers/*.java" />
+			<include name="com/jgaap/distances/*.java" />
+			<include name="com/jgaap/classifiers/*.java" />
+			<include name="com/jgaap/canonicizers/*.java" />
+			<include name="com/jgaap/backend/*.java" />
+			<include name="com/jgaap/languages/*.java" />
+			<include name="com/jgaap/ui/*.java" />
+		</javac>
+		<copy todir="../bin">
+			<fileset dir="../src">
+				<include name="com/jgaap/ui/resources/*" />
+				<include name="com/jgaap/resources/*" />
+				<include name="com/jgaap/resources/wordnet/*" />
+			</fileset>
+			<fileset dir="../unittests">
+				<include name="com/jgaap/resources/*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile-tests">
+		<javac srcdir="../unittests" destdir="../bin" debug="true" includeantruntime="false">
+			<classpath refid="test-classpath" />
+		</javac>
+	</target>
+
+	<target name="test" depends="build,compile-tests">
+		<mkdir dir="unittest_logs" />
+		<junit printsummary="off" fork="false" haltonfailure="false" failureproperty="tests.failed" showoutput="false">
+			<classpath refid="test-classpath" />
+			<formatter type="plain" usefile="true" />
+
+			<batchtest todir="unittest_logs">
+				<fileset dir="../bin/">
+					<include name="**/*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="run-gui" depends="build">
+		<java classname="com.jgaap.JGAAP" fork="true" maxmemory="2048m">
+			<classpath refid="run-classpath" />
+		</java>
+	</target>
+
+	<!-- ant cli -Dcli="arguments to CLI go here" -->
+	<target name="cli" depends="build">
+		<java classname="com.jgaap.JGAAP" fork="true" maxmemory="8192m">
+			<arg line="${cli}" />
+			<classpath refid="run-classpath" />
+		</java>
+	</target>
+
+</project>
