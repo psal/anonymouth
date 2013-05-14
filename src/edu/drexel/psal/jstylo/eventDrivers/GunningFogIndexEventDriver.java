@@ -56,8 +56,9 @@ public class GunningFogIndexEventDriver extends SingleNumericEventDriver {
 		double sentenceCount = sentenceCounter.getValue(doc);
 		EventSet syllables = syllablesDriver.createEventSet(doc);
 		for (int i=syllables.size()-1; i>=0; i--) {
-			if (Integer.parseInt(syllables.eventAt(i).toString()) < 3)
+			if (Integer.parseInt(syllables.eventAt(i).toString()) < 3){
 				syllables.removeEvent(syllables.eventAt(i));
+			}
 		}
 		double complexWordsCount = syllables.size();
 		return 0.4*(wordCount/sentenceCount + 100*complexWordsCount/wordCount);

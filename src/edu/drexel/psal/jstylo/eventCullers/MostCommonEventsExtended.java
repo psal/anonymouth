@@ -28,13 +28,13 @@ public class MostCommonEventsExtended extends FrequencyEventsExtended {
 				
 		// if one after last event has the same value, take it (although it exceeds N events)
 		int size = N;
-		while (size < events.size() &&
-				map.get(events.get(size-1)) - map.get((events.get(size))) == 0)
+		while (size < events.size() && map.get(events.get(size-1)) - map.get((events.get(size))) == 0)
 			size++;
 		
 		// remove irrelevant events
-		for (int i=events.size()-1; i >= size; i--)
+		for (int i=events.size()-1; i >= size; i--){
 			events.remove(i);
+		}
 		Event e;
 		for (EventSet es: eventSets) {
 			for (int i=es.size()-1; i >= 0; i--) {
