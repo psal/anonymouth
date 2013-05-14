@@ -242,8 +242,8 @@ public class GUIMain extends javax.swing.JFrame {
 	public GUIMain() {
 		super();
 		initData();
-		initGUI();
 		loadPreferences();
+		initGUI();
 	}
 
 	private void initData() {
@@ -262,7 +262,6 @@ public class GUIMain extends javax.swing.JFrame {
 		File jProps = new File("./jsan_resources/JStylo_prop.prop");
 		
 		if (jProps.exists()){ //if it already exists, read the calc thread variable
-			
 			try {
 				FileReader fileReader = new FileReader(jProps);
 				BufferedReader reader = new BufferedReader(fileReader);
@@ -278,7 +277,8 @@ public class GUIMain extends javax.swing.JFrame {
 					nextLine = reader.readLine();
 				}
 				reader.close();
-				
+				fileReader.close();
+
 			} catch (FileNotFoundException e) {
 				Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
 				e.printStackTrace();
@@ -287,11 +287,10 @@ public class GUIMain extends javax.swing.JFrame {
 				Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
 				e.printStackTrace();
 				generateDefaultPropsFile();
-			}
-			
+			}		
 			
 		} else { //if it doesn't exist, create it and give it defaultValues
-			
+			Logger.logln("Could not find a properties file, generating default property file...");
 			generateDefaultPropsFile();
 		}
 		
@@ -314,7 +313,7 @@ public class GUIMain extends javax.swing.JFrame {
 				writer.write(s+"\n");
 			}
 			writer.close();
-			
+			cleaner.close();
 		} catch (FileNotFoundException e) {
 			Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
 			e.printStackTrace();
@@ -1202,7 +1201,7 @@ public class GUIMain extends javax.swing.JFrame {
 							}
 						}
 						{
-							int numCalcThreads = WekaInstancesBuilder.getNumCalcThreads();
+							int numCalcThreads = wib.getNumCalcThreads();
 							JPanel analysisNPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 							analysisNThreadJTextField = new JTextField(""+numCalcThreads);
 							analysisNThreadJTextField.setColumns(5);

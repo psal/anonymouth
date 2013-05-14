@@ -37,7 +37,7 @@ public class WekaInstancesBuilder {
 	/**
 	 * Determines the number of threads to be used for features extraction.
 	 */
-	public static int numCalcThreads = 4;
+	public int numCalcThreads = 4;
 	
 	/**
 	 * Determines whether to use a set of SparseInstance or Instance.
@@ -1013,12 +1013,11 @@ public class WekaInstancesBuilder {
 	 * Sets the number of calculation threads to use for feature extraction.
 	 * @param numCalcThreads number of calculation threads to use.
 	 */
-	public void setNumCalcThreads(int numCalcThreads)
+	public void setNumCalcThreads(int nct)
 	{
-		this.numCalcThreads = numCalcThreads;
-
-		File jProps = new File("./jsan_resources/JStylo_prop.prop");
+		this.numCalcThreads = nct;
 		
+		File jProps = new File("./jsan_resources/JStylo_prop.prop");
 		if (jProps.exists()){ //write numCalcThreads to the file
 	
 			try {
@@ -1038,7 +1037,7 @@ public class WekaInstancesBuilder {
 					nextLine = reader.readLine();
 				}
 				reader.close();
-				
+				fileReader.close();
 				//Write to the file
 				FileWriter cleaner = new FileWriter(jProps,false);
 				cleaner.write("");
@@ -1090,7 +1089,7 @@ public class WekaInstancesBuilder {
 	/**
 	 * @return the number of calculation threads to use for feature extraction.
 	 */
-	public static int getNumCalcThreads()
+	public int getNumCalcThreads()
 	{	
 		return numCalcThreads;
 	}
