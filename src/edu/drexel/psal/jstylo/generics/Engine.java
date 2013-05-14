@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -88,10 +89,9 @@ public class Engine implements API {
 		return relevantEvents;
 	}
 
-	//TODO we use the List<List<EventSet>> so we can get the author names
+	//TODO we use the List<List<EventSet>> so we can get the author names, relevantEvents doesn't five us that ability
+	//should I pass both or...?
 //	@Override //FIXME Had to add in a cfd in order to check if a feature was a histogram or not
-	//also, it is currently taking the number of feature classes from the first List<EventSet>
-	//I believe it was mentioned that this shouldn't be the case, should I give it another parameter: relevantEvents? or...?
 	@Override
 	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, CumulativeFeatureDriver cumulativeFeatureDriver)
 			throws Exception {
@@ -181,9 +181,9 @@ public class Engine implements API {
 		return attributes;
 	}
 
-
 	//TODO use the relativeEvents param to form the framework of the attributes list
 	//that way all docs have the same attribute list format
+	//create and use the histograms here
 	@Override
 	public Instance createInstance(List<Attribute> attributes,
 			List<EventSet> relevantEvents,
@@ -482,7 +482,7 @@ public class Engine implements API {
 		}
 	}
 
-	//TODO need to check if indices are processed correctly
+	//Done
 	@Override
 	public List<EventSet> cullWithRespectToTraining(
 			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull,CumulativeFeatureDriver cfd)
@@ -508,9 +508,13 @@ public class Engine implements API {
 				Event e;
 				unknown = eventSetsToCull.get(i);
 				initSize = unknown.size();
-				for (int k=initSize-1; k>=0; k--) {
-					e = unknown.eventAt(k);
+				Iterator<Event> iterator = unknown.iterator();
+				Event next = (Event) iterator.next();
+				
+				while (iterator.hasNext()){
+					e = next;
 					boolean remove = true;
+
 					for (int l = 0; l<unknown.size();l++){
 						if (e.equals(relevantEvents.get(i).eventAt(l))){
 							remove=false;
@@ -519,11 +523,29 @@ public class Engine implements API {
 					}
 					
 					if (remove){
-						unknown.removeEvent(e);
+						iterator.remove();
 					}
-					
+					next = iterator.next();
 				}
 				culledUnknownEventSets.add(unknown);
+				
+				//This chunk should be obsolete. The above is a more "correct" way of updating the list.
+				//It should work properly. This code only remains as a backup.
+				//if this code is restored, move culledUknownEventSets.add(unknown) to below it.
+/*				for (int k=initSize-1; k>=0; k--) {
+					e = unknown.eventAt(k);
+					boolean remove = true;
+					for (int l = 0; l<unknown.size();l++){
+						if (e.equals(relevantEvents.get(i).eventAt(l))){
+							remove=false;
+							break;
+						}
+					}
+					if (remove){
+						unknown.removeEvent(e);
+					}		
+				}*/
+				
 			} else {	// one unique numeric event
 
 				//add non-histogram if it is in the relevantEventSets list
