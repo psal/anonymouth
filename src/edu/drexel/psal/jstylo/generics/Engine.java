@@ -30,11 +30,8 @@ import edu.drexel.psal.jstylo.eventDrivers.SentenceCounterEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.SingleNumericEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver;
 
-//TODO remove abstract. Right now it's just to get rid of the redX
-public abstract class Engine implements API {
 
-	//PassDocuments
-	//hasDocTitles
+public class Engine implements API {
 	
 	//Done
 	@Override
@@ -184,12 +181,14 @@ public abstract class Engine implements API {
 		return attributes;
 	}
 
-//	@Override //FIXME had to add a "hasDocTitles" parameter
-	//Also, there are two references to a "Document" type parameter, with the goal of adding the author.
-	//This sounds rather necessary, so perhaps it would be best to pass through the original document as well?
+
+	//TODO use the relativeEvents param to form the framework of the attributes list
+	//that way all docs have the same attribute list format
+	@Override
 	public Instance createInstance(List<Attribute> attributes,
+			List<EventSet> relevantEvents,
 			CumulativeFeatureDriver cumulativeFeatureDriver,
-			List<EventSet> documentData, boolean isSparse, boolean hasDocTitles) throws Exception {
+			List<EventSet> documentData, Document document, boolean isSparse, boolean hasDocTitles) throws Exception {
 			
 		int numOfFeatureClasses = documentData.size();
 		// initialize vector size (including authorName and title if required) and first indices of feature classes array
@@ -208,17 +207,13 @@ public abstract class Engine implements API {
 			if (isSparse) inst = new SparseInstance(vectorSize);
 			else inst = new Instance(vectorSize);
 			
-			// update document title FIXME either add this back in if its necessary or delete it if it isn't
-			//the problem: we'd need a "Document" type arg to pass it, which we don't have.
-			/*if (hasDocTitles)
-				inst.setValue((Attribute) attributes.get(0), documentData.getTitle());
-			*/	
-			
+			if (hasDocTitles)
+				inst.setValue((Attribute) attributes.get(0), document.getTitle());
+						
 				// update values
 			int index = (hasDocTitles ? 1 : 0);
 			for (int j=0; j<numOfFeatureClasses; j++) {
 
-				//TODO I think this chunk will correctly grab all events and histograms from the document
 				Set<Event> events = new HashSet<Event>();
 				EventHistogram currHist = new EventHistogram();
 				if (cumulativeFeatureDriver.featureDriverAt(j).isCalcHist()) {	// calculate histogram
@@ -248,20 +243,17 @@ public abstract class Engine implements API {
 							value);	
 				}
 			}
-				
-			// update author FIXME find a way to fix if it is needed delete if not
-			//inst.setValue((Attribute) attributes.get(attributes.size()-1), documentData.getAuthor());
-				
+			inst.setValue((Attribute) attributes.get(attributes.size()-1), document.getAuthor());	
 		}
 		return inst;
 	}
 
-//	@Override //FIXME needed to add document parameter so that we can read the document to get normalization baselines
-	//Also, there's a "hasDocTitle" parameter which is used to initialize vector size. Either the parameter needs to be added or...?
+	//Done
+	@Override
 	public void normInstance(CumulativeFeatureDriver cfd,
-			Instance instance, Document document) throws Exception {
+			Instance instance, Document document, boolean hasDocTitles) throws Exception {
 
-		int i, j;
+		int i;
 		int numOfFeatureClasses = cfd.numOfFeatureDrivers();
 
 		HashMap<Instance, int[]> featureClassPerInst = null;
@@ -273,8 +265,7 @@ public abstract class Engine implements API {
 		
 		
 		// initialize vector size (including authorName and title if required) and first indices of feature classes array
-		//int vectorSize = (hasDocTitles ? 1 : 0);
-		int vectorSize=0; //TODO figure out some way to load this like above. Perhaps add the hasDocTitle param to method
+		int vectorSize = (hasDocTitles ? 1 : 0);
 		for (i=0; i<numOfFeatureClasses; i++) {
 			featureClassAttrsFirstIndex[i] = vectorSize;
 			vectorSize += instance.attribute(i).numValues(); //not sure if this is the right thing to be counting or not
@@ -464,19 +455,13 @@ public abstract class Engine implements API {
 		return indicesToKeep;
 	}
 
-	//verify that this is how it should work; that the list<Integer> is of indices to keep.
-	//Check to see if removing an item shifts the indices of all other items. If so, compensate for that.
+	//TODO need to check indicies
 	@Override 
 	public void applyInfoGain(List<Integer> chosenFeatures, Instances insts)
 			throws Exception {
 		
 		//for all attributes
 		for (int i=0; i<insts.numAttributes();i++){
-			
-			//TODO make sure that removing the insts doesn't affect the indices. If it does, add something to compensate
-				//such as iterate over the list to keep and modify as appropriate or instead setting the indices to remove to a sentinel
-				//value and then looping through and removing all sentinels after they've all been marked
-			
 			boolean remove = true;
 			
 			//iterate over the list to see if that index should be removed or not
@@ -497,8 +482,8 @@ public abstract class Engine implements API {
 		}
 	}
 
-//	@Override //Needs cumulative feature driver to determine if an event is a histogram
-	//Need to do an indices check
+	//TODO need to check if indices are processed correctly
+	@Override
 	public List<EventSet> cullWithRespectToTraining(
 			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull,CumulativeFeatureDriver cfd)
 			throws Exception {
@@ -533,9 +518,6 @@ public abstract class Engine implements API {
 						}
 					}
 					
-					//TODO same thing here; need to check to see if this will screw with the indices
-					//it may not, as this is an unordered set
-					//at the same time, it may, as it is a set of a given size
 					if (remove){
 						unknown.removeEvent(e);
 					}

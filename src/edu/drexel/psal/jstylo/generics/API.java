@@ -73,7 +73,9 @@ public interface API {
 	public Instance createInstance(List<Attribute> attributes,
 			List<EventSet> relevantEvents,
 			CumulativeFeatureDriver cumulativeFeatureDriver,
-			List<EventSet> documentData, boolean isSparse) throws Exception;
+			List<EventSet> documentData,
+			Document document, 
+			boolean isSparse, boolean hasDocTitles) throws Exception;
 	//create and use histograms here
 	
 	/**
@@ -84,7 +86,7 @@ public interface API {
 	 * @throws Exception
 	 */
 	public void normInstance(CumulativeFeatureDriver cumulativeFeatureDriver,
-			Instance instance) throws Exception;
+			Instance instance, Document document, boolean hasDocTitles) throws Exception;
 	
 	// the full training Instances object is generated
 	
@@ -120,7 +122,8 @@ public interface API {
 	 * @throws Exception
 	 */
 	public List<EventSet> cullWithRespectToTraining(
-			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull)
+			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull,
+			CumulativeFeatureDriver cumulativeFeatureDriver)
 			throws Exception;
 	
 	// createInstance - same as for training documents
