@@ -48,10 +48,7 @@ public class Engine implements API {
 		return CumulativeEventCuller.cull(eventSets,cumulativeFeatureDriver);
 	}
 
-	//TODO this functionality was overlooked in the original wib, as the relevant events were just scraped from the first document
-	//need to implement functionality for the first time.
-	//Consider adding more detailed IDs in EventSet so as to make life easier here.
-	//Doing this could allow eventSets to be matched even if their contents do not match.
+	//Done
 	@Override
 	public List<EventSet> getRelevantEvents( 
 			List<List<EventSet>> culledEventSets,
@@ -64,14 +61,15 @@ public class Engine implements API {
 			//iterate over each inner list's eventSets
 			for (EventSet es: l){
 				
+				//whether or not to add the event set to the list (if false, it is already on the list)
 				boolean add = true;
 				
 				for (EventSet esl:relevantEvents){
-					//eventSet check. If true
-						//added equals false
-						//break
-					//else
-						//do nothing
+					//this should compare the category/name of the event set
+					if(es.getEventSetID().equals(esl.getEventSetID())){
+						add=false;
+						break;
+					}
 				}
 				
 				if (add){
@@ -81,7 +79,7 @@ public class Engine implements API {
 					for (Event e: es){
 						boolean toAdd = true;
 						for (Event re: relevantEvents.get(relevantEvents.indexOf(es))){
-							if (e.equals(re)){
+							if (e.getEvent().equals(re.getEvent())){
 								toAdd=false;
 								break;
 							}
@@ -90,12 +88,7 @@ public class Engine implements API {
 							relevantEvents.get(relevantEvents.indexOf(es)).addEvent(e);
 						}
 					}
-				}
-				
-				//TODO figure out how to match EventSets
-				
-				//it looks like Event s themselves can be matched via string matching and Event.getEvent()
-				
+				}				
 			}
 		}
 		return relevantEvents;

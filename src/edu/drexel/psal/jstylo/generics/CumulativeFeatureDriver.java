@@ -132,6 +132,7 @@ public class CumulativeFeatureDriver {
 			// extract event set
 			String prefix = features.get(i).displayName().replace(" ", "-");
 			EventSet tmpEs = ed.createEventSet(currDoc);
+			tmpEs.setEventSetID(features.get(i).getName()); //TODO try to see if we can use this to match EventSets later on
 			EventSet es = new EventSet();
 			es.setAuthor(doc.getAuthor());
 			es.setDocumentName(doc.getTitle());
@@ -571,7 +572,7 @@ public class CumulativeFeatureDriver {
         }
 	}
 
-	
+	/*
 	public static void main(String[] args) throws Exception {
 		FeatureWizardDriver.populateAll();
 		CumulativeFeatureDriver cfd = new CumulativeFeatureDriver(new File("feature_sets/example_feature_set.xml").getAbsolutePath());
@@ -582,5 +583,5 @@ public class CumulativeFeatureDriver {
 		WekaInstancesBuilder w = new WekaInstancesBuilder(false);
 		w.prepareTrainingSet(ps.getTrainDocs("aa"), cfd);
 		System.out.println(w.getTrainingSet());
-	}
+	}*/
 }
