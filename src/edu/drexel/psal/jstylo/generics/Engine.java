@@ -91,16 +91,11 @@ public class Engine implements API {
 
 	//TODO we use the List<List<EventSet>> so we can get the author names, relevantEvents doesn't five us that ability
 	//should I pass both or...?
-//	@Override //FIXME Had to add in a cfd in order to check if a feature was a histogram or not
 	@Override
-	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, CumulativeFeatureDriver cumulativeFeatureDriver)
+	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cumulativeFeatureDriver)
 			throws Exception {
 
-		//FIXME this line is incorrect, but is what we are currently using elsewhere.
-		//essentially, it uses the first List<EventSet> to determine the size of the relevant EventSet list
-		//this shouldn't always be the case: the first list might be missing EventSets which other documents have
-		//which are more popular ie a specific word or bigram. Change this once everything else is looking good.
-		int numOfFeatureClasses = culledEventSets.get(0).size();
+		int numOfFeatureClasses = relevantEvents.size();
 		
 		int numOfVectors = culledEventSets.size();
 		List<EventSet> list;
@@ -123,9 +118,7 @@ public class Engine implements API {
 		Attribute authorNameAttribute = new Attribute("authorName", authorNames);
 		
 		// initialize list of lists of histograms
-		List<List<EventHistogram>> knownEventHists = new ArrayList<List<EventHistogram>>(numOfVectors);
-		for (int i=0; i<numOfVectors; i++)
-			knownEventHists.add(new ArrayList<EventHistogram>(numOfFeatureClasses));
+		List<EventHistogram> knownEventHists = new ArrayList<EventHistogram>(numOfFeatureClasses);
 		
 		// initialize list of sets of events, which will eventually become the attributes
 		List<Set<Event>> allEvents = new ArrayList<Set<Event>>(numOfFeatureClasses);
@@ -134,8 +127,8 @@ public class Engine implements API {
 			// initialize relevant list of event sets and histograms
 
 			list = new ArrayList<EventSet>(numOfVectors);
-			for (int i=0; i<numOfVectors; i++)
-				list.add(culledEventSets.get(i).get(currEventSet));
+			for (int i=0; i<numOfFeatureClasses; i++)
+				list.add(relevantEvents.get(i));
 			histograms = new ArrayList<EventHistogram>();
 			
 			Set<Event> events = new HashSet<Event>();
@@ -155,19 +148,22 @@ public class Engine implements API {
 				
 				// update histograms
 				for (int i=0; i<numOfVectors; i++)
-					knownEventHists.get(i).add(currEventSet,histograms.get(i));
+					knownEventHists.add(currEventSet,histograms.get(i));
 				
 			} else {	// one unique numeric event
 				
 				// generate sole event (extract full event name and remove value)
+				//TODO extract the histogram value and hide it in the name
 				Event event = new Event(list.get(0).eventAt(0).getEvent().replaceAll("\\{.*\\}", "{-}"));
 				events.add(event);
 				allEvents.add(currEventSet,events);
 				
 				// update histogram to null at current position
-				for (int i=0; i<numOfVectors; i++)
-					knownEventHists.get(i).add(currEventSet,null);
+				knownEventHists.add(currEventSet,null);
 			}
+			
+			//TODO need to convert events/histograms to Attributes and add to attribute list
+			
 			// add authors attribute as last attribute
 			attributeList.addElement(authorNameAttribute);
 		}
@@ -455,7 +451,7 @@ public class Engine implements API {
 		return indicesToKeep;
 	}
 
-	//TODO need to check indicies
+	//Done
 	@Override 
 	public void applyInfoGain(List<Integer> chosenFeatures, Instances insts)
 			throws Exception {
@@ -478,6 +474,9 @@ public class Engine implements API {
 			//delete the attribute if it wasn't found
 			if (remove){
 				insts.deleteAttributeAt(i);
+				i--; //This was added because num attributes decreases by 1
+						//each time an element is removed. As such, all future indices are
+						//shifted by one to the left. This counteracts it.
 			}
 		}
 	}

@@ -60,7 +60,7 @@ public interface API {
 	 * @throws Exception
 	 */
 	public List<Attribute> getAttributeList(
-			List<List<EventSet>> culledEventSets,CumulativeFeatureDriver cfd) throws Exception;
+			List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cfd) throws Exception;
 	
 	/**
 	 * Takes various parameters related to a document and creates an Instance object from that data.
