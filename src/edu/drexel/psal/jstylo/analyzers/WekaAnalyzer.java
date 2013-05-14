@@ -367,11 +367,51 @@ public class WekaAnalyzer extends Analyzer {
 			return ((SMO) classifier).globalInfo();
 		} else if (classifier instanceof LibSVM) {
 			return ((LibSVM) classifier).globalInfo();
+		} else if (classifier instanceof GaussianProcesses) {
+			return ((GaussianProcesses) classifier).globalInfo();
+		} else if (classifier instanceof IsotonicRegression) {
+			return ((IsotonicRegression) classifier).globalInfo();
+		} else if (classifier instanceof LeastMedSq) {
+			return ((LeastMedSq) classifier).globalInfo();
+		} else if (classifier instanceof LibLINEAR) {
+			return ((LibLINEAR) classifier).globalInfo();
+		} else if (classifier instanceof LinearRegression) {
+			return ((LinearRegression) classifier).globalInfo();
+		} else if (classifier instanceof PLSClassifier) {
+			return ((PLSClassifier) classifier).globalInfo();
+		} else if (classifier instanceof PaceRegression) {
+			return ((PaceRegression) classifier).globalInfo();
+		} else if (classifier instanceof RBFNetwork) {
+			return ((RBFNetwork) classifier).globalInfo();
+		} else if (classifier instanceof RBFNetwork) {
+			return ((RBFNetwork) classifier).globalInfo();
+		} else if (classifier instanceof SMOreg) {
+			return ((SMOreg) classifier).globalInfo();
+		} else if (classifier instanceof SPegasos) {
+			return ((SPegasos) classifier).globalInfo();
+		} else if (classifier instanceof SimpleLinearRegression) {
+			return ((SimpleLinearRegression) classifier).globalInfo();
+		} else if (classifier instanceof SimpleLinearRegression) {
+			return ((SimpleLinearRegression) classifier).globalInfo();
+		} else if (classifier instanceof SimpleLogistic) {
+			return ((SimpleLogistic) classifier).globalInfo();
+		} else if (classifier instanceof VotedPerceptron) {
+			return ((VotedPerceptron) classifier).globalInfo();
+		} else if (classifier instanceof Winnow) {
+			return ((Winnow) classifier).globalInfo();
 		}
 				
 		// lazy
 		else if (classifier instanceof IBk) {
 			return ((IBk) classifier).globalInfo();
+		} else if (classifier instanceof IB1) {
+			return ((IB1) classifier).globalInfo();
+		} else if (classifier instanceof KStar) {
+			return ((KStar) classifier).globalInfo();
+		} else if (classifier instanceof LBR) {
+			return ((LBR) classifier).globalInfo();
+		} else if (classifier instanceof LWL) {
+			return ((LWL) classifier).globalInfo();
 		}
 		
 		// meta
