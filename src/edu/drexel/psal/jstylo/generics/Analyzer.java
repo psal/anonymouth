@@ -202,7 +202,7 @@ public abstract class Analyzer{
 		//use the results map to find all of the potential authors and add them to extractedAuthors
 		for (String temp: results.keySet()){
 			for (String s: results.get(temp).keySet()){
-				extractedAuthors.add(s);
+				extractedAuthors.add(s.replaceAll("'",""));
 			}
 			break;
 		}
@@ -253,14 +253,16 @@ public abstract class Analyzer{
 		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
 		for (String testDoc: results.keySet()){
 			
+			testDoc = testDoc.replaceAll("'","");
+			
 			String selectedAuthor = "";
 			Double max =0.0;
 			
 			//find the most likely author
-			for (String potentialAuthor:results.get(testDoc).keySet()){
+			for (String potentialAuthor : results.get(testDoc).keySet()){
 				if (results.get(testDoc).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
 					max = results.get(testDoc).get(potentialAuthor).doubleValue();
-					selectedAuthor=potentialAuthor;
+					selectedAuthor=potentialAuthor.replaceAll("'","");
 				}
 			}
 			
