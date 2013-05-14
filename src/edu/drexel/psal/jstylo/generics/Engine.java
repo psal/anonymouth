@@ -78,6 +78,18 @@ public class Engine implements API {
 					relevantEvents.add(es);
 				} else {
 					//go through this eventSet and add any events to the relevant EventSet if they aren't already there.
+					for (Event e: es){
+						boolean toAdd = true;
+						for (Event re: relevantEvents.get(relevantEvents.indexOf(es))){
+							if (e.equals(re)){
+								toAdd=false;
+								break;
+							}
+						}
+						if (toAdd){
+							relevantEvents.get(relevantEvents.indexOf(es)).addEvent(e);
+						}
+					}
 				}
 				
 				//TODO figure out how to match EventSets
