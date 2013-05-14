@@ -373,12 +373,14 @@ public class AnalysisTabDriver {
 					}
 				}
 				
-				// lock
+				//lock
 				lockUnlock(main, true);
 				
+				//if the number of calc threads entered is different then the current stored one, change it
+				if (Integer.parseInt(main.analysisNThreadJTextField.getText())!=main.wib.getNumCalcThreads())
+					main.wib.setNumCalcThreads(Integer.parseInt(main.analysisNThreadJTextField.getText()));
+				
 				// start analysis thread
-				//Logger.logln("CalcuThread value in field: "+Integer.parseInt(main.analysisNThreadJTextField.getText()));
-				main.wib.setNumCalcThreads(Integer.parseInt(main.analysisNThreadJTextField.getText()));
 				main.analysisThread = new Thread(new RunAnalysisThread(main));
 				main.analysisThread.start();
 			}

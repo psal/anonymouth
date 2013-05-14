@@ -6,6 +6,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 import edu.drexel.psal.JSANConstants;
@@ -237,6 +243,7 @@ public class GUIMain extends javax.swing.JFrame {
 		super();
 		initData();
 		initGUI();
+		loadPreferences();
 	}
 
 	private void initData() {
@@ -249,7 +256,77 @@ public class GUIMain extends javax.swing.JFrame {
 		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 	}
+	
+	private void loadPreferences(){
+		
+		File jProps = new File("./jsan_resources/JStylo_prop.prop");
+		
+		if (jProps.exists()){ //if it already exists, read the calc thread variable
+			
+			try {
+				FileReader fileReader = new FileReader(jProps);
+				BufferedReader reader = new BufferedReader(fileReader);
+				
+				//read the file and save the variable when it is found if for some reason it's not in the file, it'll default to 4
+				String nextLine = reader.readLine();
+				while (nextLine!=null){
+					if (nextLine.contains("numCalcThreads")){
+						String[] s = nextLine.split("="); //[0]="numCalcThreads" [1]=the number we're looking for
+						wib.setNumCalcThreads(Integer.parseInt(s[1]));
+					}
+							
+					nextLine = reader.readLine();
+				}
+				reader.close();
+				
+			} catch (FileNotFoundException e) {
+				Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+				e.printStackTrace();
+				generateDefaultPropsFile();
+			} catch (IOException e) {
+				Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+				e.printStackTrace();
+				generateDefaultPropsFile();
+			}
+			
+			
+		} else { //if it doesn't exist, create it and give it defaultValues
+			
+			generateDefaultPropsFile();
+		}
+		
+	}
 
+	public static void generateDefaultPropsFile(){
+	
+		File jProps = new File("./jsan_resources/JStylo_prop.prop");
+		
+		try {
+			String[] contents = {"#JStylo Preferences","#Properties File Version: .1","numCalcThreads=4"};
+			
+			//Write to the file
+			FileWriter cleaner = new FileWriter(jProps,false);
+			cleaner.write("");
+			cleaner.close();
+			
+			FileWriter writer = new FileWriter(jProps,true);
+			for(String s:contents){
+				writer.write(s+"\n");
+			}
+			writer.close();
+			
+		} catch (FileNotFoundException e) {
+			Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+			e.printStackTrace();
+			generateDefaultPropsFile();
+		} catch (IOException e) {
+			Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+			e.printStackTrace();
+			generateDefaultPropsFile();
+		}
+		
+	}
+	
 	private void initGUI() {
 		try {
 			

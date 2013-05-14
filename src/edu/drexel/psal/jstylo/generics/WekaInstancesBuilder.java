@@ -37,7 +37,7 @@ public class WekaInstancesBuilder {
 	/**
 	 * Determines the number of threads to be used for features extraction.
 	 */
-	public int numCalcThreads = 4;
+	public static int numCalcThreads = 4;
 	
 	/**
 	 * Determines whether to use a set of SparseInstance or Instance.
@@ -1053,17 +1053,15 @@ public class WekaInstancesBuilder {
 			} catch (FileNotFoundException e) {
 				Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
 				e.printStackTrace();
-				generateDefaultPropsFile();
+				numCalcThreads=1;
 			} catch (IOException e) {
 				Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
 				e.printStackTrace();
-				generateDefaultPropsFile();
+				numCalcThreads=1;
 			}
-			
-		} else { //otherwise make a new props file
-			generateDefaultPropsFile();
+		} else {
+			numCalcThreads=1;
 		}
-		
 	}
 
 	/**
@@ -1093,79 +1091,11 @@ public class WekaInstancesBuilder {
 	 * @return the number of calculation threads to use for feature extraction.
 	 */
 	public static int getNumCalcThreads()
-	{
-		int nct=4; //default is 4
-		
-		File jProps = new File("./jsan_resources/JStylo_prop.prop");
-		
-		if (jProps.exists()){ //if it already exists, read the calc thread variable
-			
-			try {
-				FileReader fileReader = new FileReader(jProps);
-				BufferedReader reader = new BufferedReader(fileReader);
-				
-				//read the file and save the variable when it is found if for some reason it's not in the file, it'll default to 4
-				String nextLine = reader.readLine();
-				while (nextLine!=null){
-					if (nextLine.contains("numCalcThreads")){
-						String[] s = nextLine.split("="); //[0]="numCalcThreads" [1]=the number we're looking for
-						nct = Integer.parseInt(s[1]);
-						break;
-					}
-					nextLine = reader.readLine();
-				}
-				
-				reader.close();
-				
-			} catch (FileNotFoundException e) {
-				Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
-				e.printStackTrace();
-				generateDefaultPropsFile();
-			} catch (IOException e) {
-				Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
-				e.printStackTrace();
-				generateDefaultPropsFile();
-			}
-			
-			
-		} else { //if it doesn't exist, create it and give it the calc thread value
-			
-			generateDefaultPropsFile();
-		}
-		
-		return nct;
+	{	
+		return numCalcThreads;
 	}
 	
-	public static void generateDefaultPropsFile(){
 
-		
-		File jProps = new File("./jsan_resources/JStylo_prop.prop");
-		
-		try {
-			String[] contents = {"#JStylo Preferences","#Properties File Version: .1","numCalcThreads=4"};
-			
-			//Write to the file
-			FileWriter cleaner = new FileWriter(jProps,false);
-			cleaner.write("");
-			cleaner.close();
-			
-			FileWriter writer = new FileWriter(jProps,true);
-			for(String s:contents){
-				writer.write(s+"\n");
-			}
-			writer.close();
-			
-		} catch (FileNotFoundException e) {
-			Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
-			e.printStackTrace();
-			generateDefaultPropsFile();
-		} catch (IOException e) {
-			Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
-			e.printStackTrace();
-			generateDefaultPropsFile();
-		}
-		
-	}
 	
 	/**
 	 * Returns true if the Instances representation is sparse, and false otherwise.
