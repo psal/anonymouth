@@ -30,7 +30,8 @@ import edu.drexel.psal.jstylo.eventDrivers.SentenceCounterEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.SingleNumericEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver;
 
-public class Engine implements API {
+//TODO remove abstract. Right now it's just to get rid of the redX
+public abstract class Engine implements API {
 
 	//PassDocuments
 	//hasDocTitles
@@ -90,6 +91,7 @@ public class Engine implements API {
 		return relevantEvents;
 	}
 
+	//TODO we use the List<List<EventSet>> so we can get the author names
 //	@Override //FIXME Had to add in a cfd in order to check if a feature was a histogram or not
 	//also, it is currently taking the number of feature classes from the first List<EventSet>
 	//I believe it was mentioned that this shouldn't be the case, should I give it another parameter: relevantEvents? or...?
