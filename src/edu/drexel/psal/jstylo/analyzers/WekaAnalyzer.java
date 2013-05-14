@@ -12,17 +12,13 @@ import java.util.*;
 import com.jgaap.generics.Document;
 
 import weka.classifiers.*;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.bayes.NaiveBayesMultinomial;
-import weka.classifiers.bayes.NaiveBayesMultinomialUpdateable;
-import weka.classifiers.bayes.NaiveBayesUpdateable;
-import weka.classifiers.functions.LibSVM;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.functions.SMO;
-import weka.classifiers.lazy.IBk;
-import weka.classifiers.rules.ZeroR;
-import weka.classifiers.trees.J48;
+import weka.classifiers.bayes.*;
+import weka.classifiers.functions.*;
+import weka.classifiers.lazy.*;
+import weka.classifiers.meta.*;
+import weka.classifiers.misc.*;
+import weka.classifiers.rules.*;
+import weka.classifiers.trees.*;
 import weka.core.*;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
@@ -326,7 +322,7 @@ public class WekaAnalyzer extends Analyzer {
 		return optionsDescToReturn;
 	}
 	
-	/** TODO add the other classifiers
+	/** 
 	 * returns the description of the analyzer itself. Due to the way weka is coded, the instanceofs are necessary, as "globalInfo"
 	 * is not listed in the "Classifier" abstract class, so we have to cast to the subclass in order to get it.
 	 */
@@ -334,55 +330,70 @@ public class WekaAnalyzer extends Analyzer {
 	public String analyzerDescription() {
 	
 		// bayes
-				if (classifier instanceof NaiveBayes) {
-					return ((NaiveBayes) classifier).globalInfo();
-				} else if (classifier instanceof NaiveBayesMultinomial) {
-					return ((NaiveBayesMultinomial) classifier).globalInfo();
-				}
+		if (classifier instanceof NaiveBayes) {
+			return ((NaiveBayes) classifier).globalInfo();
+		} else if (classifier instanceof NaiveBayesMultinomial) {
+			return ((NaiveBayesMultinomial) classifier).globalInfo();
+		} else if (classifier instanceof AODE) {
+			return ((AODE) classifier).globalInfo();
+		} else if (classifier instanceof AODEsr) {
+			return ((AODEsr) classifier).globalInfo();
+		} else if (classifier instanceof BayesNet) {
+			return ((BayesNet) classifier).globalInfo();
+		} else if (classifier instanceof BayesianLogisticRegression) {
+			return ((BayesianLogisticRegression) classifier).globalInfo();
+		} else if (classifier instanceof ComplementNaiveBayes) {
+			return ((ComplementNaiveBayes) classifier).globalInfo();
+		} else if (classifier instanceof DMNBtext) {
+			return ((DMNBtext) classifier).globalInfo();
+		} else if (classifier instanceof HNB) {
+			return ((HNB) classifier).globalInfo();
+		} else if (classifier instanceof NaiveBayesMultinomialUpdateable) {
+			return ((NaiveBayesMultinomialUpdateable) classifier).globalInfo();
+		} else if (classifier instanceof NaiveBayesSimple) {
+			return ((NaiveBayesSimple) classifier).globalInfo();
+		} else if (classifier instanceof NaiveBayesUpdateable) {
+			return ((NaiveBayesUpdateable) classifier).globalInfo();
+		} else if (classifier instanceof WAODE) {
+			return ((WAODE) classifier).globalInfo();
+		} 
+		
+		// functions
+		else if (classifier instanceof Logistic) {
+			return ((Logistic) classifier).globalInfo();
+		} else if (classifier instanceof MultilayerPerceptron) {
+			return ((MultilayerPerceptron) classifier).globalInfo();
+		} else if (classifier instanceof SMO) {
+			return ((SMO) classifier).globalInfo();
+		} else if (classifier instanceof LibSVM) {
+			return ((LibSVM) classifier).globalInfo();
+		}
 				
-				// functions
-				else if (classifier instanceof Logistic) {
-					return ((Logistic) classifier).globalInfo();
-				}
-				else if (classifier instanceof MultilayerPerceptron) {
-					return ((MultilayerPerceptron) classifier).globalInfo();
-				}
-				else if (classifier instanceof SMO) {
-					return ((SMO) classifier).globalInfo();
-				}
-				else if (classifier instanceof LibSVM) {
-					LibSVM s = (LibSVM) classifier;
-					String res = s.globalInfo()+"\n\nOptions:\n";
-					Enumeration e = s.listOptions();
-					while (e.hasMoreElements()) {
-						Option o = (Option) e.nextElement();
-						res += "-"+o.name()+": "+o.description()+"\n\n";
-					}
-					return res;
-				}
-				
-				// lazy
-				else if (classifier instanceof IBk) {
-					return ((IBk) classifier).globalInfo();
-				}
-				
-				// meta
+		// lazy
+		else if (classifier instanceof IBk) {
+			return ((IBk) classifier).globalInfo();
+		}
+		
+		// meta
 
-				// misc
+		// misc
 
-				// rules
-				else if (classifier instanceof ZeroR) {
-					return ((ZeroR) classifier).globalInfo();
-				}
+		// rules
+		else if (classifier instanceof ZeroR) {
+			return ((ZeroR) classifier).globalInfo();
+		}
 
-				// trees
-				else if (classifier instanceof J48) {
-					return ((J48) classifier).globalInfo();
-				}
+		// trees
+		else if (classifier instanceof J48) {
+			return ((J48) classifier).globalInfo();
+		}
+		
+		//a classifier who has
+		else {
+			return "No description available";
+		}
 				
-				else {
-					return "No description available.";
-				}
+				
 	}
 	
 	/* =======

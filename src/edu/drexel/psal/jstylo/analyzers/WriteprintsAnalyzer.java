@@ -578,8 +578,8 @@ public class WriteprintsAnalyzer extends Analyzer {
 	 * @throws IOException 
 	 */
 	private static void initWordnetDB() {
-		URL url = Thread.currentThread().getClass().getResource(
-				JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet");
+		URL url = Thread.currentThread().getClass().getResource(JSANConstants.JGAAP_RESOURCE_WORDNET);
+		//TODO have to change this to deal with jars, not directories
 		System.setProperty("wordnet.database.dir", url.getPath());
 		wndb = WordNetDatabase.getFileInstance();
 	}
