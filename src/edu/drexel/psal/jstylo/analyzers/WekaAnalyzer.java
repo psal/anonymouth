@@ -414,6 +414,7 @@ public class WekaAnalyzer extends Analyzer {
 			return ((LWL) classifier).globalInfo();
 		}
 		
+		//TODO add the rest of the descriptions
 		// meta
 
 		// misc
@@ -432,7 +433,6 @@ public class WekaAnalyzer extends Analyzer {
 		else {
 			return "No description available";
 		}
-				
 				
 	}
 	
