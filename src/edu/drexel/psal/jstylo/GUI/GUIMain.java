@@ -273,7 +273,13 @@ public class GUIMain extends javax.swing.JFrame {
 						String[] s = nextLine.split("="); //[0]="numCalcThreads" [1]=the number we're looking for
 						wib.setNumCalcThreads(Integer.parseInt(s[1]));
 					}
-							
+					//load default analysis tab args?
+						//perhaps use a series of 0 and 1 for simple on/offs?
+					
+					//load last feature set
+					
+					//load default directories
+					
 					nextLine = reader.readLine();
 				}
 				reader.close();
@@ -298,6 +304,9 @@ public class GUIMain extends javax.swing.JFrame {
 
 	public static void generateDefaultPropsFile(){
 	
+		File resourceFolder = new File("./jsan_resources/");
+		resourceFolder.mkdirs();
+		
 		File jProps = new File("./jsan_resources/JStylo_prop.prop");
 		
 		try {

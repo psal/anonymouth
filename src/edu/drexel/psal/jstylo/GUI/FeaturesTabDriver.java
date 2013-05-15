@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.*;
 
 import javax.swing.JFileChooser;
@@ -470,7 +471,10 @@ public class FeaturesTabDriver {
 		main.presetCFDs = new ArrayList<CumulativeFeatureDriver>();
 		
 		try {
-			File file = new File(JSANConstants.JSAN_FEATURESETS_PREFIX);
+			
+			File file = new File("bin/"+JSANConstants.JSAN_FEATURESETS_PREFIX);
+			Logger.logln("path: "+file.getAbsolutePath());
+			
 			File[] featureSetFiles = file.listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".xml");
@@ -481,7 +485,7 @@ public class FeaturesTabDriver {
 			for (File f: featureSetFiles) {
 				path = f.getAbsolutePath();
 				main.presetCFDs.add(new CumulativeFeatureDriver(path));
-			}
+			} 
 		} catch (Exception e) {
 			Logger.logln("Failed to read feature set files.",LogOut.STDERR);
 			e.printStackTrace();
