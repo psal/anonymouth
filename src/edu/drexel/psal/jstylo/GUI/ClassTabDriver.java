@@ -632,7 +632,7 @@ public class ClassTabDriver {
 			try { //loads the path to the resource. doubles as a test to see if we're in a jar
 				df = new File(resource.toURI());
 			} catch (Exception e) {
-				//Logger.logln("Reading from jar file..."); 
+				Logger.logln("Reading from jar file..."); 
 			} 
 			
 			//for non-jars
@@ -685,6 +685,7 @@ public class ClassTabDriver {
 			//here is where the weka/jar related stuff will be handled
 			else { 
 				try { 
+					Logger.logln("Trying to read _"+current.getName()+"_ from jar");
 					//set up jar path and information
 					JarFile source = new JarFile(resource.getFile().replaceFirst("[.]jar[!].*",".jar").replaceFirst("file:",""));
 					Enumeration<JarEntry> files = source.entries();
