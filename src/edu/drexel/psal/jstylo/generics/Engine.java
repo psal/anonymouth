@@ -94,8 +94,7 @@ public class Engine implements API {
 		return relevantEvents;
 	}
 
-	//TODO we use the List<List<EventSet>> so we can get the author names, relevantEvents doesn't five us that ability
-	//should I pass both or...?
+	//Done
 	@Override
 	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cumulativeFeatureDriver)
 			throws Exception {
@@ -233,7 +232,7 @@ public class Engine implements API {
 					for (Event e: events) {
 						inst.setValue(
 							(Attribute) attributes.get(index++),
-							currHist.getAbsoluteFrequency(e));				// use absolute values, normalize later
+							currHist.getAbsoluteFrequency(e));	// use absolute values, normalize later
 					}
 				} else {
 					
@@ -244,6 +243,13 @@ public class Engine implements API {
 							value);	
 				}
 			}
+			
+			//Initialize attribute list from relevantEvents
+			
+			//go over extracted histograms, add values to the list
+			
+			//go over the list, add them to the instance
+			
 			inst.setValue((Attribute) attributes.get(attributes.size()-1), document.getAuthor());	
 		}
 		return inst;
