@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.security.CodeSource;
 import java.util.*;
 
 import javax.swing.JFileChooser;
@@ -469,8 +471,9 @@ public class FeaturesTabDriver {
 	protected static void initPresetCFDs(GUIMain main) {
 		// initialize list of preset CFDs
 		main.presetCFDs = new ArrayList<CumulativeFeatureDriver>();
+		boolean added=true;
 		
-		try {
+		try { //This will initialize it if we're running from an IDE
 			
 			File file = new File("bin/"+JSANConstants.JSAN_FEATURESETS_PREFIX);
 			Logger.logln("path: "+file.getAbsolutePath());
@@ -487,16 +490,32 @@ public class FeaturesTabDriver {
 				main.presetCFDs.add(new CumulativeFeatureDriver(path));
 			} 
 		} catch (Exception e) {
+			added=false;
 			Logger.logln("Failed to read feature set files.",LogOut.STDERR);
 			e.printStackTrace();
 		}
 		
-		try {
+		if (!added){
+		try { //This will initialize if we're running from a jar file.
+
+			String[] defaults = {"9_features.xml","writeprints_feature_set.xml","writeprints_feature_set_limited.xml",
+					"writeprints_limited_norm.xml","writeprints_german.xml","writeprints_russian.xml"};
 			
+			for (String s: defaults){
+				String path = (new File("").getAbsolutePath());
+				path+="/JSAN"+JSANConstants.JSAN_FEATURESETS_PREFIX+s;
+				path = path.replaceAll("\\\\","/");
+				Logger.logln("4");
+				Logger.logln(path);
+				main.presetCFDs.add(new CumulativeFeatureDriver(path));
+			}
+			
+			added =true;
 		} catch (Exception e) {
-			
+			Logger.logln("Failed to read feature set files. 2",LogOut.STDERR);
+			e.printStackTrace();
+			}
 		}
-		
 		
 		/* =============
 		 * 9 feature-set
