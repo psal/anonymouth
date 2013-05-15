@@ -115,7 +115,7 @@ public class Engine implements API {
 		Collections.sort(authors);
 		
 		// initialize Weka attributes vector (but authors attribute will be added last)
-		FastVector attributeList = new FastVector();
+		FastVector attributeList = new FastVector(relevantEvents.size()+1);
 		FastVector authorNames = new FastVector();
 		for (String name: authors)
 			authorNames.addElement(name);
@@ -130,7 +130,7 @@ public class Engine implements API {
 		for (int currEventSet=0; currEventSet<numOfFeatureClasses; currEventSet++) {
 			// initialize relevant list of event sets and histograms
 
-			list = new ArrayList<EventSet>(numOfVectors);
+			list = new ArrayList<EventSet>();
 			for (int i=0; i<numOfFeatureClasses; i++)
 				list.add(relevantEvents.get(i));
 			histograms = new ArrayList<EventHistogram>();
@@ -157,7 +157,6 @@ public class Engine implements API {
 			} else {	// one unique numeric event
 				
 				// generate sole event (extract full event name and remove value)
-				//TODO extract the histogram value and hide it in the name
 				Event event = new Event(list.get(0).eventAt(0).getEvent().replaceAll("\\{.*\\}", "{-}"));
 				events.add(event);
 				allEvents.add(currEventSet,events);
@@ -165,12 +164,25 @@ public class Engine implements API {
 				// update histogram to null at current position
 				knownEventHists.add(currEventSet,null);
 			}
-			
-			//TODO need to convert events/histograms to Attributes and add to attribute list
-			
-			// add authors attribute as last attribute
-			attributeList.addElement(authorNameAttribute);
 		}
+		
+		//initialize empty attribute list
+		for (int i=0; i<relevantEvents.size(); i++){
+			attributeList.addElement(relevantEvents.get(i));
+		}
+		
+		//TODO
+		//go through all events, adding all of the correct values to the correct spot, 
+		for (int i=0; i<allEvents.size();i++){
+			Set<Event> currentSet = allEvents.get(i);
+			
+			//try to match the currentSet to a an item in AttributeList
+			//then add all of the event values to it
+			
+		}
+		
+		// add authors attribute as last attribute
+		attributeList.addElement(authorNameAttribute);
 		
 		LinkedList<Attribute> attributes = new LinkedList<Attribute>();
 		
