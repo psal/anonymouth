@@ -505,7 +505,6 @@ public class FeaturesTabDriver {
 				String path = (new File("").getAbsolutePath());
 				path+="/JSAN"+JSANConstants.JSAN_FEATURESETS_PREFIX+s;
 				path = path.replaceAll("\\\\","/");
-				Logger.logln("4");
 				Logger.logln(path);
 				main.presetCFDs.add(new CumulativeFeatureDriver(path));
 			}

@@ -103,7 +103,6 @@ public class Engine implements API {
 		
 		int numOfVectors = culledEventSets.size();
 		List<EventSet> list;
-		List<EventHistogram> histograms;
 		
 		// initialize author name set
 		LinkedList<String> authors = new LinkedList<String>();
@@ -121,9 +120,6 @@ public class Engine implements API {
 			authorNames.addElement(name);
 		Attribute authorNameAttribute = new Attribute("authorName", authorNames);
 		
-		// initialize list of lists of histograms
-		List<EventHistogram> knownEventHists = new ArrayList<EventHistogram>(numOfFeatureClasses);
-		
 		// initialize list of sets of events, which will eventually become the attributes
 		List<Set<Event>> allEvents = new ArrayList<Set<Event>>(numOfFeatureClasses);
 		
@@ -133,7 +129,6 @@ public class Engine implements API {
 			list = new ArrayList<EventSet>();
 			for (int i=0; i<numOfFeatureClasses; i++)
 				list.add(relevantEvents.get(i));
-			histograms = new ArrayList<EventHistogram>();
 			
 			Set<Event> events = new HashSet<Event>();
 			
@@ -146,13 +141,8 @@ public class Engine implements API {
 						events.add(event);
 						currHist.add(event);
 					}
-					histograms.add(currHist);
 					allEvents.add(currEventSet,events);
 				}
-				
-				// update histograms
-				for (int i=0; i<numOfVectors; i++)
-					knownEventHists.add(currEventSet,histograms.get(i));
 				
 			} else {	// one unique numeric event
 				
@@ -160,9 +150,6 @@ public class Engine implements API {
 				Event event = new Event(list.get(0).eventAt(0).getEvent().replaceAll("\\{.*\\}", "{-}"));
 				events.add(event);
 				allEvents.add(currEventSet,events);
-				
-				// update histogram to null at current position
-				knownEventHists.add(currEventSet,null);
 			}
 		}
 		
@@ -171,14 +158,13 @@ public class Engine implements API {
 			attributeList.addElement(relevantEvents.get(i));
 		}
 		
-		//TODO
-		//go through all events, adding all of the correct values to the correct spot, 
-		for (int i=0; i<allEvents.size();i++){
-			Set<Event> currentSet = allEvents.get(i);
-			
-			//try to match the currentSet to a an item in AttributeList
-			//then add all of the event values to it
-			
+		for (Set<Event> es: allEvents){
+			Iterator iterator = es.iterator();
+			Event nextEvent = (Event) iterator.next();
+			while (iterator.hasNext()){
+				attributeList.addElement(nextEvent);
+				nextEvent=(Event) iterator.next();
+			}
 		}
 		
 		// add authors attribute as last attribute
