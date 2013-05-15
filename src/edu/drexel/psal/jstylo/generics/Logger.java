@@ -7,7 +7,7 @@ import java.util.*;
 public class Logger {
 	
 	public static final boolean loggerFlag = true;
-	public static boolean logFile = false;
+	public static boolean logFile = true;
 	
 	// time
 	private static SimpleDateFormat tf = new SimpleDateFormat("HH-mm-ss");
@@ -45,6 +45,7 @@ public class Logger {
 			out = fileDirPath+"/"+filePrefix+"_"+date()+"_"+time()+".txt";
 			String msg = "Started log "+out+"\n===================================================\n";
 			try {
+				System.out.println();
 				if (logFile) {
 					bw = new BufferedWriter(new FileWriter(out));
 					bw.write(msg);
