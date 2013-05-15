@@ -310,7 +310,9 @@ public class GUIMain extends javax.swing.JFrame {
 		File jProps = new File("./jsan_resources/JStylo_prop.prop");
 		
 		try {
-			String[] contents = {"#JStylo Preferences","#Properties File Version: .1","numCalcThreads=4"};
+			String[] contents ={"#JStylo Preferences",
+								"#Properties File Version: .1",
+								"numCalcThreads=4"};
 			
 			//Write to the file
 			FileWriter cleaner = new FileWriter(jProps,false);

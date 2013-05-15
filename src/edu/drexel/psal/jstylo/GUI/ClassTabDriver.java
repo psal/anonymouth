@@ -701,7 +701,7 @@ public class ClassTabDriver {
 							if (!(splitFile.length<=splitCurrent.length) && splitFile[splitCurrent.length].endsWith(".class") && !splitFile[splitCurrent.length].contains("$")){
 								
 								String path = fileName.replaceAll("/",".");
-								path+="..."; //kinda hacky way to separate the .class portion of the filename without removing class from inside the string
+								path+="..."; //kinda hacky way to separate the .class portion of the filename without removing ".class" from inside the string
 								path=path.replaceAll("\\.class\\.\\.\\.",""); 
 		
 								Class tempClass = Class.forName(path);
@@ -717,7 +717,7 @@ public class ClassTabDriver {
 								
 								//check to see if it's on the ignore list
 								for (String ignore : filesToIgnore){
-									if (path.equalsIgnoreCase(ignore)|| file.getName().equalsIgnoreCase(ignore)){
+									if (path.equalsIgnoreCase(ignore)||file.getName().equalsIgnoreCase(ignore)){
 										skip=true;
 									}
 								}

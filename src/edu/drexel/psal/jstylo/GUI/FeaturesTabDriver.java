@@ -491,6 +491,12 @@ public class FeaturesTabDriver {
 			e.printStackTrace();
 		}
 		
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		
 		
 		/* =============
 		 * 9 feature-set
