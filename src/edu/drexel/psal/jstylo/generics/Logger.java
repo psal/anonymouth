@@ -7,7 +7,7 @@ import java.util.*;
 public class Logger {
 	
 	public static final boolean loggerFlag = true;
-	public static boolean logFile = true;
+	public static boolean logFile = false;
 	
 	// time
 	private static SimpleDateFormat tf = new SimpleDateFormat("HH-mm-ss");

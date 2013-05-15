@@ -685,7 +685,6 @@ public class ClassTabDriver {
 			//here is where the weka/jar related stuff will be handled
 			else { 
 				try { 
-					Logger.logln("Trying to read _"+current.getName()+"_ from jar");
 					//set up jar path and information
 					JarFile source = new JarFile(resource.getFile().replaceFirst("[.]jar[!].*",".jar").replaceFirst("file:",""));
 					Enumeration<JarEntry> files = source.entries();
@@ -694,12 +693,24 @@ public class ClassTabDriver {
 					while(files.hasMoreElements()){
 						JarEntry file = files.nextElement();
 						String fileName = file.toString();
+					
+						//This hacky workaround is for running jstylo from a jar file and loading WriteprintsAnalyzer because it has the wrong naming scheme.
+						//I'll try to generalize it later.
+						boolean bypass=false;
+						if (fileName.contains("WriteprintsAnalyzer")){
+							fileName=fileName.replace("/",".");
+							bypass=true;
+						}
 						
-						if (fileName.contains(current.getName().replace(".","/"))){
+						if (fileName.contains(current.getName().replace(".","/"))||bypass){							
 							String[] splitFile = fileName.split("/");
 							String[] splitCurrent = current.getName().split("\\.");
-							
-							if (!(splitFile.length<=splitCurrent.length) && splitFile[splitCurrent.length].endsWith(".class") && !splitFile[splitCurrent.length].contains("$")){
+							if (bypass){
+								bypass=false;
+								String path = fileName.replaceAll("/",".");
+								current.addChild(new Node(path));
+							}
+							else if (!(splitFile.length<=splitCurrent.length) && splitFile[splitCurrent.length].endsWith(".class") && !splitFile[splitCurrent.length].contains("$")){
 								
 								String path = fileName.replaceAll("/",".");
 								path+="..."; //kinda hacky way to separate the .class portion of the filename without removing ".class" from inside the string
