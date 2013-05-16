@@ -445,7 +445,8 @@ public class ClassTabDriver {
 		
 		// expand tree
 		int row = 0;
-		while (row < main.classJTree.getRowCount())
+		int defaultExpansion = 9;
+		while (row < defaultExpansion)
 			main.classJTree.expandRow(row++);
 	}
 	/**

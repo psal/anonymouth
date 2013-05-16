@@ -1040,7 +1040,7 @@ public class GUIMain extends javax.swing.JFrame {
 								" In this tab, you will select the classifier(s) used for the machine learning algorithm. " + 
 								" You can select as many classifiers as you like, but if you are picking duplicates, they must have different arguments.\n" +
 								" Default arguments are provided for classifiers that take arguments. " +
-								" If you are unsure of what to pick, we recommend selecting the weka SMO classifier.");
+								" If you are unsure of what to pick, we recommend selecting the SMO classifier at \"weka -> classifiers -> functions -> SMO\".");
 						classInstructionPane.setBorder(new EmptyBorder(cellPadding/2, cellPadding/2, cellPadding/2, cellPadding/2));
 						classInstructionPane.setBorder(BorderFactory.createLineBorder(Color.gray));
 						classTab.add(classInstructionPane,BorderLayout.NORTH);
