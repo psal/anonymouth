@@ -160,7 +160,7 @@ public class Engine implements API {
 		
 		//Adds all of the events to the fast vector
 		for (Set<Event> es: allEvents){
-			Iterator iterator = es.iterator();
+			Iterator<Event> iterator = es.iterator();
 			Event nextEvent = (Event) iterator.next();
 			while (iterator.hasNext()){
 				attributeList.addElement(nextEvent);
@@ -556,10 +556,8 @@ public class Engine implements API {
 
 				// remove all non-relevant events from unknown event sets
 				EventSet unknown;
-				int initSize;
 				Event e;
 				unknown = eventSetsToCull.get(i);
-				initSize = unknown.size();
 				Iterator<Event> iterator = unknown.iterator();
 				Event next = (Event) iterator.next();
 				
@@ -580,23 +578,6 @@ public class Engine implements API {
 					next = iterator.next();
 				}
 				culledUnknownEventSets.add(unknown);
-				
-				//This chunk should be obsolete. The above is a more "correct" way of updating the list.
-				//It should work properly. This code only remains as a backup.
-				//if this code is restored, move culledUknownEventSets.add(unknown) to below it.
-/*				for (int k=initSize-1; k>=0; k--) {
-					e = unknown.eventAt(k);
-					boolean remove = true;
-					for (int l = 0; l<unknown.size();l++){
-						if (e.equals(relevantEvents.get(i).eventAt(l))){
-							remove=false;
-							break;
-						}
-					}
-					if (remove){
-						unknown.removeEvent(e);
-					}		
-				}*/
 				
 			} else {	// one unique numeric event
 
