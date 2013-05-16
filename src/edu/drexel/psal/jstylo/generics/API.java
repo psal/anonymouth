@@ -7,8 +7,6 @@ import weka.core.*;
 import com.jgaap.generics.*;
 
 
-//TODO update the repository to the latest version of weka
-
 public interface API {
 
 	/*

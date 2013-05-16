@@ -158,6 +158,7 @@ public class Engine implements API {
 			attributeList.addElement(relevantEvents.get(i));
 		}
 		
+		//Adds all of the events to the fast vector
 		for (Set<Event> es: allEvents){
 			Iterator iterator = es.iterator();
 			Event nextEvent = (Event) iterator.next();
@@ -167,21 +168,64 @@ public class Engine implements API {
 			}
 		}
 		
-		// add authors attribute as last attribute
-		attributeList.addElement(authorNameAttribute);
-		
+		//The actual list of attributes to return
 		LinkedList<Attribute> attributes = new LinkedList<Attribute>();
 		
+		//here's where we create the new Attribute object and add it to the attributes list to be returned
 		for (int i=0; i<attributeList.size();i++){
-			attributes.add((Attribute) attributeList.elementAt(i));
+			
+			//initialize parameters
+			int index=-1;
+			String eventString ="";
+			//and current event to be transformed into an attribute
+			Event tempEvent = (Event) attributeList.elementAt(i);
+			
+			//get the attribute string
+			eventString = tempEvent.getEvent();
+			
+			for (EventSet es: relevantEvents){
+				
+				boolean found = false; //if we've found the event, break out of the loop
+				boolean hasInner = false; //if there are events in the event set, it is a histogram, do not increment by 1 for the event set itself
+				
+				//iterate over the histogram/eventset (if it is a non-histogram, this will not occur)
+				for (Event e: es){
+					hasInner=true; //ensures we don't accidentally overincrement
+					boolean innerFound = false; //if we find the event, break out of the loop
+					
+					//check all of the events
+					if (e.getEvent().equals(tempEvent.getEvent())){
+						innerFound = true;
+						found=true;
+					}
+
+					//break the loop if we found it 
+					if (innerFound)
+						break;
+					//otherwise increment the index and keep looking
+					index++;
+				}
+				//break the loop if we found it
+				if (found)
+					break;
+				
+				//increment by one if we just looked at a non-histogram feature
+				if (!hasInner)
+					index++;
+			}
+			
+			//if the feature is a relevant event, add it to the attribute list
+			if (index!=-1)
+				attributes.add(new Attribute(eventString,index));
 		}
+		
+		// add authors attribute as last attribute
+		attributes.add(authorNameAttribute);
 		
 		return attributes;
 	}
 
-	//TODO use the relativeEvents param to form the framework of the attributes list
-	//that way all docs have the same attribute list format
-	//create and use the histograms here
+	//TODO create and use histograms here
 	@Override
 	public Instance createInstance(List<Attribute> attributes,
 			List<EventSet> relevantEvents,
