@@ -370,10 +370,11 @@ public class ClassTabDriver {
 	@SuppressWarnings("unchecked")
 	protected static void initWekaClassifiersTree(GUIMain main) {
 		
+		//converts the tree into an array and creates the root node
 		ArrayList<Node> loadedClassifiers = generateClassifiers();
-		
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("root");
 		
+		//adds the classifiers to the tree
 		for (Node n : loadedClassifiers){
 			String name = n.getName();
 			String[] components = name.split("\\."); 
@@ -401,14 +402,14 @@ public class ClassTabDriver {
 			}
 		}
 		
+		//initializes the tree and class strings to go in it
 		DefaultTreeModel model = new DefaultTreeModel(rootNode);
 		main.classJTree.setModel(model);
-		
 		String[] loadedClasses = loadedClassifiers(loadedClassifiers);
 		
+		//trims the ".class" from all of the labels
 		int j=0;
-		for (String c : loadedClasses){
-			
+		for (String c : loadedClasses){		
 			if (c.substring(c.length()-6).equals(".class"))
 				loadedClasses[j]=c.substring(0,c.length()-6);
 			else {
