@@ -287,9 +287,12 @@ public class GUIMain extends javax.swing.JFrame {
 					}
 					if (nextLine.contains("useLogFile")){
 						String[] s = nextLine.split("=");
-						if (s[1].equalsIgnoreCase("1"))
+						if (s[1].equalsIgnoreCase("1")){
 							Logger.logFile = true;
-						else 
+							File logDir = new File("./log/");
+							if (!logDir.exists())
+								logDir.mkdirs();
+						} else 
 							Logger.logFile = false;
 						
 						found[i]=true;
