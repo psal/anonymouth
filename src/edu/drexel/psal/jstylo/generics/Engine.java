@@ -94,7 +94,7 @@ public class Engine implements API {
 		return relevantEvents;
 	}
 
-	//Done
+	//TODO use the relativeEvents param to form the framework of the attributes list
 	@Override
 	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cumulativeFeatureDriver)
 			throws Exception {
@@ -136,10 +136,8 @@ public class Engine implements API {
 			
 				// generate event histograms and unique event list
 				for (EventSet eventSet : list) {
-					EventHistogram currHist = new EventHistogram();
 					for (Event event : eventSet) {
 						events.add(event);
-						currHist.add(event);
 					}
 					allEvents.add(currEventSet,events);
 				}
@@ -158,11 +156,13 @@ public class Engine implements API {
 			attributeList.addElement(relevantEvents.get(i));
 		}
 		
+		//TODO modify here: 
 		for (Set<Event> es: allEvents){
 			Iterator iterator = es.iterator();
 			Event nextEvent = (Event) iterator.next();
 			while (iterator.hasNext()){
 				attributeList.addElement(nextEvent);
+				//use attributeList.setElementAt(nextEvent,index);
 				nextEvent=(Event) iterator.next();
 			}
 		}
@@ -205,9 +205,9 @@ public class Engine implements API {
 			if (isSparse) inst = new SparseInstance(vectorSize);
 			else inst = new Instance(vectorSize);
 			
-			if (hasDocTitles)
+			if (hasDocTitles){
 				inst.setValue((Attribute) attributes.get(0), document.getTitle());
-						
+			}
 				// update values
 			int index = (hasDocTitles ? 1 : 0);
 			for (int j=0; j<numOfFeatureClasses; j++) {
@@ -231,6 +231,7 @@ public class Engine implements API {
 						inst.setValue(
 							(Attribute) attributes.get(index++),
 							currHist.getAbsoluteFrequency(e));	// use absolute values, normalize later
+
 					}
 				} else {
 					
@@ -239,6 +240,7 @@ public class Engine implements API {
 					inst.setValue(
 							(Attribute) attributes.get(index++),
 							value);	
+
 				}
 			}
 			
