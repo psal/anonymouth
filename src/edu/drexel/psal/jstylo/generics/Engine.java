@@ -279,12 +279,18 @@ public class Engine implements API {
 				} else {
 					
 					// extract numeric value from original sole event
-					double value = Double.parseDouble(documentData.get(j).eventAt(0).toString().replaceAll(".*\\{", "").replaceAll("\\}", ""));
+					Event e = null;
+					Iterator eIterator = events.iterator();
+					e = (Event) eIterator.next();
+					
+					double value = Double.parseDouble(e.getEvent());
 					inst.setValue(
 							(Attribute) attributes.get(index++),
 							value);	
 				}
 			}
+			
+			//TODO
 			
 			//Initialize attribute list from relevantEvents
 			
