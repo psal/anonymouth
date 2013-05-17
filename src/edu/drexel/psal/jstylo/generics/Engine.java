@@ -290,7 +290,7 @@ public class Engine implements API {
 				}
 			}
 			
-			//TODO
+			//TODO finish up this stuff, then add to the bbac thing for testing
 			
 			//Initialize attribute list from relevantEvents
 			
