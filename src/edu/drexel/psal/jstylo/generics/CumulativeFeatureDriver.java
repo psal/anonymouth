@@ -5,9 +5,14 @@ import edu.drexel.psal.jstylo.GUI.FeatureWizardDriver;
 import java.io.*;
 import java.util.*;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -132,7 +137,7 @@ public class CumulativeFeatureDriver {
 			// extract event set
 			String prefix = features.get(i).displayName().replace(" ", "-");
 			EventSet tmpEs = ed.createEventSet(currDoc);
-			tmpEs.setEventSetID(features.get(i).getName()); //TODO try to see if we can use this to match EventSets later on
+			tmpEs.setEventSetID(features.get(i).getName()); 
 			EventSet es = new EventSet();
 			es.setAuthor(doc.getAuthor());
 			es.setDocumentName(doc.getTitle());
@@ -423,153 +428,155 @@ public class CumulativeFeatureDriver {
 		 * operations
 		 * ==========
 		 */
-
+		//TODO
 		/**
 		 * Parses the XML input file into a problem set.
 		 * @throws Exception
 		 * 		SAXException, ParserConfigurationException, IOException
 		 */
 		public void parse() throws Exception {
-			//get a factory
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			//get a new instance of parser
-			SAXParser sp = spf.newSAXParser();
-			//parse the file and also register this class for call backs
-			sp.parse(filename, this);
+			
+			//intialize the parser, parse the document, and build the tree
+			DocumentBuilderFactory builder = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dom = builder.newDocumentBuilder();
+			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
+			xmlDoc.getDocumentElement().normalize();
+			
+			NodeList featureSet = xmlDoc.getElementsByTagName("feature-set");
+			Element fs = (Element) xmlDoc.importNode(featureSet.item(0),false);
+			cfd.setName(fs.getAttribute("name"));
+			
+			//load single value lists (ie lists where, any given feature set will have exactly one value
+			NodeList descriptions = xmlDoc.getElementsByTagName("description");
+			NodeList eventDrivers = xmlDoc.getElementsByTagName("event-driver");
+			NodeList normValues = xmlDoc.getElementsByTagName("norm");
+			NodeList normFactors = xmlDoc.getElementsByTagName("factor");
+			
+			//load the feature set description
+			Element fsd = (Element) xmlDoc.importNode(descriptions.item(0),false);
+			cfd.setDescription(fsd.getAttribute("value"));
+			
+			//get the list of features
+			NodeList items = xmlDoc.getElementsByTagName("feature");
+			//go over the nodes and get the information we want
+			for (int i=0; i<items.getLength();i++){
+				try{
+					//initialize this feature node, this feature element, and the feature driver
+					Node currentNode = items.item(i);
+					Element currentElement = (Element) xmlDoc.importNode(items.item(i), true);
+					FeatureDriver fd = new FeatureDriver();
+					
+					//add the information from this node to the feature driver
+					fd.setName(currentElement.getAttribute("name"));
+					if (currentElement.getAttribute("calcHist").equals("false"))
+						fd.setCalcHist(false);
+					else
+						fd.setCalcHist(true);
+					
+					//get all of the components
+					
+					//description
+					Element currDesc = (Element) xmlDoc.importNode(descriptions.item(i+1), false);
+					fd.setDescription(currDesc.getAttribute("value"));
+				
+					//event driver
+					Element currEvDriver = (Element) xmlDoc.importNode(eventDrivers.item(i), false);
+					EventDriver ed = (EventDriver) Class.forName(currEvDriver.getAttribute("class")).newInstance();
+					//check for args, adding them if necessary
+					if (currEvDriver.hasChildNodes()){
+						NodeList params = currEvDriver.getChildNodes();
+						for (int k=0; k<params.getLength();k++){
+							Element currParam = (Element) xmlDoc.importNode(params.item(k), false);
+							if (currParam.hasAttribute("name")&&currParam.hasAttribute("value"))
+								ed.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
+						}
+					}
+					fd.setUnderlyingEventDriver(ed);
+					
+					NodeList children = currentNode.getChildNodes(); //used for both canonicizers and cullers
+					//canonicizer(s)
+					//loop through the children until you find the canonicizers
+					for (int j=0; j<children.getLength(); j++){
+						Node current = children.item(j);
+						if (!current.getNodeName().equals("#text")){
+							if (current.getNodeName().equals("canonicizers")){
+								if (current.hasChildNodes()){
+									NodeList canonicizers = current.getChildNodes();
+									//iterate over the canonicizers
+									for (int k=0; k<canonicizers.getLength();k++){
+										if (!canonicizers.item(k).getNodeName().equals("#text")){
+											Element currCanon = (Element) xmlDoc.importNode(canonicizers.item(k), false);
+											if (currCanon.hasAttribute("class"))
+												fd.addCanonicizer((Canonicizer) Class.forName(currCanon.getAttribute("class")).newInstance());	
+										}
+									}
+								}
+								break; //once we're done with canonicizers we don't need to check anything else
+							}
+						}
+					}
+				
+					//event culler(s)
+					for (int j=0; j<children.getLength();j++){
+						Node current = children.item(j);
+						if (current.getNodeName().equals("cullers")){
+							if (current.hasChildNodes()){
+							
+								LinkedList<EventCuller> cullers = new LinkedList<EventCuller>();
+								NodeList evculls = current.getChildNodes();
+							
+								for (int k=0; k<evculls.getLength();k++){
+									Node currEvNode = evculls.item(k);								
+									Element currEvCuller = (Element) xmlDoc.importNode(children.item(j), false);
+									if (currEvCuller.hasAttribute("class") && !currEvNode.getNodeName().equals("#text")){
+										Logger.logln("name: "+currEvCuller.getAttribute("class"));
+										EventCuller culler = (EventCuller) Class.forName(currEvCuller.getAttribute("class")).newInstance();
+										if (currEvNode.hasChildNodes()){
+											NodeList params = currEvNode.getChildNodes();
+										
+											for (int m=0; m<params.getLength();m++){
+											
+												Element currParam = (Element) xmlDoc.importNode(params.item(m), true);
+												if (currParam.hasAttribute("name") &&  currParam.hasAttribute("value")){
+													culler.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
+												}		
+											}
+										}
+										cullers.add(culler);
+									}
+								}
+								fd.setCullers(cullers);
+							}
+							break;
+						}
+					}
+				
+					//normalization value
+					Element currNormV = (Element) xmlDoc.importNode(normValues.item(i), false);
+					fd.setNormBaseline(NormBaselineEnum.valueOf(currNormV.getAttribute("value")));
+					
+					//normalization factor
+					Element currNormF = (Element) xmlDoc.importNode(normFactors.item(i), false);
+					fd.setNormFactor(Double.parseDouble(currNormF.getAttribute("value")));
+					
+					//add the feature driver
+					cfd.addFeatureDriver(fd);
+				} catch (Exception e){
+					Element currentElement = (Element) xmlDoc.importNode(items.item(i), true);
+					Logger.logln("Failed to load feature driver: "+currentElement.getAttribute("name"),Logger.LogOut.STDERR);
+				}
+			}
 		}
 		
-		/*
+		/**
 		 * Returns the generated cumulative feature driver.
 		 * @return
 		 * 		The generated cumulative feature driver.
 		 */
-		/*
 		public CumulativeFeatureDriver getCumulativeFeatureDriver() {
 			return cfd;
 		}
-		*/
 		
-		// event handlers
-		
-		/**
-		 * Handler for opening tags.
-		 */
-		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-			if (qName.equalsIgnoreCase("feature-set")) {
-				currTag = Tag.FEATURE_SET;
-				cfd.setName(attributes.getValue("name"));
-			
-			} else if (qName.equalsIgnoreCase("feature")) {
-				currTag = Tag.FEATURE;
-				fd = new FeatureDriver();
-				fd.setName(attributes.getValue("name"));
-				fd.setCalcHist((Boolean.parseBoolean(attributes.getValue("calc_hist"))));
-				
-			} else if (qName.equalsIgnoreCase("event-driver")) {
-				currTag = Tag.EVENT_DRIVER;
-				try {
-					ed = (EventDriver) Class.forName(attributes.getValue("class")).newInstance();
-				} catch (Exception e) {
-					System.out.println("failed!");
-					ed = null;
-				}
-			
-			} else if (qName.equalsIgnoreCase("canonicizers")) {
-				currTag = Tag.CANONICIZERS;
-			
-			} else if (qName.equalsIgnoreCase("canonicizer")) {
-				currTag = Tag.CANONICIZER;
-				try {
-					c = (Canonicizer) Class.forName(attributes.getValue("class")).newInstance();
-				} catch (Exception e) {
-					System.out.println("failed!");
-					c = null;
-				}
-			
-			} else if (qName.equalsIgnoreCase("cullers")) {
-				currTag = Tag.CULLERS;
-			
-			} else if (qName.equalsIgnoreCase("culler")) {
-				currTag = Tag.CULLER;
-				try {
-					ec = (EventCuller) Class.forName(attributes.getValue("class")).newInstance();
-				} catch (Exception e) {
-					System.out.println("failed!");
-					ec = null;
-				}
-			
-			} else if (qName.equalsIgnoreCase("norm")) {
-				currTag = Tag.NORM;
-				fd.setNormBaseline(NormBaselineEnum.valueOf(attributes.getValue("value")));
-			
-			} else if (qName.equalsIgnoreCase("factor")) {
-				currTag = Tag.FACTOR;
-				fd.setNormFactor(Double.valueOf(attributes.getValue("value")));
-			
-			} else if (qName.equalsIgnoreCase("description")) {
-				if (currTag == Tag.FEATURE_SET) {
-					cfd.setDescription(attributes.getValue("value"));
-				} else if (currTag == Tag.FEATURE) {
-					fd.setDescription(attributes.getValue("value"));
-				} else {
-					throw new SAXException("description tag not under feature-set or feature tag: "+qName);
-				}
-				
-			} else if (qName.equalsIgnoreCase("param")) {
-				if (currTag == Tag.EVENT_DRIVER) {
-					ed.setParameter(attributes.getValue("name"), attributes.getValue("value"));
-				} else if (currTag == Tag.CANONICIZER) {
-					c.setParameter(attributes.getValue("name"), attributes.getValue("value"));
-				} else if (currTag == Tag.CULLER) {
-					ec.setParameter(attributes.getValue("name"), attributes.getValue("value"));
-				} else {
-					throw new SAXException("param tag not under event-driver, canonicizer or culler tag: "+qName);
-				}
-				
-			} else {
-				throw new SAXException("unrecognized opening tag: "+qName);
-			}
-		}
-		
-		/**
-		 * Handler for text between open and close tags.
-		 */
-		public void characters(char ch[], int start, int length) throws SAXException {}
-		
-		/**
-         * Handler for closing tags.
-         */
-        public void endElement(String uri, String localName,String qName) throws SAXException {
-        	if (qName.equalsIgnoreCase("feature-set")) {
-			
-			} else if (qName.equalsIgnoreCase("feature")) {
-				cfd.addFeatureDriver(fd);
-				
-			} else if (qName.equalsIgnoreCase("event-driver")) {
-				fd.setUnderlyingEventDriver(ed);
-			
-			} else if (qName.equalsIgnoreCase("canonicizers")) {
-			
-			} else if (qName.equalsIgnoreCase("canonicizer")) {
-				fd.addCanonicizer(c);
-			
-			} else if (qName.equalsIgnoreCase("cullers")) {
-			
-			} else if (qName.equalsIgnoreCase("culler")) {
-				fd.addEventCuller(ec);
-			
-			} else if (qName.equalsIgnoreCase("norm")) {
-			
-			} else if (qName.equalsIgnoreCase("factor")) {
-			
-			} else if (qName.equalsIgnoreCase("description")) {
-				
-			} else if (qName.equalsIgnoreCase("param")) {
-				
-			} else {
-				throw new SAXException("unrecognized opening tag: "+qName);
-			}
-        }
 	}
 
 	/*

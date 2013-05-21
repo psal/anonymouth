@@ -710,7 +710,7 @@ public class ProblemSet {
 			
 			for (int i=0; i<items.getLength();i++){
 				Node current = items.item(i);
-				
+			
 				//test document (old format)
 				if (current.getParentNode().getNodeName().equals("test")){
 					Document testDoc = new Document(current.getTextContent(),null);
