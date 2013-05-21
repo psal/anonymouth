@@ -5,6 +5,9 @@ import java.util.*;
 
 import javax.xml.parsers.*;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
@@ -697,110 +700,43 @@ public class ProblemSet {
 		 * 		SAXException, ParserConfigurationException, IOException
 		 */
 		public void parse() throws Exception {
-			//get a factory
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			//get a new instance of parser
-			SAXParser sp = spf.newSAXParser();
-			//parse the file and also register this class for call backs
-			System.out.println("filename->"+filename);
-			try {
-			sp.parse(filename, this);
-			} catch (IOException ioe){
-				Logger.logln("IOException occured while parsing file: "+filename);
-				ioe.printStackTrace();
-			} catch (SAXException se){
-				Logger.logln("SAXException occured while parsing file: "+filename);
-				se.printStackTrace();
-			}
-		}
-		
-		// event handlers
-		
-		/**
-		 * Handler for opening tags.
-		 */
-		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-			if (qName.equalsIgnoreCase("problem-set")) {
-				currTag = Tag.PROBLEM_SET;
+			
+			//intialize the parser, parse the document, and build the tree
+			DocumentBuilderFactory builder = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dom = builder.newDocumentBuilder();
+			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
+			xmlDoc.getDocumentElement().normalize();
+			NodeList items = xmlDoc.getElementsByTagName("document");
+			
+			for (int i=0; i<items.getLength();i++){
+				Node current = items.item(i);
 				
-			} else if (qName.equalsIgnoreCase("training")) {
-				problemSet.setTrainCorpusName(attributes.getValue(0));
-				underTraining = true;
-				currTag = Tag.TRAINING;
-				
-			} else if (qName.equalsIgnoreCase("author")) {
-				author = attributes.getValue(0);
-				// set arbitrary test author from the training authors
-				if (!testAuthorSet) {
-					testAuthorSet = true;
-					testAuthor = author;
+				//test document (old format)
+				if (current.getParentNode().getNodeName().equals("test")){
+					Document testDoc = new Document(current.getTextContent(),null);
+					problemSet.addTestDoc(testDoc);
+				} 
+				//training document
+				else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
+					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
+					Document trainDoc = new Document(current.getTextContent(),parent.getAttribute("name"));
+					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
 				}
-				currTag = Tag.AUTHOR;
-				
-			} else if (qName.equalsIgnoreCase("test")) {
-				if (useDummyAuthor) {
-					author = dummyAuthor;
+				//test document (new format) <not yet implemented>
+				else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
+					Logger.logln("Planned for next version of test document handling");
+					
 				} else {
-					author = testAuthor;
-				}
-				currTag = Tag.TEST;
-				
-			} else if (qName.equalsIgnoreCase("document")) {
-				docTitle = attributes.getValue(0);
-				currTag = Tag.DOCUMENT;
-				
-			} else {
-				throw new SAXException("unrecognized opening tag: "+qName);
-			}
+					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
+				}	
+			}	
 		}
-		
-		/**
-		 * Handler for text between open and close tags.
-		 */
-		public void characters(char ch[], int start, int length) throws SAXException {
-			// handle only document
-			if (currTag == Tag.DOCUMENT) {
-				String filepath = new String(ch, start, length);
-				Document doc = new Document(filepath,author,docTitle);
-				if (underTraining)
-					problemSet.addTrainDoc(author, doc);
-				else
-					problemSet.addTestDoc(doc);
-			}
-		}
-		
-		/**
-         * Handler for closing tags.
-         */
-        public void endElement(String uri, String localName,String qName) throws SAXException {
-        	if (qName.equalsIgnoreCase("problem-set")) {
-				currTag = Tag.END;
-				
-			} else if (qName.equalsIgnoreCase("training")) {
-				underTraining = false;
-				currTag = Tag.PROBLEM_SET;
-				
-			} else if (qName.equalsIgnoreCase("author")) {
-				currTag = Tag.TRAINING;
-				
-			} else if (qName.equalsIgnoreCase("test")) {
-				currTag = Tag.PROBLEM_SET;
-				
-			} else if (qName.equalsIgnoreCase("document")) {
-				if (underTraining)
-					currTag = Tag.AUTHOR;
-				else
-					currTag = Tag.TEST;
-				
-			} else {
-				throw new SAXException("unrecognized closing tag: "+qName);
-			}
-        }
 	}
 	
-/*	public static void main(String[] args) throws Exception {
-		ProblemSet ps = new ProblemSet("jsan_resources/problem_sets/amt_imitation_short.xml");
+	/*
+	public static void main(String[] args) throws Exception {
+		ProblemSet ps = new ProblemSet("enron_demo.xml");
 		System.out.println(ps.toXMLString());
-		ps.writeToXML("d:/tmp/a.xml");
+		//ps.writeToXML("d:/tmp/a.xml");
 	}*/
 }

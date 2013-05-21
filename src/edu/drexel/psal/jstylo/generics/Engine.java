@@ -225,7 +225,7 @@ public class Engine implements API {
 		return attributes;
 	}
 
-	//TODO create and use histograms here
+	//Done
 	@Override
 	public Instance createInstance(List<Attribute> attributes,
 			List<EventSet> relevantEvents,
@@ -289,14 +289,6 @@ public class Engine implements API {
 							value);	
 				}
 			}
-			
-			//TODO finish up this stuff, then add to the bbac thing for testing
-			
-			//Initialize attribute list from relevantEvents
-			
-			//go over extracted histograms, add values to the list
-			
-			//go over the list, add them to the instance
 			
 			inst.setValue((Attribute) attributes.get(attributes.size()-1), document.getAuthor());	
 		}
