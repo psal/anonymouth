@@ -517,32 +517,41 @@ public class CumulativeFeatureDriver {
 					}
 				
 					//event culler(s)
+					//look through the children of features until you find the cullers
 					for (int j=0; j<children.getLength();j++){
 						Node current = children.item(j);
+						//then iterate over the individual cullers
 						if (current.getNodeName().equals("cullers")){
-							if (current.hasChildNodes()){
+							if (current.hasChildNodes()){ //if it has children, otherwise its just an empty tag
 							
+								//list of cullers to be passed to the fd
 								LinkedList<EventCuller> cullers = new LinkedList<EventCuller>();
 								NodeList evculls = current.getChildNodes();
 							
+								//go over the culler tags
 								for (int k=0; k<evculls.getLength();k++){
-									Node currEvNode = evculls.item(k);								
-									Element currEvCuller = (Element) xmlDoc.importNode(children.item(j), false);
-									if (currEvCuller.hasAttribute("class") && !currEvNode.getNodeName().equals("#text")){
-										Logger.logln("name: "+currEvCuller.getAttribute("class"));
-										EventCuller culler = (EventCuller) Class.forName(currEvCuller.getAttribute("class")).newInstance();
-										if (currEvNode.hasChildNodes()){
-											NodeList params = currEvNode.getChildNodes();
-										
-											for (int m=0; m<params.getLength();m++){
+									Node currEvNode = evculls.item(k);
+									if(!currEvNode.getNodeName().equals("#text")){
+										Element currEvCuller = (Element) xmlDoc.importNode(evculls.item(k), false);
+										//if it is an actually culler and has contents, add it
+										if (currEvCuller.hasAttribute("class")){
 											
-												Element currParam = (Element) xmlDoc.importNode(params.item(m), true);
-												if (currParam.hasAttribute("name") &&  currParam.hasAttribute("value")){
-													culler.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
-												}		
+											EventCuller culler = (EventCuller) Class.forName(currEvCuller.getAttribute("class")).newInstance();
+											if (currEvNode.hasChildNodes()){
+												
+												NodeList params = currEvNode.getChildNodes();
+												for (int m=0; m<params.getLength();m++){
+													Node currPNode = params.item(m);
+													if (!currPNode.getNodeName().equals("#text")){
+														Element currParam = (Element) xmlDoc.importNode(params.item(m), true);
+														if (currParam.hasAttribute("name") &&  currParam.hasAttribute("value")){
+															culler.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
+														}		
+													}
+												}
 											}
+											cullers.add(culler);
 										}
-										cullers.add(culler);
 									}
 								}
 								fd.setCullers(cullers);
