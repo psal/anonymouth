@@ -442,6 +442,7 @@ public class CumulativeFeatureDriver {
 			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
 			xmlDoc.getDocumentElement().normalize();
 			
+			//create the feature set and intialize the cfd's name
 			NodeList featureSet = xmlDoc.getElementsByTagName("feature-set");
 			Element fs = (Element) xmlDoc.importNode(featureSet.item(0),false);
 			cfd.setName(fs.getAttribute("name"));
@@ -480,15 +481,20 @@ public class CumulativeFeatureDriver {
 					fd.setDescription(currDesc.getAttribute("value"));
 				
 					//event driver
+					Node currEvNode = eventDrivers.item(i);
 					Element currEvDriver = (Element) xmlDoc.importNode(eventDrivers.item(i), false);
 					EventDriver ed = (EventDriver) Class.forName(currEvDriver.getAttribute("class")).newInstance();
 					//check for args, adding them if necessary
-					if (currEvDriver.hasChildNodes()){
-						NodeList params = currEvDriver.getChildNodes();
+					if (currEvNode.hasChildNodes()){
+						NodeList params = currEvNode.getChildNodes();
 						for (int k=0; k<params.getLength();k++){
-							Element currParam = (Element) xmlDoc.importNode(params.item(k), false);
-							if (currParam.hasAttribute("name")&&currParam.hasAttribute("value"))
-								ed.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
+							
+							Node currPNode = params.item(k);
+							if(!currPNode.getNodeName().equals("#text")){
+								Element currParam = (Element) xmlDoc.importNode(params.item(k), false);
+								if (currParam.hasAttribute("name")&&currParam.hasAttribute("value"))
+									ed.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
+							}
 						}
 					}
 					fd.setUnderlyingEventDriver(ed);
@@ -530,19 +536,22 @@ public class CumulativeFeatureDriver {
 							
 								//go over the culler tags
 								for (int k=0; k<evculls.getLength();k++){
-									Node currEvNode = evculls.item(k);
-									if(!currEvNode.getNodeName().equals("#text")){
+									Node currEvCNode = evculls.item(k);
+									if(!currEvCNode.getNodeName().equals("#text")){
 										Element currEvCuller = (Element) xmlDoc.importNode(evculls.item(k), false);
 										//if it is an actually culler and has contents, add it
 										if (currEvCuller.hasAttribute("class")){
-											
+											//create the class
 											EventCuller culler = (EventCuller) Class.forName(currEvCuller.getAttribute("class")).newInstance();
-											if (currEvNode.hasChildNodes()){
-												
-												NodeList params = currEvNode.getChildNodes();
+											//if it has children, they're arguments
+											if (currEvCNode.hasChildNodes()){
+												//take the list of args and iterate over it
+												NodeList params = currEvCNode.getChildNodes();
 												for (int m=0; m<params.getLength();m++){
 													Node currPNode = params.item(m);
+													//and if the args are useful
 													if (!currPNode.getNodeName().equals("#text")){
+														//add the args to the culler
 														Element currParam = (Element) xmlDoc.importNode(params.item(m), true);
 														if (currParam.hasAttribute("name") &&  currParam.hasAttribute("value")){
 															culler.setParameter(currParam.getAttribute("name"), currParam.getAttribute("value"));
@@ -550,7 +559,7 @@ public class CumulativeFeatureDriver {
 													}
 												}
 											}
-											cullers.add(culler);
+											cullers.add(culler); //add the culler to the list
 										}
 									}
 								}
