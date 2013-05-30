@@ -18,6 +18,11 @@ public interface API {
 	
 	 */
 	
+	//Note for version 2
+		//try to reduce amount of data being passed around
+		//ex by creating a method (or adding the functionality to a current method) to strip 
+			//normalization baselines from a document so that the doc doesn't need to be carried
+	
 	// feature extraction - training set
 	
 	/**
@@ -58,7 +63,7 @@ public interface API {
 	 * @throws Exception
 	 */
 	public List<Attribute> getAttributeList(
-			List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cfd) throws Exception;
+			List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cfd, boolean hasDocTitles) throws Exception;
 	
 	/**
 	 * Takes various parameters related to a document and creates an Instance object from that data.

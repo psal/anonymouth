@@ -469,7 +469,7 @@ public class CumulativeFeatureDriver {
 					
 					//add the information from this node to the feature driver
 					fd.setName(currentElement.getAttribute("name"));
-					if (currentElement.getAttribute("calcHist").equals("false"))
+					if (currentElement.getAttribute("calc_hist").equals("false"))
 						fd.setCalcHist(false);
 					else
 						fd.setCalcHist(true);

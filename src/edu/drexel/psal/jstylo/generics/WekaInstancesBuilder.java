@@ -271,9 +271,24 @@ public class WekaInstancesBuilder {
 //			known.add(cfd.createEventSets(knownDocs.get(i)));
 //		}
 
+		//TODO remove
+		ArrayList<String> IDs = new ArrayList<String>();
+		for (EventSet es: known.get(0)){
+			IDs.add(es.getEventSetID());
+		} 
+		
 		// apply event cullers
 		known = CumulativeEventCuller.cull(known, cfd);
 
+		//culling gives event sets in wrong order. FIXME
+		for (int j1 = 0; j1<known.size(); j1++){
+		for (int iterator = 0; iterator<known.get(j1).size();iterator++){
+		//	System.out.println("Trying to set "+known.get(j1).get(iterator).getEventSetID()+" to "+IDs.get(iterator));
+			known.get(j1).get(iterator).setEventSetID(IDs.get(iterator));
+		//	System.out.println("Post ES: "+known.get(j1).get(iterator).getEventSetID());
+		} 
+		}
+		
 		// initialize number of sets per document and number of vectors
 		final int numOfFeatureClasses = known.get(0).size();
 		final int numOfVectors = known.size();
@@ -317,7 +332,7 @@ public class WekaInstancesBuilder {
 		List<EventHistogram> histograms;
 		for (int currEventSet=0; currEventSet<numOfFeatureClasses; currEventSet++) {
 			// initialize relevant list of event sets and histograms
-			list = new ArrayList<EventSet>(numOfVectors);
+			list = new ArrayList<EventSet>();
 			for (i=0; i<numOfVectors; i++)
 				list.add(known.get(i).get(currEventSet));
 			histograms = new ArrayList<EventHistogram>();
