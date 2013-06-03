@@ -249,6 +249,9 @@ public class WekaInstancesBuilder {
 		Logger.logln("Using N calc threads: "+numCalcThreadsToUse);
 		int div = knownDocsSize / numCalcThreadsToUse;
 		
+		if (div%knownDocsSize!=0)
+			div++;
+		
 		CalcThread[] calcThreads = new CalcThread[numCalcThreadsToUse];
 		for (int thread = 0; thread < numCalcThreadsToUse; thread++)
 			calcThreads[thread] = new CalcThread(
@@ -267,11 +270,7 @@ public class WekaInstancesBuilder {
 			calcThreads[thread] = null;
 		calcThreads = null;
 		
-//		for (i=0; i<knownDocs.size(); i++){
-//			known.add(cfd.createEventSets(knownDocs.get(i)));
-//		}
-
-		//TODO remove
+		//TODO make it so this isn't necessary
 		ArrayList<String> IDs = new ArrayList<String>();
 		for (EventSet es: known.get(0)){
 			IDs.add(es.getEventSetID());
