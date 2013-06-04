@@ -80,6 +80,7 @@ public class RelaxedEvaluation extends Evaluation {
 	 * @throws Exception if the class of the instance is not
 	 * set
 	 */
+	//FIXME this method was broken upon switch to weka 3.7.9
 	protected void updateStatsForClassifier(double [] predictedDistribution,
 			Instance instance)
 					throws Exception {

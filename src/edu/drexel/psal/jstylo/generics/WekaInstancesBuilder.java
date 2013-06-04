@@ -402,7 +402,7 @@ public class WekaInstancesBuilder {
 		for (i=0; i<numOfVectors; i++) {
 			// initialize instance
 			if (isSparse) inst = new SparseInstance(vectorSize);
-			else inst = new Instance(vectorSize);
+			else inst = new DenseInstance(vectorSize);
 			
 			// update document title
 			if (hasDocTitles)
@@ -648,7 +648,7 @@ public class WekaInstancesBuilder {
 		for (i=0; i<numOfVectors; i++) {
 			// initialize instance
 			if (isSparse) inst = new SparseInstance(vectorSize);
-			else inst = new Instance(vectorSize);
+			else inst = new DenseInstance(vectorSize);
 			
 			// update document title
 			if (hasDocTitles)

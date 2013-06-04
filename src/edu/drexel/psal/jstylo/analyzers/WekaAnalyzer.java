@@ -191,7 +191,7 @@ public class WekaAnalyzer extends Analyzer {
 							
 				Instances test = randData.testCV(folds, n);
 				// build and evaluate classifier
-				Classifier clsCopy = Classifier.makeCopy(classifier);
+				Classifier clsCopy = AbstractClassifier.makeCopy(classifier);
 				clsCopy.buildClassifier(train);
 				eval.evaluateModel(clsCopy, test);
 			}
@@ -238,7 +238,7 @@ public class WekaAnalyzer extends Analyzer {
 				Instances train = randData.trainCV(folds, n);
 				Instances test = randData.testCV(folds, n);
 				// build and evaluate classifier
-				Classifier clsCopy = Classifier.makeCopy(classifier);
+				Classifier clsCopy =  AbstractClassifier.makeCopy(classifier);
 				clsCopy.buildClassifier(train);
 				eval.evaluateModel(clsCopy, test);
 			}
@@ -285,7 +285,7 @@ public class WekaAnalyzer extends Analyzer {
 	 */
 	@Override
 	public String[] getOptions(){
-		return classifier.getOptions();
+		return ((OptionHandler) classifier).getOptions();
 	}
 	
 	/**
@@ -304,7 +304,7 @@ public class WekaAnalyzer extends Analyzer {
 		ArrayList<String> optionsDesc= new ArrayList<String>();
 		String[] optionsDescToReturn = null;
 		
-		Enumeration<Option> opts = classifier.listOptions();
+		Enumeration<Option> opts = ((OptionHandler) classifier).listOptions();
 		Option nextOpt = null;
 		while (opts.hasMoreElements()){
 			nextOpt = opts.nextElement();
@@ -323,117 +323,11 @@ public class WekaAnalyzer extends Analyzer {
 	}
 	
 	/** 
-	 * returns the description of the analyzer itself. Due to the way weka is coded, the instanceofs are necessary, as "globalInfo"
-	 * is not listed in the "Classifier" abstract class, so we have to cast to the subclass in order to get it.
+	 * returns the description of the analyzer itself.
 	 */
 	@Override
 	public String analyzerDescription() {
-	
-		// bayes
-		if (classifier instanceof NaiveBayes) {
-			return ((NaiveBayes) classifier).globalInfo();
-		} else if (classifier instanceof NaiveBayesMultinomial) {
-			return ((NaiveBayesMultinomial) classifier).globalInfo();
-		} else if (classifier instanceof AODE) {
-			return ((AODE) classifier).globalInfo();
-		} else if (classifier instanceof AODEsr) {
-			return ((AODEsr) classifier).globalInfo();
-		} else if (classifier instanceof BayesNet) {
-			return ((BayesNet) classifier).globalInfo();
-		} else if (classifier instanceof BayesianLogisticRegression) {
-			return ((BayesianLogisticRegression) classifier).globalInfo();
-		} else if (classifier instanceof ComplementNaiveBayes) {
-			return ((ComplementNaiveBayes) classifier).globalInfo();
-		} else if (classifier instanceof DMNBtext) {
-			return ((DMNBtext) classifier).globalInfo();
-		} else if (classifier instanceof HNB) {
-			return ((HNB) classifier).globalInfo();
-		} else if (classifier instanceof NaiveBayesMultinomialUpdateable) {
-			return ((NaiveBayesMultinomialUpdateable) classifier).globalInfo();
-		} else if (classifier instanceof NaiveBayesSimple) {
-			return ((NaiveBayesSimple) classifier).globalInfo();
-		} else if (classifier instanceof NaiveBayesUpdateable) {
-			return ((NaiveBayesUpdateable) classifier).globalInfo();
-		} else if (classifier instanceof WAODE) {
-			return ((WAODE) classifier).globalInfo();
-		} 
-		
-		// functions
-		else if (classifier instanceof Logistic) {
-			return ((Logistic) classifier).globalInfo();
-		} else if (classifier instanceof MultilayerPerceptron) {
-			return ((MultilayerPerceptron) classifier).globalInfo();
-		} else if (classifier instanceof SMO) {
-			return ((SMO) classifier).globalInfo();
-		} else if (classifier instanceof LibSVM) {
-			return ((LibSVM) classifier).globalInfo();
-		} else if (classifier instanceof GaussianProcesses) {
-			return ((GaussianProcesses) classifier).globalInfo();
-		} else if (classifier instanceof IsotonicRegression) {
-			return ((IsotonicRegression) classifier).globalInfo();
-		} else if (classifier instanceof LeastMedSq) {
-			return ((LeastMedSq) classifier).globalInfo();
-		} else if (classifier instanceof LibLINEAR) {
-			return ((LibLINEAR) classifier).globalInfo();
-		} else if (classifier instanceof LinearRegression) {
-			return ((LinearRegression) classifier).globalInfo();
-		} else if (classifier instanceof PLSClassifier) {
-			return ((PLSClassifier) classifier).globalInfo();
-		} else if (classifier instanceof PaceRegression) {
-			return ((PaceRegression) classifier).globalInfo();
-		} else if (classifier instanceof RBFNetwork) {
-			return ((RBFNetwork) classifier).globalInfo();
-		} else if (classifier instanceof RBFNetwork) {
-			return ((RBFNetwork) classifier).globalInfo();
-		} else if (classifier instanceof SMOreg) {
-			return ((SMOreg) classifier).globalInfo();
-		} else if (classifier instanceof SPegasos) {
-			return ((SPegasos) classifier).globalInfo();
-		} else if (classifier instanceof SimpleLinearRegression) {
-			return ((SimpleLinearRegression) classifier).globalInfo();
-		} else if (classifier instanceof SimpleLinearRegression) {
-			return ((SimpleLinearRegression) classifier).globalInfo();
-		} else if (classifier instanceof SimpleLogistic) {
-			return ((SimpleLogistic) classifier).globalInfo();
-		} else if (classifier instanceof VotedPerceptron) {
-			return ((VotedPerceptron) classifier).globalInfo();
-		} else if (classifier instanceof Winnow) {
-			return ((Winnow) classifier).globalInfo();
-		}
-				
-		// lazy
-		else if (classifier instanceof IBk) {
-			return ((IBk) classifier).globalInfo();
-		} else if (classifier instanceof IB1) {
-			return ((IB1) classifier).globalInfo();
-		} else if (classifier instanceof KStar) {
-			return ((KStar) classifier).globalInfo();
-		} else if (classifier instanceof LBR) {
-			return ((LBR) classifier).globalInfo();
-		} else if (classifier instanceof LWL) {
-			return ((LWL) classifier).globalInfo();
-		}
-		
-		//TODO add the rest of the descriptions
-		// meta
-
-		// misc
-
-		// rules
-		else if (classifier instanceof ZeroR) {
-			return ((ZeroR) classifier).globalInfo();
-		}
-
-		// trees
-		else if (classifier instanceof J48) {
-			return ((J48) classifier).globalInfo();
-		}
-		
-		//a classifier who has
-		else {
-			return "No description available";
-		}
-				
+		return ((TechnicalInformationHandler) classifier).getTechnicalInformation().toString();
 	}
 	
 	/* =======
@@ -456,7 +350,7 @@ public class WekaAnalyzer extends Analyzer {
 	@Override
 	public void setOptions(String[] ops){
 		try {
-			classifier.setOptions(ops);
+			((OptionHandler) classifier).setOptions(ops);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
