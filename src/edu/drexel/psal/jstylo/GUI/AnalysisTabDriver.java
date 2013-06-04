@@ -5,6 +5,7 @@ import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.AnalyzerTypeEnum;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -93,7 +94,7 @@ public class AnalysisTabDriver {
 				Logger.logln("'Training to ARFF...' button clicked on the analysis tab.");
 				
 				// check if not null
-				if (main.wib.getTrainingSet() == null) {
+				if (main.ib.getTrainingInstances() == null) {
 					JOptionPane.showMessageDialog(main,
 							"No analysis completed yet.",
 							"Export Training Features Error",
@@ -111,7 +112,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".arff"))
 						path += ".arff";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.wib.getTrainingSet());
+					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTrainingInstances());
 					if (succeeded) {
 						Logger.log("Saved training features to arff: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -138,7 +139,7 @@ public class AnalysisTabDriver {
 				Logger.logln("'Training to CSV...' button clicked on the analysis tab.");
 				
 				// check if not null
-				if (main.wib.getTrainingSet() == null) {
+				if (main.ib.getTrainingInstances() == null) {
 					JOptionPane.showMessageDialog(main,
 							"No analysis completed yet.",
 							"Export Training Features Error",
@@ -156,7 +157,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".csv"))
 						path += ".csv";
-					boolean succeeded = WekaInstancesBuilder.writeSetToCSV(path, main.wib.getTrainingSet());
+					boolean succeeded = WekaInstancesBuilder.writeSetToCSV(path, main.ib.getTrainingInstances());
 					if (succeeded) {
 						Logger.log("Saved training features to csv: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -183,7 +184,7 @@ public class AnalysisTabDriver {
 				Logger.logln("'Test to ARFF...' button clicked on the analysis tab.");
 				
 				// check if not null
-				if (main.wib.getTestSet() == null) {
+				if (main.ib.getTestInstances() == null) {
 					JOptionPane.showMessageDialog(main,
 							"No analysis with test documents completed yet.",
 							"Export Test Features Error",
@@ -201,7 +202,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".arff"))
 						path += ".arff";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.wib.getTestSet());
+					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTestInstances());
 					if (succeeded) {
 						Logger.log("Saved test features to arff: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -228,7 +229,7 @@ public class AnalysisTabDriver {
 				Logger.logln("'Test to CSV...' button clicked on the analysis tab.");
 
 				// check if not null
-				if (main.wib.getTestSet() == null) {
+				if (main.ib.getTestInstances() == null) {
 					JOptionPane.showMessageDialog(main,
 							"No analysis with test documents completed yet.",
 							"Export Test Features Error",
@@ -246,7 +247,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".csv"))
 						path += ".csv";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.wib.getTestSet());
+					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTestInstances());
 					if (succeeded) {
 						Logger.log("Saved test features to csv: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -377,8 +378,8 @@ public class AnalysisTabDriver {
 				lockUnlock(main, true);
 				
 				//if the number of calc threads entered is different then the current stored one, change it
-				if (Integer.parseInt(main.analysisNThreadJTextField.getText())!=main.wib.getNumCalcThreads())
-					main.wib.setNumCalcThreads(Integer.parseInt(main.analysisNThreadJTextField.getText()));
+				if (Integer.parseInt(main.analysisNThreadJTextField.getText())!=main.ib.getNumThreads())
+					main.ib.setNumThreads(Integer.parseInt(main.analysisNThreadJTextField.getText()));
 				
 				// start analysis thread
 				main.analysisThread = new Thread(new RunAnalysisThread(main));
@@ -662,18 +663,18 @@ public class AnalysisTabDriver {
 			
 			contentJTextArea.setText(content);
 
+			InstancesBuilder tempBuilder = new InstancesBuilder(main.ps,
+					main.cfd,
+					main.analysisSparseInstancesJCheckBox.isSelected(), false,
+					main.ib.getNumThreads());
+			main.ib = tempBuilder;
 			// training set
-			Logger.logln("Extracting features from training corpus...");
+			//main.wib.setSparse(main.analysisSparseInstancesJCheckBox.isSelected());
 			
-			main.wib.setSparse(main.analysisSparseInstancesJCheckBox.isSelected());
-			
-			content += getTimestamp()+" Extracting features from training corpus ("+(main.wib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
+			content += getTimestamp()+" Extracting features from training corpus ("+(main.ib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
 			updateResultsView();
-			
 			try {
-				main.wib.prepareTrainingSet(
-						trainingDocs,
-						main.cfd);
+				main.ib.extractEventsThreaded();
 			} catch (Exception e) {
 				Logger.logln("Could not extract features from training corpus!",LogOut.STDERR);
 				e.printStackTrace();
@@ -685,13 +686,65 @@ public class AnalysisTabDriver {
 				updateBeforeStop();
 				Thread.currentThread().stop();
 			}
+			content += getTimestamp()+" done!\n\n";
+			updateResultsView();
+			content += getTimestamp()+" Building relevant event set...";
+			updateResultsView();
+			try {
+				main.ib.initializeRelevantEvents();
+			} catch (Exception e1) {
+				Logger.logln("Could not extract relevant events from training corpus!",LogOut.STDERR);
+				e1.printStackTrace();
+				
+				JOptionPane.showMessageDialog(main,
+						"Could not extract relevant events from training corpus:\n"+e1.getMessage()+"\n"+"Aborting analysis.",
+						"Analysis Error",
+						JOptionPane.ERROR_MESSAGE);
+				updateBeforeStop();
+				Thread.currentThread().stop();
+			}
+			content += getTimestamp()+" done!\n\n";
+			updateResultsView();
+			content += getTimestamp()+" Building attributes list...";
+			updateResultsView();
+			try {
+				main.ib.initializeAttributes();
+			} catch (Exception e1) {
+				Logger.logln("Could not create attributes from training corpus!",LogOut.STDERR);
+				e1.printStackTrace();
+				
+				JOptionPane.showMessageDialog(main,
+						"Could not create attributes from training corpus:\n"+e1.getMessage()+"\n"+"Aborting analysis.",
+						"Analysis Error",
+						JOptionPane.ERROR_MESSAGE);
+				updateBeforeStop();
+				Thread.currentThread().stop();
+			}
+			content += getTimestamp()+" done!\n\n";
+			updateResultsView();
+			content += getTimestamp()+" Creating training instances...";
+			updateResultsView();
+			try {
+				main.ib.createTrainingInstancesThreaded();
+			} catch (Exception e){
+				Logger.logln("Could not create instances from training corpus!",LogOut.STDERR);
+				e.printStackTrace();
+				
+				JOptionPane.showMessageDialog(main,
+						"Could not create instances from training corpus:\n"+e.getMessage()+"\n"+"Aborting analysis.",
+						"Analysis Error",
+						JOptionPane.ERROR_MESSAGE);
+				updateBeforeStop();
+				Thread.currentThread().stop();
+			}
 			
 			content += getTimestamp()+" done!\n\n";
+			
 			if (main.analysisOutputFeatureVectorJCheckBox.isSelected()) {
 				content +=
 						"Training corpus features (ARFF):\n" +
 						"================================\n" +
-						main.wib.getTrainingSet().toString()+"\n\n";
+						main.ib.getTrainingInstances().toString()+"\n\n";
 				updateResultsView();
 			}
 
@@ -699,18 +752,17 @@ public class AnalysisTabDriver {
 			if (main.analysisClassTestDocsJRadioButton.isSelected()) {
 				Logger.logln("Extracting features from test documents...");
 				
-				content += getTimestamp()+" Extracting features from test documents ("+(main.wib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
+				content += getTimestamp()+" Extracting features from test documents ("+(main.ib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
 				updateResultsView();
 
 				try {
-					main.wib.prepareTestSet(
-							testDocs);
+					main.ib.createTestInstancesThreaded();
 				} catch (Exception e) {
-					Logger.logln("Could not extract features from test documents!",LogOut.STDERR);
+					Logger.logln("Could not create instances from test documents!",LogOut.STDERR);
 					e.printStackTrace();
 
 					JOptionPane.showMessageDialog(main,
-							"Could not extract features from test documents:\n"+e.getMessage()+"\n"+"Aborting analysis.",
+							"Could not create instances from test documents:\n"+e.getMessage()+"\n"+"Aborting analysis.",
 							"Analysis Error",
 							JOptionPane.ERROR_MESSAGE);
 					updateBeforeStop();
@@ -718,11 +770,12 @@ public class AnalysisTabDriver {
 				}
 
 				content += getTimestamp()+" done!\n\n";
+				updateResultsView();
 				if (main.analysisOutputFeatureVectorJCheckBox.isSelected()) {
 					content +=
 							"Test documents features (ARFF):\n" +
 							"===============================\n" +
-							main.wib.getTestSet().toString()+"\n\n";
+							main.ib.getTestInstances().toString()+"\n\n";
 					updateResultsView();
 				}
 			}
@@ -742,7 +795,11 @@ public class AnalysisTabDriver {
 				
 				try{
 					boolean apply = main.analysisCalcInfoGainJCheckBox.isSelected() && main.analysisApplyInfoGainJCheckBox.isSelected();
-					content += main.wib.applyInfoGain(apply,igValue);
+					List<Integer> infoGain = main.ib.calcInfoGain(main.ib.getTrainingInstances(),igValue);
+					if (apply){
+						main.ib.applyInfoGain();
+					}
+					content+=infoGain;
 				} catch (Exception e) {
 					content += "ERROR! Could not calculate InfoGain!\n";
 					e.printStackTrace();
@@ -780,8 +837,8 @@ public class AnalysisTabDriver {
 					updateResultsView();
 					
 					results = main.analysisDriver.classify(
-							main.wib.getTrainingSet(),
-							main.wib.getTestSet(),
+							main.ib.getTrainingInstances(),
+							main.ib.getTestInstances(),
 							main.ps.getTestDocs());
 					
 					content += getTimestamp()+" done!\n\n";
@@ -835,7 +892,7 @@ public class AnalysisTabDriver {
 					updateResultsView();
 					
 					// run
-					Object results = main.analysisDriver.runCrossValidation(main.wib.getTrainingSet(),
+					Object results = main.analysisDriver.runCrossValidation(main.ib.getTrainingInstances(),
 							Integer.parseInt(main.analysisKFoldJTextField.getText()),0,
 							Integer.parseInt(main.analysisRelaxJTextField.getText())); 					
 					

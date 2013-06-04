@@ -30,7 +30,11 @@ public class InstancesBuilder extends Engine {
 	// persistant data
 	private ProblemSet ps;
 	private CumulativeFeatureDriver cfd;
-
+	private List<List<EventSet>> eventList;
+	private List<EventSet> relevantEvents;
+	private ArrayList<Attribute> attributes;
+	
+	
 	// Data of interest
 	private Instances trainingInstances;
 	private Instances testInstances;
@@ -177,40 +181,11 @@ public class InstancesBuilder extends Engine {
 		numThreads = nt;
 
 	}
-
-	// FIXME this shouldn't be here, but it's still the right algorithm for
-	// calling the stuff. Delete this once it's
-	// working in the analysis tab
-	public void generateInstances() throws Exception {
-
-		// Extract the list of events from the documents
-		List<List<EventSet>> eventList = extractEventsThreaded();
-
-		// cull the events
-		eventList = cull(eventList, cfd);
-
-		// get the relevant events
-		List<EventSet> relevantEvents = getRelevantEvents(eventList, cfd);
-
-		// generate the attribute list
-		ArrayList<Attribute> attributes = getAttributeList(eventList,
-				relevantEvents, cfd, useDocTitles);
-
-		// create training instances
-		createTrainingInstancesThreaded(eventList, attributes, relevantEvents);
-
-		// create test instances
-		createTestInstancesThreaded(attributes, relevantEvents);
-
-		// calc infoGain if you want to
-
-		// apply infoGain if you want to
-	}
-
-	public List<List<EventSet>> extractEventsThreaded() throws Exception {
+	
+	public void extractEventsThreaded() throws Exception {
 
 		// initalize empty List<List<EventSet>>
-		List<List<EventSet>> eventList = new ArrayList<List<EventSet>>();
+		eventList = new ArrayList<List<EventSet>>();
 
 		List<Document> knownDocs = ps.getAllTrainDocs();
 		int knownDocsSize = knownDocs.size();
@@ -218,6 +193,8 @@ public class InstancesBuilder extends Engine {
 		// if the num of threads is bigger then the number of docs, set it to
 		// the max number of docs (extract each document's features in its own
 		// thread
+		
+		/*
 		if (numThreads > knownDocsSize) {
 			numThreads = knownDocsSize;
 		}
@@ -226,7 +203,8 @@ public class InstancesBuilder extends Engine {
 
 		if (div % knownDocsSize != 0)
 			div++;
-
+		
+		
 		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[numThreads];
 		for (int thread = 0; thread < numThreads; thread++)
 			calcThreads[thread] = new FeatureExtractionThread(div, thread,
@@ -240,18 +218,33 @@ public class InstancesBuilder extends Engine {
 		for (int thread = 0; thread < numThreads; thread++)
 			calcThreads[thread] = null;
 		calcThreads = null;
-
-		for (Document doc : ps.getAllTrainDocs()) {
+		*/
+		for (Document doc : knownDocs) {
 			List<EventSet> events = extractEventSets(doc, cfd);
 			eventList.add(events);
 		}
-
-		// return the final eventList
-		return eventList;
+		
+		System.out.println("EventListSize pre cull: "+eventList.size());
+		List<List<EventSet>> temp = cull(eventList,cfd);
+		eventList = temp;
+		System.out.println("EventListSize post cull: "+eventList.size());
+		
 	}
 
-	public void createTrainingInstancesThreaded(List<List<EventSet>> eventList,
-			ArrayList<Attribute> attributes, List<EventSet> relevantEvents)
+	public void initializeRelevantEvents() throws Exception{
+		System.out.println("eventListSizeRel: "+eventList.size());
+		relevantEvents = getRelevantEvents(eventList,cfd);
+		System.out.println("relEvents.size: "+relevantEvents.size());
+	}
+	
+	public void initializeAttributes() throws Exception{
+		System.out.println("eventListSizeRel: "+eventList.size());
+		System.out.println("relEvents.size: "+relevantEvents.size());
+		attributes = getAttributeList(eventList,relevantEvents,cfd,useDocTitles);
+		System.out.println("attributesSize: "+attributes.size());
+	}
+	
+	public void createTrainingInstancesThreaded()
 			throws Exception {
 
 		// create instances objects from the lists lists of event sets
@@ -272,8 +265,7 @@ public class InstancesBuilder extends Engine {
 
 	}
 
-	public void createTestInstancesThreaded(ArrayList<Attribute> attributes,
-			List<EventSet> relevantEvents) throws Exception {
+	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
 		testInstances = new Instances("TestInstances", attributes, 100);
 
@@ -394,7 +386,7 @@ public class InstancesBuilder extends Engine {
 	 * Sets the number of calculation threads to use for feature extraction.
 	 * @param nct number of calculation threads to use.
 	 */
-	public void setNumCalcThreads(int nct)
+	public void setNumThreads(int nct)
 	{
 		numThreads = nct;
 		
@@ -448,6 +440,10 @@ public class InstancesBuilder extends Engine {
 		return numThreads;
 	}
 
+	public boolean isSparse(){
+		return isSparse;
+	}
+	
 	/**
 	 * Sets classification relevant data to null
 	 */

@@ -17,8 +17,8 @@ import java.util.*;
 
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.AnalyzerTypeEnum;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
@@ -27,9 +27,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
 import javax.swing.tree.*;
-
-import weka.classifiers.*;
-
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -65,7 +62,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected ProblemSet ps;
 	protected CumulativeFeatureDriver cfd;
 	protected List<CumulativeFeatureDriver> presetCFDs;
-	protected WekaInstancesBuilder wib;
+	//protected WekaInstancesBuilder wib;
+	protected InstancesBuilder ib;
 	protected Analyzer analysisDriver;
 	protected List<Analyzer> analyzers;
 	protected Thread analysisThread;
@@ -254,7 +252,8 @@ public class GUIMain extends javax.swing.JFrame {
 		FeaturesTabDriver.initPresetCFDs(this);
 		FeatureWizardDriver.populateAll();
 		analyzers = new ArrayList<Analyzer>();
-		wib = new WekaInstancesBuilder(true);
+		ib = new InstancesBuilder();
+		//wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 	}
 	
@@ -281,7 +280,7 @@ public class GUIMain extends javax.swing.JFrame {
 				while (nextLine!=null){
 					if (nextLine.contains("numCalcThreads")){
 						String[] s = nextLine.split("="); //[0]="numCalcThreads" [1]=the number we're looking for
-						wib.setNumCalcThreads(Integer.parseInt(s[1]));
+						ib.setNumThreads(Integer.parseInt(s[1]));
 						found[i]=true;
 						i++;
 					}
@@ -1251,7 +1250,7 @@ public class GUIMain extends javax.swing.JFrame {
 							}
 						}
 						{
-							int numCalcThreads = wib.getNumCalcThreads();
+							int numCalcThreads = ib.getNumThreads();
 							JPanel analysisNPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 							analysisNThreadJTextField = new JTextField(""+numCalcThreads);
 							analysisNThreadJTextField.setColumns(5);
