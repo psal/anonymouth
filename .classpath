@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/fasttag_v2.jar"/>
 	<classpathentry kind="lib" path="lib/jgaap-5.2.0-lite.jar"/>
 	<classpathentry kind="lib" path="lib/weka.jar"/>
+	<classpathentry kind="lib" path="lib/org.annolab.tt4j-1.0.15.jar" sourcepath="C:/Users/Mordio/.m2/repository/org/annolab/tt4j/org.annolab.tt4j/1.0.15/org.annolab.tt4j-1.0.15-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

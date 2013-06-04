@@ -22,12 +22,13 @@ Dependencies:
 
 JStylo is built upon the following libraries:
 
-weka 	3.6.5
+weka 	3.7.9
 Jama 	1.0.3
 Stanford postagger 	2012-01-06
 jgaap	 5.2
 jaws 	1.3
 fasttag v2
+tt4j    1.0.15
 
 Usage:
 
