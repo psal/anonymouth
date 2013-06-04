@@ -87,18 +87,20 @@ public class TreeTaggerEventDriver  extends EventDriver {
 			if (tagger == null) return es;
 		}
 		try {
-		tagger.setModel(taggerPath);
-		tagger.setHandler(new TokenHandler<String>()
-				{
-					public void token(String token, String pos, String lemma)
-					{
-						//System.out.println(token + "\t" + pos + "\t" + lemma);
-						//if(!pos.equals("SENT"))
-							es.addEvent(new Event(pos));
-					}
-				});
-		
-			tagger.process(stringText.split("\\s"));
+			tagger.setModel(taggerPath);
+			tagger.setHandler(new TokenHandler<String>() {
+				public void token(String token, String pos, String lemma) {
+					// System.out.println(token + "\t" + pos + "\t" + lemma);
+					// if(!pos.equals("SENT"))
+					es.addEvent(new Event(pos));
+				}
+			});
+
+			String[] temp = stringText.split("\\s");
+			List<String> testList = new ArrayList<String>();
+			for (String s : temp)
+				testList.add(s);
+			tagger.process(testList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,8 +109,6 @@ public class TreeTaggerEventDriver  extends EventDriver {
 			e.printStackTrace();
 		}
 
-		
-		
 		return es;
 	}
 	
