@@ -387,7 +387,7 @@
 	</feature>
 	<feature name="hapax legomena" calc_hist="false">
 		<description value="number of words used once"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.WordsUsedOnceEventDriver">
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.UniqueWordsCounterEventDriver">
 		</event-driver>
 		<canonicizers>
 			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
