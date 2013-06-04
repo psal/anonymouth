@@ -586,11 +586,9 @@ public class ClassTabDriver {
 					//check which arg it has, if its invalid break the loop and complain.
 					//if it is valid, increment i by another index, as each arg-flag is on even indices
 					if (components[i].equalsIgnoreCase("-P")){
-						Logger.logln("Adding directory to ignore: "+components[i+1]);
 						packagesToIgnore.add(components[i+1]);
 						i++; 
 					} else if (components[i].equalsIgnoreCase("-F")){
-						Logger.logln("Adding file to ignore: "+components[i+1]);
 						filesToIgnore.add(components[i+1]);
 						i++;
 					} else {
@@ -634,7 +632,7 @@ public class ClassTabDriver {
 			try { //loads the path to the resource. doubles as a test to see if we're in a jar
 				df = new File(resource.toURI());
 			} catch (Exception e) {
-				Logger.logln("Reading from jar file..."); 
+				//read from a jar file
 			} 
 			
 			//for non-jars

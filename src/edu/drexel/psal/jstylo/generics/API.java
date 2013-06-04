@@ -1,5 +1,6 @@
 package edu.drexel.psal.jstylo.generics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import weka.core.*;
@@ -62,7 +63,7 @@ public interface API {
 	 * @return A List\<Attribute\> which will be used to create the Instances object 
 	 * @throws Exception
 	 */
-	public List<Attribute> getAttributeList(
+	public ArrayList<Attribute> getAttributeList(
 			List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cfd, boolean hasDocTitles) throws Exception;
 	
 	/**

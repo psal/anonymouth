@@ -145,7 +145,7 @@ public class Engine implements API {
 
 	//Done
 	@Override
-	public List<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cumulativeFeatureDriver,
+	public ArrayList<Attribute> getAttributeList(List<List<EventSet>> culledEventSets, List<EventSet> relevantEvents, CumulativeFeatureDriver cumulativeFeatureDriver,
 			boolean hasDocTitles)
 			throws Exception {
 
@@ -218,7 +218,7 @@ public class Engine implements API {
 		}
 	
 		//The actual list of attributes to return
-		LinkedList<Attribute> attributes = new LinkedList<Attribute>();
+		ArrayList<Attribute> attributes = new ArrayList<Attribute>();
 		
 		//FIXME not sure what type of attribute to use here
 		//	I can't get the doc titles without passing the documents through here which seems like a waste
