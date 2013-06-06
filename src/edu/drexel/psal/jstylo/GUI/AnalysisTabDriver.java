@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,6 +39,7 @@ import com.sun.corba.se.impl.io.TypeMismatchException;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 
 public class AnalysisTabDriver {
 
@@ -640,9 +642,6 @@ public class AnalysisTabDriver {
 				content += "\n";
 			}
 			
-			List<Document> trainingDocs = main.ps.getAllTrainDocs();
-			List<Document> testDocs = main.ps.getTestDocs();
-			
 			// feature set
 			content += "Feature set: "+main.cfd.getName()+":\n";
 			for (int i=0; i<main.cfd.numOfFeatureDrivers(); i++) {
@@ -667,6 +666,7 @@ public class AnalysisTabDriver {
 					main.cfd,
 					main.analysisSparseInstancesJCheckBox.isSelected(), false,
 					main.ib.getNumThreads());
+			main.ib.reset();
 			main.ib = tempBuilder;
 			// training set
 			//main.wib.setSparse(main.analysisSparseInstancesJCheckBox.isSelected());

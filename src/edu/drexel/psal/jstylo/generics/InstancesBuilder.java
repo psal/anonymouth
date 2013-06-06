@@ -33,8 +33,7 @@ public class InstancesBuilder extends Engine {
 	private List<List<EventSet>> eventList;
 	private List<EventSet> relevantEvents;
 	private ArrayList<Attribute> attributes;
-	
-	
+
 	// Data of interest
 	private Instances trainingInstances;
 	private Instances testInstances;
@@ -181,7 +180,7 @@ public class InstancesBuilder extends Engine {
 		numThreads = nt;
 
 	}
-	
+
 	public void extractEventsThreaded() throws Exception {
 
 		// initalize empty List<List<EventSet>>
@@ -193,8 +192,6 @@ public class InstancesBuilder extends Engine {
 		// if the num of threads is bigger then the number of docs, set it to
 		// the max number of docs (extract each document's features in its own
 		// thread
-		
-		/*
 		if (numThreads > knownDocsSize) {
 			numThreads = knownDocsSize;
 		}
@@ -203,8 +200,7 @@ public class InstancesBuilder extends Engine {
 
 		if (div % knownDocsSize != 0)
 			div++;
-		
-		
+
 		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[numThreads];
 		for (int thread = 0; thread < numThreads; thread++)
 			calcThreads[thread] = new FeatureExtractionThread(div, thread,
@@ -218,40 +214,29 @@ public class InstancesBuilder extends Engine {
 		for (int thread = 0; thread < numThreads; thread++)
 			calcThreads[thread] = null;
 		calcThreads = null;
-		*/
-		for (Document doc : knownDocs) {
-			List<EventSet> events = extractEventSets(doc, cfd);
-			eventList.add(events);
-		}
-		
-		System.out.println("EventListSize pre cull: "+eventList.size());
-		List<List<EventSet>> temp = cull(eventList,cfd);
+
+		List<List<EventSet>> temp = cull(eventList, cfd);
 		eventList = temp;
-		System.out.println("EventListSize post cull: "+eventList.size());
-		
+
 	}
 
-	public void initializeRelevantEvents() throws Exception{
-		System.out.println("eventListSizeRel: "+eventList.size());
-		relevantEvents = getRelevantEvents(eventList,cfd);
-		System.out.println("relEvents.size: "+relevantEvents.size());
+	public void initializeRelevantEvents() throws Exception {
+		relevantEvents = getRelevantEvents(eventList, cfd);
 	}
-	
-	public void initializeAttributes() throws Exception{
-		System.out.println("eventListSizeRel: "+eventList.size());
-		System.out.println("relEvents.size: "+relevantEvents.size());
-		attributes = getAttributeList(eventList,relevantEvents,cfd,useDocTitles);
-		System.out.println("attributesSize: "+attributes.size());
+
+	public void initializeAttributes() throws Exception {
+		attributes = getAttributeList(eventList, relevantEvents, cfd,
+				useDocTitles);
 	}
-	
-	public void createTrainingInstancesThreaded()
-			throws Exception {
+
+	public void createTrainingInstancesThreaded() throws Exception {
 
 		// create instances objects from the lists lists of event sets
 		// TODO perhaps parallelize this as well? build a list of Instances
 		// objects and then add go through each list (in order) and add the
 		// instance objects to Instances?
-		trainingInstances = new Instances("Instances", attributes, 100);
+		trainingInstances = new Instances("Instances", attributes,
+				eventList.size());
 		int i = 0;
 		for (List<EventSet> documentData : eventList) {
 			Document doc = ps.getAllTrainDocs().get(i);
@@ -262,12 +247,12 @@ public class InstancesBuilder extends Engine {
 			i++;
 			trainingInstances.add(instance);
 		}
-
 	}
 
 	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
-		testInstances = new Instances("TestInstances", attributes, 100);
+		testInstances = new Instances("TestInstances", attributes, ps
+				.getTestDocs().size());
 
 		// generate the test instance objects from the list of list of event
 		// sets and add them to the Instances object
@@ -329,9 +314,8 @@ public class InstancesBuilder extends Engine {
 		}
 	}
 
-	
-	//TODO add new thread definitions for test and training instances creation
-	
+	// TODO add new thread definitions for test and training instances creation
+
 	/**
 	 * Applies the infoGain information to the training and (if present) test
 	 * Instances
@@ -384,55 +368,61 @@ public class InstancesBuilder extends Engine {
 
 	/**
 	 * Sets the number of calculation threads to use for feature extraction.
-	 * @param nct number of calculation threads to use.
+	 * 
+	 * @param nct
+	 *            number of calculation threads to use.
 	 */
-	public void setNumThreads(int nct)
-	{
+	public void setNumThreads(int nct) {
 		numThreads = nct;
-		
+
 		File jProps = new File("./jsan_resources/JStylo_prop.prop");
-		if (jProps.exists()){ //write numCalcThreads to the file
-	
+		if (jProps.exists()) { // write numCalcThreads to the file
+
 			try {
 				ArrayList<String> contents = new ArrayList<String>();
 				FileReader fileReader = new FileReader(jProps);
 				BufferedReader reader = new BufferedReader(fileReader);
-				
-				//read the file into memory and update the numCalcThreads variable
+
+				// read the file into memory and update the numCalcThreads
+				// variable
 				String nextLine = reader.readLine();
-				while (nextLine!=null){
+				while (nextLine != null) {
 					String temp = nextLine;
-					
-					if (temp.contains("numCalcThreads")){
-						temp="numCalcThreads="+numThreads;
+
+					if (temp.contains("numCalcThreads")) {
+						temp = "numCalcThreads=" + numThreads;
 					}
 					contents.add(temp);
 					nextLine = reader.readLine();
 				}
 				reader.close();
 				fileReader.close();
-				//Write to the file
-				FileWriter cleaner = new FileWriter(jProps,false);
+				// Write to the file
+				FileWriter cleaner = new FileWriter(jProps, false);
 				cleaner.write("");
 				cleaner.close();
-				
-				FileWriter writer = new FileWriter(jProps,true);
-				for(String s:contents){
-					writer.write(s+"\n");
+
+				FileWriter writer = new FileWriter(jProps, true);
+				for (String s : contents) {
+					writer.write(s + "\n");
 				}
 				writer.close();
-				
+
 			} catch (FileNotFoundException e) {
-				Logger.logln("Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+				Logger.logln(
+						"Failed to read properties file! numCalcThreads defaulting to 1! Generating new prop file...",
+						Logger.LogOut.STDERR);
 				e.printStackTrace();
-				numThreads=1;
+				numThreads = 1;
 			} catch (IOException e) {
-				Logger.logln("Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",Logger.LogOut.STDERR);
+				Logger.logln(
+						"Prop file empty! numCalcThreads defaulting to 1! Generating new prop file...",
+						Logger.LogOut.STDERR);
 				e.printStackTrace();
-				numThreads=1;
+				numThreads = 1;
 			}
 		} else {
-			numThreads=1;
+			numThreads = 1;
 		}
 	}
 
@@ -440,10 +430,10 @@ public class InstancesBuilder extends Engine {
 		return numThreads;
 	}
 
-	public boolean isSparse(){
+	public boolean isSparse() {
 		return isSparse;
 	}
-	
+
 	/**
 	 * Sets classification relevant data to null
 	 */
