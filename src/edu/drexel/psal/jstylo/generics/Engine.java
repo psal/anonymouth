@@ -246,8 +246,7 @@ public class Engine implements API {
 			// FastVector docTitles = new FastVector();
 			attributes.add(new Attribute("Document Title"));
 		}
-		
-		
+			
 		// here's where we create the new Attribute object and add it to the
 		// attributes list to be returned
 		for (int i = 0; i < attributeList.size(); i++) {
@@ -367,7 +366,10 @@ public class Engine implements API {
 		else
 			inst = new DenseInstance(vectorSize);
 		
-		
+		//-1 for indexing -1 for skipping the author
+		for (int i=0; i<attributes.size()-2;i++){
+			inst.setValue(((Attribute)attributes.get(i)), 0);
+		}
 		
 		//go through all eventSets in the document
 		for (EventSet es: documentData){
@@ -388,7 +390,6 @@ public class Engine implements API {
 						break;
 					}
 				}
-
 				
 				if (eventSetIsRelevant) {
 
@@ -417,10 +418,11 @@ public class Engine implements API {
 										indices.add(currIndex);
 										events.add(e);
 									}
+									//Old location revert if change breaks
 									currHistogram.add(e);
 									found = true;
 								}
-
+								//currHistogram.add(e);
 								if (found)
 									break;
 								currIndex++;
@@ -433,10 +435,9 @@ public class Engine implements API {
 					}
 
 					//calculate/add the histograms
+					
 					int index = 0;
 					for (Integer i: indices){
-						
-				//		System.out.println("i: "+i+" event: "+events.get(index).getEvent()+" doc "+document.getTitle()+" by "+document.getAuthor());
 						inst.setValue((Attribute)attributes.get(i),currHistogram.getAbsoluteFrequency(events.get(index)));
 						index++;
 					}
