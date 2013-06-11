@@ -855,12 +855,8 @@ public class AnalysisTabDriver {
 					//TODO have this be optional and toggle it via an option on the analysis tab. Make sure that there's some kind
 					// of disclaimer since right now it only works if the author name is in the document title.
 					if (main.analysisClassificationStatisticsJCheckBox.isSelected()){
-						Evaluation eval = main.analysisDriver.getClassificationStatistics();
-						content += eval.toSummaryString(false)+"\n";
 						try {
-							content +=
-								eval.toClassDetailsString()+"\n" +
-									eval.toMatrixString()+"\n" ;
+							content += main.analysisDriver.getClassificationStatistics();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

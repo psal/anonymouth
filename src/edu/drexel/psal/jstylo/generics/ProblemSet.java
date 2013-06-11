@@ -1,6 +1,8 @@
 package edu.drexel.psal.jstylo.generics;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import javax.xml.parsers.*;
@@ -14,6 +16,8 @@ import org.xml.sax.helpers.*;
 import java.util.Collections;
 
 import com.jgaap.generics.*;
+
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 public class ProblemSet {
 	
@@ -601,16 +605,27 @@ public class ProblemSet {
 		for (String author: sortedAuthors) {
 			pw.println("\t\t<author name=\""+author+"\">");
 			List<Document> docs = trainDocsMap.get(author);
-			for (Document doc: docs)
-				pw.println("\t\t\t<document title=\"" + doc.getTitle() + "\">" +
-						doc.getFilePath().replace('\\','/') + "</document>");
+			for (Document doc : docs) {
+				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+						+ buildRelativePath(doc) + "</document>");
+/*
+				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+						+ doc.getFilePath().replace('\\', '/') + "</document>");
+*/
+			}
 			pw.println("\t\t</author>");
 		}
 		pw.println("\t</training>");
 		pw.println("\t<test>");
-		for (Document doc: testDocs)
-			pw.println("\t\t<document title=\"" + doc.getTitle() + "\">" +
-					doc.getFilePath().replace('\\', '/') + "</document>");
+		for (Document doc : testDocs) {
+
+/*
+			pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+					+ doc.getFilePath().replace('\\', '/') + "</document>");
+*/
+			pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+					+ buildRelativePath(doc) + "</document>");
+		}
 		pw.println("\t</test>");
 		pw.println("</problem-set>");
 		
@@ -725,12 +740,57 @@ public class ProblemSet {
 				//test document (new format) <not yet implemented>
 				else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Logger.logln("Planned for next version of test document handling");
-					
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
 				}	
 			}	
 		}
+	}
+	
+	//TODO
+	public String buildRelativePath(Document doc){
+		String relPath = "";
+		String filePath = doc.getFilePath();
+		File docum = new File(filePath);
+		String docPath = docum.getAbsolutePath();
+		docPath = docPath.replaceAll("\\\\","/");
+		File here = new File("");
+		String dirPath = here.getAbsolutePath();
+		dirPath = dirPath.replaceAll("\\\\","/");
+		
+		String[] docComponents = docPath.split("/");
+		String[] dirComponents = dirPath.split("/");
+		
+		String shared = "";
+		int index = 0;
+		
+		//record all of the common components
+		//stop recording them once they diverge, as repeated dir names could appear
+		//further down the line
+		while (index<docComponents.length && index<dirComponents.length &&
+				(docComponents[index].equals(dirComponents[index]))){
+			shared+=dirComponents[index]+"/";
+			index++;
+		}
+		
+		//If this is 0, then they're on different drives or something like that.
+		//Maybe we should try to find a way to get that to work? Perhaps allow people to toggle absolute versus relative paths?
+		if (index==0){
+			Logger.logln("Failed to build relative path between: "+docPath+" and "+dirPath,LogOut.STDERR);
+		}
+		
+		//Gets the path from the current dir to the point where the current dir and the dest diverge
+		if (dirComponents.length != index){
+			int backTrack = dirComponents.length - index;
+			
+			for (int i=0; i<backTrack; i++){
+				relPath+="../";
+			}
+		}
+		
+		relPath+=docPath.substring(shared.length());
+		
+		return relPath;
 	}
 	
 	/*

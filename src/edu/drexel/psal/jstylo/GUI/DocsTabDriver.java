@@ -79,7 +79,7 @@ public class DocsTabDriver {
 					answer = load.showOpenDialog(main);
 					
 					if (answer == JFileChooser.APPROVE_OPTION) {
-						String path = load.getSelectedFile().getAbsolutePath();
+						String path = load.getSelectedFile().getPath();
 						Logger.logln("Trying to load problem set from "+path);
 						try {
 							main.ps = new ProblemSet(path);
@@ -160,16 +160,15 @@ public class DocsTabDriver {
 					File[] files = open.getSelectedFiles();
 					String msg = "Trying to load test documents:\n";
 					for (File file: files)
-						msg += "\t\t> "+file.getAbsolutePath()+"\n";
+						msg += "\t\t> "+file.getPath()+"\n";
 					Logger.log(msg);
-					
 					
 					String path = null;
 					ArrayList<String> allTestDocPaths = new ArrayList<String>();
 					for (Document doc: main.ps.getTestDocs())
 						allTestDocPaths.add(doc.getFilePath());
 					for (File file: files) {
-						path = file.getAbsolutePath();
+						path = file.getPath();
 						if (allTestDocPaths.contains(path))
 							continue;
 						main.ps.addTestDoc(new Document(path,"dummy",file.getName()));
@@ -299,7 +298,7 @@ public class DocsTabDriver {
 							allTestDocPaths.add(doc.getFilePath()); 
 						for (File dir: authors) {	//for each directory selected
 							for (File file: dir.listFiles()){ //for each file in that directory
-								path = file.getAbsolutePath();
+								path = file.getPath();
 								if (allTrainDocPaths.contains(path)) { //make sure that the file isn't already in the training set
 									skipList += "\n"+path+" - already contained for author "+dir.getName(); 
 									continue;
@@ -380,7 +379,7 @@ public class DocsTabDriver {
 						File[] files = open.getSelectedFiles();
 						String msg = "Trying to load training documents for author \""+author+"\":\n";
 						for (File file: files)
-							msg += "\t\t> "+file.getAbsolutePath()+"\n";
+							msg += "\t\t> "+file.getPath()+"\n";
 						Logger.log(msg);
 						
 						String path = null;
@@ -392,7 +391,7 @@ public class DocsTabDriver {
 						for (Document doc: main.ps.getTestDocs())
 							allTestDocPaths.add(doc.getFilePath());
 						for (File file: files) {
-							path = file.getAbsolutePath();
+							path = file.getPath();
 							if (allTrainDocPaths.contains(path)) {
 								skipList += "\n"+path+" - already contained for author "+author;
 								continue;
@@ -657,7 +656,7 @@ public class DocsTabDriver {
 		@Override
 		public boolean accept(File f) {
 			if (f.isDirectory()) return true;
-			String path = f.getAbsolutePath().toLowerCase();
+			String path = f.getPath().toLowerCase();
 			for (String extension: exts) {
 				if ((path.endsWith(extension) &&
 						(path.charAt(path.length() - extension.length() - 1)) == '.'))

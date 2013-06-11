@@ -66,7 +66,6 @@ public class Engine implements API {
 						.setEventSetID(IDs.get(iterator));
 			}
 		}
-
 		return culledEventSets;
 	}
 
@@ -490,84 +489,6 @@ public class Engine implements API {
 			}
 		}
 		
-		
-			// initialize instance
-
-			// if (hasDocTitles)
-			// inst.setValue((Attribute) attributes.get(0),
-			// document.getTitle());
-
-			//TODO create an arraylist of ints which just has the indicies of all of the events to add
-			/*
-			// update values
-			int index = (hasDocTitles ? 1 : 0);
-			
-			for (int j = 0; j < numOfFeatureClasses; j++) {
-
-				// generates the set of events to be added
-				Set<Event> events = new HashSet<Event>();
-				EventHistogram currHist = new EventHistogram();
-				if (cumulativeFeatureDriver.featureDriverAt(j).isCalcHist()) { // calculate
-																				// histogram
-					// generate event histograms and unique event list
-					for (i = 0; i < documentData.size(); i++) {
-						for (Event event : documentData.get(i)) {
-
-							String eventID = event.getEvent();
-							boolean toAdd = false;
-
-							for (Event e : relevantEvents.get(j)) {
-								if (e.getEvent().equals(eventID)) {
-									toAdd = true;
-									break;
-								}
-							}
-
-							if (toAdd) {
-								if (!events.contains(event))
-									events.add(event);
-								currHist.add(event);
-							}
-						}
-					}
-				}
-
-				if (cumulativeFeatureDriver.featureDriverAt(j).isCalcHist()) {
-
-					// extract absolute frequency from histogram
-					for (Event e : events) {
-						
-						inst.setValue((Attribute) attributes.get(index),
-								currHist.getAbsoluteFrequency(e));
-						index++;
-					}
-				} else {
-					// extract numeric value from original sole event
-
-					FeatureDriver nonHistDriver = cumulativeFeatureDriver
-							.featureDriverAt(j);
-					Document tempDoc = document;
-
-					for (Canonicizer c : nonHistDriver.getCanonicizers()) {
-						tempDoc.addCanonicizer(c);
-					}
-
-					EventDriver underlyingDriver = nonHistDriver
-							.getUnderlyingEventDriver();
-
-					tempDoc.load();
-					tempDoc.processCanonicizers();
-
-					EventSet nonHistES = underlyingDriver
-							.createEventSet(tempDoc);
-
-					double value = Double.parseDouble(nonHistES.eventAt(0)
-							.getEvent());
-					inst.setValue((Attribute) attributes.get(index), value);
-					index++;
-				}
-			}*/
-
 		// if it's a test document, it won't have an author
 		if (!(document.getAuthor() == null)) {
 			inst.setValue((Attribute) attributes.get(attributes.size() - 1),
