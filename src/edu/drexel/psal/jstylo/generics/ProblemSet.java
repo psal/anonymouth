@@ -683,16 +683,6 @@ public class ProblemSet {
 		private ProblemSet problemSet;
 		private String filename;
 		
-		private Tag currTag;
-		private String author;
-		private boolean underTraining;
-		private String docTitle;
-		
-		private String testAuthor = null;
-		private boolean testAuthorSet = false;
-		
-		
-		
 		/* ============
 		 * constructors
 		 * ============
@@ -742,12 +732,11 @@ public class ProblemSet {
 					Logger.logln("Planned for next version of test document handling");
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
-				}	
+				}
 			}	
 		}
 	}
 	
-	//TODO
 	public String buildRelativePath(Document doc){
 		String relPath = "";
 		String filePath = doc.getFilePath();

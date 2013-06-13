@@ -171,14 +171,18 @@ public class DocsTabDriver {
 						path = file.getPath();
 						if (allTestDocPaths.contains(path))
 							continue;
-						main.ps.addTestDoc(new Document(path,"dummy",file.getName()));
+						try {
+							main.ps.addTestDoc(new Document(path,null));
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
 					}
 					if (path != null)
 						main.defaultLoadSaveDir = (new File(path)).getParent();
 					
 					GUIUpdateInterface.updateTestDocTable(main);
 					GUIUpdateInterface.clearDocPreview(main);
-
+					
 				} else {
 					Logger.logln("Load test documents canceled");
 				}

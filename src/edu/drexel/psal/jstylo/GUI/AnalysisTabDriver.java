@@ -597,7 +597,7 @@ public class AnalysisTabDriver {
 
 		public void run() {
 			Logger.logln(">>> Run Analysis thread started.");
-						
+			
 			// initialize results tab
 			JPanel tab = new JPanel(new BorderLayout());
 			main.analysisResultsJTabbedPane.addTab(getTimestamp(), tab);
