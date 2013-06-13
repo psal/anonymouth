@@ -192,26 +192,28 @@ public class InstancesBuilder extends Engine {
 		// if the num of threads is bigger then the number of docs, set it to
 		// the max number of docs (extract each document's features in its own
 		// thread
+		int threadsToUse = numThreads;
+		
 		if (numThreads > knownDocsSize) {
-			numThreads = knownDocsSize;
+			threadsToUse = knownDocsSize;
 		}
 
-		int div = knownDocsSize / numThreads;
+		int div = knownDocsSize / threadsToUse;
 
 		if (div % knownDocsSize != 0)
 			div++;
 
-		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[numThreads];
-		for (int thread = 0; thread < numThreads; thread++)
+		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[threadsToUse];
+		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread] = new FeatureExtractionThread(div, thread,
 					knownDocsSize, knownDocs, new CumulativeFeatureDriver(cfd));
-		for (int thread = 0; thread < numThreads; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread].start();
-		for (int thread = 0; thread < numThreads; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread].join();
-		for (int thread = 0; thread < numThreads; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++)
 			eventList.addAll(calcThreads[thread].list);
-		for (int thread = 0; thread < numThreads; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread] = null;
 		calcThreads = null;
 
@@ -237,28 +239,87 @@ public class InstancesBuilder extends Engine {
 		// instance objects to Instances?
 		trainingInstances = new Instances("Instances", attributes,
 				eventList.size());
-		int i = 0;
-		for (List<EventSet> documentData : eventList) {
-			Document doc = ps.getAllTrainDocs().get(i);
-			Instance instance = createInstance(attributes, relevantEvents, cfd,
-					documentData, doc, isSparse, useDocTitles);
-			instance.setDataset(trainingInstances);
-			normInstance(cfd, instance, doc, useDocTitles);
-			i++;
-			trainingInstances.add(instance);
+		
+		List<Instance> generatedInstances = new ArrayList<Instance>();
+		int threadsToUse = numThreads;
+		int numInstances = eventList.size();
+		
+		if (numThreads > numInstances) {
+			threadsToUse = numInstances;
 		}
+
+		int div = numInstances / threadsToUse;
+
+		if (div % numInstances != 0)
+			div++;
+
+		CreateTrainInstancesThread[] calcThreads = new CreateTrainInstancesThread[threadsToUse];
+		for (int thread = 0; thread < threadsToUse; thread++)
+			calcThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances);
+		for (int thread = 0; thread < threadsToUse; thread++)
+			calcThreads[thread].start();
+		for (int thread = 0; thread < threadsToUse; thread++)
+			calcThreads[thread].join();
+		for (int thread = 0; thread < threadsToUse; thread++)
+			generatedInstances.addAll(calcThreads[thread].list);
+		for (int thread = 0; thread < threadsToUse; thread++)
+			calcThreads[thread] = null;
+		calcThreads = null;
+		
+		for (Instance inst: generatedInstances){
+			trainingInstances.add(inst);
+		}
+		
+		
 	}
 
 	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
 		testInstances = new Instances("TestInstances", attributes, ps
 				.getTestDocs().size());
-
+		
 		// generate the test instance objects from the list of list of event
 		// sets and add them to the Instances object
 		// TODO perhaps parallelize this as well? build a list of Instances
 		// objects and then add go through each list (in order) and add the
 		// instance objects to Instances?
+		
+		if (ps.getTestDocs().size()==0){
+			testInstances=null;
+		} else {
+			
+			List<Instance> generatedInstances = new ArrayList<Instance>();
+			int threadsToUse = numThreads;
+			int numInstances = ps.getTestDocs().size();
+			
+			if (numThreads > numInstances) {
+				threadsToUse = numInstances;
+			}
+
+			int div = numInstances / threadsToUse;
+
+			if (div % numInstances != 0)
+				div++;
+
+			CreateTestInstancesThread[] calcThreads = new CreateTestInstancesThread[threadsToUse];
+			for (int thread = 0; thread < threadsToUse; thread++)
+				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances);
+			for (int thread = 0; thread < threadsToUse; thread++)
+				calcThreads[thread].start();
+			for (int thread = 0; thread < threadsToUse; thread++)
+				calcThreads[thread].join();
+			for (int thread = 0; thread < threadsToUse; thread++)
+				generatedInstances.addAll(calcThreads[thread].list);
+			for (int thread = 0; thread < threadsToUse; thread++)
+				calcThreads[thread] = null;
+			calcThreads = null;
+			
+			for (Instance inst: generatedInstances){
+				testInstances.add(inst);
+			}
+		}
+		
+		/*
 		boolean found = false;
 		for (Document doc : ps.getTestDocs()) {
 			found = true;
@@ -274,10 +335,92 @@ public class InstancesBuilder extends Engine {
 		// if there are no test documents, set the Instances object to null
 		if (!found)
 			testInstances = null;
+			*/
 	}
 
 	// Thread Definitions
 
+	public class CreateTestInstancesThread extends Thread {
+		
+		Instances dataset;
+		ArrayList<Instance> list;
+		int div;
+		int threadId;
+		int numInstances;
+		
+		public CreateTestInstancesThread(Instances data, int d, int t, int n){
+			dataset = data;
+			list = new ArrayList<Instance>();
+			div = d;
+			threadId = t;
+			numInstances = n;
+		}
+		
+		public ArrayList<Instance> getList() {
+			return list;
+		}
+		
+		@Override
+		public void run() {
+			for (int i = div * threadId; i < Math.min(numInstances, div
+					* (threadId + 1)); i++)
+				try {
+					Document doc = ps.getTestDocs().get(i);
+					List<EventSet> events = extractEventSets(doc, cfd);
+					events = cullWithRespectToTraining(relevantEvents, events, cfd);
+					Instance instance = createInstance(attributes, relevantEvents, cfd,
+							events, doc, isSparse, useDocTitles);
+					instance.setDataset(testInstances);
+					normInstance(cfd, instance, doc, useDocTitles);
+					list.add(instance);
+				} catch (Exception e) {
+					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
+					Logger.logln(e.getMessage(), LogOut.STDERR);
+				}
+		}
+		
+	}
+	
+	
+	public class CreateTrainInstancesThread extends Thread {
+		
+		Instances dataset;
+		ArrayList<Instance> list;
+		int div;
+		int threadId;
+		int numInstances;
+		
+		public CreateTrainInstancesThread(Instances data, int d, int t, int n){
+			dataset = data;
+			list = new ArrayList<Instance>();
+			div = d;
+			threadId = t;
+			numInstances = n;
+		}
+		
+		public ArrayList<Instance> getList() {
+			return list;
+		}
+		
+		@Override
+		public void run() {
+			for (int i = div * threadId; i < Math.min(numInstances, div
+					* (threadId + 1)); i++)
+				try {
+					Document doc = ps.getAllTrainDocs().get(i);
+					Instance instance = createInstance(attributes, relevantEvents, cfd,
+							eventList.get(i), doc, isSparse, useDocTitles);
+					instance.setDataset(trainingInstances);
+					normInstance(cfd, instance, doc, useDocTitles);
+					list.add(instance);
+				} catch (Exception e) {
+					Logger.logln("Error creating Instances!", LogOut.STDERR);
+					Logger.logln(e.getMessage(), LogOut.STDERR);
+				}
+		}
+		
+	}
+	
 	public class FeatureExtractionThread extends Thread {
 
 		ArrayList<List<EventSet>> list = new ArrayList<List<EventSet>>();
