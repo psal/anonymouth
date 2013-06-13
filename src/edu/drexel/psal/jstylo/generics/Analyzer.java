@@ -202,7 +202,7 @@ public abstract class Analyzer{
 		//use the results map to find all of the potential authors and add them to extractedAuthors
 		for (String temp: results.keySet()){
 			for (String s: results.get(temp).keySet()){
-				extractedAuthors.add(s.replaceAll("'",""));
+				extractedAuthors.add(s);
 			}
 			break;
 		}
@@ -253,16 +253,14 @@ public abstract class Analyzer{
 		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
 		for (String testDoc: results.keySet()){
 			
-			testDoc = testDoc.replaceAll("'","");
-			
 			String selectedAuthor = "";
 			Double max =0.0;
 			
 			//find the most likely author
-			for (String potentialAuthor : results.get(testDoc).keySet()){
+			for (String potentialAuthor:results.get(testDoc).keySet()){
 				if (results.get(testDoc).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
 					max = results.get(testDoc).get(potentialAuthor).doubleValue();
-					selectedAuthor=potentialAuthor.replaceAll("'","");
+					selectedAuthor=potentialAuthor;
 				}
 			}
 			
@@ -327,6 +325,91 @@ public abstract class Analyzer{
 			}
 		}
 		return eval;
+		/*
+		//////
+		String AUTHOR = "AUTHOR";
+
+		String NOT_AUTHOR = "NOT_AUTHOR";
+
+		String instsStr = "@relation stub\n" + "\n" + "@attribute f numeric\n"
+				+ "@attribute class {" + AUTHOR + "," + NOT_AUTHOR + "}\n"
+				+ "\n" + "@data\n" + 
+				"0,AUTHOR\n" + // author good
+				"1,NOT_AUTHOR\n" + // not author good
+				"1,AUTHOR\n" + // author bad
+				"0,NOT_AUTHOR\n"; // not author bad
+
+		Instances dummyData = null;
+
+		Instance AUTHOR_GOOD, AUTHOR_BAD, NOT_AUTHOR_GOOD, NOT_AUTHOR_BAD;
+
+		SMO SMO = new SMO();
+
+		try {
+			dummyData = new Instances(new StringReader(instsStr));
+		} catch (Exception e) {
+			System.err.println("Error initializing evaluation stubs!!!");
+		}
+
+		dummyData.setClassIndex(1);
+		AUTHOR_GOOD = dummyData.instance(0);
+		NOT_AUTHOR_GOOD = dummyData.instance(1);
+		AUTHOR_BAD = dummyData.instance(2);
+		NOT_AUTHOR_BAD = dummyData.instance(3);
+
+		dummyData.delete(3);
+		dummyData.delete(2);
+		
+		Evaluation ratesEval = null;
+		try {
+			ratesEval = new Evaluation(dummyData);
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		try {
+			SMO.buildClassifier(dummyData);
+		} catch (Exception e) {
+			System.err.println("Error training classifier!!!");
+		}
+
+		//Go over the results again, evaluating the dummy as we go
+		for (String testDoc: results.keySet()){
+			
+			String selectedAuthor = "";
+			Double max =0.0;
+			
+			//find the most likely author
+			for (String potentialAuthor : results.get(testDoc).keySet()){
+				if (results.get(testDoc).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
+					max = results.get(testDoc).get(potentialAuthor).doubleValue();
+					selectedAuthor=potentialAuthor;
+				}
+			}
+			
+			try {
+				//TP / TN
+				if (testDoc.contains(selectedAuthor)) {
+					ratesEval.evaluateModelOnce(SMO, AUTHOR_GOOD);
+					ratesEval.evaluateModelOnce(SMO, NOT_AUTHOR_GOOD);
+				// FP / FN
+				} else {
+					ratesEval.evaluateModelOnce(SMO, AUTHOR_BAD);
+					ratesEval.evaluateModelOnce(SMO, NOT_AUTHOR_BAD);
+				}
+			} catch (Exception e) {
+
+			}
+		}
+		
+		return matrixEval.toSummaryString()+"\n"+
+		"True Positive: "+matrixEval.weightedTruePositiveRate()+
+		"\nTrue Negative: "+matrixEval.weightedTrueNegativeRate()+
+		"\nFalse Positive: "+matrixEval.weightedFalsePositiveRate()+
+		"\nFalse Negative: "+matrixEval.weightedFalseNegativeRate()+
+		"\n\n"+matrixEval.toMatrixString();
+		 */
 	}
 	
 	/**
