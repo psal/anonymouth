@@ -18,6 +18,7 @@ import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder.CalcThread;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 
 public class InstancesBuilder extends Engine {
 
@@ -233,10 +234,6 @@ public class InstancesBuilder extends Engine {
 
 	public void createTrainingInstancesThreaded() throws Exception {
 
-		// create instances objects from the lists lists of event sets
-		// TODO perhaps parallelize this as well? build a list of Instances
-		// objects and then add go through each list (in order) and add the
-		// instance objects to Instances?
 		trainingInstances = new Instances("Instances", attributes,
 				eventList.size());
 		
@@ -270,7 +267,6 @@ public class InstancesBuilder extends Engine {
 			trainingInstances.add(inst);
 		}
 		
-		
 	}
 
 	public void createTestInstancesThreaded() throws Exception {
@@ -283,7 +279,7 @@ public class InstancesBuilder extends Engine {
 		// TODO perhaps parallelize this as well? build a list of Instances
 		// objects and then add go through each list (in order) and add the
 		// instance objects to Instances?
-		
+		/*
 		if (ps.getTestDocs().size()==0){
 			testInstances=null;
 		} else {
@@ -316,26 +312,27 @@ public class InstancesBuilder extends Engine {
 			
 			for (Instance inst: generatedInstances){
 				testInstances.add(inst);
-			}
+			}		
 		}
+		*/
 		
-		/*
 		boolean found = false;
 		for (Document doc : ps.getTestDocs()) {
-			found = true;
+			
 			List<EventSet> events = extractEventSets(doc, cfd);
-			events = cullWithRespectToTraining(relevantEvents, events, cfd);
+			events = cullWithRespectToTraining(relevantEvents, events, cfd); //FIXME
 			Instance instance = createInstance(attributes, relevantEvents, cfd,
 					events, doc, isSparse, useDocTitles);
 			instance.setDataset(testInstances);
 			normInstance(cfd, instance, doc, useDocTitles);
 			testInstances.add(instance);
+			found = true;
 		}
-
+		
 		// if there are no test documents, set the Instances object to null
 		if (!found)
 			testInstances = null;
-			*/
+			
 	}
 
 	// Thread Definitions
@@ -456,8 +453,6 @@ public class InstancesBuilder extends Engine {
 				}
 		}
 	}
-
-	// TODO add new thread definitions for test and training instances creation
 
 	/**
 	 * Applies the infoGain information to the training and (if present) test

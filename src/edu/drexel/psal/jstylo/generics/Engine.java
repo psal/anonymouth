@@ -788,7 +788,7 @@ public class Engine implements API {
 			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull,
 			CumulativeFeatureDriver cfd) throws Exception {
 		List<EventSet> relevant = relevantEvents;
-		int numOfFeatureClasses = relevant.size();
+		int numOfFeatureClasses = eventSetsToCull.size();
 		int i;
 		List<EventSet> culledUnknownEventSets = new LinkedList<EventSet>();
 
@@ -841,9 +841,18 @@ public class Engine implements API {
 				culledUnknownEventSets.add(unknown);
 
 			} else { // one unique numeric event
-
 				// add non-histogram if it is in the relevantEventSets list
-				if (relevantEvents.contains(eventSetsToCull.get(i)))
+				boolean isRelevant = false;
+				
+				for (EventSet res: relevantEvents){
+					if (res.getEventSetID().equals(
+							eventSetsToCull.get(i).getEventSetID())) {
+						isRelevant = true;
+						break;
+					}
+				}
+				
+				if (isRelevant)
 					culledUnknownEventSets.add(eventSetsToCull.get(i));
 			}
 		}
