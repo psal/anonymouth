@@ -669,7 +669,6 @@ public class AnalysisTabDriver {
 			main.ib.reset();
 			main.ib = tempBuilder;
 			// training set
-			//main.wib.setSparse(main.analysisSparseInstancesJCheckBox.isSelected());
 			
 			content += getTimestamp()+" Extracting features from training corpus ("+(main.ib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
 			updateResultsView();

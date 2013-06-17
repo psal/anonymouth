@@ -8,12 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.jgaap.generics.Document;
 import com.jgaap.generics.EventSet;
 
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
-import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder.CalcThread;
 
 import weka.core.Attribute;
 import weka.core.Instance;
@@ -184,26 +186,30 @@ public class InstancesBuilder extends Engine {
 
 	public void extractEventsThreaded() throws Exception {
 
-		// initalize empty List<List<EventSet>>
-		eventList = new ArrayList<List<EventSet>>();
-
+		//pull in documents and find out how many there are
 		List<Document> knownDocs = ps.getAllTrainDocs();
 		int knownDocsSize = knownDocs.size();
+
+		// initalize empty List<List<EventSet>>
+		eventList = new ArrayList<List<EventSet>>(knownDocsSize);
+		ExecutorService pool = Executors.newCachedThreadPool();
+		ConcurrentHashMap<Integer,List<EventSet>> eventSets = 
+				new ConcurrentHashMap<Integer,List<EventSet>>(knownDocsSize);
 
 		// if the num of threads is bigger then the number of docs, set it to
 		// the max number of docs (extract each document's features in its own
 		// thread
+		
 		int threadsToUse = numThreads;
 		
 		if (numThreads > knownDocsSize) {
 			threadsToUse = knownDocsSize;
 		}
-
+		
 		int div = knownDocsSize / threadsToUse;
-
 		if (div % knownDocsSize != 0)
 			div++;
-
+		
 		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread] = new FeatureExtractionThread(div, thread,
@@ -216,11 +222,11 @@ public class InstancesBuilder extends Engine {
 			eventList.addAll(calcThreads[thread].list);
 		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread] = null;
+		
 		calcThreads = null;
-
+		
 		List<List<EventSet>> temp = cull(eventList, cfd);
 		eventList = temp;
-
 	}
 
 	public void initializeRelevantEvents() throws Exception {
@@ -279,7 +285,7 @@ public class InstancesBuilder extends Engine {
 		// TODO perhaps parallelize this as well? build a list of Instances
 		// objects and then add go through each list (in order) and add the
 		// instance objects to Instances?
-		/*
+		
 		if (ps.getTestDocs().size()==0){
 			testInstances=null;
 		} else {
@@ -299,7 +305,7 @@ public class InstancesBuilder extends Engine {
 
 			CreateTestInstancesThread[] calcThreads = new CreateTestInstancesThread[threadsToUse];
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances);
+				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
 			for (int thread = 0; thread < threadsToUse; thread++)
 				calcThreads[thread].start();
 			for (int thread = 0; thread < threadsToUse; thread++)
@@ -314,25 +320,6 @@ public class InstancesBuilder extends Engine {
 				testInstances.add(inst);
 			}		
 		}
-		*/
-		
-		boolean found = false;
-		for (Document doc : ps.getTestDocs()) {
-			
-			List<EventSet> events = extractEventSets(doc, cfd);
-			events = cullWithRespectToTraining(relevantEvents, events, cfd); //FIXME
-			Instance instance = createInstance(attributes, relevantEvents, cfd,
-					events, doc, isSparse, useDocTitles);
-			instance.setDataset(testInstances);
-			normInstance(cfd, instance, doc, useDocTitles);
-			testInstances.add(instance);
-			found = true;
-		}
-		
-		// if there are no test documents, set the Instances object to null
-		if (!found)
-			testInstances = null;
-			
 	}
 
 	// Thread Definitions
@@ -344,8 +331,10 @@ public class InstancesBuilder extends Engine {
 		int div;
 		int threadId;
 		int numInstances;
+		CumulativeFeatureDriver cfd;
 		
-		public CreateTestInstancesThread(Instances data, int d, int t, int n){
+		public CreateTestInstancesThread(Instances data, int d, int t, int n, CumulativeFeatureDriver cd){
+			cfd=cd;
 			dataset = data;
 			list = new ArrayList<Instance>();
 			div = d;
@@ -372,6 +361,7 @@ public class InstancesBuilder extends Engine {
 					list.add(instance);
 				} catch (Exception e) {
 					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
+					Logger.logln(ps.getTestDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}
@@ -419,8 +409,9 @@ public class InstancesBuilder extends Engine {
 	}
 	
 	public class FeatureExtractionThread extends Thread {
-
+		
 		ArrayList<List<EventSet>> list = new ArrayList<List<EventSet>>();
+		ConcurrentHashMap<Integer,List<EventSet>> eventSets;
 		int div;
 		int threadId;
 		int knownDocsSize;
@@ -444,14 +435,17 @@ public class InstancesBuilder extends Engine {
 		@Override
 		public void run() {
 			for (int i = div * threadId; i < Math.min(knownDocsSize, div
-					* (threadId + 1)); i++)
+					* (threadId + 1)); i++){
 				try {
-					list.add(cfd.createEventSets(ps.getAllTrainDocs().get(i)));
+					List<EventSet> extractedEvents = cfd.createEventSets(ps.getAllTrainDocs().get(i));
+					list.add(extractedEvents);
 				} catch (Exception e) {
 					Logger.logln("Error extracting features!", LogOut.STDERR);
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
+			}
 		}
+		
 	}
 
 	/**
@@ -570,6 +564,10 @@ public class InstancesBuilder extends Engine {
 
 	public boolean isSparse() {
 		return isSparse;
+	}
+	
+	public List<Document> getTrainDocs(){
+		return ps.getAllTrainDocs();
 	}
 
 	/**

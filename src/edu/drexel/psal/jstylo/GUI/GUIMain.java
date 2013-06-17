@@ -253,7 +253,6 @@ public class GUIMain extends javax.swing.JFrame {
 		FeatureWizardDriver.populateAll();
 		analyzers = new ArrayList<Analyzer>();
 		ib = new InstancesBuilder();
-		//wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 	}
 	
