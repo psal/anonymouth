@@ -22,26 +22,34 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 
+/**
+ * An API for the feature extraction process. Designed for running on a single machine
+ * @author Travis Dutko
+ */
 public class InstancesBuilder extends Engine {
 
+	//////////////////////////////////////////// Data
+	
 	// These vars should be initialized in the constructor and stay the same
-	// throughout the instances creation
-	private boolean isSparse;
-	private boolean useDocTitles;
-	private int numThreads;
+	// throughout the entire process
+	private boolean isSparse;	//sparse instances if true, dense if false
+	private boolean useDocTitles;	//use doc titles as a feature? Not yet implemented
+	private int numThreads;	//number of calc threads to use during parallelization
 
-	// persistant data
-	private ProblemSet ps;
-	private CumulativeFeatureDriver cfd;
-	private List<List<EventSet>> eventList;
-	private List<EventSet> relevantEvents;
-	private ArrayList<Attribute> attributes;
+	// persistant data stored as we create it
+	private ProblemSet ps;	//the documents
+	private CumulativeFeatureDriver cfd;	//the driver used to extract features
+	private List<List<EventSet>> eventList;	//the events/sets created from the extracted features
+	private List<EventSet> relevantEvents;	//the events/sets to pay attention to
+	private ArrayList<Attribute> attributes;	//the relevant events converted into attributes
 
-	// Data of interest
-	private Instances trainingInstances;
-	private Instances testInstances;
-	private double[][] infoGain;
+	// Relevant data to spit out at the end
+	private Instances trainingInstances;	//training doc Instances
+	private Instances testInstances;	//testDoc Instances
+	private double[][] infoGain;	//infoGain scores for all features
 
+	//////////////////////////////////////////// Constructors
+	
 	/**
 	 * Empty constructor. For use if you want to build it as you go, rather then
 	 * all at once<br>
@@ -183,6 +191,13 @@ public class InstancesBuilder extends Engine {
 
 	}
 
+	//////////////////////////////////////////// Methods
+	
+	/**
+	 * Extracts the List\<EventSet\> from each document using a user-defined number of threads.
+	 * Culls the eventSets as well.
+	 * @throws Exception
+	 */
 	public void extractEventsThreaded() throws Exception {
 
 		//pull in documents and find out how many there are
@@ -197,62 +212,85 @@ public class InstancesBuilder extends Engine {
 		// thread
 		int threadsToUse = numThreads;
 		
+		//if we have more threads than documents, that's a bit silly.
 		if (numThreads > knownDocsSize) {
 			threadsToUse = knownDocsSize;
 		}
 		
+		//if some documents are leftover after divvying them up, increment the div
 		int div = knownDocsSize / threadsToUse;
 		if (div % knownDocsSize != 0)
 			div++;
 		
+		//Parallelized feature extraction
 		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[threadsToUse];
-		for (int thread = 0; thread < threadsToUse; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++) //create the threads
 			calcThreads[thread] = new FeatureExtractionThread(div, thread,
 					knownDocsSize, knownDocs, new CumulativeFeatureDriver(cfd));
-		for (int thread = 0; thread < threadsToUse; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++) //start them
 			calcThreads[thread].start();
-		for (int thread = 0; thread < threadsToUse; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++) //join them
 			calcThreads[thread].join();
-		for (int thread = 0; thread < threadsToUse; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++) //combine List<List<EventSet>>
 			eventList.addAll(calcThreads[thread].list);
-		for (int thread = 0; thread < threadsToUse; thread++)
+		for (int thread = 0; thread < threadsToUse; thread++) //destroy threads
 			calcThreads[thread] = null;
 		
 		calcThreads = null;
+		
+		//cull the List<List<EventSet>> before returning
 		List<List<EventSet>> temp = cull(eventList, cfd);
+		
+		//return it now
 		eventList = temp;
 	}
 
+	/**
+	 * Initializes and stores the list of relevantEvents created from the culled List\<List\<EventSet\>\>
+	 * @throws Exception
+	 */
 	public void initializeRelevantEvents() throws Exception {
 		relevantEvents = getRelevantEvents(eventList, cfd);
 	}
 
+	/**
+	 * Initializes and stores the list of attributes created from the eventSets and relevantEvents
+	 * @throws Exception
+	 */
 	public void initializeAttributes() throws Exception {
 		attributes = getAttributeList(eventList, relevantEvents, cfd,
 				useDocTitles);
 	}
 
+	/**
+	 * Threaded creation of training instances from gathered data
+	 * @throws Exception
+	 */
 	public void createTrainingInstancesThreaded() throws Exception {
 
+		//create dataset from attributes and numDocs
 		trainingInstances = new Instances("Instances", attributes,
 				eventList.size());
 		
+		//initialize/fetch data
 		List<Instance> generatedInstances = new ArrayList<Instance>();
 		int threadsToUse = numThreads;
 		int numInstances = eventList.size();
 		
+		//if there are more threads than instances, that's just silly
 		if (numThreads > numInstances) {
 			threadsToUse = numInstances;
 		}
 
+		//initialize the div and make sure it captures everything
 		int div = numInstances / threadsToUse;
-
 		if (div % numInstances != 0)
 			div++;
 
+		//Parallelized magic
 		CreateTrainInstancesThread[] calcThreads = new CreateTrainInstancesThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances);
+			calcThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances,new CumulativeFeatureDriver(cfd));
 		for (int thread = 0; thread < threadsToUse; thread++)
 			calcThreads[thread].start();
 		for (int thread = 0; thread < threadsToUse; thread++)
@@ -263,34 +301,43 @@ public class InstancesBuilder extends Engine {
 			calcThreads[thread] = null;
 		calcThreads = null;
 		
+		//add all of the generated instance objects into the Instances object.
 		for (Instance inst: generatedInstances){
 			trainingInstances.add(inst);
 		}
 		
 	}
 
+	/**
+	 * Creates Test instances from all of the information gathered (if there are any)
+	 * @throws Exception
+	 */
 	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
 		testInstances = new Instances("TestInstances", attributes, ps
 				.getTestDocs().size());
 		
+		//if there are no test instances, set the instance object to null and move on with our lives
 		if (ps.getTestDocs().size()==0){
 			testInstances=null;
-		} else {
+		} else { //otherwise go through the whole process
 			
+			//create/fetch data
 			List<Instance> generatedInstances = new ArrayList<Instance>();
 			int threadsToUse = numThreads;
 			int numInstances = ps.getTestDocs().size();
-			
+		
+			//make sure number of threads isn't silly
 			if (numThreads > numInstances) {
 				threadsToUse = numInstances;
 			}
 
+			//ensure the docs are divided correctly
 			int div = numInstances / threadsToUse;
-
 			if (div % numInstances != 0)
 				div++;
 
+			//Perform some parallelization magic
 			CreateTestInstancesThread[] calcThreads = new CreateTestInstancesThread[threadsToUse];
 			for (int thread = 0; thread < threadsToUse; thread++)
 				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
@@ -304,141 +351,18 @@ public class InstancesBuilder extends Engine {
 				calcThreads[thread] = null;
 			calcThreads = null;
 			
+			//add all of the instance objects to the Instances object
 			for (Instance inst: generatedInstances){
 				testInstances.add(inst);
 			}		
 		}
 	}
 
-	// Thread Definitions
-	public class CreateTestInstancesThread extends Thread {
-		
-		Instances dataset;
-		ArrayList<Instance> list;
-		int div;
-		int threadId;
-		int numInstances;
-		CumulativeFeatureDriver cfd;
-		
-		public CreateTestInstancesThread(Instances data, int d, int t, int n, CumulativeFeatureDriver cd){
-			cfd=cd;
-			dataset = data;
-			list = new ArrayList<Instance>();
-			div = d;
-			threadId = t;
-			numInstances = n;
-		}
-		
-		public ArrayList<Instance> getList() {
-			return list;
-		}
-		
-		@Override
-		public void run() {
-			for (int i = div * threadId; i < Math.min(numInstances, div
-					* (threadId + 1)); i++)
-				try {
-					Document doc = ps.getTestDocs().get(i);
-					List<EventSet> events = extractEventSets(doc, cfd);
-					events = cullWithRespectToTraining(relevantEvents, events, cfd);
-					Instance instance = createInstance(attributes, relevantEvents, cfd,
-							events, doc, isSparse, useDocTitles);
-					instance.setDataset(testInstances);
-					normInstance(cfd, instance, doc, useDocTitles);
-					list.add(instance);
-				} catch (Exception e) {
-					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
-					Logger.logln(ps.getTestDocs().get(i).getFilePath());
-					Logger.logln(e.getMessage(), LogOut.STDERR);
-				}
-		}
-		
-	}
-	
-	
-	public class CreateTrainInstancesThread extends Thread {
-		
-		Instances dataset;
-		ArrayList<Instance> list;
-		int div;
-		int threadId;
-		int numInstances;
-		
-		public CreateTrainInstancesThread(Instances data, int d, int t, int n){
-			dataset = data;
-			list = new ArrayList<Instance>();
-			div = d;
-			threadId = t;
-			numInstances = n;
-		}
-		
-		public ArrayList<Instance> getList() {
-			return list;
-		}
-		
-		@Override
-		public void run() {
-			for (int i = div * threadId; i < Math.min(numInstances, div
-					* (threadId + 1)); i++)
-				try {
-					Document doc = ps.getAllTrainDocs().get(i);
-					Instance instance = createInstance(attributes, relevantEvents, cfd,
-							eventList.get(i), doc, isSparse, useDocTitles);
-					instance.setDataset(trainingInstances);
-					normInstance(cfd, instance, doc, useDocTitles);
-					list.add(instance);
-				} catch (Exception e) {
-					Logger.logln("Error creating Instances!", LogOut.STDERR);
-					Logger.logln(e.getMessage(), LogOut.STDERR);
-				}
-		}
-		
-	}
-	
-	public class FeatureExtractionThread extends Thread {
-		
-		ArrayList<List<EventSet>> list = new ArrayList<List<EventSet>>();
-		int div;
-		int threadId;
-		int knownDocsSize;
-		List<Document> knownDocs;
-		CumulativeFeatureDriver cfd;
-
-		public ArrayList<List<EventSet>> getList() {
-			return list;
-		}
-
-		public FeatureExtractionThread(int div, int threadId,
-				int knownDocsSize, List<Document> knownDocs,
-				CumulativeFeatureDriver cfd) {
-			
-			this.div = div;
-			this.threadId = threadId;
-			this.knownDocsSize = knownDocsSize;
-			this.knownDocs = knownDocs;
-			this.cfd = cfd;
-
-		}
-
-		@Override
-		public void run() {		
-			for (int i = div * threadId; i < Math.min(knownDocsSize, div
-					* (threadId + 1)); i++){
-				try {
-					List<EventSet> extractedEvents = cfd.createEventSets(ps.getAllTrainDocs().get(i));
-					list.add(extractedEvents);
-				} catch (Exception e) {
-					Logger.logln("Error extracting features!", LogOut.STDERR);
-					Logger.logln(e.getMessage(), LogOut.STDERR);
-				}
-			}
-		}
-	}
+	//////////////////////////////////////////// InfoGain related things
 
 	/**
 	 * Applies the infoGain information to the training and (if present) test
-	 * Instances
-	 * 
+	 * Instances. Overwrites our infoGain with the the revised version
 	 * @throws Exception
 	 */
 	public void applyInfoGain(int n) throws Exception {
@@ -447,10 +371,17 @@ public class InstancesBuilder extends Engine {
 			applyInfoGain(getInfoGain(), testInstances, n);
 	}
 
+	/**
+	 * Calculates infoGain across the trainingInstances
+	 * @return a double[][] containing an entry for each feature denoting its index and how useful it is. Sorted via usefulness.
+	 * @throws Exception
+	 */
 	public double[][] calculateInfoGain() throws Exception{
 		setInfoGain(calcInfoGain(trainingInstances));
 		return getInfoGain();
 	}
+	
+	//////////////////////////////////////////// Setters/Getters
 	
 	/**
 	 * 
@@ -552,19 +483,30 @@ public class InstancesBuilder extends Engine {
 			numThreads = 1;
 		}
 	}
-
+	
+	/**
+	 * @return the number of calculation threads we're using
+	 */
 	public int getNumThreads() {
 		return numThreads;
 	}
 
+	/**
+	 * @return true if we are using sparse instances, false if not
+	 */
 	public boolean isSparse() {
 		return isSparse;
 	}
 	
+	/**
+	 * @return the list of training documents
+	 */
 	public List<Document> getTrainDocs(){
 		return ps.getAllTrainDocs();
 	}
 
+	//////////////////////////////////////////// Utilities
+	
 	/**
 	 * Sets classification relevant data to null
 	 */
@@ -576,4 +518,184 @@ public class InstancesBuilder extends Engine {
 		testInstances = null;
 	}
 
+
+	//////////////////////////////////////////// Thread Definitions
+	
+	/**
+	 * A thread used to parallelize the creation of Test instances from a set of documents
+	 * @param data the dataset (Instances object) that the test instance belongs to
+	 * @param d The "div" or divide--how many documents each thread processes at most
+	 * @param t The threadId. Keeps track of which thread is doing which div of documents
+	 * @param n the total number of instances (used to put a cap on the last div so it doesn't try to process docs which don't exist
+	 * @param cd A copy of the cfd to assess features with
+	 * @author Travis Dutko
+	 */
+	public class CreateTestInstancesThread extends Thread {
+		
+		Instances dataset; //the dataset the test instances belong to
+		ArrayList<Instance> list; //the list of test instances produced by this thread
+		int div; //the number of instances to be created per thread
+		int threadId; //the div this thread is dealing with
+		int numInstances; //the total number of instances to be created
+		CumulativeFeatureDriver cfd; //the cfd used to assess features
+		
+		//Constructor
+		public CreateTestInstancesThread(Instances data, int d, int t, int n, CumulativeFeatureDriver cd){
+			cfd=cd;
+			dataset = data;
+			list = new ArrayList<Instance>();
+			div = d;
+			threadId = t;
+			numInstances = n;
+		}
+		
+		//returns the list of instances created by this thread
+		public ArrayList<Instance> getList() {
+			return list;
+		}
+		
+		//Run method
+		@Override
+		public void run() {
+			//for all docs in this div
+			for (int i = div * threadId; i < Math.min(numInstances, div
+					* (threadId + 1)); i++)
+				try {
+					//grab the document
+					Document doc = ps.getTestDocs().get(i);
+					//extract its event sets
+					List<EventSet> events = extractEventSets(doc, cfd);
+					//cull the events/eventSets with respect to training events/sets
+					events = cullWithRespectToTraining(relevantEvents, events, cfd);
+					//build the instance
+					Instance instance = createInstance(attributes, relevantEvents, cfd,
+							events, doc, isSparse, useDocTitles);
+					//add it to the dataset
+					instance.setDataset(testInstances);
+					//normalize it
+					normInstance(cfd, instance, doc, useDocTitles);
+					//add it to the collection of instances to be returned by the thread
+					list.add(instance);
+				} catch (Exception e) {
+					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
+					Logger.logln(ps.getTestDocs().get(i).getFilePath());
+					Logger.logln(e.getMessage(), LogOut.STDERR);
+				}
+		}
+		
+	}
+	
+	/**
+	 * A thread used to parallelize the creation of Training instances from a set of documents
+	 * @param data the dataset (Instances object) that the training instance belongs to
+	 * @param d The "div" or divide--how many documents each thread processes at most
+	 * @param t The threadId. Keeps track of which thread is doing which div of documents
+	 * @param n the total number of instances (used to put a cap on the last div so it doesn't try to process docs which don't exist
+	 * @param cd A copy of the cfd to assess features with
+	 * @author Travis Dutko
+	 */
+	public class CreateTrainInstancesThread extends Thread {
+		
+		Instances dataset; //The dataset to map the instance to
+		ArrayList<Instance> list; //the collection of instances for this div
+		int div; //the number of instances to be created per thread
+		int threadId; //the div for this thread
+		int numInstances; //the total number of instances to be created
+		CumulativeFeatureDriver cfd; //the cfd used to identify features/attributes
+		
+		//Constructor
+		public CreateTrainInstancesThread(Instances data, int d, int t, int n,CumulativeFeatureDriver cd){
+			dataset = data;
+			list = new ArrayList<Instance>();
+			div = d;
+			threadId = t;
+			numInstances = n;
+			cfd=cd;
+		}
+		
+		//Used to fetch this div's list of instances
+		public ArrayList<Instance> getList() {
+			return list;
+		}
+		
+		//Run method
+		@Override
+		public void run() {
+			//for all docs in this div
+			for (int i = div * threadId; i < Math.min(numInstances, div
+					* (threadId + 1)); i++)
+				try {
+					//grab the document
+					Document doc = ps.getAllTrainDocs().get(i);
+					//create the instance using it
+					Instance instance = createInstance(attributes, relevantEvents, cfd,
+							eventList.get(i), doc, isSparse, useDocTitles);
+					//set it as a part of the dataset
+					instance.setDataset(trainingInstances);
+					//normalize it
+					normInstance(cfd, instance, doc, useDocTitles);
+					//add it to this div's list of completed instances
+					list.add(instance);
+				} catch (Exception e) {
+					Logger.logln("Error creating Instances!", LogOut.STDERR);
+					Logger.logln(e.getMessage(), LogOut.STDERR);
+				}
+		}
+		
+	}
+	
+	/**
+	 * A thread used to extract features from documents in parallel. 
+	 * @param d the divide--how many documents each thread processes at most
+	 * @param threadId keeps track of which thread is doing which div of documents
+	 * @param knownDocs a list of documents to be divvied up and have its features extracted
+	 * @param cd A copy of the cfd to assess features with
+	 * @author Travis Dutko
+	 */
+	public class FeatureExtractionThread extends Thread {
+		
+		ArrayList<List<EventSet>> list = new ArrayList<List<EventSet>>(); //The list of event sets for this division of docs
+		int div; //the number of docs to be processed per thread
+		int threadId; //the div index of this thread
+		int knownDocsSize; //the number of docs total
+		List<Document> knownDocs; //the docs to be extracted
+		CumulativeFeatureDriver cfd; //the cfd to do the extracting with
+
+		/**
+		 * @return The list of extracted event sets for this division of documents
+		 */
+		public ArrayList<List<EventSet>> getList() {
+			return list;
+		}
+
+		//Constructor
+		public FeatureExtractionThread(int div, int threadId,
+				int knownDocsSize, List<Document> knownDocs,
+				CumulativeFeatureDriver cfd) {
+			
+			this.div = div;
+			this.threadId = threadId;
+			this.knownDocsSize = knownDocsSize;
+			this.knownDocs = knownDocs;
+			this.cfd = cfd;
+
+		}
+
+		//Runnable Method
+		@Override
+		public void run() {
+			//for all the documents in this div to a maximum of the number of docs
+			for (int i = div * threadId; i < Math.min(knownDocsSize, div
+					* (threadId + 1)); i++){
+				try {
+					//try to extract the events
+					List<EventSet> extractedEvents = cfd.createEventSets(ps.getAllTrainDocs().get(i));
+					list.add(extractedEvents); //and add them to the list of list of eventsets
+				} catch (Exception e) {
+					Logger.logln("Error extracting features!", LogOut.STDERR);
+					Logger.logln(e.getMessage(), LogOut.STDERR);
+				}
+			}
+		}
+	}
 }
