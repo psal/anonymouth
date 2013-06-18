@@ -40,7 +40,7 @@ public class InstancesBuilder extends Engine {
 	// Data of interest
 	private Instances trainingInstances;
 	private Instances testInstances;
-	private List<Integer> infoGain;
+	private double[][] infoGain;
 
 	/**
 	 * Empty constructor. For use if you want to build it as you go, rather then
@@ -89,7 +89,6 @@ public class InstancesBuilder extends Engine {
 		isSparse = sparse;
 		useDocTitles = udt;
 		numThreads = nt;
-
 	}
 
 	/**
@@ -192,14 +191,10 @@ public class InstancesBuilder extends Engine {
 
 		// initalize empty List<List<EventSet>>
 		eventList = new ArrayList<List<EventSet>>(knownDocsSize);
-		ExecutorService pool = Executors.newCachedThreadPool();
-		ConcurrentHashMap<Integer,List<EventSet>> eventSets = 
-				new ConcurrentHashMap<Integer,List<EventSet>>(knownDocsSize);
-
+		
 		// if the num of threads is bigger then the number of docs, set it to
 		// the max number of docs (extract each document's features in its own
 		// thread
-		
 		int threadsToUse = numThreads;
 		
 		if (numThreads > knownDocsSize) {
@@ -224,7 +219,6 @@ public class InstancesBuilder extends Engine {
 			calcThreads[thread] = null;
 		
 		calcThreads = null;
-		
 		List<List<EventSet>> temp = cull(eventList, cfd);
 		eventList = temp;
 	}
@@ -280,12 +274,6 @@ public class InstancesBuilder extends Engine {
 		testInstances = new Instances("TestInstances", attributes, ps
 				.getTestDocs().size());
 		
-		// generate the test instance objects from the list of list of event
-		// sets and add them to the Instances object
-		// TODO perhaps parallelize this as well? build a list of Instances
-		// objects and then add go through each list (in order) and add the
-		// instance objects to Instances?
-		
 		if (ps.getTestDocs().size()==0){
 			testInstances=null;
 		} else {
@@ -323,7 +311,6 @@ public class InstancesBuilder extends Engine {
 	}
 
 	// Thread Definitions
-
 	public class CreateTestInstancesThread extends Thread {
 		
 		Instances dataset;
@@ -411,7 +398,6 @@ public class InstancesBuilder extends Engine {
 	public class FeatureExtractionThread extends Thread {
 		
 		ArrayList<List<EventSet>> list = new ArrayList<List<EventSet>>();
-		ConcurrentHashMap<Integer,List<EventSet>> eventSets;
 		int div;
 		int threadId;
 		int knownDocsSize;
@@ -425,15 +411,17 @@ public class InstancesBuilder extends Engine {
 		public FeatureExtractionThread(int div, int threadId,
 				int knownDocsSize, List<Document> knownDocs,
 				CumulativeFeatureDriver cfd) {
+			
 			this.div = div;
 			this.threadId = threadId;
 			this.knownDocsSize = knownDocsSize;
 			this.knownDocs = knownDocs;
 			this.cfd = cfd;
+
 		}
 
 		@Override
-		public void run() {
+		public void run() {		
 			for (int i = div * threadId; i < Math.min(knownDocsSize, div
 					* (threadId + 1)); i++){
 				try {
@@ -445,7 +433,6 @@ public class InstancesBuilder extends Engine {
 				}
 			}
 		}
-		
 	}
 
 	/**
@@ -454,23 +441,31 @@ public class InstancesBuilder extends Engine {
 	 * 
 	 * @throws Exception
 	 */
-	public void applyInfoGain() throws Exception {
-		applyInfoGain(infoGain, trainingInstances);
+	public void applyInfoGain(int n) throws Exception {
+		setInfoGain(applyInfoGain(getInfoGain(), trainingInstances, n));
 		if (testInstances != null) // Apply infoGain to test set if we have one
-			applyInfoGain(infoGain, testInstances);
+			applyInfoGain(getInfoGain(), testInstances, n);
 	}
 
+	public double[][] calculateInfoGain() throws Exception{
+		setInfoGain(calcInfoGain(trainingInstances));
+		return getInfoGain();
+	}
+	
 	/**
 	 * 
 	 * @return Returns the infoGain value and stores it locally incase we decide
 	 *         to apply it
 	 * @throws Exception
 	 */
-	public List<Integer> getInfoGain(int n) throws Exception {
-		infoGain = calcInfoGain(trainingInstances, n);
+	public double[][] getInfoGain() throws Exception {
 		return infoGain;
 	}
 
+	public void setInfoGain(double[][] doubles){
+		infoGain = doubles;
+	}
+	
 	/**
 	 * A niche method for when you already have a training Instances object and
 	 * only want to build test instances

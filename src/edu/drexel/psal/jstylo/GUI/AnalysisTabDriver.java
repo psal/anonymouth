@@ -38,6 +38,7 @@ import com.sun.corba.se.impl.io.TypeMismatchException;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 
@@ -794,11 +795,22 @@ public class AnalysisTabDriver {
 				
 				try{
 					boolean apply = main.analysisCalcInfoGainJCheckBox.isSelected() && main.analysisApplyInfoGainJCheckBox.isSelected();
-					List<Integer> infoGain = main.ib.calcInfoGain(main.ib.getTrainingInstances(),igValue);
+					Instances trainingInstances = new Instances(main.ib.getTrainingInstances());
+					double[][] infoGain = main.ib.calculateInfoGain();
 					if (apply){
-						main.ib.applyInfoGain();
+						main.ib.applyInfoGain(igValue);
+						infoGain = main.ib.getInfoGain();
 					}
-					content+=infoGain;
+					
+					for (int i = 0; i<infoGain.length; i++){
+						if (infoGain[i][0]==0)
+							break;
+						content+=String.format("> %-50s   %f\n",
+								trainingInstances.attribute((int)infoGain[i][1]).name(),
+								infoGain[i][0]);
+					}
+					updateResultsView();
+					//content+=infoGain;
 				} catch (Exception e) {
 					content += "ERROR! Could not calculate InfoGain!\n";
 					e.printStackTrace();

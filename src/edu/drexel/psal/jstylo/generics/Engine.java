@@ -653,15 +653,14 @@ public class Engine implements API {
 		}
 	}
 
-	// Done
+	// Calculates the information gain for the Instances object
 	@Override
-	public List<Integer> calcInfoGain(Instances insts, int N) throws Exception {
+	public double[][] calcInfoGain(Instances insts) throws Exception {
+
+		//initialize values
 		int len = 0;
 		int n = insts.numAttributes();
-		List<Integer> indicesToKeep = new LinkedList<Integer>();
-
 		Attribute classAttribute = insts.attribute(insts.numAttributes() - 1);
-		// apply InfoGain
 		InfoGainAttributeEval ig = new InfoGainAttributeEval();
 		insts.setClass(classAttribute);
 		ig.buildEvaluator(insts);
@@ -680,6 +679,7 @@ public class Engine implements API {
 			}
 			j++;
 		}
+		//sort based on usefulness
 		Arrays.sort(infoArr, new Comparator<double[]>() {
 			@Override
 			public int compare(final double[] first, final double[] second) {
@@ -687,99 +687,41 @@ public class Engine implements API {
 			}
 		});
 
-		len = 0;
-		final Map<String, Double> featureTypeBreakdown = new HashMap<String, Double>();
-		String attrName;
-		for (int i = 0; i < n - 1; i++) {
-			attrName = insts.attribute((int) infoArr[i][1]).name()
-					.replaceFirst("(-\\d+)?\\{.*\\}", "");
-			if (featureTypeBreakdown.get(attrName) == null) {
-				featureTypeBreakdown.put(attrName, infoArr[i][0]);
-				if (len < attrName.length())
-					len = attrName.length();
-			} else {
-				featureTypeBreakdown.put(attrName,
-						featureTypeBreakdown.get(attrName) + infoArr[i][0]);
-			}
-		}
-		List<String> attrListBreakdown = new ArrayList<String>(
-				featureTypeBreakdown.keySet());
-		Collections.sort(attrListBreakdown, new Comparator<String>() {
-			public int compare(String o1, String o2) {
-				return (int) Math.floor(featureTypeBreakdown.get(o2)
-						- featureTypeBreakdown.get(o1));
-			}
-		});
+		return infoArr;
+	}
 
+	@Override
+	public double[][] applyInfoGain(double[][] chosenFeatures, Instances insts, int n)
+			throws Exception {
+		
+		double[][] infoArr = chosenFeatures;
 		// create an array with the value of infoArr's [i][1] this array will be
 		// shrunk and modified as needed
-		double[] tempArr = new double[infoArr.length];
+		double[][] tempArr = new double[infoArr.length][2];
 		for (int i = 0; i < infoArr.length; i++) {
-			tempArr[i] = infoArr[i][1];
-			indicesToKeep.add((int) infoArr[i][1]);
+			tempArr[i][0] = new Double(infoArr[i][0]);
+			tempArr[i][1] = new Double(infoArr[i][1]);
 		}
 
+		int valuesToKeep =-1;
+		if (n>infoArr.length)
+			return tempArr;
+		else
+			valuesToKeep = infoArr.length-n;
 		// for all the values we need to delete
-		for (int i = 0; i < infoArr.length - N; i++) {
+		for (int i = 0; i < valuesToKeep; i++) {
 
-			// remove the value
-			indicesToKeep.remove((int) tempArr[tempArr.length - 1]);
-
-			// Then shrink the array
-			double temp[] = new double[tempArr.length - 1];
-			for (int k = 0; k < temp.length; k++) {
-				temp[k] = tempArr[k];
-			}
-			// AND change the values
-			for (int k = 0; k < temp.length; k++) {
-				if (temp[k] > tempArr[tempArr.length - 1]) {
-					temp[k] = temp[k] - 1;
-				}
+			//shrink the array
+			double temp[][] = new double[tempArr.length - 1][2];
+			for (int k = 0; k < temp.length; k++){
+				temp[k][0] = tempArr[k][0];
+				temp[k][1] = tempArr[k][1];
 			}
 			// update array
 			tempArr = temp;
 		}
-
-		return indicesToKeep;
-	}
-
-	// Done
-	@Override
-	public void applyInfoGain(List<Integer> chosenFeatures, Instances insts)
-			throws Exception {
-
-		// for all attributes
-		for (int i = 0; i < insts.numAttributes(); i++) {
-			boolean remove = true;
-
-			// iterate over the list to see if that index should be removed or
-			// not
-			ListIterator<Integer> featureIterator = chosenFeatures
-					.listIterator();
-			if (featureIterator.hasNext()) {
-				Integer nextIndex = featureIterator.next();
-				while (featureIterator.hasNext()) {
-					if (nextIndex == i) {
-						remove = false;
-						break;
-					}
-					nextIndex = featureIterator.next();
-				}
-
-				// delete the attribute if it wasn't found
-				if (remove) {
-					if (!(insts.classIndex() == i)) {
-						insts.deleteAttributeAt(i);
-						i--; // This was added because num attributes decreases
-								// by 1
-								// each time an element is removed. As such, all
-								// future indices are
-								// shifted by one to the left. This counteracts
-								// it.
-					}
-				}
-			}
-		}
+		//return the array consisting only of the top n values
+		return tempArr;
 	}
 
 	// Done

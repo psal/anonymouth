@@ -94,23 +94,23 @@ public interface API {
 	
 	// the full training Instances object is generated
 	
+	//TODO fixme
 	/**
 	 * Calculates InfoGain on the instances to provide information on how useful each feature was to identifying the documents.
-	 * returns list of indices of the top N features
 	 * @param insts the instances to calculate over
-	 * @param N The top N features to calculate the infogain over
-	 * @return a list of the top N features
+	 * @return a two-dimensional sorted array with one element per feature. It is sorted via how useful each feature was and stores the index.
 	 * @throws Exception
 	 */
-	public List<Integer> calcInfoGain(Instances insts, int N) throws Exception;
+	public double[][] calcInfoGain(Instances insts) throws Exception;
 	
 	/**
 	 * Removes all but the top N features (as returned by calcInfoGain) from the instances
 	 * @param chosenFeatures the indices of the features to keep
 	 * @param insts the instances to remove infoGain from
+	 * @param n the number of features to keep
 	 * @throws Exception
 	 */
-	public void applyInfoGain(List<Integer> chosenFeatures, Instances insts)
+	public double[][] applyInfoGain(double[][] chosenFeatures, Instances insts, int n)
 			throws Exception;
 	
 	
