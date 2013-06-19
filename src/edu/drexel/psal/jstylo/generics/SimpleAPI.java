@@ -21,7 +21,6 @@ import weka.core.Instances;
  * TODO list:
  * 
  * 1) Add the ability to load pre-made objects (problem sets, cfds, CLASSIFIERS/ANALYZERS)
- * 2) Add the ability to apply infoGain
  * 
  */
 public class SimpleAPI {
@@ -103,6 +102,19 @@ public class SimpleAPI {
 	}
 	
 	/**
+	 * Applies infoGain to the training and testing instances
+	 * @param n the number of features/attributes to keep
+	 */
+	public void applyInfoGain(int n){
+		try {
+			ib.applyInfoGain(n);
+		} catch (Exception e) {
+			System.out.println("Failed to apply infoGain");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Perform the actual analysis
 	 */
 	public void run(){
@@ -166,6 +178,26 @@ public class SimpleAPI {
 	}
 	
 	/**
+	 * Returns a string of features, in order of most to least useful, with their infogain values<br>
+	 * @param showZeroes whether or not to show features that have a 0 as their infoGain value
+	 * @return the string representing the infoGain
+	 */
+	public String getReadableInfoGain(boolean showZeroes){
+		String infoString = ">-----InfoGain information: ";
+		Instances trainingInstances = ib.getTrainingInstances();
+		for (int i = 0; i<infoGain.length; i++){
+			if (!showZeroes && (infoGain[i][0]==0))
+				break;
+			
+			infoString+=String.format("> %-50s   %f\n",
+					trainingInstances.attribute((int)infoGain[i][1]).name(),
+					infoGain[i][0]);
+		}
+		
+		return infoString;
+	}
+	
+	/**
 	 * @return Map containing train/test results
 	 */
 	public Map<String,Map<String, Double>> getTrainTestResults(){
@@ -208,7 +240,7 @@ public class SimpleAPI {
 	}
 	
 	/**
-	 * @return String contianing accuracy and confusion matrix from train/test. other metrics may not be accurate.
+	 * @return String containing accuracy and confusion matrix from train/test. other metrics may not be accurate.
 	 */
 	public String getTrainTestStatString() {
 		
