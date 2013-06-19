@@ -10,17 +10,19 @@ import weka.core.Instances;
 
 /**
  * 
- * JStylo SimpleAPI Version .1<br>
+ * JStylo SimpleAPI Version .3<br>
  * 
  * A simple API for the inner JStylo functionality.<br>
- * This API assumes that you already have a problemSet XML file and a cumulativeFeatureDriver XML file.<br>
- * At the moment, it does not support directly adding in objects, but it will by version 1.0.<br>
+ * Provides four constructors at the moment (eventually more) <br>
+ * After the SimpleAPI is constructed, users need only call prepareInstances(),
+ * (sometimes, depending on constructor) prepareAnalyzer(), and run().<br>
+ * After fetch the relevant information with the correct get method<br>
  * @author Travis Dutko
  */
 /*
  * TODO list:
  * 
- * 1) Add the ability to load pre-made objects (problem sets, cfds, CLASSIFIERS/ANALYZERS)
+ * 1) Add the ability to load pre-made objects (problem sets, cfds)
  * 
  */
 public class SimpleAPI {
@@ -58,6 +60,54 @@ public class SimpleAPI {
 		classifierPath = classPath;
 		selected = type;
 		numFolds = 10;
+	}
+	
+	/**
+	 * SimpleAPI constructor. Does not support classifier arguments
+	 * @param psXML path to the XML containing the problem set
+	 * @param cfdXML path to the XML containing the cumulativeFeatureDriver/feature set
+	 * @param numThreads number of calculation threads to use for parallelization
+	 * @param classPath path to the classifier to use (of format "weka.classifiers.functions.SMO")
+	 * @param type type of analysis to perform
+	 * @param nf number of folds to use
+	 */
+	public SimpleAPI(String psXML, String cfdXML, int numThreads, String classPath, analysisType type, int nf){
+		
+		ib = new InstancesBuilder(psXML,cfdXML,true,false,numThreads);
+		classifierPath = classPath;
+		selected = type;
+		numFolds = nf;
+	}
+	
+	/**
+	 * Constructor for use with a weka classifier. Do not call prepare Analyzer if using this constructor
+	 * @param psXML
+	 * @param cfdXML
+	 * @param numThreads
+	 * @param classifier
+	 * @param type
+	 */
+	public SimpleAPI(String psXML, String cfdXML, int numThreads, Classifier classifier, analysisType type){
+		ib = new InstancesBuilder(psXML,cfdXML,true,false,numThreads);
+		analysisDriver = new WekaAnalyzer(classifier);
+		selected = type;
+		numFolds = 10;
+	}
+	
+	/**
+	 * Constructor for use with a weka classifier. Do not call prepare Analyzer if using this constructor
+	 * @param psXML
+	 * @param cfdXML
+	 * @param numThreads
+	 * @param classifier
+	 * @param type
+	 * @param nf number of folds to use
+	 */
+	public SimpleAPI(String psXML, String cfdXML, int numThreads, Classifier classifier, analysisType type, int nf){
+		ib = new InstancesBuilder(psXML,cfdXML,true,false,numThreads);
+		analysisDriver = new WekaAnalyzer(classifier);
+		selected = type;
+		numFolds = nf;
 	}
 	
 	///////////////////////////////// Methods
