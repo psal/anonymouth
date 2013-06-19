@@ -384,17 +384,22 @@ public class InstancesBuilder extends Engine {
 	//////////////////////////////////////////// Setters/Getters
 	
 	/**
-	 * 
 	 * @return Returns the infoGain value and stores it locally incase we decide
 	 *         to apply it
-	 * @throws Exception
 	 */
-	public double[][] getInfoGain() throws Exception {
+	public double[][] getInfoGain() {
 		return infoGain;
 	}
 
 	public void setInfoGain(double[][] doubles){
 		infoGain = doubles;
+	}
+	
+	/**
+	 * @return Returns the problem set used by the InstancesBuilder
+	 */
+	public ProblemSet getProblemSet(){
+		return ps;
 	}
 	
 	/**
