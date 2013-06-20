@@ -30,7 +30,7 @@ public class SimpleAPI {
 	///////////////////////////////// Data
 	
 	//which evaluation to perform enumeration
-	enum analysisType {CROSS_VALIDATION,TRAIN_TEST,BOTH};
+	public static enum analysisType {CROSS_VALIDATION,TRAIN_TEST,BOTH};
 	
 	//Persistant/necessary data
 	InstancesBuilder ib; //does the feature extraction
@@ -40,7 +40,6 @@ public class SimpleAPI {
 	int numFolds; //folds for cross val (defaults to 10)
 	
 	//Result Data
-	double[][] infoGain; //how useful given features were
 	Map<String,Map<String, Double>> trainTestResults;
 	Evaluation crossValResults;
 	
@@ -233,8 +232,9 @@ public class SimpleAPI {
 	 * @return the string representing the infoGain
 	 */
 	public String getReadableInfoGain(boolean showZeroes){
-		String infoString = ">-----InfoGain information: ";
+		String infoString = ">-----InfoGain information: \n\n";
 		Instances trainingInstances = ib.getTrainingInstances();
+		double[][] infoGain = ib.getInfoGain();
 		for (int i = 0; i<infoGain.length; i++){
 			if (!showZeroes && (infoGain[i][0]==0))
 				break;
@@ -310,7 +310,7 @@ public class SimpleAPI {
 	}
 	
 	///////////////////////////////// Main method for testing purposes
-	/*
+	
 	public static void main(String[] args){
 		SimpleAPI test = new SimpleAPI(
 				"./jsan_resources/problem_sets/enron_demo.xml",
@@ -323,6 +323,6 @@ public class SimpleAPI {
 		test.run();
 		
 		System.out.println("Results: " + "\n" + test.getCrossValStatString());
-
-	}*/
+		System.out.println("infoGain: "+test.getReadableInfoGain(false));
+	}
 }
