@@ -44,6 +44,7 @@ import net.miginfocom.swing.MigLayout;
 import com.jgaap.generics.Document;
 
 import weka.classifiers.*;
+import weka.core.OptionHandler;
 
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 
@@ -707,16 +708,16 @@ public class GUIMain extends javax.swing.JFrame  {
 		GUIUpdateInterface.updateFeatPrepColor(this);
 
 		classChoice.setSelectedItem(PropertiesUtil.getClassifier());
-		DriverPreProcessTabClassifiers.tmpClassifier = Classifier.forName(DriverPreProcessTabClassifiers.fullClassPath.get(classChoice.getSelectedItem().toString()), null);
-		DriverPreProcessTabClassifiers.tmpClassifier.setOptions(DriverPreProcessTabClassifiers.getOptionsStr(DriverPreProcessTabClassifiers.tmpClassifier.getOptions()).split(" "));
+		DriverPreProcessTabClassifiers.tmpClassifier = (Classifier)Class.forName(DriverPreProcessTabClassifiers.fullClassPath.get(classChoice.getSelectedItem().toString()), true, null).newInstance();
+		((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).setOptions(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()).split(" "));
 		
 		if (PropertiesUtil.getClassifier().toLowerCase().contains("smo")){
-			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(DriverPreProcessTabClassifiers.tmpClassifier.getOptions()) + " -M");
+			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()) + " -M");
 		}
 		else
-			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(DriverPreProcessTabClassifiers.tmpClassifier.getOptions()));
+			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()));
 		
-		DriverPreProcessTabClassifiers.tmpClassifier.setOptions(PPSP.classSelClassArgsJTextField.getText().split(" "));
+		((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).setOptions(PPSP.classSelClassArgsJTextField.getText().split(" "));
 		
 		classifiers.add(DriverPreProcessTabClassifiers.tmpClassifier);
 		PPSP.classDescJTextPane.setText(DriverPreProcessTabClassifiers.getDesc(classifiers.get(0)));

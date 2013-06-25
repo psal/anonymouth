@@ -24,6 +24,7 @@ import weka.classifiers.functions.*;
 import weka.classifiers.lazy.*;
 import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.*;
+import weka.core.OptionHandler;
 
 public class DriverPreProcessTabClassifiers {
 	
@@ -96,7 +97,7 @@ public class DriverPreProcessTabClassifiers {
 					String className = fullClassPath.get(main.classChoice.getSelectedItem().toString());
 					tmpClassifier = null;
 					try {
-						tmpClassifier = Classifier.forName(className, null);
+						tmpClassifier = (Classifier)Class.forName(className, true, null).newInstance();
 					} catch (Exception e2) {
 						Logger.logln(NAME+"Could not create classifier out of class: "+className);
 						JOptionPane.showMessageDialog(main,
@@ -108,14 +109,14 @@ public class DriverPreProcessTabClassifiers {
 					}
 
 					try {
-						tmpClassifier.setOptions(main.PPSP.classAvClassArgsJTextField.getText().split(" "));
-						System.out.println("TEST: tmpClassifier.getOption() = " + tmpClassifier.getOptions());
-						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()) = " + getOptionsStr(tmpClassifier.getOptions()));
-						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()).split(\" \") = " + getOptionsStr(tmpClassifier.getOptions()).split(" "));
+						((OptionHandler)tmpClassifier).setOptions(main.PPSP.classAvClassArgsJTextField.getText().split(" "));
+						System.out.println("TEST: tmpClassifier.getOption() = " + ((OptionHandler)tmpClassifier).getOptions());
+						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()) = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()));
+						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()).split(\" \") = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()).split(" "));
 						if(className.toLowerCase().contains("smo")) {
-							tmpClassifier.setOptions((getOptionsStr(tmpClassifier.getOptions())+" -M").split(" "));
+							((OptionHandler)tmpClassifier).setOptions((getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+" -M").split(" "));
 						} else
-							tmpClassifier.setOptions(getOptionsStr(tmpClassifier.getOptions()).split(" "));
+							((OptionHandler)tmpClassifier).setOptions(getOptionsStr(((OptionHandler)tmpClassifier).getOptions()).split(" "));
 					} catch (Exception e1) {
 						e1.printStackTrace();
 						Logger.logln(NAME+"Invalid options given for classifier.",LogOut.STDERR);
@@ -124,7 +125,7 @@ public class DriverPreProcessTabClassifiers {
 										"Restoring original options.",
 										"Classifier Options Error",
 										JOptionPane.ERROR_MESSAGE);
-						main.PPSP.classAvClassArgsJTextField.setText(getOptionsStr(tmpClassifier.getOptions()));
+						main.PPSP.classAvClassArgsJTextField.setText(getOptionsStr(((OptionHandler)tmpClassifier).getOptions()));
 						return;
 					}
 					
@@ -175,7 +176,7 @@ public class DriverPreProcessTabClassifiers {
 					String className = getClassNameFromPath(path);
 					tmpClassifier = null;
 					try {
-						tmpClassifier = Classifier.forName(className, null);
+						tmpClassifier = (Classifier)Class.forName(className, true, null).newInstance();
 					} catch (Exception e) {
 						Logger.logln(NAME+"Could not create classifier out of class: "+className);
 						JOptionPane.showMessageDialog(main,
@@ -192,7 +193,7 @@ public class DriverPreProcessTabClassifiers {
 					
 					
 					// show options and description
-					main.PPSP.classAvClassArgsJTextField.setText(getOptionsStr(tmpClassifier.getOptions())+dashM);
+					main.PPSP.classAvClassArgsJTextField.setText(getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
 					main.PPSP.classDescJTextPane.setText(getDesc(tmpClassifier));
 				}
 				// otherwise
@@ -230,7 +231,7 @@ public class DriverPreProcessTabClassifiers {
 				else {
 					// check classifier options
 					try {
-						tmpClassifier.setOptions(main.PPSP.classAvClassArgsJTextField.getText().split(" "));
+						((OptionHandler)tmpClassifier).setOptions(main.PPSP.classAvClassArgsJTextField.getText().split(" "));
 						//tmpClassifier.setOptions(getOptionsStr(tmpClassifier.getOptions()).split(" "));
 					} catch (Exception e) {
 						Logger.logln(NAME+"Invalid options given for classifier.",LogOut.STDERR);
@@ -288,9 +289,9 @@ public class DriverPreProcessTabClassifiers {
 
 				// show options and description
 				if(className.toLowerCase().contains("smo"))
-					main.PPSP.classSelClassArgsJTextField.setText(getOptionsStr(main.classifiers.get(selected).getOptions())+" -M");
+					main.PPSP.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)main.classifiers.get(selected)).getOptions())+" -M");
 				else
-					main.PPSP.classSelClassArgsJTextField.setText(getOptionsStr(main.classifiers.get(selected).getOptions()));
+					main.PPSP.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)main.classifiers.get(selected)).getOptions()));
 				main.PPSP.classDescJTextPane.setText(getDesc(main.classifiers.get(selected)));
 				main.PPSP.classAvClassArgsJTextField.setText("");
 			}

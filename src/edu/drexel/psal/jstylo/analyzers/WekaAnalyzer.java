@@ -1,5 +1,6 @@
 package edu.drexel.psal.jstylo.analyzers;
 
+import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabClassifiers;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -15,7 +16,6 @@ import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.bayes.NaiveBayesMultinomial;
 import weka.classifiers.bayes.NaiveBayesMultinomialUpdateable;
 import weka.classifiers.bayes.NaiveBayesUpdateable;
-import weka.classifiers.functions.LibSVM;
 import weka.classifiers.functions.Logistic;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.classifiers.functions.SMO;
@@ -332,7 +332,7 @@ public class WekaAnalyzer extends Analyzer {
 				Instances train = randData.trainCV(folds, n);
 				Instances test = randData.testCV(folds, n);
 				// build and evaluate classifier
-				Classifier clsCopy = Classifier.makeCopy(classifier);
+				Classifier clsCopy = AbstractClassifier.makeCopy(classifier);
 				clsCopy.buildClassifier(train);
 				eval.evaluateModel(clsCopy, test);
 			}
@@ -379,7 +379,7 @@ public class WekaAnalyzer extends Analyzer {
 				Instances train = randData.trainCV(folds, n);
 				Instances test = randData.testCV(folds, n);
 				// build and evaluate classifier
-				Classifier clsCopy = Classifier.makeCopy(classifier);
+				Classifier clsCopy = AbstractClassifier.makeCopy(classifier);
 				clsCopy.buildClassifier(train);
 				eval.evaluateModel(clsCopy, test);
 			}
@@ -426,7 +426,7 @@ public class WekaAnalyzer extends Analyzer {
 	 */
 	@Override
 	public String[] getOptions(){
-		return classifier.getOptions();
+		return ((OptionHandler)classifier).getOptions();
 	}
 	
 	/**
@@ -447,7 +447,8 @@ public class WekaAnalyzer extends Analyzer {
 		Integer[] skipIndices = null;
 		Option skipped = null;
 		
-		List<Option> descriptions = Collections.list(classifier.listOptions());
+		@SuppressWarnings("unchecked")
+		List<Option> descriptions = Collections.list(((OptionHandler)classifier).listOptions());
 		
 		//this chunk is pretty hideous. It should only be present temporarily
 		//once we get all weka args working it should vanish
@@ -524,7 +525,7 @@ public class WekaAnalyzer extends Analyzer {
 		//For some reasom LibSVM's arguments are in the wrong order, rather then trying to rearrange them intelligently, I'm
 		//just going to hard code them for now, as that would be a lot more work for really not much gain, since this
 		//section should be removed once the classifier's args are working properly anyway.
-		if (classifier instanceof LibSVM){
+		if (classifier instanceof LibSVM) {
 			optionsDesc = new String[10];
 			optionsDesc[0]="Set type of SVM (default: 0) 0= C-SVC 1= nu-SVC 2= one-class SVM 3= epsilon-SVR 4= nu-SVR";
 			optionsDesc[1]="Set type of kernel function (default: 2)0= linear: u'*v 1= polynomial: (gamma*u'*v + coef0)^degree 2= radial basis function: exp(-gamma*|u-v|^2) 3= sigmoid: tanh(gamma*u'*v + coef0)";
@@ -619,7 +620,7 @@ public class WekaAnalyzer extends Analyzer {
 	@Override
 	public void setOptions(String[] ops){
 		try {
-			classifier.setOptions(ops);
+			((OptionHandler)classifier).setOptions(ops);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
