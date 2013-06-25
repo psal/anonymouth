@@ -1,6 +1,7 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 import java.io.File;
@@ -44,6 +45,10 @@ public class ThePresident {
 	public static boolean CLASSIFIER_SAVED = false;
 	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
 	public static int NUM_CLUSTER_GROUPS_TO_TEST = -1;
+	public static final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
+	public static final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
+	public static final String ARROW_UP = "arrow_up.png";
+	public static final String ARROW_DOWN = "arrow_down.png";
 	public static Application app;
 	public static Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
 
@@ -88,8 +93,8 @@ public class ThePresident {
 			Logger.logln(leader.NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			app = Application.getApplication();
-			String logoName = JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_LOGO_large.png";
-			String aboutName = JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_LOGO.png";
+			String logoName = JSANConstants.JSAN_GRAPHICS_PREFIX+ANONYMOUTH_LOGO_LARGE;
+			String aboutName = JSANConstants.JSAN_GRAPHICS_PREFIX+ANONYMOUTH_LOGO;
 			try{
 				LOGO = leader.getLogo(logoName);
 				ABOUTLOGO = leader.getLogo(aboutName);
@@ -128,7 +133,7 @@ public class ThePresident {
 				public void handleAbout(ApplicationEvent e) {
 					e.setHandled(true); //Tells the system to not display their own "About" window since we've got this covered.
 					JOptionPane.showMessageDialog(null, 
-							"Anonymouth, Version 0.5\n\nAuthors: Andrew W.E. McDonald\n   -Marc Barrowclift\n   -Joe Muoio\n   -Jeff Ulman\n\nDrexel University, PSAL, Dr. Rachel Greenstadt - P.I.",
+							About.aboutAnonymouth,
 							"About Anonymouth",
 							JOptionPane.INFORMATION_MESSAGE,
 							ABOUTLOGO);
@@ -153,7 +158,6 @@ public class ThePresident {
 		tempName = tempName.replaceAll(" ", "_");
 		if(tempName != null)
 			sessionName = tempName;
-		System.out.println(tempName+" "+sessionName);
 		
 		File log_dir = new File(LOG_DIR); // create log directory if it doesn't exist.
 		if (!log_dir.exists()){
