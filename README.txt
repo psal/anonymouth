@@ -15,7 +15,7 @@ JStylo
 
 License:
 
-JStylo was released by the Privacy, Security and Automation lab at Drexel University under the AGPLv3 license.
+JStylo was released by the Privacy, Security and Automation lab at Drexel University in 2011 under the AGPLv3 license.
 A copy of this license is included with the repository/program. If for some reason it is absent, it can be viewed here: http://www.gnu.org/licenses/agpl.html
 
 Dependencies:
