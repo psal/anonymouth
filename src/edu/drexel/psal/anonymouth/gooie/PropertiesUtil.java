@@ -31,7 +31,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultBarTutorial = true;
 	protected static int defaultThreads = 4;
 	protected static int defaultFeatures = 500;
-	protected static Boolean defaultTranslation = true;
+	protected static Boolean defaultTranslation = false;
 	private static String[] DEFAULT_LOCATIONS = new String[]{"top","left","right","bottom"};
 	
 	public static enum Location // just so you cant mess up the input to methods by spelling stuff wrong
