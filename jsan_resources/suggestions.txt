@@ -1,0 +1,16 @@
+In order to effectively anonymize your document, you first need to distance yourself from it. You can't be afraid to change your style or parts of your document, as this will hinder your ability to anonymize it as well as hinder Anonymouth's ability to help. Here are some tips to help you get in the right mindset to do so:
+-Pretend it's not your document. You're not proofreading, correcting for grammar, or any of the normal steps one takes when building a document, you're only goal is to remove your identity from it.
+-Pretend you're someone else. If you are having trouble anonymizing a sentence, it may be helpful to copy a classic author's style to help get your mind off your own.
+-Ask for help. If you have a  close friend or family member you can trust, having another mind available to help you come up with new structures or words for your sentences can be very helpful (it not recommended, though, that one person helps write the entire document, since then you would be simply replacing your style footprint with theirs).
+
+The Translations tab on the right side of the Anonymouth window is there to help you, use it! Even though oftentimes a sentence may be too grammatically incorrect to use directly, the word choice and general syntax of the translation may prove an invaluable asset in reconstructing your sentences.
+
+The Suggestions tab on the right side of Anonymouth window can help give you a bird's eye view of the words you use the most in your document. This can help you avoid words that would help expose you when you're rewriting your sentences.
+
+Take a break! Just like in editing a document, taking a break for a couple hours when anonymizing a document can help rest your eyes and will help you see and fix problems easier than without.
+
+As always, never include your name or anyone's name that might be tied to you (if necessary, use fake names). Also be sure to never include any other revealing information like an address, phone number, etc. as it will ruin your efforts.
+
+If you have a quote said by yourself or someone close to you in your document, it would be wise to change it to a paraphrase so that you may be able to properly anonymize it.
+
+Upon completion, if you intend to publish your document on the Internet, it is recommended you use the Tor network or something similar to mask your IP address from the receiving end.

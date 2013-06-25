@@ -1,0 +1,65 @@
+Anonymouth-README
+
+I.	Start-up
+a.	To execute Anonymouth.jar, navigate to the directory it is in (must be in same directory as its folders), and in a terminal, execute:
+java –jar –Xmx512m Anonymouth.jar
+(you may need to increase the memory to 1024m if using many documents with Writeprints classifier)
+
+II.	Documents Tab
+a.	Input one (1) document of approximately 500 words in the leftmost window
+b.	Input 6500 words of your own writing broken up into ~500 word files (so, about 13 documents) into the middle window
+c.	Input 6500 words of at least three (3) other people’s writing (about 13 500 word documents per person/author) into the rightmost window
+d.	Click the “add documents” button to select a group of folders, each folder containing one author’s documents, to avoid having to first add an author and then that author’s documents. NOTE: Doing this will take each folder to be the author’s name, and the documents within that folder will be treated as that author’s documents
+e.	Click next (unless you would like to preview any documents)
+
+III.	Feature Tab
+a.	Select one of the available feature sets from the drop down menu. At this point, due to the interdependent nature of stylometric features and Anonymouth’s stubborn nature, the feature sets may not be modified.
+b.	Click next
+
+IV.	Classifier Tab
+a.	Select one of the available classifiers from the top left window. In the bar below, you will see the classifier, and its arguments. You may alter these if you like. 
+i.	NOTE: If unsure of what classifier to use, try either the ‘MultiLayerPerceptron’ (neural net), or the ‘SMO’ (SVM).
+1.	The MultiLayerPerceptron takes more time, and should probably be avoided if the Writeprints feature set has been selected, or if you are using many (over 10) authors.
+b.	Once satisfied with your classifier, click “Add”. You will see the classifier move up to the top right window. 
+c.	Since you may only use one classifier at a time with Anonymouth, click next.
+
+V.	Editor Tab I
+a.	Read the message presented, and then click ‘Process’. Don’t click anything else. 
+b.	The progress bar in the bottom left hand corner will turn to an indeterminate state while Anonymouth is working, and the label above it will change as Anonymouth progresses. 
+i.	NOTE: If it seems as though Anonymouth is taking far too long (this depends on session specific configurations), check the console window to see if an exception has been thrown. 
+1.	In this case, please send any information you can (including the log file in the log directory where Anonymouth resides) to Awm32@Drexel.edu
+
+VI.	Cluster Tab
+a.	You will eventually be taken to a colorful screen that visually explains what is going on. The blue dots are the values in other people’s documents for the feature specified above the plot; the empty green ellipses are the clusters of those peoples features; the empty black circles are the averages of the elements within the cluster (centroid); the shaded purple ellipses is your confidence interval (average +/- 1.96*stdDev)  - for that feature; and the red circle is the value of the document that you want to modify for that feature. The pop-up window explains what to do.
+b.	Selected one of the ordered cluster configurations from the drop down menu. The shaded green ellipses you see show you where your red dot will end up, should you choose to use that configuration, and follow the suggestions that will be given. 
+i.	The idea is to get your red dot as far away from the purple ellipse as possible for each feature, while also taking into account the number of other documents that have feature values in that cluster (more is better)
+c.	Once satisfied with your cluster group, click the button next to the drop down menu to be taken back to the editor screen.
+
+VII.	Editor Tab II
+a.	Any document you have processed is no longer editable. However, clicking on almost anything (including the document), will allow you to spawn a new inner tab and begin editing. 
+b.	The table beneath your document shows the probability distribution regarding the author of the document you are modifying as of the last processing.  If the document has been classified as belonging to you, the probability is colored red. If not, it is green.
+c.	Follow the suggestions given in the list in the bottom right hand corner of the outer tab.
+d.	You may use the provided dictionary to search for potential words.
+e.	The drop down ‘Highlight’ menu can also come in handy.
+i.	All of the colors are somewhat transparent; so, you can overlay things like ‘3 syllable words’ and ‘repeated words’ to see what the optimal changes are.
+ii.	If using the Writeprints feature set, most of the highlighter functions require you to input one or more letters or words. If it is a 'letter' one, do not include any spaces. If it is a 'word' one, include spaces (how many makes no difference, as long as each word is separated by at least one space). Once you have entered the letter/word you want to find, you MUST PRESS ENTER. Otherwise, nothing will happen.
+f.	Check your progress by clicking one of the suggestions, and watching its present value move as you type. If it is moving toward your target value, you are doing well. 
+g.	Once you think you may have done enough, or are fed up, click ‘Re-process’. You will again be taken to the Cluster Tab, and the process repeats.
+h.	When the table beneath your document no longer indicates that your document has been classified as belonging to you – depending on the probability of that classification – your document ranges from somewhat anonymized, to completely anonymized. How long you spend, is up to you, and your desired level of anonymity. 
+
+VIII.	Other Notes
+a.	You can delete a tab you don’t want anymore by right clicking on it. The original document cannot be deleted.
+b.	The inner tabs display where the document came from, and what number the document is, e.g. Original -> 2, means that this document spawned from the original one (unmodified), and is the second document you have spawned (in total). 
+c.	Each time you process the document (via ‘Re-process’), the new clusters are formed. Because of the way the clustering works, you may get slightly different configurations – however, they are still ordered from best > worst. If you have made a reasonable amount of change to your document, the red circle will not be in the same place. 
+d.	Should you want to save a copy of a document, click the tab of the document you want to save (to make it active), and then click the save button in the bottom right hand corner of the outer tab. 
+
+
+
+Author:
+
+Andrew W.E. McDonald
+Awm32@Drexel.edu
+Drexel University – PSAL
+Anonymouth 0.0.2
+
+	
