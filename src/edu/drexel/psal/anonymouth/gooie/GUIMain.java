@@ -416,10 +416,10 @@ public class GUIMain extends javax.swing.JFrame  {
 				Logger.initLogFile();
 				
 				try {
-					icon = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_LOGO_v2.png"),"logo");
-					iconNO = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_NO_v2.png"), "my 'no' icon");
-					arrow_up = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"arrow_up.png"), "arrow_up");
-					arrow_down = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"arrow_down.png"), "arrow_down");
+					icon = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO),"logo");
+					//iconNO = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_NO_v2.png"), "my 'no' icon");
+					arrow_up = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ARROW_UP), "arrow_up");
+					arrow_down = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ARROW_DOWN), "arrow_down");
 					//javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					System.err.println("Look-and-Feel error!");
@@ -434,7 +434,7 @@ public class GUIMain extends javax.swing.JFrame  {
 						if (PropertiesUtil.getWarnQuit() && !saved) {
 							inst.toFront();
 							inst.requestFocus();
-							int confirm = JOptionPane.showOptionDialog(null, "Are You Sure to Close Application?\nYou will lose all unsaved changes.", "Unsaved Changes Warning", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager.getIcon("OptionPane.warningIcon"), null, null);
+							int confirm = JOptionPane.showOptionDialog(null, "Close Application?\nYou will lose all unsaved changes.", "Unsaved Changes Warning", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager.getIcon("OptionPane.warningIcon"), null, null);
 							if (confirm == 0) {
 								System.exit(0);
 							}
@@ -552,7 +552,7 @@ public class GUIMain extends javax.swing.JFrame  {
 			this.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
 			this.setMinimumSize(new Dimension(800, 578));
 			this.setTitle("Anonymouth");
-			this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_LOGO_v2.png")).getImage());
+			this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
 
 			menuBar = new JMenuBar();
 

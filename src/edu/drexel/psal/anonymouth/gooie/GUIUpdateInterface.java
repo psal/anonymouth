@@ -22,7 +22,6 @@ public class GUIUpdateInterface {
 	// about dialog
 	// ============
 	
-	protected static String version = "0.0.4";
 /*
 	protected static void showAbout(GUIMain main) {
 		ImageIcon logo = new ImageIcon("./anonymouth_LOGO_v2.png", "Anonymouth Logo");

@@ -22,6 +22,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.jstylo.eventDrivers.*;
 import edu.drexel.psal.jstylo.generics.*;
@@ -105,7 +106,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		JOptionPane.showMessageDialog(null, 
-						"Anonymouth\nVersion 0.0.3\nAuthor: Andrew W.E. McDonald\nDrexel University, PSAL, Dr. Rachel Greenstadt - P.I.",
+						About.aboutAnonymouth,
 						"About Anonymouth",
 						JOptionPane.INFORMATION_MESSAGE,
 						ThePresident.LOGO);

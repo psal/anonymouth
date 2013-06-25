@@ -82,7 +82,7 @@ public class GeneralSettingsFrame extends JFrame {
 	private void init(final GUIMain main) {
 		this.setTitle("Preferences");
 		this.main = main;
-		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_LOGO_v2.png")).getImage());
+		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
 		initTabs();
 
 		generalSettingsFrame = this;
