@@ -1,10 +1,12 @@
 bin/*
 .DS_Store
-/.edited_documents
-/_active-auth.lnk
+.edited_documents
+_active-auth.lnk
+.serialized_objects
 
-/log
-/bin
+anonymouth_prop.prop
+JStylo_prop.prop
 
-/anonymouth_prop.prop
-/JStylo_prop.prop
+anonymouth_log
+build.xml
+dist
