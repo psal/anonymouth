@@ -1,10 +1,7 @@
 package edu.drexel.psal.jstylo.GUI;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
-import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.AnalyzerTypeEnum;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
@@ -17,12 +14,9 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
@@ -33,14 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.jgaap.generics.Document;
-import com.sun.corba.se.impl.io.TypeMismatchException;
-
-import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 public class AnalysisTabDriver {
 
@@ -353,28 +341,22 @@ public class AnalysisTabDriver {
 						}
 							
 						if (Integer.parseInt(kfolds)<=1 || Integer.parseInt(kfolds)>docCount)
-								throw new TypeMismatchException();
+								throw new Exception();
 						
 						if (Integer.parseInt(nthreads)<1 || Integer.parseInt(nthreads)>50)
-							throw new TypeMismatchException();
+							throw new Exception();
 						
 						
 						
-					} catch (TypeMismatchException tme) {
+					} catch (Exception exc) {
 						JOptionPane.showMessageDialog(main,
 								"K and N do not have correct values. Both must be integers in the range:\n1<K<="
 										+docCount+"\n1<=N<=50",
 								"Run Analysis Error",
 								JOptionPane.ERROR_MESSAGE);
+						Logger.logln(exc.getMessage(),LogOut.STDERR);
 						return;
-					} catch (NumberFormatException nme){
-						JOptionPane.showMessageDialog(main,
-								"K and N do not have correct values. Both must be integers in the range:\n1<K<="
-										+docCount+"\n1<=N<=50",
-								"Run Analysis Error",
-								JOptionPane.ERROR_MESSAGE);
-						return;
-					}
+					} 
 				}
 				
 				//lock

@@ -8,9 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import com.jgaap.generics.Document;
 import com.jgaap.generics.EventSet;
@@ -20,7 +17,6 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 /**
  * An API for the feature extraction process. Designed for running on a single machine

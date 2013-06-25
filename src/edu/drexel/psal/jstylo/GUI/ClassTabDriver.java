@@ -11,9 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.InputStream;
 import java.lang.reflect.Modifier;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.jar.JarEntry;
@@ -28,13 +26,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import weka.classifiers.*;
-import weka.classifiers.bayes.*;
-import weka.classifiers.functions.*;
-import weka.classifiers.lazy.*;
-import weka.classifiers.rules.ZeroR;
-import weka.classifiers.trees.*;
-import weka.core.Option;
-import weka.gui.GenericObjectEditor;
 
 public class ClassTabDriver {
 

@@ -21,7 +21,6 @@ import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
-import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

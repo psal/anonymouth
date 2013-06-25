@@ -3,9 +3,7 @@
  */
 package edu.drexel.psal.jstylo.eventDrivers;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +14,7 @@ import org.annolab.tt4j.TreeTaggerWrapper;
 import com.jgaap.generics.Document;
 import com.jgaap.generics.Event;
 import com.jgaap.generics.EventDriver;
-import com.jgaap.generics.EventGenerationException;
 import com.jgaap.generics.EventSet;
-
-import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.TaggedWord;
-import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /**
  * This changes words into their parts of speech in a document, based on TreeTagger-a language independent POS tagger.
