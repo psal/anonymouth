@@ -708,7 +708,9 @@ public class GUIMain extends javax.swing.JFrame  {
 		GUIUpdateInterface.updateFeatPrepColor(this);
 
 		classChoice.setSelectedItem(PropertiesUtil.getClassifier());
-		DriverPreProcessTabClassifiers.tmpClassifier = (Classifier)Class.forName(DriverPreProcessTabClassifiers.fullClassPath.get(classChoice.getSelectedItem().toString()), true, null).newInstance();
+		String chosenClassifier = DriverPreProcessTabClassifiers.fullClassPath.get(classChoice.getSelectedItem().toString());
+		System.out.println("Will try to load class: "+chosenClassifier);
+		DriverPreProcessTabClassifiers.tmpClassifier = (Classifier)Class.forName(chosenClassifier).newInstance();
 		((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).setOptions(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()).split(" "));
 		
 		if (PropertiesUtil.getClassifier().toLowerCase().contains("smo")){
