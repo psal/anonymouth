@@ -249,7 +249,7 @@ public class WekaInstancesBuilder {
 		Logger.logln("Using N calc threads: "+numCalcThreadsToUse);
 		int div = knownDocsSize / numCalcThreadsToUse;
 		
-		if (div%knownDocsSize!=0)
+		if ( knownDocsSize % numCalcThreadsToUse !=0 )
 			div++;
 		
 		CalcThread[] calcThreads = new CalcThread[numCalcThreadsToUse];

@@ -97,7 +97,7 @@ public class DriverPreProcessTabClassifiers {
 					String className = fullClassPath.get(main.classChoice.getSelectedItem().toString());
 					tmpClassifier = null;
 					try {
-						tmpClassifier = (Classifier)Class.forName(className, true, null).newInstance();
+						tmpClassifier = (Classifier)Class.forName(className).newInstance();
 					} catch (Exception e2) {
 						Logger.logln(NAME+"Could not create classifier out of class: "+className);
 						JOptionPane.showMessageDialog(main,
@@ -176,7 +176,7 @@ public class DriverPreProcessTabClassifiers {
 					String className = getClassNameFromPath(path);
 					tmpClassifier = null;
 					try {
-						tmpClassifier = (Classifier)Class.forName(className, true, null).newInstance();
+						tmpClassifier = (Classifier)Class.forName(className).newInstance();
 					} catch (Exception e) {
 						Logger.logln(NAME+"Could not create classifier out of class: "+className);
 						JOptionPane.showMessageDialog(main,

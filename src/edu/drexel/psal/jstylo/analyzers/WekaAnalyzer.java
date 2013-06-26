@@ -50,6 +50,15 @@ public class WekaAnalyzer extends Analyzer {
 		this.classifier = (Classifier) obj;
 	}
 	
+	public WekaAnalyzer(String pathToClassifier){
+		try {
+			classifier = (Classifier) weka.core.SerializationHelper.read(pathToClassifier);
+		} catch (Exception e1) {
+			Logger.logln("ERROR! Failed loading trained classifier from "+pathToClassifier+"!",Logger.LogOut.STDERR);
+			e1.printStackTrace();
+		}
+	}
+	
 	/* ==========
 	 * operations
 	 * ==========
