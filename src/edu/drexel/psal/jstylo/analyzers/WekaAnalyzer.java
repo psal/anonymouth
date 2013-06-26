@@ -1,24 +1,13 @@
 package edu.drexel.psal.jstylo.analyzers;
 
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.RelaxedEvaluation;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 import com.jgaap.generics.Document;
 
 import weka.classifiers.*;
-import weka.classifiers.bayes.*;
-import weka.classifiers.functions.*;
-import weka.classifiers.lazy.*;
-import weka.classifiers.meta.*;
-import weka.classifiers.misc.*;
-import weka.classifiers.rules.*;
-import weka.classifiers.trees.*;
 import weka.core.*;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;

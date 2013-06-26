@@ -1,18 +1,13 @@
 package edu.drexel.psal.jstylo.analyzers;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.*;
-import java.util.Map.Entry;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
 
-import com.jgaap.JGAAPConstants;
 import com.jgaap.generics.*;
 
 import weka.attributeSelection.InfoGainAttributeEval;

@@ -1,6 +1,5 @@
 package edu.drexel.psal.jstylo.GUI;
 
-import java.awt.Component;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.File;

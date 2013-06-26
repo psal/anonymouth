@@ -2,15 +2,8 @@ package edu.drexel.psal.jstylo.generics;
 
 import weka.classifiers.CostMatrix;
 import weka.classifiers.Evaluation;
-import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.Utils;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
 
 public class RelaxedEvaluation extends Evaluation {
 	protected int relaxParam;

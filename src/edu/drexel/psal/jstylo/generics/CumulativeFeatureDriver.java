@@ -1,20 +1,14 @@
 package edu.drexel.psal.jstylo.generics;
 
-import edu.drexel.psal.jstylo.GUI.FeatureWizardDriver;
-
 import java.io.*;
 import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.jgaap.generics.*;
