@@ -426,9 +426,13 @@ public abstract class Analyzer{
 		if (results == null) return -1;
 		
 		int numOfInstances = testSet.numInstances();
-		String[] unknownDocAuthors = new String[numOfInstances];
-		for (int i=0; i<unknownDocAuthors.length; i++)
-			unknownDocAuthors[i] = unknownDocs.get(i).getAuthor();
+		
+		
+		List<String> unknownDocAuthors = new ArrayList<String>();
+		for (int i=0; i<unknownDocAuthors.size(); i++){
+			unknownDocAuthors.add(unknownDocs.get(i).getAuthor());
+		}
+		
 		
 		int rightClassifications = 0;
 		double maxProb;
@@ -436,7 +440,7 @@ public abstract class Analyzer{
 		String currAuthor;
 		
 		for (int i=0; i<numOfInstances; i++) {
-			currAuthor = unknownDocAuthors[i];
+			currAuthor = unknownDocAuthors.get(i);
 
 			// get the highest probability of all authors for current document
 			maxProb = 0;

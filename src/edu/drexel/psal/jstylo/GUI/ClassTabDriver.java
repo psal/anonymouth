@@ -531,9 +531,8 @@ public class ClassTabDriver {
 			}
 			return msg;
 		}
-		
-		
 	}
+	
 	/**
 	 * 
 	 * Rakes up the leaves of the loaded classifier tree and returns them.

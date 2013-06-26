@@ -407,7 +407,7 @@ public class AnalysisTabDriver {
 				if (answer == JOptionPane.YES_OPTION) {
 					// stop run and update
 					Logger.logln("Stopping analysis");
-					
+					main.ib.reset(); 
 					main.analysisThread.stop();
 					lockUnlock(main, false);
 				}

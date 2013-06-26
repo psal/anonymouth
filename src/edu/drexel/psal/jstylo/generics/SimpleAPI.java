@@ -257,14 +257,14 @@ public class SimpleAPI {
 	/**
 	 * @return Evaluation containing train/test statistics
 	 */
-	public Evaluation getTrainTestStatistics(){
+	public Evaluation getTrainTestEval(){
 		return analysisDriver.getClassificationStatistics();
 	}
 	
 	/**
 	 * @return Evaluation containing cross validation results
 	 */
-	public Evaluation getCrossValResults(){
+	public Evaluation getCrossValEval(){
 		return crossValResults;
 	}
 	
@@ -274,7 +274,7 @@ public class SimpleAPI {
 	public String getCrossValStatString() {
 		
 		try {
-			Evaluation eval = getCrossValResults();
+			Evaluation eval = getCrossValEval();
 			String resultsString = "";
 			resultsString += eval.toSummaryString(false) + "\n";
 			resultsString += eval.toClassDetailsString() + "\n";
@@ -295,7 +295,7 @@ public class SimpleAPI {
 	public String getTrainTestStatString() {
 		
 		try {
-			Evaluation eval = getTrainTestStatistics();
+			Evaluation eval = getTrainTestEval();
 			String resultsString = "";
 			resultsString += eval.toSummaryString(false) + "\n";
 			resultsString += eval.toClassDetailsString() + "\n";
@@ -309,11 +309,33 @@ public class SimpleAPI {
 		}
 	}
 	
+	/**
+	 * @return The accuracy of the given test in percentage format
+	 */
+	public String getClassificationAccuracy(){
+		String results = "";
+		
+		if (selected == analysisType.CROSS_VALIDATION){
+			
+			Evaluation crossEval = getCrossValEval();
+			
+			
+		} else if (selected == analysisType.TRAIN_TEST){
+			
+			Evaluation trainTestEval = getTrainTestEval();
+			
+		} else {
+			
+		}
+		
+		return results;
+	}
+	
 	///////////////////////////////// Main method for testing purposes
 	
 	public static void main(String[] args){
 		SimpleAPI test = new SimpleAPI(
-				"./jsan_resources/problem_sets/enron_demo.xml",
+				"./jsan_resources/problem_sets/drexel_1_train_test.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
 				8, "weka.classifiers.functions.SMO",
 				analysisType.CROSS_VALIDATION);
@@ -324,5 +346,6 @@ public class SimpleAPI {
 		
 		System.out.println("Results: " + "\n" + test.getCrossValStatString());
 		System.out.println("infoGain: "+test.getReadableInfoGain(false));
+		//System.out.println("Accuracy: "+test.getClassificationAccuracy());
 	}
 }

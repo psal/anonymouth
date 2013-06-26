@@ -43,6 +43,11 @@ public class InstancesBuilder extends Engine {
 	private List<EventSet> relevantEvents;	//the events/sets to pay attention to
 	private ArrayList<Attribute> attributes;	//the relevant events converted into attributes
 
+	//ThreadArrays so that we can stop them if the user cancels something mid process
+	FeatureExtractionThread[] featThreads;
+	CreateTrainInstancesThread[] trainThreads;
+	CreateTestInstancesThread[] testThreads;
+	
 	// Relevant data to spit out at the end
 	private Instances trainingInstances;	//training doc Instances
 	private Instances testInstances;	//testDoc Instances
@@ -223,20 +228,20 @@ public class InstancesBuilder extends Engine {
 			div++;
 		
 		//Parallelized feature extraction
-		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[threadsToUse];
+		featThreads = new FeatureExtractionThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++) //create the threads
-			calcThreads[thread] = new FeatureExtractionThread(div, thread,
+			featThreads[thread] = new FeatureExtractionThread(div, thread,
 					knownDocsSize, knownDocs, new CumulativeFeatureDriver(cfd));
 		for (int thread = 0; thread < threadsToUse; thread++) //start them
-			calcThreads[thread].start();
+			featThreads[thread].start();
 		for (int thread = 0; thread < threadsToUse; thread++) //join them
-			calcThreads[thread].join();
+			featThreads[thread].join();
 		for (int thread = 0; thread < threadsToUse; thread++) //combine List<List<EventSet>>
-			eventList.addAll(calcThreads[thread].list);
+			eventList.addAll(featThreads[thread].list);
 		for (int thread = 0; thread < threadsToUse; thread++) //destroy threads
-			calcThreads[thread] = null;
+			featThreads[thread] = null;
 		
-		calcThreads = null;
+		featThreads = null;
 		
 		//cull the List<List<EventSet>> before returning
 		List<List<EventSet>> temp = cull(eventList, cfd);
@@ -288,18 +293,18 @@ public class InstancesBuilder extends Engine {
 			div++;
 
 		//Parallelized magic
-		CreateTrainInstancesThread[] calcThreads = new CreateTrainInstancesThread[threadsToUse];
+		trainThreads = new CreateTrainInstancesThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances,new CumulativeFeatureDriver(cfd));
+			trainThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances,new CumulativeFeatureDriver(cfd));
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread].start();
+			trainThreads[thread].start();
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread].join();
+			trainThreads[thread].join();
 		for (int thread = 0; thread < threadsToUse; thread++)
-			generatedInstances.addAll(calcThreads[thread].list);
+			generatedInstances.addAll(trainThreads[thread].list);
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread] = null;
-		calcThreads = null;
+			trainThreads[thread] = null;
+		trainThreads = null;
 		
 		//add all of the generated instance objects into the Instances object.
 		for (Instance inst: generatedInstances){
@@ -338,18 +343,18 @@ public class InstancesBuilder extends Engine {
 				div++;
 
 			//Perform some parallelization magic
-			CreateTestInstancesThread[] calcThreads = new CreateTestInstancesThread[threadsToUse];
+			testThreads = new CreateTestInstancesThread[threadsToUse];
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
+				testThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread].start();
+				testThreads[thread].start();
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread].join();
+				testThreads[thread].join();
 			for (int thread = 0; thread < threadsToUse; thread++)
-				generatedInstances.addAll(calcThreads[thread].list);
+				generatedInstances.addAll(testThreads[thread].list);
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread] = null;
-			calcThreads = null;
+				testThreads[thread] = null;
+			testThreads = null;
 			
 			//add all of the instance objects to the Instances object
 			for (Instance inst: generatedInstances){
@@ -509,6 +514,10 @@ public class InstancesBuilder extends Engine {
 	public List<Document> getTrainDocs(){
 		return ps.getAllTrainDocs();
 	}
+	
+	public List<Document> getTestDocs(){
+		return ps.getTestDocs();
+	}
 
 	//////////////////////////////////////////// Utilities
 	
@@ -521,8 +530,45 @@ public class InstancesBuilder extends Engine {
 		infoGain = null;
 		trainingInstances = null;
 		testInstances = null;
+		killThreads();
 	}
 
+	/**
+	 * For use when stopping analysis mid-way through it. Kills any processing threads
+	 */
+	public void killThreads() {
+		
+		if (!(featThreads==null)){
+			for (int i=0; i<featThreads.length; i++){
+				featThreads[i].stop();
+			}
+			for (int i=0; i<featThreads.length; i++){
+				featThreads[i] = null;
+			}
+			featThreads=null;
+		}
+		
+		if (!(trainThreads==null)){
+			for (int i=0; i<trainThreads.length; i++){
+				trainThreads[i].stop();
+			}
+			for (int i=0; i<trainThreads.length; i++){
+				trainThreads[i] = null;
+			}
+			trainThreads=null;
+		}
+		
+		if (!(testThreads==null)){
+			for (int i=0; i<testThreads.length; i++){
+				testThreads[i].stop();
+			}
+			for (int i=0; i<testThreads.length; i++){
+				testThreads[i] = null;
+			}
+			testThreads=null;
+		}
+		
+	}
 
 	//////////////////////////////////////////// Thread Definitions
 	
