@@ -455,11 +455,13 @@ public class CumulativeFeatureDriver {
 			NodeList items = xmlDoc.getElementsByTagName("feature");
 			//go over the nodes and get the information we want
 			for (int i=0; i<items.getLength();i++){
+				boolean successful = true;
+				FeatureDriver fd = new FeatureDriver();
 				try{
 					//initialize this feature node, this feature element, and the feature driver
 					Node currentNode = items.item(i);
 					Element currentElement = (Element) xmlDoc.importNode(items.item(i), true);
-					FeatureDriver fd = new FeatureDriver();
+					
 					
 					//add the information from this node to the feature driver
 					fd.setName(currentElement.getAttribute("name"));
@@ -571,11 +573,16 @@ public class CumulativeFeatureDriver {
 					Element currNormF = (Element) xmlDoc.importNode(normFactors.item(i), false);
 					fd.setNormFactor(Double.parseDouble(currNormF.getAttribute("value")));
 					
-					//add the feature driver
-					cfd.addFeatureDriver(fd);
+					
 				} catch (Exception e){
+					successful = false;
 					Element currentElement = (Element) xmlDoc.importNode(items.item(i), true);
 					Logger.logln("Failed to load feature driver: "+currentElement.getAttribute("name"),Logger.LogOut.STDERR);
+				}
+				
+				if (successful){
+					//add the feature driver
+					cfd.addFeatureDriver(fd);
 				}
 			}
 		}
