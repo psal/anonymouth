@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 
 import edu.drexel.psal.JSANConstants;
@@ -23,7 +27,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Marc Barrowclift
  *
  */
-public class GeneralSettingsFrame extends JFrame {	
+public class GeneralSettingsFrame extends JFrame implements WindowListener {	
 
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( GeneralSettingsFrame ) - ";
@@ -38,6 +42,7 @@ public class GeneralSettingsFrame extends JFrame {
 	protected JCheckBox autoSave;
 	protected JLabel autoSaveNote;
 	protected JCheckBox warnQuit;
+	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
 	protected JLabel fontSize;
 	protected JComboBox<String> fontSizes;
@@ -52,7 +57,7 @@ public class GeneralSettingsFrame extends JFrame {
 	protected JComboBox<String> classComboBox;
 	protected JComboBox<String> featComboBox;
 	protected JButton selectProbSet;
-	protected JTextArea probSetTextPane;
+	protected JTextField probSetTextPane;
 	protected JScrollPane probSetScrollPane;
 	protected int defaultsHeight;
 	
@@ -60,11 +65,17 @@ public class GeneralSettingsFrame extends JFrame {
 	protected JPanel advanced;
 	protected JLabel maxFeatures;
 	protected JSlider maxFeaturesSlider;
+	protected JTextField maxFeaturesBox;
 	protected JLabel numOfThreads;
+	protected JTextField numOfThreadsBox;
 	protected JSlider numOfThreadsSlider;
 	protected JLabel numOfThreadsNote;
-	protected JButton reset;
+	protected JButton resetAll;
 	protected int advancedHeight;
+	
+	//various variables
+	private int prevFeatureValue;
+	private int prevThreadValue;
 	
 	/**
 	 * CONSTRUCTOR
@@ -124,6 +135,11 @@ public class GeneralSettingsFrame extends JFrame {
 			if (PropertiesUtil.getWarnQuit())
 				warnQuit.setSelected(true);
 			
+			showWarnings = new JCheckBox();
+			showWarnings.setText("Displays all warnings");
+			if (PropertiesUtil.getWarnAll())
+				showWarnings.setSelected(true);
+			
 			autoSave = new JCheckBox();
 			autoSave.setText("Auto-Save anonymized documents upon exit");
 			if (PropertiesUtil.getAutoSave()) {
@@ -146,17 +162,15 @@ public class GeneralSettingsFrame extends JFrame {
 				fontSizes.addItem(sizes[i]);
 			fontSizes.setSelectedItem(Integer.toString(PropertiesUtil.getFontSize()));
 			
-//			JSeparator test = new JSeparator(JSeparator.HORIZONTAL);
-//			test.setPreferredSize(new Dimension(484, 15));
-//			general.add(test, "alignx 50%, wrap");
 			general.add(autoSave, "wrap");
 			general.add(autoSaveNote, "alignx 50%, wrap");
 			general.add(warnQuit, "wrap");
+			general.add(showWarnings, "wrap");
 			general.add(translations, "wrap");
 			general.add(fontSize, "split 2");
 			general.add(fontSizes);
 			
-			generalHeight = 230;
+			generalHeight = 260;
 		}
 		
 		MigLayout defaultLayout = new MigLayout();
@@ -176,14 +190,10 @@ public class GeneralSettingsFrame extends JFrame {
 
 			defaultProbSet = new JLabel("Set Default Problem Set:");
 			selectProbSet = new JButton("Select");
-			probSetTextPane = new JTextArea();
+			probSetTextPane = new JTextField();
 			probSetTextPane.setEditable(false);
 			probSetTextPane.setText(PropertiesUtil.getProbSet());
-			probSetTextPane.setWrapStyleWord(false);
-			probSetScrollPane = new JScrollPane(probSetTextPane);
-			probSetScrollPane.setPreferredSize(new Dimension(420, 20));
-			probSetScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-			probSetScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+			probSetTextPane.setPreferredSize(new Dimension(420, 20));
 			
 			defaults.add(defaultClassifier, "wrap");
 			defaults.add(classComboBox, "wrap");
@@ -191,7 +201,7 @@ public class GeneralSettingsFrame extends JFrame {
 			defaults.add(featComboBox, "wrap");
 			defaults.add(defaultProbSet, "wrap");
 			defaults.add(selectProbSet, "split 2");
-			defaults.add(probSetScrollPane, "wrap");
+			defaults.add(probSetTextPane, "wrap");
 			
 			defaultsHeight = 240;
 		}
@@ -199,7 +209,7 @@ public class GeneralSettingsFrame extends JFrame {
 		MigLayout advancedLayout = new MigLayout();
 		advanced.setLayout(advancedLayout);
 		{
-			maxFeatures = new JLabel("Maximum Features Used = " + PropertiesUtil.getMaximumFeatures());
+			maxFeatures = new JLabel("Maximum Features Used = ");
 			maxFeaturesSlider = new JSlider();
 			maxFeaturesSlider.setPreferredSize(new Dimension(300, 20));
 			maxFeaturesSlider.setMajorTickSpacing(1);
@@ -210,10 +220,17 @@ public class GeneralSettingsFrame extends JFrame {
 			maxFeaturesSlider.setValue(PropertiesUtil.getMaximumFeatures());
 			maxFeaturesSlider.setOrientation(SwingConstants.HORIZONTAL);
 			
-//			maxFeaturesNote = new JLabel("Note: The recommended number is 1000 for best results");
-//			maxFeaturesNote.setForeground(Color.GRAY);
+			prevFeatureValue = PropertiesUtil.getMaximumFeatures();
 			
-			numOfThreads = new JLabel("Number of Threads for Features Extraction = " + PropertiesUtil.getThreadCount());
+			maxFeaturesBox = new JTextField();
+			maxFeaturesBox.setPreferredSize(new Dimension(50, 20));
+			maxFeaturesBox.setText(Integer.toString(PropertiesUtil.getMaximumFeatures()));
+			
+			numOfThreads = new JLabel("Number of Threads for Features Extraction = ");
+			
+			numOfThreadsBox = new JTextField();
+			numOfThreadsBox.setPreferredSize(new Dimension(25, 20));
+			numOfThreadsBox.setText(Integer.toString(PropertiesUtil.getThreadCount()));
 			
 			numOfThreadsSlider = new JSlider();
 			numOfThreadsSlider.setPreferredSize(new Dimension(300, 20));
@@ -228,22 +245,23 @@ public class GeneralSettingsFrame extends JFrame {
 			numOfThreadsNote = new JLabel("Note: Expirimental, the current recommended number of threads is 4");
 			numOfThreadsNote.setForeground(Color.GRAY);
 			
-			reset = new JButton("Reset Preferences");
-			reset.setToolTipText("Reset all user preferences back to their default values");
+			resetAll = new JButton("resetAll Preferences");
+			resetAll.setToolTipText("resetAll all user preferences back to their default values");
 			
-			advanced.add(maxFeatures, "wrap");
+			advanced.add(maxFeatures, "split");
+			advanced.add(maxFeaturesBox, "wrap");
 			advanced.add(maxFeaturesSlider, "alignx 50%, wrap");
-//			advanced.add(maxFeaturesNote, "alignx 50%, wrap");
-			advanced.add(numOfThreads, "wrap");
+			advanced.add(numOfThreads, "split");
+			advanced.add(numOfThreadsBox, "wrap");
 			advanced.add(numOfThreadsSlider, "alignx 50%, wrap");
 			advanced.add(numOfThreadsNote, "alignx 50%, wrap");
 			
 			JSeparator test = new JSeparator(JSeparator.HORIZONTAL);
 			test.setPreferredSize(new Dimension(484, 15));
 			advanced.add(test, "gaptop 5, alignx 50%, wrap");
-			advanced.add(reset, "gaptop 5, alignx 50%");
+			advanced.add(resetAll, "gaptop 5, alignx 50%");
 			
-			advancedHeight = 275;
+			advancedHeight = 300;
 		}
 
 		initListeners();
@@ -288,6 +306,9 @@ public class GeneralSettingsFrame extends JFrame {
 		ActionListener translationsListener;
 		ChangeListener tabbedPaneListener;
 		ActionListener fontSizeListener;
+		KeyListener maxFeaturesBoxListener;
+		KeyListener numOfThreadsBoxListener;
+		ActionListener showWarningsListener;
 		
 		fontSizeListener = new ActionListener() {
 			@Override
@@ -307,8 +328,10 @@ public class GeneralSettingsFrame extends JFrame {
 				
 				if (tabbedPane.getSelectedIndex() == 0) {
 					resize(generalHeight);
+					assertValues();
 				} else if (tabbedPane.getSelectedIndex() == 1) {
 					resize(defaultsHeight);
+					assertValues();
 				} else {
 					resize(advancedHeight);
 				}
@@ -368,17 +391,17 @@ public class GeneralSettingsFrame extends JFrame {
 		
 		autoSaveListener = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"Auto-save checkbox clicked");
-				
+			public void actionPerformed(ActionEvent arg0) {			
 				if (autoSave.isSelected()) {
 					PropertiesUtil.setAutoSave(true);
 					warnQuit.setSelected(false);
 					PropertiesUtil.setWarnQuit(false);
 					warnQuit.setEnabled(false);
+					Logger.logln(NAME+"Auto-save checkbox checked");
 				} else {
 					PropertiesUtil.setAutoSave(false);
 					warnQuit.setEnabled(true);
+					Logger.logln(NAME+"Auto-save checkbox unchecked");
 				}
 			}
 		};
@@ -387,11 +410,13 @@ public class GeneralSettingsFrame extends JFrame {
 		warnQuitListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"Warn on quit checkbox clicked");
-				if (warnQuit.isSelected())
+				if (warnQuit.isSelected()) {
 					PropertiesUtil.setWarnQuit(true);
-				else
+					Logger.logln(NAME+"Warn on quit checkbox checked");
+				} else {
 					PropertiesUtil.setWarnQuit(false);
+					Logger.logln(NAME+"Warn on quit checkbox unchecked");
+				}
 			}
 		};
 		warnQuit.addActionListener(warnQuitListener);
@@ -437,7 +462,8 @@ public class GeneralSettingsFrame extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				PropertiesUtil.setMaximumFeatures(maxFeaturesSlider.getValue());
-				maxFeatures.setText("Maximum Features Used = " + PropertiesUtil.getMaximumFeatures());
+				maxFeaturesBox.setText(Integer.toString(PropertiesUtil.getMaximumFeatures()));
+				prevFeatureValue = maxFeaturesSlider.getValue();
 			}	
 		};
 		maxFeaturesSlider.addChangeListener(maxFeaturesListener);
@@ -446,7 +472,8 @@ public class GeneralSettingsFrame extends JFrame {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				PropertiesUtil.setThreadCount(numOfThreadsSlider.getValue());
-				numOfThreads.setText("Number of Threads for Features Extraction = " + PropertiesUtil.getThreadCount());
+				numOfThreadsBox.setText(Integer.toString(PropertiesUtil.getThreadCount()));
+				prevThreadValue = numOfThreadsSlider.getValue();
 			}
 		};
 		numOfThreadsSlider.addChangeListener(numOfThreadsListener);
@@ -454,19 +481,19 @@ public class GeneralSettingsFrame extends JFrame {
 		resetListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"Reset button clicked");
+				Logger.logln(NAME+"resetAll button clicked");
 				
 				int answer = 0;
 				
 				answer = JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to reset all preferences?\nThis will override your changes.",
-						"Reset Preferences",
+						"Are you sure you want to resetAll all preferences?\nThis will override your changes.",
+						"resetAll Preferences",
 						JOptionPane.WARNING_MESSAGE,
 						JOptionPane.YES_NO_CANCEL_OPTION);
 				
 				if (answer == 0) {
 					try {
-						Logger.logln(NAME+"Reset progressing...");
+						Logger.logln(NAME+"resetAll progressing...");
 						PropertiesUtil.reset();
 						numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
 						maxFeaturesSlider.setValue(PropertiesUtil.getMaximumFeatures());
@@ -475,15 +502,136 @@ public class GeneralSettingsFrame extends JFrame {
 						probSetTextPane.setText(PropertiesUtil.getProbSet());
 						featComboBox.setSelectedItem(PropertiesUtil.getFeature());
 						classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
-						Logger.logln(NAME+"Reset complete");
+						Logger.logln(NAME+"resetAll complete");
 					} catch (Exception e) {
-						Logger.logln(NAME+"Error occurred during reset");
+						Logger.logln(NAME+"Error occurred during resetAll");
 					}
 				} else {
-					Logger.logln(NAME+"User cancelled reset");
+					Logger.logln(NAME+"User cancelled resetAll");
 				}
 			}
 		};
-		reset.addActionListener(resetListener);
+		resetAll.addActionListener(resetListener);
+		
+		maxFeaturesBoxListener = new KeyListener() {			
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int number = -1;
+				try {
+					if (maxFeaturesBox.getText().equals("")) {
+						maxFeaturesBox.setText("");
+					} else {
+						number = Integer.parseInt(maxFeaturesBox.getText());
+						
+						if (number > 1000) {
+							maxFeaturesBox.setText(Integer.toString(prevFeatureValue));
+							number = prevFeatureValue;
+						} else {
+							maxFeaturesBox.setText(Integer.toString(number));
+						}
+					}
+				} catch (Exception e1) {
+					maxFeaturesBox.setText(Integer.toString(prevFeatureValue));
+				}
+				
+				if (number != -1) {
+					prevFeatureValue = number;
+				}
+				
+				if (prevFeatureValue >= 200) {
+					PropertiesUtil.setMaximumFeatures(prevFeatureValue);
+					maxFeaturesSlider.setValue(prevFeatureValue);
+				}
+			}
+		};
+		maxFeaturesBox.addKeyListener(maxFeaturesBoxListener);
+		
+		numOfThreadsBoxListener = new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyPressed(KeyEvent e) {}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int number = -1;
+				try {
+					if (numOfThreadsBox.getText().equals("")) {
+						numOfThreadsBox.setText("");
+					} else {
+						number = Integer.parseInt(numOfThreadsBox.getText());
+						
+						if (number > 8) {
+							numOfThreadsBox.setText(Integer.toString(prevThreadValue));
+							number = prevThreadValue;
+						} else {
+							numOfThreadsBox.setText(Integer.toString(number));
+						}
+					}
+				} catch (Exception e1) {
+					numOfThreadsBox.setText(Integer.toString(prevThreadValue));
+				}
+				
+				if (number != -1) {
+					prevThreadValue = number;
+				}
+				
+				if (prevThreadValue >= 1) {
+					PropertiesUtil.setMaximumFeatures(prevThreadValue);
+					numOfThreadsSlider.setValue(prevThreadValue);
+				}
+			}
+		};
+		numOfThreadsBox.addKeyListener(numOfThreadsBoxListener);
+		
+		showWarningsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (showWarnings.isSelected()) {
+					PropertiesUtil.setWarnAll(true);
+					Logger.logln(NAME+"Show all warnings checkbox checked");
+				} else {
+					PropertiesUtil.setWarnAll(false);
+					Logger.logln(NAME+"Show all warnings checkbox unchecked");
+				}
+			}
+		};
+		showWarnings.addActionListener(showWarningsListener);
 	}
+
+	private void assertValues() {
+		int feat = PropertiesUtil.getMaximumFeatures();
+		int thread = PropertiesUtil.getThreadCount();
+		if (feat < 200 || feat > 1000)
+			PropertiesUtil.setMaximumFeatures(PropertiesUtil.defaultFeatures);
+		if (thread < 1 || thread > 8)
+			PropertiesUtil.setThreadCount(PropertiesUtil.defaultThreads);
+	}
+	
+	/**
+	 * We want to be absolutely sure that when Preferences is closed that the set values are within
+	 * acceptable boundaries, and if they aren't change them back to their defaults.
+	 */
+	@Override
+	public void windowClosing(WindowEvent e) {
+		assertValues();
+	}
+	
+	@Override
+	public void windowOpened(WindowEvent e) {}
+	@Override
+	public void windowClosed(WindowEvent e) {}
+	@Override
+	public void windowIconified(WindowEvent e) {}
+	@Override
+	public void windowDeiconified(WindowEvent e) {}
+	@Override
+	public void windowActivated(WindowEvent e) {}
+	@Override
+	public void windowDeactivated(WindowEvent e) {}
 }

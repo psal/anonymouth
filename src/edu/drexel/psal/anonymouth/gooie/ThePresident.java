@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationAdapter;
 import com.apple.eawt.ApplicationEvent;
+import com.sun.awt.AWTUtilities;
 
 /**
  * ThePresident sets up the Application and System fields/preferences prior to calling 'GUIMain'
@@ -208,6 +209,9 @@ class InputDialog extends JFrame {
 	private JTextField textBox;
 	private JButton ok;
 	private JButton quit;
+	private JPanel completePanel;
+	private JPanel buttons;
+	private JPanel messageAndBox;
 	private ActionListener okListener;
 	private ActionListener quitListener;
 	private FocusListener textBoxListener;
@@ -226,7 +230,7 @@ class InputDialog extends JFrame {
 		initListeners();
 	}
 	
-	private void initGUI() {
+	private void initGUI() {		
 		warningMessage = new JLabel(
 				"<html><left>"+
 				"<center><b><font color=\"#FF0000\" size = 6>WARNING:</font></b></center>" +
@@ -254,15 +258,15 @@ class InputDialog extends JFrame {
 		
 		inputDialog = this;
 		
-		JPanel messageAndBox = new JPanel(new FlowLayout());
+		messageAndBox = new JPanel(new FlowLayout());
 		messageAndBox.add(inputMessage);
 		messageAndBox.add(textBox);
 		
-		JPanel buttons = new JPanel(new FlowLayout());
+		buttons = new JPanel(new FlowLayout());
 		buttons.add(quit);
 		buttons.add(ok);
 		
-		JPanel completePanel = new JPanel(new BorderLayout());
+		completePanel = new JPanel(new BorderLayout());
 		completePanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 0, 12));
 		completePanel.add(messageAndBox, BorderLayout.NORTH);
 		completePanel.add(warningMessage, BorderLayout.CENTER);
@@ -304,7 +308,17 @@ class InputDialog extends JFrame {
 	
 	public void showDialog() {
 		this.getRootPane().setDefaultButton(ok);
+		AWTUtilities.setWindowOpacity(this, (float)0/(float)100);
 		this.setVisible(true);
 		ok.requestFocusInWindow();
+		for (int i = 0; i <= 100; i++) {
+			this.setOpacity((float)i/(float)100);
+			
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

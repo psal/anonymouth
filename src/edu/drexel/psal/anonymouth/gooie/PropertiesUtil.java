@@ -29,6 +29,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultAutoSave = false;
 	protected static Boolean defaultWarnQuit = true;
 	protected static Boolean defaultBarTutorial = true;
+	protected static Boolean defaultWarnAll = true;
 	protected static int defaultThreads = 4;
 	protected static int defaultFeatures = 500;
 	protected static Boolean defaultTranslation = false;
@@ -95,6 +96,42 @@ public class PropertiesUtil {
 	}
 	
 	/**
+	 * Sets whether or not to display all warnings for actions such as deleting a sample document and whatnot
+	 * @param warnAll - whether or not to display the warnings
+	 */
+	protected static void setWarnAll(Boolean warnAll) {
+		BufferedWriter writer;
+		
+		try {
+			prop.setProperty("warnAll", warnAll.toString());
+			writer = new BufferedWriter(new FileWriter(propFileName));
+			prop.store(writer, "User Preferences");
+		} catch (Exception e) {
+			Logger.logln(NAME + "Failed setting whether or not to display all warnings");
+		}
+	}
+	
+	protected static boolean getWarnAll() {
+		String warnAll = "";
+		
+		try {
+			warnAll = prop.getProperty("warnAll");
+			if (warnAll == null)  {
+				prop.setProperty("warnAll", defaultWarnAll.toString());
+				warnAll = prop.getProperty("warnAll");
+			}
+		} catch (NullPointerException e) {
+			prop.setProperty("warnAll", defaultWarnAll.toString());
+			warnAll = prop.getProperty("warnAll");
+		}
+		
+		if (warnAll.equals("true"))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
 	 * Sets whether or not to display the anonymity bar and results tutorial after processing (so that it's only shown once)
 	 * @param barTutorial - whether or not to display the tutorial
 	 */
@@ -110,6 +147,10 @@ public class PropertiesUtil {
 		}
 	}
 	
+	/**
+	 * Gets whether or not to display the anonymity bar tutorial after processing
+	 * @return
+	 */
 	protected static boolean showBarTutorial() {
 		String barTutorial = "";
 		
@@ -120,7 +161,7 @@ public class PropertiesUtil {
 				barTutorial = prop.getProperty("barTutorial");
 			}
 		} catch (NullPointerException e) {
-				prop.setProperty("barTutorial", barTutorial.toString());
+				prop.setProperty("barTutorial", defaultBarTutorial.toString());
 				barTutorial = prop.getProperty("barTutorial");
 		}
 		
@@ -280,8 +321,8 @@ public class PropertiesUtil {
 				translate = prop.getProperty("translate");
 			}
 		} catch (NullPointerException e) {
-				prop.setProperty("translate", defaultTranslation.toString());
-				translate = prop.getProperty("translate");
+			prop.setProperty("translate", defaultTranslation.toString());
+			translate = prop.getProperty("translate");
 		}
 		
 		if (translate.equals("true"))

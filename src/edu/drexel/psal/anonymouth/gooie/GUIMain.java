@@ -971,6 +971,7 @@ public class GUIMain extends javax.swing.JFrame  {
 			prepDocLabel.setBorder(rlborder);
 			prepDocLabel.setOpaque(true);
 			prepDocLabel.setBackground(notReady);
+			prepDocLabel.setToolTipText("Click here to access advanced confirguration");
 
 			problemSetLabel = new JLabel("Problem Set:");
 			problemSetLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1067,6 +1068,7 @@ public class GUIMain extends javax.swing.JFrame  {
 			prepFeatLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			prepFeatLabel.setBorder(rlborder);
 			prepFeatLabel.setBackground(notReady);
+			prepFeatLabel.setToolTipText("Click here to access advanced confirguration");
 
 			JLabel label = new JLabel("Feature Set:");
 
@@ -1077,6 +1079,7 @@ public class GUIMain extends javax.swing.JFrame  {
 			featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
 			featuresSetJComboBox = new JComboBox<String>();
 			featuresSetJComboBox.setModel(featuresSetJComboBoxModel);
+			featuresSetJComboBox.setToolTipText("<html>Click the Features Banner above to<br>access advanced configuration</html>");
 
 			prepFeaturesPanel.add(prepFeatLabel, "h " + titleHeight + "!, wrap");
 			prepFeaturesPanel.add(label, "split");
@@ -1096,8 +1099,10 @@ public class GUIMain extends javax.swing.JFrame  {
 			prepClassLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			prepClassLabel.setBorder(rlborder);
 			prepClassLabel.setBackground(notReady);
+			prepClassLabel.setToolTipText("Click here to access advanced confirguration");
 
 			classChoice = new JComboBox<String>();
+			classChoice.setToolTipText("<html>Click the Classifiers Banner above to<br>access advanced configuration</html>");
 
 			DriverPreProcessTabClassifiers.initMainWekaClassifiersTree(this);
 

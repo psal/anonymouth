@@ -22,7 +22,7 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * 3) Adding/removing quotes (handled inherently by a combination of the two checks above and by existing code in SentenceTools)
  * 4) Adding/removing parentheses (handled primarily by SentenceTools)
  */
-public class InputFilter extends DocumentFilter{
+public class InputFilter extends DocumentFilter {
 	
 	private final String NAME = "( InputFilter ) - ";
 	public final static int UNDOCHARACTERBUFFER = 5;

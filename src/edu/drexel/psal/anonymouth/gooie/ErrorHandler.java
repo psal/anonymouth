@@ -12,7 +12,7 @@ public class ErrorHandler {
 	
 	private static final int FATAL_ERROR = 666;
 	
-	public static void fatalError(){
+	public static void fatalError() {
 		int ans = JOptionPane.showConfirmDialog(null, "Anonymouth has encountered a fatal error.\n" +
 				"The best thing to do is to examine the stack trace, and terminate the program.\n" +
 				"If you would like to save your work/problem set prior to closing Anonymouth,\n" +
@@ -21,6 +21,11 @@ public class ErrorHandler {
 			Logger.logln(NAME+"Fatal error encountered, termination requested.",LogOut.STDERR);
 			System.exit(FATAL_ERROR);
 		}
+	}
+	
+	public static void editorError(String title, String errorMessage) {
+		Logger.logln(NAME+"An error was encountered in the editor.", LogOut.STDERR);
+		JOptionPane.showConfirmDialog(null, "", "", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null);
 	}
 	
 	public static void incompleteSentence(){

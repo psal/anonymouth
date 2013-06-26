@@ -40,9 +40,11 @@ public class DriverTranslationsTab implements ActionListener {
 	protected static TaggedSentence current;
 	private static ImageIcon arrow_up;
 	private static ImageIcon arrow_down;
+	private static DriverTranslationsTab inst;
 
 	public static void initListeners(GUIMain main) {
 		DriverTranslationsTab.main = main;
+		DriverTranslationsTab.inst = new DriverTranslationsTab();
 		
 		resetTranslatorListener = new ActionListener() {
 			@Override
@@ -78,10 +80,7 @@ public class DriverTranslationsTab implements ActionListener {
 	 * Displays the translations of the given sentence in the translations holder panel.
 	 * @param sentence - the TaggedSentence to show the translations of
 	 */
-	public static void showTranslations(TaggedSentence sentence) {
-		main = GUIMain.inst;
-		DriverTranslationsTab inst = new DriverTranslationsTab();
-		
+	public static void showTranslations(TaggedSentence sentence) {		
 		// remove all the current translations shown
 		if (main.getDocumentPane().isEnabled()) {
 			main.translationsHolderPanel.removeAll();

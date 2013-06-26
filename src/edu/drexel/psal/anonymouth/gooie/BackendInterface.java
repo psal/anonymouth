@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
@@ -223,7 +222,7 @@ public class BackendInterface {
 				Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
 
 				main.processButton.setText("Re-Process");
-				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
+				main.resultsWindow.resultsLabel.setText("Click here for larger graph");
 				main.resultsMainPanel.setToolTipText("Re-Process your document to get updated ownership probability");
 				if (PropertiesUtil.getDoTranslations()) {
 					main.rightTabPane.setSelectedIndex(2);

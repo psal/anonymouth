@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import edu.drexel.psal.anonymouth.gooie.Translation;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
+import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * Manages fetching translations for every sentence and adding/removing sentences from the translation "queue".
@@ -15,6 +17,7 @@ import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 
 public class Translator implements Runnable {
 	
+	private static final String NAME = "( Translator ) - ";
 	private ArrayList<TaggedSentence> sentences = new ArrayList<TaggedSentence>(); // essentially the priority queue
 	private GUIMain main;
 	public static boolean addSent = false;
@@ -125,11 +128,14 @@ public class Translator implements Runnable {
 						String translation = Translation.getTranslation(sentences.get(currentSentNum-1).getUntagged(false), lang);
 						
 						if (translation.equals("internet")) {
+							Logger.logln(NAME+"No internet connection", LogOut.STDERR);
 							noInternet = true;
 							translationsEnded();
 							DriverTranslationsTab.showTranslations(new TaggedSentence(""));
 							return;
 						} else if (translation.equals("account")) {
+							Logger.logln(NAME+"Account used up", LogOut.STDERR);
+							reset();
 							accountsUsed = true;
 							translationsEnded();
 							DriverTranslationsTab.showTranslations(new TaggedSentence(""));

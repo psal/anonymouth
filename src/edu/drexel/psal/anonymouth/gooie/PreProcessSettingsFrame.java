@@ -205,7 +205,7 @@ public class PreProcessSettingsFrame extends JDialog {
 	
 	public PreProcessSettingsFrame(GUIMain main)
 	{
-		super(main, "Pre-Process Settings", Dialog.ModalityType.APPLICATION_MODAL);
+		super(main, "Advanced Configuration", Dialog.ModalityType.APPLICATION_MODAL);
 		init(main);
 		setVisible(false);
 	}

@@ -21,16 +21,16 @@ public class IndexFinder {
 	 * @return
 	 * 	ArrayList<int[]> with the starting and ending indices of all words in 'theList' that were found in 'theDoc'
 	 */
-	public static ArrayList<int[]> findIndices(String theDoc, String theWord){
+	public static ArrayList<int[]> findIndices(String theDoc, String theWord) {
 		ArrayList<int[]> theIndices = new ArrayList<int[]>();
-		int i;
 		int j;
 		int start;
 		int end;
-		int length = theDoc.length();
 		String spaces=" ";
 		theDoc = theDoc.replaceAll("\\p{Cf}", " ");
-		try{
+		theWord = theWord.replaceAll("\\.", "\\\\.");
+		
+		try {
 			while (true) {
 				Pattern wordToFind = Pattern.compile("((\\s|\\b)("+theWord+")(\\s|\\b)){1}+");
 				Matcher theMatch = wordToFind.matcher(theDoc);
@@ -54,7 +54,7 @@ public class IndexFinder {
 				String theDocTwo = theDoc.substring(end);
 				theDoc = theDocOne+spaces+theDocTwo;
 			}
-		}catch(IllegalStateException e){
+		} catch(IllegalStateException e) {
 			Logger.logln("'"+theWord+"' - was not matched. Are there symbols or spaces between the single quotes? If so, that may be why.");
 		}
 		return theIndices;

@@ -32,7 +32,6 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -498,14 +497,33 @@ public class DriverEditor {
 									TaggedDocument.userDeletedSentence = false;
 								}
 							} catch (Exception e1) {
-								JOptionPane.showOptionDialog(null,
-										"Anonymouth has encountered an internal problem\nprocessing your most recent action.\n\nWe are aware of and working on the issue,\nand we apologize for any inconvenience.\nPlease re-process to fix the editor.",
-										"Editor Failure",
-										JOptionPane.DEFAULT_OPTION,
-										JOptionPane.WARNING_MESSAGE,
-										UIManager.getIcon("OptionPane.warningIcon"),
-										null,
-										null);
+								Logger.logln(NAME+"Error occured while attempting to delete an EOS character.", LogOut.STDERR);
+								Logger.logln(NAME+"-> leftSentInfo", LogOut.STDERR);
+								if (leftSentInfo != null) {
+									for (int i = 0; i < leftSentInfo.length; i++)
+										Logger.logln(NAME+"\tleftSentInfo["+i+"] = " + leftSentInfo[i], LogOut.STDERR);
+								} else {
+									Logger.logln(NAME+"\tleftSentInfo was null!", LogOut.STDERR);
+								}
+								
+								Logger.logln(NAME+"-> rightSentInfo", LogOut.STDERR);
+								if (rightSentInfo != null) {
+									for (int i = 0; i < leftSentInfo.length; i++)
+										Logger.logln(NAME+"\rightSentInfo["+i+"] = " + rightSentInfo[i], LogOut.STDERR);
+								} else {
+									Logger.logln(NAME+"\rightSentInfo was null!", LogOut.STDERR);
+								}
+								
+								Logger.logln(NAME+"->Document Text (What the user sees)", LogOut.STDERR);
+								Logger.logln(NAME+"\t" + main.getDocumentPane().getText(), LogOut.STDERR);
+								
+								Logger.logln(NAME+"->Tagged Document Text (The Backend)", LogOut.STDERR);
+								int size = taggedDoc.getNumSentences();
+								for (int i = 0; i < size; i++) {
+									Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i));
+								}
+								
+								ErrorHandler.editorError("Editor Failure", "Anonymouth has encountered an internal problem\nprocessing your most recent action.\n\nWe are aware of and working on the issue,\nand we apologize for any inconvenience.");
 								return;
 							}
 
@@ -1108,8 +1126,8 @@ class SuggestionCalculator {
 		main.elementsToAdd.removeAllElements();
 
 		//Adding new suggestions
-		topToRemove=ConsolidationStation.getPriorityWords(ConsolidationStation.toModifyTaggedDocs, true, .2);
-		topToAdd=ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, .02);
+		topToRemove=ConsolidationStation.getPriorityWords(ConsolidationStation.toModifyTaggedDocs, true, .25);
+		topToAdd=ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, .25);
 		
 		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
 		int sentNum = DriverEditor.getCurrentSentNum();
@@ -1263,7 +1281,7 @@ class SuggestionCalculator {
 					if (wordSynMatch.length() > 2)
 						wordsWithSynonyms.put(wordToSearch.toLowerCase().trim(), wordSynMatch.substring(0, wordSynMatch.length()-1));
 					else
-						wordsWithSynonyms.put(wordToSearch.toLowerCase().trim(), "NO Synonyms");
+						wordsWithSynonyms.put(wordToSearch.toLowerCase().trim(), "No Synonyms");
 				}
 			}
 		}
