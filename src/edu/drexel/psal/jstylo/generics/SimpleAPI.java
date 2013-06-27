@@ -1,5 +1,6 @@
 package edu.drexel.psal.jstylo.generics;
 
+import java.util.List;
 import java.util.Map;
 
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
@@ -258,7 +259,7 @@ public class SimpleAPI {
 	 * @return Evaluation containing train/test statistics
 	 */
 	public Evaluation getTrainTestEval(){
-		return analysisDriver.getClassificationStatistics();
+		return analysisDriver.getTrainTestEval();
 	}
 	
 	/**
@@ -290,23 +291,23 @@ public class SimpleAPI {
 	}
 	
 	/**
-	 * @return String containing accuracy and confusion matrix from train/test. other metrics may not be accurate.
+	 * @return String containing accuracy and confusion matrix from train/test.
 	 */
 	public String getTrainTestStatString() {
+		return analysisDriver.getTrainTestStatString();
+	}
+	
+	public String getWeightedStats(){
+		String source = analysisDriver.getTrainTestStatString();
+		String resultsString = "";
 		
-		try {
-			Evaluation eval = getTrainTestEval();
-			String resultsString = "";
-			resultsString += eval.toSummaryString(false) + "\n";
-			resultsString += eval.toClassDetailsString() + "\n";
-			resultsString += eval.toMatrixString() + "\n";
-			return resultsString;
+		int start = source.indexOf("Weighted Avg.");
 		
-		} catch (Exception e) {
-			System.out.println("Failed to get train/test statistics string");
-			e.printStackTrace();
-			return "";
-		}
+		String trimmed = source.substring(start);
+		int end = trimmed.indexOf("\n");
+		resultsString = trimmed.substring(0,end+1);
+		
+		return resultsString;
 	}
 	
 	/**
@@ -318,14 +319,38 @@ public class SimpleAPI {
 		if (selected == analysisType.CROSS_VALIDATION){
 			
 			Evaluation crossEval = getCrossValEval();
-			
+			String summary = crossEval.toSummaryString();
+			int start = summary.indexOf("Correctly classified Instances");
+			int end = summary.indexOf("%");
+			results+=summary.substring(start,end+1)+"\n";
 			
 		} else if (selected == analysisType.TRAIN_TEST){
-			
-			Evaluation trainTestEval = getTrainTestEval();
+			String source = analysisDriver.getTrainTestStatString();
+					
+			int start = source.indexOf("Correctly classified");
+			int end = source.indexOf("%");
+
+			results += source.substring(start,end+1);
 			
 		} else {
 			
+			Evaluation crossEval = getCrossValEval();
+			String summary = crossEval.toSummaryString();
+			int start = summary.indexOf("Correctly Classified Instances");
+			int end = summary.indexOf("%");
+			results+=" CrossVal Results: " + summary.substring(start,end+1)+"\n";
+			
+			List<Author> stats = analysisDriver.getAuthorStatistics();
+			int correctDocs = 0;
+			int totalDocs = 0;
+			for (Author a: stats){
+
+				if (!(a.getName().equals("_dummy_"))){
+					correctDocs+=a.getTruePositiveCount();
+					totalDocs+=a.getNumberOfDocuments();
+				}
+			}
+			results+="\t\t\tTrain/Test results: "+(((double) correctDocs)/totalDocs)+" %\n";
 		}
 		
 		return results;
@@ -338,14 +363,16 @@ public class SimpleAPI {
 				"./jsan_resources/problem_sets/drexel_1_train_test.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
 				8, "weka.classifiers.functions.SMO",
-				analysisType.CROSS_VALIDATION);
+				analysisType.TRAIN_TEST);
 
 		test.prepareInstances();
 		test.prepareAnalyzer();
 		test.run();
 		
-		System.out.println("Results: " + "\n" + test.getCrossValStatString());
-		System.out.println("infoGain: "+test.getReadableInfoGain(false));
-		//System.out.println("Accuracy: "+test.getClassificationAccuracy());
+		//System.out.println("Results: " + "\n" + test.getCrossValStatString());
+		//System.out.println("infoGain: "+test.getReadableInfoGain(false));
+		System.out.println("Stats: "+test.getTrainTestStatString());
+		System.out.println("\n\nAccuracy Only: "+test.getClassificationAccuracy());
+		System.out.println("\n\nWeighted Stats: "+test.getWeightedStats());
 	}
 }
