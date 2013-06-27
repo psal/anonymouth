@@ -54,9 +54,11 @@ public class Translator implements Runnable {
 			this.newSentence = newSentence;
 			this.oldSentence = oldSentence;
 		} else {
-			ArrayList<TaggedSentence> loaded = new ArrayList<TaggedSentence>();
-			loaded.add(newSentence);
-			load(loaded);
+			if (accountsUsed == false) {
+				ArrayList<TaggedSentence> loaded = new ArrayList<TaggedSentence>();
+				loaded.add(newSentence);
+				load(loaded);
+			}
 		}
 	}
 	

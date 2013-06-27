@@ -71,7 +71,7 @@ import com.apple.eawt.FullScreenListener;
  * @author Marc Barrowclift
  */
 //This is a comment from Joe Muoio to see if he can commit changes.
-public class GUIMain extends javax.swing.JFrame  {
+public class GUIMain extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
@@ -229,7 +229,8 @@ public class GUIMain extends javax.swing.JFrame  {
 	protected JScrollPane elementsToAddScrollPane;
 	protected JPanel elementsToRemovePanel;
 	protected JLabel elementsToRemoveLabel;
-	protected JList<String> elementsToRemovePane;
+	protected DefaultTableModel elementsToRemoveModel;
+	protected ElementsTable elementsToRemoveTable;
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected DefaultListModel<String> elementsToAdd;
 	protected DefaultListModel<String> elementsToRemove;
@@ -462,6 +463,8 @@ public class GUIMain extends javax.swing.JFrame  {
 				if (ThePresident.IS_MAC) {
 					enableOSXFullscreen(inst);
 				}
+				
+				ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep tooltips from disappearing so fast
 
 				inst.addWindowListener(exitListener);
 				inst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -534,8 +537,12 @@ public class GUIMain extends javax.swing.JFrame  {
 		BufferedReader propReader = null;
 
 		if (!PropertiesUtil.propFile.exists()) {
-			try {PropertiesUtil.propFile.createNewFile();} 
-			catch (IOException e1) {e1.printStackTrace();}
+			try {
+				PropertiesUtil.propFile.getParentFile().mkdirs();
+				PropertiesUtil.propFile.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 
 		try {propReader = new BufferedReader (new FileReader(PropertiesUtil.propFileName));} 
@@ -818,7 +825,7 @@ public class GUIMain extends javax.swing.JFrame  {
 			public void stateChanged(ChangeEvent e) {
 				if (rightTabPane.getSelectedIndex() != 1) {
 					elementsToAddPane.clearSelection();
-					elementsToRemovePane.clearSelection();
+					elementsToRemoveTable.clearSelection();
 				}
 			}
 		});
@@ -1147,7 +1154,7 @@ public class GUIMain extends javax.swing.JFrame  {
 				@Override
 				public void valueChanged(ListSelectionEvent e) {
 					Logger.logln(NAME+"Elements to add value changed");
-					elementsToRemovePane.clearSelection();
+					elementsToRemoveTable.clearSelection();
 
 					try {
 						Highlighter highlight = getDocumentPane().getHighlighter();
@@ -1183,42 +1190,35 @@ public class GUIMain extends javax.swing.JFrame  {
 			elementsToRemoveLabel.setToolTipText("<html><center>Words that Anonymouth believes may be more likely to expose<br>" +
 												 "you and you should consider replacing.</center></html>");
 
-			//--------- Elements to Remove Text Pane ------------------
-			elementsToRemovePane = new JList<String>();
-			elementsToRemoveScrollPane = new JScrollPane(elementsToRemovePane);
-			elementsToRemovePane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
-			elementsToRemove = new DefaultListModel<String>();
-			elementsToRemove.add(0, "Please process your document to receive suggestions");
-			elementsToRemovePane.setModel(elementsToRemove);
-			elementsToRemovePane.setEnabled(false);
-			elementsToRemovePane.addListSelectionListener(new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent evt) {
-					Logger.logln(NAME+"Elements to remove value changed");
-					elementsToAddPane.clearSelection();
-					
-					try {
-						Highlighter highlight = getDocumentPane().getHighlighter();
-						int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
-
-						for (int i = 0; i < highlightedObjectsSize; i++)
-							highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-						DriverEditor.highlightedObjects.clear();
-
-						ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), elementsToRemovePane.getSelectedValue());
-
-						int indexSize = index.size();
-
-						for (int i = 0; i < indexSize; i++)
-							DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				}
-			});
-			elementsToRemovePane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			elementsToRemovePane.setDragEnabled(false);
-			elementsToRemovePane.setFocusable(false);
+			//--------- Elements to Remove Table ------------------			
+			String[][] removeTableFiller = new String[1][1];
+			removeTableFiller[0] = new String[] {"N/A", "N/A"};
+			String[] removeTableHeaderFiller = {"Word to Remove", "Occurrences"};
+			elementsToRemoveModel = new DefaultTableModel(removeTableFiller, removeTableHeaderFiller) {
+				private static final long serialVersionUID = 1L;
+				public boolean isCellEditable(int rowIndex, int mColIndex) {
+			        return false;
+			    }
+			};
+			
+			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel);
+			elementsToRemoveTable.getTableHeader().setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
+																"in all given docs written by the user.<br>" +
+													"<br><b>Word To Remove:</b> The words you should consider<br>" +
+																"removing or using less of in your document<br>" +
+																"(sorted by most revealing from top to bottom)." +
+																"</html>");
+			elementsToRemoveTable.setRowSelectionAllowed(true);
+			elementsToRemoveTable.setColumnSelectionAllowed(false);
+			elementsToRemoveTable.removeAllElements();
+			elementsToRemoveModel.addRow(new String[] {"Please process to recieve suggestions"});
+			elementsToRemoveTable.setShowGrid(false);
+			elementsToRemoveTable.getColumn("Occurrences").setMaxWidth(90);
+			elementsToRemoveTable.getColumn("Occurrences").setMinWidth(90);
+			elementsToRemoveTable.setEnabled(false);
+			elementsToRemoveTable.setFocusable(false);
+			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
+			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 			suggestionsPanel.add(elementsToAddLabel, "h " + titleHeight + "!");
 			suggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
@@ -1610,6 +1610,76 @@ public class GUIMain extends javax.swing.JFrame  {
 			}
 			
 			return sum;
+		}
+	}
+	
+	/**
+	 * To be used for Elements to Remove so that we can display both the word to remove as well as the number of occurrences
+	 * in a nice way.
+	 * @author Marc Barrowclift
+	 *
+	 */
+	public class ElementsTable extends JTable implements ListSelectionListener {
+		private static final long serialVersionUID = 1L;
+
+		public ElementsTable(DefaultTableModel model) {
+			super(model);
+		}
+		
+		/**
+		 * Goes through each row of the table and removes them
+		 */
+		public void removeAllElements() {
+			int size = this.getRowCount();
+			DefaultTableModel tm = (DefaultTableModel)this.getModel();
+			
+			try {
+				for (int i = 0; i < size; i++) {
+					tm.removeRow(i);
+				}
+			} catch (Exception e) {
+				Logger.logln(NAME+"Error occured while trying to remove elemenets to remove", LogOut.STDERR);
+			}
+		}
+		
+		/**
+		 * Whenever the user clicks another row we should highlight the words in the test document (like with elements to add)
+		 * @param e
+		 */
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			if (!e.getValueIsAdjusting()) { // added as sometimes, multiple events are fired while selection changes
+		        System.out.println("The row clicked is "+this.getSelectedRow());
+		        Logger.logln(NAME+"Elements to remove value changed");
+				elementsToAddPane.clearSelection();
+				
+				try {
+					Highlighter highlight = getDocumentPane().getHighlighter();
+					int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
+
+					for (int i = 0; i < highlightedObjectsSize; i++)
+						highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
+					DriverEditor.highlightedObjects.clear();
+
+					//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
+					//to just extract the "..." for highlighting
+					String wordToRemove = (String)this.getModel().getValueAt(this.getSelectedRow(), 0);
+					String[] test = wordToRemove.split(" ");
+					if (test.length > 2) {
+						wordToRemove = test[1].substring(0, test.length-2);
+					}
+					
+					ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), wordToRemove);
+
+					int indexSize = index.size();
+
+					for (int i = 0; i < indexSize; i++)
+						DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+			super.valueChanged(e);
 		}
 	}
 }

@@ -18,7 +18,7 @@ import edu.drexel.psal.jstylo.generics.Logger;
  */
 public class ClusterAnalyzer {
 	
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	private final String NAME = "( ClusterAnalyzer ) - ";
 
 	private HashMap<SmartIntegerArray,Integer> commonClusterSetMap;
 	ArrayList<String> theFeatures;

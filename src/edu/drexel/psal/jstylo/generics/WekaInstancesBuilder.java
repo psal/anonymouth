@@ -237,7 +237,7 @@ public class WekaInstancesBuilder {
 		known = new ArrayList<List<EventSet>>(knownDocs.size());
 		int knownDocsSize = knownDocs.size();
 		
-		int numCalcThreadsToUse = 1;
+		int numCalcThreadsToUse = 4;
 		numCalcThreads = getNumCalcThreads();
 		
 		if (numCalcThreads>knownDocsSize){

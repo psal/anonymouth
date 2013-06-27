@@ -10,63 +10,44 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Scanner;
+import java.util.List;
 import java.util.Set;
-import java.util.concurrent.locks.Lock;
+
+import com.jgaap.generics.Document;
 
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
-import edu.drexel.psal.anonymouth.engine.FeatureList;
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
-import edu.stanford.nlp.ling.TaggedWord;
 
 /**
  * 
  * @author Andrew W.E. McDonald
+ * @author Marc Barrowclift
  * @author Joe Muoio
  *
  */
 public class ConsolidationStation {
 	
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
-	
+	public static final String NAME = "( ConsolidationStation ) - ";
 	static HashMap<String,ArrayList<TreeData>> parsed;
 	static ArrayList<Triple> toAdd=new ArrayList<Triple>(400);
 	static ArrayList<Triple> toRemove=new ArrayList<Triple>(400);
 	public static ArrayList<TaggedDocument> otherSampleTaggedDocs;//initialized in backendInterfaces.
 	public static ArrayList<TaggedDocument> authorSampleTaggedDocs;
 	public static ArrayList<TaggedDocument> toModifyTaggedDocs;//init in editor Tab Driver
-	private static boolean allDocsTagged = false;
 	public static FunctionWord functionWords=new FunctionWord();
-	
-	private HashMap<String,Word>wordsToAdd;
-	private HashMap<String,Word>newWordsToAdd;
-	private HashMap<String,Word>wordsInDocToMod;
-	private HashMap<String,Word>wordsToRemove;
 	
 	/**
 	 * constructor for ConsolidationStation. Depends on target values, and should not be called until they have been selected.
 	 * @param attribs
 	 * @param parsed
 	 */
-	public ConsolidationStation(){
-		this.parsed = parsed;
+	public ConsolidationStation() {
 		toAdd = new ArrayList<Triple>(400);
-		toRemove = new ArrayList<Triple>(400);
-		wordsToAdd=new HashMap<String,Word>();
-		newWordsToAdd=new HashMap<String,Word>();
-		wordsInDocToMod=new HashMap<String,Word>();
-		wordsToRemove=new HashMap<String,Word>();
-		
-	}
-	
-	
-	
-	public static void setAllDocsTagged(boolean allDocsTagged){
-		ConsolidationStation.allDocsTagged = allDocsTagged;
+		toRemove = new ArrayList<Triple>(400);		
 	}
 	
 	/**
@@ -81,8 +62,6 @@ public class ConsolidationStation {
 		setSentenceFeatures(taggedSent);
 		return taggedSent;
 	}
-	
-	
 	
 	/**
 	 * Adds Reference objects to each Word objects' SparseReferences indicating which features were found in each word, and how many times that feature was found
@@ -117,7 +96,6 @@ public class ConsolidationStation {
 		}
 	}
 	
-	
 	/**
 	 * Same as {@link #setWordFeatures(Word word)}, except on the sentence level. 
 	 * 
@@ -128,9 +106,7 @@ public class ConsolidationStation {
 	public static void setSentenceFeatures(TaggedSentence sent){
 		// TODO -- We already found the 'word' level features, and they are stored differently/independently... so, we start with word bigrams, and move up (trigrams, possibly POS bi/trigrams, and punctutation)
 		String sentString = sent.untagged;
-		int strSize = sentString.length(); 
 		int sibSize;
-		int tempNumber;
 		int attribLen = DataAnalyzer.lengthTopAttributes;
 		int numFound = 0;
 		GramMatcher gm = new GramMatcher();
@@ -171,7 +147,6 @@ public class ConsolidationStation {
 		}
 		//System.out.println("number of sentence level features found: "+sent.sentenceLevelFeaturesFound.length());
 	}
-	
 	
 	/**
 	 * This is the test method to see if a bunch of translated sentences may be able to be pieced together to produce an anonymous document
@@ -326,7 +301,7 @@ public class ConsolidationStation {
 	
 	
 	/**
-	 * Goes through all Words in all TaggedSentences in all TaggedDocuments, sorts them from least to greatest in terms of Anonymity Index, and returns either the lowest ranked or
+	 * Goes through all words in the TaggedDocument instance, sorts them from least to greatest in terms of Anonymity Index, and returns either the lowest ranked or
 	 * highest ranked percent as strings.
 	 * NOTE:
 	 * * percentToReturn, the percent of highest or lowest ranked words (String) to return, should be a number between 0 and 1.
@@ -337,7 +312,7 @@ public class ConsolidationStation {
 	 * @param percentToReturn the percent of words found to return (should probably be MUCH smaller if finding top words to add, because this will look at all otherSampleDocuments
 	 * @return
 	 */
-	public static ArrayList<String> getPriorityWords(ArrayList<TaggedDocument> docsToConsider, boolean findTopToRemove, double percentToReturn){
+	public static ArrayList<String> getPriorityWords(ArrayList<TaggedDocument> docsToConsider, boolean findTopToRemove, double percentToReturn) {
 		int totalWords = 0;
 		ArrayList<Word> words = new ArrayList<Word>(totalWords);
 			
@@ -389,6 +364,109 @@ public class ConsolidationStation {
 		return toReturn;
 	}
 	
+	/**
+	 * Goes through all words in the TaggedDocument instance, sorts them from least to greatest in terms of Anonymity Index, and returns either the lowest ranked or
+	 * highest ranked percent as strings as well as the number of times the given word occurs.
+	 * NOTE:
+	 * * percentToReturn, the percent of highest or lowest ranked words (String) to return, should be a number between 0 and 1.
+	 * * if findTopToRemove is false, the highest ranked Words will be returned (as Strings) (these would then be the most important words to ADD to the documentToAnonymize)
+	 * * if findTopToRemove is true, the lowest ranked Words will be returned (as String) (these would then be the most important words to REMOVE from the documentToAnonymize)
+	 * @param docsToConsider the TaggedDocuments to extract Words from
+	 * @param findTopToRemove true to find the top words to remove, false to find the top words to add
+	 * @param percentToReturn the percent of words found to return (should probably be MUCH smaller if finding top words to add, because this will look at all otherSampleDocuments
+	 * @return
+	 */
+	public static ArrayList<String[]> getPriorityWordsAndOccurances(List<Document> userSampleDocs, boolean findTopToRemove, double percentToReturn) {
+		int totalWords = 0;
+		ArrayList<Word> words = new ArrayList<Word>(totalWords);
+			
+		totalWords += DriverEditor.taggedDoc.getWordCount();
+		words.addAll(DriverEditor.taggedDoc.getWords());
+		
+		int numToReturn = (int)(totalWords*percentToReturn);
+		ArrayList<String[]> toReturn = new ArrayList<String[]>(numToReturn);
+		words = removeDuplicateWords(words);
+		
+		/**
+		 * NOTE: We MUST be using getAnonymity() for both Word's compareTo method and for retrieving the word's anonymity index.
+		 * This is because the old method call to getAnonymityIndex() did not allow the index to be negative. This wouldn't work
+		 * here since we use the more negative the index is to rate how important it is a word be removed. As a result, we are now
+		 * using a slightly modified version of getAnonymityIndex() called getAnonymity() so that we get the negative range back.
+		 */
+		Collections.sort(words);// sort the words in INCREASING anonymityIndex
+
+		int mergedNumWords = words.size();
+		if (mergedNumWords <= numToReturn) {
+			Logger.logln(NAME+"The number of priority words to return is greater than the number of words available. Only returning what is available");
+			numToReturn = mergedNumWords;
+		}
+		try {
+		int size = userSampleDocs.size();
+		int occurances = 0;
+		Logger.logln(NAME+"Scanning " + size + " user docs for " + numToReturn + " words to remove");
+		
+		Word tempWord;
+		if (findTopToRemove) { // then start from index 0, and go up to index (numToReturn-1) words (inclusive)]		
+			for (int i = 0; i < numToReturn; i++) {
+				if ((tempWord = words.get(i)).getAnonymity() <= 0) {
+					for (int d = 0; d < size; d++) {
+						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
+					}
+					Logger.logln(NAME+"Word to remove = " + tempWord.word + ", Occurances = " + occurances);
+					toReturn.add(new String[] {tempWord.word, Integer.toString(occurances)});//+" ("+tempWord.getAnonymity()+")");
+				} else {
+					break;
+				}
+			}
+		} else { // start at the END of the list, and go down to (END-numToReturn) (inclusive)
+			int startIndex = mergedNumWords - 1;
+			int stopIndex = startIndex - numToReturn;
+			
+			for (int i = startIndex; i> stopIndex; i--) {
+				if ((tempWord = words.get(i)).getAnonymity() > 0 ) {
+					for (int d = 0; d < size; d++) {
+						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
+					}
+					Logger.logln(NAME+"Word to add = " + tempWord.word + ", Occurances = " + occurances);
+					toReturn.add(new String[] {tempWord.word, Integer.toString(occurances)});//+" ("+tempWord.getAnonymity()+")");
+				} else { 
+					break;
+				}
+			}	
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Logger.logln(NAME+"Done! Words to remove obtained");
+		return toReturn;
+	}
+
+	/**
+	 * Returns the number of occurrences of a given word
+	 * @param text - The text you want to find the word in
+	 * @param word - The word you want to find
+	 * @return result - The number of occurrences
+	 */
+	public static int getWordOccurances(String text, String word) {
+		int result = 0;
+		int location = 0;
+		int wordLength = word.length();
+		int textLength = text.length();
+		
+		while (location != -1 && location < textLength) {
+			location = text.indexOf(word, location);
+			
+			if (location == -1) {
+				break;
+			} else {
+				result++;
+				location += wordLength;
+			}
+		}
+		
+		return result;
+	}
 	
 	public static ArrayList<Word> removeDuplicateWords(ArrayList<Word> unMerged){
 		HashMap<String,Word> mergingMap = new HashMap<String,Word>((unMerged.size()));//Guessing there will be at least an average of 3 duplicate words per word -> 1/3 of the size is needed
@@ -421,43 +499,39 @@ public class ConsolidationStation {
 	}
 	
 	
-	public static Word getWordFromString(String str){
-		Word newWord=new Word(str);
-		for (int i=0;i<toAdd.size();i++){//toaddList loop
-			Logger.logln("(ConsolidationStation) - TOADD: "+toAdd.get(i).getStringInBraces());
-			int toAddLength=toAdd.get(i).getStringInBraces().length();
-			if(toAddLength<=str.length()){//checks if it can be a possible match
-				int tempNumber=0;
-				double featureInfoGain=toAdd.get(i).getInfoGain();
-				double featurePercentChange = toAdd.get(i).getInfoGain();
-				for(int j=0;j<str.length()-toAddLength;j++){//loops through word to check if/howManyTimes the stringInBraces is found in the word.
-					if(str.substring(j, j+toAddLength).equals((String)toAdd.get(i).stringInBraces)){
-						tempNumber++;
-					}
-				}
-				//newWord.adjustVals(tempNumber, featureInfoGain,featurePercentChange);
-			}
-		}
-		for (int i=0;i<toRemove.size();i++){//toaddList loop
-			Logger.logln("(ConsolidationStation) - TOREMOVE: "+toRemove.get(i).getStringInBraces());
-			int toAddLength=toRemove.get(i).getStringInBraces().length();
-			if(toAddLength<=str.length()){//checks if it can be a possible match
-				int tempNumber=0;
-				double featureInfoGain=toRemove.get(i).getInfoGain();
-				double featurePercentChange = toRemove.get(i).getInfoGain();
-				for(int j=0;j<str.length()-toAddLength;j++){//loops through word to check if/howManyTimes the stringInBraces is found in the word.
-					if(str.substring(j, j+toAddLength).equals((String)toRemove.get(i).stringInBraces)){
-						tempNumber++;
-					}
-				}
-				//newWord.adjustVals(tempNumber, featureInfoGain, featurePercentChange);//respresents a word to remove, so it should be negative
-			}
-		}
-	//	Logger.logln(NAME+"NEW WORD"+newWord.toString());
-		return newWord;
-	}
-	
-
-
-	
+//	public static Word getWordFromString(String str){
+//		Word newWord=new Word(str);
+//		for (int i=0;i<toAdd.size();i++){//toaddList loop
+//			Logger.logln("(ConsolidationStation) - TOADD: "+toAdd.get(i).getStringInBraces());
+//			int toAddLength=toAdd.get(i).getStringInBraces().length();
+//			if(toAddLength<=str.length()){//checks if it can be a possible match
+//				int tempNumber=0;
+//				double featureInfoGain=toAdd.get(i).getInfoGain();
+//				double featurePercentChange = toAdd.get(i).getInfoGain();
+//				for(int j=0;j<str.length()-toAddLength;j++){//loops through word to check if/howManyTimes the stringInBraces is found in the word.
+//					if(str.substring(j, j+toAddLength).equals((String)toAdd.get(i).stringInBraces)){
+//						tempNumber++;
+//					}
+//				}
+//				//newWord.adjustVals(tempNumber, featureInfoGain,featurePercentChange);
+//			}
+//		}
+//		for (int i=0;i<toRemove.size();i++){//toaddList loop
+//			Logger.logln("(ConsolidationStation) - TOREMOVE: "+toRemove.get(i).getStringInBraces());
+//			int toAddLength=toRemove.get(i).getStringInBraces().length();
+//			if(toAddLength<=str.length()){//checks if it can be a possible match
+//				int tempNumber=0;
+//				double featureInfoGain=toRemove.get(i).getInfoGain();
+//				double featurePercentChange = toRemove.get(i).getInfoGain();
+//				for(int j=0;j<str.length()-toAddLength;j++){//loops through word to check if/howManyTimes the stringInBraces is found in the word.
+//					if(str.substring(j, j+toAddLength).equals((String)toRemove.get(i).stringInBraces)){
+//						tempNumber++;
+//					}
+//				}
+//				//newWord.adjustVals(tempNumber, featureInfoGain, featurePercentChange);//respresents a word to remove, so it should be negative
+//			}
+//		}
+//	//	Logger.logln(NAME+"NEW WORD"+newWord.toString());
+//		return newWord;
+//	}
 }

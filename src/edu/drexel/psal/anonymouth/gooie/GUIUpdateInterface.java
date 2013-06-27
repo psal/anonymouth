@@ -130,15 +130,15 @@ public class GUIUpdateInterface {
 		DefaultListModel<String> dlm2 = (DefaultListModel<String>)main.PPSP.prepSampleDocsList.getModel();
 		dlm.removeAllElements();
 		dlm2.removeAllElements();
-		if (main.sampleDocsReady())
-		{
+		
+		if (main.sampleDocsReady()) {
 			List<Document> userSampleDocs = main.ps.getTrainDocs(ProblemSet.getDummyAuthor());
-			for (int i=0; i<userSampleDocs.size(); i++)
-			{
+			for (int i=0; i<userSampleDocs.size(); i++) {
 				dlm.addElement(userSampleDocs.get(i).getTitle());// todo this is where it fails (from the note in DocsTabDriver).. it fails with a "NullPointerException".... (when "create new problem set" is clicked when there isn't a problem set there. [ i.e. as soon as Anonymouth starts up]) 
 				dlm2.addElement(userSampleDocs.get(i).getTitle());
 			}
 		}
+		
 		updateDocPrepColor(main);
 	}
 

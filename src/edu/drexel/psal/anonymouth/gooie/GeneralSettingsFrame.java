@@ -245,8 +245,8 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 			numOfThreadsNote = new JLabel("Note: Expirimental, the current recommended number of threads is 4");
 			numOfThreadsNote.setForeground(Color.GRAY);
 			
-			resetAll = new JButton("resetAll Preferences");
-			resetAll.setToolTipText("resetAll all user preferences back to their default values");
+			resetAll = new JButton("Reset Preferences");
+			resetAll.setToolTipText("Reset all user preferences back to their default values");
 			
 			advanced.add(maxFeatures, "split");
 			advanced.add(maxFeaturesBox, "wrap");

@@ -89,26 +89,22 @@ public class DriverPreProcessTabDocuments {
 		main.prepDocLabel.addMouseListener(documentLabelClickAL);
 
 		// new problem set button
-		clearProblemSetAL = new ActionListener() 
-		{
-
+		clearProblemSetAL = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"'Clear Problem Set' button clicked on the documents tab");
 
 				int answer = -1;
 				// ask if current problem set is not empty
-				if (main.ps != null && (main.ps.hasAuthors() || main.ps.hasTestDocs())) 
-				{
+				if (main.ps != null && (main.ps.hasAuthors() || main.ps.hasTestDocs())) {
 					answer = JOptionPane.showConfirmDialog(null,
 							"Are you sure you want to clear the current problem set?",
 							"Clear Current Problem Set",
 							JOptionPane.WARNING_MESSAGE,
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
-				if (answer == 0) 
-				{					
+				
+				if (answer == 0) {					
 					main.ps = new ProblemSet();
 					main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
 					GUIUpdateInterface.updateProblemSet(main);// todo This needs to be fixed.. someone screwed it up.. (see function for where it fails -- there's a note)
@@ -122,13 +118,10 @@ public class DriverPreProcessTabDocuments {
 
 
 		// load problem set button
-		loadProblemSetAL = new ActionListener()
-		{
+		loadProblemSetAL = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				try
-				{
+			public void actionPerformed(ActionEvent e) {
+				try {
 					Logger.logln(NAME+"'Load Problem Set' button clicked on the documents tab");
 
 					int answer = 0;
@@ -158,14 +151,13 @@ public class DriverPreProcessTabDocuments {
 							//String filename = PropertiesUtil.load.getSelectedFile().getName();
 							//path = path.substring(path.indexOf("jsan_resources"));
 
-							PropertiesUtil.setProbSet(path);
-
 							Logger.logln(NAME+"Trying to load problem set at: " + path);
 							try {
 								main.ps = new ProblemSet(path);
 								main.classChoice.setSelectedItem(PropertiesUtil.prop.getProperty("recentClass"));
 								main.featuresSetJComboBox.setSelectedItem(PropertiesUtil.prop.getProperty("recentFeat"));
 								GUIUpdateInterface.updateProblemSet(main);
+								PropertiesUtil.setProbSet(path);
 							} catch (Exception exc) {
 								Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
 								Logger.logln(NAME+exc.toString(),LogOut.STDERR);
@@ -197,7 +189,7 @@ public class DriverPreProcessTabDocuments {
 				PropertiesUtil.save.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
 				if (PropertiesUtil.prop.getProperty("recentProbSet") != null) {
 					PropertiesUtil.save.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
-					System.out.println(PropertiesUtil.save.getSelectedFile().getAbsolutePath());
+					Logger.logln(NAME+"Chooser root directory: " + PropertiesUtil.save.getSelectedFile().getAbsolutePath());
 				} else {
 					PropertiesUtil.save.setSelectedFile(new File("problemSet.xml"));
 				}
@@ -208,8 +200,6 @@ public class DriverPreProcessTabDocuments {
 					File f = PropertiesUtil.save.getSelectedFile();
 					String path = f.getAbsolutePath();
 
-					PropertiesUtil.setProbSet(PropertiesUtil.save.getSelectedFile().getAbsolutePath());
-
 					if (!path.toLowerCase().endsWith(".xml"))
 						path += ".xml";
 					try {
@@ -218,6 +208,7 @@ public class DriverPreProcessTabDocuments {
 						bw.flush();
 						bw.close();
 						Logger.log("Saved problem set to "+path+":\n"+main.ps.toXMLString());
+						PropertiesUtil.setProbSet(path);
 					} catch (IOException exc) {
 						Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
 						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
@@ -772,12 +763,14 @@ public class DriverPreProcessTabDocuments {
 							JOptionPane.WARNING_MESSAGE,
 							JOptionPane.YES_NO_CANCEL_OPTION);
 				}
+				
 				if (answer == 0) {					
 					main.ps = new ProblemSet();
 					main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
 					GUIUpdateInterface.updateProblemSet(main);// todo This needs to be fixed.. someone screwed it up.. (see function for where it fails -- there's a note)
 					main.addTestDocJButton.setEnabled(true);
 					main.PPSP.addTestDocJButton.setEnabled(true);
+					PropertiesUtil.setProbSet("");
 				}
 			}
 		};
@@ -813,12 +806,11 @@ public class DriverPreProcessTabDocuments {
 					if (answer == JFileChooser.APPROVE_OPTION) {
 						String path = PropertiesUtil.load.getSelectedFile().getAbsolutePath();
 
-						PropertiesUtil.setProbSet(path);
-
 						Logger.logln(NAME+"Trying to load problem set from "+path);
 						try {
 							main.ps = new ProblemSet(path);
 							GUIUpdateInterface.updateProblemSet(main);
+							PropertiesUtil.setProbSet(path);
 						} catch (Exception exc) {
 							Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
 							Logger.logln(NAME+exc.toString(),LogOut.STDERR);
@@ -851,9 +843,6 @@ public class DriverPreProcessTabDocuments {
 				if (answer == JFileChooser.APPROVE_OPTION) {
 					File f = PropertiesUtil.save.getSelectedFile();
 					String path = f.getAbsolutePath();
-					System.out.println(path);
-
-					PropertiesUtil.setProbSet(path);
 
 					if (!path.toLowerCase().endsWith(".xml"))
 						path += ".xml";
@@ -863,6 +852,7 @@ public class DriverPreProcessTabDocuments {
 						bw.flush();
 						bw.close();
 						Logger.log("Saved problem set to "+path+":\n"+main.ps.toXMLString());
+						PropertiesUtil.setProbSet(path);
 					} catch (IOException exc) {
 						Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
 						Logger.logln(NAME+exc.toString(),LogOut.STDERR);

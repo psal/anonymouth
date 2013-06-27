@@ -23,6 +23,7 @@ enum CONJ {SIMPLE,PROGRESSIVE,PERFECT,PERFECT_PROGRESSIVE};
 /**
  * 
  * @author Andrew W.E. McDonald
+ * @author Marc Barrowclift
  * @author Joe Muoio
  * 
  */

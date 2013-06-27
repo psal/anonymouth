@@ -17,7 +17,7 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 public class BackendInterface {
 
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	private final String NAME = "( BackendInterface ) - ";
 	private ProgressWindow pw;
 	public static Boolean processed = false;
 
@@ -192,6 +192,7 @@ public class BackendInterface {
 					DriverEditor.originals.put(DriverEditor.taggedDoc.getUntaggedSentences(false).get(i), DriverEditor.taggedDoc.getTaggedSentences().get(i));
 
 				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
+				SuggestionCalculator.init(magician);
 				SuggestionCalculator.placeSuggestions(main);
 				GUIUpdateInterface.updateResultsPrepColor(main);
 
@@ -222,7 +223,8 @@ public class BackendInterface {
 				Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
 
 				main.processButton.setText("Re-Process");
-				main.resultsWindow.resultsLabel.setText("Click here for larger graph");
+				main.resultsLabel.setToolTipText("Click here for larger graph");
+				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
 				main.resultsMainPanel.setToolTipText("Re-Process your document to get updated ownership probability");
 				if (PropertiesUtil.getDoTranslations()) {
 					main.rightTabPane.setSelectedIndex(2);

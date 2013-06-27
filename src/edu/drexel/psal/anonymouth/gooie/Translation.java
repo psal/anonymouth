@@ -240,8 +240,7 @@ public class Translation {
 
 				return backToEnglish; 
 			} catch (Exception e) {
-				e.printStackTrace();
-				Logger.logln(NAME+"Could not load translations (may not be connected to the internet. Will try again.", LogOut.STDOUT);
+				Logger.logln(NAME+"Could not load translations (may not be connected to the internet.", LogOut.STDOUT);
 				tries--;
 			}
 		}

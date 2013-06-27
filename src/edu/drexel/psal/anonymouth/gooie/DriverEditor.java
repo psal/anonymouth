@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,6 +40,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
+
+import com.jgaap.generics.Document;
 /**
  * editorTabDriver does the work for the editorTab (Editor) in the main GUI (GUIMain)
  * @author Andrew W.E. McDonald
@@ -191,8 +194,8 @@ public class DriverEditor {
 		main.viewClustersMenuItem.setEnabled(b);
 		main.elementsToAddPane.setEnabled(b);
 		main.elementsToAddPane.setFocusable(b);
-		main.elementsToRemovePane.setEnabled(b);
-		main.elementsToRemovePane.setFocusable(b);
+		main.elementsToRemoveTable.setEnabled(b);
+		main.elementsToRemoveTable.setFocusable(b);
 		main.getDocumentPane().setEnabled(b);
 		main.clipboard.setEnabled(b);
 
@@ -1012,8 +1015,8 @@ public class DriverEditor {
 		main.anonymityDrawingPanel.reset();
 		main.resultsWindow.reset();
 		GUIUpdateInterface.updateResultsPrepColor(main);
-		main.elementsToRemove.removeAllElements();
-		main.elementsToRemove.add(0, "Re-processing, please wait");
+		main.elementsToRemoveTable.removeAllElements();
+		main.elementsToRemoveModel.addRow(new String[] {"Re-processing, please wait", ""});
 		main.elementsToAdd.removeAllElements();
 		main.elementsToAdd.add(0, "Re-processing, please wait");
 	}
@@ -1105,10 +1108,15 @@ class SuggestionCalculator {
 
 	private final static String PUNCTUATION = "?!,.\"`'";
 	private final static String CLEANWORD=".*([\\.,!?])+";
+	private static DocumentMagician magician;
 	protected static Highlighter editTracker;
-	protected static ArrayList<String> topToRemove;
+	protected static ArrayList<String[]> topToRemove;
 	protected static ArrayList<String> topToAdd;
 
+	public static void init(DocumentMagician magician) {
+		SuggestionCalculator.magician = magician;
+	}
+	
 	/*
 	 * Highlights the sentence that is currently in the editor box in the main document
 	 * no return
@@ -1122,21 +1130,20 @@ class SuggestionCalculator {
 			highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
 		DriverEditor.highlightedObjects.clear();
 
-		main.elementsToRemove.removeAllElements();
+		main.elementsToRemoveTable.removeAllElements();
 		main.elementsToAdd.removeAllElements();
 
 		//Adding new suggestions
-		topToRemove=ConsolidationStation.getPriorityWords(ConsolidationStation.toModifyTaggedDocs, true, .25);
-		topToAdd=ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, .25);
+		List<Document> documents = magician.getDocumentSets().get(1); //all the user's sample documents (written by them)
+		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
+		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .25);
+		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, .25);
 		
 		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
 		int sentNum = DriverEditor.getCurrentSentNum();
 		String sentence = sentences.get(sentNum);
 
-		main.elementsToRemove.removeAllElements();
-
 		int arrSize = topToRemove.size();
-		int listIndex = 0;
 //		String setString = "";
 //		int fromIndex = 0;
 		String tempString;
@@ -1182,15 +1189,27 @@ class SuggestionCalculator {
 			}
 			
 			if (!topToRemove.get(i).equals("''") && !topToRemove.get(i).equals("``")) {
-				if (PUNCTUATION.contains(topToRemove.get(i).trim()))
-					main.elementsToRemove.add(listIndex, "Reduce the number of " + topToRemove.get(i) + "'s you use");
+				String left, right;
+				
+				//The element to remove
+				if (PUNCTUATION.contains(topToRemove.get(i)[0].trim()))
+					left = "Reduce " + topToRemove.get(i)[0] + "'s";
 				else
-					main.elementsToRemove.add(listIndex, topToRemove.get(i));
-				listIndex++;
+					left = topToRemove.get(i)[0];
+				
+				//The number of occurrences
+				if (topToRemove.get(i)[1].equals("0"))
+					right = "None";
+				else if (topToRemove.get(i)[1].equals("1"))
+					right = "1 time";
+				else
+					right = topToRemove.get(i)[1] + " times";
+				
+				main.elementsToRemoveModel.addRow(new String[] {left, right});
 			}		
 		}
 
-		main.elementsToRemovePane.clearSelection();
+		main.elementsToRemoveTable.clearSelection();
 		main.elementsToAdd.removeAllElements();
 
 		arrSize = topToAdd.size();
@@ -1215,14 +1234,14 @@ class SuggestionCalculator {
 		Scanner parser;
 		HashMap<String,Integer> indexMap = new HashMap<String,Integer>();
 
-		for (String str : topToRemove) {
-			tempArr = DictionaryBinding.getSynonyms(str);
+		for (String[] str : topToRemove) {
+			tempArr = DictionaryBinding.getSynonyms(str[0]);
 			if (tempArr!=null) {
 				//inSent=currentSent.contains(str);
-				inSent = DriverEditor.checkSentFor(currentSent,str);
+				inSent = DriverEditor.checkSentFor(currentSent,str[0]);
 
 				if (inSent)
-					synSetString+=str+"=>";
+					synSetString+=str[0]+"=>";
 				for (int i = 0; i < tempArr.length; i++) {//looks through synonyms
 					tempStr=tempArr[i];
 					if (inSent) {
@@ -1290,9 +1309,9 @@ class SuggestionCalculator {
 		Word possibleToAdd;
 		double topAnon = 0;
 		
-		for (String wordToRem : topToRemove) {//adds ALL the synonyms in the wordsToRemove
-			if (wordsWithSynonyms.containsKey(wordToRem)) {
-				tempStr = wordsWithSynonyms.get(wordToRem);
+		for (String[] wordToRem : topToRemove) {//adds ALL the synonyms in the wordsToRemove
+			if (wordsWithSynonyms.containsKey(wordToRem[0])) {
+				tempStr = wordsWithSynonyms.get(wordToRem[0]);
 				tempStrToAdd = "";
 				parser = new Scanner(tempStr);
 				topAnon = 0;
@@ -1306,7 +1325,7 @@ class SuggestionCalculator {
 						topAnon = possibleToAdd.getAnonymityIndex();
 					}
 				}
-				synSetString += wordToRem + " => " + tempStrToAdd + "\n";
+				synSetString += wordToRem[0] + " => " + tempStrToAdd + "\n";
 			}
 		}
 

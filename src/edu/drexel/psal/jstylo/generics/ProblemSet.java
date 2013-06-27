@@ -1,8 +1,6 @@
 package edu.drexel.psal.jstylo.generics;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 import javax.xml.parsers.*;
@@ -10,7 +8,6 @@ import javax.xml.parsers.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
 import java.util.Collections;
@@ -653,23 +650,7 @@ public class ProblemSet {
 		return useDummyAuthor;
 	}
 	
-	
-	/* ===========
-	 * XML parsing
-	 * ===========
-	 */
-	
-	/**
-	 * Tag to indicate the current scope of the XML.
-	 */
-	private enum Tag{
-		PROBLEM_SET,
-		TRAINING,
-		TEST,
-		AUTHOR,
-		DOCUMENT,
-		END
-	}
+
 	
 	/**
 	 * XML parser to create a problem set out of a XML file.
@@ -712,20 +693,53 @@ public class ProblemSet {
 			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
 			xmlDoc.getDocumentElement().normalize();
 			NodeList items = xmlDoc.getElementsByTagName("document");
+			problemSet.trainCorpusName = "Authors";
 			
-			for (int i=0; i<items.getLength();i++){
+			HashSet<String> titles = new HashSet<String>();
+			
+			for (int i=0; i<items.getLength();i++) {
 				Node current = items.item(i);
 			
 				//test document (old format)
-				if (current.getParentNode().getNodeName().equals("test")){
+				if (current.getParentNode().getNodeName().equals("test")) {
 					Document testDoc = new Document(current.getTextContent(),null);
+					
+					if (titles.contains(testDoc.getTitle())) {
+						int addNum = 1;
+
+						String newTitle = testDoc.getTitle();
+						while (titles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+							addNum++;
+						}
+						
+						testDoc.setTitle(newTitle);
+					}
+					
+					titles.add(testDoc.getTitle());
 					problemSet.addTestDoc(testDoc);
 				} 
 				//training document
 				else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Document trainDoc = new Document(current.getTextContent(),parent.getAttribute("name"));
-					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
+					
+					if (titles.contains(trainDoc.getTitle())) {
+						int addNum = 1;
+						
+						String newTitle = trainDoc.getTitle();
+						while (titles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+							addNum++;
+						}
+						
+						trainDoc.setTitle(newTitle);
+					}
+					
+					titles.add(trainDoc.getTitle());
+					problemSet.addTrainDoc(parent.getAttribute("name"), trainDoc);
 				}
 				//test document (new format) <not yet implemented>
 				else if (current.getParentNode().getParentNode().getNodeName().equals("test")){

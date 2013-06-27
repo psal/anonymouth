@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 import com.apple.eawt.Application;
 import com.apple.eawt.ApplicationAdapter;
 import com.apple.eawt.ApplicationEvent;
-import com.sun.awt.AWTUtilities;
 
 /**
  * ThePresident sets up the Application and System fields/preferences prior to calling 'GUIMain'
@@ -101,10 +100,12 @@ public class ThePresident {
 		return in.nextLine();
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		String OS = System.getProperty("os.name").toLowerCase();
 		ThePresident leader = new ThePresident();
 		if(OS.contains("mac")) {
+			System.setProperty("WEKA_HOME", "/dev/null");
+			
 			IS_MAC = true;
 			Logger.logln(leader.NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
@@ -281,6 +282,16 @@ class InputDialog extends JFrame {
 		okListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for (int i = 100; i >= 0; i-= 2) {
+					inputDialog.setOpacity((float)i/(float)100);
+					
+					try {
+						Thread.sleep(3);
+					} catch (InterruptedException ie) {
+						ie.printStackTrace();
+					}
+				}
+				
 				inputDialog.setVisible(false);
 				ThePresident.continueLoading(leader, textBox.getText());
 			}
@@ -308,10 +319,10 @@ class InputDialog extends JFrame {
 	
 	public void showDialog() {
 		this.getRootPane().setDefaultButton(ok);
-		AWTUtilities.setWindowOpacity(this, (float)0/(float)100);
+		this.setOpacity((float)0/(float)100);
 		this.setVisible(true);
 		ok.requestFocusInWindow();
-		for (int i = 0; i <= 100; i++) {
+		for (int i = 0; i <= 100; i+=2) {
 			this.setOpacity((float)i/(float)100);
 			
 			try {
@@ -320,5 +331,6 @@ class InputDialog extends JFrame {
 				e.printStackTrace();
 			}
 		}
+		this.setOpacity((float)1.0);
 	}
 }
