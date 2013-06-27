@@ -1050,8 +1050,8 @@ public class GUIMain extends javax.swing.JFrame {
 			prepDocumentsPanel.add(separator, "span 4, wrap, h 13!");
 			prepDocumentsPanel.add(mainLabel, "split, w 50%");
 			prepDocumentsPanel.add(sampleLabel, "wrap, w 50%");
-			prepDocumentsPanel.add(prepMainDocScrollPane, "split, h 30:100:180, w 30:60:150, w 50%");
-			prepDocumentsPanel.add(prepSampleDocsScrollPane, "h 30:100:180, w 30:60:150, wrap, w 50%, wrap");
+			prepDocumentsPanel.add(prepMainDocScrollPane, "split, h 40:100:180, w 30:60:150, w 50%");
+			prepDocumentsPanel.add(prepSampleDocsScrollPane, "h 40:100:180, w 30:60:150, wrap, w 50%, wrap");
 
 			prepDocumentsPanel.add(addTestDocJButton, "split 4, w 10::, gap 0");
 			prepDocumentsPanel.add(removeTestDocJButton, "w 10::, gap 0");
@@ -1059,7 +1059,7 @@ public class GUIMain extends javax.swing.JFrame {
 			prepDocumentsPanel.add(removeuserSampleDocJButton, "wrap, w 10::, gap 0");
 
 			prepDocumentsPanel.add(trainLabel, "span");
-			prepDocumentsPanel.add(trainCorpusJTreeScrollPane, "span, h 25::345");
+			prepDocumentsPanel.add(trainCorpusJTreeScrollPane, "span, h 10::345");
 			prepDocumentsPanel.add(addTrainDocsJButton, "split 2, w 10::");
 			prepDocumentsPanel.add(removeTrainDocsJButton, "w 10::");
 		}
