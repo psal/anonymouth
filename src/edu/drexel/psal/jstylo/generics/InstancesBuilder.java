@@ -220,7 +220,7 @@ public class InstancesBuilder extends Engine {
 		
 		//if some documents are leftover after divvying them up, increment the div
 		int div = knownDocsSize / threadsToUse;
-		if (div % knownDocsSize != 0)
+		if (div % threadsToUse != 0)
 			div++;
 		
 		//Parallelized feature extraction
@@ -285,7 +285,7 @@ public class InstancesBuilder extends Engine {
 
 		//initialize the div and make sure it captures everything
 		int div = numInstances / threadsToUse;
-		if (div % numInstances != 0)
+		if (div % threadsToUse != 0)
 			div++;
 
 		//Parallelized magic
@@ -335,7 +335,7 @@ public class InstancesBuilder extends Engine {
 
 			//ensure the docs are divided correctly
 			int div = numInstances / threadsToUse;
-			if (div % numInstances != 0)
+			if (div % threadsToUse != 0)
 				div++;
 
 			//Perform some parallelization magic
