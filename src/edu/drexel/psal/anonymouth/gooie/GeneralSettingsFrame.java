@@ -45,6 +45,7 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
 	protected JLabel fontSize;
+	protected JCheckBox highlightElems;
 	protected JComboBox<String> fontSizes;
 	protected String[] sizes = {"9", "10", "11", "12", "13", "14", "18"};
 	protected int generalHeight;
@@ -155,6 +156,9 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 			autoSaveNote = new JLabel("<html><center>Note: Will overwrite original document with changes.<br>THIS ACTION CANNOT BE UNDONE</center></html>");
 			autoSaveNote.setForeground(Color.GRAY);
 			
+			JSeparator sep = new JSeparator(JSeparator.HORIZONTAL);
+			sep.setPreferredSize(new Dimension(484, 15));
+			
 			fontSize = new JLabel ("Font Size: ");
 			
 			fontSizes = new JComboBox<String>();
@@ -162,15 +166,23 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 				fontSizes.addItem(sizes[i]);
 			fontSizes.setSelectedItem(Integer.toString(PropertiesUtil.getFontSize()));
 			
+			highlightElems = new JCheckBox();
+			highlightElems.setText("Automatically highlight words to remove in selected sentence");
+			if (PropertiesUtil.getAutoHighlight()) {
+				highlightElems.setSelected(true);
+			}
+			
 			general.add(autoSave, "wrap");
 			general.add(autoSaveNote, "alignx 50%, wrap");
 			general.add(warnQuit, "wrap");
 			general.add(showWarnings, "wrap");
 			general.add(translations, "wrap");
+			general.add(sep, "alignx 50%, wrap");
 			general.add(fontSize, "split 2");
-			general.add(fontSizes);
+			general.add(fontSizes, "wrap");
+			general.add(highlightElems);
 			
-			generalHeight = 260;
+			generalHeight = 320;
 		}
 		
 		MigLayout defaultLayout = new MigLayout();
@@ -256,9 +268,9 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 			advanced.add(numOfThreadsSlider, "alignx 50%, wrap");
 			advanced.add(numOfThreadsNote, "alignx 50%, wrap");
 			
-			JSeparator test = new JSeparator(JSeparator.HORIZONTAL);
-			test.setPreferredSize(new Dimension(484, 15));
-			advanced.add(test, "gaptop 5, alignx 50%, wrap");
+			JSeparator sep = new JSeparator(JSeparator.HORIZONTAL);
+			sep.setPreferredSize(new Dimension(484, 15));
+			advanced.add(sep, "gaptop 5, alignx 50%, wrap");
 			advanced.add(resetAll, "gaptop 5, alignx 50%");
 			
 			advancedHeight = 300;
@@ -309,6 +321,7 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 		KeyListener maxFeaturesBoxListener;
 		KeyListener numOfThreadsBoxListener;
 		ActionListener showWarningsListener;
+		ActionListener highlightElemsListener;
 		
 		fontSizeListener = new ActionListener() {
 			@Override
@@ -602,6 +615,22 @@ public class GeneralSettingsFrame extends JFrame implements WindowListener {
 			}
 		};
 		showWarnings.addActionListener(showWarningsListener);
+		
+		highlightElemsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (highlightElems.isSelected()) {
+					PropertiesUtil.setAutoHighlight(true);
+					DriverEditor.highlightWordsToRemove(main, DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
+					Logger.logln(NAME+"Auto highlights checkbox checked");
+				} else {
+					PropertiesUtil.setAutoHighlight(false);
+					DriverEditor.removeHighlightWordsToRemove(main);
+					Logger.logln(NAME+"Auto highlights checkbox unchecked");
+				}
+			}
+		};
+		highlightElems.addActionListener(highlightElemsListener);
 	}
 
 	private void assertValues() {

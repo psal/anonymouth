@@ -61,6 +61,59 @@ public class IndexFinder {
 	}
 	
 	/**
+	 * Finds indices of the words in LinkedList<String> theList in the String theDoc within the given section
+	 * @param theDoc
+	 * @param theWord
+	 * @param startSection
+	 * @param endSection
+	 * @return
+	 */
+	public static ArrayList<int[]> findIndicesInSection(String theDoc, String theWord, int startSection, int endSection) {
+		ArrayList<int[]> theIndices = new ArrayList<int[]>();
+		int j;
+		int start;
+		int end;
+		String spaces=" ";
+		theDoc = theDoc.replaceAll("\\p{Cf}", " ");
+		theWord = theWord.replaceAll("\\.", "\\\\.");
+		
+		try {
+			while (true) {
+				Pattern wordToFind = Pattern.compile("((\\s|\\b)("+theWord+")(\\s|\\b)){1}+");
+				Matcher theMatch = wordToFind.matcher(theDoc);
+				
+				if (theMatch.find(startSection) == false)
+					break;
+				
+				if (theMatch.start() > endSection)
+					break;
+
+				if (theMatch.group(2).matches("\\s"))
+					start = theMatch.start()+1;
+				else
+					start = theMatch.start();
+				
+				if (theMatch.group(4).matches("\\s"))
+					end = theMatch.end()-1;
+				else
+					end = theMatch.end();
+				
+				theIndices.add(new int[] {start, end});
+				spaces = " ";
+				
+				for (j = 1; j < theWord.length(); j++)
+					spaces = spaces +" ";
+				String theDocOne = theDoc.substring(0,start);
+				String theDocTwo = theDoc.substring(end);
+				theDoc = theDocOne+spaces+theDocTwo;
+			}
+		} catch(IllegalStateException e) {
+			Logger.logln("'"+theWord+"' - was not matched. Are there symbols or spaces between the single quotes? If so, that may be why.");
+		}
+		return theIndices;
+	}
+	
+	/**
 	 * Finds indices of symbols in the document
 	 * @param theDoc 
 	 * @param theList
