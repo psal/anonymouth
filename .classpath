@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon-1.0.17.jar"/>
 	<classpathentry kind="lib" path="lib/weka_3_7_9.jar"/>
+	<classpathentry kind="lib" path="lib/ui.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
