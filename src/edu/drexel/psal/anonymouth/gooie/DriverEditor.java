@@ -181,6 +181,7 @@ public class DriverEditor {
 	 * @param main GUIMain object
 	 */
 	public static void setAllDocTabUseable(boolean b, GUIMain main) {
+		System.out.println("SETTING TO = " + b);
 		main.saveButton.setEnabled(b);
 		main.fileSaveTestDocMenuItem.setEnabled(b);
 		main.fileSaveAsTestDocMenuItem.setEnabled(b);
@@ -891,15 +892,19 @@ public class DriverEditor {
 				if (!main.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
 
+				System.out.println(errorMessage);
 				// ----- display error message if there are errors
 				if (errorMessage != "Oops! Found errors that must be taken care of prior to processing!\n\nErrors found:\n") {
 					JOptionPane.showMessageDialog(main, errorMessage, "Configuration Error!",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
+					System.out.println("Hello");
 					main.leftTabPane.setSelectedIndex(0);
 					// ----- confirm they want to process
 					if (true) {// ---- can be a confirm dialog to make sure they want to process.
 						setAllDocTabUseable(false, main);
+						System.out.println("Doc tab useable");
+						System.out.println("isFirstRun = " + isFirstRun);
 						// ----- if this is the first run, do everything that needs to be ran the first time
 						if (isFirstRun) {
 							// ----- create the main document and add it to the appropriate array list.
@@ -934,6 +939,7 @@ public class DriverEditor {
 							wizard = new DataAnalyzer(main.ps);
 							magician = new DocumentMagician(false);
 						} else {
+							System.out.println("ELSE");
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
 							taggedDoc.specialCharTracker.resetEOSCharacters();
 							taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
@@ -943,6 +949,7 @@ public class DriverEditor {
 						}
 
 						main.getDocumentPane().getHighlighter().removeAllHighlights();
+						elementsToRemoveInSentence.clear();
 						selectedAddElements.clear();
 						selectedRemoveElements.clear();
 						okayToSelectSuggestion = false;
