@@ -2,36 +2,11 @@ package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterJob;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.*;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.utils.About;
-import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
-import edu.drexel.psal.jstylo.eventDrivers.*;
 import edu.drexel.psal.jstylo.generics.*;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
-import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
-import edu.drexel.psal.jstylo.canonicizers.*;
-
-import com.jgaap.canonicizers.*;
-import com.jgaap.generics.*;
 
 /**
  * Handles all the menu bar listeners
@@ -56,23 +31,21 @@ public class DriverMenu {
 	protected static ActionListener fullScreenListener;
 //	protected static ActionListener printMenuItemListener;
 	
-	protected static void initListeners(final GUIMain main)
-	{
-		generalListener = new ActionListener()
-		{
+	protected static void initListeners(final GUIMain main) {
+		if (!ThePresident.IS_MAC)
+        	main.settingsGeneralMenuItem.addActionListener(generalListener);
+		
+		generalListener = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				main.GSP.openWindow();
+			public void actionPerformed(ActionEvent e) {
+				GUIMain.GSP.openWindow();
 			}
         };
-        String OS = System.getProperty("os.name").toLowerCase();
-        if (!ThePresident.IS_MAC)
-        	main.settingsGeneralMenuItem.addActionListener(generalListener);
         
         saveProblemSetListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Save problem set menu item clicked");
         		DriverPreProcessTabDocuments.saveProblemSetAL.actionPerformed(e);
         	}
         };
@@ -81,6 +54,7 @@ public class DriverMenu {
         loadProblemSetListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Load problem set menu item clicked");
         		DriverPreProcessTabDocuments.loadProblemSetAL.actionPerformed(e);
         	}
         };
@@ -89,6 +63,7 @@ public class DriverMenu {
         saveTestDocListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Save document menu item clicked");
         		DriverEditor.save(main);
         	}
         };
@@ -97,6 +72,7 @@ public class DriverMenu {
         saveAsTestDocListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Save As menu item clicked");
         		DriverEditor.saveAsTestDoc.actionPerformed(e);
         	}
         };
@@ -105,6 +81,7 @@ public class DriverMenu {
         aboutListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"About menu item clicked");
         		JOptionPane.showMessageDialog(null, 
 						About.aboutAnonymouth,
 						"About Anonymouth",
@@ -117,6 +94,7 @@ public class DriverMenu {
         viewClustersListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"View Clusters menu item clicked");
         		main.clustersWindow.openWindow();
         	}
         };
@@ -125,6 +103,7 @@ public class DriverMenu {
         suggestionsListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Suggestions menu item clicked");
         		main.suggestionsWindow.openWindow();
         	}
         };
@@ -133,6 +112,7 @@ public class DriverMenu {
         helpClustersListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Clusters help menu item clicked");
         		main.clustersTutorial.openWindow();
         	}
         };
@@ -141,6 +121,7 @@ public class DriverMenu {
         undoListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Undo menu item clicked");
         		main.versionControl.undo();
         	}
         };
@@ -149,6 +130,7 @@ public class DriverMenu {
         redoListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		Logger.logln(NAME+"Redo menu item clicekd");
         		main.versionControl.redo();
         	}
         };
@@ -157,11 +139,12 @@ public class DriverMenu {
         if (ThePresident.IS_MAC) {
         	fullScreenListener = new ActionListener() {
             	@Override
-            	public void actionPerformed(ActionEvent e) {  		  		
+            	public void actionPerformed(ActionEvent e) { 
+            		Logger.logln(NAME+"Fullscreen menu item clicked");
             		ThePresident.app.requestToggleFullScreen(main);
             	}
             };
-            main.viewEnterFullScreenMenuItem.addActionListener(fullScreenListener);
+            GUIMain.viewEnterFullScreenMenuItem.addActionListener(fullScreenListener);
         }
         
         /*

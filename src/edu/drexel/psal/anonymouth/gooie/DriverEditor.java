@@ -26,7 +26,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,10 +51,6 @@ import com.jgaap.generics.Document;
 public class DriverEditor {
 
 	private final static String NAME = "( DriverEditor ) - ";
-
-	//	public final static int UNDOCHARACTERBUFFER = 5;
-	//	public static int currentCharacterBuffer = 0;
-
 	public static boolean isUsingNineFeatures = false;
 	protected static boolean hasBeenInitialized = false;
 	protected static String[] condensedSuggestions;
@@ -71,20 +66,15 @@ public class DriverEditor {
 	protected static Attribute currentAttrib;
 	public static boolean hasCurrentAttrib = false;
 	public static boolean isWorkingOnUpdating = false;
+	
 	// It seems redundant to have these next four variables, but they are used in slightly different ways, and are all necessary.
 	public static int currentCaretPosition = -1;
 	public static int startSelection = -1;
 	public static int oldStartSelection = -1;
 	public static int endSelection = -1;
-	public static int oldEndSelection = -1;
-	//	private static int lastCaretPosition = -1;
-	private static int thisKeyCaretPosition = -1;
-	private static int lastKeyCaretPosition = -1;
+	public static int oldEndSelection = -1
+			;
 	protected static boolean okayToSelectSuggestion = false;
-	private static boolean keyJustTyped = false;
-	//	private static boolean keyJustPressed = false;
-	//	private static int mouseEndPosition;
-	//	private static boolean checkForMouseInfluence =false;
 	protected static int selectedIndexTP;
 	protected static int sizeOfCfd;
 	protected static boolean consoleDead = true;
@@ -693,82 +683,12 @@ public class DriverEditor {
 					deleting = true;
 				else
 					deleting = false;
-				//				keyJustPressed = true;
-				lastKeyCaretPosition = thisKeyCaretPosition;
 			}
-
-			/*
-			 * TODO: make the highlighter and sentences track when people type. think about copy and paste and cut and paste too.
-			 */			
+	
 			@Override
-			public void keyReleased(KeyEvent arg0) {  
-				/* 	Code		|	key
-				 * ----------------
-				 * 		8			|	Backspace
-				 *		10			|	Enter
-				 *		9			|	Tab
-				 *		27			|	Escape
-				 *		32			|	Space
-				 *
-				 * Codes 
-				 */
-				thisKeyCaretPosition = main.getDocumentPane().getCaretPosition(); // todo maybe we dont need to call for this.. all we might have to do is get the dot position from the CaretListener
-				//System.out.println("Caret postion resitered at keyreleased:  "+currentCaretPosition);
-				if (keyJustTyped == true) {
-					keyJustTyped = false;
-					//					char keyChar = arg0.getKeyChar();
-					//					int keyCode = arg0.getKeyCode();
-					//					int keyLocation = arg0.getKeyLocation();
-					//					String keyText = KeyEvent.getKeyText(keyCode);
-					//System.out.printf("key char: <%c> key code: <%d> key location: <%d> key text: <%s>\n",keyChar, keyCode, keyLocation, keyText);
-					//System.out.printf("%c		%d		%d		%s\n",keyChar, keyCode, keyLocation, keyText);
-					//System.out.println("Should start present features continuous present value update thread..");
-					//BackendInterface.updatePresentFeatureNow(main, eits,theChief);
-					//int caretPos =main.editorBox.getCaretPosition();
-					//System.out.println("Old Caret Postion: "+oldCaretPosition+" and current CARET POSITION IS: "+currentCaretPosition);
-					//Collections.sort(highlightedObjects);
-					if (lastKeyCaretPosition < thisKeyCaretPosition) {
-						// cursor has advanced 
-						Iterator<HighlightMapper> hloi = highlightedObjects.iterator();
-						boolean isGone;
-						while (hloi.hasNext()) {
-							isGone = false;
-							HighlightMapper tempHm = hloi.next();
-
-							if ((tempHm.getStart() <= thisKeyCaretPosition) && (lastKeyCaretPosition <= tempHm.getEnd())){
-								//System.out.println("FOUND object... start at: "+tempHm.getStart()+" end at: "+tempHm.getEnd());
-								main.getDocumentPane().getHighlighter().removeHighlight(tempHm.getHighlightedObject());
-								isGone = true;
-							}	
-
-							if ((lastKeyCaretPosition <= tempHm.getStart() && !isGone))
-								tempHm.increment(thisKeyCaretPosition - lastKeyCaretPosition);
-						}
-					} else if(lastKeyCaretPosition > thisKeyCaretPosition) {
-						Iterator<HighlightMapper> hloi = highlightedObjects.iterator();
-						boolean isGone;
-						while (hloi.hasNext()) {
-							isGone = false;
-							HighlightMapper tempHm = hloi.next();
-
-							if ((tempHm.getStart() <= thisKeyCaretPosition) && (thisKeyCaretPosition <= tempHm.getEnd())) {
-								//System.out.println("FOUND object ... start at: "+tempHm.getStart()+" end at: "+tempHm.getEnd());
-								main.getDocumentPane().getHighlighter().removeHighlight(tempHm.getHighlightedObject());
-								isGone = true;
-							}
-
-							if ((lastKeyCaretPosition <= tempHm.getStart()) && !isGone)
-								tempHm.decrement(lastKeyCaretPosition - thisKeyCaretPosition);
-						}
-
-					}
-				}
-			}
-
+			public void keyReleased(KeyEvent arg0) {}
 			@Override
-			public void keyTyped(KeyEvent arg0) {
-				keyJustTyped = true;
-			}
+			public void keyTyped(KeyEvent arg0) {}
 		});
 
 		main.getDocumentPane().getDocument().addDocumentListener(new DocumentListener() {
@@ -1025,9 +945,6 @@ public class DriverEditor {
 		currentCaretPosition = 0;
 		startSelection = -1;
 		endSelection = -1;
-		thisKeyCaretPosition = -1;
-		lastKeyCaretPosition = -1;
-		keyJustTyped = false;
 		noCalcHistFeatures.clear();
 		yesCalcHistFeatures.clear();
 
@@ -1130,14 +1047,23 @@ class SuggestionCalculator {
 			highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
 		DriverEditor.highlightedObjects.clear();
 
-		main.elementsToRemoveTable.removeAllElements();
-		main.elementsToAdd.removeAllElements();
+		//If the user had a word highlighted and we're updating the list, we want to keep the word highlighted if it's in the updated list
+		String prevSelectedElement = "";
+		if (main.elementsToAddPane.getSelectedValue() != null)
+			prevSelectedElement = main.elementsToAddPane.getSelectedValue();
+		if (main.elementsToRemoveTable.getSelectedRow() != -1)
+			prevSelectedElement = (String)main.elementsToRemoveTable.getModel().getValueAt(main.elementsToRemoveTable.getSelectedRow(), 0);
+		
+		if (main.elementsToRemoveTable.getRowCount() > 0)
+			main.elementsToRemoveTable.removeAllElements();
+		if (main.elementsToAdd.getSize() > 0)
+			main.elementsToAdd.removeAllElements();
 
 		//Adding new suggestions
 		List<Document> documents = magician.getDocumentSets().get(1); //all the user's sample documents (written by them)
 		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
-		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .25);
-		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, .25);
+		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .1);
+		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, 1);
 		
 		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
 		int sentNum = DriverEditor.getCurrentSentNum();
@@ -1205,18 +1131,27 @@ class SuggestionCalculator {
 				else
 					right = topToRemove.get(i)[1] + " times";
 				
-				main.elementsToRemoveModel.addRow(new String[] {left, right});
+				main.elementsToRemoveModel.insertRow(i, new String[] {left, right});
+				
+				if (topToRemove.get(i)[0].trim().equals(prevSelectedElement)) {
+					main.elementsToRemoveTable.setRowSelectionInterval(i, i);
+				}
 			}		
 		}
 
-		main.elementsToRemoveTable.clearSelection();
+		//main.elementsToRemoveTable.clearSelection();
 		main.elementsToAdd.removeAllElements();
 
 		arrSize = topToAdd.size();
-		for(int i=0;i<arrSize;i++)
+		for (int i=0;i<arrSize;i++) {
 			main.elementsToAdd.add(i, topToAdd.get(i));
+			
+			if (topToAdd.get(i).equals(prevSelectedElement)) {
+				main.elementsToAddPane.setSelectedValue(topToAdd.get(i), true);
+			}
+		}
 
-		main.elementsToAddPane.clearSelection();
+		//main.elementsToAddPane.clearSelection();
 		//findSynonyms(main, sentence);
 	}
 

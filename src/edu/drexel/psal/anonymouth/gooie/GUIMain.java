@@ -1153,25 +1153,29 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToAddPane.addListSelectionListener(new ListSelectionListener() {
 				@Override
 				public void valueChanged(ListSelectionEvent e) {
-					Logger.logln(NAME+"Elements to add value changed");
-					elementsToRemoveTable.clearSelection();
+					if (!e.getValueIsAdjusting()) {
+						Logger.logln(NAME+"Elements to add value changed");
+						
+						if (elementsToRemoveTable.getSelectedRow() != -1)
+							elementsToRemoveTable.clearSelection();
 
-					try {
-						Highlighter highlight = getDocumentPane().getHighlighter();
-						int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
+						try {
+							Highlighter highlight = getDocumentPane().getHighlighter();
+							int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
 
-						for (int i = 0; i < highlightedObjectsSize; i++)
-							highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-						DriverEditor.highlightedObjects.clear();
+							for (int i = 0; i < highlightedObjectsSize; i++)
+								highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
+							DriverEditor.highlightedObjects.clear();
 
-						ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), elementsToAddPane.getSelectedValue());
+							ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), elementsToAddPane.getSelectedValue());
 
-						int indexSize = index.size();
+							int indexSize = index.size();
 
-						for (int i = 0; i < indexSize; i++)
-							DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterAdd)));
-					} catch (Exception e1) {
-						e1.printStackTrace();
+							for (int i = 0; i < indexSize; i++)
+								DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterAdd)));
+						} catch (Exception e1) {
+							Logger.logln(NAME+"Error occured while getting selected word to add value and highlighting all instances.", LogOut.STDERR);
+						}
 					}
 				}
 			});
@@ -1635,10 +1639,11 @@ public class GUIMain extends javax.swing.JFrame {
 			
 			try {
 				for (int i = 0; i < size; i++) {
-					tm.removeRow(i);
+					tm.removeRow(0);
 				}
 			} catch (Exception e) {
 				Logger.logln(NAME+"Error occured while trying to remove elemenets to remove", LogOut.STDERR);
+				e.printStackTrace();
 			}
 		}
 		
@@ -1649,35 +1654,38 @@ public class GUIMain extends javax.swing.JFrame {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			if (!e.getValueIsAdjusting()) { // added as sometimes, multiple events are fired while selection changes
-		        System.out.println("The row clicked is "+this.getSelectedRow());
 		        Logger.logln(NAME+"Elements to remove value changed");
-				elementsToAddPane.clearSelection();
 				
-				try {
-					Highlighter highlight = getDocumentPane().getHighlighter();
-					int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
+		        if (elementsToAddPane.getSelectedIndex() != -1)
+		        	elementsToAddPane.clearSelection();
+				
+		        if (this.getSelectedRow() != -1) {
+		        	try {
+						Highlighter highlight = getDocumentPane().getHighlighter();
+						int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
 
-					for (int i = 0; i < highlightedObjectsSize; i++)
-						highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-					DriverEditor.highlightedObjects.clear();
+						for (int i = 0; i < highlightedObjectsSize; i++)
+							highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
+						DriverEditor.highlightedObjects.clear();
 
-					//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
-					//to just extract the "..." for highlighting
-					String wordToRemove = (String)this.getModel().getValueAt(this.getSelectedRow(), 0);
-					String[] test = wordToRemove.split(" ");
-					if (test.length > 2) {
-						wordToRemove = test[1].substring(0, test.length-2);
+						//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
+						//to just extract the "..." for highlighting
+						String wordToRemove = (String)this.getModel().getValueAt(this.getSelectedRow(), 0);
+						String[] test = wordToRemove.split(" ");
+						if (test.length > 2) {
+							wordToRemove = test[1].substring(0, test.length-2);
+						}
+						
+						ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), wordToRemove);
+
+						int indexSize = index.size();
+
+						for (int i = 0; i < indexSize; i++)
+							DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
+					} catch (Exception e1) {
+						Logger.logln(NAME+"Error occured while getting selected word to remove value and highlighting all instances.", LogOut.STDERR);
 					}
-					
-					ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), wordToRemove);
-
-					int indexSize = index.size();
-
-					for (int i = 0; i < indexSize; i++)
-						DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+		        }
 			}
 			super.valueChanged(e);
 		}
