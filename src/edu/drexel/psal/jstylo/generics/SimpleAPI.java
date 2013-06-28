@@ -1,5 +1,7 @@
 package edu.drexel.psal.jstylo.generics;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 
 /**
  * 
@@ -198,6 +201,28 @@ public class SimpleAPI {
 	
 	///////////////////////////////// Setters/Getters
 	
+	public void generateTestArff(String path){
+		try {
+			ArffSaver saver = new ArffSaver();
+			 saver.setInstances(ib.getTestInstances());
+			 saver.setFile(new File(path));
+			 saver.writeBatch();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}	
+	}
+	
+	public void generateTrainArff(String path){
+		try {
+			ArffSaver saver = new ArffSaver();
+			 saver.setInstances(ib.getTrainingInstances());
+			 saver.setFile(new File(path));
+			 saver.writeBatch();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Change the number of folds to use in cross validation
 	 * @param n number of folds to use from now on
@@ -359,6 +384,7 @@ public class SimpleAPI {
 	///////////////////////////////// Main method for testing purposes
 	
 	public static void main(String[] args){
+		
 		SimpleAPI test = new SimpleAPI(
 				"./jsan_resources/problem_sets/drexel_1_train_test.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
@@ -369,10 +395,7 @@ public class SimpleAPI {
 		test.prepareAnalyzer();
 		test.run();
 		
-		//System.out.println("Results: " + "\n" + test.getCrossValStatString());
-		//System.out.println("infoGain: "+test.getReadableInfoGain(false));
-		System.out.println("Stats: "+test.getTrainTestStatString());
-		System.out.println("\n\nAccuracy Only: "+test.getClassificationAccuracy());
-		System.out.println("\n\nWeighted Stats: "+test.getWeightedStats());
+		//test.generateTrainArff("./train.arff");
+
 	}
 }
