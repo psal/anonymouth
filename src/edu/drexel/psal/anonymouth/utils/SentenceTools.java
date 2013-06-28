@@ -67,9 +67,9 @@ public class SentenceTools implements Serializable  {
 	private static final String t_PERIOD_REPLACEMENT = ""; // XXX: Hopefully it is safe to assume no one sprinkles apple symbols in their paper
 	// The below three "permanent" replacments are to mark EOS characters in text that the user has told us are not actually ending a sentence. 
 	// DO NOT remove these... in order to get them back, you need to know the unicode code
-	public static final String p_PERIOD_REPLACEMENT = "๏";
-	public static final String p_EXCLAMATION_REPLACEMENT ="˩";//"ǃ";
-	public static final String p_QUESTION_REPLACEMENT ="ʔ";
+	public static final String p_PERIOD_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[0]);
+	public static final String p_EXCLAMATION_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[1]);
+	public static final String p_QUESTION_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[2]);
 	private static int MAX_SENTENCES = 500;
 	//private ArrayList<String> sentsToEdit = new ArrayList<String>(MAX_SENTENCES);
 	private static int sentNumber = -1;
