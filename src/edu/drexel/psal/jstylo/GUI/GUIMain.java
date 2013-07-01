@@ -107,7 +107,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton clearDocPreviewJButton;
 	protected JButton docsAboutJButton;
 	protected JTextPane docsInstructionPane;
-
+	protected JButton addTestAuthorJButton;
+	protected JButton removeTestAuthorJButton;
+	
 	// features tab
 	protected JButton featuresNextJButton;
 	protected JButton featuresBackJButton;
@@ -469,22 +471,33 @@ public class GUIMain extends javax.swing.JFrame {
 						JPanel buttons = new JPanel(new GridLayout(2,3,cellPadding,cellPadding));
 						testDocsPanel.add(buttons,BorderLayout.SOUTH);
 						{
+							addTestAuthorJButton = new JButton();
+							buttons.add(addTestAuthorJButton);
+							addTestAuthorJButton.setText("Add Author(s)...");
+						}
+						{
 							addTestDocJButton = new JButton();
 							buttons.add(addTestDocJButton);
 							addTestDocJButton.setText("Add Document(s)...");
-						}
-						{
-							removeTestDocJButton = new JButton();
-							buttons.add(removeTestDocJButton);
-							removeTestDocJButton.setText("Remove Document(s)");
 						}
 						{
 							testDocPreviewJButton = new JButton();
 							buttons.add(testDocPreviewJButton);
 							testDocPreviewJButton.setText("Preview Document");
 						}
-						buttons.add(new JPanel());
-						buttons.add(new JPanel());
+						{
+							removeTestAuthorJButton = new JButton();
+							buttons.add(removeTestAuthorJButton);
+							removeTestAuthorJButton.setText("Remove Author(s)");
+						}
+						{
+							removeTestDocJButton = new JButton();
+							buttons.add(removeTestDocJButton);
+							removeTestDocJButton.setText("Remove Document(s)");
+						}
+
+						//buttons.add(new JPanel());
+						//buttons.add(new JPanel());
 						buttons.add(new JPanel());
 					}
 
