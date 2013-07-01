@@ -181,13 +181,13 @@ public class SimpleAPI {
 
 		// do a train/test
 		case TRAIN_TEST:
-			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getTestDocs());
+			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
 			break;
 
 		//do both
 		case BOTH:
 			crossValResults = analysisDriver.runCrossValidation(ib.getTrainingInstances(), numFolds, 0);
-			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getTestDocs());
+			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
 			break;
 		
 		//should not occur

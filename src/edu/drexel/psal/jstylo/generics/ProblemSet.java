@@ -25,7 +25,9 @@ public class ProblemSet {
 	
 	private SortedMap<String,List<Document>> trainDocsMap;
 	
-	private List<Document> testDocs;
+	private SortedMap<String,List<Document>> testDocsMap;
+	
+	//private List<Document> testDocs;
 	
 	private String trainCorpusName;	
 	
@@ -45,7 +47,8 @@ public class ProblemSet {
 	 */
 	public ProblemSet() {
 		trainDocsMap = new TreeMap<String,List<Document>>();
-		testDocs = new LinkedList<Document>();
+		//testDocs = new LinkedList<Document>();
+		testDocsMap = new TreeMap<String,List<Document>>();
 		trainCorpusName = "";
 	}
 	
@@ -58,7 +61,8 @@ public class ProblemSet {
 	 */
 	public ProblemSet(String trainCorpusName, SortedMap<String,List<Document>> trainDocsMap) {
 		this.trainDocsMap = trainDocsMap;
-		testDocs = new LinkedList<Document>();
+		//testDocs = new LinkedList<Document>();
+		testDocsMap = new TreeMap<String,List<Document>>();
 		this.trainCorpusName = trainCorpusName;
 	}
 	
@@ -68,9 +72,10 @@ public class ProblemSet {
 	 * @param testDocs
 	 * 		The test documents list to set to.
 	 */
-	public ProblemSet(List<Document> testDocs) {
+	public ProblemSet(SortedMap<String,List<Document>> testDocs){
 		trainDocsMap = new TreeMap<String,List<Document>>();
-		this.testDocs = testDocs;
+		//testDocs = new LinkedList<Document>();
+		testDocsMap = testDocs;
 		trainCorpusName = "";
 	}
 	
@@ -83,9 +88,10 @@ public class ProblemSet {
 	 * @param testDocs
 	 * 		The test documents list to set to.
 	 */
-	public ProblemSet(String trainCorpusName, SortedMap<String,List<Document>> trainDocsMap, List<Document> testDocs) {
+	public ProblemSet(String trainCorpusName, SortedMap<String,List<Document>> trainDocsMap, SortedMap<String,List<Document>> testDocs) {
 		this.trainDocsMap = trainDocsMap;
-		this.testDocs = testDocs;
+		//testDocs = new LinkedList<Document>();
+		testDocsMap = testDocs;
 		this.trainCorpusName = trainCorpusName;
 	}
 	
@@ -100,7 +106,7 @@ public class ProblemSet {
 		ProblemSet generated = parser.problemSet;
 		trainCorpusName = generated.trainCorpusName;
 		trainDocsMap = generated.trainDocsMap;
-		testDocs = generated.testDocs;
+		testDocsMap = generated.testDocsMap;
 	}
 	
 	/**
@@ -126,12 +132,17 @@ public class ProblemSet {
 		}
 		
 		// test docs
-		docs = new LinkedList<Document>();
-		for (Document doc: other.testDocs) {
-			newDoc = new Document(doc);
-			docs.add(newDoc);
+		this.testDocsMap = new TreeMap<String,List<Document>>();
+		LinkedList<Document> testDocs;
+		Document newTestDoc;
+		for (String author: other.testDocsMap.keySet()) {
+			testDocs = new LinkedList<Document>();
+			for (Document doc: other.trainDocsMap.get(author)) {
+				newTestDoc = new Document(doc.getFilePath(),doc.getAuthor(),doc.getTitle());
+				testDocs.add(newTestDoc);
+			}
+			this.trainDocsMap.put(author, testDocs);
 		}
-		this.testDocs = docs;
 	}
 	
 	
@@ -183,6 +194,22 @@ public class ProblemSet {
 		if (trainDocsMap.get(author) == null)
 			trainDocsMap.put(author,new LinkedList<Document>());
 		return trainDocsMap.get(author).add(doc);
+	}
+	
+	/**
+	 * Adds the given document to the given author. If no such author exists in the map, creates a new entry for
+	 * that author. Returns true iff the addition succeeded.
+	 * @param author
+	 * 		The author to add the document to.
+	 * @param doc
+	 * 		The document to be added.
+	 * @return
+	 * 		true iff the addition succeeded.
+	 */
+	public boolean addTestDoc(String author, Document doc) {
+		if (testDocsMap.get(author) == null)
+			testDocsMap.put(author,new LinkedList<Document>());
+		return testDocsMap.get(author).add(doc);
 	}
 	
 	/**
@@ -255,6 +282,18 @@ public class ProblemSet {
 	}
 	
 	/**
+	 * Removes the given author and returns its list of documents, or null if the author does not exist in the
+	 * training set.
+	 * @param author
+	 * 		The author to be removed.
+	 * @return
+	 * 		The documents of the removed author, or null if the author does not exist.
+	 */
+	public List<Document> removeTestAuthor(String author) {
+		return testDocsMap.remove(author);
+	}
+	
+	/**
 	 * Removes the document at the given index from the list of training documents of the given author.
 	 * Returns the document that was removed, or null if no such document existed.
 	 * @param author
@@ -322,8 +361,13 @@ public class ProblemSet {
 	 * @return
 	 * 		true iff the addition succeeded.
 	 */
-	public boolean addTestDoc(Document doc) {
-		return testDocs.add(doc);
+	public boolean addTestDocs(String author, List<Document> docs) {
+		if (testDocsMap.get(author) == null) {
+			testDocsMap.put(author,docs);
+			return true;
+		} else {
+			return testDocsMap.get(author).addAll(docs);
+		}	
 	}
 	
 	/**
@@ -331,8 +375,8 @@ public class ProblemSet {
 	 * @param docs
 	 * 		The list of documents to set to.
 	 */
-	public void setTestDocs(List<Document> docs) {
-		testDocs = docs;
+	public void setTestDocs(String author, List<Document> docs) {
+		testDocsMap.put(author, docs);
 	}
 	
 	/**
@@ -343,12 +387,11 @@ public class ProblemSet {
 	 * @return
 	 * 		The removed document, or null if the index is out of bounds.
 	 */
-	public Document removeTestDocAt(int i) {
-		try {
-			return testDocs.remove(i);
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
+	public boolean removeTestDocAt(String author, Document doc) {
+		List<Document> docs = testDocsMap.get(author);
+		if (docs == null)
+			return false;
+		return docs.remove(doc);
 	}
 	
 	/**
@@ -358,8 +401,14 @@ public class ProblemSet {
 	 * @return
 	 * 		true iff the document appeared in the list.
 	 */
-	public boolean removeTestDoc(Document doc) {
-		return testDocs.remove(doc);
+	public Document removeTestDocAt(String author, String docTitle) {
+		List<Document> docs = testDocsMap.get(author);
+		if (docs == null)
+			return null;
+		for (int i=0; i<docs.size(); i++)
+			if (docs.get(i).getTitle().equals(docTitle))
+				return docs.remove(i);
+		return null;
 	}
 	
 	// other
@@ -427,6 +476,10 @@ public class ProblemSet {
 	 */
 	public Map<String,List<Document>> getAuthorMap() {
 		return trainDocsMap;
+	}
+	
+	public Map<String,List<Document>> getTestAuthorMap(){
+		return testDocsMap;
 	}
 	
 	/**
@@ -521,7 +574,7 @@ public class ProblemSet {
 	 * 		true iff the list of test documents is not empty.
 	 */
 	public boolean hasTestDocs() {
-		return !testDocs.isEmpty();
+		return !testDocsMap.isEmpty();
 	}
 	
 	/**
@@ -529,8 +582,8 @@ public class ProblemSet {
 	 * @return
 	 * 		The list of test documents.
 	 */
-	public List<Document> getTestDocs() {
-		return testDocs;
+	public SortedMap<String,List<Document>> getTestDocs() {
+		return testDocsMap;
 	}
 	
 	/**
@@ -540,12 +593,25 @@ public class ProblemSet {
 	 * @return
 	 * 		The test document at the given index, or null if the index is out of bounds.
 	 */
-	public Document testDocAt(int i) {
+	public Document testDocAt(String author, int i) {
+		List<Document> docs = testDocsMap.get(author);
+		if (docs == null)
+			return null;
 		try {
-			return testDocs.get(i);
+			return docs.get(i);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
+	}
+	
+	public Document testDocAt(String author, String docTitle) {
+		List<Document> docs = testDocsMap.get(author);
+		if (docs == null)
+			return null;
+		for (int i=0; i<docs.size(); i++)
+			if (docs.get(i).getTitle().equals(docTitle))
+				return docs.get(i);
+		return null;
 	}
 	
 	/**
@@ -553,8 +619,24 @@ public class ProblemSet {
 	 * @return
 	 * 		The number of test documents.
 	 */
-	public int numTestDocs() {
-		return testDocs.size();
+	public int numTestDocs(String author) {
+		if (testDocsMap.get(author) == null)
+			return 0;
+		else return testDocsMap.get(author).size();
+	}
+	
+	public List<Document> getAllTestDocs() {
+		List<Document> allTestDocs = new LinkedList<Document>();
+		for (String key: testDocsMap.keySet()){
+			for (Document d:testDocsMap.get(key)){
+				try {
+					allTestDocs.add(new Document(d.getFilePath(),key,d.getTitle()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return allTestDocs;
 	}
 	
 	// stringifiers
@@ -571,8 +653,12 @@ public class ProblemSet {
 				res += "> "+doc.getTitle()+": "+doc.getFilePath()+"\n";
 		}
 		res += "Test documents:\n";
-		for (Document doc: testDocs)
-			res += "> "+doc.getTitle()+": "+doc.getFilePath()+"\n";
+		for (String author: testDocsMap.keySet()) {
+			res += "Author "+author+":\n";
+			List<Document> docs = testDocsMap.get(author);
+			for (Document doc: docs)
+				res += "> "+doc.getTitle()+": "+doc.getFilePath()+"\n";
+		}
 		return res;
 	}
 	
@@ -614,17 +700,20 @@ public class ProblemSet {
 		}
 		pw.println("\t</training>");
 		pw.println("\t<test>");
-		for (Document doc : testDocs) {
-
+		Set<String> sortedTestAuthors = testDocsMap.keySet();
+		for (String author: sortedTestAuthors) {
+			pw.println("\t\t<author name=\""+author+"\">");
+			List<Document> docs = testDocsMap.get(author);
+			for (Document doc : docs) {
+				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+						+ buildRelativePath(doc) + "</document>");
 /*
-			pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
-					+ doc.getFilePath().replace('\\', '/') + "</document>");
+				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+						+ doc.getFilePath().replace('\\', '/') + "</document>");
 */
-			pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
-					+ buildRelativePath(doc) + "</document>");
+			}
+			pw.println("\t\t</author>");
 		}
-		pw.println("\t</test>");
-		pw.println("</problem-set>");
 		
 		return res;
 	}
@@ -655,18 +744,6 @@ public class ProblemSet {
 	 * XML parsing
 	 * ===========
 	 */
-	
-	/**
-	 * Tag to indicate the current scope of the XML.
-	 */
-	private enum Tag{
-		PROBLEM_SET,
-		TRAINING,
-		TEST,
-		AUTHOR,
-		DOCUMENT,
-		END
-	}
 	
 	/**
 	 * XML parser to create a problem set out of a XML file.
@@ -715,18 +792,20 @@ public class ProblemSet {
 			
 				//test document (old format)
 				if (current.getParentNode().getNodeName().equals("test")){
-					Document testDoc = new Document(current.getTextContent(),null);
-					problemSet.addTestDoc(testDoc);
-				} 
-				//training document
-				else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
+					Document testDoc = new Document(current.getTextContent(),"_Unknown_");
+					problemSet.addTestDoc("_Unknown_",testDoc);
+					
+					//Training document
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Document trainDoc = new Document(current.getTextContent(),parent.getAttribute("name"));
 					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
-				}
-				//test document (new format) <not yet implemented>
-				else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
-					Logger.logln("Planned for next version of test document handling");
+					
+					//test document (new format)
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
+					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
+					Document testDoc = new Document(current.getTextContent(),parent.getAttribute("name"));
+					problemSet.addTestDoc(parent.getAttribute("name"),testDoc);
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
 				}
@@ -778,6 +857,8 @@ public class ProblemSet {
 		
 		return relPath;
 	}
+
+
 	
 	/*
 	public static void main(String[] args) throws Exception {

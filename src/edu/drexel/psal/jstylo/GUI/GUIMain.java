@@ -96,8 +96,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton removeTrainDocsJButton;
 	protected JButton addTrainDocsJButton;
 	protected JTree trainCorpusJTree;
-	protected JTable testDocsJTable;
-	protected DefaultTableModel testDocsTableModel;
+	//protected JTable testDocsJTable;
+	protected JTree testDocsJTree;
+	//protected DefaultTableModel testDocsTableModel;
 	protected JLabel featuresToolsJLabel;
 	protected JLabel docPreviewNameJLabel;
 	protected JLabel corpusJLabel;
@@ -452,6 +453,12 @@ public class GUIMain extends javax.swing.JFrame {
 						testDocsJLabel.setFont(defaultLabelFont);
 					}
 					{
+						DefaultMutableTreeNode top = new DefaultMutableTreeNode(ps.getTrainCorpusName());
+						testDocsJTree = new JTree(top);
+						JScrollPane scrollPane = new JScrollPane(testDocsJTree);
+						testDocsPanel.add(scrollPane,BorderLayout.CENTER);
+					}
+					/*{
 						testDocsTableModel = new DefaultTableModel();
 						testDocsTableModel.addColumn("Title");
 						testDocsTableModel.addColumn("Path");
@@ -466,7 +473,7 @@ public class GUIMain extends javax.swing.JFrame {
 						testDocsJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 						JScrollPane scrollPane = new JScrollPane(testDocsJTable);
 						testDocsPanel.add(scrollPane,BorderLayout.CENTER);
-					}
+					}*/
 					{
 						JPanel buttons = new JPanel(new GridLayout(2,3,cellPadding,cellPadding));
 						testDocsPanel.add(buttons,BorderLayout.SOUTH);

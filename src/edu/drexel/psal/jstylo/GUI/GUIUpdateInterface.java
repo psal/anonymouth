@@ -56,7 +56,7 @@ public class GUIUpdateInterface {
 		Logger.logln("GUI Update: update documents tab with current problem set started");
 		
 		// update test documents table
-		updateTestDocTable(main);
+		updateTestDocTree(main);
 		
 		// update training corpus tree
 		updateTrainDocTree(main);
@@ -68,6 +68,7 @@ public class GUIUpdateInterface {
 	/**
 	 * Updates the test documents table with the current problem set. 
 	 */
+	/*
 	protected static void updateTestDocTable(GUIMain main) {
 		JTable testDocsTable = main.testDocsJTable;
 		DefaultTableModel testTableModel = main.testDocsTableModel;
@@ -84,8 +85,33 @@ public class GUIUpdateInterface {
 					testDocs.get(i).getTitle(),
 					testDocs.get(i).getFilePath()
 			});
+	}*/
+	protected static void updateTestDocTree(GUIMain main) {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Test Docs");
+		Map<String,List<Document>> testDocsMap = main.ps.getTestAuthorMap();
+		DefaultMutableTreeNode authorNode, docNode;
+		List<String> authorsSorted = new ArrayList<String>(testDocsMap.keySet());
+		Collections.sort(authorsSorted);
+		for (String author: authorsSorted) {
+			authorNode = new DefaultMutableTreeNode(author);
+			root.add(authorNode);
+			List<Document> docs = testDocsMap.get(author);
+			Collections.sort(docs,new Comparator<Document>() {
+				public int compare(Document o1, Document o2) {
+					return o1.getTitle().compareTo(o2.getTitle());
+				}
+			});
+			for (Document doc: docs){
+				docNode = new DefaultMutableTreeNode(doc.getTitle());
+				authorNode.add(docNode);
+			}
+		}
+		
+		DefaultTreeModel testTreeModel = new DefaultTreeModel(root);
+		main.testDocsJTree.setModel(testTreeModel);
 	}
-
+	
+	
 	/**
 	 * Updates the training corpus tree with the current problem set. 
 	 */

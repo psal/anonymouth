@@ -615,11 +615,11 @@ public class AnalysisTabDriver {
 			// test set
 			if (classifyTestDocs) {
 				content += "Test documents:\n";
-				int numRows = main.testDocsJTable.getModel().getRowCount();
-				String doc;
-				for (int i=0; i<numRows; i++) {
-					doc = main.testDocsJTable.getModel().getValueAt(i,0).toString();
-					content += "> "+doc+"\n";
+				Enumeration<DefaultMutableTreeNode> testAuthors = ((DefaultMutableTreeNode) main.testDocsJTree.getModel().getRoot()).children();
+				DefaultMutableTreeNode testAuthor;
+				while (testAuthors.hasMoreElements()) {
+					testAuthor = testAuthors.nextElement();
+					content += "> "+testAuthor.getUserObject().toString()+" ("+testAuthor.getChildCount()+" documents)\n";
 				}
 				content += "\n";
 			}
@@ -831,7 +831,7 @@ public class AnalysisTabDriver {
 					results = main.analysisDriver.classify(
 							main.ib.getTrainingInstances(),
 							main.ib.getTestInstances(),
-							main.ps.getTestDocs());
+							main.ps.getAllTestDocs());
 					
 					content += getTimestamp()+" done!\n\n";
 					Logger.logln("Done!");

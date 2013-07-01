@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 import com.jgaap.generics.Document;
 import com.jgaap.generics.EventSet;
@@ -513,7 +514,7 @@ public class InstancesBuilder extends Engine {
 		return ps.getAllTrainDocs();
 	}
 	
-	public List<Document> getTestDocs(){
+	public SortedMap<String,List<Document>> getTestDocs(){
 		return ps.getTestDocs();
 	}
 
@@ -654,14 +655,16 @@ public class InstancesBuilder extends Engine {
 					* (threadId + 1)); i++)
 				try {
 					//grab the document
-					Document doc = ps.getTestDocs().get(i);
+					Document doc = ps.getAllTestDocs().get(i);
 					//extract its event sets
 					List<EventSet> events = extractEventSets(doc, cfd);
 					//cull the events/eventSets with respect to training events/sets
 					events = cullWithRespectToTraining(relevantEvents, events, cfd);
+					Logger.logln("culled");
 					//build the instance
 					Instance instance = createInstance(attributes, relevantEvents, cfd,
 							events, doc, isSparse, useDocTitles);
+					Logger.logln("created instance");
 					//add it to the dataset
 					instance.setDataset(testInstances);
 					//normalize it
@@ -670,7 +673,7 @@ public class InstancesBuilder extends Engine {
 					list.add(instance);
 				} catch (Exception e) {
 					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
-					Logger.logln(ps.getTestDocs().get(i).getFilePath());
+					Logger.logln(ps.getAllTestDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}
@@ -729,7 +732,8 @@ public class InstancesBuilder extends Engine {
 					//add it to this div's list of completed instances
 					list.add(instance);
 				} catch (Exception e) {
-					Logger.logln("Error creating Instances!", LogOut.STDERR);
+					Logger.logln("Error creating Training Instances!", LogOut.STDERR);
+					Logger.logln(ps.getAllTrainDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}
