@@ -56,7 +56,7 @@ public class DriverEditor {
 	protected static boolean hasBeenInitialized = false;
 	protected static String[] condensedSuggestions;
 	protected static int numEdits = 0;
-	protected static boolean isFirstRun = true; 
+	protected static boolean isFirstRun = true;
 	protected static DataAnalyzer wizard;
 	private static DocumentMagician magician;
 	protected static String[] theFeatures;
@@ -75,9 +75,8 @@ public class DriverEditor {
 	public static int startSelection = -1;
 	public static int oldStartSelection = -1;
 	public static int endSelection = -1;
-	public static int oldEndSelection = -1
-			;
-	protected static boolean okayToSelectSuggestion = false;
+	public static int oldEndSelection = -1;
+	
 	protected static int selectedIndexTP;
 	protected static int sizeOfCfd;
 	protected static boolean consoleDead = true;
@@ -892,21 +891,24 @@ public class DriverEditor {
 				if (!main.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
 
-				System.out.println(errorMessage);
+				System.out.println("BEFORE IF");
 				// ----- display error message if there are errors
 				if (errorMessage != "Oops! Found errors that must be taken care of prior to processing!\n\nErrors found:\n") {
+					System.out.println("SHOULD NOT HAVE EXECUTED");
 					JOptionPane.showMessageDialog(main, errorMessage, "Configuration Error!",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					System.out.println("Hello");
+					System.out.println("THE SHOULD EXECUTE");
 					main.leftTabPane.setSelectedIndex(0);
 					// ----- confirm they want to process
 					if (true) {// ---- can be a confirm dialog to make sure they want to process.
 						setAllDocTabUseable(false, main);
 						System.out.println("Doc tab useable");
 						System.out.println("isFirstRun = " + isFirstRun);
+						System.out.println("taggedDoc = " + taggedDoc);
 						// ----- if this is the first run, do everything that needs to be ran the first time
-						if (isFirstRun) {
+						if (taggedDoc == null) {
+							System.out.println("ERROR, SHOULD NOT RUN");
 							// ----- create the main document and add it to the appropriate array list.
 							// ----- may not need the arraylist in the future since you only really can have one at a time
 							TaggedDocument taggedDocument = new TaggedDocument();
@@ -939,7 +941,8 @@ public class DriverEditor {
 							wizard = new DataAnalyzer(main.ps);
 							magician = new DocumentMagician(false);
 						} else {
-							System.out.println("ELSE");
+							System.out.println("ELSE, SHOULD RUN");
+							isFirstRun = false;
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
 							taggedDoc.specialCharTracker.resetEOSCharacters();
 							taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
@@ -952,7 +955,6 @@ public class DriverEditor {
 						elementsToRemoveInSentence.clear();
 						selectedAddElements.clear();
 						selectedRemoveElements.clear();
-						okayToSelectSuggestion = false;
 						Logger.logln(NAME+"calling backendInterface for preTargetSelectionProcessing");
 
 						BackendInterface.preTargetSelectionProcessing(main,wizard,magician);
