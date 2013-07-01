@@ -17,6 +17,8 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
+import weka.core.converters.CSVSaver;
 
 /**
  * An API for the feature extraction process. Designed for running on a single machine
@@ -516,6 +518,49 @@ public class InstancesBuilder extends Engine {
 	}
 
 	//////////////////////////////////////////// Utilities
+	/**
+	 * Writes the given Instances set into an ARFF file in the given filename.
+	 * @param filename
+	 * 		The filename of the ARFF file to create.
+	 * @param set
+	 * 		The Weka Instances object from which to create an ARFF file.
+	 * @return
+	 * 		True iff the write succeeded.
+	 */
+	public static boolean writeToARFF(String filename, Instances set) {
+		try {
+			ArffSaver saver = new ArffSaver();
+			 saver.setInstances(set);
+			 saver.setFile(new File(filename));
+			 saver.writeBatch();
+			 return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * Writes the given Instances set into an CSV file in the given filename.
+	 * @param filename
+	 * 		The filename of the CSV file to create.
+	 * @param set
+	 * 		The Weka Instances object from which to create an ARFF file.
+	 * @return
+	 * 		True iff the write succeeded.
+	 */
+	public static boolean writeToCSV(String filename, Instances set) {
+		try {
+			CSVSaver saver = new CSVSaver();
+			saver.setInstances(set);
+			saver.setFile(new File(filename));
+			saver.writeBatch();
+			return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+	}
 	
 	/**
 	 * Sets classification relevant data to null
