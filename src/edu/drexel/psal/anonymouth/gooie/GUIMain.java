@@ -96,7 +96,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected List<String> results;
 
 	protected PreProcessSettingsFrame PPSP;
-	protected static GeneralSettingsFrame GSP;
+	protected static PreferencesWindow GSP;
 
 	protected String defaultTrainDocsTreeName = "Authors"; 
 	protected Font defaultLabelFont = new Font("Verdana",0,16);
@@ -385,7 +385,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected boolean featPPIsShowing = true;
 	protected boolean classPPIsShowing = true;
 	protected ClustersWindow clustersWindow;
-	protected SuggestionsWindow suggestionsWindow;
+	protected FAQWindow suggestionsWindow;
 	protected ClustersTutorial clustersTutorial;
 	protected VersionControl versionControl;
 	protected ResultsWindow resultsWindow;
@@ -651,13 +651,13 @@ public class GUIMain extends javax.swing.JFrame {
 			// init all settings panes
 
 			PPSP = new PreProcessSettingsFrame(this);
-			GSP = new GeneralSettingsFrame(this);
+			GSP = new PreferencesWindow(this);
 
 			//init default values
 			setDefaultValues();
 
 			clustersWindow = new ClustersWindow();
-			suggestionsWindow = new SuggestionsWindow();
+			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
 			versionControl = new VersionControl(this);
 			resultsWindow = new ResultsWindow(this);

@@ -42,6 +42,7 @@ public class ThePresident {
 	 */
 	//protected static ImageIcon buffImg;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
+	//DO NOT DELETE, for use when bundling Anonymouth in an OS X app
 	//public final static String WORKING_DIR = System.getProperty("java.library.path") + "/";
 	public final static String WORKING_DIR = "./";
 	public static ImageIcon LOGO;
@@ -49,6 +50,7 @@ public class ThePresident {
 	public static String sessionName;
 	public static final String DOC_MAGICIAN_WRITE_DIR = WORKING_DIR + ".edited_documents/";
 	public static final String LOG_DIR = WORKING_DIR + "anonymouth_log";
+	//DO NOT DELETE, for use when bundling Anonymouth in an OS X app.
 	//public static final String LOG_DIR = System.getProperty("user.home")+"/Desktop/anonymouth_log";
 	public static boolean IS_MAC = false;
 	public static String SER_DIR = WORKING_DIR + ".serialized_objects/";

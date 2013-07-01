@@ -11,19 +11,23 @@ import javax.swing.JTextPane;
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
-public class SuggestionsWindow extends JFrame {
+public class FAQWindow extends JFrame {
 
+	private static final String NAME = "( FAQWindow ) - ";
 	private static final long serialVersionUID = 1L;
-	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private final String filePath = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"suggestions.txt";
 	private String text = "";
 	private JTextPane textPane;
 	private JScrollPane textScrollPane;
 
-	public SuggestionsWindow() {
+	public FAQWindow() {
 		init();
+		this.setVisible(false);
 	}
 	
+	/**
+	 * Initializes the frame
+	 */
 	public void init() {
 		textPane = new JTextPane();
 		
@@ -39,9 +43,11 @@ public class SuggestionsWindow extends JFrame {
 		this.setSize(600, 640);
 		this.setLocationRelativeTo(null);
 		this.setTitle("General Suggestions");
-		this.setVisible(false);
 	}
 	
+	/**
+	 * Reads the suggestions file and saves it all to a string
+	 */
 	public void readFile() {
 		try {
 			File file = new File(filePath);
@@ -57,6 +63,9 @@ public class SuggestionsWindow extends JFrame {
 		}
 	}
 	
+	/**
+	 * Displays the general suggestions window
+	 */
 	public void openWindow() {
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
 		this.setVisible(true);

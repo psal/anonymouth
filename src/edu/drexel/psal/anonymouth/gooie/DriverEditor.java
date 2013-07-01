@@ -180,7 +180,6 @@ public class DriverEditor {
 	 * @param main GUIMain object
 	 */
 	public static void setAllDocTabUseable(boolean b, GUIMain main) {
-		System.out.println("SETTING TO = " + b);
 		main.saveButton.setEnabled(b);
 		main.fileSaveTestDocMenuItem.setEnabled(b);
 		main.fileSaveAsTestDocMenuItem.setEnabled(b);
@@ -373,8 +372,10 @@ public class DriverEditor {
 			
 			int indexSize = index.size();
 
-			for (int i = 0; i < indexSize; i++)
+			for (int i = 0; i < indexSize; i++) {
+				System.out.println("Highlighting " + index.get(i)[0] + " " + index.get(i)[1]);
 				DriverEditor.elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
+			}
 		} catch (Exception e1) {
 			Logger.logln(NAME+"Error occured while getting selected word to remove value and highlighting all instances.", LogOut.STDERR);
 		}
@@ -891,7 +892,6 @@ public class DriverEditor {
 				if (!main.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
 
-				System.out.println("BEFORE IF");
 				// ----- display error message if there are errors
 				if (errorMessage != "Oops! Found errors that must be taken care of prior to processing!\n\nErrors found:\n") {
 					JOptionPane.showMessageDialog(main, errorMessage, "Configuration Error!",
