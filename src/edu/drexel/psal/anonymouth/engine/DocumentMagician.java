@@ -155,6 +155,8 @@ public class DocumentMagician {
 		this.isSparse = isSparse;
 	}
 	
+// NOTE: "runPrimaryDocOps" and "runSecondaryDocOps" can be combined into one method!!!	
+	
 	/**
 	 * Runs the primary document operations
 	 * @param cfd
@@ -232,6 +234,8 @@ public class DocumentMagician {
 			if (!tempModdedDoc.exists())
 				tempModdedDoc.createNewFile();
 			FileWriter writer = new FileWriter(tempModdedDoc);
+			if(ThePresident.SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC == false)
+				tempModdedDoc.deleteOnExit();
 			writer.write(toModifySet.get(0).stringify());
 			writer.close();
 		} catch (IOException e) {
