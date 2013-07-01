@@ -10,7 +10,6 @@ import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 /**
  * 
@@ -201,28 +200,6 @@ public class SimpleAPI {
 	
 	///////////////////////////////// Setters/Getters
 	
-	public void generateTestArff(String path){
-		try {
-			ArffSaver saver = new ArffSaver();
-			 saver.setInstances(ib.getTestInstances());
-			 saver.setFile(new File(path));
-			 saver.writeBatch();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}	
-	}
-	
-	public void generateTrainArff(String path){
-		try {
-			ArffSaver saver = new ArffSaver();
-			 saver.setInstances(ib.getTrainingInstances());
-			 saver.setFile(new File(path));
-			 saver.writeBatch();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-	}
-	
 	/**
 	 * Change the number of folds to use in cross validation
 	 * @param n number of folds to use from now on
@@ -381,21 +358,92 @@ public class SimpleAPI {
 		return results;
 	}
 	
+	/**
+	 * @return the weka clsasifier being used by the analyzer. Will break something if you try to call it on a non-weka analyzer
+	 */
+	public Classifier getUnderlyingClassifier(){
+		return analysisDriver.getClassifier();
+	}
+	
+	public void writeArff(String path, Instances insts){
+		InstancesBuilder.writeToARFF(path,insts);
+	}
+	
+	/////////////////////////////////
+	//TODO try to modify these for statistics sake
+	/*
+	  /**
+	   * Returns the area under ROC for those predictions that have been collected
+	   * in the evaluateClassifier(Classifier, Instances) method. Returns
+	   * Utils.missingValue() if the area is not available.
+	   * 
+	   * @param classIndex the index of the class to consider as "positive"
+	   * @return the area under the ROC curve or not a number
+	   */
+	/*
+	  public double areaUnderROC(int classIndex) {
+
+	    // Check if any predictions have been collected
+	    if (m_Predictions == null) {
+	      return Utils.missingValue();
+	    } else {
+	      ThresholdCurve tc = new ThresholdCurve();
+	      Instances result = tc.getCurve(m_Predictions, classIndex);
+	      return ThresholdCurve.getROCArea(result);
+	    }
+	  }
+
+	  /**
+	   * Calculates the weighted (by class size) AUC.
+	   * 
+	   * @return the weighted AUC.
+	   */
+	/*
+	  public double weightedAreaUnderROC() {
+	    double[] classCounts = new double[m_NumClasses];
+	    double classCountSum = 0;
+	    double[][] matrix = getTrainTestEval().confusionMatrix()
+
+	    for (int i = 0; i < m_NumClasses; i++) {
+	      for (int j = 0; j < m_NumClasses; j++) {
+	        classCounts[i] += matrix[i][j];
+	      }
+	      classCountSum += classCounts[i];
+	    }
+
+	    double aucTotal = 0;
+	    for (int i = 0; i < m_NumClasses; i++) {
+	      double temp = areaUnderROC(i);
+	      if (!Utils.isMissingValue(temp)) {
+	        aucTotal += (temp * classCounts[i]);
+	      }
+	    }
+
+	    return aucTotal / classCountSum;
+	  }
+	
+	*/
+	
 	///////////////////////////////// Main method for testing purposes
 	
 	public static void main(String[] args){
 		
 		SimpleAPI test = new SimpleAPI(
-				"./jsan_resources/problem_sets/drexel_1_train_test.xml",
+				"C:/Users/Mordio/workspace/research/tests/200000Words-10000perAuthorNC/CrossVal_600-700.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
 				8, "weka.classifiers.functions.SMO",
-				analysisType.TRAIN_TEST);
+				analysisType.CROSS_VALIDATION);
 
+		
 		test.prepareInstances();
 		test.prepareAnalyzer();
 		test.run();
 		
-		//test.generateTrainArff("./train.arff");
+		System.out.println(test.getCrossValEval().weightedAreaUnderROC());
+		
+		//test.writeArff("./training.arff",test.getTrainingInstances());
+		//test.writeArff("./testing.arff",test.getTestInstances());
+		
 
 	}
 }

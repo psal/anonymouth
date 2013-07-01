@@ -194,6 +194,19 @@ public abstract class Analyzer{
 		
 		Evaluation eval = null; //return object
 		SMO smo = new SMO(); //dummy classifier to hold data
+		
+		String optionsString = "";
+		for (String s: smo.getOptions()){
+			optionsString+=s+" ";
+		}
+		optionsString+="-M";
+		
+		try {
+			smo.setOptions(optionsString.split(" "));
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Instances allInstances = null; //all of the instances
 		Instances goodInstances = null; //just the good ones
 		
@@ -244,6 +257,7 @@ public abstract class Analyzer{
 			allInstances.setClassIndex(allInstances.numAttributes()-1);
 			goodInstances = new Instances(allInstances,0,extractedAuthors.size());
 			smo.buildClassifier(goodInstances);
+			smo.setBuildLogisticModels(true);
 			eval = new Evaluation(allInstances);		
 		} catch (Exception e){
 			e.printStackTrace();
@@ -279,10 +293,7 @@ public abstract class Analyzer{
 				}
 				
 				try {
-					//Logger.logln("Attempting to add correct instance at: "+correctIndex);
-					//Logger.logln("\t "+"correctAuthor: "+testInstAuthor+" guess: "+selected);
 					eval.evaluateModelOnce(smo,goodInstances.instance(correctIndex));
-					//Logger.logln(eval.toMatrixString());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
@@ -303,9 +314,6 @@ public abstract class Analyzer{
 				if (!(correctIndex==-1)){ //if the author is listed
 					try {
 
-						//Logger.logln("Attempting to add incorrect instance at: "+(correctIndex*extractedAuthors.numValues()+incorrectIndex));
-						//Logger.logln("\t "+"correctAuthor: "+testInstAuthor+" guess: "+selected);
-					
 						int index = extractedAuthors.size()-1; //moves the index past the good instances
 						index+=extractedAuthors.size()*correctIndex; //moves to the correct "row"
 						index+=incorrectIndex; //moves to correct "column"
@@ -314,7 +322,6 @@ public abstract class Analyzer{
 							index+=1;
 					
 						eval.evaluateModelOnce(smo,allInstances.instance(index));
-						//Logger.logln(eval.toMatrixString());
 					
 					} catch (Exception e) {
 						e.printStackTrace();
