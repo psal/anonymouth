@@ -25,17 +25,11 @@ import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
 import edu.drexel.psal.anonymouth.engine.VersionControl;
-import edu.drexel.psal.anonymouth.utils.IndexFinder;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.Highlighter;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.*;
 
@@ -102,7 +96,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected List<String> results;
 
 	protected PreProcessSettingsFrame PPSP;
-	protected static GeneralSettingsFrame GSP;
+	protected static PreferencesWindow GSP;
 
 	protected String defaultTrainDocsTreeName = "Authors"; 
 	protected Font defaultLabelFont = new Font("Verdana",0,16);
@@ -234,6 +228,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected DefaultListModel<String> elementsToAdd;
 	protected DefaultListModel<String> elementsToRemove;
+	protected JButton clearAddHighlights;
+	protected JButton clearRemoveHighlights;
 
 	protected JPanel translationsPanel;
 	protected JLabel translationsLabel;
@@ -389,7 +385,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected boolean featPPIsShowing = true;
 	protected boolean classPPIsShowing = true;
 	protected ClustersWindow clustersWindow;
-	protected SuggestionsWindow suggestionsWindow;
+	protected FAQWindow suggestionsWindow;
 	protected ClustersTutorial clustersTutorial;
 	protected VersionControl versionControl;
 	protected ResultsWindow resultsWindow;
@@ -655,13 +651,13 @@ public class GUIMain extends javax.swing.JFrame {
 			// init all settings panes
 
 			PPSP = new PreProcessSettingsFrame(this);
-			GSP = new GeneralSettingsFrame(this);
+			GSP = new PreferencesWindow(this);
 
 			//init default values
 			setDefaultValues();
 
 			clustersWindow = new ClustersWindow();
-			suggestionsWindow = new SuggestionsWindow();
+			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
 			versionControl = new VersionControl(this);
 			resultsWindow = new ResultsWindow(this);
@@ -819,16 +815,6 @@ public class GUIMain extends javax.swing.JFrame {
 			getContentPane().add(rightTabPane, "width :353:353, spany, shrinkprio 2");
 		if (panelLocations.contains(PropertiesUtil.Location.BOTTOM))
 			getContentPane().add(bottomTabPane, "width 600:100%:, height 150:25%:, shrinkprio 3");
-		
-		rightTabPane.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if (rightTabPane.getSelectedIndex() != 1) {
-					elementsToAddPane.clearSelection();
-					elementsToRemoveTable.clearSelection();
-				}
-			}
-		});
 
 		getContentPane().revalidate();
 		getContentPane().repaint();
@@ -1150,39 +1136,11 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToAdd.add(0, "Please process your document to receive suggestions");
 			elementsToAddPane.setModel(elementsToAdd);
 			elementsToAddPane.setEnabled(false);
-			elementsToAddPane.addListSelectionListener(new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent e) {
-					if (!e.getValueIsAdjusting()) {
-						Logger.logln(NAME+"Elements to add value changed");
-						
-						if (elementsToRemoveTable.getSelectedRow() != -1)
-							elementsToRemoveTable.clearSelection();
-
-						try {
-							Highlighter highlight = getDocumentPane().getHighlighter();
-							int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
-
-							for (int i = 0; i < highlightedObjectsSize; i++)
-								highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-							DriverEditor.highlightedObjects.clear();
-
-							ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), elementsToAddPane.getSelectedValue());
-
-							int indexSize = index.size();
-
-							for (int i = 0; i < indexSize; i++)
-								DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterAdd)));
-						} catch (Exception e1) {
-							Logger.logln(NAME+"Error occured while getting selected word to add value and highlighting all instances.", LogOut.STDERR);
-						}
-					}
-				}
-			});
-			//elementsToAddPane.setText("Please process your document to receive word suggestions");
 			elementsToAddPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			elementsToAddPane.setDragEnabled(false);
 			elementsToAddPane.setFocusable(false);
+			
+			clearAddHighlights = new JButton("Clear \"Add\" Highlights");
 
 			//--------- Elements to Remove Label  ------------------
 			elementsToRemoveLabel = new JLabel("Elements To Remove:");
@@ -1205,7 +1163,7 @@ public class GUIMain extends javax.swing.JFrame {
 			    }
 			};
 			
-			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel);
+			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel, this);
 			elementsToRemoveTable.getTableHeader().setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
 																"in all given docs written by the user.<br>" +
 													"<br><b>Word To Remove:</b> The words you should consider<br>" +
@@ -1223,11 +1181,15 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToRemoveTable.setFocusable(false);
 			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
+			clearRemoveHighlights = new JButton("Clear \"Remove\" Highlights");
 
 			suggestionsPanel.add(elementsToAddLabel, "h " + titleHeight + "!");
 			suggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
+			suggestionsPanel.add(clearAddHighlights, "growx");
 			suggestionsPanel.add(elementsToRemoveLabel, "h " + titleHeight + "!");
 			suggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
+			suggestionsPanel.add(clearRemoveHighlights, "growx");
 		}//============ End Suggestions Tab =================
 		return suggestionsPanel;
 	}
@@ -1614,80 +1576,6 @@ public class GUIMain extends javax.swing.JFrame {
 			}
 			
 			return sum;
-		}
-	}
-	
-	/**
-	 * To be used for Elements to Remove so that we can display both the word to remove as well as the number of occurrences
-	 * in a nice way.
-	 * @author Marc Barrowclift
-	 *
-	 */
-	public class ElementsTable extends JTable implements ListSelectionListener {
-		private static final long serialVersionUID = 1L;
-
-		public ElementsTable(DefaultTableModel model) {
-			super(model);
-		}
-		
-		/**
-		 * Goes through each row of the table and removes them
-		 */
-		public void removeAllElements() {
-			int size = this.getRowCount();
-			DefaultTableModel tm = (DefaultTableModel)this.getModel();
-			
-			try {
-				for (int i = 0; i < size; i++) {
-					tm.removeRow(0);
-				}
-			} catch (Exception e) {
-				Logger.logln(NAME+"Error occured while trying to remove elemenets to remove", LogOut.STDERR);
-				e.printStackTrace();
-			}
-		}
-		
-		/**
-		 * Whenever the user clicks another row we should highlight the words in the test document (like with elements to add)
-		 * @param e
-		 */
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			if (!e.getValueIsAdjusting()) { // added as sometimes, multiple events are fired while selection changes
-		        Logger.logln(NAME+"Elements to remove value changed");
-				
-		        if (elementsToAddPane.getSelectedIndex() != -1)
-		        	elementsToAddPane.clearSelection();
-				
-		        if (this.getSelectedRow() != -1) {
-		        	try {
-						Highlighter highlight = getDocumentPane().getHighlighter();
-						int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
-
-						for (int i = 0; i < highlightedObjectsSize; i++)
-							highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-						DriverEditor.highlightedObjects.clear();
-
-						//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
-						//to just extract the "..." for highlighting
-						String wordToRemove = (String)this.getModel().getValueAt(this.getSelectedRow(), 0);
-						String[] test = wordToRemove.split(" ");
-						if (test.length > 2) {
-							wordToRemove = test[1].substring(0, test.length-2);
-						}
-						
-						ArrayList<int[]> index = IndexFinder.findIndices(getDocumentPane().getText(), wordToRemove);
-
-						int indexSize = index.size();
-
-						for (int i = 0; i < indexSize; i++)
-							DriverEditor.highlightedObjects.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
-					} catch (Exception e1) {
-						Logger.logln(NAME+"Error occured while getting selected word to remove value and highlighting all instances.", LogOut.STDERR);
-					}
-		        }
-			}
-			super.valueChanged(e);
 		}
 	}
 }

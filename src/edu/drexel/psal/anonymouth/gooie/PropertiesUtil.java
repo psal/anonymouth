@@ -30,6 +30,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultWarnQuit = true;
 	protected static Boolean defaultBarTutorial = true;
 	protected static Boolean defaultWarnAll = true;
+	protected static Boolean defaultHighlight = true;
 	protected static int defaultThreads = 4;
 	protected static int defaultFeatures = 500;
 	protected static Boolean defaultTranslation = false;
@@ -96,6 +97,46 @@ public class PropertiesUtil {
 	}
 	
 	/**
+	 * Sets whether or not to automatically highlight words to remove in a given sentence
+	 * @param highlight
+	 */
+	protected static void setAutoHighlight(Boolean highlight) {
+		BufferedWriter writer;
+		
+		try {
+			prop.setProperty("autoHighlight", highlight.toString());
+			writer = new BufferedWriter(new FileWriter(propFileName));
+			prop.store(writer, "User Preferences");
+		} catch (Exception e) {
+			Logger.logln(NAME + "Failed setting automatic highlights");
+		}
+	}
+	
+	/**
+	 * Gets whether or not to automatically highlight words to remove in a given sentence
+	 * @return
+	 */
+	protected static boolean getAutoHighlight() {
+		String highlight = "";
+		
+		try {
+			highlight = prop.getProperty("autoHighlight");
+			if (highlight == null) {
+				prop.setProperty("autoHighlight", defaultHighlight.toString());
+				highlight = prop.getProperty("autoHighlight");
+			}
+		} catch (NullPointerException e) {
+			prop.setProperty("autoHighlight", defaultHighlight.toString());
+			highlight = prop.getProperty("autoHighlight");
+		}
+		
+		if (highlight.equals("true"))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
 	 * Sets whether or not to display all warnings for actions such as deleting a sample document and whatnot
 	 * @param warnAll - whether or not to display the warnings
 	 */
@@ -111,6 +152,10 @@ public class PropertiesUtil {
 		}
 	}
 	
+	/**
+	 * Gets whether or not to display generic warnings
+	 * @return
+	 */
 	protected static boolean getWarnAll() {
 		String warnAll = "";
 		

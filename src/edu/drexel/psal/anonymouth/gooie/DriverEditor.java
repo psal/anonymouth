@@ -5,6 +5,7 @@ import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.engine.FeatureList;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
+import edu.drexel.psal.anonymouth.utils.IndexFinder;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.anonymouth.utils.Word;
@@ -55,11 +56,13 @@ public class DriverEditor {
 	protected static boolean hasBeenInitialized = false;
 	protected static String[] condensedSuggestions;
 	protected static int numEdits = 0;
-	protected static boolean isFirstRun = true; 
+	protected static boolean isFirstRun = true;
 	protected static DataAnalyzer wizard;
 	private static DocumentMagician magician;
 	protected static String[] theFeatures;
-	protected static ArrayList<HighlightMapper> highlightedObjects = new ArrayList<HighlightMapper>();
+	protected static ArrayList<HighlightMapper> elementsToRemoveInSentence = new ArrayList<HighlightMapper>();
+	protected static ArrayList<HighlightMapper> selectedAddElements = new ArrayList<HighlightMapper>();
+	protected static ArrayList<HighlightMapper> selectedRemoveElements = new ArrayList<HighlightMapper>();
 	public static int resultsMaxIndex;
 	public static Object maxValue;
 	public static String chosenAuthor = "n/a";
@@ -72,9 +75,8 @@ public class DriverEditor {
 	public static int startSelection = -1;
 	public static int oldStartSelection = -1;
 	public static int endSelection = -1;
-	public static int oldEndSelection = -1
-			;
-	protected static boolean okayToSelectSuggestion = false;
+	public static int oldEndSelection = -1;
+	
 	protected static int selectedIndexTP;
 	protected static int sizeOfCfd;
 	protected static boolean consoleDead = true;
@@ -275,6 +277,7 @@ public class DriverEditor {
 	 */
 	protected static void moveHighlight(final GUIMain main, int[] bounds) {
 		if (main.getDocumentPane().getCaret().getDot() != main.getDocumentPane().getCaret().getMark()) {
+			removeHighlightWordsToRemove(main);
 			main.getDocumentPane().getHighlighter().removeHighlight(currentHighlight);
 			return;
 		}
@@ -291,6 +294,11 @@ public class DriverEditor {
 
 					if (selectedSentIndexRange[0]+temp <= currentCaretPosition) { //If the user is actually selecting the sentence
 						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
+						
+						if (PropertiesUtil.getAutoHighlight())
+							highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
+					} else {
+						removeHighlightWordsToRemove(main);
 					}
 				} else {
 					int temp = 0;
@@ -301,14 +309,75 @@ public class DriverEditor {
 
 					if (selectedSentIndexRange[0]+temp <= currentCaretPosition || isFirstRun) {
 						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
+						
+						if (PropertiesUtil.getAutoHighlight())
+							highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
+					} else {
+						removeHighlightWordsToRemove(main);
 					}
 				}
-			} 
+			} else {
+				removeHighlightWordsToRemove(main);
+			}
 		} catch (BadLocationException err) {
 			err.printStackTrace();
 		}
 		synchronized(lock) {
 			lock.notify();
+		}
+	}
+	
+	public static void removeHighlightWordsToRemove(GUIMain main) {
+		Highlighter highlight = main.getDocumentPane().getHighlighter();
+		int highlightedObjectsSize = DriverEditor.elementsToRemoveInSentence.size();
+
+		for (int i = 0; i < highlightedObjectsSize; i++)
+			highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
+		DriverEditor.elementsToRemoveInSentence.clear();
+	}
+	
+	/**
+	 * Automatically highlights words to remove in the currently highlighted sentence
+	 * @param main
+	 * @param start
+	 * @param end
+	 */
+	public static void highlightWordsToRemove(GUIMain main, int start, int end) {
+		try {
+			Highlighter highlight = main.getDocumentPane().getHighlighter();
+			int highlightedObjectsSize = DriverEditor.elementsToRemoveInSentence.size();
+
+			for (int i = 0; i < highlightedObjectsSize; i++)
+				highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
+			DriverEditor.elementsToRemoveInSentence.clear();
+
+			ArrayList<int[]> index = new ArrayList<int[]>();
+			//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
+			//to just extract the "..." for highlighting
+			String[] words = taggedDoc.getWordsInSentence(taggedDoc.getTaggedSentenceAtIndex(start+1)); //if we don't increment by one, it gets the previous sentence.
+			int sentenceSize = words.length;
+			int removeSize = main.elementsToRemoveTable.getRowCount();
+			for (int i = 0; i < sentenceSize; i++) {
+				for (int x = 0; x < removeSize; x++) {
+					String wordToRemove = (String)main.elementsToRemoveTable.getModel().getValueAt(x, 0);
+					String[] test = wordToRemove.split(" ");
+					if (test.length > 2) {
+						wordToRemove = test[1].substring(0, test.length-2);
+					}
+					if (words[i].equals(wordToRemove)) {
+						index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
+					}
+				}
+			}
+			
+			int indexSize = index.size();
+
+			for (int i = 0; i < indexSize; i++) {
+				System.out.println("Highlighting " + index.get(i)[0] + " " + index.get(i)[1]);
+				DriverEditor.elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
+			}
+		} catch (Exception e1) {
+			Logger.logln(NAME+"Error occured while getting selected word to remove value and highlighting all instances.", LogOut.STDERR);
 		}
 	}
 
@@ -638,7 +707,7 @@ public class DriverEditor {
 						currentSentSelectionInfo = calculateIndicesOfSentences(caretPositionPriorToAction)[0];
 						selectedSentIndexRange[0] = currentSentSelectionInfo[1]; //start highlight
 						selectedSentIndexRange[1] = currentSentSelectionInfo[2]; //end highlight
-						moveHighlight(main,selectedSentIndexRange);
+						moveHighlight(main, selectedSentIndexRange);
 					}
 
 					lastCaretLocation = currentCaretPosition;
@@ -833,7 +902,7 @@ public class DriverEditor {
 					if (true) {// ---- can be a confirm dialog to make sure they want to process.
 						setAllDocTabUseable(false, main);
 						// ----- if this is the first run, do everything that needs to be ran the first time
-						if (isFirstRun) {
+						if (taggedDoc == null) {
 							// ----- create the main document and add it to the appropriate array list.
 							// ----- may not need the arraylist in the future since you only really can have one at a time
 							TaggedDocument taggedDocument = new TaggedDocument();
@@ -866,6 +935,7 @@ public class DriverEditor {
 							wizard = new DataAnalyzer(main.ps);
 							magician = new DocumentMagician(false);
 						} else {
+							isFirstRun = false;
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
 							taggedDoc.specialCharTracker.resetEOSCharacters();
 							taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
@@ -875,9 +945,9 @@ public class DriverEditor {
 						}
 
 						main.getDocumentPane().getHighlighter().removeAllHighlights();
-						highlightedObjects.clear();
-						highlightedObjects.clear();
-						okayToSelectSuggestion = false;
+						elementsToRemoveInSentence.clear();
+						selectedAddElements.clear();
+						selectedRemoveElements.clear();
 						Logger.logln(NAME+"calling backendInterface for preTargetSelectionProcessing");
 
 						BackendInterface.preTargetSelectionProcessing(main,wizard,magician);
@@ -1041,11 +1111,15 @@ class SuggestionCalculator {
 	protected static void placeSuggestions(GUIMain main) {
 		//We must first clear any existing highlights the user has and remove all existing suggestions
 		Highlighter highlight = main.getDocumentPane().getHighlighter();
-		int highlightedObjectsSize = DriverEditor.highlightedObjects.size();
+		int highlightedObjectsSize = DriverEditor.selectedAddElements.size();
 
 		for (int i = 0; i < highlightedObjectsSize; i++)
-			highlight.removeHighlight(DriverEditor.highlightedObjects.get(i).getHighlightedObject());
-		DriverEditor.highlightedObjects.clear();
+			highlight.removeHighlight(DriverEditor.selectedAddElements.get(i).getHighlightedObject());
+		DriverEditor.selectedAddElements.clear();
+		highlightedObjectsSize = DriverEditor.selectedRemoveElements.size();
+		for (int i = 0; i < highlightedObjectsSize; i++)
+			highlight.removeHighlight(DriverEditor.selectedRemoveElements.get(i).getHighlightedObject());
+		DriverEditor.selectedRemoveElements.clear();
 
 		//If the user had a word highlighted and we're updating the list, we want to keep the word highlighted if it's in the updated list
 		String prevSelectedElement = "";

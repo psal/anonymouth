@@ -178,8 +178,6 @@ public class BackendInterface {
 				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
 				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
-				DriverEditor.okayToSelectSuggestion = true;
-
 				if(DriverEditor.isFirstRun)
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), true);
 				else

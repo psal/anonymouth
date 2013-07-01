@@ -109,13 +109,30 @@ public class TaggedDocument implements Serializable{
 	 * returns all Words in the TaggedDocument
 	 * @return
 	 */
-	public ArrayList<Word> getWords(){
+	public ArrayList<Word> getWords() {
 		int numWords = getWordCount();
 		ArrayList<Word> theWords = new ArrayList<Word>(numWords);
 		for(TaggedSentence ts: taggedSentences){
 			theWords.addAll(ts.wordsInSentence);
 		}
 		return theWords;
+	}
+	
+	/**
+	 * Returns the String word for each word in a given tagged sentence
+	 * @param sentence
+	 * @return
+	 */
+	public String[] getWordsInSentence(TaggedSentence sentence) {
+		ArrayList<Word> theWords = sentence.getWordsInSentence();
+		int size = theWords.size();
+		
+		String[] words = new String[size];
+		
+		for (int i = 0; i < size; i++) {
+			words[i] = theWords.get(i).word;
+		}
+		return words;
 	}
 	
 	/**
