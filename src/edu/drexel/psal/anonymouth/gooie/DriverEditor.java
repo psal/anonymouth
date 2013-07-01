@@ -894,21 +894,15 @@ public class DriverEditor {
 				System.out.println("BEFORE IF");
 				// ----- display error message if there are errors
 				if (errorMessage != "Oops! Found errors that must be taken care of prior to processing!\n\nErrors found:\n") {
-					System.out.println("SHOULD NOT HAVE EXECUTED");
 					JOptionPane.showMessageDialog(main, errorMessage, "Configuration Error!",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					System.out.println("THE SHOULD EXECUTE");
 					main.leftTabPane.setSelectedIndex(0);
 					// ----- confirm they want to process
 					if (true) {// ---- can be a confirm dialog to make sure they want to process.
 						setAllDocTabUseable(false, main);
-						System.out.println("Doc tab useable");
-						System.out.println("isFirstRun = " + isFirstRun);
-						System.out.println("taggedDoc = " + taggedDoc);
 						// ----- if this is the first run, do everything that needs to be ran the first time
 						if (taggedDoc == null) {
-							System.out.println("ERROR, SHOULD NOT RUN");
 							// ----- create the main document and add it to the appropriate array list.
 							// ----- may not need the arraylist in the future since you only really can have one at a time
 							TaggedDocument taggedDocument = new TaggedDocument();
@@ -941,7 +935,6 @@ public class DriverEditor {
 							wizard = new DataAnalyzer(main.ps);
 							magician = new DocumentMagician(false);
 						} else {
-							System.out.println("ELSE, SHOULD RUN");
 							isFirstRun = false;
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
 							taggedDoc.specialCharTracker.resetEOSCharacters();
