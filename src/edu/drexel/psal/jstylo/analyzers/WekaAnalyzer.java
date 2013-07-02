@@ -1,6 +1,7 @@
 package edu.drexel.psal.jstylo.analyzers;
 
 import edu.drexel.psal.jstylo.generics.Analyzer;
+import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.RelaxedEvaluation;
 
 import java.util.*;

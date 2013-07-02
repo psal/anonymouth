@@ -555,7 +555,6 @@ public class ClassTabDriver {
 		return converted;
 	}
 	
-	//TODO could use some cleanup
 	/**
 	*		Returns the a list of nodes for the tree of classifiers.
 	**/

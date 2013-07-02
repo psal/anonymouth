@@ -319,17 +319,17 @@ public class InstancesBuilder extends Engine {
 	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
 		testInstances = new Instances("TestInstances", attributes, ps
-				.getTestDocs().size());
+				.getAllTestDocs().size());
 		
 		//if there are no test instances, set the instance object to null and move on with our lives
-		if (ps.getTestDocs().size()==0){
+		if (ps.getAllTestDocs().size()==0){
 			testInstances=null;
 		} else { //otherwise go through the whole process
 			
 			//create/fetch data
 			List<Instance> generatedInstances = new ArrayList<Instance>();
 			int threadsToUse = numThreads;
-			int numInstances = ps.getTestDocs().size();
+			int numInstances = ps.getAllTestDocs().size();
 		
 			//make sure number of threads isn't silly
 			if (numThreads > numInstances) {
@@ -514,8 +514,8 @@ public class InstancesBuilder extends Engine {
 		return ps.getAllTrainDocs();
 	}
 	
-	public SortedMap<String,List<Document>> getTestDocs(){
-		return ps.getTestDocs();
+	public List<Document> getTestDocs(){
+		return ps.getAllTestDocs();
 	}
 
 	//////////////////////////////////////////// Utilities
