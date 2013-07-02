@@ -642,7 +642,6 @@ public class ProblemSet {
 	}
 	
 	// stringifiers
-	
 	/**
 	 * Returns a readable String representation of the problem set.
 	 */
@@ -691,7 +690,7 @@ public class ProblemSet {
 			pw.println("\t\t<author name=\""+author+"\">");
 			List<Document> docs = trainDocsMap.get(author);
 			for (Document doc : docs) {
-				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+				pw.println("\t\t\t<document title=\"" + doc.getTitle() + "\">"
 						+ buildRelativePath(doc) + "</document>");
 /*
 				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
@@ -707,7 +706,7 @@ public class ProblemSet {
 			pw.println("\t\t<author name=\""+author+"\">");
 			List<Document> docs = testDocsMap.get(author);
 			for (Document doc : docs) {
-				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
+				pw.println("\t\t\t<document title=\"" + doc.getTitle() + "\">"
 						+ buildRelativePath(doc) + "</document>");
 /*
 				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
@@ -716,7 +715,8 @@ public class ProblemSet {
 			}
 			pw.println("\t\t</author>");
 		}
-		
+		pw.println("\t</test>");
+		pw.println("</problem-set>");
 		return res;
 	}
 	
