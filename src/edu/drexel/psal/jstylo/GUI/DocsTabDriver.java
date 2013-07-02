@@ -179,10 +179,10 @@ public class DocsTabDriver {
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
 						for (Document doc: main.ps.getAllTrainDocs()){
-							allTrainDocPaths.add(doc.getFilePath());
+							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						}
 						for (Document doc: main.ps.getAllTestDocs()){
-							allTestDocPaths.add(doc.getFilePath());
+							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						}
 						for (File file: files) {
 							path = file.getPath().replaceAll("\\\\","/");
@@ -336,10 +336,10 @@ public class DocsTabDriver {
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
 						for (Document doc: main.ps.getAllTrainDocs()){
-							allTrainDocPaths.add(doc.getFilePath()); 
+							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						}
 						for (Document doc: main.ps.getAllTestDocs()){
-							allTestDocPaths.add(doc.getFilePath()); 
+							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						}
 						for (File dir: authors) {	//for each directory selected
 							for (File file: dir.listFiles()){ //for each file in that directory
@@ -478,9 +478,9 @@ public class DocsTabDriver {
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
 						for (Document doc: main.ps.getAllTrainDocs())
-							allTrainDocPaths.add(doc.getFilePath()); 
+							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						for (Document doc: main.ps.getAllTestDocs())
-							allTestDocPaths.add(doc.getFilePath()); 
+							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						for (File dir: authors) {	//for each directory selected
 							for (File file: dir.listFiles()){ //for each file in that directory
 								path = file.getPath().replaceAll("\\\\","/");
@@ -571,9 +571,9 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						for (Document doc: main.ps.getTrainDocs(author))
-							allTrainDocPaths.add(doc.getFilePath());
+							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						for (Document doc: main.ps.getAllTestDocs())
-							allTestDocPaths.add(doc.getFilePath());
+							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						for (File file: files) {
 							path = file.getPath().replaceAll("\\\\","/");
 							if (allTrainDocPaths.contains(path)) {

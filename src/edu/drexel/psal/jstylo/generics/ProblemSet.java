@@ -815,21 +815,27 @@ public class ProblemSet {
 				//test document (old format)
 				if (current.getParentNode().getNodeName().equals("test")){
 					Path testPath = Paths.get(current.getTextContent());
-					Document testDoc = new Document(testPath.toAbsolutePath().toString().replaceAll("\\\\","/"),"_Unknown_");
+					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document testDoc = new Document(filePath,"_Unknown_");
 					problemSet.addTestDoc("_Unknown_",testDoc);
 					
 					//Training document
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path trainPath = Paths.get(current.getTextContent());
-					Document trainDoc = new Document(trainPath.toAbsolutePath().toString().replaceAll("\\\\","/"),parent.getAttribute("name"));
+					String filePath = trainPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document trainDoc = new Document(filePath,parent.getAttribute("name"));
 					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
 					
 					//test document (new format)
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path testPath = Paths.get(current.getTextContent());
-					Document testDoc = new Document(testPath.toAbsolutePath().toString().replaceAll("\\\\","/"),parent.getAttribute("name"));
+					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document testDoc = new Document(filePath,parent.getAttribute("name"));
 					problemSet.addTestDoc(parent.getAttribute("name"),testDoc);
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
