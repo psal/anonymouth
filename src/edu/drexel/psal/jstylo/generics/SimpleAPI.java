@@ -342,7 +342,7 @@ public class SimpleAPI {
 			int end = summary.indexOf("%");
 			results+=" CrossVal Results: " + summary.substring(start,end+1)+"\n";
 			
-			List<Author> stats = analysisDriver.getAuthorStatistics();
+			List<Author> stats = analysisDriver.getAuthorStatistics(ib.getTestDocs());
 			int correctDocs = 0;
 			int totalDocs = 0;
 			for (Author a: stats){

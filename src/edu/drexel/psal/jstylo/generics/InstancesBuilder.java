@@ -660,11 +660,9 @@ public class InstancesBuilder extends Engine {
 					List<EventSet> events = extractEventSets(doc, cfd);
 					//cull the events/eventSets with respect to training events/sets
 					events = cullWithRespectToTraining(relevantEvents, events, cfd);
-					Logger.logln("culled");
 					//build the instance
 					Instance instance = createInstance(attributes, relevantEvents, cfd,
 							events, doc, isSparse, useDocTitles);
-					Logger.logln("created instance");
 					//add it to the dataset
 					instance.setDataset(testInstances);
 					//normalize it

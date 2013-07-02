@@ -266,76 +266,78 @@ public abstract class Analyzer{
 		//we need SOME way to tell who the real author is. Right now I'm just going to arbitrarily decide that this is via the document title, as I can't really think of an
 		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
 		for (String testDoc: results.keySet()){
-			Document currTestDoc = null; //TODO use this to match authors instead 
 			
+			Document currTestDoc = null; //TODO use this to match authors instead 
 			for (Document d: testDocs){
 				if (d.getTitle().equals(testDoc)){
 					currTestDoc = d;
 					break;
 				}
 			}
-			
+
 			String selectedAuthor = "";
-			Double max =0.0;
-			
-			//find the most likely author
-			for (String potentialAuthor:results.get(testDoc).keySet()){
-				if (results.get(testDoc).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
-					max = results.get(testDoc).get(potentialAuthor).doubleValue();
-					selectedAuthor=potentialAuthor;
+			Double max = 0.0;
+
+			// find the most likely author
+			for (String potentialAuthor : results.get(currTestDoc.getTitle()).keySet()) {
+				if (results.get(currTestDoc.getTitle()).get(potentialAuthor).doubleValue() > max) { // find which document has the highest
+																									// probability of being selected
+					max = results.get(currTestDoc.getTitle()).get(potentialAuthor).doubleValue();
+					selectedAuthor = potentialAuthor;
 				}
 			}
-			
-			//check to see whether or not that author was correct, and evaluate the model accordingly.
-			if (currTestDoc.getAuthor().equals(selectedAuthor)){ //classify with a good instance
-				
-				//find where the correct index is
-				int correctIndex=-1;
-				int i=0;
-				for (String s: extractedAuthors){
-					if (testDoc.contains(s)){
-						correctIndex=i;
+
+			// check to see whether or not that author was correct, and evaluate the model accordingly.
+			if (currTestDoc.getAuthor().equals(selectedAuthor)) { // classify with a good instance
+
+				// find where the correct index is
+				int correctIndex = -1;
+				int i = 0;
+				for (String s : extractedAuthors) {
+					if (currTestDoc.getAuthor().equals(s)) {
+						correctIndex = i;
 						break;
 					}
 					i++;
 				}
-				
+
 				try {
-					eval.evaluateModelOnce(smo,goodInstances.instance(correctIndex));
+					eval.evaluateModelOnce(smo, goodInstances.instance(correctIndex));
 				} catch (Exception e) {
 					e.printStackTrace();
-				}		
-			} else if (!currTestDoc.getAuthor().equals("_Unknown_")){ //classify with a bad instance
-				
-				//find where the correct index is
-				int correctIndex=-1;
-				int i=0;
-				for (String s: extractedAuthors){
-					if (testDoc.contains(s)){
-						correctIndex=i;
+				}
+			} else if (!currTestDoc.getAuthor().equals("_Unknown_")) { // classify with a bad instance
+
+				// find where the correct index is
+				int correctIndex = -1;
+				int i = 0;
+				for (String s : extractedAuthors) {
+					if (currTestDoc.getAuthor().equals(s)) {
+						correctIndex = i;
 						break;
 					}
 					i++;
 				}
 				int incorrectIndex = extractedAuthors.indexOf(selectedAuthor);
-				
-				if (!(correctIndex==-1)){ //if the author is listed
+
+				if (!(correctIndex == -1)) { // if the author is listed
 					try {
 
-						int index = extractedAuthors.size()-1; //moves the index past the good instances
-						index+=extractedAuthors.size()*correctIndex; //moves to the correct "row"
-						index+=incorrectIndex; //moves to correct "column"
-						index-=correctIndex; //adjusts for the fact that there are numAuthors-1 cells per row in the bad instances part of the instance list					
-						if (incorrectIndex<correctIndex)
-							index+=1;
-					
-						eval.evaluateModelOnce(smo,allInstances.instance(index));
-					
+						int index = extractedAuthors.size() - 1; // moves the index past the good instances
+						index += extractedAuthors.size() * correctIndex; // moves to the correct "row"
+						index += incorrectIndex; // moves to correct "column"
+						index -= correctIndex; // adjusts for the fact that there are numAuthors-1 cells per row in the bad instances part of the
+												// instance list
+						if (incorrectIndex < correctIndex)
+							index += 1;
+
+						eval.evaluateModelOnce(smo, allInstances.instance(index));
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				} else {
-					Logger.logln("author not found for: "+testDoc);
+					Logger.logln("author not found for: " + testDoc);
 				}
 			} else {
 				Logger.logln("Unknown document detected. Will not be included in statistics calculation");
@@ -343,8 +345,8 @@ public abstract class Analyzer{
 		}
 		return eval;
 	}
-	
-	public List<Author> getAuthorStatistics(){
+
+	public List<Author> getAuthorStatistics(List<Document> testDocs){
 		
 		ArrayList<String> extractedAuthors = new ArrayList<String>();
 		
@@ -361,30 +363,37 @@ public abstract class Analyzer{
 			authorStats.add(temp);
 		}
 		
-		//we need SOME way to tell who the real author is. Right now I'm just going to arbitrarily decide that this is via the document title, as I can't really think of an
-		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
+		
 		for (String testDoc: results.keySet()){
 			
 			String selectedAuthor = "";
 			Double max =0.0;
+
+			//Nabs the corresponding testing document
 			
+			Document currTestDoc=null;
+			for (Document d: testDocs){
+				if (d.getTitle().equals(testDoc)){
+					currTestDoc = d;
+					break;
+				}
+			}
+
 			//find the most likely author
-			for (String potentialAuthor:results.get(testDoc).keySet()){
-				if (results.get(testDoc).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
-					max = results.get(testDoc).get(potentialAuthor).doubleValue();
+			for (String potentialAuthor:results.get(currTestDoc.getTitle()).keySet()){
+				if (results.get(currTestDoc.getTitle()).get(potentialAuthor).doubleValue()>max){ //find which document has the highest probability of being selected
+					max = results.get(currTestDoc.getTitle()).get(potentialAuthor).doubleValue();
 					selectedAuthor=potentialAuthor;
 				}
 			}
 			
 			//check to see whether or not that author was correct, and evaluate the model accordingly.
-			if (testDoc.contains(selectedAuthor)){ //correctly identified
+			if (currTestDoc.getAuthor().equals(selectedAuthor)){ //correctly identified
 				
-				boolean added = false;
 				for (Author a: authorStats){
-					if (testDoc.contains(a.getName()) && !added){ //increase the real author's TP and numDocs
+					if (currTestDoc.getAuthor().equals(a.getName())){ //increase the real author's TP and numDocs
 						a.incrementTruePositiveCount();
 						a.incrementNumberOfDocuments();
-						added=true;
 						
 					} else { //Increase everyone else's TN
 						a.incrementTrueNegativeCount();
@@ -394,7 +403,7 @@ public abstract class Analyzer{
 			} else { //incorrectly identified
 				
 				for (Author a: authorStats){
-					if (testDoc.contains(a.getName())){ //increase the real author's FN and numDocs
+					if (currTestDoc.getAuthor().equals(a.getName())){ //increase the real author's FN and numDocs
 						a.incrementFalseNegativeCount();
 						a.incrementNumberOfDocuments();
 					} else if (selectedAuthor.equals(a.getName())){ //increase the guess's FP
@@ -426,7 +435,7 @@ public abstract class Analyzer{
 			double weightedMCC = 0.0;
 			double weightedROC = 0.0;
 			
-			List<Author> stats = getAuthorStatistics();
+			List<Author> stats = getAuthorStatistics(testDocs);
 			int correctDocs = 0;
 			int totalDocs = 0;
 			String authorInfoString="==========Detailed Accuracy by Author==========\n\n";
