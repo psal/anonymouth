@@ -55,7 +55,7 @@ public class ThePresident {
 	public static boolean IS_MAC = false;
 	public static String SER_DIR = WORKING_DIR + ".serialized_objects/";
 	public static boolean AUTOSAVE_LATEST_VERSION = PropertiesUtil.getAutoSave();
-	public static boolean SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = false; // this should go in preferences utility
+	public static boolean SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = PropertiesUtil.getVersionAutoSave(); // this should go in preferences utility
 	public static boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
 	public static boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: put in "options
 	public static int MAX_FEATURES_TO_CONSIDER = PropertiesUtil.getMaximumFeatures(); // todo: put in 'options', and figure out an optimal number (maybe based upon info gain, total #, etc.)... basically, when the processing time outweighs the benefit, that should be our cutoff.

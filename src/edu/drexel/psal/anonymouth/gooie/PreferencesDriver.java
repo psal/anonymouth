@@ -48,6 +48,7 @@ public class PreferencesDriver {
 	private KeyListener numOfThreadsBoxListener;
 	private ActionListener showWarningsListener;
 	private ActionListener highlightElemsListener;
+	private ActionListener versionAutoSaveListener;
 	
 	public PreferencesDriver(GUIMain main, PreferencesWindow prefWin) {
 		this.main = main;
@@ -244,14 +245,27 @@ public class PreferencesDriver {
 				if (answer == 0) {
 					try {
 						Logger.logln(NAME+"resetAll progressing...");
+						//resets everything in the prop file to their default values
 						PropertiesUtil.reset();
-						prefWin.numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
-						prefWin.maxFeaturesSlider.setValue(PropertiesUtil.getMaximumFeatures());
+						
+						//updating the GUI to reflect the changes
+						//general
 						prefWin.warnQuit.setSelected(PropertiesUtil.getWarnQuit());
 						prefWin.autoSave.setSelected(PropertiesUtil.getAutoSave());
+						prefWin.fontSizes.setSelectedItem(PropertiesUtil.getFontSize());
+						prefWin.translations.setSelected(PropertiesUtil.getDoTranslations());
+						prefWin.showWarnings.setSelected(PropertiesUtil.getWarnAll());
+						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
+						
+						//defaults
 						prefWin.probSetTextPane.setText(PropertiesUtil.getProbSet());
 						prefWin.featComboBox.setSelectedItem(PropertiesUtil.getFeature());
 						prefWin.classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
+						
+						//advanced
+						prefWin.numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
+						prefWin.maxFeaturesSlider.setValue(PropertiesUtil.getMaximumFeatures());
+						prefWin.versionAutoSave.setSelected(PropertiesUtil.getVersionAutoSave());
 						Logger.logln(NAME+"resetAll complete");
 					} catch (Exception e) {
 						Logger.logln(NAME+"Error occurred during resetAll");
@@ -368,6 +382,22 @@ public class PreferencesDriver {
 			}
 		};
 		prefWin.highlightElems.addActionListener(highlightElemsListener);
+		
+		versionAutoSaveListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (prefWin.versionAutoSave.isSelected()) {
+					PropertiesUtil.setVersionAutoSave(true);
+					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = true;
+					Logger.logln(NAME+"Version auto save checkbox checked");
+				} else {
+					PropertiesUtil.setVersionAutoSave(false);
+					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = false;
+					Logger.logln(NAME+"Version auto save checkbox unchecked");
+				}
+			}
+		};
+		prefWin.versionAutoSave.addActionListener(versionAutoSaveListener);
 	}
 	
 	/**
@@ -379,11 +409,11 @@ public class PreferencesDriver {
 		
 		//If the new height is larger we need to grow the window height
 		if (newSize >= curHeight) {
-			for (int h = curHeight; h <= newSize; h+=7) {
+			for (int h = curHeight; h <= newSize; h+=10) {
 				prefWin.setSize(new Dimension(500, h));
 			}
 		} else { //If the new height is smaller we need to shrink the window height
-			for (int h = curHeight; h >= newSize; h-=7) {
+			for (int h = curHeight; h >= newSize; h-=10) {
 				prefWin.setSize(new Dimension(500, h));
 			}
 		}

@@ -62,6 +62,8 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JTextField numOfThreadsBox;
 	protected JSlider numOfThreadsSlider;
 	protected JLabel numOfThreadsNote;
+	protected JCheckBox versionAutoSave;
+	protected JLabel versionAutoSaveNote;
 	protected JButton resetAll;
 	protected int advancedHeight;
 	
@@ -245,8 +247,18 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			numOfThreadsNote = new JLabel("Note: Expirimental, the current recommended number of threads is 4");
 			numOfThreadsNote.setForeground(Color.GRAY);
 			
+			versionAutoSave = new JCheckBox();
+			versionAutoSave.setText("Backup version of document to anonymize every reprocess");
+			if (PropertiesUtil.getVersionAutoSave()) {
+				versionAutoSave.setSelected(true);
+			}
+			
+			versionAutoSaveNote = new JLabel("<html>Note: Backups saved to hidden directory \"./edited_documents\" in the<br>Anonymouth root directory</html>");
+			versionAutoSaveNote.setForeground(Color.GRAY);
+			
 			resetAll = new JButton("Reset Preferences");
 			resetAll.setToolTipText("Reset all user preferences back to their default values");
+			
 			
 			advanced.add(maxFeatures, "split");
 			advanced.add(maxFeaturesBox, "wrap");
@@ -256,12 +268,17 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			advanced.add(numOfThreadsSlider, "alignx 50%, wrap");
 			advanced.add(numOfThreadsNote, "alignx 50%, wrap");
 			
-			JSeparator sep = new JSeparator(JSeparator.HORIZONTAL);
-			sep.setPreferredSize(new Dimension(484, 15));
-			advanced.add(sep, "gaptop 5, alignx 50%, wrap");
+			JSeparator sep1 = new JSeparator(JSeparator.HORIZONTAL);
+			sep1.setPreferredSize(new Dimension(484, 15));
+			advanced.add(sep1, "gaptop 5, alignx 50%, wrap");
+			advanced.add(versionAutoSave, "wrap");
+			advanced.add(versionAutoSaveNote, "alignx 50%, wrap");
+			JSeparator sep2 = new JSeparator(JSeparator.HORIZONTAL);
+			sep2.setPreferredSize(new Dimension(484, 15));
+			advanced.add(sep2, "gaptop 5, alignx 50%, wrap");
 			advanced.add(resetAll, "gaptop 5, alignx 50%");
 			
-			advancedHeight = 300;
+			advancedHeight = 390;
 		}
 
 		preferencesDriver.initListeners();

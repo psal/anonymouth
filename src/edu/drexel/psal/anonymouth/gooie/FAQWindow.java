@@ -14,8 +14,8 @@ import edu.drexel.psal.jstylo.generics.Logger;
 public class FAQWindow extends JFrame {
 
 	private static final String NAME = "( FAQWindow ) - ";
+	private static final String FILEPATH = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"faq.html";
 	private static final long serialVersionUID = 1L;
-	private final String filePath = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"suggestions.txt";
 	private String text = "";
 	private JTextPane textPane;
 	private JScrollPane textScrollPane;
@@ -32,6 +32,8 @@ public class FAQWindow extends JFrame {
 		textPane = new JTextPane();
 		
 		readFile();
+		textPane.setContentType("text/html");
+		//textPane.setPage(url);
 		textPane.setText(text);
 		textPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 		textPane.setEditable(false);
@@ -40,7 +42,7 @@ public class FAQWindow extends JFrame {
 		textScrollPane = new JScrollPane(textPane);
 		
 		this.add(textScrollPane);
-		this.setSize(600, 640);
+		this.setSize(620, 640);
 		this.setLocationRelativeTo(null);
 		this.setTitle("General Suggestions");
 	}
@@ -50,7 +52,7 @@ public class FAQWindow extends JFrame {
 	 */
 	public void readFile() {
 		try {
-			File file = new File(filePath);
+			File file = new File(FILEPATH);
 			Scanner scanner = new Scanner(file);
 			
 			while (scanner.hasNext()) {

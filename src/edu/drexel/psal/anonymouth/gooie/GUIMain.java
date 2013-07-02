@@ -620,7 +620,7 @@ public class GUIMain extends javax.swing.JFrame {
 				helpMenu.add(helpAboutMenuItem);
 				helpMenu.add(new JSeparator());
 			}
-			helpSuggestionsMenuItem = new JMenuItem("General Suggestions");
+			helpSuggestionsMenuItem = new JMenuItem("FAQ");
 			helpMenu.add(helpSuggestionsMenuItem);
 			helpMenu.add(new JSeparator());
 			helpMenu.add(helpClustersMenuItem);
