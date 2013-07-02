@@ -848,7 +848,7 @@ public class AnalysisTabDriver {
 					// of disclaimer since right now it only works if the author name is in the document title.
 					if (main.analysisClassificationStatisticsJCheckBox.isSelected()){
 						try {
-							Evaluation eval = main.analysisDriver.getTrainTestEval();
+							Evaluation eval = main.analysisDriver.getTrainTestEval(main.ps.getAllTestDocs());
 							content += eval.toSummaryString(false)+"\n"+eval.toClassDetailsString()+"\n"+eval.toMatrixString();
 						} catch (Exception e) {
 							e.printStackTrace();

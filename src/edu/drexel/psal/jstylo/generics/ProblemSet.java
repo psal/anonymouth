@@ -848,12 +848,12 @@ public class ProblemSet {
 		if (dirComponents.length != index){
 			int backTrack = dirComponents.length - index;
 			
-			for (int i=0; i<backTrack; i++){
-				relPath+="../";
+			if (backTrack>1){
+				return docPath;
 			}
 		}
 		
-		relPath+=docPath.substring(shared.length());
+		relPath+="./"+docPath.substring(shared.length());
 		
 		return relPath;
 	}

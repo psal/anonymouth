@@ -261,7 +261,7 @@ public class SimpleAPI {
 	 * @return Evaluation containing train/test statistics
 	 */
 	public Evaluation getTrainTestEval(){
-		return analysisDriver.getTrainTestEval();
+		return analysisDriver.getTrainTestEval(ib.getProblemSet().getAllTrainDocs());
 	}
 	
 	/**
@@ -296,11 +296,11 @@ public class SimpleAPI {
 	 * @return String containing accuracy and confusion matrix from train/test.
 	 */
 	public String getTrainTestStatString() {
-		return analysisDriver.getTrainTestStatString();
+		return analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
 	}
 	
 	public String getWeightedStats(){
-		String source = analysisDriver.getTrainTestStatString();
+		String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
 		String resultsString = "";
 		
 		int start = source.indexOf("Weighted Avg.");
@@ -327,7 +327,7 @@ public class SimpleAPI {
 			results+=summary.substring(start,end+1)+"\n";
 			
 		} else if (selected == analysisType.TRAIN_TEST){
-			String source = analysisDriver.getTrainTestStatString();
+			String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
 					
 			int start = source.indexOf("Correctly classified");
 			int end = source.indexOf("%");

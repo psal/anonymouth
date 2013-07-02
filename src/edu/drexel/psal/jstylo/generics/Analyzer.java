@@ -190,7 +190,7 @@ public abstract class Analyzer{
 	 * &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp To avoid this, make sure each author name is unique and not a subset of another, adding symbols or numbers if necessary.<br>
 	 * @return an evaluation object representing the classification results
 	 */
-	public Evaluation getTrainTestEval(){
+	public Evaluation getTrainTestEval(List<Document> testDocs){ //TODO overhaul this for the new author stuff
 		
 		Evaluation eval = null; //return object
 		SMO smo = new SMO(); //dummy classifier to hold data
@@ -204,7 +204,6 @@ public abstract class Analyzer{
 		try {
 			smo.setOptions(optionsString.split(" "));
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Instances allInstances = null; //all of the instances
@@ -215,7 +214,8 @@ public abstract class Analyzer{
 		//use the results map to find all of the potential authors and add them to extractedAuthors
 		for (String temp: results.keySet()){
 			for (String s: results.get(temp).keySet()){
-				extractedAuthors.add(s);
+				if (!s.equals("_Unknown_"))
+					extractedAuthors.add(s);
 			}
 			break;
 		}
@@ -266,6 +266,14 @@ public abstract class Analyzer{
 		//we need SOME way to tell who the real author is. Right now I'm just going to arbitrarily decide that this is via the document title, as I can't really think of an
 		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
 		for (String testDoc: results.keySet()){
+			Document currTestDoc = null; //TODO use this to match authors instead 
+			
+			for (Document d: testDocs){
+				if (d.getTitle().equals(testDoc)){
+					currTestDoc = d;
+					break;
+				}
+			}
 			
 			String selectedAuthor = "";
 			Double max =0.0;
@@ -279,7 +287,7 @@ public abstract class Analyzer{
 			}
 			
 			//check to see whether or not that author was correct, and evaluate the model accordingly.
-			if (testDoc.contains(selectedAuthor)){ //classify with a good instance
+			if (currTestDoc.getAuthor().equals(selectedAuthor)){ //classify with a good instance
 				
 				//find where the correct index is
 				int correctIndex=-1;
@@ -297,7 +305,7 @@ public abstract class Analyzer{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}		
-			} else { //classify with a bad instance
+			} else if (!currTestDoc.getAuthor().equals("_Unknown_")){ //classify with a bad instance
 				
 				//find where the correct index is
 				int correctIndex=-1;
@@ -327,8 +335,10 @@ public abstract class Analyzer{
 						e.printStackTrace();
 					}
 				} else {
-					Logger.logln("author to be removed: "+testDoc);
+					Logger.logln("author not found for: "+testDoc);
 				}
+			} else {
+				Logger.logln("Unknown document detected. Will not be included in statistics calculation");
 			}
 		}
 		return eval;
@@ -402,7 +412,7 @@ public abstract class Analyzer{
 	/**
 	 * @return String containing accuracy and confusion matrix from train/test.
 	 */
-	public String getTrainTestStatString() { //TODO implement ROC stuff
+	public String getTrainTestStatString(List<Document> testDocs) { //TODO implement ROC stuff
 		
 		try {
 			
@@ -450,7 +460,7 @@ public abstract class Analyzer{
 					weightedTPR/totalDocs,weightedFPR/totalDocs,weightedPre/totalDocs,weightedRec/totalDocs,
 					weightedF1M/totalDocs,weightedMCC/totalDocs);
 			
-			Evaluation eval = getTrainTestEval();
+			Evaluation eval = getTrainTestEval(testDocs);
 			resultsString += eval.toMatrixString() + "\n";
 			
 			return resultsString;

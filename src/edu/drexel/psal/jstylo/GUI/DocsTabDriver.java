@@ -178,10 +178,12 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
-						for (Document doc: main.ps.getAllTrainDocs())
+						for (Document doc: main.ps.getAllTrainDocs()){
 							allTrainDocPaths.add(doc.getFilePath());
-						for (Document doc: main.ps.getAllTestDocs())
+						}
+						for (Document doc: main.ps.getAllTestDocs()){
 							allTestDocPaths.add(doc.getFilePath());
+						}
 						for (File file: files) {
 							path = file.getPath();
 							if (allTrainDocPaths.contains(path)) {
