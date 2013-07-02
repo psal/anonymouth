@@ -68,27 +68,15 @@ public class GUIUpdateInterface {
 	/**
 	 * Updates the test documents table with the current problem set. 
 	 */
-	/*
-	protected static void updateTestDocTable(GUIMain main) {
-		JTable testDocsTable = main.testDocsJTable;
-		DefaultTableModel testTableModel = main.testDocsTableModel;
-		testDocsTable.clearSelection();
-		testTableModel.setRowCount(0);
-		List<Document> testDocs = main.ps.getTestDocs();
-		Collections.sort(testDocs,new Comparator<Document>() {
-			public int compare(Document o1, Document o2) {
-				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-		for (int i=0; i<testDocs.size(); i++)
-			testTableModel.addRow(new Object[]{
-					testDocs.get(i).getTitle(),
-					testDocs.get(i).getFilePath()
-			});
-	}*/
 	protected static void updateTestDocTree(GUIMain main) {
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Test Docs");
+		
 		Map<String,List<Document>> testDocsMap = main.ps.getTestAuthorMap();
+		if (!testDocsMap.keySet().contains("_Unknown_")){
+			
+			DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+			root.add(_Unknown_);
+		}
 		DefaultMutableTreeNode authorNode, docNode;
 		List<String> authorsSorted = new ArrayList<String>(testDocsMap.keySet());
 		Collections.sort(authorsSorted);
