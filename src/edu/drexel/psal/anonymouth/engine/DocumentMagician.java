@@ -396,6 +396,10 @@ public class DocumentMagician {
 		int lenTSet = noAuthorTrainSet.size();
 		trainTitlesList = new ArrayList<String>(lenTSet);
 		System.out.println("Training document titles:");
+		loadDocs(toModifySet);
+		loadDocs(trainSet);
+		loadDocs(authorSamplesSet);
+		loadDocs(noAuthorTrainSet);
 		for (i=0;i<lenTSet;i++){
 			trainTitlesList.add(i,noAuthorTrainSet.get(i).getTitle());
 		}
@@ -410,6 +414,22 @@ public class DocumentMagician {
 		Logger.logln(NAME+"Calling runSecondaryDocOps");
 		runSecondaryDocOps();
 		Logger.logln(NAME+"Exiting initialDocToData in DocumentMagician");
+	}
+	
+	/**
+	 * Asks JGAAP's Document class to load the text of the documents.
+	 * @param docs
+	 */
+	public void loadDocs(List<Document> docs){
+		int i = 0;
+		int numDocs = docs.size();
+		for(i = 0; i < numDocs; i++){
+			try {
+				docs.get(i).load();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
