@@ -425,12 +425,11 @@ public class GUIMain extends javax.swing.JFrame {
 							docsInstructionPane.setPreferredSize(new java.awt.Dimension(500, 50));
 							docsInstructionPane.setText(" Step One: The Documents Tab\n" +
 									" In this tab, you will create your training corpus by adding known authors and documents they have written to it.\n" +
-									" You can also add test documents. JStylo will determine which of the authors you have provided is the best match for the test document(s) you provide.");		
+									" You can also add documents and authors to test on. If you do not know the true author of a document, place it in the \"_Unknown_\" directory");		
 							docsInstructionPane.setBorder(new EmptyBorder(cellPadding/2, cellPadding/2, cellPadding/2, cellPadding/2));
 							docsInstructionPane.setBorder(BorderFactory.createLineBorder(Color.gray));
 							topPanel.add(docsInstructionPane,BorderLayout.NORTH);
 						}
-
 				}
 				{
 					JPanel centerPanel = new JPanel(new GridLayout(2,1,cellPadding,cellPadding));
@@ -460,22 +459,6 @@ public class GUIMain extends javax.swing.JFrame {
 						JScrollPane scrollPane = new JScrollPane(testDocsJTree);
 						testDocsPanel.add(scrollPane,BorderLayout.CENTER);
 					}
-					/*{
-						testDocsTableModel = new DefaultTableModel();
-						testDocsTableModel.addColumn("Title");
-						testDocsTableModel.addColumn("Path");
-						testDocsJTable = new JTable(testDocsTableModel){
-							private static final long serialVersionUID = 1L;
-
-							public boolean isCellEditable(int rowIndex, int colIndex) {
-								return false;
-							}
-						};
-						testDocsJTable.getTableHeader().setReorderingAllowed(false);
-						testDocsJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-						JScrollPane scrollPane = new JScrollPane(testDocsJTable);
-						testDocsPanel.add(scrollPane,BorderLayout.CENTER);
-					}*/
 					{
 						JPanel buttons = new JPanel(new GridLayout(2,3,cellPadding,cellPadding));
 						testDocsPanel.add(buttons,BorderLayout.SOUTH);
