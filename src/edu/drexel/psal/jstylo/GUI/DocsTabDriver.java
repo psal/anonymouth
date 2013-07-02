@@ -200,10 +200,17 @@ public class DocsTabDriver {
 							main.defaultLoadSaveDir = (new File(path)).getParent();
 
 						if (!skipList.equals("")) {
-							JOptionPane.showMessageDialog(null,
-									"Skipped the following documents:"+skipList,
-									"Add Training Documents",
-									JOptionPane.WARNING_MESSAGE);
+							if (skipList.length()<3000){
+								JOptionPane.showMessageDialog(null,
+										"Skipped the following documents:"+skipList,
+										"Add Testing Documents",
+										JOptionPane.WARNING_MESSAGE);
+								} else {
+									JOptionPane.showMessageDialog(null,
+										"Skipping too many documents to list...",
+										"Add Testing Documents",
+										JOptionPane.WARNING_MESSAGE);
+								}
 							Logger.logln("skipped the following training documents:"+skipList);
 						}
 
@@ -236,16 +243,16 @@ public class DocsTabDriver {
 					Logger.logln("Failed removing training documents - no documents are selected",LogOut.STDERR);
 					JOptionPane.showMessageDialog(null,
 							"You must select training documents to remove.",
-							"Remove Training Documents Failure",
+							"Remove Testing Documents Failure",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					int answer = JOptionPane.showConfirmDialog(null,
 							"Are you sure you want to remove the selected training documents?",
-							"Remove Training Documents Confirmation",
+							"Remove Testing Documents Confirmation",
 							JOptionPane.YES_NO_OPTION);
 
 					if (answer == 0) {
-						String msg = "Removed training documents:\n";
+						String msg = "Removed testing documents:\n";
 						String author;
 						for (DefaultMutableTreeNode doc: selectedDocs) {
 							author = doc.getParent().toString();
@@ -272,10 +279,10 @@ public class DocsTabDriver {
 				TreePath path = main.testDocsJTree.getSelectionPath();
 				if (path == null || path.getPathCount() != 3) {
 					JOptionPane.showMessageDialog(null,
-							"You must select a training document in order to show its preview.",
-							"Show Training Document Preview Error",
+							"You must select a test document in order to show its preview.",
+							"Show Testing Document Preview Error",
 							JOptionPane.ERROR_MESSAGE);
-					Logger.logln("No training document is selected for preview",LogOut.STDERR);
+					Logger.logln("No testing document is selected for preview",LogOut.STDERR);
 				} else {
 					String docTitle = path.getPath()[2].toString();
 					Document doc = main.ps.testDocAt(path.getPath()[1].toString(),docTitle);
@@ -285,10 +292,10 @@ public class DocsTabDriver {
 						main.docPreviewJTextPane.setText(doc.stringify());
 					} catch (Exception exc) {
 						JOptionPane.showMessageDialog(null,
-								"Failed opening training document for preview:\n"+doc.getFilePath(),
-								"Show Training Document Preview Error",
+								"Failed opening testing document for preview:\n"+doc.getFilePath(),
+								"Show Testing Document Preview Error",
 								JOptionPane.ERROR_MESSAGE);
-						Logger.logln("Failed opening training document for preview",LogOut.STDERR);
+						Logger.logln("Failed opening testing document for preview",LogOut.STDERR);
 						Logger.logln(exc.toString(),LogOut.STDERR);
 						GUIUpdateInterface.clearDocPreview(main);
 					}
@@ -321,7 +328,7 @@ public class DocsTabDriver {
 
 					if (answer == JFileChooser.APPROVE_OPTION) {
 						File[] authors = open.getSelectedFiles();
-						Logger.logln("Trying to load training documents");
+						Logger.logln("Trying to load testing documents");
 						
 						String path = null;
 						String skipList = "";
@@ -353,18 +360,25 @@ public class DocsTabDriver {
 							main.defaultLoadSaveDir = ((new File(path)).getParentFile()).getParent();
 
 						if (!skipList.equals("")) { //if there was at least one file that was already present in one of the sets already, inform the user of which one it was
-							JOptionPane.showMessageDialog(null,
-									"Skipped the following documents:"+skipList,
-									"Add Training Documents",
-									JOptionPane.WARNING_MESSAGE);
-							Logger.logln("skipped the following training documents:"+skipList);
+							if (skipList.length()<3000){
+								JOptionPane.showMessageDialog(null,
+										"Skipped the following documents:"+skipList,
+										"Add Testing Documents",
+										JOptionPane.WARNING_MESSAGE);
+								} else {
+									JOptionPane.showMessageDialog(null,
+										"Skipping too many documents to list...",
+										"Add Testing Documents",
+										JOptionPane.WARNING_MESSAGE);
+								}
+							Logger.logln("skipped the following testing documents:"+skipList);
 						}
 
 						GUIUpdateInterface.updateTestDocTree(main);
 						GUIUpdateInterface.clearDocPreview(main);
 
 					} else {
-						Logger.logln("Load training documents canceled");
+						Logger.logln("Load testing documents canceled");
 					}
 					
 				} else {
@@ -486,10 +500,17 @@ public class DocsTabDriver {
 							main.defaultLoadSaveDir = ((new File(path)).getParentFile()).getParent();
 
 						if (!skipList.equals("")) { //if there was at least one file that was already present in one of the sets already, inform the user of which one it was
+							if (skipList.length()<3000){
 							JOptionPane.showMessageDialog(null,
 									"Skipped the following documents:"+skipList,
 									"Add Training Documents",
 									JOptionPane.WARNING_MESSAGE);
+							} else {
+								JOptionPane.showMessageDialog(null,
+									"Skipping too many documents to list...",
+									"Add Training Documents",
+									JOptionPane.WARNING_MESSAGE);
+							}
 							Logger.logln("skipped the following training documents:"+skipList);
 						}
 
@@ -569,10 +590,17 @@ public class DocsTabDriver {
 							main.defaultLoadSaveDir = (new File(path)).getParent();
 
 						if (!skipList.equals("")) {
+							if (skipList.length()<5000){
 							JOptionPane.showMessageDialog(null,
 									"Skipped the following documents:"+skipList,
 									"Add Training Documents",
 									JOptionPane.WARNING_MESSAGE);
+							} else {
+								JOptionPane.showMessageDialog(null,
+										"Skipping too many documents to list...",
+										"Add Training Documents",
+										JOptionPane.WARNING_MESSAGE);
+							}
 							Logger.logln("skipped the following training documents:"+skipList);
 						}
 
