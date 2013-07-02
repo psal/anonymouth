@@ -305,6 +305,17 @@ public class ProblemSet {
 	}
 	
 	/**
+	 * Removes the training document at the given index 
+	 * @param i the index to remove
+	 * @return true iff the document was removed successfully
+	 */
+	public boolean removeTrainDocFromList(int i){
+		List<Document> docs = getAllTrainDocs();
+		Document doc = docs.get(i);
+		return removeTrainDocAt(doc.getAuthor(),doc);
+	}
+	
+	/**
 	 * Removes the training document with the given title from the list of training documents of the given author.
 	 * Returns the training document that was removed, or null if no such document existed.
 	 * @param author
@@ -381,6 +392,17 @@ public class ProblemSet {
 	 */
 	public void setTestDocs(String author, List<Document> docs) {
 		testDocsMap.put(author, docs);
+	}
+	
+	/**
+	 * Removes the testing document at the given index 
+	 * @param i the index to remove
+	 * @return true iff the document was removed successfully
+	 */
+	public boolean removeTestDocFromList(int i){
+		List<Document> docs = getAllTestDocs();
+		Document doc = docs.get(i);
+		return removeTestDocAt(doc.getAuthor(),doc);
 	}
 	
 	/**
