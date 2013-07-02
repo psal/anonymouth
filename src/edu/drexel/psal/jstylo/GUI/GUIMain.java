@@ -454,6 +454,8 @@ public class GUIMain extends javax.swing.JFrame {
 					}
 					{
 						DefaultMutableTreeNode top = new DefaultMutableTreeNode(ps.getTrainCorpusName());
+						DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+						top.add(_Unknown_);
 						testDocsJTree = new JTree(top);
 						JScrollPane scrollPane = new JScrollPane(testDocsJTree);
 						testDocsPanel.add(scrollPane,BorderLayout.CENTER);

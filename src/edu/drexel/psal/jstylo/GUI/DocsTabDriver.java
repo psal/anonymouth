@@ -177,7 +177,8 @@ public class DocsTabDriver {
 						String skipList = "";
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
-						for (Document doc: main.ps.getTrainDocs(author))
+						
+						for (Document doc: main.ps.getAllTrainDocs())
 							allTrainDocPaths.add(doc.getFilePath());
 						for (Document doc: main.ps.getAllTestDocs())
 							allTestDocPaths.add(doc.getFilePath());
