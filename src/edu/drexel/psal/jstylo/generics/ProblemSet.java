@@ -29,8 +29,6 @@ public class ProblemSet {
 	
 	private SortedMap<String,List<Document>> testDocsMap;
 	
-	//private List<Document> testDocs;
-	
 	private String trainCorpusName;	
 	
 	private static String dummyAuthor = "_dummy_"; 
@@ -45,7 +43,7 @@ public class ProblemSet {
 	 */
 	
 	/**
-	 * Default constructor for ProblemSet. Initializes training documents map, name, and test document list to be empty.
+	 * Default constructor for ProblemSet. Initializes training documents map, name, and test document map to be empty
 	 */
 	public ProblemSet() {
 		trainDocsMap = new TreeMap<String,List<Document>>();
@@ -55,7 +53,7 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Constructor for ProblemSet. Initializes the training documents map and name to the given ones, and an empty test documents list.
+	 * Constructor for ProblemSet. Initializes the training documents map and name to the given ones, and an empty test documents map.
 	 * @param trainCorpusName
 	 * 		The name of the training corpus.
 	 * @param trainDocsMap
@@ -69,10 +67,10 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Constructor for ProblemSet. Initializes the training documents map and name to be empty, and the test documents list to
+	 * Constructor for ProblemSet. Initializes the training documents map and name to be empty, and the test documents map to
 	 * the given one.
 	 * @param testDocs
-	 * 		The test documents list to set to.
+	 * 		The test documents map to set to.
 	 */
 	public ProblemSet(SortedMap<String,List<Document>> testDocs){
 		trainDocsMap = new TreeMap<String,List<Document>>();
@@ -82,13 +80,13 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Constructor for ProblemSet. Initializes the training documents map and the test documents list to the given ones.
+	 * Constructor for ProblemSet. Initializes the training documents map and the test documents map to the given ones.
 	 * @param trainCorpusName
 	 * 		The name of the training corpus.
 	 * @param trainDocsMap
 	 * 		The map of training documents to set to.
 	 * @param testDocs
-	 * 		The test documents list to set to.
+	 * 		The test documents map to set to.
 	 */
 	public ProblemSet(String trainCorpusName, SortedMap<String,List<Document>> trainDocsMap, SortedMap<String,List<Document>> testDocs) {
 		this.trainDocsMap = trainDocsMap;
@@ -167,11 +165,11 @@ public class ProblemSet {
 	
 	
 	/* =======
-	 * setters
+	 * setters / adders
 	 * =======
 	 */
 	
-	// training documents
+	/////////////////////// training documents
 	
 	/**
 	 * Sets the name of the training corpus to the given one.
@@ -183,12 +181,12 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Adds the given document to the given author. If no such author exists in the map, creates a new entry for
-	 * that author. Returns true iff the addition succeeded.
+	 * Adds the given training document to the given training author. If no such author exists in the  training map, 
+	 * creates a new entry for that author. Returns true iff the addition succeeded.
 	 * @param author
-	 * 		The author to add the document to.
+	 * 		The training author to add the document to.
 	 * @param doc
-	 * 		The document to be added.
+	 * 		The training document to be added.
 	 * @return
 	 * 		true iff the addition succeeded.
 	 */
@@ -197,30 +195,15 @@ public class ProblemSet {
 			trainDocsMap.put(author,new LinkedList<Document>());
 		return trainDocsMap.get(author).add(doc);
 	}
+
 	
 	/**
-	 * Adds the given document to the given author. If no such author exists in the map, creates a new entry for
-	 * that author. Returns true iff the addition succeeded.
-	 * @param author
-	 * 		The author to add the document to.
-	 * @param doc
-	 * 		The document to be added.
-	 * @return
-	 * 		true iff the addition succeeded.
-	 */
-	public boolean addTestDoc(String author, Document doc) {
-		if (testDocsMap.get(author) == null)
-			testDocsMap.put(author,new LinkedList<Document>());
-		return testDocsMap.get(author).add(doc);
-	}
-	
-	/**
-	 * Adds the given documents to the given author, or creates a new author with the given list of documents.
+	 * Adds the given training documents to the given training author, or creates a new author with the given list of documents.
 	 * Returns true iff the addition succeeded.
 	 * @param author
-	 * 		The author to add the documents to / to create.
+	 * 		The training author to add the documents to / to create.
 	 * @param docs
-	 * 		The documents to be added.
+	 * 		The training documents to be added.
 	 * @return
 	 * 		true iff the addition succeeded.
 	 */
@@ -263,7 +246,7 @@ public class ProblemSet {
 	/**
 	 * Sets the training document list for the given author to be the given list of documents (whether he exists or new). 
 	 * @param author
-	 * 		The author to set the list of documents to.
+	 * 		The training author to set the list of documents to.
 	 * @param docs
 	 * 		The list of documents to set to.
 	 */
@@ -272,7 +255,7 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Removes the given author and returns its list of documents, or null if the author does not exist in the
+	 * Removes the given training author and returns its list of documents, or null if the author does not exist in the
 	 * training set.
 	 * @param author
 	 * 		The author to be removed.
@@ -284,22 +267,10 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Removes the given author and returns its list of documents, or null if the author does not exist in the
-	 * training set.
-	 * @param author
-	 * 		The author to be removed.
-	 * @return
-	 * 		The documents of the removed author, or null if the author does not exist.
-	 */
-	public List<Document> removeTestAuthor(String author) {
-		return testDocsMap.remove(author);
-	}
-	
-	/**
 	 * Removes the document at the given index from the list of training documents of the given author.
 	 * Returns the document that was removed, or null if no such document existed.
 	 * @param author
-	 * 		The author whose document is to be removed.	 * @param i
+	 * 		The training author whose document is to be removed.
 	 * @param i
 	 * 		The index of the document to be removed.
 	 * @return
@@ -320,9 +291,9 @@ public class ProblemSet {
 	 * Removes the given document from the list of training documents of the given author. Returns true iff
 	 * the author exists and the document appeared in his list.
 	 * @param author
-	 * 		The author whose document is to be removed.
+	 * 		The training author whose document is to be removed.
 	 * @param doc
-	 * 		The document to remove.
+	 * 		The training document to remove.
 	 * @return
 	 * 		true iff the author exists and the document appeared in his list.
 	 */
@@ -334,12 +305,23 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Removes the document with the given title from the list of training documents of the given author.
-	 * Returns the document that was removed, or null if no such document existed.
+	 * Removes the training document at the given index 
+	 * @param i the index to remove
+	 * @return true iff the document was removed successfully
+	 */
+	public boolean removeTrainDocFromList(int i){
+		List<Document> docs = getAllTrainDocs();
+		Document doc = docs.get(i);
+		return removeTrainDocAt(doc.getAuthor(),doc);
+	}
+	
+	/**
+	 * Removes the training document with the given title from the list of training documents of the given author.
+	 * Returns the training document that was removed, or null if no such document existed.
 	 * @param author
-	 * 		The author whose document is to be removed.	 * @param i
+	 * 		The training author whose document is to be removed.
 	 * @param docTitle
-	 * 		The title of the document to be removed.
+	 * 		The title of the training document to be removed.
 	 * @return
 	 * 		The document that was removed, or null if no such document existed.
 	 */
@@ -353,11 +335,28 @@ public class ProblemSet {
 		return null;
 	}
 	
+	////////////////////////// test documents
 	
-	// test documents
-		
 	/**
-	 * Adds the given document to the list of test documents. Returns true iff the addition succeeded.
+	 * Adds the given testing document to the given author. If no such testing author exists in the map,
+	 * creates a new entry for that author. Returns true iff the addition succeeded.
+	 * @param author
+	 * 		The testing author to add the document to.
+	 * @param doc
+	 * 		The testing document to be added.
+	 * @return
+	 * 		true iff the addition succeeded.
+	 */
+	public boolean addTestDoc(String author, Document doc) {
+		if (testDocsMap.get(author) == null)
+			testDocsMap.put(author,new LinkedList<Document>());
+		return testDocsMap.get(author).add(doc);
+	}
+	
+	/**
+	 * Adds the given testing document to the list of test documents. Returns true iff the addition succeeded.
+	 * @param author
+	 * 		The author to add the document to.
 	 * @param doc
 	 * 		The test document to be added.
 	 * @return
@@ -373,7 +372,21 @@ public class ProblemSet {
 	}
 	
 	/**
+	 * Removes the given testing author and returns its list of documents, or null if the author does not exist in the
+	 * training set.
+	 * @param author
+	 * 		The testing author to be removed.
+	 * @return
+	 * 		The documents of the removed author, or null if the author does not exist.
+	 */
+	public List<Document> removeTestAuthor(String author) {
+		return testDocsMap.remove(author);
+	}
+	
+	/**
 	 * Sets the list of test documents to the given list of documents.
+	 * @param author
+	 * 		The author to set the list to
 	 * @param docs
 	 * 		The list of documents to set to.
 	 */
@@ -382,8 +395,21 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Removes the test document at the given index. Returns the removed document, or null
-	 * if no the index is out of bounds.
+	 * Removes the testing document at the given index 
+	 * @param i the index to remove
+	 * @return true iff the document was removed successfully
+	 */
+	public boolean removeTestDocFromList(int i){
+		List<Document> docs = getAllTestDocs();
+		Document doc = docs.get(i);
+		return removeTestDocAt(doc.getAuthor(),doc);
+	}
+	
+	/**
+	 * Removes the test document for the given author at the given index.<br>
+	 * returns true if succesful, false if unsuccessful
+	 * @param author
+	 * 		The author whose document should be removed.
 	 * @param i
 	 * 		The index of the test document to be removed.
 	 * @return
@@ -397,7 +423,10 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Removes the given document from the list of test documents. Returns true iff the document appeared in the list.
+	 * Removes the test document with the given title from the given testing author.<br>
+	 * Returns true iff the document appeared in the author's list.
+	 * @param author
+	 * 		The author whose document should be removed
 	 * @param doc
 	 * 		The test document to be removed.
 	 * @return
@@ -443,18 +472,18 @@ public class ProblemSet {
 	// training documents
 	
 	/**
-	 * Returns true iff the problem set has any authors.
+	 * Returns true iff the training set has any authors.
 	 * @return
-	 * 		true iff the problem set has any authors.
+	 * 		true iff the training set has any authors.
 	 */
 	public boolean hasAuthors() {
 		return !trainDocsMap.isEmpty();
 	}
 	
 	/**
-	 * Returns the set of the authors, or null if it is empty.
+	 * Returns the set of the training authors, or null if it is empty.
 	 * @return
-	 * 		The set of the authors, or null if it is empty.
+	 * 		The set of the training authors, or null if it is empty.
 	 */
 	public Set<String> getAuthors() {
 		if (trainDocsMap.keySet().isEmpty())
@@ -472,24 +501,20 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Returns the mapping from authors to their list of documents.
+	 * Returns the mapping from training authors to their list of training documents.
 	 * @return
-	 * 		The mapping from authors to their list of documents.
+	 * 		The mapping from training authors to their list of training documents.
 	 */
 	public Map<String,List<Document>> getAuthorMap() {
 		return trainDocsMap;
 	}
 	
-	public Map<String,List<Document>> getTestAuthorMap(){
-		return testDocsMap;
-	}
-	
 	/**
-	 * Returns the list of documents for the given author.
+	 * Returns the list of training documents for the given author.
 	 * @param author
-	 * 		The given author whose list of documents are returned.
+	 * 		The given training author whose list of documents are returned.
 	 * @return
-	 * 		The list of documents for the given author.
+	 * 		The list of training documents for the given author.
 	 */
 	public List<Document> getTrainDocs(String author) {
 		return trainDocsMap.get(author);
@@ -528,7 +553,7 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Returns the document in the given index of the given author, or null if no such author or document at
+	 * Returns the document in the given index of the given training author, or null if no such author or document at
 	 * that index exist.
 	 * @param author
 	 * 		The author.
@@ -549,7 +574,7 @@ public class ProblemSet {
 	}
 	
 	/**
-	 * Returns the document with the given title of the given author, or null if no such author or document with
+	 * Returns the document with the given title of the given training author, or null if no such author or document with
 	 * that title exist.
 	 * @param author
 	 * 		The author.
@@ -580,6 +605,15 @@ public class ProblemSet {
 	}
 	
 	/**
+	 * Returns the sorted map of the testing authors mapped to their list of documents
+	 * @return
+	 * 		testing authors mapped to their list of documents
+	 */	
+	public Map<String,List<Document>> getTestAuthorMap(){
+		return testDocsMap;
+	}
+	
+	/**
 	 * Returns the list of test documents.
 	 * @return
 	 * 		The list of test documents.
@@ -590,6 +624,8 @@ public class ProblemSet {
 	
 	/**
 	 * Returns the test document at the given index, or null if the index is out of bounds.
+	 * @param author
+	 * 		The name of the author to get the testing document from
 	 * @param i
 	 * 		The index of the desired test document.
 	 * @return
@@ -606,6 +642,15 @@ public class ProblemSet {
 		}
 	}
 	
+	/**
+	 * Returns the test document with the given title
+	 * @param author
+	 * 		The name of the author to get the document from
+	 * @param docTitle
+	 * 		The name of the document to return
+	 * @return
+	 * 		The specified document
+	 */
 	public Document testDocAt(String author, String docTitle) {
 		List<Document> docs = testDocsMap.get(author);
 		if (docs == null)
@@ -627,6 +672,11 @@ public class ProblemSet {
 		else return testDocsMap.get(author).size();
 	}
 	
+	/**
+	 * Returns the list of all of the test documents
+	 * @return
+	 * 		The lost containing all test documents
+	 */
 	public List<Document> getAllTestDocs() {
 		List<Document> allTestDocs = new LinkedList<Document>();
 		for (String key: testDocsMap.keySet()){
@@ -692,10 +742,6 @@ public class ProblemSet {
 			for (Document doc : docs) {
 				pw.println("\t\t\t<document title=\"" + doc.getTitle() + "\">"
 						+ buildRelativePath(doc) + "</document>");
-/*
-				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
-						+ doc.getFilePath().replace('\\', '/') + "</document>");
-*/
 			}
 			pw.println("\t\t</author>");
 		}
@@ -708,10 +754,6 @@ public class ProblemSet {
 			for (Document doc : docs) {
 				pw.println("\t\t\t<document title=\"" + doc.getTitle() + "\">"
 						+ buildRelativePath(doc) + "</document>");
-/*
-				pw.println("\t\t<document title=\"" + doc.getTitle() + "\">"
-						+ doc.getFilePath().replace('\\', '/') + "</document>");
-*/
 			}
 			pw.println("\t\t</author>");
 		}
@@ -795,21 +837,27 @@ public class ProblemSet {
 				//test document (old format)
 				if (current.getParentNode().getNodeName().equals("test")){
 					Path testPath = Paths.get(current.getTextContent());
-					Document testDoc = new Document(testPath.toAbsolutePath().toString().replaceAll("\\\\","/"),"_Unknown_");
+					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document testDoc = new Document(filePath,"_Unknown_");
 					problemSet.addTestDoc("_Unknown_",testDoc);
 					
 					//Training document
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path trainPath = Paths.get(current.getTextContent());
-					Document trainDoc = new Document(trainPath.toAbsolutePath().toString().replaceAll("\\\\","/"),parent.getAttribute("name"));
+					String filePath = trainPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document trainDoc = new Document(filePath,parent.getAttribute("name"));
 					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
 					
 					//test document (new format)
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path testPath = Paths.get(current.getTextContent());
-					Document testDoc = new Document(testPath.toAbsolutePath().toString().replaceAll("\\\\","/"),parent.getAttribute("name"));
+					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					filePath = filePath.replace("/./","/");
+					Document testDoc = new Document(filePath,parent.getAttribute("name"));
 					problemSet.addTestDoc(parent.getAttribute("name"),testDoc);
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
@@ -844,12 +892,13 @@ public class ProblemSet {
 		}
 		
 		//If this is 0, then they're on different drives or something like that.
-		//Maybe we should try to find a way to get that to work? Perhaps allow people to toggle absolute versus relative paths?
+		//Just use absolute paths in this case
 		if (index==0){
-			Logger.logln("Failed to build relative path between: "+docPath+" and "+dirPath,LogOut.STDERR);
+			return doc.getFilePath();
 		}
 		
 		//Gets the path from the current dir to the point where the current dir and the dest diverge
+		//if we're going up, then just use absolute paths.
 		if (dirComponents.length != index){
 			int backTrack = dirComponents.length - index;
 			
@@ -858,12 +907,12 @@ public class ProblemSet {
 			}
 		}
 		
+		//Assuming the documents are in a subfolder of the root where the program runs, this should return
+		//the relative path
 		relPath+="./"+docPath.substring(shared.length());
 		
 		return relPath;
 	}
-
-
 	
 	/*
 	public static void main(String[] args) throws Exception {

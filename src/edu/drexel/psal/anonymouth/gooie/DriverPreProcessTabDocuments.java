@@ -315,7 +315,7 @@ public class DriverPreProcessTabDocuments {
 						String msg = "Removed test documents:\n";
 						for (int i=rows.length-1; i>=0; i--) 
 						{
-							msg += "\t\t> "+main.ps.testDocAt(main.ps.rows[i]).getTitle()+"\n";
+							msg += "\t\t> "+main.ps.testDocAt(main.ps.testDocAt(rows[i])).getTitle()+"\n";
 							main.ps.removeTestDocAt(rows[i]);
 						}
 						Logger.log(msg);
