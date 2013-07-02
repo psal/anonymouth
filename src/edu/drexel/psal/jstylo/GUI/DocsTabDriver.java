@@ -185,7 +185,7 @@ public class DocsTabDriver {
 							allTestDocPaths.add(doc.getFilePath());
 						}
 						for (File file: files) {
-							path = file.getPath();
+							path = file.getPath().replaceAll("\\\\","/");
 							if (allTrainDocPaths.contains(path)) {
 								skipList += "\n"+path+" - already listed as a training document for author "+author;
 								continue;
@@ -328,13 +328,15 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
-						for (Document doc: main.ps.getAllTrainDocs())
+						for (Document doc: main.ps.getAllTrainDocs()){
 							allTrainDocPaths.add(doc.getFilePath()); 
-						for (Document doc: main.ps.getAllTestDocs())
+						}
+						for (Document doc: main.ps.getAllTestDocs()){
 							allTestDocPaths.add(doc.getFilePath()); 
+						}
 						for (File dir: authors) {	//for each directory selected
 							for (File file: dir.listFiles()){ //for each file in that directory
-								path = file.getPath();
+								path = file.getPath().replaceAll("\\\\","/");
 								if (allTrainDocPaths.contains(path)) { //make sure that the file isn't already in the training set
 									skipList += "\n"+path+" - already listed as a training document for author "+dir.getName(); 
 									continue;
@@ -366,7 +368,7 @@ public class DocsTabDriver {
 					}
 					
 				} else {
-					if (main.ps.getAuthorMap().keySet().contains(ans)) {
+					if (main.ps.getTestAuthorMap().keySet().contains(ans)) {
 						JOptionPane.showMessageDialog(null,
 								"Author \""+ans+"\" already exists.",
 								"Add New Author Error",
@@ -467,7 +469,7 @@ public class DocsTabDriver {
 							allTestDocPaths.add(doc.getFilePath()); 
 						for (File dir: authors) {	//for each directory selected
 							for (File file: dir.listFiles()){ //for each file in that directory
-								path = file.getPath();
+								path = file.getPath().replaceAll("\\\\","/");
 								if (allTrainDocPaths.contains(path)) { //make sure that the file isn't already in the training set
 									skipList += "\n"+path+" - already contained for author "+dir.getName(); 
 									continue;
@@ -552,7 +554,7 @@ public class DocsTabDriver {
 						for (Document doc: main.ps.getAllTestDocs())
 							allTestDocPaths.add(doc.getFilePath());
 						for (File file: files) {
-							path = file.getPath();
+							path = file.getPath().replaceAll("\\\\","/");
 							if (allTrainDocPaths.contains(path)) {
 								skipList += "\n"+path+" - already contained for author "+author;
 								continue;

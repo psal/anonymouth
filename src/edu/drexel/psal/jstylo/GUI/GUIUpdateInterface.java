@@ -107,6 +107,11 @@ public class GUIUpdateInterface {
 			}
 		}
 		
+		if (root.getChildCount()==0){
+			DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+			root.add(_Unknown_);
+		}
+		
 		DefaultTreeModel testTreeModel = new DefaultTreeModel(root);
 		main.testDocsJTree.setModel(testTreeModel);
 	}
