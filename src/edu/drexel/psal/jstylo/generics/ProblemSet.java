@@ -137,11 +137,11 @@ public class ProblemSet {
 		Document newTestDoc;
 		for (String author: other.testDocsMap.keySet()) {
 			testDocs = new LinkedList<Document>();
-			for (Document doc: other.trainDocsMap.get(author)) {
+			for (Document doc: other.testDocsMap.get(author)) {
 				newTestDoc = new Document(doc.getFilePath(),doc.getAuthor(),doc.getTitle());
 				testDocs.add(newTestDoc);
 			}
-			this.trainDocsMap.put(author, testDocs);
+			this.testDocsMap.put(author, testDocs);
 		}
 	}
 	

@@ -315,8 +315,8 @@ public class DriverPreProcessTabDocuments {
 						String msg = "Removed test documents:\n";
 						for (int i=rows.length-1; i>=0; i--) 
 						{
-							msg += "\t\t> "+main.ps.testDocAt(main.ps.testDocAt(rows[i])).getTitle()+"\n";
-							main.ps.removeTestDocAt(rows[i]);
+							msg += "\t\t> "+main.ps.getAllTestDocs().get(rows[i]).getTitle()+"\n";
+							main.ps.removeTestDocFromList(rows[i]);
 						}
 						Logger.log(msg);
 
@@ -912,7 +912,7 @@ public class DriverPreProcessTabDocuments {
 						path = file.getAbsolutePath();
 						if (allTestDocPaths.contains(path))
 							continue;
-						main.ps.addTestDoc(new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
+						main.ps.addTestDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
 					}
 
 					GUIUpdateInterface.updateTestDocTable(main);
@@ -955,8 +955,8 @@ public class DriverPreProcessTabDocuments {
 						String msg = "Removed test documents:\n";
 						for (int i=rows.length-1; i>=0; i--) 
 						{
-							msg += "\t\t> "+main.ps.testDocAt(rows[i]).getTitle()+"\n";
-							main.ps.removeTestDocAt(rows[i]);
+							msg += "\t\t> "+main.ps.getAllTestDocs().get(rows[i]).getTitle()+"\n";
+							main.ps.removeTestDocFromList(rows[i]);
 						}
 						Logger.log(msg);
 

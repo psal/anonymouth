@@ -435,6 +435,8 @@ public class DataAnalyzer{
 		for (Document d:tempTestDocs) {
 			d.setAuthor(ThePresident.DUMMY_NAME);
 		}
+		if (pSet == null)
+			ThePresident.read("pSet is NULL!");
 		magician.initialDocToData(pSet,cfd, classifier);
 		
 		HashMap<String,Double[][]> attribsAndInstances = magician.getPackagedInstanceData();

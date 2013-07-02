@@ -100,7 +100,7 @@ public class GUIUpdateInterface {
 			{
 				dlm.addElement(testDocs.get(i).getTitle());
 				dlm2.addElement(testDocs.get(i).getTitle());
-				main.mainDocPreview = main.ps.testDocAt(ProblemSet.getDummyAuthor(),0);
+				main.mainDocPreview = main.ps.getAllTestDocs().get(0);
 				try {
 					main.mainDocPreview.load();
 				} catch (Exception e) {
