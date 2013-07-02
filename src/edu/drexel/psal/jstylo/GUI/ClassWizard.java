@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -17,11 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.Logger;
 /**
  * 
  * Created in ClassTabDriver, this popup will allow for the editing of a classifier's arguments, and will

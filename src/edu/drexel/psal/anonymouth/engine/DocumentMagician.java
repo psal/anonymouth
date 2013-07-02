@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 import weka.classifiers.Classifier;
+import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.*;
@@ -279,7 +281,7 @@ public class DocumentMagician {
 	 * Runs Weka and classifies the document to modify based on the selected classifier, with the selected options. The user's document to modify is classified 
 	 * against all sample documents (user's samples, and 'other' samples)
 	 * @throws Exception
-	 */
+	 
 	public synchronized void runWeka(){
 		Logger.logln(NAME+"Called runWeka");
 		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
@@ -289,6 +291,81 @@ public class DocumentMagician {
 		}
 		else{
 			wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
+		}
+		Logger.logln(NAME+"Weka Done");
+	}
+	*/
+	
+	public synchronized void runWeka(){
+		Logger.logln(NAME+"Called runWeka");
+		//WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
+		if(ThePresident.CLASSIFIER_SAVED == false){
+			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
+			Instances trainingSet = authorAndTrainDat;
+			Instances testSet = toModifyDat;
+			List<Document> unknownDocs = toModifySet;
+			String saveClassifierAs = ThePresident.PATH_TO_CLASSIFIER;
+			Classifier classifier = theClassifier;
+			
+			//this.trainingSet = trainingSet;					
+			//this.testSet = testSet;
+			// initialize authors (extract from training set)
+			List<String> authors = new ArrayList<String>();
+			Attribute authorsAttr = trainingSet.attribute("authorName");
+			for (int i=0; i< authorsAttr.numValues(); i++)
+				authors.add(i,authorsAttr.value(i));
+			//this.authors = authors;
+			
+			int numOfInstances = testSet.numInstances();
+			int numOfAuthors = authors.size();
+			
+			Map<String,Map<String, Double>> res = new HashMap<String,Map<String,Double>>(numOfInstances);
+			for (int i=0; i<numOfInstances; i++)
+				res.put(unknownDocs.get(i).getTitle(), new HashMap<String,Double>(numOfAuthors));
+			
+			
+			// train classifier
+			trainingSet.setClass(authorsAttr);
+			try {
+				classifier.buildClassifier(trainingSet);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// save classifier
+			try {
+				weka.core.SerializationHelper.write(saveClassifierAs, classifier);
+			} catch (Exception e1) {
+				Logger.logln("ERROR! Could not save classifier to "+saveClassifierAs+"!",Logger.LogOut.STDERR);
+				e1.printStackTrace();
+			}
+			
+			
+			// classify test cases
+			Map<String,Double> map;
+			double[] currRes;
+			for (int i=0; i<testSet.numInstances(); i++) {
+				Instance test = testSet.instance(i);
+
+				test.setDataset(trainingSet);
+
+				map = res.get(unknownDocs.get(i).getTitle());
+				try {
+					currRes = classifier.distributionForInstance(test);
+					for (int j=0; j<numOfAuthors; j++) {
+						map.put(authors.get(j), currRes[j]);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			wekaResultMap = res;
+			
+			ThePresident.CLASSIFIER_SAVED = true;
+		}
+		else{
+			//wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
 		}
 		Logger.logln(NAME+"Weka Done");
 	}
@@ -307,7 +384,7 @@ public class DocumentMagician {
 		ProblemSet pSetCopy = new ProblemSet(pSet);
 		trainSet = pSetCopy.getAllTrainDocs();
 		
-		toModifySet = pSetCopy.getTestDocs(); // docToModify is the test doc already
+		toModifySet = pSetCopy.getAllTestDocs(); // docToModify is the test doc already
 		Logger.logln(NAME+"True test doc author: "+toModifySet.get(0).getAuthor()); 
 		
 		authorToRemove = ProblemSet.getDummyAuthor(); 

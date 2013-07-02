@@ -1,6 +1,5 @@
 package edu.drexel.psal.jstylo.canonicizers;
 
-import java.io.*;
 import java.util.*;
 
 import com.jgaap.generics.Canonicizer;

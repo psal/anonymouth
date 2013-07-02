@@ -3,4 +3,3 @@ Privacy, Security and Automation lab at Drexel University.
 
 JSAN, JStylo and Anonymouth are released under the AGPL version 3; 
 a copy of which should have come in the same directory as this notice.
-

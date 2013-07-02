@@ -1040,7 +1040,7 @@ public class DriverEditor {
 	public static void save(GUIMain main) {
 		Logger.logln(NAME+"Save document button clicked.");
 
-		String path = main.ps.getTestDocs().get(0).getFilePath();
+		String path = main.ps.getAllTestDocs().get(0).getFilePath();
 
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(path));

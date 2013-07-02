@@ -21,7 +21,6 @@ import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
-import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -97,8 +96,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton removeTrainDocsJButton;
 	protected JButton addTrainDocsJButton;
 	protected JTree trainCorpusJTree;
-	protected JTable testDocsJTable;
-	protected DefaultTableModel testDocsTableModel;
+	//protected JTable testDocsJTable;
+	protected JTree testDocsJTree;
+	//protected DefaultTableModel testDocsTableModel;
 	protected JLabel featuresToolsJLabel;
 	protected JLabel docPreviewNameJLabel;
 	protected JLabel corpusJLabel;
@@ -108,7 +108,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton clearDocPreviewJButton;
 	protected JButton docsAboutJButton;
 	protected JTextPane docsInstructionPane;
-
+	protected JButton addTestAuthorJButton;
+	protected JButton removeTestAuthorJButton;
+	
 	// features tab
 	protected JButton featuresNextJButton;
 	protected JButton featuresBackJButton;
@@ -423,12 +425,11 @@ public class GUIMain extends javax.swing.JFrame {
 							docsInstructionPane.setPreferredSize(new java.awt.Dimension(500, 50));
 							docsInstructionPane.setText(" Step One: The Documents Tab\n" +
 									" In this tab, you will create your training corpus by adding known authors and documents they have written to it.\n" +
-									" You can also add test documents. JStylo will determine which of the authors you have provided is the best match for the test document(s) you provide.");		
+									" You can also add documents and authors to test on. If you do not know the true author of a document, place it in the \"_Unknown_\" directory");		
 							docsInstructionPane.setBorder(new EmptyBorder(cellPadding/2, cellPadding/2, cellPadding/2, cellPadding/2));
 							docsInstructionPane.setBorder(BorderFactory.createLineBorder(Color.gray));
 							topPanel.add(docsInstructionPane,BorderLayout.NORTH);
 						}
-
 				}
 				{
 					JPanel centerPanel = new JPanel(new GridLayout(2,1,cellPadding,cellPadding));
@@ -451,41 +452,44 @@ public class GUIMain extends javax.swing.JFrame {
 						testDocsJLabel.setFont(defaultLabelFont);
 					}
 					{
-						testDocsTableModel = new DefaultTableModel();
-						testDocsTableModel.addColumn("Title");
-						testDocsTableModel.addColumn("Path");
-						testDocsJTable = new JTable(testDocsTableModel){
-							private static final long serialVersionUID = 1L;
-
-							public boolean isCellEditable(int rowIndex, int colIndex) {
-								return false;
-							}
-						};
-						testDocsJTable.getTableHeader().setReorderingAllowed(false);
-						testDocsJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-						JScrollPane scrollPane = new JScrollPane(testDocsJTable);
+						DefaultMutableTreeNode top = new DefaultMutableTreeNode(ps.getTrainCorpusName());
+						DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+						top.add(_Unknown_);
+						testDocsJTree = new JTree(top);
+						JScrollPane scrollPane = new JScrollPane(testDocsJTree);
 						testDocsPanel.add(scrollPane,BorderLayout.CENTER);
 					}
 					{
 						JPanel buttons = new JPanel(new GridLayout(2,3,cellPadding,cellPadding));
 						testDocsPanel.add(buttons,BorderLayout.SOUTH);
 						{
+							addTestAuthorJButton = new JButton();
+							buttons.add(addTestAuthorJButton);
+							addTestAuthorJButton.setText("Add Author(s)...");
+						}
+						{
 							addTestDocJButton = new JButton();
 							buttons.add(addTestDocJButton);
 							addTestDocJButton.setText("Add Document(s)...");
-						}
-						{
-							removeTestDocJButton = new JButton();
-							buttons.add(removeTestDocJButton);
-							removeTestDocJButton.setText("Remove Document(s)");
 						}
 						{
 							testDocPreviewJButton = new JButton();
 							buttons.add(testDocPreviewJButton);
 							testDocPreviewJButton.setText("Preview Document");
 						}
-						buttons.add(new JPanel());
-						buttons.add(new JPanel());
+						{
+							removeTestAuthorJButton = new JButton();
+							buttons.add(removeTestAuthorJButton);
+							removeTestAuthorJButton.setText("Remove Author(s)");
+						}
+						{
+							removeTestDocJButton = new JButton();
+							buttons.add(removeTestDocJButton);
+							removeTestDocJButton.setText("Remove Document(s)");
+						}
+
+						//buttons.add(new JPanel());
+						//buttons.add(new JPanel());
 						buttons.add(new JPanel());
 					}
 

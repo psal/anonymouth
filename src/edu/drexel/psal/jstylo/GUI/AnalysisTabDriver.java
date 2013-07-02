@@ -1,13 +1,9 @@
 package edu.drexel.psal.jstylo.GUI;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
-import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.AnalyzerTypeEnum;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import java.awt.BorderLayout;
@@ -17,12 +13,9 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFileChooser;
@@ -33,14 +26,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.jgaap.generics.Document;
-import com.sun.corba.se.impl.io.TypeMismatchException;
-
-import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
 
 public class AnalysisTabDriver {
 
@@ -115,7 +102,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".arff"))
 						path += ".arff";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTrainingInstances());
+					boolean succeeded = InstancesBuilder.writeToARFF(path, main.ib.getTrainingInstances());
 					if (succeeded) {
 						Logger.log("Saved training features to arff: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -160,7 +147,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".csv"))
 						path += ".csv";
-					boolean succeeded = WekaInstancesBuilder.writeSetToCSV(path, main.ib.getTrainingInstances());
+					boolean succeeded = InstancesBuilder.writeToCSV(path, main.ib.getTrainingInstances());
 					if (succeeded) {
 						Logger.log("Saved training features to csv: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -205,7 +192,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".arff"))
 						path += ".arff";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTestInstances());
+					boolean succeeded = InstancesBuilder.writeToARFF(path, main.ib.getTestInstances());
 					if (succeeded) {
 						Logger.log("Saved test features to arff: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -250,7 +237,7 @@ public class AnalysisTabDriver {
 					String path = f.getAbsolutePath();
 					if (!path.toLowerCase().endsWith(".csv"))
 						path += ".csv";
-					boolean succeeded = WekaInstancesBuilder.writeSetToARFF(path, main.ib.getTestInstances());
+					boolean succeeded = InstancesBuilder.writeToCSV(path, main.ib.getTestInstances());
 					if (succeeded) {
 						Logger.log("Saved test features to csv: "+path);
 						main.defaultLoadSaveDir = (new File(path)).getParent();
@@ -353,28 +340,22 @@ public class AnalysisTabDriver {
 						}
 							
 						if (Integer.parseInt(kfolds)<=1 || Integer.parseInt(kfolds)>docCount)
-								throw new TypeMismatchException();
+								throw new Exception();
 						
 						if (Integer.parseInt(nthreads)<1 || Integer.parseInt(nthreads)>50)
-							throw new TypeMismatchException();
+							throw new Exception();
 						
 						
 						
-					} catch (TypeMismatchException tme) {
+					} catch (Exception exc) {
 						JOptionPane.showMessageDialog(main,
 								"K and N do not have correct values. Both must be integers in the range:\n1<K<="
 										+docCount+"\n1<=N<=50",
 								"Run Analysis Error",
 								JOptionPane.ERROR_MESSAGE);
+						Logger.logln(exc.getMessage(),LogOut.STDERR);
 						return;
-					} catch (NumberFormatException nme){
-						JOptionPane.showMessageDialog(main,
-								"K and N do not have correct values. Both must be integers in the range:\n1<K<="
-										+docCount+"\n1<=N<=50",
-								"Run Analysis Error",
-								JOptionPane.ERROR_MESSAGE);
-						return;
-					}
+					} 
 				}
 				
 				//lock
@@ -407,7 +388,7 @@ public class AnalysisTabDriver {
 				if (answer == JOptionPane.YES_OPTION) {
 					// stop run and update
 					Logger.logln("Stopping analysis");
-					
+					main.ib.reset(); 
 					main.analysisThread.stop();
 					lockUnlock(main, false);
 				}
@@ -634,11 +615,11 @@ public class AnalysisTabDriver {
 			// test set
 			if (classifyTestDocs) {
 				content += "Test documents:\n";
-				int numRows = main.testDocsJTable.getModel().getRowCount();
-				String doc;
-				for (int i=0; i<numRows; i++) {
-					doc = main.testDocsJTable.getModel().getValueAt(i,0).toString();
-					content += "> "+doc+"\n";
+				Enumeration<DefaultMutableTreeNode> testAuthors = ((DefaultMutableTreeNode) main.testDocsJTree.getModel().getRoot()).children();
+				DefaultMutableTreeNode testAuthor;
+				while (testAuthors.hasMoreElements()) {
+					testAuthor = testAuthors.nextElement();
+					content += "> "+testAuthor.getUserObject().toString()+" ("+testAuthor.getChildCount()+" documents)\n";
 				}
 				content += "\n";
 			}
@@ -850,7 +831,7 @@ public class AnalysisTabDriver {
 					results = main.analysisDriver.classify(
 							main.ib.getTrainingInstances(),
 							main.ib.getTestInstances(),
-							main.ps.getTestDocs());
+							main.ps.getAllTestDocs());
 					
 					content += getTimestamp()+" done!\n\n";
 					Logger.logln("Done!");
@@ -867,7 +848,7 @@ public class AnalysisTabDriver {
 					// of disclaimer since right now it only works if the author name is in the document title.
 					if (main.analysisClassificationStatisticsJCheckBox.isSelected()){
 						try {
-							Evaluation eval = main.analysisDriver.getClassificationStatistics();
+							Evaluation eval = main.analysisDriver.getTrainTestEval(main.ps.getAllTestDocs());
 							content += eval.toSummaryString(false)+"\n"+eval.toClassDetailsString()+"\n"+eval.toMatrixString();
 						} catch (Exception e) {
 							e.printStackTrace();

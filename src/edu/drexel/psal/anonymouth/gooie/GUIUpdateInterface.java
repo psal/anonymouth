@@ -95,14 +95,12 @@ public class GUIUpdateInterface {
 		dlm2.removeAllElements();
 		if (main.mainDocReady())
 		{
-			List<Document>testDocs = main.ps.getTestDocs();
+			List<Document>testDocs = main.ps.getAllTestDocs();
 			for (int i=0; i<testDocs.size(); i++)
 			{
 				dlm.addElement(testDocs.get(i).getTitle());
 				dlm2.addElement(testDocs.get(i).getTitle());
-				System.out.println(testDocs.get(i).getTitle());
-				System.out.println(main.ps.testDocAt(0));
-				main.mainDocPreview = main.ps.testDocAt(0);
+				main.mainDocPreview = main.ps.testDocAt(ProblemSet.getDummyAuthor(),0);
 				try {
 					main.mainDocPreview.load();
 				} catch (Exception e) {
