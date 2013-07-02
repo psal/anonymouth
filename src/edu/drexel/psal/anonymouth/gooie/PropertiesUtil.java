@@ -31,6 +31,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultBarTutorial = true;
 	protected static Boolean defaultWarnAll = true;
 	protected static Boolean defaultHighlight = true;
+	protected static Boolean defaultVersionAutoSave = false;
 	protected static int defaultThreads = 4;
 	protected static int defaultFeatures = 500;
 	protected static Boolean defaultTranslation = false;
@@ -87,13 +88,62 @@ public class PropertiesUtil {
 	 * Resets all values in the prop file to their default values, thereby erasing all the user's changes.
 	 */
 	protected static void reset() {
-		setThreadCount(defaultThreads);
-		setMaximumFeatures(defaultFeatures);
+		//general
 		setWarnQuit(defaultWarnQuit);
 		setAutoSave(defaultAutoSave);
+		setFontSize(defaultFontSize);
+		setDoTranslations(defaultTranslation);
+		setWarnAll(defaultWarnAll);
+		setAutoHighlight(defaultHighlight);
+		
+		//defaults
 		setProbSet(defaultProbSet);
 		setFeature(defaultFeat);
 		setClassifier(defaultClass);
+		
+		//advanced
+		setThreadCount(defaultThreads);
+		setMaximumFeatures(defaultFeatures);
+		setVersionAutoSave(defaultVersionAutoSave);
+	}
+	
+	/**
+	 * Sets whether or not to save a version of the document each time the user processes
+	 * @param versionAutoSave
+	 */
+	protected static void setVersionAutoSave(Boolean versionAutoSave) {
+		BufferedWriter writer;
+		
+		try {
+			prop.setProperty("versionAutoSave", versionAutoSave.toString());
+			writer = new BufferedWriter(new FileWriter(propFileName));
+			prop.store(writer, "User Preferences");
+		} catch (Exception e) {
+			Logger.logln(NAME + "Failed setting version auto save");
+		}
+	}
+	
+	/**
+	 * Gets whether or not to save a version of the document each time the user processes
+	 */
+	protected static boolean getVersionAutoSave() {
+		String versionAutoSave;
+		
+		try {
+			versionAutoSave = prop.getProperty("versionAutoSave");
+			if (versionAutoSave == null) {
+				prop.setProperty("versionAutoSave", defaultVersionAutoSave.toString());
+				versionAutoSave = prop.getProperty("versionAutoSave");
+			}
+		} catch (NullPointerException e) {
+			prop.setProperty("versionAutoSave", defaultVersionAutoSave.toString());
+			versionAutoSave = prop.getProperty("versionAutoSave");
+		}
+		
+		if (versionAutoSave.equals("true"))
+			return true;
+		else
+			return false;
 	}
 	
 	/**
@@ -498,7 +548,7 @@ public class PropertiesUtil {
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
 			
-			ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = b;
+			ThePresident.AUTOSAVE_LATEST_VERSION = b;
 		} catch (Exception e) {
 			Logger.logln(NAME+"Failed setting auto save", LogOut.STDERR);
 		}

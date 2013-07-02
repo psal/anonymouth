@@ -104,14 +104,12 @@ public class GUIUpdateInterface {
 				try {
 					main.mainDocPreview.load();
 				} catch (Exception e) {
-					System.err.println("ANOTHER PROBLEM!");
 					e.printStackTrace();
 				}
 				try {
 					System.out.println(main.mainDocPreview.stringify());
 					main.getDocumentPane().setText(main.mainDocPreview.stringify());
 				} catch (Exception e) {
-					System.err.println("PROBLEM!");
 					e.printStackTrace();
 				}
 			}
