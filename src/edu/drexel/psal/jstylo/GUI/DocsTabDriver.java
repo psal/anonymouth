@@ -185,11 +185,11 @@ public class DocsTabDriver {
 						for (File file: files) {
 							path = file.getPath();
 							if (allTrainDocPaths.contains(path)) {
-								skipList += "\n"+path+" - already contained for author "+author;
+								skipList += "\n"+path+" - already listed as a training document for author "+author;
 								continue;
 							}
 							if (allTestDocPaths.contains(path)) {
-								skipList += "\n"+path+" - already contained as a test document";
+								skipList += "\n"+path+" - already listed as a test document for author"+author;
 								continue;
 							}
 							main.ps.addTestDoc(author, new Document(path,"dummy",file.getName()));
@@ -334,11 +334,11 @@ public class DocsTabDriver {
 							for (File file: dir.listFiles()){ //for each file in that directory
 								path = file.getPath();
 								if (allTrainDocPaths.contains(path)) { //make sure that the file isn't already in the training set
-									skipList += "\n"+path+" - already contained for author "+dir.getName(); 
+									skipList += "\n"+path+" - already listed as a training document for author "+dir.getName(); 
 									continue;
 								}
 								if (allTestDocPaths.contains(path)) { //make sure that the file isn't in the test set
-									skipList += "\n"+path+" - already contained as a test document";
+									skipList += "\n"+path+" - already listed as a test document";
 									continue;
 								}
 								
