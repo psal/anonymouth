@@ -30,6 +30,8 @@ import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 public class DriverTranslationsTab implements ActionListener {
 	
 	private static ActionListener resetTranslatorListener;
+	private static ActionListener stopTranslationsListener;
+	private static ActionListener startTranslationsListener;
 	private static GUIMain main;
 	protected static JPanel[] finalPanels;
 	protected static JLabel[] languageLabels;
@@ -45,6 +47,27 @@ public class DriverTranslationsTab implements ActionListener {
 	public static void initListeners(GUIMain main) {
 		DriverTranslationsTab.main = main;
 		DriverTranslationsTab.inst = new DriverTranslationsTab();
+		
+		stopTranslationsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUIMain.GUITranslator.reset();
+				GUIMain.inst.startTranslations.setEnabled(true);
+				GUIMain.inst.stopTranslations.setEnabled(false);
+			}
+		};
+		main.stopTranslations.addActionListener(stopTranslationsListener);
+		
+		startTranslationsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUIMain.inst.startTranslations.setEnabled(false);
+				GUIMain.inst.stopTranslations.setEnabled(true);
+				GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
+				DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+			}
+		};
+		main.startTranslations.addActionListener(startTranslationsListener);
 		
 		resetTranslatorListener = new ActionListener() {
 			@Override
@@ -72,7 +95,6 @@ public class DriverTranslationsTab implements ActionListener {
 				}
 			}
 		};
-		
 		main.resetTranslator.addActionListener(resetTranslatorListener);
 	}
 	
@@ -91,14 +113,18 @@ public class DriverTranslationsTab implements ActionListener {
 					"If you wish to recieve translation suggestions you must connect to the internet" +
 					"and re-process your document.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
+			main.stopTranslations.setEnabled(false);
 		} else if (Translator.accountsUsed) {
 			main.notTranslated.setText("The account used for translations has expired.\n\n" +
 					"In order to continue recieving translations, you must restart in order for the " +
 					"account change to be reflected.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
+			main.stopTranslations.setEnabled(false);
+			main.resetTranslator.setEnabled(false);
 		} else if (!PropertiesUtil.getDoTranslations()) {
 			main.notTranslated.setText("You have turned translations off.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
+			main.stopTranslations.setEnabled(false);
 		} else if (sentence.hasTranslations()) {
 			arrow_up = GUIMain.arrow_up;
 			arrow_down = GUIMain.arrow_down;
@@ -119,8 +145,7 @@ public class DriverTranslationsTab implements ActionListener {
 			
 			// for each translation, initialize a title label, and a text area that will hold the translation
 			// then add those two to a final panel, which will be added to the translation list panel.
-			for (int i = 0; i < numTranslations; i++)
-			{
+			for (int i = 0; i < numTranslations; i++) {
 				// set up title label
 				languageLabels[i] = new JLabel(translationNames.get(i));
 				translationsMap.put(translationNames.get(i), translations.get(i));
@@ -158,7 +183,10 @@ public class DriverTranslationsTab implements ActionListener {
 				// add final panel to the translations list panel
 				main.translationsHolderPanel.add(finalPanels[i], "");
 			}
-		} else if (main.getDocumentPane().isEnabled()){
+		} else if (PropertiesUtil.getDoTranslations() && main.startTranslations.isEnabled()) {
+			main.notTranslated.setText("You granted access for translations to be obtained from Microsoft Bing in Preferences.\n\nTo begin, click the Start button");
+			main.translationsHolderPanel.add(main.notTranslated, "");
+		} else if (main.getDocumentPane().isEnabled()) {
 			main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
 		}
@@ -194,10 +222,13 @@ public class DriverTranslationsTab implements ActionListener {
 	/**
 	 * Resets all variables and clears panel of all translations, to be used for re-processing
 	 */
-	public static void reset() {
+	public static void reset(boolean reprocessing) {
 		main.translationsHolderPanel.removeAll();
 		if (PropertiesUtil.getDoTranslations()) {
-			main.notTranslated.setText("Document re-processing, please wait.");
+			if (reprocessing)
+				main.notTranslated.setText("Document re-processing, please wait.");
+			else
+				main.notTranslated.setText("");
 			main.translationsHolderPanel.add(main.notTranslated, "");
 		}
 	}

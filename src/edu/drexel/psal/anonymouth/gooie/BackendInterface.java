@@ -210,7 +210,10 @@ public class BackendInterface {
 				DriverEditor.selectedSentIndexRange[1] = selectedSentInfo[2];
 				DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
 
-				GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
+				//no longer automatically translating even if checkmarked, only when the user clicks "start"
+				//GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
+				main.notTranslated.setText("You granted access for translations to be obtained from Microsoft Bing in Preferences.\n\nTo begin, click the Start button");
+				main.translationsHolderPanel.add(main.notTranslated, "");
 				DriverEditor.charsInserted = 0; // this gets updated when the document is loaded.
 				DriverEditor.charsRemoved = 0;	
 				DriverEditor.caretPositionPriorToCharInsertion = 0;

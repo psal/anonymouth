@@ -54,12 +54,12 @@ public class ThePresident {
 	//public static final String LOG_DIR = System.getProperty("user.home")+"/Desktop/anonymouth_log";
 	public static boolean IS_MAC = false;
 	public static String SER_DIR = WORKING_DIR + ".serialized_objects/";
-	public static boolean AUTOSAVE_LATEST_VERSION = PropertiesUtil.getAutoSave();
-	public static boolean SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = PropertiesUtil.getVersionAutoSave(); // this should go in preferences utility
+	public static boolean AUTOSAVE_LATEST_VERSION = PropertiesUtil.defaultAutoSave;
+	public static boolean SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = PropertiesUtil.defaultVersionAutoSave; // this should go in preferences utility
 	public static boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
 	public static boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: put in "options
-	public static int MAX_FEATURES_TO_CONSIDER = PropertiesUtil.getMaximumFeatures(); // todo: put in 'options', and figure out an optimal number (maybe based upon info gain, total #, etc.)... basically, when the processing time outweighs the benefit, that should be our cutoff.
-	public static int NUM_TAGGING_THREADS = PropertiesUtil.getThreadCount();
+	public static int MAX_FEATURES_TO_CONSIDER = PropertiesUtil.defaultFeatures; // todo: put in 'options', and figure out an optimal number (maybe based upon info gain, total #, etc.)... basically, when the processing time outweighs the benefit, that should be our cutoff.
+	public static int NUM_TAGGING_THREADS = PropertiesUtil.defaultThreads;
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
 	public static boolean CLASSIFIER_SAVED = false;
 	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
@@ -109,6 +109,7 @@ public class ThePresident {
 		ThePresident leader = new ThePresident();
 		if(OS.contains("mac")) {
 			System.setProperty("WEKA_HOME", "/dev/null");
+			PropertiesUtil.defaultThreads = 2; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
 			IS_MAC = true;
 			Logger.logln(leader.NAME+"We're on a Mac!");

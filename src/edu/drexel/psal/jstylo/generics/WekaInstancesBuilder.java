@@ -16,6 +16,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.jgaap.generics.*;
 
+import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
+import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.eventDrivers.CharCounterEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver;
 import edu.drexel.psal.jstylo.eventDrivers.SentenceCounterEventDriver;
@@ -37,7 +39,7 @@ public class WekaInstancesBuilder {
 	/**
 	 * Determines the number of threads to be used for features extraction.
 	 */
-	public int numCalcThreads = 4;
+	public int numCalcThreads = ThePresident.NUM_TAGGING_THREADS;
 	
 	/**
 	 * Determines whether to use a set of SparseInstance or Instance.
@@ -237,14 +239,15 @@ public class WekaInstancesBuilder {
 		known = new ArrayList<List<EventSet>>(knownDocs.size());
 		int knownDocsSize = knownDocs.size();
 		
-		int numCalcThreadsToUse = 4;
-		numCalcThreads = getNumCalcThreads();
-		
-		if (numCalcThreads>knownDocsSize){
-			numCalcThreadsToUse=knownDocsSize;
-		} else if (numCalcThreads>1){
-			numCalcThreadsToUse=numCalcThreads;
-		}
+		int numCalcThreadsToUse = ThePresident.NUM_TAGGING_THREADS;
+		numCalcThreads = numCalcThreadsToUse;
+//		numCalcThreads = getNumCalcThreads();
+//		
+//		if (numCalcThreads>knownDocsSize){
+//			numCalcThreadsToUse=knownDocsSize;
+//		} else if (numCalcThreads>1){
+//			numCalcThreadsToUse=numCalcThreads;
+//		}
 		
 		Logger.logln("Using N calc threads: "+numCalcThreadsToUse);
 		int div = knownDocsSize / numCalcThreadsToUse;

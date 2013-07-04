@@ -193,6 +193,13 @@ public class PreferencesDriver {
 						if (answer == JOptionPane.YES_OPTION) {
 							GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
 							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+							
+							main.startTranslations.setEnabled(false);
+							main.stopTranslations.setEnabled(true);
+						} else {
+							main.startTranslations.setEnabled(true);
+							main.stopTranslations.setEnabled(false);
+							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
 						}
 					} else {
 						main.notTranslated.setText("Please process your document to recieve translation suggestions.");
@@ -204,6 +211,8 @@ public class PreferencesDriver {
 					PropertiesUtil.setDoTranslations(false);
 					main.notTranslated.setText("You have turned translations off.");
 					main.translationsHolderPanel.add(main.notTranslated, "");
+					main.startTranslations.setEnabled(false);
+					main.stopTranslations.setEnabled(false);
 				}
 			}
 		};

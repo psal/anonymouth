@@ -35,6 +35,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JCheckBox warnQuit;
 	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
+	protected JLabel translationsNote;
 	protected JLabel fontSize;
 	protected JCheckBox highlightElems;
 	protected JComboBox<String> fontSizes;
@@ -141,9 +142,13 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			}
 			
 			translations = new JCheckBox();
-			translations.setText("Send sentences to Microsoft Bing© for translation");
+			translations.setText("Enable sending sentences to Microsoft Bing© for translation");
 			if (PropertiesUtil.getDoTranslations())
 				translations.setSelected(true);
+			
+			translationsNote = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" /><center>Note: Once checked, simply click the Start button in the translations tab to " +
+					"begin translations. This button will not be clickable unless permission is granted via this checkbox.</center></html>");
+			translationsNote.setForeground(Color.GRAY);
 			
 			autoSaveNote = new JLabel("<html><center>Note: Will overwrite original document with changes.<br>THIS ACTION CANNOT BE UNDONE</center></html>");
 			autoSaveNote.setForeground(Color.GRAY);
@@ -169,12 +174,13 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			general.add(warnQuit, "wrap");
 			general.add(showWarnings, "wrap");
 			general.add(translations, "wrap");
+			general.add(translationsNote, "alignx 50%, wrap");
 			general.add(sep, "alignx 50%, wrap");
 			general.add(fontSize, "split 2");
 			general.add(fontSizes, "wrap");
 			general.add(highlightElems);
 			
-			generalHeight = 320;
+			generalHeight = 370;
 		}
 		
 		MigLayout defaultLayout = new MigLayout();

@@ -234,6 +234,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel translationsPanel;
 	protected JLabel translationsLabel;
 	protected JButton resetTranslator;
+	protected JButton stopTranslations;
+	protected JButton startTranslations;
 	protected ScrollablePanel translationsHolderPanel;
 	protected JScrollPane translationsScrollPane;
 	protected JPanel progressPanel;
@@ -541,11 +543,22 @@ public class GUIMain extends javax.swing.JFrame {
 			}
 		}
 
-		try {propReader = new BufferedReader (new FileReader(PropertiesUtil.propFileName));} 
-		catch (FileNotFoundException e) {e.printStackTrace();}
+		try {
+			propReader = new BufferedReader (new FileReader(PropertiesUtil.propFileName));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
-		try {PropertiesUtil.prop.load(propReader);}
-		catch (IOException e) {e.printStackTrace();}
+		try {
+			PropertiesUtil.prop.load(propReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		ThePresident.AUTOSAVE_LATEST_VERSION = PropertiesUtil.getAutoSave();
+		ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = PropertiesUtil.getVersionAutoSave();
+		ThePresident.MAX_FEATURES_TO_CONSIDER = PropertiesUtil.getMaximumFeatures();
+		ThePresident.NUM_TAGGING_THREADS = PropertiesUtil.getThreadCount();
 	}
 
 	private void initGUI() {
@@ -1215,8 +1228,8 @@ public class GUIMain extends javax.swing.JFrame {
 					return true;
 				}
 			};
-			translationsHolderPanel.setScrollableUnitIncrement(SwingConstants.VERTICAL, ScrollablePanel.IncrementType.PIXELS, 74);
-			translationsHolderPanel.setAutoscrolls(true);
+			translationsHolderPanel.setScrollableUnitIncrement(SwingConstants.VERTICAL, ScrollablePanel.IncrementType.PIXELS, 10);
+			translationsHolderPanel.setAutoscrolls(false);
 			translationsHolderPanel.setOpaque(true);
 			translationsHolderPanel.setLayout(new MigLayout(
 					"wrap, ins 0, gap 0",
@@ -1238,6 +1251,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 			translationsScrollPane = new JScrollPane(translationsHolderPanel);
 			translationsScrollPane.setOpaque(true);
+			translationsScrollPane.setAutoscrolls(false);
 
 			progressPanel = new JPanel();
 			progressPanel.setLayout(new MigLayout(
@@ -1263,15 +1277,18 @@ public class GUIMain extends javax.swing.JFrame {
 			}
 
 			resetTranslator = new JButton("Reset Translator");
-			if (PropertiesUtil.getDoTranslations()) {
-				resetTranslator.setEnabled(true);
-			} else {
-				resetTranslator.setEnabled(false);
-			}
+			resetTranslator.setEnabled(false);
+			
+			stopTranslations = new JButton("Stop");
+			stopTranslations.setEnabled(false);
+			startTranslations = new JButton("Start");
+			startTranslations.setEnabled(false);
 			
 			translationsPanel.add(translationsLabel, "grow, h 25!, split 1");
-			translationsPanel.add(translationsScrollPane, "grow, h :100%:");
-			translationsPanel.add(resetTranslator, "h 30!");
+			translationsPanel.add(stopTranslations, "split, h 30!");
+			translationsPanel.add(startTranslations, "h 30!, wrap");
+			translationsPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
+			translationsPanel.add(resetTranslator, "h 30!, wrap");
 			translationsPanel.add(progressPanel, "grow");
 		}
 		return translationsPanel;

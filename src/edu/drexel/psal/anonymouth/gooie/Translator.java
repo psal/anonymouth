@@ -112,13 +112,10 @@ public class Translator implements Runnable {
 		main.translationsProgressLabel.setText("Sentence: 1/" + sentences.size() + " Languages: 0/"  + Translation.getUsedLangs().length);
 
 		// translate all languages for each sentence, sorting the list based on anon index after each translation
-		while (!sentences.isEmpty() && currentSentNum <= sentences.size()) {
-			
-			
-			
+		while (!sentences.isEmpty() && currentSentNum <= sentences.size()) {			
 			if (!sentences.get(currentSentNum - 1).isTranslated()) {
 				// Translate the sentence for each language				
-				for (Language lang: Translation.getUsedLangs()) {					
+				for (Language lang: Translation.getUsedLangs()) {
 					if (currentLangNum >= stoppedLangNum) {
 						if (sentences.size() == 0) {
 							stop = false;
@@ -200,5 +197,7 @@ public class Translator implements Runnable {
 		main.translationsProgressBar.setValue(0);
 		main.translationsProgressLabel.setText("No Translations Pending.");
 		main.processButton.setEnabled(true);
+		main.stopTranslations.setEnabled(false);
+		main.startTranslations.setEnabled(true);
 	}
 }

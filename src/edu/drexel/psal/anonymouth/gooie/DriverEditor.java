@@ -69,6 +69,7 @@ public class DriverEditor {
 	protected static Attribute currentAttrib;
 	public static boolean hasCurrentAttrib = false;
 	public static boolean isWorkingOnUpdating = false;
+	private static String savePath;
 	
 	// It seems redundant to have these next four variables, but they are used in slightly different ways, and are all necessary.
 	public static int currentCaretPosition = -1;
@@ -190,6 +191,12 @@ public class DriverEditor {
 		main.elementsToRemoveTable.setFocusable(b);
 		main.getDocumentPane().setEnabled(b);
 		main.clipboard.setEnabled(b);
+		
+		if (PropertiesUtil.getDoTranslations() && b) {
+			main.startTranslations.setEnabled(true);
+		} else {
+			main.startTranslations.setEnabled(false);
+		}
 
 		if (b) {
 			if (PropertiesUtil.getDoTranslations()) {
@@ -217,7 +224,7 @@ public class DriverEditor {
 		 * We must do this AFTER creating the new tagged sentence so that the translations are attached to the most recent tagged sentence, not the old
 		 * one that was replaced. 
 		 */
-		if (translate) {
+		if (translate && !main.startTranslations.isEnabled() && PropertiesUtil.getDoTranslations()) {
 			translate = false;
 			GUIMain.GUITranslator.replace(taggedDoc.getSentenceNumber(oldSelectionInfo[0]), originals.get(originalSents.get(oldSelectionInfo[0])));//new old
 			main.anonymityDrawingPanel.updateAnonymityBar();
@@ -320,7 +327,7 @@ public class DriverEditor {
 				removeHighlightWordsToRemove(main);
 			}
 		} catch (BadLocationException err) {
-			err.printStackTrace();
+			Logger.logln(NAME+"Highlighting sentence failed, bounds[0] = " + bounds[0] + ", bounds[1] = " + bounds[1] + ", sentToTranslate = " + sentToTranslate, LogOut.STDERR);
 		}
 		synchronized(lock) {
 			lock.notify();
@@ -559,7 +566,7 @@ public class DriverEditor {
 									TaggedDocument.userDeletedSentence = false;
 								}
 							} catch (Exception e1) {
-								Logger.logln(NAME+"Error occured while attempting to delete an EOS character.", LogOut.STDERR);
+								Logger.logln(NAME+"Error occurred while attempting to delete an EOS character.", LogOut.STDERR);
 								Logger.logln(NAME+"-> leftSentInfo", LogOut.STDERR);
 								if (leftSentInfo != null) {
 									for (int i = 0; i < leftSentInfo.length; i++)
@@ -571,7 +578,7 @@ public class DriverEditor {
 								Logger.logln(NAME+"-> rightSentInfo", LogOut.STDERR);
 								if (rightSentInfo != null) {
 									for (int i = 0; i < leftSentInfo.length; i++)
-										Logger.logln(NAME+"\rightSentInfo["+i+"] = " + rightSentInfo[i], LogOut.STDERR);
+										Logger.logln(NAME+"\trightSentInfo["+i+"] = " + rightSentInfo[i], LogOut.STDERR);
 								} else {
 									Logger.logln(NAME+"\rightSentInfo was null!", LogOut.STDERR);
 								}
@@ -906,7 +913,7 @@ public class DriverEditor {
 							// ----- create the main document and add it to the appropriate array list.
 							// ----- may not need the arraylist in the future since you only really can have one at a time
 							TaggedDocument taggedDocument = new TaggedDocument();
-							ConsolidationStation.toModifyTaggedDocs=new ArrayList<TaggedDocument>();
+							ConsolidationStation.toModifyTaggedDocs = new ArrayList<TaggedDocument>();
 							ConsolidationStation.toModifyTaggedDocs.add(taggedDocument);
 							taggedDoc = ConsolidationStation.toModifyTaggedDocs.get(0);
 
@@ -941,7 +948,7 @@ public class DriverEditor {
 							taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
 
 							Logger.logln(NAME+"Repeat processing starting....");
-							resetAll(main);
+							resetAll(main, true);
 						}
 
 						main.getDocumentPane().getHighlighter().removeAllHighlights();
@@ -961,6 +968,15 @@ public class DriverEditor {
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"Save As document button clicked.");
 				JFileChooser save = new JFileChooser();
+				
+				File dir;
+				try {
+					dir = new File(new File(main.ps.getTestDocs().get(0).getFilePath()).getCanonicalPath());
+					save.setCurrentDirectory(dir);
+				} catch (IOException e1) {
+					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
+				}
+				
 				save.setSelectedFile(new File("anonymizedDoc.txt"));
 				save.addChoosableFileFilter(new ExtFilter("txt files (*.txt)", "txt"));
 				int answer = save.showSaveDialog(main);
@@ -968,6 +984,7 @@ public class DriverEditor {
 				if (answer == JFileChooser.APPROVE_OPTION) {
 					File f = save.getSelectedFile();
 					String path = f.getAbsolutePath();
+					savePath = path;
 					if (!path.toLowerCase().endsWith(".txt"))
 						path += ".txt";
 					try {
@@ -997,18 +1014,21 @@ public class DriverEditor {
 	 * Resets everything to their default values, to be used before reprocessing
 	 * @param main - An instance of GUIMain
 	 */
-	public static void resetAll(GUIMain main) {
+	public static void resetAll(GUIMain main, boolean reprocessing) {
 		reset();
 		GUIMain.GUITranslator.reset();	
-		DriverTranslationsTab.reset();
+		DriverTranslationsTab.reset(reprocessing);
 		main.versionControl.reset();
 		main.anonymityDrawingPanel.reset();
 		main.resultsWindow.reset();
 		GUIUpdateInterface.updateResultsPrepColor(main);
 		main.elementsToRemoveTable.removeAllElements();
-		main.elementsToRemoveModel.addRow(new String[] {"Re-processing, please wait", ""});
 		main.elementsToAdd.removeAllElements();
-		main.elementsToAdd.add(0, "Re-processing, please wait");
+		
+		if (reprocessing) {
+			main.elementsToRemoveModel.addRow(new String[] {"Re-processing, please wait", ""});
+			main.elementsToAdd.add(0, "Re-processing, please wait");
+		}
 	}
 
 	public static void reset() {
@@ -1040,23 +1060,25 @@ public class DriverEditor {
 	public static void save(GUIMain main) {
 		Logger.logln(NAME+"Save document button clicked.");
 
-		String path = main.ps.getTestDocs().get(0).getFilePath();
+		if (savePath == null) {
+			DriverEditor.saveAsTestDoc.actionPerformed(new ActionEvent(main.saveButton, ActionEvent.ACTION_PERFORMED, "Save As..."));
+		} else {
+			try {
+				BufferedWriter bw = new BufferedWriter(new FileWriter(savePath));
+				bw.write(main.getDocumentPane().getText());
+				bw.flush();
+				bw.close();
+				Logger.log("Saved contents of document to "+savePath);
 
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(path));
-			bw.write(main.getDocumentPane().getText());
-			bw.flush();
-			bw.close();
-			Logger.log("Saved contents of document to "+path);
-
-			GUIMain.saved = true;
-		} catch (IOException exc) {
-			Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
-			Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-			JOptionPane.showMessageDialog(null,
-					"Failed saving contents of current tab into:\n"+path,
-					"Save Problem Set Failure",
-					JOptionPane.ERROR_MESSAGE);
+				GUIMain.saved = true;
+			} catch (IOException exc) {
+				Logger.logln(NAME+"Failed opening "+savePath+" for writing",LogOut.STDERR);
+				Logger.logln(NAME+exc.toString(),LogOut.STDERR);
+				JOptionPane.showMessageDialog(null,
+						"Failed saving contents of current tab into:\n"+savePath,
+						"Save Problem Set Failure",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 

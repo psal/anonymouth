@@ -256,6 +256,23 @@ public class TaggedDocument implements Serializable{
 	}
 	
 	/**
+	 * Checks all sentences in the tagged document and returns whether or not they are all translated.
+	 */
+	public boolean isTranslated() {
+		boolean result = true;
+		int size = getNumSentences();
+		
+		for (int i = 0; i < size; i++) {
+			if (!taggedSentences.get(i).isTranslated()) {
+				result = false;
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Uses a given index and calculates the sentence number of the index.
 	 * @param index - The positions in the document text.
 	 * @return returnValue - The sentence number. If none is found, -1 is returned.

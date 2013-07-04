@@ -167,7 +167,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		}
 
 		translations = sortedTrans; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
-		translationNames = sortedTranNames; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
+		translationNames = sortedTranNames; // set translations to be the same list of translated sentences, but now in order of Anonymity Index		
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class ErrorHandler {
 	
 	public static void editorError(String title, String errorMessage) {
 		Logger.logln(NAME+"An error was encountered in the editor.", LogOut.STDERR);
-		JOptionPane.showConfirmDialog(null, "", "", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null);
+		JOptionPane.showConfirmDialog(null, errorMessage, title, JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null);
 	}
 	
 	public static void incompleteSentence(){

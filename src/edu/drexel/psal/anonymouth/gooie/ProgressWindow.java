@@ -24,11 +24,11 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	private GUIMain main;
 	protected Thread t;
 	private Task task;
-	private String text;
+	private JLabel firstMessage;
+	private String progressMessage;
 //	private Boolean continueLoop;
 	private JProgressBar editorProgressBar;
 	private JLabel editingProgressBarLabel;
-	private JPanel processPanel;
 
 	/**
 	 * Constructor
@@ -36,27 +36,36 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	 * @param main - an instance of GUIMain
 	 */
 	public ProgressWindow(String title, GUIMain main) {
-		super(main, title, Dialog.ModalityType.MODELESS); // MODELESS lets it stay on top, but not block any processes
+		super(main, title, null); // MODELESS lets it stay on top, but not block any processes
 		this.main = main;
 		main.setEnabled(false);
 		
-		text = "";
+		firstMessage = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" />" +
+				"<center>Document currently processing, depending on the size of your dataset and computer this may take " +
+				"several minutes. Please wait.</center></html>");
+		
+		progressMessage = "";
 //		continueLoop = true;
 		
 		editingProgressBarLabel = new JLabel();
-		editingProgressBarLabel.setText("Editing Progress:");
+		editingProgressBarLabel.setText("<html><center>Editing Progress:</center></html>");
+		editingProgressBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		editorProgressBar = new JProgressBar();
 		editorProgressBar.setIndeterminate(false);
 		
-		processPanel = new JPanel(new FlowLayout());
-		processPanel.add(editingProgressBarLabel);
-		processPanel.add(editorProgressBar);
-		processPanel.setSize(280, 80);
+		JPanel progressPanel = new JPanel(new BorderLayout(0, 5));
+		progressPanel.add(editingProgressBarLabel, BorderLayout.NORTH);
+		progressPanel.add(editorProgressBar, BorderLayout.SOUTH);
 		
-		this.add(processPanel);
+		JPanel completePanel = new JPanel(new BorderLayout());
+		completePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		completePanel.add(firstMessage, BorderLayout.NORTH);
+		completePanel.add(progressPanel, BorderLayout.SOUTH);
+		
+		this.add(completePanel);
 		this.setResizable(false);
-		this.setSize(280, 80);
+		this.setSize(320, 150);
 		this.setLocationRelativeTo(null);
 	}
 
@@ -69,12 +78,12 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 		@Override
 		public Void doInBackground() {
 			t = new Thread();
-			editingProgressBarLabel.setText(text);
+			editingProgressBarLabel.setText(progressMessage);
 			editorProgressBar.setEnabled(true);
 			int i = 0;
 			while (true) {
 				for (i = 0; i < 101; i++) {
-					editingProgressBarLabel.setText(text);
+					editingProgressBarLabel.setText(progressMessage);
 					editorProgressBar.setValue(i);
 					try {
 						Thread.sleep(20);
@@ -116,10 +125,10 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	
 	/**
 	 * Sets the progress bar's label
-	 * @param text - whatever you want to display
+	 * @param progressMessage - whatever you want to display
 	 */
-	public void setText(String text) {
-		this.text = text;
+	public void setText(String progressMessage) {
+		this.progressMessage = progressMessage;
 	}
 	
 	/**
