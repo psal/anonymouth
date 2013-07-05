@@ -71,11 +71,32 @@ public class GUIMain extends javax.swing.JFrame {
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 
 	{
-		//Set Look & Feel
-		try {
-			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-		} catch(Exception e) {
-			e.printStackTrace();
+		boolean lookAndFeelSet = false;
+		//Set Look & Feel 
+		// -- start patch submitted by Sebastian Pipping
+		// Try best natives looks explicitly
+		// (or we might still end up with Metal but GTK+ on Linux)
+		final String[] themeClassesToTry = {
+			"com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
+			"com.sun.java.swing.plaf.gtk.GTKLookAndFeel",
+		};
+		
+		for (String themeClassName : themeClassesToTry) {
+			try {
+				UIManager.setLookAndFeel(themeClassName);
+				lookAndFeelSet = true; // added by AweM
+			} catch (Exception e) {
+				lookAndFeelSet = false; // added by AweM
+				
+			}
+		}
+		// -- end patch
+		if(lookAndFeelSet = false){
+			try { 
+				javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
