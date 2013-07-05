@@ -59,18 +59,18 @@ public class DriverPreProcessTabDocuments {
 		
 		DriverEditor.resetAll(main, false);
 		
-		//main.processButton.setText("Process");
+		main.processButton.setText("Process");
 		main.getDocumentPane().setEnabled(false);
 		main.ps = new ProblemSet();
 		main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
 		
-//		GUIUpdateInterface.updateTestDocTable(main);
-//		GUIUpdateInterface.updateUserSampleDocTable(main);
-//		GUIUpdateInterface.updateTrainDocTree(main);
-//		
-//		main.addTestDocJButton.setEnabled(true);
-//		main.PPSP.addTestDocJButton.setEnabled(true);
-//		DriverEditor.setAllDocTabUseable(false, main);
+		GUIUpdateInterface.updateTestDocTable(main);
+		GUIUpdateInterface.updateUserSampleDocTable(main);
+		GUIUpdateInterface.updateTrainDocTree(main);
+		
+		main.addTestDocJButton.setEnabled(true);
+		main.PPSP.addTestDocJButton.setEnabled(true);
+		DriverEditor.setAllDocTabUseable(false, main);
 		ThePresident.CLASSIFIER_SAVED = false;
 		main.saveButton.setEnabled(false);
 		main.repaint();
