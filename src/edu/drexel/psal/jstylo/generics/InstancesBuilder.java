@@ -8,9 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.SortedMap;
 
 import com.jgaap.generics.Document;
 import com.jgaap.generics.EventSet;
@@ -21,6 +19,7 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
+import weka.core.converters.CSVSaver;
 
 /**
  * An API for the feature extraction process. Designed for running on a single machine
@@ -43,6 +42,11 @@ public class InstancesBuilder extends Engine {
 	private List<EventSet> relevantEvents;	//the events/sets to pay attention to
 	private ArrayList<Attribute> attributes;	//the relevant events converted into attributes
 
+	//ThreadArrays so that we can stop them if the user cancels something mid process
+	FeatureExtractionThread[] featThreads;
+	CreateTrainInstancesThread[] trainThreads;
+	CreateTestInstancesThread[] testThreads;
+	
 	// Relevant data to spit out at the end
 	private Instances trainingInstances;	//training doc Instances
 	private Instances testInstances;	//testDoc Instances
@@ -219,24 +223,24 @@ public class InstancesBuilder extends Engine {
 		
 		//if some documents are leftover after divvying them up, increment the div
 		int div = knownDocsSize / threadsToUse;
-		if (div % knownDocsSize != 0)
+		if (div % threadsToUse != 0)
 			div++;
 		
 		//Parallelized feature extraction
-		FeatureExtractionThread[] calcThreads = new FeatureExtractionThread[threadsToUse];
+		featThreads = new FeatureExtractionThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++) //create the threads
-			calcThreads[thread] = new FeatureExtractionThread(div, thread,
+			featThreads[thread] = new FeatureExtractionThread(div, thread,
 					knownDocsSize, knownDocs, new CumulativeFeatureDriver(cfd));
 		for (int thread = 0; thread < threadsToUse; thread++) //start them
-			calcThreads[thread].start();
+			featThreads[thread].start();
 		for (int thread = 0; thread < threadsToUse; thread++) //join them
-			calcThreads[thread].join();
+			featThreads[thread].join();
 		for (int thread = 0; thread < threadsToUse; thread++) //combine List<List<EventSet>>
-			eventList.addAll(calcThreads[thread].list);
+			eventList.addAll(featThreads[thread].list);
 		for (int thread = 0; thread < threadsToUse; thread++) //destroy threads
-			calcThreads[thread] = null;
+			featThreads[thread] = null;
 		
-		calcThreads = null;
+		featThreads = null;
 		
 		//cull the List<List<EventSet>> before returning
 		List<List<EventSet>> temp = cull(eventList, cfd);
@@ -284,22 +288,22 @@ public class InstancesBuilder extends Engine {
 
 		//initialize the div and make sure it captures everything
 		int div = numInstances / threadsToUse;
-		if (div % numInstances != 0)
+		if (div % threadsToUse != 0)
 			div++;
 
 		//Parallelized magic
-		CreateTrainInstancesThread[] calcThreads = new CreateTrainInstancesThread[threadsToUse];
+		trainThreads = new CreateTrainInstancesThread[threadsToUse];
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances,new CumulativeFeatureDriver(cfd));
+			trainThreads[thread] = new CreateTrainInstancesThread(trainingInstances,div,thread,numInstances,new CumulativeFeatureDriver(cfd));
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread].start();
+			trainThreads[thread].start();
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread].join();
+			trainThreads[thread].join();
 		for (int thread = 0; thread < threadsToUse; thread++)
-			generatedInstances.addAll(calcThreads[thread].list);
+			generatedInstances.addAll(trainThreads[thread].list);
 		for (int thread = 0; thread < threadsToUse; thread++)
-			calcThreads[thread] = null;
-		calcThreads = null;
+			trainThreads[thread] = null;
+		trainThreads = null;
 		
 		//add all of the generated instance objects into the Instances object.
 		for (Instance inst: generatedInstances){
@@ -315,17 +319,17 @@ public class InstancesBuilder extends Engine {
 	public void createTestInstancesThreaded() throws Exception {
 		// create the empty Test instances object
 		testInstances = new Instances("TestInstances", attributes, ps
-				.getTestDocs().size());
+				.getAllTestDocs().size());
 		
 		//if there are no test instances, set the instance object to null and move on with our lives
-		if (ps.getTestDocs().size()==0){
+		if (ps.getAllTestDocs().size()==0){
 			testInstances=null;
 		} else { //otherwise go through the whole process
 			
 			//create/fetch data
 			List<Instance> generatedInstances = new ArrayList<Instance>();
 			int threadsToUse = numThreads;
-			int numInstances = ps.getTestDocs().size();
+			int numInstances = ps.getAllTestDocs().size();
 		
 			//make sure number of threads isn't silly
 			if (numThreads > numInstances) {
@@ -334,22 +338,22 @@ public class InstancesBuilder extends Engine {
 
 			//ensure the docs are divided correctly
 			int div = numInstances / threadsToUse;
-			if (div % numInstances != 0)
+			if (div % threadsToUse != 0)
 				div++;
 
 			//Perform some parallelization magic
-			CreateTestInstancesThread[] calcThreads = new CreateTestInstancesThread[threadsToUse];
+			testThreads = new CreateTestInstancesThread[threadsToUse];
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
+				testThreads[thread] = new CreateTestInstancesThread(testInstances,div,thread,numInstances, new CumulativeFeatureDriver(cfd));
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread].start();
+				testThreads[thread].start();
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread].join();
+				testThreads[thread].join();
 			for (int thread = 0; thread < threadsToUse; thread++)
-				generatedInstances.addAll(calcThreads[thread].list);
+				generatedInstances.addAll(testThreads[thread].list);
 			for (int thread = 0; thread < threadsToUse; thread++)
-				calcThreads[thread] = null;
-			calcThreads = null;
+				testThreads[thread] = null;
+			testThreads = null;
 			
 			//add all of the instance objects to the Instances object
 			for (Instance inst: generatedInstances){
@@ -509,8 +513,55 @@ public class InstancesBuilder extends Engine {
 	public List<Document> getTrainDocs(){
 		return ps.getAllTrainDocs();
 	}
+	
+	public List<Document> getTestDocs(){
+		return ps.getAllTestDocs();
+	}
 
 	//////////////////////////////////////////// Utilities
+	/**
+	 * Writes the given Instances set into an ARFF file in the given filename.
+	 * @param filename
+	 * 		The filename of the ARFF file to create.
+	 * @param set
+	 * 		The Weka Instances object from which to create an ARFF file.
+	 * @return
+	 * 		True iff the write succeeded.
+	 */
+	public static boolean writeToARFF(String filename, Instances set) {
+		try {
+			ArffSaver saver = new ArffSaver();
+			 saver.setInstances(set);
+			 saver.setFile(new File(filename));
+			 saver.writeBatch();
+			 return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * Writes the given Instances set into an CSV file in the given filename.
+	 * @param filename
+	 * 		The filename of the CSV file to create.
+	 * @param set
+	 * 		The Weka Instances object from which to create an ARFF file.
+	 * @return
+	 * 		True iff the write succeeded.
+	 */
+	public static boolean writeToCSV(String filename, Instances set) {
+		try {
+			CSVSaver saver = new CSVSaver();
+			saver.setInstances(set);
+			saver.setFile(new File(filename));
+			saver.writeBatch();
+			return true;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+	}
 	
 	/**
 	 * Sets classification relevant data to null
@@ -521,8 +572,45 @@ public class InstancesBuilder extends Engine {
 		infoGain = null;
 		trainingInstances = null;
 		testInstances = null;
+		killThreads();
 	}
 
+	/**
+	 * For use when stopping analysis mid-way through it. Kills any processing threads
+	 */
+	public void killThreads() {
+		
+		if (!(featThreads==null)){
+			for (int i=0; i<featThreads.length; i++){
+				featThreads[i].stop();
+			}
+			for (int i=0; i<featThreads.length; i++){
+				featThreads[i] = null;
+			}
+			featThreads=null;
+		}
+		
+		if (!(trainThreads==null)){
+			for (int i=0; i<trainThreads.length; i++){
+				trainThreads[i].stop();
+			}
+			for (int i=0; i<trainThreads.length; i++){
+				trainThreads[i] = null;
+			}
+			trainThreads=null;
+		}
+		
+		if (!(testThreads==null)){
+			for (int i=0; i<testThreads.length; i++){
+				testThreads[i].stop();
+			}
+			for (int i=0; i<testThreads.length; i++){
+				testThreads[i] = null;
+			}
+			testThreads=null;
+		}
+		
+	}
 
 	//////////////////////////////////////////// Thread Definitions
 	
@@ -567,7 +655,7 @@ public class InstancesBuilder extends Engine {
 					* (threadId + 1)); i++)
 				try {
 					//grab the document
-					Document doc = ps.getTestDocs().get(i);
+					Document doc = ps.getAllTestDocs().get(i);
 					//extract its event sets
 					List<EventSet> events = extractEventSets(doc, cfd);
 					//cull the events/eventSets with respect to training events/sets
@@ -583,7 +671,7 @@ public class InstancesBuilder extends Engine {
 					list.add(instance);
 				} catch (Exception e) {
 					Logger.logln("Error creating Test Instances!", LogOut.STDERR);
-					Logger.logln(ps.getTestDocs().get(i).getFilePath());
+					Logger.logln(ps.getAllTestDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}
@@ -642,7 +730,8 @@ public class InstancesBuilder extends Engine {
 					//add it to this div's list of completed instances
 					list.add(instance);
 				} catch (Exception e) {
-					Logger.logln("Error creating Instances!", LogOut.STDERR);
+					Logger.logln("Error creating Training Instances!", LogOut.STDERR);
+					Logger.logln(ps.getAllTrainDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -17,11 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.border.Border;
 
 import edu.drexel.psal.jstylo.generics.Analyzer;
-import edu.drexel.psal.jstylo.generics.Logger;
 /**
  * 
  * Created in ClassTabDriver, this popup will allow for the editing of a classifier's arguments, and will
@@ -187,7 +184,7 @@ public class ClassWizard extends javax.swing.JFrame {
 								"If the text field is blank, the arg is optional. You can leave it blank to ignore it, or fill it in with an appropriate value<br>" +
 								"Clicking the \"Apply Changes\" button will change the arg string and close the window.<br>"+
 								"Clicking the \"Cancel\" button will undo any changes.<br><br>" +
-								"NOTE: For classifiers which are toggled on/off please use either \"&lt;ON/OFF&gt;\" as the argument<br>" +
+								"NOTE: For arguments which are toggled on/off please use either \"&lt;ON/OFF&gt;\" as the argument<br>" +
 								"<br></p></html>");
 						descriptionPanel.add(summaryJLabel,BorderLayout.NORTH);
 					}
@@ -229,7 +226,7 @@ public class ClassWizard extends javax.swing.JFrame {
 						//loop through options, adding a new option-description pair for each one
 						for (int i=0; i<args.size();i++){
 							
-							JTextField tempLabel = new JTextField("\n"+args.get(i).getDescription());
+							JTextField tempLabel = new JTextField("\n"+args.get(i).getFlag()+" : "+args.get(i).getDescription());
 							tempLabel.setPreferredSize(new Dimension(550,30));
 							tempLabel.setEditable(false);
 							

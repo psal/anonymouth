@@ -87,27 +87,25 @@ public class GUIUpdateInterface {
 	/**
 	 * Updates the test documents table with the current problem set. 
 	 */
-	protected static void updateTestDocTable(GUIMain main) 
-	{
+	protected static void updateTestDocTable(GUIMain main) {
 		DefaultListModel<String> dlm = (DefaultListModel<String>)main.prepMainDocList.getModel();
 		DefaultListModel<String> dlm2 = (DefaultListModel<String>)main.PPSP.prepMainDocList.getModel();
 		dlm.removeAllElements();
 		dlm2.removeAllElements();
-		if (main.mainDocReady())
-		{
-			List<Document>testDocs = main.ps.getTestDocs();
-			for (int i=0; i<testDocs.size(); i++)
-			{
+		if (main.mainDocReady()) {
+			List<Document> testDocs = main.ps.getAllTestDocs();
+			
+			for (int i=0; i<testDocs.size(); i++) {
 				dlm.addElement(testDocs.get(i).getTitle());
 				dlm2.addElement(testDocs.get(i).getTitle());
-				System.out.println(testDocs.get(i).getTitle());
-				System.out.println(main.ps.testDocAt(0));
-				main.mainDocPreview = main.ps.testDocAt(0);
+				main.mainDocPreview = main.ps.getAllTestDocs().get(0);
+				
 				try {
 					main.mainDocPreview.load();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 				try {
 					System.out.println(main.mainDocPreview.stringify());
 					main.getDocumentPane().setText(main.mainDocPreview.stringify());
@@ -115,6 +113,7 @@ public class GUIUpdateInterface {
 					e.printStackTrace();
 				}
 			}
+			
 			updateDocLabel(main, testDocs.get(0).getTitle());
 		}
 		updateDocPrepColor(main);

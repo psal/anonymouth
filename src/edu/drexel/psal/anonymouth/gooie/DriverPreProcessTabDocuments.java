@@ -206,7 +206,7 @@ public class DriverPreProcessTabDocuments {
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"'Clear Problem Set' button clicked on the documents tab");
 
-				int answer = -1;
+				int answer = 0;
 				// ask if current problem set is not empty
 				if (main.ps != null && (main.ps.hasAuthors() || main.ps.hasTestDocs())) {
 					if (PropertiesUtil.getWarnAll()) {
@@ -375,13 +375,13 @@ public class DriverPreProcessTabDocuments {
 
 						String path = "";
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
-						for (Document doc: main.ps.getTestDocs())
+						for (Document doc: main.ps.getAllTestDocs())
 							allTestDocPaths.add(doc.getFilePath());
 						for (File file: files) {
 							path = file.getAbsolutePath();
 							if (allTestDocPaths.contains(path))
 								continue;
-							main.ps.addTestDoc(new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
+							main.ps.addTestDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
 						}
 						GUIUpdateInterface.updateTestDocTable(main);
 						main.addTestDocJButton.setEnabled(false);
@@ -443,14 +443,17 @@ public class DriverPreProcessTabDocuments {
 					if (answer == JOptionPane.YES_OPTION) {
 						int[] rows = main.prepMainDocList.getSelectedIndices();
 						String msg = "Removed test documents:\n";
-						for (int i = rows.length-1; i >= 0; i--) {
-							msg += "\t\t> "+main.ps.testDocAt(rows[i]).getTitle()+"\n";
-							main.ps.removeTestDocAt(rows[i]);
+
+						for (int i=rows.length-1; i>=0; i--) {
+							msg += "\t\t> "+main.ps.getAllTestDocs().get(rows[i]).getTitle()+"\n";
+							main.ps.removeTestDocFromList(rows[i]);
 						}
 						Logger.log(msg);
 
 						GUIUpdateInterface.updateTestDocTable(main);
 						GUIUpdateInterface.clearDocPreview(main);
+						//Necessary to clean up the document label (it get's "dirty" with image fragments after this operation and needs to be cleaned.)
+						main.repaint();
 						main.addTestDocJButton.setEnabled(true);
 						main.PPSP.addTestDocJButton.setEnabled(true);
 					} else {
@@ -486,7 +489,7 @@ public class DriverPreProcessTabDocuments {
 
 					String path = "";
 					ArrayList<String> allUserSampleDocPaths = new ArrayList<String>();
-					for (Document doc: main.ps.getTestDocs())
+					for (Document doc: main.ps.getAllTestDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
 					for (Document doc: main.ps.getAllTrainDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
@@ -638,7 +641,7 @@ public class DriverPreProcessTabDocuments {
 						Logger.logln(NAME+"file '"+author+"' was not found. If name in single quotes is 'no author entered', this is not a problem.", LogOut.STDERR);
 					}
 
-					for (Document doc: main.ps.getTestDocs())
+					for (Document doc: main.ps.getAllTestDocs())
 						allTestDocPaths.add(doc.getFilePath());
 					if (main.ps.getTrainDocs(ProblemSet.getDummyAuthor()) != null) {
 						for (Document doc: main.ps.getTrainDocs(ProblemSet.getDummyAuthor()))
@@ -1053,13 +1056,13 @@ public class DriverPreProcessTabDocuments {
 
 					String path = "";
 					ArrayList<String> allTestDocPaths = new ArrayList<String>();
-					for (Document doc: main.ps.getTestDocs())
+					for (Document doc: main.ps.getAllTestDocs())
 						allTestDocPaths.add(doc.getFilePath());
 					for (File file: files) {
 						path = file.getAbsolutePath();
 						if (allTestDocPaths.contains(path))
 							continue;
-						main.ps.addTestDoc(new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
+						main.ps.addTestDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
 					}
 
 					updateOpeningDir(path, false);
@@ -1115,9 +1118,10 @@ public class DriverPreProcessTabDocuments {
 					if (answer == JOptionPane.YES_OPTION) {
 						int[] rows = main.PPSP.prepMainDocList.getSelectedIndices();
 						String msg = "Removed test documents:\n";
+
 						for (int i=rows.length-1; i>=0; i--) {
-							msg += "\t\t> "+main.ps.testDocAt(rows[i]).getTitle()+"\n";
-							main.ps.removeTestDocAt(rows[i]);
+							msg += "\t\t> "+main.ps.getAllTestDocs().get(rows[i]).getTitle()+"\n";
+							main.ps.removeTestDocFromList(rows[i]);
 						}
 						Logger.log(msg);
 
@@ -1192,7 +1196,7 @@ public class DriverPreProcessTabDocuments {
 
 					String path = "";
 					ArrayList<String> allUserSampleDocPaths = new ArrayList<String>();
-					for (Document doc: main.ps.getTestDocs())
+					for (Document doc: main.ps.getAllTestDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
 					for (Document doc: main.ps.getAllTrainDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
@@ -1411,7 +1415,7 @@ public class DriverPreProcessTabDocuments {
 						Logger.logln(NAME+"file '"+author+"' was not found. If name in single quotes is 'no author entered', this is not a problem.", LogOut.STDERR);
 					}
 
-					for (Document doc: main.ps.getTestDocs())
+					for (Document doc: main.ps.getAllTestDocs())
 						allTestDocPaths.add(doc.getFilePath());
 					if (main.ps.getTrainDocs(ProblemSet.getDummyAuthor()) != null) {
 						for (Document doc: main.ps.getTrainDocs(ProblemSet.getDummyAuthor()))

@@ -1,5 +1,8 @@
 package edu.drexel.psal.jstylo.generics;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
@@ -178,13 +181,13 @@ public class SimpleAPI {
 
 		// do a train/test
 		case TRAIN_TEST:
-			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getTestDocs());
+			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
 			break;
 
 		//do both
 		case BOTH:
 			crossValResults = analysisDriver.runCrossValidation(ib.getTrainingInstances(), numFolds, 0);
-			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getTestDocs());
+			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
 			break;
 		
 		//should not occur
@@ -257,14 +260,14 @@ public class SimpleAPI {
 	/**
 	 * @return Evaluation containing train/test statistics
 	 */
-	public Evaluation getTrainTestStatistics(){
-		return analysisDriver.getClassificationStatistics();
+	public Evaluation getTrainTestEval(){
+		return analysisDriver.getTrainTestEval(ib.getProblemSet().getAllTrainDocs());
 	}
 	
 	/**
 	 * @return Evaluation containing cross validation results
 	 */
-	public Evaluation getCrossValResults(){
+	public Evaluation getCrossValEval(){
 		return crossValResults;
 	}
 	
@@ -274,7 +277,7 @@ public class SimpleAPI {
 	public String getCrossValStatString() {
 		
 		try {
-			Evaluation eval = getCrossValResults();
+			Evaluation eval = getCrossValEval();
 			String resultsString = "";
 			resultsString += eval.toSummaryString(false) + "\n";
 			resultsString += eval.toClassDetailsString() + "\n";
@@ -290,39 +293,157 @@ public class SimpleAPI {
 	}
 	
 	/**
-	 * @return String containing accuracy and confusion matrix from train/test. other metrics may not be accurate.
+	 * @return String containing accuracy and confusion matrix from train/test.
 	 */
 	public String getTrainTestStatString() {
-		
-		try {
-			Evaluation eval = getTrainTestStatistics();
-			String resultsString = "";
-			resultsString += eval.toSummaryString(false) + "\n";
-			resultsString += eval.toClassDetailsString() + "\n";
-			resultsString += eval.toMatrixString() + "\n";
-			return resultsString;
-		
-		} catch (Exception e) {
-			System.out.println("Failed to get train/test statistics string");
-			e.printStackTrace();
-			return "";
-		}
+		return analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
 	}
+	
+	public String getWeightedStats(){
+		String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
+		String resultsString = "";
+		
+		int start = source.indexOf("Weighted Avg.");
+		
+		String trimmed = source.substring(start);
+		int end = trimmed.indexOf("\n");
+		resultsString = trimmed.substring(0,end+1);
+		
+		return resultsString;
+	}
+	
+	/**
+	 * @return The accuracy of the given test in percentage format
+	 */
+	public String getClassificationAccuracy(){
+		String results = "";
+		
+		if (selected == analysisType.CROSS_VALIDATION){
+			
+			Evaluation crossEval = getCrossValEval();
+			String summary = crossEval.toSummaryString();
+			int start = summary.indexOf("Correctly classified Instances");
+			int end = summary.indexOf("%");
+			results+=summary.substring(start,end+1)+"\n";
+			
+		} else if (selected == analysisType.TRAIN_TEST){
+			String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
+					
+			int start = source.indexOf("Correctly classified");
+			int end = source.indexOf("%");
+
+			results += source.substring(start,end+1);
+			
+		} else {
+			
+			Evaluation crossEval = getCrossValEval();
+			String summary = crossEval.toSummaryString();
+			int start = summary.indexOf("Correctly Classified Instances");
+			int end = summary.indexOf("%");
+			results+=" CrossVal Results: " + summary.substring(start,end+1)+"\n";
+			
+			List<Author> stats = analysisDriver.getAuthorStatistics(ib.getTestDocs());
+			int correctDocs = 0;
+			int totalDocs = 0;
+			for (Author a: stats){
+
+				if (!(a.getName().equals("_dummy_"))){
+					correctDocs+=a.getTruePositiveCount();
+					totalDocs+=a.getNumberOfDocuments();
+				}
+			}
+			results+="\t\t\tTrain/Test results: "+(((double) correctDocs)/totalDocs)+" %\n";
+		}
+		
+		return results;
+	}
+	
+	/**
+	 * @return the weka clsasifier being used by the analyzer. Will break something if you try to call it on a non-weka analyzer
+	 */
+	public Classifier getUnderlyingClassifier(){
+		return analysisDriver.getClassifier();
+	}
+	
+	public void writeArff(String path, Instances insts){
+		InstancesBuilder.writeToARFF(path,insts);
+	}
+	
+	/////////////////////////////////
+	//TODO try to modify these for statistics sake
+	/*
+	  /**
+	   * Returns the area under ROC for those predictions that have been collected
+	   * in the evaluateClassifier(Classifier, Instances) method. Returns
+	   * Utils.missingValue() if the area is not available.
+	   * 
+	   * @param classIndex the index of the class to consider as "positive"
+	   * @return the area under the ROC curve or not a number
+	   */
+	/*
+	  public double areaUnderROC(int classIndex) {
+
+	    // Check if any predictions have been collected
+	    if (m_Predictions == null) {
+	      return Utils.missingValue();
+	    } else {
+	      ThresholdCurve tc = new ThresholdCurve();
+	      Instances result = tc.getCurve(m_Predictions, classIndex);
+	      return ThresholdCurve.getROCArea(result);
+	    }
+	  }
+
+	  /**
+	   * Calculates the weighted (by class size) AUC.
+	   * 
+	   * @return the weighted AUC.
+	   */
+	/*
+	  public double weightedAreaUnderROC() {
+	    double[] classCounts = new double[m_NumClasses];
+	    double classCountSum = 0;
+	    double[][] matrix = getTrainTestEval().confusionMatrix()
+
+	    for (int i = 0; i < m_NumClasses; i++) {
+	      for (int j = 0; j < m_NumClasses; j++) {
+	        classCounts[i] += matrix[i][j];
+	      }
+	      classCountSum += classCounts[i];
+	    }
+
+	    double aucTotal = 0;
+	    for (int i = 0; i < m_NumClasses; i++) {
+	      double temp = areaUnderROC(i);
+	      if (!Utils.isMissingValue(temp)) {
+	        aucTotal += (temp * classCounts[i]);
+	      }
+	    }
+
+	    return aucTotal / classCountSum;
+	  }
+	
+	*/
 	
 	///////////////////////////////// Main method for testing purposes
 	
 	public static void main(String[] args){
+		
 		SimpleAPI test = new SimpleAPI(
-				"./jsan_resources/problem_sets/enron_demo.xml",
+				"C:/Users/Mordio/workspace/research/tests/200000Words-10000perAuthorNC/CrossVal_600-700.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
 				8, "weka.classifiers.functions.SMO",
 				analysisType.CROSS_VALIDATION);
 
+		
 		test.prepareInstances();
 		test.prepareAnalyzer();
 		test.run();
 		
-		System.out.println("Results: " + "\n" + test.getCrossValStatString());
-		System.out.println("infoGain: "+test.getReadableInfoGain(false));
+		System.out.println(test.getCrossValEval().weightedAreaUnderROC());
+		
+		//test.writeArff("./training.arff",test.getTrainingInstances());
+		//test.writeArff("./testing.arff",test.getTestInstances());
+		
+
 	}
 }

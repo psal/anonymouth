@@ -9,8 +9,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 import java.util.Set;
 
 import weka.attributeSelection.InfoGainAttributeEval;
@@ -177,7 +175,7 @@ public class Engine implements API {
 		// added last)
 		FastVector attributeList = new FastVector(relevantEvents.size() + 1);
 		FastVector authorNames = new FastVector();
-		authorNames.addElement("_dummy_");
+		authorNames.addElement("_Unknown_");
 		for (String name : authors)
 			authorNames.addElement(name);
 		Attribute authorNameAttribute = new Attribute("authorName", authorNames);
@@ -489,11 +487,13 @@ public class Engine implements API {
 			}
 		}
 		
+		//TODO
 		// if it's a test document, it won't have an author
 		if (!(document.getAuthor() == null)) {
 			inst.setValue((Attribute) attributes.get(attributes.size() - 1),
 					document.getAuthor());
 		}
+		
 		return inst;
 	}
 

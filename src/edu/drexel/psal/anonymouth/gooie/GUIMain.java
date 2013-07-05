@@ -105,6 +105,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected final Color ready = new Color(0,255,128);
 	protected final Color notReady = new Color(255,102,102);
 	protected final Color blue = new Color(136,166,233,200);
+	//protected final Color blue = new Color((float)0.62f, (float)0.71, (float)0.93); //without alpha
 
 	// tabs
 	protected JTabbedPane mainJTabbedPane;

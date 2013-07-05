@@ -431,10 +431,12 @@ public class DataAnalyzer{
 	 */
 	public void runInitial(DocumentMagician magician, CumulativeFeatureDriver cfd, Classifier classifier) throws Exception {
 		Logger.logln(NAME+"called runIntitial in DataAnalyzer");
-		List<Document> tempTestDocs = pSet.getTestDocs();
+		List<Document> tempTestDocs = pSet.getAllTestDocs();
 		for (Document d:tempTestDocs) {
 			d.setAuthor(ThePresident.DUMMY_NAME);
 		}
+		if (pSet == null)
+			ThePresident.read("pSet is NULL!");
 		magician.initialDocToData(pSet,cfd, classifier);
 		
 		HashMap<String,Double[][]> attribsAndInstances = magician.getPackagedInstanceData();

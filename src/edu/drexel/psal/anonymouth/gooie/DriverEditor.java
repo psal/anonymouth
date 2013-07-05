@@ -971,7 +971,7 @@ public class DriverEditor {
 				
 				File dir;
 				try {
-					dir = new File(new File(main.ps.getTestDocs().get(0).getFilePath()).getCanonicalPath());
+					dir = new File(new File(main.ps.getTestDocs().get(ThePresident.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
 					save.setCurrentDirectory(dir);
 				} catch (IOException e1) {
 					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);

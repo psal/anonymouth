@@ -5,11 +5,7 @@ import javax.swing.table.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import weka.classifiers.Classifier;
-
 import edu.drexel.psal.JSANConstants;
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
-import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.FeatureDriver;
@@ -60,7 +56,7 @@ public class GUIUpdateInterface {
 		Logger.logln("GUI Update: update documents tab with current problem set started");
 		
 		// update test documents table
-		updateTestDocTable(main);
+		updateTestDocTree(main);
 		
 		// update training corpus tree
 		updateTrainDocTree(main);
@@ -72,24 +68,43 @@ public class GUIUpdateInterface {
 	/**
 	 * Updates the test documents table with the current problem set. 
 	 */
-	protected static void updateTestDocTable(GUIMain main) {
-		JTable testDocsTable = main.testDocsJTable;
-		DefaultTableModel testTableModel = main.testDocsTableModel;
-		testDocsTable.clearSelection();
-		testTableModel.setRowCount(0);
-		List<Document> testDocs = main.ps.getTestDocs();
-		Collections.sort(testDocs,new Comparator<Document>() {
-			public int compare(Document o1, Document o2) {
-				return o1.getTitle().compareTo(o2.getTitle());
-			}
-		});
-		for (int i=0; i<testDocs.size(); i++)
-			testTableModel.addRow(new Object[]{
-					testDocs.get(i).getTitle(),
-					testDocs.get(i).getFilePath()
+	protected static void updateTestDocTree(GUIMain main) {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Test Docs");
+		
+		Map<String,List<Document>> testDocsMap = main.ps.getTestAuthorMap();
+		if (!testDocsMap.keySet().contains("_Unknown_")){
+			
+			DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+			root.add(_Unknown_);
+		}
+		DefaultMutableTreeNode authorNode, docNode;
+		List<String> authorsSorted = new ArrayList<String>(testDocsMap.keySet());
+		Collections.sort(authorsSorted);
+		for (String author: authorsSorted) {
+			authorNode = new DefaultMutableTreeNode(author);
+			root.add(authorNode);
+			List<Document> docs = testDocsMap.get(author);
+			Collections.sort(docs,new Comparator<Document>() {
+				public int compare(Document o1, Document o2) {
+					return o1.getTitle().compareTo(o2.getTitle());
+				}
 			});
+			for (Document doc: docs){
+				docNode = new DefaultMutableTreeNode(doc.getTitle());
+				authorNode.add(docNode);
+			}
+		}
+		
+		if (root.getChildCount()==0){
+			DefaultMutableTreeNode _Unknown_ = new DefaultMutableTreeNode("_Unknown_");
+			root.add(_Unknown_);
+		} 
+		
+		DefaultTreeModel testTreeModel = new DefaultTreeModel(root);
+		main.testDocsJTree.setModel(testTreeModel);
 	}
-
+	
+	
 	/**
 	 * Updates the training corpus tree with the current problem set. 
 	 */
