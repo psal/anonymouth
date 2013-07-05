@@ -137,7 +137,8 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	public void stop() {
 		Logger.logln("Stopping ProgressBar");
 		main.setEnabled(true); // to ensure its enabled, even if we didn't disable it to begin with
-//		continueLoop = false;
+		//continueLoop = false;
+		t.interrupt();
 		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 	}

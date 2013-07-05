@@ -257,11 +257,13 @@ public class BackendInterface {
 			if (PropertiesUtil.showBarTutorial()) {
 				//Needed, without it the Progress bar window just sort of chills around and doesn't close itself like it should (If showing
 				//A JOptionPane, otherwise it's fine, weird.)
+				/*
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				*/
 				JOptionPane.showMessageDialog(null,
 						"<html><left>" +
 						"There are two main ways to identify how anonymous your document is, the <b>Anonymity Bar</b> and " +
