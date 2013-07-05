@@ -26,7 +26,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	private Task task;
 	private JLabel firstMessage;
 	private String progressMessage;
-//	private Boolean continueLoop;
 	private JProgressBar editorProgressBar;
 	private JLabel editingProgressBarLabel;
 
@@ -45,7 +44,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 				"several minutes. Please wait.</center></html>");
 		
 		progressMessage = "";
-//		continueLoop = true;
 		
 		editingProgressBarLabel = new JLabel();
 		editingProgressBarLabel.setText("<html><center>Editing Progress:</center></html>");
@@ -90,9 +88,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					
-//					if (!continueLoop)
-//						break;
 				}
 			}
 		}
@@ -137,7 +132,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	public void stop() {
 		Logger.logln("Stopping ProgressBar");
 		main.setEnabled(true); // to ensure its enabled, even if we didn't disable it to begin with
-		//continueLoop = false;
 		t.interrupt();
 		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
