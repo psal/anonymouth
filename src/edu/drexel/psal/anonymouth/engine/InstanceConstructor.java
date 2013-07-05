@@ -156,6 +156,13 @@ public class InstanceConstructor {
 		Boolean outOfMemoryExceptionThrown = false;
 		do {
 			try {
+				int sizeOfCfd = theseFeaturesCfd.numOfFeatureDrivers();
+				String theName = "";
+				for(int i = 0; i < sizeOfCfd; i++) {
+					theName += theseFeaturesCfd.featureDriverAt(i).getName()+ " ";
+				}
+				ThePresident.read(theName);
+				ThePresident.read(trainDocs.toString());
 				wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
 				outOfMemoryExceptionThrown = false;
 			} catch(Exception e) {
