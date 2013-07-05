@@ -853,7 +853,7 @@ public class ProblemSet {
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
 					filePath = filePath.replace("/./","/");
-					Document testDoc = new Document(filePath,"_Unknown_");
+					Document testDoc = new Document(filePath,ThePresident.DUMMY_NAME);
 					
 					if (titles.contains(testDoc.getTitle())) {
 						int addNum = 1;
@@ -870,7 +870,7 @@ public class ProblemSet {
 					
 					titles.add(testDoc.getTitle());
 					
-					problemSet.addTestDoc("_Unknown_",testDoc);
+					problemSet.addTestDoc(ThePresident.DUMMY_NAME,testDoc);
 					//Training document
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);

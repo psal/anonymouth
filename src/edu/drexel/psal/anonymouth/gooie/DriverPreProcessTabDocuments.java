@@ -226,6 +226,11 @@ public class DriverPreProcessTabDocuments {
 					PropertiesUtil.setProbSet("");
 					main.addTestDocJButton.setEnabled(true);
 					main.PPSP.addTestDocJButton.setEnabled(true);
+					
+					if (GUIMain.processed)
+						clearAllDocs(main);
+					else
+						GUIUpdateInterface.clearDocPreview(main);
 				}
 			}
 		};
@@ -287,6 +292,8 @@ public class DriverPreProcessTabDocuments {
 										JOptionPane.ERROR_MESSAGE);
 							}
 
+							if (GUIMain.processed)
+								clearAllDocs(main);
 						} else {
 							Logger.logln(NAME+"Load problem set canceled");
 						}
@@ -930,6 +937,11 @@ public class DriverPreProcessTabDocuments {
 					main.addTestDocJButton.setEnabled(true);
 					main.PPSP.addTestDocJButton.setEnabled(true);
 					PropertiesUtil.setProbSet("");
+					
+					if (GUIMain.processed)
+						clearAllDocs(main);
+					else
+						GUIUpdateInterface.clearDocPreview(main);
 				}
 			}
 		};
@@ -981,6 +993,8 @@ public class DriverPreProcessTabDocuments {
 									JOptionPane.ERROR_MESSAGE);
 						}
 
+						if (GUIMain.processed)
+							clearAllDocs(main);
 					} else {
 						Logger.logln(NAME+"Load problem set canceled");
 					}
