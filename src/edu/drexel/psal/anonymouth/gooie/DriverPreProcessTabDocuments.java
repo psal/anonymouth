@@ -59,18 +59,19 @@ public class DriverPreProcessTabDocuments {
 		
 		DriverEditor.resetAll(main, false);
 		
-		main.processButton.setText("Process");
+		//main.processButton.setText("Process");
 		main.getDocumentPane().setEnabled(false);
 		main.ps = new ProblemSet();
 		main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
 		
-		GUIUpdateInterface.updateTestDocTable(main);
-		GUIUpdateInterface.updateUserSampleDocTable(main);
-		GUIUpdateInterface.updateTrainDocTree(main);
-		
-		main.addTestDocJButton.setEnabled(true);
-		main.PPSP.addTestDocJButton.setEnabled(true);
-		DriverEditor.setAllDocTabUseable(false, main);
+//		GUIUpdateInterface.updateTestDocTable(main);
+//		GUIUpdateInterface.updateUserSampleDocTable(main);
+//		GUIUpdateInterface.updateTrainDocTree(main);
+//		
+//		main.addTestDocJButton.setEnabled(true);
+//		main.PPSP.addTestDocJButton.setEnabled(true);
+//		DriverEditor.setAllDocTabUseable(false, main);
+		ThePresident.CLASSIFIER_SAVED = false;
 		main.saveButton.setEnabled(false);
 		main.repaint();
 		main.resultsMainPanel.revalidate();
@@ -277,6 +278,7 @@ public class DriverPreProcessTabDocuments {
 								GUIUpdateInterface.updateProblemSet(main);
 								PropertiesUtil.setProbSet(path);
 							} catch (Exception exc) {
+								exc.printStackTrace();
 								Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
 								Logger.logln(NAME+exc.toString(),LogOut.STDERR);
 								JOptionPane.showMessageDialog(null,
@@ -613,7 +615,7 @@ public class DriverPreProcessTabDocuments {
 				JFileChooser load = new JFileChooser();
 				load = setOpeningDir(load, true);
 				load.setMultiSelectionEnabled(true);				
-				load.addChoosableFileFilter(new ExtFilter("Text files (*.txt)", "txt"));
+				//load.addChoosableFileFilter(new ExtFilter("Text files (*.txt)", "txt"));
 				load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				
 				int answer = load.showOpenDialog(main);
