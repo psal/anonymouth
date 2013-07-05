@@ -72,7 +72,7 @@ public class DriverPreProcessTabDocuments {
 		main.PPSP.addTestDocJButton.setEnabled(true);
 		DriverEditor.setAllDocTabUseable(false, main);
 		main.saveButton.setEnabled(false);
-		main.revalidate();
+		main.repaint();
 		main.resultsMainPanel.revalidate();
 		main.resultsScrollPane.revalidate();
 	}
@@ -83,7 +83,7 @@ public class DriverPreProcessTabDocuments {
 	 * @param trainDocs
 	 * @return
 	 */
-	private static JFileChooser setOpeningDir(JFileChooser load, boolean trainDocs) {
+	public static JFileChooser setOpeningDir(JFileChooser load, boolean trainDocs) {
 		if (trainDocs) {
 			if (trainDocsDirectory == null) {
 				try {
@@ -117,7 +117,7 @@ public class DriverPreProcessTabDocuments {
 	 * @param absPath
 	 * @param trainDocs
 	 */
-	private static void updateOpeningDir(String absPath, boolean trainDocs) {
+	public static void updateOpeningDir(String absPath, boolean trainDocs) {
 		if (trainDocs) {
 			String backupPath = ".";
 			try {

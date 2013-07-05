@@ -123,7 +123,7 @@ public class BackendInterface {
 					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 
 					pw.setText("Extracting and Clustering Features...");
-					try{
+					try {
 						wizard.runInitial(magician,main.cfd, main.classifiers.get(0));
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();

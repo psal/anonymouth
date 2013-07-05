@@ -801,6 +801,8 @@ public class DriverEditor {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (!GUIMain.processed) {
+					if (!DriverEditor.isFirstRun)
+						GUIMain.processed = true;
 					return;
 				}
 				

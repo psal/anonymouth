@@ -16,6 +16,7 @@ import java.util.Collections;
 
 import com.jgaap.generics.*;
 
+import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 
 public class ProblemSet {
@@ -107,6 +108,9 @@ public class ProblemSet {
 		trainCorpusName = generated.trainCorpusName;
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
+		
+		DriverPreProcessTabDocuments.updateOpeningDir(testDocsMap.get(ThePresident.DUMMY_NAME).get(0).getFilePath(), false);
+		DriverPreProcessTabDocuments.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
 	/**
@@ -144,7 +148,6 @@ public class ProblemSet {
 			this.testDocsMap.put(author, testDocs);
 		}
 	}
-	
 	
 	/* ==========
 	 * operations
@@ -603,7 +606,14 @@ public class ProblemSet {
 	 * 		true iff the list of test documents is not empty.
 	 */
 	public boolean hasTestDocs() {
-		return !testDocsMap.get(ThePresident.DUMMY_NAME).isEmpty();
+		boolean result;
+		
+		if (testDocsMap.isEmpty())
+			result = false;
+		else
+			result = !testDocsMap.get(ThePresident.DUMMY_NAME).isEmpty();
+		
+		return result;
 	}
 	
 	/**
