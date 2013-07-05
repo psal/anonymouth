@@ -326,6 +326,7 @@ public class DriverEditor {
 			} else {
 				removeHighlightWordsToRemove(main);
 			}
+			
 		} catch (BadLocationException err) {
 			Logger.logln(NAME+"Highlighting sentence failed, bounds[0] = " + bounds[0] + ", bounds[1] = " + bounds[1] + ", sentToTranslate = " + sentToTranslate, LogOut.STDERR);
 		}
@@ -801,6 +802,8 @@ public class DriverEditor {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				if (!GUIMain.processed) {
+					if (!DriverEditor.isFirstRun)
+						GUIMain.processed = true;
 					return;
 				}
 				
