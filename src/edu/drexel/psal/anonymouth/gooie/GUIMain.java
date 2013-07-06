@@ -1100,8 +1100,6 @@ public class GUIMain extends javax.swing.JFrame {
 			prepFeatLabel.setBackground(notReady);
 			prepFeatLabel.setToolTipText("Click here to access advanced confirguration");
 
-			JLabel label = new JLabel("Feature Set:");
-
 			String[] presetCFDsNames = new String[presetCFDs.size()];
 			for (int i=0; i<presetCFDs.size(); i++)
 				presetCFDsNames[i] = presetCFDs.get(i).getName();
@@ -1112,7 +1110,6 @@ public class GUIMain extends javax.swing.JFrame {
 			featuresSetJComboBox.setToolTipText("<html>Click the Features Banner above to<br>access advanced configuration</html>");
 
 			prepFeaturesPanel.add(prepFeatLabel, "h " + titleHeight + "!, wrap");
-			prepFeaturesPanel.add(label, "split");
 			prepFeaturesPanel.add(featuresSetJComboBox, "w 30:100%:");
 		}
 

@@ -316,7 +316,7 @@ public class PreferencesDriver {
 					prevFeatureValue = number;
 				}
 				
-				if (prevFeatureValue >= 200) {
+				if (prevFeatureValue >= 300) {
 					PropertiesUtil.setMaximumFeatures(prevFeatureValue);
 					prefWin.maxFeaturesSlider.setValue(prevFeatureValue);
 				}
@@ -436,7 +436,7 @@ public class PreferencesDriver {
 	protected void assertValues() {
 		int feat = PropertiesUtil.getMaximumFeatures();
 		int thread = PropertiesUtil.getThreadCount();
-		if (feat < 200 || feat > 1000)
+		if (feat < 300 || feat > 1000)
 			PropertiesUtil.setMaximumFeatures(PropertiesUtil.defaultFeatures);
 		if (thread < 1 || thread > 8)
 			PropertiesUtil.setThreadCount(PropertiesUtil.defaultThreads);
