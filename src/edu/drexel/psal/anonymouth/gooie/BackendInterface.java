@@ -197,15 +197,27 @@ public class BackendInterface {
 
 				DriverEditor.setAllDocTabUseable(true, main);		
 
-				DriverEditor.ignoreNumActions = 1; // must be set to 1, otherwise "....setDot(0)" (2 lines down) will screw things up when it fires the caretUpdate listener.
+				if (PropertiesUtil.getDoTranslations()) {
+					main.rightTabPane.setSelectedIndex(2);
+				} else {
+					main.rightTabPane.setSelectedIndex(1);
+				}
 				
+				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
+				int caret = 0;
+				while (Character.isWhitespace(main.getDocumentPane().getText().charAt(caret))) {
+					caret++;
+				}
+
+				DriverEditor.ignoreNumActions = 1; // must be set to 1, otherwise "....setDot(0)" (2 lines down) will screw things up when it fires the caretUpdate listener.
 				if (!DriverEditor.isFirstRun)
 					InputFilter.ignoreTranslation = true;
 				main.getDocumentPane().setText(DriverEditor.taggedDoc.getUntaggedDocument(false));// NOTE this won't fire the caretListener because (I THINK) this method isn't in a listener, because setting the text from within a listener (directly or indirectly) DOES fire the caretUpdate.
-				main.getDocumentPane().getCaret().setDot(0); // NOTE However, THIS DOES fire the caretUpdate, because we are messing with the caret itself.
-				main.getDocumentPane().setCaretPosition(0); // NOTE And then this, again, does not fire the caretUpdate
+				main.getDocumentPane().getCaret().setDot(caret); // NOTE However, THIS DOES fire the caretUpdate, because we are messing with the caret itself.
+				main.getDocumentPane().setCaretPosition(caret); // NOTE And then this, again, does not fire the caretUpdate
+				DriverEditor.currentCaretPosition = caret;
 				DriverEditor.ignoreNumActions = 0; //We MUST reset this to 0 because, for whatever reason, sometimes setDot() does not fire the caret listener, so ignoreNumActions is never reset. This is to ensure it is.
-
+				
 				int[] selectedSentInfo = DriverEditor.calculateIndicesOfSentences(0)[0];
 				DriverEditor.selectedSentIndexRange[0] = selectedSentInfo[1];
 				DriverEditor.selectedSentIndexRange[1] = selectedSentInfo[2];
@@ -228,13 +240,8 @@ public class BackendInterface {
 				main.resultsLabel.setToolTipText("Click here for larger graph");
 				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
 				main.resultsMainPanel.setToolTipText("Re-Process your document to get updated ownership probability");
-				if (PropertiesUtil.getDoTranslations()) {
-					main.rightTabPane.setSelectedIndex(2);
-				} else {
-					main.rightTabPane.setSelectedIndex(1);
-				}
 				main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
-				
+
 				DriverEditor.backedUpTaggedDoc = new TaggedDocument(DriverEditor.taggedDoc);
 
 				GUIMain.processed = true;

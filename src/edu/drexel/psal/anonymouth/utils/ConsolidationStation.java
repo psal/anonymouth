@@ -412,8 +412,13 @@ public class ConsolidationStation {
 					for (int d = 0; d < size; d++) {
 						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
 					}
-					Logger.logln(NAME+"Word to remove = " + tempWord.word + ", Occurances = " + occurances);
-					toReturn.add(new String[] {tempWord.word, Integer.toString(occurances)});//+" ("+tempWord.getAnonymity()+")");
+					
+					if (occurances == 0) {
+						Logger.logln(NAME+"Skipping word to remove, not actually in any documents (Look into this!!!!)"); //TODO Should not be here, fix being able to find them
+					} else {
+						Logger.logln(NAME+"Word to remove = " + tempWord.word + ", Occurances = " + occurances);
+						toReturn.add(new String[] {tempWord.word, Integer.toString(occurances)});//+" ("+tempWord.getAnonymity()+")");
+					}
 				} else {
 					break;
 				}
