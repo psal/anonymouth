@@ -1,6 +1,7 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -293,12 +294,12 @@ public class BackendInterface {
 		int numAuthors = DocumentMagician.numSampleAuthors+1;
 
 		Object[] authors = (tempMap.keySet()).toArray();
-		Double[] predictions = new Double[authors.length];
-		Map<Double, Object> predMap = new HashMap<Double, Object>();
 
 		Object[] keyRing = tempMap.values().toArray();
 		int maxIndex = 0;
 		Double biggest = .01;
+		
+		double[][] predictionMapArray = new double[authors.length][2];
 		for(int i = 0; i < numAuthors; i++){
 			Double tempVal = ((Double)keyRing[i])*100;
 			// compare PRIOR to rounding.
@@ -306,20 +307,21 @@ public class BackendInterface {
 				biggest = tempVal;
 				maxIndex = i;
 			}
-			int precision = 100;
-			tempVal = Math.floor(tempVal*precision+.5)/precision;	
-			predictions[i] = tempVal;
-
-			if (authors[i].equals(ThePresident.DUMMY_NAME)) {
-				predMap.put(predictions[i], "You");
-			} else
-				predMap.put(predictions[i], authors[i]);
+			predictionMapArray[i][0] = tempVal;
+			predictionMapArray[i][1] = i;
 		}
 
-		Arrays.sort(predictions);
+		//Sort array of info gains from greatest to least
+		Arrays.sort(predictionMapArray, new Comparator<double[]>() {
+			@Override
+			public int compare(final double[] first, final double[] second) {
+				return ((-1)*((Double)first[0]).compareTo(((Double)second[0]))); // multiplying by -1 will sort from greatest to least, which saves work.
+			}
+		});
 
-		for (int i = numAuthors-1; i >= 0; i--){
-			main.resultsWindow.addAttrib(predMap.get(predictions[i]).toString(), (int)(predictions[i] + .5));
+		for (int i = 0; i < numAuthors; i++){
+			ThePresident.read((String)authors[(int)predictionMapArray[i][1]]+" -- "+(int)(predictionMapArray[i][0] + .5));
+			main.resultsWindow.addAttrib((String)authors[(int)predictionMapArray[i][1]], (int)(predictionMapArray[i][0] + .5));
 		}
 
 		DriverEditor.resultsMaxIndex = maxIndex;
