@@ -2,7 +2,6 @@ package edu.drexel.psal.anonymouth.gooie;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -327,7 +326,6 @@ public class BackendInterface {
 		});
 
 		for (int i = 0; i < numAuthors; i++){
-			ThePresident.read((String)authors[(int)predictionMapArray[i][1]]+" -- "+(int)(predictionMapArray[i][0] + .5));
 			main.resultsWindow.addAttrib((String)authors[(int)predictionMapArray[i][1]], (int)(predictionMapArray[i][0] + .5));
 		}
 
