@@ -295,14 +295,11 @@ public class DriverEditor {
 			System.out.printf("Moving highlight to %d to %d\n", bounds[0],bounds[1]);
 			if ((selectedSentIndexRange[0] != currentCaretPosition || currentSentNum == 0) || deleting) { //if the user is not selecting a sentence, don't highlight it.
 				int temp = 0;
-				System.out.println("Should be highlighting");
 				while (Character.isWhitespace(main.getDocumentPane().getText().charAt(bounds[0]+temp))) {
 					temp++;
 				}
-				System.out.println(bounds[0]+temp);
-				System.out.println(currentCaretPosition);
+
 				if (bounds[0]+temp <= currentCaretPosition) {
-					System.out.println("IN HERE");
 					currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
 					
 					if (PropertiesUtil.getAutoHighlight())

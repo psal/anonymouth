@@ -184,7 +184,6 @@ public class ResultsWindow extends JDialog {
 	 * @param percentage - the author's percent chance of owning the test document
 	 */
 	public void addAttrib(String author, int percentage) {
-		System.out.println("DEBUGGING: " + author + " " + percentage);
 		if (!authors.contains(author)) {
 			authors.add(author);
 			percent.add((Integer)percentage);
