@@ -316,6 +316,10 @@ public class BackendInterface {
 			}
 			predictionMapArray[i][0] = tempVal;
 			predictionMapArray[i][1] = i;
+			
+			if (authors[i] == ThePresident.DUMMY_NAME){
+				authors[i] = "You";
+			}
 		}
 
 		//Sort array of info gains from greatest to least
@@ -327,7 +331,6 @@ public class BackendInterface {
 		});
 
 		for (int i = 0; i < numAuthors; i++){
-			ThePresident.read((String)authors[(int)predictionMapArray[i][1]]+" -- "+(int)(predictionMapArray[i][0] + .5));
 			main.resultsWindow.addAttrib((String)authors[(int)predictionMapArray[i][1]], (int)(predictionMapArray[i][0] + .5));
 		}
 
