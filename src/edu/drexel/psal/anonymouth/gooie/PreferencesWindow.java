@@ -62,7 +62,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JLabel numOfThreads;
 	protected JTextField numOfThreadsBox;
 	protected JSlider numOfThreadsSlider;
-	protected JLabel numOfThreadsNote;
 	protected JCheckBox versionAutoSave;
 	protected JLabel versionAutoSaveNote;
 	protected JButton resetAll;
@@ -213,7 +212,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			defaults.add(selectProbSet, "split 2");
 			defaults.add(probSetTextPane, "wrap");
 			
-			defaultsHeight = 240;
+			defaultsHeight = 220;
 		}
 		
 		MigLayout advancedLayout = new MigLayout();
@@ -225,7 +224,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			maxFeaturesSlider.setMajorTickSpacing(1);
 			maxFeaturesSlider.setMinorTickSpacing(1);
 			maxFeaturesSlider.setMaximum(1000);
-			maxFeaturesSlider.setMinimum(200);
+			maxFeaturesSlider.setMinimum(300);
 			maxFeaturesSlider.setSnapToTicks(true);
 			maxFeaturesSlider.setValue(PropertiesUtil.getMaximumFeatures());
 			maxFeaturesSlider.setOrientation(SwingConstants.HORIZONTAL);
@@ -234,7 +233,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			maxFeaturesBox.setPreferredSize(new Dimension(50, 20));
 			maxFeaturesBox.setText(Integer.toString(PropertiesUtil.getMaximumFeatures()));
 			
-			numOfThreads = new JLabel("Number of Threads for Features Extraction = ");
+			numOfThreads = new JLabel("Number of Threads for Part of Speech Tagging = ");
 			
 			numOfThreadsBox = new JTextField();
 			numOfThreadsBox.setPreferredSize(new Dimension(25, 20));
@@ -249,9 +248,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			numOfThreadsSlider.setOrientation(SwingConstants.HORIZONTAL);
 			numOfThreadsSlider.setSnapToTicks(true);
 			numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
-			
-			numOfThreadsNote = new JLabel("Note: Expirimental, the current recommended number of threads is 4");
-			numOfThreadsNote.setForeground(Color.GRAY);
 			
 			versionAutoSave = new JCheckBox();
 			versionAutoSave.setText("Backup version of document to anonymize every reprocess");
@@ -272,7 +268,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			advanced.add(numOfThreads, "split");
 			advanced.add(numOfThreadsBox, "wrap");
 			advanced.add(numOfThreadsSlider, "alignx 50%, wrap");
-			advanced.add(numOfThreadsNote, "alignx 50%, wrap");
 			
 			JSeparator sep1 = new JSeparator(JSeparator.HORIZONTAL);
 			sep1.setPreferredSize(new Dimension(484, 15));
