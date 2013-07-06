@@ -316,7 +316,7 @@ public class BackendInterface {
 			predictionMapArray[i][0] = tempVal;
 			predictionMapArray[i][1] = i;
 			
-			if (authors[i] == ThePresident.DUMMY_NAME){
+			if (((String)authors[i]).equals(ThePresident.DUMMY_NAME)){
 				authors[i] = "You";
 			}
 		}
