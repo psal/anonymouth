@@ -294,39 +294,25 @@ public class DriverEditor {
 		try {
 			System.out.printf("Moving highlight to %d to %d\n", bounds[0],bounds[1]);
 			if ((selectedSentIndexRange[0] != currentCaretPosition || currentSentNum == 0) || deleting) { //if the user is not selecting a sentence, don't highlight it.
-				if (main.getDocumentPane().getText().substring(bounds[0], bounds[0]+2).contains(newLine)) { // if the sentence is preceded by a newline, we need to modify this a bit
-					int temp = 0;
-					while (main.getDocumentPane().getText().substring(selectedSentIndexRange[0]+temp, selectedSentIndexRange[0]+1+temp).equals(newLine))
-						temp++;
-
-					if (selectedSentIndexRange[0]+temp <= currentCaretPosition) { //If the user is actually selecting the sentence
-						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
-						
-						if (PropertiesUtil.getAutoHighlight())
-							highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
-					} else {
-						removeHighlightWordsToRemove(main);
-					}
+				int temp = 0;
+				System.out.println("Should be highlighting");
+				while (Character.isWhitespace(main.getDocumentPane().getText().charAt(bounds[0]+temp))) {
+					temp++;
+				}
+				System.out.println(bounds[0]+temp);
+				System.out.println(currentCaretPosition);
+				if (bounds[0]+temp <= currentCaretPosition) {
+					System.out.println("IN HERE");
+					currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
+					
+					if (PropertiesUtil.getAutoHighlight())
+						highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
 				} else {
-					int temp = 0;
-					//if (main.getDocumentPane().getText().substring(selectedSentIndexRange[0], selectedSentIndexRange[0]+1).equals(" "))
-					//	temp++;
-					while (main.getDocumentPane().getText().substring(selectedSentIndexRange[0]+temp, selectedSentIndexRange[0]+1+temp).equals(" ")) //we want to not highlight whitespace before the actual sentence.
-						temp++;
-
-					if (selectedSentIndexRange[0]+temp <= currentCaretPosition || isFirstRun) {
-						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
-						
-						if (PropertiesUtil.getAutoHighlight())
-							highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
-					} else {
-						removeHighlightWordsToRemove(main);
-					}
+					removeHighlightWordsToRemove(main);
 				}
 			} else {
 				removeHighlightWordsToRemove(main);
-			}
-			
+			}	
 		} catch (BadLocationException err) {
 			Logger.logln(NAME+"Highlighting sentence failed, bounds[0] = " + bounds[0] + ", bounds[1] = " + bounds[1] + ", sentToTranslate = " + sentToTranslate, LogOut.STDERR);
 		}
@@ -336,12 +322,15 @@ public class DriverEditor {
 	}
 	
 	public static void removeHighlightWordsToRemove(GUIMain main) {
-		Highlighter highlight = main.getDocumentPane().getHighlighter();
 		int highlightedObjectsSize = DriverEditor.elementsToRemoveInSentence.size();
+		
+		if (highlightedObjectsSize > 0) {
+			Highlighter highlight = main.getDocumentPane().getHighlighter();
 
-		for (int i = 0; i < highlightedObjectsSize; i++)
-			highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
-		DriverEditor.elementsToRemoveInSentence.clear();
+			for (int i = 0; i < highlightedObjectsSize; i++)
+				highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
+			DriverEditor.elementsToRemoveInSentence.clear();
+		}
 	}
 	
 	/**
@@ -363,6 +352,9 @@ public class DriverEditor {
 			//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
 			//to just extract the "..." for highlighting
 			String[] words = taggedDoc.getWordsInSentence(taggedDoc.getTaggedSentenceAtIndex(start+1)); //if we don't increment by one, it gets the previous sentence.
+			for (int j = 0; j < words.length; j++)
+				System.out.print(words[j] + " ");
+			System.out.println();
 			int sentenceSize = words.length;
 			int removeSize = main.elementsToRemoveTable.getRowCount();
 			for (int i = 0; i < sentenceSize; i++) {
@@ -371,7 +363,9 @@ public class DriverEditor {
 					String[] test = wordToRemove.split(" ");
 					if (test.length > 2) {
 						wordToRemove = test[1].substring(0, test.length-2);
+						System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
 					}
+					
 					if (words[i].equals(wordToRemove)) {
 						index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
 					}
@@ -1162,7 +1156,7 @@ class SuggestionCalculator {
 		List<Document> documents = magician.getDocumentSets().get(1); //all the user's sample documents (written by them)
 		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
 		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .1);
-		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.authorSampleTaggedDocs, false, 1);
+		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.otherSampleTaggedDocs, false, .1);
 		
 		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
 		int sentNum = DriverEditor.getCurrentSentNum();

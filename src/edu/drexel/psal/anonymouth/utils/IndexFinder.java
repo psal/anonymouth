@@ -28,7 +28,8 @@ public class IndexFinder {
 		int end;
 		String spaces=" ";
 		theDoc = theDoc.replaceAll("\\p{Cf}", " ");
-		theWord = theWord.replaceAll("\\.", "\\\\.");
+		//theWord = theWord.replaceAll("\\.", "\\\\.");
+		theWord = theWord.replaceAll("\\.", "\\\\\\.");
 		
 		try {
 			while (true) {
@@ -38,18 +39,28 @@ public class IndexFinder {
 				if (theMatch.find() == false)
 					break;
 
-				if( theMatch.group(2).matches("\\s"))
+				if (theMatch.group(2).matches("\\s"))
 					start = theMatch.start()+1;
 				else
 					start = theMatch.start();
-				if(theMatch.group(4).matches("\\s"))
+				if (theMatch.group(4).matches("\\s"))
 					end = theMatch.end()-1;
 				else
 					end = theMatch.end();
 				theIndices.add(new int[]{start,end});
-				spaces = " ";
-				for(j=1;j<theWord.length();j++)
-					spaces = spaces +" ";
+				
+				if (theWord.charAt(0) == '\\') {
+					spaces = "";
+				} else {
+					spaces = " ";
+				}
+				
+				for (j = 1; j < theWord.length(); j++) {
+					if (theWord.charAt(j) != '\\') {
+						spaces = spaces + " ";
+					}			
+				}
+				
 				String theDocOne = theDoc.substring(0,start);
 				String theDocTwo = theDoc.substring(end);
 				theDoc = theDocOne+spaces+theDocTwo;

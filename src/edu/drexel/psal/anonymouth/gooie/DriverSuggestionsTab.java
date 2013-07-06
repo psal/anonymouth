@@ -149,10 +149,10 @@ class ElementsTable extends JTable implements ListSelectionListener {
 					//to just extract the "..." for highlighting
 					String wordToRemove = (String)this.getModel().getValueAt(this.getSelectedRow(), 0);
 					String[] test = wordToRemove.split(" ");
-					if (test.length > 2) {
-						wordToRemove = test[1].substring(0, test.length-2);
+					if (test.length >= 2) {
+						wordToRemove = test[1].substring(0, test[1].length()-2);
 					}
-
+					
 					ArrayList<int[]> index = IndexFinder.findIndices(main.getDocumentPane().getText(), wordToRemove);
 
 					int indexSize = index.size();
