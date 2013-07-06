@@ -1205,6 +1205,12 @@ public class GUIMain extends javax.swing.JFrame {
 																"removing or using less of in your document<br>" +
 																"(sorted by most revealing from top to bottom)." +
 																"</html>");
+			elementsToRemoveTable.setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
+																"in all given docs written by the user.<br>" +
+													"<br><b>Word To Remove:</b> The words you should consider<br>" +
+																"removing or using less of in your document<br>" +
+																"(sorted by most revealing from top to bottom)." +
+																"</html>");
 			elementsToRemoveTable.setRowSelectionAllowed(true);
 			elementsToRemoveTable.setColumnSelectionAllowed(false);
 			elementsToRemoveTable.removeAllElements();
