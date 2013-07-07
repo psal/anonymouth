@@ -113,6 +113,7 @@ public class DriverPreProcessTabClassifiers {
 						System.out.println("TEST: tmpClassifier.getOption() = " + ((OptionHandler)tmpClassifier).getOptions());
 						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()) = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()));
 						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()).split(\" \") = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()).split(" "));
+						
 						if(className.toLowerCase().contains("smo")) {
 							((OptionHandler)tmpClassifier).setOptions((getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+" -M").split(" "));
 						} else

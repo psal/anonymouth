@@ -298,7 +298,7 @@ public class DocumentMagician {
 	
 	public synchronized void runWeka(){
 		Logger.logln(NAME+"Called runWeka");
-		//WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
+		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
 		if(ThePresident.CLASSIFIER_SAVED == false){
 			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
 			Instances trainingSet = authorAndTrainDat;
@@ -365,7 +365,7 @@ public class DocumentMagician {
 			ThePresident.CLASSIFIER_SAVED = true;
 		}
 		else{
-			//wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
+			wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
 		}
 		Logger.logln(NAME+"Weka Done");
 	}
