@@ -3,6 +3,7 @@ package edu.drexel.psal.anonymouth.engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -153,25 +154,11 @@ public class InstanceConstructor {
 		 * in JStylo's low level code. So instead, we're simply catching the error if it does arise and then trying again since,
 		 * most of the time, it's just fine.
 		 */
-		Boolean outOfMemoryExceptionThrown = false;
-		do {
-			try {
-				/*
-				int sizeOfCfd = theseFeaturesCfd.numOfFeatureDrivers();
-				String theName = "";
-				for(int i = 0; i < sizeOfCfd; i++) {
-					theName += theseFeaturesCfd.featureDriverAt(i).getName()+ " ";
-				}
-				ThePresident.read(theName);
-				ThePresident.read(trainDocs.toString());
-				*/
-				wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
-				outOfMemoryExceptionThrown = false;
-			} catch(Exception e) {
-				Logger.logln(NAME+"Could not prepare training set, out of memory, will go again.", LogOut.STDERR);
-				outOfMemoryExceptionThrown = true;
-			}
-		} while (outOfMemoryExceptionThrown);
+		try {
+			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
+		} catch(Exception e) {
+			ErrorHandler.StanfordPOSError();
+		}
 		
 		trainingDat=wid.getTrainingSet();
 		setAttributes=getAttributes(trainingDat);
