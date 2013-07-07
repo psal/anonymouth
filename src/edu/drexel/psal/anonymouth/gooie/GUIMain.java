@@ -71,6 +71,7 @@ public class GUIMain extends javax.swing.JFrame {
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 
 	{
+		@SuppressWarnings("unused")
 		boolean lookAndFeelSet = false;
 		//Set Look & Feel 
 		// -- start patch submitted by Sebastian Pipping
@@ -720,18 +721,18 @@ public class GUIMain extends javax.swing.JFrame {
 	 * @throws Exception - if any of these values are not found in the prop file, we instead set them to the defaults
 	 */
 	protected void setDefaultValues() throws Exception {
-		if (PropertiesUtil.getProbSet() != "") {
+		if (!PropertiesUtil.getProbSet().equals("")) {
 			String problemSetPath = PropertiesUtil.prop.getProperty("recentProbSet");
-
-			PropertiesUtil.setProbSet(problemSetPath);
 			Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
 
 			try {
 				ps = new ProblemSet(problemSetPath);
 				GUIUpdateInterface.updateProblemSet(this);
 			} catch (Exception exc) {
-				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDOUT);
+				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDERR);
 			}
+		} else {
+			Logger.logln(NAME+"No default problem set saved from last run, will continue without.", LogOut.STDOUT);
 		}
 		
 		if (prepMainDocList.getModel().getSize() != 0) {

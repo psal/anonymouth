@@ -37,49 +37,43 @@ public class PropertiesUtil {
 	protected static Boolean defaultTranslation = false;
 	private static String[] DEFAULT_LOCATIONS = new String[]{"top","left","right","bottom"};
 	
-	public static enum Location // just so you cant mess up the input to methods by spelling stuff wrong
-	{
+	public static enum Location { // just so you cant mess up the input to methods by spelling stuff wrong
 		LEFT("left"), TOP("top"), RIGHT("right"), BOTTOM("bottom"), NONE("none");
 		
 		public String strRep;
-		Location(String rep)
-		{
+		Location(String rep) {
 			strRep = rep;
 		}
 	}
 	
-	protected static Location stringToLocation(String loc)
-	{
-		switch (loc)
-		{
-		case "left":
-			return Location.LEFT;
-		case "top":
-			return Location.TOP;
-		case "right":
-			return Location.RIGHT;
-		case "bottom":
-			return Location.BOTTOM;
-		case "none":
-			return Location.NONE;
+	protected static Location stringToLocation(String loc) {
+		switch (loc) {
+			case "left":
+				return Location.LEFT;
+			case "top":
+				return Location.TOP;
+			case "right":
+				return Location.RIGHT;
+			case "bottom":
+				return Location.BOTTOM;
+			case "none":
+				return Location.NONE;
 		}
 		return null;
 	}
 	
-	protected static String locationToString(Location loc)
-	{
-		switch (loc)
-		{
-		case LEFT:
-			return "left";
-		case TOP:
-			return "top";
-		case RIGHT:
-			return "right";
-		case BOTTOM:
-			return "bottom";
-		case NONE:
-			return "none";
+	protected static String locationToString(Location loc) {
+		switch (loc) {
+			case LEFT:
+				return "left";
+			case TOP:
+				return "top";
+			case RIGHT:
+				return "right";
+			case BOTTOM:
+				return "bottom";
+			case NONE:
+				return "none";
 		}
 		return null;
 	}
@@ -118,6 +112,7 @@ public class PropertiesUtil {
 			prop.setProperty("versionAutoSave", versionAutoSave.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting version auto save");
 		}
@@ -157,6 +152,7 @@ public class PropertiesUtil {
 			prop.setProperty("autoHighlight", highlight.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting automatic highlights");
 		}
@@ -197,6 +193,7 @@ public class PropertiesUtil {
 			prop.setProperty("warnAll", warnAll.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting whether or not to display all warnings");
 		}
@@ -237,6 +234,7 @@ public class PropertiesUtil {
 			prop.setProperty("barTutorial", barTutorial.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting bar tutorial");
 		}
@@ -277,6 +275,7 @@ public class PropertiesUtil {
 			prop.setProperty("fontSize", fontSize);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting the font size");
 		}
@@ -314,6 +313,7 @@ public class PropertiesUtil {
 			prop.setProperty("curClient", Integer.toString(client));
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting the current client");
 		}
@@ -352,6 +352,7 @@ public class PropertiesUtil {
 			prop.setProperty("availability", availability.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting client availability");
 		}
@@ -397,6 +398,7 @@ public class PropertiesUtil {
 			prop.setProperty("translate", translate.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting translations on/off");
 		}
@@ -436,6 +438,8 @@ public class PropertiesUtil {
 			prop.setProperty("numOfThreads", Integer.toString(threads));
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
+			
 			ThePresident.NUM_TAGGING_THREADS = threads;
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting thread count", LogOut.STDERR);
@@ -472,6 +476,7 @@ public class PropertiesUtil {
 			prop.setProperty("maxFeatures", Integer.toString(max));
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 			
 			ThePresident.MAX_FEATURES_TO_CONSIDER = max;
 		} catch (Exception e) {
@@ -509,6 +514,7 @@ public class PropertiesUtil {
 			prop.setProperty("warnQuit", b.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME+"Failed setting warn on quit", LogOut.STDERR);
 		}
@@ -547,6 +553,7 @@ public class PropertiesUtil {
 			prop.setProperty("autoSave", b.toString());
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 			
 			ThePresident.AUTOSAVE_LATEST_VERSION = b;
 		} catch (Exception e) {
@@ -588,6 +595,7 @@ public class PropertiesUtil {
 			prop.setProperty("recentProbSet", probSet);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			Logger.logln(NAME+"Failed setting problem set \""+probSet+"\"", LogOut.STDERR);
 		}
@@ -624,6 +632,7 @@ public class PropertiesUtil {
 			prop.setProperty("recentFeat", feature);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -661,6 +670,7 @@ public class PropertiesUtil {
 			prop.setProperty("recentClass", classifier);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -699,6 +709,7 @@ public class PropertiesUtil {
 			prop.setProperty("documentsTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -736,6 +747,7 @@ public class PropertiesUtil {
 			prop.setProperty("resultsTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -773,6 +785,7 @@ public class PropertiesUtil {
 			prop.setProperty("clustersTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -810,6 +823,7 @@ public class PropertiesUtil {
 			prop.setProperty("preProcessTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -847,6 +861,7 @@ public class PropertiesUtil {
 			prop.setProperty("suggestionsTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -884,6 +899,7 @@ public class PropertiesUtil {
 			prop.setProperty("translationsTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -921,6 +937,7 @@ public class PropertiesUtil {
 			prop.setProperty("anonymousTabLocation", "" + location.strRep);
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
+			writer.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

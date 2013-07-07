@@ -110,6 +110,7 @@ public class DriverPreProcessTabClassifiers {
 
 					try {
 						((OptionHandler)tmpClassifier).setOptions(main.PPSP.classAvClassArgsJTextField.getText().split(" "));
+						
 						System.out.println("TEST: tmpClassifier.getOption() = " + ((OptionHandler)tmpClassifier).getOptions());
 						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()) = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()));
 						System.out.println("TEST: getOptionsStr(tmpClassifier.getOptions()).split(\" \") = " + getOptionsStr(((OptionHandler)tmpClassifier).getOptions()).split(" "));
