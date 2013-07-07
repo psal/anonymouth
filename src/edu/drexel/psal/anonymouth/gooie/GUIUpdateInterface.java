@@ -9,6 +9,7 @@ import weka.classifiers.Classifier;
 
 import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.FeatureDriver.ParamTag;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import com.jgaap.generics.*;
 
@@ -16,8 +17,7 @@ import java.util.*;
 
 public class GUIUpdateInterface {
 	
-	@SuppressWarnings("unused")
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	private static final String NAME = "( GUIUpdateInterface ) - ";
 
 	// about dialog
 	// ============
@@ -48,15 +48,11 @@ public class GUIUpdateInterface {
 	 * ========================
 	 */
 	
-	public static void updateDocPrepColor(GUIMain main)
-	{
-		if (main.documentsAreReady())
-		{
+	public static void updateDocPrepColor(GUIMain main) {
+		if (main.documentsAreReady()) {
 			main.prepDocLabel.setBackground(main.ready);
 			main.PPSP.prepDocLabel.setBackground(main.ready);
-		}
-		else
-		{
+		} else {
 			main.prepDocLabel.setBackground(main.notReady);
 			main.PPSP.prepDocLabel.setBackground(main.notReady);
 		}	
@@ -103,14 +99,37 @@ public class GUIUpdateInterface {
 				try {
 					main.mainDocPreview.load();
 				} catch (Exception e) {
-					e.printStackTrace();
+					Logger.logln(NAME+"Error updating test doc table", LogOut.STDERR);
+					JOptionPane.showOptionDialog(main,
+							"An error occurred while tring to load your test document\n" +
+							"from the previous problem set (most likely the original\nd" +
+							"ocument has been moved).\n\nPlease replace the test document by hand.",
+							"Error While Adding Test File",
+							JOptionPane.DEFAULT_OPTION,		
+							JOptionPane.ERROR_MESSAGE, null, null, null);
+					dlm.removeAllElements();
+					dlm2.removeAllElements();
+					main.ps.removeTestAuthor(ThePresident.DUMMY_NAME);
+					updateDocPrepColor(main);
+					return;
 				}
 				
 				try {
-					System.out.println(main.mainDocPreview.stringify());
 					main.getDocumentPane().setText(main.mainDocPreview.stringify());
 				} catch (Exception e) {
-					e.printStackTrace();
+					Logger.logln(NAME+"Error setting text of test document in editor", LogOut.STDERR);
+					JOptionPane.showOptionDialog(main,
+							"An error occurred while tring to display the test document\n" +
+							"in the document editor. Please verify the file's sane or\n" +
+							"use a different file.</html>",
+							"Error While Adding Test File",
+							JOptionPane.DEFAULT_OPTION,		
+							JOptionPane.ERROR_MESSAGE, null, null, null);
+					dlm.removeAllElements();
+					dlm2.removeAllElements();
+					main.ps.removeTestAuthor(ThePresident.DUMMY_NAME);
+					updateDocPrepColor(main);
+					return;
 				}
 			}
 			
