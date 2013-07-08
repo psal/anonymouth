@@ -1152,8 +1152,8 @@ class SuggestionCalculator {
 		//Adding new suggestions
 		List<Document> documents = magician.getDocumentSets().get(1); //all the user's sample documents (written by them)
 		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
-		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .1);
-		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.otherSampleTaggedDocs, false, .1);
+		topToRemove = ConsolidationStation.getPriorityWordsAndOccurances(documents, true, .2);
+		topToAdd = ConsolidationStation.getPriorityWords(ConsolidationStation.otherSampleTaggedDocs, false, .2);
 		
 		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
 		int sentNum = DriverEditor.getCurrentSentNum();
