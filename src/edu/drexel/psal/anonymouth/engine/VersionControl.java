@@ -44,6 +44,10 @@ public class VersionControl {
 			undo.remove(0);
 		}
 
+		for (int i = 0; i < taggedDoc.getNumSentences(); i++) {
+			taggedDoc.getTaggedSentences().get(i).getTranslations().clear();
+		}
+		
 		undo.push(new TaggedDocument(taggedDoc));
 		indicesUndo.push(offset);
 		undoSize++;
