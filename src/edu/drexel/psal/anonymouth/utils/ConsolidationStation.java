@@ -312,12 +312,15 @@ public class ConsolidationStation {
 	 * @param percentToReturn the percent of words found to return (should probably be MUCH smaller if finding top words to add, because this will look at all otherSampleDocuments
 	 * @return
 	 */
-	public static ArrayList<String> getPriorityWords(ArrayList<TaggedDocument> docsToConsider, boolean findTopToRemove, double percentToReturn) {
+	public static ArrayList<String> getPriorityWordsToAdd(ArrayList<TaggedDocument> docsToConsider, double percentToReturn) {
 		int totalWords = 0;
+		int size = docsToConsider.size();
 		ArrayList<Word> words = new ArrayList<Word>(totalWords);
-			
-		totalWords += DriverEditor.taggedDoc.getWordCount();
-		words.addAll(DriverEditor.taggedDoc.getWords());
+
+		for (int i = 0; i < size; i++) {
+			totalWords += docsToConsider.get(i).getWordCount();
+			words.addAll(docsToConsider.get(i).getWords());
+		}
 		
 		int numToReturn = (int)(totalWords*percentToReturn);
 		ArrayList<String> toReturn = new ArrayList<String>(numToReturn);
@@ -333,37 +336,26 @@ public class ConsolidationStation {
 
 		int mergedNumWords = words.size();
 		if (mergedNumWords <= numToReturn) {
-			Logger.logln("(ConsolidationStation) - The number of priority words to return is greater than the number of words available. Only returning what is available");
+			Logger.logln(NAME+"The number of priority words to return is greater than the number of words available. Only returning what is available");
 			numToReturn = mergedNumWords;
 		}
-		
-		
+
+
 		Word tempWord;
-		if(findTopToRemove){ // then start from index 0, and go up to index (numToReturn-1) words (inclusive)]
-//			System.out.println("Finding top to remove");
-			for(int i = 0; i < numToReturn; i++) {
-//				System.out.println(words.get(i).word+" "+words.get(i).getAnonymity()); 	
-				if((tempWord=words.get(i)).getAnonymityIndex() <= 0)
-					toReturn.add(tempWord.word);//+" ("+tempWord.getAnonymity()+")");
-				else 
-					break;
-			}
-		}
-		else{ // start at the END of the list, and go down to (END-numToReturn) (inclusive)
-//			System.out.println("Finding top to add");
-			int startIndex = mergedNumWords - 1;
-			int stopIndex = startIndex - numToReturn;
-			for(int i = startIndex; i> stopIndex; i--) {
-//				System.out.println(words.get(i).word+" "+words.get(i).getAnonymity());
-				if((tempWord=words.get(i)).getAnonymityIndex()>0)
-					toReturn.add(tempWord.word);//+" ("+tempWord.getAnonymity()+")");
-				else 
-					break;
-			}	
-		}
+		String word;
+		int startIndex = mergedNumWords - 1;
+		int stopIndex = startIndex - numToReturn;
+		for(int i = startIndex; i> stopIndex; i--) {
+			if ((tempWord=words.get(i)).getAnonymityIndex() > 0) {
+				word = tempWord.word.replaceAll("\\\\", "");
+				toReturn.add(word);//+" ("+tempWord.getAnonymity()+")");
+			} else
+				break;
+		}	
+		
 		return toReturn;
 	}
-	
+
 	/**
 	 * Goes through all words in the TaggedDocument instance, sorts them from least to greatest in terms of Anonymity Index, and returns either the lowest ranked or
 	 * highest ranked percent as strings as well as the number of times the given word occurs.
@@ -376,7 +368,7 @@ public class ConsolidationStation {
 	 * @param percentToReturn the percent of words found to return (should probably be MUCH smaller if finding top words to add, because this will look at all otherSampleDocuments
 	 * @return
 	 */
-	public static ArrayList<String[]> getPriorityWordsAndOccurances(List<Document> userSampleDocs, boolean findTopToRemove, double percentToReturn) {
+	public static ArrayList<String[]> getPriorityWordsToRemove(List<Document> userSampleDocs, double percentToReturn) {
 		int totalWords = 0;
 		ArrayList<Word> words = new ArrayList<Word>(totalWords);
 			
@@ -396,23 +388,24 @@ public class ConsolidationStation {
 		Collections.sort(words);// sort the words in INCREASING anonymityIndex
 
 		int mergedNumWords = words.size();
+		
 		if (mergedNumWords <= numToReturn) {
 			Logger.logln(NAME+"The number of priority words to return is greater than the number of words available. Only returning what is available");
 			numToReturn = mergedNumWords;
 		}
-		try {
-		int size = userSampleDocs.size();
-		int occurances = 0;
-		Logger.logln(NAME+"Scanning " + size + " user docs for " + numToReturn + " words to remove");
 		
-		Word tempWord;
-		if (findTopToRemove) { // then start from index 0, and go up to index (numToReturn-1) words (inclusive)]		
+		try {
+			int size = userSampleDocs.size();
+			int occurances = 0;
+			Logger.logln(NAME+"Scanning " + size + " user docs for " + numToReturn + " words to remove");
+
+			Word tempWord;
 			for (int i = 0; i < numToReturn; i++) {
 				if ((tempWord = words.get(i)).getAnonymityIndex() <= 0) {
 					for (int d = 0; d < size; d++) {
 						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
 					}
-					
+
 					if (occurances == 0) {
 						Logger.logln(NAME+"Skipping word to remove, not actually in any documents (Look into this!!!!)"); //TODO Should not be here, fix being able to find them
 					} else {
@@ -423,26 +416,10 @@ public class ConsolidationStation {
 					break;
 				}
 			}
-		} else { // start at the END of the list, and go down to (END-numToReturn) (inclusive)
-			int startIndex = mergedNumWords - 1;
-			int stopIndex = startIndex - numToReturn;
-			
-			for (int i = startIndex; i> stopIndex; i--) {
-				if ((tempWord = words.get(i)).getAnonymityIndex() > 0 ) {
-					for (int d = 0; d < size; d++) {
-						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
-					}
-					Logger.logln(NAME+"Word to add = " + tempWord.word + ", Occurances = " + occurances);
-					toReturn.add(new String[] {tempWord.word, Integer.toString(occurances)});//+" ("+tempWord.getAnonymity()+")");
-				} else { 
-					break;
-				}
-			}	
-		}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		Logger.logln(NAME+"Done! Words to remove obtained");
 		return toReturn;
 	}

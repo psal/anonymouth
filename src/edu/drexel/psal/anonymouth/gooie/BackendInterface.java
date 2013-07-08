@@ -1,11 +1,15 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+
+import com.jgaap.generics.Document;
 
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
@@ -178,9 +182,16 @@ public class BackendInterface {
 				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
 				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
-				if(DriverEditor.isFirstRun)
+				if(DriverEditor.isFirstRun) {
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), true);
-				else
+					
+					List<Document> sampleDocs = magician.getDocumentSets().get(0);
+					int size = sampleDocs.size();
+					ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
+					for (int i = 0; i < size; i++) {
+						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
+					}
+				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
 				main.anonymityDrawingPanel.updateAnonymityBar();

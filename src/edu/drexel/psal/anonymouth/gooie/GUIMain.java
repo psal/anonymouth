@@ -1212,7 +1212,7 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToRemoveTable.setRowSelectionAllowed(true);
 			elementsToRemoveTable.setColumnSelectionAllowed(false);
 			elementsToRemoveTable.removeAllElements();
-			elementsToRemoveModel.addRow(new String[] {"Please process to recieve suggestions"});
+			elementsToRemoveModel.addRow(new String[] {"Please process to receive suggestions"});
 			elementsToRemoveTable.setShowGrid(false);
 			elementsToRemoveTable.getColumn("Occurrences").setMaxWidth(90);
 			elementsToRemoveTable.getColumn("Occurrences").setMinWidth(90);
@@ -1265,7 +1265,7 @@ public class GUIMain extends javax.swing.JFrame {
 			notTranslated = new JTextPane();
 
 			if (PropertiesUtil.getDoTranslations())
-				notTranslated.setText("Please process your document to recieve translation suggestions.");
+				notTranslated.setText("Please process your document to receive translation suggestions.");
 			else
 				notTranslated.setText("You have turned translations off.");
 
@@ -1396,7 +1396,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 			anonymityDescription = new JLabel();
 			anonymityDescription.setFont(new Font("Helvatica", Font.PLAIN, 15));
-			anonymityDescription.setText("<html><center>Test document must<br>be processed to<br>recieve results</center></html>");
+			anonymityDescription.setText("<html><center>Test document must<br>be processed to<br>receive results</center></html>");
 			anonymityDescription.setHorizontalAlignment(SwingConstants.CENTER);
 
 			anonymityHoldingPanel = new JPanel();
@@ -1451,7 +1451,7 @@ public class GUIMain extends javax.swing.JFrame {
 					g2d.drawImage(resultsWindow.getPanelChart(170, resultsHeight), -10, -6, null);
 				} else {
 					if (DriverEditor.isFirstRun)
-						resultsLabel.setText("<html><center>Please process your<br>document to<br>recieve results.</center></html>");
+						resultsLabel.setText("<html><center>Please process your<br>document to<br>receive results.</center></html>");
 					else
 						resultsLabel.setText("<html><center>Please wait while<br>re-processing</center></html>");
 				}

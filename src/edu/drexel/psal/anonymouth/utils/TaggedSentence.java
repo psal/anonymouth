@@ -314,7 +314,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 			Reference tempFeature = sentenceLevelFeaturesFound.references.get(i);
 			currentAttrib = DataAnalyzer.topAttributes[tempFeature.index];
 			double value=tempFeature.value;
-			sentenceAnonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getInverseChangeNeeded());
+			sentenceAnonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());
 		}
 		int numWords = wordsInSentence.size();
 		// then add the contribution of each individual word
