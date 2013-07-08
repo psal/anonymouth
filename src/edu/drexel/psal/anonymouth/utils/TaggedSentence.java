@@ -314,7 +314,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 			Reference tempFeature = sentenceLevelFeaturesFound.references.get(i);
 			currentAttrib = DataAnalyzer.topAttributes[tempFeature.index];
 			double value=tempFeature.value;
-			sentenceAnonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getPercentChangeNeeded(false,true,true));// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
+			sentenceAnonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getInverseChangeNeeded());
 		}
 		int numWords = wordsInSentence.size();
 		// then add the contribution of each individual word

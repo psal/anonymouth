@@ -343,7 +343,7 @@ public class ConsolidationStation {
 //			System.out.println("Finding top to remove");
 			for(int i = 0; i < numToReturn; i++) {
 //				System.out.println(words.get(i).word+" "+words.get(i).getAnonymity()); 	
-				if((tempWord=words.get(i)).getAnonymity() <= 0)
+				if((tempWord=words.get(i)).getAnonymityIndex() <= 0)
 					toReturn.add(tempWord.word);//+" ("+tempWord.getAnonymity()+")");
 				else 
 					break;
@@ -355,7 +355,7 @@ public class ConsolidationStation {
 			int stopIndex = startIndex - numToReturn;
 			for(int i = startIndex; i> stopIndex; i--) {
 //				System.out.println(words.get(i).word+" "+words.get(i).getAnonymity());
-				if((tempWord=words.get(i)).getAnonymity()>0)
+				if((tempWord=words.get(i)).getAnonymityIndex()>0)
 					toReturn.add(tempWord.word);//+" ("+tempWord.getAnonymity()+")");
 				else 
 					break;
@@ -408,7 +408,7 @@ public class ConsolidationStation {
 		Word tempWord;
 		if (findTopToRemove) { // then start from index 0, and go up to index (numToReturn-1) words (inclusive)]		
 			for (int i = 0; i < numToReturn; i++) {
-				if ((tempWord = words.get(i)).getAnonymity() <= 0) {
+				if ((tempWord = words.get(i)).getAnonymityIndex() <= 0) {
 					for (int d = 0; d < size; d++) {
 						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
 					}
@@ -428,7 +428,7 @@ public class ConsolidationStation {
 			int stopIndex = startIndex - numToReturn;
 			
 			for (int i = startIndex; i> stopIndex; i--) {
-				if ((tempWord = words.get(i)).getAnonymity() > 0 ) {
+				if ((tempWord = words.get(i)).getAnonymityIndex() > 0 ) {
 					for (int d = 0; d < size; d++) {
 						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
 					}

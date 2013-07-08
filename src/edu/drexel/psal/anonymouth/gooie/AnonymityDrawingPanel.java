@@ -201,8 +201,8 @@ public class AnonymityDrawingPanel extends JPanel {
 	public void updateAnonymityBar() {
 		int current = (int)(DriverEditor.taggedDoc.getAnonymityIndex() + .5);
 		int max = (int)(DriverEditor.taggedDoc.getTargetAnonymityIndex() + .5);
-
 		percentToGoal = ((double)current/max)*100;
+		Logger.logln("Max AI: "+max+" ==> current AI: "+current+" -- "+percentToGoal+"% of the way there.");
 		pointer.setPercentages(current,max);
 		
 		if (percentToGoal > 100)
