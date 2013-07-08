@@ -212,7 +212,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			defaults.add(selectProbSet, "split 2");
 			defaults.add(probSetTextPane, "wrap");
 			
-			defaultsHeight = 220;
+			defaultsHeight = 240;
 		}
 		
 		MigLayout advancedLayout = new MigLayout();

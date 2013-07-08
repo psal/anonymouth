@@ -808,8 +808,6 @@ public class DriverEditor {
 					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				}
 
-				System.out.println(ignoreVersion);
-				System.out.println(GUIMain.processed);
 				if (ignoreVersion) {
 					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 					return;
