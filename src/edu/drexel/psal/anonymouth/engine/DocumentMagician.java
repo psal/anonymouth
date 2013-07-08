@@ -299,6 +299,7 @@ public class DocumentMagician {
 	public synchronized void runWeka(){
 		Logger.logln(NAME+"Called runWeka");
 		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
+		ThePresident.CLASSIFIER_SAVED = false;
 		if(ThePresident.CLASSIFIER_SAVED == false){
 			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
 			Instances trainingSet = authorAndTrainDat;

@@ -109,23 +109,12 @@ public class InstanceConstructor {
 			System.out.println();
 		}
 		
-		/**
-		 * Try catch in place to handle the occasional OutOfMemoryError - Java Heap Space error that's been plaguing Anonymouth.
-		 * While it's clear the issue is somewhere within WekaInstancesBuilder in JStylo, I don't feel comfortable messing around
-		 * in JStylo's low level code. So instead, we're simply catching the error if it does arise and then trying again since,
-		 * most of the time, it's just fine.
-		 */
-		Boolean outOfMemoryExceptionThrown = false;
-		do {
-			try {
-				wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
-				wid.prepareTestSet(testDocs);
-				outOfMemoryExceptionThrown = false;
-			} catch(Exception e) {
-				Logger.logln(NAME+"Could not prepare either test or training set, out of memory, will go again.", LogOut.STDERR);
-				outOfMemoryExceptionThrown = true;
-			}
-		} while (outOfMemoryExceptionThrown);
+		try {
+			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
+			wid.prepareTestSet(testDocs);
+		} catch(Exception e) {
+			ErrorHandler.StanfordPOSError();
+		}
 
 		// Initialize two new instances to hold training and testing instances (attributes and data)
 		trainingDat=wid.getTrainingSet();
@@ -148,12 +137,6 @@ public class InstanceConstructor {
 	public boolean onlyBuildTrain(List<Document> trainDocs){
 		Logger.logln(NAME+"Only building train set");
 		
-		/**
-		 * Try catch in place to handle the occasional OutOfMemoryError - Java Heap Space error that's been plaguing Anonymouth.
-		 * While it's clear the issue is somewhere within WekaInstancesBuilder in JStylo, I don't feel comfortable messing around
-		 * in JStylo's low level code. So instead, we're simply catching the error if it does arise and then trying again since,
-		 * most of the time, it's just fine.
-		 */
 		try {
 			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
 		} catch(Exception e) {
