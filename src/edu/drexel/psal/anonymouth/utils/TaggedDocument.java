@@ -645,38 +645,11 @@ public class TaggedDocument implements Serializable{
 			
 	}
 	
-	
-	/**
-	 * Calculates and returns the document's anonymity index.
-	 * @return
-	 * 
-		@deprecated
-	 */
-	public double getAnonymityIndex(){
-		double totalAI = 0;
-		int numSents = taggedSentences.size();
-		int i;
-		//System.out.println("NUMSENTS: " + numSents);
-		for (i = 0; i < numSents; i++){
-			totalAI += taggedSentences.get(i).getSentenceAnonymityIndex();
-			System.out.println("TOTALAI: " + totalAI);
-		}
-		ThePresident.read();
-		return totalAI;
-	}
-	
 	public double getCurrentChangeNeeded(){
 		int i;
 		int numAttribs = DataAnalyzer.topAttributes.length;
-//		double totalFeatures = 0;
 		double currentChangeNeeded = 0;
 		Attribute tempAttrib;
-//		for(i = 0; i < numAttribs; i++){
-//			tempAttrib = DataAnalyzer.topAttributes[i];
-//			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
-//				continue; // We don't want to add percentages into the mix of total features
-//			totalFeatures += DataAnalyzer.topAttributes[i].getTargetValue();
-//		}
 		for(i = 0; i < numAttribs; i++){
 			tempAttrib = DataAnalyzer.topAttributes[i];
 			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
@@ -686,7 +659,6 @@ public class TaggedDocument implements Serializable{
 			currentChangeNeeded += tempAttrib.getPercentChangeNeeded(false,false,true);
 		}
 		return currentChangeNeeded;
-		
 	}	
 	
 	/**
@@ -696,15 +668,8 @@ public class TaggedDocument implements Serializable{
 	public double getMaxChangeNeeded(){
 		int i;
 		int numAttribs = DataAnalyzer.topAttributes.length;
-//		double totalFeatures = 0;
 		double maxChange = 0;
 		Attribute tempAttrib;
-//		for(i = 0; i < numAttribs; i++){
-//			tempAttrib = DataAnalyzer.topAttributes[i];
-//			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
-//				continue; // We don't want to add percentages into the mix of total features
-//			totalFeatures += DataAnalyzer.topAttributes[i].getTargetValue();
-//		}
 		for(i = 0; i < numAttribs; i++){
 			tempAttrib = DataAnalyzer.topAttributes[i];
 			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
@@ -801,56 +766,6 @@ public class TaggedDocument implements Serializable{
 		specialCharTracker = new SpecialCharacterTracker(td.specialCharTracker);
 		
 	}
-	
-	
-	/*
-	public static void main(String[] args){
-		String text1 = "people enjoy coffee, especially in the mornings, because it helps to wake me up. My dog is fairly small, but she seems not to realize it when she is around bigger dogs. This is my third testing sentence. I hope this works well.";
-		TaggedDocument testDoc = new TaggedDocument(text1);
-		System.out.println(testDoc.toString());			
-		//System.out.println(testDoc.getFunctionWords());
-		
-	}
-	*/
-	
-	
-	/**
-	 * Loops through all topAttribute Attributes in DataAnalyzer, and returns the average percent change needed. This is a first stab at some
-	 * way to deliver a general sense of the degree of anonymity achived at any given point. This method must be called before any changes are made to set 
-	 * a baseline percent change. That number is what everything from that point on gets compared (normalized) to. 
-	 * 
-	 * It is important to note that this does not take into consideration the information gain of any feature. So, the less important features will have the same effect on this number
-	 * as the most important features. This should probably change...
-	 * @param is_initial 'true' if this is the first time the function is being called for this document (basically, if you are calling it to set the document's baseline percent change needed, this should be true. If you want to know how much the document has changed, this should be false. This will be false all the time, except for the first time it's called).
-	 * @return
-	 * The overall percent change that is needed. 
-	 */
-	public double getAvgPercentChangeNeeded(boolean is_initial){
-		int total_attribs = 0;
-		double total_percent_change = 0;
-		for (Attribute attrib : DataAnalyzer.topAttributes) {
-			total_percent_change += Math.abs(attrib.getPercentChangeNeeded(false,false,true));
-			total_attribs ++;
-		}
-		double avg_percent_change = total_percent_change/total_attribs;
-		if (is_initial)
-			return avg_percent_change;
-		else{
-			double percent_change_needed = baseline_percent_change_needed - (Math.abs(avg_percent_change - baseline_percent_change_needed)/baseline_percent_change_needed);
-			return percent_change_needed;
-		}
-	}
-	
-	/**
-	 * Sets baseline_percent_change_needed. This is the ONLY time that 'getAvgPercentChangeNeeded' will be called with 'true'.
-	 */
-	public void setBaselinePercentChangeNeeded(){
-		if (can_set_baseline_percent_change_needed){
-			baseline_percent_change_needed = getAvgPercentChangeNeeded(true);
-			can_set_baseline_percent_change_needed = false;
-		}
-	}
-
 	
 }
 	
