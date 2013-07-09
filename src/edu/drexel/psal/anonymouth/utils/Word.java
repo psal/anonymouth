@@ -92,6 +92,8 @@ public class Word implements Comparable<Word>, Serializable {
 //			System.out.println("currentAttrib.getPercentChangeNeeded(false,true,true)" + currentAttrib.getPercentChangeNeeded(false,true,true));
 			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
 			
+			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says not to take the absolute value (don't ignore direction of change)
+			System.out.println("						word AI = "+anonymityIndex);
 //			System.out.println("anonymityIndex = " + anonymityIndex);
 		}
 //		System.out.println("anonymityIndex = " + anonymityIndex);
@@ -103,7 +105,7 @@ public class Word implements Comparable<Word>, Serializable {
 	 * as well. This is used for us to better gauge what words should be removed.
 	 * @return
 	 */
-	public double getAnonymity() {
+	public double getWordAnonymity() {
 		double anonymityIndex=0;
 		double numFeatures = wordLevelFeaturesFound.length();
 		int i;
@@ -238,8 +240,8 @@ public class Word implements Comparable<Word>, Serializable {
 	 * compares Words based upon Anonymity Index
 	 */
 	public int compareTo(Word notThisWord) {
-		double thisAnonIndex = this.getAnonymity();
-		double thatAnonIndex = notThisWord.getAnonymity();
+		double thisAnonIndex = this.getAnonymityIndex();
+		double thatAnonIndex = notThisWord.getAnonymityIndex();
 		if(thisAnonIndex< thatAnonIndex)
 			return -1;
 		else if (thisAnonIndex == thatAnonIndex)

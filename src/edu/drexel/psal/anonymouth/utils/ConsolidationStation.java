@@ -346,7 +346,7 @@ public class ConsolidationStation {
 		int startIndex = mergedNumWords - 1;
 		int stopIndex = startIndex - numToReturn;
 		for(int i = startIndex; i> stopIndex; i--) {
-			if ((tempWord=words.get(i)).getAnonymity() > 0) {
+			if ((tempWord=words.get(i)).getAnonymityIndex() > 0) {
 				word = tempWord.word.replaceAll("\\\\", "");
 				toReturn.add(word);//+" ("+tempWord.getAnonymity()+")");
 			} else
@@ -401,7 +401,7 @@ public class ConsolidationStation {
 
 			Word tempWord;
 			for (int i = 0; i < numToReturn; i++) {
-				if ((tempWord = words.get(i)).getAnonymity() <= 0) {
+				if ((tempWord = words.get(i)).getAnonymityIndex() <= 0) {
 					for (int d = 0; d < size; d++) {
 						occurances = getWordOccurances(userSampleDocs.get(d).stringify(), tempWord.word);
 					}

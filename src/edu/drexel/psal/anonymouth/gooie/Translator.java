@@ -199,5 +199,6 @@ public class Translator implements Runnable {
 		main.processButton.setEnabled(true);
 		main.stopTranslations.setEnabled(false);
 		main.startTranslations.setEnabled(true);
+		transThread.interrupt();
 	}
 }
