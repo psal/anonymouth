@@ -409,7 +409,7 @@ public class Attribute {
 	}
 	
 	public double getChangeNeeded(){
-		return getPercentChangeNeeded(false,false,false)/100;
+		return getPercentChangeNeeded(false,false,false);
 	}
 	
 	/**

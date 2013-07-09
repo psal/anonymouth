@@ -8,6 +8,7 @@ import java.util.List;
 
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
+import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
@@ -648,6 +649,8 @@ public class TaggedDocument implements Serializable{
 	/**
 	 * Calculates and returns the document's anonymity index.
 	 * @return
+	 * 
+		@deprecated
 	 */
 	public double getAnonymityIndex(){
 		double totalAI = 0;
@@ -656,20 +659,17 @@ public class TaggedDocument implements Serializable{
 		//System.out.println("NUMSENTS: " + numSents);
 		for (i = 0; i < numSents; i++){
 			totalAI += taggedSentences.get(i).getSentenceAnonymityIndex();
-			//System.out.println("TOTALAI: " + totalAI);
+			System.out.println("TOTALAI: " + totalAI);
 		}
+		ThePresident.read();
 		return totalAI;
 	}
 	
-	/**
-	 * Calculates and returns the anonymity index of the document if the all of the document's features (that are in 'topAttributes') are equal to their target values.
-	 * @return
-	 */
-	public double getTargetAnonymityIndex(){
+	public double getCurrentChangeNeeded(){
 		int i;
 		int numAttribs = DataAnalyzer.topAttributes.length;
 //		double totalFeatures = 0;
-		double anonIndex = 0;
+		double currentChangeNeeded = 0;
 		Attribute tempAttrib;
 //		for(i = 0; i < numAttribs; i++){
 //			tempAttrib = DataAnalyzer.topAttributes[i];
@@ -683,9 +683,37 @@ public class TaggedDocument implements Serializable{
 				continue; // not really sure how to handle this...
 			if(tempAttrib.getToModifyValue() <= 0)
 				continue;
-			anonIndex += (tempAttrib.getTargetValue())*(tempAttrib.getInfoGain());//*(Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded())));
+			currentChangeNeeded += tempAttrib.getPercentChangeNeeded(false,false,true);
 		}
-		return anonIndex;
+		return currentChangeNeeded;
+		
+	}	
+	
+	/**
+	 * Calculates and returns the anonymity index of the document if the all of the document's features (that are in 'topAttributes') are equal to their target values.
+	 * @return
+	 */
+	public double getMaxChangeNeeded(){
+		int i;
+		int numAttribs = DataAnalyzer.topAttributes.length;
+//		double totalFeatures = 0;
+		double maxChange = 0;
+		Attribute tempAttrib;
+//		for(i = 0; i < numAttribs; i++){
+//			tempAttrib = DataAnalyzer.topAttributes[i];
+//			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
+//				continue; // We don't want to add percentages into the mix of total features
+//			totalFeatures += DataAnalyzer.topAttributes[i].getTargetValue();
+//		}
+		for(i = 0; i < numAttribs; i++){
+			tempAttrib = DataAnalyzer.topAttributes[i];
+			if(tempAttrib.getFullName().contains("Percentage") || tempAttrib.getFullName().contains("Average"))
+				continue; // not really sure how to handle this...
+			if(tempAttrib.getToModifyValue() <= 0)
+				continue;
+			maxChange += Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded());
+		}
+		return maxChange;
 		
 	}
 	
