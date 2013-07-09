@@ -191,7 +191,7 @@ public class AnonymityDrawingPanel extends JPanel {
 		double curPercent = DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Being recieved as 100 for 100%, 200 for 200%, etc
 		double max = DriverEditor.taggedDoc.getMaxChangeNeeded();
 
-		percentToGoal = (((max - curPercent) / max) + .5)*100;
+		percentToGoal = ((max - curPercent) / max)*100;
 
 		if (percentToGoal > 100)
 			percentToGoal = 100;
