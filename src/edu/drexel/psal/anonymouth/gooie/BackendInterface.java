@@ -181,6 +181,10 @@ public class BackendInterface {
 					for (int i = 0; i < size; i++) {
 						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
 					}
+					
+					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
+					System.out.println("DEBUGGING maxchange = " + DriverEditor.taggedDoc.getMaxChangeNeeded());
+					System.out.println("DEBUGGING current change = " + DriverEditor.taggedDoc.getCurrentChangeNeeded());
 				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
