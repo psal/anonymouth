@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.math.BigDecimal;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -195,7 +196,9 @@ public class AnonymityDrawingPanel extends JPanel {
 
 		if (percentToGoal > 100)
 			percentToGoal = 100;
-		main.anonymityDescription.setText("<html><center>You are "+percentToGoal+"%<br>of the way to<br>your goal</center><html>");
+		BigDecimal bd = new BigDecimal(Double.toString(percentToGoal));
+		bd = bd.setScale(4, BigDecimal.ROUND_HALF_UP);
+		main.anonymityDescription.setText("<html><center>" + bd + "%<br>of the way to<br>your goal</center><html>");
 		
 		Logger.logln(NAME+"CurPercent = " + curPercent + ", max = " + max+" ==> you are "+percentToGoal+"% of the way to your goal.");
 

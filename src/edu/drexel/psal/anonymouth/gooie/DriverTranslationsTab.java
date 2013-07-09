@@ -82,6 +82,8 @@ public class DriverTranslationsTab implements ActionListener {
 					DriverTranslationsTab.main.translationsHolderPanel.removeAll();
 					GUIMain.inst.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
 					GUIMain.inst.translationsHolderPanel.add(GUIMain.inst.notTranslated, "");
+					GUIMain.inst.stopTranslations.setEnabled(true);
+					GUIMain.inst.startTranslations.setEnabled(false);
 					GUIMain.GUITranslator.reset();
 					DriverEditor.taggedDoc.deleteTranslations();
 					
