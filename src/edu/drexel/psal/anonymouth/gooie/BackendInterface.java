@@ -140,11 +140,6 @@ public class BackendInterface {
 						e.printStackTrace();
 						ErrorHandler.fatalError();
 					}
-
-					Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
-					Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
-					Logger.logln(NAME+wekaResults.toString());
-					makeResultsChart(wekaResults, main);
 				} else {
 					Logger.logln(NAME+"Process button pressed to re-process document to modify.");
 					tempDoc = getDocFromCurrentTab();
@@ -168,11 +163,6 @@ public class BackendInterface {
 							e.printStackTrace();
 							ErrorHandler.fatalError();
 						}
-
-						Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
-						Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
-						Logger.logln(NAME+wekaResults.toString());
-						makeResultsChart(wekaResults, main);
 					}
 				}
 
@@ -191,9 +181,18 @@ public class BackendInterface {
 					for (int i = 0; i < size; i++) {
 						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
 					}
+					
+					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
+					System.out.println("DEBUGGING maxchange = " + DriverEditor.taggedDoc.getMaxChangeNeeded());
+					System.out.println("DEBUGGING current change = " + DriverEditor.taggedDoc.getCurrentChangeNeeded());
 				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
+				Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
+				Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
+				Logger.logln(NAME+wekaResults.toString());
+				makeResultsChart(wekaResults, main);
+				
 				main.anonymityDrawingPanel.updateAnonymityBar();
 				main.anonymityDrawingPanel.showPointer(true);
 
