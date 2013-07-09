@@ -31,9 +31,9 @@ public class AnonymityDrawingPanel extends JPanel {
 	
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
 	private static final long serialVersionUID = 1L;
+	private final String[] PERCENTTEXT = {"100%", "75%", "50%", "25%", "0%"};
 	private final int MINY = 50;
 	private final int MAXY = 470; //700 without results part
-	private final String[] PERCENTTEXT = {"100%", "75%", "50%", "25%", "0%"};
 	private GUIMain main;
 	private JLabel anonymous;
 	private JLabel notAnonymous;
@@ -53,20 +53,12 @@ public class AnonymityDrawingPanel extends JPanel {
 	class Pointer {
 		private final int X = 50;
 		private int y;
-		private int maxPercent;
-		private int curPercent;
+		private double curPercent;
+		private double maxPercent;
 		private double ratio;
 		
 		public Pointer() {
 			y = MAXY + MINY;
-		}
-		
-		/**
-		 * Calculates what the arrow's new y position should be, should not be called by other methods.
-		 * If the y value needs to be changed, call "setPercentage()" instead
-		 */
-		private void setValue() {
-			this.y = (int)(MAXY * getRatio() + MINY * getRatio() + getMaxPercentage() * (.5 - getRatio()));
 		}
 		
 		public int getY() {
@@ -81,34 +73,28 @@ public class AnonymityDrawingPanel extends JPanel {
 		 * Sets the new anonymity percentage, the panel must be repainted for changes to be seen.
 		 * @param perc must be integer representation of percentage (e.g., 50 for 50% instead of .5)
 		 */
-		public void setPercentages(int percentage, int maxPercentage) {
-			if (maxPercentage >= 0 && percentage >= 0) {
-				if (percentage <= maxPercentage)
-					setRatio(percentage, maxPercentage);
-				else
-					setRatio(1, 1);
-				
-				curPercent = (int)(getRatio() * 100 + .5);
-				maxPercent = 100;
-				
-				setValue();
+		public void setCurPercent(double curPercent) {
+			if (curPercent >= 0 && curPercent <= 100) {
+				this.curPercent = curPercent;
+				ratio = curPercent / (double)100;
+				y = (int)(MAXY * ratio + MINY * ratio + 100 * (.5 - ratio));
 			}
 		}
 		
-		public int getPercentage() {
+		public double getCurPercent() {
 			return curPercent;
 		}
 		
-		public int getMaxPercentage() {
+		public double getMaxPercent() {
 			return maxPercent;
 		}
 		
-		private void setRatio(int percentage, int maxPercentage) {
-			ratio = (double)percentage / (double)maxPercentage;
+		public void setMaxPercent(double maxPercent) {
+			this.maxPercent = maxPercent;
 		}
 		
-		public double getRatio() {
-			return ratio;
+		public double getMaxPercentage() {
+			return maxPercent;
 		}
 	}
 	
@@ -135,6 +121,9 @@ public class AnonymityDrawingPanel extends JPanel {
 		}
 		
 		pointer = new Pointer();
+//		pointer.setMaxPercent(1700);
+//		pointer.setCurPercent(25);
+//		showPointer(true);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -199,24 +188,29 @@ public class AnonymityDrawingPanel extends JPanel {
 	 * for the first time) so that the arrow may move accordingly
 	 */
 	public void updateAnonymityBar() {
-		int current = (int)(DriverEditor.taggedDoc.getAnonymityIndex() + .5);
-		int max = (int)(DriverEditor.taggedDoc.getTargetAnonymityIndex() + .5);
-		percentToGoal = ((double)current/max)*100;
-		Logger.logln("Max AI: "+max+" ==> current AI: "+current+" -- "+percentToGoal+"% of the way there.");
-		pointer.setPercentages(current,max);
+		double curPercent = DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Being recieved as 100 for 100%, 200 for 200%, etc
+		double max = DriverEditor.taggedDoc.getMaxChangeNeeded();
 		
+		percentToGoal = (((max - curPercent) / max) + .5)*100;
 		if (percentToGoal > 100)
 			percentToGoal = 100;
+		main.anonymityDescription.setText("<html><center>You are "+percentToGoal+"%<br>of the way to<br>your goal</center><html>");
 		
-		main.anonymityDescription.setText("<html><center>You are "+((int)percentToGoal)+"%<br>of the way to<br>your goal</center><html>");
+		Logger.logln(NAME+"CurPercent = " + curPercent + ", max = " + max+" ==> you are "+percentToGoal+"% of the way to your goal.");
+		pointer.setCurPercent(percentToGoal);
+		
 		repaint();
+	}
+	
+	public void setMaxPercent(double maxPercent) {
+		pointer.setMaxPercent(maxPercent);
 	}
 	
 	/**
 	 * Created for a quick and easy way to get the percent that the pointer uses for use in the text description below the bar
 	 */
-	public int getAvgPercentChangeNeeded() {
-		return pointer.getMaxPercentage() - pointer.getPercentage();
+	public double getAvgPercentChangeNeeded() {
+		return pointer.getCurPercent();
 	}
 	
 	/**
@@ -224,7 +218,7 @@ public class AnonymityDrawingPanel extends JPanel {
 	 */
 	public void reset() {
 		showPointer(false);
-		pointer.setPercentages(0, 100);
+		pointer.setCurPercent(0);
 		main.anonymityDescription.setText("<html><center>Re-processing...<br>Please Wait</center></html>");
 		repaint();
 	}

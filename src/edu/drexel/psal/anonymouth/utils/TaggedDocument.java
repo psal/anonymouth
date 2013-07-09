@@ -676,7 +676,7 @@ public class TaggedDocument implements Serializable{
 				continue; // not really sure how to handle this...
 			if(tempAttrib.getToModifyValue() <= 0)
 				continue;
-			maxChange += Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded());
+			maxChange += Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded())/100;
 		}
 		return maxChange;
 		
