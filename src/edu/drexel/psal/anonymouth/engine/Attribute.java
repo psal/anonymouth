@@ -408,6 +408,10 @@ public class Attribute {
 			return -1;
 	}
 	
+	public double getChangeNeeded() {
+		return getPercentChangeNeeded(false, false, false);
+	}
+	
 	/**
 	 * returns the percent change needed for the feature contained by this Attribute. Signed, so a negative number indicates the feature needs to be removed, 
 	 * and vice versa. Percent change needed is calculated at the time of function call, so the returned value will always be current. 

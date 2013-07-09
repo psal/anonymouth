@@ -10,6 +10,7 @@ import javax.xml.parsers.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ import com.jgaap.generics.*;
 
 import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 public class ProblemSet {
 	
@@ -25,7 +27,7 @@ public class ProblemSet {
 	 * fields
 	 * ======
 	 */
-	
+	private static final String NAME = "( ProblemSet ) - ";
 	private SortedMap<String,List<Document>> trainDocsMap;
 	
 	private SortedMap<String,List<Document>> testDocsMap;
@@ -839,7 +841,14 @@ public class ProblemSet {
 			//intialize the parser, parse the document, and build the tree
 			DocumentBuilderFactory builder = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = builder.newDocumentBuilder();
-			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
+			
+			org.w3c.dom.Document xmlDoc = null;
+			try {
+				xmlDoc = dom.parse(filename);	
+			} catch (SAXParseException e) {
+				Logger.logln(NAME+"Failed to problem set, will stop.", LogOut.STDERR);
+				return;
+			}
 			xmlDoc.getDocumentElement().normalize();
 			NodeList items = xmlDoc.getElementsByTagName("document");
 			problemSet.trainCorpusName = "Authors";

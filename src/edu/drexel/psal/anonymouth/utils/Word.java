@@ -90,7 +90,7 @@ public class Word implements Comparable<Word>, Serializable {
 //			System.out.println("value = " + value);
 //			System.out.println("currentAttrib.getInfoGain()" + currentAttrib.getInfoGain());
 //			System.out.println("currentAttrib.getPercentChangeNeeded(false,true,true)" + currentAttrib.getPercentChangeNeeded(false,true,true));
-			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getPercentChangeNeeded(false,true,true));// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
+			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
 			
 //			System.out.println("anonymityIndex = " + anonymityIndex);
 		}

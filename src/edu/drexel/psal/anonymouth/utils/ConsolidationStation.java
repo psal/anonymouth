@@ -347,7 +347,7 @@ public class ConsolidationStation {
 		int stopIndex = startIndex - numToReturn;
 		for(int i = startIndex; i> stopIndex; i--) {
 			if ((tempWord=words.get(i)).getAnonymity() > 0) {
-				word = tempWord.word.replaceAll("\\", "");
+				word = tempWord.word.replaceAll("\\\\", "");
 				toReturn.add(word);//+" ("+tempWord.getAnonymity()+")");
 			} else
 				break;

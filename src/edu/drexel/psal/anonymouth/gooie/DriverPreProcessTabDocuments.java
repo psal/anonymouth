@@ -290,6 +290,7 @@ public class DriverPreProcessTabDocuments {
 										"Failed loading problem set from:\n"+path,
 										"Load Problem Set Failure",
 										JOptionPane.ERROR_MESSAGE);
+								PropertiesUtil.setProbSet("");
 							}
 
 							if (GUIMain.processed)
