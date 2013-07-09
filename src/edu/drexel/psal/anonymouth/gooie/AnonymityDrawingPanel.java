@@ -43,7 +43,7 @@ public class AnonymityDrawingPanel extends JPanel {
 	protected Image bar;
 	protected Image barFull;
 	protected Image barEmpty;
-	protected int percentToGoal;
+	protected double percentToGoal;
 	
 	//Pointer to show the user how anonymous their document is on the scale.
 	/**
@@ -189,8 +189,10 @@ public class AnonymityDrawingPanel extends JPanel {
 	 */
 	public void updateAnonymityBar() {
 		double curPercent = DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Being recieved as 100 for 100%, 200 for 200%, etc
+		pointer.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
 		
-		percentToGoal = (int)(((pointer.getMaxPercent() - curPercent) / pointer.getMaxPercent()) + .5);
+		System.out.println((pointer.getMaxPercent() - curPercent) / pointer.getMaxPercent());
+		percentToGoal = (pointer.getMaxPercent() - curPercent) / pointer.getMaxPercent();
 		if (percentToGoal > 100)
 			percentToGoal = 100;
 		main.anonymityDescription.setText("<html><center>You are "+percentToGoal+"%<br>of the way to<br>your goal</center><html>");
