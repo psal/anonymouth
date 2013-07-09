@@ -212,11 +212,10 @@ public class DataAnalyzer{
 			}
 			
 			// TODO do we want this??
-			if (toModifyIndex == -1) {
-				ThePresident.read("CONTINUING attribute: "+attrib+" does not appear in toModifyDocument.");
-				numFeatures++;
-				continue;
-			}
+			//if (toModifyIndex == -1) {
+			//	numFeatures++;
+			//	continue;
+			//}
 		
 			String stringInBraces;
 			boolean calcHist;
@@ -435,8 +434,7 @@ public class DataAnalyzer{
 		for (Document d:tempTestDocs) {
 			d.setAuthor(ThePresident.DUMMY_NAME);
 		}
-		if (pSet == null)
-			ThePresident.read("pSet is NULL!");
+		
 		magician.initialDocToData(pSet,cfd, classifier);
 		
 		HashMap<String,Double[][]> attribsAndInstances = magician.getPackagedInstanceData();

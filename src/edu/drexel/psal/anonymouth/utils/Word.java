@@ -76,27 +76,13 @@ public class Word implements Comparable<Word>, Serializable {
 		double numFeatures = wordLevelFeaturesFound.length();
 		int i;
 		Attribute currentAttrib;
-//		int totalFeatureOccurrences = 0;
-//		for (i = 0; i < numFeatures; i++)
-//			totalFeatureOccurrences += wordLevelFeaturesFound.references.get(i).value;
-//		if (totalFeatureOccurrences == 0)
-//				totalFeatureOccurrences = 1; // can't divide by zero..
-//		System.out.println("numFeatures = " + numFeatures);
 		for (i = 0;i<numFeatures;i++){
 			Reference tempFeature = wordLevelFeaturesFound.references.get(i);
 			currentAttrib = DataAnalyzer.topAttributes[tempFeature.index];
 
 			double value=tempFeature.value;
-//			System.out.println("value = " + value);
-//			System.out.println("currentAttrib.getInfoGain()" + currentAttrib.getInfoGain());
-//			System.out.println("currentAttrib.getPercentChangeNeeded(false,true,true)" + currentAttrib.getPercentChangeNeeded(false,true,true));
-			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
-			
-			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says not to take the absolute value (don't ignore direction of change)
-			System.out.println("						word AI = "+anonymityIndex);
-//			System.out.println("anonymityIndex = " + anonymityIndex);
+			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getChangeNeeded());
 		}
-//		System.out.println("anonymityIndex = " + anonymityIndex);
 		return anonymityIndex;
 	}
 
@@ -110,18 +96,13 @@ public class Word implements Comparable<Word>, Serializable {
 		double numFeatures = wordLevelFeaturesFound.length();
 		int i;
 		Attribute currentAttrib;
-
 		for (i = 0;i<numFeatures;i++){
 			Reference tempFeature = wordLevelFeaturesFound.references.get(i);
 			currentAttrib = DataAnalyzer.topAttributes[tempFeature.index];
 
 			double value=tempFeature.value;
 			anonymityIndex += (value)*(currentAttrib.getInfoGain())*(currentAttrib.getPercentChangeNeeded(false,false,false));// for 'getPercentChangeNeeded', the first boolean says not to normalize the result to the baslinePercentChangeNeeded, the second says to invert the percentage, and the third says to take the absolute value (ignore direction of change)
-			
-//			System.out.println("anonymityIndex = " + anonymityIndex);
 		}
-//		System.out.println("anonymityIndex = " + anonymityIndex);
-//		System.out.println("DEBUGING");
 		return anonymityIndex;
 	}
 	
@@ -134,23 +115,10 @@ public class Word implements Comparable<Word>, Serializable {
 		return wordLevelFeaturesFound.addNewReference(ref);
 	}
 	
-	/*
-		String sib=newAttrib.stringInBraces;	
-		for(int j=0;j<word.length()-sib.length();j++){
-			//loops through word to check if/howManyTimes the stringInBraces is found in the word.
-			if(word.substring(j, j+sib.length()).equals(word)){
-				appearances++;
-			}
-		}
-		if(appearances>0){
-			attributes.add(newAttrib);
-			numberAttribAppearances.add(appearances);
-		}
-	}
-*/	
 	public String getUntagged(){
 		return word;
 	}
+	
 	/**
 	 * Merges two words, provided that the 'word' (string) inside are equivalent (case sensitive), and that both 'word' strings have been determined to be of 
 	 * the same part of speech.
@@ -165,25 +133,7 @@ public class Word implements Comparable<Word>, Serializable {
 			Logger.logln(NAME+"Cannot merge inequivalent  Words!",LogOut.STDERR);
 	}
 	
-	
-	
-/*
- * XXX NOTE: We may not be able to count on words being added, but we may be able to *kind of* count on words being removed.....
- * 
- *	totalNumberFeatures  <=> the total number of features found in a word
- * 
- * anonymityIndex = SUM( (numAppearancesOfSpecificFeature[i]/totalNumberFeatures))*(percentChangeNeededForFeature[i])*(infoGainForFeature[i]))
- * 
- * If we think it would help, we could divide anonymityIndex by the total number of features -> that would then be the average of the above values...  
- * 
- * XXX we need to be able to update the percent change needed for features and have that change reflected in EACH Word object (and thus through the sentences, and taggedDocuments) XXX
- * 
- *	- the best way may be to reference each attribute rather than a "triple" in each TaggedSentence, so that we will always read the updated value when we want to order the features...
- *  - Joe, can you think of a better way?
- */
-	
-
-	
+		
 	/**
 	 * defines two Word objects to be equal if they contain the same 'word' String object.
 	 * @return

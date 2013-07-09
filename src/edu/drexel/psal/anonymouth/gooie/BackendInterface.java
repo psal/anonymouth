@@ -166,9 +166,6 @@ public class BackendInterface {
 					}
 				}
 
-
-				ConsolidationStation.toModifyTaggedDocs.get(0).setBaselinePercentChangeNeeded(); // todo figure out why this and/or the two percent change needed calls in TaggedDocument affect AnonymityBar
-
 				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
 				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
