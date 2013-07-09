@@ -190,13 +190,15 @@ public class AnonymityDrawingPanel extends JPanel {
 	public void updateAnonymityBar() {
 		double curPercent = DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Being recieved as 100 for 100%, 200 for 200%, etc
 		double max = DriverEditor.taggedDoc.getMaxChangeNeeded();
-		
+
 		percentToGoal = (((max - curPercent) / max) + .5)*100;
+
 		if (percentToGoal > 100)
 			percentToGoal = 100;
 		main.anonymityDescription.setText("<html><center>You are "+percentToGoal+"%<br>of the way to<br>your goal</center><html>");
 		
 		Logger.logln(NAME+"CurPercent = " + curPercent + ", max = " + max+" ==> you are "+percentToGoal+"% of the way to your goal.");
+
 		pointer.setCurPercent(percentToGoal);
 		
 		repaint();
