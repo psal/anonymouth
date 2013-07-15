@@ -109,7 +109,7 @@ public class ThePresident {
 		ThePresident leader = new ThePresident();
 		if(OS.contains("mac")) {
 			System.setProperty("WEKA_HOME", "/dev/null");
-			PropertiesUtil.defaultThreads = 2; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
+			PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
 			IS_MAC = true;
 			Logger.logln(leader.NAME+"We're on a Mac!");
