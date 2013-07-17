@@ -65,9 +65,9 @@ public class BackendInterface {
 			Logger.logln(NAME+"Backend: create new problem set thread started.");
 
 			// initialize probelm set
-			main.ps = new ProblemSet();
-			main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
-			GUIUpdateInterface.updateProblemSet(main);
+			main.preProcessWindow.ps = new ProblemSet();
+			main.preProcessWindow.ps.setTrainCorpusName(main.preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
+			main.preProcessWindow.driver.updateAllComponents();
 
 			Logger.logln(NAME+"Backend: create new problem set thread finished.");
 		}
@@ -128,7 +128,7 @@ public class BackendInterface {
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						wizard.runInitial(magician,main.cfd, main.classifiers.get(0));
+						wizard.runInitial(magician,main.preProcessWindow.featureDrivers, main.preProcessWindow.classifiers.get(0));
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();
 						pw.setText("Initialize Cluster Viewer...");
@@ -200,7 +200,7 @@ public class BackendInterface {
 				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
 				SuggestionCalculator.init(magician);
 				SuggestionCalculator.placeSuggestions(main);
-				GUIUpdateInterface.updateResultsPrepColor(main);
+				ResultsWindow.updateResultsPrepColor(main);
 
 				DriverEditor.setAllDocTabUseable(true, main);		
 

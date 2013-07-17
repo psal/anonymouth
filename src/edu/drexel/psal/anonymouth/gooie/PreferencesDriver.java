@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments.ExtFilter;
+import edu.drexel.psal.anonymouth.helpers.ExtFilter;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**

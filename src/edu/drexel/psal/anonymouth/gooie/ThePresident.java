@@ -163,7 +163,7 @@ public class ThePresident {
 				
 				@Override
 				public void handlePreferences(ApplicationEvent e) {
-					GUIMain.GSP.openWindow();
+					GUIMain.preferencesWindow.showWindow();
 				}
 			});
 			

@@ -9,7 +9,6 @@ import edu.drexel.psal.jstylo.generics.Logger.*;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.*;
 import java.io.File;
 import java.util.*;
@@ -29,19 +28,17 @@ import com.jgaap.generics.*;
 public class FeatureWizardDriver {
 	
 	private final static String NAME = "( FeatureWizardDriver ) - ";
-
-	
-	/* =======================
-	 * FeatureWizard listeners
-	 * =======================
-	 */
+	protected static int cellPadding = FeatureWizard.cellPadding;
+	public enum ParamPanelConstraint {
+		INTEGER,
+		DOUBLE,
+		NONE
+	}
 	
 	/**
 	 * Initialize all feature wizard listeners.
 	 */
 	public static void initListeners(final FeatureWizard fw) {
-		
-		// back, cancel and next buttons listeners
 		ActionListener goBack = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -76,20 +73,10 @@ public class FeatureWizardDriver {
 			}
 		};
 
-		// feature name and description tab
-		// ================================
-		
-		// cancel button
 		fw.nameCancelJButton.addActionListener(cancel);
-		
-		// next button
 		fw.nameNextJButton.addActionListener(goNext);
 		
-		
-		// text pre-processing tab
-		// =======================
-
-		// available list
+		//Text pre-processing tab
 		fw.avCanonJList.addListSelectionListener(new ListSelectionListener() {
 			private int lastSelectedIndex = -2;
 			@Override
@@ -109,7 +96,7 @@ public class FeatureWizardDriver {
 			}
 		});
 		
-		// available \ add button
+		//Available \ add button
 		fw.avCanonAddJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -128,7 +115,7 @@ public class FeatureWizardDriver {
 			}
 		});
 		
-		// selected list
+		//Selected list
 		fw.selCanonJList.addListSelectionListener(new ListSelectionListener() {
 			private int lastSelectedIndex = -2;
 			@Override
@@ -150,7 +137,7 @@ public class FeatureWizardDriver {
 			}
 		});
 		
-		// selected \ remove button
+		//Selected \ remove button
 		fw.selCanonRemoveJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -170,20 +157,11 @@ public class FeatureWizardDriver {
 			}
 		});
 
-		// back button
 		fw.canonBackJButton.addActionListener(goBack);
-		
-		// cancel button
 		fw.canonCancelJButton.addActionListener(cancel);
-
-		// next button
 		fw.canonNextJButton.addActionListener(goNext);
 		
-		
-		// feature extractors tab
-		// ======================
-		
-		// features tree
+		//Feature extractors tab
 		fw.featuresJTree.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
 			public void valueChanged(TreeSelectionEvent arg0) {
@@ -197,20 +175,11 @@ public class FeatureWizardDriver {
 			}
 		});
 		
-		// back button
 		fw.featuresBackJButton.addActionListener(goBack);
-
-		// cancel button
 		fw.featuresCancelJButton.addActionListener(cancel);
-
-		// next button
 		fw.featuresNextJButton.addActionListener(goNext);
 		
-
-		// features post-processing tab
-		// ============================
-
-		// available list
+		//Features post-processing tab
 		fw.avCullJList.addListSelectionListener(new ListSelectionListener() {
 			private int lastSelectedIndex = -2;
 			@Override
@@ -230,7 +199,7 @@ public class FeatureWizardDriver {
 			}
 		});
 
-		// available \ add button
+		//Available \ add button
 		fw.avCullAddJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -249,7 +218,7 @@ public class FeatureWizardDriver {
 			}
 		});
 
-		// selected list
+		//Selected list
 		fw.selCullJList.addListSelectionListener(new ListSelectionListener() {
 			private int lastSelectedIndex = -2;
 			@Override
@@ -271,7 +240,7 @@ public class FeatureWizardDriver {
 			}
 		});
 
-		// selected \ remove button
+		//Selected \ remove button
 		fw.selCullRemoveJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -291,27 +260,19 @@ public class FeatureWizardDriver {
 			}
 		});
 
-		// back button
 		fw.cullBackJButton.addActionListener(goBack);
-
-		// cancel button
 		fw.cullCancelJButton.addActionListener(cancel);
-
-		// next button
 		fw.cullNextJButton.addActionListener(goNext);
 		
 		
-		// normalizaton tab
-		// ================
-		
-		// normalization combo-box
+		//Normalizaton tab
 		fw.normChooserJComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				NormBaselineEnum nbl = NormBaselineEnum.getNormBaselineFromTitle(
 						(String) fw.normChooserJComboBox.getSelectedItem());
 				
-				// set description
+				//Set description
 				fw.normDescContentJLabel.setText(
 						"<html><p>" +
 						nbl.getDescription() +
@@ -319,7 +280,7 @@ public class FeatureWizardDriver {
 			}
 		});
 		
-		// factoring
+		//Factoring
 		fw.normFactorJTextField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
@@ -340,26 +301,19 @@ public class FeatureWizardDriver {
 			public void focusGained(FocusEvent arg0) {}
 		});
 
-		// back button
 		fw.normBackJButton.addActionListener(goBack);
-
-		// cancel button
 		fw.normCancelJButton.addActionListener(cancel);
 		
-		// ==================
-		// =				=
-		// add feature button
-		// =				=
-		// ==================
+		//Add feauture button
 		fw.normAddFeatureJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Logger.logln(NAME+"'Add Feature' button clicked in the normalization tab");
 				
-				// create a new feature driver
+				//Create a new feature driver
 				fw.fd = new FeatureDriver();
 				
-				// set name
+				//Set name
 				String name = fw.nameJTextField.getText(); 
 				if (name.matches("\\s*")) {
 					JOptionPane.showMessageDialog(fw,
@@ -369,9 +323,9 @@ public class FeatureWizardDriver {
 					Logger.logln(NAME+"Add feature error: given empty feature name.",LogOut.STDERR);
 					return;
 				}
-				CumulativeFeatureDriver cfd = fw.parent.cfd;
+				CumulativeFeatureDriver cfd = fw.main.preProcessWindow.featureDrivers;
 				
-				// if new feature - check for duplicates
+				//If new feature - check for duplicates
 				if (fw.editMode == false) {
 					for (int i=0; i<cfd.numOfFeatureDrivers(); i++) {
 						if (name.equals(cfd.featureDriverAt(i).getName())) {
@@ -387,19 +341,19 @@ public class FeatureWizardDriver {
 				fw.fd.setName(name);
 				Logger.logln(NAME+"feature name: "+name);
 				
-				// set description
+				//Set description
 				fw.fd.setDescription(fw.descJTextPane.getText());
 				Logger.logln(NAME+"feature description: "+fw.descJTextPane.getText());
 				
-				// set canonicizers
+				//Set canonicizers
 				Logger.logln(NAME+"canonicizers:");
 				for (int i=0; i<fw.selCanonJListModel.getSize(); i++) {
-					// create canonicizer
+					//Create canonicizer
 					String canonName = (String) fw.selCanonJListModel.getElementAt(i);
 					Canonicizer c = getCanonicizer(canonName);
 					Logger.logln(NAME+"- "+canonName);
 					
-					// set parameters
+					//Set parameters
 					JPanel canonParams = fw.canonParamList.get(i);
 					if (canonParams != null) {
 						Logger.logln(NAME+"  parameters:");
@@ -420,7 +374,7 @@ public class FeatureWizardDriver {
 					fw.fd.addCanonicizer(c);
 				}
 				
-				// set feature
+				//Set feature
 				if (fw.featuresJTree.getSelectionCount() == 0 ||  fw.featuresJTree.getSelectionPath().getPath().length != 3) {
 					JOptionPane.showMessageDialog(fw,
 							"No feature extractor selected.",
@@ -429,16 +383,16 @@ public class FeatureWizardDriver {
 					Logger.logln(NAME+"Add feature error: No feature extractor selected.",LogOut.STDERR);
 					return;
 				} else {
-					// set event driver
+					//Set event driver
 					String edString = ((DefaultMutableTreeNode)fw.featuresJTree.getSelectionPath().getPath()[2]).toString();
 					EventDriver ed = getEventDriver(edString);
 					Logger.logln(NAME+"event driver: "+ed.displayName());
 					
-					// set isCalcHist
+					//Set isCalcHist
 					fw.fd.setCalcHist(getIsCalcHist(ed.getClass().getName()));
 					Logger.logln(NAME+"calculate histogram: "+fw.fd.isCalcHist());
 					
-					// set parameters
+					//Set parameters
 					if (fw.edParamList != null) {
 						Logger.logln(NAME+"  parameters:");
 						for (Component paramComp: fw.edParamList.getComponents()) {
@@ -459,15 +413,15 @@ public class FeatureWizardDriver {
 					fw.fd.setUnderlyingEventDriver(ed);
 				}
 				
-				// set cullers
+				//SSet cullers
 				Logger.logln(NAME+"cullers:");
 				for (int i=0; i<fw.selCullJListModel.getSize(); i++) {
-					// create culler
+					//Create culler
 					String cullName = (String) fw.selCullJListModel.getElementAt(i);
 					EventCuller ec = getCuller(cullName);
 					Logger.logln(NAME+"- "+cullName);
 					
-					// set parameters
+					//Set parameters
 					JPanel cullParams = fw.cullParamList.get(i);
 					if (cullParams != null) {
 						Logger.logln(NAME+"  parameters:");
@@ -488,27 +442,24 @@ public class FeatureWizardDriver {
 					fw.fd.addEventCuller(ec);
 				}
 				
-				// normalization and factoring
+				//Normalization and factoring
 				fw.fd.setNormBaseline(NormBaselineEnum.getNormBaselineFromTitle((String)fw.normChooserJComboBox.getSelectedItem()));
 				fw.fd.setNormFactor(Double.valueOf(fw.normFactorJTextField.getText()));
 				Logger.logln(NAME+"normalization baseline: "+fw.fd.getNormBaseline());
 				Logger.logln(NAME+"normalization factor: "+fw.fd.getNormFactor());
 				
-				// --------------------------------------------------------------
-				
-				// update GUIMain
+				//Update GUIMain
 				if (fw.editMode == false) {
-					// add new feature
-					fw.parent.cfd.addFeatureDriver(fw.fd);
-					Logger.logln(NAME+"Added feature driver '"+fw.fd.getName()+"' to main feature set. Total feature drivers: "+fw.parent.cfd.numOfFeatureDrivers());
+					//Add new feature
+					fw.main.preProcessWindow.featureDrivers.addFeatureDriver(fw.fd);
+					Logger.logln(NAME+"Added feature driver '"+fw.fd.getName()+"' to main feature set. Total feature drivers: "+fw.main.preProcessWindow.featureDrivers.numOfFeatureDrivers());
 				} else {
-					// update old feature
-					fw.parent.cfd.replaceFeatureDriverAt(fw.originalIndex,fw.fd);
+					//Update old feature
+					fw.main.preProcessWindow.featureDrivers.replaceFeatureDriverAt(fw.originalIndex,fw.fd);
 					Logger.logln(NAME+"Updated feature driver '"+fw.fd.getName()+"' in the main feature set.");
 				}
 				
-				// update GUIMain gui and dispose
-				GUIUpdateInterface.updateFeatureSetView(fw.parent);
+				fw.main.preProcessWindow.driver.updateFeatureSetView(fw.main);
 				fw.dispose();
 			}
 		});
@@ -542,19 +493,6 @@ public class FeatureWizardDriver {
 		fw.mainJTabbedPane.setSelectedIndex(0);
 	}
 	
-	protected static int cellPadding = FeatureWizard.cellPadding;
-	
-	/* ========================
-	 * parameter GUI components
-	 * ========================
-	 */
-	
-	public enum ParamPanelConstraint {
-		INTEGER,
-		DOUBLE,
-		NONE
-	}
-	
 	/**
 	 * Creates a text-field with constrained to accept only integer values.
 	 */
@@ -563,11 +501,11 @@ public class FeatureWizardDriver {
 		
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,cellPadding,cellPadding));
 		
-		// add label
+		//Add label
 		JLabel name = new JLabel(fieldName);
 		panel.add(name);
 		
-		// add value text field with constraint
+		//Add value text field with constraint
 		final JTextField value = new JTextField(defaultValue);
 		value.setPreferredSize(new Dimension(100,20));
 		value.addFocusListener(new FocusListener() {
@@ -616,11 +554,11 @@ public class FeatureWizardDriver {
 		
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,cellPadding,cellPadding));
 		
-		// add label
+		//Add label
 		JLabel name = new JLabel(fieldName);
 		panel.add(name);
 		
-		// add value text field with constraint
+		//Add value text field with constraint
 		final JTextField value = new JTextField(defaultValue);
 		value.setEditable(false);
 		value.setPreferredSize(new Dimension(200,20));
@@ -664,11 +602,11 @@ public class FeatureWizardDriver {
 		
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT,cellPadding,cellPadding));
 		
-		// add label
+		//Add label
 		JLabel name = new JLabel(fieldName);
 		panel.add(name);
 		
-		// add value text field with constraint
+		//Add value text field with constraint
 		final JComboBox value = new JComboBox(values);
 		panel.add(value);
 
@@ -684,136 +622,81 @@ public class FeatureWizardDriver {
 		BoxLayout bl = new BoxLayout(panel,BoxLayout.Y_AXIS);
 		panel.setLayout(bl);
 		
-		// canonicizers
-		// ============
-		
-		// JGAAP canonicizers
-		
-		// JStylo canonicizers
 		if (className.equals("edu.drexel.psal.jstylo.canonicizers.RemoveFirstNLines")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "1", ParamPanelConstraint.INTEGER));
-		}
-		
-		// event drivers
-		// =============
-		
-		// JGAAP event drivers
-		else if (className.equals("com.jgaap.eventDrivers.BlackListEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.BlackListEventDriver")) {
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
 			panel.add(getParamFileChooserPanel(fw, tabIndex, "filename", "", ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.WhiteListEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.WhiteListEventDriver")) {
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
 			panel.add(getParamFileChooserPanel(fw, tabIndex, "filename", "", ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.MNLetterWordEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.MNLetterWordEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "M", "2", ParamPanelConstraint.INTEGER));
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "3", ParamPanelConstraint.INTEGER));
-			//panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-			
-		}
-		else if (className.equals("com.jgaap.eventDrivers.CharacterNGramEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.CharacterNGramEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.POSNGramEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.POSNGramEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.RareWordsEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.RareWordsEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "M", "2", ParamPanelConstraint.INTEGER));
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "3", ParamPanelConstraint.INTEGER));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.SuffixEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.SuffixEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "length", "3", ParamPanelConstraint.INTEGER));
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "minimumlength", "5", ParamPanelConstraint.INTEGER));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.SyllableTransitionEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.SyllableTransitionEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.TruncatedEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.TruncatedEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "length", "2", ParamPanelConstraint.INTEGER));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.TumblingNGramEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.TumblingNGramEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.VowelMNLetterWordEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.VowelMNLetterWordEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "M", "2", ParamPanelConstraint.INTEGER));
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "3", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("com.jgaap.eventDrivers.WordNGramEventDriver")) {
+		} else if (className.equals("com.jgaap.eventDrivers.WordNGramEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}				
-		
-		// JStylo event drivers
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.EventsCounterEventDriver")) {
-			
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.EventsCounterEventDriver")) {
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.FastTagPOSNGramsEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.FastTagPOSNGramsEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.MaxentPOSNGramsEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.MaxentPOSNGramsEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "2", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.ListEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.ListEventDriver")) {
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "sort", new String[]{"false","true"}, ParamPanelConstraint.NONE));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "whiteList", new String[]{"false","true"}, ParamPanelConstraint.NONE));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "keepLexiconInMem", new String[]{"false","true"}, ParamPanelConstraint.NONE));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
 			panel.add(getParamFileChooserPanel(fw, tabIndex, "filename", "", ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.ListRegexpEventDriver")) {
-			//panel.add(getParamComboBoxPanel(fw, tabIndex, "sort", new String[]{"false","true"}, ParamPanelConstraint.NONE));
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.ListRegexpEventDriver")) {
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "whiteList", new String[]{"false","true"}, ParamPanelConstraint.NONE));
 			panel.add(getParamComboBoxPanel(fw, tabIndex, "keepLexiconInMem", new String[]{"false","true"}, ParamPanelConstraint.NONE));
-			//panel.add(getParamComboBoxPanel(fw, tabIndex, "underlyingEvents", getUnderlyingEvents(), ParamPanelConstraint.NONE));
 			panel.add(getParamFileChooserPanel(fw, tabIndex, "filename", "", ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "regexp", "", ParamPanelConstraint.NONE));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.RegexpEventDriver")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventDrivers.RegexpEventDriver")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "regexp", "", ParamPanelConstraint.NONE));
-		}
-				
-		// cullers
-		// =======
-		
-		// JGAAP cullers
-		else if (className.equals("com.jgaap.eventCullers.LeastCommonEvents")) {
+		} else if (className.equals("com.jgaap.eventCullers.LeastCommonEvents")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "numEvents", "50", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("com.jgaap.eventCullers.MostCommonEvents")) {
+		} else if (className.equals("com.jgaap.eventCullers.MostCommonEvents")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "numEvents", "50", ParamPanelConstraint.INTEGER));
-		}
-		
-		// JStylo cullers
-		else if (className.equals("edu.drexel.psal.jstylo.eventCullers.LeastCommonEventsExtended")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventCullers.LeastCommonEventsExtended")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "50", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "50", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MinAppearances")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MinAppearances")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "10", ParamPanelConstraint.INTEGER));
-		}
-		else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MaxAppearances")) {
+		} else if (className.equals("edu.drexel.psal.jstylo.eventCullers.MaxAppearances")) {
 			panel.add(getParamTextFieldPanel(fw, tabIndex, "N", "10", ParamPanelConstraint.INTEGER));
-		}
-		
-		// in any other case
-		else {
+		} else {
 			panel = null;
 		}
 
 		return panel;
-		
 	}
 	
 	/**
@@ -856,10 +739,10 @@ public class FeatureWizardDriver {
 	 * ===========================
 	 */
 	
-	// canonicizers
+	//Canonicizers
 	protected static Map<String,String> canonMap;
 	protected static String[] canonClasses = new String[] {
-		// JGAAP original canonicizers
+		//JGAAP original canonicizers
 		"com.jgaap.canonicizers.AddErrors",
 		"com.jgaap.canonicizers.NormalizeWhitespace",
 		"com.jgaap.canonicizers.StripComments",
@@ -868,20 +751,20 @@ public class FeatureWizardDriver {
 		"com.jgaap.canonicizers.StripNumbers",
 		"com.jgaap.canonicizers.UnifyCase",
 
-		// JStylo canonicizers
+		//JStylo canonicizers
 		"edu.drexel.psal.jstylo.canonicizers.RemoveFirstNLines",
 		"edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation",
 		"edu.drexel.psal.jstylo.canonicizers.WordEndsPunctSeparator",
 		"edu.drexel.psal.jstylo.canonicizers.StripSpaces"
 	};
 	
-	// event drivers
+	//Event drivers
 	protected static Map<String,Map<String,String>> edMap;
 	protected static String[][] edClasses = new String[][] {
 		
-		// Basic
+		//Basic
 		new String[] { "Basic",
-				// JGAAP event drivers
+				//JGAAP event drivers
 				"com.jgaap.eventDrivers.FirstWordInSentenceEventDriver",
 				"com.jgaap.eventDrivers.CharacterEventDriver",
 				"com.jgaap.eventDrivers.NaiveWordEventDriver",
@@ -903,48 +786,48 @@ public class FeatureWizardDriver {
 				"edu.drexel.psal.jstylo.eventDrivers.WordLengthEventDriver",
 		},
 		
-		// POS
+		//POS
 		new String[] { "Part-Of-Speech",
-				// JGAAP event drivers
+				//JGAAP event drivers
 				"com.jgaap.eventDrivers.CoarsePOSTagger",
 				"com.jgaap.eventDrivers.PartOfSpeechEventDriver",
 				"com.jgaap.eventDrivers.POSNGramEventDriver",
 				
-				// JStylo event drivers
+				//JStylo event drivers
 				"edu.drexel.psal.jstylo.eventDrivers.FastTagPOSTagsEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.FastTagPOSNGramsEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.MaxentPOSTagsEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.MaxentPOSNGramsEventDriver",
 		},
 		
-		// grams
+		//Grams
 		new String[] { "Grams",
-				// JGAAP event drivers
+				//JGAAP event drivers
 				"com.jgaap.eventDrivers.CharacterNGramEventDriver",
 				"com.jgaap.eventDrivers.MNLetterWordEventDriver",
 				"com.jgaap.eventDrivers.TumblingNGramEventDriver",
 				"com.jgaap.eventDrivers.WordNGramEventDriver",
 				
-				// JStylo event drivers
+				//JStylo event drivers
 				"edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver",
 				
 		},
 		
-		// dictionary-based
+		//Dictionary-based
 		new String[] { "Dictionary",
-				// JGAAP event drivers
+				//JGAAP event drivers
 				"com.jgaap.eventDrivers.BlackListEventDriver",
 				"com.jgaap.eventDrivers.WhiteListEventDriver",
 				"com.jgaap.eventDrivers.DefinitionsEventDriver",
 				
-				// JStylo event drivers
+				//JStylo event drivers
 				"edu.drexel.psal.jstylo.eventDrivers.ListEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.ListRegexpEventDriver"
 		},
 		
-		// counters
+		//Counters
 		new String[] { "Counters",
-				// JStylo event drivers
+				//JStylo event drivers
 				"edu.drexel.psal.jstylo.eventDrivers.CharCounterEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver",
@@ -955,15 +838,15 @@ public class FeatureWizardDriver {
 				"edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver",
 		},
 		
-		// readability metrics
+		//Readability metrics
 		new String[] { "Readability Metrics",
 				"edu.drexel.psal.jstylo.eventDrivers.FleschReadingEaseScoreEventDriver",
 				"edu.drexel.psal.jstylo.eventDrivers.GunningFogIndexEventDriver",
 		},
 		
-		// Misc.
+		//Misc.
 		new String[] { "Misc.",
-				// JGAAP event drivers
+				//JGAAP event drivers
 				"com.jgaap.eventDrivers.NamingTimeEventDriver",
 				"com.jgaap.eventDrivers.PorterStemmerEventDriver",
 				"com.jgaap.eventDrivers.PorterStemmerWithIrregularEventDriver",
@@ -972,35 +855,24 @@ public class FeatureWizardDriver {
 				"com.jgaap.eventDrivers.TruncatedFreqEventDriver",
 				"com.jgaap.eventDrivers.TruncatedNamingTimeEventDriver",
 				"com.jgaap.eventDrivers.TruncatedReactionTimeEventDriver",
-				
-				// JStylo event drivers
+				//JStylo event drivers
 		}
 	};
 	
-	// cullers
+	//Cullers
 	protected static Map<String,String> cullersMap;
 	protected static String[] cullerClasses = new String[] {
-		// JGAAP original cullers
+		//JGAAP original cullers
 		"com.jgaap.eventCullers.ExtremeCuller",
 		"com.jgaap.eventCullers.LeastCommonEvents",
 		"com.jgaap.eventCullers.MostCommonEvents",
 		
-		// JStylo cullers
+		//JStylo cullers
 		"edu.drexel.psal.jstylo.eventCullers.LeastCommonEventsExtended",
 		"edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended",
 		"edu.drexel.psal.jstylo.eventCullers.MinAppearances",
 		"edu.drexel.psal.jstylo.eventCullers.MaxAppearances",
 	};
-	
-	
-	/* =======
-	 * setters
-	 * =======
-	 */
-	
-	public static void initClasses() {
-		
-	}
 	
 	/**
 	 * Populates all maps - canonicizers, event drivers and cullers.
@@ -1018,7 +890,7 @@ public class FeatureWizardDriver {
 		Logger.logln(NAME+"Populating canonicizers...");
 		canonMap = new HashMap<String,String>(canonClasses.length);
 		
-		// map all canonicizers from description to class name
+		//Map all canonicizers from description to class name
 		Canonicizer c;
 		for (String className: canonClasses) {
 			try {
@@ -1039,7 +911,7 @@ public class FeatureWizardDriver {
 		Logger.logln(NAME+"Populating event drivers...");
 		edMap = new HashMap<String,Map<String,String>>(edClasses.length);
 		
-		// map all event drivers from description to class name
+		//Map all event drivers from description to class name
 		EventDriver ed;
 		String className;
 		String[] set;
@@ -1071,7 +943,7 @@ public class FeatureWizardDriver {
 		Logger.logln(NAME+"Populating event cullers...");
 		cullersMap = new HashMap<String,String>(cullerClasses.length);
 		
-		// map all canonicizers from description to class name
+		//Map all canonicizers from description to class name
 		EventCuller c;
 		for (String className: cullerClasses) {
 			try {

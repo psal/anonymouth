@@ -17,7 +17,7 @@ public class DriverMenu {
 	
 	private final static String NAME = "( DriverMenu ) - ";
 
-	protected static ActionListener generalListener;
+	protected static ActionListener preferencesListener;
 	protected static ActionListener saveProblemSetListener;
 	protected static ActionListener loadProblemSetListener;
 	protected static ActionListener saveTestDocListener;
@@ -31,22 +31,21 @@ public class DriverMenu {
 	protected static ActionListener fullScreenListener;
 //	protected static ActionListener printMenuItemListener;
 	
-	protected static void initListeners(final GUIMain main) {
-		if (!ThePresident.IS_MAC)
-        	main.settingsGeneralMenuItem.addActionListener(generalListener);
-		
-		generalListener = new ActionListener() {
+	protected static void initListeners(final GUIMain main) {	
+		preferencesListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUIMain.GSP.openWindow();
+				GUIMain.preferencesWindow.showWindow();
 			}
         };
+        if (!ThePresident.IS_MAC)
+        	main.settingsGeneralMenuItem.addActionListener(preferencesListener);
         
         saveProblemSetListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Save problem set menu item clicked");
-        		DriverPreProcessTabDocuments.saveProblemSetAL.actionPerformed(e);
+        		main.preProcessWindow.driver.saveProblemSetListener.actionPerformed(e);
         	}
         };
         main.fileSaveProblemSetMenuItem.addActionListener(saveProblemSetListener);
@@ -55,7 +54,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Load problem set menu item clicked");
-        		DriverPreProcessTabDocuments.loadProblemSetAL.actionPerformed(e);
+        		main.preProcessWindow.driver.loadProblemSetListener.actionPerformed(e);
         	}
         };
         main.fileLoadProblemSetMenuItem.addActionListener(loadProblemSetListener);

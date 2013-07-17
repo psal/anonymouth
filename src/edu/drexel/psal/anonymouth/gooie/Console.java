@@ -9,7 +9,7 @@ package edu.drexel.psal.anonymouth.gooie;
 //
 // RJHM van den Bergh , rvdb@comweb.nl
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments.ExtFilter;
+import edu.drexel.psal.anonymouth.helpers.ExtFilter;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 

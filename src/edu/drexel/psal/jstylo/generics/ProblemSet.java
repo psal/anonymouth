@@ -17,7 +17,7 @@ import java.util.Collections;
 
 import com.jgaap.generics.*;
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments;
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -111,8 +111,8 @@ public class ProblemSet {
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
 		
-		DriverPreProcessTabDocuments.updateOpeningDir(testDocsMap.get(ThePresident.DUMMY_NAME).get(0).getFilePath(), false);
-		DriverPreProcessTabDocuments.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
+		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ThePresident.DUMMY_NAME).get(0).getFilePath(), false);
+		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
 	/**

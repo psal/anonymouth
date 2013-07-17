@@ -878,17 +878,17 @@ public class DriverEditor {
 			public synchronized void actionPerformed(ActionEvent event) {
 				// ----- check if all requirements for processing are met
 				String errorMessage = "Oops! Found errors that must be taken care of prior to processing!\n\nErrors found:\n";
-				if (!main.mainDocReady())
+				if (!main.preProcessWindow.mainDocReady())
 					errorMessage += "<html>&bull; Main document not provided.</html>\n";
-				if (!main.sampleDocsReady())
+				if (!main.preProcessWindow.sampleDocsReady())
 					errorMessage += "<html>&bull; Sample documents not provided.</html>\n";
-				if (!main.trainDocsReady())
-					errorMessage += "<html>&bull; Train documents not provided.</html>\n";
-				if (!main.featuresAreReady())
+				if (!main.preProcessWindow.otherDocsReady())
+					errorMessage += "<html>&bull; Other author documents not provided.</html>\n";
+				if (!main.preProcessWindow.featuresAreReady())
 					errorMessage += "<html>&bull; Feature set not chosen.</html>\n";
-				if (!main.classifiersAreReady())
+				if (!main.preProcessWindow.classifiersAreReady())
 					errorMessage += "<html>&bull; Classifier not chosen.</html>\n";
-				if (!main.hasAtLeastThreeOtherAuthors())
+				if (!main.preProcessWindow.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
 
 				// ----- display error message if there are errors
@@ -912,18 +912,18 @@ public class DriverEditor {
 							Logger.logln(NAME+"Initial processing starting...");
 
 							// initialize all arraylists needed for feature processing
-							sizeOfCfd = main.cfd.numOfFeatureDrivers();
+							sizeOfCfd = main.preProcessWindow.featureDrivers.numOfFeatureDrivers();
 							featuresInCfd = new ArrayList<String>(sizeOfCfd);
 							noCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 							yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 
 							for(int i = 0; i < sizeOfCfd; i++) {
-								String theName = main.cfd.featureDriverAt(i).getName();
+								String theName = main.preProcessWindow.featureDrivers.featureDriverAt(i).getName();
 
 								// capitalize the name and replace all " " and "-" with "_"
 								theName = theName.replaceAll("[ -]","_").toUpperCase(); 
 								if(isCalcHist == false) {
-									isCalcHist = main.cfd.featureDriverAt(i).isCalcHist();
+									isCalcHist = main.preProcessWindow.featureDrivers.featureDriverAt(i).isCalcHist();
 									yesCalcHistFeatures.add(FeatureList.valueOf(theName));
 								} else {
 									// these values will go in suggestion list... PLUS any 	
@@ -931,7 +931,7 @@ public class DriverEditor {
 								}
 								featuresInCfd.add(i,theName);
 							}
-							wizard = new DataAnalyzer(main.ps);
+							wizard = new DataAnalyzer(main.preProcessWindow.ps);
 							magician = new DocumentMagician(false);
 						} else {
 							isFirstRun = false;
@@ -963,7 +963,7 @@ public class DriverEditor {
 				
 				File dir;
 				try {
-					dir = new File(new File(main.ps.getTestDocs().get(ThePresident.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
+					dir = new File(new File(main.preProcessWindow.ps.getTestDocs().get(ThePresident.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
 					save.setCurrentDirectory(dir);
 				} catch (IOException e1) {
 					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
@@ -1013,7 +1013,7 @@ public class DriverEditor {
 		main.versionControl.reset();
 		main.anonymityDrawingPanel.reset();
 		main.resultsWindow.reset();
-		GUIUpdateInterface.updateResultsPrepColor(main);
+		ResultsWindow.updateResultsPrepColor(main);
 		main.elementsToRemoveTable.removeAllElements();
 		main.elementsToAdd.removeAllElements();
 		

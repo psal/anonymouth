@@ -25,6 +25,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * Displays an enlarged, more detailed version of the results graph shown in the main window.
+ * 
+ * TODO Make Results window organized, consolidate into ResultsWindow and ResultsDriver
  * @author Marc Barrowclift
  *
  */
@@ -217,5 +219,12 @@ public class ResultsWindow extends JDialog {
 		percent.clear();
 		main.resultsMainPanel.setPreferredSize(new Dimension(175, 110));
 		panelImage = null;
+	}
+	
+	protected static void updateResultsPrepColor(GUIMain main) {
+		if (main.resultsAreReady())
+			main.resultsTableLabel.setBackground(main.ready);
+		else
+			main.resultsTableLabel.setBackground(main.blue);
 	}
 }

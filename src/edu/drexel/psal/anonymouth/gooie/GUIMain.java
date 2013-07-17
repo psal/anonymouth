@@ -31,7 +31,6 @@ import javax.swing.border.Border;
 import javax.swing.table.*;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.StyledDocument;
-import javax.swing.tree.*;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -108,19 +107,14 @@ public class GUIMain extends javax.swing.JFrame {
 	// ------------------------
 
 	// data
-	protected ProblemSet ps;
-	protected CumulativeFeatureDriver cfd;
 	protected List<CumulativeFeatureDriver> presetCFDs;
 	protected WekaInstancesBuilder wib;
 	protected WekaAnalyzer wad;
-	protected List<Classifier> classifiers;
 	protected Thread analysisThread;
 	protected List<String> results;
 
-	protected PreProcessSettingsFrame PPSP;
-	protected static PreferencesWindow GSP;
+	protected static PreferencesWindow preferencesWindow;
 
-	protected String defaultTrainDocsTreeName = "Authors"; 
 	protected Font defaultLabelFont = new Font("Verdana",0,16);
 	protected static int cellPadding = 5;
 
@@ -135,32 +129,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel featuresTab;
 	protected JPanel classTab;
 	protected JPanel editorTab;
-
-	// documents tab
-	protected JLabel problemSetLabel;
-	protected JButton loadProblemSetJButton;
-	protected JButton saveProblemSetJButton;
-	protected JButton removeTrainDocsJButton;
-	protected JButton addTrainDocsJButton;
-
-	protected JTable testDocsJTable;
-	protected DefaultTableModel testDocsTableModel;
-	protected JLabel featuresToolsJLabel;
-	protected JLabel docPreviewNameJLabel;
-	protected JLabel corpusJLabel;
-	protected JButton removeTestDocJButton;
-	protected JButton addAuthorJButton;
-	protected JButton addTestDocJButton;
-	protected JPanel testDocBottom;
-	protected JButton clearDocPreviewJButton;
-	protected JButton docsAboutJButton;
-	protected JTable userSampleDocsJTable;
-	protected DefaultTableModel userSampleDocsTableModel;
-	protected JLabel userSampleDocsJLabel;
-	protected JPanel buttons;
-	protected JButton adduserSampleDocJButton;
-	protected JButton removeuserSampleDocJButton;
-	protected JButton userSampleDocPreviewJButton;
+	
+	public PreProcessWindow preProcessWindow;
 
 	// Classifiers tab
 	protected JTextField classAvClassArgsJTextField;
@@ -181,11 +151,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton classRemoveJButton;
 	protected JButton classAboutJButton;
 
-	protected JComboBox<String> classChoice;
-
 	// Editor tab
-
-
 	protected JScrollPane theEditorScrollPane;
 	protected JTable suggestionTable;
 	protected JPanel editorRowTwoButtonBufferPanel;
@@ -205,38 +171,6 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel updaterJPanel;
 	//-------------- HELP TAB PANE STUFF ---------
 	protected JTabbedPane leftTabPane;
-
-	protected JPanel preProcessPanel;
-	protected JButton prepAdvButton;
-	protected JPanel prepDocumentsPanel;
-	protected JPanel prepMainDocPanel;
-	protected JLabel prepDocLabel;
-	protected JLabel mainLabel;
-	protected JList<String> prepMainDocList;
-	protected JButton clearProblemSetJButton;
-	protected JScrollPane prepMainDocScrollPane;
-	protected JPanel prepSampleDocsPanel;
-	protected JLabel sampleLabel;
-	protected JList<String> prepSampleDocsList;
-	protected JScrollPane prepSampleDocsScrollPane;
-	protected JPanel prepTrainDocsPanel;
-	protected JLabel trainLabel;
-	protected JTree trainCorpusJTree;
-	protected JScrollPane trainCorpusJTreeScrollPane;
-	protected JPanel prepFeaturesPanel;
-	protected JLabel prepFeatLabel;
-	protected JComboBox<String> featuresSetJComboBox;
-	protected DefaultComboBoxModel<String> featuresSetJComboBoxModel;
-	protected JPanel prepClassifiersPanel;
-	protected JLabel prepClassLabel;
-	protected JPanel prepAvailableClassPanel;
-	protected JTree classJTree;
-	protected JTextPane classTextPane;
-	protected JComboBox<String> classComboBox;
-	protected JScrollPane prepAvailableClassScrollPane;
-	protected JPanel prepSelectedClassPanel;
-	protected JList<String> classJList;
-	protected JScrollPane prepSelectedClassScrollPane;
 
 	protected JPanel suggestionsPanel;
 	protected JPanel elementsPanel;
@@ -420,6 +354,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
 	protected Font normalFont;
+	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 
 	private int resultsHeight;
 	protected Map<Integer, ArrayList<int[]>> highlights = new HashMap<Integer, ArrayList<int[]>>();
@@ -491,7 +426,6 @@ public class GUIMain extends javax.swing.JFrame {
 				inst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
 			}
 		});
 	}
@@ -542,15 +476,25 @@ public class GUIMain extends javax.swing.JFrame {
 		initData();
 		initGUI();
 	}
+	
+	public void showMainGUI() {
+		setExtendedState(MAXIMIZED_BOTH);
+		this.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
+		this.setLocation((screensize.width/2)-(this.getWidth()/2), (screensize.height/2)-(this.getHeight()/2));
+		this.setMinimumSize(new Dimension(800, 578));
+		this.setTitle("Anonymouth");
+		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
+		this.setVisible(true);
+	}
 
 	private void initData() {
 		ProblemSet.setDummyAuthor(ThePresident.DUMMY_NAME);
-		ps = new ProblemSet();
-		ps.setTrainCorpusName(defaultTrainDocsTreeName);
-		cfd = new CumulativeFeatureDriver();
-		DriverPreProcessTabFeatures.initPresetCFDs(this);
+		preProcessWindow.ps = new ProblemSet();
+		preProcessWindow.ps.setTrainCorpusName(preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
+		preProcessWindow.featureDrivers = new CumulativeFeatureDriver();
+		preProcessWindow.advancedWindow.initPresetCFDs(this);
 		FeatureWizardDriver.populateAll();
-		classifiers = new ArrayList<Classifier>();
+		preProcessWindow.classifiers = new ArrayList<Classifier>();
 		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
@@ -583,133 +527,128 @@ public class GUIMain extends javax.swing.JFrame {
 		ThePresident.MAX_FEATURES_TO_CONSIDER = PropertiesUtil.getMaximumFeatures();
 		ThePresident.NUM_TAGGING_THREADS = PropertiesUtil.getThreadCount();
 	}
+	
+	/**
+	 * Creates the menu bar used by Anonymouth
+	 */
+	private void initMenuBar() {
+		menuBar = new JMenuBar();
+
+		fileMenu = new JMenu("File");
+		fileSaveProblemSetMenuItem = new JMenuItem("Save Problem Set");
+		fileLoadProblemSetMenuItem = new JMenuItem("Load Problem Set");
+		fileSaveTestDocMenuItem = new JMenuItem("Save");
+		fileSaveAsTestDocMenuItem = new JMenuItem("Save As...");
+
+		fileMenu.add(fileSaveProblemSetMenuItem);
+		fileMenu.add(fileLoadProblemSetMenuItem);
+		fileMenu.add(new JSeparator());
+		fileMenu.add(fileSaveTestDocMenuItem);
+		fileMenu.add(fileSaveAsTestDocMenuItem);
+
+		menuBar.add(fileMenu);
+
+		editMenu = new JMenu("Edit");
+		editUndoMenuItem = new JMenuItem("Undo");
+		editUndoMenuItem.setEnabled(false);
+		editMenu.add(editUndoMenuItem);
+		editRedoMenuItem = new JMenuItem("Redo");
+		editRedoMenuItem.setEnabled(false);
+		editMenu.add(editRedoMenuItem);
+		clipboard = new Clipboard(this, editMenu);
+		menuBar.add(editMenu);
+
+		viewMenuItem = new JMenu("View");
+		viewClustersMenuItem = new JMenuItem("Clusters");
+		viewMenuItem.add(viewClustersMenuItem);
+
+		menuBar.add(viewMenuItem);
+
+		if (ThePresident.IS_MAC) {
+			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+			viewMenuItem.add(new JSeparator());
+			viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
+			viewMenuItem.add(viewEnterFullScreenMenuItem);
+			viewEnterFullScreenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		} else {
+			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
+			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
+			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
+		}
+
+		if (!ThePresident.IS_MAC) {
+			JMenu settingsMenu = new JMenu("Settings");
+			settingsGeneralMenuItem = new JMenuItem("Preferences");
+			settingsMenu.add(settingsGeneralMenuItem);
+			menuBar.add(settingsMenu);
+		}
+
+		helpMenu = new JMenu("Help");
+		helpAboutMenuItem = new JMenuItem("About Anonymouth");
+		helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
+		if (!ThePresident.IS_MAC) {
+			helpMenu.add(helpAboutMenuItem);
+			helpMenu.add(new JSeparator());
+		}
+		helpSuggestionsMenuItem = new JMenuItem("FAQ");
+		helpMenu.add(helpSuggestionsMenuItem);
+		helpMenu.add(new JSeparator());
+		helpMenu.add(helpClustersMenuItem);
+
+		menuBar.add(helpMenu);
+
+		this.setJMenuBar(menuBar);
+	}
 
 	private void initGUI() {
 		try {
-			setExtendedState(MAXIMIZED_BOTH);
-			Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-			this.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
-			this.setMinimumSize(new Dimension(800, 578));
-			this.setTitle("Anonymouth");
-			this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
-
-			menuBar = new JMenuBar();
-
-			fileMenu = new JMenu("File");
-			fileSaveProblemSetMenuItem = new JMenuItem("Save Problem Set");
-			fileLoadProblemSetMenuItem = new JMenuItem("Load Problem Set");
-			fileSaveTestDocMenuItem = new JMenuItem("Save");
-			fileSaveAsTestDocMenuItem = new JMenuItem("Save As...");
-
-			fileMenu.add(fileSaveProblemSetMenuItem);
-			fileMenu.add(fileLoadProblemSetMenuItem);
-			fileMenu.add(new JSeparator());
-			fileMenu.add(fileSaveTestDocMenuItem);
-			fileMenu.add(fileSaveAsTestDocMenuItem);
-
-			menuBar.add(fileMenu);
-
-			editMenu = new JMenu("Edit");
-			editUndoMenuItem = new JMenuItem("Undo");
-			editUndoMenuItem.setEnabled(false);
-			editMenu.add(editUndoMenuItem);
-			editRedoMenuItem = new JMenuItem("Redo");
-			editRedoMenuItem.setEnabled(false);
-			editMenu.add(editRedoMenuItem);
-			clipboard = new Clipboard(this, editMenu);
-			menuBar.add(editMenu);
-
-			viewMenuItem = new JMenu("View");
-			viewClustersMenuItem = new JMenuItem("Clusters");
-			viewMenuItem.add(viewClustersMenuItem);
-
-			menuBar.add(viewMenuItem);
-
-			if (ThePresident.IS_MAC) {
-				fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-				fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-				editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-				editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-
-				viewMenuItem.add(new JSeparator());
-				viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
-				viewMenuItem.add(viewEnterFullScreenMenuItem);
-				viewEnterFullScreenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-			} else {
-				fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
-				fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-				editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
-				editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
-			}
-
-			if (!ThePresident.IS_MAC) {
-				JMenu settingsMenu = new JMenu("Settings");
-				settingsGeneralMenuItem = new JMenuItem("Preferences");
-				settingsMenu.add(settingsGeneralMenuItem);
-				menuBar.add(settingsMenu);
-			}
-
-			helpMenu = new JMenu("Help");
-			helpAboutMenuItem = new JMenuItem("About Anonymouth");
-			helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
-			if (!ThePresident.IS_MAC) {
-				helpMenu.add(helpAboutMenuItem);
-				helpMenu.add(new JSeparator());
-			}
-			helpSuggestionsMenuItem = new JMenuItem("FAQ");
-			helpMenu.add(helpSuggestionsMenuItem);
-			helpMenu.add(new JSeparator());
-			helpMenu.add(helpClustersMenuItem);
-
-			menuBar.add(helpMenu);
-
-			this.setJMenuBar(menuBar);
-
-			// ----- create all the tabs based on tab location (for some)
-			// ----- must be done first so the lists and tables below refer to a location (not null)
+			//Initializes the menu bar
+			initMenuBar();
+			
+			//Creates all tabs based on saved location in the Prop file
 			leftTabPane = new JTabbedPane();
 			topTabPane = new JTabbedPane();
 			rightTabPane = new JTabbedPane();
 			bottomTabPane = new JTabbedPane();
-			createPPTab();
 			createSugTab();
 			createTransTab();
 			createDocumentTab();
 			createAnonymityTab();
-			//			createResultsTab();
 
 			setUpContentPane();
-
-			// final property settings
-
 			DriverEditor.setAllDocTabUseable(false, this);
-
-			// init all settings panes
-
-			PPSP = new PreProcessSettingsFrame(this);
-			GSP = new PreferencesWindow(this);
-
-			//init default values
 			setDefaultValues();
 
+			preferencesWindow = new PreferencesWindow(this);
 			clustersWindow = new ClustersWindow();
 			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
 			versionControl = new VersionControl(this);
 			resultsWindow = new ResultsWindow(this);
 			rightClickMenu = new RightClickMenu(this);
+			preProcessWindow = new PreProcessWindow(this);
 
-			// initialize listeners - except for EditorTabDriver!
-
+			//Initialize GUIMain listeners
 			DriverMenu.initListeners(this);
 			DriverEditor.initListeners(this);
-			DriverPreProcessTab.initListeners(this);
 			DriverResultsTab.initListeners(this);
 			DriverSuggestionsTab.initListeners(this);
 			DriverClustersWindow.initListeners(this);
 			DriverResultsWindow.initListeners(this);
 			DriverTranslationsTab.initListeners(this);
 			DictionaryBinding.init();
+			
+			//Display the set-up wizard if necessary
+			if (!PropertiesUtil.getProbSet().equals("")) {
+				preProcessWindow.showWindow();
+			} else {
+				showMainGUI();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -726,8 +665,8 @@ public class GUIMain extends javax.swing.JFrame {
 			Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
 
 			try {
-				ps = new ProblemSet(problemSetPath);
-				GUIUpdateInterface.updateProblemSet(this);
+				preProcessWindow.ps = new ProblemSet(problemSetPath);
+				preProcessWindow.driver.updateAllComponents();
 			} catch (Exception exc) {
 				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDERR);
 			}
@@ -735,37 +674,36 @@ public class GUIMain extends javax.swing.JFrame {
 			Logger.logln(NAME+"No default problem set saved from last run, will continue without.", LogOut.STDOUT);
 		}
 		
-		if (prepMainDocList.getModel().getSize() != 0) {
-			addTestDocJButton.setEnabled(false);
-			PPSP.addTestDocJButton.setEnabled(false);
+		if (preProcessWindow.prepMainDocList.getModel().getSize() != 0) {
+			preProcessWindow.addTestDocJButton.setEnabled(false);
 		}
 
-		featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
-		PPSP.featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
-		cfd = presetCFDs.get(featuresSetJComboBox.getSelectedIndex());
-		GUIUpdateInterface.updateFeatureSetView(this);
-		GUIUpdateInterface.updateFeatPrepColor(this);
+		preProcessWindow.featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
+		preProcessWindow.advancedWindow.featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
+		preProcessWindow.featureDrivers = presetCFDs.get(preProcessWindow.featuresSetJComboBox.getSelectedIndex());
+		preProcessWindow.driver.updateFeatureSetView(this);
+		preProcessWindow.advancedWindow.advancedDriver.updateFeatPrepColor(this);
 
-		classChoice.setSelectedItem(PropertiesUtil.getClassifier());
-		String chosenClassifier = DriverPreProcessTabClassifiers.fullClassPath.get(classChoice.getSelectedItem().toString());
+		preProcessWindow.classChoice.setSelectedItem(PropertiesUtil.getClassifier());
+		String chosenClassifier = preProcessWindow.advancedWindow.advancedDriver.fullClassPath.get(preProcessWindow.classChoice.getSelectedItem().toString());
 		System.out.println("Will try to load class: "+chosenClassifier);
-		DriverPreProcessTabClassifiers.tmpClassifier = (Classifier)Class.forName(chosenClassifier).newInstance();
-		((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).setOptions(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()).split(" "));
+		preProcessWindow.advancedWindow.advancedDriver.tmpClassifier = (Classifier)Class.forName(chosenClassifier).newInstance();
+		((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).setOptions(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()).split(" "));
 		
 		if (PropertiesUtil.getClassifier().toLowerCase().contains("smo")){
-			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()) + " -M");
+			preProcessWindow.advancedWindow.classSelClassArgsJTextField.setText(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()) + " -M");
 		}
 		else
-			PPSP.classSelClassArgsJTextField.setText(DriverPreProcessTabClassifiers.getOptionsStr(((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).getOptions()));
+			preProcessWindow.advancedWindow.classSelClassArgsJTextField.setText(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()));
 		
-		((OptionHandler)DriverPreProcessTabClassifiers.tmpClassifier).setOptions(PPSP.classSelClassArgsJTextField.getText().split(" "));
+		((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).setOptions(preProcessWindow.advancedWindow.classSelClassArgsJTextField.getText().split(" "));
 		
-		classifiers.add(DriverPreProcessTabClassifiers.tmpClassifier);
-		PPSP.classDescJTextPane.setText(DriverPreProcessTabClassifiers.getDesc(classifiers.get(0)));
-		GUIUpdateInterface.updateClassList(this);
-		GUIUpdateInterface.updateClassPrepColor(this);
-		GUIUpdateInterface.updateResultsPrepColor(this);
-		DriverPreProcessTabClassifiers.tmpClassifier = null;
+		preProcessWindow.classifiers.add(preProcessWindow.advancedWindow.advancedDriver.tmpClassifier);
+		preProcessWindow.advancedWindow.classDescJTextPane.setText(preProcessWindow.advancedWindow.advancedDriver.getDesc(preProcessWindow.classifiers.get(0)));
+		preProcessWindow.advancedWindow.advancedDriver.updateClassList(this);
+		preProcessWindow.advancedWindow.advancedDriver.updateClassPrepColor(this);
+		ResultsWindow.updateResultsPrepColor(this);
+		preProcessWindow.advancedWindow.advancedDriver.tmpClassifier = null;
 	}
 
 	/**
@@ -777,7 +715,6 @@ public class GUIMain extends javax.swing.JFrame {
 
 		// ------- initialize PARALLEL arrays for the panels, their names, and their locations
 		ArrayList<String> panelNames = new ArrayList<String>();
-		panelNames.add("Pre-Process");
 		panelNames.add("Suggestions");
 		panelNames.add("Translations");
 		panelNames.add("Document");
@@ -785,14 +722,12 @@ public class GUIMain extends javax.swing.JFrame {
 		panelNames.add("Results");
 
 		HashMap<String, JPanel> panels = new HashMap<String, JPanel>(6);
-		panels.put("Pre-Process", preProcessPanel);
 		panels.put("Suggestions", suggestionsPanel);
 		panels.put("Translations", translationsPanel);
 		panels.put("Document", documentsPanel);
 		panels.put("Anonymity", anonymityPanel);
 
 		ArrayList<PropertiesUtil.Location> panelLocations = new ArrayList<PropertiesUtil.Location>();
-		panelLocations.add(PropertiesUtil.getPreProcessTabLocation());
 		panelLocations.add(PropertiesUtil.getSuggestionsTabLocation());
 		panelLocations.add(PropertiesUtil.getTranslationsTabLocation());
 		panelLocations.add(PropertiesUtil.getDocumentsTabLocation());
@@ -856,110 +791,6 @@ public class GUIMain extends javax.swing.JFrame {
 		getContentPane().repaint();
 	}
 
-	public boolean documentsAreReady() {
-		boolean ready = true;
-		try {
-			if (!mainDocReady())
-				ready = false;
-			if (!sampleDocsReady())
-				ready = false;
-			if (!trainDocsReady())
-				ready = false;
-		} catch (Exception e) {
-			return false;
-		}
-
-		return ready;
-	}
-
-	public boolean mainDocReady() {
-		if (ps.hasTestDocs())
-			return true;
-		else
-			return false;
-	}
-
-	public boolean sampleDocsReady() {
-		try {
-			if (!ps.getTrainDocs(ProblemSet.getDummyAuthor()).isEmpty())
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	public boolean trainDocsReady() {
-		try {
-			boolean result = true;
-			if (ps.getAuthors().size() == 0)
-				result = false;
-			else {
-				for (int i = 0; i < ps.getAuthors().size(); i++) {
-					String author = (String)ps.getAuthors().toArray()[i];
-					Set<String> authors = ps.getAuthors();
-					for (String curAuthor : authors) {
-						if (ps.getTrainDocs(curAuthor).isEmpty()) {
-							result = false;
-							break;
-						}
-					} if (!author.equals(ProblemSet.getDummyAuthor())) {
-						if (ps.numTrainDocs(author) < 1) {
-							result = false;
-							break;
-						}
-					} else if (ps.getAuthors().size() == 1) {
-						result = false;
-						break;
-					}
-				}
-			}
-
-			return result;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	public boolean featuresAreReady() {
-		boolean ready = true;
-
-		try {
-			if (cfd.numOfFeatureDrivers() == 0)
-				ready = false;
-		}
-		catch (Exception e){
-			return false;
-		}
-
-		return ready;
-	}
-	
-	public boolean hasAtLeastThreeOtherAuthors(){
-		Set<String> trainAuthors = ps.getAuthors();
-		if ((trainAuthors == null) || (trainAuthors.size() < 3))
-			return false;
-		else
-			return true;
-	}
-	
-	
-
-	public boolean classifiersAreReady() {
-		boolean ready = true;
-
-		try {
-			if (classifiers.isEmpty())
-				ready = false;
-		}
-		catch (Exception e){
-			return false;
-		}
-
-		return ready;
-	}
-
 	public boolean resultsAreReady() {
 		boolean ready = true;
 
@@ -971,175 +802,6 @@ public class GUIMain extends javax.swing.JFrame {
 		}
 
 		return ready;
-	}
-
-	/**
-	 * Creates a Pre-Process panel that can be added to the "help area".
-	 * @return editorHelpSettingsPanel
-	 */
-	protected void createPPTab() {
-		preProcessPanel = new JPanel();
-		//editorHelpPrepPanel.setMaximumSize(editorHelpPrepPanel.getPreferredSize());
-		MigLayout settingsLayout = new MigLayout(
-				"fill, wrap 1, ins 0",
-				"fill, grow",
-				"fill, grow");
-		preProcessPanel.setLayout(settingsLayout);
-		prepDocumentsPanel = new JPanel();
-		MigLayout documentsLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill, center",
-				"[][grow, fill][]");
-		prepDocumentsPanel.setLayout(documentsLayout);
-		{
-			// Advanced Button
-			prepAdvButton = new JButton("Advanced");
-
-			// Documents Label
-			prepDocLabel = new JLabel("Documents:");
-			prepDocLabel.setFont(titleFont);
-			prepDocLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepDocLabel.setBorder(rlborder);
-			prepDocLabel.setOpaque(true);
-			prepDocLabel.setBackground(notReady);
-			prepDocLabel.setToolTipText("Click here to access advanced confirguration");
-
-			problemSetLabel = new JLabel("Problem Set:");
-			problemSetLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			// Save Problem Set button
-			saveProblemSetJButton = new JButton("Save");
-
-			// load problem set button
-			loadProblemSetJButton = new JButton("Load");
-
-			// Save Problem Set button
-			clearProblemSetJButton = new JButton("Clear");
-
-			// main label
-			mainLabel = new JLabel("<html><center>Your Document<br>To Anonymize:</center></html>");
-			mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			// sample label
-			sampleLabel = new JLabel("<html><center>Your Other<br>Sample Documents:</center></html>");
-			sampleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			// main documents list
-			DefaultListModel<String> mainDocListModel = new DefaultListModel<String>();
-			prepMainDocList = new JList<String>(mainDocListModel);
-			prepMainDocList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			prepMainDocScrollPane = new JScrollPane(prepMainDocList);
-
-			// sample documents list
-			DefaultListModel<String> sampleDocsListModel = new DefaultListModel<String>();
-			prepSampleDocsList = new JList<String>(sampleDocsListModel);
-			prepSampleDocsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			prepSampleDocsScrollPane = new JScrollPane(prepSampleDocsList);
-
-			// main add button
-			addTestDocJButton = new JButton("+");
-
-			// main delete button
-			removeTestDocJButton = new JButton("-");
-
-			// sample add button
-			adduserSampleDocJButton = new JButton("+");
-
-			// sample delete button
-			removeuserSampleDocJButton = new JButton("-");
-
-			// train label
-			trainLabel = new JLabel("<html><center>Documents You Didn't Write<br>(At Least 3 Authors):</center></html>");
-			trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			// train tree
-			DefaultMutableTreeNode top = new DefaultMutableTreeNode(ps.getTrainCorpusName(), true);
-			trainCorpusJTree = new JTree(top, true);
-			trainCorpusJTreeScrollPane = new JScrollPane(trainCorpusJTree);
-
-			// train add button
-			addTrainDocsJButton = new JButton("+");
-
-			// train delete button
-			removeTrainDocsJButton = new JButton("-");
-
-			prepDocumentsPanel.add(prepDocLabel, "h " + titleHeight + "!, wrap");
-			prepDocumentsPanel.add(problemSetLabel, "alignx 50%, wrap");
-			prepDocumentsPanel.add(saveProblemSetJButton, "span 4, split 3, w 20::");
-			prepDocumentsPanel.add(loadProblemSetJButton, "w 20::");
-			prepDocumentsPanel.add(clearProblemSetJButton, "wrap, w 20::");
-			JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
-			prepDocumentsPanel.add(separator, "span 4, wrap, h 13!");
-			prepDocumentsPanel.add(mainLabel, "split, w 50%");
-			prepDocumentsPanel.add(sampleLabel, "wrap, w 50%");
-			prepDocumentsPanel.add(prepMainDocScrollPane, "split, h 40:100:180, w 30:60:150, w 50%");
-			prepDocumentsPanel.add(prepSampleDocsScrollPane, "h 40:100:180, w 30:60:150, wrap, w 50%, wrap");
-
-			prepDocumentsPanel.add(addTestDocJButton, "split 4, w 10::, gap 0");
-			prepDocumentsPanel.add(removeTestDocJButton, "w 10::, gap 0");
-			prepDocumentsPanel.add(adduserSampleDocJButton, "w 10::, gap 0");
-			prepDocumentsPanel.add(removeuserSampleDocJButton, "wrap, w 10::, gap 0");
-
-			prepDocumentsPanel.add(trainLabel, "span");
-			prepDocumentsPanel.add(trainCorpusJTreeScrollPane, "span, h 10::345");
-			prepDocumentsPanel.add(addTrainDocsJButton, "split 2, w 10::");
-			prepDocumentsPanel.add(removeTrainDocsJButton, "w 10::");
-		}
-
-		prepFeaturesPanel = new JPanel();
-		MigLayout featuresLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill",
-				"[][grow, fill][]");
-		prepFeaturesPanel.setLayout(featuresLayout);
-		{
-			prepFeatLabel = new JLabel("Features:");
-			prepFeatLabel.setOpaque(true);
-			prepFeatLabel.setFont(titleFont);
-			prepFeatLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepFeatLabel.setBorder(rlborder);
-			prepFeatLabel.setBackground(notReady);
-			prepFeatLabel.setToolTipText("Click here to access advanced confirguration");
-
-			String[] presetCFDsNames = new String[presetCFDs.size()];
-			for (int i=0; i<presetCFDs.size(); i++)
-				presetCFDsNames[i] = presetCFDs.get(i).getName();
-
-			featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
-			featuresSetJComboBox = new JComboBox<String>();
-			featuresSetJComboBox.setModel(featuresSetJComboBoxModel);
-			featuresSetJComboBox.setToolTipText("<html>Click the Features Banner above to<br>access advanced configuration</html>");
-
-			prepFeaturesPanel.add(prepFeatLabel, "h " + titleHeight + "!, wrap");
-			prepFeaturesPanel.add(featuresSetJComboBox, "w 30:100%:");
-		}
-
-		prepClassifiersPanel = new JPanel();
-		MigLayout classLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill",
-				"[][grow, fill][]");
-		prepClassifiersPanel.setLayout(classLayout);
-		{
-			prepClassLabel = new JLabel("Classifiers:");
-			prepClassLabel.setOpaque(true);
-			prepClassLabel.setFont(titleFont);
-			prepClassLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepClassLabel.setBorder(rlborder);
-			prepClassLabel.setBackground(notReady);
-			prepClassLabel.setToolTipText("Click here to access advanced confirguration");
-
-			classChoice = new JComboBox<String>();
-			classChoice.setToolTipText("<html>Click the Classifiers Banner above to<br>access advanced configuration</html>");
-
-			DriverPreProcessTabClassifiers.initMainWekaClassifiersTree(this);
-
-			prepClassifiersPanel.add(prepClassLabel, "h " + titleHeight + "!, wrap");
-			prepClassifiersPanel.add(classChoice, "w 30:100%:");
-		}
-		preProcessPanel.add(prepDocumentsPanel, "growx");
-		preProcessPanel.add(prepFeaturesPanel, "growx");
-		preProcessPanel.add(prepClassifiersPanel, "growx");
 	}
 
 	private JPanel createSugTab() {
@@ -1484,6 +1146,10 @@ public class GUIMain extends javax.swing.JFrame {
 	
 	public void enableRedo(boolean b) {
 		editRedoMenuItem.setEnabled(b);
+	}
+	
+	public void updateDocLabel(String title) {
+		documentLabel.setText("Document: " + title);
 	}
 
 	/**\

@@ -99,7 +99,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	/**
 	 * Displays the window
 	 */
-	public void openWindow() {
+	public void showWindow() {
 		Logger.logln(NAME+"Preferences window opened");
 		probSetTextPane.setText(PropertiesUtil.getProbSet());
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
@@ -187,14 +187,14 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 		{
 			defaultClassifier = new JLabel("Set Default Classifier:");
 			classComboBox = new JComboBox<String>();
-			for (int i = 0; i < main.classChoice.getItemCount(); i++)
-				classComboBox.addItem(main.classChoice.getItemAt(i).toString());
+			for (int i = 0; i < main.preProcessWindow.classChoice.getItemCount(); i++)
+				classComboBox.addItem(main.preProcessWindow.classChoice.getItemAt(i).toString());
 			classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
 
 			defaultFeature = new JLabel("Set Default Feature:");
 			featComboBox = new JComboBox<String>();
-			for (int i = 0; i < main.featuresSetJComboBox.getItemCount(); i++)
-				featComboBox.addItem(main.featuresSetJComboBox.getItemAt(i).toString());
+			for (int i = 0; i < main.preProcessWindow.featuresSetJComboBox.getItemCount(); i++)
+				featComboBox.addItem(main.preProcessWindow.featuresSetJComboBox.getItemAt(i).toString());
 			featComboBox.setSelectedItem(PropertiesUtil.getFeature());
 
 			defaultProbSet = new JLabel("Set Default Problem Set:");
