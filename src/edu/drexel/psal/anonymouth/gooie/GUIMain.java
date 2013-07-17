@@ -489,12 +489,6 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private void initData() {
 		ProblemSet.setDummyAuthor(ThePresident.DUMMY_NAME);
-		preProcessWindow.ps = new ProblemSet();
-		preProcessWindow.ps.setTrainCorpusName(preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
-		preProcessWindow.featureDrivers = new CumulativeFeatureDriver();
-		preProcessWindow.advancedWindow.initPresetCFDs(this);
-		FeatureWizardDriver.populateAll();
-		preProcessWindow.classifiers = new ArrayList<Classifier>();
 		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
@@ -622,8 +616,9 @@ public class GUIMain extends javax.swing.JFrame {
 
 			setUpContentPane();
 			DriverEditor.setAllDocTabUseable(false, this);
-			setDefaultValues();
 
+			preProcessWindow = new PreProcessWindow(this);
+			setDefaultValues();
 			preferencesWindow = new PreferencesWindow(this);
 			clustersWindow = new ClustersWindow();
 			suggestionsWindow = new FAQWindow();
@@ -631,7 +626,6 @@ public class GUIMain extends javax.swing.JFrame {
 			versionControl = new VersionControl(this);
 			resultsWindow = new ResultsWindow(this);
 			rightClickMenu = new RightClickMenu(this);
-			preProcessWindow = new PreProcessWindow(this);
 
 			//Initialize GUIMain listeners
 			DriverMenu.initListeners(this);

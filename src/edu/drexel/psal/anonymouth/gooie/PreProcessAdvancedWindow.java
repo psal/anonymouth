@@ -149,10 +149,13 @@ public class PreProcessAdvancedWindow extends JDialog {
 	public PreProcessAdvancedWindow(PreProcessWindow preProcessWindow, GUIMain main) {
 		super(preProcessWindow, "Advanced Options", Dialog.ModalityType.APPLICATION_MODAL);
 		Logger.logln(NAME+"Initializing the pre-process advanced settings window");
+		this.preProcessWindow = preProcessWindow;
+		this.main = main;
+		initPresetCFDs(main);
 		initComponents();
 		initWindow();
 		advancedDriver = new PreProcessAdvancedDriver(preProcessWindow, this, main);
-		preProcessWindow = this.preProcessWindow;
+		advancedDriver.initAdvWekaClassifiersTree(this);
 		setVisible(false);
 	}
 	
@@ -457,7 +460,6 @@ public class PreProcessAdvancedWindow extends JDialog {
 				classJTree = new JTree();
 				classJTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 				classTreeScrollPane = new JScrollPane(classJTree);
-				advancedDriver.initAdvWekaClassifiersTree(this);
 				
 				classSelClassJListModel = new DefaultListModel<String>();
 				classJList = new JList<String>(classSelClassJListModel);

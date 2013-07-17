@@ -1,5 +1,6 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -91,18 +92,29 @@ public class PreProcessWindow extends JFrame {
 	public PreProcessWindow(GUIMain main) {
 		Logger.logln(NAME+"Preparing the Pre-process window for viewing");
 		this.main = main;
+		initData();
+		
+		advancedWindow = new PreProcessAdvancedWindow(this, main);
+		driver = new PreProcessWindowDriver(this, advancedWindow, main);
+		
 		initComponents();
 		initWindow();
-		driver = new PreProcessWindowDriver(this, advancedWindow, main);
-		advancedWindow = new PreProcessAdvancedWindow(this, main);
 		this.setVisible(false);
 	}
-	
+
 	/**
 	 * Displays the prepared window for viewing
 	 */
 	public void showWindow() {
 		this.setVisible(true);
+	}
+	
+	private void initData() {
+		ps = new ProblemSet();
+		ps.setTrainCorpusName(DEFAULT_TRAIN_TREE_NAME);
+		featureDrivers = new CumulativeFeatureDriver();
+		FeatureWizardDriver.populateAll();
+		classifiers = new ArrayList<Classifier>();
 	}
 	
 	/**
@@ -261,6 +273,8 @@ public class PreProcessWindow extends JFrame {
 		preProcessPanel.add(prepDocumentsPanel, "growx");
 		preProcessPanel.add(prepFeaturesPanel, "growx");
 		preProcessPanel.add(prepClassifiersPanel, "growx");
+		
+		this.add(preProcessPanel);
 	}
 	
 	protected boolean documentsAreReady() {
