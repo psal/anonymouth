@@ -8,8 +8,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -21,7 +19,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.bayes.NaiveBayes;
@@ -58,8 +55,7 @@ public class PreProcessAdvancedDriver {
 
 	//Variables
 	protected Classifier tmpClassifier;
-	protected Hashtable<String, String> fullClassPath;
-	protected Hashtable<String, String> shortClassName;
+	protected String className;
 
 	public PreProcessAdvancedDriver(PreProcessWindow preProcessWindow, PreProcessAdvancedWindow advancedWindow, GUIMain main) {
 		this.preProcessWindow = preProcessWindow;
@@ -74,37 +70,33 @@ public class PreProcessAdvancedDriver {
 	}
 
 	public void updateFeatPrepColor(GUIMain main) {
-		if (preProcessWindow.featuresAreReady()) {
-			preProcessWindow.prepFeatLabel.setBackground(main.ready);
+		if (advancedWindow.featuresAreReady()) {
 			advancedWindow.prepFeatLabel.setBackground(main.ready);
 		} else {
-			preProcessWindow.prepFeatLabel.setBackground(main.notReady);
 			advancedWindow.prepFeatLabel.setBackground(main.notReady);
 		}	
 	}
 
 	public void updateClassPrepColor(GUIMain main) {
-		if (preProcessWindow.classifiersAreReady()) {
-			preProcessWindow.prepClassLabel.setBackground(main.ready);
+		if (advancedWindow.classifiersAreReady()) {
 			advancedWindow.prepClassLabel.setBackground(main.ready);
 		} else {
-			preProcessWindow.prepClassLabel.setBackground(main.notReady);
 			advancedWindow.prepClassLabel.setBackground(main.notReady);
 		}	
 	}
 
 	private void initFeatureListeners() {
-		advancedWindow.featuresSetJComboBox.addActionListener(new ActionListener() {
+		advancedWindow.featureChoice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Logger.logln(NAME+"Preset feature set selected in the features tab.");
 
-				int selected = advancedWindow.featuresSetJComboBox.getSelectedIndex() - 1;
-				preProcessWindow.featureDrivers = main.presetCFDs.get(selected+1);
-				Logger.logln(NAME+"loaded preset feature set: "+preProcessWindow.featureDrivers.getName());
+				int selected = advancedWindow.featureChoice.getSelectedIndex() - 1;
+				advancedWindow.cfd = main.presetCFDs.get(selected+1);
+				Logger.logln(NAME+"loaded preset feature set: "+advancedWindow.cfd.getName());
 				
-				preProcessWindow.featuresSetJComboBox.setSelectedIndex(selected+1);
-				advancedWindow.featuresSetJComboBox.setSelectedIndex(selected+1);
+				advancedWindow.featureChoice.setSelectedIndex(selected+1);
+				advancedWindow.featureChoice.setSelectedIndex(selected+1);
 				preProcessWindow.driver.updateFeatureSetView(main);
 				advancedWindow.advancedDriver.updateFeatPrepColor(main);
 			}
@@ -117,7 +109,7 @@ public class PreProcessAdvancedDriver {
 
 				//Check if the current FeatureDrivers CFD is not empty
 				int answer;
-				if (!preProcessWindow.isFeatureDriversEmpty(preProcessWindow.featureDrivers) && PropertiesUtil.getWarnAll()) {
+				if (!advancedWindow.isFeatureDriversEmpty(advancedWindow.cfd) && PropertiesUtil.getWarnAll()) {
 					answer = JOptionPane.showConfirmDialog(main,
 							"Are you sure you want to override current feature set?",
 							"New Feature Set",
@@ -127,8 +119,8 @@ public class PreProcessAdvancedDriver {
 				}
 
 				if (answer == JOptionPane.YES_OPTION) {
-					preProcessWindow.featureDrivers = new CumulativeFeatureDriver();
-					advancedWindow.featuresSetJComboBox.setSelectedIndex(0);
+					advancedWindow.cfd = new CumulativeFeatureDriver();
+					advancedWindow.featureChoice.setSelectedIndex(0);
 					preProcessWindow.driver.updateFeatureSetView(main);
 				}
 			}
@@ -139,7 +131,7 @@ public class PreProcessAdvancedDriver {
 			public void actionPerformed(ActionEvent arg0) {
 				Logger.logln(NAME+"'Add Feature Set' button clicked in the features tab.");
 
-				if (preProcessWindow.featureDrivers.getName() == null || preProcessWindow.featureDrivers.getName().matches("\\s*")) {
+				if (advancedWindow.cfd.getName() == null || advancedWindow.cfd.getName().matches("\\s*")) {
 					JOptionPane.showMessageDialog(main,
 							"Feature set must have at least a name to be added.",
 							"Add Feature Set",
@@ -149,7 +141,7 @@ public class PreProcessAdvancedDriver {
 
 				//Check that doesn't exist
 				for (int i=0; i<advancedWindow.featuresSetJComboBoxModel.getSize(); i++) {
-					if (preProcessWindow.featureDrivers.getName().equals(advancedWindow.featuresSetJComboBoxModel.getElementAt(i))) {
+					if (advancedWindow.cfd.getName().equals(advancedWindow.featuresSetJComboBoxModel.getElementAt(i))) {
 						JOptionPane.showMessageDialog(main,
 								"Feature set with the given name already exists.",
 								"Add Feature Set",
@@ -158,9 +150,9 @@ public class PreProcessAdvancedDriver {
 					}
 				}
 
-				main.presetCFDs.add(preProcessWindow.featureDrivers);
-				advancedWindow.featuresSetJComboBoxModel.addElement(preProcessWindow.featureDrivers.getName());
-				advancedWindow.featuresSetJComboBox.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
+				main.presetCFDs.add(advancedWindow.cfd);
+				advancedWindow.featuresSetJComboBoxModel.addElement(advancedWindow.cfd.getName());
+				advancedWindow.featureChoice.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
 			}
 		});
 
@@ -184,10 +176,10 @@ public class PreProcessAdvancedDriver {
 							}
 						}
 
-						preProcessWindow.featureDrivers = cfd;
+						advancedWindow.cfd = cfd;
 						main.presetCFDs.add(cfd);
 						advancedWindow.featuresSetJComboBoxModel.addElement(cfd.getName());
-						advancedWindow.featuresSetJComboBox.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
+						advancedWindow.featureChoice.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
 						preProcessWindow.driver.updateFeatureSetView(main);
 					} catch (Exception exc) {
 						Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
@@ -219,10 +211,10 @@ public class PreProcessAdvancedDriver {
 						path += ".xml";
 					try {
 						BufferedWriter bw = new BufferedWriter(new FileWriter(path));
-						bw.write(preProcessWindow.featureDrivers.toXMLString());
+						bw.write(advancedWindow.cfd.toXMLString());
 						bw.flush();
 						bw.close();
-						Logger.log("Saved cumulative feature driver to "+path+":\n"+preProcessWindow.featureDrivers.toXMLString());
+						Logger.log("Saved cumulative feature driver to "+path+":\n"+advancedWindow.cfd.toXMLString());
 					} catch (IOException exc) {
 						Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
 						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
@@ -241,7 +233,7 @@ public class PreProcessAdvancedDriver {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				Logger.logln(NAME+"Feature set description edited in the features tab.");
-				preProcessWindow.featureDrivers.setDescription(advancedWindow.featuresSetDescJTextPane.getText());
+				advancedWindow.cfd.setDescription(advancedWindow.featuresSetDescJTextPane.getText());
 			}
 
 			@Override
@@ -276,7 +268,7 @@ public class PreProcessAdvancedDriver {
 					Logger.logln(NAME+"Canonicizer unselected in features tab.");
 					advancedWindow.featuresCanonConfigJTableModel.getDataVector().removeAllElements();
 				} else {
-					Canonicizer c = preProcessWindow.featureDrivers.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).canonicizerAt(selected);
+					Canonicizer c = advancedWindow.cfd.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).canonicizerAt(selected);
 					Logger.logln(NAME+"Canonicizer '"+c.displayName()+"' selected in features tab.");
 					advancedWindow.advancedDriver.populateTableWithParams(c, advancedWindow.featuresCanonConfigJTableModel);
 				}
@@ -297,7 +289,7 @@ public class PreProcessAdvancedDriver {
 					Logger.logln(NAME+"Culler unselected in features tab.");
 					advancedWindow.featuresCullConfigJTableModel.getDataVector().removeAllElements();
 				} else {
-					EventCuller ec = preProcessWindow.featureDrivers.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).cullerAt(selected);
+					EventCuller ec = advancedWindow.cfd.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).cullerAt(selected);
 					Logger.logln(NAME+"Culler '"+ec.displayName()+"' selected in features tab.");
 					populateTableWithParams(ec, advancedWindow.featuresCullConfigJTableModel);
 				}
@@ -329,7 +321,7 @@ public class PreProcessAdvancedDriver {
 				if (selectedNode.isLeaf()) {
 					Logger.logln(NAME+"Classifier selected in the available classifiers tree in the classifiers tab: "+selectedNode.toString());
 
-					String className = getClassNameFromPath(path);
+					className = getClassNameFromPath(path);
 					tmpClassifier = null;
 					try {
 						tmpClassifier = (Classifier)Class.forName(className).newInstance();
@@ -346,7 +338,6 @@ public class PreProcessAdvancedDriver {
 					String dashM = "";
 					if(className.toLowerCase().contains("smo"))
 						dashM = " -M";
-
 
 					//Show options and description
 					advancedWindow.classAvClassArgsJTextField.setText(getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
@@ -371,7 +362,7 @@ public class PreProcessAdvancedDriver {
 								JOptionPane.ERROR_MESSAGE);
 					}
 					return;
-				} else if (preProcessWindow.classifiers.size() > 0) {
+				} else if (advancedWindow.classifiers.size() > 0) {
 					JOptionPane.showMessageDialog(advancedWindow,
 							"It is only possible to select one classifier at a time.",
 							"Add Classifier Error",
@@ -391,9 +382,10 @@ public class PreProcessAdvancedDriver {
 						return;
 					}
 
+					advancedWindow.selectedClassName = advancedWindow.getNameFromClassPath(className);
+					
 					//Add classifier
-					preProcessWindow.classifiers.add(tmpClassifier);
-					preProcessWindow.classChoice.setSelectedItem(shortClassName.get(tmpClassifier.getClass().getName()));
+					advancedWindow.classifiers.add(tmpClassifier);
 					advancedWindow.advancedDriver.updateClassList(main);
 					advancedWindow.advancedDriver.updateClassPrepColor(main);
 					tmpClassifier = null;
@@ -427,10 +419,10 @@ public class PreProcessAdvancedDriver {
 
 				//Show options and description
 				if(className.toLowerCase().contains("smo"))
-					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)preProcessWindow.classifiers.get(selected)).getOptions())+" -M");
+					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)advancedWindow.classifiers.get(selected)).getOptions())+" -M");
 				else
-					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)preProcessWindow.classifiers.get(selected)).getOptions()));
-				advancedWindow.classDescJTextPane.setText(getDesc(preProcessWindow.classifiers.get(selected)));
+					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)advancedWindow.classifiers.get(selected)).getOptions()));
+				advancedWindow.classDescJTextPane.setText(getDesc(advancedWindow.classifiers.get(selected)));
 				advancedWindow.classAvClassArgsJTextField.setText("");
 			}
 		});
@@ -453,12 +445,11 @@ public class PreProcessAdvancedDriver {
 				}
 
 				//Remove classifier
-				preProcessWindow.classifiers.remove(selected);
+				advancedWindow.classifiers.remove(selected);
 
 				advancedWindow.classSelClassArgsJTextField.setText("");
 				advancedWindow.classDescJTextPane.setText("");
 				advancedWindow.classAvClassArgsJTextField.setText("");
-				preProcessWindow.classChoice.setSelectedIndex(-1);
 				advancedWindow.advancedDriver.updateClassList(main);
 				advancedWindow.advancedDriver.updateClassPrepColor(main);
 			}
@@ -491,7 +482,7 @@ public class PreProcessAdvancedDriver {
 		if (selected == -1)
 			return;
 
-		FeatureDriver fd = preProcessWindow.featureDrivers.featureDriverAt(selected);
+		FeatureDriver fd = advancedWindow.cfd.featureDriverAt(selected);
 
 		//Name and description
 		advancedWindow.featuresFeatureNameJTextPane.setText(fd.getName());
@@ -560,7 +551,7 @@ public class PreProcessAdvancedDriver {
 	 */
 	protected void updateClassList(GUIMain main) {
 		DefaultListModel<String> model2 = (DefaultListModel<String>)advancedWindow.classJList.getModel();
-		List<Classifier> classifiers = preProcessWindow.classifiers;
+		List<Classifier> classifiers = advancedWindow.classifiers;
 
 		model2.removeAllElements();
 		for (Classifier c: classifiers) {
@@ -609,100 +600,6 @@ public class PreProcessAdvancedDriver {
 		}
 		res = res.substring(0,res.length()-1);
 		return res;
-	}
-
-	/**
-	 * build classifiers tree from list of class names
-	 */
-	public String[] classNames = new String[] {
-			//Bayes
-			//"weka.classifiers.bayes.BayesNet",
-			"weka.classifiers.bayes.NaiveBayes",
-			"weka.classifiers.bayes.NaiveBayesMultinomial",
-			//"weka.classifiers.bayes.NaiveBayesMultinomialUpdateable",
-			//"weka.classifiers.bayes.NaiveBayesUpdateable",
-
-			//Functions
-			"weka.classifiers.functions.Logistic",
-			"weka.classifiers.functions.MultilayerPerceptron",
-			"weka.classifiers.functions.SMO",
-
-			//Lazy
-			"weka.classifiers.lazy.IBk",
-
-			//Rules
-			"weka.classifiers.rules.ZeroR",
-
-			//Trees
-			"weka.classifiers.trees.J48",
-	};
-
-	/**
-	 * Initialize available classifiers tree
-	 */
-	protected void initMainWekaClassifiersTree(GUIMain main) {	
-		Boolean shouldAdd = false;
-		fullClassPath = new Hashtable<String, String>();
-		shortClassName = new Hashtable<String, String>();
-
-		for (String className: classNames) {
-			String[] nameArr = className.split("\\.");
-
-			for (int i = 2; i < nameArr.length; i++) {
-				if (shouldAdd) {
-					preProcessWindow.classChoice.addItem(nameArr[i]);
-					fullClassPath.put(nameArr[i], className);
-					shortClassName.put(className, nameArr[i]);
-					shouldAdd = false;
-				} else {
-					shouldAdd = true;
-				}
-			}
-		}
-	}
-
-	/**
-	 * Initialize available classifiers tree
-	 */
-	protected void initAdvWekaClassifiersTree(PreProcessAdvancedWindow PPSP) {
-		//Create root and set to tree
-		DefaultMutableTreeNode wekaNode = new DefaultMutableTreeNode("weka");
-		DefaultMutableTreeNode classifiersNode = new DefaultMutableTreeNode("classifiers");
-		wekaNode.add(classifiersNode);
-		DefaultTreeModel model = new DefaultTreeModel(wekaNode);
-		PPSP.classJTree.setModel(model);
-
-		//Add all classes
-		DefaultMutableTreeNode currNode, child;
-		for (String className: classNames) {
-			String[] nameArr = className.split("\\.");
-			currNode = classifiersNode;
-
-			for (int i=2; i<nameArr.length; i++) {
-				// look for node
-				@SuppressWarnings("unchecked")
-				Enumeration<DefaultMutableTreeNode> children = currNode.children();
-				while (children.hasMoreElements()) {
-					child = children.nextElement();
-					if (child.getUserObject().toString().equals(nameArr[i])) {
-						currNode = child;
-						break;
-					}
-				}
-
-				// if not found, create a new one
-				if (!currNode.getUserObject().toString().equals(nameArr[i])) {
-					child = new DefaultMutableTreeNode(nameArr[i]);
-					currNode.add(child);
-					currNode = child;
-				}
-			}
-		}
-
-		// expand tree
-		int row = 0;
-		while (row < PPSP.classJTree.getRowCount())
-			PPSP.classJTree.expandRow(row++);
 	}
 
 	/**

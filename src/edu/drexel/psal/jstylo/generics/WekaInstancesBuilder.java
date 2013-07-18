@@ -39,7 +39,7 @@ public class WekaInstancesBuilder {
 	/**
 	 * Determines the number of threads to be used for features extraction.
 	 */
-	public int numCalcThreads = ThePresident.NUM_TAGGING_THREADS;
+	public int numCalcThreads = ThePresident.num_Tagging_Threads;
 	
 	/**
 	 * Determines whether to use a set of SparseInstance or Instance.
@@ -239,7 +239,7 @@ public class WekaInstancesBuilder {
 		known = new ArrayList<List<EventSet>>(knownDocs.size());
 		int knownDocsSize = knownDocs.size();
 		
-		int numCalcThreadsToUse = ThePresident.NUM_TAGGING_THREADS;
+		int numCalcThreadsToUse = ThePresident.num_Tagging_Threads;
 		numCalcThreads = numCalcThreadsToUse;
 //		numCalcThreads = getNumCalcThreads();
 //		

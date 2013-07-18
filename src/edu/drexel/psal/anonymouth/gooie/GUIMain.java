@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.*;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -35,9 +36,6 @@ import javax.swing.text.StyledDocument;
 import net.miginfocom.swing.MigLayout;
 
 import com.jgaap.generics.Document;
-
-import weka.classifiers.*;
-import weka.core.OptionHandler;
 
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 
@@ -131,6 +129,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel editorTab;
 	
 	public PreProcessWindow preProcessWindow;
+	public PreProcessAdvancedWindow ppAdvancedWindow;
 
 	// Classifiers tab
 	protected JTextField classAvClassArgsJTextField;
@@ -304,12 +303,6 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JCheckBox analysisOutputConfusionMatrixJCheckBox;
 	protected ButtonGroup analysisTypeButtonGroup;
 
-	protected static ImageIcon iconNO;
-	protected static ImageIcon iconFINISHED;
-	public static ImageIcon icon;
-	protected static ImageIcon arrow_up;
-	protected static ImageIcon arrow_down;
-
 	protected JMenuBar menuBar;
 	protected JMenuItem settingsGeneralMenuItem;
 	protected JMenuItem fileSaveProblemSetMenuItem;
@@ -350,6 +343,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected ResultsWindow resultsWindow;
 	protected RightClickMenu rightClickMenu;
 	protected Clipboard clipboard;
+	protected StartingWindow startingWindow;
+	public static SplashScreen splashScreen;
 	protected static Runnable mainThread;
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
@@ -366,21 +361,10 @@ public class GUIMain extends javax.swing.JFrame {
 	 * Auto-generated main method to display this JFrame
 	 */
 	public static void startGooie() {
-		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				mainThread = this;
 				Logger.initLogFile();
-				
-				try {
-					icon = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO),"logo");
-					//iconNO = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"anonymouth_NO_v2.png"), "my 'no' icon");
-					arrow_up = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ARROW_UP), "arrow_up");
-					arrow_down = new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ARROW_DOWN), "arrow_down");
-					//javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					System.err.println("Look-and-Feel error!");
-				}
 
 				inst = new GUIMain();
 				GUITranslator = new Translator(inst);
@@ -391,7 +375,12 @@ public class GUIMain extends javax.swing.JFrame {
 						if (PropertiesUtil.getWarnQuit() && !saved) {
 							inst.toFront();
 							inst.requestFocus();
-							int confirm = JOptionPane.showOptionDialog(null, "Close Application?\nYou will lose all unsaved changes.", "Unsaved Changes Warning", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, UIManager.getIcon("OptionPane.warningIcon"), null, null);
+							int confirm = JOptionPane.showOptionDialog(GUIMain.inst,
+									"Close Application?\nYou will lose all unsaved changes.",
+									"Unsaved Changes Warning",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE,
+									UIManager.getIcon("OptionPane.warningIcon"), null, null);
 							if (confirm == 0) {
 								System.exit(0);
 							}
@@ -416,15 +405,13 @@ public class GUIMain extends javax.swing.JFrame {
 					public void windowOpened(WindowEvent arg0) {}
 				};
 
-				if (ThePresident.IS_MAC) {
+				if (ANONConstants.IS_MAC) {
 					enableOSXFullscreen(inst);
 				}
 				
 				ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep tooltips from disappearing so fast
-
 				inst.addWindowListener(exitListener);
 				inst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
 				inst.setLocationRelativeTo(null);
 			}
 		});
@@ -470,25 +457,46 @@ public class GUIMain extends javax.swing.JFrame {
 		}
 	}
 
-
 	public GUIMain() {
 		super();
 		initData();
 		initGUI();
+		
+		splashScreen.hideSplashScreen();
+		startingWindow = new StartingWindow(this);
+		startingWindow.showStartingWindow();
+	}
+	
+	public void initLog () {
+		String sessionName = "anonymous";
+		sessionName = startingWindow.sessionName.replaceAll("['.?!()<>#\\\\/|\\[\\]{}*\":;`~&^%$@+=,]", "");
+		String tempName = sessionName.replaceAll(" ", "_");
+		if(tempName != null)
+			sessionName = tempName;
+		
+		Logger.setFilePrefix("Anonymouth_"+sessionName);
+		Logger.logFile = true;	
+		Logger.initLogFile();
+		Logger.logln(NAME+"Logger initialized, GUIMain init complete");
 	}
 	
 	public void showMainGUI() {
-		setExtendedState(MAXIMIZED_BOTH);
-		this.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
-		this.setLocation((screensize.width/2)-(this.getWidth()/2), (screensize.height/2)-(this.getHeight()/2));
-		this.setMinimumSize(new Dimension(800, 578));
-		this.setTitle("Anonymouth");
-		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
-		this.setVisible(true);
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				initLog();
+				setExtendedState(MAXIMIZED_BOTH);
+				GUIMain.inst.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
+				GUIMain.inst.setLocationRelativeTo(null);
+				GUIMain.inst.setMinimumSize(new Dimension(800, 578));
+				GUIMain.inst.setTitle("Anonymouth");
+				GUIMain.inst.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
+				GUIMain.inst.setVisible(true);
+			}
+		});
 	}
 
 	private void initData() {
-		ProblemSet.setDummyAuthor(ThePresident.DUMMY_NAME);
+		ProblemSet.setDummyAuthor(ANONConstants.DUMMY_NAME);
 		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
@@ -515,11 +523,6 @@ public class GUIMain extends javax.swing.JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		ThePresident.AUTOSAVE_LATEST_VERSION = PropertiesUtil.getAutoSave();
-		ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = PropertiesUtil.getVersionAutoSave();
-		ThePresident.MAX_FEATURES_TO_CONSIDER = PropertiesUtil.getMaximumFeatures();
-		ThePresident.NUM_TAGGING_THREADS = PropertiesUtil.getThreadCount();
 	}
 	
 	/**
@@ -529,8 +532,8 @@ public class GUIMain extends javax.swing.JFrame {
 		menuBar = new JMenuBar();
 
 		fileMenu = new JMenu("File");
-		fileSaveProblemSetMenuItem = new JMenuItem("Save Problem Set");
-		fileLoadProblemSetMenuItem = new JMenuItem("Load Problem Set");
+		fileSaveProblemSetMenuItem = new JMenuItem("Save Document Set");
+		fileLoadProblemSetMenuItem = new JMenuItem("Load Document Set");
 		fileSaveTestDocMenuItem = new JMenuItem("Save");
 		fileSaveAsTestDocMenuItem = new JMenuItem("Save As...");
 
@@ -558,8 +561,8 @@ public class GUIMain extends javax.swing.JFrame {
 
 		menuBar.add(viewMenuItem);
 
-		if (ThePresident.IS_MAC) {
-			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		if (ANONConstants.IS_MAC) {
+			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
@@ -575,7 +578,7 @@ public class GUIMain extends javax.swing.JFrame {
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
 		}
 
-		if (!ThePresident.IS_MAC) {
+		if (!ANONConstants.IS_MAC) {
 			JMenu settingsMenu = new JMenu("Settings");
 			settingsGeneralMenuItem = new JMenuItem("Preferences");
 			settingsMenu.add(settingsGeneralMenuItem);
@@ -585,7 +588,7 @@ public class GUIMain extends javax.swing.JFrame {
 		helpMenu = new JMenu("Help");
 		helpAboutMenuItem = new JMenuItem("About Anonymouth");
 		helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
-		if (!ThePresident.IS_MAC) {
+		if (!ANONConstants.IS_MAC) {
 			helpMenu.add(helpAboutMenuItem);
 			helpMenu.add(new JSeparator());
 		}
@@ -618,6 +621,7 @@ public class GUIMain extends javax.swing.JFrame {
 			DriverEditor.setAllDocTabUseable(false, this);
 
 			preProcessWindow = new PreProcessWindow(this);
+			ppAdvancedWindow = preProcessWindow.advancedWindow;
 			setDefaultValues();
 			preferencesWindow = new PreferencesWindow(this);
 			clustersWindow = new ClustersWindow();
@@ -627,6 +631,8 @@ public class GUIMain extends javax.swing.JFrame {
 			resultsWindow = new ResultsWindow(this);
 			rightClickMenu = new RightClickMenu(this);
 
+			splashScreen.updateText("Initializing listeners");
+			
 			//Initialize GUIMain listeners
 			DriverMenu.initListeners(this);
 			DriverEditor.initListeners(this);
@@ -636,13 +642,6 @@ public class GUIMain extends javax.swing.JFrame {
 			DriverResultsWindow.initListeners(this);
 			DriverTranslationsTab.initListeners(this);
 			DictionaryBinding.init();
-			
-			//Display the set-up wizard if necessary
-			if (!PropertiesUtil.getProbSet().equals("")) {
-				preProcessWindow.showWindow();
-			} else {
-				showMainGUI();
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -655,7 +654,7 @@ public class GUIMain extends javax.swing.JFrame {
 	 */
 	protected void setDefaultValues() throws Exception {
 		if (!PropertiesUtil.getProbSet().equals("")) {
-			String problemSetPath = PropertiesUtil.prop.getProperty("recentProbSet");
+			String problemSetPath = PropertiesUtil.getProbSet();
 			Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
 
 			try {
@@ -663,6 +662,7 @@ public class GUIMain extends javax.swing.JFrame {
 				preProcessWindow.driver.updateAllComponents();
 			} catch (Exception exc) {
 				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDERR);
+				PropertiesUtil.setProbSet("");
 			}
 		} else {
 			Logger.logln(NAME+"No default problem set saved from last run, will continue without.", LogOut.STDOUT);
@@ -672,32 +672,18 @@ public class GUIMain extends javax.swing.JFrame {
 			preProcessWindow.addTestDocJButton.setEnabled(false);
 		}
 
-		preProcessWindow.featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
-		preProcessWindow.advancedWindow.featuresSetJComboBox.setSelectedItem(PropertiesUtil.getFeature());
-		preProcessWindow.featureDrivers = presetCFDs.get(preProcessWindow.featuresSetJComboBox.getSelectedIndex());
+		ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());
+		ppAdvancedWindow.cfd = presetCFDs.get(ppAdvancedWindow.featureChoice.getSelectedIndex());
 		preProcessWindow.driver.updateFeatureSetView(this);
-		preProcessWindow.advancedWindow.advancedDriver.updateFeatPrepColor(this);
+		ppAdvancedWindow.advancedDriver.updateFeatPrepColor(this);
 
-		preProcessWindow.classChoice.setSelectedItem(PropertiesUtil.getClassifier());
-		String chosenClassifier = preProcessWindow.advancedWindow.advancedDriver.fullClassPath.get(preProcessWindow.classChoice.getSelectedItem().toString());
-		System.out.println("Will try to load class: "+chosenClassifier);
-		preProcessWindow.advancedWindow.advancedDriver.tmpClassifier = (Classifier)Class.forName(chosenClassifier).newInstance();
-		((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).setOptions(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()).split(" "));
+		Logger.logln(NAME+"Attempting to load classifier: "+PropertiesUtil.getClassifier());
+		ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
 		
-		if (PropertiesUtil.getClassifier().toLowerCase().contains("smo")){
-			preProcessWindow.advancedWindow.classSelClassArgsJTextField.setText(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()) + " -M");
-		}
-		else
-			preProcessWindow.advancedWindow.classSelClassArgsJTextField.setText(preProcessWindow.advancedWindow.advancedDriver.getOptionsStr(((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).getOptions()));
-		
-		((OptionHandler)preProcessWindow.advancedWindow.advancedDriver.tmpClassifier).setOptions(preProcessWindow.advancedWindow.classSelClassArgsJTextField.getText().split(" "));
-		
-		preProcessWindow.classifiers.add(preProcessWindow.advancedWindow.advancedDriver.tmpClassifier);
-		preProcessWindow.advancedWindow.classDescJTextPane.setText(preProcessWindow.advancedWindow.advancedDriver.getDesc(preProcessWindow.classifiers.get(0)));
-		preProcessWindow.advancedWindow.advancedDriver.updateClassList(this);
-		preProcessWindow.advancedWindow.advancedDriver.updateClassPrepColor(this);
+		ppAdvancedWindow.classifiers.add(ppAdvancedWindow.advancedDriver.tmpClassifier);
+		ppAdvancedWindow.classDescJTextPane.setText(ppAdvancedWindow.advancedDriver.getDesc(ppAdvancedWindow.classifiers.get(0)));
 		ResultsWindow.updateResultsPrepColor(this);
-		preProcessWindow.advancedWindow.advancedDriver.tmpClassifier = null;
+		ppAdvancedWindow.advancedDriver.tmpClassifier = null;
 	}
 
 	/**

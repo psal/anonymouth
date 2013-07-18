@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 import javax.swing.*;
@@ -84,7 +83,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	private void init(final GUIMain main) {
 		this.setTitle("Preferences");
 		this.main = main;
-		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
+		this.setIconImage(ThePresident.logo);
 		
 		preferencesDriver = new PreferencesDriver(main, this);
 		preferencesWindow = this;
@@ -187,14 +186,15 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 		{
 			defaultClassifier = new JLabel("Set Default Classifier:");
 			classComboBox = new JComboBox<String>();
-			for (int i = 0; i < main.preProcessWindow.classChoice.getItemCount(); i++)
-				classComboBox.addItem(main.preProcessWindow.classChoice.getItemAt(i).toString());
-			classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
+			String[] classifierNames = main.ppAdvancedWindow.getClassifierNames();
+			for (int i = 0; i < classifierNames.length; i++)
+				classComboBox.addItem(classifierNames[i]);
+			classComboBox.setSelectedItem(main.ppAdvancedWindow.getClassName());
 
 			defaultFeature = new JLabel("Set Default Feature:");
 			featComboBox = new JComboBox<String>();
-			for (int i = 0; i < main.preProcessWindow.featuresSetJComboBox.getItemCount(); i++)
-				featComboBox.addItem(main.preProcessWindow.featuresSetJComboBox.getItemAt(i).toString());
+			for (int i = 0; i < main.ppAdvancedWindow.featureChoice.getItemCount(); i++)
+				featComboBox.addItem(main.ppAdvancedWindow.featureChoice.getItemAt(i).toString());
 			featComboBox.setSelectedItem(PropertiesUtil.getFeature());
 
 			defaultProbSet = new JLabel("Set Default Problem Set:");

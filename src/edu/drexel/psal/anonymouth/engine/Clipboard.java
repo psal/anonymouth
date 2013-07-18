@@ -11,8 +11,8 @@ import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.TransferHandler;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
 
 /**
  * Adds standard clipboard actions to the Edit pull-down menu and supplies the corresponding methods for each.
@@ -71,7 +71,7 @@ public class Clipboard {
 		
 		//Readying the keyboard shortcuts for each, depending on what OS they are running
 		int modKey = 0;
-		if (ThePresident.IS_MAC)
+		if (ANONConstants.IS_MAC)
 			modKey = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 		else
 			modKey = InputEvent.CTRL_DOWN_MASK;

@@ -25,8 +25,24 @@ import edu.drexel.psal.jstylo.generics.Logger;
  */
 public class PreferencesDriver {
 	
-	//various variables
+	//Constants
 	private static final String NAME = "( PreferencesDriver ) - ";
+	private final String TRANSWARNING = 
+			"<html><left>"+
+			"<center><b><font color=\"#FF0000\" size = 6>WARNING:</font></b></center>" +
+			"Anonymouth provides translations functionality that will help obsure your<br>" +
+			"style by translating your document into multiple languages and back again.<br>" +
+			"THIS MEANS THAT YOUR SENTENCES WILL BE SENT OFF REMOTELY TO<br>" +
+			"MICROSOFT BING.<br><br>" +
+			"This feature is turned off by default, and if you desire to use this feature<br>" +
+			"and understand the risks you may turn it on by...<br><br>" +
+			"FOR MAC:<br>" +
+			"     <center><code>Anonymouth > Preferences > Tick the translations option</code></center>" +
+			"FOR ALL OTHER OPERATING SYSTEMS:<br>" + 
+			"     <center><code>Settings > Preferences > Tick the translations option</code></center>" +
+			"</left></div></html>";
+	
+	//various variables
 	private GUIMain main;
 	private PreferencesWindow prefWin;
 	private int prevFeatureValue;
@@ -178,33 +194,42 @@ public class PreferencesDriver {
 				Logger.logln(NAME+"Translations checkbox clicked");
 				
 				if (prefWin.translations.isSelected()) {
-					if (GUIMain.processed)
-						main.resetTranslator.setEnabled(true);
-					PropertiesUtil.setDoTranslations(true);
-					
-					if (BackendInterface.processed) {
-						int answer = JOptionPane.showOptionDialog(null,
-								"Being translating now?",
-								"Begin Translations",
-								JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null, null, null);
+					Object[] buttons = {"Ok", "Cancel"};
+					int answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+							TRANSWARNING,
+							"Please Be Aware!",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE,
+							null, buttons, 1);
+					if (answer == 0) {
+						if (GUIMain.processed)
+							main.resetTranslator.setEnabled(true);
+						PropertiesUtil.setDoTranslations(true);
 						
-						if (answer == JOptionPane.YES_OPTION) {
-							GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
-							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+						if (BackendInterface.processed) {
+							answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+									"Being translating now?",
+									"Begin Translations",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE,
+									null, null, null);
 							
-							main.startTranslations.setEnabled(false);
-							main.stopTranslations.setEnabled(true);
+							if (answer == JOptionPane.YES_OPTION) {
+								GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
+								DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+								
+								main.startTranslations.setEnabled(false);
+								main.stopTranslations.setEnabled(true);
+							} else {
+								main.startTranslations.setEnabled(true);
+								main.stopTranslations.setEnabled(false);
+								DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+							}
 						} else {
-							main.startTranslations.setEnabled(true);
-							main.stopTranslations.setEnabled(false);
-							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+							main.notTranslated.setText("Please process your document to recieve translation suggestions.");
+							main.translationsHolderPanel.add(main.notTranslated, "");
 						}
-					} else {
-						main.notTranslated.setText("Please process your document to recieve translation suggestions.");
-						main.translationsHolderPanel.add(main.notTranslated, "");
-					}
+					}					
 				} else {
 					main.resetTranslator.setEnabled(false);
 					GUIMain.GUITranslator.reset();
@@ -397,11 +422,11 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.versionAutoSave.isSelected()) {
 					PropertiesUtil.setVersionAutoSave(true);
-					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = true;
+					ThePresident.should_Keep_Auto_Saved_Anonymized_Docs = true;
 					Logger.logln(NAME+"Version auto save checkbox checked");
 				} else {
 					PropertiesUtil.setVersionAutoSave(false);
-					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = false;
+					ThePresident.should_Keep_Auto_Saved_Anonymized_Docs = false;
 					Logger.logln(NAME+"Version auto save checkbox unchecked");
 				}
 			}

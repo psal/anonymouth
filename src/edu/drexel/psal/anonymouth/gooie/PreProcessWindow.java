@@ -1,13 +1,9 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,11 +13,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTree;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import weka.classifiers.Classifier;
-
-import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 
@@ -44,9 +38,7 @@ public class PreProcessWindow extends JFrame {
 	public PreProcessWindowDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
-	protected List<Classifier> classifiers;
 	protected ProblemSet ps;
-	protected CumulativeFeatureDriver featureDrivers;
 	
 	//======Documents=====
 	//problem set
@@ -56,7 +48,6 @@ public class PreProcessWindow extends JFrame {
 	private JLabel problemSetLabel;
 	protected JButton saveProblemSetJButton;
 	protected JButton loadProblemSetJButton;
-	protected JButton clearProblemSetJButton;
 		//doc to anonymize
 		private JLabel mainLabel;
 		protected JList<String> prepMainDocList;
@@ -75,15 +66,6 @@ public class PreProcessWindow extends JFrame {
 		private JScrollPane trainCorpusJTreeScrollPane;
 		protected JButton addTrainDocsJButton;
 		protected JButton removeTrainDocsJButton;
-	//=======Features======
-	protected JLabel prepFeatLabel;
-	private JPanel prepFeaturesPanel;
-	private DefaultComboBoxModel<String> featuresSetJComboBoxModel;
-	protected JComboBox<String> featuresSetJComboBox;
-	//=====Classifiers=====
-	protected JLabel prepClassLabel;
-	private JPanel prepClassifiersPanel;
-	protected JComboBox<String> classChoice;
 	
 	/**
 	 * Constructor
@@ -92,7 +74,9 @@ public class PreProcessWindow extends JFrame {
 	public PreProcessWindow(GUIMain main) {
 		Logger.logln(NAME+"Preparing the Pre-process window for viewing");
 		this.main = main;
-		initData();
+		
+		ps = new ProblemSet();
+		ps.setTrainCorpusName(DEFAULT_TRAIN_TREE_NAME);
 		
 		advancedWindow = new PreProcessAdvancedWindow(this, main);
 		driver = new PreProcessWindowDriver(this, advancedWindow, main);
@@ -109,14 +93,6 @@ public class PreProcessWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
-	private void initData() {
-		ps = new ProblemSet();
-		ps.setTrainCorpusName(DEFAULT_TRAIN_TREE_NAME);
-		featureDrivers = new CumulativeFeatureDriver();
-		FeatureWizardDriver.populateAll();
-		classifiers = new ArrayList<Classifier>();
-	}
-	
 	/**
 	 * Initializes and prepares the Pre-process window for viewing
 	 */
@@ -125,6 +101,7 @@ public class PreProcessWindow extends JFrame {
 		this.setSize(500, 500);
 		this.setTitle("Anonymouth Set-Up Wizard");
 		this.setLocation((main.screensize.width/2)-(500/2), (main.screensize.height/2)-(500/2));
+		this.driver.updateDocPrepColor();
 	}
 	
 	/**
@@ -132,6 +109,7 @@ public class PreProcessWindow extends JFrame {
 	 */
 	private void initComponents() {
 		preProcessPanel = new JPanel();
+		preProcessPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		MigLayout settingsLayout = new MigLayout(
 				"fill, wrap 1, ins 0",
 				"fill, grow",
@@ -159,7 +137,6 @@ public class PreProcessWindow extends JFrame {
 
 			saveProblemSetJButton = new JButton("Save");
 			loadProblemSetJButton = new JButton("Load");
-			clearProblemSetJButton = new JButton("Clear");
 
 			//Document to Anonymize
 			mainLabel = new JLabel("<html><center>Your Document<br>To Anonymize:</center></html>");
@@ -198,9 +175,8 @@ public class PreProcessWindow extends JFrame {
 			//Adding everything to the panel
 			prepDocumentsPanel.add(prepDocLabel, "h " + GUIMain.titleHeight + "!, wrap");
 			prepDocumentsPanel.add(problemSetLabel, "alignx 50%, wrap");
-			prepDocumentsPanel.add(saveProblemSetJButton, "span 4, split 3, w 20::");
+			prepDocumentsPanel.add(saveProblemSetJButton, "span 4, split 2, w 20::");
 			prepDocumentsPanel.add(loadProblemSetJButton, "w 20::");
-			prepDocumentsPanel.add(clearProblemSetJButton, "wrap, w 20::");
 			JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
 			prepDocumentsPanel.add(separator, "span 4, wrap, h 13!");
 			prepDocumentsPanel.add(mainLabel, "split, w 50%");
@@ -219,60 +195,7 @@ public class PreProcessWindow extends JFrame {
 			prepDocumentsPanel.add(removeTrainDocsJButton, "w 10::");
 		}
 
-		prepFeaturesPanel = new JPanel();
-		MigLayout featuresLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill",
-				"[][grow, fill][]");
-		prepFeaturesPanel.setLayout(featuresLayout);
-		{
-			prepFeatLabel = new JLabel("Features:");
-			prepFeatLabel.setOpaque(true);
-			prepFeatLabel.setFont(GUIMain.titleFont);
-			prepFeatLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepFeatLabel.setBorder(GUIMain.rlborder);
-			prepFeatLabel.setBackground(main.notReady);
-			prepFeatLabel.setToolTipText("Click here to access advanced confirguration");
-
-			String[] presetCFDsNames = new String[main.presetCFDs.size()];
-			for (int i = 0; i < main.presetCFDs.size(); i++)
-				presetCFDsNames[i] = main.presetCFDs.get(i).getName();
-
-			featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
-			featuresSetJComboBox = new JComboBox<String>();
-			featuresSetJComboBox.setModel(featuresSetJComboBoxModel);
-			featuresSetJComboBox.setToolTipText("<html>Click the Features Banner above to<br>access advanced configuration</html>");
-
-			prepFeaturesPanel.add(prepFeatLabel, "h " + GUIMain.titleHeight + "!, wrap");
-			prepFeaturesPanel.add(featuresSetJComboBox, "w 30:100%:");
-		}
-
-		prepClassifiersPanel = new JPanel();
-		MigLayout classLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill",
-				"[][grow, fill][]");
-		prepClassifiersPanel.setLayout(classLayout);
-		{
-			prepClassLabel = new JLabel("Classifiers:");
-			prepClassLabel.setOpaque(true);
-			prepClassLabel.setFont(GUIMain.titleFont);
-			prepClassLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepClassLabel.setBorder(GUIMain.rlborder);
-			prepClassLabel.setBackground(main.notReady);
-			prepClassLabel.setToolTipText("Click here to access advanced confirguration");
-
-			classChoice = new JComboBox<String>();
-			classChoice.setToolTipText("<html>Click the Classifiers Banner above to<br>access advanced configuration</html>");
-
-			advancedWindow.advancedDriver.initMainWekaClassifiersTree(main);
-
-			prepClassifiersPanel.add(prepClassLabel, "h " + GUIMain.titleHeight + "!, wrap");
-			prepClassifiersPanel.add(classChoice, "w 30:100%:");
-		}
 		preProcessPanel.add(prepDocumentsPanel, "growx");
-		preProcessPanel.add(prepFeaturesPanel, "growx");
-		preProcessPanel.add(prepClassifiersPanel, "growx");
 		
 		this.add(preProcessPanel);
 	}
@@ -342,19 +265,6 @@ public class PreProcessWindow extends JFrame {
 			return false;
 		}
 	}
-
-	protected boolean featuresAreReady() {
-		boolean ready = true;
-
-		try {
-			if (featureDrivers.numOfFeatureDrivers() == 0)
-				ready = false;
-		} catch (Exception e) {
-			return false;
-		}
-
-		return ready;
-	}
 	
 	protected boolean hasAtLeastThreeOtherAuthors() {
 		Set<String> trainAuthors = ps.getAuthors();
@@ -363,32 +273,5 @@ public class PreProcessWindow extends JFrame {
 			return false;
 		else
 			return true;
-	}
-
-	protected boolean classifiersAreReady() {
-		boolean ready = true;
-
-		try {
-			if (classifiers.isEmpty())
-				ready = false;
-		} catch (Exception e) {
-			return false;
-		}
-
-		return ready;
-	}
-	
-	/**
-	 * Returns true iff the given cumulative feature driver is effectively empty
-	 */
-	protected boolean isFeatureDriversEmpty(CumulativeFeatureDriver featureDrivers) {
-		if (featureDrivers == null)
-			return true;
-		else if ((featureDrivers.getName() == null || featureDrivers.getName().matches("\\s*")) &&
-			(featureDrivers.getDescription() == null || featureDrivers.getDescription().matches("\\s*")) &&
-			featureDrivers.numOfFeatureDrivers() == 0)
-			return true;
-		else
-			return false;
 	}
 }

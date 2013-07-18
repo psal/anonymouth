@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.jgaap.generics.Document;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
@@ -128,7 +129,7 @@ public class BackendInterface {
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						wizard.runInitial(magician,main.preProcessWindow.featureDrivers, main.preProcessWindow.classifiers.get(0));
+						wizard.runInitial(magician,main.ppAdvancedWindow.cfd, main.ppAdvancedWindow.classifiers.get(0));
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();
 						pw.setText("Initialize Cluster Viewer...");
@@ -148,7 +149,7 @@ public class BackendInterface {
 								"It is not possible to process an empty document.",
 								"Document processing error",
 								JOptionPane.ERROR_MESSAGE,
-								GUIMain.iconNO);
+								null);
 					} else {
 						magician.setModifiedDocument(tempDoc);
 
@@ -324,7 +325,7 @@ public class BackendInterface {
 			predictionMapArray[i][0] = tempVal;
 			predictionMapArray[i][1] = i;
 			
-			if (((String)authors[i]).equals(ThePresident.DUMMY_NAME)){
+			if (((String)authors[i]).equals(ANONConstants.DUMMY_NAME)){
 				authors[i] = "You";
 			}
 		}

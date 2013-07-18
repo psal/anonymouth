@@ -4,7 +4,7 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
+import edu.drexel.psal.ANONConstants;
 
 public class Logger {
 	
@@ -17,7 +17,7 @@ public class Logger {
 	private static Calendar cal = null;
 	
 	// file
-	private static String fileDirPath = ThePresident.LOG_DIR;
+	private static String fileDirPath = ANONConstants.LOG_DIR;
 	private static String filePrefix = "anonymouth";
 	private static String out;
 	private static BufferedWriter bw = null;

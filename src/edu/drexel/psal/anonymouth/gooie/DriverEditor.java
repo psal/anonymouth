@@ -1,5 +1,6 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
@@ -884,9 +885,9 @@ public class DriverEditor {
 					errorMessage += "<html>&bull; Sample documents not provided.</html>\n";
 				if (!main.preProcessWindow.otherDocsReady())
 					errorMessage += "<html>&bull; Other author documents not provided.</html>\n";
-				if (!main.preProcessWindow.featuresAreReady())
+				if (!main.ppAdvancedWindow.featuresAreReady())
 					errorMessage += "<html>&bull; Feature set not chosen.</html>\n";
-				if (!main.preProcessWindow.classifiersAreReady())
+				if (!main.ppAdvancedWindow.classifiersAreReady())
 					errorMessage += "<html>&bull; Classifier not chosen.</html>\n";
 				if (!main.preProcessWindow.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
@@ -912,18 +913,18 @@ public class DriverEditor {
 							Logger.logln(NAME+"Initial processing starting...");
 
 							// initialize all arraylists needed for feature processing
-							sizeOfCfd = main.preProcessWindow.featureDrivers.numOfFeatureDrivers();
+							sizeOfCfd = main.ppAdvancedWindow.cfd.numOfFeatureDrivers();
 							featuresInCfd = new ArrayList<String>(sizeOfCfd);
 							noCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 							yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 
 							for(int i = 0; i < sizeOfCfd; i++) {
-								String theName = main.preProcessWindow.featureDrivers.featureDriverAt(i).getName();
+								String theName = main.ppAdvancedWindow.cfd.featureDriverAt(i).getName();
 
 								// capitalize the name and replace all " " and "-" with "_"
 								theName = theName.replaceAll("[ -]","_").toUpperCase(); 
 								if(isCalcHist == false) {
-									isCalcHist = main.preProcessWindow.featureDrivers.featureDriverAt(i).isCalcHist();
+									isCalcHist = main.ppAdvancedWindow.cfd.featureDriverAt(i).isCalcHist();
 									yesCalcHistFeatures.add(FeatureList.valueOf(theName));
 								} else {
 									// these values will go in suggestion list... PLUS any 	
@@ -963,7 +964,7 @@ public class DriverEditor {
 				
 				File dir;
 				try {
-					dir = new File(new File(main.preProcessWindow.ps.getTestDocs().get(ThePresident.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
+					dir = new File(new File(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
 					save.setCurrentDirectory(dir);
 				} catch (IOException e1) {
 					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);

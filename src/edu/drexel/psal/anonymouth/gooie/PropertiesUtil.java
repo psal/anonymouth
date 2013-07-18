@@ -21,7 +21,7 @@ public class PropertiesUtil {
 	protected static Properties prop = new Properties();
 	protected static JFileChooser load = new JFileChooser();
 	protected static JFileChooser save = new JFileChooser();
-	protected static String defaultClass = "SMO";
+	protected static String defaultClass = "weka.classifiers.functions.SMO";
 	protected static String defaultFeat = "WritePrints (Limited)";
 	protected static int defaultClient = 0;
 	protected static String defaultFontSize = "12";
@@ -440,7 +440,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 			
-			ThePresident.NUM_TAGGING_THREADS = threads;
+			ThePresident.num_Tagging_Threads = threads;
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting thread count", LogOut.STDERR);
 		}
@@ -478,7 +478,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 			
-			ThePresident.MAX_FEATURES_TO_CONSIDER = max;
+			ThePresident.max_Features_To_Consider = max;
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed setting maximum features", LogOut.STDERR);
 		}
@@ -555,7 +555,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 			
-			ThePresident.AUTOSAVE_LATEST_VERSION = b;
+			ThePresident.autosave_Latest_Version = b;
 		} catch (Exception e) {
 			Logger.logln(NAME+"Failed setting auto save", LogOut.STDERR);
 		}

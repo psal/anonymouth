@@ -50,7 +50,7 @@ public class ErrorHandler {
 				"Please finish the current sentence before moving on to the next sentence.",
 				"",
 				JOptionPane.INFORMATION_MESSAGE,
-				GUIMain.icon);
+				ThePresident.aboutLogo);
 	}
 			
 	

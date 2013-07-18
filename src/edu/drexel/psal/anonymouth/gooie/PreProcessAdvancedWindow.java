@@ -8,6 +8,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
 
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
@@ -19,6 +22,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import javax.swing.tree.*;
+
+import weka.classifiers.Classifier;
+import weka.core.OptionHandler;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -34,6 +40,12 @@ public class PreProcessAdvancedWindow extends JDialog {
 	protected PreProcessWindow preProcessWindow;
 	protected GUIMain main;
 	public boolean panelsAreMade = false;
+	protected List<Classifier> classifiers;
+	protected CumulativeFeatureDriver cfd;
+	private String[] classifierNames;
+	protected String selectedClassName;
+	protected Hashtable<String, String> fullClassPath;
+	protected Hashtable<String, String> shortClassName;
 	
 	//Swing components
 	protected JTabbedPane tabbedPane;
@@ -67,7 +79,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 		protected JButton featuresSaveSetJButton;
 		protected JButton featuresLoadSetFromFileJButton;
 		protected JButton featuresAddSetJButton;
-		protected JComboBox<String> featuresSetJComboBox;
+		protected JComboBox<String> featureChoice;
 		protected DefaultComboBoxModel<String> featuresSetJComboBoxModel;
 		protected JLabel featuresSetJLabel;
 		protected JButton featuresAboutJButton;
@@ -151,12 +163,19 @@ public class PreProcessAdvancedWindow extends JDialog {
 		Logger.logln(NAME+"Initializing the pre-process advanced settings window");
 		this.preProcessWindow = preProcessWindow;
 		this.main = main;
-		initPresetCFDs(main);
+		initData();
 		initComponents();
 		initWindow();
 		advancedDriver = new PreProcessAdvancedDriver(preProcessWindow, this, main);
-		advancedDriver.initAdvWekaClassifiersTree(this);
+		initClassifiersTree(this);
 		setVisible(false);
+	}
+	
+	private void initData() {
+		cfd = new CumulativeFeatureDriver();
+		classifiers = new ArrayList<Classifier>();
+		FeatureWizardDriver.populateAll();
+		initPresetCFDs(main);
 	}
 	
 	/**
@@ -167,7 +186,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 		this.setSize(new Dimension((int)(screensize.width*.8), (int)(screensize.height*.8)));
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
 		this.setMinimumSize(new Dimension(800, 578));
-		this.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
+		this.setIconImage(ThePresident.logo);
 	}
 	
 	/**
@@ -205,7 +224,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 			prepFeatLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			prepFeatLabel.setBorder(GUIMain.rlborder);
 			prepFeatLabel.setOpaque(true);
-			if (preProcessWindow.featuresAreReady())
+			if (featuresAreReady())
 				prepFeatLabel.setBackground(main.ready);
 			else
 				prepFeatLabel.setBackground(main.notReady);
@@ -229,9 +248,9 @@ public class PreProcessAdvancedWindow extends JDialog {
 						presetCFDsNames[i] = main.presetCFDs.get(i).getName();
 			
 					featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
-					featuresSetJComboBox = new JComboBox<String>();
-					featuresSetJComboBox.setModel(featuresSetJComboBoxModel);
-					featMainTopPanel.add(featuresSetJComboBox, "grow");
+					featureChoice = new JComboBox<String>();
+					featureChoice.setModel(featuresSetJComboBoxModel);
+					featMainTopPanel.add(featureChoice, "grow");
 					
 					featuresAddSetJButton = new JButton("Add");
 					featMainTopPanel.add(featuresAddSetJButton);
@@ -431,7 +450,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 			prepClassLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			prepClassLabel.setBorder(GUIMain.rlborder);
 			prepClassLabel.setOpaque(true);
-			if (preProcessWindow.classifiersAreReady())
+			if (classifiersAreReady())
 				prepClassLabel.setBackground(main.ready);
 			else
 				prepClassLabel.setBackground(main.notReady);
@@ -538,5 +557,170 @@ public class PreProcessAdvancedWindow extends JDialog {
 			Logger.logln(NAME+"Failed to read feature set files.",LogOut.STDERR);
 			e.printStackTrace();
 		}
+	}
+	
+	protected void setClassifier(String className) {
+		Classifier tmpClassifier;
+		
+		try {
+			tmpClassifier = (Classifier)Class.forName(className).newInstance();
+		} catch (Exception e) {
+			Logger.logln(NAME+"Could not create classifier out of class: "+className);
+			JOptionPane.showMessageDialog(this,
+					"Could not generate classifier for selected class:\n"+className,
+					"Classifier Selection Error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
+		}
+		
+		//Add an -M option for SMO classifier
+		String dashM = "";
+		if(className.toLowerCase().contains("smo"))
+			dashM = " -M";
+
+		selectedClassName = getNameFromClassPath(className);
+		
+		//Show options and description
+		classAvClassArgsJTextField.setText(advancedDriver.getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
+		classDescJTextPane.setText(advancedDriver.getDesc(tmpClassifier));
+		classifiers.add(tmpClassifier);
+		advancedDriver.updateClassList(main);
+		advancedDriver.updateClassPrepColor(main);
+		classJTree.clearSelection();
+	}
+	
+	protected String[] getClassifierNames() {
+		return classifierNames;
+	}
+	
+	protected String getClassName() {
+		return selectedClassName;
+	}
+	
+	protected boolean classifiersAreReady() {
+		boolean ready = true;
+
+		try {
+			if (classifiers.isEmpty())
+				ready = false;
+		} catch (Exception e) {
+			return false;
+		}
+
+		return ready;
+	}
+	
+	protected boolean featuresAreReady() {
+		boolean ready = true;
+
+		try {
+			if (cfd.numOfFeatureDrivers() == 0)
+				ready = false;
+		} catch (Exception e) {
+			return false;
+		}
+
+		return ready;
+	}
+	
+	/**
+	 * Returns true iff the given cumulative feature driver is effectively empty
+	 */
+	protected boolean isFeatureDriversEmpty(CumulativeFeatureDriver featureDrivers) {
+		if (featureDrivers == null)
+			return true;
+		else if ((featureDrivers.getName() == null || featureDrivers.getName().matches("\\s*")) &&
+			(featureDrivers.getDescription() == null || featureDrivers.getDescription().matches("\\s*")) &&
+			featureDrivers.numOfFeatureDrivers() == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * Initialize available classifiers tree
+	 */
+	protected void initClassifiersTree(PreProcessAdvancedWindow PPSP) {
+		//Create root and set to tree
+		DefaultMutableTreeNode wekaNode = new DefaultMutableTreeNode("weka");
+		DefaultMutableTreeNode classifiersNode = new DefaultMutableTreeNode("classifiers");
+		wekaNode.add(classifiersNode);
+		DefaultTreeModel model = new DefaultTreeModel(wekaNode);
+		PPSP.classJTree.setModel(model);
+		classifierNames = new String[wekaClassNames.length];
+		fullClassPath = new Hashtable<String, String>();
+		shortClassName = new Hashtable<String, String>();
+		int curClassifier = 0;
+
+		//Add all classes
+		DefaultMutableTreeNode currNode, child;
+		for (String className: wekaClassNames) {
+			String[] nameArr = className.split("\\.");
+			currNode = classifiersNode;
+
+			for (int i = 2; i < nameArr.length; i++) {
+				//Look for node
+				@SuppressWarnings("unchecked")
+				Enumeration<DefaultMutableTreeNode> children = currNode.children();
+				while (children.hasMoreElements()) {
+					child = children.nextElement();
+					if (child.getUserObject().toString().equals(nameArr[i])) {
+						currNode = child;
+						classifierNames[curClassifier] = nameArr[i];
+						fullClassPath.put(nameArr[i], className);
+						shortClassName.put(className, nameArr[i]);
+						break;
+					}
+				}
+
+				//If not found, create a new one
+				if (!currNode.getUserObject().toString().equals(nameArr[i])) {
+					child = new DefaultMutableTreeNode(nameArr[i]);
+					currNode.add(child);
+					classifierNames[curClassifier] = nameArr[i];
+					fullClassPath.put(nameArr[i], className);
+					shortClassName.put(className, nameArr[i]);
+					currNode = child;
+				}
+			}
+			curClassifier++;
+		}
+
+		// expand tree
+		int row = 0;
+		while (row < PPSP.classJTree.getRowCount())
+			PPSP.classJTree.expandRow(row++);
+	}
+	
+	/**
+	 * build classifiers tree from list of class names
+	 */
+	public String[] wekaClassNames = new String[] {
+			//Bayes
+			//"weka.classifiers.bayes.BayesNet",
+			"weka.classifiers.bayes.NaiveBayes",
+			"weka.classifiers.bayes.NaiveBayesMultinomial",
+			//"weka.classifiers.bayes.NaiveBayesMultinomialUpdateable",
+			//"weka.classifiers.bayes.NaiveBayesUpdateable",
+
+			//Functions
+			"weka.classifiers.functions.Logistic",
+			"weka.classifiers.functions.MultilayerPerceptron",
+			"weka.classifiers.functions.SMO",
+
+			//Lazy
+			"weka.classifiers.lazy.IBk",
+
+			//Rules
+			"weka.classifiers.rules.ZeroR",
+
+			//Trees
+			"weka.classifiers.trees.J48",
+	};
+	
+	protected String getNameFromClassPath(String path) {
+		String[] classPath = path.split("\\.");
+		return classPath[classPath.length - 1];
 	}
 }

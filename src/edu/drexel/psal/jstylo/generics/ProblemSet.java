@@ -17,8 +17,8 @@ import java.util.Collections;
 
 import com.jgaap.generics.*;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 public class ProblemSet {
@@ -111,7 +111,7 @@ public class ProblemSet {
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
 		
-		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ThePresident.DUMMY_NAME).get(0).getFilePath(), false);
+		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ANONConstants.DUMMY_NAME).get(0).getFilePath(), false);
 		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
@@ -613,7 +613,7 @@ public class ProblemSet {
 		if (testDocsMap.isEmpty())
 			result = false;
 		else
-			result = !testDocsMap.get(ThePresident.DUMMY_NAME).isEmpty();
+			result = !testDocsMap.get(ANONConstants.DUMMY_NAME).isEmpty();
 		
 		return result;
 	}
@@ -862,7 +862,7 @@ public class ProblemSet {
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
 					filePath = filePath.replace("/./","/");
-					Document testDoc = new Document(filePath,ThePresident.DUMMY_NAME);
+					Document testDoc = new Document(filePath, ANONConstants.DUMMY_NAME);
 					
 					if (titles.contains(testDoc.getTitle())) {
 						int addNum = 1;
@@ -879,7 +879,7 @@ public class ProblemSet {
 					
 					titles.add(testDoc.getTitle());
 					
-					problemSet.addTestDoc(ThePresident.DUMMY_NAME,testDoc);
+					problemSet.addTestDoc(ANONConstants.DUMMY_NAME,testDoc);
 					//Training document
 				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);

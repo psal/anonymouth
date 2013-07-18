@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import edu.drexel.psal.jstylo.generics.Logger;
 import weka.core.Instance;
@@ -39,7 +39,7 @@ public class FeatureSwapper {
 		toAnonymize = magician.getToModifyDat();
 		toAnonymizeTitlesList = magician.getToModifyTitlesList();
 		trainSetAuthors = magician.getTrainSetAuthors();
-		waz = new WekaAnalyzer(ThePresident.PATH_TO_CLASSIFIER);
+		waz = new WekaAnalyzer(ANONConstants.PATH_TO_CLASSIFIER);
 		this.clusterGroups = clusterGroups;
 		if (clusterGroups == null)
 			Logger.logln(NAME+"Damn.");
@@ -146,7 +146,7 @@ class WekaResults implements Comparable<WekaResults>{
 		while(strIter.hasNext()){
 			name = strIter.next();
 			d = resultsMap.get(name);
-			if (name.equals(ThePresident.DUMMY_NAME)){
+			if (name.equals(ANONConstants.DUMMY_NAME)){
 				theUser = new ResultPair(name, d);
 				continue;
 			}

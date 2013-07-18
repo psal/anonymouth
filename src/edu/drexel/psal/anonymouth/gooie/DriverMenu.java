@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -38,7 +39,7 @@ public class DriverMenu {
 				GUIMain.preferencesWindow.showWindow();
 			}
         };
-        if (!ThePresident.IS_MAC)
+        if (!ANONConstants.IS_MAC)
         	main.settingsGeneralMenuItem.addActionListener(preferencesListener);
         
         saveProblemSetListener = new ActionListener() {
@@ -85,7 +86,7 @@ public class DriverMenu {
 						About.aboutAnonymouth,
 						"About Anonymouth",
 						JOptionPane.INFORMATION_MESSAGE,
-						ThePresident.LOGO);
+						ThePresident.aboutLogo);
         	}
         };
         main.helpAboutMenuItem.addActionListener(aboutListener);
@@ -135,7 +136,7 @@ public class DriverMenu {
         };
         main.editRedoMenuItem.addActionListener(redoListener);
         
-        if (ThePresident.IS_MAC) {
+        if (ANONConstants.IS_MAC) {
         	fullScreenListener = new ActionListener() {
             	@Override
             	public void actionPerformed(ActionEvent e) { 

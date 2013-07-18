@@ -21,6 +21,7 @@ import javax.swing.tree.TreePath;
 
 import com.jgaap.generics.Document;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.ExtFilter;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
@@ -58,34 +59,7 @@ public class PreProcessWindowDriver {
 		this.preProcessWindow = preProcessWindow;
 	}
 	
-	public void initListeners() {
-		clearProblemSetListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Logger.logln(NAME+"'Clear Problem Set' button clicked on the Pre-process window");
-
-				int answer = 0;
-				if (preProcessWindow.ps != null && (preProcessWindow.ps.hasAuthors() || preProcessWindow.ps.hasTestDocs())) {
-					if (PropertiesUtil.getWarnAll()) {
-						answer = JOptionPane.showConfirmDialog(preProcessWindow,
-								"Are you sure you want to clear the current problem set?",
-								"Clear Current Problem Set",
-								JOptionPane.WARNING_MESSAGE,
-								JOptionPane.YES_NO_CANCEL_OPTION);
-					}
-				}
-
-				if (answer == JOptionPane.YES_OPTION) {					
-					preProcessWindow.ps = new ProblemSet();
-					preProcessWindow.ps.setTrainCorpusName(preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
-					updateAllComponents();
-					PropertiesUtil.setProbSet("");
-					preProcessWindow.addTestDocJButton.setEnabled(true);
-				}
-			}
-		};
-		preProcessWindow.clearProblemSetJButton.addActionListener(clearProblemSetListener);		
-		
+	public void initListeners() {	
 		loadProblemSetListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,8 +97,6 @@ public class PreProcessWindowDriver {
 							Logger.logln(NAME+"Trying to load problem set at: " + path);
 							try {
 								preProcessWindow.ps = new ProblemSet(path);
-								preProcessWindow.classChoice.setSelectedItem(PropertiesUtil.prop.getProperty("recentClass"));
-								preProcessWindow.featuresSetJComboBox.setSelectedItem(PropertiesUtil.prop.getProperty("recentFeat"));
 								updateAllComponents();
 								PropertiesUtil.setProbSet(path);
 							} catch (Exception exc) {
@@ -729,7 +701,7 @@ public class PreProcessWindowDriver {
 							JOptionPane.DEFAULT_OPTION,		
 							JOptionPane.ERROR_MESSAGE, null, null, null);
 					dlm.removeAllElements();
-					preProcessWindow.ps.removeTestAuthor(ThePresident.DUMMY_NAME);
+					preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
 					updateDocPrepColor();
 					return;
 				}
@@ -746,7 +718,7 @@ public class PreProcessWindowDriver {
 							JOptionPane.DEFAULT_OPTION,		
 							JOptionPane.ERROR_MESSAGE, null, null, null);
 					dlm.removeAllElements();
-					preProcessWindow.ps.removeTestAuthor(ThePresident.DUMMY_NAME);
+					preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
 					updateDocPrepColor();
 					return;
 				}
@@ -862,7 +834,7 @@ public class PreProcessWindowDriver {
 	 * Updates the feature set view when a new feature set is selected / created.
 	 */
 	protected void updateFeatureSetView(GUIMain main) {
-		CumulativeFeatureDriver featureDriver = preProcessWindow.featureDrivers;
+		CumulativeFeatureDriver featureDriver = advancedWindow.cfd;
 		
 		advancedWindow.featuresSetDescJTextPane.setText(featureDriver.getDescription() == null ? "" : featureDriver.getDescription());
 		

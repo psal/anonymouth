@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.DriverClustersWindow;
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
@@ -28,7 +29,7 @@ import weka.core.Instances;
 public class DataAnalyzer{
 	
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
-	private int numFeaturesToReturn = ThePresident.MAX_FEATURES_TO_CONSIDER;
+	private int numFeaturesToReturn = ThePresident.max_Features_To_Consider;
 	public static Attribute[] topAttributes;
 	public static int lengthTopAttributes;
 	private String[] importantAttribs;
@@ -432,7 +433,7 @@ public class DataAnalyzer{
 		Logger.logln(NAME+"called runIntitial in DataAnalyzer");
 		List<Document> tempTestDocs = pSet.getAllTestDocs();
 		for (Document d:tempTestDocs) {
-			d.setAuthor(ThePresident.DUMMY_NAME);
+			d.setAuthor(ANONConstants.DUMMY_NAME);
 		}
 		
 		magician.initialDocToData(pSet,cfd, classifier);
