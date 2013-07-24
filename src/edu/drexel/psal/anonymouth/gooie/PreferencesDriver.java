@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import edu.drexel.psal.anonymouth.helpers.ExtFilter;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -130,7 +130,7 @@ public class PreferencesDriver {
 
 					int answer = 0;
 					
-					PropertiesUtil.load.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
+					PropertiesUtil.load.addChoosableFileFilter(ANONConstants.XML);
 					if (PropertiesUtil.getProbSet() != null) {
 						String absPath = PropertiesUtil.propFile.getAbsolutePath();
 						String problemSetDir = absPath.substring(0, absPath.indexOf("anonymouth_prop")-1) + "\\problem_sets\\";

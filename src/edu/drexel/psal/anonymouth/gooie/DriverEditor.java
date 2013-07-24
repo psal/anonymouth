@@ -439,11 +439,10 @@ public class DriverEditor {
 		return results; 
 	}
 
-
 	private static void displayEditInfo(DocumentEvent e) {
-		javax.swing.text.Document document = (javax.swing.text.Document) e.getDocument();
-		int changeLength = e.getLength();
-		System.out.println(e.getType().toString() + ": " + changeLength + " character(s). Text length = " + document.getLength() + ".");
+//		javax.swing.text.Document document = (javax.swing.text.Document) e.getDocument();
+//		int changeLength = e.getLength();
+//		Logger.logln(NAME+e.getType().toString() + ": " + changeLength + " character(s). Text length = " + document.getLength() + ".");
 	}
 
 	protected static void initListeners(final GUIMain main) {
@@ -459,7 +458,6 @@ public class DriverEditor {
 		main.getDocumentPane().addCaretListener(new CaretListener() {
 			@Override
 			public void caretUpdate(CaretEvent e) {
-				System.out.println("======================================================================================");
 				if (ignoreNumActions > 0) {
 					charsInserted = 0;
 					charsWereRemoved = false;
@@ -467,6 +465,7 @@ public class DriverEditor {
 					charsRemoved = 0;
 					ignoreNumActions--;
 				} else if (taggedDoc != null) { //main.documentPane.getText().length() != 0
+					System.out.println("======================================================================================");
 					boolean setSelectionInfoAndHighlight = true;
 					startSelection = e.getDot();
 					endSelection = e.getMark();
@@ -883,7 +882,7 @@ public class DriverEditor {
 					errorMessage += "<html>&bull; Main document not provided.</html>\n";
 				if (!main.preProcessWindow.sampleDocsReady())
 					errorMessage += "<html>&bull; Sample documents not provided.</html>\n";
-				if (!main.preProcessWindow.otherDocsReady())
+				if (!main.preProcessWindow.trainDocsReady())
 					errorMessage += "<html>&bull; Other author documents not provided.</html>\n";
 				if (!main.ppAdvancedWindow.featuresAreReady())
 					errorMessage += "<html>&bull; Feature set not chosen.</html>\n";
@@ -903,6 +902,9 @@ public class DriverEditor {
 						setAllDocTabUseable(false, main);
 						// ----- if this is the first run, do everything that needs to be ran the first time
 						if (taggedDoc == null) {
+							//makes sure to internally rename files by different authors that have the same name
+							//Used to be handed upon adding, but better for the user if they never have to worry about it
+							main.preProcessWindow.assertUniqueTitles();
 							// ----- create the main document and add it to the appropriate array list.
 							// ----- may not need the arraylist in the future since you only really can have one at a time
 							TaggedDocument taggedDocument = new TaggedDocument();

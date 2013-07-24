@@ -3,6 +3,7 @@ package edu.drexel.psal.anonymouth.gooie;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.anonymouth.utils.About;
+import edu.drexel.psal.jstylo.generics.Logger;
 
 import java.awt.Image;
 import java.io.File;
@@ -29,8 +30,10 @@ public class ThePresident {
 	//Anonymouth Icons
 	public static Image logo;
 	public static ImageIcon aboutLogo;
+	public static ImageIcon dialogLogo;
 	public static final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
 	public static final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
+	public static final String ANONYMOUTH_LOGO_SMALL = "anonymouth_gui_chooser.png";
 	
 	public static Application app;
 	public static Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
@@ -40,6 +43,7 @@ public class ThePresident {
 	public static int num_Tagging_Threads = PropertiesUtil.defaultThreads;
 	public static boolean should_Keep_Auto_Saved_Anonymized_Docs = PropertiesUtil.defaultVersionAutoSave;
 	public static boolean autosave_Latest_Version = PropertiesUtil.defaultAutoSave;
+	public static boolean canDoQuickStart = false;
 
 	public static void main(String[] args) {
 		new ThePresident();
@@ -51,13 +55,14 @@ public class ThePresident {
 		
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
+		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
 
 		if(ANONConstants.IS_MAC) {
 			System.setProperty("WEKA_HOME", "/dev/null");
 			PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
 			GUIMain.splashScreen.updateText("Preparing Mac Look and Feel");
-			System.out.println(NAME+"We're on a Mac!");
+			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			
 			app = Application.getApplication();
@@ -111,24 +116,24 @@ public class ThePresident {
 		
 		File log_dir = new File(ANONConstants.LOG_DIR); // create log directory if it doesn't exist.
 		if (!log_dir.exists()){
-			System.out.println(NAME+"Creating directory for DocumentMagician to write to...");
+			Logger.logln(NAME+"Creating directory for DocumentMagician to write to...");
 			log_dir = log_dir.getAbsoluteFile();
 			log_dir.mkdir();
 		}
 		
 		File dm_write_dir = new File(ANONConstants.DOC_MAGICIAN_WRITE_DIR);
 		if (!dm_write_dir.exists()) {
-			System.out.println(NAME+"Creating directory for DocumentMagician to write to...");
+			Logger.logln(NAME+"Creating directory for DocumentMagician to write to...");
 			dm_write_dir.mkdir();
 		}
 		File ser_dir = new File(ANONConstants.SER_DIR);
 		if (!ser_dir.exists()){
-			System.out.println(NAME+"Creating directory to save serialized objects to...");
+			Logger.logln(NAME+"Creating directory to save serialized objects to...");
 			ser_dir.mkdir();
 		}
 		
 		GUIMain.splashScreen.updateText("Preparing Main Window");
-		System.out.println("Gooie starting...");
+		Logger.logln("Gooie starting...");
 		GUIMain.startGooie();
 	}
 	

@@ -1,5 +1,7 @@
 package edu.drexel.psal;
 
+import edu.drexel.psal.anonymouth.helpers.ExtFilter;
+
 /**
  * Anonymouth Constants and such (To help clean up ThePresident, which now focuses solely on starting up Anonymouth)
  * @author Marc Barrowclift
@@ -23,4 +25,6 @@ public class ANONConstants {
 	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: put in "options
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
 	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
+	public static final ExtFilter TXT = new ExtFilter("Text files (*.txt)", ".txt");
+	public static final ExtFilter XML = new ExtFilter("XML files (*.xml)", ".xml");
 }

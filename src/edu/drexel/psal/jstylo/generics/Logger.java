@@ -6,6 +6,14 @@ import java.util.*;
 
 import edu.drexel.psal.ANONConstants;
 
+/**
+ * Takes output that would normally just be printing out via stdout and in addition to printing also writes the output to a log
+ * file, and also provides functionality for setting the name and location for these logs.
+ * 
+ * @author Ariel Stolerman
+ * @author Marc Barrowclift
+ *
+ */
 public class Logger {
 	
 	public static final boolean loggerFlag = true;
@@ -21,6 +29,7 @@ public class Logger {
 	private static String filePrefix = "anonymouth";
 	private static String out;
 	private static BufferedWriter bw = null;
+	private static String printBuffer = ""; //So we can store output even before the logger file is made
 	
 	/**
 	 * Reutrns the current time.
@@ -42,6 +51,9 @@ public class Logger {
 		return df.format(cal.getTime());
 	}
 
+	/**
+	 * Initializes the file we will be printing our output to
+	 */
 	public static void initLogFile() {
 		if (loggerFlag && logFile) {
 			out = fileDirPath+"/"+filePrefix+"_"+date()+"_"+time()+".txt";
@@ -51,6 +63,12 @@ public class Logger {
 				if (logFile) {
 					bw = new BufferedWriter(new FileWriter(out));
 					bw.write(msg);
+					
+					if (!printBuffer.equals("")) {
+						bw.write(msg);
+						bw.flush();
+						printBuffer = "";
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -69,9 +87,12 @@ public class Logger {
 		STDERR
 	}
 	
+	/**
+	 * Prints output (no new line) to the file and to standard output
+	 * @param msg
+	 */
 	public static void log(String msg) {
 		if (loggerFlag) {
-			if (bw == null) initLogFile();
 			String timedMsg = time()+": "+msg;
 
 			// write to screen
@@ -88,6 +109,10 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * Prints a single line to the file and to standard output
+	 * @param msg
+	 */
 	public static void logln(String msg) {
 		if (loggerFlag) {
 			log(msg);
@@ -96,6 +121,8 @@ public class Logger {
 				if (logFile) {
 					bw.write("\n");
 					bw.flush();
+				} else {
+					printBuffer.concat(msg+"\n");
 				}
 			} catch (IOException e) {
 				System.err.println("Failed writing to log file!");
@@ -103,19 +130,23 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * Prints output (no new line) to the file and to standard output OR standard error output, depending on passed value.
+	 * @param msg
+	 * @param target
+	 */
 	public static void log(String msg, LogOut target) {
 		if (loggerFlag) {
-			if (bw == null)	initLogFile();
 			String timedMsg = time()+": "+msg;
 
 			// write to logger
 			switch (target) {
-			case STDOUT:
-				System.out.print(timedMsg);	
-				break;
-			case STDERR:
-				System.err.print(timedMsg);
-				break;
+				case STDOUT:
+					System.out.print(timedMsg);	
+					break;
+				case STDERR:
+					System.err.print(timedMsg);
+					break;
 			}
 
 			// write to file
@@ -123,6 +154,8 @@ public class Logger {
 				if (logFile) {
 					bw.write(timedMsg);
 					bw.flush();
+				} else {
+					printBuffer.concat(msg);
 				}
 			} catch (IOException e) {
 				System.err.println("Failed writing to log file!");
@@ -130,24 +163,31 @@ public class Logger {
 		}
 	}
 	
+	/**
+	 * Prints output (no new line) to the file and to standard output or standard error output, depending on passed value
+	 * @param msg
+	 * @param target
+	 */
 	public static void logln(String msg, LogOut target) {
 		if (loggerFlag) {
 			log(msg,target);
 
 			switch (target) {
-			case STDOUT:
-				System.out.println();	
-				break;
-			case STDERR:
-				System.err.println();
-				break;
+				case STDOUT:
+					System.out.println();	
+					break;
+				case STDERR:
+					System.err.println();
+					break;
 			}
 
-			// write to file
+			//Write to file
 			try {
 				if (logFile) {
 					bw.write("\n");
 					bw.flush();
+				} else {
+					printBuffer.concat(msg+"\n");
 				}
 			} catch (IOException e) {
 				System.err.println("Failed writing to log file!");
@@ -155,6 +195,9 @@ public class Logger {
 		}
 	}
 
+	/**
+	 * Safely closes the file
+	 */
 	public static void close() {
 		if (loggerFlag) {
 			try {

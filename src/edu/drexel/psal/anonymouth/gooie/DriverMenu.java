@@ -46,7 +46,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Save problem set menu item clicked");
-        		main.preProcessWindow.driver.saveProblemSetListener.actionPerformed(e);
+        		main.preProcessWindow.driver.doneSaveListener.actionPerformed(e);
         	}
         };
         main.fileSaveProblemSetMenuItem.addActionListener(saveProblemSetListener);
@@ -55,7 +55,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Load problem set menu item clicked");
-        		main.preProcessWindow.driver.loadProblemSetListener.actionPerformed(e);
+        		main.startingWindow.loadDocSetListener.actionPerformed(e);
         	}
         };
         main.fileLoadProblemSetMenuItem.addActionListener(loadProblemSetListener);

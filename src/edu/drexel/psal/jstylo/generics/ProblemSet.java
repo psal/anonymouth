@@ -197,7 +197,7 @@ public class ProblemSet {
 	 */
 	public boolean addTrainDoc(String author, Document doc) {
 		if (trainDocsMap.get(author) == null)
-			trainDocsMap.put(author,new LinkedList<Document>());
+			trainDocsMap.put(author, new LinkedList<Document>());
 		return trainDocsMap.get(author).add(doc);
 	}
 
@@ -334,9 +334,13 @@ public class ProblemSet {
 		List<Document> docs = trainDocsMap.get(author);
 		if (docs == null)
 			return null;
-		for (int i=0; i<docs.size(); i++)
-			if (docs.get(i).getTitle().equals(docTitle))
+
+		for (int i = 0; i < docs.size(); i++) {
+			if (docs.get(i).getTitle().equals(docTitle)) {
 				return docs.remove(i);
+			}
+		}
+		
 		return null;
 	}
 	
@@ -477,6 +481,38 @@ public class ProblemSet {
 	 */
 	
 	// training documents
+	
+	/**
+	 * Removes the authors with the given name from the problem set and then adds it back in with all their
+	 * past documents under the given new name
+	 * @param oldName - The name of the author you want to rename
+	 * @param newName - The new name of the author you want to use
+	 */
+	public void renameAuthor(String oldName, String newName) {
+		List<Document> docs = trainDocsMap.remove(oldName);
+		trainDocsMap.put(newName, docs);
+	}
+	
+	/**
+	 * Removes the given document under the given author from the problem set and then adds it back in under
+	 * it's new name
+	 * @param oldName - The name of the document you want to rename
+	 * @param newName - The new name of the document you want to use
+	 * @param author - The name of author under which the document resides
+	 */
+	public void renameTrainDoc(String oldName, String newName, String author) {
+		List<Document> docs = trainDocsMap.get(author);
+		int size = docs.size();
+		
+		for (int i = 0; i < size; i++) {
+			if (docs.get(i).equals(oldName)) {
+				String path = docs.get(i).getFilePath();
+				docs.remove(i);
+				docs.add(i, new Document(path, author, newName));
+				break;
+			}
+		}
+	}
 	
 	/**
 	 * Returns true iff the training set has any authors.

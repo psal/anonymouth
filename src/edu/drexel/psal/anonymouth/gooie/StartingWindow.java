@@ -3,11 +3,13 @@ package edu.drexel.psal.anonymouth.gooie;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -16,7 +18,6 @@ import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import edu.drexel.psal.JSANConstants;
-import edu.drexel.psal.anonymouth.helpers.ExtFilter;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -48,10 +49,10 @@ public class StartingWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( StartingWindow ) - ";
 	private GUIMain main;
-	private PreProcessWindow preProcessWindow;
 	public String sessionName;
 	private Image background;
-	private int width = 520, height = 160;
+	private int width = 520, height = 155;
+	private FileDialog load;
 	
 	//Swing Components
 	private JPanel completePanel;
@@ -61,21 +62,22 @@ public class StartingWindow extends JFrame {
 		private StartingWindow startingWindow;
 		private JPanel messageAndBox;
 		
-		//Bottom
-		private JPanel bottom;
-		private JPanel wrapperPanel;
-		private JPanel problemSetPanel;
-		private JButton loadDocSetButton;
-		private JButton newDocSetButton;
+		//Middle
+		private JPanel middlePanel;
+		private JLabel middleLabel;
 		private JButton startButton;
+		
+		//Bottom
 		private JButton quitButton;
+		private JButton loadDocSetButton;
+		protected JButton newDocSetButton;
 		private JPanel bottomButtons;
 		
 	//Listeners
 	private ActionListener startListener;
 	private ActionListener quitListener;
-	private ActionListener loadDocSetListener;
 	private ActionListener newDocSetListener;
+	protected ActionListener loadDocSetListener;
 	private FocusListener textBoxListener;
 	
 	/**
@@ -88,16 +90,37 @@ public class StartingWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.main = main;
-		this.setTitle("Anonymouth Start Screen");
+		this.setTitle("Anonymouth Start Window");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		load = new FileDialog(this);
+		load.setModalityType(ModalityType.DOCUMENT_MODAL);
 	
 		initGUI();
 		initListeners();
 		
-		preProcessWindow = new PreProcessWindow(main);
-		
 		if (PropertiesUtil.getProbSet().equals("")) {
 			startButton.setEnabled(false);
+		}
+	}
+	
+	protected void setReadyToStart(boolean ready) {
+		if (ready) {
+			if (!PropertiesUtil.getProbSet().equals(""))
+				middleLabel.setText("Start with document set \"" + new File(PropertiesUtil.getProbSet()).getName() + "\"");
+			else
+				middleLabel.setText("Start with completed document set");
+			
+			middleLabel.setForeground(Color.BLACK);
+			startButton.setEnabled(true);
+			this.getRootPane().setDefaultButton(startButton);
+			startButton.requestFocusInWindow();
+		} else {
+			middleLabel.setText("Please finish your document set to start");
+			middleLabel.setForeground(Color.LIGHT_GRAY);
+			startButton.setEnabled(false);
+			this.getRootPane().setDefaultButton(newDocSetButton);
+			newDocSetButton.requestFocusInWindow();
 		}
 	}
 
@@ -107,8 +130,9 @@ public class StartingWindow extends JFrame {
 	private void initGUI() {		
 		inputMessage = new JLabel("Please name your session:");
 		
-		startButton = new JButton("Start Anonymouth");
 		quitButton = new JButton("Quit");
+		loadDocSetButton = new JButton("Load Document Set");
+		newDocSetButton = new JButton("New Document Set");
 		
 		textBox = new JTextField();
 		textBox.setPreferredSize(new Dimension(300, 23));
@@ -121,25 +145,34 @@ public class StartingWindow extends JFrame {
 		messageAndBox.add(textBox);
 		messageAndBox.setMinimumSize(new Dimension(600, 50));
 		messageAndBox.setBackground(new Color(180, 143, 186));
-		messageAndBox.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 0));
+		messageAndBox.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0));
 		
-		problemSetPanel = new JPanel(new BorderLayout());
-		loadDocSetButton = new JButton("Load Document Set");
-		newDocSetButton = new JButton("New Document Set");
-		problemSetPanel.add(loadDocSetButton, BorderLayout.NORTH);
-		problemSetPanel.add(newDocSetButton, BorderLayout.SOUTH);
+		middlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+		middleLabel = new JLabel();
+		middleLabel.setFont(new Font("Helvetica", Font.PLAIN, 16));
+		startButton = new JButton("Start");
 		
-		bottomButtons = new JPanel(new FlowLayout(0, 0, 0));
-		bottomButtons.add(quitButton);
-		bottomButtons.add(startButton);
+		if (ThePresident.canDoQuickStart) {
+			middleLabel.setText("Resume with previously used document set");
+		} else {
+			middleLabel.setText("No previous document set found");
+			middleLabel.setForeground(Color.LIGHT_GRAY);
+			startButton.setEnabled(false);
+		}
 		
-		wrapperPanel = new JPanel(new BorderLayout());
-		wrapperPanel.add(bottomButtons, BorderLayout.SOUTH);
+		middlePanel.add(middleLabel);
+		middlePanel.add(startButton);
 		
-		bottom = new JPanel(new BorderLayout());
-		bottom.add(problemSetPanel, BorderLayout.WEST);
-		bottom.add(wrapperPanel, BorderLayout.EAST);
-		bottom.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 0));
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		bottomPanel.add(quitButton);
+		bottomPanel.add(loadDocSetButton);
+		bottomPanel.add(newDocSetButton);
+		bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+		
+		bottomButtons = new JPanel(new BorderLayout(0, 0));
+		bottomButtons.add(middlePanel, BorderLayout.NORTH);
+		bottomButtons.add(bottomPanel, BorderLayout.SOUTH);
+		bottomButtons.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 		
 		background = ImageLoader.getImage("session_name.png");
 		completePanel = new JPanel(new BorderLayout()) {
@@ -148,12 +181,12 @@ public class StartingWindow extends JFrame {
 				super.paintComponent(g);
 				
 				Graphics2D g2d = (Graphics2D)g;
-				g2d.drawImage(background, 0, 0, null);
+				g2d.drawImage(background, 0, -15, null);
 			}
 		};
-		completePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+		completePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		completePanel.add(messageAndBox, BorderLayout.NORTH);
-		completePanel.add(bottom, BorderLayout.SOUTH);
+		completePanel.add(bottomButtons, BorderLayout.SOUTH);
 		this.add(completePanel);
 	}
 	
@@ -164,17 +197,6 @@ public class StartingWindow extends JFrame {
 		startListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 100; i >= 0; i-= 2) {
-					sessionName = textBox.getText();
-					startingWindow.setOpacity((float)i/(float)100);
-					
-					try {
-						Thread.sleep(3);
-					} catch (InterruptedException ie) {
-						ie.printStackTrace();
-					}
-				}
-				
 				startingWindow.setVisible(false);
 				main.showMainGUI();
 			}
@@ -195,7 +217,11 @@ public class StartingWindow extends JFrame {
 				textBox.setText("");
 			}
 			@Override
-			public void focusLost(FocusEvent e) {}
+			public void focusLost(FocusEvent e) {
+				if (textBox.getText().equals("")) {
+					textBox.setText("Anonymouth");
+				}
+			}
 		};
 		textBox.addFocusListener(textBoxListener);
 		
@@ -205,21 +231,22 @@ public class StartingWindow extends JFrame {
 				try {
 					Logger.logln(NAME+"'Load Problem Set' button clicked on the documents tab");
 
-					PropertiesUtil.load.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
-
+					load.setTitle("Load A Previous Document Set");
 					if (PropertiesUtil.prop.getProperty("recentProbSet") != null) {
-						String absPath = PropertiesUtil.propFile.getAbsolutePath();
-						String problemSetDir = absPath.substring(0, absPath.indexOf("anonymouth_prop")-1) + "\\problem_sets\\";
-						PropertiesUtil.load.setCurrentDirectory(new File(problemSetDir));
-						PropertiesUtil.load.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
+						Logger.logln(NAME+"Chooser root directory set to: " + PropertiesUtil.prop.getProperty("recentProbSet"));
+						load.setDirectory(PropertiesUtil.prop.getProperty("recentProbSet"));
 					} else {
-						PropertiesUtil.load.setCurrentDirectory(new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX));
-					}
+						load.setDirectory(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
+					}		
+					load.setMode(FileDialog.LOAD);
+					load.setMultipleMode(false);
+					load.setFilenameFilter(ANONConstants.XML);
+					load.setLocationRelativeTo(null);
+					load.setVisible(true);
 
-					int answer = PropertiesUtil.load.showDialog(startingWindow, "Load Problem Set");
-
-					if (answer == JFileChooser.APPROVE_OPTION) {
-						String path = PropertiesUtil.load.getSelectedFile().getAbsolutePath();
+					File[] files = load.getFiles();
+					if (files.length != 0) {
+						String path = files[0].getAbsolutePath();
 
 						Logger.logln(NAME+"Trying to load problem set at: " + path);
 						try {
@@ -251,7 +278,14 @@ public class StartingWindow extends JFrame {
 		newDocSetListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				preProcessWindow.showWindow();
+				String sessionName = textBox.getText();
+				sessionName = sessionName.replaceAll("['.?!()<>#\\\\/|\\[\\]{}*\":;`~&^%$@+=,]", "");
+				String tempName = sessionName.replaceAll(" ", "_");
+				if (tempName != null)
+					sessionName = tempName;
+				ThePresident.sessionName = sessionName;
+				
+				main.preProcessWindow.showWindow();
 			}
 		};
 		newDocSetButton.addActionListener(newDocSetListener);
@@ -261,20 +295,20 @@ public class StartingWindow extends JFrame {
 	 * Makes the prepared window visible
 	 */
 	public void showStartingWindow() {
-		String probSet = PropertiesUtil.getProbSet();
+		Logger.logln(NAME+"Displaying Anonymouth Start Window");
 		
-		if (probSet.equals("")) {
-			this.getRootPane().setDefaultButton(newDocSetButton);
-		} else {
+		if (ThePresident.canDoQuickStart) {
 			this.getRootPane().setDefaultButton(startButton);
+		} else {
+			this.getRootPane().setDefaultButton(newDocSetButton);
 		}
 		
 		this.setVisible(true);
 		
-		if (probSet.equals("")) {
-			newDocSetButton.requestFocusInWindow();
-		} else {
+		if (ThePresident.canDoQuickStart) {
 			startButton.requestFocusInWindow();
+		} else {
+			newDocSetButton.requestFocusInWindow();
 		}
 	}
 }
@@ -331,7 +365,7 @@ class SplashScreen extends JFrame {
 
 	/**
 	 * Updates the message text with the new status
-	 * XXX TODO XXX DOESN'T ACTUALLY WORK RIGHT NOW, Look into it later, probably concurancy problem.
+	 * XXX TODO XXX DOESN'T ACTUALLY WORK RIGHT NOW, Look into it later, probably concurrency problem.
 	 * @param newText
 	 */
 	public void updateText(String newText) {

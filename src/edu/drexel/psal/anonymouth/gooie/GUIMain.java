@@ -458,24 +458,19 @@ public class GUIMain extends javax.swing.JFrame {
 	}
 
 	public GUIMain() {
-		super();
+		super();	
+		startingWindow = new StartingWindow(this);
+		
 		initData();
 		initGUI();
 		
 		splashScreen.hideSplashScreen();
-		startingWindow = new StartingWindow(this);
 		startingWindow.showStartingWindow();
 	}
 	
-	public void initLog () {
-		String sessionName = "anonymous";
-		sessionName = startingWindow.sessionName.replaceAll("['.?!()<>#\\\\/|\\[\\]{}*\":;`~&^%$@+=,]", "");
-		String tempName = sessionName.replaceAll(" ", "_");
-		if(tempName != null)
-			sessionName = tempName;
-		
-		Logger.setFilePrefix("Anonymouth_"+sessionName);
-		Logger.logFile = true;	
+	public void initLog () {		
+		Logger.setFilePrefix("Anonymouth_"+ThePresident.sessionName);
+		Logger.logFile = true;
 		Logger.initLogFile();
 		Logger.logln(NAME+"Logger initialized, GUIMain init complete");
 	}
@@ -660,16 +655,13 @@ public class GUIMain extends javax.swing.JFrame {
 			try {
 				preProcessWindow.ps = new ProblemSet(problemSetPath);
 				preProcessWindow.driver.updateAllComponents();
+				ThePresident.canDoQuickStart = true;
 			} catch (Exception exc) {
 				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDERR);
 				PropertiesUtil.setProbSet("");
 			}
 		} else {
 			Logger.logln(NAME+"No default problem set saved from last run, will continue without.", LogOut.STDOUT);
-		}
-		
-		if (preProcessWindow.prepMainDocList.getModel().getSize() != 0) {
-			preProcessWindow.addTestDocJButton.setEnabled(false);
 		}
 
 		ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());

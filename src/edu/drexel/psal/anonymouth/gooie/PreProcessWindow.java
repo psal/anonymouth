@@ -1,25 +1,38 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
+import javax.swing.JTextPane;
 import javax.swing.JTree;
-import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeCellEditor;
 
+import com.jgaap.generics.Document;
+
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
-
-import net.miginfocom.swing.MigLayout;
 
 /**
  * The new home for the preProces panel. It is now acting as a set-up wizard as opposed to a main component in GUIMain based on user
@@ -27,177 +40,491 @@ import net.miginfocom.swing.MigLayout;
  * @author Marc Barrowclift
  *
  */
-public class PreProcessWindow extends JFrame {
+public class PreProcessWindow extends JDialog {
 
 	//Constants
 	private final static String NAME = "( PreProcessWindow ) - ";
 	protected final String DEFAULT_TRAIN_TREE_NAME = "Authors";
+	private final String EMPTY_BAR = "empty.png";
+	private final String THIRD_BAR = "third.png";
+	private final String TWO_THIRD_BAR = "twoThird.png";
+	private final String FULL = "full.png";
+	private final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 22);
 	
 	//Variables
-	private GUIMain main;
 	public PreProcessWindowDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
 	protected ProblemSet ps;
+	private int width = 500, height = 410;
+	protected Container currentContainer;
+	protected boolean saved = false;
 	
-	//======Documents=====
-	//problem set
-	private JPanel preProcessPanel;
-	private JPanel prepDocumentsPanel;
-	protected JLabel prepDocLabel;
-	private JLabel problemSetLabel;
-	protected JButton saveProblemSetJButton;
-	protected JButton loadProblemSetJButton;
-		//doc to anonymize
-		private JLabel mainLabel;
-		protected JList<String> prepMainDocList;
-		private JScrollPane prepMainDocScrollPane;
-		protected JButton addTestDocJButton;
-		protected JButton removeTestDocJButton;
-		//other sample documents written by the author
-		private JLabel sampleLabel;
-		protected JList<String> prepSampleDocsList;
-		private JScrollPane prepSampleDocsScrollPane;
-		protected JButton addUserSampleDocJButton;
-		protected JButton removeUserSampleDocJButton;
-		//test documents by other authors
-		private JLabel trainLabel;
-		protected JTree trainCorpusJTree;
-		private JScrollPane trainCorpusJTreeScrollPane;
-		protected JButton addTrainDocsJButton;
-		protected JButton removeTrainDocsJButton;
+	//Doc to anonymize
+	private JPanel testAddRemovePanel;
+	protected JPanel testBarPanel;
+	protected JLabel emptyBarLabel;
+	protected JButton testAddButton;
+	protected JButton testRemoveButton;
+	private JPanel testMainPanel;
+	private JPanel testTextPanel;
+	private JPanel testTopPanel;
+	private ImageIcon empty;
+	private JLabel testLabel;
+	private JPanel docPanel;
+	protected JTextPane testDocPane;
+	private JScrollPane testDocScrollPane;
+	private JPanel testMiddlePanel;
+	private JPanel testPrevNextPanel;
+	private JPanel testNextPanel;
+	protected JButton testPreviousButton;
+	protected JButton testNextButton;
+	//Other sample documents written by the author
+	protected JPanel sampleMainPanel;
+	private JPanel sampleTopPanel;
+	private JPanel sampleAddRemovePanel;
+	protected JPanel sampleBarPanel;
+	protected JLabel thirdBarLabel;
+	private JLabel sampleLabel;
+	protected JButton sampleAddButton;
+	protected JButton sampleRemoveButton;
+	protected JPanel sampleTextPanel;
+	protected DefaultListModel<String> sampleDocsListModel;
+	protected JList<String> sampleDocsList;
+	private ImageIcon third;
+	private JPanel sampleMiddlePanel;
+	private JScrollPane sampleDocsScrollPane;
+	private JPanel samplePanel;
+	private JPanel samplePrevNextPanel;
+	private JPanel sampleNextPanel;
+	protected JButton samplePreviousButton;
+	protected JButton sampleNextButton;
+	//Test documents by other authors
+	protected JPanel trainMainPanel;
+	protected JPanel trainTopPanel;
+	protected JPanel trainAddRemovePanel;
+	protected JPanel trainBarPanel;
+	protected JTree trainDocsTree;
+	private JScrollPane trainDocsScrollPane;
+	protected JLabel twoThirdBarLabel;
+	protected JButton trainAddButton;
+	protected JButton trainRemoveButton;
+	protected JPanel trainTextPanel;
+	protected JLabel trainLabel;
+	private ImageIcon twoThird;
+	private JPanel trainMiddlePanel;
+	private JPanel trainPanel;
+	private JPanel trainPrevNextPanel;
+	private JPanel trainNextPanel;
+	protected JButton trainPreviousButton;
+	protected JButton trainNextButton;
+	protected DefaultMutableTreeNode trainTreeTop;
+	protected TreeCellEditor trainCellEditor;
+	protected DefaultTreeModel trainTreeModel;
+	//Done Panel
+	protected JPanel doneMainPanel;
+	protected JPanel doneTopPanel;
+	protected JPanel doneBarPanel;
+	protected JLabel fullBarLabel;
+	protected ImageIcon full;
+	protected JPanel doneTextPanel;
+	protected JPanel doneSaveLabelPanel;
+	protected JPanel doneSaveButtonPanel;
+	protected JLabel doneLabel;
+	protected JLabel doneSaveLabel;
+	protected JPanel doneMiddlePanel;
+	protected JPanel doneSavePanel;
+	protected JPanel donePrevDonePanel;
+	protected JPanel doneNextPanel;
+	protected JButton donePreviousButton;
+	protected JButton doneDoneButton;
+	protected JPanel doneDonePanel;
+	protected JButton doneSaveButton;
+	protected JButton doneButton;
+	protected JButton doneAdvancedButton;
 	
 	/**
 	 * Constructor
 	 * @param main - Instance of GUIMain
 	 */
 	public PreProcessWindow(GUIMain main) {
+		super(main.startingWindow, "Anonymouth Set-Up Wizard", Dialog.ModalityType.DOCUMENT_MODAL);
 		Logger.logln(NAME+"Preparing the Pre-process window for viewing");
-		this.main = main;
 		
 		ps = new ProblemSet();
 		ps.setTrainCorpusName(DEFAULT_TRAIN_TREE_NAME);
 		
-		advancedWindow = new PreProcessAdvancedWindow(this, main);
-		driver = new PreProcessWindowDriver(this, advancedWindow, main);
-		
-		initComponents();
+		initPanels();
 		initWindow();
-		this.setVisible(false);
+		
+		advancedWindow = new PreProcessAdvancedWindow(this, main);
+		
+		driver = new PreProcessWindowDriver(this, advancedWindow, main);
+		driver.initListeners();
+		driver.curBar = emptyBarLabel;
 	}
 
 	/**
 	 * Displays the prepared window for viewing
 	 */
 	public void showWindow() {
+		switchingToTest();
 		this.setVisible(true);
+	}
+	
+	public void switchingToTest() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (mainDocReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(testNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(testAddButton);
+		}
+		
+		testPreviousButton.setEnabled(false);
+		testRemoveButton.setEnabled(areEnabled);
+		testAddButton.setEnabled(!areEnabled);
+		testNextButton.setEnabled(areEnabled);
+		
+		this.add(testMainPanel);
+		
+		if (areEnabled) {
+			testNextButton.requestFocusInWindow();
+		} else {
+			testAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = testMainPanel;
+	}
+	
+	protected void switchingToSample() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (sampleDocsReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(sampleNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(sampleAddButton);
+		}
+		
+		samplePreviousButton.setEnabled(true);
+		sampleAddButton.setEnabled(true);
+		sampleRemoveButton.setEnabled(!sampleDocsEmpty());
+		sampleNextButton.setEnabled(areEnabled);
+		
+		this.add(sampleMainPanel);
+		
+		if (areEnabled) {
+			sampleNextButton.requestFocusInWindow();
+		} else {
+			sampleAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = sampleMainPanel;
+	}
+	
+	protected void switchingToOther() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (trainDocsReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(trainNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(trainAddButton);
+		}
+		
+		trainPreviousButton.setEnabled(true);
+		trainAddButton.setEnabled(true);
+		trainRemoveButton.setEnabled(!trainDocsEmpty());
+		trainNextButton.setEnabled(areEnabled);
+		
+		this.add(trainMainPanel);
+		
+		if (areEnabled) {
+			trainNextButton.requestFocusInWindow();
+		} else {
+			trainAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = trainMainPanel;
+	}
+	
+	protected void switchingToDone() {
+		this.remove(currentContainer);
+		
+		if (saved) {
+			this.getRootPane().setDefaultButton(doneDoneButton);
+		} else {
+			this.getRootPane().setDefaultButton(doneSaveButton);
+		}
+		
+		this.add(doneMainPanel);
+		
+		if (saved) {
+			doneDoneButton.requestFocusInWindow();
+		} else {
+			doneSaveButton.requestFocusInWindow();
+		}
+		
+		currentContainer = doneMainPanel;
 	}
 	
 	/**
 	 * Initializes and prepares the Pre-process window for viewing
 	 */
 	private void initWindow() {
-		//this.setResizable(false);
-		this.setSize(500, 500);
-		this.setTitle("Anonymouth Set-Up Wizard");
-		this.setLocation((main.screensize.width/2)-(500/2), (main.screensize.height/2)-(500/2));
-		this.driver.updateDocPrepColor();
+		this.setResizable(false);
+		this.setSize(width, height);
+		this.setLocationRelativeTo(null);
+		this.setVisible(false);
 	}
 	
-	/**
-	 * Adds all the components necessary to the Pre-process window wizard
-	 */
-	private void initComponents() {
-		preProcessPanel = new JPanel();
-		preProcessPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		MigLayout settingsLayout = new MigLayout(
-				"fill, wrap 1, ins 0",
-				"fill, grow",
-				"fill, grow");
-		preProcessPanel.setLayout(settingsLayout);
-		prepDocumentsPanel = new JPanel();
-		MigLayout documentsLayout = new MigLayout(
-				"wrap, ins 0, gap 0 5",
-				"grow, fill, center",
-				"[][grow, fill][]");
-		prepDocumentsPanel.setLayout(documentsLayout);
-		{
-			//Documents Label
-			prepDocLabel = new JLabel("Documents:");
-			prepDocLabel.setFont(GUIMain.titleFont);
-			prepDocLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			prepDocLabel.setBorder(GUIMain.rlborder);
-			prepDocLabel.setOpaque(true);
-			prepDocLabel.setBackground(main.notReady);
-			prepDocLabel.setToolTipText("Click here to access advanced confirguration");
-
-			//Problem Set
-			problemSetLabel = new JLabel("Problem Set:");
-			problemSetLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			saveProblemSetJButton = new JButton("Save");
-			loadProblemSetJButton = new JButton("Load");
-
-			//Document to Anonymize
-			mainLabel = new JLabel("<html><center>Your Document<br>To Anonymize:</center></html>");
-			mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			DefaultListModel<String> mainDocListModel = new DefaultListModel<String>();
-			prepMainDocList = new JList<String>(mainDocListModel);
-			prepMainDocList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			prepMainDocScrollPane = new JScrollPane(prepMainDocList);
-
-			addTestDocJButton = new JButton("+");
-			removeTestDocJButton = new JButton("-");
-			
-			//Other sample documents written by the author
-			sampleLabel = new JLabel("<html><center>Your Other<br>Sample Documents:</center></html>");
-			sampleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			addUserSampleDocJButton = new JButton("+");
-			removeUserSampleDocJButton = new JButton("-");
-
-			DefaultListModel<String> sampleDocsListModel = new DefaultListModel<String>();
-			prepSampleDocsList = new JList<String>(sampleDocsListModel);
-			prepSampleDocsList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			prepSampleDocsScrollPane = new JScrollPane(prepSampleDocsList);
-			
-			//Test documents by other authors
-			trainLabel = new JLabel("<html><center>Documents You Didn't Write<br>(At Least 3 Authors):</center></html>");
-			trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-			DefaultMutableTreeNode top = new DefaultMutableTreeNode(ps.getTrainCorpusName(), true);
-			trainCorpusJTree = new JTree(top, true);
-			trainCorpusJTreeScrollPane = new JScrollPane(trainCorpusJTree);
-
-			addTrainDocsJButton = new JButton("+");
-			removeTrainDocsJButton = new JButton("-");
-
-			//Adding everything to the panel
-			prepDocumentsPanel.add(prepDocLabel, "h " + GUIMain.titleHeight + "!, wrap");
-			prepDocumentsPanel.add(problemSetLabel, "alignx 50%, wrap");
-			prepDocumentsPanel.add(saveProblemSetJButton, "span 4, split 2, w 20::");
-			prepDocumentsPanel.add(loadProblemSetJButton, "w 20::");
-			JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
-			prepDocumentsPanel.add(separator, "span 4, wrap, h 13!");
-			prepDocumentsPanel.add(mainLabel, "split, w 50%");
-			prepDocumentsPanel.add(sampleLabel, "wrap, w 50%");
-			prepDocumentsPanel.add(prepMainDocScrollPane, "split, h 40:100:180, w 30:60:150, w 50%");
-			prepDocumentsPanel.add(prepSampleDocsScrollPane, "h 40:100:180, w 30:60:150, wrap, w 50%, wrap");
-
-			prepDocumentsPanel.add(addTestDocJButton, "split 4, w 10::, gap 0");
-			prepDocumentsPanel.add(removeTestDocJButton, "w 10::, gap 0");
-			prepDocumentsPanel.add(addUserSampleDocJButton, "w 10::, gap 0");
-			prepDocumentsPanel.add(removeUserSampleDocJButton, "wrap, w 10::, gap 0");
-
-			prepDocumentsPanel.add(trainLabel, "span");
-			prepDocumentsPanel.add(trainCorpusJTreeScrollPane, "span, h 10::345");
-			prepDocumentsPanel.add(addTrainDocsJButton, "split 2, w 10::");
-			prepDocumentsPanel.add(removeTrainDocsJButton, "w 10::");
-		}
-
-		preProcessPanel.add(prepDocumentsPanel, "growx");
+	private void initPanels() {
+		initTestDocPanel();
+		initSampleDocPanel();
+		initOtherDocPanel();
+		initDonePanel();
 		
-		this.add(preProcessPanel);
+		currentContainer = testMainPanel;
+	}
+	
+	private void initTestDocPanel() {
+		testMainPanel = new JPanel(new BorderLayout());
+		testMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
+		testTopPanel = new JPanel();
+		testTopPanel.setLayout(new BoxLayout(testTopPanel, BoxLayout.Y_AXIS));
+		
+		testBarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		empty = ImageLoader.getImageIcon(EMPTY_BAR);
+		emptyBarLabel = new JLabel(empty);
+		emptyBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emptyBarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		testBarPanel.add(emptyBarLabel);
+		testTopPanel.add(testBarPanel);
+		
+		testTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		testLabel = new JLabel("<html><center>Enter the document you wish to anonymize</center></html>");
+		testLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		testLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		testLabel.setFont(HELVETICA);
+		testTopPanel.add(Box.createRigidArea(new Dimension(0,20)));
+		testTextPanel.add(testLabel);
+		testTopPanel.add(testTextPanel);
+		
+		docPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		testDocPane = new JTextPane();
+		testDocPane.setEditable(false);
+		testDocScrollPane = new JScrollPane(testDocPane);
+		testDocScrollPane.setPreferredSize(new Dimension((int)(width*.9), (int)(height*.558)));
+		docPanel.add(testDocScrollPane);
+		
+		testAddRemovePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		testRemoveButton = new JButton("-");
+		testAddRemovePanel.add(testRemoveButton);
+		testAddButton = new JButton("+");
+		testAddRemovePanel.add(testAddButton);
+		
+		testMiddlePanel = new JPanel(new BorderLayout());
+		testMiddlePanel.add(docPanel, BorderLayout.NORTH);
+		testMiddlePanel.add(testAddRemovePanel, BorderLayout.SOUTH);
+		testTopPanel.add(testMiddlePanel);
+
+		testNextButton = new JButton("Next");
+		testPreviousButton = new JButton("Previous");
+		testPreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
+		testPrevNextPanel = new JPanel();
+		testPrevNextPanel.setLayout(new BoxLayout(testPrevNextPanel, BoxLayout.X_AXIS));
+		testPrevNextPanel.add(testPreviousButton);
+		testNextButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		testNextPanel = new JPanel();
+		testNextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		testNextPanel.add(testNextButton);
+		testPrevNextPanel.add(testNextPanel);
+		
+		testMainPanel.add(testTopPanel, BorderLayout.NORTH);
+		testMainPanel.add(testPrevNextPanel, BorderLayout.SOUTH);
+		this.add(testMainPanel);
+	}
+	
+	private void initSampleDocPanel() {
+		sampleMainPanel = new JPanel(new BorderLayout());
+		sampleMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
+		sampleTopPanel = new JPanel();
+		sampleTopPanel.setLayout(new BoxLayout(sampleTopPanel, BoxLayout.Y_AXIS));
+		
+		sampleBarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		third = ImageLoader.getImageIcon(THIRD_BAR);
+		thirdBarLabel = new JLabel(third);
+		thirdBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		thirdBarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		sampleBarPanel.add(thirdBarLabel);
+		sampleTopPanel.add(sampleBarPanel);
+		
+		sampleTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		sampleLabel = new JLabel("<html><center>Enter at least 2 other documents<br>written by you</center></html>");
+		sampleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		sampleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		sampleLabel.setFont(HELVETICA);
+		sampleTopPanel.add(Box.createRigidArea(new Dimension(0,20)));
+		sampleTextPanel.add(sampleLabel);
+		sampleTopPanel.add(sampleTextPanel);
+		
+		samplePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		sampleDocsListModel = new DefaultListModel<String>();
+		sampleDocsList = new JList<String>(sampleDocsListModel);
+		sampleDocsScrollPane = new JScrollPane(sampleDocsList);
+		sampleDocsScrollPane.setPreferredSize(new Dimension((int)(width*.9), (int)(height*.5)));
+		samplePanel.add(sampleDocsScrollPane);
+		
+		sampleAddRemovePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		sampleRemoveButton = new JButton("-");
+		sampleAddRemovePanel.add(sampleRemoveButton);
+		sampleAddButton = new JButton("+");
+		sampleAddRemovePanel.add(sampleAddButton);
+		
+		sampleMiddlePanel = new JPanel(new BorderLayout());
+		sampleMiddlePanel.add(samplePanel, BorderLayout.NORTH);
+		sampleMiddlePanel.add(sampleAddRemovePanel, BorderLayout.SOUTH);
+		sampleTopPanel.add(sampleMiddlePanel);
+		
+		sampleNextButton = new JButton("Next");
+		samplePreviousButton = new JButton("Previous");
+		samplePreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
+		samplePrevNextPanel = new JPanel();
+		samplePrevNextPanel.setLayout(new BoxLayout(samplePrevNextPanel, BoxLayout.X_AXIS));
+		samplePrevNextPanel.add(samplePreviousButton);
+		sampleNextButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		sampleNextPanel = new JPanel();
+		sampleNextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		sampleNextPanel.add(sampleNextButton);
+		samplePrevNextPanel.add(sampleNextPanel);
+		
+		sampleMainPanel.add(sampleTopPanel, BorderLayout.NORTH);
+		sampleMainPanel.add(samplePrevNextPanel, BorderLayout.SOUTH);
+	}
+	
+	private void initOtherDocPanel() {
+		trainMainPanel = new JPanel(new BorderLayout());
+		trainMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
+		trainTopPanel = new JPanel();
+		trainTopPanel.setLayout(new BoxLayout(trainTopPanel, BoxLayout.Y_AXIS));
+		
+		trainBarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		twoThird = ImageLoader.getImageIcon(TWO_THIRD_BAR);
+		twoThirdBarLabel = new JLabel(twoThird);
+		twoThirdBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		twoThirdBarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		trainBarPanel.add(twoThirdBarLabel);
+		trainTopPanel.add(trainBarPanel);
+		
+		trainTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		trainLabel = new JLabel("<html><center>Enter at least 3 different authors with<br>" +
+				"at least 2 different documents each</center></html>");
+		trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		trainLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		trainLabel.setFont(HELVETICA);
+		trainTopPanel.add(Box.createRigidArea(new Dimension(0,20)));
+		trainTextPanel.add(trainLabel);
+		trainTopPanel.add(trainTextPanel);
+		
+		trainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		trainTreeTop = new DefaultMutableTreeNode(ps.getTrainCorpusName(), true);
+		trainTreeModel = new DefaultTreeModel(trainTreeTop, true);
+		trainDocsTree = new JTree(trainTreeModel);
+		trainDocsTree.setEditable(true);
+		trainCellEditor = trainDocsTree.getCellEditor();
+		trainDocsScrollPane = new JScrollPane(trainDocsTree);
+		trainDocsScrollPane.setPreferredSize(new Dimension((int)(width*.9), (int)(height*.5)));
+		trainPanel.add(trainDocsScrollPane);
+		
+		trainAddRemovePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		trainRemoveButton = new JButton("-");
+		trainAddRemovePanel.add(trainRemoveButton);
+		trainAddButton = new JButton("+");
+		trainAddRemovePanel.add(trainAddButton);
+		
+		trainMiddlePanel = new JPanel(new BorderLayout());
+		trainMiddlePanel.add(trainPanel, BorderLayout.NORTH);
+		trainMiddlePanel.add(trainAddRemovePanel, BorderLayout.SOUTH);
+		trainTopPanel.add(trainMiddlePanel);
+		
+		trainNextButton = new JButton("Next");
+		trainPreviousButton = new JButton("Previous");
+		trainPreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
+		trainPrevNextPanel = new JPanel();
+		trainPrevNextPanel.setLayout(new BoxLayout(trainPrevNextPanel, BoxLayout.X_AXIS));
+		trainPrevNextPanel.add(trainPreviousButton);
+		trainNextButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		trainNextPanel = new JPanel();
+		trainNextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		trainNextPanel.add(trainNextButton);
+		trainPrevNextPanel.add(trainNextPanel);
+		
+		trainMainPanel.add(trainTopPanel, BorderLayout.NORTH);
+		trainMainPanel.add(trainPrevNextPanel, BorderLayout.SOUTH);
+	}
+	
+	private void initDonePanel() {
+		doneMainPanel = new JPanel(new BorderLayout());
+		doneMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
+		doneTopPanel = new JPanel();
+		doneTopPanel.setLayout(new BoxLayout(doneTopPanel, BoxLayout.Y_AXIS));
+		
+		doneBarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		full = ImageLoader.getImageIcon(FULL);
+		fullBarLabel = new JLabel(full);
+		fullBarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		fullBarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		doneBarPanel.add(fullBarLabel);
+		doneTopPanel.add(doneBarPanel);
+		
+		doneTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		doneLabel = new JLabel("<html><center>Document set complete!</center></html>");
+		doneLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		doneLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		doneLabel.setFont(HELVETICA);
+		doneTopPanel.add(Box.createRigidArea(new Dimension(0,20)));
+		doneTextPanel.add(doneLabel);
+		doneTopPanel.add(doneTextPanel);
+		doneTopPanel.add(Box.createRigidArea(new Dimension(0,80)));
+		
+		doneSaveLabelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		doneSaveLabel = new JLabel("<html><center>Save your document set for quick<br>loading and starting in the future</center></html>");
+		doneSaveLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		doneSaveLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		doneSaveLabel.setFont(HELVETICA);
+		doneSaveLabelPanel.add(doneSaveLabel);
+		
+		doneSaveButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5));
+		doneSaveButton = new JButton("Save");
+		doneSaveButtonPanel.add(doneSaveButton);
+		
+		doneMiddlePanel = new JPanel(new BorderLayout());
+		doneMiddlePanel.add(doneSaveLabelPanel, BorderLayout.NORTH);
+		doneMiddlePanel.add(doneSaveButtonPanel, BorderLayout.SOUTH);
+		doneTopPanel.add(doneMiddlePanel);
+		
+		doneDoneButton = new JButton("Done");
+		doneAdvancedButton = new JButton("Advanced");
+		donePreviousButton = new JButton("Previous");
+		
+		donePreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
+		donePrevDonePanel = new JPanel();
+		donePrevDonePanel.setLayout(new BoxLayout(donePrevDonePanel, BoxLayout.X_AXIS));
+		donePrevDonePanel.add(donePreviousButton);
+		
+		doneDonePanel = new JPanel();
+		doneDonePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		doneDonePanel.add(doneAdvancedButton);
+		doneDonePanel.add(doneDoneButton);
+		donePrevDonePanel.add(doneDonePanel);
+		
+		doneMainPanel.add(doneTopPanel, BorderLayout.NORTH);
+		doneMainPanel.add(donePrevDonePanel, BorderLayout.SOUTH);
 	}
 	
 	protected boolean documentsAreReady() {
@@ -207,7 +534,7 @@ public class PreProcessWindow extends JFrame {
 				ready = false;
 			if (!sampleDocsReady())
 				ready = false;
-			if (!otherDocsReady())
+			if (!trainDocsReady())
 				ready = false;
 		} catch (Exception e) {
 			return false;
@@ -225,7 +552,42 @@ public class PreProcessWindow extends JFrame {
 
 	protected boolean sampleDocsReady() {
 		try {
-			if (!ps.getTrainDocs(ProblemSet.getDummyAuthor()).isEmpty())
+			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2)
+				return true;
+			else
+				return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected void assertUniqueTitles() {
+		List<Document> docs = ps.getAllTrainDocs();
+		docs.addAll(ps.getAllTestDocs());
+		int size = docs.size();
+		
+		for (int d = 0; d < size; d++) {
+			String newTitle = docs.get(d).getTitle();
+			String author = docs.get(d).getAuthor();
+			int addNum = 1;
+			
+			while (driver.titles.get(author).contains(newTitle)) {
+				newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+				newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
+				addNum++;
+			}
+
+			if (ps.getAuthorMap().get(author) == null)
+				ps.addTrainDocs(author, new ArrayList<Document>());
+			ps.addTrainDoc(author, new Document(docs.get(d).getFilePath(), author, newTitle));
+			driver.titles.get(author).remove(docs.get(d).getTitle());
+			driver.titles.get(author).add(newTitle);
+		}
+	}
+	
+	protected boolean sampleDocsEmpty() {
+		try {
+			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).isEmpty())
 				return true;
 			else
 				return false;
@@ -234,33 +596,43 @@ public class PreProcessWindow extends JFrame {
 		}
 	}
 
-	protected boolean otherDocsReady() {
+	protected boolean trainDocsReady() {
 		try {
 			boolean result = true;
-			if (ps.getAuthors().size() == 0)
+			int size = ps.getAuthors().size();
+			int numGoodAuthors = size;
+
+			//4 because we want to adjust for the user as one of the authors (which we don't want to count)
+			if (size == 0 || size < 4)
 				result = false;
 			else {
-				for (int i = 0; i < ps.getAuthors().size(); i++) {
-					String author = (String)ps.getAuthors().toArray()[i];
-					Set<String> authors = ps.getAuthors();
-					for (String curAuthor : authors) {
-						if (ps.getTrainDocs(curAuthor).isEmpty()) {
+				Set<String> authors = ps.getAuthors();
+				
+				for (String curAuthor: authors) {
+					if (ps.numTrainDocs(curAuthor) < 2) {
+						numGoodAuthors--;
+						
+						if (numGoodAuthors < 4) {
 							result = false;
 							break;
 						}
-					} if (!author.equals(ProblemSet.getDummyAuthor())) {
-						if (ps.numTrainDocs(author) < 1) {
-							result = false;
-							break;
-						}
-					} else if (ps.getAuthors().size() == 1) {
-						result = false;
-						break;
 					}
 				}
 			}
 
 			return result;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	protected boolean trainDocsEmpty() {
+		try {
+			//We don't want to count the author
+			if (ps.getAuthors().size() <= 1)
+				return true;
+			else
+				return false;
 		} catch (Exception e) {
 			return false;
 		}
