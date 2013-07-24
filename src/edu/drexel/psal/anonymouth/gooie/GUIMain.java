@@ -343,9 +343,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected ResultsWindow resultsWindow;
 	protected RightClickMenu rightClickMenu;
 	protected Clipboard clipboard;
-	protected StartingWindow startingWindow;
-	public static SplashScreen splashScreen;
+	protected StartingWindows startingWindows;
 	protected static Runnable mainThread;
+	private SplashScreen splashScreen;
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
 	protected Font normalFont;
@@ -360,13 +360,13 @@ public class GUIMain extends javax.swing.JFrame {
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
-	public static void startGooie() {
+	public static void startGooie(final SplashScreen splash) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				mainThread = this;
 				Logger.initLogFile();
-
-				inst = new GUIMain();
+				
+				inst = new GUIMain(splash);
 				GUITranslator = new Translator(inst);
 
 				WindowListener exitListener = new WindowListener() {
@@ -457,28 +457,28 @@ public class GUIMain extends javax.swing.JFrame {
 		}
 	}
 
-	public GUIMain() {
+	public GUIMain(SplashScreen splash) {
 		super();	
-		startingWindow = new StartingWindow(this);
+		splashScreen = splash;
+		if (!splashScreen.isVisible()) {
+			splashScreen.showSplashScreen();
+		}
+		startingWindows = new StartingWindows(this);
 		
 		initData();
 		initGUI();
-		
+
 		splashScreen.hideSplashScreen();
-		startingWindow.showStartingWindow();
+		startingWindows.showStartingWindow();
 	}
 	
-	public void initLog () {		
-		Logger.setFilePrefix("Anonymouth_"+ThePresident.sessionName);
-		Logger.logFile = true;
-		Logger.initLogFile();
-		Logger.logln(NAME+"Logger initialized, GUIMain init complete");
+	public GUIMain() {
+		this(new SplashScreen("Beginning Anonymouth Class Test"));
 	}
 	
 	public void showMainGUI() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				initLog();
 				setExtendedState(MAXIMIZED_BOTH);
 				GUIMain.inst.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
 				GUIMain.inst.setLocationRelativeTo(null);
@@ -599,6 +599,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private void initGUI() {
 		try {
+			splashScreen.updateText("Setting up class instances");
 			//Initializes the menu bar
 			initMenuBar();
 			

@@ -109,9 +109,9 @@ public class PreProcessWindowDriver {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindow.setReadyToStart(true);
+					main.startingWindows.setReadyToStart(true);
 				} else {
-					main.startingWindow.setReadyToStart(false);
+					main.startingWindows.setReadyToStart(false);
 				}
 			}
 			
@@ -748,7 +748,7 @@ public class PreProcessWindowDriver {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindow.setReadyToStart(true);
+					main.startingWindows.setReadyToStart(true);
 				}
 				
 				preProcessWindow.setVisible(false);

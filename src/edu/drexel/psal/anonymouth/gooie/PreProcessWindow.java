@@ -148,7 +148,7 @@ public class PreProcessWindow extends JDialog {
 	 * @param main - Instance of GUIMain
 	 */
 	public PreProcessWindow(GUIMain main) {
-		super(main.startingWindow, "Anonymouth Set-Up Wizard", Dialog.ModalityType.DOCUMENT_MODAL);
+		super(main.startingWindows, "Anonymouth Set-Up Wizard", Dialog.ModalityType.DOCUMENT_MODAL);
 		Logger.logln(NAME+"Preparing the Pre-process window for viewing");
 		
 		ps = new ProblemSet();

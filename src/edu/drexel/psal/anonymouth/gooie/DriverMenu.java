@@ -55,7 +55,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Load problem set menu item clicked");
-        		main.startingWindow.loadDocSetListener.actionPerformed(e);
+        		main.startingWindows.loadDocSetListener.actionPerformed(e);
         	}
         };
         main.fileLoadProblemSetMenuItem.addActionListener(loadProblemSetListener);

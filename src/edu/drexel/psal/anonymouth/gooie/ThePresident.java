@@ -37,7 +37,7 @@ public class ThePresident {
 	
 	public static Application app;
 	public static Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
-	public static String sessionName;
+	public static String sessionName = "";
 	public static boolean classifier_Saved = false;
 	public static int max_Features_To_Consider = PropertiesUtil.defaultFeatures;
 	public static int num_Tagging_Threads = PropertiesUtil.defaultThreads;
@@ -50,8 +50,8 @@ public class ThePresident {
 	}
 	
 	public ThePresident() {
-		GUIMain.splashScreen = new SplashScreen("Beginning to Start Anonymouth");
-		GUIMain.splashScreen.showSplashScreen();
+		SplashScreen splash = new SplashScreen("Beginning Anonymouth");
+		splash.showSplashScreen();
 		
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
@@ -61,7 +61,6 @@ public class ThePresident {
 			System.setProperty("WEKA_HOME", "/dev/null");
 			PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
-			GUIMain.splashScreen.updateText("Preparing Mac Look and Feel");
 			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			
@@ -132,9 +131,9 @@ public class ThePresident {
 			ser_dir.mkdir();
 		}
 		
-		GUIMain.splashScreen.updateText("Preparing Main Window");
+		splash.updateText("Preparing Main Window");
 		Logger.logln("Gooie starting...");
-		GUIMain.startGooie();
+		GUIMain.startGooie(splash);
 	}
 	
 	/**
