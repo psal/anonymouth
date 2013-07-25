@@ -459,7 +459,7 @@ public class FeatureWizardDriver {
 					Logger.logln(NAME+"Updated feature driver '"+fw.fd.getName()+"' in the main feature set.");
 				}
 				
-				fw.main.preProcessWindow.driver.updateFeatureSetView(fw.main);
+				fw.main.ppAdvancedWindow.driver.updateFeatureSetView(fw.main);
 				fw.dispose();
 			}
 		});

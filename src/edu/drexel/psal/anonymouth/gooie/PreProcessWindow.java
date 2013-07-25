@@ -30,6 +30,7 @@ import javax.swing.tree.TreeCellEditor;
 
 import com.jgaap.generics.Document;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
@@ -37,6 +38,10 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
 /**
  * The new home for the preProces panel. It is now acting as a set-up wizard as opposed to a main component in GUIMain based on user
  * feedback. Much remains the same, it's just wrapped up in a JFrame with a few visual cue tweaks to help guide the user along.
+ * 
+ * This is the "Window" class for preProcessing, which just handles creating and adding swing components and "isSomething"/"hasSomething"
+ * methods pertaining to the problem set. As a guideline, any sort of "update" methods should be handled in the "Driver" class though as a
+ * rule all listeners/events should be handled in the "Driver" class. 
  * @author Marc Barrowclift
  *
  */
@@ -122,23 +127,21 @@ public class PreProcessWindow extends JDialog {
 	protected TreeCellEditor trainCellEditor;
 	protected DefaultTreeModel trainTreeModel;
 	//Done Panel
-	protected JPanel doneMainPanel;
-	protected JPanel doneTopPanel;
+	private JPanel doneMainPanel;
+	private JPanel doneTopPanel;
 	protected JPanel doneBarPanel;
 	protected JLabel fullBarLabel;
 	protected ImageIcon full;
-	protected JPanel doneTextPanel;
-	protected JPanel doneSaveLabelPanel;
-	protected JPanel doneSaveButtonPanel;
-	protected JLabel doneLabel;
-	protected JLabel doneSaveLabel;
-	protected JPanel doneMiddlePanel;
-	protected JPanel doneSavePanel;
-	protected JPanel donePrevDonePanel;
-	protected JPanel doneNextPanel;
+	private JPanel doneTextPanel;
+	private JPanel doneSaveLabelPanel;
+	private JPanel doneSaveButtonPanel;
+	private JLabel doneLabel;
+	private JLabel doneSaveLabel;
+	private JPanel doneMiddlePanel;
+	private JPanel donePrevDonePanel;
 	protected JButton donePreviousButton;
 	protected JButton doneDoneButton;
-	protected JPanel doneDonePanel;
+	private JPanel doneDonePanel;
 	protected JButton doneSaveButton;
 	protected JButton doneButton;
 	protected JButton doneAdvancedButton;
@@ -159,118 +162,16 @@ public class PreProcessWindow extends JDialog {
 		
 		advancedWindow = new PreProcessAdvancedWindow(this, main);
 		
-		driver = new PreProcessWindowDriver(this, advancedWindow, main);
-		driver.initListeners();
-		driver.curBar = emptyBarLabel;
+		driver = new PreProcessWindowDriver(this, main);
 	}
 
 	/**
 	 * Displays the prepared window for viewing
 	 */
 	public void showWindow() {
+		driver.updateBar(this.testBarPanel);
 		switchingToTest();
 		this.setVisible(true);
-	}
-	
-	public void switchingToTest() {
-		this.remove(currentContainer);
-		
-		boolean areEnabled = false;
-		if (mainDocReady()) {
-			areEnabled = true;
-			this.getRootPane().setDefaultButton(testNextButton);
-		} else {
-			this.getRootPane().setDefaultButton(testAddButton);
-		}
-		
-		testPreviousButton.setEnabled(false);
-		testRemoveButton.setEnabled(areEnabled);
-		testAddButton.setEnabled(!areEnabled);
-		testNextButton.setEnabled(areEnabled);
-		
-		this.add(testMainPanel);
-		
-		if (areEnabled) {
-			testNextButton.requestFocusInWindow();
-		} else {
-			testAddButton.requestFocusInWindow();
-		}
-		
-		currentContainer = testMainPanel;
-	}
-	
-	protected void switchingToSample() {
-		this.remove(currentContainer);
-		
-		boolean areEnabled = false;
-		if (sampleDocsReady()) {
-			areEnabled = true;
-			this.getRootPane().setDefaultButton(sampleNextButton);
-		} else {
-			this.getRootPane().setDefaultButton(sampleAddButton);
-		}
-		
-		samplePreviousButton.setEnabled(true);
-		sampleAddButton.setEnabled(true);
-		sampleRemoveButton.setEnabled(!sampleDocsEmpty());
-		sampleNextButton.setEnabled(areEnabled);
-		
-		this.add(sampleMainPanel);
-		
-		if (areEnabled) {
-			sampleNextButton.requestFocusInWindow();
-		} else {
-			sampleAddButton.requestFocusInWindow();
-		}
-		
-		currentContainer = sampleMainPanel;
-	}
-	
-	protected void switchingToOther() {
-		this.remove(currentContainer);
-		
-		boolean areEnabled = false;
-		if (trainDocsReady()) {
-			areEnabled = true;
-			this.getRootPane().setDefaultButton(trainNextButton);
-		} else {
-			this.getRootPane().setDefaultButton(trainAddButton);
-		}
-		
-		trainPreviousButton.setEnabled(true);
-		trainAddButton.setEnabled(true);
-		trainRemoveButton.setEnabled(!trainDocsEmpty());
-		trainNextButton.setEnabled(areEnabled);
-		
-		this.add(trainMainPanel);
-		
-		if (areEnabled) {
-			trainNextButton.requestFocusInWindow();
-		} else {
-			trainAddButton.requestFocusInWindow();
-		}
-		
-		currentContainer = trainMainPanel;
-	}
-	
-	protected void switchingToDone() {
-		this.remove(currentContainer);
-		
-		if (saved) {
-			this.getRootPane().setDefaultButton(doneDoneButton);
-		} else {
-			this.getRootPane().setDefaultButton(doneSaveButton);
-		}
-		
-		this.add(doneMainPanel);
-		
-		if (saved) {
-			doneDoneButton.requestFocusInWindow();
-		} else {
-			doneSaveButton.requestFocusInWindow();
-		}
-		
-		currentContainer = doneMainPanel;
 	}
 	
 	/**
@@ -283,15 +184,21 @@ public class PreProcessWindow extends JDialog {
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Initializes all the panels
+	 */
 	private void initPanels() {
 		initTestDocPanel();
 		initSampleDocPanel();
-		initOtherDocPanel();
+		initTrainDocPanel();
 		initDonePanel();
 		
 		currentContainer = testMainPanel;
 	}
 	
+	/**
+	 * Initializes the Test doc panel, which allows the user to add the document they want to anonymize
+	 */
 	private void initTestDocPanel() {
 		testMainPanel = new JPanel(new BorderLayout());
 		testMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
@@ -350,6 +257,9 @@ public class PreProcessWindow extends JDialog {
 		this.add(testMainPanel);
 	}
 	
+	/**
+	 * Initializes the Sample Docs panel, which allows the user to add other documents they have written to a list
+	 */
 	private void initSampleDocPanel() {
 		sampleMainPanel = new JPanel(new BorderLayout());
 		sampleMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
@@ -407,7 +317,10 @@ public class PreProcessWindow extends JDialog {
 		sampleMainPanel.add(samplePrevNextPanel, BorderLayout.SOUTH);
 	}
 	
-	private void initOtherDocPanel() {
+	/**
+	 * Initializes the Train doc panel, which allows the user to add other user's documents in a tree for Anonymouth to test against
+	 */
+	private void initTrainDocPanel() {
 		trainMainPanel = new JPanel(new BorderLayout());
 		trainMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
 		trainTopPanel = new JPanel();
@@ -468,6 +381,9 @@ public class PreProcessWindow extends JDialog {
 		trainMainPanel.add(trainPrevNextPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Initializes the "done" panel, which tells the user that their document set is complete and whether or not they'd like to save it
+	 */
 	private void initDonePanel() {
 		doneMainPanel = new JPanel(new BorderLayout());
 		doneMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
@@ -527,6 +443,50 @@ public class PreProcessWindow extends JDialog {
 		doneMainPanel.add(donePrevDonePanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Goes through all titles in the train docs part of the problem set and changes the Anonymouth-reference titles of those that
+	 * Have the same title
+	 * 
+	 * This is needed since, while we do guide the user to rename files of the same name for a given author, we want to allow them
+	 * To enter documents of the same name for two different authors (sort of like in file systems how I can have two documents of
+	 * the same name in two different directories). This helps make things less confusing/irritating for the user
+	 */
+	protected void assertUniqueTitles() {
+		List<Document> docs = ps.getAllTrainDocs();
+		docs.addAll(ps.getAllTestDocs());
+		int size = docs.size();
+		
+		driver.printTitles();
+		for (int d = 0; d < size; d++) {
+			String oldTitle = docs.get(d).getTitle();
+			String newTitle = oldTitle;
+			String author = docs.get(d).getAuthor();
+			int addNum = 1;
+			
+			//we don't want to do anything below unless it's a duplicate
+			if (driver.titles.get(author).contains(newTitle)) {
+				while (driver.titles.get(author).contains(newTitle)) {
+					newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+					newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
+					addNum++;
+				}
+
+				ps.removeTrainDocAt(author, oldTitle);
+				if (ps.getAuthorMap().get(author) == null)
+					ps.addTrainDocs(author, new ArrayList<Document>());
+				ps.addTrainDoc(author, new Document(docs.get(d).getFilePath(), author, newTitle));
+				driver.titles.get(author).remove(docs.get(d).getTitle());
+				driver.titles.get(author).add(newTitle);
+			}
+		}
+
+		driver.printTitles();
+	}
+	
+	/**
+	 * Determines whether or not all the various parts of the document set are ready to begin
+	 * @return
+	 */
 	protected boolean documentsAreReady() {
 		boolean ready = true;
 		try {
@@ -543,6 +503,10 @@ public class PreProcessWindow extends JDialog {
 		return ready;
 	}
 
+	/**
+	 * Determines whether or not the user has entered a test document or not
+	 * @return
+	 */
 	protected boolean mainDocReady() {
 		if (ps.hasTestDocs())
 			return true;
@@ -550,6 +514,10 @@ public class PreProcessWindow extends JDialog {
 			return false;
 	}
 
+	/**
+	 * Determines whether or not the user has entered enough sample documents to proceed
+	 * @return
+	 */
 	protected boolean sampleDocsReady() {
 		try {
 			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2)
@@ -561,30 +529,10 @@ public class PreProcessWindow extends JDialog {
 		}
 	}
 	
-	protected void assertUniqueTitles() {
-		List<Document> docs = ps.getAllTrainDocs();
-		docs.addAll(ps.getAllTestDocs());
-		int size = docs.size();
-		
-		for (int d = 0; d < size; d++) {
-			String newTitle = docs.get(d).getTitle();
-			String author = docs.get(d).getAuthor();
-			int addNum = 1;
-			
-			while (driver.titles.get(author).contains(newTitle)) {
-				newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-				newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
-				addNum++;
-			}
-
-			if (ps.getAuthorMap().get(author) == null)
-				ps.addTrainDocs(author, new ArrayList<Document>());
-			ps.addTrainDoc(author, new Document(docs.get(d).getFilePath(), author, newTitle));
-			driver.titles.get(author).remove(docs.get(d).getTitle());
-			driver.titles.get(author).add(newTitle);
-		}
-	}
-	
+	/**
+	 * Determines whether or not the sample documents list is empty
+	 * @return
+	 */
 	protected boolean sampleDocsEmpty() {
 		try {
 			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).isEmpty())
@@ -596,12 +544,16 @@ public class PreProcessWindow extends JDialog {
 		}
 	}
 
+	/**
+	 * Determines whether or not the user has entered enough train docs to move on
+	 * @return
+	 */
 	protected boolean trainDocsReady() {
 		try {
 			boolean result = true;
 			int size = ps.getAuthors().size();
 			int numGoodAuthors = size;
-
+			
 			//4 because we want to adjust for the user as one of the authors (which we don't want to count)
 			if (size == 0 || size < 4)
 				result = false;
@@ -609,9 +561,13 @@ public class PreProcessWindow extends JDialog {
 				Set<String> authors = ps.getAuthors();
 				
 				for (String curAuthor: authors) {
+					//We don't want to count the main author
+					if (curAuthor.equals(ANONConstants.DUMMY_NAME))
+						continue;
+					
 					if (ps.numTrainDocs(curAuthor) < 2) {
 						numGoodAuthors--;
-						
+
 						if (numGoodAuthors < 4) {
 							result = false;
 							break;
@@ -626,6 +582,10 @@ public class PreProcessWindow extends JDialog {
 		}
 	}
 	
+	/**
+	 * Determines whether or not the user has entered any train docs
+	 * @return
+	 */
 	protected boolean trainDocsEmpty() {
 		try {
 			//We don't want to count the author
@@ -638,6 +598,10 @@ public class PreProcessWindow extends JDialog {
 		}
 	}
 	
+	/**
+	 * Determines whether or not the user has entered at least three different authors for the train documents
+	 * @return
+	 */
 	protected boolean hasAtLeastThreeOtherAuthors() {
 		Set<String> trainAuthors = ps.getAuthors();
 		
@@ -645,5 +609,118 @@ public class PreProcessWindow extends JDialog {
 			return false;
 		else
 			return true;
+	}
+	
+	/**
+	 * To be called only in PreProcessWindowDriver when we are switching to the "test" panel in the set-up wizard
+	 */
+	protected void switchingToTest() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (mainDocReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(testNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(testAddButton);
+		}
+		
+		testPreviousButton.setEnabled(false);
+		testRemoveButton.setEnabled(areEnabled);
+		testAddButton.setEnabled(!areEnabled);
+		testNextButton.setEnabled(areEnabled);
+		
+		this.add(testMainPanel);
+		
+		if (areEnabled) {
+			testNextButton.requestFocusInWindow();
+		} else {
+			testAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = testMainPanel;
+	}
+	
+	/**
+	 * To be called only in PreProcessWindowDriver when we are switching to the "sample" panel in the set-up wizard
+	 */
+	protected void switchingToSample() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (sampleDocsReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(sampleNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(sampleAddButton);
+		}
+		
+		samplePreviousButton.setEnabled(true);
+		sampleAddButton.setEnabled(true);
+		sampleRemoveButton.setEnabled(!sampleDocsEmpty());
+		sampleNextButton.setEnabled(areEnabled);
+		
+		this.add(sampleMainPanel);
+		
+		if (areEnabled) {
+			sampleNextButton.requestFocusInWindow();
+		} else {
+			sampleAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = sampleMainPanel;
+	}
+	
+	/**
+	 * To be called only in PreProcessWindowDriver when we are switching to the "train" panel in the set-up wizard
+	 */
+	protected void switchingToTrain() {
+		this.remove(currentContainer);
+		
+		boolean areEnabled = false;
+		if (trainDocsReady()) {
+			areEnabled = true;
+			this.getRootPane().setDefaultButton(trainNextButton);
+		} else {
+			this.getRootPane().setDefaultButton(trainAddButton);
+		}
+		
+		trainPreviousButton.setEnabled(true);
+		trainAddButton.setEnabled(true);
+		trainRemoveButton.setEnabled(!trainDocsEmpty());
+		trainNextButton.setEnabled(areEnabled);
+		
+		this.add(trainMainPanel);
+		
+		if (areEnabled) {
+			trainNextButton.requestFocusInWindow();
+		} else {
+			trainAddButton.requestFocusInWindow();
+		}
+		
+		currentContainer = trainMainPanel;
+	}
+	
+	/**
+	 * To be called only in PreProcessWindowDriver when we are switching to the "Done" panel in the set-up wizard
+	 */
+	protected void switchingToDone() {
+		this.remove(currentContainer);
+		
+		if (saved) {
+			this.getRootPane().setDefaultButton(doneDoneButton);
+		} else {
+			this.getRootPane().setDefaultButton(doneSaveButton);
+		}
+		
+		this.add(doneMainPanel);
+		
+		if (saved) {
+			doneDoneButton.requestFocusInWindow();
+		} else {
+			doneSaveButton.requestFocusInWindow();
+		}
+		
+		currentContainer = doneMainPanel;
 	}
 }

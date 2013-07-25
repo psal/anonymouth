@@ -21,7 +21,7 @@ public class ANONConstants {
 	public static final String GRAPHICS = "/edu/drexel/psal/resources/graphics/";
 	
 	public static final boolean IS_MAC = System.getProperty("os.name").toLowerCase().contains("mac");
-	public static final boolean IS_USER_STUDY = true; //whether or not to show the session name dialog
+	public static final boolean IS_USER_STUDY = false; //whether or not to show the session name dialog
 	public static final boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
 	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: put in "options
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";

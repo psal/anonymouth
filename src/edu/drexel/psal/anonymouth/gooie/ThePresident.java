@@ -56,8 +56,8 @@ public class ThePresident {
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
-
-		if(ANONConstants.IS_MAC) {
+		
+		if (ANONConstants.IS_MAC) {
 			System.setProperty("WEKA_HOME", "/dev/null");
 			PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
@@ -129,6 +129,10 @@ public class ThePresident {
 		if (!ser_dir.exists()){
 			Logger.logln(NAME+"Creating directory to save serialized objects to...");
 			ser_dir.mkdir();
+		}
+		
+		if (!ANONConstants.IS_USER_STUDY) {
+			sessionName = "Anonymouth";
 		}
 		
 		splash.updateText("Preparing Main Window");

@@ -16,6 +16,7 @@ import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
+import edu.drexel.psal.anonymouth.helpers.ColumnsAutoSizer;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -36,7 +37,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	
 	//Variables
 	protected static int cellPadding = 5;
-	protected PreProcessAdvancedDriver advancedDriver;
+	protected PreProcessAdvancedDriver driver;
 	protected PreProcessWindow preProcessWindow;
 	protected GUIMain main;
 	public boolean panelsAreMade = false;
@@ -163,11 +164,12 @@ public class PreProcessAdvancedWindow extends JDialog {
 		Logger.logln(NAME+"Initializing the pre-process advanced settings window");
 		this.preProcessWindow = preProcessWindow;
 		this.main = main;
-		initData();
+		
 		initComponents();
+		initData();
 		initWindow();
-		advancedDriver = new PreProcessAdvancedDriver(preProcessWindow, this, main);
-		initClassifiersTree(this);
+		
+		driver = new PreProcessAdvancedDriver(this, main);
 		setVisible(false);
 	}
 	
@@ -176,6 +178,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 		classifiers = new ArrayList<Classifier>();
 		FeatureWizardDriver.populateAll();
 		initPresetCFDs(main);
+		initClassifiersTree();
 	}
 	
 	/**
@@ -242,14 +245,8 @@ public class PreProcessAdvancedWindow extends JDialog {
 				{
 					featuresSetJLabel = new JLabel("Feature Set:");
 					featMainTopPanel.add(featuresSetJLabel);
-
-					String[] presetCFDsNames = new String[main.presetCFDs.size()];
-					for (int i=0; i<main.presetCFDs.size(); i++)
-						presetCFDsNames[i] = main.presetCFDs.get(i).getName();
-			
-					featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
+					
 					featureChoice = new JComboBox<String>();
-					featureChoice.setModel(featuresSetJComboBoxModel);
 					featMainTopPanel.add(featureChoice, "grow");
 					
 					featuresAddSetJButton = new JButton("Add");
@@ -422,11 +419,10 @@ public class PreProcessAdvancedWindow extends JDialog {
 				
 				JTable[] configTableArray = {featuresFeatureExtractorConfigJTable, featuresCanonConfigJTable, featuresCullConfigJTable};
 				
-				for (final JTable table: configTableArray)
-				{
+				for (final JTable table: configTableArray) {
 					table.getModel().addTableModelListener(new TableModelListener() {
 			            public void tableChanged(TableModelEvent e) {
-			                GUIMain.ColumnsAutoSizer.sizeColumnsToFit(table);
+			                ColumnsAutoSizer.sizeColumnsToFit(table);
 			            }
 			        });
 				}
@@ -553,6 +549,13 @@ public class PreProcessAdvancedWindow extends JDialog {
 				path = f.getAbsolutePath();
 				main.presetCFDs.add(new CumulativeFeatureDriver(path));
 			}
+			
+			String[] presetCFDsNames = new String[main.presetCFDs.size()];
+			for (int i=0; i<main.presetCFDs.size(); i++)
+				presetCFDsNames[i] = main.presetCFDs.get(i).getName();
+			
+			featuresSetJComboBoxModel = new DefaultComboBoxModel<String>(presetCFDsNames);
+			featureChoice.setModel(featuresSetJComboBoxModel);
 		} catch (Exception e) {
 			Logger.logln(NAME+"Failed to read feature set files.",LogOut.STDERR);
 			e.printStackTrace();
@@ -561,7 +564,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	
 	protected void setClassifier(String className) {
 		Classifier tmpClassifier;
-		
+
 		try {
 			tmpClassifier = (Classifier)Class.forName(className).newInstance();
 		} catch (Exception e) {
@@ -576,17 +579,27 @@ public class PreProcessAdvancedWindow extends JDialog {
 		
 		//Add an -M option for SMO classifier
 		String dashM = "";
-		if(className.toLowerCase().contains("smo"))
+		if(className.toLowerCase().contains("smo")) {
 			dashM = " -M";
+			String options = driver.getOptionsStr(((OptionHandler)tmpClassifier).getOptions()) + " -M";
+			try {
+				((OptionHandler)tmpClassifier).setOptions(options.split(" "));
+			} catch (Exception e) {
+				Logger.logln(NAME+"Problem occured while tried to add -M flag to SMO classifier", LogOut.STDERR);
+			}
+		}
 
 		selectedClassName = getNameFromClassPath(className);
 		
 		//Show options and description
-		classAvClassArgsJTextField.setText(advancedDriver.getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
-		classDescJTextPane.setText(advancedDriver.getDesc(tmpClassifier));
+		classAvClassArgsJTextField.setText(driver.getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
+		classDescJTextPane.setText(driver.getDesc(tmpClassifier));
+		
+		classifiers = new ArrayList<Classifier>();
 		classifiers.add(tmpClassifier);
-		advancedDriver.updateClassList(main);
-		advancedDriver.updateClassPrepColor(main);
+		
+		driver.updateClassList(main);
+		driver.updateClassPrepColor(main);
 		classJTree.clearSelection();
 	}
 	
@@ -641,13 +654,13 @@ public class PreProcessAdvancedWindow extends JDialog {
 	/**
 	 * Initialize available classifiers tree
 	 */
-	protected void initClassifiersTree(PreProcessAdvancedWindow PPSP) {
+	protected void initClassifiersTree() {
 		//Create root and set to tree
 		DefaultMutableTreeNode wekaNode = new DefaultMutableTreeNode("weka");
 		DefaultMutableTreeNode classifiersNode = new DefaultMutableTreeNode("classifiers");
 		wekaNode.add(classifiersNode);
 		DefaultTreeModel model = new DefaultTreeModel(wekaNode);
-		PPSP.classJTree.setModel(model);
+		classJTree.setModel(model);
 		classifierNames = new String[wekaClassNames.length];
 		fullClassPath = new Hashtable<String, String>();
 		shortClassName = new Hashtable<String, String>();
@@ -689,8 +702,8 @@ public class PreProcessAdvancedWindow extends JDialog {
 
 		// expand tree
 		int row = 0;
-		while (row < PPSP.classJTree.getRowCount())
-			PPSP.classJTree.expandRow(row++);
+		while (row < classJTree.getRowCount())
+			classJTree.expandRow(row++);
 	}
 	
 	/**

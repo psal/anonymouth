@@ -38,11 +38,15 @@ import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.JSANConstants;
-import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
+/**
+ * The corresponding "Driver" class for the "Window" PreProcessWindow. Handles all listeners and most update methods relating to the window
+ * @author Marc Barrowclift
+ *
+ */
 public class PreProcessWindowDriver {
 	
 	//Constants
@@ -56,10 +60,8 @@ public class PreProcessWindowDriver {
 	private String lastDirectory;
 	private String trainDocsDirectory;
 	private PreProcessWindow preProcessWindow;
-	private PreProcessAdvancedWindow advancedWindow;
 	private FileDialog load;
 	private FileDialog save;
-	protected JLabel curBar;
 	private String[] duplicateName = {"Replace", "Keep Both", "Stop"};
 	
 	//Swing Components
@@ -87,9 +89,14 @@ public class PreProcessWindowDriver {
 	protected ActionListener doneDoneListener;
 	protected ActionListener doneAdvancedListener;
 	
-	public PreProcessWindowDriver(PreProcessWindow preProcessWindow, PreProcessAdvancedWindow advancedWindow, GUIMain main) {
+	/**
+	 * Constructor
+	 * @param preProcessWindow - PreProcessWindow instance
+	 * @param advancedWindow - PreProcessAdvancedWindow instance
+	 * @param main - GUIMain instance
+	 */
+	public PreProcessWindowDriver(PreProcessWindow preProcessWindow, GUIMain main) {
 		this.main = main;
-		this.advancedWindow = advancedWindow;
 		this.preProcessWindow = preProcessWindow;
 		load = new FileDialog(preProcessWindow);
 		load.setModalityType(ModalityType.DOCUMENT_MODAL);
@@ -97,8 +104,13 @@ public class PreProcessWindowDriver {
 		save = new FileDialog(preProcessWindow);
 		save.setModalityType(ModalityType.DOCUMENT_MODAL);
 		save.setMode(FileDialog.SAVE);
+		
+		initListeners();
 	}
 	
+	/**
+	 * initializes all the listeners for the various panels in PreProcessWindow
+	 */
 	public void initListeners() {
 		initTestDocPanelListeners();
 		initSampleDocPanelListeners();
@@ -108,10 +120,12 @@ public class PreProcessWindowDriver {
 		preProcessListener = new WindowListener() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				//if the user is closing the window via "X", we should check to see if they have completed the doc set or not
+				//and update accordingly
 				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindows.setReadyToStart(true);
+					main.startingWindows.setReadyToStart(true, false);
 				} else {
-					main.startingWindows.setReadyToStart(false);
+					main.startingWindows.setReadyToStart(false, true);
 				}
 			}
 			
@@ -131,6 +145,9 @@ public class PreProcessWindowDriver {
 		preProcessWindow.addWindowListener(preProcessListener);
 	}
 	
+	/**
+	 * Initializes all the listeners corresponding to the "Test" panel in PreProcessWindow
+	 */
 	private void initTestDocPanelListeners() {	
 		testAddListener = new ActionListener() {
 			@Override
@@ -214,6 +231,9 @@ public class PreProcessWindowDriver {
 		preProcessWindow.testNextButton.addActionListener(testNextListener);
 	}
 	
+	/**
+	 * Initializes all the listeners corresponding to the "Sample" panel in PreProcessWindow
+	 */
 	private void initSampleDocPanelListeners() {
 		sampleAddListener = new ActionListener() {
 			@Override
@@ -246,7 +266,7 @@ public class PreProcessWindowDriver {
 						if (allUserSampleDocPaths.contains(path))
 							continue;
 
-						if (empty(path, file.getName())) {
+						if (isEmpty(path, file.getName())) {
 							continue;
 						}
 						
@@ -341,7 +361,7 @@ public class PreProcessWindowDriver {
 		sampleNextListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				preProcessWindow.switchingToOther();
+				preProcessWindow.switchingToTrain();
 				updateBar(preProcessWindow.trainBarPanel);
 				preProcessWindow.revalidate();
 				preProcessWindow.repaint();	
@@ -349,6 +369,7 @@ public class PreProcessWindowDriver {
 		};
 		preProcessWindow.sampleNextButton.addActionListener(sampleNextListener);
 		
+		//We want to allow the user to delete list items with their delete key if they so desire
 		sampleDeleteListener = new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -365,6 +386,9 @@ public class PreProcessWindowDriver {
 		preProcessWindow.sampleDocsList.addKeyListener(sampleDeleteListener);
 	}
 	
+	/**
+	 * Initializes all the listeners corresponding to the "Train" panel in PreProcessWindow
+	 */
 	private void initTrainDocPanelListeners() {
 		trainAddListener = new ActionListener() {
 			@Override
@@ -448,12 +472,12 @@ public class PreProcessWindowDriver {
 								File newFile = new File(path);
 								
 								if (allTrainDocPaths.contains(path)) {
-									skipList += "\n"+path+" - already contained for author "+author;
+									skipList += "\n"+path+" - Already contained for author "+author;
 									continue;
 								}
 
 								if (allTestDocPaths.contains(path)) {
-									skipList += "\n"+path+" - already contained as a test document";
+									skipList += "\n"+path+" - Already contained as a test document";
 									continue;
 								}
 								
@@ -473,7 +497,8 @@ public class PreProcessWindowDriver {
 									continue;
 								}
 								
-								if (empty(path, newFile.getName())) {
+								if (isEmpty(path, newFile.getName())) {
+									skipList += "\n"+path+" - File is empty";
 									continue;
 								}
 
@@ -499,15 +524,16 @@ public class PreProcessWindowDriver {
 						} else {
 							path = file.getAbsolutePath();
 							if (allTrainDocPaths.contains(path)) {
-								skipList += "\n"+path+" - already contained for author "+author;
+								skipList += "\n"+path+" - Already contained for author "+author;
 								continue;
 							}
 							if (allTestDocPaths.contains(path)) {
-								skipList += "\n"+path+" - already contained as a test document";
+								skipList += "\n"+path+" - Already contained as a test document";
 								continue;
 							}
 							
-							if (empty(path, file.getName())) {
+							if (isEmpty(path, file.getName())) {
+								skipList += "\n"+path+" - File is empty";
 								continue;
 							}
 
@@ -532,10 +558,10 @@ public class PreProcessWindowDriver {
 
 					if (!skipList.equals("")) {
 						JOptionPane.showMessageDialog(null,
-								"Skipped the following documents:"+skipList,
-								"Add Training Documents",
-								JOptionPane.WARNING_MESSAGE);
-						Logger.logln(NAME+"skipped the following training documents:"+skipList);
+								"Didn't load the following documents:"+skipList,
+								"Documents Skipped",
+								JOptionPane.WARNING_MESSAGE, ThePresident.dialogLogo);
+						Logger.logln(NAME+"Skipped the following training documents:"+skipList);
 					}
 
 					updateOpeningDir(path, true);
@@ -577,6 +603,13 @@ public class PreProcessWindowDriver {
 		};
 		preProcessWindow.trainPreviousButton.addActionListener(trainPreviousListener);
 		
+		/**
+		 * We want to allow the user to rename authors if they so desire.
+		 * NOTE: While we allow them to change the name of any node in the tree, ONLY the author nodes will actually be updated in the
+		 * backend to reflect this. This is because there's no real reason to update the backend for file names since the user never sees
+		 * them again, and reflecting a renamed root node may break something (not sure). We want to allow them to rename authors though
+		 * since they will in fact see them again with the classification results (aka ownership certainty results).
+		 */
 		trainCellListener = new CellEditorListener() {
 			@Override
 			public void editingStopped(ChangeEvent e) {
@@ -591,6 +624,7 @@ public class PreProcessWindowDriver {
 					List<String> docs = titles.remove(author);
 					titles.put(renamedNode, docs);
 				}
+				//In case we ever do want to let them rename files, here's the code (should work, not sure)
 				/*
 				else if (test.length == 3) { //renaming a file
 					DefaultMutableTreeNode fileNode = (DefaultMutableTreeNode)test[test.length-1];
@@ -623,6 +657,7 @@ public class PreProcessWindowDriver {
 		};
 		preProcessWindow.trainCellEditor.addCellEditorListener(trainCellListener);
 		
+		//We want to allow the user to delete tree nodes with the delete key if they so desire/expect that functionality
 		trainDeleteListener = new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -650,6 +685,9 @@ public class PreProcessWindowDriver {
 		preProcessWindow.trainNextButton.addActionListener(trainNextListener);
 	}
 	
+	/**
+	 * Initializes all the listeners corresponding to the "Done" panel in PreProcessWindow
+	 */
 	private void initDonePanelListeners() {
 		doneSaveListener = new ActionListener() {
 			@Override
@@ -708,7 +746,7 @@ public class PreProcessWindowDriver {
 						bw.write(preProcessWindow.ps.toXMLString());
 						bw.flush();
 						bw.close();
-						Logger.log("Saved problem set to "+path+":\n"+preProcessWindow.ps.toXMLString());
+						Logger.logln("Saved problem set to "+path);
 						PropertiesUtil.setProbSet(path);
 						
 						preProcessWindow.saved = true;
@@ -736,7 +774,7 @@ public class PreProcessWindowDriver {
 		donePreviousListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				preProcessWindow.switchingToOther();
+				preProcessWindow.switchingToTrain();
 				updateBar(preProcessWindow.trainBarPanel);
 				preProcessWindow.revalidate();
 				preProcessWindow.repaint();	
@@ -747,16 +785,22 @@ public class PreProcessWindowDriver {
 		doneDoneListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindows.setReadyToStart(true);
-				}
-				
 				preProcessWindow.setVisible(false);
+				
+				if (preProcessWindow.documentsAreReady()) {
+					main.startingWindows.setReadyToStart(true, false);
+				} else {
+					main.startingWindows.setReadyToStart(false, true);
+				}
 			}
 		};
 		preProcessWindow.doneDoneButton.addActionListener(doneDoneListener);
 	}
 	
+	/**
+	 * The code to remove a list item from the Samples JList. It's separate here since both the keyListener and "-" button need to run the
+	 * same code 
+	 */
 	private void sampleRemove() {
 		preProcessWindow.saved = false;
 		int[] rows = preProcessWindow.sampleDocsList.getSelectedIndices();
@@ -786,6 +830,10 @@ public class PreProcessWindowDriver {
 		preProcessWindow.repaint();	
 	}
 	
+	/**
+	 * The code to remove a node from the Training docs JTREE. It's separate here since both the keyListener and "-" button need to run the
+	 * same code 
+	 */
 	private void trainRemove() {
 		preProcessWindow.saved = false;
 		boolean removingAuthor = false;
@@ -872,6 +920,13 @@ public class PreProcessWindowDriver {
 		}
 	}
 	
+	/**
+	 * Code which supplies a popup to allow the user to replace, keep both files, or cancel when they try adding a file to an author
+	 * when one with the same name and different path already exist.
+	 * @param author - The name of the author they are trying to add the file to.
+	 * @param path - The path of the file
+	 * @param name - The name of the file
+	 */
 	private void keepBothOrReplace(String author, String path, String name) {
 		int confirm = JOptionPane.showOptionDialog(preProcessWindow,
 				"An older file named \""+name+"\" already exists in author\n" +
@@ -905,13 +960,18 @@ public class PreProcessWindowDriver {
 		}
 	}
 	
+	/**
+	 * Updates the Set-up wizard "Progress" bar to the correct status
+	 * @param curBarPanel
+	 */
 	protected void updateBar(JPanel curBarPanel) {
-		curBarPanel.remove(curBar);
+		JLabel curBar = new JLabel();
+		curBarPanel.removeAll();
 		int gauge = 0;
 		
-		if (preProcessWindow.sampleDocsReady())
-			gauge++;
 		if (preProcessWindow.mainDocReady())
+			gauge++;
+		if (preProcessWindow.sampleDocsReady())
 			gauge++;
 		if (preProcessWindow.trainDocsReady())
 			gauge++;
@@ -929,38 +989,223 @@ public class PreProcessWindowDriver {
 		curBarPanel.add(curBar);
 	}
 	
-	protected void updateAllComponents() {
+	/**
+	 * Updates all GUI tables and text fields. Should be called when a new problem set has been loaded (we need to update all components
+	 * to reflect the change).
+	 */
+	protected boolean updateAllComponents() {
 		Logger.logln(NAME+"Updating components to reflect new problem set.");
+		/**
+		 * TODO I know this is a very noisy, cluttered way to do it, if you have to time and
+		 * know how to make this easier on the eyes please go ahead.
+		 */
+		boolean result;
+		int passed = 0;
+		
+		if (updateTestDocTable())
+			passed++;
+		if (updateSampleDocTable())
+			passed++;
+		if (updateTrainDocTree())
+			passed++;
 
-		updateTestDocTable();
-		updateTrainDocTree();
-		updateUserSampleDocTable();
+		if (passed == 3)
+			result = true;
+		else
+			result = false;
+		
+		return result;
 	}
 	
 	/**
-	 * Updates the training corpus tree with the current problem set. 
+	 * Updates the test documents table with a new test doc
 	 */
-	protected void updateTrainDocTree() {
+	protected boolean updateTestDocTable() {
+		boolean passed = true;
+		
+		if (preProcessWindow.mainDocReady()) {
+			main.mainDocPreview = preProcessWindow.ps.getAllTestDocs().get(0);
+
+			try {
+				main.mainDocPreview.load();
+			} catch (Exception e) {
+				if (e.getMessage().equals("Empty Document Error")) {
+					Logger.logln(NAME+"User tried to load empty document, will not allow", LogOut.STDERR);
+					JOptionPane.showOptionDialog(preProcessWindow,
+							"You can't anonymize a blank document, please only\n" +
+							"choose a document that contains text.",
+							"Empty Document",
+									JOptionPane.DEFAULT_OPTION,		
+									JOptionPane.ERROR_MESSAGE, null, null, null);
+				} else {
+					Logger.logln(NAME+"Error updating test doc table", LogOut.STDERR);
+					JOptionPane.showOptionDialog(preProcessWindow,
+							"An error occurred while tring to load your test document\n" +
+									"Perhaps Anonymouth doesn't have correct permissions,\n" +
+									"try moving the document to somewhere else and trying again.",
+									"Error While Adding Document to Anonymize",
+									JOptionPane.DEFAULT_OPTION,		
+									JOptionPane.ERROR_MESSAGE, null, null, null);
+				}
+				
+				preProcessWindow.testDocPane.setText("");
+				preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
+				preProcessWindow.testAddButton.setEnabled(true);
+				preProcessWindow.testRemoveButton.setEnabled(false);
+				preProcessWindow.testNextButton.setEnabled(false);
+				preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testAddButton);
+				preProcessWindow.testAddButton.requestFocusInWindow();
+				preProcessWindow.ps.removeTestDocAt(main.mainDocPreview.getAuthor(), main.mainDocPreview.getTitle());
+				main.mainDocPreview = new Document();
+				passed = false;
+			}
+
+			try {
+				String testDocText = main.mainDocPreview.stringify();
+				main.getDocumentPane().setText(testDocText);
+				preProcessWindow.testDocPane.setText(testDocText);
+				if (titles.get(ANONConstants.DUMMY_NAME) == null)
+					titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
+				titles.get(ANONConstants.DUMMY_NAME).add(main.mainDocPreview.getTitle());
+			} catch (Exception e) {
+				Logger.logln(NAME+"Error setting text of test document in editor", LogOut.STDERR);
+				JOptionPane.showOptionDialog(main,
+						"An error occurred while tring to display the test document\n" +
+								"in the document editor. Please verify the file's sane or\n" +
+								"use a different file.</html>",
+								"Error While Adding Test File",
+								JOptionPane.DEFAULT_OPTION,		
+								JOptionPane.ERROR_MESSAGE, null, null, null);
+				preProcessWindow.testDocPane.setText("");
+				preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
+				preProcessWindow.testAddButton.setEnabled(true);
+				preProcessWindow.testRemoveButton.setEnabled(false);
+				preProcessWindow.testNextButton.setEnabled(false);
+				preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testAddButton);
+				preProcessWindow.testAddButton.requestFocusInWindow();
+				preProcessWindow.ps.removeTestDocAt(main.mainDocPreview.getAuthor(), main.mainDocPreview.getTitle());
+				main.mainDocPreview = new Document();
+				passed = false;
+			}
+		}
+		
+		return passed;
+	}
+	
+	/**
+	 * Updates the User Sample documents table for the new problem set (should not be called by directly by programmer, instead call
+	 * updateAllComponents(), and only when loading a new problem set)
+	 */
+	protected boolean updateSampleDocTable() {
+		boolean passed = true;
+		DefaultListModel<String> dlm = (DefaultListModel<String>)preProcessWindow.sampleDocsList.getModel();
+		dlm.removeAllElements();
+
+		if (!preProcessWindow.sampleDocsEmpty()) {
+			List<Document> userSampleDocs = preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor());
+			for (int i = 0; i < userSampleDocs.size(); i++) {
+				if (isEmpty(userSampleDocs.get(i).getFilePath(), userSampleDocs.get(i).getTitle())) {
+					passed = false;
+					dlm.removeElementAt(i);
+					preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), userSampleDocs.get(i).getTitle());
+				} else {
+					dlm.addElement(userSampleDocs.get(i).getTitle());
+					if (titles.get(ANONConstants.DUMMY_NAME) == null)
+						titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
+					titles.get(ANONConstants.DUMMY_NAME).add(userSampleDocs.get(i).getTitle());
+				}
+			}
+		}
+		
+		if (!passed) {
+			Logger.logln(NAME+"Problem reading the sample docs from the saved problem set. " +
+					"Ether it doesn't exist, we don't have permissions, or it's empty");
+		}
+		return passed;
+	}
+	
+	/**
+	 * Updates the Train docs tree for the new problem set (should not be called by directly by programmer, instead call
+	 * updateAllComponents(), and only when loading a new problem set)
+	 */
+	protected boolean updateTrainDocTree() {
+		boolean passed = true;
 		preProcessWindow.trainTreeTop = new DefaultMutableTreeNode(preProcessWindow.ps.getTrainCorpusName());
 		Map<String,List<Document>> trainDocsMap = preProcessWindow.ps.getAuthorMap();
+		Set<String> authors = trainDocsMap.keySet();
 		DefaultMutableTreeNode authorNode, docNode;
 
-		for (String author: trainDocsMap.keySet()) {
+		for (String author: authors) {
+			//We don't want to count the user's sample documents
 			if(author.equals(ProblemSet.getDummyAuthor()))
 					continue;
 			
 			authorNode = new DefaultMutableTreeNode(author, true);
 			preProcessWindow.trainTreeTop.add(authorNode);
 			
-			for (Document doc: trainDocsMap.get(author)){
-				docNode = new DefaultMutableTreeNode(doc.getTitle(), false);
-				authorNode.add(docNode);
+			for (Document doc: trainDocsMap.get(author)) {
+				if (isEmpty(doc.getFilePath(), doc.getTitle())) {
+					passed = false;
+					preProcessWindow.ps.removeTrainDocAt(author, doc.getTitle());
+				} else {
+					docNode = new DefaultMutableTreeNode(doc.getTitle(), false);
+					authorNode.add(docNode);
+					
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(doc.getTitle());
+				}
+			}
+			
+			//If all of the documents once attributed to this author when the doc set was saved no longer exist in the saved path,
+			//don't have read permissions, or are now empty, then we will remove the author entirely
+			if (authorNode.getChildCount() == 0) {
+				preProcessWindow.trainTreeTop.remove(authorNode);
 			}
 		}
 		DefaultTreeModel trainTreeModel = new DefaultTreeModel(preProcessWindow.trainTreeTop, true);
 		preProcessWindow.trainDocsTree.setModel(trainTreeModel);
+		
+		return passed;
 	}
 	
+	/**
+	 * Adds a single item to the Sample docs list
+	 * @param title - The name of the new item
+	 */
+	private void addSampleDoc(String title) {		
+		preProcessWindow.sampleDocsListModel.addElement(title);
+		preProcessWindow.sampleDocsList.setSelectedIndex(preProcessWindow.sampleDocsListModel.size()-1);
+	}
+	
+	/**
+	 * Removes a single item from the Sample docs list
+	 * @param title - The name of the item to remove
+	 */
+	private void removeSampleDoc(String title) {
+		int[] selectedIndex = preProcessWindow.sampleDocsList.getSelectedIndices();
+		int min = -1;
+		for (int i = 0; i < selectedIndex.length; i++) {
+			if (min == -1 || selectedIndex[i] < min)
+				min = selectedIndex[i];
+		}
+		
+		preProcessWindow.sampleDocsListModel.removeElement(title);
+		
+		int size = preProcessWindow.sampleDocsListModel.getSize();
+		while (min >= size) {
+			min--;
+		}
+		
+		preProcessWindow.sampleDocsList.setSelectedIndex(min);
+	}
+	
+	/**
+	 * Adds a single node to the Train docs tree
+	 * @param nodeTitle - The title of the new node
+	 * @param nodeParent - The parent of the new node
+	 * @param file - Whether or not the node should be an author's document, or is an author
+	 */
 	private void addTrainNode(String nodeTitle, String nodeParent, boolean file) {
 		if (file) {
 			int numAuthors = preProcessWindow.trainTreeTop.getChildCount();
@@ -981,6 +1226,11 @@ public class PreProcessWindowDriver {
 		}
 	}
 	
+	/**
+	 * Removes a given node from the Train docs tree
+	 * @param nodeTitle - The title of the node to remove
+	 * @param file - Whether or not the node to remove is an author or a document
+	 */
 	private void removeTrainNode(String nodeTitle, boolean file) {
 		int[] selectedIndex = preProcessWindow.trainDocsTree.getSelectionRows();
 		int min = -1;
@@ -1024,72 +1274,6 @@ public class PreProcessWindowDriver {
 			min--;
 		}
 		preProcessWindow.trainDocsTree.setSelectionRow(min);
-	}
-	
-	/**
-	 * Updates the test documents table with the current problem set. 
-	 */
-	protected boolean updateTestDocTable() {
-		if (preProcessWindow.mainDocReady()) {
-			main.mainDocPreview = preProcessWindow.ps.getAllTestDocs().get(0);
-
-			try {
-				main.mainDocPreview.load();
-			} catch (Exception e) {
-				if (e.getMessage().equals("Empty Document Error")) {
-					Logger.logln(NAME+"User tried to load empty document, will not allow", LogOut.STDERR);
-					JOptionPane.showOptionDialog(preProcessWindow,
-							"You can't anonymize a blank document, please only\n" +
-							"choose a document that contains text.",
-							"Empty Document",
-									JOptionPane.DEFAULT_OPTION,		
-									JOptionPane.ERROR_MESSAGE, null, null, null);
-				} else {
-					Logger.logln(NAME+"Error updating test doc table", LogOut.STDERR);
-					JOptionPane.showOptionDialog(preProcessWindow,
-							"An error occurred while tring to load your test document\n" +
-									"Perhaps Anonymouth doesn't have correct permissions,\n" +
-									"try moving the document to somewhere else and trying again.",
-									"Error While Adding Document to Anonymize",
-									JOptionPane.DEFAULT_OPTION,		
-									JOptionPane.ERROR_MESSAGE, null, null, null);
-				}
-				
-				preProcessWindow.testDocPane.setText("");
-				preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
-				preProcessWindow.testAddButton.setEnabled(true);
-				preProcessWindow.testRemoveButton.setEnabled(false);
-				preProcessWindow.testNextButton.setEnabled(false);
-				preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testAddButton);
-				preProcessWindow.testAddButton.requestFocusInWindow();
-				return false;
-			}
-
-			try {
-				String testDocText = main.mainDocPreview.stringify();
-				main.getDocumentPane().setText(testDocText);
-				preProcessWindow.testDocPane.setText(testDocText);
-			} catch (Exception e) {
-				Logger.logln(NAME+"Error setting text of test document in editor", LogOut.STDERR);
-				JOptionPane.showOptionDialog(main,
-						"An error occurred while tring to display the test document\n" +
-								"in the document editor. Please verify the file's sane or\n" +
-								"use a different file.</html>",
-								"Error While Adding Test File",
-								JOptionPane.DEFAULT_OPTION,		
-								JOptionPane.ERROR_MESSAGE, null, null, null);
-				preProcessWindow.testDocPane.setText("");
-				preProcessWindow.ps.removeTestAuthor(ANONConstants.DUMMY_NAME);
-				preProcessWindow.testAddButton.setEnabled(true);
-				preProcessWindow.testRemoveButton.setEnabled(false);
-				preProcessWindow.testNextButton.setEnabled(false);
-				preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testAddButton);
-				preProcessWindow.testAddButton.requestFocusInWindow();
-				return false;
-			}
-		}
-		
-		return true;
 	}
 	
 	/**
@@ -1211,58 +1395,12 @@ public class PreProcessWindowDriver {
 	}
 	
 	/**
-	 * Updates the User Sample documents table with the current problem set. 
+	 * Verifies that a document file added by the user actually contains something, we don't want blank docs in Anonymouth
+	 * @param path - The path of the file to check
+	 * @param name - The name of the file to check
+	 * @return
 	 */
-	protected void updateUserSampleDocTable() {
-		DefaultListModel<String> dlm = (DefaultListModel<String>)preProcessWindow.sampleDocsList.getModel();
-		dlm.removeAllElements();
-
-		if (!preProcessWindow.sampleDocsEmpty()) {
-			List<Document> userSampleDocs = preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor());
-			for (int i=0; i<userSampleDocs.size(); i++) {
-				dlm.addElement(userSampleDocs.get(i).getTitle());
-			}
-		}
-	}
-	
-	private void addSampleDoc(String title) {		
-		preProcessWindow.sampleDocsListModel.addElement(title);
-		preProcessWindow.sampleDocsList.setSelectedIndex(preProcessWindow.sampleDocsListModel.size()-1);
-	}
-	
-	private void removeSampleDoc(String title) {
-		int[] selectedIndex = preProcessWindow.sampleDocsList.getSelectedIndices();
-		int min = -1;
-		for (int i = 0; i < selectedIndex.length; i++) {
-			if (min == -1 || selectedIndex[i] < min)
-				min = selectedIndex[i];
-		}
-		
-		preProcessWindow.sampleDocsListModel.removeElement(title);
-		
-		int size = preProcessWindow.sampleDocsListModel.getSize();
-		while (min >= size) {
-			min--;
-		}
-		
-		preProcessWindow.sampleDocsList.setSelectedIndex(min);
-	}
-	
-	/**
-	 * Updates the feature set view when a new feature set is selected / created.
-	 */
-	protected void updateFeatureSetView(GUIMain main) {
-		CumulativeFeatureDriver featureDriver = advancedWindow.cfd;
-		
-		advancedWindow.featuresSetDescJTextPane.setText(featureDriver.getDescription() == null ? "" : featureDriver.getDescription());
-		
-		advancedWindow.advancedDriver.clearFeatureView(main);
-		advancedWindow.featuresJListModel.removeAllElements();
-		for (int i = 0; i < featureDriver.numOfFeatureDrivers(); i++) 
-			advancedWindow.featuresJListModel.addElement(featureDriver.featureDriverAt(i).getName());
-	}
-	
-	private boolean empty(String path, String name) {
+	private boolean isEmpty(String path, String name) {
 		boolean result = false;
 
 		try {
@@ -1307,13 +1445,17 @@ public class PreProcessWindowDriver {
 	/**
 	 * Debugging method to see the contents of "titles" to check and make sure it's contents are being updated properly
 	 */
-	@SuppressWarnings("unused")
-	private void printTitles() {
+	protected void printTitles() {
 		Set<String> test = titles.keySet();
 		Iterator<String> it = test.iterator();
 		while (it.hasNext()) {
 			String name = (String)it.next();
+			List<String> docs = titles.get(name);
 			System.out.println("Author = " + name + " Docs = " + Integer.toString(titles.get(name).size()));
+			
+			for (int i = 0; i < docs.size(); i++) {
+				System.out.println("---" + docs.get(i));
+			}
 		}
 	}
 }

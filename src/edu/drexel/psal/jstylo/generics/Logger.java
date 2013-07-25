@@ -194,6 +194,29 @@ public class Logger {
 			}
 		}
 	}
+	
+	/**
+	 * Prints a stack trace for an exception to the log file as well as to Standard Error Output
+	 * @param e
+	 */
+	public static void logln(Exception e) {
+		if (loggerFlag) {
+			String msg = e.toString();
+			
+			log(msg, LogOut.STDERR);
+			System.err.println();
+			try {
+				if (logFile) {
+					bw.write("\n");
+					bw.flush();
+				} else {
+					printBuffer.concat(msg+"\n");
+				}
+			} catch (IOException e1) {
+				System.err.println("Failed writing to log file!");
+			}
+		}
+	}
 
 	/**
 	 * Safely closes the file

@@ -19,7 +19,6 @@ import com.jgaap.generics.*;
 
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 public class ProblemSet {
 	
@@ -27,14 +26,14 @@ public class ProblemSet {
 	 * fields
 	 * ======
 	 */
-	private static final String NAME = "( ProblemSet ) - ";
+	//private static final String NAME = "( ProblemSet ) - ";
 	private SortedMap<String,List<Document>> trainDocsMap;
 	
 	private SortedMap<String,List<Document>> testDocsMap;
 	
 	private String trainCorpusName;	
 	
-	private static String dummyAuthor = "_dummy_"; 
+	private static String dummyAuthor = ANONConstants.DUMMY_NAME; 
 	
 	// whether to use the dummy author name for test instances
 	// or the default - an arbitrary author name from the training authors
@@ -882,7 +881,6 @@ public class ProblemSet {
 			try {
 				xmlDoc = dom.parse(filename);	
 			} catch (SAXParseException e) {
-				Logger.logln(NAME+"Failed to problem set, will stop.", LogOut.STDERR);
 				return;
 			}
 			xmlDoc.getDocumentElement().normalize();

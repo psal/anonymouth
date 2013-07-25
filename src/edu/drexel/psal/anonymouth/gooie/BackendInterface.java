@@ -181,8 +181,6 @@ public class BackendInterface {
 					}
 					
 					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
-					System.out.println("DEBUGGING maxchange = " + DriverEditor.taggedDoc.getMaxChangeNeeded());
-					System.out.println("DEBUGGING current change = " + DriverEditor.taggedDoc.getCurrentChangeNeeded());
 				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
@@ -206,9 +204,9 @@ public class BackendInterface {
 				DriverEditor.setAllDocTabUseable(true, main);		
 
 				if (PropertiesUtil.getDoTranslations()) {
-					main.rightTabPane.setSelectedIndex(2);
-				} else {
 					main.rightTabPane.setSelectedIndex(1);
+				} else {
+					main.rightTabPane.setSelectedIndex(0);
 				}
 				
 				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)

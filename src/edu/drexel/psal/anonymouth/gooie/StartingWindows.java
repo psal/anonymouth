@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -64,7 +65,7 @@ public class StartingWindows extends JFrame {
 	//Bottom
 	private JPanel bottomPanel;
 	private JPanel buttonPanel;
-	//private JSeparator separator;
+	private JSeparator separator;
 	private JButton loadDocSetButton;
 	protected JButton newDocSetButton;
 		
@@ -105,16 +106,13 @@ public class StartingWindows extends JFrame {
 		textPanel.add(textLabel);
 		startPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		startButton = new JButton("Start");
-		startButton.setMinimumSize(new Dimension(100, 35));
-		startButton.setPreferredSize(new Dimension(100, 35));
-		startButton.setMaximumSize(new Dimension(100, 35));
-		startButton.setSize(new Dimension(100, 35));
+		startButton.setPreferredSize(new Dimension(100, 30));
 		startPanel.add(startButton);
-		
+
 		if (ThePresident.canDoQuickStart) {
-			textLabel.setText("<html><center>Resume with previously used document set</center></html>");
+			textLabel.setText("Start with previously used document set");
 		} else {
-			textLabel.setText("<html><center>No previous document set found</center></html>");
+			textLabel.setText("No previous document set found");
 			textLabel.setForeground(Color.LIGHT_GRAY);
 			startButton.setEnabled(false);
 		}
@@ -128,13 +126,12 @@ public class StartingWindows extends JFrame {
 		buttonPanel.add(loadDocSetButton);
 		buttonPanel.add(newDocSetButton);
 		
-		//separator = new JSeparator();
-		//separator.setMaximumSize(new Dimension(480, 0));
+		separator = new JSeparator();
+		separator.setMaximumSize(new Dimension(480, 0));
 		
 		bottomPanel = new JPanel();
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
-		//JSeparator separator
-		//bottomPanel.add(separator);
+		bottomPanel.add(separator);
 		bottomPanel.add(buttonPanel);
 		bottomPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 3, 0));
 		//Color Separator
@@ -152,12 +149,12 @@ public class StartingWindows extends JFrame {
 		completePanel.add(topPanel, BorderLayout.NORTH);
 		completePanel.add(bottomPanel, BorderLayout.SOUTH);
 		this.add(completePanel);
-		
-		if (PropertiesUtil.getProbSet().equals("")) {
-			startButton.setEnabled(false);
-		}
 	}
 	
+	/**
+	 * Sets all the window attributes (like size, location, etc)
+	 * @param main - GUIMain instance
+	 */
 	private void initWindow(GUIMain main) {
 		this.setSize(width, height);
 		this.setResizable(false);
@@ -203,24 +200,7 @@ public class StartingWindows extends JFrame {
 					File[] files = load.getFiles();
 					if (files.length != 0) {
 						String path = files[0].getAbsolutePath();
-
-						Logger.logln(NAME+"Trying to load problem set at: " + path);
-						try {
-							main.preProcessWindow.ps = new ProblemSet(path);
-							main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
-							main.ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());
-							main.preProcessWindow.driver.updateAllComponents();
-							PropertiesUtil.setProbSet(path);
-						} catch (Exception exc) {
-							exc.printStackTrace();
-							Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
-							Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-							JOptionPane.showMessageDialog(null,
-									"Failed loading problem set from:\n"+path,
-									"Load Problem Set Failure",
-									JOptionPane.ERROR_MESSAGE);
-							PropertiesUtil.setProbSet("");
-						}
+						loadProblemSet(path);
 					} else {
 						Logger.logln(NAME+"Load problem set canceled");
 					}
@@ -240,19 +220,25 @@ public class StartingWindows extends JFrame {
 		newDocSetButton.addActionListener(newDocSetListener);
 	}
 	
-	protected void setReadyToStart(boolean ready) {
+	/**
+	 * Determines whether or not the user has an acceptable document set built and updates components accordingly
+	 * @param ready
+	 */
+	protected void setReadyToStart(boolean ready, boolean loaded) {
 		if (ready) {
-			if (!PropertiesUtil.getProbSet().equals(""))
-				textLabel.setText("Start with document set \"" + new File(PropertiesUtil.getProbSet()).getName() + "\"");
+			if (loaded)
+				textLabel.setText("Start with loaded document set");
 			else
-				textLabel.setText("Start with completed document set");
-			
+				textLabel.setText("Start with finished document set");
 			textLabel.setForeground(Color.BLACK);
 			startButton.setEnabled(true);
 			this.getRootPane().setDefaultButton(startButton);
 			startButton.requestFocusInWindow();
 		} else {
-			textLabel.setText("Please finish your document set to start");
+			if (loaded)
+				textLabel.setText("Please finish incomplete document set");
+			else
+				textLabel.setText("No previous document set found");
 			textLabel.setForeground(Color.LIGHT_GRAY);
 			startButton.setEnabled(false);
 			this.getRootPane().setDefaultButton(newDocSetButton);
@@ -263,12 +249,13 @@ public class StartingWindows extends JFrame {
 	/**
 	 * Makes the prepared window visible
 	 */
+	@SuppressWarnings("unused") //Eclipse lies, it's being used, it just doesn't like my ANONConstants flag
 	public void showStartingWindow() {
 		if (ANONConstants.IS_USER_STUDY && ThePresident.sessionName.equals("")) {
 			userStudySessionName.showSessionWindow();
 		} else {
 			Logger.logln(NAME+"Displaying Anonymouth Start Window");
-			
+
 			if (ThePresident.canDoQuickStart) {
 				this.getRootPane().setDefaultButton(startButton);
 			} else {
@@ -284,26 +271,99 @@ public class StartingWindows extends JFrame {
 			}
 		}
 	}
+	
+	/**
+	 * Loads the problem set from the given path, attempts to load everything, then checks to make sure everything's ready. Updates
+	 * Components accordingly
+	 * @param path - The absolute path to the problem set we want to load
+	 */
+	protected void loadProblemSet(String path) {
+		Logger.logln(NAME+"Trying to load problem set at: " + path);
+		try {
+			main.preProcessWindow.ps = new ProblemSet(path);
+			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
+			main.ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());
+			main.preProcessWindow.driver.titles.clear();
+			
+			boolean probSetReady = main.preProcessWindow.documentsAreReady();
+			if (main.preProcessWindow.driver.updateAllComponents() && probSetReady) {
+				setReadyToStart(true, true);
+				ThePresident.canDoQuickStart = true;
+			} else {
+				Logger.logln(NAME+"Some issue was detected constructing the saved Document set, will verify " +
+						"if there's still enough documents to move forward");
+				if (probSetReady) {
+					JOptionPane.showMessageDialog(startingWindows,
+							"Anonymouth encountered a few problems loading your document set,\n" +
+							"some documents may have not been added in the process. Some\n" +
+							"possible causes of this may be:\n\n" +
+							"   -The document no longer exists in it's original path\n" +
+							"   -The document no longer has read permissions\n" +
+							"   -The document is not empty, where it wasn't in the past",
+							"Problems with Loading Document Set",
+							JOptionPane.WARNING_MESSAGE, ThePresident.dialogLogo);
+					setReadyToStart(true, true);
+					ThePresident.canDoQuickStart = true;
+				} else {
+					JOptionPane.showMessageDialog(startingWindows,
+							"Anonymouth encountered a few problems loading your document set\n" +
+							"and now there isn't enough loaded documents to proceed. Some\n" +
+							"possible causes of this may be:\n\n" +
+							"   -The document no longer exists in it's original path\n" +
+							"   -The document no longer has read permissions\n" +
+							"   -The document is not empty, where it wasn't in the past",
+							"Problems with Loading Document Set",
+							JOptionPane.WARNING_MESSAGE, ThePresident.dialogLogo);
+					Logger.logln(NAME+"One or more parts of the loaded doc set are insufficient now to begin due to" +
+							"loading problems, cannot quick start");
+					setReadyToStart(false, true);
+					ThePresident.canDoQuickStart = false;
+				}
+			}
+			
+			PropertiesUtil.setProbSet(path);
+		} catch (Exception exc) {
+			Logger.logln(NAME+"Failed loading problem set at path: "+path, LogOut.STDERR);
+			setReadyToStart(false, false);
+			ThePresident.canDoQuickStart = false;
+			PropertiesUtil.setProbSet("");
+		}
+	}
 }
 
+/**
+ * Simple Frame to ask the user for their name so we can name the log files. This is intended for use in user case studies, and (at least
+ * from last discussion) should not be shown or used in a release version of Anonymouth. Whether or not to display this can be easily flipped
+ * via the constant boolean "IS_USER_STUDY" in ANONConstants.
+ * @author Marc Barrowclift
+ *
+ */
 class UserStudySessionName extends JFrame {
 
+	//Constants
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( UserStudySessionName ) - ";
+	private final int WIDTH = 520, HEIGHT = 135;
 	
-	private int width = 520, height = 135;
+	//Class instances
 	private UserStudySessionName sessionWindow;
 	private StartingWindows startingWindows;
 	
+	//Swing Components
 	private JLabel inputMessage;
 	private JTextField textBox;
 	private JButton continueButton;
 	private JPanel textBoxAndNextPanel;
 	private JPanel mainSessionNamePanel;
 	
+	//Listeners
 	private ActionListener continueListener;
 	private FocusListener textBoxListener;
 	
+	/**
+	 * Constructor
+	 * @param startingWindows - StartingWindows instance
+	 */
 	public UserStudySessionName(StartingWindows startingWindows) {
 		this.startingWindows = startingWindows;
 		sessionWindow = this;
@@ -312,6 +372,9 @@ class UserStudySessionName extends JFrame {
 		initListeners();
 	}
 	
+	/**
+	 * Displays the session window prompt to the user with a nice fade in effect
+	 */
 	protected void showSessionWindow() {
 		Logger.logln(NAME+"Displaying Session Window");
 		mainSessionNamePanel.getRootPane().setDefaultButton(continueButton);
@@ -331,6 +394,9 @@ class UserStudySessionName extends JFrame {
 		this.setOpacity((float)1.0);
 	}
 	
+	/**
+	 * Initializes the swing components and adds them all to the frame
+	 */
 	private void initGUI() {		
 		inputMessage = new JLabel("<html><center>Please enter your name:</center></html>");
 		inputMessage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -353,12 +419,15 @@ class UserStudySessionName extends JFrame {
 		
 		this.add(mainSessionNamePanel);
 		this.setUndecorated(true);
-		this.setSize(width, height);
+		this.setSize(WIDTH, HEIGHT);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Initialzes all listeners used by the frame and adds them to their respective components
+	 */
 	private void initListeners() {
 		textBoxListener = new FocusListener() {
 			@Override

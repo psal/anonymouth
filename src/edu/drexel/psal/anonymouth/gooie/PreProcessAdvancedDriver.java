@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -49,7 +50,6 @@ public class PreProcessAdvancedDriver {
 	private final String NAME = "( PreProcessAdvancedDriver ) - ";
 
 	//Class Instances
-	private PreProcessWindow preProcessWindow;
 	private PreProcessAdvancedWindow advancedWindow;
 	private GUIMain main;
 
@@ -57,8 +57,7 @@ public class PreProcessAdvancedDriver {
 	protected Classifier tmpClassifier;
 	protected String className;
 
-	public PreProcessAdvancedDriver(PreProcessWindow preProcessWindow, PreProcessAdvancedWindow advancedWindow, GUIMain main) {
-		this.preProcessWindow = preProcessWindow;
+	public PreProcessAdvancedDriver(PreProcessAdvancedWindow advancedWindow, GUIMain main) {
 		this.advancedWindow = advancedWindow;
 		this.main = main;
 		initListeners();
@@ -97,8 +96,8 @@ public class PreProcessAdvancedDriver {
 				
 				advancedWindow.featureChoice.setSelectedIndex(selected+1);
 				advancedWindow.featureChoice.setSelectedIndex(selected+1);
-				preProcessWindow.driver.updateFeatureSetView(main);
-				advancedWindow.advancedDriver.updateFeatPrepColor(main);
+				advancedWindow.driver.updateFeatPrepColor(main);
+				updateFeatureSetView(main);
 			}
 		});
 
@@ -121,7 +120,7 @@ public class PreProcessAdvancedDriver {
 				if (answer == JOptionPane.YES_OPTION) {
 					advancedWindow.cfd = new CumulativeFeatureDriver();
 					advancedWindow.featureChoice.setSelectedIndex(0);
-					preProcessWindow.driver.updateFeatureSetView(main);
+					updateFeatureSetView(main);
 				}
 			}
 		});
@@ -180,7 +179,7 @@ public class PreProcessAdvancedDriver {
 						main.presetCFDs.add(cfd);
 						advancedWindow.featuresSetJComboBoxModel.addElement(cfd.getName());
 						advancedWindow.featureChoice.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
-						preProcessWindow.driver.updateFeatureSetView(main);
+						updateFeatureSetView(main);
 					} catch (Exception exc) {
 						Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
 						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
@@ -250,7 +249,7 @@ public class PreProcessAdvancedDriver {
 				if (selected == lastSelected)
 					return;
 				Logger.logln(NAME+"Feature selected in the features tab: "+advancedWindow.featuresJList.getSelectedValue());
-				advancedWindow.advancedDriver.updateFeatureView(main, selected);
+				advancedWindow.driver.updateFeatureView(main, selected);
 				lastSelected = selected;
 			}
 		});
@@ -270,7 +269,7 @@ public class PreProcessAdvancedDriver {
 				} else {
 					Canonicizer c = advancedWindow.cfd.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).canonicizerAt(selected);
 					Logger.logln(NAME+"Canonicizer '"+c.displayName()+"' selected in features tab.");
-					advancedWindow.advancedDriver.populateTableWithParams(c, advancedWindow.featuresCanonConfigJTableModel);
+					advancedWindow.driver.populateTableWithParams(c, advancedWindow.featuresCanonConfigJTableModel);
 				}
 
 				lastSelected = selected;
@@ -385,9 +384,10 @@ public class PreProcessAdvancedDriver {
 					advancedWindow.selectedClassName = advancedWindow.getNameFromClassPath(className);
 					
 					//Add classifier
+					advancedWindow.classifiers = new ArrayList<Classifier>();
 					advancedWindow.classifiers.add(tmpClassifier);
-					advancedWindow.advancedDriver.updateClassList(main);
-					advancedWindow.advancedDriver.updateClassPrepColor(main);
+					advancedWindow.driver.updateClassList(main);
+					advancedWindow.driver.updateClassPrepColor(main);
 					tmpClassifier = null;
 					advancedWindow.classJTree.clearSelection();
 				}
@@ -450,8 +450,8 @@ public class PreProcessAdvancedDriver {
 				advancedWindow.classSelClassArgsJTextField.setText("");
 				advancedWindow.classDescJTextPane.setText("");
 				advancedWindow.classAvClassArgsJTextField.setText("");
-				advancedWindow.advancedDriver.updateClassList(main);
-				advancedWindow.advancedDriver.updateClassPrepColor(main);
+				advancedWindow.driver.updateClassList(main);
+				advancedWindow.driver.updateClassPrepColor(main);
 			}
 		});
 	}
@@ -520,6 +520,20 @@ public class PreProcessAdvancedDriver {
 			advancedWindow.featuresCullConfigJTableModel.addRow(new String[]{"N/A", "N/A", "N/A"});
 		}
 	}
+	
+	/**
+	 * Updates the feature set view when a new feature set is selected / created.
+	 */
+	protected void updateFeatureSetView(GUIMain main) {
+		CumulativeFeatureDriver featureDriver = advancedWindow.cfd;
+		
+		advancedWindow.featuresSetDescJTextPane.setText(featureDriver.getDescription() == null ? "" : featureDriver.getDescription());
+		
+		advancedWindow.driver.clearFeatureView(main);
+		advancedWindow.featuresJListModel.removeAllElements();
+		for (int i = 0; i < featureDriver.numOfFeatureDrivers(); i++) 
+			advancedWindow.featuresJListModel.addElement(featureDriver.featureDriverAt(i).getName());
+	}
 
 	/**
 	 * Populates the given tableModel with parameters and their values for the given event driver / canonicizer / culler.
@@ -551,9 +565,9 @@ public class PreProcessAdvancedDriver {
 	 */
 	protected void updateClassList(GUIMain main) {
 		DefaultListModel<String> model2 = (DefaultListModel<String>)advancedWindow.classJList.getModel();
-		List<Classifier> classifiers = advancedWindow.classifiers;
-
+		List<Classifier> classifiers = advancedWindow.classifiers;	
 		model2.removeAllElements();
+
 		for (Classifier c: classifiers) {
 			String className = c.getClass().getName();
 			model2.addElement(className);

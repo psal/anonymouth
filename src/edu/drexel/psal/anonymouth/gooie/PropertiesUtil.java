@@ -24,7 +24,7 @@ public class PropertiesUtil {
 	protected static String defaultClass = "weka.classifiers.functions.SMO";
 	protected static String defaultFeat = "WritePrints (Limited)";
 	protected static int defaultClient = 0;
-	protected static String defaultFontSize = "12";
+	protected static String defaultFontSize = "14";
 	protected static String defaultProbSet = "";
 	protected static Boolean defaultAutoSave = false;
 	protected static Boolean defaultWarnQuit = false;
