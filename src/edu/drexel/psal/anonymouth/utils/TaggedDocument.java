@@ -3,12 +3,12 @@ package edu.drexel.psal.anonymouth.utils;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
@@ -53,8 +53,6 @@ public class TaggedDocument implements Serializable{
 	private String ID; 
 	private int totalSentences=0;
 	public SpecialCharacterTracker specialCharTracker;
-	private double baseline_percent_change_needed = 0; // This may end up over 100%. That's unimportant. This is used to gauge the change that the rest of the document needs -- this is normalized to 100%, effectivley.
-	private boolean can_set_baseline_percent_change_needed = true;
 	public static boolean userDeletedSentence = false;
 
 	/**
@@ -133,6 +131,32 @@ public class TaggedDocument implements Serializable{
 		for (int i = 0; i < size; i++) {
 			words[i] = theWords.get(i).word;
 		}
+		return words;
+	}
+	
+	/**
+	 * Returns an array of Strings for each unique word in a given tagged sentence (no duplicates)
+	 * @param sentence
+	 * @return
+	 */
+	public String[] getWordsInSentenceNoDups(TaggedSentence sentence) {
+		ArrayList<Word> unfiltered = sentence.getWordsInSentence();
+		int size = unfiltered.size();
+		HashSet<String> wordList = new HashSet<String>(size);
+		String curWord;
+		String[] words = new String[size];
+		
+		for (int i = 0; i < size; i++) {
+			curWord = unfiltered.get(i).word;
+			
+			if (wordList.contains(curWord)) {
+				continue;
+			}
+			
+			words[i] = unfiltered.get(i).word;
+			wordList.add(words[i]);
+		}
+		
 		return words;
 	}
 	

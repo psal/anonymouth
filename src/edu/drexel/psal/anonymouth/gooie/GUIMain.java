@@ -613,7 +613,7 @@ public class GUIMain extends javax.swing.JFrame {
 			bottomTabPane = new JTabbedPane();
 			createSugTab();
 			createTransTab();
-			createDocumentTab();
+			createEditorTab();
 			createAnonymityTab();
 
 			setUpContentPane();
@@ -837,12 +837,14 @@ public class GUIMain extends javax.swing.JFrame {
 																"removing or using less of in your document<br>" +
 																"(sorted by most revealing from top to bottom)." +
 																"</html>");
+			/*
 			elementsToRemoveTable.setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
 																"in all given docs written by the user.<br>" +
 													"<br><b>Word To Remove:</b> The words you should consider<br>" +
 																"removing or using less of in your document<br>" +
 																"(sorted by most revealing from top to bottom)." +
 																"</html>");
+																*/
 			elementsToRemoveTable.setRowSelectionAllowed(true);
 			elementsToRemoveTable.setColumnSelectionAllowed(false);
 			elementsToRemoveTable.removeAllElements();
@@ -954,8 +956,8 @@ public class GUIMain extends javax.swing.JFrame {
 		return translationsPanel;
 	}
 
-	private JPanel createDocumentTab() {
-		Logger.logln(NAME+"Creating Documents Tab...");
+	private JPanel createEditorTab() {
+		Logger.logln(NAME+"Creating Editor Tab...");
 		if(tabMade == false) {
 			normalFont = new Font("Ariel", Font.PLAIN, PropertiesUtil.getFontSize());
 			

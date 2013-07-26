@@ -35,22 +35,18 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
 	protected JLabel translationsNote;
-	protected JLabel fontSize;
-	protected JCheckBox highlightElems;
-	protected JComboBox<String> fontSizes;
-	protected String[] sizes = {"9", "10", "11", "12", "13", "14", "18"};
 	protected int generalHeight;
 	
-	//Defaults tab
-	protected JPanel defaults;
-	protected JLabel defaultClassifier;
-	protected JLabel defaultFeature;
-	protected JLabel defaultProbSet;
-	protected JComboBox<String> classComboBox;
-	protected JComboBox<String> featComboBox;
-	protected JButton selectProbSet;
-	protected JTextField probSetTextPane;
-	protected JScrollPane probSetScrollPane;
+	//Editor tab
+	protected JPanel editor;
+	protected JCheckBox highlightElems;
+	protected JCheckBox highlightSent;
+	protected JLabel fontSize;
+	protected JComboBox<String> fontSizes;
+	protected final String[] SIZES = {"9", "10", "11", "12", "13", "14", "18"};
+	protected JLabel highlightColor;
+	protected JComboBox<String> sentHighlightColors;
+	protected final String[] COLORS = {"Yellow", "Orange", "Blue", "Purple"};
 	protected int defaultsHeight;
 	
 	//Advanced tab
@@ -100,7 +96,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	 */
 	public void showWindow() {
 		Logger.logln(NAME+"Preferences window opened");
-		probSetTextPane.setText(PropertiesUtil.getProbSet());
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
 		this.setVisible(true);
 	}
@@ -115,7 +110,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 		//==========================================================================================
 		tabbedPane = new JTabbedPane();
 		general = new JPanel();
-		defaults= new JPanel();
+		editor= new JPanel();
 		advanced = new JPanel();
 
 		MigLayout generalLayout = new MigLayout("fill");
@@ -148,8 +143,33 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 					"begin translations. This button will not be clickable unless permission is granted via this checkbox.</center></html>");
 			translationsNote.setForeground(Color.GRAY);
 			
-			autoSaveNote = new JLabel("<html><center>Note: Will overwrite original document with changes.<br>THIS ACTION CANNOT BE UNDONE</center></html>");
+			autoSaveNote = new JLabel("<html><center>Note: Will only save over previously saved Anonymized document,<br>if one exists. Will not overwrite original document.</center></html>");
 			autoSaveNote.setForeground(Color.GRAY);
+			
+			general.add(autoSave, "wrap");
+			general.add(autoSaveNote, "alignx 50%, wrap");
+			general.add(warnQuit, "wrap");
+			general.add(showWarnings, "wrap");
+			general.add(translations, "wrap");
+			general.add(translationsNote, "alignx 50%");
+			
+			generalHeight = 310;
+		}
+		
+		MigLayout defaultLayout = new MigLayout();
+		editor.setLayout(defaultLayout);
+		{	
+			highlightSent = new JCheckBox();
+			highlightSent.setText("Highlight current sentence");
+			if (PropertiesUtil.getHighlightSents()) {
+				highlightSent.setSelected(true);
+			}
+			
+			highlightElems = new JCheckBox();
+			highlightElems.setText("Automatically highlight words to remove for selected sentence");
+			if (PropertiesUtil.getAutoHighlight()) {
+				highlightElems.setSelected(true);
+			}
 			
 			JSeparator sep = new JSeparator(JSeparator.HORIZONTAL);
 			sep.setPreferredSize(new Dimension(484, 15));
@@ -157,62 +177,26 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			fontSize = new JLabel ("Font Size: ");
 			
 			fontSizes = new JComboBox<String>();
-			for (int i = 0; i < sizes.length; i++)
-				fontSizes.addItem(sizes[i]);
+			for (int i = 0; i < SIZES.length; i++)
+				fontSizes.addItem(SIZES[i]);
 			fontSizes.setSelectedItem(Integer.toString(PropertiesUtil.getFontSize()));
 			
-			highlightElems = new JCheckBox();
-			highlightElems.setText("Automatically highlight words to remove in selected sentence");
-			if (PropertiesUtil.getAutoHighlight()) {
-				highlightElems.setSelected(true);
-			}
+			highlightColor = new JLabel("Sentence Highlight Color: ");
 			
-			general.add(autoSave, "wrap");
-			general.add(autoSaveNote, "alignx 50%, wrap");
-			general.add(warnQuit, "wrap");
-			general.add(showWarnings, "wrap");
-			general.add(translations, "wrap");
-			general.add(translationsNote, "alignx 50%, wrap");
-			general.add(sep, "alignx 50%, wrap");
-			general.add(fontSize, "split 2");
-			general.add(fontSizes, "wrap");
-			general.add(highlightElems);
+			sentHighlightColors = new JComboBox<String>();
+			for (int i = 0; i < COLORS.length; i++)
+				sentHighlightColors.addItem(COLORS[i]);
+			sentHighlightColors.setSelectedItem(PropertiesUtil.getHighlightColor());
 			
-			generalHeight = 370;
-		}
-		
-		MigLayout defaultLayout = new MigLayout();
-		defaults.setLayout(defaultLayout);
-		{
-			defaultClassifier = new JLabel("Set Default Classifier:");
-			classComboBox = new JComboBox<String>();
-			String[] classifierNames = main.ppAdvancedWindow.getClassifierNames();
-			for (int i = 0; i < classifierNames.length; i++)
-				classComboBox.addItem(classifierNames[i]);
-			classComboBox.setSelectedItem(main.ppAdvancedWindow.getClassName());
-
-			defaultFeature = new JLabel("Set Default Feature:");
-			featComboBox = new JComboBox<String>();
-			for (int i = 0; i < main.ppAdvancedWindow.featureChoice.getItemCount(); i++)
-				featComboBox.addItem(main.ppAdvancedWindow.featureChoice.getItemAt(i).toString());
-			featComboBox.setSelectedItem(PropertiesUtil.getFeature());
-
-			defaultProbSet = new JLabel("Set Default Problem Set:");
-			selectProbSet = new JButton("Select");
-			probSetTextPane = new JTextField();
-			probSetTextPane.setEditable(false);
-			probSetTextPane.setText(PropertiesUtil.getProbSet());
-			probSetTextPane.setPreferredSize(new Dimension(420, 20));
+			editor.add(highlightSent, "wrap");
+			editor.add(highlightElems, "wrap");
+			editor.add(sep, "alignx 50%, wrap");
+			editor.add(fontSize, "split 4");
+			editor.add(fontSizes);
+			editor.add(highlightColor, "gapbefore 20");
+			editor.add(sentHighlightColors);
 			
-			defaults.add(defaultClassifier, "wrap");
-			defaults.add(classComboBox, "wrap");
-			defaults.add(defaultFeature, "wrap");
-			defaults.add(featComboBox, "wrap");
-			defaults.add(defaultProbSet, "wrap");
-			defaults.add(selectProbSet, "split 2");
-			defaults.add(probSetTextPane, "wrap");
-			
-			defaultsHeight = 240;
+			defaultsHeight = 190;
 		}
 		
 		MigLayout advancedLayout = new MigLayout();
@@ -279,18 +263,18 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			advanced.add(sep2, "gaptop 5, alignx 50%, wrap");
 			advanced.add(resetAll, "gaptop 5, alignx 50%");
 			
-			advancedHeight = 390;
+			advancedHeight = 370;
 		}
 
 		preferencesDriver.initListeners();
 		tabbedPane.add("General", general);
-		tabbedPane.add("Defaults", defaults);
+		tabbedPane.add("Editor", editor);
 		tabbedPane.add("Advanced", advanced);
 	}
 	
 	/**
 	 * We want to be absolutely sure that when Preferences is closed that the set values are within
-	 * acceptable boundaries, and if they aren't change them back to their defaults.
+	 * acceptable boundaries, and if they aren't change them back to their editor.
 	 */
 	@Override
 	public void windowClosing(WindowEvent e) {

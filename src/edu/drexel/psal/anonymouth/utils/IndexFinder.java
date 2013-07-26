@@ -87,7 +87,7 @@ public class IndexFinder {
 		String spaces=" ";
 		theDoc = theDoc.replaceAll("\\p{Cf}", " ");
 		theWord = theWord.replaceAll("\\.", "\\\\.");
-		
+
 		try {
 			while (true) {
 				Pattern wordToFind = Pattern.compile("((\\s|\\b)("+theWord+")(\\s|\\b)){1}+");
@@ -111,7 +111,7 @@ public class IndexFinder {
 				
 				theIndices.add(new int[] {start, end});
 				spaces = " ";
-				
+
 				for (j = 1; j < theWord.length(); j++)
 					spaces = spaces +" ";
 				String theDocOne = theDoc.substring(0,start);

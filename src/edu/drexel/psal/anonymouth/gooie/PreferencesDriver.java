@@ -6,14 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.DefaultHighlighter;
 
-import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -47,11 +45,8 @@ public class PreferencesDriver {
 	private PreferencesWindow prefWin;
 	private int prevFeatureValue;
 	private int prevThreadValue;
-	
+
 	//Listeners
-	private ActionListener classifierListener;
-	private ActionListener featureListener;
-	private ActionListener probSetListener;
 	private ActionListener autoSaveListener;
 	private ActionListener warnQuitListener;
 	private ChangeListener maxFeaturesListener;
@@ -60,6 +55,8 @@ public class PreferencesDriver {
 	private ActionListener translationsListener;
 	private ChangeListener tabbedPaneListener;
 	private ActionListener fontSizeListener;
+	private ActionListener highlightColorListener;
+	private ActionListener highlightSentsListener;
 	private KeyListener maxFeaturesBoxListener;
 	private KeyListener numOfThreadsBoxListener;
 	private ActionListener showWarningsListener;
@@ -77,6 +74,42 @@ public class PreferencesDriver {
 	 * Initializes and adds all preferences window listeners
 	 */
 	public void initListeners() {
+		highlightSentsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (prefWin.highlightSent.isSelected()) {
+					PropertiesUtil.setHighlightSents(true);
+					DriverEditor.doHighlight = true;
+					if (DriverEditor.currentHighlight != null)
+						DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+					
+					Logger.logln(NAME+"Highlight Sents checkbox checked");
+				} else {
+					PropertiesUtil.setHighlightSents(false);
+					DriverEditor.doHighlight = false;
+					if (DriverEditor.currentHighlight != null)
+						main.getDocumentPane().getHighlighter().removeHighlight(DriverEditor.currentHighlight);
+					
+					Logger.logln(NAME+"Highlight Sents checkbox unchecked");
+				}
+			}
+		};
+		prefWin.highlightSent.addActionListener(highlightSentsListener);
+		
+		highlightColorListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int color = prefWin.sentHighlightColors.getSelectedIndex();
+				PropertiesUtil.setHighlightColor(color);
+				
+				if (DriverEditor.taggedDoc != null) {
+					DriverEditor.painterHighlight = new DefaultHighlighter.DefaultHighlightPainter(PropertiesUtil.getHighlightColor());
+					DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				}
+			}
+		};
+		prefWin.sentHighlightColors.addActionListener(highlightColorListener);
+		
 		fontSizeListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -105,56 +138,6 @@ public class PreferencesDriver {
 			}
 		};
 		prefWin.tabbedPane.addChangeListener(tabbedPaneListener);
-		
-		classifierListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				PropertiesUtil.setClassifier(prefWin.classComboBox.getSelectedItem().toString());
-			}
-		};
-		prefWin.classComboBox.addActionListener(classifierListener);
-		
-		featureListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				PropertiesUtil.setFeature(prefWin.featComboBox.getSelectedItem().toString());
-			}
-		};
-		prefWin.featComboBox.addActionListener(featureListener);
-		
-		probSetListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Logger.logln(NAME+"'Select' Problem Set button clicked on the Preferences window");
-
-					int answer = 0;
-					
-					PropertiesUtil.load.addChoosableFileFilter(ANONConstants.XML);
-					if (PropertiesUtil.getProbSet() != null) {
-						String absPath = PropertiesUtil.propFile.getAbsolutePath();
-						String problemSetDir = absPath.substring(0, absPath.indexOf("anonymouth_prop")-1) + "\\problem_sets\\";
-						PropertiesUtil.load.setCurrentDirectory(new File(problemSetDir));
-						PropertiesUtil.load.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
-					}
-					
-					answer = PropertiesUtil.load.showDialog(main, "Load Problem Set");
-
-					if (answer == JFileChooser.APPROVE_OPTION) {
-						String path = PropertiesUtil.load.getSelectedFile().getAbsolutePath();
-						PropertiesUtil.setProbSet(path);
-						
-						prefWin.probSetTextPane.setText(path);
-					} else {
-						Logger.logln(NAME+"Set default problem set canceled");
-					}
-				} catch (NullPointerException arg)
-				{
-					arg.printStackTrace();
-				}
-			}
-		};
-		prefWin.selectProbSet.addActionListener(probSetListener);
 		
 		autoSaveListener = new ActionListener() {
 			@Override
@@ -286,15 +269,13 @@ public class PreferencesDriver {
 						//general
 						prefWin.warnQuit.setSelected(PropertiesUtil.getWarnQuit());
 						prefWin.autoSave.setSelected(PropertiesUtil.getAutoSave());
-						prefWin.fontSizes.setSelectedItem(PropertiesUtil.getFontSize());
 						prefWin.translations.setSelected(PropertiesUtil.getDoTranslations());
 						prefWin.showWarnings.setSelected(PropertiesUtil.getWarnAll());
-						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
 						
-						//defaults
-						prefWin.probSetTextPane.setText(PropertiesUtil.getProbSet());
-						prefWin.featComboBox.setSelectedItem(PropertiesUtil.getFeature());
-						prefWin.classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
+						//editor
+						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
+						prefWin.highlightSent.setSelected(PropertiesUtil.getHighlightSents());
+						prefWin.fontSizes.setSelectedItem(PropertiesUtil.getFontSize());
 						
 						//advanced
 						prefWin.numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
@@ -406,10 +387,12 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.highlightElems.isSelected()) {
 					PropertiesUtil.setAutoHighlight(true);
+					DriverEditor.autoHighlight = true;
 					DriverEditor.highlightWordsToRemove(main, DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);
+					DriverEditor.autoHighlight = false;
 					DriverEditor.removeHighlightWordsToRemove(main);
 					Logger.logln(NAME+"Auto highlights checkbox unchecked");
 				}

@@ -97,14 +97,15 @@ public class DriverEditor {
 
 	private static String cleanWordRegex=".*([\\.,!?])+";//REFINE THIS??
 
-	private static final Color HILIT_COLOR = new Color(255,0,0,100);//Color.yellow; //new Color(50, 161,227);// Color.blue;
-	protected static DefaultHighlighter.DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(255,255,0,128));
-	protected static DefaultHighlighter.DefaultHighlightPainter painterRemove = new DefaultHighlighter.DefaultHighlightPainter(HILIT_COLOR);
+	protected static DefaultHighlighter.DefaultHighlightPainter painterHighlight = new DefaultHighlighter.DefaultHighlightPainter(PropertiesUtil.getHighlightColor());
+	protected static DefaultHighlighter.DefaultHighlightPainter painterRemove = new DefaultHighlighter.DefaultHighlightPainter(new Color(255,0,0,100));
 	protected static DefaultHighlighter.DefaultHighlightPainter painterAdd = new DefaultHighlighter.DefaultHighlightPainter(new Color(0,255,0,128));
 
 	protected static Translation translator = new Translation();
 
 	public static TaggedDocument taggedDoc;
+	public static boolean doHighlight = PropertiesUtil.getHighlightSents();
+	public static boolean autoHighlight = PropertiesUtil.getAutoHighlight();
 	protected static Map<String, TaggedSentence> originals = new HashMap<String, TaggedSentence>();
 	protected static ArrayList<String> originalSents = new ArrayList<String>();
 	public static int currentSentNum = 0;
@@ -283,13 +284,13 @@ public class DriverEditor {
 	 * @param start
 	 * @param end
 	 */
-	protected static void moveHighlight(final GUIMain main, int[] bounds) {
+	protected static void moveHighlight(final GUIMain main, int[] bounds) {		
 		if (main.getDocumentPane().getCaret().getDot() != main.getDocumentPane().getCaret().getMark()) {
 			removeHighlightWordsToRemove(main);
 			main.getDocumentPane().getHighlighter().removeHighlight(currentHighlight);
 			return;
 		}
-
+		
 		if (currentHighlight != null)
 			main.getDocumentPane().getHighlighter().removeHighlight(currentHighlight);
 		try {
@@ -301,9 +302,10 @@ public class DriverEditor {
 				}
 
 				if (bounds[0]+temp <= currentCaretPosition) {
-					currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painter);
+					if (doHighlight)
+						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painterHighlight);
 					
-					if (PropertiesUtil.getAutoHighlight())
+					if (autoHighlight)
 						highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
 				} else {
 					removeHighlightWordsToRemove(main);
@@ -347,25 +349,28 @@ public class DriverEditor {
 			DriverEditor.elementsToRemoveInSentence.clear();
 
 			ArrayList<int[]> index = new ArrayList<int[]>();
-			//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
-			//to just extract the "..." for highlighting
-			String[] words = taggedDoc.getWordsInSentence(taggedDoc.getTaggedSentenceAtIndex(start+1)); //if we don't increment by one, it gets the previous sentence.
-			for (int j = 0; j < words.length; j++)
-				System.out.print(words[j] + " ");
-			System.out.println();
+			
+			String[] words = taggedDoc.getWordsInSentenceNoDups(taggedDoc.getTaggedSentenceAtIndex(start+1)); //if we don't increment by one, it gets the previous sentence.
+			
 			int sentenceSize = words.length;
 			int removeSize = main.elementsToRemoveTable.getRowCount();
+			
 			for (int i = 0; i < sentenceSize; i++) {
-				for (int x = 0; x < removeSize; x++) {
-					String wordToRemove = (String)main.elementsToRemoveTable.getModel().getValueAt(x, 0);
-					String[] test = wordToRemove.split(" ");
-					if (test.length > 2) {
-						wordToRemove = test[1].substring(0, test.length-2);
-						System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
-					}
-					
-					if (words[i].equals(wordToRemove)) {
-						index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
+				if (words[i] != null) {
+					for (int x = 0; x < removeSize; x++) {
+						String wordToRemove = (String)main.elementsToRemoveTable.getModel().getValueAt(x, 0);
+						System.out.println(wordToRemove);
+						//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
+						//to just extract the "..." for highlighting
+						String[] test = wordToRemove.split(" ");
+						if (test.length > 2) {
+							wordToRemove = test[1].substring(0, test.length-2);
+							System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
+						}
+						
+						if (words[i].equals(wordToRemove)) {
+							index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
+						}
 					}
 				}
 			}
@@ -373,7 +378,6 @@ public class DriverEditor {
 			int indexSize = index.size();
 
 			for (int i = 0; i < indexSize; i++) {
-				System.out.println("Highlighting " + index.get(i)[0] + " " + index.get(i)[1]);
 				DriverEditor.elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
 			}
 		} catch (Exception e1) {
@@ -1167,7 +1171,7 @@ class SuggestionCalculator {
 		String tempString;
 //		ArrayList<Integer> tempArray;
 //		int indexOfTemp;
-		
+
 		for (int i = 0; i < arrSize; i++) {//loops through top to remove list
 //			setString += topToRemove.get(i) + "\n";//sets the string to return
 			@SuppressWarnings("resource")
