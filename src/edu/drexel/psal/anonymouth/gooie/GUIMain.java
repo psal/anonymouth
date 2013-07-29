@@ -315,6 +315,7 @@ public class GUIMain extends javax.swing.JFrame {
 	public static JMenuItem viewEnterFullScreenMenuItem;
 	protected JMenuItem helpMenu;
 	protected JMenuItem fileMenu;
+	protected JMenu windowMenu;
 	protected JMenuItem editMenu;
 	public JMenuItem editUndoMenuItem;
 	public JMenuItem editRedoMenuItem;
@@ -346,6 +347,7 @@ public class GUIMain extends javax.swing.JFrame {
 	private SplashScreen splashScreen;
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
+	public SuggestionsTabDriver suggestionsTabDriver;
 	protected Font normalFont;
 	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -541,8 +543,6 @@ public class GUIMain extends javax.swing.JFrame {
 		fileMenu.add(fileSaveTestDocMenuItem);
 		fileMenu.add(fileSaveAsTestDocMenuItem);
 
-		menuBar.add(fileMenu);
-
 		editMenu = new JMenu("Edit");
 		editUndoMenuItem = new JMenuItem("Undo");
 		editUndoMenuItem.setEnabled(false);
@@ -551,38 +551,7 @@ public class GUIMain extends javax.swing.JFrame {
 		editRedoMenuItem.setEnabled(false);
 		editMenu.add(editRedoMenuItem);
 		clipboard = new Clipboard(this, editMenu);
-		menuBar.add(editMenu);
-
-		viewMenuItem = new JMenu("View");
-		viewClustersMenuItem = new JMenuItem("Clusters");
-		viewMenuItem.add(viewClustersMenuItem);
-
-		menuBar.add(viewMenuItem);
-
-		if (ANONConstants.IS_MAC) {
-			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-
-			viewMenuItem.add(new JSeparator());
-			viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
-			viewMenuItem.add(viewEnterFullScreenMenuItem);
-			viewEnterFullScreenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-		} else {
-			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
-			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
-			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
-		}
-
-		if (!ANONConstants.IS_MAC) {
-			JMenu settingsMenu = new JMenu("Settings");
-			settingsGeneralMenuItem = new JMenuItem("Preferences");
-			settingsMenu.add(settingsGeneralMenuItem);
-			menuBar.add(settingsMenu);
-		}
-
+		
 		helpMenu = new JMenu("Help");
 		helpAboutMenuItem = new JMenuItem("About Anonymouth");
 		helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
@@ -595,6 +564,39 @@ public class GUIMain extends javax.swing.JFrame {
 		helpMenu.add(new JSeparator());
 		helpMenu.add(helpClustersMenuItem);
 
+		if (ANONConstants.IS_MAC) {
+			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+
+			viewMenuItem = new JMenu("View");
+			viewClustersMenuItem = new JMenuItem("Clusters");
+			viewMenuItem.add(viewClustersMenuItem);
+			
+			viewMenuItem.add(new JSeparator());
+			viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
+			viewMenuItem.add(viewEnterFullScreenMenuItem);
+			viewEnterFullScreenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));	
+		} else {
+			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
+			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
+			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
+			
+			JMenu windowMenu = new JMenu("Window");
+			settingsGeneralMenuItem = new JMenuItem("Preferences");
+			viewClustersMenuItem = new JMenuItem("Clusters");
+			windowMenu.add(settingsGeneralMenuItem);
+			windowMenu.add(viewClustersMenuItem);
+		}
+
+		menuBar.add(fileMenu);
+		menuBar.add(editMenu);
+		if (ANONConstants.IS_MAC)
+			menuBar.add(viewMenuItem);
+		else
+			menuBar.add(windowMenu);
 		menuBar.add(helpMenu);
 
 		this.setJMenuBar(menuBar);
@@ -623,6 +625,7 @@ public class GUIMain extends javax.swing.JFrame {
 			ppAdvancedWindow = preProcessWindow.advancedWindow;
 			setDefaultValues();
 			preferencesWindow = new PreferencesWindow(this);
+			suggestionsTabDriver = new SuggestionsTabDriver(this);
 			clustersWindow = new ClustersWindow();
 			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
@@ -633,10 +636,10 @@ public class GUIMain extends javax.swing.JFrame {
 			splashScreen.updateText("Initializing listeners");
 			
 			//Initialize GUIMain listeners
+			suggestionsTabDriver.initListeners();
 			DriverMenu.initListeners(this);
 			DriverEditor.initListeners(this);
 			DriverResultsTab.initListeners(this);
-			DriverSuggestionsTab.initListeners(this);
 			DriverClustersWindow.initListeners(this);
 			DriverResultsWindow.initListeners(this);
 			DriverTranslationsTab.initListeners(this);
@@ -687,14 +690,14 @@ public class GUIMain extends javax.swing.JFrame {
 
 		// ------- initialize PARALLEL arrays for the panels, their names, and their locations
 		ArrayList<String> panelNames = new ArrayList<String>();
-		panelNames.add("Suggestions");
+		panelNames.add("Word Suggestions");
 		panelNames.add("Translations");
 		panelNames.add("Document");
 		panelNames.add("Anonymity");
 		panelNames.add("Results");
 
 		HashMap<String, JPanel> panels = new HashMap<String, JPanel>(6);
-		panels.put("Suggestions", suggestionsPanel);
+		panels.put("Word Suggestions", suggestionsPanel);
 		panels.put("Translations", translationsPanel);
 		panels.put("Document", documentsPanel);
 		panels.put("Anonymity", anonymityPanel);
@@ -785,7 +788,7 @@ public class GUIMain extends javax.swing.JFrame {
 		suggestionsPanel.setLayout(settingsLayout);
 		{//================ Suggestions Tab =====================
 			//--------- Elements to Add Label ------------------
-			elementsToAddLabel = new JLabel("Elements To Add:");
+			elementsToAddLabel = new JLabel("Words To Add:");
 			elementsToAddLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			elementsToAddLabel.setFont(titleFont);
 			elementsToAddLabel.setOpaque(true);
@@ -800,7 +803,6 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToAddScrollPane = new JScrollPane(elementsToAddPane);
 			elementsToAddPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 			elementsToAdd = new DefaultListModel<String>();
-			elementsToAdd.add(0, "Please process your document to receive suggestions");
 			elementsToAddPane.setModel(elementsToAdd);
 			elementsToAddPane.setEnabled(false);
 			elementsToAddPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -810,7 +812,7 @@ public class GUIMain extends javax.swing.JFrame {
 			clearAddHighlights = new JButton("Clear \"Add\" Highlights");
 
 			//--------- Elements to Remove Label  ------------------
-			elementsToRemoveLabel = new JLabel("Elements To Remove:");
+			elementsToRemoveLabel = new JLabel("Words To Remove:");
 			elementsToRemoveLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			elementsToRemoveLabel.setFont(titleFont);
 			elementsToRemoveLabel.setOpaque(true);
@@ -830,7 +832,7 @@ public class GUIMain extends javax.swing.JFrame {
 			    }
 			};
 			
-			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel, this);
+			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel);
 			elementsToRemoveTable.getTableHeader().setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
 																"in all given docs written by the user.<br>" +
 													"<br><b>Word To Remove:</b> The words you should consider<br>" +
@@ -848,7 +850,6 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToRemoveTable.setRowSelectionAllowed(true);
 			elementsToRemoveTable.setColumnSelectionAllowed(false);
 			elementsToRemoveTable.removeAllElements();
-			elementsToRemoveModel.addRow(new String[] {"Please process to receive suggestions"});
 			elementsToRemoveTable.setShowGrid(false);
 			elementsToRemoveTable.getColumn("Occurrences").setMaxWidth(90);
 			elementsToRemoveTable.getColumn("Occurrences").setMinWidth(90);
@@ -900,10 +901,14 @@ public class GUIMain extends javax.swing.JFrame {
 
 			notTranslated = new JTextPane();
 
-			if (PropertiesUtil.getDoTranslations())
-				notTranslated.setText("Please process your document to receive translation suggestions.");
-			else
-				notTranslated.setText("You have turned translations off.");
+			if (PropertiesUtil.getDoTranslations()) {
+				String text;
+				if (ANONConstants.IS_MAC)
+					text = "Anonymouth > Preferences";
+				else
+					text = "Window > Preferences";
+				notTranslated.setText("Translations are off\n\nTo turn them on, navigate to " + text);
+			}
 
 			notTranslated.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 			notTranslated.setDragEnabled(false);
@@ -1086,10 +1091,7 @@ public class GUIMain extends javax.swing.JFrame {
 					resultsMainPanel.setPreferredSize(new Dimension(160, resultsHeight));
 					g2d.drawImage(resultsWindow.getPanelChart(170, resultsHeight), -10, -6, null);
 				} else {
-					if (DriverEditor.isFirstRun)
-						resultsLabel.setText("<html><center>Please process your<br>document to<br>receive results.</center></html>");
-					else
-						resultsLabel.setText("<html><center>Please wait while<br>re-processing</center></html>");
+					resultsLabel.setText("<html><center>Please wait while<br>re-processing</center></html>");
 				}
 			}
 		};

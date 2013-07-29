@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,7 +54,7 @@ public class PreProcessWindowDriver {
 	private final int KEEP_BOTH = 1;
 
 	//Variables
-	protected HashMap<String, List<String>> titles = new HashMap<String, List<String>>();
+	protected HashMap<String, List<String>> titles;
 	private GUIMain main;
 	private String lastDirectory;
 	private String trainDocsDirectory;
@@ -98,6 +97,9 @@ public class PreProcessWindowDriver {
 	public PreProcessWindowDriver(PreProcessWindow preProcessWindow, GUIMain main) {
 		this.main = main;
 		this.preProcessWindow = preProcessWindow;
+		
+		titles = new HashMap<String, List<String>>();
+		
 		load = new FileDialog(preProcessWindow);
 		load.setModalityType(ModalityType.DOCUMENT_MODAL);
 		load.setMode(FileDialog.LOAD);
@@ -105,7 +107,15 @@ public class PreProcessWindowDriver {
 		save.setModalityType(ModalityType.DOCUMENT_MODAL);
 		save.setMode(FileDialog.SAVE);
 		
-		initListeners();
+		initListeners();	
+	}
+	
+	public void updateTitles() {
+		if (PropertiesUtil.getProbSet().equals("")) {
+			titles = new HashMap<String, List<String>>();
+		} else {
+			titles = preProcessWindow.ps.getTitles();
+		}
 	}
 	
 	/**
@@ -1068,12 +1078,13 @@ public class PreProcessWindowDriver {
 					titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
 				titles.get(ANONConstants.DUMMY_NAME).add(main.mainDocPreview.getTitle());
 			} catch (Exception e) {
+				e.printStackTrace();
 				Logger.logln(NAME+"Error setting text of test document in editor", LogOut.STDERR);
-				JOptionPane.showOptionDialog(main,
-						"An error occurred while tring to display the test document\n" +
-								"in the document editor. Please verify the file's sane or\n" +
-								"use a different file.</html>",
-								"Error While Adding Test File",
+				JOptionPane.showOptionDialog(preProcessWindow,
+						"An error occurred while tring to load your test document\n" +
+								"Perhaps Anonymouth doesn't have correct permissions,\n" +
+								"try moving the document to somewhere else and trying again.",
+								"Error While Adding Document to Anonymize",
 								JOptionPane.DEFAULT_OPTION,		
 								JOptionPane.ERROR_MESSAGE, null, null, null);
 				preProcessWindow.testDocPane.setText("");
@@ -1440,22 +1451,5 @@ public class PreProcessWindowDriver {
 		}     
 
 		return result;
-	}
-	
-	/**
-	 * Debugging method to see the contents of "titles" to check and make sure it's contents are being updated properly
-	 */
-	protected void printTitles() {
-		Set<String> test = titles.keySet();
-		Iterator<String> it = test.iterator();
-		while (it.hasNext()) {
-			String name = (String)it.next();
-			List<String> docs = titles.get(name);
-			System.out.println("Author = " + name + " Docs = " + Integer.toString(titles.get(name).size()));
-			
-			for (int i = 0; i < docs.size(); i++) {
-				System.out.println("---" + docs.get(i));
-			}
-		}
 	}
 }

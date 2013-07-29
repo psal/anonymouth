@@ -217,7 +217,7 @@ public class DriverTranslationsTab implements ActionListener {
 		GUIMain.GUITranslator.replace(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate), current);
 		
 		main.anonymityDrawingPanel.updateAnonymityBar();
-		SuggestionCalculator.placeSuggestions(main);
+		main.suggestionsTabDriver.placeSuggestions();
 		
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");

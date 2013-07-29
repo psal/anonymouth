@@ -28,8 +28,8 @@ public class ProblemSet {
 	 */
 	//private static final String NAME = "( ProblemSet ) - ";
 	private SortedMap<String,List<Document>> trainDocsMap;
-	
 	private SortedMap<String,List<Document>> testDocsMap;
+	private HashMap<String, List<String>> titles;
 	
 	private String trainCorpusName;	
 	
@@ -832,6 +832,10 @@ public class ProblemSet {
 		return useDummyAuthor;
 	}
 	
+	public HashMap<String, List<String>> getTitles() {
+		return titles;
+	}
+	
 	
 	/* ===========
 	 * XML parsing
@@ -886,82 +890,97 @@ public class ProblemSet {
 			xmlDoc.getDocumentElement().normalize();
 			NodeList items = xmlDoc.getElementsByTagName("document");
 			problemSet.trainCorpusName = "Authors";
-			HashSet<String> titles = new HashSet<String>();
+			titles = new HashMap<String, List<String>>();
+			int size = items.getLength();
 			
-			for (int i=0; i<items.getLength();i++){
+			ArrayList<String> docTitles = new ArrayList<String>(size);
+
+			for (int i = 0; i < size; i++) {
 				Node current = items.item(i);
 			
-				//test document (old format)
-				if (current.getParentNode().getNodeName().equals("test")){
+				if (current.getParentNode().getNodeName().equals("test")) {
+					//test document (old format)
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = ANONConstants.DUMMY_NAME;
 					filePath = filePath.replace("/./","/");
-					Document testDoc = new Document(filePath, ANONConstants.DUMMY_NAME);
+					Document testDoc = new Document(filePath, author);
+					String oldTitle = testDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(testDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 
-						String newTitle = testDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
 						}
-						
-						testDoc.setTitle(newTitle);
 					}
+
+					testDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					titles.add(testDoc.getTitle());
-					
-					problemSet.addTestDoc(ANONConstants.DUMMY_NAME,testDoc);
+					problemSet.addTestDoc(author, testDoc);
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")) {
 					//Training document
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path trainPath = Paths.get(current.getTextContent());
 					String filePath = trainPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document trainDoc = new Document(filePath,parent.getAttribute("name"));
+					String oldTitle = trainDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(trainDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 						
-						String newTitle = trainDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
-						}
-						
-						trainDoc.setTitle(newTitle);
+						}	
 					}
 					
-					titles.add(trainDoc.getTitle());
+					trainDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
+					problemSet.addTrainDoc(author, trainDoc);
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")) {
 					//test document (new format)
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document testDoc = new Document(filePath,parent.getAttribute("name"));
+					String oldTitle = testDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(testDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 
-						String newTitle = testDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
 						}
-						
-						testDoc.setTitle(newTitle);
 					}
 					
-					titles.add(testDoc.getTitle());
+					testDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					problemSet.addTestDoc(parent.getAttribute("name"),testDoc);
+					problemSet.addTestDoc(author, testDoc);
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
 				}

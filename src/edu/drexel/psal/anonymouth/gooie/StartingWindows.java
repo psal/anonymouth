@@ -173,7 +173,7 @@ public class StartingWindows extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				startingWindows.setVisible(false);
-				main.showMainGUI();
+				DriverEditor.processButtonListener.actionPerformed(e);
 			}
 		};
 		startButton.addActionListener(startListener);
@@ -322,11 +322,16 @@ public class StartingWindows extends JFrame {
 			}
 			
 			PropertiesUtil.setProbSet(path);
+			main.preProcessWindow.driver.updateTitles();
 		} catch (Exception exc) {
+			exc.printStackTrace();
 			Logger.logln(NAME+"Failed loading problem set at path: "+path, LogOut.STDERR);
 			setReadyToStart(false, false);
 			ThePresident.canDoQuickStart = false;
 			PropertiesUtil.setProbSet("");
+			main.preProcessWindow.driver.updateTitles();
+			revalidate();
+			repaint();
 		}
 	}
 }

@@ -21,7 +21,6 @@ import edu.drexel.psal.jstylo.generics.Logger;
 public class ProgressWindow extends JDialog implements PropertyChangeListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private GUIMain main;
 	protected Thread t;
 	private Task task;
 	private JLabel firstMessage;
@@ -36,8 +35,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	 */
 	public ProgressWindow(String title, GUIMain main) {
 		super(main, title, null); // MODELESS lets it stay on top, but not block any processes
-		this.main = main;
-		main.setEnabled(false);
 		
 		firstMessage = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" />" +
 				"<center>Document currently processing, depending on the size of your dataset and computer this may take " +
@@ -78,18 +75,17 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 			t = new Thread();
 			editingProgressBarLabel.setText(progressMessage);
 			editorProgressBar.setEnabled(true);
-			int i = 0;
-			while (true) {
-				for (i = 0; i < 101; i++) {
-					editingProgressBarLabel.setText(progressMessage);
-					editorProgressBar.setValue(i);
-					try {
-						Thread.sleep(20);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+			for (int i = 0; i <= 100; i++) {
+				editingProgressBarLabel.setText(progressMessage);
+				editorProgressBar.setValue(i);
+
+				try {
+					Thread.sleep(400);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
+			return null;
 		}
 
 		@Override
@@ -130,8 +126,9 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	 * Stops the progress bar and trashes the window
 	 */
 	public void stop() {
+		editorProgressBar.setValue(100);
+		editingProgressBarLabel.setText("Final Preparations...");
 		Logger.logln("Stopping ProgressBar");
-		main.setEnabled(true); // to ensure its enabled, even if we didn't disable it to begin with
 		t.interrupt();
 		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);

@@ -5,17 +5,15 @@ import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.engine.FeatureList;
+import edu.drexel.psal.anonymouth.engine.HighlighterEngine;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
-import edu.drexel.psal.anonymouth.utils.IndexFinder;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
-import edu.drexel.psal.anonymouth.utils.Word;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,7 +26,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -38,11 +35,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Highlighter;
 
-import com.jgaap.generics.Document;
 /**
  * editorTabDriver does the work for the editorTab (Editor) in the main GUI (GUIMain)
  * @author Andrew W.E. McDonald
@@ -61,9 +54,6 @@ public class DriverEditor {
 	protected static DataAnalyzer wizard;
 	private static DocumentMagician magician;
 	protected static String[] theFeatures;
-	protected static ArrayList<HighlightMapper> elementsToRemoveInSentence = new ArrayList<HighlightMapper>();
-	protected static ArrayList<HighlightMapper> selectedAddElements = new ArrayList<HighlightMapper>();
-	protected static ArrayList<HighlightMapper> selectedRemoveElements = new ArrayList<HighlightMapper>();
 	public static int resultsMaxIndex;
 	public static Object maxValue;
 	public static String chosenAuthor = "n/a";
@@ -97,10 +87,6 @@ public class DriverEditor {
 
 	private static String cleanWordRegex=".*([\\.,!?])+";//REFINE THIS??
 
-	protected static DefaultHighlighter.DefaultHighlightPainter painterHighlight = new DefaultHighlighter.DefaultHighlightPainter(PropertiesUtil.getHighlightColor());
-	protected static DefaultHighlighter.DefaultHighlightPainter painterRemove = new DefaultHighlighter.DefaultHighlightPainter(new Color(255,0,0,100));
-	protected static DefaultHighlighter.DefaultHighlightPainter painterAdd = new DefaultHighlighter.DefaultHighlightPainter(new Color(0,255,0,128));
-
 	protected static Translation translator = new Translation();
 
 	public static TaggedDocument taggedDoc;
@@ -117,7 +103,6 @@ public class DriverEditor {
 	protected static int charsInserted = -1;
 	protected static int charsRemoved = -1;
 	protected static String currentSentenceString = "";
-	protected static Object currentHighlight = null;
 	protected static int ignoreNumActions = 0;
 	protected static int caretPositionPriorToCharInsertion = 0;
 	protected static int caretPositionPriorToCharRemoval = 0;
@@ -125,7 +110,7 @@ public class DriverEditor {
 	public static int[] oldSelectionInfo = new int[3];
 	protected static Map<String, int[]> wordsToRemove = new HashMap<String, int[]>();
 
-	protected static SuggestionCalculator suggestionCalculator;
+	public static HighlighterEngine highlightEngine;
 	protected static Boolean shouldUpdate = false;
 	protected static Boolean EOSPreviouslyRemoved = false;
 	protected static Boolean EOSesRemoved = false;
@@ -139,13 +124,14 @@ public class DriverEditor {
 	public static int[] rightSentInfo = new int[0];
 	private static boolean translate = false;
 	protected static ActionListener saveAsTestDoc;
+	public static ActionListener processButtonListener;
 	protected static Object lock = new Object();
 	private static boolean wholeLastSentDeleted = false;
 	private static boolean wholeBeginningSentDeleted = false;
 	public static boolean skipDeletingEOSes = false;
 	public static boolean ignoreVersion = false;
 	public static TaggedDocument backedUpTaggedDoc;
-
+	
 	public static int getCurrentSentNum(){
 		return currentSentNum;
 	}
@@ -234,7 +220,7 @@ public class DriverEditor {
 			originals.put(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false), taggedDoc.getSentenceNumber(oldSelectionInfo[0]));
 			originalSents.remove(oldSelectionInfo[0]);
 			originalSents.add(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false));
-			SuggestionCalculator.placeSuggestions(main);
+			main.suggestionsTabDriver.placeSuggestions();
 		}
 
 		if (shouldUpdate) {
@@ -285,103 +271,32 @@ public class DriverEditor {
 	 * @param end
 	 */
 	protected static void moveHighlight(final GUIMain main, int[] bounds) {		
+		highlightEngine.removeAutoRemoveHighlights();
+		highlightEngine.removeSentenceHighlight();
+		
+		//If user is highlight text themselves, don't highlight any additional stuff
 		if (main.getDocumentPane().getCaret().getDot() != main.getDocumentPane().getCaret().getMark()) {
-			removeHighlightWordsToRemove(main);
-			main.getDocumentPane().getHighlighter().removeHighlight(currentHighlight);
 			return;
 		}
 		
-		if (currentHighlight != null)
-			main.getDocumentPane().getHighlighter().removeHighlight(currentHighlight);
-		try {
-			System.out.printf("Moving highlight to %d to %d\n", bounds[0],bounds[1]);
-			if ((selectedSentIndexRange[0] != currentCaretPosition || currentSentNum == 0) || deleting) { //if the user is not selecting a sentence, don't highlight it.
-				int temp = 0;
-				while (Character.isWhitespace(main.getDocumentPane().getText().charAt(bounds[0]+temp))) {
-					temp++;
-				}
+		System.out.printf("Moving highlight to %d to %d\n", bounds[0],bounds[1]);
+		if ((selectedSentIndexRange[0] != currentCaretPosition || currentSentNum == 0) || deleting) { //if the user is not selecting a sentence, don't highlight it.
+			int temp = 0;
+			while (Character.isWhitespace(main.getDocumentPane().getText().charAt(bounds[0]+temp))) {
+				temp++;
+			}
 
-				if (bounds[0]+temp <= currentCaretPosition) {
-					if (doHighlight)
-						currentHighlight = main.getDocumentPane().getHighlighter().addHighlight(bounds[0]+temp, bounds[1], painterHighlight);
-					
-					if (autoHighlight)
-						highlightWordsToRemove(main, bounds[0]+temp, bounds[1]);
-				} else {
-					removeHighlightWordsToRemove(main);
-				}
-			} else {
-				removeHighlightWordsToRemove(main);
-			}	
-		} catch (BadLocationException err) {
-			Logger.logln(NAME+"Highlighting sentence failed, bounds[0] = " + bounds[0] + ", bounds[1] = " + bounds[1] + ", sentToTranslate = " + sentToTranslate, LogOut.STDERR);
+			if (bounds[0]+temp <= currentCaretPosition) {
+				if (doHighlight)
+					highlightEngine.addSentenceHighlight(bounds[0]+temp, bounds[1]);
+
+				if (autoHighlight)
+					highlightEngine.addAutoRemoveHighlights(bounds[0]+temp, bounds[1]);
+			}
 		}
+		
 		synchronized(lock) {
 			lock.notify();
-		}
-	}
-	
-	public static void removeHighlightWordsToRemove(GUIMain main) {
-		int highlightedObjectsSize = DriverEditor.elementsToRemoveInSentence.size();
-		
-		if (highlightedObjectsSize > 0) {
-			Highlighter highlight = main.getDocumentPane().getHighlighter();
-
-			for (int i = 0; i < highlightedObjectsSize; i++)
-				highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
-			DriverEditor.elementsToRemoveInSentence.clear();
-		}
-	}
-	
-	/**
-	 * Automatically highlights words to remove in the currently highlighted sentence
-	 * @param main
-	 * @param start
-	 * @param end
-	 */
-	public static void highlightWordsToRemove(GUIMain main, int start, int end) {
-		try {
-			Highlighter highlight = main.getDocumentPane().getHighlighter();
-			int highlightedObjectsSize = DriverEditor.elementsToRemoveInSentence.size();
-
-			for (int i = 0; i < highlightedObjectsSize; i++)
-				highlight.removeHighlight(DriverEditor.elementsToRemoveInSentence.get(i).getHighlightedObject());
-			DriverEditor.elementsToRemoveInSentence.clear();
-
-			ArrayList<int[]> index = new ArrayList<int[]>();
-			
-			String[] words = taggedDoc.getWordsInSentenceNoDups(taggedDoc.getTaggedSentenceAtIndex(start+1)); //if we don't increment by one, it gets the previous sentence.
-			
-			int sentenceSize = words.length;
-			int removeSize = main.elementsToRemoveTable.getRowCount();
-			
-			for (int i = 0; i < sentenceSize; i++) {
-				if (words[i] != null) {
-					for (int x = 0; x < removeSize; x++) {
-						String wordToRemove = (String)main.elementsToRemoveTable.getModel().getValueAt(x, 0);
-						System.out.println(wordToRemove);
-						//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
-						//to just extract the "..." for highlighting
-						String[] test = wordToRemove.split(" ");
-						if (test.length > 2) {
-							wordToRemove = test[1].substring(0, test.length-2);
-							System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
-						}
-						
-						if (words[i].equals(wordToRemove)) {
-							index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
-						}
-					}
-				}
-			}
-			
-			int indexSize = index.size();
-
-			for (int i = 0; i < indexSize; i++) {
-				DriverEditor.elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], highlight.addHighlight(index.get(i)[0], index.get(i)[1], DriverEditor.painterRemove)));
-			}
-		} catch (Exception e1) {
-			Logger.logln(NAME+"Error occured while getting selected word to remove value and highlighting all instances.", LogOut.STDERR);
 		}
 	}
 
@@ -457,7 +372,7 @@ public class DriverEditor {
 		 *############################################################################################################*
 		 ***********************************************************************************************************************************************/	
 
-		suggestionCalculator = new SuggestionCalculator();
+		highlightEngine = new HighlighterEngine(main);
 
 		main.getDocumentPane().addCaretListener(new CaretListener() {
 			@Override
@@ -877,7 +792,7 @@ public class DriverEditor {
 		/**
 		 * ActionListener for process button (bar).
 		 */
-		main.processButton.addActionListener(new ActionListener() {
+		processButtonListener = new ActionListener() {
 			@Override
 			public synchronized void actionPerformed(ActionEvent event) {
 				// ----- check if all requirements for processing are met
@@ -940,6 +855,7 @@ public class DriverEditor {
 							}
 							wizard = new DataAnalyzer(main.preProcessWindow.ps);
 							magician = new DocumentMagician(false);
+							main.suggestionsTabDriver.setMagician(magician);
 						} else {
 							isFirstRun = false;
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
@@ -950,17 +866,15 @@ public class DriverEditor {
 							resetAll(main, true);
 						}
 
-						main.getDocumentPane().getHighlighter().removeAllHighlights();
-						elementsToRemoveInSentence.clear();
-						selectedAddElements.clear();
-						selectedRemoveElements.clear();
+						highlightEngine.clearAll();
 						Logger.logln(NAME+"calling backendInterface for preTargetSelectionProcessing");
 
 						BackendInterface.preTargetSelectionProcessing(main,wizard,magician);
 					}
 				}
 			}
-		});
+		};
+		main.processButton.addActionListener(processButtonListener);
 
 		saveAsTestDoc = new ActionListener() {
 			@Override
@@ -1100,281 +1014,7 @@ public class DriverEditor {
 		}
 		return 0;
 	}
-
-	public static void setSuggestions() {
-		SuggestionCalculator.placeSuggestions(GUIMain.inst);
-	}
 } 
-
-class TheHighlighter extends DefaultHighlighter.DefaultHighlightPainter{
-	public TheHighlighter(Color color){
-		super(color);
-	}
-}
-
-class SuggestionCalculator {
-
-	private final static String PUNCTUATION = "?!,.\"`'";
-	private final static String CLEANWORD=".*([\\.,!?])+";
-	private static DocumentMagician magician;
-	protected static Highlighter editTracker;
-	protected static ArrayList<String[]> topToRemove;
-	protected static ArrayList<String> topToAdd;
-
-	public static void init(DocumentMagician magician) {
-		SuggestionCalculator.magician = magician;
-	}
-	
-	/*
-	 * Highlights the sentence that is currently in the editor box in the main document
-	 * no return
-	 */
-	protected static void placeSuggestions(GUIMain main) {
-		//We must first clear any existing highlights the user has and remove all existing suggestions
-		Highlighter highlight = main.getDocumentPane().getHighlighter();
-		int highlightedObjectsSize = DriverEditor.selectedAddElements.size();
-
-		for (int i = 0; i < highlightedObjectsSize; i++)
-			highlight.removeHighlight(DriverEditor.selectedAddElements.get(i).getHighlightedObject());
-		DriverEditor.selectedAddElements.clear();
-		highlightedObjectsSize = DriverEditor.selectedRemoveElements.size();
-		for (int i = 0; i < highlightedObjectsSize; i++)
-			highlight.removeHighlight(DriverEditor.selectedRemoveElements.get(i).getHighlightedObject());
-		DriverEditor.selectedRemoveElements.clear();
-
-		//If the user had a word highlighted and we're updating the list, we want to keep the word highlighted if it's in the updated list
-		String prevSelectedElement = "";
-		if (main.elementsToAddPane.getSelectedValue() != null)
-			prevSelectedElement = main.elementsToAddPane.getSelectedValue();
-		if (main.elementsToRemoveTable.getSelectedRow() != -1)
-			prevSelectedElement = (String)main.elementsToRemoveTable.getModel().getValueAt(main.elementsToRemoveTable.getSelectedRow(), 0);
-		
-		if (main.elementsToRemoveTable.getRowCount() > 0)
-			main.elementsToRemoveTable.removeAllElements();
-		if (main.elementsToAdd.getSize() > 0)
-			main.elementsToAdd.removeAllElements();
-
-		//Adding new suggestions
-		List<Document> documents = magician.getDocumentSets().get(1); //all the user's sample documents (written by them)
-		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
-		
-		topToRemove = ConsolidationStation.getPriorityWordsToRemove(documents, .1);
-		topToAdd = ConsolidationStation.getPriorityWordsToAdd(ConsolidationStation.otherSampleTaggedDocs, .05);
-		
-		ArrayList<String> sentences = DriverEditor.taggedDoc.getUntaggedSentences(false);
-		int sentNum = DriverEditor.getCurrentSentNum();
-		String sentence = sentences.get(sentNum);
-
-		int arrSize = topToRemove.size();
-//		String setString = "";
-//		int fromIndex = 0;
-		String tempString;
-//		ArrayList<Integer> tempArray;
-//		int indexOfTemp;
-
-		for (int i = 0; i < arrSize; i++) {//loops through top to remove list
-//			setString += topToRemove.get(i) + "\n";//sets the string to return
-			@SuppressWarnings("resource")
-			Scanner parser = new Scanner(sentence);
-//			fromIndex = 0;
-			
-			while (parser.hasNext()) {//finds if the given word to remove is in the current sentence
-				//loops through current sentence
-				tempString = parser.next();
-				
-				if (tempString.matches(CLEANWORD)) {//TODO: refine this.
-					tempString=tempString.substring(0,tempString.length()-1);
-					//Logger.logln("replaced a period in: "+tempString);
-				}
-				
-//				if (tempString.equals(topToRemove.get(i))) {
-//					tempArray = new ArrayList<Integer>(2);
-//					
-//					indexOfTemp = sentence.indexOf(tempString, fromIndex);
-//					tempArray.add(indexOfTemp + startHighlight);//-numberTimesFixTabs
-//					tempArray.add(indexOfTemp+tempString.length() + startHighlight);
-//
-//					added = false;
-//					for(int j=0;j<indexArray.size();j++){
-//						if(indexArray.get(j).get(0)>tempArray.get(0)){
-//							indexArray.add(j,tempArray);
-//							added=true;
-//							break;
-//						}
-//					}
-//					if(!added)
-//						indexArray.add(tempArray);
-//					//fromIndex=tempArray.get(1);
-//				}
-//				fromIndex+=tempString.length()+1;
-				
-			}
-			
-			if (!topToRemove.get(i).equals("''") && !topToRemove.get(i).equals("``")) {
-				String left, right;
-				
-				//The element to remove
-				if (PUNCTUATION.contains(topToRemove.get(i)[0].trim()))
-					left = "Reduce " + topToRemove.get(i)[0] + "'s";
-				else
-					left = topToRemove.get(i)[0];
-				
-				//The number of occurrences
-				if (topToRemove.get(i)[1].equals("0"))
-					right = "None";
-				else if (topToRemove.get(i)[1].equals("1"))
-					right = "1 time";
-				else
-					right = topToRemove.get(i)[1] + " times";
-				
-				main.elementsToRemoveModel.insertRow(i, new String[] {left, right});
-				
-				if (topToRemove.get(i)[0].trim().equals(prevSelectedElement)) {
-					main.elementsToRemoveTable.setRowSelectionInterval(i, i);
-				}
-			}		
-		}
-
-		//main.elementsToRemoveTable.clearSelection();
-		main.elementsToAdd.removeAllElements();
-
-		arrSize = topToAdd.size();
-		for (int i=0;i<arrSize;i++) {
-			main.elementsToAdd.add(i, topToAdd.get(i));
-			
-			if (topToAdd.get(i).equals(prevSelectedElement)) {
-				main.elementsToAddPane.setSelectedValue(topToAdd.get(i), true);
-			}
-		}
-
-		//main.elementsToAddPane.clearSelection();
-		//findSynonyms(main, sentence);
-	}
-
-	/**
-	 * Finds the synonyms of the words to remove in the words to add list
-	 */
-	protected static void findSynonyms(GUIMain main, String currentSent) {
-		String[] tempArr;
-		//addTracker = new DefaultHighlighter();
-		// TODO make new painter!!! (this one doesn't exist) anymore // painter3 = new DefaultHighlighter.DefaultHighlightPainter(new Color(0,0,255,128));
-		String tempStr, synSetString = "";
-		int index;
-		synSetString = "";
-		boolean inSent;
-		Scanner parser;
-		HashMap<String,Integer> indexMap = new HashMap<String,Integer>();
-
-		for (String[] str : topToRemove) {
-			tempArr = DictionaryBinding.getSynonyms(str[0]);
-			if (tempArr!=null) {
-				//inSent=currentSent.contains(str);
-				inSent = DriverEditor.checkSentFor(currentSent,str[0]);
-
-				if (inSent)
-					synSetString+=str[0]+"=>";
-				for (int i = 0; i < tempArr.length; i++) {//looks through synonyms
-					tempStr=tempArr[i];
-					if (inSent) {
-						synSetString += tempStr + ", ";
-						
-						for (String addString : topToAdd) {
-							if (addString.equalsIgnoreCase(tempStr)) {
-								index = synSetString.indexOf(tempStr);
-								indexMap.put(tempStr, index);
-							}
-						}
-					}
-				}
-				
-				if (inSent)
-					synSetString = synSetString.substring(0, synSetString.length()-2)+"\n";
-			}
-		}
-		
-		@SuppressWarnings("resource")
-		Scanner sentParser = new Scanner(currentSent);
-		String wordToSearch, wordSynMatch;
-		HashMap<String,String> wordsWithSynonyms = new HashMap<String,String>();
-		boolean added = false;
-		synSetString = "";
-		
-		while (sentParser.hasNext()) {//loops through every word in the sentence
-			wordToSearch = sentParser.next();
-			tempArr = DictionaryBinding.getSynonyms(wordToSearch);
-			wordSynMatch = "";
-
-			if (!wordsWithSynonyms.containsKey(wordToSearch.toLowerCase().trim())) {
-				if (tempArr != null) {
-					for (int i = 0; i < tempArr.length; i++) {//looks through synonyms
-						tempStr = tempArr[i];
-						wordSynMatch += tempStr + " ";
-						added = false;
-						for (String addString:topToAdd) {//loops through the toAdd list
-							if (addString.trim().equalsIgnoreCase(tempStr.trim())) {//there is a match in topToAdd!
-								if (!synSetString.contains(wordToSearch))
-									synSetString += wordToSearch + " => ";
-								synSetString = synSetString + addString + ", ";
-								//index=synSetString.indexOf(tempStr);
-								//indexMap.put(tempStr, index);
-								added=true;
-								break;
-							}
-						}
-
-						if (added) {
-							//do something if the word was added like print to the box.
-							synSetString=synSetString.substring(0, synSetString.length()-2)+"\n";
-						}
-					}
-					
-					if (wordSynMatch.length() > 2)
-						wordsWithSynonyms.put(wordToSearch.toLowerCase().trim(), wordSynMatch.substring(0, wordSynMatch.length()-1));
-					else
-						wordsWithSynonyms.put(wordToSearch.toLowerCase().trim(), "No Synonyms");
-				}
-			}
-		}
-		
-		String tempStrToAdd;
-		Word possibleToAdd;
-		double topAnon = 0;
-		
-		for (String[] wordToRem : topToRemove) {//adds ALL the synonyms in the wordsToRemove
-			if (wordsWithSynonyms.containsKey(wordToRem[0])) {
-				tempStr = wordsWithSynonyms.get(wordToRem[0]);
-				tempStrToAdd = "";
-				parser = new Scanner(tempStr);
-				topAnon = 0;
-				
-				while (parser.hasNext()) {
-					possibleToAdd = new Word(parser.next().trim());
-					ConsolidationStation.setWordFeatures(possibleToAdd);
-					
-					if (possibleToAdd.getAnonymityIndex() > topAnon) {
-						tempStrToAdd = possibleToAdd.getUntagged() + ", ";//changed for test
-						topAnon = possibleToAdd.getAnonymityIndex();
-					}
-				}
-				synSetString += wordToRem[0] + " => " + tempStrToAdd + "\n";
-			}
-		}
-
-//		Iterator<String> iter = indexMap.keySet().iterator();
-//		String key;
-
-//		while (iter.hasNext()) {
-//			key = (String) iter.next();
-//			index = indexMap.get(key);
-//			
-//			try {
-//				addTracker.addHighlight(index, index+key.length(), painter3);
-//			} catch (BadLocationException e) {
-//				e.printStackTrace();
-//			}
-//		}
-	}
-}
 
 /*
  * Answer to puzzle:

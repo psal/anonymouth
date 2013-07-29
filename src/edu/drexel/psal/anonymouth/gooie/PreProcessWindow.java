@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -456,7 +457,13 @@ public class PreProcessWindow extends JDialog {
 		docs.addAll(ps.getAllTestDocs());
 		int size = docs.size();
 		
-		driver.printTitles();
+		ArrayList<String> docTitles = new ArrayList<String>(size);
+		
+		for (int i = 0; i < size; i++) {
+			docTitles.add(docs.get(i).getTitle());
+		}
+		
+		//printTitles();
 		for (int d = 0; d < size; d++) {
 			String oldTitle = docs.get(d).getTitle();
 			String newTitle = oldTitle;
@@ -464,8 +471,8 @@ public class PreProcessWindow extends JDialog {
 			int addNum = 1;
 			
 			//we don't want to do anything below unless it's a duplicate
-			if (driver.titles.get(author).contains(newTitle)) {
-				while (driver.titles.get(author).contains(newTitle)) {
+			if (docTitles.contains(newTitle)) {
+				while (docTitles.contains(newTitle)) {
 					newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
 					newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 					addNum++;
@@ -475,12 +482,15 @@ public class PreProcessWindow extends JDialog {
 				if (ps.getAuthorMap().get(author) == null)
 					ps.addTrainDocs(author, new ArrayList<Document>());
 				ps.addTrainDoc(author, new Document(docs.get(d).getFilePath(), author, newTitle));
-				driver.titles.get(author).remove(docs.get(d).getTitle());
+				
+				docTitles.remove(oldTitle);
+				docTitles.add(newTitle);
+				driver.titles.get(author).remove(oldTitle);
 				driver.titles.get(author).add(newTitle);
 			}
 		}
 
-		driver.printTitles();
+		//printTitles();
 	}
 	
 	/**
@@ -722,5 +732,24 @@ public class PreProcessWindow extends JDialog {
 		}
 		
 		currentContainer = doneMainPanel;
+	}
+	
+	/**
+	 * Debugging method to see the contents of "titles" to check and make sure it's contents are being updated properly
+	 */
+	protected void printTitles() {
+		Set<String> test = driver.titles.keySet();
+		Iterator<String> it = test.iterator();
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		while (it.hasNext()) {
+			String name = (String)it.next();
+			List<String> docs = driver.titles.get(name);
+			System.out.println("Author = " + name + " Docs = " + Integer.toString(driver.titles.get(name).size()));
+			
+			for (int i = 0; i < docs.size(); i++) {
+				System.out.println("---" + docs.get(i));
+			}
+		}
 	}
 }

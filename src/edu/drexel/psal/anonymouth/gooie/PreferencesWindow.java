@@ -34,6 +34,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JCheckBox warnQuit;
 	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
+	protected JCheckBox filterAddWords;
 	protected JLabel translationsNote;
 	protected int generalHeight;
 	
@@ -122,11 +123,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			if (PropertiesUtil.getWarnQuit())
 				warnQuit.setSelected(true);
 			
-			showWarnings = new JCheckBox();
-			showWarnings.setText("Displays all warnings");
-			if (PropertiesUtil.getWarnAll())
-				showWarnings.setSelected(true);
-			
 			autoSave = new JCheckBox();
 			autoSave.setText("Auto-Save anonymized documents upon exit");
 			if (PropertiesUtil.getAutoSave()) {
@@ -134,26 +130,56 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 				warnQuit.setEnabled(false);
 			}
 			
+			autoSaveNote = new JLabel("<html><center>" +
+					"Note: Will only save over previously saved Anonymized document,<br>" +
+					"if one exists. Will not overwrite original document." +
+					"</center></html>");
+			autoSaveNote.setForeground(Color.GRAY);
+			
+			JSeparator sep1 = new JSeparator(JSeparator.HORIZONTAL);
+			sep1.setPreferredSize(new Dimension(484, 15));
+			
+			filterAddWords = new JCheckBox();
+			filterAddWords.setText("Filter out non-words from \"Words to Add\" Suggestions");
+			filterAddWords.setToolTipText("<html><center>" +
+					"Filtered out words include but are not limited to:<br>" +
+					"	-Email addresses<br>"+
+					"	-Dates and other numbers<br>"+
+					"	-Web addresses"+
+					"</center></html>");
+			if (PropertiesUtil.getFilterAddSuggestions())
+				filterAddWords.setSelected(true);
+			
 			translations = new JCheckBox();
 			translations.setText("Enable sending sentences to Microsoft Bing© for translation");
 			if (PropertiesUtil.getDoTranslations())
 				translations.setSelected(true);
 			
-			translationsNote = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" /><center>Note: Once checked, simply click the Start button in the translations tab to " +
-					"begin translations. This button will not be clickable unless permission is granted via this checkbox.</center></html>");
+			translationsNote = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" /><center>" +
+					"Note: Once checked, simply click the Start button in the translations tab to " +
+					"begin translations. This button will not be clickable unless permission is granted via this checkbox." +
+					"</center></html>");
 			translationsNote.setForeground(Color.GRAY);
 			
-			autoSaveNote = new JLabel("<html><center>Note: Will only save over previously saved Anonymized document,<br>if one exists. Will not overwrite original document.</center></html>");
-			autoSaveNote.setForeground(Color.GRAY);
+			JSeparator sep2 = new JSeparator(JSeparator.HORIZONTAL);
+			sep2.setPreferredSize(new Dimension(484, 15));
+			
+			showWarnings = new JCheckBox();
+			showWarnings.setText("Displays all warnings");
+			if (PropertiesUtil.getWarnAll())
+				showWarnings.setSelected(true);
 			
 			general.add(autoSave, "wrap");
 			general.add(autoSaveNote, "alignx 50%, wrap");
 			general.add(warnQuit, "wrap");
-			general.add(showWarnings, "wrap");
+			general.add(sep1, "alignx 50%, wrap");
+			general.add(filterAddWords, "wrap");
 			general.add(translations, "wrap");
-			general.add(translationsNote, "alignx 50%");
+			general.add(translationsNote, "alignx 50%, wrap");
+			general.add(sep2, "alignx 50%, wrap");
+			general.add(showWarnings);
 			
-			generalHeight = 310;
+			generalHeight = 340;
 		}
 		
 		MigLayout defaultLayout = new MigLayout();
@@ -186,7 +212,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			sentHighlightColors = new JComboBox<String>();
 			for (int i = 0; i < COLORS.length; i++)
 				sentHighlightColors.addItem(COLORS[i]);
-			sentHighlightColors.setSelectedItem(PropertiesUtil.getHighlightColor());
+			sentHighlightColors.setSelectedIndex(PropertiesUtil.getHighlightColorIndex());
 			
 			editor.add(highlightSent, "wrap");
 			editor.add(highlightElems, "wrap");

@@ -10,7 +10,6 @@ import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.DefaultHighlighter;
 
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -62,6 +61,7 @@ public class PreferencesDriver {
 	private ActionListener showWarningsListener;
 	private ActionListener highlightElemsListener;
 	private ActionListener versionAutoSaveListener;
+	private ActionListener filterAddWordsListener;
 	
 	public PreferencesDriver(GUIMain main, PreferencesWindow prefWin) {
 		this.main = main;
@@ -74,21 +74,41 @@ public class PreferencesDriver {
 	 * Initializes and adds all preferences window listeners
 	 */
 	public void initListeners() {
+		filterAddWordsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (prefWin.filterAddWords.isSelected()) {
+					PropertiesUtil.setFilterAddSuggestions(true);
+					main.suggestionsTabDriver.setFilterWordsToAdd(true);
+					main.suggestionsTabDriver.placeSuggestions();
+					
+					Logger.logln(NAME+"Filter Words to Add checkbox checked");
+				} else {
+					PropertiesUtil.setFilterAddSuggestions(false);
+					main.suggestionsTabDriver.setFilterWordsToAdd(false);
+					main.suggestionsTabDriver.placeSuggestions();
+					
+					Logger.logln(NAME+"Filter Words to Add checkbox unchecked");
+				}
+			}
+		};
+		prefWin.filterAddWords.addActionListener(filterAddWordsListener);
+		
 		highlightSentsListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (prefWin.highlightSent.isSelected()) {
 					PropertiesUtil.setHighlightSents(true);
 					DriverEditor.doHighlight = true;
-					if (DriverEditor.currentHighlight != null)
+					if (DriverEditor.highlightEngine.isSentenceHighlighted())
 						DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
 					
 					Logger.logln(NAME+"Highlight Sents checkbox checked");
 				} else {
 					PropertiesUtil.setHighlightSents(false);
 					DriverEditor.doHighlight = false;
-					if (DriverEditor.currentHighlight != null)
-						main.getDocumentPane().getHighlighter().removeHighlight(DriverEditor.currentHighlight);
+					if (DriverEditor.highlightEngine.isSentenceHighlighted())
+						DriverEditor.highlightEngine.removeSentenceHighlight();
 					
 					Logger.logln(NAME+"Highlight Sents checkbox unchecked");
 				}
@@ -103,7 +123,7 @@ public class PreferencesDriver {
 				PropertiesUtil.setHighlightColor(color);
 				
 				if (DriverEditor.taggedDoc != null) {
-					DriverEditor.painterHighlight = new DefaultHighlighter.DefaultHighlightPainter(PropertiesUtil.getHighlightColor());
+					DriverEditor.highlightEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
 					DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
 				}
 			}
@@ -388,12 +408,12 @@ public class PreferencesDriver {
 				if (prefWin.highlightElems.isSelected()) {
 					PropertiesUtil.setAutoHighlight(true);
 					DriverEditor.autoHighlight = true;
-					DriverEditor.highlightWordsToRemove(main, DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
+					DriverEditor.highlightEngine.addAutoRemoveHighlights(DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);
 					DriverEditor.autoHighlight = false;
-					DriverEditor.removeHighlightWordsToRemove(main);
+					DriverEditor.highlightEngine.removeAutoRemoveHighlights();
 					Logger.logln(NAME+"Auto highlights checkbox unchecked");
 				}
 			}

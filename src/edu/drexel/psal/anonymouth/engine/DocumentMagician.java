@@ -397,7 +397,6 @@ public class DocumentMagician {
 		int i = 0;
 		int lenTSet = noAuthorTrainSet.size();
 		trainTitlesList = new ArrayList<String>(lenTSet);
-		System.out.println("Training document titles:");
 		loadDocs(toModifySet);
 		loadDocs(trainSet);
 		loadDocs(authorSamplesSet);

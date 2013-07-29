@@ -17,10 +17,10 @@ public class PropertiesUtil {
 	
 	private static final String NAME = "( PropertiesUtil ) - ";
 	private static final int[][] COLORS = {
-		{255,255,0,200},	//Yellow
+		{255,255,0,128},	//Yellow
 		{255,128,0,80},	//Orange
-		{0,0,255,80},		//Blue
-		{128,0,128,80}};	//Purple
+		{0,128,255,80},		//Blue
+		{128,0,255,80}};	//Purple
 
 	protected static final String propFileName = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"anonymouth_prop.prop";
 	protected static File propFile = new File(propFileName);
@@ -40,6 +40,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultWarnAll = true;
 	protected static Boolean defaultAutoHighlight = true;
 	protected static Boolean defaultVersionAutoSave = false;
+	protected static Boolean defaultFilterAddSuggestions = true;
 	protected static int defaultThreads = 4;
 	protected static int defaultFeatures = 500;
 	protected static Boolean defaultTranslation = false;
@@ -106,6 +107,51 @@ public class PropertiesUtil {
 		setVersionAutoSave(defaultVersionAutoSave);
 	}
 	
+	/**
+	 * Sets whether or not to filter words to add suggestions
+	 * @param filter
+	 */
+	protected static void setFilterAddSuggestions(Boolean filter) {
+		BufferedWriter writer;
+		
+		try {
+			prop.setProperty("filterAddSuggestions", filter.toString());
+			writer = new BufferedWriter(new FileWriter(propFileName));
+			prop.store(writer, "User Preferences");
+			writer.close();
+		} catch (Exception e) {
+			Logger.logln(NAME+"Failed setting words to remove filter preference", LogOut.STDERR);
+		}
+	}
+	
+	/**
+	 * Gets whether or not to filter words to remove
+	 * @return
+	 */
+	public static boolean getFilterAddSuggestions() {
+		String filter;
+		
+		try {
+			filter = prop.getProperty("filterAddSuggestions");
+			if (filter == null) {
+				prop.setProperty("filterAddSuggestions", defaultFilterAddSuggestions.toString());
+				filter = prop.getProperty("filterAddSuggestions");
+			}
+		} catch (NullPointerException e) {
+			prop.setProperty("filterAddSuggestions", defaultFilterAddSuggestions.toString());
+			filter = prop.getProperty("filterAddSuggestions");
+		}
+		
+		if (filter.equals("true"))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * Sets the color to highlight sentences with (must be the index, with respect to the COLORS array in PreferencesWindow)
+	 * @param color
+	 */
 	protected static void setHighlightColor(int color) {
 		BufferedWriter writer;
 		
@@ -115,11 +161,15 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME+"Failed setting highlight color");
+			Logger.logln(NAME+"Failed setting highlight color", LogOut.STDERR);
 		}
 	}
 	
-	protected static Color getHighlightColor() {
+	/**
+	 * Gets a color object of the saved color to highlight sentences with (for use when actually creating the highlighter)
+	 * @return
+	 */
+	public static Color getHighlightColor() {
 		String highlightColor;
 		
 		try {
@@ -137,6 +187,31 @@ public class PropertiesUtil {
 		return new Color(rgba[0],rgba[1],rgba[2],rgba[3]);
 	}
 	
+	/**
+	 * Gets the index of the the saved color to highlight sentences with (the index is with respect to the PreferencesWindow COLORS array)
+	 * @return
+	 */
+	public static int getHighlightColorIndex() {
+		String highlightColorIndex;
+		
+		try {
+			highlightColorIndex = prop.getProperty("highlightColor");
+			if (highlightColorIndex == null) {
+				prop.setProperty("highlightColor", defaultHighlightColor);
+				highlightColorIndex = prop.getProperty("highlightColor");
+			}
+		} catch (NullPointerException e) {
+			prop.setProperty("highlightColor", defaultHighlightColor);
+			highlightColorIndex = prop.getProperty("highlightColor");
+		}
+		
+		return Integer.parseInt(highlightColorIndex);
+	}
+	
+	/**
+	 * Sets whether or not to highlight the currently selected sentence
+	 * @param highlightSents
+	 */
 	protected static void setHighlightSents(Boolean highlightSents) {
 		BufferedWriter writer;
 		
@@ -146,10 +221,14 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting highlight sentences");
+			Logger.logln(NAME + "Failed setting highlight sentences", LogOut.STDERR);
 		}
 	}
 	
+	/**
+	 * Gets whether or not to highlight the currently selected sentence
+	 * @return
+	 */
 	protected static boolean getHighlightSents() {
 		String highlightSents;
 		
@@ -183,7 +262,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting version auto save");
+			Logger.logln(NAME + "Failed setting version auto save", LogOut.STDERR);
 		}
 	}
 	
@@ -223,7 +302,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting automatic highlights");
+			Logger.logln(NAME + "Failed setting automatic highlights", LogOut.STDERR);
 		}
 	}
 	
@@ -264,7 +343,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting whether or not to display all warnings");
+			Logger.logln(NAME + "Failed setting whether or not to display all warnings", LogOut.STDERR);
 		}
 	}
 	
@@ -305,7 +384,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting bar tutorial");
+			Logger.logln(NAME + "Failed setting bar tutorial", LogOut.STDERR);
 		}
 	}
 	
@@ -346,7 +425,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting the font size");
+			Logger.logln(NAME + "Failed setting the font size", LogOut.STDERR);
 		}
 	}
 	
@@ -384,7 +463,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting the current client");
+			Logger.logln(NAME + "Failed setting the current client", LogOut.STDERR);
 		}
 	}
 	
@@ -423,7 +502,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting client availability");
+			Logger.logln(NAME + "Failed setting client availability", LogOut.STDERR);
 		}
 	}
 	
@@ -469,7 +548,7 @@ public class PropertiesUtil {
 			prop.store(writer, "User Preferences");
 			writer.close();
 		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting translations on/off");
+			Logger.logln(NAME + "Failed setting translations on/off", LogOut.STDERR);
 		}
 	}
 	
