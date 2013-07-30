@@ -324,7 +324,6 @@ public class StartingWindows extends JFrame {
 			PropertiesUtil.setProbSet(path);
 			main.preProcessWindow.driver.updateTitles();
 		} catch (Exception exc) {
-			exc.printStackTrace();
 			Logger.logln(NAME+"Failed loading problem set at path: "+path, LogOut.STDERR);
 			setReadyToStart(false, false);
 			ThePresident.canDoQuickStart = false;

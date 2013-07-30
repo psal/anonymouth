@@ -805,6 +805,14 @@ public class PreProcessWindowDriver {
 			}
 		};
 		preProcessWindow.doneDoneButton.addActionListener(doneDoneListener);
+		
+		doneAdvancedListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				preProcessWindow.advancedWindow.showWindow();
+			}
+		};
+		preProcessWindow.doneAdvancedButton.addActionListener(doneAdvancedListener);
 	}
 	
 	/**

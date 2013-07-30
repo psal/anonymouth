@@ -344,7 +344,6 @@ public class GUIMain extends javax.swing.JFrame {
 	protected Clipboard clipboard;
 	protected StartingWindows startingWindows;
 	protected static Runnable mainThread;
-	private SplashScreen splashScreen;
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
 	public SuggestionsTabDriver suggestionsTabDriver;
@@ -360,13 +359,13 @@ public class GUIMain extends javax.swing.JFrame {
 	/**
 	 * Auto-generated main method to display this JFrame
 	 */
-	public static void startGooie(final SplashScreen splash) {
+	public static void startGooie() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				mainThread = this;
 				Logger.initLogFile();
 				
-				inst = new GUIMain(splash);
+				inst = new GUIMain();
 				GUITranslator = new Translator(inst);
 
 				WindowListener exitListener = new WindowListener() {
@@ -457,9 +456,8 @@ public class GUIMain extends javax.swing.JFrame {
 		}
 	}
 
-	public GUIMain(SplashScreen splash) {
+	public GUIMain() {
 		super();
-		splashScreen = splash;
 		inst = this;
 		
 		initPropertiesUtil();
@@ -467,19 +465,12 @@ public class GUIMain extends javax.swing.JFrame {
 			ThePresident.canDoQuickStart = true;
 		}
 		
-		if (!splashScreen.isVisible()) {
-			splashScreen.showSplashScreen();
-		}
 		startingWindows = new StartingWindows(this);
 		
 		initGUI();
 
-		splashScreen.hideSplashScreen();
+		ThePresident.splash.hideSplashScreen();
 		startingWindows.showStartingWindow();
-	}
-	
-	public GUIMain() {
-		this(new SplashScreen("Beginning Anonymouth Class Test"));
 	}
 	
 	public void showMainGUI() {
@@ -497,6 +488,7 @@ public class GUIMain extends javax.swing.JFrame {
 	}
 
 	private void initPropertiesUtil() {
+		ThePresident.splash.updateText("Initializing preferences");
 		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
@@ -604,7 +596,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private void initGUI() {
 		try {
-			splashScreen.updateText("Setting up class instances");
+			ThePresident.splash.updateText("Initializing menu bar");
 			//Initializes the menu bar
 			initMenuBar();
 			
@@ -621,6 +613,7 @@ public class GUIMain extends javax.swing.JFrame {
 			setUpContentPane();
 			DriverEditor.setAllDocTabUseable(false, this);
 
+			ThePresident.splash.updateText("Preparing class instances");
 			preProcessWindow = new PreProcessWindow(this);
 			ppAdvancedWindow = preProcessWindow.advancedWindow;
 			setDefaultValues();
@@ -633,7 +626,7 @@ public class GUIMain extends javax.swing.JFrame {
 			resultsWindow = new ResultsWindow(this);
 			rightClickMenu = new RightClickMenu(this);
 
-			splashScreen.updateText("Initializing listeners");
+			ThePresident.splash.updateText("Initializing listeners");
 			
 			//Initialize GUIMain listeners
 			suggestionsTabDriver.initListeners();

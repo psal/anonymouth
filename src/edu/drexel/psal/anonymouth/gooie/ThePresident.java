@@ -44,14 +44,15 @@ public class ThePresident {
 	public static boolean should_Keep_Auto_Saved_Anonymized_Docs = PropertiesUtil.defaultVersionAutoSave;
 	public static boolean autosave_Latest_Version = PropertiesUtil.defaultAutoSave;
 	public static boolean canDoQuickStart = false;
+	public static SplashScreen splash;
 
 	public static void main(String[] args) {
 		new ThePresident();
 	}
 	
 	public ThePresident() {
-		SplashScreen splash = new SplashScreen("Beginning Anonymouth");
-		splash.showSplashScreen();
+		splash = new SplashScreen();
+		splash.start();
 		
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
@@ -136,8 +137,8 @@ public class ThePresident {
 		}
 		
 		splash.updateText("Preparing Main Window");
-		Logger.logln("Gooie starting...");
-		GUIMain.startGooie(splash);
+		Logger.logln(NAME+"Gooie starting...");
+		GUIMain.startGooie();
 	}
 	
 	/**

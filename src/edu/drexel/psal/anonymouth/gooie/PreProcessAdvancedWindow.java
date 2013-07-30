@@ -149,9 +149,6 @@ public class PreProcessAdvancedWindow extends JDialog {
 		protected DefaultMutableTreeNode top;
 	
 		protected JPanel mainPanel;
-		
-		protected JPanel docPanel;
-		protected JButton clearProblemSetJButton;
 	
 		protected JPanel classPanel;
 		protected JPanel classMainPanel;
@@ -526,7 +523,6 @@ public class PreProcessAdvancedWindow extends JDialog {
 				"fill, grow",
 				"[grow][grow]"));
 		tabbedPane = new JTabbedPane();
-		tabbedPane.add("Documents", docPanel);
 		tabbedPane.add("Features", featPanel);
 		tabbedPane.add("Classifiers", classPanel);
 

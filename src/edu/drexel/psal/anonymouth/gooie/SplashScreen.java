@@ -1,19 +1,13 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import java.awt.BorderLayout;
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.RenderingHints;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
-import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * A simple splash screen displayed on start up to serve two main purposes:
@@ -22,93 +16,79 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * @author Marc Barrowclift
  *
  */
-public class SplashScreen extends JFrame {
-
-	private static final long serialVersionUID = 1L;
-	private final String NAME = "( SplashScreen) - ";
-	private final String SPLASH_NAME = "anonymouth_SPLASH.png";
+public class SplashScreen extends Thread {
 	
-	private int width = 520, height = 135;
-	private Image splashImage;
-	public JLabel progressLabel;
-	public String newText;
-	private JPanel panel;
+	private final String NAME = "( SplashScreen) - ";
+	private static final int WIDTH = 520, HEIGHT = 135;
+	private static final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 18);
+	
+	private static String message;
+	private java.awt.SplashScreen splash;
+	private boolean showSplash = true;
 
+	/**
+	 * Paints the changes on top of the splash screen image;
+	 * @param g
+	 */
+	static void renderSplashFrame(Graphics2D g) {
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setComposite(AlphaComposite.Clear);
+		g.fillRect(0,0,WIDTH,HEIGHT);
+		g.setPaintMode();
+		g.setColor(Color.BLACK);
+		g.setFont(HELVETICA);
+		g.drawString(message+"...", 250, 128);
+	}
+	
 	/**
 	 * Constructor
 	 * @param message
 	 */
-	public SplashScreen(String message) {
-		this.setSize(width, height);
-		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setUndecorated(true);
-		this.setVisible(false);
-		
-		splashImage = ImageLoader.getImage(SPLASH_NAME);
-		panel = new JPanel(new BorderLayout()) {
-			private static final long serialVersionUID = 1L;
-			@Override
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				Graphics2D g2d = (Graphics2D)g;
-				g2d.drawImage(splashImage, 0, 0, null);
-			}
-		};
-		
-		progressLabel = new JLabel(message);
-		progressLabel.setFont(new Font("Helvetica", Font.PLAIN, 18));
-		progressLabel.setBorder(new EmptyBorder(5, 5, 0, 20));
-		progressLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		progressLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
-		
-		panel.setLayout(new BorderLayout());
-		panel.add(progressLabel, BorderLayout.SOUTH);
-		this.add(panel);
+	public SplashScreen() {
+		super("SplashScreen");
 	}
 
 	/**
 	 * Updates the message text with the new status
-	 * XXX TODO XXX DOESN'T ACTUALLY WORK RIGHT NOW, Look into it later, probably concurrency problem.
 	 * @param newText
 	 */
 	public void updateText(String newText) {
-		progressLabel.setText(newText+"...");	
-	}
-
-	/**
-	 * Displays the splash screen
-	 */
-	public void showSplashScreen() {
-		Logger.logln(NAME+"Displaying Splash Screen");
-		this.setOpacity((float)0/(float)100);
-		this.setVisible(true);
-		for (int i = 0; i <= 100; i+=2) {
-			this.setOpacity((float)i/(float)100);
-			
-			try {
-				Thread.sleep(3);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		this.setOpacity((float)1.0);
+		message = newText+"...";	
 	}
 	
 	/**
 	 * Trashes the splash screen
 	 */
 	public void hideSplashScreen() {
-		Logger.logln(NAME+"Closing Splash Screen");
-		for (int i = 100; i >= 0; i-=2) {
-			this.setOpacity((float)i/(float)100);
-			
-			try {
-				Thread.sleep(3);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		showSplash = false;
+		splash.close();
+	}
+
+	/**
+	 * Updates the splash screen for as long as necessary
+	 */
+	@Override
+	public void run() {
+		message = "Starting Anonymouth";
+
+		splash = java.awt.SplashScreen.getSplashScreen();
+		if (splash == null) {
+			Logger.logln(NAME+"SplashScreen.getSplashScreen() returned null", LogOut.STDERR);
+			return;
 		}
-		this.setVisible(false);
+		Graphics2D g = splash.createGraphics();
+		if (g == null) {
+			Logger.logln(NAME+"Graphics returned null", LogOut.STDERR);
+			return;
+		}
+		
+		while (showSplash) {
+			renderSplashFrame(g);
+			splash.update();
+			try {
+				Thread.sleep(90);
+			}
+			catch(InterruptedException e) {}
+		}
 	}
 }
