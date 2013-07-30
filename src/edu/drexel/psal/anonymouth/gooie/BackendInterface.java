@@ -52,8 +52,8 @@ public class BackendInterface {
 	/**
 	 * documents tab >> create new problem set
 	 */
-	protected static void docTabCreateNewProblemSet(GUIMain main) {
-		Logger.logln("( BackendInterface ) - create new problem set");
+	protected void docTabCreateNewProblemSet(GUIMain main) {
+		Logger.logln(NAME+"Create new problem set");
 		(new Thread(bei.new DocTabNewProblemSetButtonClick(main))).start();
 	}
 
@@ -75,13 +75,11 @@ public class BackendInterface {
 		}
 	}
 
-	protected static void runVerboseOutputWindow(GUIMain main){
+	protected void runVerboseOutputWindow(GUIMain main) {
 		new Thread(bei.new RunVerboseOutputWindow(main)).start();
-
 	}
 
-	public class RunVerboseOutputWindow extends GUIThread{
-
+	public class RunVerboseOutputWindow extends GUIThread {
 		public RunVerboseOutputWindow(GUIMain main) {
 			super(main);
 		}
@@ -89,21 +87,17 @@ public class BackendInterface {
 		public void run() {
 			new Console();
 		}
-
 	}
 
-
-
-	protected static void preTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician){
+	protected static void preTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
 		(new Thread(bei.new PreTargetSelectionProcessing(main,wizard,magician))).start();
 	}
 
 	public class PreTargetSelectionProcessing extends GUIThread {
-
 		private DataAnalyzer wizard;
 		private DocumentMagician magician;		
 
-		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician){
+		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
 			super(main);
 			this.wizard = wizard;
 			this.magician = magician;
@@ -309,7 +303,7 @@ public class BackendInterface {
 		}
 	}
 
-	public static void makeResultsChart(Map<String,Map<String,Double>> resultMap, GUIMain main){
+	public void makeResultsChart(Map<String,Map<String,Double>> resultMap, GUIMain main) {
 
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();
 		Map<String,Double> tempMap = resultMap.get(mapKeyIter.next()); 

@@ -132,30 +132,26 @@ public class DriverEditor {
 	public static boolean ignoreVersion = false;
 	public static TaggedDocument backedUpTaggedDoc;
 	
-	public static int getCurrentSentNum(){
+	public static int getCurrentSentNum() {
 		return currentSentNum;
 	}
 
-	protected static void doTranslations(ArrayList<TaggedSentence> sentences, GUIMain main)
-	{
+	protected static void doTranslations(ArrayList<TaggedSentence> sentences, GUIMain main) {
 		GUIMain.GUITranslator.load(sentences);
 	}
 
 
-	protected static boolean checkSentFor(String currentSent, String str) 
-	{
+	protected static boolean checkSentFor(String currentSent, String str) {
 		@SuppressWarnings("resource")
 		Scanner parser = new Scanner(currentSent);
 		boolean inSent = false;
 		String tempStr;
-		while(parser.hasNext())
-		{
+		while(parser.hasNext()) {
 			tempStr = parser.next();
-			if(tempStr.matches(cleanWordRegex))
+			if (tempStr.matches(cleanWordRegex))
 				tempStr = tempStr.substring(0,tempStr.length()-1);
 
-			if(tempStr.equalsIgnoreCase(str))
-			{
+			if (tempStr.equalsIgnoreCase(str)) {
 				inSent = true;
 				break;
 			}

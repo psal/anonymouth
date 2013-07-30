@@ -7,6 +7,7 @@ import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Dialog.ModalityType;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -158,7 +159,10 @@ public class StartingWindows extends JFrame {
 	private void initWindow(GUIMain main) {
 		this.setSize(width, height);
 		this.setResizable(false);
-		this.setLocationRelativeTo(null);
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
 		this.setVisible(false);
 		this.main = main;
 		this.setTitle("Anonymouth Start Window");
