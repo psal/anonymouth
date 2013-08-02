@@ -19,13 +19,15 @@ public class ANONConstants {
 	public static final String DOC_MAGICIAN_WRITE_DIR = WORKING_DIR + ".edited_documents/";
 	public static final String SER_DIR = WORKING_DIR + ".serialized_objects/";
 	public static final String GRAPHICS = "/edu/drexel/psal/resources/graphics/";
+	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
+	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
 	
 	public static final boolean IS_MAC = System.getProperty("os.name").toLowerCase().contains("mac");
 	public static final boolean IS_USER_STUDY = false; //whether or not to show the session name dialog
 	public static final boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
-	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: put in "options
-	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
-	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
+	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: Put in Preferences and create implementation for it
+	public static final boolean SHOW_ADVANCED_SETTINGS = false;
+	
 	public static final ExtFilter TXT = new ExtFilter("Text files (*.txt)", ".txt");
 	public static final ExtFilter XML = new ExtFilter("XML files (*.xml)", ".xml");
 }

@@ -437,7 +437,8 @@ public class PreProcessWindow extends JDialog {
 		
 		doneDonePanel = new JPanel();
 		doneDonePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-		doneDonePanel.add(doneAdvancedButton);
+		if (ANONConstants.SHOW_ADVANCED_SETTINGS)
+			doneDonePanel.add(doneAdvancedButton);
 		doneDonePanel.add(doneDoneButton);
 		donePrevDonePanel.add(doneDonePanel);
 		
