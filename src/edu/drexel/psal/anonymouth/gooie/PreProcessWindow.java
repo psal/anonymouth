@@ -38,11 +38,12 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 /**
  * The new home for the preProces panel. It is now acting as a set-up wizard as opposed to a main component in GUIMain based on user
- * feedback. Much remains the same, it's just wrapped up in a JFrame with a few visual cue tweaks to help guide the user along.
+ * feedback.
  * 
  * This is the "Window" class for preProcessing, which just handles creating and adding swing components and "isSomething"/"hasSomething"
  * methods pertaining to the problem set. As a guideline, any sort of "update" methods should be handled in the "Driver" class though as a
  * rule all listeners/events should be handled in the "Driver" class. 
+ * 
  * @author Marc Barrowclift
  *
  */

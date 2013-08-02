@@ -60,7 +60,7 @@ public class ThePresident {
 		
 		if (ANONConstants.IS_MAC) {
 			System.setProperty("WEKA_HOME", "/dev/null");
-			PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
+			//PropertiesUtil.defaultThreads = 1; //XXX NOTE XXX This is just because of that weird Stanford tagging issue
 			
 			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");

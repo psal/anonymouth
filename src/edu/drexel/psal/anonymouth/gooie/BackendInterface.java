@@ -125,7 +125,7 @@ public class BackendInterface {
 					pw.setText("Extracting and Clustering Features...");
 					try {
 						Toolkit.getDefaultToolkit().beep();
-						wizard.runInitial(magician,main.ppAdvancedWindow.cfd, main.ppAdvancedWindow.classifiers.get(0));
+						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
 						Toolkit.getDefaultToolkit().beep();
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();

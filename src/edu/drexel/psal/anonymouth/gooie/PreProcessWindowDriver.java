@@ -1,6 +1,5 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import java.awt.Dialog.ModalityType;
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,12 +36,15 @@ import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
- * The corresponding "Driver" class for the "Window" PreProcessWindow. Handles all listeners and most update methods relating to the window
+ * The corresponding "Driver" class for the "Window" PreProcessWindow.
+ * Handles all listeners and most update methods relating to the window
+ * 
  * @author Marc Barrowclift
  *
  */
@@ -59,8 +61,10 @@ public class PreProcessWindowDriver {
 	private String lastDirectory;
 	private String trainDocsDirectory;
 	private PreProcessWindow preProcessWindow;
+	/*
 	private FileDialog load;
 	private FileDialog save;
+	*/
 	private String[] duplicateName = {"Replace", "Keep Both", "Stop"};
 	
 	//Swing Components
@@ -100,12 +104,14 @@ public class PreProcessWindowDriver {
 		
 		titles = new HashMap<String, List<String>>();
 		
+		/*
 		load = new FileDialog(preProcessWindow);
 		load.setModalityType(ModalityType.DOCUMENT_MODAL);
 		load.setMode(FileDialog.LOAD);
 		save = new FileDialog(preProcessWindow);
 		save.setModalityType(ModalityType.DOCUMENT_MODAL);
 		save.setMode(FileDialog.SAVE);
+		*/
 		
 		initListeners();	
 	}
@@ -165,8 +171,10 @@ public class PreProcessWindowDriver {
 				Logger.logln(NAME+"'+' button clicked in the Test Doc section of the set-up wizard");
 				preProcessWindow.saved = false;
 				
+				/*
 				load.setTitle("Load Your Document To Anonymize");
 				load = setOpeningDir(load, false);
+				System.out.println(load.getFile() +", " + load.getDirectory());
 				load.setMultipleMode(false);
 				load.setFilenameFilter(ANONConstants.TXT);
 				load.setLocationRelativeTo(null);
@@ -175,6 +183,16 @@ public class PreProcessWindowDriver {
 				String fileName = load.getFile();
 				if (fileName != null) {
 					File file = new File(load.getDirectory()+fileName);
+				*/
+				FileHelper.load = setOpeningDir(FileHelper.load, false);
+				FileHelper.load.setFileFilter(ANONConstants.TXT);
+				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				FileHelper.load.setMultiSelectionEnabled(false);
+				FileHelper.load.setVisible(true);
+				int answer = FileHelper.load.showOpenDialog(preProcessWindow);
+				
+				if (answer == JFileChooser.APPROVE_OPTION) {
+					File file = FileHelper.load.getSelectedFile();
 					Logger.log(NAME+"Trying to load test documents: \n"+"\t\t> "+file.getAbsolutePath()+"\n");
 					
 					String path = file.getAbsolutePath();
@@ -251,6 +269,7 @@ public class PreProcessWindowDriver {
 				Logger.logln(NAME+"'+' button clicked in the Sample Docs section of the set-up wizard");
 				preProcessWindow.saved = false;
 				
+				/*
 				load.setTitle("Load Other Documents Written By You");
 				load = setOpeningDir(load, false);
 				load.setMultipleMode(true);
@@ -261,6 +280,22 @@ public class PreProcessWindowDriver {
 				File[] files = load.getFiles();
 				if (files.length != 0) {
 					String msg = "Trying to load User Sample documents:\n";
+					for (File file: files)
+						msg += "\t\t> "+file.getAbsolutePath()+"\n";
+					Logger.log(msg);
+				*/
+				
+				FileHelper.load = setOpeningDir(FileHelper.load, false);
+				FileHelper.load.setFileFilter(ANONConstants.TXT);
+				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				FileHelper.load.setMultiSelectionEnabled(true);
+				FileHelper.load.setVisible(true);
+				int answer = FileHelper.load.showOpenDialog(preProcessWindow);
+
+				if (answer == JFileChooser.APPROVE_OPTION) {
+					File[] files = FileHelper.load.getSelectedFiles();
+					String msg = "Trying to load User Sample documents:\n";
+					
 					for (File file: files)
 						msg += "\t\t> "+file.getAbsolutePath()+"\n";
 					Logger.log(msg);
@@ -285,14 +320,14 @@ public class PreProcessWindowDriver {
 						}
 						
 						if (titles.get(ProblemSet.getDummyAuthor()).contains(file.getName())) {
-							int answer = JOptionPane.showOptionDialog(preProcessWindow,
+							int response = JOptionPane.showOptionDialog(preProcessWindow,
 									"An older file named \""+file.getName()+"\" already exists in your\n" +
 									"documents. Do you want to replace it with the new one you're moving?",
 									"Duplicate Name",
 									JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, ThePresident.dialogLogo,
 									duplicateName, "Replace");
 							
-							if (answer == REPLACE) {
+							if (response == REPLACE) {
 								preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), file.getName());
 								preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
 								addSampleDoc(file.getName());
@@ -412,13 +447,12 @@ public class PreProcessWindowDriver {
 				 * the shitty, JFileChooser class instead of FileDialog. I'm going for function over form here, but keeping the old
 				 * Code below in case we can find a way around it.
 				 */
-				JFileChooser load = new JFileChooser();
-				load.setFileFilter(ANONConstants.TXT);
-				load = setOpeningDir(load, true);
-				load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-				load.setMultiSelectionEnabled(true);
-				load.setVisible(true);
-				int answer = load.showOpenDialog(preProcessWindow);
+				FileHelper.load.setFileFilter(ANONConstants.TXT);
+				FileHelper.load = setOpeningDir(FileHelper.load, true);
+				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				FileHelper.load.setMultiSelectionEnabled(true);
+				FileHelper.load.setVisible(true);
+				int answer = FileHelper.load.showOpenDialog(preProcessWindow);
 				
 				/*
 				load.setTitle("Load Documents By Other Authors");
@@ -432,7 +466,7 @@ public class PreProcessWindowDriver {
 				if (files.length != 0) {
 					*/
 				if (answer == JFileChooser.APPROVE_OPTION) {
-					File[] files = load.getSelectedFiles();
+					File[] files = FileHelper.load.getSelectedFiles();
 					String msg = "Trying to load Training documents:\n";
 
 					for (File file: files)
@@ -711,26 +745,8 @@ public class PreProcessWindowDriver {
 				 * 
 				 * Basically, whichever one you manage to get the extensions accepted for all major OS's, go with that one.
 				 */
+				
 				/*
-				PropertiesUtil.save.setDialogType(JFileChooser.SAVE_DIALOG);
-				PropertiesUtil.save.setFileFilter(ANONConstants.XML);
-				PropertiesUtil.save.addChoosableFileFilter(ANONConstants.XML);
-				PropertiesUtil.save.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				if (!PropertiesUtil.getProbSet().equals("")) {
-					PropertiesUtil.save.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
-					Logger.logln(NAME+"Chooser root directory: " + PropertiesUtil.save.getSelectedFile().getAbsolutePath());
-				} else {
-					File directory = new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
-					PropertiesUtil.save.setCurrentDirectory(directory);
-				}
-				PropertiesUtil.save.setSelectedFile(new File(ThePresident.sessionName+"_docSet.xml"));
-				
-				int answer = PropertiesUtil.save.showSaveDialog(preProcessWindow);
-
-				if (answer == JFileChooser.APPROVE_OPTION) {
-					File file = PropertiesUtil.save.getSelectedFile();
-					*/
-				
 				save.setTitle("Save Document Set");
 				if (!PropertiesUtil.getProbSet().equals("")) {
 					Logger.logln(NAME+"Chooser root directory: " + PropertiesUtil.getProbSet());
@@ -747,7 +763,26 @@ public class PreProcessWindowDriver {
 				
 				File[] files = save.getFiles();
 				if (files.length != 0) {
-					String path = files[0].getAbsolutePath();
+				*/
+				
+				FileHelper.save.setDialogType(JFileChooser.SAVE_DIALOG);
+				FileHelper.save.setFileFilter(ANONConstants.XML);
+				FileHelper.save.addChoosableFileFilter(ANONConstants.XML);
+				FileHelper.save.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				if (!PropertiesUtil.getProbSet().equals("")) {
+					FileHelper.save.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
+					Logger.logln(NAME+"Chooser root directory: " + FileHelper.save.getSelectedFile().getAbsolutePath());
+				} else {
+					File directory = new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
+					FileHelper.save.setCurrentDirectory(directory);
+				}
+				FileHelper.save.setSelectedFile(new File(ThePresident.sessionName+"_docSet.xml"));
+				
+				int answer = FileHelper.save.showSaveDialog(preProcessWindow);
+
+				if (answer == JFileChooser.APPROVE_OPTION) {
+					File file = FileHelper.save.getSelectedFile();
+					String path = file.getAbsolutePath();
 
 					if (!path.toLowerCase().endsWith(".xml"))
 						path += ".xml";

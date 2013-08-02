@@ -37,7 +37,7 @@ public class SplashScreen extends Thread {
 		g.setPaintMode();
 		g.setColor(Color.BLACK);
 		g.setFont(HELVETICA);
-		g.drawString(message+"...", 250, 128);
+		g.drawString(message+"...", 240, 128);
 	}
 	
 	/**
@@ -84,7 +84,14 @@ public class SplashScreen extends Thread {
 		
 		while (showSplash) {
 			renderSplashFrame(g);
-			splash.update();
+			try {
+				splash.update();
+			} catch (IllegalStateException e) {
+				Logger.logln(NAME+"Splash screen not configured by Java properly and unavailable," +
+						" happens every once in a while. As far as I know nothing I can do.", LogOut.STDERR);
+				return;
+			}
+			
 			try {
 				Thread.sleep(90);
 			}

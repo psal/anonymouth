@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.*;
-
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.*;
@@ -25,9 +23,7 @@ public class PropertiesUtil {
 	protected static final String propFileName = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"anonymouth_prop.prop";
 	protected static File propFile = new File(propFileName);
 	protected static Properties prop = new Properties();
-	protected static JFileChooser load = new JFileChooser();
-	protected static JFileChooser save = new JFileChooser();
-	protected static String defaultClass = "weka.classifiers.functions.SMO";
+	protected static String defaultClass = "SMO";
 	protected static String defaultFeat = "WritePrints (Limited)";
 	protected static String defaultHighlightColor = "0";
 	protected static int defaultClient = 0;
@@ -781,8 +777,10 @@ public class PropertiesUtil {
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
 			writer.close();
+			
+			Logger.logln(NAME+"Saving new preference: feature = " + feature);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.logln(NAME+"Failed saving new Feature preference \"" + feature + "\"", LogOut.STDERR);
 		}
 	}
 	
@@ -819,8 +817,10 @@ public class PropertiesUtil {
 			writer = new BufferedWriter(new FileWriter(propFileName));
 			prop.store(writer, "User Preferences");
 			writer.close();
+			
+			Logger.logln(NAME+"Saving new preference: classifier = " + classifier);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.logln(NAME+"Failed saving new Classifier preference \"" + classifier + "\"", LogOut.STDERR);
 		}
 	}
 	

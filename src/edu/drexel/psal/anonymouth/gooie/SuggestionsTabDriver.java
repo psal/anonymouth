@@ -13,7 +13,7 @@ import com.jgaap.generics.Document;
 
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
-import edu.drexel.psal.anonymouth.helpers.FileLoader;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -50,7 +50,7 @@ public class SuggestionsTabDriver {
 		this.main = main;
 		
 		//We want this to be a Hashset because we want looking up to see if a single word's a dictionary word to be constant time
-		words = FileLoader.tokenizeLinesFromFile(DICTIONARY);
+		words = FileHelper.tokenizeLinesFromFile(DICTIONARY);
 		setFilterWordsToAdd(PropertiesUtil.getFilterAddSuggestions());
 	}
 
@@ -184,6 +184,7 @@ public class SuggestionsTabDriver {
 			}
 		}
 		
+		/*
 		System.out.println("============GOOD===========");
 		for (int i = 0; i < good.size(); i++) {
 			System.out.println(good.get(i));
@@ -192,6 +193,7 @@ public class SuggestionsTabDriver {
 		for (int i = 0; i < bad.size(); i++) {
 			System.out.println(bad.get(i));
 		}
+		*/
 	}
 
 	/**

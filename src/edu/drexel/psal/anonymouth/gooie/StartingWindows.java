@@ -286,7 +286,7 @@ public class StartingWindows extends JFrame {
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
-			main.ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());
+			main.ppAdvancedWindow.setFeature(PropertiesUtil.getFeature());
 			main.preProcessWindow.driver.titles.clear();
 			
 			boolean probSetReady = main.preProcessWindow.documentsAreReady();

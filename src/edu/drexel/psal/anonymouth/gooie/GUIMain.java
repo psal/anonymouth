@@ -648,29 +648,30 @@ public class GUIMain extends javax.swing.JFrame {
 	 * @throws Exception - if any of these values are not found in the prop file, we instead set them to the defaults
 	 */
 	protected void setDefaultValues() throws Exception {
-		if (!PropertiesUtil.getProbSet().equals("")) {
-			String problemSetPath = PropertiesUtil.getProbSet();
-			Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
+		try {
+			if (!PropertiesUtil.getProbSet().equals("")) {
+				String problemSetPath = PropertiesUtil.getProbSet();
+				Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
 
-			try {
-				startingWindows.loadProblemSet(problemSetPath);
-			} catch (Exception exc) {
-				Logger.logln(NAME+"Failed loading problemSet path \""+problemSetPath+"\"", LogOut.STDERR);
-				PropertiesUtil.setProbSet("");
+				try {
+					startingWindows.loadProblemSet(problemSetPath);
+				} catch (Exception exc) {
+					throw new Exception("Failed loading problemSet path \""+problemSetPath+"\"");
+				}
+			} else {
+				throw new Exception("No default problem set saved from last run, will continue without.");
 			}
-		} else {
-			Logger.logln(NAME+"No default problem set saved from last run, will continue without.", LogOut.STDOUT);
+		} catch (Exception e) {
+			Logger.logln(NAME+e.getMessage(), LogOut.STDERR);
+			PropertiesUtil.setProbSet("");
+			
+			String feature = PropertiesUtil.getFeature();
+			ppAdvancedWindow.setFeature(feature);
+
+			String classifier = PropertiesUtil.getClassifier();
+			ppAdvancedWindow.setClassifier(classifier);
 		}
-
-		ppAdvancedWindow.featureChoice.setSelectedItem(PropertiesUtil.getFeature());
-		ppAdvancedWindow.cfd = presetCFDs.get(ppAdvancedWindow.featureChoice.getSelectedIndex());
-		ppAdvancedWindow.driver.updateFeatureSetView(this);
-		ppAdvancedWindow.driver.updateFeatPrepColor(this);
-
-		String chosenClassifier = PropertiesUtil.getClassifier();
-		Logger.logln(NAME+"Attempting to load classifier: "+chosenClassifier);
-		ppAdvancedWindow.setClassifier(chosenClassifier);
-
+		
 		ResultsWindow.updateResultsPrepColor(this);
 	}
 

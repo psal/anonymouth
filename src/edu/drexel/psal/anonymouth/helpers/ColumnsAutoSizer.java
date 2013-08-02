@@ -15,6 +15,7 @@ import javax.swing.table.TableColumn;
  * 
  * //http://bosmeeuw.wordpress.com/2011/08/07/java-swing-automatically-resize-table-columns-to-their-contents/
  * @author Jeff Ulman
+ * @author Marc Barrowclift (Some changes in functionality)
  */
 public class ColumnsAutoSizer {
 	
@@ -23,6 +24,8 @@ public class ColumnsAutoSizer {
 	}
 
 	public static void sizeColumnsToFit(JTable table, int columnMargin) {
+		int size = table.getColumnCount();
+		
 		JTableHeader tableHeader = table.getTableHeader();
 		if (tableHeader == null) {
 			// can't auto size a table without a header
@@ -30,8 +33,8 @@ public class ColumnsAutoSizer {
 		}
 
 		FontMetrics headerFontMetrics = tableHeader.getFontMetrics(tableHeader.getFont());
-		int[] minWidths = new int[table.getColumnCount()];
-		int[] maxWidths = new int[table.getColumnCount()];
+		int[] minWidths = new int[size];
+		int[] maxWidths = new int[size];
 
 		for (int columnIndex = 0; columnIndex < table.getColumnCount(); columnIndex++) {
 			int headerWidth = headerFontMetrics.stringWidth(table.getColumnName(columnIndex));
@@ -42,12 +45,31 @@ public class ColumnsAutoSizer {
 
 		adjustMaximumWidths(table, minWidths, maxWidths);
 
-		for(int i = 0; i < minWidths.length; i++) {
+		for (int i = 0; i < minWidths.length; i++) {
 			if (minWidths[i] > 0) 
 				table.getColumnModel().getColumn(i).setMinWidth(minWidths[i]);
 			if (maxWidths[i] > 0) {
-				table.getColumnModel().getColumn(i).setMaxWidth(maxWidths[i]);
+				table.getColumnModel().getColumn(i).setMinWidth(maxWidths[i]);
 				table.getColumnModel().getColumn(i).setWidth(maxWidths[i]);
+			}
+		}
+		
+		int curWidth = 0;
+		int totalWidth = table.getWidth();
+		
+		for (int i = 0; i < size; i++) {
+			curWidth += table.getColumnModel().getColumn(i).getWidth();
+		}
+
+		while (curWidth < totalWidth) {
+			for (int i = 0; i < size; i++) {
+				int width = table.getColumnModel().getColumn(i).getWidth() + 1;
+				table.getColumnModel().getColumn(i).setMinWidth(width);
+				table.getColumnModel().getColumn(i).setWidth(width);
+				curWidth++;
+				
+				if (curWidth >= totalWidth)
+					break;
 			}
 		}
 	}

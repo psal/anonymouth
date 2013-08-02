@@ -799,9 +799,9 @@ public class DriverEditor {
 					errorMessage += "<html>&bull; Sample documents not provided.</html>\n";
 				if (!main.preProcessWindow.trainDocsReady())
 					errorMessage += "<html>&bull; Other author documents not provided.</html>\n";
-				if (!main.ppAdvancedWindow.featuresAreReady())
+				if (!main.ppAdvancedWindow.featureSetIsReady())
 					errorMessage += "<html>&bull; Feature set not chosen.</html>\n";
-				if (!main.ppAdvancedWindow.classifiersAreReady())
+				if (!main.ppAdvancedWindow.classifierIsReady())
 					errorMessage += "<html>&bull; Classifier not chosen.</html>\n";
 				if (!main.preProcessWindow.hasAtLeastThreeOtherAuthors())
 					errorMessage += "<html>&bull; You must have at least 3 other authors.</html>";
@@ -830,18 +830,18 @@ public class DriverEditor {
 							Logger.logln(NAME+"Initial processing starting...");
 
 							// initialize all arraylists needed for feature processing
-							sizeOfCfd = main.ppAdvancedWindow.cfd.numOfFeatureDrivers();
+							sizeOfCfd = main.ppAdvancedWindow.driver.cfd.numOfFeatureDrivers();
 							featuresInCfd = new ArrayList<String>(sizeOfCfd);
 							noCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 							yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 
 							for(int i = 0; i < sizeOfCfd; i++) {
-								String theName = main.ppAdvancedWindow.cfd.featureDriverAt(i).getName();
+								String theName = main.ppAdvancedWindow.driver.cfd.featureDriverAt(i).getName();
 
 								// capitalize the name and replace all " " and "-" with "_"
 								theName = theName.replaceAll("[ -]","_").toUpperCase(); 
 								if(isCalcHist == false) {
-									isCalcHist = main.ppAdvancedWindow.cfd.featureDriverAt(i).isCalcHist();
+									isCalcHist = main.ppAdvancedWindow.driver.cfd.featureDriverAt(i).isCalcHist();
 									yesCalcHistFeatures.add(FeatureList.valueOf(theName));
 								} else {
 									// these values will go in suggestion list... PLUS any 	

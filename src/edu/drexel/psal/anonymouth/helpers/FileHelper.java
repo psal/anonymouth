@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashSet;
 
+import javax.swing.JFileChooser;
+
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -13,9 +15,11 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  * @author Marc Barrowclift
  *
  */
-public class FileLoader {
+public class FileHelper {
 	
-	private static final String NAME = "( FileLoader ) - ";
+	private static final String NAME = "( FileHelper ) - ";
+	public static JFileChooser load = new JFileChooser();
+	public static JFileChooser save = new JFileChooser();
 	
 	/**
 	 * Creates and returns a ready BufferedReader instance to read. Returns null if file was not found or another error occurred.

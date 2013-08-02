@@ -323,7 +323,7 @@ public class FeatureWizardDriver {
 					Logger.logln(NAME+"Add feature error: given empty feature name.",LogOut.STDERR);
 					return;
 				}
-				CumulativeFeatureDriver cfd = fw.main.ppAdvancedWindow.cfd;
+				CumulativeFeatureDriver cfd = fw.main.ppAdvancedWindow.driver.cfd;
 				
 				//If new feature - check for duplicates
 				if (fw.editMode == false) {
@@ -451,15 +451,15 @@ public class FeatureWizardDriver {
 				//Update GUIMain
 				if (fw.editMode == false) {
 					//Add new feature
-					fw.main.ppAdvancedWindow.cfd.addFeatureDriver(fw.fd);
-					Logger.logln(NAME+"Added feature driver '"+fw.fd.getName()+"' to main feature set. Total feature drivers: "+fw.main.ppAdvancedWindow.cfd.numOfFeatureDrivers());
+					fw.main.ppAdvancedWindow.driver.cfd.addFeatureDriver(fw.fd);
+					Logger.logln(NAME+"Added feature driver '"+fw.fd.getName()+"' to main feature set. Total feature drivers: "+fw.main.ppAdvancedWindow.driver.cfd.numOfFeatureDrivers());
 				} else {
 					//Update old feature
-					fw.main.ppAdvancedWindow.cfd.replaceFeatureDriverAt(fw.originalIndex,fw.fd);
+					fw.main.ppAdvancedWindow.driver.cfd.replaceFeatureDriverAt(fw.originalIndex,fw.fd);
 					Logger.logln(NAME+"Updated feature driver '"+fw.fd.getName()+"' in the main feature set.");
 				}
 				
-				fw.main.ppAdvancedWindow.driver.updateFeatureSetView(fw.main);
+				//fw.main.ppAdvancedWindow.driver.updateFeatureSetTab();
 				fw.dispose();
 			}
 		});

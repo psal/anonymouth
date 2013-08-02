@@ -1,35 +1,23 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import weka.classifiers.Classifier;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.bayes.NaiveBayesMultinomial;
-import weka.classifiers.functions.Logistic;
-import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.functions.SMO;
-import weka.classifiers.lazy.IBk;
-import weka.classifiers.rules.ZeroR;
-import weka.classifiers.trees.J48;
 import weka.core.OptionHandler;
 
 import com.jgaap.generics.Canonicizer;
@@ -37,502 +25,438 @@ import com.jgaap.generics.EventCuller;
 import com.jgaap.generics.Pair;
 import com.jgaap.generics.Parameterizable;
 
-import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
+import edu.drexel.psal.anonymouth.helpers.ScrollToTop;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.FeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.FeatureDriver.ParamTag;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
+/**
+ * The corresponding "Driver" class for the "Window" PreProcessAdvancedWindow.
+ * Handles all listeners and most update methods relating to the window
+ * 
+ * @author Marc Barrowclift
+ */
 public class PreProcessAdvancedDriver {
 
 	//Constants
 	private final String NAME = "( PreProcessAdvancedDriver ) - ";
 
-	//Class Instances
+	//Variables
 	private PreProcessAdvancedWindow advancedWindow;
 	private GUIMain main;
+	protected CumulativeFeatureDriver cfd;
+	private Classifier testClassifier;
 
-	//Variables
-	protected Classifier tmpClassifier;
-	protected String className;
+	//Listeners
+	private ChangeListener tabbedPaneListener;
+	private WindowListener advancedWindowListener;
+	//Feature Set
+	private ActionListener featureChoiceListener;
+	private ActionListener featureViewInfoListener;
+	private ActionListener featureOKListener;
+	private ActionListener featureRestoreDefaultsListener;
+	//View Info Window
+	private ListSelectionListener viewInfoListListener;
+	private ListSelectionListener viewInfoCanonTableListener;
+	private ListSelectionListener viewInfoCullTableListener;
+	//Classifier
+	private ActionListener classChoiceListener;
+	private ActionListener classEditListener;
+	private ActionListener classOKListener;
+	private ActionListener classRestoreDefaultsListener;
+	//Argument Window
+	private ActionListener argsOKListener;
+	private ActionListener argsCancelListener;
+	private DocumentListener argsFieldListener;
 
+	/**
+	 * CONSTRUCTOR
+	 * @param advancedWindow - PreProcessAdvancedWindow instance, so we can access the swing components
+	 * @param main - GUIMain instance
+	 */
 	public PreProcessAdvancedDriver(PreProcessAdvancedWindow advancedWindow, GUIMain main) {
 		this.advancedWindow = advancedWindow;
 		this.main = main;
 		initListeners();
 	}
 
+	/**
+	 * Initializes all the listeners and adds them to the respective components
+	 */
 	private void initListeners() {
 		initFeatureListeners();
+		initViewInfoListeners();
+		initArgListeners();
 		initClassifierListeners();
+		initOtherListeners();
 	}
 
-	public void updateFeatPrepColor(GUIMain main) {
-		if (advancedWindow.featuresAreReady()) {
-			advancedWindow.prepFeatLabel.setBackground(main.ready);
-		} else {
-			advancedWindow.prepFeatLabel.setBackground(main.notReady);
-		}	
-	}
-
-	public void updateClassPrepColor(GUIMain main) {
-		if (advancedWindow.classifiersAreReady()) {
-			advancedWindow.prepClassLabel.setBackground(main.ready);
-		} else {
-			advancedWindow.prepClassLabel.setBackground(main.notReady);
-		}	
-	}
-
+	/**
+	 * Initializes all the "Feature Set" tab listeners
+	 */
 	private void initFeatureListeners() {
-		advancedWindow.featureChoice.addActionListener(new ActionListener() {
+		featureChoiceListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"Preset feature set selected in the features tab.");
-
-				int selected = advancedWindow.featureChoice.getSelectedIndex() - 1;
-				advancedWindow.cfd = main.presetCFDs.get(selected+1);
-				Logger.logln(NAME+"loaded preset feature set: "+advancedWindow.cfd.getName());
-				
-				advancedWindow.featureChoice.setSelectedIndex(selected+1);
-				advancedWindow.featureChoice.setSelectedIndex(selected+1);
-				advancedWindow.driver.updateFeatPrepColor(main);
-				updateFeatureSetView(main);
-			}
-		});
-
-		advancedWindow.featuresNewSetJButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Logger.logln(NAME+"'New Feature Set' button clicked in the features tab.");
-
-				//Check if the current FeatureDrivers CFD is not empty
-				int answer;
-				if (!advancedWindow.isFeatureDriversEmpty(advancedWindow.cfd) && PropertiesUtil.getWarnAll()) {
-					answer = JOptionPane.showConfirmDialog(main,
-							"Are you sure you want to override current feature set?",
-							"New Feature Set",
-							JOptionPane.YES_NO_OPTION);
-				} else {
-					answer = JOptionPane.YES_OPTION;
-				}
-
-				if (answer == JOptionPane.YES_OPTION) {
-					advancedWindow.cfd = new CumulativeFeatureDriver();
-					advancedWindow.featureChoice.setSelectedIndex(0);
-					updateFeatureSetView(main);
+				if (advancedWindow.isVisible()) {
+					Logger.logln(NAME+"Feature changed in the features tab.");
+					updateFeatureSetTab();
 				}
 			}
-		});
-
-		advancedWindow.featuresAddSetJButton.addActionListener(new ActionListener() {
+		};
+		advancedWindow.featureChoice.addActionListener(featureChoiceListener);
+		
+		featureViewInfoListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"'Add Feature Set' button clicked in the features tab.");
-
-				if (advancedWindow.cfd.getName() == null || advancedWindow.cfd.getName().matches("\\s*")) {
-					JOptionPane.showMessageDialog(main,
-							"Feature set must have at least a name to be added.",
-							"Add Feature Set",
-							JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				//Check that doesn't exist
-				for (int i=0; i<advancedWindow.featuresSetJComboBoxModel.getSize(); i++) {
-					if (advancedWindow.cfd.getName().equals(advancedWindow.featuresSetJComboBoxModel.getElementAt(i))) {
-						JOptionPane.showMessageDialog(main,
-								"Feature set with the given name already exists.",
-								"Add Feature Set",
-								JOptionPane.INFORMATION_MESSAGE);
-						return;
-					}
-				}
-
-				main.presetCFDs.add(advancedWindow.cfd);
-				advancedWindow.featuresSetJComboBoxModel.addElement(advancedWindow.cfd.getName());
-				advancedWindow.featureChoice.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
+				Logger.logln(NAME+"View Info button clicked for feature " + (String)advancedWindow.featureChoice.getSelectedItem());
+				advancedWindow.viewInfoFrame.setTitle("Viewing " + (String)advancedWindow.featureChoice.getSelectedItem() + " Information");
+				advancedWindow.viewInfoFrame.setVisible(true);
+				advancedWindow.viewInfoList.setSelectedIndex(0);
 			}
-		});
-
-		advancedWindow.featuresLoadSetFromFileJButton.addActionListener(new ActionListener() {
+		};
+		advancedWindow.featureViewInfoButton.addActionListener(featureViewInfoListener);
+		
+		featureOKListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"'Import from XML' button clicked in the features tab.");
-
-				JFileChooser load = new JFileChooser(new File("."));
-				load.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
-				int answer = load.showOpenDialog(main);
-
-				if (answer == JFileChooser.APPROVE_OPTION) {
-					String path = load.getSelectedFile().getAbsolutePath();
-					Logger.logln(NAME+"Trying to load cumulative feature driver from "+path);
-					try {
-						CumulativeFeatureDriver cfd = new CumulativeFeatureDriver(path);
-						for (int i=0; i<advancedWindow.featuresSetJComboBoxModel.getSize(); i++) {
-							if (cfd.getName().equals(advancedWindow.featuresSetJComboBoxModel.getElementAt(i))) {
-								advancedWindow.featuresSetJComboBoxModel.removeElementAt(i);
-							}
-						}
-
-						advancedWindow.cfd = cfd;
-						main.presetCFDs.add(cfd);
-						advancedWindow.featuresSetJComboBoxModel.addElement(cfd.getName());
-						advancedWindow.featureChoice.setSelectedIndex(advancedWindow.featuresSetJComboBoxModel.getSize()-1);
-						updateFeatureSetView(main);
-					} catch (Exception exc) {
-						Logger.logln(NAME+"Failed loading "+path, LogOut.STDERR);
-						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-						JOptionPane.showMessageDialog(null,
-								"Failed loading feature set from:\n"+path,
-								"Load Feature Set Failure",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				} else {
-					Logger.logln(NAME+"Load cumulative feature driver canceled");
-				}
+				Logger.logln(NAME+"OK button clicked in feature tab");
+				advancedWindow.setVisible(false);
 			}
-		});
-
-		advancedWindow.featuresSaveSetJButton.addActionListener(new ActionListener() {
+		};
+		advancedWindow.featureOKButton.addActionListener(featureOKListener);
+		
+		featureRestoreDefaultsListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"'Save Feature Set...' button clicked in the features tab.");
-
-				JFileChooser save = new JFileChooser(new File("."));
-				save.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
-				int answer = save.showSaveDialog(main);
-
-				if (answer == JFileChooser.APPROVE_OPTION) {
-					File f = save.getSelectedFile();
-					String path = f.getAbsolutePath();
-					if (!path.toLowerCase().endsWith(".xml"))
-						path += ".xml";
-					try {
-						BufferedWriter bw = new BufferedWriter(new FileWriter(path));
-						bw.write(advancedWindow.cfd.toXMLString());
-						bw.flush();
-						bw.close();
-						Logger.log("Saved cumulative feature driver to "+path+":\n"+advancedWindow.cfd.toXMLString());
-					} catch (IOException exc) {
-						Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
-						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-						JOptionPane.showMessageDialog(null,
-								"Failed saving feature set set into:\n"+path,
-								"Save Feature Set Failure",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				} else {
-					Logger.logln(NAME+"Save cumulative feature driver canceled");
-				}
+				Logger.logln(NAME+"Restore Defaults button clicked in the feature tab");
+				advancedWindow.featureChoice.setSelectedItem(PropertiesUtil.defaultFeat);
+				updateFeatureSetTab();
 			}
-		});
-
-		advancedWindow.featuresSetDescJTextPane.addFocusListener(new FocusListener() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				Logger.logln(NAME+"Feature set description edited in the features tab.");
-				advancedWindow.cfd.setDescription(advancedWindow.featuresSetDescJTextPane.getText());
-			}
-
-			@Override
-			public void focusGained(FocusEvent arg0) {}
-		});
-
-		advancedWindow.featuresJList.addListSelectionListener(new ListSelectionListener() {
+		};
+		advancedWindow.featureRestoreDefaultsButton.addActionListener(featureRestoreDefaultsListener);
+	}
+	
+	/**
+	 * Initializes all the "View ${FEATURE_SET} Info" window listeners
+	 */
+	private void initViewInfoListeners() {
+		viewInfoListListener = new ListSelectionListener() {
 			int lastSelected = -2;
 			
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				int selected = advancedWindow.featuresJList.getSelectedIndex();
+				int selected = advancedWindow.viewInfoList.getSelectedIndex();
 				//Skip if already processed
 				if (selected == lastSelected)
 					return;
-				Logger.logln(NAME+"Feature selected in the features tab: "+advancedWindow.featuresJList.getSelectedValue());
-				advancedWindow.driver.updateFeatureView(main, selected);
+				Logger.logln(NAME+"Feature selected in the view info window: "+advancedWindow.viewInfoList.getSelectedValue());
+				updateViewInfoWindow(selected);
 				lastSelected = selected;
 			}
-		});
+		};
+		advancedWindow.viewInfoList.addListSelectionListener(viewInfoListListener);
 
-		advancedWindow.featuresCanonJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		viewInfoCanonTableListener = new ListSelectionListener() {
 			int lastSelected = -2;
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				int selected = advancedWindow.featuresCanonJTable.getSelectedRow();
-				
+				int selected = advancedWindow.viewInfoCanonTable.getSelectedRow();
+
 				if (selected == lastSelected) {
 					return;
-				} else if (selected == -1) {
+				}
+				
+				advancedWindow.viewInfoCanonConfigTableModel.getDataVector().removeAllElements();
+				
+				if (selected == -1) {
 					Logger.logln(NAME+"Canonicizer unselected in features tab.");
-					advancedWindow.featuresCanonConfigJTableModel.getDataVector().removeAllElements();
 				} else {
-					Canonicizer c = advancedWindow.cfd.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).canonicizerAt(selected);
+					Canonicizer c = cfd.featureDriverAt(advancedWindow.viewInfoList.getSelectedIndex()).canonicizerAt(selected);
+					if (c == null)
+						return;
+					
 					Logger.logln(NAME+"Canonicizer '"+c.displayName()+"' selected in features tab.");
-					advancedWindow.driver.populateTableWithParams(c, advancedWindow.featuresCanonConfigJTableModel);
+					populateTableWithParams(c, advancedWindow.viewInfoCanonConfigTableModel);
 				}
 
+				advancedWindow.viewInfoCanonConfigTable.revalidate();
+				advancedWindow.viewInfoCanonConfigTable.repaint();
 				lastSelected = selected;
 			}
-		});
-
-		advancedWindow.featuresCullJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		};
+		advancedWindow.viewInfoCanonTable.getSelectionModel().addListSelectionListener(viewInfoCanonTableListener);
+		
+		viewInfoCullTableListener = new ListSelectionListener() {
 			int lastSelected = -2;
+			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				int selected = advancedWindow.featuresCullJTable.getSelectedRow();
+				int selected = advancedWindow.viewInfoCullTable.getSelectedRow();
 
 				if (selected == lastSelected) {
 					return;
-				} else if (selected == -1) {
+				}
+				
+				advancedWindow.viewInfoCullConfigTableModel.getDataVector().removeAllElements();
+				
+				if (selected == -1) {
 					Logger.logln(NAME+"Culler unselected in features tab.");
-					advancedWindow.featuresCullConfigJTableModel.getDataVector().removeAllElements();
 				} else {
-					EventCuller ec = advancedWindow.cfd.featureDriverAt(advancedWindow.featuresJList.getSelectedIndex()).cullerAt(selected);
+					EventCuller ec = cfd.featureDriverAt(advancedWindow.viewInfoList.getSelectedIndex()).cullerAt(selected);
 					Logger.logln(NAME+"Culler '"+ec.displayName()+"' selected in features tab.");
-					populateTableWithParams(ec, advancedWindow.featuresCullConfigJTableModel);
+					populateTableWithParams(ec, advancedWindow.viewInfoCullConfigTableModel);
 				}
 
+				advancedWindow.viewInfoCullConfigTable.revalidate();
+				advancedWindow.viewInfoCullConfigTable.repaint();
 				lastSelected = selected;
 			}
-		});
+		};
+		advancedWindow.viewInfoCullTable.getSelectionModel().addListSelectionListener(viewInfoCullTableListener);
 	}
 
+	/**
+	 * Initializes all the "Classifier" tab listeners
+	 */
 	private void initClassifierListeners() {
-		advancedWindow.classJTree.addTreeSelectionListener(new TreeSelectionListener() {	
+		classChoiceListener = new ActionListener() {
 			@Override
-			public void valueChanged(TreeSelectionEvent arg0) {
-				//If unselected
-				if (advancedWindow.classJTree.getSelectionCount() == 0) {
-					Logger.logln(NAME+"Classifier tree unselected in the classifiers tab.");
-					//ResetAvClassSelection(main);
-					tmpClassifier = null;
-					return;
-				}
-
-				//Unselect selected list
-				advancedWindow.classJList.clearSelection();
-
-				Object[] path = advancedWindow.classJTree.getSelectionPath().getPath();
-				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)path[path.length-1];
-
-				//If selected a classifier
-				if (selectedNode.isLeaf()) {
-					Logger.logln(NAME+"Classifier selected in the available classifiers tree in the classifiers tab: "+selectedNode.toString());
-
-					className = getClassNameFromPath(path);
-					tmpClassifier = null;
-					try {
-						tmpClassifier = (Classifier)Class.forName(className).newInstance();
-					} catch (Exception e) {
-						Logger.logln(NAME+"Could not create classifier out of class: "+className);
-						JOptionPane.showMessageDialog(advancedWindow,
-								"Could not generate classifier for selected class:\n"+className,
-								"Classifier Selection Error",
-								JOptionPane.ERROR_MESSAGE);
-						e.printStackTrace();
-						return;
-					}
-					//Add an -M option for SMO classifier
-					String dashM = "";
-					if(className.toLowerCase().contains("smo"))
-						dashM = " -M";
-
-					//Show options and description
-					advancedWindow.classAvClassArgsJTextField.setText(getOptionsStr(((OptionHandler)tmpClassifier).getOptions())+dashM);
-					advancedWindow.classDescJTextPane.setText(getDesc(tmpClassifier));
-				} else {
-					tmpClassifier = null;
+			public void actionPerformed(ActionEvent e) {
+				if (advancedWindow.isVisible()) {
+					Logger.logln(NAME+"Classifier changed in the classifier tab.");
+					updateClassifierTab();
 				}
 			}
-		});
-
-		advancedWindow.classAddJButton.addActionListener(new ActionListener() {	
+		};
+		advancedWindow.classChoice.addActionListener(classChoiceListener);
+		
+		classEditListener = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Logger.logln(NAME+"'Add' button clicked in the analysis tab.");
+			public void actionPerformed(ActionEvent e) {
+				Logger.logln(NAME+"Edit button clicked in the classifier tab");
+				advancedWindow.argsFrame.setTitle("Edit " + (String)advancedWindow.classChoice.getSelectedItem() + "'s Arguments");
+				advancedWindow.argsOKButton.setEnabled(true);
+				advancedWindow.argsFrame.setVisible(true);
+				advancedWindow.argsOKButton.requestFocusInWindow();
+			}
+		};
+		advancedWindow.classEditButton.addActionListener(classEditListener);
+		
+		classOKListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Logger.logln(NAME+"OK button clicked in classifier tab");
+				advancedWindow.setVisible(false);
+			}
+		};
+		advancedWindow.classOKButton.addActionListener(classOKListener);
+		
+		classRestoreDefaultsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Logger.logln(NAME+"Restore Defaults button clicked in the classifier tab");
+				advancedWindow.classChoice.setSelectedItem(PropertiesUtil.defaultClass);
+				updateClassifierTab();
+			}
+		};
+		advancedWindow.classRestoreDefaultsButton.addActionListener(classRestoreDefaultsListener);
+	}
+	
+	/**
+	 * Initializes all the "Edit ${CLASSIFIER}'s Arguments" window listeners
+	 */
+	private void initArgListeners() {
+		argsFieldListener = new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				if (advancedWindow.argsFrame.isVisible())
+					updateArgsOKButton();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				if (advancedWindow.argsFrame.isVisible())
+					updateArgsOKButton();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {}
+		};
+		advancedWindow.argsField.getDocument().addDocumentListener(argsFieldListener);
+		
+		argsOKListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Logger.logln(NAME+"Ok button clicked in the Arguments Editor");
+				
+				String options = advancedWindow.argsField.getText();
+				try {
+					((OptionHandler)advancedWindow.classifiers.get(0)).setOptions(options.split(" "));
+				} catch (Exception e1) {
+					Logger.logln(NAME+"Problem occured while trying to set user defined arguments, shouldn't have got here.", LogOut.STDERR);
+				}
+				
+				advancedWindow.argsFrame.setVisible(false);
+			}
+		};
+		advancedWindow.argsOKButton.addActionListener(argsOKListener);
+		
+		argsCancelListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Logger.logln(NAME+"Cancel Button clicked in the Arguments Editor, will scrap changes");
+				
+				advancedWindow.argsField.setText(advancedWindow.getOptionsStr(((OptionHandler)advancedWindow.classifiers.get(0)).getOptions()));
+				advancedWindow.argsFrame.setVisible(false);
+			}
+		};
+		advancedWindow.argsCancelButton.addActionListener(argsCancelListener);
+	}
 
-				//Check if classifier is selected
-				if (tmpClassifier == null) {
-					if (PropertiesUtil.getWarnAll()) {
-						JOptionPane.showMessageDialog(advancedWindow,
-								"You must select a classifier to be added.",
-								"Add Classifier Error",
-								JOptionPane.ERROR_MESSAGE);
-					}
-					return;
-				} else if (advancedWindow.classifiers.size() > 0) {
-					JOptionPane.showMessageDialog(advancedWindow,
-							"It is only possible to select one classifier at a time.",
-							"Add Classifier Error",
-							JOptionPane.ERROR_MESSAGE);	
-					return;
+	/**
+	 * Initialies any remaining listeners
+	 */
+	private void initOtherListeners() {
+		tabbedPaneListener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (advancedWindow.tabbedPane.getSelectedIndex() == 0) {
+					advancedWindow.getRootPane().setDefaultButton(advancedWindow.featureOKButton);
+					advancedWindow.featureOKButton.requestFocusInWindow();
 				} else {
-					//Check classifier options
-					try {
-						((OptionHandler)tmpClassifier).setOptions(advancedWindow.classAvClassArgsJTextField.getText().split(" "));
-					} catch (Exception e) {
-						Logger.logln(NAME+"Invalid options given for classifier.",LogOut.STDERR);
-						JOptionPane.showMessageDialog(advancedWindow,
-								"The classifier arguments entered are invalid.\n"+
-										"Restoring original options.",
-										"Classifier Options Error",
-										JOptionPane.ERROR_MESSAGE);
-						return;
-					}
-
-					advancedWindow.selectedClassName = advancedWindow.getNameFromClassPath(className);
-					
-					//Add classifier
-					advancedWindow.classifiers = new ArrayList<Classifier>();
-					advancedWindow.classifiers.add(tmpClassifier);
-					advancedWindow.driver.updateClassList(main);
-					advancedWindow.driver.updateClassPrepColor(main);
-					tmpClassifier = null;
-					advancedWindow.classJTree.clearSelection();
+					advancedWindow.getRootPane().setDefaultButton(advancedWindow.classOKButton);
+					advancedWindow.classOKButton.requestFocusInWindow();
 				}
 			}
-		});
-
-		advancedWindow.classJList.addListSelectionListener(new ListSelectionListener() {
-			int lastSelected = -2;
-
+		};
+		advancedWindow.tabbedPane.addChangeListener(tabbedPaneListener);
+		
+		advancedWindowListener = new WindowListener() {
 			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				int selected = advancedWindow.classJList.getSelectedIndex();
-				if (selected == lastSelected)
-					return;
-				lastSelected = selected;
-
-				//If unselected
-				if (selected == -1) {
-					Logger.logln(NAME+"Classifier list unselected in the classifiers tab.");
-					tmpClassifier = null;
-					return;
-				}
-
-				//Unselect available classifiers tree
-				advancedWindow.classJTree.clearSelection();
-
-				String className = advancedWindow.classJList.getSelectedValue().toString();
-				Logger.logln(NAME+"Classifier selected in the selected classifiers list in the classifiers tab: "+className);
-
-				//Show options and description
-				if(className.toLowerCase().contains("smo"))
-					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)advancedWindow.classifiers.get(selected)).getOptions())+" -M");
+			public void windowOpened(WindowEvent e) {
+				if (advancedWindow.tabbedPane.getSelectedIndex() == 0)
+					advancedWindow.featureOKButton.requestFocusInWindow();
 				else
-					advancedWindow.classSelClassArgsJTextField.setText(getOptionsStr(((OptionHandler)advancedWindow.classifiers.get(selected)).getOptions()));
-				advancedWindow.classDescJTextPane.setText(getDesc(advancedWindow.classifiers.get(selected)));
-				advancedWindow.classAvClassArgsJTextField.setText("");
+					advancedWindow.classOKButton.requestFocusInWindow();
 			}
-		});
-
-		advancedWindow.classRemoveJButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Logger.log("'Remove' button clicked in the classifiers tab.");
-				int selected = advancedWindow.classJList.getSelectedIndex();
-
-				//Check if selected
-				if (selected == -1) {
-					if (PropertiesUtil.getWarnAll()) {
-						JOptionPane.showMessageDialog(main,
-								"You must select a classifier to be removed.",
-								"Remove Classifier Error",
-								JOptionPane.ERROR_MESSAGE);
-					}
-					return;
-				}
-
-				//Remove classifier
-				advancedWindow.classifiers.remove(selected);
-
-				advancedWindow.classSelClassArgsJTextField.setText("");
-				advancedWindow.classDescJTextPane.setText("");
-				advancedWindow.classAvClassArgsJTextField.setText("");
-				advancedWindow.driver.updateClassList(main);
-				advancedWindow.driver.updateClassPrepColor(main);
-			}
-		});
+			public void windowClosing(WindowEvent e) {}
+			@Override
+			public void windowClosed(WindowEvent e) {}
+			@Override
+			public void windowIconified(WindowEvent e) {}
+			@Override
+			public void windowDeiconified(WindowEvent e) {}
+			@Override
+			public void windowActivated(WindowEvent e) {}
+			@Override
+			public void windowDeactivated(WindowEvent e) {}
+		};
+		advancedWindow.addWindowListener(advancedWindowListener);
+	}
+	
+	/**
+	 * Either enables or disables the ArgsOKButton based on whether or not the arguments from the argument text field are
+	 * acceptable in Weka or not.
+	 * 
+	 * NOTE: This does not catch arguments that don't make sense or may break Weka, we are simply filtering out arguments
+	 * that Weka won't even let us set. If there is a "deeper" way to ensure that the arguments are valid while still retaining
+	 * good performance feel free to do so.
+	 */
+	private void updateArgsOKButton() {
+		boolean good = true;
+		
+		String options = advancedWindow.argsField.getText();
+		try {
+			((OptionHandler)testClassifier).setOptions(options.split(" "));
+		} catch (Exception e1) {
+			good = false;
+		}
+		
+		if (good) {
+			advancedWindow.argsOKButton.setEnabled(true);
+		} else {
+			advancedWindow.argsOKButton.setEnabled(false);
+		}
+	}
+	
+	/**
+	 * Clears all "View ${FEATURE_SET} Info" Text panes and tables
+	 */
+	protected void clearFeatureView() {
+		advancedWindow.viewInfoNameTextPane.setText("");
+		advancedWindow.viewInfoDescTextPane.setText("");
+		advancedWindow.viewInfoNormTextPane.setText("");
+		advancedWindow.viewInfoFactorTextPane.setText("");
+		advancedWindow.viewInfoExtractorPane.setText("");
+		
+		advancedWindow.viewInfoExtractorConfigModel.getDataVector().removeAllElements();
+		advancedWindow.viewInfoCanonTableModel.getDataVector().removeAllElements();
+		advancedWindow.viewInfoCanonConfigTableModel.getDataVector().removeAllElements();
+		advancedWindow.viewInfoCullTableModel.getDataVector().removeAllElements();
+		advancedWindow.viewInfoCullConfigTableModel.getDataVector().removeAllElements();
+		
+		advancedWindow.viewInfoFrame.revalidate();
+		advancedWindow.viewInfoFrame.repaint();
 	}
 
 	/**
-	 * Resets the feature view in the features tab.
+	 * Updates the "View ${FEATURE_SET} Info" window's text panes and tables with data corresponding to the currently selected feature set
 	 */
-	protected void clearFeatureView(GUIMain main) {
-		advancedWindow.featuresFeatureNameJTextPane.setText("");
-		advancedWindow.featuresFeatureDescJTextPane.setText("");
-		advancedWindow.featuresFeatureExtractorContentJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresFeatureExtractorConfigJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresCanonJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresCanonConfigJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresCullJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresCullConfigJTableModel.getDataVector().removeAllElements();
-		advancedWindow.featuresNormContentJTextPane.setText("");
-		advancedWindow.featuresFactorContentJTextPane.setText("");
-	}
-
-	/**
-	 * Updates the feature view when a feature is selected in the features tab.
-	 */
-	protected void updateFeatureView(GUIMain main, int selected) {
-		clearFeatureView(main);
+	protected void updateViewInfoWindow(int selected) {
+		clearFeatureView();
+		
+		//Clearing All selections
+		advancedWindow.viewInfoExtractorConfigTable.clearSelection();
+		advancedWindow.viewInfoCanonTable.clearSelection();
+		advancedWindow.viewInfoCanonConfigTable.clearSelection();
+		advancedWindow.viewInfoCullTable.clearSelection();
+		advancedWindow.viewInfoCullConfigTable.clearSelection();
 
 		//If nothing's selected, return
 		if (selected == -1)
 			return;
 
-		FeatureDriver fd = advancedWindow.cfd.featureDriverAt(selected);
+		FeatureDriver fd = cfd.featureDriverAt(selected);
 
 		//Name and description
-		advancedWindow.featuresFeatureNameJTextPane.setText(fd.getName());
-		advancedWindow.featuresFeatureDescJTextPane.setText(fd.getDescription());
+		advancedWindow.viewInfoNameTextPane.setText(fd.getName());
+		advancedWindow.viewInfoDescTextPane.setText(fd.getDescription());
 
 		//Update normalization
-		advancedWindow.featuresNormContentJTextPane.setText(fd.getNormBaseline().getTitle());
-		advancedWindow.featuresFactorContentJTextPane.setText(fd.getNormFactor().toString());
+		advancedWindow.viewInfoNormTextPane.setText(fd.getNormBaseline().getTitle());
+		advancedWindow.viewInfoFactorTextPane.setText(fd.getNormFactor().toString());
 
 		//Update feature extractor
-		advancedWindow.featuresFeatureExtractorContentJTableModel.addRow(new String[] {fd.getUnderlyingEventDriver().displayName()});
-		populateTableWithParams(fd.getUnderlyingEventDriver(), advancedWindow.featuresFeatureExtractorConfigJTableModel);
+		advancedWindow.viewInfoExtractorPane.setText(fd.getUnderlyingEventDriver().displayName());
+		populateTableWithParams(fd.getUnderlyingEventDriver(), advancedWindow.viewInfoExtractorConfigModel);
+		advancedWindow.viewInfoExtractorConfigTable.doLayout();
 
 		//Update canonicizers
 		List<Canonicizer> canons = fd.getCanonicizers();
 		if (canons != null) {
 			for (int i = 0; i < canons.size(); i++) {
-				advancedWindow.featuresCanonJTableModel.addRow(new String[]{canons.get(i).displayName()});
-				populateTableWithParams(canons.get(i), advancedWindow.featuresCanonConfigJTableModel);
+				advancedWindow.viewInfoCanonTableModel.addRow(new String[]{canons.get(i).displayName()});
 			}
+			advancedWindow.viewInfoCanonTable.doLayout();
 		} else {
-			advancedWindow.featuresCanonJTableModel.addRow(new String[]{"N/A"});
-			advancedWindow.featuresCanonConfigJTableModel.addRow(new String[]{"N/A", "N/A", "N/A"});
+			advancedWindow.viewInfoCanonTableModel.addRow(new String[]{"N/A"});
+			advancedWindow.viewInfoCanonTable.doLayout();
 		}
 
 		// update cullers
 		List<EventCuller> cullers = fd.getCullers();
 		if (cullers != null) {
 			for (int i = 0; i < cullers.size(); i++) {
-				advancedWindow.featuresCullJTableModel.addRow(new String[]{cullers.get(i).displayName()});
-				populateTableWithParams(cullers.get(i), advancedWindow.featuresCullConfigJTableModel);
+				advancedWindow.viewInfoCullTableModel.addRow(new String[]{cullers.get(i).displayName()});
 			}
+			advancedWindow.viewInfoCullTable.doLayout();
 		} else {
-			advancedWindow.featuresCullJTableModel.addRow(new String[]{"N/A"});
-			advancedWindow.featuresCullConfigJTableModel.addRow(new String[]{"N/A", "N/A", "N/A"});
+			advancedWindow.viewInfoCullTableModel.addRow(new String[]{"N/A"});
+			advancedWindow.viewInfoCullTable.doLayout();
 		}
-	}
-	
-	/**
-	 * Updates the feature set view when a new feature set is selected / created.
-	 */
-	protected void updateFeatureSetView(GUIMain main) {
-		CumulativeFeatureDriver featureDriver = advancedWindow.cfd;
-		
-		advancedWindow.featuresSetDescJTextPane.setText(featureDriver.getDescription() == null ? "" : featureDriver.getDescription());
-		
-		advancedWindow.driver.clearFeatureView(main);
-		advancedWindow.featuresJListModel.removeAllElements();
-		for (int i = 0; i < featureDriver.numOfFeatureDrivers(); i++) 
-			advancedWindow.featuresJListModel.addElement(featureDriver.featureDriverAt(i).getName());
 	}
 
 	/**
@@ -559,102 +483,67 @@ public class PreProcessAdvancedDriver {
 			tm.addRow(new String[] {fullname.substring(fullname.lastIndexOf(".")+1), "N/A", "N/A"});
 		}
 	}
-
+	
 	/**
-	 * Updates the list of selected classifiers with respect to the list of classifiers.
+	 * Updates the "Feature Set" tab to reflect a newly selected feature set.
 	 */
-	protected void updateClassList(GUIMain main) {
-		DefaultListModel<String> model2 = (DefaultListModel<String>)advancedWindow.classJList.getModel();
-		List<Classifier> classifiers = advancedWindow.classifiers;	
-		model2.removeAllElements();
+	protected void updateFeatureSetTab() {
+		cfd = main.presetCFDs.get(advancedWindow.featureChoice.getSelectedIndex());
+		Logger.logln(NAME+"Successfully loaded feature set: "+cfd.getName());
 
-		for (Classifier c: classifiers) {
-			String className = c.getClass().getName();
-			model2.addElement(className);
+		clearFeatureView();
+		advancedWindow.featureDescPane.setText(cfd.getDescription() == null ? "" : cfd.getDescription());
+		
+		String feature = (String)advancedWindow.featureChoice.getSelectedItem();
+		if (!PropertiesUtil.getFeature().equals(feature)) {
+			PropertiesUtil.setFeature(feature);
+		}
+		
+		advancedWindow.viewInfoListModel.removeAllElements();
+		int size = cfd.numOfFeatureDrivers();
+		for (int i = 0; i < size; i++) { 
+			advancedWindow.viewInfoListModel.addElement(cfd.featureDriverAt(i).getName());
 		}
 	}
-
+	
 	/**
-	 * Clears the GUI when no available classifier is selected.
+	 * Updates the "Classifier" tab to reflect a newly selected classifier.
 	 */
-	protected void resetAvClassSelection(GUIMain main) {
-		// clear everything
-		tmpClassifier = null;
-		main.classAvClassArgsJTextField.setText("");
-		main.classDescJTextPane.setText("");
-	}
+	protected void updateClassifierTab() {
+		Classifier tmpClassifier;
 
-	/**
-	 * Clears the GUI when no selected classifier is selected.
-	 */
-	protected void resetSelClassSelection(GUIMain main) {
-		// clear everything
-		main.classSelClassArgsJTextField.setText("");
-		main.classDescJTextPane.setText("");
-	}
-
-	/**
-	 * Creates a classifier options string.
-	 */
-	public String getOptionsStr(String[] options) {
-		String optionStr = "";
-		for (String option: options)
-			optionStr += option+" ";
-		return optionStr;
-	}
-
-
-	/**
-	 * Constructs the class name out of a tree path.
-	 */
-	protected String getClassNameFromPath(Object[] path) {
-		String res = "";
-		for (Object o: path) {
-			res += o.toString()+".";
-		}
-		res = res.substring(0,res.length()-1);
-		return res;
-	}
-
-	/**
-	 * Initialize map of classifier class-name to its description.
-	 */
-	protected String getDesc(Classifier c) {
-		// bayes
-		if (c instanceof NaiveBayes) {
-			return ((NaiveBayes) c).globalInfo();
-		} else if (c instanceof NaiveBayesMultinomial) {
-			return ((NaiveBayesMultinomial) c).globalInfo();
+		String className = "";
+		try {
+			className = (String)advancedWindow.classChoice.getSelectedItem();
+			tmpClassifier = (Classifier)Class.forName(advancedWindow.fullClassPath.get(className)).newInstance();
+			testClassifier = (Classifier)Class.forName(advancedWindow.fullClassPath.get(className)).newInstance();
+		} catch (Exception e) {
+			Logger.logln(NAME+"Could not create classifier out of the selected class: "+className, LogOut.STDERR);
+			return;
 		}
 
-		// functions
-		else if (c instanceof Logistic) {
-			return ((Logistic) c).globalInfo();
-		}
-		else if (c instanceof MultilayerPerceptron) {
-			return ((MultilayerPerceptron) c).globalInfo();
-		}
-		else if (c instanceof SMO) {
-			return ((SMO) c).globalInfo();
-		}
-
-		// lazy
-		else if (c instanceof IBk) {
-			return ((IBk) c).globalInfo();
+		Logger.logln(NAME+"Successfully loaded classifier: "+className);
+		//Add an -M option for SMO classifier
+		if (className.toLowerCase().contains("smo")) {
+			String options = advancedWindow.getOptionsStr(((OptionHandler)tmpClassifier).getOptions()) + " -M";
+			try {
+				((OptionHandler)tmpClassifier).setOptions(options.split(" "));
+			} catch (Exception e) {
+				Logger.logln(NAME+"Problem occured while tried to add -M flag to SMO classifier", LogOut.STDERR);
+			}
 		}
 
-		// rules
-		else if (c instanceof ZeroR) {
-			return ((ZeroR) c).globalInfo();
-		}
+		//Show options and description
+		advancedWindow.argsField.setText(advancedWindow.getOptionsStr(((OptionHandler)tmpClassifier).getOptions()));
+		advancedWindow.classDescPane.setText(advancedWindow.getDesc(tmpClassifier));
 
-		// trees
-		else if (c instanceof J48) {
-			return ((J48) c).globalInfo();
+		advancedWindow.classifiers = new ArrayList<Classifier>();
+		advancedWindow.classifiers.add(tmpClassifier);
+		
+		if (!PropertiesUtil.getClassifier().equals(className)) {
+			PropertiesUtil.setClassifier(className);
 		}
-
-		else {
-			return "No description available.";
-		}
+		
+		SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), advancedWindow.classDescScrollPane));
 	}
 }
