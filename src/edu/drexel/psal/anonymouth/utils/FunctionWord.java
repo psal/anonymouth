@@ -40,7 +40,7 @@ public class FunctionWord implements Runnable {
 		}
 		node = new Trie();
 		node.addWords(functionWordArray);
-		Logger.logln(NAME+"FINISHED INITIALIZING FUNCTION WORDS",Logger.LogOut.STDERR);
+		Logger.logln(NAME+"FINISHED INITIALIZING FUNCTION WORDS");
 		//System.out.println("TEST CASE: "+this.searchListFor("The"));
 			
 		//System.exit(0);

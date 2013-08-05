@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
 
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 
@@ -29,9 +30,15 @@ import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 
 public class DriverTranslationsTab implements ActionListener {
 	
+	public static final String ARROW_UP = "arrow_up.png";
+	public static final String ARROW_DOWN = "arrow_down.png";
+	private static ImageIcon arrow_up;
+	private static ImageIcon arrow_down;
+	
 	private static ActionListener resetTranslatorListener;
 	private static ActionListener stopTranslationsListener;
 	private static ActionListener startTranslationsListener;
+	
 	private static GUIMain main;
 	protected static JPanel[] finalPanels;
 	protected static JLabel[] languageLabels;
@@ -40,8 +47,6 @@ public class DriverTranslationsTab implements ActionListener {
 	protected static JButton[] translationButtons;
 	protected static int numTranslations;
 	protected static TaggedSentence current;
-	private static ImageIcon arrow_up;
-	private static ImageIcon arrow_down;
 	private static DriverTranslationsTab inst;
 
 	public static void initListeners(GUIMain main) {
@@ -82,6 +87,8 @@ public class DriverTranslationsTab implements ActionListener {
 					DriverTranslationsTab.main.translationsHolderPanel.removeAll();
 					GUIMain.inst.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
 					GUIMain.inst.translationsHolderPanel.add(GUIMain.inst.notTranslated, "");
+					GUIMain.inst.stopTranslations.setEnabled(true);
+					GUIMain.inst.startTranslations.setEnabled(false);
 					GUIMain.GUITranslator.reset();
 					DriverEditor.taggedDoc.deleteTranslations();
 					
@@ -96,6 +103,9 @@ public class DriverTranslationsTab implements ActionListener {
 			}
 		};
 		main.resetTranslator.addActionListener(resetTranslatorListener);
+		
+		arrow_up = ImageLoader.getImageIcon(ARROW_UP);
+		arrow_down = ImageLoader.getImageIcon(ARROW_DOWN);
 	}
 	
 	/**
@@ -125,10 +135,7 @@ public class DriverTranslationsTab implements ActionListener {
 			main.notTranslated.setText("You have turned translations off.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
 			main.stopTranslations.setEnabled(false);
-		} else if (sentence.hasTranslations()) {
-			arrow_up = GUIMain.arrow_up;
-			arrow_down = GUIMain.arrow_down;
-			
+		} else if (sentence.hasTranslations()) {			
 			current = sentence;
 
 			// retrieve the translation information
@@ -210,7 +217,7 @@ public class DriverTranslationsTab implements ActionListener {
 		GUIMain.GUITranslator.replace(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate), current);
 		
 		main.anonymityDrawingPanel.updateAnonymityBar();
-		SuggestionCalculator.placeSuggestions(main);
+		main.suggestionsTabDriver.placeSuggestions();
 		
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -17,7 +18,7 @@ public class DriverMenu {
 	
 	private final static String NAME = "( DriverMenu ) - ";
 
-	protected static ActionListener generalListener;
+	protected static ActionListener preferencesListener;
 	protected static ActionListener saveProblemSetListener;
 	protected static ActionListener loadProblemSetListener;
 	protected static ActionListener saveTestDocListener;
@@ -31,22 +32,21 @@ public class DriverMenu {
 	protected static ActionListener fullScreenListener;
 //	protected static ActionListener printMenuItemListener;
 	
-	protected static void initListeners(final GUIMain main) {
-		if (!ThePresident.IS_MAC)
-        	main.settingsGeneralMenuItem.addActionListener(generalListener);
-		
-		generalListener = new ActionListener() {
+	protected static void initListeners(final GUIMain main) {	
+		preferencesListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUIMain.GSP.openWindow();
+				GUIMain.preferencesWindow.showWindow();
 			}
         };
+        if (!ANONConstants.IS_MAC)
+        	main.settingsGeneralMenuItem.addActionListener(preferencesListener);
         
         saveProblemSetListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Save problem set menu item clicked");
-        		DriverPreProcessTabDocuments.saveProblemSetAL.actionPerformed(e);
+        		main.preProcessWindow.driver.doneSaveListener.actionPerformed(e);
         	}
         };
         main.fileSaveProblemSetMenuItem.addActionListener(saveProblemSetListener);
@@ -55,7 +55,7 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Load problem set menu item clicked");
-        		DriverPreProcessTabDocuments.loadProblemSetAL.actionPerformed(e);
+        		main.startingWindows.loadDocSetListener.actionPerformed(e);
         	}
         };
         main.fileLoadProblemSetMenuItem.addActionListener(loadProblemSetListener);
@@ -86,7 +86,7 @@ public class DriverMenu {
 						About.aboutAnonymouth,
 						"About Anonymouth",
 						JOptionPane.INFORMATION_MESSAGE,
-						ThePresident.LOGO);
+						ThePresident.aboutLogo);
         	}
         };
         main.helpAboutMenuItem.addActionListener(aboutListener);
@@ -136,7 +136,7 @@ public class DriverMenu {
         };
         main.editRedoMenuItem.addActionListener(redoListener);
         
-        if (ThePresident.IS_MAC) {
+        if (ANONConstants.IS_MAC) {
         	fullScreenListener = new ActionListener() {
             	@Override
             	public void actionPerformed(ActionEvent e) { 

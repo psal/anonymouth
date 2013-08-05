@@ -6,14 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments.ExtFilter;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -25,17 +22,30 @@ import edu.drexel.psal.jstylo.generics.Logger;
  */
 public class PreferencesDriver {
 	
-	//various variables
+	//Constants
 	private static final String NAME = "( PreferencesDriver ) - ";
+	private final String TRANSWARNING = 
+			"<html><left>"+
+			"<center><b><font color=\"#FF0000\" size = 6>WARNING:</font></b></center>" +
+			"Anonymouth provides translations functionality that will help obsure your<br>" +
+			"style by translating your document into multiple languages and back again.<br>" +
+			"THIS MEANS THAT YOUR SENTENCES WILL BE SENT OFF REMOTELY TO<br>" +
+			"MICROSOFT BING.<br><br>" +
+			"This feature is turned off by default, and if you desire to use this feature<br>" +
+			"and understand the risks you may turn it on by...<br><br>" +
+			"FOR MAC:<br>" +
+			"     <center><code>Anonymouth > Preferences > Tick the translations option</code></center>" +
+			"FOR ALL OTHER OPERATING SYSTEMS:<br>" + 
+			"     <center><code>Settings > Preferences > Tick the translations option</code></center>" +
+			"</left></div></html>";
+	
+	//various variables
 	private GUIMain main;
 	private PreferencesWindow prefWin;
 	private int prevFeatureValue;
 	private int prevThreadValue;
-	
+
 	//Listeners
-	private ActionListener classifierListener;
-	private ActionListener featureListener;
-	private ActionListener probSetListener;
 	private ActionListener autoSaveListener;
 	private ActionListener warnQuitListener;
 	private ChangeListener maxFeaturesListener;
@@ -44,11 +54,14 @@ public class PreferencesDriver {
 	private ActionListener translationsListener;
 	private ChangeListener tabbedPaneListener;
 	private ActionListener fontSizeListener;
+	private ActionListener highlightColorListener;
+	private ActionListener highlightSentsListener;
 	private KeyListener maxFeaturesBoxListener;
 	private KeyListener numOfThreadsBoxListener;
 	private ActionListener showWarningsListener;
 	private ActionListener highlightElemsListener;
 	private ActionListener versionAutoSaveListener;
+	private ActionListener filterAddWordsListener;
 	
 	public PreferencesDriver(GUIMain main, PreferencesWindow prefWin) {
 		this.main = main;
@@ -61,6 +74,62 @@ public class PreferencesDriver {
 	 * Initializes and adds all preferences window listeners
 	 */
 	public void initListeners() {
+		filterAddWordsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (prefWin.filterAddWords.isSelected()) {
+					PropertiesUtil.setFilterAddSuggestions(true);
+					main.suggestionsTabDriver.setFilterWordsToAdd(true);
+					main.suggestionsTabDriver.placeSuggestions();
+					
+					Logger.logln(NAME+"Filter Words to Add checkbox checked");
+				} else {
+					PropertiesUtil.setFilterAddSuggestions(false);
+					main.suggestionsTabDriver.setFilterWordsToAdd(false);
+					main.suggestionsTabDriver.placeSuggestions();
+					
+					Logger.logln(NAME+"Filter Words to Add checkbox unchecked");
+				}
+			}
+		};
+		prefWin.filterAddWords.addActionListener(filterAddWordsListener);
+		
+		highlightSentsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (prefWin.highlightSent.isSelected()) {
+					PropertiesUtil.setHighlightSents(true);
+					DriverEditor.doHighlight = true;
+					if (DriverEditor.highlightEngine.isSentenceHighlighted())
+						DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+					
+					Logger.logln(NAME+"Highlight Sents checkbox checked");
+				} else {
+					PropertiesUtil.setHighlightSents(false);
+					DriverEditor.doHighlight = false;
+					if (DriverEditor.highlightEngine.isSentenceHighlighted())
+						DriverEditor.highlightEngine.removeSentenceHighlight();
+					
+					Logger.logln(NAME+"Highlight Sents checkbox unchecked");
+				}
+			}
+		};
+		prefWin.highlightSent.addActionListener(highlightSentsListener);
+		
+		highlightColorListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int color = prefWin.sentHighlightColors.getSelectedIndex();
+				PropertiesUtil.setHighlightColor(color);
+				
+				if (DriverEditor.taggedDoc != null) {
+					DriverEditor.highlightEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
+					DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				}
+			}
+		};
+		prefWin.sentHighlightColors.addActionListener(highlightColorListener);
+		
 		fontSizeListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -89,56 +158,6 @@ public class PreferencesDriver {
 			}
 		};
 		prefWin.tabbedPane.addChangeListener(tabbedPaneListener);
-		
-		classifierListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				PropertiesUtil.setClassifier(prefWin.classComboBox.getSelectedItem().toString());
-			}
-		};
-		prefWin.classComboBox.addActionListener(classifierListener);
-		
-		featureListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				PropertiesUtil.setFeature(prefWin.featComboBox.getSelectedItem().toString());
-			}
-		};
-		prefWin.featComboBox.addActionListener(featureListener);
-		
-		probSetListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Logger.logln(NAME+"'Select' Problem Set button clicked on the Preferences window");
-
-					int answer = 0;
-					
-					PropertiesUtil.load.addChoosableFileFilter(new ExtFilter("XML files (*.xml)", "xml"));
-					if (PropertiesUtil.getProbSet() != null) {
-						String absPath = PropertiesUtil.propFile.getAbsolutePath();
-						String problemSetDir = absPath.substring(0, absPath.indexOf("anonymouth_prop")-1) + "\\problem_sets\\";
-						PropertiesUtil.load.setCurrentDirectory(new File(problemSetDir));
-						PropertiesUtil.load.setSelectedFile(new File(PropertiesUtil.prop.getProperty("recentProbSet")));
-					}
-					
-					answer = PropertiesUtil.load.showDialog(main, "Load Problem Set");
-
-					if (answer == JFileChooser.APPROVE_OPTION) {
-						String path = PropertiesUtil.load.getSelectedFile().getAbsolutePath();
-						PropertiesUtil.setProbSet(path);
-						
-						prefWin.probSetTextPane.setText(path);
-					} else {
-						Logger.logln(NAME+"Set default problem set canceled");
-					}
-				} catch (NullPointerException arg)
-				{
-					arg.printStackTrace();
-				}
-			}
-		};
-		prefWin.selectProbSet.addActionListener(probSetListener);
 		
 		autoSaveListener = new ActionListener() {
 			@Override
@@ -178,33 +197,42 @@ public class PreferencesDriver {
 				Logger.logln(NAME+"Translations checkbox clicked");
 				
 				if (prefWin.translations.isSelected()) {
-					if (GUIMain.processed)
-						main.resetTranslator.setEnabled(true);
-					PropertiesUtil.setDoTranslations(true);
-					
-					if (BackendInterface.processed) {
-						int answer = JOptionPane.showOptionDialog(null,
-								"Being translating now?",
-								"Begin Translations",
-								JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null, null, null);
+					Object[] buttons = {"Ok", "Cancel"};
+					int answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+							TRANSWARNING,
+							"Please Be Aware!",
+							JOptionPane.OK_CANCEL_OPTION,
+							JOptionPane.WARNING_MESSAGE,
+							null, buttons, 1);
+					if (answer == 0) {
+						if (GUIMain.processed)
+							main.resetTranslator.setEnabled(true);
+						PropertiesUtil.setDoTranslations(true);
 						
-						if (answer == JOptionPane.YES_OPTION) {
-							GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
-							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+						if (BackendInterface.processed) {
+							answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+									"Being translating now?",
+									"Begin Translations",
+									JOptionPane.YES_NO_OPTION,
+									JOptionPane.QUESTION_MESSAGE,
+									null, null, null);
 							
-							main.startTranslations.setEnabled(false);
-							main.stopTranslations.setEnabled(true);
+							if (answer == JOptionPane.YES_OPTION) {
+								GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
+								DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+								
+								main.startTranslations.setEnabled(false);
+								main.stopTranslations.setEnabled(true);
+							} else {
+								main.startTranslations.setEnabled(true);
+								main.stopTranslations.setEnabled(false);
+								DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+							}
 						} else {
-							main.startTranslations.setEnabled(true);
-							main.stopTranslations.setEnabled(false);
-							DriverTranslationsTab.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+							main.notTranslated.setText("Please process your document to recieve translation suggestions.");
+							main.translationsHolderPanel.add(main.notTranslated, "");
 						}
-					} else {
-						main.notTranslated.setText("Please process your document to recieve translation suggestions.");
-						main.translationsHolderPanel.add(main.notTranslated, "");
-					}
+					}					
 				} else {
 					main.resetTranslator.setEnabled(false);
 					GUIMain.GUITranslator.reset();
@@ -261,15 +289,13 @@ public class PreferencesDriver {
 						//general
 						prefWin.warnQuit.setSelected(PropertiesUtil.getWarnQuit());
 						prefWin.autoSave.setSelected(PropertiesUtil.getAutoSave());
-						prefWin.fontSizes.setSelectedItem(PropertiesUtil.getFontSize());
 						prefWin.translations.setSelected(PropertiesUtil.getDoTranslations());
 						prefWin.showWarnings.setSelected(PropertiesUtil.getWarnAll());
-						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
 						
-						//defaults
-						prefWin.probSetTextPane.setText(PropertiesUtil.getProbSet());
-						prefWin.featComboBox.setSelectedItem(PropertiesUtil.getFeature());
-						prefWin.classComboBox.setSelectedItem(PropertiesUtil.getClassifier());
+						//editor
+						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
+						prefWin.highlightSent.setSelected(PropertiesUtil.getHighlightSents());
+						prefWin.fontSizes.setSelectedItem(PropertiesUtil.getFontSize());
 						
 						//advanced
 						prefWin.numOfThreadsSlider.setValue(PropertiesUtil.getThreadCount());
@@ -381,11 +407,13 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.highlightElems.isSelected()) {
 					PropertiesUtil.setAutoHighlight(true);
-					DriverEditor.highlightWordsToRemove(main, DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
+					DriverEditor.autoHighlight = true;
+					DriverEditor.highlightEngine.addAutoRemoveHighlights(DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);
-					DriverEditor.removeHighlightWordsToRemove(main);
+					DriverEditor.autoHighlight = false;
+					DriverEditor.highlightEngine.removeAutoRemoveHighlights();
 					Logger.logln(NAME+"Auto highlights checkbox unchecked");
 				}
 			}
@@ -397,11 +425,11 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.versionAutoSave.isSelected()) {
 					PropertiesUtil.setVersionAutoSave(true);
-					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = true;
+					ThePresident.should_Keep_Auto_Saved_Anonymized_Docs = true;
 					Logger.logln(NAME+"Version auto save checkbox checked");
 				} else {
 					PropertiesUtil.setVersionAutoSave(false);
-					ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS = false;
+					ThePresident.should_Keep_Auto_Saved_Anonymized_Docs = false;
 					Logger.logln(NAME+"Version auto save checkbox unchecked");
 				}
 			}

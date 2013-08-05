@@ -1,6 +1,7 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 //import edu.drexel.psal.anonymouth.utils.POS;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 /*
 import com.wintertree.wthes.CompressedThesaurus;
@@ -47,7 +48,7 @@ public class DictionaryBinding {
 	protected static ArrayList<String> allWords = new ArrayList<String>();
 	
 	public static void init() {
-		System.setProperty("wordnet.database.dir", ThePresident.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet");
+		System.setProperty("wordnet.database.dir", ANONConstants.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet");
 	}
 	
 	public static void initDictListeners (final DictionaryConsole dc) {
@@ -67,7 +68,7 @@ public class DictionaryBinding {
 						"just 'http://www.google.com' it.",
 						"Google.",
 						JOptionPane.PLAIN_MESSAGE,
-						GUIMain.icon);			
+						ThePresident.aboutLogo);			
 			}
 		});
 		

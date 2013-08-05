@@ -10,14 +10,15 @@ import javax.xml.parsers.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.Collections;
 
 import com.jgaap.generics.*;
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
+import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 
 public class ProblemSet {
 	
@@ -25,14 +26,14 @@ public class ProblemSet {
 	 * fields
 	 * ======
 	 */
-	
+	//private static final String NAME = "( ProblemSet ) - ";
 	private SortedMap<String,List<Document>> trainDocsMap;
-	
 	private SortedMap<String,List<Document>> testDocsMap;
+	private HashMap<String, List<String>> titles;
 	
 	private String trainCorpusName;	
 	
-	private static String dummyAuthor = "_dummy_"; 
+	private static String dummyAuthor = ANONConstants.DUMMY_NAME; 
 	
 	// whether to use the dummy author name for test instances
 	// or the default - an arbitrary author name from the training authors
@@ -109,8 +110,8 @@ public class ProblemSet {
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
 		
-		DriverPreProcessTabDocuments.updateOpeningDir(testDocsMap.get(ThePresident.DUMMY_NAME).get(0).getFilePath(), false);
-		DriverPreProcessTabDocuments.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
+		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ANONConstants.DUMMY_NAME).get(0).getFilePath(), false);
+		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
 	/**
@@ -195,7 +196,7 @@ public class ProblemSet {
 	 */
 	public boolean addTrainDoc(String author, Document doc) {
 		if (trainDocsMap.get(author) == null)
-			trainDocsMap.put(author,new LinkedList<Document>());
+			trainDocsMap.put(author, new LinkedList<Document>());
 		return trainDocsMap.get(author).add(doc);
 	}
 
@@ -332,9 +333,13 @@ public class ProblemSet {
 		List<Document> docs = trainDocsMap.get(author);
 		if (docs == null)
 			return null;
-		for (int i=0; i<docs.size(); i++)
-			if (docs.get(i).getTitle().equals(docTitle))
+
+		for (int i = 0; i < docs.size(); i++) {
+			if (docs.get(i).getTitle().equals(docTitle)) {
 				return docs.remove(i);
+			}
+		}
+		
 		return null;
 	}
 	
@@ -477,6 +482,38 @@ public class ProblemSet {
 	// training documents
 	
 	/**
+	 * Removes the authors with the given name from the problem set and then adds it back in with all their
+	 * past documents under the given new name
+	 * @param oldName - The name of the author you want to rename
+	 * @param newName - The new name of the author you want to use
+	 */
+	public void renameAuthor(String oldName, String newName) {
+		List<Document> docs = trainDocsMap.remove(oldName);
+		trainDocsMap.put(newName, docs);
+	}
+	
+	/**
+	 * Removes the given document under the given author from the problem set and then adds it back in under
+	 * it's new name
+	 * @param oldName - The name of the document you want to rename
+	 * @param newName - The new name of the document you want to use
+	 * @param author - The name of author under which the document resides
+	 */
+	public void renameTrainDoc(String oldName, String newName, String author) {
+		List<Document> docs = trainDocsMap.get(author);
+		int size = docs.size();
+		
+		for (int i = 0; i < size; i++) {
+			if (docs.get(i).equals(oldName)) {
+				String path = docs.get(i).getFilePath();
+				docs.remove(i);
+				docs.add(i, new Document(path, author, newName));
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Returns true iff the training set has any authors.
 	 * @return
 	 * 		true iff the training set has any authors.
@@ -611,7 +648,7 @@ public class ProblemSet {
 		if (testDocsMap.isEmpty())
 			result = false;
 		else
-			result = !testDocsMap.get(ThePresident.DUMMY_NAME).isEmpty();
+			result = !testDocsMap.get(ANONConstants.DUMMY_NAME).isEmpty();
 		
 		return result;
 	}
@@ -795,6 +832,10 @@ public class ProblemSet {
 		return useDummyAuthor;
 	}
 	
+	public HashMap<String, List<String>> getTitles() {
+		return titles;
+	}
+	
 	
 	/* ===========
 	 * XML parsing
@@ -839,86 +880,107 @@ public class ProblemSet {
 			//intialize the parser, parse the document, and build the tree
 			DocumentBuilderFactory builder = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = builder.newDocumentBuilder();
-			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
+			
+			org.w3c.dom.Document xmlDoc = null;
+			try {
+				xmlDoc = dom.parse(filename);	
+			} catch (SAXParseException e) {
+				return;
+			}
 			xmlDoc.getDocumentElement().normalize();
 			NodeList items = xmlDoc.getElementsByTagName("document");
 			problemSet.trainCorpusName = "Authors";
-			HashSet<String> titles = new HashSet<String>();
+			titles = new HashMap<String, List<String>>();
+			int size = items.getLength();
 			
-			for (int i=0; i<items.getLength();i++){
+			ArrayList<String> docTitles = new ArrayList<String>(size);
+
+			for (int i = 0; i < size; i++) {
 				Node current = items.item(i);
 			
-				//test document (old format)
-				if (current.getParentNode().getNodeName().equals("test")){
+				if (current.getParentNode().getNodeName().equals("test")) {
+					//test document (old format)
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = ANONConstants.DUMMY_NAME;
 					filePath = filePath.replace("/./","/");
-					Document testDoc = new Document(filePath,ThePresident.DUMMY_NAME);
+					Document testDoc = new Document(filePath, author);
+					String oldTitle = testDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(testDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 
-						String newTitle = testDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
 						}
-						
-						testDoc.setTitle(newTitle);
 					}
+
+					testDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					titles.add(testDoc.getTitle());
-					
-					problemSet.addTestDoc(ThePresident.DUMMY_NAME,testDoc);
+					problemSet.addTestDoc(author, testDoc);
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")) {
 					//Training document
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path trainPath = Paths.get(current.getTextContent());
 					String filePath = trainPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document trainDoc = new Document(filePath,parent.getAttribute("name"));
+					String oldTitle = trainDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(trainDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 						
-						String newTitle = trainDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
-						}
-						
-						trainDoc.setTitle(newTitle);
+						}	
 					}
 					
-					titles.add(trainDoc.getTitle());
+					trainDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					problemSet.addTrainDoc(parent.getAttribute("name"),trainDoc);
+					problemSet.addTrainDoc(author, trainDoc);
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")) {
 					//test document (new format)
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
+					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document testDoc = new Document(filePath,parent.getAttribute("name"));
+					String oldTitle = testDoc.getTitle();
+					String newTitle = oldTitle;
 					
-					if (titles.contains(testDoc.getTitle())) {
+					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
 
-						String newTitle = testDoc.getTitle();
-						while (titles.contains(newTitle)) {
-							newTitle = newTitle.replaceAll("_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-							newTitle = newTitle.concat("_"+Integer.toString(addNum)+".txt");
+						while (docTitles.contains(newTitle)) {
+							newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+							newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
 							addNum++;
 						}
-						
-						testDoc.setTitle(newTitle);
 					}
 					
-					titles.add(testDoc.getTitle());
+					testDoc.setTitle(newTitle);
+					docTitles.add(newTitle);
+					if (titles.get(author) == null)
+						titles.put(author, new ArrayList<String>());
+					titles.get(author).add(newTitle);
 					
-					problemSet.addTestDoc(parent.getAttribute("name"),testDoc);
+					problemSet.addTestDoc(author, testDoc);
 				} else {
 					Logger.logln("Error loading document file. Incorrectly formatted XML: "+current.getNodeValue());
 				}

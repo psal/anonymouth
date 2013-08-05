@@ -89,7 +89,7 @@ public class VersionControl {
 		}
 		
 		main.anonymityDrawingPanel.updateAnonymityBar();
-		DriverEditor.setSuggestions();
+		main.suggestionsTabDriver.placeSuggestions();
 	}
 	
 	/**
@@ -117,7 +117,7 @@ public class VersionControl {
 		}
 		
 		main.anonymityDrawingPanel.updateAnonymityBar();
-		DriverEditor.setSuggestions();
+		main.suggestionsTabDriver.placeSuggestions();
 	}
 	
 	/**

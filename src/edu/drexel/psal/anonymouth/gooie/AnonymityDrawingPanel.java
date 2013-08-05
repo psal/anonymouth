@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.math.BigDecimal;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -189,15 +190,18 @@ public class AnonymityDrawingPanel extends JPanel {
 	 */
 	public void updateAnonymityBar() {
 		double curPercent = DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Being recieved as 100 for 100%, 200 for 200%, etc
-		pointer.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
-		
-		System.out.println((pointer.getMaxPercent() - curPercent) / pointer.getMaxPercent());
-		percentToGoal = (pointer.getMaxPercent() - curPercent) / pointer.getMaxPercent();
+		double max = DriverEditor.taggedDoc.getMaxChangeNeeded();
+
+		percentToGoal = ((max - curPercent) / max)*100;
+
 		if (percentToGoal > 100)
 			percentToGoal = 100;
-		main.anonymityDescription.setText("<html><center>You are "+percentToGoal+"%<br>of the way to<br>your goal</center><html>");
+		BigDecimal bd = new BigDecimal(Double.toString(percentToGoal));
+		bd = bd.setScale(4, BigDecimal.ROUND_HALF_UP);
+		main.anonymityDescription.setText("<html><center>" + bd + "%<br>of the way to<br>your goal</center><html>");
 		
-		Logger.logln(NAME+"CurPercent = " + curPercent + ", max = " + pointer.getMaxPercent());
+		Logger.logln(NAME+"CurPercent = " + curPercent + ", max = " + max+" ==> you are "+percentToGoal+"% of the way to your goal.");
+
 		pointer.setCurPercent(percentToGoal);
 		
 		repaint();

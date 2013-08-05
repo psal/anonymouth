@@ -36,10 +36,12 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  */
 public class WekaInstancesBuilder {
 	
+	public final String NAME = "( WekaInstancesBuilder ) - ";
+	
 	/**
 	 * Determines the number of threads to be used for features extraction.
 	 */
-	public int numCalcThreads = ThePresident.NUM_TAGGING_THREADS;
+	public int numCalcThreads = ThePresident.num_Tagging_Threads;
 	
 	/**
 	 * Determines whether to use a set of SparseInstance or Instance.
@@ -194,13 +196,11 @@ public class WekaInstancesBuilder {
 		List<Document> knownDocs;
 		CumulativeFeatureDriver cfd;
 		
-		public ArrayList<List<EventSet>> getList()
-		{
+		public ArrayList<List<EventSet>> getList() {
 			return list;
 		}
 		
-		public CalcThread(int div, int threadId, int knownDocsSize, List<Document> knownDocs, CumulativeFeatureDriver cfd)
-		{
+		public CalcThread(int div, int threadId, int knownDocsSize, List<Document> knownDocs, CumulativeFeatureDriver cfd) {
 			this.div = div;
 			this.threadId = threadId;
 			this.knownDocsSize = knownDocsSize;
@@ -210,13 +210,14 @@ public class WekaInstancesBuilder {
 		
 		@Override
 		public void run() {
-			for (int i = div * threadId; i < Math.min(knownDocsSize, div * (threadId + 1)); i++)
+			for (int i = div * threadId; i < Math.min(knownDocsSize, div * (threadId + 1)); i++) {
 				try {
 					list.add(cfd.createEventSets(knownDocs.get(i)));
 				} catch (Exception e) {
 					Logger.logln("Error extracting features!",LogOut.STDERR);
 					Logger.logln(e.getMessage(),LogOut.STDERR);
 				}
+			}
 		}
 	}
 	
@@ -239,7 +240,7 @@ public class WekaInstancesBuilder {
 		known = new ArrayList<List<EventSet>>(knownDocs.size());
 		int knownDocsSize = knownDocs.size();
 		
-		int numCalcThreadsToUse = ThePresident.NUM_TAGGING_THREADS;
+		int numCalcThreadsToUse = ThePresident.num_Tagging_Threads;
 		numCalcThreads = numCalcThreadsToUse;
 //		numCalcThreads = getNumCalcThreads();
 //		
@@ -249,12 +250,11 @@ public class WekaInstancesBuilder {
 //			numCalcThreadsToUse=numCalcThreads;
 //		}
 		
-		Logger.logln("Using N calc threads: "+numCalcThreadsToUse);
+		Logger.logln(NAME+"Using N calc threads: "+numCalcThreadsToUse);
 		int div = knownDocsSize / numCalcThreadsToUse;
 		
 		if ( knownDocsSize % numCalcThreadsToUse !=0 )
 			div++;
-		
 		CalcThread[] calcThreads = new CalcThread[numCalcThreadsToUse];
 		for (int thread = 0; thread < numCalcThreadsToUse; thread++)
 			calcThreads[thread] = new CalcThread(
@@ -278,24 +278,21 @@ public class WekaInstancesBuilder {
 		for (EventSet es: known.get(0)){
 			IDs.add(es.getEventSetID());
 		} 
-		
 		// apply event cullers
 		known = CumulativeEventCuller.cull(known, cfd);
-
 		//culling gives event sets in wrong order. FIXME
 		for (int j1 = 0; j1<known.size(); j1++){
-		for (int iterator = 0; iterator<known.get(j1).size();iterator++){
-		//	System.out.println("Trying to set "+known.get(j1).get(iterator).getEventSetID()+" to "+IDs.get(iterator));
-			known.get(j1).get(iterator).setEventSetID(IDs.get(iterator));
-		//	System.out.println("Post ES: "+known.get(j1).get(iterator).getEventSetID());
-		} 
+			for (int iterator = 0; iterator<known.get(j1).size();iterator++){
+				//	System.out.println("Trying to set "+known.get(j1).get(iterator).getEventSetID()+" to "+IDs.get(iterator));
+				known.get(j1).get(iterator).setEventSetID(IDs.get(iterator));
+				//	System.out.println("Post ES: "+known.get(j1).get(iterator).getEventSetID());
+			} 
 		}
 		
 		// initialize number of sets per document and number of vectors
 		final int numOfFeatureClasses = known.get(0).size();
 		final int numOfVectors = known.size();
 		featureClassAttrsFirstIndex = new int[numOfFeatureClasses+1];
-
 		// initialize author name set
 		if (authors == null)
 			authors = new LinkedList<String>();

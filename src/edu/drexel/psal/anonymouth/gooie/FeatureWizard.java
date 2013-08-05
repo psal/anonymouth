@@ -40,7 +40,7 @@ public class FeatureWizard extends javax.swing.JFrame {
 	protected JPanel edParamList;
 	protected java.util.List<JPanel> cullParamList = new ArrayList<JPanel>();
 	protected FeatureDriver fd;
-	protected GUIMain parent;
+	protected GUIMain main;
 	protected boolean editMode;
 	protected int originalIndex;
 	
@@ -143,23 +143,23 @@ public class FeatureWizard extends javax.swing.JFrame {
 	/**
 	 * Default constructor.
 	 */
-	public FeatureWizard(GUIMain parent) {
+	public FeatureWizard(GUIMain main) {
 		super();
-		this.parent = parent;
+		this.main = main;
 		initGUI();
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(main);
 	}
 	
 	/**
 	 * Constructor for editing a selected feature driver.
 	 */
-	public FeatureWizard(GUIMain parent, FeatureDriver fd, int originalIndex) {
+	public FeatureWizard(GUIMain main, FeatureDriver fd, int originalIndex) {
 		super();
-		this.parent = parent;
+		this.main = main;
 		this.editMode = true;
 		this.originalIndex = originalIndex;
 		initGUI();
-		setLocationRelativeTo(parent);
+		setLocationRelativeTo(main);
 		
 		// set view to given feature driver
 		// ================================

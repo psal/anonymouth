@@ -14,6 +14,7 @@ import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -35,7 +36,7 @@ public class DocumentMagician {
 	
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	
-	private String writeDirectory = ThePresident.DOC_MAGICIAN_WRITE_DIR;
+	private String writeDirectory = ANONConstants.DOC_MAGICIAN_WRITE_DIR;
 	
 	/**
 	 * private boolean variable, true if sparse data is expected, false otherwise
@@ -187,7 +188,7 @@ public class DocumentMagician {
 		Logger.logln(NAME+"Saving temporary file: "+pathToTempModdedDoc);
 		try {
 			File tempModdedDoc = new File(pathToTempModdedDoc);
-			if(ThePresident.SHOULD_KEEP_AUTO_SAVED_ANONYMIZED_DOCS == false)
+			if(ThePresident.should_Keep_Auto_Saved_Anonymized_Docs == false)
 				tempModdedDoc.deleteOnExit();
 			FileWriter writer = new FileWriter(tempModdedDoc);
 			writer.write(modifiedDocument);
@@ -198,8 +199,7 @@ public class DocumentMagician {
 		}
 		Document newModdedDoc = new Document(pathToTempModdedDoc,toModifySet.get(0).getAuthor(),toModifySet.get(0).getTitle());
 		Logger.logln(NAME+"Document opened");
-		while(!toModifySet.isEmpty())
-			toModifySet.remove(0);
+		toModifySet.clear();
 		toModifySet.add(0,newModdedDoc);
 		oneAndDone.runInstanceBuilder(trainSet,toModifySet);
 		authorAndTrainingInstances = oneAndDone.getTrainingInstances();
@@ -236,7 +236,7 @@ public class DocumentMagician {
 			if (!tempModdedDoc.exists())
 				tempModdedDoc.createNewFile();
 			FileWriter writer = new FileWriter(tempModdedDoc);
-			if(ThePresident.SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC == false)
+			if (!ANONConstants.SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC)
 				tempModdedDoc.deleteOnExit();
 			writer.write(toModifySet.get(0).stringify());
 			writer.close();
@@ -262,17 +262,17 @@ public class DocumentMagician {
 		noAuthorTrainInstanceConstructor = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
 		int i;
 		int authSampleSetSize = authorSamplesSet.size();
-		noAuthorTrainInstanceConstructor.onlyBuildTrain(noAuthorTrainSet);
+		noAuthorTrainInstanceConstructor.onlyBuildTrain(noAuthorTrainSet, false);
 		noAuthorTrainAttributeSet = noAuthorTrainInstanceConstructor.getAttributeSet();
 		trainingInstances = noAuthorTrainInstanceConstructor.getTrainingInstances();
 		noAuthorTrainDat = noAuthorTrainInstanceConstructor.getFullTrainData();
 		
-		authorInstanceConstructor.onlyBuildTrain(authorSamplesSet);
+		authorInstanceConstructor.onlyBuildTrain(authorSamplesSet, true);
 		authorAttributeSet = authorInstanceConstructor.getAttributeSet();
 		authorInstances = authorInstanceConstructor.getTrainingInstances();
 		authorOnlyDat = authorInstanceConstructor.getFullTrainData();
 		for(i=0;i<authSampleSetSize;i++){
-			if(authorSamplesSet.get(i).getAuthor().equals(ThePresident.DUMMY_NAME))
+			if(authorSamplesSet.get(i).getAuthor().equals(ANONConstants.DUMMY_NAME))
 				authorSamplesSet.get(i).setAuthor(authorToRemove);
 		}
 	}
@@ -299,13 +299,13 @@ public class DocumentMagician {
 	public synchronized void runWeka(){
 		Logger.logln(NAME+"Called runWeka");
 		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
-		ThePresident.CLASSIFIER_SAVED = false;
-		if(ThePresident.CLASSIFIER_SAVED == false){
+		ThePresident.classifier_Saved = false;
+		if(ThePresident.classifier_Saved == false){
 			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
 			Instances trainingSet = authorAndTrainDat;
 			Instances testSet = toModifyDat;
 			List<Document> unknownDocs = toModifySet;
-			String saveClassifierAs = ThePresident.PATH_TO_CLASSIFIER;
+			String saveClassifierAs = ANONConstants.PATH_TO_CLASSIFIER;
 			Classifier classifier = theClassifier;
 			
 			//this.trainingSet = trainingSet;					
@@ -363,7 +363,7 @@ public class DocumentMagician {
 			
 			wekaResultMap = res;
 			
-			ThePresident.CLASSIFIER_SAVED = true;
+			ThePresident.classifier_Saved = true;
 		}
 		else{
 			wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
@@ -396,7 +396,6 @@ public class DocumentMagician {
 		int i = 0;
 		int lenTSet = noAuthorTrainSet.size();
 		trainTitlesList = new ArrayList<String>(lenTSet);
-		System.out.println("Training document titles:");
 		loadDocs(toModifySet);
 		loadDocs(trainSet);
 		loadDocs(authorSamplesSet);

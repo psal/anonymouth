@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.jgaap.generics.Document;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
@@ -50,8 +51,8 @@ public class BackendInterface {
 	/**
 	 * documents tab >> create new problem set
 	 */
-	protected static void docTabCreateNewProblemSet(GUIMain main) {
-		Logger.logln("( BackendInterface ) - create new problem set");
+	protected void docTabCreateNewProblemSet(GUIMain main) {
+		Logger.logln(NAME+"Create new problem set");
 		(new Thread(bei.new DocTabNewProblemSetButtonClick(main))).start();
 	}
 
@@ -65,21 +66,19 @@ public class BackendInterface {
 			Logger.logln(NAME+"Backend: create new problem set thread started.");
 
 			// initialize probelm set
-			main.ps = new ProblemSet();
-			main.ps.setTrainCorpusName(main.defaultTrainDocsTreeName);
-			GUIUpdateInterface.updateProblemSet(main);
+			main.preProcessWindow.ps = new ProblemSet();
+			main.preProcessWindow.ps.setTrainCorpusName(main.preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
+			main.preProcessWindow.driver.updateAllComponents();
 
 			Logger.logln(NAME+"Backend: create new problem set thread finished.");
 		}
 	}
 
-	protected static void runVerboseOutputWindow(GUIMain main){
+	protected void runVerboseOutputWindow(GUIMain main) {
 		new Thread(bei.new RunVerboseOutputWindow(main)).start();
-
 	}
 
-	public class RunVerboseOutputWindow extends GUIThread{
-
+	public class RunVerboseOutputWindow extends GUIThread {
 		public RunVerboseOutputWindow(GUIMain main) {
 			super(main);
 		}
@@ -87,21 +86,17 @@ public class BackendInterface {
 		public void run() {
 			new Console();
 		}
-
 	}
 
-
-
-	protected static void preTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician){
+	protected static void preTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
 		(new Thread(bei.new PreTargetSelectionProcessing(main,wizard,magician))).start();
 	}
 
 	public class PreTargetSelectionProcessing extends GUIThread {
-
 		private DataAnalyzer wizard;
 		private DocumentMagician magician;		
 
-		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician){
+		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
 			super(main);
 			this.wizard = wizard;
 			this.magician = magician;
@@ -128,10 +123,9 @@ public class BackendInterface {
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						wizard.runInitial(magician,main.cfd, main.classifiers.get(0));
+						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();
-						pw.setText("Initialize Cluster Viewer...");
 						pw.setText("Classifying Documents...");
 						magician.runWeka();
 						wizard.runClusterAnalysis(magician);
@@ -148,7 +142,7 @@ public class BackendInterface {
 								"It is not possible to process an empty document.",
 								"Document processing error",
 								JOptionPane.ERROR_MESSAGE,
-								GUIMain.iconNO);
+								null);
 					} else {
 						magician.setModifiedDocument(tempDoc);
 
@@ -166,9 +160,6 @@ public class BackendInterface {
 					}
 				}
 
-
-				ConsolidationStation.toModifyTaggedDocs.get(0).setBaselinePercentChangeNeeded(); // todo figure out why this and/or the two percent change needed calls in TaggedDocument affect AnonymityBar
-
 				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
 				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
@@ -183,8 +174,6 @@ public class BackendInterface {
 					}
 					
 					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
-					System.out.println("DEBUGGING maxchange = " + DriverEditor.taggedDoc.getMaxChangeNeeded());
-					System.out.println("DEBUGGING current change = " + DriverEditor.taggedDoc.getCurrentChangeNeeded());
 				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
@@ -192,6 +181,7 @@ public class BackendInterface {
 				Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
 				Logger.logln(NAME+wekaResults.toString());
 				makeResultsChart(wekaResults, main);
+
 				
 				main.anonymityDrawingPanel.updateAnonymityBar();
 				main.anonymityDrawingPanel.showPointer(true);
@@ -200,16 +190,15 @@ public class BackendInterface {
 					DriverEditor.originals.put(DriverEditor.taggedDoc.getUntaggedSentences(false).get(i), DriverEditor.taggedDoc.getTaggedSentences().get(i));
 
 				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
-				SuggestionCalculator.init(magician);
-				SuggestionCalculator.placeSuggestions(main);
-				GUIUpdateInterface.updateResultsPrepColor(main);
+				main.suggestionsTabDriver.placeSuggestions();
+				ResultsWindow.updateResultsPrepColor(main);
 
 				DriverEditor.setAllDocTabUseable(true, main);		
 
 				if (PropertiesUtil.getDoTranslations()) {
-					main.rightTabPane.setSelectedIndex(2);
-				} else {
 					main.rightTabPane.setSelectedIndex(1);
+				} else {
+					main.rightTabPane.setSelectedIndex(0);
 				}
 				
 				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
@@ -255,6 +244,7 @@ public class BackendInterface {
 
 				GUIMain.processed = true;
 				pw.stop();
+				main.showMainGUI();
 			} catch (Exception e) {
 				e.printStackTrace();
 				// Get current size of heap in bytes
@@ -302,7 +292,7 @@ public class BackendInterface {
 		}
 	}
 
-	public static void makeResultsChart(Map<String,Map<String,Double>> resultMap, GUIMain main){
+	public void makeResultsChart(Map<String,Map<String,Double>> resultMap, GUIMain main) {
 
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();
 		Map<String,Double> tempMap = resultMap.get(mapKeyIter.next()); 
@@ -326,7 +316,7 @@ public class BackendInterface {
 			predictionMapArray[i][0] = tempVal;
 			predictionMapArray[i][1] = i;
 			
-			if (((String)authors[i]).equals(ThePresident.DUMMY_NAME)){
+			if (((String)authors[i]).equals(ANONConstants.DUMMY_NAME)){
 				authors[i] = "You";
 			}
 		}

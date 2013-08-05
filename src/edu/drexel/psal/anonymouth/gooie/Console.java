@@ -9,7 +9,7 @@ package edu.drexel.psal.anonymouth.gooie;
 //
 // RJHM van den Bergh , rvdb@comweb.nl
 
-import edu.drexel.psal.anonymouth.gooie.DriverPreProcessTabDocuments.ExtFilter;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -98,7 +98,7 @@ public class Console extends WindowAdapter implements WindowListener, ActionList
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser save = new JFileChooser();
-				save.addChoosableFileFilter(new ExtFilter("txt files (*.txt)", "txt"));
+				save.addChoosableFileFilter(ANONConstants.TXT);
 				int answer = save.showSaveDialog(frame);
 				
 				if (answer == JFileChooser.APPROVE_OPTION) {

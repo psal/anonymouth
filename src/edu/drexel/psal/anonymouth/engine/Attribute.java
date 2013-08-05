@@ -408,8 +408,8 @@ public class Attribute {
 			return -1;
 	}
 	
-	public double getChangeNeeded(){
-		return getPercentChangeNeeded(false,false,false);
+	public double getChangeNeeded() {
+		return getPercentChangeNeeded(false, false, false);
 	}
 	
 	/**

@@ -7,7 +7,6 @@ import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
 import com.jgaap.generics.*;
 
@@ -83,7 +82,7 @@ public class InstanceConstructor {
 	 */
 	public InstanceConstructor(boolean isSparse, CumulativeFeatureDriver cfd, boolean printStuff){
 		wid = new WekaInstancesBuilder(isSparse);
-		wid.setNumCalcThreads(ThePresident.NUM_TAGGING_THREADS);
+		wid.setNumCalcThreads(ThePresident.num_Tagging_Threads);
 		theseFeaturesCfd = cfd;
 		this.printStuff =printStuff;
 		Logger.logln(NAME+"InstanceConstuctor constructed");
@@ -99,7 +98,7 @@ public class InstanceConstructor {
 	 * 	true if no errors
 	 */
 	public boolean runInstanceBuilder(List<Document> trainDocs,List<Document> testDocs){
-		Logger.logln(NAME+"Runnng JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
+		Logger.logln(NAME+"Running JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
 		int eye = 0;
 		if (printStuff == true) {
 			char[] cRay = testDocs.get(0).getProcessedText();
@@ -134,8 +133,11 @@ public class InstanceConstructor {
 		return true;
 	}
 	
-	public boolean onlyBuildTrain(List<Document> trainDocs){
-		Logger.logln(NAME+"Only building train set");
+	public boolean onlyBuildTrain(List<Document> trainDocs, boolean withAuthor) {
+		if (withAuthor)
+			Logger.logln(NAME+"Only building train set");
+		else
+			Logger.logln(NAME+"Building train set with author");
 		
 		try {
 			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
