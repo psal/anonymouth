@@ -19,10 +19,8 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SparseInstance;
 
-import com.jgaap.generics.Canonicizer;
 import com.jgaap.generics.Document;
 import com.jgaap.generics.Event;
-import com.jgaap.generics.EventDriver;
 import com.jgaap.generics.EventHistogram;
 import com.jgaap.generics.EventSet;
 
@@ -34,11 +32,94 @@ import edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver;
 
 public class Engine implements API {
 
+	
+	/*
+	 * Metadata Event format:
+	 * 
+	 * EventSetID: "<DOCUMENT METADATA>"
+	 * Event at Index:
+	 * 		0 : author
+	 * 		1 : title
+	 * 		2 : Sentences in document
+	 * 		3 : Words in document
+	 * 		4 : Characters in document
+	 * 		5 : Letters in document
+	 */	
+	
 	// Done
 	@Override
 	public List<EventSet> extractEventSets(Document document,
 			CumulativeFeatureDriver cumulativeFeatureDriver) throws Exception {
-		return cumulativeFeatureDriver.createEventSets(document);
+		
+		//Extract the Events from the documents
+		List<EventSet> generatedEvents = cumulativeFeatureDriver.createEventSets(document);
+		
+		//create metadata event to store document information
+		EventSet documentInfo = new EventSet();
+		documentInfo.setEventSetID("<DOCUMENT METADATA>");
+		
+		//Extract document title and author
+		Event authorEvent = new Event(document.getAuthor());
+		Event titleEvent = new Event(document.getTitle());
+		documentInfo.addEvent(authorEvent);
+		documentInfo.addEvent(titleEvent);
+		
+		//Extract normalization baselines
+		// initialize normalization baselines
+		
+			//Feature Class in Doc //Dunno if we actually want this or not. Makes everything more complicated
+			/*	int sum = 0;
+				featureClassPerInst.put(instance, new int[numOfFeatureClasses]);
+				for (k = start; k < end; k++)
+					sum += instance.value(k);
+				featureClassPerInst.get(instance)[i] = sum;
+					*/
+		
+			//Sentences in doc
+			{
+				Document doc = null;
+				SingleNumericEventDriver counter = new SentenceCounterEventDriver();
+				doc = document;
+				doc.load();
+				Event tempEvent = new Event(""+(int) counter.getValue(doc));
+				documentInfo.addEvent(tempEvent);
+			}
+				
+			//Words in doc
+			{
+				Document doc = null;
+				SingleNumericEventDriver counter = new WordCounterEventDriver();
+				doc = document;
+				doc.load();
+				Event tempEvent = new Event(""+(int) counter.getValue(doc));
+				documentInfo.addEvent(tempEvent);
+			}
+				
+			//Characters in doc
+			{
+				Document doc = null;
+				SingleNumericEventDriver counter = new CharCounterEventDriver();
+				doc = document;
+				doc.load();
+				Event tempEvent = new Event(""+(int) counter.getValue(doc));
+				documentInfo.addEvent(tempEvent);
+			}
+				
+			//Letters in doc
+			{
+				Document doc = null;
+				SingleNumericEventDriver counter = new LetterCounterEventDriver();
+				doc = document;
+				doc.load();
+				Event tempEvent = new Event(""+(int) counter.getValue(doc));
+				documentInfo.addEvent(tempEvent);
+			}
+		
+		//add the metadata EventSet to the List<EventSet>
+		generatedEvents.add(documentInfo);
+		
+		//return the List<EventSet>
+		return generatedEvents;
 	}
 
 	// Done
@@ -46,17 +127,31 @@ public class Engine implements API {
 	public List<List<EventSet>> cull(List<List<EventSet>> eventSets,
 			CumulativeFeatureDriver cumulativeFeatureDriver) throws Exception {
 
-		// FIXME a hacky workaround for the bug in the eventCuller. Fix that
+		// a hacky workaround for the bug in the eventCuller. Fix that
 		// later then remove these
 		ArrayList<String> IDs = new ArrayList<String>();
 		for (EventSet es : eventSets.get(0)) {
 			IDs.add(es.getEventSetID());
 		}
-
+		
+		//remove the metdata prior to culling
+		ArrayList<EventSet> docMetaData = new ArrayList<EventSet>();
+		for (List<EventSet> les : eventSets){
+			docMetaData.add(les.remove(les.size()-1));
+		}
+		
+		//cull the events
 		List<List<EventSet>> culledEventSets = CumulativeEventCuller.cull(
 				eventSets, cumulativeFeatureDriver);
 
-		// FIXME a hacky workaround for the bug in the eventCuller. Fix that
+		//add the metadata back in
+		int index = 0;
+		for (List<EventSet> les : culledEventSets){
+			les.add(docMetaData.get(index));
+			index++;
+		}
+		
+		// a hacky workaround for the bug in the eventCuller. Fix that
 		// later then remove these
 		for (int j1 = 0; j1 < culledEventSets.size(); j1++) {
 			for (int iterator = 0; iterator < culledEventSets.get(j1).size(); iterator++) {
@@ -64,15 +159,23 @@ public class Engine implements API {
 						.setEventSetID(IDs.get(iterator));
 			}
 		}
+		
+		//return culled events
 		return culledEventSets;
 	}
 
-	// Done
+	// Done.
 	@Override
 	public List<EventSet> getRelevantEvents(
 			List<List<EventSet>> culledEventSets,
 			CumulativeFeatureDriver cumulativeFeatureDriver) throws Exception {
 
+		//remove the metadata prior to generating the relevantEvents
+		ArrayList<EventSet> docMetaData = new ArrayList<EventSet>();
+		for (List<EventSet> les : culledEventSets){
+			docMetaData.add(les.remove(les.size()-1));
+		}
+		
 		List<EventSet> relevantEvents = new LinkedList<EventSet>();
 
 		// iterate over the List of Lists
@@ -82,12 +185,7 @@ public class Engine implements API {
 			for (EventSet esToAdd : l) {
 				// whether or not to add the event set to the list (if false, it
 				// is already on the list)
-				boolean add = true;
-
-				// the index of where the event set is--assuming it's in the
-				// list of relevant events
-				// if it is not in the list, this variable is not referenced
-				int index = 0;
+				boolean add = true;;
 
 				for (EventSet esl : relevantEvents) {
 					// this should compare the category/name of the event set
@@ -95,8 +193,6 @@ public class Engine implements API {
 						add = false;
 						break;
 					}
-					if (add)
-						index++;
 				}
 
 				// this event set isn't on the list at all, just add it (which
@@ -146,6 +242,14 @@ public class Engine implements API {
 				featureIndex++;
 			}
 		}
+		
+		//add the metadata back in
+		int index = 0;
+		for (List<EventSet> les : culledEventSets){
+			les.add(docMetaData.get(index));
+			index++;
+		}
+		
 		return relevantEvents;
 	}
 
@@ -157,6 +261,12 @@ public class Engine implements API {
 			CumulativeFeatureDriver cumulativeFeatureDriver,
 			boolean hasDocTitles) throws Exception {
 
+		//remove the metdata prior to generating attribute list
+		ArrayList<EventSet> docMetaData = new ArrayList<EventSet>();
+		for (List<EventSet> les : culledEventSets){
+			docMetaData.add(les.remove(les.size()-1));
+		}
+		
 		int numOfFeatureClasses = relevantEvents.size();
 
 		int numOfVectors = culledEventSets.size();
@@ -174,7 +284,7 @@ public class Engine implements API {
 		// initialize Weka attributes vector (but authors attribute will be
 		// added last)
 		FastVector attributeList = new FastVector(relevantEvents.size() + 1);
-		FastVector authorNames = new FastVector();
+		FastVector<String> authorNames = new FastVector();
 		authorNames.addElement("_Unknown_");
 		for (String name : authors)
 			authorNames.addElement(name);
@@ -235,13 +345,10 @@ public class Engine implements API {
 		// The actual list of attributes to return
 		ArrayList<Attribute> attributes = new ArrayList<Attribute>();
 		
-		
-		// FIXME not sure what type of attribute to use here
-		// I can't get the doc titles without passing the documents through here
-		// which seems like a waste
+		// Add the attribute for document title if enabled
 		if (hasDocTitles) {
-			// FastVector docTitles = new FastVector();
-			attributes.add(new Attribute("Document Title"));
+			Attribute docTitle = new Attribute("Document Title", (FastVector) null);
+			attributes.add(docTitle);
 		}
 			
 		// here's where we create the new Attribute object and add it to the
@@ -332,6 +439,13 @@ public class Engine implements API {
 			}
 		}
 
+		//add the metadata back in
+		int index = 0;
+		for (List<EventSet> les : culledEventSets){
+			les.add(docMetaData.get(index));
+			index++;
+		}
+		
 		// add authors attribute as last attribute
 		attributes.add(authorNameAttribute);
 		return attributes;
@@ -342,30 +456,42 @@ public class Engine implements API {
 	public Instance createInstance(List<Attribute> attributes,
 			List<EventSet> relevantEvents,
 			CumulativeFeatureDriver cumulativeFeatureDriver,
-			List<EventSet> documentData, Document document, boolean isSparse,
+			List<EventSet> documentData, boolean isSparse,
 			boolean hasDocTitles) throws Exception {
-
-		int numOfFeatureClasses = relevantEvents.size();
 
 		// initialize vector size (including authorName and title if required)
 		// and first indices of feature classes array
-
 		int vectorSize = attributes.size();
 		if (hasDocTitles)
 			vectorSize++;
 
 		// generate training instances
 		Instance inst = null;
-		int numOfVectors = documentData.size();
-
 		if (isSparse)
 			inst = new SparseInstance(vectorSize);
 		else
 			inst = new DenseInstance(vectorSize);
 		
-		//-1 for indexing -1 for skipping the author
-		for (int i=0; i<attributes.size()-2;i++){
-			inst.setValue(((Attribute)attributes.get(i)), 0);
+		int start = 0;
+		
+		//add the document title if need be
+		if (hasDocTitles){
+			start = 1;
+			inst.setValue(attributes.get(0),(documentData.get(documentData.size()-1).eventAt(1).getEvent().replaceAll("\\\\","/")));
+		}
+		
+		// add the document author
+		if (!(documentData.get(documentData.size()-1).eventAt(0).getEvent() == null)) {
+			inst.setValue((Attribute) attributes.get(attributes.size() - 1),
+					documentData.get(documentData.size()-1).eventAt(0).getEvent());
+		}
+		
+		//remove metadata event
+		EventSet metadata = documentData.remove(documentData.size()-1);
+		
+		//-1 for indexing
+		for (int i=start; i<attributes.size()-1;i++){
+			inst.setValue((attributes.get(i)), 0);
 		}
 		
 		//go through all eventSets in the document
@@ -373,7 +499,6 @@ public class Engine implements API {
 			
 			ArrayList<Integer> indices = new ArrayList<Integer>();
 			ArrayList<Event> events = new ArrayList<Event>();
-			//Set<Event> events = new HashSet<Event>();
 			EventHistogram currHistogram = new EventHistogram();
 			
 			boolean eventSetIsRelevant = false;
@@ -393,7 +518,10 @@ public class Engine implements API {
 					// find the indices of the events
 					// and count all of the events
 					for (Event e : es) {
-						int currIndex=(hasDocTitles ? 1 : 0);
+						int currIndex=0;
+						if (hasDocTitles){
+							currIndex++;
+						}
 						boolean hasInner = false;
 
 						for (EventSet res : relevantEvents) {
@@ -420,19 +548,20 @@ public class Engine implements API {
 									found = true;
 								}
 								//currHistogram.add(e);
-								if (found)
+								if (found){
 									break;
+								}
 								currIndex++;
 							}
-							if (found)
+							if (found){
 								break;
-							if (!hasInner)
+							}
+							if (!hasInner){
 								currIndex++;
+							}
 						}
 					}
-
 					//calculate/add the histograms
-					
 					int index = 0;
 					for (Integer i: indices){
 						inst.setValue((Attribute)attributes.get(i),currHistogram.getAbsoluteFrequency(events.get(index)));
@@ -443,9 +572,11 @@ public class Engine implements API {
 			} else { //non histogram feature
 				
 				int nonHistIndex = 0;
+				if (hasDocTitles)
+					nonHistIndex++;
+				
 				//find the indices of the events
 				//and count all of the events
-				
 				for (EventSet res : relevantEvents) {
 					
 					if (es.getEventSetID().equals(res.getEventSetID())){
@@ -462,37 +593,18 @@ public class Engine implements API {
 						nonHistIndex++;
 				}
 
-				//Extract and add the event
-				FeatureDriver nonHistDriver = cumulativeFeatureDriver
-						.featureDriverAt(documentData.indexOf(es));
-				Document tempDoc = document;
+				//Extract and add the event				
+				String eventString = es.eventAt(0).getEvent();
+				int startIndex = eventString.indexOf("{");
+				int endIndex = eventString.indexOf("}");
+				eventString = eventString.substring(startIndex+1,endIndex);
 
-				for (Canonicizer c : nonHistDriver.getCanonicizers()) {
-					tempDoc.addCanonicizer(c);
-				}
-
-				EventDriver underlyingDriver = nonHistDriver
-						.getUnderlyingEventDriver();
-
-				tempDoc.load();
-				tempDoc.processCanonicizers();
-
-				EventSet nonHistES = underlyingDriver
-						.createEventSet(tempDoc);
-
-				double value = Double.parseDouble(nonHistES.eventAt(0)
-						.getEvent());
+				double value = Double.parseDouble(eventString);
 				inst.setValue((Attribute) attributes.get(nonHistIndex), value);
-				
 			}
 		}
-		
-		//TODO
-		// if it's a test document, it won't have an author
-		if (!(document.getAuthor() == null)) {
-			inst.setValue((Attribute) attributes.get(attributes.size() - 1),
-					document.getAuthor());
-		}
+		//add metadata back. Not sure if necessary
+		documentData.add(metadata);
 		
 		return inst;
 	}
@@ -500,16 +612,16 @@ public class Engine implements API {
 	// Done
 	@Override
 	public void normInstance(CumulativeFeatureDriver cfd, Instance instance,
-			Document document, boolean hasDocTitles) throws Exception {
+			List<EventSet> documentData, boolean hasDocTitles) throws Exception {
 
 		int i;
 		int numOfFeatureClasses = cfd.numOfFeatureDrivers();
 
-		HashMap<Instance, int[]> featureClassPerInst = null;
-		HashMap<Instance, Integer> sentencesPerInst = null;
-		HashMap<Instance, Integer> wordsPerInst = null;
-		HashMap<Instance, Integer> charsPerInst = null;
-		HashMap<Instance, Integer> lettersPerInst = null;
+		//HashMap<Instance, int[]> featureClassPerInst = null;
+		int sentencesPerInst = Integer.parseInt(documentData.get(documentData.size()-1).eventAt(2).getEvent());
+		int wordsPerInst = Integer.parseInt(documentData.get(documentData.size()-1).eventAt(3).getEvent());
+		int charsPerInst = Integer.parseInt(documentData.get(documentData.size()-1).eventAt(4).getEvent());
+		int lettersPerInst = Integer.parseInt(documentData.get(documentData.size()-1).eventAt(5).getEvent());
 		int[] featureClassAttrsFirstIndex = new int[numOfFeatureClasses + 1];
 
 		// initialize vector size (including authorName and title if required)
@@ -527,76 +639,6 @@ public class Engine implements API {
 			}
 		}
 
-		// initialize normalization baselines
-		for (i = 0; i < numOfFeatureClasses; i++) {
-			NormBaselineEnum norm = cfd.featureDriverAt(i).getNormBaseline();
-			int start = featureClassAttrsFirstIndex[i], end = featureClassAttrsFirstIndex[i + 1], k;
-
-			if (norm == NormBaselineEnum.FEATURE_CLASS_IN_DOC
-					|| norm == NormBaselineEnum.FEATURE_CLASS_ALL_DOCS) {
-				// initialize
-				if (featureClassPerInst == null)
-					featureClassPerInst = new HashMap<Instance, int[]>();
-
-				// accumulate feature class sum per document
-
-				int sum = 0;
-				featureClassPerInst.put(instance, new int[numOfFeatureClasses]);
-				for (k = start; k < end; k++)
-					sum += instance.value(k);
-				featureClassPerInst.get(instance)[i] = sum;
-
-			} else if (norm == NormBaselineEnum.SENTENCES_IN_DOC) {
-				// initialize
-				if (sentencesPerInst == null)
-					sentencesPerInst = new HashMap<Instance, Integer>();
-
-				// extract sentence count and update
-				Document doc;
-				SingleNumericEventDriver counter = new SentenceCounterEventDriver();
-
-				doc = document;
-				doc.load();
-				sentencesPerInst.put(instance, (int) counter.getValue(doc));
-
-			} else if (norm == NormBaselineEnum.WORDS_IN_DOC) {
-				// initialize
-				if (wordsPerInst == null)
-					wordsPerInst = new HashMap<Instance, Integer>();
-
-				// extract word count and update
-				Document doc;
-				SingleNumericEventDriver counter = new WordCounterEventDriver();
-				doc = document;
-				doc.load();
-				wordsPerInst.put(instance, (int) counter.getValue(doc));
-
-			} else if (norm == NormBaselineEnum.CHARS_IN_DOC) {
-				// initialize
-				if (charsPerInst == null)
-					charsPerInst = new HashMap<Instance, Integer>();
-
-				// extract character count and update
-				Document doc;
-				SingleNumericEventDriver counter = new CharCounterEventDriver();
-				doc = document;
-				doc.load();
-				charsPerInst.put(instance, (int) counter.getValue(doc));
-
-			} else if (norm == NormBaselineEnum.LETTERS_IN_DOC) {
-				// initialize
-				if (lettersPerInst == null)
-					lettersPerInst = new HashMap<Instance, Integer>();
-
-				// extract letter count and update
-				Document doc;
-				SingleNumericEventDriver counter = new LetterCounterEventDriver();
-				doc = document;
-				doc.load();
-				lettersPerInst.put(instance, (int) counter.getValue(doc));
-			}
-		}
-
 		// normalizes features
 		for (i = 0; i < numOfFeatureClasses; i++) {
 
@@ -604,7 +646,8 @@ public class Engine implements API {
 			double factor = cfd.featureDriverAt(i).getNormFactor();
 			int start = featureClassAttrsFirstIndex[i], end = featureClassAttrsFirstIndex[i + 1], k;
 
-			if (norm == NormBaselineEnum.FEATURE_CLASS_IN_DOC) {
+		/*	if (norm == NormBaselineEnum.FEATURE_CLASS_IN_DOC) { //TODO decide if we want to keep this or remove it
+				
 				// use featureClassPerDoc
 				if (!cfd.featureDriverAt(i).isCalcHist()) {
 					instance.setValue(start, instance.value(start) * factor
@@ -618,42 +661,53 @@ public class Engine implements API {
 										/ ((double) featureClassPerInst
 												.get(instance)[i]));
 				}
-			} else if (norm == NormBaselineEnum.SENTENCES_IN_DOC) {
+			} else */
+			if (norm == NormBaselineEnum.SENTENCES_IN_DOC) {
 				// use wordsInDoc
 				if (!cfd.featureDriverAt(i).isCalcHist()) {
 					instance.setValue(start, instance.value(start) * factor
-							/ ((double) sentencesPerInst.get(instance)));
+							/ ((double) sentencesPerInst));
 				} else {
 					for (k = start; k < end; k++)
 						instance.setValue(k, instance.value(k) * factor
-								/ ((double) sentencesPerInst.get(instance)));
+								/ ((double) sentencesPerInst));
 				}
 			} else if (norm == NormBaselineEnum.WORDS_IN_DOC) {
 				// use wordsInDoc
 				if (!cfd.featureDriverAt(i).isCalcHist()) {
 					instance.setValue(start, instance.value(start) * factor
-							/ ((double) wordsPerInst.get(instance)));
+							/ ((double) wordsPerInst));
 				} else {
 					for (k = start; k < end; k++)
 						instance.setValue(k, instance.value(k) * factor
-								/ ((double) wordsPerInst.get(instance)));
+								/ ((double) wordsPerInst));
 				}
 
 			} else if (norm == NormBaselineEnum.CHARS_IN_DOC) {
 				// use charsInDoc
 				if (!cfd.featureDriverAt(i).isCalcHist()) {
 					instance.setValue(start, instance.value(start) * factor
-							/ ((double) charsPerInst.get(instance)));
+							/ ((double) charsPerInst));
 				} else {
 					for (k = start; k < end; k++)
 						instance.setValue(k, instance.value(k) * factor
-								/ ((double) charsPerInst.get(instance)));
+								/ ((double) charsPerInst));
+				}
+			} else if (norm == NormBaselineEnum.LETTERS_IN_DOC) {
+				// use charsInDoc
+				if (!cfd.featureDriverAt(i).isCalcHist()) {
+					instance.setValue(start, instance.value(start) * factor
+							/ ((double) lettersPerInst));
+				} else {
+					for (k = start; k < end; k++)
+						instance.setValue(k, instance.value(k) * factor
+								/ ((double) lettersPerInst));
 				}
 			}
 		}
 	}
 
-	// Calculates the information gain for the Instances object
+	// Done
 	@Override
 	public double[][] calcInfoGain(Instances insts) throws Exception {
 
@@ -670,7 +724,7 @@ public class Engine implements API {
 		int j = 0;
 		for (int i = 0; i < infoArr.length; i++) {
 			if (insts.attribute(j).name().equals("authorName")) {
-				i--;
+				;
 			} else {
 				len = (len > insts.attribute(j).name().length() ? len : insts
 						.attribute(j).name().length());
@@ -690,50 +744,119 @@ public class Engine implements API {
 		return infoArr;
 	}
 
-	@Override
-	public double[][] applyInfoGain(double[][] chosenFeatures, Instances insts, int n)
+	// Done
+	@Override 
+	public double[][] applyInfoGain(double[][] sortedFeatures, Instances insts, int n)
 			throws Exception {
 		
-		double[][] infoArr = chosenFeatures;
-		// create an array with the value of infoArr's [i][1] this array will be
-		// shrunk and modified as needed
-		double[][] tempArr = new double[infoArr.length][2];
-		for (int i = 0; i < infoArr.length; i++) {
-			tempArr[i][0] = new Double(infoArr[i][0]);
-			tempArr[i][1] = new Double(infoArr[i][1]);
-		}
-
-		int valuesToKeep =-1;
-		if (n>infoArr.length)
-			return tempArr;
+		//find out how many values to remove
+		int valuesToRemove =-1;
+		if (n>sortedFeatures.length)
+			return sortedFeatures;
 		else
-			valuesToKeep = infoArr.length-n;
-		// for all the values we need to delete
-		for (int i = 0; i < valuesToKeep; i++) {
-
-			//shrink the array
-			double temp[][] = new double[tempArr.length - 1][2];
-			for (int k = 0; k < temp.length; k++){
-				temp[k][0] = tempArr[k][0];
-				temp[k][1] = tempArr[k][1];
+			valuesToRemove = sortedFeatures.length-n;
+		
+		double[][] keepArray = new double[n][2]; //array to be returned
+		double[][] removeArray = new double[valuesToRemove][2]; //array to be sorted and be removed from the Instances object
+		
+		//populate the arrays
+		for (int i =0; i<sortedFeatures.length; i++){
+			if (i<n){
+				keepArray[i][0] = sortedFeatures[i][0];
+				keepArray[i][1] = sortedFeatures[i][1];
+			} else {
+				removeArray[i-n][0] = sortedFeatures[i][0];
+				removeArray[i-n][1] = sortedFeatures[i][1];
 			}
-			// update array
-			tempArr = temp;
 		}
+		
+		//sort based on index
+		Arrays.sort(removeArray, new Comparator<double[]>() {
+			@Override
+			public int compare(final double[] first, final double[] second) {
+				return -1 * ((Double) first[1]).compareTo(((Double) second[1]));
+			}
+		});
+		
+		//for all of the values to remove
+		for (int i=0; i<removeArray.length;i++){
+			
+			//get the index to remove
+			int indexToRemove = (int)Math.round(removeArray[i][1]);
+			
+			//remove from the Instances object
+			insts.deleteAttributeAt(indexToRemove);
+			
+			//adjust all of the indices in the keepArray to compensate for the removal
+			for (int j=0; j<keepArray.length;j++){
+				if (indexToRemove <= (int)Math.round(keepArray[j][1])){
+					keepArray[j][1] = keepArray[j][1]-1;
+				}
+			}
+		}
+		
 		//return the array consisting only of the top n values
-		return tempArr;
+		return keepArray;
 	}
 
+	// Done
+	@Override 
+	public void applyInfoGain(double[][] sortedFeatures, Instance inst, int n)
+			throws Exception {
+		
+		// find out how many values to remove
+		int valuesToRemove = -1;
+		if (n > sortedFeatures.length)
+			;
+		else
+			valuesToRemove = sortedFeatures.length - n;
+
+		if (!(valuesToRemove == -1)) {
+			double[][] removeArray = new double[valuesToRemove][2]; // array to be sorted and be removed from the Instances object
+
+			// populate the arrays
+			for (int i = 0; i < sortedFeatures.length; i++) {
+				if (i < n) {
+					;
+				} else {
+					removeArray[i - n][0] = sortedFeatures[i][0];
+					removeArray[i - n][1] = sortedFeatures[i][1];
+				}
+			}
+
+			// sort based on index
+			Arrays.sort(removeArray, new Comparator<double[]>() {
+				@Override
+				public int compare(final double[] first, final double[] second) {
+					return -1 * ((Double) first[1]).compareTo(((Double) second[1]));
+				}
+			});
+
+			// for all of the values to remove
+			for (int i = 0; i < removeArray.length; i++) {
+
+				// get the index to remove
+				int indexToRemove = (int) Math.round(removeArray[i][1]);
+
+				// remove from the Instances object
+				inst.deleteAttributeAt(indexToRemove);
+			}
+		}
+	}
+	
 	// Done
 	@Override
 	public List<EventSet> cullWithRespectToTraining(
 			List<EventSet> relevantEvents, List<EventSet> eventSetsToCull,
 			CumulativeFeatureDriver cfd) throws Exception {
 		List<EventSet> relevant = relevantEvents;
-		int numOfFeatureClasses = eventSetsToCull.size();
+		int numOfFeatureClasses = eventSetsToCull.size()-1; //-1 to compensate for removing metadata
 		int i;
 		List<EventSet> culledUnknownEventSets = new LinkedList<EventSet>();
 
+		//remove the metadata prior to culling
+		EventSet metadata = eventSetsToCull.remove(eventSetsToCull.size()-1);
+		
 		// make sure all unknown sets would have only events that appear in the
 		// known sets
 		// UNLESS the event set contains a sole numeric value event - in that
@@ -798,6 +921,10 @@ public class Engine implements API {
 					culledUnknownEventSets.add(eventSetsToCull.get(i));
 			}
 		}
+		
+		eventSetsToCull.add(metadata);
+		culledUnknownEventSets.add(metadata);
+		
 		return culledUnknownEventSets;
 	}
 

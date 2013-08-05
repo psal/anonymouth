@@ -539,6 +539,7 @@ public class PreProcessAdvancedDriver {
 
 		advancedWindow.classifiers = new ArrayList<Classifier>();
 		advancedWindow.classifiers.add(tmpClassifier);
+		advancedWindow.curClassifier = advancedWindow.fullClassPath.get(className);
 		
 		if (!PropertiesUtil.getClassifier().equals(className)) {
 			PropertiesUtil.setClassifier(className);

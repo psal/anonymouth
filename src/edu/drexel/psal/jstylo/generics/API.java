@@ -78,7 +78,7 @@ public interface API {
 			List<EventSet> relevantEvents,
 			CumulativeFeatureDriver cumulativeFeatureDriver,
 			List<EventSet> documentData,
-			Document document, 
+		/*	Document document, */
 			boolean isSparse, boolean hasDocTitles) throws Exception;
 	//create and use histograms here
 	
@@ -90,11 +90,10 @@ public interface API {
 	 * @throws Exception
 	 */
 	public void normInstance(CumulativeFeatureDriver cumulativeFeatureDriver,
-			Instance instance, Document document, boolean hasDocTitles) throws Exception;
+			Instance instance, List<EventSet> documentData, boolean hasDocTitles) throws Exception;
 	
 	// the full training Instances object is generated
 	
-	//TODO fixme
 	/**
 	 * Calculates InfoGain on the instances to provide information on how useful each feature was to identifying the documents.
 	 * @param insts the instances to calculate over
@@ -104,16 +103,23 @@ public interface API {
 	public double[][] calcInfoGain(Instances insts) throws Exception;
 	
 	/**
-	 * Removes all but the top N features (as returned by calcInfoGain) from the instances
-	 * @param chosenFeatures the indices of the features to keep
+	 * Removes all but the top N features (as returned by calcInfoGain) from the Instances object
+	 * @param the indices and infoGain values of all attributes
 	 * @param insts the instances to remove infoGain from
 	 * @param n the number of features to keep
 	 * @throws Exception
 	 */
-	public double[][] applyInfoGain(double[][] chosenFeatures, Instances insts, int n)
+	public double[][] applyInfoGain(double[][] sortedFeatures, Instances insts, int n)
 			throws Exception;
 	
-	
+	/**
+	 * The above, but for a single Instance object
+	 * @param sortedFeatures
+	 * @param inst
+	 * @param n
+	 * @throws Exception
+	 */
+	public void applyInfoGain(double[][] sortedFeatures, Instance inst, int n) throws Exception;
 	// feature extraction - test set
 	
 	// extractEventSets - same as for training documents

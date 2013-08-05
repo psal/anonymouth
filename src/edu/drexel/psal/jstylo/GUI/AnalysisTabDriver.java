@@ -1,6 +1,7 @@
 package edu.drexel.psal.jstylo.GUI;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
+import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -268,22 +269,34 @@ public class AnalysisTabDriver {
 				if (selected){
 					main.analysisKFoldJTextField.setEnabled(true);					
 					main.analysisRelaxJTextField.setEnabled(true);
-					main.analysisClassificationStatisticsJCheckBox.setEnabled(false);
 				}			
 			}		
 		});
-		main.analysisClassTestDocsJRadioButton.addActionListener(new ActionListener(){
+		main.analysisClassTestUnknownJRadioButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Logger.logln("Test and Classify radio button selected");
+				Logger.logln("Test and Classify Unknown radio button selected");
 				
-				boolean selected = main.analysisClassTestDocsJRadioButton.isSelected();
+				boolean selected = main.analysisClassTestUnknownJRadioButton.isSelected();
 				if (selected){
 					main.analysisKFoldJTextField.setEnabled(false);
 					main.analysisRelaxJTextField.setEnabled(false);
-					main.analysisClassificationStatisticsJCheckBox.setEnabled(true);
+				}			
+			}		
+		});
+		main.analysisClassTestKnownJRadioButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Logger.logln("Test and Classify Known radio button selected");
+				
+				boolean selected = main.analysisClassTestKnownJRadioButton.isSelected();
+				if (selected){
+					main.analysisKFoldJTextField.setEnabled(false);
+					main.analysisRelaxJTextField.setEnabled(false);
 				}			
 			}		
 		});
@@ -298,14 +311,14 @@ public class AnalysisTabDriver {
 				Logger.logln("'Run Analysis' button clicked in the analysis tab.");
 				
 				// check
-				if (main.ps == null || main.ps.getAllTrainDocs().size() == 0) {
+				if (main.ps == null || main.ps.getTrainDocs().size() == 0) {
 					JOptionPane.showMessageDialog(main,
 							"Training corpus not set or empty.",
 							"Run Analysis Error",
 							JOptionPane.ERROR_MESSAGE);
 					return;
 					
-				} else if (main.analysisClassTestDocsJRadioButton.isSelected() && main.ps.getTestDocs().isEmpty()) {
+				} else if (main.analysisClassTestUnknownJRadioButton.isSelected() && main.ps.getTestDocs().isEmpty()) {
 					JOptionPane.showMessageDialog(main,
 							"Test documents not set.",
 							"Run Analysis Error",
@@ -518,8 +531,9 @@ public class AnalysisTabDriver {
 		main.mainJTabbedPane.setEnabled(!lock);
 		
 		// all action buttons
-		main.analysisClassTestDocsJRadioButton.setEnabled(!lock);
+		main.analysisClassTestUnknownJRadioButton.setEnabled(!lock);
 		main.analysisTrainCVJRadioButton.setEnabled(!lock);
+		main.analysisClassTestKnownJRadioButton.setEnabled(!lock);
 		
 		//main.analysisOutputAccByClassJCheckBox.setEnabled(!lock);
 		//main.analysisOutputConfusionMatrixJCheckBox.setEnabled(!lock);
@@ -533,9 +547,7 @@ public class AnalysisTabDriver {
 			main.analysisKFoldJTextField.setEnabled(!lock);
 			main.analysisRelaxJTextField.setEnabled(!lock);
 		}
-		if (main.analysisClassTestDocsJRadioButton.isSelected()){
-			main.analysisClassificationStatisticsJCheckBox.setEnabled(!lock);
-		}
+
 		main.analysisRelaxJLabel.setEnabled(!lock);
 		main.analysisKFoldJLabel.setEnabled(!lock);
 		main.analysisNThreadJLabel.setEnabled(!lock);
@@ -592,7 +604,7 @@ public class AnalysisTabDriver {
 			scrollPane.setViewportView(contentJTextArea);
 			contentJTextArea.setEditable(false);
 			content = "";
-			boolean classifyTestDocs = main.analysisClassTestDocsJRadioButton.isSelected();
+			boolean classifyTestDocs = main.analysisClassTestUnknownJRadioButton.isSelected()||main.analysisClassTestKnownJRadioButton.isSelected();
 
 			// update header
 			// -------------
@@ -644,12 +656,12 @@ public class AnalysisTabDriver {
 			
 			contentJTextArea.setText(content);
 
-			InstancesBuilder tempBuilder = new InstancesBuilder(main.ps,
-					main.cfd,
-					main.analysisSparseInstancesJCheckBox.isSelected(), false,
-					main.ib.getNumThreads());
+			InstancesBuilder tempBuilder = new InstancesBuilder(main.ib);
 			main.ib.reset();
 			main.ib = tempBuilder;
+			main.ib.setProblemSet(main.ps);
+			main.ib.setCumulativeFeatureDriver(main.cfd);
+			main.ib.setUseSparse(main.ib.isSparse());
 			// training set
 			
 			content += getTimestamp()+" Extracting features from training corpus ("+(main.ib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
@@ -730,12 +742,16 @@ public class AnalysisTabDriver {
 			}
 
 			// test set
-			if (main.analysisClassTestDocsJRadioButton.isSelected()) {
+			if (classifyTestDocs) {
 				Logger.logln("Extracting features from test documents...");
 				
 				content += getTimestamp()+" Extracting features from test documents ("+(main.ib.isSparse() ? "" : "not ")+"using sparse representation)...\n";
 				updateResultsView();
-
+				
+				if (main.analysisClassTestKnownJRadioButton.isSelected()){
+					main.ib.getProblemSet().removeAuthor("_Unknown_");
+				}
+				
 				try {
 					main.ib.createTestInstancesThreaded();
 				} catch (Exception e) {
@@ -775,19 +791,22 @@ public class AnalysisTabDriver {
 				} catch (NumberFormatException e) {}
 				
 				try{
-					boolean apply = main.analysisCalcInfoGainJCheckBox.isSelected() && main.analysisApplyInfoGainJCheckBox.isSelected();
-					Instances trainingInstances = new Instances(main.ib.getTrainingInstances());
+					boolean apply = main.analysisApplyInfoGainJCheckBox.isSelected();
 					double[][] infoGain = main.ib.calculateInfoGain();
 					if (apply){
 						main.ib.applyInfoGain(igValue);
 						infoGain = main.ib.getInfoGain();
 					}
 					
+					Instances trainingInstances = new Instances(main.ib.getTrainingInstances());
 					for (int i = 0; i<infoGain.length; i++){
-						if (infoGain[i][0]==0)
+/*						if (infoGain[i][0]==0){
 							break;
+						}
+	*/					
+						int index = (int)Math.round(infoGain[i][1]);
 						content+=String.format("> %-50s   %f\n",
-								trainingInstances.attribute((int)infoGain[i][1]).name(),
+								trainingInstances.attribute(index).name(),
 								infoGain[i][0]);
 					}
 					updateResultsView();
@@ -804,7 +823,7 @@ public class AnalysisTabDriver {
 			// running classification
 			// ======================
 			
-			if (main.analysisClassTestDocsJRadioButton.isSelected()) {
+			if (main.analysisClassTestUnknownJRadioButton.isSelected()) {
 				// Training and testing
 				// ====================
 				
@@ -843,21 +862,11 @@ public class AnalysisTabDriver {
 							"========\n";
 					
 					content += main.analysisDriver.getLastStringResults();
-					
-					//TODO have this be optional and toggle it via an option on the analysis tab. Make sure that there's some kind
-					// of disclaimer since right now it only works if the author name is in the document title.
-					if (main.analysisClassificationStatisticsJCheckBox.isSelected()){
-						try {
-							Evaluation eval = main.analysisDriver.getTrainTestEval(main.ps.getAllTestDocs());
-							content += eval.toSummaryString(false)+"\n"+eval.toClassDetailsString()+"\n"+eval.toMatrixString();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
+
 					updateResultsView();
 				}
 				
-			} else {
+			} else if (main.analysisTrainCVJRadioButton.isSelected()) {
 				// Running cross-validation on training corpus
 				// ===========================================
 				
@@ -909,6 +918,66 @@ public class AnalysisTabDriver {
 					
 				}
 				
+			} else {
+				Logger.logln("Starting training and testing phase...");
+				
+				content += getTimestamp()+" Starting training and testing phase...\n";
+				content += "\n================================================================================\n\n";
+				
+				Analyzer a;
+				int numClass = main.analyzers.size();
+				for (int i=0; i<numClass; i++) {
+					a = main.analyzers.get(i);
+					content += "Running analysis with Analyzer "+(i+1)+" out of "+numClass+":\n" +
+							"> Classifier: "+a.getName()+"\n" +
+							"> Options:    "+ClassTabDriver.getOptionsStr(a.getOptions())+"\n\n";
+					
+					main.analysisDriver = a;
+					
+					//TODO ick another instanceof. See if there's a way around using it.
+					if (a instanceof WriteprintsAnalyzer){
+						a.classify(main.ib.getTrainingInstances(),main.ib.getTestInstances(), main.ps.getAllTestDocs());
+					}
+					
+					content += getTimestamp()+" Starting classification...\n";
+					Logger.log("Starting classification...\n");
+					updateResultsView();
+					
+					Instances train = main.ib.getTrainingInstances();
+					Instances test = main.ib.getTestInstances();
+					test.setClassIndex(test.numAttributes()-1);
+
+					Evaluation results = null;
+					try {
+						results = main.analysisDriver.getTrainTestEval(
+								train,
+								test);
+						
+					} catch (Exception e) {
+						Logger.logln("Failed to build train test eval with known authors!",LogOut.STDERR);
+						content+="Failed to build train test eval with known authors!";
+						e.printStackTrace();
+					}
+					
+					content += getTimestamp()+" done!\n\n";
+					Logger.logln("Done!");
+					updateResultsView();
+					
+					// print out results
+					content +=
+							"Results:\n" +
+							"========\n";
+					
+					try {
+						content += results.toSummaryString()+"\n"+results.toClassDetailsString()+"\n"+results.toMatrixString()+"\n";
+					} catch (Exception e) {
+						Logger.logln("Failed to build the statistics string!",LogOut.STDERR);
+						content+="Failed to build the statistics string!";
+						e.printStackTrace();
+					}
+
+					updateResultsView();
+				}
 			}
 			
 			// unlock gui and update results

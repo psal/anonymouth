@@ -78,6 +78,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	protected GUIMain main;
 	protected List<Classifier> classifiers;
 	private String[] classifierNames;
+	protected String curClassifier;
 	protected Hashtable<String, String> fullClassPath;
 	protected Hashtable<String, String> shortClassName;
 

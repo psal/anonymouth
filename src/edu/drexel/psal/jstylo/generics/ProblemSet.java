@@ -10,7 +10,6 @@ import javax.xml.parsers.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.Collections;
@@ -18,7 +17,6 @@ import java.util.Collections;
 import com.jgaap.generics.*;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.gooie.GUIMain;
 
 public class ProblemSet {
 	
@@ -26,14 +24,14 @@ public class ProblemSet {
 	 * fields
 	 * ======
 	 */
-	//private static final String NAME = "( ProblemSet ) - ";
+	
 	private SortedMap<String,List<Document>> trainDocsMap;
 	private SortedMap<String,List<Document>> testDocsMap;
 	private HashMap<String, List<String>> titles;
 	
 	private String trainCorpusName;	
 	
-	private static String dummyAuthor = ANONConstants.DUMMY_NAME; 
+	private static String dummyAuthor = "_dummy_"; 
 	
 	// whether to use the dummy author name for test instances
 	// or the default - an arbitrary author name from the training authors
@@ -109,9 +107,6 @@ public class ProblemSet {
 		trainCorpusName = generated.trainCorpusName;
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
-		
-		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ANONConstants.DUMMY_NAME).get(0).getFilePath(), false);
-		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
 	/**
@@ -149,6 +144,7 @@ public class ProblemSet {
 			this.testDocsMap.put(author, testDocs);
 		}
 	}
+	
 	
 	/* ==========
 	 * operations
@@ -196,7 +192,7 @@ public class ProblemSet {
 	 */
 	public boolean addTrainDoc(String author, Document doc) {
 		if (trainDocsMap.get(author) == null)
-			trainDocsMap.put(author, new LinkedList<Document>());
+			trainDocsMap.put(author,new LinkedList<Document>());
 		return trainDocsMap.get(author).add(doc);
 	}
 
@@ -314,7 +310,7 @@ public class ProblemSet {
 	 * @return true iff the document was removed successfully
 	 */
 	public boolean removeTrainDocFromList(int i){
-		List<Document> docs = getAllTrainDocs();
+		List<Document> docs = getTrainDocs();
 		Document doc = docs.get(i);
 		return removeTrainDocAt(doc.getAuthor(),doc);
 	}
@@ -333,13 +329,9 @@ public class ProblemSet {
 		List<Document> docs = trainDocsMap.get(author);
 		if (docs == null)
 			return null;
-
-		for (int i = 0; i < docs.size(); i++) {
-			if (docs.get(i).getTitle().equals(docTitle)) {
+		for (int i=0; i<docs.size(); i++)
+			if (docs.get(i).getTitle().equals(docTitle))
 				return docs.remove(i);
-			}
-		}
-		
 		return null;
 	}
 	
@@ -407,7 +399,7 @@ public class ProblemSet {
 	 * @param i the index to remove
 	 * @return true iff the document was removed successfully
 	 */
-	public boolean removeTestDocFromList(int i) {
+	public boolean removeTestDocFromList(int i){
 		List<Document> docs = getAllTestDocs();
 		Document doc = docs.get(i);
 		return removeTestDocAt(doc.getAuthor(),doc);
@@ -427,9 +419,7 @@ public class ProblemSet {
 		List<Document> docs = testDocsMap.get(author);
 		if (docs == null)
 			return false;
-
-		docs.clear();
-		return true;
+		return docs.remove(doc);
 	}
 	
 	/**
@@ -482,38 +472,6 @@ public class ProblemSet {
 	// training documents
 	
 	/**
-	 * Removes the authors with the given name from the problem set and then adds it back in with all their
-	 * past documents under the given new name
-	 * @param oldName - The name of the author you want to rename
-	 * @param newName - The new name of the author you want to use
-	 */
-	public void renameAuthor(String oldName, String newName) {
-		List<Document> docs = trainDocsMap.remove(oldName);
-		trainDocsMap.put(newName, docs);
-	}
-	
-	/**
-	 * Removes the given document under the given author from the problem set and then adds it back in under
-	 * it's new name
-	 * @param oldName - The name of the document you want to rename
-	 * @param newName - The new name of the document you want to use
-	 * @param author - The name of author under which the document resides
-	 */
-	public void renameTrainDoc(String oldName, String newName, String author) {
-		List<Document> docs = trainDocsMap.get(author);
-		int size = docs.size();
-		
-		for (int i = 0; i < size; i++) {
-			if (docs.get(i).equals(oldName)) {
-				String path = docs.get(i).getFilePath();
-				docs.remove(i);
-				docs.add(i, new Document(path, author, newName));
-				break;
-			}
-		}
-	}
-	
-	/**
 	 * Returns true iff the training set has any authors.
 	 * @return
 	 * 		true iff the training set has any authors.
@@ -558,7 +516,7 @@ public class ProblemSet {
 	 * @return
 	 * 		The list of training documents for the given author.
 	 */
-	public List<Document> getTrainDocs(String author) {
+	public List<Document> getTrainDocsForAuthor(String author) {
 		return trainDocsMap.get(author);
 	}
 	
@@ -580,12 +538,15 @@ public class ProblemSet {
 	 * @return
 	 * 		The list of all training documents.
 	 */
-	public List<Document> getAllTrainDocs() {
+	public List<Document> getTrainDocs() {
 		List<Document> allTrainDocs = new LinkedList<Document>();
 		for (String key: trainDocsMap.keySet()){
 			for (Document d:trainDocsMap.get(key)){
 				try {
-					allTrainDocs.add(new Document(d.getFilePath(),key,d.getTitle()));
+					if (d instanceof StringDocument)
+						allTrainDocs.add(new StringDocument((StringDocument)d));
+					else
+						allTrainDocs.add(new Document(d.getFilePath(),key,d.getTitle()));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -643,14 +604,7 @@ public class ProblemSet {
 	 * 		true iff the list of test documents is not empty.
 	 */
 	public boolean hasTestDocs() {
-		boolean result;
-		
-		if (testDocsMap.isEmpty())
-			result = false;
-		else
-			result = !testDocsMap.get(ANONConstants.DUMMY_NAME).isEmpty();
-		
-		return result;
+		return !testDocsMap.isEmpty();
 	}
 	
 	/**
@@ -669,6 +623,14 @@ public class ProblemSet {
 	 */
 	public SortedMap<String,List<Document>> getTestDocs() {
 		return testDocsMap;
+	}
+	
+	public Document getTestDoc() {
+		return testDocsMap.get(ANONConstants.DUMMY_NAME).get(0);
+	}
+	
+	public List<Document> getSampleDocs() {
+		return trainDocsMap.get(ANONConstants.DUMMY_NAME);
 	}
 	
 	/**
@@ -719,6 +681,17 @@ public class ProblemSet {
 		if (testDocsMap.get(author) == null)
 			return 0;
 		else return testDocsMap.get(author).size();
+	}
+	
+	/**
+	 * Removes the authors with the given name from the problem set and then adds it back in with all their
+	 * past documents under the given new name
+	 * @param oldName - The name of the author you want to rename
+	 * @param newName - The new name of the author you want to use
+	 */
+	public void renameAuthor(String oldName, String newName) {
+		List<Document> docs = trainDocsMap.remove(oldName);
+		trainDocsMap.put(newName, docs);
 	}
 	
 	/**
@@ -880,31 +853,24 @@ public class ProblemSet {
 			//intialize the parser, parse the document, and build the tree
 			DocumentBuilderFactory builder = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = builder.newDocumentBuilder();
-			
-			org.w3c.dom.Document xmlDoc = null;
-			try {
-				xmlDoc = dom.parse(filename);	
-			} catch (SAXParseException e) {
-				return;
-			}
+			org.w3c.dom.Document xmlDoc = dom.parse(filename);	
 			xmlDoc.getDocumentElement().normalize();
 			NodeList items = xmlDoc.getElementsByTagName("document");
-			problemSet.trainCorpusName = "Authors";
-			titles = new HashMap<String, List<String>>();
 			int size = items.getLength();
-			
+			titles = new HashMap<String, List<String>>();
 			ArrayList<String> docTitles = new ArrayList<String>(size);
-
-			for (int i = 0; i < size; i++) {
+			
+			for (int i = 0; i < size; i++){
 				Node current = items.item(i);
 			
-				if (current.getParentNode().getNodeName().equals("test")) {
-					//test document (old format)
+				//test document (old format)
+				if (current.getParentNode().getNodeName().equals("test")){
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
-					String author = ANONConstants.DUMMY_NAME;
 					filePath = filePath.replace("/./","/");
-					Document testDoc = new Document(filePath, author);
+					Document testDoc = new Document(filePath,"_Unknown_");
+					
+					String author = ANONConstants.DUMMY_NAME;
 					String oldTitle = testDoc.getTitle();
 					String newTitle = oldTitle;
 					
@@ -923,18 +889,19 @@ public class ProblemSet {
 					if (titles.get(author) == null)
 						titles.put(author, new ArrayList<String>());
 					titles.get(author).add(newTitle);
-					
 					problemSet.addTestDoc(author, testDoc);
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")) {
+					
 					//Training document
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("training")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path trainPath = Paths.get(current.getTextContent());
 					String filePath = trainPath.toAbsolutePath().toString().replaceAll("\\\\","/");
-					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document trainDoc = new Document(filePath,parent.getAttribute("name"));
+					
 					String oldTitle = trainDoc.getTitle();
 					String newTitle = oldTitle;
+					String author = parent.getAttribute("name");
 					
 					if (docTitles.contains(newTitle)) {
 						int addNum = 1;
@@ -951,16 +918,16 @@ public class ProblemSet {
 					if (titles.get(author) == null)
 						titles.put(author, new ArrayList<String>());
 					titles.get(author).add(newTitle);
-					
 					problemSet.addTrainDoc(author, trainDoc);
-				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")) {
+					
 					//test document (new format)
+				} else if (current.getParentNode().getParentNode().getNodeName().equals("test")){
 					Element parent = (Element) xmlDoc.importNode(current.getParentNode(),false);
 					Path testPath = Paths.get(current.getTextContent());
 					String filePath = testPath.toAbsolutePath().toString().replaceAll("\\\\","/");
-					String author = parent.getAttribute("name");
 					filePath = filePath.replace("/./","/");
 					Document testDoc = new Document(filePath,parent.getAttribute("name"));
+					String author = parent.getAttribute("name");
 					String oldTitle = testDoc.getTitle();
 					String newTitle = oldTitle;
 					

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.WekaInstancesBuilder;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import com.jgaap.generics.*;
 
 import weka.core.Instances;
@@ -65,14 +66,11 @@ public class InstanceConstructor {
 		return testingInstances;
 	}
 	
-	private CumulativeFeatureDriver theseFeaturesCfd;
-	
-	
 	Instances trainingDat,testingDat;
 	
 	private boolean printStuff;
 	
-	WekaInstancesBuilder wid;
+	InstancesBuilder id;
 	
 	
 	/**
@@ -80,10 +78,7 @@ public class InstanceConstructor {
 	 * @param isSparse - boolean, true if expecting sparse data, false otherwise or if unsure.
 	 * @param cfd - cumulative feature driver. Contains all features that will be extracted from the documents
 	 */
-	public InstanceConstructor(boolean isSparse, CumulativeFeatureDriver cfd, boolean printStuff){
-		wid = new WekaInstancesBuilder(isSparse);
-		wid.setNumCalcThreads(ThePresident.num_Tagging_Threads);
-		theseFeaturesCfd = cfd;
+	public InstanceConstructor(boolean isSparse, CumulativeFeatureDriver cfd, boolean printStuff) {
 		this.printStuff =printStuff;
 		Logger.logln(NAME+"InstanceConstuctor constructed");
 	}
@@ -109,15 +104,16 @@ public class InstanceConstructor {
 		}
 		
 		try {
-			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
-			wid.prepareTestSet(testDocs);
+			id.createTrainingInstancesThreaded();
+			id.createTestInstancesThreaded();
 		} catch(Exception e) {
+			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();
 		}
 
 		// Initialize two new instances to hold training and testing instances (attributes and data)
-		trainingDat=wid.getTrainingSet();
-		testingDat=wid.getTestSet();
+		trainingDat = id.getTrainingInstances();
+		testingDat = id.getTestInstances();
 		setAttributes=getAttributes(trainingDat);
 		trainingInstances=getInstances(trainingDat);
 		testingInstances=getInstances(testingDat);
@@ -140,12 +136,13 @@ public class InstanceConstructor {
 			Logger.logln(NAME+"Building train set with author");
 		
 		try {
-			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
+			id.createTrainingInstancesThreaded();
 		} catch(Exception e) {
+			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();
 		}
 		
-		trainingDat=wid.getTrainingSet();
+		trainingDat = id.getTrainingInstances();
 		setAttributes=getAttributes(trainingDat);
 		trainingInstances=getInstances(trainingDat);
 		return true;

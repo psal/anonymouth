@@ -178,7 +178,7 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
-						for (Document doc: main.ps.getAllTrainDocs()){
+						for (Document doc: main.ps.getTrainDocs()){
 							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						}
 						for (Document doc: main.ps.getAllTestDocs()){
@@ -335,7 +335,7 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
-						for (Document doc: main.ps.getAllTrainDocs()){
+						for (Document doc: main.ps.getTrainDocs()){
 							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						}
 						for (Document doc: main.ps.getAllTestDocs()){
@@ -477,7 +477,7 @@ public class DocsTabDriver {
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
 						
-						for (Document doc: main.ps.getAllTrainDocs())
+						for (Document doc: main.ps.getTrainDocs())
 							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
 						for (Document doc: main.ps.getAllTestDocs())
 							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/")); 
@@ -570,7 +570,7 @@ public class DocsTabDriver {
 						String skipList = "";
 						ArrayList<String> allTrainDocPaths = new ArrayList<String>();
 						ArrayList<String> allTestDocPaths = new ArrayList<String>();
-						for (Document doc: main.ps.getTrainDocs(author))
+						for (Document doc: main.ps.getTrainDocsForAuthor(author))
 							allTrainDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));
 						for (Document doc: main.ps.getAllTestDocs())
 							allTestDocPaths.add(doc.getFilePath().replaceAll("\\\\","/"));

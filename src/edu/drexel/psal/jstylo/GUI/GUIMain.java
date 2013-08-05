@@ -96,9 +96,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton removeTrainDocsJButton;
 	protected JButton addTrainDocsJButton;
 	protected JTree trainCorpusJTree;
-	//protected JTable testDocsJTable;
 	protected JTree testDocsJTree;
-	//protected DefaultTableModel testDocsTableModel;
 	protected JLabel featuresToolsJLabel;
 	protected JLabel docPreviewNameJLabel;
 	protected JLabel corpusJLabel;
@@ -205,7 +203,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected ButtonGroup analysisTypeButtonGroup;
 	protected JLabel analysisConfigJLabel;
 	protected JRadioButton analysisTrainCVJRadioButton;
-	protected JRadioButton analysisClassTestDocsJRadioButton;
+	protected JRadioButton analysisClassTestUnknownJRadioButton;
+	protected JRadioButton analysisClassTestKnownJRadioButton;
 	protected JLabel analysisResultsJLabel;
 	protected JButton analysisAboutJButton;
 	protected JButton analysisRemoveResultTabJButton;
@@ -218,7 +217,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JTextPane analysisInstructionPane;
 	protected JLabel analysisRelaxJLabel;
 	protected JTextField analysisRelaxJTextField;
-	protected JCheckBox analysisClassificationStatisticsJCheckBox;
+	//protected JCheckBox analysisClassificationStatisticsJCheckBox;
 	
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -334,8 +333,6 @@ public class GUIMain extends javax.swing.JFrame {
 			Logger.logln("Could not find a properties file, generating default property file...");
 			generateDefaultPropsFile();
 		}
-		
-
 	}
 
 	public static void generateDefaultPropsFile(){
@@ -1278,7 +1275,7 @@ public class GUIMain extends javax.swing.JFrame {
 						analysisTypeJLabel.setText("Analysis Type");
 						
 						// options
-						JPanel options = new JPanel(new GridLayout(2,1,cellPadding,cellPadding));
+						JPanel options = new JPanel(new GridLayout(3,1,cellPadding,cellPadding));
 						analysisTypePanel.add(options,BorderLayout.CENTER);
 						analysisTypeButtonGroup = new ButtonGroup();
 						{																			
@@ -1315,26 +1312,29 @@ public class GUIMain extends javax.swing.JFrame {
 						}
 						{
 							JPanel analysisClassTestJPanel = new JPanel(new BorderLayout(cellPadding,cellPadding));
-							analysisClassTestDocsJRadioButton = new JRadioButton();
-							analysisClassTestJPanel.add(analysisClassTestDocsJRadioButton,BorderLayout.CENTER);
-							analysisTypeButtonGroup.add(analysisClassTestDocsJRadioButton);
-							analysisClassTestDocsJRadioButton.setText("Train on training corpus and classify test documents");
-							{
-								JPanel analysisClassStatisticsJPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-								
-								analysisClassificationStatisticsJCheckBox = new JCheckBox();
-								analysisClassificationStatisticsJCheckBox.setSelected(false);
-								analysisClassificationStatisticsJCheckBox.setToolTipText("<html>JStylo will provide a confusion matrix and supplementary statistics.<br>" +
-										"Not recommended by default.<br>Only use if the true authors of each document are known and appear in the test document filename in the same" +
-										" format as the author name.<br>" +
-										"Intended for research purposes, not for deanonymization attempts.</html>");
-								analysisClassificationStatisticsJCheckBox.setText("Enable Classification Statistics");
-								analysisClassificationStatisticsJCheckBox.setEnabled(false);
-
-								analysisClassStatisticsJPanel.add(analysisClassificationStatisticsJCheckBox);
-								analysisClassTestJPanel.add(analysisClassStatisticsJPanel,BorderLayout.SOUTH);
-							}
+							analysisClassTestUnknownJRadioButton = new JRadioButton();
+							analysisClassTestJPanel.add(analysisClassTestUnknownJRadioButton,BorderLayout.CENTER);
+							analysisTypeButtonGroup.add(analysisClassTestUnknownJRadioButton);
+							analysisClassTestUnknownJRadioButton.setText("Train on training corpus and classify unknown test documents");
+							analysisClassTestUnknownJRadioButton.setToolTipText("<html>" +
+									"Use the provided training documents to classify all of the provided testing documents.<br>" +
+									"This will output a matrix of documents versus authors with the probability of each document being written by a particular author.<br>" +
+									"The most likely author will be marked with a \"+\" sign.<br>" +
+									"</html>");
 							options.add(analysisClassTestJPanel,BorderLayout.CENTER);
+						}
+						{
+							JPanel analysisClassTestKnownJPanel = new JPanel(new BorderLayout(cellPadding,cellPadding));
+							analysisClassTestKnownJRadioButton = new JRadioButton();
+							analysisClassTestKnownJPanel.add(analysisClassTestKnownJRadioButton,BorderLayout.CENTER);
+							analysisTypeButtonGroup.add(analysisClassTestKnownJRadioButton);
+							analysisClassTestKnownJRadioButton.setText("Train and classify on documents with known authors.");
+							analysisClassTestKnownJRadioButton.setToolTipText("<html>" +
+									"Use the provided training documents to classify the test documents.<br>" +
+									"This will output a variety of statistics based on the accuracy of the classification as well as a confusion matrix.<br>" +
+									"WARNING: This will ignore all documents in the \"_Unknown_\" directory!" +
+									"</html>");
+							options.add(analysisClassTestKnownJPanel);
 						}
 					}
 
@@ -1387,29 +1387,6 @@ public class GUIMain extends javax.swing.JFrame {
 							}
 						}
 					}
-					
-					/*
-					// line 4
-					header.add(new JPanel());
-					header.add(new JPanel());
-					{
-						analysisOutputConfusionMatrixJCheckBox = new JCheckBox();
-						analysisOutputConfusionMatrixJCheckBox.setSelected(true);
-						header.add(analysisOutputConfusionMatrixJCheckBox);
-						analysisOutputConfusionMatrixJCheckBox.setText("Output Weka confusion matrix");
-					}
-					header.add(new JPanel());
-					
-					// line 5
-					header.add(new JPanel());
-					{
-						analysisOutputAccByClassJCheckBox = new JCheckBox();
-						analysisOutputAccByClassJCheckBox.setSelected(true);
-						header.add(analysisOutputAccByClassJCheckBox);
-						analysisOutputAccByClassJCheckBox.setText("Output Weka detailed accuracy by class");
-					}
-					header.add(new JPanel());
-					*/
 				}
 				{
 					// main

@@ -57,21 +57,23 @@ public class FeatureSwapper {
 	 * @param topN_ClusterGroupsToTest
 	 * @return
 	 */
-	public ClusterGroup getBestClusterGroup(int topN_ClusterGroupsToTest){
+	public ClusterGroup getBestClusterGroup(int topN_ClusterGroupsToTest) {
 		int numClusterGroups;
 		if (topN_ClusterGroupsToTest <= 0 || topN_ClusterGroupsToTest > clusterGroups.length)
 			numClusterGroups = clusterGroups.length;
 		else
 			numClusterGroups = topN_ClusterGroupsToTest;
 		Instance alteredInstance = null;
+		Instances trainingSet = DocumentMagician.authorAndTrainDat;
 		double[] tempCG_centroids;
 		Attribute tempAttrib;
 		Iterator<String> keyIter;
 		int indexInInstance;
 		int numTopFeatures = DataAnalyzer.topAttributes.length;
 		wekaResultsArray = new WekaResults[numClusterGroups];
+		
 		int i,j;
-		for(i = 0; i < numClusterGroups; i++){ // for each cluster group
+		for (i = 0; i < numClusterGroups; i++) { // for each cluster group
 			Instances hopefullyAnonymizedInstances = new Instances(toAnonymize);
 			alteredInstance = hopefullyAnonymizedInstances.instance(0); // hardcoding in '0' because we only plan to have a single document (thus a single instance)
 			hopefullyAnonymizedInstances.delete(0);// deleting the original from the copy -- it will be replaced by an Instance with substituted values
@@ -84,15 +86,14 @@ public class FeatureSwapper {
 				alteredInstance.setValue(indexInInstance, tempCG_centroids[j]);
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
-			Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
+			Map<String,Map<String,Double>> wekaResultMap = waz.classify(trainingSet, hopefullyAnonymizedInstances, DocumentMagician.docToAnonymize);
 			keyIter = (wekaResultMap.keySet()).iterator();
 			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);
-			if (keyIter.hasNext()){
+			if (keyIter.hasNext()) {
 				wekaResultsArray[i] = new WekaResults(wekaResultMap.get(keyIter.next()),i); // there should never be more that one key in this map. We only test one document.
-			}
-			else
+			} else {
 				ErrorHandler.fatalError();
-			
+			}
 		}
 				
 		Arrays.sort(wekaResultsArray);

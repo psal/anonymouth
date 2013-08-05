@@ -1,19 +1,17 @@
 package edu.drexel.psal.jstylo.generics;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import edu.drexel.psal.jstylo.analyzers.WriteprintsAnalyzer;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 
 /**
  * 
- * JStylo SimpleAPI Version .3<br>
+ * JStylo SimpleAPI Version .5<br>
  * 
  * A simple API for the inner JStylo functionality.<br>
  * Provides four constructors at the moment (eventually more) <br>
@@ -22,18 +20,13 @@ import weka.core.Instances;
  * After fetch the relevant information with the correct get method<br>
  * @author Travis Dutko
  */
-/*
- * TODO list:
- * 
- * 1) Add the ability to load pre-made objects (problem sets, cfds)
- * 
- */
+
 public class SimpleAPI {
 
 	///////////////////////////////// Data
 	
 	//which evaluation to perform enumeration
-	public static enum analysisType {CROSS_VALIDATION,TRAIN_TEST,BOTH};
+	public static enum analysisType {CROSS_VALIDATION,TRAIN_TEST_UNKNOWN,TRAIN_TEST_KNOWN};
 	
 	//Persistant/necessary data
 	InstancesBuilder ib; //does the feature extraction
@@ -44,6 +37,7 @@ public class SimpleAPI {
 	
 	//Result Data
 	Map<String,Map<String, Double>> trainTestResults;
+	Evaluation trainTestEval;
 	Evaluation crossValResults;
 	
 	///////////////////////////////// Constructors
@@ -91,7 +85,20 @@ public class SimpleAPI {
 	 */
 	public SimpleAPI(String psXML, String cfdXML, int numThreads, Classifier classifier, analysisType type){
 		ib = new InstancesBuilder(psXML,cfdXML,true,false,numThreads);
-		analysisDriver = new WekaAnalyzer(classifier);
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
 		selected = type;
 		numFolds = 10;
 	}
@@ -107,9 +114,256 @@ public class SimpleAPI {
 	 */
 	public SimpleAPI(String psXML, String cfdXML, int numThreads, Classifier classifier, analysisType type, int nf){
 		ib = new InstancesBuilder(psXML,cfdXML,true,false,numThreads);
-		analysisDriver = new WekaAnalyzer(classifier);
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
 		selected = type;
 		numFolds = nf;
+	}
+	
+	/**
+	 * Constructor for use with a weka classifier that uses default params
+	 * Do not call prepareAnalyzer if using this constructor
+	 * @param ps 
+	 * @param cfd
+	 * @param classifier
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, String classifier) {
+		ib = new InstancesBuilder(ps,cfd);
+		selected = analysisType.TRAIN_TEST_UNKNOWN;
+		numFolds = 10;
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifier).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifier) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Minimalistic constructor that takes only a problemset object and a CumulativeFeatureDriver.<br>
+	 * Defaults to an SMO classifier performing cross validation with ten folds
+	 * @param ps
+	 * @param cfd
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = analysisType.CROSS_VALIDATION;
+		numFolds = 10;
+		analysisDriver = new WekaAnalyzer();
+	}
+	
+	/**
+	 *
+	 * @param ps
+	 * @param cfd
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, int nf){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = analysisType.CROSS_VALIDATION;
+		numFolds = nf;
+		analysisDriver = new WekaAnalyzer();
+	}
+	
+	/**
+	 * 
+	 * @param ps
+	 * @param cfd
+	 * @param nf
+	 * @param numThreads
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, int nf, int numThreads){
+		ib = new InstancesBuilder(ps,cfd);
+		ib.setNumThreads(numThreads);
+		selected = analysisType.CROSS_VALIDATION;
+		numFolds = nf;
+		analysisDriver = new WekaAnalyzer();
+	}
+	
+	/**
+	 * 
+	 * @param ps
+	 * @param cfd
+	 * @param nf
+	 * @param numThreads
+	 * @param isSparse
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, int nf, int numThreads, boolean isSparse){
+		ib = new InstancesBuilder(ps,cfd);
+		ib.setNumThreads(numThreads);
+		ib.setUseSparse(isSparse);
+		selected = analysisType.CROSS_VALIDATION;
+		numFolds = nf;
+		analysisDriver = new WekaAnalyzer();
+	}
+	
+	/**
+	 * 
+	 * @param ps
+	 * @param cfd
+	 * @param nf
+	 * @param numThreads
+	 * @param isSparse
+	 * @param useDocTitles
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, int nf, int numThreads, boolean isSparse, boolean useDocTitles){
+		ib = new InstancesBuilder(ps,cfd);
+		ib.setNumThreads(numThreads);
+		ib.setUseSparse(isSparse);
+		selected = analysisType.CROSS_VALIDATION;
+		numFolds = nf;
+		analysisDriver = new WekaAnalyzer();
+	}
+	
+	/**
+	 * Basic constructor that takes a problemSet object, CFD, classifier, and analysis type<br>
+	 * @param ps
+	 * @param cfd
+	 * @param classifier
+	 * @param type
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, Classifier classifier, analysisType type){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = type;
+		numFolds = 10;
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @param ps
+	 * @param cfd
+	 * @param classifier
+	 * @param type
+	 * @param isSparse
+	 * @param useDocTitles
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, Classifier classifier, analysisType type, boolean isSparse, boolean useDocTitles, int numThreads){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = type;
+		ib.setNumThreads(numThreads);
+		ib.setUseSparse(isSparse);
+		ib.setUseDocTitles(useDocTitles);
+		numFolds = 10;
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param ps
+	 * @param cfd
+	 * @param classifier
+	 * @param type
+	 * @param isSparse
+	 * @param useDocTitles
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, Classifier classifier, analysisType type, boolean isSparse, boolean useDocTitles){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = type;
+		ib.setUseSparse(isSparse);
+		ib.setUseDocTitles(useDocTitles);
+		numFolds = 10;
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param ps
+	 * @param cfd
+	 * @param classifier
+	 * @param type
+	 * @param numThreads 
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, Classifier classifier, analysisType type, int numThreads){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = type;
+		ib.setNumThreads(numThreads);
+		numFolds = 10;
+		try {
+			Object tmpObject = null;
+			tmpObject = Class.forName(classifierPath).newInstance(); //creates the object from the string
+
+			if (tmpObject instanceof Classifier) { //if it's a weka classifier
+				analysisDriver = new WekaAnalyzer(Class.forName(classifierPath) //make a wekaAnalyzer
+						.newInstance());
+			} else if (tmpObject instanceof WriteprintsAnalyzer) { //otherwise it's a writeprints analyzer
+				analysisDriver = new WriteprintsAnalyzer(); 
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to prepare Analyzer");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Basic Constructor which takes a ProblemSet object, CFD, and analysis type.<br>
+	 * Defaults to the basic SMO classifier.
+	 * @param ps
+	 * @param cfd
+	 * @param type
+	 */
+	public SimpleAPI(ProblemSet ps, CumulativeFeatureDriver cfd, analysisType type){
+		ib = new InstancesBuilder(ps,cfd);
+		selected = type;
+		numFolds = 10;
+		analysisDriver = new WekaAnalyzer();
 	}
 	
 	///////////////////////////////// Methods
@@ -125,7 +379,7 @@ public class SimpleAPI {
 			ib.initializeAttributes(); //creates the attribute list to base the Instances on
 			ib.createTrainingInstancesThreaded(); //creates train Instances
 			ib.createTestInstancesThreaded(); //creates test Instances (if present)
-			ib.calculateInfoGain(); //calculates infoGain
+			
 		} catch (Exception e) {
 			System.out.println("Failed to prepare instances");
 			e.printStackTrace();
@@ -151,6 +405,18 @@ public class SimpleAPI {
 			System.out.println("Failed to prepare Analyzer");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Calculates and stores the infoGain for future use
+	 */
+	public void calcInfoGain(){
+		try {
+			ib.calculateInfoGain();
+		} catch (Exception e) {
+			Logger.logln("Failed to calculate infoGain",LogOut.STDERR);
+			e.printStackTrace();
+		} 
 	}
 	
 	/**
@@ -180,14 +446,23 @@ public class SimpleAPI {
 			break;
 
 		// do a train/test
-		case TRAIN_TEST:
+		case TRAIN_TEST_UNKNOWN:
 			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
 			break;
 
-		//do both
-		case BOTH:
-			crossValResults = analysisDriver.runCrossValidation(ib.getTrainingInstances(), numFolds, 0);
-			trainTestResults = analysisDriver.classify(ib.getTrainingInstances(), ib.getTestInstances(), ib.getProblemSet().getAllTestDocs());
+		//do a train/test where we know the answer and just want statistics
+		case TRAIN_TEST_KNOWN:
+			ib.getProblemSet().removeAuthor("_Unknown_");
+			try {
+				Instances train = ib.getTrainingInstances();
+				Instances test = ib.getTestInstances();
+				test.setClassIndex(test.numAttributes()-1);
+				train.setClassIndex(train.numAttributes()-1);
+				trainTestEval = analysisDriver.getTrainTestEval(train,test);
+			} catch (Exception e) {
+				Logger.logln("Failed to build trainTest Evaluation");
+				e.printStackTrace();
+			}
 			break;
 		
 		//should not occur
@@ -195,10 +470,45 @@ public class SimpleAPI {
 			System.out.println("Unreachable. Something went wrong somewhere.");
 			break;
 		}
-		
 	}
 	
 	///////////////////////////////// Setters/Getters
+	
+	/**
+	 * 
+	 * @param useDocTitles
+	 */
+	public void setUseDocTitles(boolean useDocTitles){
+		ib.setUseDocTitles(useDocTitles);
+	}
+	
+	public void setUseSparse(boolean sparse){
+		ib.setUseSparse(sparse);
+	}
+	
+	/**
+	 * Sets the training Instances object
+	 * @param insts the Instances object to use as training data
+	 */
+	public void setTrainingInstances(Instances insts){
+		ib.setTrainingInstances(insts);
+	}
+	
+	/**
+	 * Sets the testing Instances object
+	 * @param insts the Instances object to use as testing data
+	 */
+	public void setTestingInstances(Instances insts){
+		ib.setTestingInstances(insts);
+	}
+	
+	/**
+	 * Sets the type of experiment to run
+	 * @param type enum value of either CROSS_VALIDATION, TRAIN_TEST_UNKNOWN, or TRAIN_TEST_KNOWN
+	 */
+	public void setExperimentType(analysisType type){
+		selected = type;
+	}
 	
 	/**
 	 * Change the number of folds to use in cross validation
@@ -206,6 +516,14 @@ public class SimpleAPI {
 	 */
 	public void setNumFolds(int n){
 		numFolds = n;
+	}
+	
+	/**
+	 * Sets the number of calculation threads to use
+	 * @param nt the number of calculation threads to use
+	 */
+	public void setNumThreads(int nt){
+		ib.setNumThreads(nt);
 	}
 	
 	/**
@@ -261,7 +579,7 @@ public class SimpleAPI {
 	 * @return Evaluation containing train/test statistics
 	 */
 	public Evaluation getTrainTestEval(){
-		return analysisDriver.getTrainTestEval(ib.getProblemSet().getAllTrainDocs());
+		return trainTestEval;
 	}
 	
 	/**
@@ -294,22 +612,17 @@ public class SimpleAPI {
 	
 	/**
 	 * @return String containing accuracy and confusion matrix from train/test.
+	 * @throws Exception 
 	 */
 	public String getTrainTestStatString() {
-		return analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
-	}
-	
-	public String getWeightedStats(){
-		String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
-		String resultsString = "";
 		
-		int start = source.indexOf("Weighted Avg.");
-		
-		String trimmed = source.substring(start);
-		int end = trimmed.indexOf("\n");
-		resultsString = trimmed.substring(0,end+1);
-		
-		return resultsString;
+		Evaluation eval = getTrainTestEval();
+		try {
+			return eval.toSummaryString() + "\n" + eval.toClassDetailsString() + "\n" + eval.toMatrixString();
+		} catch (Exception e) {
+			Logger.logln("Failed to generate stat string!", LogOut.STDERR);
+			return null;
+		}
 	}
 	
 	/**
@@ -322,37 +635,18 @@ public class SimpleAPI {
 			
 			Evaluation crossEval = getCrossValEval();
 			String summary = crossEval.toSummaryString();
-			int start = summary.indexOf("Correctly classified Instances");
+			int start = summary.indexOf("Correctly Classified Instances");
 			int end = summary.indexOf("%");
 			results+=summary.substring(start,end+1)+"\n";
 			
-		} else if (selected == analysisType.TRAIN_TEST){
-			String source = analysisDriver.getTrainTestStatString(ib.getProblemSet().getAllTestDocs());
+		} else if (selected == analysisType.TRAIN_TEST_KNOWN ){
+			String source = getTrainTestStatString();
 					
-			int start = source.indexOf("Correctly classified");
+			int start = source.indexOf("Correctly Classified");
 			int end = source.indexOf("%");
 
 			results += source.substring(start,end+1);
 			
-		} else {
-			
-			Evaluation crossEval = getCrossValEval();
-			String summary = crossEval.toSummaryString();
-			int start = summary.indexOf("Correctly Classified Instances");
-			int end = summary.indexOf("%");
-			results+=" CrossVal Results: " + summary.substring(start,end+1)+"\n";
-			
-			List<Author> stats = analysisDriver.getAuthorStatistics(ib.getTestDocs());
-			int correctDocs = 0;
-			int totalDocs = 0;
-			for (Author a: stats){
-
-				if (!(a.getName().equals("_dummy_"))){
-					correctDocs+=a.getTruePositiveCount();
-					totalDocs+=a.getNumberOfDocuments();
-				}
-			}
-			results+="\t\t\tTrain/Test results: "+(((double) correctDocs)/totalDocs)+" %\n";
 		}
 		
 		return results;
@@ -369,81 +663,22 @@ public class SimpleAPI {
 		InstancesBuilder.writeToARFF(path,insts);
 	}
 	
-	/////////////////////////////////
-	//TODO try to modify these for statistics sake
-	/*
-	  /**
-	   * Returns the area under ROC for those predictions that have been collected
-	   * in the evaluateClassifier(Classifier, Instances) method. Returns
-	   * Utils.missingValue() if the area is not available.
-	   * 
-	   * @param classIndex the index of the class to consider as "positive"
-	   * @return the area under the ROC curve or not a number
-	   */
-	/*
-	  public double areaUnderROC(int classIndex) {
-
-	    // Check if any predictions have been collected
-	    if (m_Predictions == null) {
-	      return Utils.missingValue();
-	    } else {
-	      ThresholdCurve tc = new ThresholdCurve();
-	      Instances result = tc.getCurve(m_Predictions, classIndex);
-	      return ThresholdCurve.getROCArea(result);
-	    }
-	  }
-
-	  /**
-	   * Calculates the weighted (by class size) AUC.
-	   * 
-	   * @return the weighted AUC.
-	   */
-	/*
-	  public double weightedAreaUnderROC() {
-	    double[] classCounts = new double[m_NumClasses];
-	    double classCountSum = 0;
-	    double[][] matrix = getTrainTestEval().confusionMatrix()
-
-	    for (int i = 0; i < m_NumClasses; i++) {
-	      for (int j = 0; j < m_NumClasses; j++) {
-	        classCounts[i] += matrix[i][j];
-	      }
-	      classCountSum += classCounts[i];
-	    }
-
-	    double aucTotal = 0;
-	    for (int i = 0; i < m_NumClasses; i++) {
-	      double temp = areaUnderROC(i);
-	      if (!Utils.isMissingValue(temp)) {
-	        aucTotal += (temp * classCounts[i]);
-	      }
-	    }
-
-	    return aucTotal / classCountSum;
-	  }
-	
-	*/
 	
 	///////////////////////////////// Main method for testing purposes
 	
 	public static void main(String[] args){
 		
 		SimpleAPI test = new SimpleAPI(
-				"C:/Users/Mordio/workspace/research/tests/200000Words-10000perAuthorNC/CrossVal_600-700.xml",
+				"./jsan_resources/problem_sets/enron_demo.xml",
 				"./jsan_resources/feature_sets/writeprints_feature_set_limited.xml",
 				8, "weka.classifiers.functions.SMO",
 				analysisType.CROSS_VALIDATION);
 
-		
 		test.prepareInstances();
 		test.prepareAnalyzer();
 		test.run();
 		
-		System.out.println(test.getCrossValEval().weightedAreaUnderROC());
-		
-		//test.writeArff("./training.arff",test.getTrainingInstances());
 		//test.writeArff("./testing.arff",test.getTestInstances());
 		
-
 	}
 }

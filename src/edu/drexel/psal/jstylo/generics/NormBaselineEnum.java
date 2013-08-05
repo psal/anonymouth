@@ -14,7 +14,7 @@ public enum NormBaselineEnum {
 			"No normalization - absolute values."),
 	
 	// feature class within the current document, e.g. all appearances of digits in the document
-	FEATURE_CLASS_IN_DOC("Feature class frequency in the document",
+/*	FEATURE_CLASS_IN_DOC("Feature class frequency in the document",
 			"Normalize over the total frequency of all features of the same class in the current document. For instance, when using " +
 			"letter bigrams, the normalization value will be the sum of frequencies of all letter bigrams in the current document. " +
 			"This normalization is in per document, i.e. does not take into account frequencies in other documents."),
@@ -30,7 +30,7 @@ public enum NormBaselineEnum {
 			"class (e.g. letter bigrams that includes all possible pairs of letters where each is a unique feature), the normalization is done over each " +
 			"feature separately. For instance, when using letter bigrams, the normalization value for each letter bigram (e.g. \"in\") will be the sum of " +
 			"frequencies of that letter bigram in all documents in the training corpus."),
-	
+*/
 	// number of sentences in the document
 	SENTENCES_IN_DOC("Number of sentences in the document",
 			"Normalize over the total number of sentences in the current document."),

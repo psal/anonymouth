@@ -306,7 +306,7 @@ public class PreProcessWindowDriver {
 					ArrayList<String> allUserSampleDocPaths = new ArrayList<String>();
 					for (Document doc: preProcessWindow.ps.getAllTestDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
-					for (Document doc: preProcessWindow.ps.getAllTrainDocs())
+					for (Document doc: preProcessWindow.ps.getTrainDocs())
 						allUserSampleDocPaths.add(doc.getFilePath());
 					for (File file: files) {
 						path = file.getAbsolutePath();
@@ -483,7 +483,7 @@ public class PreProcessWindowDriver {
 					boolean directoryMessageShown = false;
 
 					try {
-						for (Document doc: preProcessWindow.ps.getTrainDocs(author)) {
+						for (Document doc: preProcessWindow.ps.getTrainDocsForAuthor(author)) {
 							allTrainDocPaths.add(doc.getFilePath());
 							Logger.logln(NAME+"Added to Train Docs: " + doc.getFilePath());
 						}
@@ -495,8 +495,8 @@ public class PreProcessWindowDriver {
 
 					for (Document doc: preProcessWindow.ps.getAllTestDocs())
 						allTestDocPaths.add(doc.getFilePath());
-					if (preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor()) != null) {
-						for (Document doc: preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor()))
+					if (preProcessWindow.ps.getTrainDocsForAuthor(ProblemSet.getDummyAuthor()) != null) {
+						for (Document doc: preProcessWindow.ps.getTrainDocsForAuthor(ProblemSet.getDummyAuthor()))
 							allTestDocPaths.add(doc.getFilePath());
 					}
 					for (File file: files) {
@@ -1157,7 +1157,7 @@ public class PreProcessWindowDriver {
 		dlm.removeAllElements();
 
 		if (!preProcessWindow.sampleDocsEmpty()) {
-			List<Document> userSampleDocs = preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor());
+			List<Document> userSampleDocs = preProcessWindow.ps.getTrainDocsForAuthor(ProblemSet.getDummyAuthor());
 			for (int i = 0; i < userSampleDocs.size(); i++) {
 				if (isEmpty(userSampleDocs.get(i).getFilePath(), userSampleDocs.get(i).getTitle())) {
 					passed = false;

@@ -78,8 +78,12 @@ public class ClassTabDriver {
 						
 						if (tmpObject instanceof Classifier){	//TODO hopefully this is the only "instanceOf" I'll need
 							tmpAnalyzer = new WekaAnalyzer(Class.forName(className).newInstance());
+							main.ib.setUseDocTitles(false);
+							main.analysisCalcInfoGainJCheckBox.setSelected(true);
 						} else if (tmpObject instanceof WriteprintsAnalyzer){
 							tmpAnalyzer = new WriteprintsAnalyzer();
+							main.ib.setUseDocTitles(true);
+							main.analysisCalcInfoGainJCheckBox.setSelected(false);
 						} else {
 							Logger.logln("Tried to add an Analyzer we do not yet support");
 						}	

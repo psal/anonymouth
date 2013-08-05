@@ -1,7 +1,9 @@
 package edu.drexel.psal.jstylo.analyzers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.JarURLConnection;
 import java.net.URL;
 import java.util.*;
 
@@ -19,6 +21,7 @@ import weka.core.Instances;
 import weka.core.converters.ArffLoader.ArffReader;
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.*;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.SynsetType;
 import edu.smu.tspell.wordnet.WordNetDatabase;
@@ -87,10 +90,10 @@ public class WriteprintsAnalyzer extends Analyzer {
 	 */
 	
 	@Override
-	public Map<String,Map<String, Double>> classify(Instances trainingSet,
-			Instances testSet, List<Document> unknownDocs) {
+	public Map<String,Map<String, Double>> classify(Instances train,
+			Instances test, List<Document> unknownDocs) {
 		Logger.logln(">>> classify started");
-		
+
 		/* ========
 		 * LEARNING
 		 * ========
@@ -99,10 +102,21 @@ public class WriteprintsAnalyzer extends Analyzer {
 		
 		trainAuthorData.clear();
 		testAuthorData.clear();
+		
+		//use new instances objects and temporarily strip titles
+		trainingSet = new Instances(train);
+		testSet = new Instances(test);
+		
+		trainingSet.deleteAttributeAt(0); //TODO
+		testSet.deleteAttributeAt(0); //TODO
+		
 		//TODO if we get weird results somewhere the two lines below might be the reason. Testing didn't reveal anything though
 				//this was added because authors weren't being cleared between one classification and the next ie different presses of the "run analysis" button. 
 		if (authors!=null)
 			authors.clear();
+		
+		trainingSet.setClassIndex(trainingSet.numAttributes()-1);
+		testSet.setClassIndex(testSet.numAttributes()-1);
 		
 		// initialize features, basis and writeprint matrices
 		Attribute classAttribute = trainingSet.classAttribute();
@@ -113,14 +127,16 @@ public class WriteprintsAnalyzer extends Analyzer {
 		Logger.logln("Initializing training authors data:");
 		for (int i = 0; i < numAuthors; i++) {
 			authorName = classAttribute.value(i);
-			authorData = new AuthorWPData(authorName);
-			if (authors==null)
-				authors = new ArrayList<String>();
-			authors.add(authorName);
-			//Logger.logln("- " + authorName);
-			authorData.initFeatureMatrix(trainingSet, averageFeatureVectors);
-			trainAuthorData.add(authorData);
-			authorData.initBasisAndWriteprintMatrices();
+			if (!authorName.equals("_Unknown_")){
+				authorData = new AuthorWPData(authorName);
+				if (authors == null)
+					authors = new ArrayList<String>();
+				authors.add(authorName);
+				//Logger.logln("- " + authorName);
+				authorData.initFeatureMatrix(trainingSet, averageFeatureVectors);
+				trainAuthorData.add(authorData);
+				authorData.initBasisAndWriteprintMatrices();
+			}
 		}
 		// test set
 		int numTestInstances = testSet.numInstances();
@@ -129,11 +145,11 @@ public class WriteprintsAnalyzer extends Analyzer {
 			Logger.logln("Initializing test authors data (author per test document):");
 			for (int i = 0; i < numTestInstances; i++) {
 				authorName =
-						TEST_AUTHOR_NAME_PREFIX +
+						/*TEST_AUTHOR_NAME_PREFIX +
 						String.format("%03d", i) + "_" +
-						unknownDocs.get(i).getTitle();
+						*/unknownDocs.get(i).getTitle();
 				authorData = new AuthorWPData(authorName);
-				Logger.logln("- " + authorName);
+				//Logger.logln("- " + authorName);
 				authorData.initFeatureMatrix(testSet, i, averageFeatureVectors);
 				testAuthorData.add(authorData);				
 				authorData.initBasisAndWriteprintMatrices();
@@ -143,12 +159,15 @@ public class WriteprintsAnalyzer extends Analyzer {
 		else {
 			Logger.logln("Initializing test authors data (CV mode):");
 			for (int i = 0; i < numAuthors; i++) {
+				
 				authorName = classAttribute.value(i);
-				authorData = new AuthorWPData(authorName);
-				Logger.log("- " + authorName);
-				authorData.initFeatureMatrix(testSet, averageFeatureVectors);
-				testAuthorData.add(authorData);
-				authorData.initBasisAndWriteprintMatrices();
+				if (!authorName.equals("_Unknown_")){
+					authorData = new AuthorWPData(authorName);
+					//Logger.log("- " + authorName);
+					authorData.initFeatureMatrix(testSet, averageFeatureVectors);
+					testAuthorData.add(authorData);
+					authorData.initBasisAndWriteprintMatrices();
+				}
 			}
 		}
 		
@@ -213,6 +232,13 @@ public class WriteprintsAnalyzer extends Analyzer {
 			results.put(testData.authorName,testRes);
 		}
 		Logger.logln(">>> classify finished");
+		
+		//set back to the originals so that we have titles again
+		trainingSet = train;
+		testSet = test;
+		trainingSet.setClassIndex(trainingSet.numAttributes()-1);
+		testSet.setClassIndex(testSet.numAttributes()-1);
+		
 		return normalize(results);
 	}
 
@@ -244,6 +270,7 @@ public class WriteprintsAnalyzer extends Analyzer {
 			long randSeed) {
 		Logger.logln(">>> runCrossValidation started");
 		// setup
+		data.deleteAttributeAt(0); //TODO
 		data.setClass(data.attribute("authorName"));
 		
 		Instances randData = new Instances(data);
@@ -405,9 +432,6 @@ public class WriteprintsAnalyzer extends Analyzer {
 	
 	
 	@Override
-	/**
-	 * TODO
-	 */
 	public Evaluation runCrossValidation(Instances data, int folds, long randSeed,
 			int relaxFactor) {
 		if (relaxFactor==1)
@@ -573,10 +597,22 @@ public class WriteprintsAnalyzer extends Analyzer {
 	 * @throws IOException 
 	 */
 	private static void initWordnetDB() {
-		URL url = Thread.currentThread().getClass().getResource(JSANConstants.JGAAP_RESOURCE_WORDNET);
 		//TODO have to change this to deal with jars, not directories
-		System.setProperty("wordnet.database.dir", url.getPath());
-		wndb = WordNetDatabase.getFileInstance();
+		try{
+			
+			File wordnetDBDir = new File(JSANConstants.JGAAP_RESOURCE_WORDNET);
+			System.setProperty("wordnet.database.dir", wordnetDBDir.getAbsolutePath());
+			wndb = WordNetDatabase.getFileInstance();
+			
+		} catch (Exception e){
+			//e.printStackTrace();
+			Logger.logln("Wordnet Database for use with the WriteprintsAnalyzer not found",LogOut.STDERR);
+			Logger.logln("\tFor distribution purposes, this database is compressed by default.");
+			Logger.logln("\tPlease create a folder named \"wordnet\" in the jsan_resources folder.");
+			Logger.logln("\tExtract the contents of com/jgaap/resources/wordnet/ to jsan_resources/wordnet/ restart jstylo, and try running the analysis again.");
+			Logger.logln("\t\tThe WriteprintsAnalyzer is an experimental Analyzer, and has not been optimized.");
+			Logger.logln("\t\tUnless there is a reason you wish to use this Analyzer specifically, it may be better to use one of the WEKA classifiers for your experiments.");
+		}
 	}
 
 	/**
@@ -752,6 +788,164 @@ public class WriteprintsAnalyzer extends Analyzer {
 				"\n"
 				;
 		return description;
+	}
+
+	@Override
+	public Evaluation getTrainTestEval(Instances train, Instances test) throws Exception {
+		
+		int authorIndex = train.numAttributes()-1; //the index of the Author Attribute
+		Evaluation eval = null; //return object
+		SMO smo = new SMO(); //dummy classifier to hold data
+		
+		String optionsString = "";
+		for (String s: smo.getOptions()){
+			optionsString+=s+" ";
+		}
+		optionsString+="-M";
+		
+		try {
+			smo.setOptions(optionsString.split(" "));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		Instances allInstances = null; //all of the instances
+		Instances goodInstances = null; //just the good ones
+		
+		ArrayList<String> extractedAuthors = new ArrayList<String>();
+		
+		//use the results map to find all of the potential authors and add them to extractedAuthors
+		for (String temp: results.keySet()){
+			for (String s: results.get(temp).keySet()){
+				if (!s.equals("_Unknown_"))
+					extractedAuthors.add(s);
+			}
+			break;
+		}
+		
+		//start the ARFF string
+		String stub = "@RELATION <stub>\n";
+		stub+="@ATTRIBUTE value {";
+		for (int i=0; i<extractedAuthors.size();i++){
+			stub+=i+",";
+		}
+		stub=stub.substring(0,stub.length()-1); //removes the extra comma
+		stub+="}\n";
+		stub+=  "@ATTRIBUTE authors {";
+		//Add all authors
+		for (int i=0; i<extractedAuthors.size();i++){
+			stub+=extractedAuthors.get(i)+",";
+		}
+		stub=stub.substring(0,stub.length()-1); //removes the extra comma
+		stub+="}\n";
+		stub+="@DATA\n";
+		//Add the correct author/data pair
+		for (int i=0; i<extractedAuthors.size();i++){
+			stub+=i+","+extractedAuthors.get(i)+"\n";	
+		}	
+		//add the incorrect Author/data pairs
+		for (int i=0; i<extractedAuthors.size();i++){
+			for (int j=0; j<extractedAuthors.size();j++){
+				if (i!=j){ 
+					stub+=j+","+extractedAuthors.get(i)+"\n";
+				}
+			}
+		}
+		
+		//initialize the eval and classifier
+		try{
+			StringReader sReader = new StringReader(stub);
+			ArffReader aReader = new ArffReader(sReader);
+			allInstances = aReader.getData();
+			allInstances.setClassIndex(allInstances.numAttributes()-1);
+			goodInstances = new Instances(allInstances,0,extractedAuthors.size());
+			smo.buildClassifier(goodInstances);
+			smo.setBuildLogisticModels(true);
+			eval = new Evaluation(allInstances);		
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+
+		//we need SOME way to tell who the real author is. Right now I'm just going to arbitrarily decide that this is via the document title, as I can't really think of an
+		//easy way to do it otherwise; no matter what we decide to use, the test set will need to be prepped before hand regardless.
+		for (String testDoc: results.keySet()){
+			
+			Instance currTestInst = null;
+			for (Instance inst : test){
+				if (inst.stringValue(inst.attribute(0)).equals(testDoc)){
+					currTestInst = inst;
+					break;
+				}
+			}
+
+			String selectedAuthor = "";
+			Double max = 0.0;
+			
+			// find the most likely author
+			for (String potentialAuthor : results.get(currTestInst.stringValue(currTestInst.attribute(0))).keySet()) {
+				if (results.get(currTestInst.stringValue(currTestInst.attribute(0))).get(potentialAuthor).doubleValue() > max) { // find which document has the highest
+																									// probability of being selected
+					max = results.get(currTestInst.stringValue(currTestInst.attribute(0))).get(potentialAuthor).doubleValue();
+					selectedAuthor = potentialAuthor;
+				}
+			}
+
+			// check to see whether or not that author was correct, and evaluate the model accordingly.
+			if (currTestInst.stringValue(currTestInst.attribute(authorIndex)).equals(selectedAuthor)) { // classify with a good instance
+
+				// find where the correct index is
+				int correctIndex = -1;
+				int i = 0;
+				for (String s : extractedAuthors) {
+					if ((currTestInst.stringValue(currTestInst.attribute(authorIndex)).equals(s))) {
+						correctIndex = i;
+						break;
+					}
+					i++;
+				}
+
+				try {
+					eval.evaluateModelOnce(smo, goodInstances.instance(correctIndex));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (!(currTestInst.stringValue(currTestInst.attribute(authorIndex)).equals("_Unknown_"))) { // classify with a bad instance
+
+				// find where the correct index is
+				int correctIndex = -1;
+				int i = 0;
+				for (String s : extractedAuthors) {
+					if ((currTestInst.stringValue(currTestInst.attribute(authorIndex)).equals(s))) {
+						correctIndex = i;
+						break;
+					}
+					i++;
+				}
+				int incorrectIndex = extractedAuthors.indexOf(selectedAuthor);
+
+				if (!(correctIndex == -1)) { // if the author is listed
+					try {
+
+						int index = extractedAuthors.size() - 1; // moves the index past the good instances
+						index += extractedAuthors.size() * correctIndex; // moves to the correct "row"
+						index += incorrectIndex; // moves to correct "column"
+						index -= correctIndex; // adjusts for the fact that there are numAuthors-1 cells per row in the bad instances part of the
+												// instance list
+						if (incorrectIndex < correctIndex)
+							index += 1;
+
+						eval.evaluateModelOnce(smo, allInstances.instance(index));
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else {
+					Logger.logln("author not found for: " + testDoc);
+				}
+			} else {
+				Logger.logln("Unknown document detected. Will not be included in statistics calculation");
+			}
+		}
+		return eval;
 	}
 	
 	// ============================================================================================

@@ -104,7 +104,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 	// data
 	protected List<CumulativeFeatureDriver> presetCFDs;
-	protected WekaInstancesBuilder wib;
+	protected InstancesBuilder ib;
 	protected WekaAnalyzer wad;
 	protected Thread analysisThread;
 	protected List<String> results;
@@ -468,7 +468,7 @@ public class GUIMain extends javax.swing.JFrame {
 		startingWindows = new StartingWindows(this);
 		
 		initGUI();
-
+		
 		ThePresident.splash.hideSplashScreen();
 		startingWindows.showStartingWindow();
 	}
@@ -489,7 +489,6 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private void initPropertiesUtil() {
 		ThePresident.splash.updateText("Initializing preferences");
-		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
 		// properties file -----------------------------------

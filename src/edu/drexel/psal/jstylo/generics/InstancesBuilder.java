@@ -28,6 +28,7 @@ import weka.core.converters.CSVSaver;
 public class InstancesBuilder extends Engine {
 
 	//////////////////////////////////////////// Data
+	public static final int DEFAULT_THREADS = 4;
 	
 	// These vars should be initialized in the constructor and stay the same
 	// throughout the entire process
@@ -195,6 +196,28 @@ public class InstancesBuilder extends Engine {
 
 	}
 
+	public InstancesBuilder(ProblemSet probSet, CumulativeFeatureDriver cumulativeFD){
+		ps = probSet;
+		cfd = cumulativeFD;
+		
+		isSparse = false;
+		useDocTitles = false;
+		numThreads = DEFAULT_THREADS;
+	}
+	
+	/**
+	 * Copy constructor
+	 * @param oib
+	 */
+	public InstancesBuilder(InstancesBuilder oib){
+		ps = oib.getProblemSet();
+		cfd = oib.getCFD();
+		isSparse = oib.getIsSparse();
+		useDocTitles = oib.getUseDocTitles();
+		numThreads = oib.getNumThreads();
+		
+	}
+	
 	//////////////////////////////////////////// Methods
 	
 	/**
@@ -205,7 +228,7 @@ public class InstancesBuilder extends Engine {
 	public void extractEventsThreaded() throws Exception {
 
 		//pull in documents and find out how many there are
-		List<Document> knownDocs = ps.getAllTrainDocs();
+		List<Document> knownDocs = ps.getTrainDocs();
 		int knownDocsSize = knownDocs.size();
 
 		// initalize empty List<List<EventSet>>
@@ -387,6 +410,26 @@ public class InstancesBuilder extends Engine {
 	
 	//////////////////////////////////////////// Setters/Getters
 	
+	public boolean getUseDocTitles(){
+		return useDocTitles;
+	}
+	
+	public boolean getIsSparse(){
+		return isSparse;
+	}
+	
+	public void setProblemSet(ProblemSet probSet){
+		ps = probSet;
+	}
+	
+	public void setCumulativeFeatureDriver(CumulativeFeatureDriver cumulativeFeatureDriver){
+		cfd = cumulativeFeatureDriver;
+	}
+	
+	public CumulativeFeatureDriver getCFD(){
+		return cfd;
+	}
+	
 	/**
 	 * @return Returns the infoGain value and stores it locally incase we decide
 	 *         to apply it
@@ -399,6 +442,14 @@ public class InstancesBuilder extends Engine {
 		infoGain = doubles;
 	}
 	
+	public void setUseDocTitles(boolean udt){
+		useDocTitles = udt;
+	}
+	
+	public void setUseSparse(boolean sparse){
+		isSparse = sparse;
+	}
+	
 	/**
 	 * @return Returns the problem set used by the InstancesBuilder
 	 */
@@ -407,16 +458,25 @@ public class InstancesBuilder extends Engine {
 	}
 	
 	/**
-	 * A niche method for when you already have a training Instances object and
-	 * only want to build test instances
+	 * A niche method for when you already have a training Instances object
 	 * 
 	 * @param ti
 	 *            training Instances object
 	 */
-	public void setInstances(Instances ti) {
+	public void setTrainingInstances(Instances ti) {
 		trainingInstances = ti;
 	}
-
+	
+	/**
+	 * A niche method for when you already have a testing Instances object
+	 * 
+	 * @param ti
+	 *            testing Instances object
+	 */
+	public void setTestingInstances(Instances ti){
+		testInstances = ti;
+	}
+	
 	/**
 	 * 
 	 * @return The Instances object representing the training documents
@@ -511,7 +571,7 @@ public class InstancesBuilder extends Engine {
 	 * @return the list of training documents
 	 */
 	public List<Document> getTrainDocs(){
-		return ps.getAllTrainDocs();
+		return ps.getTrainDocs();
 	}
 	
 	public List<Document> getTestDocs(){
@@ -531,10 +591,11 @@ public class InstancesBuilder extends Engine {
 	public static boolean writeToARFF(String filename, Instances set) {
 		try {
 			ArffSaver saver = new ArffSaver();
-			 saver.setInstances(set);
-			 saver.setFile(new File(filename));
-			 saver.writeBatch();
-			 return true;
+			
+			saver.setInstances(set);
+			saver.setFile(new File(filename));
+			saver.writeBatch();
+			return true;
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			return false;
@@ -662,11 +723,11 @@ public class InstancesBuilder extends Engine {
 					events = cullWithRespectToTraining(relevantEvents, events, cfd);
 					//build the instance
 					Instance instance = createInstance(attributes, relevantEvents, cfd,
-							events, doc, isSparse, useDocTitles);
+							events, isSparse, useDocTitles);
 					//add it to the dataset
 					instance.setDataset(testInstances);
 					//normalize it
-					normInstance(cfd, instance, doc, useDocTitles);
+					normInstance(cfd, instance, events, useDocTitles);
 					//add it to the collection of instances to be returned by the thread
 					list.add(instance);
 				} catch (Exception e) {
@@ -719,19 +780,19 @@ public class InstancesBuilder extends Engine {
 					* (threadId + 1)); i++)
 				try {
 					//grab the document
-					Document doc = ps.getAllTrainDocs().get(i);
+					Document doc = ps.getTrainDocs().get(i);
 					//create the instance using it
 					Instance instance = createInstance(attributes, relevantEvents, cfd,
-							eventList.get(i), doc, isSparse, useDocTitles);
+							eventList.get(i), isSparse, useDocTitles);
 					//set it as a part of the dataset
 					instance.setDataset(trainingInstances);
 					//normalize it
-					normInstance(cfd, instance, doc, useDocTitles);
+					normInstance(cfd, instance, eventList.get(i), useDocTitles);
 					//add it to this div's list of completed instances
 					list.add(instance);
 				} catch (Exception e) {
 					Logger.logln("Error creating Training Instances!", LogOut.STDERR);
-					Logger.logln(ps.getAllTrainDocs().get(i).getFilePath());
+					Logger.logln(ps.getTrainDocs().get(i).getFilePath());
 					Logger.logln(e.getMessage(), LogOut.STDERR);
 				}
 		}
@@ -771,7 +832,11 @@ public class InstancesBuilder extends Engine {
 			this.threadId = threadId;
 			this.knownDocsSize = knownDocsSize;
 			this.knownDocs = knownDocs;
-			this.cfd = cfd;
+			try {
+				this.cfd = new CumulativeFeatureDriver(cfd);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 		}
 
@@ -783,7 +848,7 @@ public class InstancesBuilder extends Engine {
 					* (threadId + 1)); i++){
 				try {
 					//try to extract the events
-					List<EventSet> extractedEvents = cfd.createEventSets(ps.getAllTrainDocs().get(i));
+					List<EventSet> extractedEvents = extractEventSets(ps.getTrainDocs().get(i),cfd);
 					list.add(extractedEvents); //and add them to the list of list of eventsets
 				} catch (Exception e) {
 					Logger.logln("Error extracting features!", LogOut.STDERR);

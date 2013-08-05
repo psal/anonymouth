@@ -2,8 +2,6 @@ package edu.drexel.psal.anonymouth.utils;
 
 import java.io.IOException;
 
-import com.jgaap.JGAAPConstants;
-
 import edu.drexel.psal.JSANConstants;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 

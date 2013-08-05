@@ -32,6 +32,12 @@ public class SynonymBasedClassifier extends Analyzer {
 	}
 
 	@Override
+	public Evaluation getTrainTestEval(Instances train, Instances test) throws Exception{
+		return null;
+		
+	}
+	
+	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;

@@ -18,7 +18,7 @@ import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.ProblemSet;
+import edu.drexel.psal.jstylo.generics.SimpleAPI;
 
 public class BackendInterface {
 
@@ -32,7 +32,6 @@ public class BackendInterface {
 		GUIMain main;
 
 		public GUIThread(GUIMain main) {
-
 			this.main = main;
 		}
 
@@ -46,33 +45,6 @@ public class BackendInterface {
 
 	// -- none --
 	// all operations are fast, so no backend threads are ran.
-
-
-	/**
-	 * documents tab >> create new problem set
-	 */
-	protected void docTabCreateNewProblemSet(GUIMain main) {
-		Logger.logln(NAME+"Create new problem set");
-		(new Thread(bei.new DocTabNewProblemSetButtonClick(main))).start();
-	}
-
-	public class DocTabNewProblemSetButtonClick extends GUIThread {
-
-		public DocTabNewProblemSetButtonClick(GUIMain main) {
-			super(main);
-		}
-
-		public void run() {
-			Logger.logln(NAME+"Backend: create new problem set thread started.");
-
-			// initialize probelm set
-			main.preProcessWindow.ps = new ProblemSet();
-			main.preProcessWindow.ps.setTrainCorpusName(main.preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
-			main.preProcessWindow.driver.updateAllComponents();
-
-			Logger.logln(NAME+"Backend: create new problem set thread finished.");
-		}
-	}
 
 	protected void runVerboseOutputWindow(GUIMain main) {
 		new Thread(bei.new RunVerboseOutputWindow(main)).start();
@@ -93,12 +65,10 @@ public class BackendInterface {
 	}
 
 	public class PreTargetSelectionProcessing extends GUIThread {
-		private DataAnalyzer wizard;
 		private DocumentMagician magician;		
 
 		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
 			super(main);
-			this.wizard = wizard;
 			this.magician = magician;
 		}
 
@@ -114,70 +84,67 @@ public class BackendInterface {
 
 				processed = true;
 				DocumentMagician.numProcessRequests++;
-				String tempDoc = "";
+				SimpleAPI analyze = new SimpleAPI(main.preProcessWindow.ps,
+						main.ppAdvancedWindow.driver.cfd,
+						main.ppAdvancedWindow.curClassifier);
+				analyze.prepareInstances();
+				analyze.run();
+				
+//				if (DriverEditor.isFirstRun == true) {
+//					ConsolidationStation.functionWords.run();
+//					tempDoc = getDocFromCurrentTab();
+//					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
+//
+//					pw.setText("Extracting and Clustering Features...");
+//					try {
+//						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+//						pw.setText("Initializing Tagger...");
+//						Tagger.initTagger();
+//						pw.setText("Classifying Documents...");
+//						magician.runWeka();
+//						wizard.runClusterAnalysis(magician);
+//						DriverClustersWindow.initializeClusterViewer(main,false);
+//					} catch(Exception e) {
+//						e.printStackTrace();
+//						ErrorHandler.fatalError();
+//					}
+//				} else {
+//					Logger.logln(NAME+"Process button pressed to re-process document to modify.");
+//					tempDoc = getDocFromCurrentTab();
+//					if(tempDoc.equals("") == true) {
+//						JOptionPane.showMessageDialog(null,
+//								"It is not possible to process an empty document.",
+//								"Document processing error",
+//								JOptionPane.ERROR_MESSAGE,
+//								null);
+//					} else {
+//						magician.setModifiedDocument(tempDoc);
+//
+//						pw.setText("Extracting and Clustering Features...");
+//						try {
+//							wizard.reRunModified(magician);
+//							pw.setText("Initialize Cluster Viewer...");
+//							DriverClustersWindow.initializeClusterViewer(main,false);
+//							pw.setText("Classifying Documents...");
+//							magician.runWeka();
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//							ErrorHandler.fatalError();
+//						}
+//					}
+//				}
+//
+//				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
+//				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
-				if (DriverEditor.isFirstRun == true) {
-					ConsolidationStation.functionWords.run();
-					tempDoc = getDocFromCurrentTab();
-					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
-
-					pw.setText("Extracting and Clustering Features...");
-					try {
-						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
-						pw.setText("Initializing Tagger...");
-						Tagger.initTagger();
-						pw.setText("Classifying Documents...");
-						magician.runWeka();
-						wizard.runClusterAnalysis(magician);
-						DriverClustersWindow.initializeClusterViewer(main,false);
-					} catch(Exception e) {
-						e.printStackTrace();
-						ErrorHandler.fatalError();
-					}
-				} else {
-					Logger.logln(NAME+"Process button pressed to re-process document to modify.");
-					tempDoc = getDocFromCurrentTab();
-					if(tempDoc.equals("") == true) {
-						JOptionPane.showMessageDialog(null,
-								"It is not possible to process an empty document.",
-								"Document processing error",
-								JOptionPane.ERROR_MESSAGE,
-								null);
-					} else {
-						magician.setModifiedDocument(tempDoc);
-
-						pw.setText("Extracting and Clustering Features...");
-						try {
-							wizard.reRunModified(magician);
-							pw.setText("Initialize Cluster Viewer...");
-							DriverClustersWindow.initializeClusterViewer(main,false);
-							pw.setText("Classifying Documents...");
-							magician.runWeka();
-						} catch (Exception e) {
-							e.printStackTrace();
-							ErrorHandler.fatalError();
-						}
-					}
+				Tagger.initTagger();
+				if (DriverEditor.isFirstRun) {					
+//					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
+					main.anonymityDrawingPanel.setMaxPercent(100);
 				}
+				
 
-				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
-				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
-
-				if(DriverEditor.isFirstRun) {
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), true);
-					
-					List<Document> sampleDocs = magician.getDocumentSets().get(0);
-					int size = sampleDocs.size();
-					ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
-					for (int i = 0; i < size; i++) {
-						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
-					}
-					
-					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
-				} else
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
-
-				Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
+				Map<String,Map<String,Double>> wekaResults = analyze.getTrainTestResults();
 				Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
 				Logger.logln(NAME+wekaResults.toString());
 				makeResultsChart(wekaResults, main);

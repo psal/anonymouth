@@ -54,7 +54,7 @@ public class DocumentMagician {
 	public static boolean classifier_saved = false;
 	public static String classifier_path = "";
 	private List<Document> trainSet;
-	private List<Document> toModifySet;
+	public static List<Document> docToAnonymize;
 	private List<Document> noAuthorTrainSet;
 	private List<Document> authorSamplesSet;
 	private Map<String,Map<String,Double>> wekaResultMap;
@@ -71,7 +71,7 @@ public class DocumentMagician {
 	private static ArrayList<String> trainTitlesList;
 	private Set<String> trainSetAuthors;
 	private ArrayList<String> toModifyTitlesList;
-	private Instances authorAndTrainDat;
+	public static Instances authorAndTrainDat;
 	private Instances toModifyDat;
 	private Instances noAuthorTrainDat;
 	private Instances authorOnlyDat;
@@ -153,7 +153,7 @@ public class DocumentMagician {
 	 * Constructor for DocumentMagician
 	 * @param isSparse 
 	 */
-	public DocumentMagician(boolean isSparse){
+	public DocumentMagician(boolean isSparse) {
 		Logger.logln(NAME+"Created new DocumentMagician, is sparse?  ... "+isSparse);
 		this.isSparse = isSparse;
 	}
@@ -183,7 +183,7 @@ public class DocumentMagician {
 	 */
 	public void reRunModified(){ 
 		Logger.logln(NAME+"Called reRunModified (DocumentMagician)");
-		InstanceConstructor oneAndDone = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
+		InstanceConstructor oneAndDone = new InstanceConstructor(isSparse, theseFeaturesCfd, false);
 		String pathToTempModdedDoc = writeDirectory+ThePresident.sessionName+"_"+numProcessRequests+".txt";
 		Logger.logln(NAME+"Saving temporary file: "+pathToTempModdedDoc);
 		try {
@@ -197,11 +197,11 @@ public class DocumentMagician {
 			Logger.logln(NAME+"Error saving temporary file to: "+pathToTempModdedDoc,Logger.LogOut.STDERR);
 			e.printStackTrace();
 		}
-		Document newModdedDoc = new Document(pathToTempModdedDoc,toModifySet.get(0).getAuthor(),toModifySet.get(0).getTitle());
+		Document newModdedDoc = new Document(pathToTempModdedDoc,docToAnonymize.get(0).getAuthor(),docToAnonymize.get(0).getTitle());
 		Logger.logln(NAME+"Document opened");
-		toModifySet.clear();
-		toModifySet.add(0,newModdedDoc);
-		oneAndDone.runInstanceBuilder(trainSet,toModifySet);
+		docToAnonymize.clear();
+		docToAnonymize.add(0,newModdedDoc);
+		oneAndDone.runInstanceBuilder(trainSet,docToAnonymize);
 		authorAndTrainingInstances = oneAndDone.getTrainingInstances();
 		toModifyInstanceSet = oneAndDone.getTestingInstances();
 		authorAndTrainDat = oneAndDone.getFullTrainData();
@@ -238,14 +238,14 @@ public class DocumentMagician {
 			FileWriter writer = new FileWriter(tempModdedDoc);
 			if (!ANONConstants.SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC)
 				tempModdedDoc.deleteOnExit();
-			writer.write(toModifySet.get(0).stringify());
+			writer.write(docToAnonymize.get(0).stringify());
 			writer.close();
 		} catch (IOException e) {
 			Logger.logln(NAME+"Error saving temporary (unmodified) file to: "+pathToTempModdedDoc,Logger.LogOut.STDERR);
 			e.printStackTrace();
 		}
-		toModifySet.get(0).setAuthor(authorToRemove);
-		instanceSet.runInstanceBuilder(trainSet,toModifySet);
+		docToAnonymize.get(0).setAuthor(authorToRemove);
+		instanceSet.runInstanceBuilder(trainSet,docToAnonymize);
 		attributeSet = instanceSet.getAttributeSet();
 		authorAndTrainingInstances = instanceSet.getTrainingInstances();
 		toModifyInstanceSet = instanceSet.getTestingInstances();
@@ -286,7 +286,7 @@ public class DocumentMagician {
 		Logger.logln(NAME+"Called runWeka");
 		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
 		if(ThePresident.CLASSIFIER_SAVED == false){
-			wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
+			wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,docToAnonymize, ThePresident.PATH_TO_CLASSIFIER);// ?
 			ThePresident.CLASSIFIER_SAVED = true;
 		}
 		else{
@@ -300,11 +300,12 @@ public class DocumentMagician {
 		Logger.logln(NAME+"Called runWeka");
 		WekaAnalyzer waz = new WekaAnalyzer(theClassifier);
 		ThePresident.classifier_Saved = false;
-		if(ThePresident.classifier_Saved == false){
-			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,toModifySet, ThePresident.PATH_TO_CLASSIFIER);// ?
-			Instances trainingSet = authorAndTrainDat;
-			Instances testSet = toModifyDat;
-			List<Document> unknownDocs = toModifySet;
+		Instances trainingSet = authorAndTrainDat;
+		Instances testSet = toModifyDat;
+		
+		if (ThePresident.classifier_Saved == false) {
+			//wekaResultMap = waz.classifyAndSaveClassifier(authorAndTrainDat,toModifyDat,docToAnonymize, ThePresident.PATH_TO_CLASSIFIER);// ?
+			List<Document> unknownDocs = docToAnonymize;
 			String saveClassifierAs = ANONConstants.PATH_TO_CLASSIFIER;
 			Classifier classifier = theClassifier;
 			
@@ -364,9 +365,8 @@ public class DocumentMagician {
 			wekaResultMap = res;
 			
 			ThePresident.classifier_Saved = true;
-		}
-		else{
-			wekaResultMap = waz.classifyWithPretrainedClassifier(toModifyDat,toModifyTitlesList, trainSetAuthors);// ?
+		} else {
+			wekaResultMap = waz.classify(trainingSet, testSet, docToAnonymize);
 		}
 		Logger.logln(NAME+"Weka Done");
 	}
@@ -383,30 +383,30 @@ public class DocumentMagician {
 		theClassifier = classifier;
 		
 		ProblemSet pSetCopy = new ProblemSet(pSet);
-		trainSet = pSetCopy.getAllTrainDocs();
+		trainSet = pSetCopy.getTrainDocs();
 		
-		toModifySet = pSetCopy.getAllTestDocs(); // docToModify is the test doc already
-		Logger.logln(NAME+"True test doc author: "+toModifySet.get(0).getAuthor()); 
+		docToAnonymize = pSetCopy.getAllTestDocs(); // docToModify is the test doc already
+		Logger.logln(NAME+"True test doc author: "+docToAnonymize.get(0).getAuthor()); 
 		
 		authorToRemove = ProblemSet.getDummyAuthor(); 
 		Logger.logln(NAME+"Dummy author: "+authorToRemove);
 		authorSamplesSet = pSetCopy.removeAuthor(authorToRemove);
-		authorSamplesSet.remove(toModifySet.get(0));
-		noAuthorTrainSet = pSetCopy.getAllTrainDocs();
+		authorSamplesSet.remove(docToAnonymize.get(0));
+		noAuthorTrainSet = pSetCopy.getTrainDocs();
 		int i = 0;
 		int lenTSet = noAuthorTrainSet.size();
 		trainTitlesList = new ArrayList<String>(lenTSet);
-		loadDocs(toModifySet);
+		loadDocs(docToAnonymize);
 		loadDocs(trainSet);
 		loadDocs(authorSamplesSet);
 		loadDocs(noAuthorTrainSet);
 		for (i=0;i<lenTSet;i++){
 			trainTitlesList.add(i,noAuthorTrainSet.get(i).getTitle());
 		}
-		int lenTMSet = toModifySet.size();
+		int lenTMSet = docToAnonymize.size();
 		toModifyTitlesList = new ArrayList<String>(lenTMSet);
 		for(i=0; i<lenTMSet; i++){
-			toModifyTitlesList.add(i,toModifySet.get(i).getTitle());
+			toModifyTitlesList.add(i,docToAnonymize.get(i).getTitle());
 		}
 		numSampleAuthors = pSetCopy.getAuthors().size();
 		Logger.logln(NAME+"Calling runPrimaryDocOps");
@@ -466,7 +466,7 @@ public class DocumentMagician {
 		ArrayList<List<Document>> theDocs = new ArrayList<List<Document>>(3);
 		theDocs.add(noAuthorTrainSet); // index 0
 		theDocs.add(authorSamplesSet); // 1
-		theDocs.add(toModifySet); // 2
+		theDocs.add(docToAnonymize); // 2
 		return theDocs;
 	}
 	

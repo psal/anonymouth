@@ -62,7 +62,7 @@ public class PreProcessWindow extends JDialog {
 	public PreProcessWindowDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
-	protected ProblemSet ps;
+	public ProblemSet ps;
 	private int width = 500, height = 410;
 	protected Container currentContainer;
 	protected boolean saved = false;
@@ -455,7 +455,7 @@ public class PreProcessWindow extends JDialog {
 	 * the same name in two different directories). This helps make things less confusing/irritating for the user
 	 */
 	protected void assertUniqueTitles() {
-		List<Document> docs = ps.getAllTrainDocs();
+		List<Document> docs = ps.getTrainDocs();
 		int size = docs.size();
 		
 		ArrayList<String> docTitles = new ArrayList<String>(size);
@@ -532,7 +532,7 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected boolean sampleDocsReady() {
 		try {
-			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2)
+			if (ps.getTrainDocsForAuthor(ProblemSet.getDummyAuthor()).size() >= 2)
 				return true;
 			else
 				return false;
@@ -547,7 +547,7 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected boolean sampleDocsEmpty() {
 		try {
-			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).isEmpty())
+			if (ps.getTrainDocsForAuthor(ProblemSet.getDummyAuthor()).isEmpty())
 				return true;
 			else
 				return false;
