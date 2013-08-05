@@ -199,8 +199,7 @@ public class DocumentMagician {
 		}
 		Document newModdedDoc = new Document(pathToTempModdedDoc,toModifySet.get(0).getAuthor(),toModifySet.get(0).getTitle());
 		Logger.logln(NAME+"Document opened");
-		while(!toModifySet.isEmpty())
-			toModifySet.remove(0);
+		toModifySet.clear();
 		toModifySet.add(0,newModdedDoc);
 		oneAndDone.runInstanceBuilder(trainSet,toModifySet);
 		authorAndTrainingInstances = oneAndDone.getTrainingInstances();
@@ -263,12 +262,12 @@ public class DocumentMagician {
 		noAuthorTrainInstanceConstructor = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
 		int i;
 		int authSampleSetSize = authorSamplesSet.size();
-		noAuthorTrainInstanceConstructor.onlyBuildTrain(noAuthorTrainSet);
+		noAuthorTrainInstanceConstructor.onlyBuildTrain(noAuthorTrainSet, false);
 		noAuthorTrainAttributeSet = noAuthorTrainInstanceConstructor.getAttributeSet();
 		trainingInstances = noAuthorTrainInstanceConstructor.getTrainingInstances();
 		noAuthorTrainDat = noAuthorTrainInstanceConstructor.getFullTrainData();
 		
-		authorInstanceConstructor.onlyBuildTrain(authorSamplesSet);
+		authorInstanceConstructor.onlyBuildTrain(authorSamplesSet, true);
 		authorAttributeSet = authorInstanceConstructor.getAttributeSet();
 		authorInstances = authorInstanceConstructor.getTrainingInstances();
 		authorOnlyDat = authorInstanceConstructor.getFullTrainData();

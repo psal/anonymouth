@@ -113,7 +113,8 @@ public class CumulativeFeatureDriver {
 	 */
 	public List<EventSet> createEventSets(Document doc) throws Exception {
 		List<EventSet> esl = new ArrayList<EventSet>();
-		for (int i=0; i<features.size(); i++) {
+		int size = features.size();
+		for (int i = 0; i < size; i++) {
 			EventDriver ed = features.get(i).getUnderlyingEventDriver();
 			Document currDoc = doc instanceof StringDocument ?
 					new StringDocument((StringDocument) doc) :

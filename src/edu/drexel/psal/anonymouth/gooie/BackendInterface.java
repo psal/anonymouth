@@ -1,6 +1,5 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -124,19 +123,13 @@ public class BackendInterface {
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						Toolkit.getDefaultToolkit().beep();
 						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
-						Toolkit.getDefaultToolkit().beep();
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();
-						pw.setText("Initialize Cluster Viewer...");
 						pw.setText("Classifying Documents...");
 						magician.runWeka();
-						Toolkit.getDefaultToolkit().beep();
 						wizard.runClusterAnalysis(magician);
-						Toolkit.getDefaultToolkit().beep();
 						DriverClustersWindow.initializeClusterViewer(main,false);
-						Toolkit.getDefaultToolkit().beep();
 					} catch(Exception e) {
 						e.printStackTrace();
 						ErrorHandler.fatalError();
@@ -155,15 +148,11 @@ public class BackendInterface {
 
 						pw.setText("Extracting and Clustering Features...");
 						try {
-							Toolkit.getDefaultToolkit().beep();
 							wizard.reRunModified(magician);
-							Toolkit.getDefaultToolkit().beep();
 							pw.setText("Initialize Cluster Viewer...");
 							DriverClustersWindow.initializeClusterViewer(main,false);
-							Toolkit.getDefaultToolkit().beep();
 							pw.setText("Classifying Documents...");
 							magician.runWeka();
-							Toolkit.getDefaultToolkit().beep();
 						} catch (Exception e) {
 							e.printStackTrace();
 							ErrorHandler.fatalError();

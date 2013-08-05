@@ -98,7 +98,7 @@ public class InstanceConstructor {
 	 * 	true if no errors
 	 */
 	public boolean runInstanceBuilder(List<Document> trainDocs,List<Document> testDocs){
-		Logger.logln(NAME+"Runnng JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
+		Logger.logln(NAME+"Running JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
 		int eye = 0;
 		if (printStuff == true) {
 			char[] cRay = testDocs.get(0).getProcessedText();
@@ -133,8 +133,11 @@ public class InstanceConstructor {
 		return true;
 	}
 	
-	public boolean onlyBuildTrain(List<Document> trainDocs){
-		Logger.logln(NAME+"Only building train set");
+	public boolean onlyBuildTrain(List<Document> trainDocs, boolean withAuthor) {
+		if (withAuthor)
+			Logger.logln(NAME+"Only building train set");
+		else
+			Logger.logln(NAME+"Building train set with author");
 		
 		try {
 			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);

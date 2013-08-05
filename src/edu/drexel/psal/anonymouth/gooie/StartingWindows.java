@@ -293,6 +293,7 @@ public class StartingWindows extends JFrame {
 			if (main.preProcessWindow.driver.updateAllComponents() && probSetReady) {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
+				main.updateDocLabel(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getTitle());
 			} else {
 				Logger.logln(NAME+"Some issue was detected constructing the saved Document set, will verify " +
 						"if there's still enough documents to move forward");
@@ -331,6 +332,13 @@ public class StartingWindows extends JFrame {
 			Logger.logln(NAME+"Failed loading problem set at path: "+path, LogOut.STDERR);
 			setReadyToStart(false, false);
 			ThePresident.canDoQuickStart = false;
+			
+			String feature = PropertiesUtil.getFeature();
+			main.ppAdvancedWindow.setFeature(feature);
+
+			String classifier = PropertiesUtil.getClassifier();
+			main.ppAdvancedWindow.setClassifier(classifier);
+			
 			PropertiesUtil.setProbSet("");
 			main.preProcessWindow.driver.updateTitles();
 			revalidate();

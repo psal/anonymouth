@@ -456,7 +456,6 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected void assertUniqueTitles() {
 		List<Document> docs = ps.getAllTrainDocs();
-		docs.addAll(ps.getAllTestDocs());
 		int size = docs.size();
 		
 		ArrayList<String> docTitles = new ArrayList<String>(size);
@@ -467,6 +466,7 @@ public class PreProcessWindow extends JDialog {
 		
 		//printTitles();
 		for (int d = 0; d < size; d++) {
+			
 			String oldTitle = docs.get(d).getTitle();
 			String newTitle = oldTitle;
 			String author = docs.get(d).getAuthor();

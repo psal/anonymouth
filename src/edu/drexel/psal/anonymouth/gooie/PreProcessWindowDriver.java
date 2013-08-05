@@ -210,6 +210,8 @@ public class PreProcessWindowDriver {
 						preProcessWindow.testNextButton.setEnabled(true);
 						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testNextButton);
 						preProcessWindow.testNextButton.requestFocusInWindow();
+						
+						main.updateDocLabel(file.getName());
 					}
 				} else {
 					Logger.logln(NAME+"Load test documents canceled");
@@ -623,7 +625,6 @@ public class PreProcessWindowDriver {
 					Logger.logln(NAME+"Load training documents canceled");
 				}
 			}
-
 		};
 		preProcessWindow.trainAddButton.addActionListener(trainAddListener);
 
