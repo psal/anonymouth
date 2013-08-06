@@ -2,6 +2,8 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.Stack;
 
+import javax.swing.SwingUtilities;
+
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
@@ -11,14 +13,17 @@ import edu.drexel.psal.anonymouth.utils.TaggedDocument;
  * @author Marc Barrowclift
  *
  */
-public class VersionControl {
+public class VersionControl implements Runnable {
 	
 	private final int SIZECAP = 30;
 	private GUIMain main;
+	private VersionControl versionControl;
 	private Stack<TaggedDocument> undo;
 	private Stack<TaggedDocument> redo;
 	private Stack<Integer> indicesUndo;
 	private Stack<Integer> indicesRedo;
+	private TaggedDocument docToBackup;
+	private int offset = 0;
 	private int undoSize = 0;
 	private int redoSize = 0;
 	
@@ -28,36 +33,33 @@ public class VersionControl {
 	 */
 	public VersionControl(GUIMain main) {
 		this.main = main;
+		versionControl = this;
 		undo = new Stack<TaggedDocument>();
 		redo = new Stack<TaggedDocument>();
 		indicesUndo = new Stack<Integer>();
 		indicesRedo = new Stack<Integer>();
 	}
 	
+	public TaggedDocument getDocToBackup() {
+		return docToBackup;
+	}
+
+	public void setDocToBackup(final TaggedDocument docToBackup) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				versionControl.docToBackup = new TaggedDocument(docToBackup);
+			}
+		}); 
+	}
+
 	/**
 	 * Must be called in DriverEditor or wherever you want a "version" to be backed up in the undo stack.
 	 * @param taggedDoc - The TaggedDocument instance you want to capture.
 	 */
 	
 	public void addVersion(TaggedDocument taggedDoc, int offset) {
-		if (undo.size() >= SIZECAP) {
-			undo.remove(0);
-		}
-
-		for (int i = 0; i < taggedDoc.getNumSentences(); i++) {
-			taggedDoc.getTaggedSentences().get(i).getTranslations().clear();
-		}
-		
-		undo.push(new TaggedDocument(taggedDoc));
-		indicesUndo.push(offset);
-		undoSize++;
-		
-		main.enableUndo(true);
-		main.enableRedo(false);
-		
-		redo.clear();
-		indicesRedo.clear();
-		redoSize = 0;
+		docToBackup = taggedDoc;
+		this.offset = offset;
 	}
 	
 	public void addVersion(TaggedDocument taggedDoc) {
@@ -128,11 +130,41 @@ public class VersionControl {
 		redo.clear();
 		indicesUndo.clear();
 		indicesRedo.clear();
+		docToBackup = null;
 		undoSize = 0;
 		redoSize = 0;
 	}
 	
 	public boolean isUndoEmpty() {
 		return undo.isEmpty();
+	}
+
+	@Override
+	public void run() {
+		if (docToBackup == null) {
+			return;
+		}
+		
+		if (undo.size() >= SIZECAP) {
+			undo.remove(0);
+		}
+
+		for (int i = 0; i < docToBackup.getNumSentences(); i++) {
+			docToBackup.getTaggedSentences().get(i).getTranslations().clear();
+		}
+		
+		docToBackup = new TaggedDocument(docToBackup);
+		undo.push(docToBackup);
+		indicesUndo.push(offset);
+		undoSize++;
+		
+		main.enableUndo(true);
+		main.enableRedo(false);
+		
+		redo.clear();
+		indicesRedo.clear();
+		redoSize = 0;
+		
+		docToBackup = null;
 	}
 }

@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ import javax.swing.border.EmptyBorder;
 
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
@@ -188,23 +190,16 @@ public class StartingWindows extends JFrame {
 				try {
 					Logger.logln(NAME+"'Load Problem Set' button clicked on the documents tab");
 
-					load.setTitle("Load A Previous Document Set");
-					if (PropertiesUtil.prop.getProperty("recentProbSet") != null) {
-						Logger.logln(NAME+"Chooser root directory set to: " + PropertiesUtil.prop.getProperty("recentProbSet"));
-						load.setDirectory(PropertiesUtil.prop.getProperty("recentProbSet"));
-					} else {
-						load.setDirectory(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
-					}		
-					load.setMode(FileDialog.LOAD);
-					load.setMultipleMode(false);
-					load.setFilenameFilter(ANONConstants.XML);
-					load.setLocationRelativeTo(null);
-					load.setVisible(true);
-
-					File[] files = load.getFiles();
-					if (files.length != 0) {
-						String path = files[0].getAbsolutePath();
-						loadProblemSet(path);
+					FileHelper.load.setCurrentDirectory(new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX));
+					FileHelper.load.setFileFilter(ANONConstants.XML);
+					FileHelper.load.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					FileHelper.load.setMultiSelectionEnabled(false);
+					FileHelper.load.setVisible(true);
+					int answer = FileHelper.load.showOpenDialog(startingWindows);
+					
+					if (answer == JFileChooser.APPROVE_OPTION) {
+						File file = FileHelper.load.getSelectedFile();
+						loadProblemSet(file.getAbsolutePath());
 					} else {
 						Logger.logln(NAME+"Load problem set canceled");
 					}
@@ -293,7 +288,10 @@ public class StartingWindows extends JFrame {
 			if (main.preProcessWindow.driver.updateAllComponents() && probSetReady) {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
-				main.updateDocLabel(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getTitle());
+				
+				main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle());
+				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getTestDoc().getFilePath(), false);
+				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath(), true);
 			} else {
 				Logger.logln(NAME+"Some issue was detected constructing the saved Document set, will verify " +
 						"if there's still enough documents to move forward");

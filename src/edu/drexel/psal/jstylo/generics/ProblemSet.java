@@ -18,7 +18,6 @@ import java.util.Collections;
 import com.jgaap.generics.*;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.gooie.GUIMain;
 
 public class ProblemSet {
 	
@@ -109,9 +108,6 @@ public class ProblemSet {
 		trainCorpusName = generated.trainCorpusName;
 		trainDocsMap = generated.trainDocsMap;
 		testDocsMap = generated.testDocsMap;
-		
-		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(testDocsMap.get(ANONConstants.DUMMY_NAME).get(0).getFilePath(), false);
-		GUIMain.inst.preProcessWindow.driver.updateOpeningDir(trainDocsMap.get(trainDocsMap.keySet().toArray()[0]).get(0).getFilePath(), true);
 	}
 	
 	/**
@@ -167,6 +163,13 @@ public class ProblemSet {
 		pw.close();
 	}
 	
+	public Document getTestDoc() {
+		return testDocsMap.get(ANONConstants.DUMMY_NAME).get(0);
+	}
+	
+	public List<Document> getSampleDocs() {
+		return trainDocsMap.get(ANONConstants.DUMMY_NAME);
+	}
 	
 	/* =======
 	 * setters / adders

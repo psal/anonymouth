@@ -4,18 +4,18 @@ import java.awt.Point;
 import javax.swing.JScrollPane;
 
 /**
- * ==========Made with help from Carl Smotricz from StackOverflow==========
+ * ==========Made with help from Carl Smotricz from StackOverflow==========<br>
  * Simple class to ensure that the scroll pane's scroll position is ACTUALLY
  * set. The reason it seems behind simply making the call doesn't work is that
  * if done so anywhere near setting text in it, the scroll adjust would happen
  * first BEFORE the text is inserted. This defeats the purpose of the call since
  * the text being inserted also scrolls the pane to the bottom, thus overwriting
- * our changes.
+ * our changes.<br><br>
  * 
  * In order to solve this, we need a sort of buffer to ensure this happens AFTER
- * the text is inserted into the scroll pane. Simply call:
+ * the text is inserted into the scroll pane. Simply call:<br><br>
  * 
- * SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), myScrollPane);
+ * SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), myScrollPane);<br><br>
  * 
  * To activate after you have set the new text in the respective pane. You may of
  * course feel free to adjust to scroll pane to anywhere you want, not just the top,
@@ -38,9 +38,9 @@ public class ScrollToTop implements Runnable {
 	}
 	
 	/**
-	 * DO NOT CALL DIRECTLY, in order to adjust your scroll pane use:
+	 * DO NOT CALL DIRECTLY, in order to adjust your scroll pane use:<br><br>
 	 * 
-	 * SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), myScrollPane);
+	 * SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), myScrollPane);<br><br>
 	 * 
 	 * For more information see class documentation.
 	 */

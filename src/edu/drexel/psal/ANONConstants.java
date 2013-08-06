@@ -17,6 +17,7 @@ public class ANONConstants {
 	//public static final String LOG_DIR = System.getProperty("user.home")+"/Desktop/anonymouth_log";
 	public static final String LOG_DIR = WORKING_DIR + "anonymouth_log";
 	public static final String DOC_MAGICIAN_WRITE_DIR = WORKING_DIR + ".edited_documents/";
+	public static final String KOPPEL_FUNCTION_WORDS = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"koppel_function_words.txt";
 	public static final String SER_DIR = WORKING_DIR + ".serialized_objects/";
 	public static final String GRAPHICS = "/edu/drexel/psal/resources/graphics/";
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";

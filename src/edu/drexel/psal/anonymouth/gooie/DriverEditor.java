@@ -31,6 +31,7 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -628,8 +629,8 @@ public class DriverEditor {
 					sentToTranslate = currentSentNum;
 					if (!inRange) {
 						if (shouldUpdate && !ignoreVersion) {
-							backedUpTaggedDoc = new TaggedDocument(taggedDoc);
-							main.versionControl.addVersion(backedUpTaggedDoc, oldStartSelection);
+							main.versionControl.addVersion(main.versionControl.getDocToBackup(), oldStartSelection);
+							SwingUtilities.invokeLater(main.versionControl);
 						}
 
 						DriverTranslationsTab.showTranslations(taggedDoc.getSentenceNumber(sentToTranslate));
@@ -685,22 +686,22 @@ public class DriverEditor {
 				charsInserted = e.getLength();
 
 				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
-					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
+					SwingUtilities.invokeLater(main.versionControl);
 				}
 
 				if (ignoreVersion) {
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.setDocToBackup(taggedDoc);
 					return;
 				}
 
 				if (e.getLength() > 1) {
-					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
+					SwingUtilities.invokeLater(main.versionControl);
 				} else {
 					if (InputFilter.shouldBackup) {
-						main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset()+1);
-						backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+						main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset()+1);
+						SwingUtilities.invokeLater(main.versionControl);
 					}
 				}
 			}
@@ -719,22 +720,22 @@ public class DriverEditor {
 					charsRemoved = e.getLength();
 
 				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
-					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
+					SwingUtilities.invokeLater(main.versionControl);
 				}
 
 				if (ignoreVersion) {
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.setDocToBackup(taggedDoc);
 					return;
 				}
 
 				if (e.getLength() > 1) {
-					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
-					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
+					SwingUtilities.invokeLater(main.versionControl);
 				} else {
 					if (InputFilter.shouldBackup) {
-						main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
-						backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+						main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
+						SwingUtilities.invokeLater(main.versionControl);
 					}
 				}
 			}
@@ -930,7 +931,7 @@ public class DriverEditor {
 		main.versionControl.reset();
 		main.anonymityDrawingPanel.reset();
 		main.resultsWindow.reset();
-		ResultsWindow.updateResultsPrepColor(main);
+		ResultsChartWindow.updateResultsPrepColor(main);
 		main.elementsToRemoveTable.removeAllElements();
 		main.elementsToAdd.removeAllElements();
 		

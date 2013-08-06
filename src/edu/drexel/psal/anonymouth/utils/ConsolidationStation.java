@@ -38,7 +38,6 @@ public class ConsolidationStation {
 	public static ArrayList<TaggedDocument> otherSampleTaggedDocs;//initialized in backendInterfaces.
 	public static ArrayList<TaggedDocument> authorSampleTaggedDocs;
 	public static ArrayList<TaggedDocument> toModifyTaggedDocs;//init in editor Tab Driver
-	public static FunctionWord functionWords=new FunctionWord();
 	
 	/**
 	 * constructor for ConsolidationStation. Depends on target values, and should not be called until they have been selected.

@@ -50,7 +50,7 @@ public class SuggestionsTabDriver {
 		this.main = main;
 		
 		//We want this to be a Hashset because we want looking up to see if a single word's a dictionary word to be constant time
-		words = FileHelper.tokenizeLinesFromFile(DICTIONARY);
+		words = FileHelper.hashSetFromFile(DICTIONARY);
 		setFilterWordsToAdd(PropertiesUtil.getFilterAddSuggestions());
 	}
 

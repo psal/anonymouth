@@ -15,6 +15,7 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
+import edu.drexel.psal.anonymouth.utils.FunctionWords;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -25,6 +26,7 @@ public class BackendInterface {
 	private final String NAME = "( BackendInterface ) - ";
 	private ProgressWindow pw;
 	public static Boolean processed = false;
+	private FunctionWords functionWords;
 
 	protected static BackendInterface bei = new BackendInterface();
 
@@ -115,9 +117,10 @@ public class BackendInterface {
 				processed = true;
 				DocumentMagician.numProcessRequests++;
 				String tempDoc = "";
+				functionWords = new FunctionWords();
 
 				if (DriverEditor.isFirstRun == true) {
-					ConsolidationStation.functionWords.run();
+					functionWords.run();
 					tempDoc = getDocFromCurrentTab();
 					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 
@@ -191,7 +194,7 @@ public class BackendInterface {
 
 				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
 				main.suggestionsTabDriver.placeSuggestions();
-				ResultsWindow.updateResultsPrepColor(main);
+				ResultsChartWindow.updateResultsPrepColor(main);
 
 				DriverEditor.setAllDocTabUseable(true, main);		
 

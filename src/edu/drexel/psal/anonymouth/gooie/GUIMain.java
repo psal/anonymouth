@@ -339,7 +339,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected FAQWindow suggestionsWindow;
 	protected ClustersTutorial clustersTutorial;
 	protected VersionControl versionControl;
-	protected ResultsWindow resultsWindow;
+	protected ResultsChartWindow resultsWindow;
 	protected RightClickMenu rightClickMenu;
 	protected Clipboard clipboard;
 	protected StartingWindows startingWindows;
@@ -623,7 +623,7 @@ public class GUIMain extends javax.swing.JFrame {
 			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
 			versionControl = new VersionControl(this);
-			resultsWindow = new ResultsWindow(this);
+			resultsWindow = new ResultsChartWindow(this);
 			rightClickMenu = new RightClickMenu(this);
 
 			ThePresident.splash.updateText("Initializing listeners");
@@ -672,7 +672,7 @@ public class GUIMain extends javax.swing.JFrame {
 			ppAdvancedWindow.setClassifier(classifier);
 		}
 		
-		ResultsWindow.updateResultsPrepColor(this);
+		ResultsChartWindow.updateResultsPrepColor(this);
 	}
 
 	/**

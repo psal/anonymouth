@@ -30,7 +30,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Marc Barrowclift
  *
  */
-public class ResultsWindow extends JDialog {
+public class ResultsChartWindow extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private GUIMain main;
@@ -51,7 +51,7 @@ public class ResultsWindow extends JDialog {
 	 * Constructor
 	 * @param main - An instantace of GUIMain
 	 */
-	public ResultsWindow(GUIMain main) {
+	public ResultsChartWindow(GUIMain main) {
 		super(main, "Process Results", Dialog.ModalityType.APPLICATION_MODAL);
 		this.main = main;
 		init();
