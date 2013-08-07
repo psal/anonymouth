@@ -30,7 +30,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class AnonymityDrawingPanel extends JPanel {
 	
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private static final long serialVersionUID = 1L;
 	private final String[] PERCENTTEXT = {"100%", "75%", "50%", "25%", "0%"};
 	private final int MINY = 50;

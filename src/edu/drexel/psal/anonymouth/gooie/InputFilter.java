@@ -24,8 +24,14 @@ import edu.drexel.psal.jstylo.generics.Logger;
  */
 public class InputFilter extends DocumentFilter {
 	
+	//Constants
 	private final String NAME = "( InputFilter ) - ";
 	public final static int UNDOCHARACTERBUFFER = 5;
+	//we only need to worry about these kinds of abbreviations since SentenceTools takes care of the others
+	private final String[] ABBREVIATIONS = {"U.S.","R.N.","M.D.","i.e.","e.x.","e.g.","D.C.","B.C.","B.S.","Ph.D.","B.A.","A.B.","A.D.","A.M.","P.M.","r.b.i.","V.P."};
+	//Quick and dirty way to identify EOS characters.
+	private final String EOS = ".?!";
+	
 	public static int currentCharacterBuffer = 0;
 	public static boolean isEOS = false; //keeps track of whether or not the current character is an EOS character.
 	public static boolean ignoreTranslation = false;
@@ -33,8 +39,6 @@ public class InputFilter extends DocumentFilter {
 	public static boolean shouldBackup = false;
 	private boolean watchForEOS = false; //Lets us know if the previous character(s) were EOS characters.
 	private boolean addingAbbreviation = false;
-	private String EOS = ".?!"; //Quick and dirty way to identify EOS characters.
-	private String[] notEndsOfSentence = {"U.S.","R.N.","M.D.","i.e.","e.x.","e.g.","D.C.","B.C.","B.S.","Ph.D.","B.A.","A.B.","A.D.","A.M.","P.M.","r.b.i.","V.P."}; //we only need to worry about these kinds of abbreviations since SentenceTools takes care of the others
 	
 	/**
 	 * If the user types a character or pastes in text this will get called BEFORE updating the documentPane and firing the listeners.
@@ -52,7 +56,7 @@ public class InputFilter extends DocumentFilter {
 			DriverEditor.shouldUpdate = true; //If the user pasted in a massive chunk of text we want to update no matter what.
 			Logger.logln(NAME + "User pasted in text, will update");
 		}
-		
+				
 		fb.replace(offset, length, text, attr);
 	}
 	
@@ -97,15 +101,40 @@ public class InputFilter extends DocumentFilter {
 	 */
 	private void checkAddingAbbreviations(String text) {
 		try {
+			boolean isAdding = false;
+			
 			String textBeforePeriod = GUIMain.inst.getDocumentPane().getText().substring(DriverEditor.startSelection-2, DriverEditor.startSelection);
-			if (textBeforePeriod.substring(1, 2).equals(".") && !EOS.contains(text)) {			
-				for (int i = 0; i < notEndsOfSentence.length; i++) {
-					if (notEndsOfSentence[i].contains(textBeforePeriod)) {
+			if (textBeforePeriod.substring(1, 2).equals(".") && !EOS.contains(text)) {
+				for (int i = 0; i < ABBREVIATIONS.length; i++) {
+					if (ABBREVIATIONS[i].endsWith(textBeforePeriod)) {
+						int length = ABBREVIATIONS[i].length();
+						textBeforePeriod = GUIMain.inst.getDocumentPane().getText().substring(DriverEditor.startSelection-length, DriverEditor.startSelection);
+						
+						System.out.println (textBeforePeriod + " = " + ABBREVIATIONS[i]);
+						if (textBeforePeriod.equals(ABBREVIATIONS[i])) {
+							DriverEditor.shouldUpdate = false;
+							addingAbbreviation = true;
+							isAdding = true;
+							break;
+						}
+					} else if (ABBREVIATIONS[i].contains(textBeforePeriod)) {
+						System.out.println(ABBREVIATIONS[i]);
 						DriverEditor.shouldUpdate = false;
 						addingAbbreviation = true;
+						isAdding = true;
+						break;
 					}
 				}
 			}
+			
+			/**
+			 * If we are no longer adding abbreviations (meaning that it didn't match any of the ones of the list), then we will reset
+			 * addingAbbreviation to false. We have to do it here since we only know here whether or not the user is actually done writing
+			 * one or not (it may be one with multiple EOS characters, you don't know.
+			 */
+			if (!isAdding)
+				addingAbbreviation = false;
+			
 		} catch(StringIndexOutOfBoundsException e) {} //most likely the user is typing at the very beginning of the document, move on.
 	}
 	
@@ -163,8 +192,8 @@ public class InputFilter extends DocumentFilter {
 		try {
 			String textBeforeDeletion = GUIMain.inst.getDocumentPane().getText().substring(offset-2, offset+1);
 
-			for (int i = 0; i < notEndsOfSentence.length; i++) {
-				if (notEndsOfSentence[i].contains(textBeforeDeletion))
+			for (int i = 0; i < ABBREVIATIONS.length; i++) {
+				if (ABBREVIATIONS[i].contains(textBeforeDeletion))
 					DriverEditor.shouldUpdate = false;
 			}
 		} catch(StringIndexOutOfBoundsException e) {} //most likely the user is deleting at the first index of their document, move on

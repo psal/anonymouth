@@ -14,6 +14,7 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -31,7 +32,6 @@ import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -95,6 +95,8 @@ public class DriverEditor {
 	public static boolean autoHighlight = PropertiesUtil.getAutoHighlight();
 	protected static Map<String, TaggedSentence> originals = new HashMap<String, TaggedSentence>();
 	protected static ArrayList<String> originalSents = new ArrayList<String>();
+	protected static int CHARS_TIL_BACKUP = 5;
+	protected static int curCharBackupBuffer = 0;
 	public static int currentSentNum = 0;
 	protected static int lastSentNum = -1;
 	protected static int sentToTranslate = 0;
@@ -382,6 +384,7 @@ public class DriverEditor {
 					ignoreNumActions--;
 				} else if (taggedDoc != null) { //main.documentPane.getText().length() != 0
 					System.out.println("======================================================================================");
+					
 					boolean setSelectionInfoAndHighlight = true;
 					startSelection = e.getDot();
 					endSelection = e.getMark();
@@ -474,6 +477,9 @@ public class DriverEditor {
 									TaggedDocument.userDeletedSentence = false;
 								}
 							} catch (Exception e1) {
+								if (ANONConstants.DEBUGGING)
+									Toolkit.getDefaultToolkit().beep();
+								
 								Logger.logln(NAME+"Error occurred while attempting to delete an EOS character.", LogOut.STDERR);
 								Logger.logln(NAME+"-> leftSentInfo", LogOut.STDERR);
 								if (leftSentInfo != null) {
@@ -628,12 +634,13 @@ public class DriverEditor {
 					lastCaretLocation = currentCaretPosition;
 					sentToTranslate = currentSentNum;
 					if (!inRange) {
-						if (shouldUpdate && !ignoreVersion) {
-							main.versionControl.addVersion(main.versionControl.getDocToBackup(), oldStartSelection);
-							SwingUtilities.invokeLater(main.versionControl);
-						}
-
 						DriverTranslationsTab.showTranslations(taggedDoc.getSentenceNumber(sentToTranslate));
+					}
+					
+					if (shouldUpdate && !ignoreVersion && (curCharBackupBuffer >= CHARS_TIL_BACKUP)) {
+						curCharBackupBuffer = 0;
+						backedUpTaggedDoc = new TaggedDocument(taggedDoc);
+						main.versionControl.addVersion(backedUpTaggedDoc, oldStartSelection);
 					}
 
 					if (shouldUpdate) {
@@ -684,24 +691,26 @@ public class DriverEditor {
 				}
 				
 				charsInserted = e.getLength();
+//				System.out.println("LENGTH = " + e.getLength());
+				curCharBackupBuffer += e.getLength();
 
 				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
-					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
-					SwingUtilities.invokeLater(main.versionControl);
+					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				}
 
 				if (ignoreVersion) {
-					main.versionControl.setDocToBackup(taggedDoc);
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 					return;
 				}
 
 				if (e.getLength() > 1) {
-					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
-					SwingUtilities.invokeLater(main.versionControl);
+					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				} else {
 					if (InputFilter.shouldBackup) {
-						main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset()+1);
-						SwingUtilities.invokeLater(main.versionControl);
+						main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset()+1);
+						backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 					}
 				}
 			}
@@ -714,28 +723,31 @@ public class DriverEditor {
 					return;
 				}
 				
-				if (InputFilter.ignoreDeletion)
+				if (InputFilter.ignoreDeletion) {
 					InputFilter.ignoreDeletion = false;
-				else
+				} else {
 					charsRemoved = e.getLength();
+//					System.out.println("LENGTH = " + e.getLength());
+					curCharBackupBuffer += e.getLength();
+				}
 
 				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
-					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
-					SwingUtilities.invokeLater(main.versionControl);
+					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				}
 
 				if (ignoreVersion) {
-					main.versionControl.setDocToBackup(taggedDoc);
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 					return;
 				}
 
 				if (e.getLength() > 1) {
-					main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
-					SwingUtilities.invokeLater(main.versionControl);
+					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
+					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				} else {
 					if (InputFilter.shouldBackup) {
-						main.versionControl.addVersion(main.versionControl.getDocToBackup(), e.getOffset());
-						SwingUtilities.invokeLater(main.versionControl);
+						main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
+						backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 					}
 				}
 			}

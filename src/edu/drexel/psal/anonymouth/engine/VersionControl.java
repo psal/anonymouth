@@ -5,6 +5,7 @@ import java.util.Stack;
 import javax.swing.SwingUtilities;
 
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
+import edu.drexel.psal.anonymouth.gooie.DriverMenu;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 
@@ -13,19 +14,15 @@ import edu.drexel.psal.anonymouth.utils.TaggedDocument;
  * @author Marc Barrowclift
  *
  */
-public class VersionControl implements Runnable {
+public class VersionControl {
 	
 	private final int SIZECAP = 30;
 	private GUIMain main;
-	private VersionControl versionControl;
+	private boolean ready;
 	private Stack<TaggedDocument> undo;
 	private Stack<TaggedDocument> redo;
 	private Stack<Integer> indicesUndo;
 	private Stack<Integer> indicesRedo;
-	private TaggedDocument docToBackup;
-	private int offset = 0;
-	private int undoSize = 0;
-	private int redoSize = 0;
 	
 	/**
 	 * Constructor
@@ -33,33 +30,41 @@ public class VersionControl implements Runnable {
 	 */
 	public VersionControl(GUIMain main) {
 		this.main = main;
-		versionControl = this;
+		ready = true;
 		undo = new Stack<TaggedDocument>();
 		redo = new Stack<TaggedDocument>();
 		indicesUndo = new Stack<Integer>();
 		indicesRedo = new Stack<Integer>();
 	}
 	
-	public TaggedDocument getDocToBackup() {
-		return docToBackup;
+	public boolean isReady() {
+		return ready;
 	}
-
-	public void setDocToBackup(final TaggedDocument docToBackup) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				versionControl.docToBackup = new TaggedDocument(docToBackup);
-			}
-		}); 
-	}
-
+	
 	/**
 	 * Must be called in DriverEditor or wherever you want a "version" to be backed up in the undo stack.
 	 * @param taggedDoc - The TaggedDocument instance you want to capture.
 	 */
 	
 	public void addVersion(TaggedDocument taggedDoc, int offset) {
-		docToBackup = taggedDoc;
-		this.offset = offset;
+		ready = false;
+		if (undo.size() >= SIZECAP) {
+			undo.remove(0);
+		}
+
+		for (int i = 0; i < taggedDoc.getNumSentences(); i++) {
+			taggedDoc.getTaggedSentences().get(i).getTranslations().clear();
+		}
+		
+		undo.push(new TaggedDocument(taggedDoc));
+		indicesUndo.push(offset);
+		
+		main.enableUndo(true);
+		main.enableRedo(false);
+		
+		redo.clear();
+		indicesRedo.clear();
+		ready = true;
 	}
 	
 	public void addVersion(TaggedDocument taggedDoc) {
@@ -73,7 +78,14 @@ public class VersionControl implements Runnable {
 	 * the new taggedDoc, and pushed the taggedDoc that was just on the undo stack to the redo one. 
 	 */
 	public void undo() {
-		redo.push(new TaggedDocument(DriverEditor.taggedDoc));
+		ready = false;
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
+			}
+		});
 		indicesRedo.push(main.getDocumentPane().getCaret().getDot());
 		
 		DriverEditor.ignoreVersion = true;
@@ -83,15 +95,16 @@ public class VersionControl implements Runnable {
 		DriverEditor.ignoreVersion = false;
 		
 		main.enableRedo(true);
-		undoSize--;
-		redoSize++;
 		
-		if (undoSize == 0) {
+		if (undo.size() == 0) {
 			main.enableUndo(false);
 		}
 		
-		main.anonymityDrawingPanel.updateAnonymityBar();
-		main.suggestionsTabDriver.placeSuggestions();
+		synchronized(DriverMenu.class) {
+		    //set ready flag to true (so isReady returns true)
+		    ready = true;
+		    DriverMenu.class.notifyAll();
+		}
 	}
 	
 	/**
@@ -101,7 +114,14 @@ public class VersionControl implements Runnable {
 	 * the new taggedDoc, and pushed the taggedDoc that was just on the redo stack to the undo one. 
 	 */
 	public void redo() {
-		undo.push(new TaggedDocument(DriverEditor.taggedDoc));
+		ready = false;
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
+			}
+		});
 		indicesUndo.push(main.getDocumentPane().getCaret().getDot());
 		
 		DriverEditor.ignoreVersion = true;
@@ -111,15 +131,16 @@ public class VersionControl implements Runnable {
 		DriverEditor.ignoreVersion = false;
 
 		main.enableUndo(true);	
-		undoSize++;
-		redoSize--;
 		
-		if (redoSize == 0) {
+		if (redo.size() == 0) {
 			main.enableRedo(false);
 		}
 		
-		main.anonymityDrawingPanel.updateAnonymityBar();
-		main.suggestionsTabDriver.placeSuggestions();
+		synchronized(DriverMenu.class) {
+		    //set ready flag to true (so isReady returns true)
+		    ready = true;
+		    DriverMenu.class.notifyAll();
+		}
 	}
 	
 	/**
@@ -128,43 +149,12 @@ public class VersionControl implements Runnable {
 	public void reset() {
 		undo.clear();
 		redo.clear();
+		ready = false;
 		indicesUndo.clear();
 		indicesRedo.clear();
-		docToBackup = null;
-		undoSize = 0;
-		redoSize = 0;
 	}
 	
 	public boolean isUndoEmpty() {
 		return undo.isEmpty();
-	}
-
-	@Override
-	public void run() {
-		if (docToBackup == null) {
-			return;
-		}
-		
-		if (undo.size() >= SIZECAP) {
-			undo.remove(0);
-		}
-
-		for (int i = 0; i < docToBackup.getNumSentences(); i++) {
-			docToBackup.getTaggedSentences().get(i).getTranslations().clear();
-		}
-		
-		docToBackup = new TaggedDocument(docToBackup);
-		undo.push(docToBackup);
-		indicesUndo.push(offset);
-		undoSize++;
-		
-		main.enableUndo(true);
-		main.enableRedo(false);
-		
-		redo.clear();
-		indicesRedo.clear();
-		redoSize = 0;
-		
-		docToBackup = null;
 	}
 }

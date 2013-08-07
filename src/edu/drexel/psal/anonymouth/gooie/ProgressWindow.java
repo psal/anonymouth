@@ -90,7 +90,6 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 
 		@Override
 		public void done() {
-			Toolkit.getDefaultToolkit().beep();
 			setCursor(null); //turn off the wait cursor
 		}
 	}
