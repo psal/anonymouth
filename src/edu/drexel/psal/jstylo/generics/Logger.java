@@ -197,12 +197,15 @@ public class Logger {
 	
 	/**
 	 * Prints a stack trace for an exception to the log file as well as to Standard Error Output
+	 * 
 	 * @param e
+	 * 		The Exception you want to log the stack trace of
 	 */
 	public static void logln(Exception e) {
 		if (loggerFlag) {
 			String msg = e.toString();
 			
+			log(">>>>>>>>>>>>>>>>>>>>>>>   LOGGING STACK TRACE   <<<<<<<<<<<<<<<<<<<<<<<<<", LogOut.STDERR);
 			log(msg, LogOut.STDERR);
 			System.err.println();
 			try {

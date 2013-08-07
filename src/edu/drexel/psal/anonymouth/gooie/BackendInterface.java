@@ -14,6 +14,7 @@ import com.jgaap.generics.Document;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.FunctionWords;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
@@ -134,8 +135,8 @@ public class BackendInterface {
 						wizard.runClusterAnalysis(magician);
 						DriverClustersWindow.initializeClusterViewer(main,false);
 					} catch(Exception e) {
-						e.printStackTrace();
-						ErrorHandler.fatalError();
+						pw.stop();
+						ErrorHandler.fatalProcessingError(e);
 					}
 				} else {
 					Logger.logln(NAME+"Process button pressed to re-process document to modify.");
@@ -157,8 +158,8 @@ public class BackendInterface {
 							pw.setText("Classifying Documents...");
 							magician.runWeka();
 						} catch (Exception e) {
-							e.printStackTrace();
-							ErrorHandler.fatalError();
+							pw.stop();
+							ErrorHandler.fatalProcessingError(e);
 						}
 					}
 				}

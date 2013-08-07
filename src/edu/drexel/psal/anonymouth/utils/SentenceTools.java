@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
-import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.InputFilter;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -324,7 +324,7 @@ public class SentenceTools implements Serializable  {
 			//// xxx xxx xxx return the safeString_subbedEOS too!!!!
 			if (currentStart < 0 || currentStop < 0) {
 				Logger.logln(NAME+"Something went really wrong making sentence tokens.");
-				ErrorHandler.fatalError();
+				ErrorHandler.fatalProcessingError(null);
 			}
 
 			currentStart = currentStop+1;

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.gooie.ErrorHandler;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import edu.drexel.psal.jstylo.generics.Logger;
 import weka.core.Instance;
@@ -91,7 +91,7 @@ public class FeatureSwapper {
 				wekaResultsArray[i] = new WekaResults(wekaResultMap.get(keyIter.next()),i); // there should never be more that one key in this map. We only test one document.
 			}
 			else
-				ErrorHandler.fatalError();
+				ErrorHandler.fatalProcessingError(null);
 			
 		}
 				

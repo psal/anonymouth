@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.File;
 import java.util.Scanner;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -25,15 +26,17 @@ import com.apple.eawt.ApplicationEvent;
 @SuppressWarnings("deprecation") //For the Apple Look and Feel code below (If you find something better, please replace)
 public class ThePresident {
 	
+	//Constants
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
+	public static final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
+	public static final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
+	public static final String ANONYMOUTH_LOGO_SMALL = "anonymouth_gui_chooser.png";
 	
 	//Anonymouth Icons
 	public static Image logo;
 	public static ImageIcon aboutLogo;
 	public static ImageIcon dialogLogo;
-	public static final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
-	public static final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
-	public static final String ANONYMOUTH_LOGO_SMALL = "anonymouth_gui_chooser.png";
+	public static Icon dialogIcon;
 	
 	public static Application app;
 	public static Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
@@ -57,6 +60,7 @@ public class ThePresident {
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
+		dialogIcon = ImageLoader.getIcon(ANONYMOUTH_LOGO_SMALL);
 		
 		if (ANONConstants.IS_MAC) {
 			System.setProperty("WEKA_HOME", "/dev/null");

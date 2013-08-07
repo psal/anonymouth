@@ -22,7 +22,7 @@ public class SplashScreen extends Thread {
 	private static final int WIDTH = 520, HEIGHT = 135;
 	private static final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 18);
 	
-	private static String message;
+	private static String message = "Starting Anonymouth";
 	private java.awt.SplashScreen splash;
 	private boolean showSplash = true;
 
@@ -61,7 +61,12 @@ public class SplashScreen extends Thread {
 	 */
 	public void hideSplashScreen() {
 		showSplash = false;
-		splash.close();
+		try {
+			splash.close();
+		} catch (IllegalStateException e) {
+			Logger.logln(NAME+"SplashScreen had trouble being closed, must have closed earlier due to an error of some sort",
+					LogOut.STDERR);
+		}
 	}
 
 	/**
@@ -69,8 +74,6 @@ public class SplashScreen extends Thread {
 	 */
 	@Override
 	public void run() {
-		message = "Starting Anonymouth";
-
 		splash = java.awt.SplashScreen.getSplashScreen();
 		if (splash == null) {
 			Logger.logln(NAME+"SplashScreen.getSplashScreen() returned null", LogOut.STDERR);

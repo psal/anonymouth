@@ -14,7 +14,6 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -477,9 +476,6 @@ public class DriverEditor {
 									TaggedDocument.userDeletedSentence = false;
 								}
 							} catch (Exception e1) {
-								if (ANONConstants.DEBUGGING)
-									Toolkit.getDefaultToolkit().beep();
-								
 								Logger.logln(NAME+"Error occurred while attempting to delete an EOS character.", LogOut.STDERR);
 								Logger.logln(NAME+"-> leftSentInfo", LogOut.STDERR);
 								if (leftSentInfo != null) {
@@ -506,7 +502,7 @@ public class DriverEditor {
 									Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i));
 								}
 								
-								ErrorHandler.editorError("Editor Failure", "Anonymouth has encountered an internal problem\nprocessing your most recent action.\n\nWe are aware of and working on the issue,\nand we apologize for any inconvenience.");
+								Logger.logln(e1);
 								return;
 							}
 
