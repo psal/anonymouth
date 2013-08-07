@@ -80,7 +80,7 @@ public class PreProcessWindow extends JDialog {
 	private JLabel testLabel;
 	private JPanel docPanel;
 	protected JTextPane testDocPane;
-	private JScrollPane testDocScrollPane;
+	protected JScrollPane testDocScrollPane;
 	private JPanel testMiddlePanel;
 	private JPanel testPrevNextPanel;
 	private JPanel testNextPanel;
@@ -100,7 +100,7 @@ public class PreProcessWindow extends JDialog {
 	protected JList<String> sampleDocsList;
 	private ImageIcon third;
 	private JPanel sampleMiddlePanel;
-	private JScrollPane sampleDocsScrollPane;
+	protected JScrollPane sampleDocsScrollPane;
 	private JPanel samplePanel;
 	private JPanel samplePrevNextPanel;
 	private JPanel sampleNextPanel;
@@ -112,7 +112,7 @@ public class PreProcessWindow extends JDialog {
 	protected JPanel trainAddRemovePanel;
 	protected JPanel trainBarPanel;
 	protected JTree trainDocsTree;
-	private JScrollPane trainDocsScrollPane;
+	protected JScrollPane trainDocsScrollPane;
 	protected JLabel twoThirdBarLabel;
 	protected JButton trainAddButton;
 	protected JButton trainRemoveButton;
@@ -146,7 +146,6 @@ public class PreProcessWindow extends JDialog {
 	private JPanel doneDonePanel;
 	protected JButton doneSaveButton;
 	protected JButton doneButton;
-	protected JButton doneAdvancedButton;
 	
 	/**
 	 * Constructor
@@ -161,8 +160,6 @@ public class PreProcessWindow extends JDialog {
 		
 		initPanels();
 		initWindow();
-		
-		advancedWindow = new PreProcessAdvancedWindow(this, main);
 		
 		driver = new PreProcessWindowDriver(this, main);
 	}
@@ -427,7 +424,6 @@ public class PreProcessWindow extends JDialog {
 		doneTopPanel.add(doneMiddlePanel);
 		
 		doneDoneButton = new JButton("Done");
-		doneAdvancedButton = new JButton("Advanced");
 		donePreviousButton = new JButton("Previous");
 		
 		donePreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
@@ -437,8 +433,6 @@ public class PreProcessWindow extends JDialog {
 		
 		doneDonePanel = new JPanel();
 		doneDonePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-		if (ANONConstants.SHOW_ADVANCED_SETTINGS)
-			doneDonePanel.add(doneAdvancedButton);
 		doneDonePanel.add(doneDoneButton);
 		donePrevDonePanel.add(doneDonePanel);
 		
@@ -718,15 +712,28 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected void switchingToDone() {
 		this.remove(currentContainer);
-		
+
 		if (saved) {
+			/**
+			 * TODO
+			 * This doesn't work when the user has a loaded document set, clicks all the way through modify without changing anything,
+			 * then clicks modify again and goes through it to the done panel. It doesn't set the default button that time
+			 * 
+			 * This is most likely due to the address/pointer value of doneDoneButton changing once for some reason:
+			 * javax.swing.JButton[,0,0,0x0,invalid,alignmentX=0.0,...
+			 * to
+			 * javax.swing.JButton[,316,0,77x29,invalid,alignmentX=0.0,...
+			 * 
+			 * This change happens in the trainNextListener at the call "preProcessWindow.revalidate()". Keep in mind, this only
+			 * changes the address/pointer value of the button ONCE for some reason, even though this gets called multiple times.
+			 */
 			this.getRootPane().setDefaultButton(doneDoneButton);
 		} else {
 			this.getRootPane().setDefaultButton(doneSaveButton);
 		}
 		
 		this.add(doneMainPanel);
-		
+
 		if (saved) {
 			doneDoneButton.requestFocusInWindow();
 		} else {

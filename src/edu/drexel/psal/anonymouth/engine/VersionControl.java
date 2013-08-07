@@ -2,8 +2,6 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.Stack;
 
-import javax.swing.SwingUtilities;
-
 import edu.drexel.psal.anonymouth.gooie.DriverEditor;
 import edu.drexel.psal.anonymouth.gooie.DriverMenu;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
@@ -80,12 +78,13 @@ public class VersionControl {
 	public void undo() {
 		ready = false;
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
-			}
-		});
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
+//			}
+//		});
+		redo.push(new TaggedDocument(DriverEditor.taggedDoc));
 		indicesRedo.push(main.getDocumentPane().getCaret().getDot());
 		
 		DriverEditor.ignoreVersion = true;
@@ -116,12 +115,13 @@ public class VersionControl {
 	public void redo() {
 		ready = false;
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
-			}
-		});
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
+//			}
+//		});
+		undo.push(new TaggedDocument(DriverEditor.taggedDoc));
 		indicesUndo.push(main.getDocumentPane().getCaret().getDot());
 		
 		DriverEditor.ignoreVersion = true;

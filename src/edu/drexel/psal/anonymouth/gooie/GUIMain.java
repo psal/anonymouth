@@ -342,7 +342,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected ResultsChartWindow resultsWindow;
 	protected RightClickMenu rightClickMenu;
 	protected Clipboard clipboard;
-	protected StartingWindows startingWindows;
+	protected StartWindow startingWindows;
 	protected static Runnable mainThread;
 	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
@@ -465,7 +465,7 @@ public class GUIMain extends javax.swing.JFrame {
 			ThePresident.canDoQuickStart = true;
 		}
 		
-		startingWindows = new StartingWindows(this);
+		startingWindows = new StartWindow(this);
 		
 		initGUI();
 
@@ -615,7 +615,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 			ThePresident.splash.updateText("Preparing class instances");
 			preProcessWindow = new PreProcessWindow(this);
-			ppAdvancedWindow = preProcessWindow.advancedWindow;
+			ppAdvancedWindow = new PreProcessAdvancedWindow(preProcessWindow, this);
 			setDefaultValues();
 			preferencesWindow = new PreferencesWindow(this);
 			suggestionsTabDriver = new SuggestionsTabDriver(this);
@@ -656,9 +656,11 @@ public class GUIMain extends javax.swing.JFrame {
 				try {
 					startingWindows.loadProblemSet(problemSetPath);
 				} catch (Exception exc) {
+					startingWindows.setReadyToStart(false, true);
 					throw new Exception("Failed loading problemSet path \""+problemSetPath+"\"");
 				}
 			} else {
+				startingWindows.setReadyToStart(false, false);
 				throw new Exception("No default problem set saved from last run, will continue without.");
 			}
 		} catch (Exception e) {

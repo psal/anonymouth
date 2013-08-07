@@ -95,7 +95,7 @@ public class DriverEditor {
 	public static boolean autoHighlight = PropertiesUtil.getAutoHighlight();
 	protected static Map<String, TaggedSentence> originals = new HashMap<String, TaggedSentence>();
 	protected static ArrayList<String> originalSents = new ArrayList<String>();
-	protected static int CHARS_TIL_BACKUP = 5;
+	protected static int CHARS_TIL_BACKUP = 20;
 	protected static int curCharBackupBuffer = 0;
 	public static int currentSentNum = 0;
 	protected static int lastSentNum = -1;

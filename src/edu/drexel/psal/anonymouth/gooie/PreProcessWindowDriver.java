@@ -1,6 +1,7 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.FileDialog;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -37,6 +39,7 @@ import com.jgaap.generics.Document;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
+import edu.drexel.psal.anonymouth.helpers.ScrollToTop;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -90,7 +93,6 @@ public class PreProcessWindowDriver {
 	protected ActionListener doneSaveListener;
 	protected ActionListener donePreviousListener;
 	protected ActionListener doneDoneListener;
-	protected ActionListener doneAdvancedListener;
 	
 	/**
 	 * Constructor
@@ -139,7 +141,10 @@ public class PreProcessWindowDriver {
 				//if the user is closing the window via "X", we should check to see if they have completed the doc set or not
 				//and update accordingly
 				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindows.setReadyToStart(true, false);
+					if (preProcessWindow.saved)
+						main.startingWindows.setReadyToStart(true, true);
+					else
+						main.startingWindows.setReadyToStart(true, false);
 				} else {
 					main.startingWindows.setReadyToStart(false, true);
 				}
@@ -185,6 +190,7 @@ public class PreProcessWindowDriver {
 					File file = new File(load.getDirectory()+fileName);
 				*/
 				FileHelper.load = setOpeningDir(FileHelper.load, false);
+				FileHelper.load.setName("Load Your Document To Anonymize");
 				FileHelper.load.setFileFilter(ANONConstants.TXT);
 				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_ONLY);
 				FileHelper.load.setMultiSelectionEnabled(false);
@@ -198,7 +204,7 @@ public class PreProcessWindowDriver {
 					String path = file.getAbsolutePath();
 					
 					preProcessWindow.ps.addTestDoc(ProblemSet.getDummyAuthor(), new Document(path, ProblemSet.getDummyAuthor(), file.getName()));
-					boolean noIssue = updateTestDocTable();
+					boolean noIssue = updateTestDocPane();
 					updateOpeningDir(path, false);
 					updateBar(preProcessWindow.testBarPanel);
 					preProcessWindow.revalidate();
@@ -233,7 +239,7 @@ public class PreProcessWindowDriver {
 				preProcessWindow.testDocPane.setText("");
 
 				Logger.log(msg);
-				boolean noIssue = updateTestDocTable();
+				boolean noIssue = updateTestDocPane();
 				updateBar(preProcessWindow.testBarPanel);
 				preProcessWindow.revalidate();
 				preProcessWindow.repaint();	
@@ -288,6 +294,7 @@ public class PreProcessWindowDriver {
 				*/
 				
 				FileHelper.load = setOpeningDir(FileHelper.load, false);
+				FileHelper.load.setName("Load Other Documents Written By You");
 				FileHelper.load.setFileFilter(ANONConstants.TXT);
 				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				FileHelper.load.setMultiSelectionEnabled(true);
@@ -449,6 +456,7 @@ public class PreProcessWindowDriver {
 				 * the shitty, JFileChooser class instead of FileDialog. I'm going for function over form here, but keeping the old
 				 * Code below in case we can find a way around it.
 				 */
+				FileHelper.load.setName("Load Documents By Other Authors");
 				FileHelper.load.setFileFilter(ANONConstants.TXT);
 				FileHelper.load = setOpeningDir(FileHelper.load, true);
 				FileHelper.load.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -724,7 +732,7 @@ public class PreProcessWindowDriver {
 				preProcessWindow.switchingToDone();
 				updateBar(preProcessWindow.doneBarPanel);
 				preProcessWindow.revalidate();
-				preProcessWindow.repaint();	
+				preProcessWindow.repaint();
 			}
 		};
 		preProcessWindow.trainNextButton.addActionListener(trainNextListener);
@@ -834,21 +842,16 @@ public class PreProcessWindowDriver {
 				preProcessWindow.setVisible(false);
 				
 				if (preProcessWindow.documentsAreReady()) {
-					main.startingWindows.setReadyToStart(true, false);
+					if (preProcessWindow.saved)
+						main.startingWindows.setReadyToStart(true, true);
+					else
+						main.startingWindows.setReadyToStart(true, false);
 				} else {
 					main.startingWindows.setReadyToStart(false, true);
 				}
 			}
 		};
 		preProcessWindow.doneDoneButton.addActionListener(doneDoneListener);
-		
-		doneAdvancedListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				preProcessWindow.advancedWindow.showWindow();
-			}
-		};
-		preProcessWindow.doneAdvancedButton.addActionListener(doneAdvancedListener);
 	}
 	
 	/**
@@ -1044,8 +1047,8 @@ public class PreProcessWindowDriver {
 	}
 	
 	/**
-	 * Updates all GUI tables and text fields. Should be called when a new problem set has been loaded (we need to update all components
-	 * to reflect the change).
+	 * Force-updates all GUI tables and text fields. This entails removing all elements from tables and refilling them with
+	 * everything from the problem set
 	 */
 	protected boolean updateAllComponents() {
 		Logger.logln(NAME+"Updating components to reflect new problem set.");
@@ -1056,9 +1059,9 @@ public class PreProcessWindowDriver {
 		boolean result;
 		int passed = 0;
 		
-		if (updateTestDocTable())
+		if (updateTestDocPane())
 			passed++;
-		if (updateSampleDocTable())
+		if (updateSampleDocList())
 			passed++;
 		if (updateTrainDocTree())
 			passed++;
@@ -1072,9 +1075,34 @@ public class PreProcessWindowDriver {
 	}
 	
 	/**
+	 * Clears all components to their default, empty states.
+	 * @return
+	 */
+	protected void resetAllComponents() {
+		preProcessWindow.saved = false;
+		preProcessWindow.ps = new ProblemSet();
+		preProcessWindow.ps.setTrainCorpusName(preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
+		PropertiesUtil.setProbSet("");
+		
+		//Resets the test document textPane
+		preProcessWindow.testDocPane.setText("");
+		main.mainDocPreview = new Document();
+		
+		//Reset the sample document list
+		DefaultListModel<String> dlm = (DefaultListModel<String>)preProcessWindow.sampleDocsList.getModel();
+		dlm.removeAllElements();
+		titles.clear();
+		
+		//Reset the training document table
+		preProcessWindow.trainTreeTop = new DefaultMutableTreeNode(preProcessWindow.ps.getTrainCorpusName());
+		preProcessWindow.trainTreeModel = new DefaultTreeModel(preProcessWindow.trainTreeTop, true);
+		preProcessWindow.trainDocsTree.setModel(preProcessWindow.trainTreeModel);
+	}
+	
+	/**
 	 * Updates the test documents table with a new test doc
 	 */
-	protected boolean updateTestDocTable() {
+	protected boolean updateTestDocPane() {
 		boolean passed = true;
 		
 		if (preProcessWindow.mainDocReady()) {
@@ -1121,6 +1149,9 @@ public class PreProcessWindowDriver {
 				if (titles.get(ANONConstants.DUMMY_NAME) == null)
 					titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
 				titles.get(ANONConstants.DUMMY_NAME).add(main.mainDocPreview.getTitle());
+				
+				//To Set the Scroll pane vertical bar to the top instead of bottom
+				SwingUtilities.invokeLater(new ScrollToTop(new Point(0, 0), preProcessWindow.testDocScrollPane));
 			} catch (Exception e) {
 				e.printStackTrace();
 				Logger.logln(NAME+"Error setting text of test document in editor", LogOut.STDERR);
@@ -1151,23 +1182,29 @@ public class PreProcessWindowDriver {
 	 * Updates the User Sample documents table for the new problem set (should not be called by directly by programmer, instead call
 	 * updateAllComponents(), and only when loading a new problem set)
 	 */
-	protected boolean updateSampleDocTable() {
+	protected boolean updateSampleDocList() {
 		boolean passed = true;
 		DefaultListModel<String> dlm = (DefaultListModel<String>)preProcessWindow.sampleDocsList.getModel();
 		dlm.removeAllElements();
 
 		if (!preProcessWindow.sampleDocsEmpty()) {
 			List<Document> userSampleDocs = preProcessWindow.ps.getTrainDocs(ProblemSet.getDummyAuthor());
-			for (int i = 0; i < userSampleDocs.size(); i++) {
-				if (isEmpty(userSampleDocs.get(i).getFilePath(), userSampleDocs.get(i).getTitle())) {
-					passed = false;
-					dlm.removeElementAt(i);
-					preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), userSampleDocs.get(i).getTitle());
-				} else {
-					dlm.addElement(userSampleDocs.get(i).getTitle());
-					if (titles.get(ANONConstants.DUMMY_NAME) == null)
-						titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
-					titles.get(ANONConstants.DUMMY_NAME).add(userSampleDocs.get(i).getTitle());
+			if (userSampleDocs == null) {
+				passed = false;
+			} else {
+				int size = userSampleDocs.size();
+				
+				for (int i = 0; i < size; i++) {
+					if (isEmpty(userSampleDocs.get(i).getFilePath(), userSampleDocs.get(i).getTitle())) {
+						passed = false;
+						dlm.removeElementAt(i);
+						preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), userSampleDocs.get(i).getTitle());
+					} else {
+						dlm.addElement(userSampleDocs.get(i).getTitle());
+						if (titles.get(ANONConstants.DUMMY_NAME) == null)
+							titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());
+						titles.get(ANONConstants.DUMMY_NAME).add(userSampleDocs.get(i).getTitle());
+					}
 				}
 			}
 		}

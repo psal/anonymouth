@@ -167,7 +167,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	 * Constructor
 	 */
 	public PreProcessAdvancedWindow(PreProcessWindow preProcessWindow, GUIMain main) {
-		super(preProcessWindow, "Advanced Options", Dialog.ModalityType.APPLICATION_MODAL);
+		super(main.startingWindows, "Advanced Options", Dialog.ModalityType.APPLICATION_MODAL);
 		Logger.logln(NAME+"Initializing the pre-process advanced settings window");
 		this.preProcessWindow = preProcessWindow;
 		this.main = main;

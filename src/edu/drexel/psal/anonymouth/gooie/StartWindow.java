@@ -2,6 +2,7 @@ package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.FlowLayout;
@@ -46,15 +47,15 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
  * @author Marc Barrowclift
  *
  */
-public class StartingWindows extends JFrame {
+public class StartWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private final String NAME = "( StartingWindows ) - ";
+	private final String NAME = "( StartWindow ) - ";
 	
 	private GUIMain main;
 	private int width = 520, height = 135;
 	private FileDialog load;
-	private StartingWindows startingWindows;
+	private StartWindow startingWindows;
 	private UserStudySessionName userStudySessionName;
 	
 	//Swing Components
@@ -67,21 +68,26 @@ public class StartingWindows extends JFrame {
 	private JPanel textPanel;
 	//Bottom
 	private JPanel bottomPanel;
+	private JPanel rightButtonsPanel;
 	private JPanel buttonPanel;
 	private JSeparator separator;
 	private JButton loadDocSetButton;
-	protected JButton newDocSetButton;
+	private JButton newDocSetButton;
+	protected JButton modifyDocSetButton;
+	protected JButton advancedConfigButton;
 		
 	//Listeners
 	private ActionListener startListener;
 	private ActionListener newDocSetListener;
+	private ActionListener modifyDocSetListener;
 	protected ActionListener loadDocSetListener;
+	protected ActionListener advancedConfigListener;
 	
 	/**
 	 * Constructor
 	 * @param main - Instance of GUIMain
 	 */
-	public StartingWindows(GUIMain main) {	
+	public StartWindow(GUIMain main) {	
 		initGUI();
 		initWindow(main);
 		initListeners();
@@ -98,8 +104,15 @@ public class StartingWindows extends JFrame {
 	private void initGUI() {
 		startingWindows = this;
 		
-		loadDocSetButton = new JButton("Load Document Set");
-		newDocSetButton = new JButton("New Document Set");
+		newDocSetButton = new JButton("New");
+		newDocSetButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		loadDocSetButton = new JButton("Load");
+		loadDocSetButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		modifyDocSetButton = new JButton("Modify");
+		modifyDocSetButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
+		
+		advancedConfigButton = new JButton("Advanced Configuration");
+		advancedConfigButton.setAlignmentX(Container.LEFT_ALIGNMENT);
 		
 		topPanel = new JPanel();
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
@@ -125,13 +138,31 @@ public class StartingWindows extends JFrame {
 		topPanel.add(startPanel);
 		topPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
 		
-		buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-		buttonPanel.add(loadDocSetButton);
-		buttonPanel.add(newDocSetButton);
-		
+		//===========================================
+		//*****		Setting up bottom buttons	*****
+		//===========================================
+		buttonPanel = new JPanel();
 		separator = new JSeparator();
 		separator.setMaximumSize(new Dimension(480, 0));
-		
+		{
+			if (ANONConstants.SHOW_ADVANCED_SETTINGS) {
+				buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+				buttonPanel.setBorder(new EmptyBorder(0,14,0,15));
+				buttonPanel.add(advancedConfigButton);
+				
+				rightButtonsPanel = new JPanel();
+				rightButtonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+				rightButtonsPanel.add(newDocSetButton);
+				rightButtonsPanel.add(loadDocSetButton);
+				rightButtonsPanel.add(modifyDocSetButton);
+				buttonPanel.add(rightButtonsPanel);
+			} else {
+				buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
+				buttonPanel.add(newDocSetButton);
+				buttonPanel.add(loadDocSetButton);
+				buttonPanel.add(modifyDocSetButton);
+			}
+		}
 		bottomPanel = new JPanel();
 		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
 		bottomPanel.add(separator);
@@ -142,7 +173,7 @@ public class StartingWindows extends JFrame {
 		bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, -5));
 		bottomPanel.add(quitButton);
 		bottomPanel.add(loadDocSetButton);
-		bottomPanel.add(newDocSetButton);
+		bottomPanel.add(modifyDocSetButton);
 		bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 		bottomPanel.setPreferredSize(new Dimension(520, 35));
 		bottomPanel.setBackground(new Color(180, 143, 186));
@@ -188,8 +219,9 @@ public class StartingWindows extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Logger.logln(NAME+"'Load Problem Set' button clicked on the documents tab");
+					Logger.logln(NAME+"'Load' button clicked on the documents tab");
 
+					FileHelper.load.setName("Load Saved Document Set Set");
 					FileHelper.load.setCurrentDirectory(new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX));
 					FileHelper.load.setFileFilter(ANONConstants.XML);
 					FileHelper.load.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -201,7 +233,7 @@ public class StartingWindows extends JFrame {
 						File file = FileHelper.load.getSelectedFile();
 						loadProblemSet(file.getAbsolutePath());
 					} else {
-						Logger.logln(NAME+"Load problem set canceled");
+						Logger.logln(NAME+"Load document set canceled");
 					}
 				} catch (NullPointerException arg) {
 					arg.printStackTrace();
@@ -210,13 +242,32 @@ public class StartingWindows extends JFrame {
 		};
 		loadDocSetButton.addActionListener(loadDocSetListener);
 		
-		newDocSetListener = new ActionListener() {
+		modifyDocSetListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {				
 				main.preProcessWindow.showWindow();
 			}
 		};
+		modifyDocSetButton.addActionListener(modifyDocSetListener);
+		
+		newDocSetListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.preProcessWindow.driver.resetAllComponents();
+				setReadyToStart(false, false);
+				main.preProcessWindow.switchingToTest();
+				main.preProcessWindow.showWindow();
+			}
+		};
 		newDocSetButton.addActionListener(newDocSetListener);
+		
+		advancedConfigListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.ppAdvancedWindow.showWindow();
+			}
+		};
+		advancedConfigButton.addActionListener(advancedConfigListener);
 	}
 	
 	/**
@@ -229,19 +280,27 @@ public class StartingWindows extends JFrame {
 				textLabel.setText("Start with loaded document set");
 			else
 				textLabel.setText("Start with finished document set");
+			modifyDocSetButton.setEnabled(true);
 			textLabel.setForeground(Color.BLACK);
 			startButton.setEnabled(true);
 			this.getRootPane().setDefaultButton(startButton);
 			startButton.requestFocusInWindow();
+			main.preProcessWindow.saved = true;
 		} else {
-			if (loaded)
+			if (loaded) {
 				textLabel.setText("Please finish incomplete document set");
-			else
+				modifyDocSetButton.setEnabled(true);
+				this.getRootPane().setDefaultButton(modifyDocSetButton);
+				modifyDocSetButton.requestFocusInWindow();
+			} else {
 				textLabel.setText("No previous document set found");
+				this.getRootPane().setDefaultButton(newDocSetButton);
+				newDocSetButton.requestFocusInWindow();
+				modifyDocSetButton.setEnabled(false);
+			}
 			textLabel.setForeground(Color.LIGHT_GRAY);
 			startButton.setEnabled(false);
-			this.getRootPane().setDefaultButton(newDocSetButton);
-			newDocSetButton.requestFocusInWindow();
+			main.preProcessWindow.saved = false;
 		}
 	}
 	
@@ -361,7 +420,7 @@ class UserStudySessionName extends JFrame {
 	
 	//Class instances
 	private UserStudySessionName sessionWindow;
-	private StartingWindows startingWindows;
+	private StartWindow startingWindows;
 	
 	//Swing Components
 	private JLabel inputMessage;
@@ -378,7 +437,7 @@ class UserStudySessionName extends JFrame {
 	 * Constructor
 	 * @param startingWindows - StartingWindows instance
 	 */
-	public UserStudySessionName(StartingWindows startingWindows) {
+	public UserStudySessionName(StartWindow startingWindows) {
 		this.startingWindows = startingWindows;
 		sessionWindow = this;
 		

@@ -27,7 +27,7 @@ public class ANONConstants {
 	public static final boolean IS_USER_STUDY = false; //whether or not to show the session name dialog
 	public static final boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
 	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: Put in Preferences and create implementation for it
-	public static final boolean SHOW_ADVANCED_SETTINGS = false;
+	public static final boolean SHOW_ADVANCED_SETTINGS = true;
 	public static final boolean DEBUGGING = true;
 	
 	public static final ExtFilter TXT = new ExtFilter("Text files (*.txt)", ".txt");
