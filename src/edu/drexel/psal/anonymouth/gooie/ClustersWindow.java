@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
+import edu.drexel.psal.jstylo.generics.Logger;
+
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -19,27 +21,45 @@ import net.miginfocom.swing.MigLayout;
  */
 public class ClustersWindow extends JFrame {
 
-	@SuppressWarnings("unused")
+	//Constants
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private static final long serialVersionUID = 1L;
+	
+	//Swing Components
 	protected ScrollablePanel clusterHolderPanel;
 	private JPanel clustersPanel;
 	private JScrollPane clusterScrollPane;
 	private JLabel clustersLabel;
 	protected JScrollPane subFeaturesListScrollPane;
 	
+	//Variables
 	protected ArrayList<ArrayList<String>> subfeatures = new ArrayList<ArrayList<String>>();
 	protected ArrayList<String> features = new ArrayList<String>();
 	
+	/**
+	 * Constructor, initializes the window and it's components automatically for you.
+	 * Also initializes and sets all listeners with it's driver automatically
+	 */
 	public ClustersWindow() {
-		init();
+		initWindow();
+		initComponents();
+	}
+	
+	/**
+	 * Initializes all data relating to the frame itself (like location, size, etc.)
+	 */
+	private void initWindow() {
+		this.setSize(400, 860);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Clusters Viewer");
 		this.setVisible(false);
 	}
 	
 	/**
 	 * initializes all the data needed to display the clusters
 	 */
-	private void init() {
+	private void initComponents() {
+		Logger.logln(NAME+"Initializing Clusters Window...");
 		clustersPanel = new JPanel();
 		clustersPanel.setLayout(new MigLayout(
 				"wrap, ins 0",
@@ -49,10 +69,10 @@ public class ClustersWindow extends JFrame {
 		{ // --------------cluster panel components
 			clustersLabel = new JLabel("Clusters:");
 			clustersLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			clustersLabel.setFont(GUIMain.titleFont);
+			clustersLabel.setFont(GUIMain.inst.titleFont);
 			clustersLabel.setOpaque(true);
 			clustersLabel.setBackground(new Color(252,242,206));
-			clustersLabel.setBorder(GUIMain.rlborder);
+			clustersLabel.setBorder(GUIMain.inst.rlborder);
 			
 			clusterHolderPanel = new ScrollablePanel() {
 				private static final long serialVersionUID = 1L;
@@ -73,9 +93,6 @@ public class ClustersWindow extends JFrame {
 		}
 		
 		this.add(clustersPanel);
-		this.setSize(400, 860);
-		this.setLocationRelativeTo(null);
-		this.setTitle("Clusters Viewer");
 	}
 	
 	/**

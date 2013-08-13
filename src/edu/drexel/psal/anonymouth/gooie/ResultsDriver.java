@@ -12,9 +12,24 @@ import java.awt.event.ActionListener;
  */
 public class ResultsDriver {
 	
-	private static ActionListener resultsListener;
+	private ActionListener resultsListener;
+	private GUIMain main;
 	
-	public static void initListeners(final GUIMain main) {
+	/**
+	 * Constructor, initializes and sets all listeners for you
+	 * 
+	 * @param main
+	 * 		GUIMain instance
+	 */
+	public ResultsDriver(GUIMain main) {
+		this.main = main;
+		initListeners();
+	}
+	
+	/**
+	 * Initializes all Results listeners
+	 */
+	private void initListeners() {
 		resultsListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

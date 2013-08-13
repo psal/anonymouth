@@ -178,7 +178,7 @@ public class Console extends WindowAdapter implements WindowListener, ActionList
 		this.notifyAll(); // stop all threads
 		try { reader.join(1000);pin.close();   } catch (Exception e){}		
 		try { reader2.join(1000);pin2.close(); } catch (Exception e){}
-		DriverEditor.consoleDead = true;
+		EditorDriver.consoleDead = true;
 	}		
 		
 	public synchronized void windowClosing(WindowEvent evt)

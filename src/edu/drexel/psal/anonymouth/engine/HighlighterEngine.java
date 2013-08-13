@@ -7,7 +7,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
-import edu.drexel.psal.anonymouth.gooie.DriverEditor;
+import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.HighlightMapper;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
@@ -42,7 +42,7 @@ public class HighlighterEngine {
 	 */
 	public HighlighterEngine(GUIMain main) {
 		this.main = main;
-		mainHighlight = main.getDocumentPane().getHighlighter();
+		mainHighlight = main.documentPane.getHighlighter();
 	}
 	
 	/**
@@ -141,7 +141,7 @@ public class HighlighterEngine {
 	 * @param wordToHighlight - The word you want to highlight
 	 */
 	public void addAllAddHighlights(String wordToHighlight) {
-		ArrayList<int[]> index = IndexFinder.findIndices(main.getDocumentPane().getText(), wordToHighlight);
+		ArrayList<int[]> index = IndexFinder.findIndices(main.documentPane.getText(), wordToHighlight);
 		int indexSize = index.size();		
 		
 		for (int i = 0; i < indexSize; i++) {
@@ -184,7 +184,7 @@ public class HighlighterEngine {
 			wordToHighlight = test[1].substring(0, test[1].length()-2);
 		}
 		
-		ArrayList<int[]> index = IndexFinder.findIndices(main.getDocumentPane().getText(), wordToHighlight);
+		ArrayList<int[]> index = IndexFinder.findIndices(main.documentPane.getText(), wordToHighlight);
 		int indexSize = index.size();
 
 		for (int i = 0; i < indexSize; i++) {
@@ -220,10 +220,10 @@ public class HighlighterEngine {
 	 */
 	public void addAutoRemoveHighlights(int start, int end) {
 		//if we don't increment by one, it gets the previous sentence.
-		String[] words = DriverEditor.taggedDoc.getWordsInSentenceNoDups(DriverEditor.taggedDoc.getTaggedSentenceAtIndex(start+1));
-		int removeSize = main.suggestionsTabDriver.getRemoveSize();
+		String[] words = EditorDriver.taggedDoc.getWordsInSentenceNoDups(EditorDriver.taggedDoc.getTaggedSentenceAtIndex(start+1));
+		int removeSize = main.wordSuggestionsDriver.getRemoveSize();
 		ArrayList<int[]> index = new ArrayList<int[]>(removeSize);
-		ArrayList<String[]> topToRemove = main.suggestionsTabDriver.getTopToRemove();
+		ArrayList<String[]> topToRemove = main.wordSuggestionsDriver.getTopToRemove();
 		
 		int sentenceSize = words.length;
 		for (int i = 0; i < sentenceSize; i++) {
@@ -240,7 +240,7 @@ public class HighlighterEngine {
 					}
 
 					if (words[i].equals(wordToRemove)) {
-						index.addAll(IndexFinder.findIndicesInSection(main.getDocumentPane().getText(), wordToRemove, start, end));
+						index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
 					}
 				}
 			}

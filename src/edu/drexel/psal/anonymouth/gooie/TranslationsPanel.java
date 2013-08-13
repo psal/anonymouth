@@ -77,7 +77,7 @@ public class TranslationsPanel {
 	 */
 	public void showTranslations(TaggedSentence sentence) {		
 		// remove all the current translations shown
-		if (main.getDocumentPane().isEnabled()) {
+		if (main.documentPane.isEnabled()) {
 			main.translationsHolderPanel.removeAll();
 		}
 		
@@ -120,9 +120,9 @@ public class TranslationsPanel {
 				// set up title label
 				languageLabels[i] = new JLabel(translationNames.get(i));
 				translationsMap.put(translationNames.get(i), translations.get(i));
-				languageLabels[i].setFont(GUIMain.titleFont);
+				languageLabels[i].setFont(main.titleFont);
 				languageLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
-				languageLabels[i].setBorder(GUIMain.rlborder);
+				languageLabels[i].setBorder(main.rlborder);
 				languageLabels[i].setOpaque(true);
 				languageLabels[i].setBackground(main.blue);
 
@@ -157,7 +157,7 @@ public class TranslationsPanel {
 		} else if (PropertiesUtil.getDoTranslations() && main.startTranslations.isEnabled()) {
 			main.notTranslated.setText("You granted access for translations to be obtained from Microsoft Bing in Preferences.\n\nTo begin, click the Start button");
 			main.translationsHolderPanel.add(main.notTranslated, "");
-		} else if (main.getDocumentPane().isEnabled()) {
+		} else if (main.documentPane.isEnabled()) {
 			main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
 			main.translationsHolderPanel.add(main.notTranslated, "");
 		}

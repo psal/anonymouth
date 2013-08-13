@@ -4,11 +4,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -17,7 +16,9 @@ import edu.drexel.psal.jstylo.generics.Logger;
  *
  */
 public class ClustersTutorial extends JFrame {
-	
+
+	private static final long serialVersionUID = 1L;
+	private final String TUTORIAL = "clustersTutorial.png";
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private Image tutorial;
 	private JPanel panel;
@@ -42,12 +43,8 @@ public class ClustersTutorial extends JFrame {
 	 * Initializes all the data for the window
 	 */
 	private void init() {
-		try {
-			tutorial = ImageIO.read(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"clustersTutorial.png"));
-		} catch (Exception e) {
-			Logger.logln(NAME + "Error loading clusters tutorial");
-			e.printStackTrace();
-		}
+		Logger.logln(NAME+"Initializing clusters tutorial...");
+		tutorial = ImageLoader.getImage(TUTORIAL);
 		
 		panel = new JPanel() {
 			private static final long serialVersionUID = 1L;

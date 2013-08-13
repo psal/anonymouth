@@ -45,15 +45,15 @@ public class InputFilter extends DocumentFilter {
 	 */
 	public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attr) throws BadLocationException {	
 		if (text.length() == 1) { //If the user is just typing (single character)
-			DriverEditor.shouldUpdate = false;
+			EditorDriver.shouldUpdate = false;
 			
 			checkAddingEllipses(text);
 			checkAddingAbbreviations(text);
 			
-			if (DriverEditor.startSelection != DriverEditor.endSelection)
-				DriverEditor.skipDeletingEOSes = true; 
+			if (EditorDriver.startSelection != EditorDriver.endSelection)
+				EditorDriver.skipDeletingEOSes = true; 
 		} else { //If the user pasted in text of length greater than a single character
-			DriverEditor.shouldUpdate = true; //If the user pasted in a massive chunk of text we want to update no matter what.
+			EditorDriver.shouldUpdate = true; //If the user pasted in a massive chunk of text we want to update no matter what.
 			Logger.logln(NAME + "User pasted in text, will update");
 		}
 				
@@ -71,11 +71,11 @@ public class InputFilter extends DocumentFilter {
 		if (isEOS && !addingAbbreviation) {
 			watchForEOS = true;
 			//For whatever reason, startSelection must be subtracted by 1, and refuses to work otherwise.
-			DriverEditor.taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], DriverEditor.endSelection-1, false);
+			EditorDriver.taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], EditorDriver.endSelection-1, false);
 		} else if (!isEOS && !watchForEOS) { //If the user isn't typing an EOS character and they weren't typing one previously, then it's just a normal character, update.
-			DriverEditor.shouldUpdate = true;
+			EditorDriver.shouldUpdate = true;
 		} else if (isEOS && addingAbbreviation) {
-			DriverEditor.shouldUpdate = true;
+			EditorDriver.shouldUpdate = true;
 			addingAbbreviation = false;
 		}
 
@@ -90,7 +90,7 @@ public class InputFilter extends DocumentFilter {
 			 * this is just have a little flag at the end of the caret listener that calls removeReplaceAndUpdate only when we command
 			 * it to from the InputFilter.
 			 */
-			DriverEditor.shouldUpdate = true;
+			EditorDriver.shouldUpdate = true;
 		}
 	}
 	
@@ -103,23 +103,23 @@ public class InputFilter extends DocumentFilter {
 		try {
 			boolean isAdding = false;
 			
-			String textBeforePeriod = GUIMain.inst.getDocumentPane().getText().substring(DriverEditor.startSelection-2, DriverEditor.startSelection);
+			String textBeforePeriod = GUIMain.inst.documentPane.getText().substring(EditorDriver.startSelection-2, EditorDriver.startSelection);
 			if (textBeforePeriod.substring(1, 2).equals(".") && !EOS.contains(text)) {
 				for (int i = 0; i < ABBREVIATIONS.length; i++) {
 					if (ABBREVIATIONS[i].endsWith(textBeforePeriod)) {
 						int length = ABBREVIATIONS[i].length();
-						textBeforePeriod = GUIMain.inst.getDocumentPane().getText().substring(DriverEditor.startSelection-length, DriverEditor.startSelection);
+						textBeforePeriod = GUIMain.inst.documentPane.getText().substring(EditorDriver.startSelection-length, EditorDriver.startSelection);
 						
 						System.out.println (textBeforePeriod + " = " + ABBREVIATIONS[i]);
 						if (textBeforePeriod.equals(ABBREVIATIONS[i])) {
-							DriverEditor.shouldUpdate = false;
+							EditorDriver.shouldUpdate = false;
 							addingAbbreviation = true;
 							isAdding = true;
 							break;
 						}
 					} else if (ABBREVIATIONS[i].contains(textBeforePeriod)) {
 						System.out.println(ABBREVIATIONS[i]);
-						DriverEditor.shouldUpdate = false;
+						EditorDriver.shouldUpdate = false;
 						addingAbbreviation = true;
 						isAdding = true;
 						break;
@@ -143,8 +143,8 @@ public class InputFilter extends DocumentFilter {
 	 */
 	public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
 		if (length == 1) { //If the user is just deleting character by character
-			DriverEditor.shouldUpdate = false;
-			DriverEditor.EOSesRemoved = false;
+			EditorDriver.shouldUpdate = false;
+			EditorDriver.EOSesRemoved = false;
 
 			checkRemoveEllipses(offset);
 			checkRemoveAbbreviations(offset);
@@ -153,8 +153,8 @@ public class InputFilter extends DocumentFilter {
 			 * I know this looks goofy, but without some sort of check to make sure that the document is done processing, this would fire
 			 * removeReplaceAndUpdate() in DriverEditor and screw all the highlighting up. There may be a better way to do this...
 			 */
-			if (GUIMain.processed && !ignoreTranslation) {
-				DriverEditor.shouldUpdate = true; //We want to update no matter what since the user is dealing with a chunk of text
+			if (GUIMain.inst.processed && !ignoreTranslation) {
+				EditorDriver.shouldUpdate = true; //We want to update no matter what since the user is dealing with a chunk of text
 				Logger.logln(NAME + "User deleted multiple characters in text, will update");
 			} else
 				ignoreTranslation = false;
@@ -169,18 +169,18 @@ public class InputFilter extends DocumentFilter {
 	 * @param offset
 	 */
 	private void checkRemoveEllipses(int offset) {
-		isEOS = EOS.contains(GUIMain.inst.getDocumentPane().getText().substring(offset, offset+1)); //checks to see if the deleted character is an EOS character
+		isEOS = EOS.contains(GUIMain.inst.documentPane.getText().substring(offset, offset+1)); //checks to see if the deleted character is an EOS character
 		
-		if (isEOS && EOS.contains(GUIMain.inst.getDocumentPane().getText().substring(offset-1, offset))) { //if it was AND the character before it is ALSO an EOS character...
+		if (isEOS && EOS.contains(GUIMain.inst.documentPane.getText().substring(offset-1, offset))) { //if it was AND the character before it is ALSO an EOS character...
 			watchForEOS = true;
 		} else if (!isEOS && !watchForEOS) { //The user deleted a character and didn't delete one previously, nothing to do, update.
-			DriverEditor.shouldUpdate = true;
+			EditorDriver.shouldUpdate = true;
 		}
 		
 		if (watchForEOS && !isEOS) { //if the user previously deleted an EOS character AND the one they just deleted is not an EOS character, we should update.
 			watchForEOS = false;
 			shouldBackup = true;
-			DriverEditor.shouldUpdate = true;
+			EditorDriver.shouldUpdate = true;
 		}
 	}
 	
@@ -190,11 +190,11 @@ public class InputFilter extends DocumentFilter {
 	 */
 	private void checkRemoveAbbreviations(int offset) {
 		try {
-			String textBeforeDeletion = GUIMain.inst.getDocumentPane().getText().substring(offset-2, offset+1);
+			String textBeforeDeletion = GUIMain.inst.documentPane.getText().substring(offset-2, offset+1);
 
 			for (int i = 0; i < ABBREVIATIONS.length; i++) {
 				if (ABBREVIATIONS[i].contains(textBeforeDeletion))
-					DriverEditor.shouldUpdate = false;
+					EditorDriver.shouldUpdate = false;
 			}
 		} catch(StringIndexOutOfBoundsException e) {} //most likely the user is deleting at the first index of their document, move on
 	}

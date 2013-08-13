@@ -35,9 +35,9 @@ import javax.swing.event.DocumentListener;
  * @author Joe Muoio
  * 
  */
-public class DriverEditor {
+public class EditorDriver {
 
-	private final static String NAME = "( DriverEditor ) - ";
+	private final static String NAME = "( EditorDriver ) - ";
 	public static boolean isUsingNineFeatures = false;
 	protected static boolean hasBeenInitialized = false;
 	protected static String[] condensedSuggestions;
@@ -115,7 +115,6 @@ public class DriverEditor {
 	public static int[] rightSentInfo = new int[0];
 	private static boolean translate = false;
 	public static ActionListener processButtonListener;
-	public static ActionListener viewResultsListener;
 	protected static Object lock = new Object();
 	private static boolean wholeLastSentDeleted = false;
 	private static boolean wholeBeginningSentDeleted = false;
@@ -156,7 +155,6 @@ public class DriverEditor {
 	 * @param main GUIMain object
 	 */
 	public static void setAllDocTabUseable(boolean b, GUIMain main) {
-		main.viewResultsButton.setEnabled(b);
 		main.fileSaveTestDocMenuItem.setEnabled(b);
 		main.fileSaveAsTestDocMenuItem.setEnabled(b);
 		main.viewClustersMenuItem.setEnabled(b);
@@ -164,7 +162,7 @@ public class DriverEditor {
 		main.elementsToAddPane.setFocusable(b);
 		main.elementsToRemoveTable.setEnabled(b);
 		main.elementsToRemoveTable.setFocusable(b);
-		main.getDocumentPane().setEnabled(b);
+		main.documentPane.setEnabled(b);
 		main.clipboard.setEnabled(b);
 		
 		if (PropertiesUtil.getDoTranslations() && b) {
@@ -207,14 +205,14 @@ public class DriverEditor {
 			originals.put(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false), taggedDoc.getSentenceNumber(oldSelectionInfo[0]));
 			originalSents.remove(oldSelectionInfo[0]);
 			originalSents.add(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false));
-			main.suggestionsTabDriver.placeSuggestions();
+			main.wordSuggestionsDriver.placeSuggestions();
 		}
 
 		if (shouldUpdate) {
 			ignoreNumActions = 3;
-			main.getDocumentPane().setText(taggedDoc.getUntaggedDocument(false)); // NOTE should be false after testing!!!
-			main.getDocumentPane().getCaret().setDot(caretPositionPriorToAction);
-			main.getDocumentPane().setCaretPosition(caretPositionPriorToAction);
+			main.documentPane.setText(taggedDoc.getUntaggedDocument(false)); // NOTE should be false after testing!!!
+			main.documentPane.getCaret().setDot(caretPositionPriorToAction);
+			main.documentPane.setCaretPosition(caretPositionPriorToAction);
 			ignoreNumActions = 0;
 		}
 
@@ -237,9 +235,9 @@ public class DriverEditor {
 	public static void update(GUIMain main, Boolean shouldUpdate) {
 		if (shouldUpdate) {
 			ignoreNumActions = 3;
-			main.getDocumentPane().setText(taggedDoc.getUntaggedDocument(false));
-			main.getDocumentPane().getCaret().setDot(caretPositionPriorToCharInsertion);
-			main.getDocumentPane().setCaretPosition(caretPositionPriorToCharInsertion);	
+			main.documentPane.setText(taggedDoc.getUntaggedDocument(false));
+			main.documentPane.getCaret().setDot(caretPositionPriorToCharInsertion);
+			main.documentPane.setCaretPosition(caretPositionPriorToCharInsertion);	
 		}
 
 		int[] selectionInfo = calculateIndicesOfSentences(caretPositionPriorToCharInsertion)[0];
@@ -262,14 +260,14 @@ public class DriverEditor {
 		highlightEngine.removeSentenceHighlight();
 		
 		//If user is highlight text themselves, don't highlight any additional stuff
-		if (main.getDocumentPane().getCaret().getDot() != main.getDocumentPane().getCaret().getMark()) {
+		if (main.documentPane.getCaret().getDot() != main.documentPane.getCaret().getMark()) {
 			return;
 		}
 		
 		System.out.printf("Moving highlight to %d to %d\n", bounds[0],bounds[1]);
 		if ((selectedSentIndexRange[0] != currentCaretPosition || currentSentNum == 0) || deleting) { //if the user is not selecting a sentence, don't highlight it.
 			int temp = 0;
-			while (Character.isWhitespace(main.getDocumentPane().getText().charAt(bounds[0]+temp))) {
+			while (Character.isWhitespace(main.documentPane.getText().charAt(bounds[0]+temp))) {
 				temp++;
 			}
 
@@ -361,7 +359,7 @@ public class DriverEditor {
 
 		highlightEngine = new HighlighterEngine(main);
 
-		main.getDocumentPane().addCaretListener(new CaretListener() {
+		main.documentPane.addCaretListener(new CaretListener() {
 			@Override
 			public void caretUpdate(CaretEvent e) {
 				if (ignoreNumActions > 0) {
@@ -434,7 +432,7 @@ public class DriverEditor {
 									// for left: read from 'leftSentInfo[1]' (the beginning of the sentence) to 'currentCaretPosition' (where the "sentence" now ends)
 									// for right: read from 'caretPositionPriorToCharRemoval' (where the "sentence" now begins) to 'rightSentInfo[2]' (the end of the sentence) 
 									// Once we have the string, we call removeAndReplace, once for each sentence (String)
-									String docText = main.getDocumentPane().getText();
+									String docText = main.documentPane.getText();
 									String leftSentCurrent = docText.substring(leftSentInfo[1],currentCaretPosition);
 									taggedDoc.removeAndReplace(leftSentInfo[0], leftSentCurrent);
 									//Needed so that we don't delete more than we should if that be the case
@@ -483,7 +481,7 @@ public class DriverEditor {
 								}
 								
 								Logger.logln(NAME+"->Document Text (What the user sees)", LogOut.STDERR);
-								Logger.logln(NAME+"\t" + main.getDocumentPane().getText(), LogOut.STDERR);
+								Logger.logln(NAME+"\t" + main.documentPane.getText(), LogOut.STDERR);
 								
 								Logger.logln(NAME+"->Tagged Document Text (The Backend)", LogOut.STDERR);
 								int size = taggedDoc.getNumSentences();
@@ -571,7 +569,7 @@ public class DriverEditor {
 							 * constantly pushing now sentences to be translated is the user's immediately going to replace them again, we only
 							 * want to translate completed sentences).
 							 */
-							if (!originals.keySet().contains(main.getDocumentPane().getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
+							if (!originals.keySet().contains(main.documentPane.getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
 								translate = true;
 						}
 					}
@@ -584,12 +582,12 @@ public class DriverEditor {
 					} else {
 						lastSelectedSentIndexRange[0] = selectedSentIndexRange[0];
 						lastSelectedSentIndexRange[1] = selectedSentIndexRange[1];
-						currentSentenceString = main.getDocumentPane().getText().substring(lastSelectedSentIndexRange[0],lastSelectedSentIndexRange[1]);
+						currentSentenceString = main.documentPane.getText().substring(lastSelectedSentIndexRange[0],lastSelectedSentIndexRange[1]);
 
 						if (!taggedDoc.getSentenceNumber(lastSentNum).getUntagged(false).equals(currentSentenceString)) {
 							main.anonymityBar.updateBar();
 							setSelectionInfoAndHighlight = false;
-							GUIMain.saved = false;
+							main.saved = false;
 						}
 
 						if ((currentCaretPosition-1 != lastCaretLocation && !charsWereRemoved && charsWereInserted) || (currentCaretPosition != lastCaretLocation-1) && !charsWereInserted && charsWereRemoved) {
@@ -604,7 +602,7 @@ public class DriverEditor {
 							 * constantly pushing now sentences to be translated is the user's immediately going to replace them again, we only
 							 * want to translate completed sentences).
 							 */
-							if (!originals.keySet().contains(main.getDocumentPane().getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
+							if (!originals.keySet().contains(main.documentPane.getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
 								translate = true;
 						}
 					}
@@ -630,7 +628,7 @@ public class DriverEditor {
 
 					if (shouldUpdate) {
 						shouldUpdate = false;
-						GUIMain.saved = false;
+						main.saved = false;
 						removeReplaceAndUpdate(main, lastSentNum, currentSentenceString, false);
 					}
 
@@ -644,7 +642,7 @@ public class DriverEditor {
 		/**
 		 * Key listener for the documentPane. Allows tracking the cursor while typing to make sure that indices of sentence start and ends 
 		 */
-		main.getDocumentPane().addKeyListener(new KeyListener() {
+		main.documentPane.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -667,11 +665,11 @@ public class DriverEditor {
 			public void keyTyped(KeyEvent arg0) {}
 		});
 
-		main.getDocumentPane().getDocument().addDocumentListener(new DocumentListener() {
+		main.documentPane.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (!GUIMain.processed){
+				if (!main.processed){
 					return;
 				}
 				
@@ -679,7 +677,7 @@ public class DriverEditor {
 //				System.out.println("LENGTH = " + e.getLength());
 				curCharBackupBuffer += e.getLength();
 
-				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
+				if (main.versionControl.isUndoEmpty() && main.processed && !ignoreVersion) {
 					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
 					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				}
@@ -702,9 +700,9 @@ public class DriverEditor {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				if (!GUIMain.processed) {
-					if (!DriverEditor.isFirstRun)
-						GUIMain.processed = true;
+				if (!main.processed) {
+					if (!EditorDriver.isFirstRun)
+						main.processed = true;
 					return;
 				}
 				
@@ -716,7 +714,7 @@ public class DriverEditor {
 					curCharBackupBuffer += e.getLength();
 				}
 
-				if (main.versionControl.isUndoEmpty() && GUIMain.processed && !ignoreVersion) {
+				if (main.versionControl.isUndoEmpty() && main.processed && !ignoreVersion) {
 					main.versionControl.addVersion(backedUpTaggedDoc, e.getOffset());
 					backedUpTaggedDoc = new TaggedDocument(taggedDoc);
 				}
@@ -739,11 +737,11 @@ public class DriverEditor {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				DriverEditor.displayEditInfo(e);
+				EditorDriver.displayEditInfo(e);
 			}
 		});	
 
-		main.getDocumentPane().addMouseListener(new MouseListener() {
+		main.documentPane.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent me) {
@@ -760,7 +758,7 @@ public class DriverEditor {
 				changedCaret = true;
 				deleting = false;
 
-				if (main.getDocumentPane().getCaret().getDot() == main.getDocumentPane().getCaret().getMark())
+				if (main.documentPane.getCaret().getDot() == main.documentPane.getCaret().getMark())
 					main.clipboard.setEnabled(false, false, true);
 				else
 					main.clipboard.setEnabled(true);
@@ -827,18 +825,18 @@ public class DriverEditor {
 							Logger.logln(NAME+"Initial processing starting...");
 
 							// initialize all arraylists needed for feature processing
-							sizeOfCfd = main.ppAdvancedWindow.driver.cfd.numOfFeatureDrivers();
+							sizeOfCfd = main.ppAdvancedDriver.cfd.numOfFeatureDrivers();
 							featuresInCfd = new ArrayList<String>(sizeOfCfd);
 							noCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 							yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 
 							for(int i = 0; i < sizeOfCfd; i++) {
-								String theName = main.ppAdvancedWindow.driver.cfd.featureDriverAt(i).getName();
+								String theName = main.ppAdvancedDriver.cfd.featureDriverAt(i).getName();
 
 								// capitalize the name and replace all " " and "-" with "_"
 								theName = theName.replaceAll("[ -]","_").toUpperCase(); 
 								if(isCalcHist == false) {
-									isCalcHist = main.ppAdvancedWindow.driver.cfd.featureDriverAt(i).isCalcHist();
+									isCalcHist = main.ppAdvancedDriver.cfd.featureDriverAt(i).isCalcHist();
 									yesCalcHistFeatures.add(FeatureList.valueOf(theName));
 								} else {
 									// these values will go in suggestion list... PLUS any 	
@@ -848,12 +846,12 @@ public class DriverEditor {
 							}
 							wizard = new DataAnalyzer(main.preProcessWindow.ps);
 							magician = new DocumentMagician(false);
-							main.suggestionsTabDriver.setMagician(magician);
+							main.wordSuggestionsDriver.setMagician(magician);
 						} else {
 							isFirstRun = false;
 							//TODO ASK ANDREW: Should we erase the user's "this is a single sentence" actions upon reprocessing? Only only when they reset the highlighter?
 							taggedDoc.specialCharTracker.resetEOSCharacters();
-							taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
+							taggedDoc = new TaggedDocument(main.documentPane.getText());
 
 							Logger.logln(NAME+"Repeat processing starting....");
 							resetAll(main, true);
@@ -868,14 +866,6 @@ public class DriverEditor {
 			}
 		};
 		main.processButton.addActionListener(processButtonListener);
-		
-		viewResultsListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				main.resultsWindow.showResultsWindow();
-			}
-		};
-		main.viewResultsButton.addActionListener(viewResultsListener);
 	}
 
 	/**

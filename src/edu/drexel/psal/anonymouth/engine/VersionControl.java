@@ -2,8 +2,8 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.Stack;
 
-import edu.drexel.psal.anonymouth.gooie.DriverEditor;
-import edu.drexel.psal.anonymouth.gooie.DriverMenu;
+import edu.drexel.psal.anonymouth.gooie.EditorDriver;
+import edu.drexel.psal.anonymouth.gooie.MenuDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 
@@ -66,7 +66,7 @@ public class VersionControl {
 	}
 	
 	public void addVersion(TaggedDocument taggedDoc) {
-		addVersion(taggedDoc, main.getDocumentPane().getCaret().getDot());
+		addVersion(taggedDoc, main.documentPane.getCaret().getDot());
 	}
 	
 	/**
@@ -84,14 +84,14 @@ public class VersionControl {
 //				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
 //			}
 //		});
-		redo.push(new TaggedDocument(DriverEditor.taggedDoc));
-		indicesRedo.push(main.getDocumentPane().getCaret().getDot());
+		redo.push(new TaggedDocument(EditorDriver.taggedDoc));
+		indicesRedo.push(main.documentPane.getCaret().getDot());
 		
-		DriverEditor.ignoreVersion = true;
-		DriverEditor.taggedDoc = undo.pop();
-		DriverEditor.update(main, true);
-		main.getDocumentPane().getCaret().setDot(indicesUndo.pop());
-		DriverEditor.ignoreVersion = false;
+		EditorDriver.ignoreVersion = true;
+		EditorDriver.taggedDoc = undo.pop();
+		EditorDriver.update(main, true);
+		main.documentPane.getCaret().setDot(indicesUndo.pop());
+		EditorDriver.ignoreVersion = false;
 		
 		main.enableRedo(true);
 		
@@ -99,10 +99,10 @@ public class VersionControl {
 			main.enableUndo(false);
 		}
 		
-		synchronized(DriverMenu.class) {
+		synchronized(MenuDriver.class) {
 		    //set ready flag to true (so isReady returns true)
 		    ready = true;
-		    DriverMenu.class.notifyAll();
+		    MenuDriver.class.notifyAll();
 		}
 	}
 	
@@ -121,14 +121,14 @@ public class VersionControl {
 //				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
 //			}
 //		});
-		undo.push(new TaggedDocument(DriverEditor.taggedDoc));
-		indicesUndo.push(main.getDocumentPane().getCaret().getDot());
+		undo.push(new TaggedDocument(EditorDriver.taggedDoc));
+		indicesUndo.push(main.documentPane.getCaret().getDot());
 		
-		DriverEditor.ignoreVersion = true;
-		DriverEditor.taggedDoc = redo.pop();
-		DriverEditor.update(main, true);
-		main.getDocumentPane().getCaret().setDot(indicesRedo.pop());
-		DriverEditor.ignoreVersion = false;
+		EditorDriver.ignoreVersion = true;
+		EditorDriver.taggedDoc = redo.pop();
+		EditorDriver.update(main, true);
+		main.documentPane.getCaret().setDot(indicesRedo.pop());
+		EditorDriver.ignoreVersion = false;
 
 		main.enableUndo(true);	
 		
@@ -136,10 +136,10 @@ public class VersionControl {
 			main.enableRedo(false);
 		}
 		
-		synchronized(DriverMenu.class) {
+		synchronized(MenuDriver.class) {
 		    //set ready flag to true (so isReady returns true)
 		    ready = true;
-		    DriverMenu.class.notifyAll();
+		    MenuDriver.class.notifyAll();
 		}
 	}
 	

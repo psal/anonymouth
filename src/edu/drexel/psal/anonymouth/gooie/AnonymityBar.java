@@ -181,7 +181,7 @@ public class AnonymityBar extends JPanel {
 	 * for internal purposes.
 	 */
 	public void updateBar() {
-		newValue = (float)DriverEditor.taggedDoc.getCurrentChangeNeeded(); //Getting the new percent
+		newValue = (float)EditorDriver.taggedDoc.getCurrentChangeNeeded(); //Getting the new percent
 		newValue = ((maxFill - newValue) / maxFill) * 100;
 
 		updateTubeFill(); //update the other variables

@@ -61,8 +61,8 @@ public class TranslationsDriver implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				main.startTranslations.setEnabled(false);
 				main.stopTranslations.setEnabled(true);
-				translator.load(DriverEditor.taggedDoc.getTaggedSentences());
-				translationsPanel.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+				translator.load(EditorDriver.taggedDoc.getTaggedSentences());
+				translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
 			}
 		};
 		main.startTranslations.addActionListener(startTranslationsListener);
@@ -83,7 +83,7 @@ public class TranslationsDriver implements ActionListener {
 					main.stopTranslations.setEnabled(true);
 					main.startTranslations.setEnabled(false);
 					translator.reset();
-					DriverEditor.taggedDoc.deleteTranslations();
+					EditorDriver.taggedDoc.deleteTranslations();
 					
 					try {
 						Thread.sleep(500);
@@ -91,7 +91,7 @@ public class TranslationsDriver implements ActionListener {
 						e1.printStackTrace();
 					}
 					
-					translator.load(DriverEditor.taggedDoc.getTaggedSentences());
+					translator.load(EditorDriver.taggedDoc.getTaggedSentences());
 				}
 			}
 		};
@@ -104,16 +104,16 @@ public class TranslationsDriver implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Logger.logln(NAME+"User clicked the Translation swap-in arrow button");
-		DriverEditor.backedUpTaggedDoc = new TaggedDocument(DriverEditor.taggedDoc);
-		main.versionControl.addVersion(DriverEditor.backedUpTaggedDoc, main.getDocumentPane().getCaret().getDot());
+		EditorDriver.backedUpTaggedDoc = new TaggedDocument(EditorDriver.taggedDoc);
+		main.versionControl.addVersion(EditorDriver.backedUpTaggedDoc, main.documentPane.getCaret().getDot());
 		
-		GUIMain.saved = false;
+		main.saved = false;
 		InputFilter.ignoreTranslation = true;
-		DriverEditor.removeReplaceAndUpdate(main, DriverEditor.sentToTranslate, translationsPanel.translationsMap.get(e.getActionCommand()).getUntagged(false), true);
-		translator.replace(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate), translationsPanel.current);
+		EditorDriver.removeReplaceAndUpdate(main, EditorDriver.sentToTranslate, translationsPanel.translationsMap.get(e.getActionCommand()).getUntagged(false), true);
+		translator.replace(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate), translationsPanel.current);
 		
 		main.anonymityBar.updateBar();
-		main.suggestionsTabDriver.placeSuggestions();
+		main.wordSuggestionsDriver.placeSuggestions();
 		
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");

@@ -168,7 +168,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	 * Constructor
 	 */
 	public PreProcessAdvancedWindow(PreProcessWindow preProcessWindow, GUIMain main) {
-		super(main.startingWindows, "Advanced Options", Dialog.ModalityType.APPLICATION_MODAL);
+		super(ThePresident.startWindow, "Advanced Options", Dialog.ModalityType.APPLICATION_MODAL);
 		Logger.logln(NAME+"Initializing the pre-process advanced settings window");
 		this.preProcessWindow = preProcessWindow;
 		this.main = main;
@@ -336,14 +336,14 @@ public class PreProcessAdvancedWindow extends JDialog {
 			viewInfoListLabel.setFont(new Font("Helvetica", Font.BOLD, 12));
 			viewInfoListLabel.setOpaque(true);
 			viewInfoListLabel.setBackground(main.blue);
-			viewInfoListLabel.setBorder(GUIMain.rlborder);
+			viewInfoListLabel.setBorder(main.rlborder);
 
 			viewInfoInfoLabel = new JLabel("Feature Information:");
 			viewInfoInfoLabel.setFont(new Font("Ariel", Font.BOLD, 12));
 			viewInfoInfoLabel.setHorizontalAlignment(JLabel.CENTER);
 			viewInfoInfoLabel.setOpaque(true);
 			viewInfoInfoLabel.setBackground(main.blue);
-			viewInfoInfoLabel.setBorder(GUIMain.rlborder);
+			viewInfoInfoLabel.setBorder(main.rlborder);
 
 			viewInfoListModel = new DefaultComboBoxModel<String>();
 			viewInfoList = new JList<String>(viewInfoListModel);

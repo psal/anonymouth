@@ -10,7 +10,6 @@ import javax.swing.UIManager;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
-import edu.drexel.psal.anonymouth.gooie.DriverMenu;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -260,12 +259,12 @@ public class TranslationFetcher {
 									UIManager.getIcon("OptionPane.warningIcon"), RESTART_OPTIONS, 0);
 
 					if (answer == 1) {
-						if (GUIMain.saved) {
+						if (GUIMain.inst.saved) {
 							System.exit(0);
 						}
 
 						if (PropertiesUtil.getAutoSave()) {
-							DriverMenu.save(GUIMain.inst);
+							main.menuDriver.save(GUIMain.inst);
 							System.exit(0);
 						}
 

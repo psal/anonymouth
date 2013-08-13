@@ -16,10 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.*;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
@@ -29,13 +27,10 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.*;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 
 import com.jgaap.generics.Document;
-
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 
 import com.apple.eawt.AppEvent.FullScreenEvent;
 import com.apple.eawt.FullScreenListener;
@@ -52,119 +47,101 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
-
-	{
-		boolean lookAndFeelSet = false;
-		//Set Look & Feel 
-		// -- start patch submitted by Sebastian Pipping
-		// Try best natives looks explicitly
-		// (or we might still end up with Metal but GTK+ on Linux)
-		final String[] themeClassesToTry = {
-			"com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
-			"com.sun.java.swing.plaf.gtk.GTKLookAndFeel",
-		};
-		
-		for (String themeClassName : themeClassesToTry) {
-			try {
-				UIManager.setLookAndFeel(themeClassName);
-				lookAndFeelSet = true; // added by AweM
-			} catch (Exception e) {
-				lookAndFeelSet = false; // added by AweM
-				
-			}
-		}
-		// -- end patch
-		if(lookAndFeelSet = false){
-			try { 
-				javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	private final int MIN_WIDTH = 800;
+	private final int MIN_HEIGHT = 578;
 	
-	//Our main instance for easy access anywhere in the code.
-	public static GUIMain inst;
+	public static GUIMain inst; //Our main instance for easy access anywhere in the code.
 
-	protected WekaAnalyzer wad;
-	protected Thread analysisThread;
-	protected List<String> results;
-
-	protected static PreferencesWindow preferencesWindow;
-
-	protected Font defaultLabelFont = new Font("Verdana",0,16);
-	protected static int cellPadding = 5;
-	protected final Color blue = new Color(136,166,233,200);
-
-	// tabs
-	protected JTabbedPane mainJTabbedPane;
-	protected JPanel docsTab;
-	protected JPanel featuresTab;
-	protected JPanel classTab;
-	protected JPanel editorTab;
+	//=====================================================================
+	//						VARIOUS STUFF
+	//=====================================================================
 	
+	//Translation and suggestion banners
+	protected Border rlborder = BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(),
+			BorderFactory.createLoweredBevelBorder()); //The border of the banners used for translations and suggestions
+	protected Font titleFont = new Font("Ariel", Font.BOLD, 12); //The font of the banners used for translations and suggestions
+	protected String titleHeight = "25"; //The height of the banners used for translations and suggestions
+	protected final Color blue = new Color(136,166,233,200); //The color of the banners used for translations and suggestions
+	
+	//Pre Processing windows
 	public PreProcessWindow preProcessWindow;
 	public PreProcessAdvancedWindow ppAdvancedWindow;
-
-	// Classifiers tab
-	protected JTextField classAvClassArgsJTextField;
-	protected JLabel classAvClassArgsJLabel;
-	protected JLabel classAvClassJLabel;
-	protected JButton classAddJButton;
-
-	protected JTextField classSelClassArgsJTextField;
-	protected JLabel classSelClassArgsJLabel;
-	protected JScrollPane classSelClassJScrollPane;
-	protected JScrollPane classTreeScrollPane;
-	protected JScrollPane classDescJScrollPane;
-	protected JTextPane classDescJTextPane;
-	protected JLabel classDescJLabel;
-	protected JButton classBackJButton;
-	protected JButton classNextJButton;
-	protected JLabel classSelClassJLabel;
-	protected JButton classRemoveJButton;
-	protected JButton classAboutJButton;
-
-	// Editor tab
-	protected JScrollPane theEditorScrollPane;
-	protected JTable suggestionTable;
-	protected JPanel editorRowTwoButtonBufferPanel;
-	protected JPanel buttonBufferJPanel;
-	protected JPanel editorBottomRowButtonPanel;
-	protected JPanel editorTopRowButtonsPanel;
-	protected JPanel editorButtonJPanel;
-	protected JPanel editorInteractionWestPanel;
-	protected JPanel editorInteractionJPanel;
-	protected JPanel jPanel2;
-	protected JPanel dummyPanelUpdatorLeftSide;
-	protected JPanel elementsToAddBoxLabelJPanel;
-	protected JPanel suggestionBoxLabelJPanel;
-	protected JPanel jPanel1;
-	protected JPanel valueLabelJPanel;
-	protected JPanel valueBoxPanel;
-	protected JPanel updaterJPanel;
-	//-------------- HELP TAB PANE STUFF ---------
-	protected JTabbedPane leftTabPane;
-
-	protected JPanel suggestionsPanel;
-	protected JPanel elementsPanel;
-	protected JPanel elementsToAddPanel;
+	protected PreProcessDriver preProcessDriver;
+	protected PreProcessAdvancedDriver ppAdvancedDriver;
+	public MenuDriver menuDriver;
+	public ClustersDriver clustersDriver; 
+	
+	//Other stuff
+	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+	private WindowListener exitListener; //To know when the window is being closed
+	private ComponentListener resizeListener; //To know when the window is resizing (so we can repaint the anonymity bar)
+	
+	//=====================================================================
+	//				LEFT TAB (anonymity bar, results, etc.)
+	//=====================================================================
+	
+	protected JTabbedPane AnonymityBarTabPane;
+	
+	//Anonymity Bar
+	public AnonymityBar anonymityBar;		//The actual bar
+	protected JPanel anonymityHoldingPanel;	//The "main" anonymity bar panel, holds the bar, label, and anything else we want to add
+	protected JPanel anonymityPanel;		//The entire left-hand tab of Anonymouth
+	protected JLabel anonymityLabel;		//The "Anonymity: " banner label
+	protected JLabel anonymityDescription;	//The Anonymity percentage/description label
+	protected int anonymityWidth = 200;			//The current height of the panel
+	protected int anonymityHeight = 450;			//The current width of the panel
+	
+	//Results
+	protected ResultsWindow resultsWindow;
+	protected ResultsDriver	resultsDriver;
+	protected JButton resultsButton;
+	
+	//=====================================================================
+	//						TOP TAB (middle editor)
+	//=====================================================================
+	
+	protected JTabbedPane EditorTabPane;
+	
+	//Editor
+	protected JPanel documentPanel;
+	protected JPanel originalDocumentPanel;
+	public JTextPane documentPane;
+	protected JTextPane originalDocPane;
+	protected JScrollPane documentScrollPane;
+	protected JScrollPane originalDocScrollPane;
+	public Boolean saved = true;
+	protected Font normalFont; //The editor's font
+	public Document mainDocPreview; //Allows us to load the main document without having to alter the main.ps.testDocAt(0) directly
+	
+	//Bottom Button
+	public JButton processButton;
+	protected Boolean processed = false;
+	
+	//=====================================================================
+	//			RIGHT TAB (words to remove/add, translations, etc.)
+	//=====================================================================
+	
+	protected JTabbedPane helpersTabPane;
+	
+	//Words to Add/Remove
+	public WordSuggestionsDriver wordSuggestionsDriver;
+	protected JPanel wordSuggestionsPanel;
 	protected JLabel elementsToAddLabel;
 	protected JList<String> elementsToAddPane;
 	protected JScrollPane elementsToAddScrollPane;
-	protected JPanel elementsToRemovePanel;
 	protected JLabel elementsToRemoveLabel;
 	protected DefaultTableModel elementsToRemoveModel;
-	protected ElementsTable elementsToRemoveTable;
+	protected WordsToRemoveTable elementsToRemoveTable;
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected DefaultListModel<String> elementsToAdd;
 	protected DefaultListModel<String> elementsToRemove;
 	protected JButton clearAddHighlights;
 	protected JButton clearRemoveHighlights;
-
-	protected JPanel translationsMainPanel;
+	
+	//Translations
 	public TranslationsPanel translationsPanel;
 	public TranslationsDriver translationsDriver;
+	protected JPanel translationsMainPanel;
 	protected JLabel translationsLabel;
 	protected JButton resetTranslator;
 	public JButton stopTranslations;
@@ -175,119 +152,16 @@ public class GUIMain extends javax.swing.JFrame {
 	public JLabel translationsProgressLabel;
 	public JProgressBar translationsProgressBar;
 	public JTextPane notTranslated;
-
-	protected JPanel informationPanel;
-	protected JLabel sentenceEditorLabel;
-	protected JLabel documentViewerLabel;
-	protected JLabel resultsLabel;
-	protected JTextPane descriptionPane;
-
-	protected JPanel instructionsPanel;
-	protected JLabel instructionsLabel;
-	protected JTextPane instructionsPane;
-	protected JScrollPane instructionsScrollPane;
-	protected JPanel synonymsPanel;
-	protected JLabel synonymsLabel;
-	protected JTextPane synonymsPane;
-	protected JScrollPane synonymsScrollPane;
-	//--------------------------------------------
-
-	//--------------- Editor Tab Pane stuff ----------------------
-	protected JTabbedPane topTabPane;
-	protected JPanel documentsPanel;
-	protected JPanel originalDocumentPanel;
-	protected JPanel sentenceAndDocumentPanel;
-	protected JPanel sentenceLabelPanel;
-
-	protected JPanel sentenceEditingPanel;
-	protected JPanel documentPanel;
-	protected StyledDocument theDocument;
-
-	protected JButton removeWordsButton;
-	protected JButton shuffleButton;
-	protected JButton SaveChangesButton;
-	protected JButton copyToSentenceButton;
-	protected JButton restoreSentenceButton;
-	protected JLabel documentLabel;
-	private JTextPane documentPane;
-	protected JTextPane originalDocPane;
-	protected JScrollPane documentScrollPane;
-	protected JScrollPane originalDocScrollPane;
-
-	protected JPanel sentenceAndSentenceLabelPanel;
-	protected JLabel translationsBoxLabel;
-	protected JScrollPane translationPane;
-	protected JTextPane translationEditPane;
-
-	private boolean tabMade = false;
-	protected int resultsMaxIndex;
-	protected String chosenAuthor;
-
-	protected JButton viewResultsButton;
-	public JButton processButton;
-	//---------------------------------------------------------------------
-	protected JTabbedPane bottomTabPane;
-	protected JTextArea displayTextArea;
-	protected JPanel resultsBoxPanel_InnerBottomPanel;
-	protected JTable resultsTable;
-	protected DefaultTableModel resultsTableModel;
-	protected JScrollPane resultsTablePane;
-	protected JPanel resultsBoxPanel;
-	protected JLabel resultsTableLabel;
-	protected JPanel resultsTableLabelPanel;
-	protected JPanel resultsBoxAndResultsLabelPanel;
-	//---------------------------------------------------------------------
-
-	protected JTabbedPane rightTabPane;
-	protected JPanel anonymityHoldingPanel;	//The "main" anonymity bar panel, holds the bar, label, and anything else we want to add
-	protected JPanel anonymityPanel;		//The entire left-hand tab of Anonymouth
-	protected JLabel anonymityLabel;		//The "Anonymity: " banner label
-	public AnonymityBar anonymityBar;		//The actual bar
-	protected JLabel anonymityDescription;	//The Anonymity percentage/description label
-	protected int anonymityWidth = 200;			//The current height of the panel
-	protected int anonymityHeight = 450;			//The current width of the panel
-
-	//--------------------------------------------------------------------
-
-	protected JPanel featuresPanel;
-	protected JLabel legendLabel;
-	protected JPanel legendPanel;
-
-	protected JPanel topPanel;
-	protected JButton refreshButton;
-	protected JPanel secondPanel;
-
-	//----------------------------------------------------------------------
-
-	protected JPanel editorInfoJPanel;
-	protected JScrollPane editorInteractionScrollPane;
-	protected JScrollPane EditorInfoScrollPane;
-	protected JTabbedPane editTP;
-
-	protected JScrollPane wordsToAddPane;
-	protected JTextField searchInputBox;
-	protected JLabel highlightLabel;
-	protected JPanel jPanel_IL3;
-	protected JButton clearHighlightingButton;
-	protected JLabel featureNameLabel;
-	protected JLabel targetValueLabel;
-	protected JLabel presentValueLabel;
-	protected JTextField targetValueField;
-	protected JTextField presentValueField;
-	protected JLabel suggestionListLabel;
-	protected JButton verboseButton;
-	protected JScrollPane suggestionListPane;
-	protected JButton resultsButton;
-
-	// Analysis tab
-	protected JCheckBox analysisOutputAccByClassJCheckBox;
-	protected JCheckBox analysisOutputConfusionMatrixJCheckBox;
-	protected ButtonGroup analysisTypeButtonGroup;
-
+	private JLabel translationsProgressTitleLabel;
+	
+	//=====================================================================
+	//			MENU BAR (Preferences, pull down menus, etc.)
+	//=====================================================================
+	
+	//Pull down menus
 	protected JMenuBar menuBar;
 	protected JMenuItem settingsGeneralMenuItem;
 	protected JMenuItem fileSaveProblemSetMenuItem;
-	protected JMenuItem fileLoadProblemSetMenuItem;
 	protected JMenuItem fileSaveTestDocMenuItem;
 	protected JMenuItem fileSaveAsTestDocMenuItem;
 	protected JMenuItem helpAboutMenuItem;
@@ -295,195 +169,53 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JMenuItem helpClustersMenuItem;
 	protected JMenuItem viewMenuItem;
 	protected JMenuItem viewClustersMenuItem;
-	public static JMenuItem viewEnterFullScreenMenuItem;
+	public JMenuItem viewEnterFullScreenMenuItem;
 	protected JMenuItem helpMenu;
 	protected JMenuItem fileMenu;
 	protected JMenu windowMenu;
 	protected JMenuItem editMenu;
 	public JMenuItem editUndoMenuItem;
 	public JMenuItem editRedoMenuItem;
-	//	protected JMenuItem filePrintMenuItem;
-
-	// random useful variables
-	protected static Border rlborder = BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder());
-	protected static Font titleFont = new Font("Ariel", Font.BOLD, 12);
-	protected static String titleHeight = "25";
-	public static Boolean saved = true;
-	protected static Boolean processed = false;
-
-	// not yet used, may be used to minimize the document, features, or classifiers part of the preprocess panel
-	protected boolean docPPIsShowing = true;
-	protected boolean featPPIsShowing = true;
-	protected boolean classPPIsShowing = true;
+	
+	//Pull down selections
+	protected PreferencesWindow preferencesWindow;
 	protected ClustersWindow clustersWindow;
-	protected FAQWindow suggestionsWindow;
+	protected FAQWindow faqWindow;
 	protected ClustersTutorial clustersTutorial;
-	protected VersionControl versionControl;
-	protected ResultsWindow resultsWindow;
-	protected RightClickMenu rightClickMenu;
-	protected Clipboard clipboard;
-	protected StartWindow startingWindows;
-	protected static Runnable mainThread;
-	protected JScrollPane anonymityScrollPane;
-	public SuggestionsTabDriver suggestionsTabDriver;
-	protected Font normalFont;
-	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+	protected VersionControl versionControl; //Undo/Redo
+	protected RightClickMenu rightClickMenu; //Not really menu bar, but it's a menu
+	protected Clipboard clipboard; //Edit > Copy/Paste/Cut
 
-	protected Map<Integer, ArrayList<int[]>> highlights = new HashMap<Integer, ArrayList<int[]>>();
-
-	//used mostly for loading the main document without having to alter the main.ps.testDocAt(0) directly
-	Document mainDocPreview;
+	//=====================================================================
+	//---------------------------METHODS-----------------------------------
+	//=====================================================================
 
 	/**
-	 * Auto-generated main method to display this JFrame
-	 */
-	public static void startGooie() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				mainThread = this;
-				Logger.initLogFile();
-				
-				inst = new GUIMain();
-
-				WindowListener exitListener = new WindowListener() {
-					@Override
-					public void windowClosing(WindowEvent e) {
-						if (PropertiesUtil.getWarnQuit() && !saved) {
-							inst.toFront();
-							inst.requestFocus();
-							int confirm = JOptionPane.showOptionDialog(GUIMain.inst,
-									"Close Application?\nYou will lose all unsaved changes.",
-									"Unsaved Changes Warning",
-									JOptionPane.YES_NO_OPTION,
-									JOptionPane.QUESTION_MESSAGE,
-									UIManager.getIcon("OptionPane.warningIcon"), null, null);
-							if (confirm == 0) {
-								System.exit(0);
-							}
-						} else if (PropertiesUtil.getAutoSave()) {
-							Logger.logln(inst.NAME+"Auto-saving document");
-							DriverMenu.save(inst);
-							System.exit(0);
-						} else {
-							System.exit(0);
-						}
-					}
-					@Override
-					public void windowActivated(WindowEvent arg0) {}
-					@Override
-					public void windowClosed(WindowEvent arg0) {}
-					@Override
-					public void windowDeactivated(WindowEvent arg0) {}
-					@Override
-					public void windowDeiconified(WindowEvent arg0) {}
-					@Override
-					public void windowIconified(WindowEvent arg0) {}
-					@Override
-					public void windowOpened(WindowEvent arg0) {}
-				};
-				inst.addWindowListener(exitListener);
-				
-				inst.addComponentListener(new ComponentListener() {
-					@Override
-					public void componentResized(ComponentEvent e) {
-						inst.updateSizeVariables();
-					}
-					
-					@Override
-					public void componentMoved(ComponentEvent e) {}
-					@Override
-					public void componentShown(ComponentEvent e) {}
-					@Override
-					public void componentHidden(ComponentEvent e) {}
-				});
-
-				if (ANONConstants.IS_MAC) {
-					enableOSXFullscreen(inst);
-				}
-				
-				ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep tooltips from disappearing so fast
-				inst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				inst.setLocationRelativeTo(null);
-			}
-		});
-	}
-
-	/**
-	 * (Thanks to Dyorgio at StackOverflow for the code)
-	 * If the user is on OS X, we will allow them to enter full screen in Anonymouth using OS X's native full screen functionality.
-	 * As of right now it doesn't actually resize the components that much and doesn't add much to the application, but the structure's
-	 * there to allow someone to come in and optimize Anonymouth when in full screen (not to mention just having the functionality makes
-	 * it seem more like a native OS X application).
+	 * Constructor, constructs nearly everything used by Anonymouth including
+	 * all swing components, listeners, and other class instances.<br><br>
 	 * 
-	 * This enables full screen for the particular window and also adds a full screen listener so that we may chance components as needed
-	 * depending on what state we are in.
-	 * @param window
+	 * The main window is not visible by default after constructor is run, to
+	 * show the window call "showGUIMain()"
 	 */
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static void enableOSXFullscreen(Window window) {
-		try {
-			Class util = Class.forName("com.apple.eawt.FullScreenUtilities");
-			Class params[] = new Class[]{Window.class, Boolean.TYPE};
-			Method method = util.getMethod("setWindowCanFullScreen", params);
-			method.invoke(util, window, true);
-
-			com.apple.eawt.FullScreenUtilities.addFullScreenListenerTo(window, new FullScreenListener () {
-				@Override
-				public void windowEnteredFullScreen(FullScreenEvent arg0) {
-					GUIMain.viewEnterFullScreenMenuItem.setText("Exit Full Screen");
-				}
-				@Override
-				public void windowEnteringFullScreen(FullScreenEvent arg0) {}
-				@Override
-				public void windowExitedFullScreen(FullScreenEvent arg0) {
-					GUIMain.viewEnterFullScreenMenuItem.setText("Enter Full Screen");
-				}
-				@Override
-				public void windowExitingFullScreen(FullScreenEvent arg0) {}
-			});
-		} catch (ClassNotFoundException e1) {
-			Logger.logln("( GUIMain ) - Failed initializing Anonymouth for full-screen", LogOut.STDERR);
-		} catch (Exception e) {
-			Logger.logln("( GUIMain ) - Failed initializing Anonymouth for full-screen", LogOut.STDERR);
-		}
-	}
-
 	public GUIMain() {
-		super();
+		Logger.logln(NAME+"GUIMain being created...");
+		ThePresident.splash.updateText("Initializing Anonymouth");
 		inst = this;
 		
-		initPropertiesUtil();
-		if (!PropertiesUtil.getProbSet().equals("")) {
-			ThePresident.canDoQuickStart = true;
-		}
-		
-		startingWindows = new StartWindow(this);
-		
-		initGUI();
-
-		ThePresident.splash.hideSplashScreen();
-		startingWindows.showStartingWindow();
+		initPropertiesUtil();		//Open the preferences file for reading and writing
+		initWindow();				//Initializes The actual frame
+		initMenuBar();				//Initializes the menu bar
+		initComponents();			//All of the window's Swing Components
+		initClassesAndListeners();	//Other class instances and their listeners/drivers
 	}
 	
-	public void showMainGUI() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				setExtendedState(MAXIMIZED_BOTH);
-				GUIMain.inst.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
-				GUIMain.inst.setLocationRelativeTo(null);
-				GUIMain.inst.setMinimumSize(new Dimension(800, 578));
-				GUIMain.inst.setTitle("Anonymouth");
-				GUIMain.inst.setIconImage(new ImageIcon(getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+ThePresident.ANONYMOUTH_LOGO)).getImage());
-				GUIMain.inst.setVisible(true);
-			}
-		});
-	}
-
+	/**
+	 * Opens up the preferences file for reading and writing. Must be done first since a lot
+	 * of component initialization after this uses the Properties File to get the saved preferences
+	 * or information, and if the Properties file isn't actual initialized before then only
+	 * the defaults will be used
+	 */
 	private void initPropertiesUtil() {
-		ThePresident.splash.updateText("Initializing preferences");
-		results = new ArrayList<String>();
-
-		// properties file -----------------------------------
 		BufferedReader propReader = null;
 
 		if (!PropertiesUtil.propFile.exists()) {
@@ -506,6 +238,29 @@ public class GUIMain extends javax.swing.JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		if (!PropertiesUtil.getProbSet().equals("")) {
+			ThePresident.canDoQuickStart = true;
+		}
+	}
+	
+	/**
+	 * Initializes all settings specific to the Window itself (like default closer operation,
+	 * size, etc.)
+	 */
+	private void initWindow() {
+		//We want to enable the system-wide full screen functionality present in OS X if possible
+		if (ANONConstants.IS_MAC) {
+			enableOSXFullscreen();
+		}
+				
+		ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep Tool Tips from disappearing so fast
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //We're letting the window listener take control of this
+		this.setLocationRelativeTo(null); //Set for in the middle of the screen
+		this.setTitle("Anonymouth");
+		this.setIconImage(ThePresident.logo);
+		this.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+		this.setSize(new Dimension((int)(screensize.width*.75), (int)(screensize.height*.75)));
 	}
 	
 	/**
@@ -513,19 +268,21 @@ public class GUIMain extends javax.swing.JFrame {
 	 */
 	private void initMenuBar() {
 		menuBar = new JMenuBar();
+		preferencesWindow = new PreferencesWindow(this); //The Preferences Window (in "Anonymouth" for OS X, "Window" for others)
+		clustersWindow = new ClustersWindow(); //The Clusters Viewer Window in the "View" pull-down menu for OS X, "Window" for others
 
+		//--------------------------------------------
 		fileMenu = new JMenu("File");
 		fileSaveProblemSetMenuItem = new JMenuItem("Save Document Set");
-		fileLoadProblemSetMenuItem = new JMenuItem("Load Document Set");
 		fileSaveTestDocMenuItem = new JMenuItem("Save");
 		fileSaveAsTestDocMenuItem = new JMenuItem("Save As...");
 
 		fileMenu.add(fileSaveProblemSetMenuItem);
-		fileMenu.add(fileLoadProblemSetMenuItem);
 		fileMenu.add(new JSeparator());
 		fileMenu.add(fileSaveTestDocMenuItem);
 		fileMenu.add(fileSaveAsTestDocMenuItem);
 
+		//--------------------------------------------
 		editMenu = new JMenu("Edit");
 		editUndoMenuItem = new JMenuItem("Undo");
 		editUndoMenuItem.setEnabled(false);
@@ -533,8 +290,10 @@ public class GUIMain extends javax.swing.JFrame {
 		editRedoMenuItem = new JMenuItem("Redo");
 		editRedoMenuItem.setEnabled(false);
 		editMenu.add(editRedoMenuItem);
-		clipboard = new Clipboard(this, editMenu);
+		clipboard = new Clipboard(this, editMenu); //The Class that handles copy/paste/cut functionality
+		versionControl = new VersionControl(this); //The Class that handles undo/redo functionality
 		
+		//--------------------------------------------
 		helpMenu = new JMenu("Help");
 		helpAboutMenuItem = new JMenuItem("About Anonymouth");
 		helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
@@ -546,17 +305,28 @@ public class GUIMain extends javax.swing.JFrame {
 		helpMenu.add(helpSuggestionsMenuItem);
 		helpMenu.add(new JSeparator());
 		helpMenu.add(helpClustersMenuItem);
+		faqWindow = new FAQWindow();				//The FAQ window in the "Help" pull-down menu
+		clustersTutorial = new ClustersTutorial();	//The clusters tutorial in the "Help" pull-down menu
+		
+		//--------------------------------------------
 
+		/**
+		 * The Menu location/text/keyboard shortcuts all change depending on the OS (and thus, the look and feel)
+		 * currently being using to run Anonymouth, so we remain as consistent as we can with their OS as Java's
+		 * swing allows
+		 */
 		if (ANONConstants.IS_MAC) {
 			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
+			//"View" is a very OS X/(Linux?) menu bar, thus it's only available for it
 			viewMenuItem = new JMenu("View");
 			viewClustersMenuItem = new JMenuItem("Clusters");
 			viewMenuItem.add(viewClustersMenuItem);
 			
+			//We also want the "Enter Full Screen" Menu Item to stay consistent with the Lion+ look and feel
 			viewMenuItem.add(new JSeparator());
 			viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
 			viewMenuItem.add(viewEnterFullScreenMenuItem);
@@ -567,6 +337,10 @@ public class GUIMain extends javax.swing.JFrame {
 			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
 			
+			/*
+			 * "Window" is more predominant in Windows, and since "View" isn't really used for it we will stick our menu items such
+			 * as Preferences and Clusters here instead
+			 */
 			JMenu windowMenu = new JMenu("Window");
 			settingsGeneralMenuItem = new JMenuItem("Preferences");
 			viewClustersMenuItem = new JMenuItem("Clusters");
@@ -574,6 +348,7 @@ public class GUIMain extends javax.swing.JFrame {
 			windowMenu.add(viewClustersMenuItem);
 		}
 
+		//Adding everything to the menu bar, and finally adding that to the frame.
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
 		if (ANONConstants.IS_MAC)
@@ -585,57 +360,150 @@ public class GUIMain extends javax.swing.JFrame {
 		this.setJMenuBar(menuBar);
 	}
 
-	private void initGUI() {
-		try {
-			ThePresident.splash.updateText("Initializing menu bar");
-			//Initializes the menu bar
-			initMenuBar();
-			
-			//Creates all tabs based on saved location in the Prop file
-			leftTabPane = new JTabbedPane();
-			topTabPane = new JTabbedPane();
-			rightTabPane = new JTabbedPane();
-			bottomTabPane = new JTabbedPane();
-			createSugTab();
-			createTransTab();
-			createEditorTab();
-			resultsWindow = new ResultsWindow(this);
-			createAnonymityTab();
-			
-			setUpContentPane();
-			DriverEditor.setAllDocTabUseable(false, this);
+	/**
+	 * Initializes all swing components and organizes them in the window
+	 */
+	private void initComponents() {
+		ThePresident.splash.updateText("Setting up main window");
+		
+		//LEFT TAB (Anonymity Bar, Results. Actually no longer a tab, just the left side)
+		AnonymityBarTabPane = new JTabbedPane();
+		resultsWindow = new ResultsWindow(this);
+		initAnonymityTab();
+		
+		//TOP TAB (Actually middle tab, Editor)
+		EditorTabPane = new JTabbedPane();
+		initEditorTab();
+		
+		//RIGHT TAB (All helpers, including word to remove/add, translations, etc.)
+		helpersTabPane = new JTabbedPane();
+		initWordSuggestionsTab();
+		initTranslationsTab();
+		
+		//Now we organize all these tabs and fit them into the window
+		//Adding multiple tabs to areas where it is needed (i.e., same location)
+		//Top
+		EditorTabPane.add("Document to Anonymize", documentPanel);
+		EditorTabPane.add("Original Document", originalDocumentPanel);
+		//Right
+		helpersTabPane.add("Word Suggestions", wordSuggestionsPanel);
+		helpersTabPane.add("Translations", translationsMainPanel);
+		
+		this.setLayout(new MigLayout(
+				"wrap 3, gap 10 10",//layout constraints
+				"[][grow, fill][]", //column constraints
+				"[grow, fill]"));	// row constraints
+		this.add(anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
+		this.add(EditorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
+		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 2");//RIGHT		(Word Suggestions, Translations, etc.)
 
-			ThePresident.splash.updateText("Preparing class instances");
-			preProcessWindow = new PreProcessWindow(this);
-			ppAdvancedWindow = new PreProcessAdvancedWindow(preProcessWindow, this);
-			setDefaultValues();
-			preferencesWindow = new PreferencesWindow(this);
-			suggestionsTabDriver = new SuggestionsTabDriver(this);
-			clustersWindow = new ClustersWindow();
-			suggestionsWindow = new FAQWindow();
-			clustersTutorial = new ClustersTutorial();
-			versionControl = new VersionControl(this);
-			rightClickMenu = new RightClickMenu(this);
-
-			ThePresident.splash.updateText("Initializing listeners");
-			
-			//Initialize GUIMain listeners
-			suggestionsTabDriver.initListeners();
-			DriverMenu.initListeners(this);
-			DriverEditor.initListeners(this);
-			DriverClustersWindow.initListeners(this);
-			ResultsDriver.initListeners(this);
-			translationsPanel = new TranslationsPanel(this);
-			translationsDriver = translationsPanel.driver;
-			DictionaryBinding.init();
-			
-			pack();
-			updateSizeVariables();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		/**
+		 * This is needed so we can ensure that the Anonymity bar is getting the correct width and height needed
+		 * to draw itself. pack() here calculates the component width and heights, which is what the anonymity
+		 * bar uses to dynamically adjust itself.
+		 */
+		pack();
+		updateSizeVariables();
 	}
 	
+	/**
+	 * Initializes all other Anonymouth instances and their respective listeners/drivers
+	 */
+	private void initClassesAndListeners() {
+		ThePresident.splash.updateText("Preparing listeners");
+		
+		/**
+		 * Initialize any remaining Anonymouth classes that will be used throughout the application
+		 */
+		preProcessWindow = new PreProcessWindow(this);								//The PreProcess "Set-up" wizard
+		ppAdvancedWindow = new PreProcessAdvancedWindow(preProcessWindow, this);	//The PreProcess "advanced configuration" window
+		rightClickMenu = new RightClickMenu(this);									//The right click menu for the editor
+		
+		/**
+		 * Initialize all remaining Listeners/Drivers.
+		 */
+		wordSuggestionsDriver = new WordSuggestionsDriver(this);	//The Words to remove/add listeners
+		menuDriver = new MenuDriver(this);							//The menu bar item listeners
+		clustersDriver = new ClustersDriver();						//The Clusters Driver (no listeners currently)
+		resultsDriver = new ResultsDriver(this);					//The Results Window listeners
+		translationsDriver = translationsPanel.driver;				//Translations listeners
+		preProcessDriver = preProcessWindow.driver;					//preProcess set-up wizard listeners
+		ppAdvancedDriver = ppAdvancedWindow.driver;					//preProcess "Advanced Configuration" listeners
+		
+		EditorDriver.initListeners(this);
+		
+		exitListener = new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (PropertiesUtil.getWarnQuit() && !GUIMain.inst.saved) {
+					inst.toFront();
+					inst.requestFocus();
+					int confirm = JOptionPane.showOptionDialog(GUIMain.inst,
+							"Close Application?\nYou will lose all unsaved changes.",
+							"Unsaved Changes Warning",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,
+							UIManager.getIcon("OptionPane.warningIcon"), null, null);
+					if (confirm == 0) {
+						System.exit(0);
+					}
+				} else if (PropertiesUtil.getAutoSave()) {
+					Logger.logln(inst.NAME+"Auto-saving document");
+					menuDriver.save(inst);
+					System.exit(0);
+				} else {
+					System.exit(0);
+				}
+			}
+			@Override
+			public void windowActivated(WindowEvent arg0) {}
+			@Override
+			public void windowClosed(WindowEvent arg0) {}
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {}
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {}
+			@Override
+			public void windowIconified(WindowEvent arg0) {}
+			@Override
+			public void windowOpened(WindowEvent arg0) {}
+		};
+		this.addWindowListener(exitListener);
+		
+		resizeListener = new ComponentListener() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				inst.updateSizeVariables();
+			}
+			
+			@Override
+			public void componentMoved(ComponentEvent e) {}
+			@Override
+			public void componentShown(ComponentEvent e) {}
+			@Override
+			public void componentHidden(ComponentEvent e) {}
+		};
+		this.addComponentListener(resizeListener);
+	}
+	
+	/**
+	 * Displays Anonymouth's main GUI.
+	 */
+	public void showGUIMain() {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				setExtendedState(MAXIMIZED_BOTH);
+				setLocationRelativeTo(null);
+				GUIMain.inst.setVisible(true);
+			}
+		});
+	}
+	
+	/**
+	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel
+	 * and anonymityHoldingPanel, respectively, so that it can be drawn to fit nicely with whatever
+	 * size the window is (basically, it resizes like any javax swing component)
+	 */
 	private void updateSizeVariables() {
 		anonymityHeight = anonymityHoldingPanel.getHeight() + 15;
 		anonymityWidth = anonymityPanel.getWidth();
@@ -643,147 +511,16 @@ public class GUIMain extends javax.swing.JFrame {
 	}
 
 	/**
-	 * Loads up the last saved prop file (if able) and sets all the documents from that prop file automatically. It also checks
-	 * what the last used feature and classifier were and (if able) set them over the default values.
-	 * @throws Exception - if any of these values are not found in the prop file, we instead set them to the defaults
+	 * Creates and lays out all swing components in the word Suggestions tab
 	 */
-	protected void setDefaultValues() throws Exception {
-		try {
-			if (!PropertiesUtil.getProbSet().equals("")) {
-				String problemSetPath = PropertiesUtil.getProbSet();
-				Logger.logln(NAME+"Trying to load problem set at: " + problemSetPath);
-
-				try {
-					startingWindows.loadProblemSet(problemSetPath);
-				} catch (Exception exc) {
-					startingWindows.setReadyToStart(false, true);
-					throw new Exception("Failed loading problemSet path \""+problemSetPath+"\"");
-				}
-			} else {
-				startingWindows.setReadyToStart(false, false);
-				throw new Exception("No default problem set saved from last run, will continue without.");
-			}
-		} catch (Exception e) {
-			Logger.logln(NAME+e.getMessage(), LogOut.STDERR);
-			PropertiesUtil.setProbSet("");
-			
-			String feature = PropertiesUtil.getFeature();
-			ppAdvancedWindow.setFeature(feature);
-
-			String classifier = PropertiesUtil.getClassifier();
-			ppAdvancedWindow.setClassifier(classifier);
-		}
-	}
-
-	/**
-	 * Adds everything to the content pane.
-	 * @throws Exception 
-	 */
-	protected void setUpContentPane() throws Exception {
-		getContentPane().removeAll();
-
-		// ------- initialize PARALLEL arrays for the panels, their names, and their locations
-		ArrayList<String> panelNames = new ArrayList<String>();
-		panelNames.add("Word Suggestions");
-		panelNames.add("Translations");
-		panelNames.add("Document to Anonymize");
-		panelNames.add("Original Document");
-		panelNames.add("Anonymity");
-		panelNames.add("Results");
-
-		HashMap<String, JPanel> panels = new HashMap<String, JPanel>(6);
-		panels.put("Word Suggestions", suggestionsPanel);
-		panels.put("Translations", translationsMainPanel);
-		panels.put("Document to Anonymize", documentsPanel);
-		panels.put("Original Document", originalDocumentPanel);
-		panels.put("Anonymity", anonymityPanel);
-
-		ArrayList<PropertiesUtil.Location> panelLocations = new ArrayList<PropertiesUtil.Location>();
-		panelLocations.add(PropertiesUtil.getSuggestionsTabLocation());
-		panelLocations.add(PropertiesUtil.getTranslationsTabLocation());
-		panelLocations.add(PropertiesUtil.getDocumentsTabLocation());
-		panelLocations.add(PropertiesUtil.getDocumentsTabLocation());
-		panelLocations.add(PropertiesUtil.getAnonymityTabLocation());
-		panelLocations.add(PropertiesUtil.getResultsTabLocation());
-
-		// ----- form the column specifications
-		String columnString = "";
-		int columnNumber = 0;
-		if (panelLocations.contains(PropertiesUtil.Location.LEFT)) {
-			columnString = columnString.concat("[]");
-			columnNumber++;
-		}
-		if (panelLocations.contains(PropertiesUtil.Location.TOP) || panelLocations.contains(PropertiesUtil.Location.BOTTOM)) {
-			columnString = columnString.concat("[grow, fill]");
-			columnNumber++;
-		}
-		if (panelLocations.contains(PropertiesUtil.Location.RIGHT)) {
-			columnString = columnString.concat("[]");
-			columnNumber++;
-		}
-
-		// ----- form the row specifications
-		String rowString = "";
-		if (panelLocations.contains(PropertiesUtil.Location.TOP))
-			rowString = rowString.concat("[grow, fill]");
-		if (panelLocations.contains(PropertiesUtil.Location.BOTTOM))
-			rowString = rowString.concat("[150:25%:]");
-
-		// ------ set the content pane layout based on the tab locations
-		getContentPane().setLayout(new MigLayout(
-				"wrap " + columnNumber + ", gap 10 10", // layout constraints
-				columnString, // column constraints
-				rowString)); // row constraints)
-
-		// ------ add all tabs to their correct tab panes
-		for (int i = 0; i < panels.size(); i++) {
-			if (panelLocations.get(i) == PropertiesUtil.Location.LEFT)
-				leftTabPane.add(panelNames.get(i), panels.get(panelNames.get(i)));
-			else if (panelLocations.get(i) == PropertiesUtil.Location.TOP)
-				topTabPane.add(panelNames.get(i), panels.get(panelNames.get(i)));
-			else if (panelLocations.get(i) == PropertiesUtil.Location.RIGHT)
-				rightTabPane.add(panelNames.get(i), panels.get(panelNames.get(i)));
-			else if (panelLocations.get(i) == PropertiesUtil.Location.BOTTOM)
-				bottomTabPane.add(panelNames.get(i), panels.get(panelNames.get(i)));
-			else
-				throw new Exception();
-		}
-
-		// ------ add all tab panes, if they need to be added
-		if (panelLocations.contains(PropertiesUtil.Location.LEFT))
-			getContentPane().add(anonymityPanel, "width 80!, spany, shrinkprio 1");
-		if (panelLocations.contains(PropertiesUtil.Location.TOP))
-			getContentPane().add(topTabPane, "width 100:400:, grow, shrinkprio 3");
-		if (panelLocations.contains(PropertiesUtil.Location.RIGHT))
-			getContentPane().add(rightTabPane, "width :353:353, spany, shrinkprio 2");
-		if (panelLocations.contains(PropertiesUtil.Location.BOTTOM))
-			getContentPane().add(bottomTabPane, "width 600:100%:, height 150:25%:, shrinkprio 3");
-
-		getContentPane().revalidate();
-		getContentPane().repaint();
-	}
-
-	public boolean resultsAreReady() {
-		boolean ready = true;
-
-		try {
-			if (!resultsWindow.isReady())
-				ready = false;
-		} catch (Exception e) {
-			ready = false;
-		}
-
-		return ready;
-	}
-
-	private JPanel createSugTab() {
-		suggestionsPanel = new JPanel();
+	private void initWordSuggestionsTab() {
+		wordSuggestionsPanel = new JPanel();
 		MigLayout settingsLayout = new MigLayout(
-				"fill, wrap 1, ins 0, gap 0 0",
-				"grow, fill",
-				"[][grow, fill][][grow, fill]");
-		suggestionsPanel.setLayout(settingsLayout);
-		{//================ Suggestions Tab =====================
+			"fill, wrap 1, ins 0, gap 0 0",
+			"grow, fill",
+			"[][grow, fill][][grow, fill]");
+		wordSuggestionsPanel.setLayout(settingsLayout);
+		{
 			//--------- Elements to Add Label ------------------
 			elementsToAddLabel = new JLabel("Words To Add:");
 			elementsToAddLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -829,21 +566,13 @@ public class GUIMain extends javax.swing.JFrame {
 			    }
 			};
 			
-			elementsToRemoveTable = new ElementsTable(elementsToRemoveModel);
+			elementsToRemoveTable = new WordsToRemoveTable(elementsToRemoveModel);
 			elementsToRemoveTable.getTableHeader().setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
 																"in all given docs written by the user.<br>" +
 													"<br><b>Word To Remove:</b> The words you should consider<br>" +
 																"removing or using less of in your document<br>" +
 																"(sorted by most revealing from top to bottom)." +
 																"</html>");
-			/*
-			elementsToRemoveTable.setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
-																"in all given docs written by the user.<br>" +
-													"<br><b>Word To Remove:</b> The words you should consider<br>" +
-																"removing or using less of in your document<br>" +
-																"(sorted by most revealing from top to bottom)." +
-																"</html>");
-																*/
 			elementsToRemoveTable.setRowSelectionAllowed(true);
 			elementsToRemoveTable.setColumnSelectionAllowed(false);
 			elementsToRemoveTable.removeAllElements();
@@ -856,25 +585,30 @@ public class GUIMain extends javax.swing.JFrame {
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
 			clearRemoveHighlights = new JButton("Clear \"Remove\" Highlights");
-
-			suggestionsPanel.add(elementsToAddLabel, "h " + titleHeight + "!");
-			suggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
-			suggestionsPanel.add(clearAddHighlights, "growx");
-			suggestionsPanel.add(elementsToRemoveLabel, "h " + titleHeight + "!");
-			suggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
-			suggestionsPanel.add(clearRemoveHighlights, "growx");
-		}//============ End Suggestions Tab =================
-		return suggestionsPanel;
+		}
+		
+		//Adding everything in...
+		wordSuggestionsPanel.add(elementsToAddLabel, "h " + titleHeight + "!");
+		wordSuggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
+		wordSuggestionsPanel.add(clearAddHighlights, "growx");
+		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + titleHeight + "!");
+		wordSuggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
+		wordSuggestionsPanel.add(clearRemoveHighlights, "growx");
 	}
 
-	@SuppressWarnings("serial")
-	private JPanel createTransTab() {
+	/**
+	 * Creates and lays out every swing component in the translations tab
+	 */
+	private void initTranslationsTab() {
+		Logger.logln(NAME+"Creating Translations Tab...");
+		
 		translationsMainPanel = new JPanel();
 		translationsMainPanel.setLayout(new MigLayout(
-				"wrap, ins 0, gap 0 0",
-				"grow, fill",
-				"[][grow, fill][]"));
-		{ // --------------translation panel components
+			"wrap, ins 0, gap 0 0",
+			"grow, fill",
+			"[][grow, fill][]"));
+		{			
+			//--------- Translations Label ------------------
 			translationsLabel = new JLabel("Translations:");
 			translationsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			translationsLabel.setFont(titleFont);
@@ -882,7 +616,10 @@ public class GUIMain extends javax.swing.JFrame {
 			translationsLabel.setBackground(blue);
 			translationsLabel.setBorder(rlborder);
 
+			//--------- Holds all translations ------------------
 			translationsHolderPanel = new ScrollablePanel() {
+				private static final long serialVersionUID = 1L;
+
 				@Override
 				public boolean getScrollableTracksViewportWidth() {
 					return true;
@@ -896,6 +633,7 @@ public class GUIMain extends javax.swing.JFrame {
 					"grow, fill",
 					""));
 
+			//------------ Text Pane displayed when no translations ------------------
 			notTranslated = new JTextPane();
 
 			if (PropertiesUtil.getDoTranslations()) {
@@ -913,17 +651,22 @@ public class GUIMain extends javax.swing.JFrame {
 			notTranslated.setFocusable(false);
 			translationsHolderPanel.add(notTranslated);
 
+			//----------- Scroll pane for all translations -------------
 			translationsScrollPane = new JScrollPane(translationsHolderPanel);
 			translationsScrollPane.setOpaque(true);
 			translationsScrollPane.setAutoscrolls(false);
-
+			
+			//=============================================
+			//The bottom of the translations, where we show the progress, allow them to reset, and so forth
+			//=============================================
+			
 			progressPanel = new JPanel();
 			progressPanel.setLayout(new MigLayout(
 					"wrap, fill, ins 0",
 					"grow, fill",
 					"[][][20]"));
 			{
-				JLabel translationsProgressTitleLabel = new JLabel("Progress:");
+				translationsProgressTitleLabel = new JLabel("Progress:");
 				translationsProgressTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 				translationsProgressTitleLabel.setFont(titleFont);
 				translationsProgressTitleLabel.setOpaque(true);
@@ -934,12 +677,12 @@ public class GUIMain extends javax.swing.JFrame {
 				translationsProgressLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 				translationsProgressBar = new JProgressBar();
-
-				progressPanel.add(translationsProgressTitleLabel, "grow, h 25!");
-				progressPanel.add(translationsProgressLabel, "grow");
-				progressPanel.add(translationsProgressBar, "grow");
 			}
+			progressPanel.add(translationsProgressTitleLabel, "grow, h 25!");
+			progressPanel.add(translationsProgressLabel, "grow");
+			progressPanel.add(translationsProgressBar, "grow");
 
+			//----------- All buttons (top start/stop, bottom reset) -------------
 			resetTranslator = new JButton("Reset Translator");
 			resetTranslator.setEnabled(false);
 			
@@ -947,96 +690,92 @@ public class GUIMain extends javax.swing.JFrame {
 			stopTranslations.setEnabled(false);
 			startTranslations = new JButton("Start");
 			startTranslations.setEnabled(false);
-			
-			translationsMainPanel.add(translationsLabel, "grow, h 25!, split 1");
-			translationsMainPanel.add(stopTranslations, "split, h 30!");
-			translationsMainPanel.add(startTranslations, "h 30!, wrap");
-			translationsMainPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
-			translationsMainPanel.add(resetTranslator, "h 30!, wrap");
-			translationsMainPanel.add(progressPanel, "grow");
 		}
-		return translationsMainPanel;
+		
+		//The Class that handles obtaining and displaying all the different translations.
+		translationsPanel = new TranslationsPanel(this);
+		
+		translationsMainPanel.add(translationsLabel, "grow, h 25!, split 1");
+		translationsMainPanel.add(stopTranslations, "split, h 30!");
+		translationsMainPanel.add(startTranslations, "h 30!, wrap");
+		translationsMainPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
+		translationsMainPanel.add(resetTranslator, "h 30!, wrap");
+		translationsMainPanel.add(progressPanel, "grow");
 	}
 
-	private JPanel createEditorTab() {
-		Logger.logln(NAME+"Creating Editor Tab...");
-		if(tabMade == false) {
-			normalFont = new Font("Ariel", Font.PLAIN, PropertiesUtil.getFontSize());
-			
-			originalDocumentPanel = new JPanel();
-			originalDocumentPanel.setLayout(new MigLayout(
+	/**
+	 * Creates and lays out every swing component in the editor tabs
+	 */
+	private void initEditorTab() {
+		Logger.logln(NAME+"Creating the Editor Tab...");
+
+		//The Editor's font
+		normalFont = new Font("Ariel", Font.PLAIN, PropertiesUtil.getFontSize());
+		
+		//The original document the user wants to anonymize (for reference) 
+		originalDocumentPanel = new JPanel();
+		originalDocumentPanel.setLayout(new MigLayout(
+			"fill, wrap, ins 0, gap 0 0",
+			"[grow, fill]",
+			"[grow, fill]"
+		));
+		
+		//The document the user will Anonymize
+		documentPanel = new JPanel();
+		MigLayout EBPLayout = new MigLayout(
 				"fill, wrap, ins 0, gap 0 0",
 				"[grow, fill]",
-				"[grow, fill]"
-			));
+				"[grow, fill][]");
+		documentPanel.setLayout(EBPLayout);
+		{
+			documentScrollPane = new JScrollPane();
+			documentPane = new JTextPane();
+			documentPane.setDragEnabled(false);
+			documentPane.setText("This is where the latest version of your document will be.");
+			documentPane.setFont(normalFont);
+			documentPane.setEnabled(false);
+			documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
+
+			InputFilter documentFilter = new InputFilter();
+			((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
+
+			documentScrollPane.setViewportView(documentPane);
 			
-			documentsPanel = new JPanel();
-			MigLayout EBPLayout = new MigLayout(
-					"fill, wrap, ins 0, gap 0 0",
-					"[grow, fill]",
-					"[grow, fill][]");
-			documentsPanel.setLayout(EBPLayout);
-			{
-				documentScrollPane = new JScrollPane();
-				documentPane = new JTextPane();
-				documentPane.setDragEnabled(false);
-				documentPane.setText("This is where the latest version of your document will be.");
-				documentPane.setFont(normalFont);
-				documentPane.setEnabled(false);
-				documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
+			originalDocScrollPane = new JScrollPane();
+			originalDocPane = new JTextPane();
+			originalDocPane.setDragEnabled(false);
+			originalDocPane.setText("This is where the original version of your document will be.");
+			originalDocPane.setFont(normalFont);
+			originalDocPane.setEnabled(true);
+			originalDocPane.setEditable(false);
+			originalDocPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
+			originalDocScrollPane.setViewportView(originalDocPane);
 
-				InputFilter documentFilter = new InputFilter();
-				((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
+			processButton = new JButton("Reprocess");
+			processButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
+											"and updates the results graph with the new results.</center></html>");
+			processButton.setFocusable(false);
 
-				documentScrollPane.setViewportView(documentPane);
-				
-				originalDocScrollPane = new JScrollPane();
-				originalDocPane = new JTextPane();
-				originalDocPane.setDragEnabled(false);
-				originalDocPane.setText("This is where the original version of your document will be.");
-				originalDocPane.setFont(normalFont);
-				originalDocPane.setEnabled(true);
-				originalDocPane.setEditable(false);
-				originalDocPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
-				originalDocScrollPane.setViewportView(originalDocPane);
-				
-				viewResultsButton = new JButton("View Process Results");
-				viewResultsButton.setToolTipText("Displays the results from the most recent process");
-				viewResultsButton.setFocusable(false);
-
-				processButton = new JButton("Reprocess");
-				processButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
-												"and updates the results graph with the new results.</center></html>");
-				processButton.setFocusable(false);
-
-				documentsPanel.add(documentScrollPane, "grow");
-				documentsPanel.add(processButton, "right");
-//				documentsPanel.add(viewResultsButton, "right");
-				
-				originalDocumentPanel.add(originalDocScrollPane, "grow");
-			}
-			tabMade = true;
+			documentPanel.add(documentScrollPane, "grow");
+			documentPanel.add(processButton, "right");
+			
+			originalDocumentPanel.add(originalDocScrollPane, "grow");
 		}
-		return documentsPanel;
 	}
 
-	private JPanel createAnonymityTab() throws Exception {
-		PropertiesUtil.Location location = PropertiesUtil.getAnonymityTabLocation();
+	/**
+	 * Creates and lays out all components in the anonymity "tab" (there is no tab anymore, it's just
+	 * the left-side of the window now.
+	 */
+	private void initAnonymityTab() {
+		Logger.logln(NAME+"Creating the Anonymity Tab...");
 		anonymityPanel = new JPanel();
-		if (location == PropertiesUtil.Location.LEFT || location == PropertiesUtil.Location.RIGHT)
-			anonymityPanel.setLayout(new MigLayout(
-					"wrap, ins 0, gap 0 0",
-					"grow, fill",
-					"[grow, fill]"));
-		else if (location == PropertiesUtil.Location.TOP)
-			anonymityPanel.setLayout(new MigLayout(
-					"wrap 2, fill, ins 0, gap 0 0",
-					"[70%][30%]",
-					"[][][grow, fill]"));
-		else
-			throw new Exception();
+		anonymityPanel.setLayout(new MigLayout(
+			"wrap, ins 0, gap 0 0",
+			"grow, fill",
+			"[grow, fill]"));
 
-		{ // --------------anonymity panel components
+		{
 			anonymityLabel = new JLabel("Anonymity:");
 			anonymityLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			anonymityLabel.setFont(titleFont);
@@ -1067,28 +806,85 @@ public class GUIMain extends javax.swing.JFrame {
 			anonymityHoldingPanel.add(anonymityBar, "grow");
 			anonymityHoldingPanel.setBackground(Color.white);
 
-			if (location== PropertiesUtil.Location.LEFT || location == PropertiesUtil.Location.RIGHT) {
-				anonymityPanel.add(anonymityHoldingPanel, "width 80!");
-				anonymityPanel.add(resultsButton, "dock south, gapbottom 9");
-			}
+			anonymityPanel.add(anonymityHoldingPanel, "width 80!");
+			anonymityPanel.add(resultsButton, "dock south, gapbottom 9");
 		}
-		return anonymityPanel;
-	}
-
-	public JTextPane getDocumentPane() {
-		return documentPane;
 	}
 	
+	/**
+	 * Enables or disables the Edit > Undo menu item.
+	 * 
+	 * @param b
+	 * 		Whether or not to enable the menu item
+	 */
 	public void enableUndo(boolean b) {
 		editUndoMenuItem.setEnabled(b);
 	}
 	
+	/**
+	 * Enables or diables the Edit > Redo menu item.
+	 * 
+	 * @param b
+	 * 		Whether or not to enable to menu item
+	 */
 	public void enableRedo(boolean b) {
 		editRedoMenuItem.setEnabled(b);
 	}
 	
+	/**
+	 * Updates the given editor tab's title with a new one
+	 * 
+	 * @param title
+	 * 		The new title you wish to use
+	 * @param index
+	 * 		The index of the editor tab you wish to change
+	 */
 	public void updateDocLabel(String title, int index) {
-		title = title.replaceAll(".[Tt][Xx][Tt]$", "");
-		topTabPane.setTitleAt(index, title);
+		try {
+			title = title.replaceAll(".[Tt][Xx][Tt]$", "");
+			EditorTabPane.setTitleAt(index, title);
+		} catch (Exception e) { //In case the index doesn't exit
+			Logger.logln(NAME+"Tried to change the name of an editor tab that doesn't edit, index = " +
+				index + ", name change to " + title);
+		}
+	}
+	
+	/**
+	 * (Thanks to Dyorgio at StackOverflow for the code)
+	 * If the user is on OS X, we will allow them to enter full screen in Anonymouth using OS X's native full screen functionality.
+	 * As of right now it doesn't actually resize the components that much and doesn't add much to the application, but the structure's
+	 * there to allow someone to come in and optimize Anonymouth when in full screen (not to mention just having the functionality makes
+	 * it seem more like a native OS X application).
+	 * 
+	 * This enables full screen for the particular window and also adds a full screen listener so that we may chance components as needed
+	 * depending on what state we are in.
+	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public void enableOSXFullscreen() {
+		try {
+			Class util = Class.forName("com.apple.eawt.FullScreenUtilities");
+			Class params[] = new Class[]{Window.class, Boolean.TYPE};
+			Method method = util.getMethod("setWindowCanFullScreen", params);
+			method.invoke(util, this, true);
+
+			com.apple.eawt.FullScreenUtilities.addFullScreenListenerTo(this, new FullScreenListener () {
+				@Override
+				public void windowEnteredFullScreen(FullScreenEvent arg0) {
+					GUIMain.inst.viewEnterFullScreenMenuItem.setText("Exit Full Screen");
+				}
+				@Override
+				public void windowEnteringFullScreen(FullScreenEvent arg0) {}
+				@Override
+				public void windowExitedFullScreen(FullScreenEvent arg0) {
+					GUIMain.inst.viewEnterFullScreenMenuItem.setText("Enter Full Screen");
+				}
+				@Override
+				public void windowExitingFullScreen(FullScreenEvent arg0) {}
+			});
+		} catch (ClassNotFoundException e1) {
+			Logger.logln(NAME+"Failed initializing Anonymouth for full-screen", LogOut.STDERR);
+		} catch (Exception e) {
+			Logger.logln(NAME+"Failed initializing Anonymouth for full-screen", LogOut.STDERR);
+		}
 	}
 }

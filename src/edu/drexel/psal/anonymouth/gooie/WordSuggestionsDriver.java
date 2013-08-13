@@ -24,9 +24,9 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * @author Marc Barrowclift
  *
  */
-public class SuggestionsTabDriver {
+public class WordSuggestionsDriver {
 
-	private final static String NAME = "( SuggestionsTabDriver ) - ";
+	private final static String NAME = "( WordSuggestionsDriver ) - ";
 	private final String PUNCTUATION = "?!,.\"`'";
 	private final String DICTIONARY = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"words.txt";
 
@@ -46,12 +46,14 @@ public class SuggestionsTabDriver {
 	 * Constructor
 	 * @param main - GUIMain instance
 	 */
-	public SuggestionsTabDriver(GUIMain main) {
+	public WordSuggestionsDriver(GUIMain main) {
 		this.main = main;
 		
 		//We want this to be a Hashset because we want looking up to see if a single word's a dictionary word to be constant time
 		words = FileHelper.hashSetFromFile(DICTIONARY);
 		setFilterWordsToAdd(PropertiesUtil.getFilterAddSuggestions());
+		
+		initListeners();
 	}
 
 	public void setFilterWordsToAdd(boolean filter) {
@@ -91,8 +93,8 @@ public class SuggestionsTabDriver {
 	 */
 	public void placeSuggestions() {
 		//We must first clear any existing highlights the user has and remove all existing suggestions		
-		DriverEditor.highlightEngine.removeAllAddHighlights();
-		DriverEditor.highlightEngine.removeAllRemoveHighlights();
+		EditorDriver.highlightEngine.removeAllAddHighlights();
+		EditorDriver.highlightEngine.removeAllRemoveHighlights();
 
 		//If the user had a word highlighted and we're updating the list, we want to keep the word highlighted if it's in the updated list
 		String prevSelectedElement = "";
@@ -207,12 +209,12 @@ public class SuggestionsTabDriver {
 					Logger.logln(NAME+"Elements to add value changed");
 
 					if (main.elementsToAddPane.getSelectedIndex() != -1) {
-						DriverEditor.highlightEngine.removeAllAddHighlights();
+						EditorDriver.highlightEngine.removeAllAddHighlights();
 
 						if (main.elementsToAddPane.getSelectedIndex() == -1)
 							return;
 
-						DriverEditor.highlightEngine.addAllAddHighlights(main.elementsToAddPane.getSelectedValue());
+						EditorDriver.highlightEngine.addAllAddHighlights(main.elementsToAddPane.getSelectedValue());
 					}
 				}
 			}
@@ -222,7 +224,7 @@ public class SuggestionsTabDriver {
 		clearAddListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DriverEditor.highlightEngine.removeAllAddHighlights();
+				EditorDriver.highlightEngine.removeAllAddHighlights();
 				main.elementsToAddPane.clearSelection();
 			}
 		};
@@ -231,7 +233,7 @@ public class SuggestionsTabDriver {
 		clearRemoveListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
-				DriverEditor.highlightEngine.removeAllRemoveHighlights();
+				EditorDriver.highlightEngine.removeAllRemoveHighlights();
 				main.elementsToRemoveTable.clearSelection();
 			}
 		};

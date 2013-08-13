@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import edu.drexel.psal.anonymouth.gooie.DriverClustersWindow;
+import edu.drexel.psal.anonymouth.gooie.ClustersDriver;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.utils.Pair;
 import edu.drexel.psal.anonymouth.utils.SmartIntegerArray;
@@ -156,7 +156,7 @@ public class ClusterAnalyzer {
 		}
 		
 		Arrays.sort(clusterGroupArray);
-		DriverClustersWindow.clusterGroupReady = true;
+		ClustersDriver.clusterGroupReady = true;
 		this.clusterGroupArray = clusterGroupArray;
 
 		Logger.logln(NAME+"ClusterAnalyzer analysis complete");

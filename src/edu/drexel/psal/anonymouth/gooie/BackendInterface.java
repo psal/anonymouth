@@ -72,7 +72,7 @@ public class BackendInterface {
 			// initialize probelm set
 			main.preProcessWindow.ps = new ProblemSet();
 			main.preProcessWindow.ps.setTrainCorpusName(main.preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
-			main.preProcessWindow.driver.updateAllComponents();
+			main.preProcessDriver.updateAllComponents();
 
 			Logger.logln(NAME+"Backend: create new problem set thread finished.");
 		}
@@ -108,7 +108,7 @@ public class BackendInterface {
 
 		public String getDocFromCurrentTab()
 		{
-			return main.getDocumentPane().getText();
+			return main.documentPane.getText();
 		}
 
 		public void run() {
@@ -121,20 +121,20 @@ public class BackendInterface {
 				String tempDoc = "";
 				functionWords = new FunctionWords();
 
-				if (DriverEditor.isFirstRun == true) {
+				if (EditorDriver.isFirstRun == true) {
 					functionWords.run();
 					tempDoc = getDocFromCurrentTab();
 					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						wizard.runInitial(magician, main.ppAdvancedWindow.driver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+						wizard.runInitial(magician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
 						pw.setText("Initializing Tagger...");
 						Tagger.initTagger();
 						pw.setText("Classifying Documents...");
 						magician.runWeka();
 						wizard.runClusterAnalysis(magician);
-						DriverClustersWindow.initializeClusterViewer(main,false);
+						ClustersDriver.initializeClusterViewer(main,false);
 					} catch(Exception e) {
 						pw.stop();
 						ErrorHandler.fatalProcessingError(e);
@@ -155,7 +155,7 @@ public class BackendInterface {
 						try {
 							wizard.reRunModified(magician);
 							pw.setText("Initialize Cluster Viewer...");
-							DriverClustersWindow.initializeClusterViewer(main,false);
+							ClustersDriver.initializeClusterViewer(main,false);
 							pw.setText("Classifying Documents...");
 							magician.runWeka();
 						} catch (Exception e) {
@@ -165,11 +165,11 @@ public class BackendInterface {
 					}
 				}
 
-				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
-				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
+				EditorDriver.theFeatures = wizard.getAllRelevantFeatures();
+				Logger.logln(NAME+"The Features are: "+EditorDriver.theFeatures.toString());
 
-				if (DriverEditor.isFirstRun) {
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), true);
+				if (EditorDriver.isFirstRun) {
+					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
 					
 					List<Document> sampleDocs = magician.getDocumentSets().get(0);
 					int size = sampleDocs.size();
@@ -178,7 +178,7 @@ public class BackendInterface {
 						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
 					}
 				} else
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
+					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), false);
 
 				Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
 				Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
@@ -187,53 +187,53 @@ public class BackendInterface {
 
 				
 				main.anonymityBar.updateBar();
-				if (DriverEditor.isFirstRun)
-					main.anonymityBar.setMaxFill(DriverEditor.taggedDoc.getMaxChangeNeeded());
+				if (EditorDriver.isFirstRun)
+					main.anonymityBar.setMaxFill(EditorDriver.taggedDoc.getMaxChangeNeeded());
 				main.anonymityBar.updateBar();
 				main.anonymityBar.showFill(true);
 
-				for (int i = 0; i < DriverEditor.taggedDoc.getTaggedSentences().size(); i++)
-					DriverEditor.originals.put(DriverEditor.taggedDoc.getUntaggedSentences(false).get(i), DriverEditor.taggedDoc.getTaggedSentences().get(i));
+				for (int i = 0; i < EditorDriver.taggedDoc.getTaggedSentences().size(); i++)
+					EditorDriver.originals.put(EditorDriver.taggedDoc.getUntaggedSentences(false).get(i), EditorDriver.taggedDoc.getTaggedSentences().get(i));
 
-				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
-				main.suggestionsTabDriver.placeSuggestions();
+				EditorDriver.originalSents = EditorDriver.taggedDoc.getUntaggedSentences(false);
+				main.wordSuggestionsDriver.placeSuggestions();
 
-				DriverEditor.setAllDocTabUseable(true, main);		
+				EditorDriver.setAllDocTabUseable(true, main);		
 
 				if (PropertiesUtil.getDoTranslations()) {
-					main.rightTabPane.setSelectedIndex(1);
+					main.helpersTabPane.setSelectedIndex(1);
 				} else {
-					main.rightTabPane.setSelectedIndex(0);
+					main.helpersTabPane.setSelectedIndex(0);
 				}
 				
 				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
 				int caret = 0;
-				while (Character.isWhitespace(main.getDocumentPane().getText().charAt(caret))) {
+				while (Character.isWhitespace(main.documentPane.getText().charAt(caret))) {
 					caret++;
 				}
 
-				DriverEditor.ignoreNumActions = 1; // must be set to 1, otherwise "....setDot(0)" (2 lines down) will screw things up when it fires the caretUpdate listener.
-				if (!DriverEditor.isFirstRun)
+				EditorDriver.ignoreNumActions = 1; // must be set to 1, otherwise "....setDot(0)" (2 lines down) will screw things up when it fires the caretUpdate listener.
+				if (!EditorDriver.isFirstRun)
 					InputFilter.ignoreTranslation = true;
-				main.getDocumentPane().setText(DriverEditor.taggedDoc.getUntaggedDocument(false));// NOTE this won't fire the caretListener because (I THINK) this method isn't in a listener, because setting the text from within a listener (directly or indirectly) DOES fire the caretUpdate.
-				main.getDocumentPane().getCaret().setDot(caret); // NOTE However, THIS DOES fire the caretUpdate, because we are messing with the caret itself.
-				main.getDocumentPane().setCaretPosition(caret); // NOTE And then this, again, does not fire the caretUpdate
-				DriverEditor.currentCaretPosition = caret;
-				DriverEditor.ignoreNumActions = 0; //We MUST reset this to 0 because, for whatever reason, sometimes setDot() does not fire the caret listener, so ignoreNumActions is never reset. This is to ensure it is.
+				main.documentPane.setText(EditorDriver.taggedDoc.getUntaggedDocument(false));// NOTE this won't fire the caretListener because (I THINK) this method isn't in a listener, because setting the text from within a listener (directly or indirectly) DOES fire the caretUpdate.
+				main.documentPane.getCaret().setDot(caret); // NOTE However, THIS DOES fire the caretUpdate, because we are messing with the caret itself.
+				main.documentPane.setCaretPosition(caret); // NOTE And then this, again, does not fire the caretUpdate
+				EditorDriver.currentCaretPosition = caret;
+				EditorDriver.ignoreNumActions = 0; //We MUST reset this to 0 because, for whatever reason, sometimes setDot() does not fire the caret listener, so ignoreNumActions is never reset. This is to ensure it is.
 				
-				int[] selectedSentInfo = DriverEditor.calculateIndicesOfSentences(0)[0];
-				DriverEditor.selectedSentIndexRange[0] = selectedSentInfo[1];
-				DriverEditor.selectedSentIndexRange[1] = selectedSentInfo[2];
-				DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(0)[0];
+				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
+				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
+				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
 
 				//no longer automatically translating even if checkmarked, only when the user clicks "start"
 				//GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
 				main.notTranslated.setText("You granted access for translations to be obtained from Microsoft Bing in Preferences.\n\nTo begin, click the Start button");
 				main.translationsHolderPanel.add(main.notTranslated, "");
-				DriverEditor.charsInserted = 0; // this gets updated when the document is loaded.
-				DriverEditor.charsRemoved = 0;	
-				DriverEditor.caretPositionPriorToCharInsertion = 0;
-				DriverEditor.isFirstRun = true;
+				EditorDriver.charsInserted = 0; // this gets updated when the document is loaded.
+				EditorDriver.charsRemoved = 0;	
+				EditorDriver.caretPositionPriorToCharInsertion = 0;
+				EditorDriver.isFirstRun = true;
 
 				DictionaryBinding.init();//initializes the dictionary for wordNEt
 
@@ -242,11 +242,11 @@ public class BackendInterface {
 				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
 				main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 
-				DriverEditor.backedUpTaggedDoc = new TaggedDocument(DriverEditor.taggedDoc);
+				EditorDriver.backedUpTaggedDoc = new TaggedDocument(EditorDriver.taggedDoc);
 
-				GUIMain.processed = true;
+				main.processed = true;
 				pw.stop();
-				main.showMainGUI();
+				main.showGUIMain();
 				
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
@@ -344,9 +344,9 @@ public class BackendInterface {
 			main.resultsWindow.addAttrib((String)authors[(int)predictionMapArray[i][1]], (int)(predictionMapArray[i][0] + .5));
 		}
 
-		DriverEditor.resultsMaxIndex = maxIndex;
-		DriverEditor.chosenAuthor = (String)authors[maxIndex];
-		DriverEditor.maxValue = (Object)biggest;
+		EditorDriver.resultsMaxIndex = maxIndex;
+		EditorDriver.chosenAuthor = (String)authors[maxIndex];
+		EditorDriver.maxValue = (Object)biggest;
 
 		main.resultsWindow.makeChart();
 	}

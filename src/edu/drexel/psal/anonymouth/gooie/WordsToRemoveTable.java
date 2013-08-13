@@ -14,12 +14,12 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  * @author Marc Barrowclift
  *
  */
-public class ElementsTable extends JTable implements ListSelectionListener {
+public class WordsToRemoveTable extends JTable implements ListSelectionListener {
 
-	private static final String NAME = "( ElementsTable ) - ";
+	private static final String NAME = "( WordsToRemoveTable ) - ";
 	private static final long serialVersionUID = 1L;
 
-	public ElementsTable(DefaultTableModel model) {
+	public WordsToRemoveTable(DefaultTableModel model) {
 		super(model);
 	}
 
@@ -50,8 +50,8 @@ public class ElementsTable extends JTable implements ListSelectionListener {
 			Logger.logln(NAME+"Elements to remove value changed");
 
 			if (this.getSelectedRow() != -1) {
-				DriverEditor.highlightEngine.removeAllRemoveHighlights();
-				DriverEditor.highlightEngine.addAllRemoveHighlights((String)this.getModel().getValueAt(this.getSelectedRow(), 0));
+				EditorDriver.highlightEngine.removeAllRemoveHighlights();
+				EditorDriver.highlightEngine.addAllRemoveHighlights((String)this.getModel().getValueAt(this.getSelectedRow(), 0));
 			}
 		}
 		super.valueChanged(e);

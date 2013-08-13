@@ -20,28 +20,40 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  * @author Marc Barrowclift
  *
  */
-public class DriverMenu {
+public class MenuDriver {
 	
 	//Constants
-	private final static String NAME = "( DriverMenu ) - ";
+	private final String NAME = "( DriverMenu ) - ";
 
 	//Listeners
-	protected static ActionListener preferencesListener;
-	protected static ActionListener saveProblemSetListener;
-	protected static ActionListener loadProblemSetListener;
-	protected static ActionListener saveTestDocListener;
-	protected static ActionListener saveAsTestDocListener;
-	protected static ActionListener aboutListener;
-	protected static ActionListener viewClustersListener;
-	protected static ActionListener suggestionsListener;
-	protected static ActionListener helpClustersListener;
-	protected static ActionListener undoListener;
-	protected static ActionListener redoListener;
-	protected static ActionListener fullScreenListener;
-//	protected static ActionListener printMenuItemListener;
+	protected ActionListener preferencesListener;
+	protected ActionListener saveProblemSetListener;
+	protected ActionListener saveTestDocListener;
+	protected ActionListener saveAsTestDocListener;
+	protected ActionListener aboutListener;
+	protected ActionListener viewClustersListener;
+	protected ActionListener faqListener;
+	protected ActionListener helpClustersListener;
+	protected ActionListener undoListener;
+	protected ActionListener redoListener;
+	protected ActionListener fullScreenListener;
+	//protected ActionListener printMenuItemListener;
 	
 	//Variables
-	private static String savedPath = "";
+	private String savedPath = "";
+	private GUIMain main;
+	
+	/**
+	 * Constructor, takes care of everything, all you need to do is initialize it and you're listeners
+	 * are good to go.
+	 * 
+	 * @param main
+	 * 		GUIMain instance
+	 */
+	public MenuDriver(GUIMain main) {
+		this.main = main;
+		initListeners();
+	}
 	
 	/**
 	 * Initializes all menu bar listeners. Should be called sometime during startup before main window
@@ -50,11 +62,11 @@ public class DriverMenu {
 	 * @param main
 	 * 		GUIMain instance
 	 */
-	protected static void initListeners(final GUIMain main) {	
+	protected void initListeners() {	
 		preferencesListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUIMain.preferencesWindow.showWindow();
+				main.preferencesWindow.showWindow();
 			}
         };
         if (!ANONConstants.IS_MAC)
@@ -64,25 +76,16 @@ public class DriverMenu {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Save problem set menu item clicked");
-        		main.preProcessWindow.driver.doneSaveListener.actionPerformed(e);
+        		main.preProcessDriver.doneSaveListener.actionPerformed(e);
         	}
         };
         main.fileSaveProblemSetMenuItem.addActionListener(saveProblemSetListener);
-        
-        loadProblemSetListener = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		Logger.logln(NAME+"Load problem set menu item clicked");
-        		main.startingWindows.loadDocSetListener.actionPerformed(e);
-        	}
-        };
-        main.fileLoadProblemSetMenuItem.addActionListener(loadProblemSetListener);
         
         saveTestDocListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Save document menu item clicked");
-        		DriverMenu.save(main);
+        		save(main);
         	}
         };
         main.fileSaveTestDocMenuItem.addActionListener(saveTestDocListener);
@@ -116,7 +119,8 @@ public class DriverMenu {
 					if (!path.toLowerCase().endsWith(".txt"))
 						path += ".txt";
 					
-					FileHelper.writeToFile(path, main.getDocumentPane().getText());
+					FileHelper.writeToFile(path, main.documentPane.getText());
+					main.saved = true;
 					savedPath = path;
 				} else
 					Logger.logln(NAME+"Save As contents of current tab canceled");
@@ -146,14 +150,14 @@ public class DriverMenu {
         };
         main.viewClustersMenuItem.addActionListener(viewClustersListener);
         
-        suggestionsListener = new ActionListener() {
+        faqListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Suggestions menu item clicked");
-        		main.suggestionsWindow.openWindow();
+        		main.faqWindow.openWindow();
         	}
         };
-        main.helpSuggestionsMenuItem.addActionListener(suggestionsListener);
+        main.helpSuggestionsMenuItem.addActionListener(faqListener);
         
         helpClustersListener = new ActionListener() {
         	@Override
@@ -208,7 +212,7 @@ public class DriverMenu {
             		ThePresident.app.requestToggleFullScreen(main);
             	}
             };
-            GUIMain.viewEnterFullScreenMenuItem.addActionListener(fullScreenListener);
+            main.viewEnterFullScreenMenuItem.addActionListener(fullScreenListener);
         }
         
         //Print functionality, not yet implemented or complete, we'll get around to it at some point
@@ -240,11 +244,12 @@ public class DriverMenu {
 	 * @param main
 	 * 		GUIMain instance
 	 */
-	public static void save(GUIMain main) {
+	public void save(GUIMain main) {
 		if (savedPath == "") {
-			DriverMenu.saveAsTestDocListener.actionPerformed(new ActionEvent(main.fileSaveAsTestDocMenuItem, ActionEvent.ACTION_PERFORMED, "Save As..."));
+			saveAsTestDocListener.actionPerformed(new ActionEvent(main.fileSaveAsTestDocMenuItem, ActionEvent.ACTION_PERFORMED, "Save As..."));
 		} else {
-			FileHelper.writeToFile(savedPath, main.getDocumentPane().getText());
+			FileHelper.writeToFile(savedPath, main.documentPane.getText());
+			main.saved = true;
 		}
 	}
 }

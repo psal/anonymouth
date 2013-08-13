@@ -7,8 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.gooie.DriverClustersWindow;
-import edu.drexel.psal.anonymouth.gooie.DriverEditor;
+import edu.drexel.psal.anonymouth.gooie.ClustersDriver;
+import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -196,7 +196,7 @@ public class DataAnalyzer{
 		int j = 0;
 		String strippedAttrib;
 		FeatureList genName;
-		DriverEditor.attributesMappedByName = new HashMap<FeatureList,Integer>(numFeatures);
+		EditorDriver.attributesMappedByName = new HashMap<FeatureList,Integer>(numFeatures);
 		
 		int numAvailableFeatures=0;
 		if (numFeatures < numAttributes) 
@@ -236,7 +236,7 @@ public class DataAnalyzer{
 			topAttribs[j].setInfoGain(allInfoGain[j][0]);
 			topAttribs[j].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
 			genName = topAttribs[j].getGenericName();
-			DriverEditor.attributesMappedByName.put(genName, j);
+			EditorDriver.attributesMappedByName.put(genName, j);
 			featuresForClusterAnalyzer.add(topAttribs[j].getConcatGenNameAndStrInBraces());
 			strippedAttributeNames[j] = strippedAttrib;	
 			Logger.logln(NAME+topAttribs[j].getFullName()+" info gain for this feature is: "+topAttribs[j].getInfoGain()+", calcHist is: "+topAttribs[j].getCalcHist()+" string in the braces (if applicable): "+topAttribs[j].getStringInBraces()+" toModify value is: "+topAttribs[j].getToModifyValue()); 
@@ -389,9 +389,9 @@ public class DataAnalyzer{
 		numberCruncher.analyzeNow();
 		featureSwapper = new FeatureSwapper(ClusterAnalyzer.getClusterGroupArray(), magician) ;
 		bestClusterGroup = featureSwapper.getBestClusterGroup(-1);
-		DriverClustersWindow.bestClusterGroup = bestClusterGroup;
+		ClustersDriver.bestClusterGroup = bestClusterGroup;
 		Logger.logln(NAME+"calling makeViewer");
-		DriverClustersWindow.makePanels(topAttributes);
+		ClustersDriver.makePanels(topAttributes);
 		Logger.logln(NAME+"viewer made");
 		setSelectedTargets();
 	}
@@ -466,7 +466,7 @@ public class DataAnalyzer{
 	public void reRunModified(DocumentMagician magician) throws Exception {
 		magician.reRunModified();
 		Logger.logln(NAME+"Calling makeViewer in ClusterViewer after re-running modified.");
-		DriverClustersWindow.makePanels(topAttributes);
+		ClustersDriver.makePanels(topAttributes);
 		Logger.logln(NAME+"viewer made");
 	}
 	

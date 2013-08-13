@@ -79,14 +79,14 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent arg0) {
 				if (prefWin.filterAddWords.isSelected()) {
 					PropertiesUtil.setFilterAddSuggestions(true);
-					main.suggestionsTabDriver.setFilterWordsToAdd(true);
-					main.suggestionsTabDriver.placeSuggestions();
+					main.wordSuggestionsDriver.setFilterWordsToAdd(true);
+					main.wordSuggestionsDriver.placeSuggestions();
 					
 					Logger.logln(NAME+"Filter Words to Add checkbox checked");
 				} else {
 					PropertiesUtil.setFilterAddSuggestions(false);
-					main.suggestionsTabDriver.setFilterWordsToAdd(false);
-					main.suggestionsTabDriver.placeSuggestions();
+					main.wordSuggestionsDriver.setFilterWordsToAdd(false);
+					main.wordSuggestionsDriver.placeSuggestions();
 					
 					Logger.logln(NAME+"Filter Words to Add checkbox unchecked");
 				}
@@ -99,16 +99,16 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent arg0) {
 				if (prefWin.highlightSent.isSelected()) {
 					PropertiesUtil.setHighlightSents(true);
-					DriverEditor.doHighlight = true;
-					if (DriverEditor.highlightEngine.isSentenceHighlighted())
-						DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+					EditorDriver.doHighlight = true;
+					if (EditorDriver.highlightEngine.isSentenceHighlighted())
+						EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
 					
 					Logger.logln(NAME+"Highlight Sents checkbox checked");
 				} else {
 					PropertiesUtil.setHighlightSents(false);
-					DriverEditor.doHighlight = false;
-					if (DriverEditor.highlightEngine.isSentenceHighlighted())
-						DriverEditor.highlightEngine.removeSentenceHighlight();
+					EditorDriver.doHighlight = false;
+					if (EditorDriver.highlightEngine.isSentenceHighlighted())
+						EditorDriver.highlightEngine.removeSentenceHighlight();
 					
 					Logger.logln(NAME+"Highlight Sents checkbox unchecked");
 				}
@@ -122,9 +122,9 @@ public class PreferencesDriver {
 				int color = prefWin.sentHighlightColors.getSelectedIndex();
 				PropertiesUtil.setHighlightColor(color);
 				
-				if (DriverEditor.taggedDoc != null) {
-					DriverEditor.highlightEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
-					DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				if (EditorDriver.taggedDoc != null) {
+					EditorDriver.highlightEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
+					EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
 				}
 			}
 		};
@@ -135,7 +135,7 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent arg0) {
 				PropertiesUtil.setFontSize(prefWin.fontSizes.getSelectedItem().toString());
 				main.normalFont = new Font("Ariel", Font.PLAIN, PropertiesUtil.getFontSize());
-				main.getDocumentPane().setFont(main.normalFont);
+				main.documentPane.setFont(main.normalFont);
 			}
 		};
 		prefWin.fontSizes.addActionListener(fontSizeListener);
@@ -198,19 +198,19 @@ public class PreferencesDriver {
 				
 				if (prefWin.translations.isSelected()) {
 					Object[] buttons = {"Ok", "Cancel"};
-					int answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+					int answer = JOptionPane.showOptionDialog(main.preferencesWindow,
 							TRANSWARNING,
 							"Please Be Aware!",
 							JOptionPane.OK_CANCEL_OPTION,
 							JOptionPane.WARNING_MESSAGE,
 							null, buttons, 1);
 					if (answer == 0) {
-						if (GUIMain.processed)
+						if (main.processed)
 							main.resetTranslator.setEnabled(true);
 						PropertiesUtil.setDoTranslations(true);
 						
 						if (BackendInterface.processed) {
-							answer = JOptionPane.showOptionDialog(GUIMain.preferencesWindow,
+							answer = JOptionPane.showOptionDialog(main.preferencesWindow,
 									"Being translating now?",
 									"Begin Translations",
 									JOptionPane.YES_NO_OPTION,
@@ -218,15 +218,15 @@ public class PreferencesDriver {
 									null, null, null);
 							
 							if (answer == JOptionPane.YES_OPTION) {
-								main.translationsDriver.translator.load(DriverEditor.taggedDoc.getTaggedSentences());
-								main.translationsPanel.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+								main.translationsDriver.translator.load(EditorDriver.taggedDoc.getTaggedSentences());
+								main.translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
 								
 								main.startTranslations.setEnabled(false);
 								main.stopTranslations.setEnabled(true);
 							} else {
 								main.startTranslations.setEnabled(true);
 								main.stopTranslations.setEnabled(false);
-								main.translationsPanel.showTranslations(DriverEditor.taggedDoc.getSentenceNumber(DriverEditor.sentToTranslate));
+								main.translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
 							}
 						} else {
 							main.notTranslated.setText("Please process your document to recieve translation suggestions.");
@@ -407,13 +407,13 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.highlightElems.isSelected()) {
 					PropertiesUtil.setAutoHighlight(true);
-					DriverEditor.autoHighlight = true;
-					DriverEditor.highlightEngine.addAutoRemoveHighlights(DriverEditor.selectedSentIndexRange[0], DriverEditor.selectedSentIndexRange[1]);
+					EditorDriver.autoHighlight = true;
+					EditorDriver.highlightEngine.addAutoRemoveHighlights(EditorDriver.selectedSentIndexRange[0], EditorDriver.selectedSentIndexRange[1]);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);
-					DriverEditor.autoHighlight = false;
-					DriverEditor.highlightEngine.removeAutoRemoveHighlights();
+					EditorDriver.autoHighlight = false;
+					EditorDriver.highlightEngine.removeAutoRemoveHighlights();
 					Logger.logln(NAME+"Auto highlights checkbox unchecked");
 				}
 			}

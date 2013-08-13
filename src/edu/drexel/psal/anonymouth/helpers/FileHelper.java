@@ -13,7 +13,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -149,8 +148,6 @@ public class FileHelper {
 			bw.flush();
 			bw.close();
 			Logger.log(NAME+"Saved contents of document to "+path);
-
-			GUIMain.saved = true;
 		} catch (IOException exc) {
 			Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
 			JOptionPane.showMessageDialog(null,

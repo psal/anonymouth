@@ -218,6 +218,26 @@ public class ResultsWindow extends JFrame {
 	}
 	
 	/**
+	 * Checks to see if the author and percentage data has been acquired and the data's ready
+	 * to be made into a chart
+	 * 
+	 * @return
+	 * 		Whether or not the chart has been created (i.e., do we have any authors)
+	 */
+	public boolean resultsAreReady() {
+		boolean ready = true;
+
+		try {
+			if (authors.size() == 0)
+				ready = false;
+		} catch (Exception e) {
+			ready = false;
+		}
+
+		return ready;
+	}
+	
+	/**
 	 * Big thanks to JFreeChart, Object Refinery Limited and Contributors, and MaVRoSCy from StackOverflow for
 	 * the help.
 	 * 

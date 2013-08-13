@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import edu.drexel.psal.JSANConstants;
@@ -90,12 +91,14 @@ public class StartWindow extends JFrame {
 	public StartWindow(GUIMain main) {	
 		initGUI();
 		initWindow(main);
+		initLookAndFeel();
 		initListeners();
 		
 		load = new FileDialog(this);
 		load.setModalityType(ModalityType.DOCUMENT_MODAL);
 		
 		userStudySessionName = new UserStudySessionName(this);
+		setLastDocumentSet();
 	}
 	
 	/**
@@ -203,6 +206,32 @@ public class StartWindow extends JFrame {
 	}
 	
 	/**
+	 * Sets the look and feel for Anonymouth based on the system look and feel
+	 */
+	private void initLookAndFeel() {
+		//For Sebastian Pipping's GTK look and feel
+		final String[] themeClassesToTry = {
+			"com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
+			"com.sun.java.swing.plaf.gtk.GTKLookAndFeel",
+		};
+		
+		for (String themeClassName : themeClassesToTry) {
+			try {
+				UIManager.setLookAndFeel(themeClassName);
+			} catch (Exception e) {
+				//If setting the GTK look and feel fails, then default to the system look and feel
+				try { 
+					javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+				} catch(Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Initializes the listeners
 	 */
 	private void initListeners() {
@@ -210,7 +239,7 @@ public class StartWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				startingWindows.setVisible(false);
-				DriverEditor.processButtonListener.actionPerformed(e);
+				EditorDriver.processButtonListener.actionPerformed(e);
 			}
 		};
 		startButton.addActionListener(startListener);
@@ -253,7 +282,7 @@ public class StartWindow extends JFrame {
 		newDocSetListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				main.preProcessWindow.driver.resetAllComponents();
+				main.preProcessDriver.resetAllComponents();
 				setReadyToStart(false, false);
 				main.preProcessWindow.switchingToTest();
 				main.preProcessWindow.showWindow();
@@ -271,10 +300,41 @@ public class StartWindow extends JFrame {
 	}
 	
 	/**
+	 * If there was a recently used/saved document set in the properties file, Anonymouth will load up and initialize
+	 * itself around that problem set so Anonymouth's ready to immediately start if the user wants.
+	 */
+	protected void setLastDocumentSet() {		
+		try {
+			if (!PropertiesUtil.getProbSet().equals("")) {
+				String problemSetPath = PropertiesUtil.getProbSet();
+
+				try {
+					loadProblemSet(problemSetPath);
+				} catch (Exception exc) {
+					setReadyToStart(false, true);
+					throw new Exception("Failed loading problemSet path \""+problemSetPath+"\"");
+				}
+			} else {
+				setReadyToStart(false, false);
+				throw new Exception("No default problem set saved from last run, will continue without.");
+			}
+		} catch (Exception e) {
+			Logger.logln(NAME+"Problem loading last used document set: " + PropertiesUtil.getProbSet(), LogOut.STDERR);
+			PropertiesUtil.setProbSet("");
+			
+			String feature = PropertiesUtil.getFeature();
+			main.ppAdvancedWindow.setFeature(feature);
+
+			String classifier = PropertiesUtil.getClassifier();
+			main.ppAdvancedWindow.setClassifier(classifier);
+		}
+	}
+	
+	/**
 	 * Determines whether or not the user has an acceptable document set built and updates components accordingly
 	 * @param ready
 	 */
-	protected void setReadyToStart(boolean ready, boolean loaded) {
+	public void setReadyToStart(boolean ready, boolean loaded) {
 		if (ready) {
 			if (loaded)
 				textLabel.setText("Start with loaded document set");
@@ -308,7 +368,7 @@ public class StartWindow extends JFrame {
 	 * Makes the prepared window visible
 	 */
 	@SuppressWarnings("unused") //Eclipse lies, it's being used, it just doesn't like my ANONConstants flag
-	public void showStartingWindow() {
+	public void showStartWindow() {
 		if (ANONConstants.IS_USER_STUDY && ThePresident.sessionName.equals("")) {
 			userStudySessionName.showSessionWindow();
 		} else {
@@ -340,22 +400,22 @@ public class StartWindow extends JFrame {
 	 * Components accordingly
 	 * @param path - The absolute path to the problem set we want to load
 	 */
-	protected void loadProblemSet(String path) {
+	public void loadProblemSet(String path) {
 		Logger.logln(NAME+"Trying to load problem set at: " + path);
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
 			main.ppAdvancedWindow.setFeature(PropertiesUtil.getFeature());
-			main.preProcessWindow.driver.titles.clear();
+			main.preProcessDriver.titles.clear();
 			
 			boolean probSetReady = main.preProcessWindow.documentsAreReady();
-			if (main.preProcessWindow.driver.updateAllComponents() && probSetReady) {
+			if (main.preProcessDriver.updateAllComponents() && probSetReady) {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
 				
 				//main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle(), 0);
-				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getTestDoc().getFilePath(), false);
-				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath(), true);
+				main.preProcessDriver.updateOpeningDir(main.preProcessWindow.ps.getTestDoc().getFilePath(), false);
+				main.preProcessDriver.updateOpeningDir(main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath(), true);
 			} else {
 				Logger.logln(NAME+"Some issue was detected constructing the saved Document set, will verify " +
 						"if there's still enough documents to move forward");
@@ -389,7 +449,7 @@ public class StartWindow extends JFrame {
 			}
 			
 			PropertiesUtil.setProbSet(path);
-			main.preProcessWindow.driver.updateTitles();
+			main.preProcessDriver.updateTitles();
 		} catch (Exception exc) {
 			Logger.logln(NAME+"Failed loading problem set at path: "+path, LogOut.STDERR);
 			setReadyToStart(false, false);
@@ -402,7 +462,7 @@ public class StartWindow extends JFrame {
 			main.ppAdvancedWindow.setClassifier(classifier);
 			
 			PropertiesUtil.setProbSet("");
-			main.preProcessWindow.driver.updateTitles();
+			main.preProcessDriver.updateTitles();
 			revalidate();
 			repaint();
 		}
@@ -553,7 +613,7 @@ class UserStudySessionName extends JFrame {
 				}
 				sessionWindow.setVisible(false);
 				
-				startingWindows.showStartingWindow();
+				startingWindows.showStartWindow();
 			}
 		};
 		continueButton.addActionListener(continueListener);

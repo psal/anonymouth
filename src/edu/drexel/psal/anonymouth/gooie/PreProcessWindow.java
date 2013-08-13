@@ -59,7 +59,7 @@ public class PreProcessWindow extends JDialog {
 	private final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 22);
 	
 	//Variables
-	public PreProcessDriver driver;
+	protected PreProcessDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
 	protected ProblemSet ps;
@@ -152,7 +152,7 @@ public class PreProcessWindow extends JDialog {
 	 * @param main - Instance of GUIMain
 	 */
 	public PreProcessWindow(GUIMain main) {
-		super(main.startingWindows, "Anonymouth Set-Up Wizard", Dialog.ModalityType.DOCUMENT_MODAL);
+		super(ThePresident.startWindow, "Anonymouth Set-Up Wizard", Dialog.ModalityType.DOCUMENT_MODAL);
 		Logger.logln(NAME+"Preparing the Pre-process window for viewing");
 		
 		ps = new ProblemSet();

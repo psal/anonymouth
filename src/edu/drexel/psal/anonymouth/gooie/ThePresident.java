@@ -28,18 +28,20 @@ public class ThePresident {
 	
 	//Constants
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
-	public static final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
-	public static final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
-	public static final String ANONYMOUTH_LOGO_SMALL = "anonymouth_gui_chooser.png";
+	public final String ANONYMOUTH_LOGO = "anonymouth_LOGO.png";
+	public final String ANONYMOUTH_LOGO_LARGE = "anonymouth_LOGO_large.png";
+	public final String ANONYMOUTH_LOGO_SMALL = "anonymouth_gui_chooser.png";
 	
 	//Anonymouth Icons
 	public static Image logo;
 	public static ImageIcon aboutLogo;
 	public static ImageIcon dialogLogo;
 	public static Icon dialogIcon;
+	protected static StartWindow startWindow;
+	public GUIMain main;
 	
-	public static Application app;
-	public static Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
+	public static Application app; //For OS X
+	public Scanner in = new Scanner(System.in); // xxx just for testing. can be called anywhere in Anonymouth.
 	public static String sessionName = "";
 	public static boolean classifier_Saved = false;
 	public static int max_Features_To_Consider = PropertiesUtil.defaultFeatures;
@@ -78,9 +80,9 @@ public class ThePresident {
 			app.addApplicationListener(new ApplicationAdapter() {
 				@Override
 				public void handleQuit(ApplicationEvent e) {
-					if (PropertiesUtil.getWarnQuit() && !GUIMain.saved) {
-						GUIMain.inst.toFront();
-						GUIMain.inst.requestFocus();
+					if (PropertiesUtil.getWarnQuit() && !main.saved) {
+						main.toFront();
+						main.requestFocus();
 						int confirm = JOptionPane.showOptionDialog(null,
 								"Are You Sure to Close Application?\nYou will lose all unsaved changes.",
 								"Unsaved Changes Warning",
@@ -91,7 +93,7 @@ public class ThePresident {
 							System.exit(0);
 						}
 					} else if (PropertiesUtil.getAutoSave()) {
-						DriverMenu.save(GUIMain.inst);
+						main.menuDriver.save(GUIMain.inst);
 						System.exit(0);
 					} else {
 						System.exit(0);
@@ -110,7 +112,7 @@ public class ThePresident {
 				
 				@Override
 				public void handlePreferences(ApplicationEvent e) {
-					GUIMain.preferencesWindow.showWindow();
+					main.preferencesWindow.showWindow();
 				}
 			});
 			
@@ -140,9 +142,13 @@ public class ThePresident {
 			sessionName = "Anonymouth";
 		}
 		
-		splash.updateText("Preparing Main Window");
-		Logger.logln(NAME+"Gooie starting...");
-		GUIMain.startGooie();
+		splash.updateText("Preparing Start Window");
+		
+		main = new GUIMain();
+		startWindow = new StartWindow(main);
+		
+		ThePresident.splash.hideSplashScreen();
+		startWindow.showStartWindow();
 	}
 	
 	/**
@@ -151,7 +157,7 @@ public class ThePresident {
 	 * @param sayThis
 	 * @return
 	 */
-	public static String read(String sayThis){
+	public String read(String sayThis){
 		System.out.println(sayThis);
 		return in.nextLine();
 	}
@@ -161,7 +167,7 @@ public class ThePresident {
 	 * will print "System waiting for user input:" and then read and return a line from the user. Useful for stopping the progam at spots.
 	 * @return
 	 */
-	public static String read(){
+	public String read(){
 		System.out.println("System waiting for user input:");
 		return in.nextLine();
 	}

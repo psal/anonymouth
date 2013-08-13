@@ -100,36 +100,36 @@ public class RightClickMenu extends JPopupMenu {
 				//Goes through the selected sentences and for each EOS character we find (EXCLUDING the EOS character at the end of the last sentence) marks them as ignorable.
 				for (int i = 0; i < size; i++) {
 					length = sentences.get(i)[0].length();
-					char character = main.getDocumentPane().getText().charAt(length-1+PopupListener.mark+pastLength);
+					char character = main.documentPane.getText().charAt(length-1+PopupListener.mark+pastLength);
 
 					if ((character == '.' || character == '!' || character == '?') && size-1 != i) {
-						DriverEditor.taggedDoc.specialCharTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
+						EditorDriver.taggedDoc.specialCharTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
 					}
 										
-					taggedSentences.add(DriverEditor.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
+					taggedSentences.add(EditorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
 					pastLength += length;
 				}
 				
 				//We're borrowing a variable used by translations to solve a similar purpose, we do not want the InputFilter to fire removeReplaceAndUpdate in the DriverEditor.
 				InputFilter.ignoreTranslation = true;
 				
-				TaggedSentence replacement = DriverEditor.taggedDoc.concatSentences(taggedSentences);
-				DriverEditor.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
-				DriverEditor.update(main, true);
+				TaggedSentence replacement = EditorDriver.taggedDoc.concatSentences(taggedSentences);
+				EditorDriver.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
+				EditorDriver.update(main, true);
 				
-				int[] selectedSentInfo = DriverEditor.calculateIndicesOfSentences(PopupListener.mark)[0];
+				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(PopupListener.mark)[0];
 
 				//We want to make sure we're setting the caret at the actual start of the sentence and not in white space (so it gets highlighted)
 				int space = 0;
-				String text = main.getDocumentPane().getText();
+				String text = main.documentPane.getText();
 				while (text.charAt(selectedSentInfo[1] + space)  == ' ' || text.charAt(selectedSentInfo[1] + space) == '\n') {
 					space++;
 				}
 				
-				main.getDocumentPane().getCaret().setDot(selectedSentInfo[1]+space);
-				DriverEditor.selectedSentIndexRange[0] = selectedSentInfo[1];
-				DriverEditor.selectedSentIndexRange[1] = selectedSentInfo[2];
-				DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				main.documentPane.getCaret().setDot(selectedSentInfo[1]+space);
+				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
+				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
+				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
 			}
 		};
 		combineSentences.addActionListener(combineSentencesListener);
@@ -137,20 +137,20 @@ public class RightClickMenu extends JPopupMenu {
 		resetHighlighterListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DriverEditor.taggedDoc.specialCharTracker.resetEOSCharacters();
-				DriverEditor.taggedDoc = new TaggedDocument(main.getDocumentPane().getText());
-				DriverEditor.isFirstRun = true;
+				EditorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
+				EditorDriver.taggedDoc = new TaggedDocument(main.documentPane.getText());
+				EditorDriver.isFirstRun = true;
 				
-				int[] selectedSentInfo = DriverEditor.calculateIndicesOfSentences(DriverEditor.currentCaretPosition)[0];
-				DriverEditor.selectedSentIndexRange[0] = selectedSentInfo[1];
-				DriverEditor.selectedSentIndexRange[1] = selectedSentInfo[2];
-				DriverEditor.moveHighlight(main, DriverEditor.selectedSentIndexRange);
+				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(EditorDriver.currentCaretPosition)[0];
+				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
+				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
+				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
 			}
 		};
 		resetHighlighter.addActionListener(resetHighlighterListener);
 		
 		popupListener = new PopupListener(this, main, this);
-		main.getDocumentPane().addMouseListener(popupListener);
+		main.documentPane.addMouseListener(popupListener);
 	}
 	
 	/**
@@ -216,15 +216,15 @@ class PopupListener extends MouseAdapter {
 		 * we don't want anything below to be fired during so. This checks to make sure the user has selected appropriate text for the combine sentences option to be
 		 * enabled.
 		 */
-		if (e.isPopupTrigger() && main.getDocumentPane().isEnabled()) {
-			mark = main.getDocumentPane().getCaret().getMark();
-			int dot = main.getDocumentPane().getCaret().getDot();
+		if (e.isPopupTrigger() && main.documentPane.isEnabled()) {
+			mark = main.documentPane.getCaret().getMark();
+			int dot = main.documentPane.getCaret().getDot();
 			
 			if (dot == mark) {
 				rightClickMenu.enableCombineSentences(false);
 				rightClickMenu.setEnabled(false, false, true);
 			} else {
-				String text = main.getDocumentPane().getText();
+				String text = main.documentPane.getText();
 				
 				int padding = 0;
 				int length = text.length();

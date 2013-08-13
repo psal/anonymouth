@@ -60,7 +60,7 @@ public class Logger {
 			out = fileDirPath+"/"+filePrefix+"_"+date()+"_"+time()+".txt";
 			String msg = NAME+"Started log "+out+"\n" +
 					"=======================ALL PREVIOUS OUTPUT WRITTEN TO LOG FILE============================\n";
-			System.out.println(msg);
+			System.out.println(time()+": "+msg);
 			
 			try {
 				if (logFile) {

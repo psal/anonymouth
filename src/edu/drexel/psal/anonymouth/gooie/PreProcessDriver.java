@@ -142,11 +142,11 @@ public class PreProcessDriver {
 				//and update accordingly
 				if (preProcessWindow.documentsAreReady()) {
 					if (preProcessWindow.saved)
-						main.startingWindows.setReadyToStart(true, true);
+						ThePresident.startWindow.setReadyToStart(true, true);
 					else
-						main.startingWindows.setReadyToStart(true, false);
+						ThePresident.startWindow.setReadyToStart(true, false);
 				} else {
-					main.startingWindows.setReadyToStart(false, true);
+					ThePresident.startWindow.setReadyToStart(false, true);
 				}
 			}
 			
@@ -843,11 +843,11 @@ public class PreProcessDriver {
 				
 				if (preProcessWindow.documentsAreReady()) {
 					if (preProcessWindow.saved)
-						main.startingWindows.setReadyToStart(true, true);
+						ThePresident.startWindow.setReadyToStart(true, true);
 					else
-						main.startingWindows.setReadyToStart(true, false);
+						ThePresident.startWindow.setReadyToStart(true, false);
 				} else {
-					main.startingWindows.setReadyToStart(false, true);
+					ThePresident.startWindow.setReadyToStart(false, true);
 				}
 			}
 		};
@@ -1144,7 +1144,7 @@ public class PreProcessDriver {
 
 			try {
 				String testDocText = main.mainDocPreview.stringify();
-				main.getDocumentPane().setText(testDocText);
+				main.documentPane.setText(testDocText);
 				main.originalDocPane.setText(testDocText);
 				preProcessWindow.testDocPane.setText(testDocText);
 				if (titles.get(ANONConstants.DUMMY_NAME) == null)

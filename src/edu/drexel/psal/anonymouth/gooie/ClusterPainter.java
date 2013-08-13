@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import edu.drexel.psal.anonymouth.engine.Cluster;
 
-public class ClusterPanel extends JPanel {
+public class ClusterPainter extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class ClusterPanel extends JPanel {
 	Cluster[] clusters;
 	int numClusters;
 	
-	public ClusterPanel(Cluster[] clusters,int featureNumber, double minimum, double maximum, double authorMin, double authorMax, double presentValue) {
+	public ClusterPainter(Cluster[] clusters,int featureNumber, double minimum, double maximum, double authorMin, double authorMax, double presentValue) {
 		this.clusters = clusters;
 		this.numClusters = clusters.length;
 		this.minimum = minimum;
@@ -108,7 +108,7 @@ public class ClusterPanel extends JPanel {
 			g2.fill(new Ellipse2D.Double(centroid-Math.sqrt(dim), yoffset-Math.sqrt(dim),dim,dim));
 			*/
 			
-			int selectedCluster = DriverClustersWindow.selectedClustersByFeature[featureNumber];
+			int selectedCluster = ClustersDriver.selectedClustersByFeature[featureNumber];
 
 			/**
 			 * this needs to be offset by 1, because a '1' was added to the cluster numbers to avoid a cluster being number '0'.

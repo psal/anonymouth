@@ -105,18 +105,18 @@ public class Clipboard {
 	
 	public void cut() {
 		copy();
-		main.getDocumentPane().replaceSelection("");
+		main.documentPane.replaceSelection("");
 	}
 	
 	public void copy() {
 		java.awt.datatransfer.Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		TransferHandler transferHandler = main.getDocumentPane().getTransferHandler();
-		transferHandler.exportToClipboard(main.getDocumentPane(), clipboard, TransferHandler.COPY);
+		TransferHandler transferHandler = main.documentPane.getTransferHandler();
+		transferHandler.exportToClipboard(main.documentPane, clipboard, TransferHandler.COPY);
 	}
 	
 	public void paste() {
 		java.awt.datatransfer.Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		TransferHandler transferHandler = main.getDocumentPane().getTransferHandler();
-		transferHandler.importData(main.getDocumentPane(), clipboard.getContents(null));
+		TransferHandler transferHandler = main.documentPane.getTransferHandler();
+		transferHandler.importData(main.documentPane, clipboard.getContents(null));
 	}
 }

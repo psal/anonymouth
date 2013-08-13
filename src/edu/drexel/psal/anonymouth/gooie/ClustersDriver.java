@@ -14,10 +14,9 @@ import edu.drexel.psal.anonymouth.engine.ClusterAnalyzer;
 import edu.drexel.psal.anonymouth.engine.ClusterGroup;
 import edu.drexel.psal.jstylo.generics.Logger;
 
-public class DriverClustersWindow {
+public class ClustersDriver {
 	
-	@SuppressWarnings("unused")
-	private final static String NAME = "( DriverClustersTab ) - ";
+	private final static String NAME = "( ClustersDriver ) - ";
 
 	private static int lenJPanels;
 	public static boolean clusterGroupReady = false;
@@ -32,29 +31,6 @@ public class DriverClustersWindow {
 	protected static int numFeatures;
 	protected static int[] selectedClustersByFeature;
 
-	@SuppressWarnings("rawtypes")
-	public static class alignListRenderer implements ListCellRenderer {
-
-		int alignValue;
-		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
-
-		public alignListRenderer(int value) {
-			super();
-			alignValue = value;
-		}
-
-		public Component getListCellRendererComponent(JList list, Object value, int index,
-	      boolean isSelected, boolean cellHasFocus) {
-
-		    JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index,
-		        isSelected, cellHasFocus);
-
-		    renderer.setHorizontalAlignment(alignValue);
-
-		    return renderer;
-	    }
-	}
-
 	public static int[][] getIntRep() {
 		return intRepresentation;
 	}
@@ -64,7 +40,7 @@ public class DriverClustersWindow {
 	}
 
 	public static boolean setClusterGroup() {
-		Logger.logln("Cluster group array retrieved from ClusterAnalyzer and brought to ClusterViewerDriver");
+		Logger.logln(NAME+"Cluster group array retrieved from ClusterAnalyzer and brought to ClusterViewerDriver");
 		if(clusterGroupReady) {
 			clusterGroupRay = ClusterAnalyzer.getClusterGroupArray();
 			lenCGR = clusterGroupRay.length;
@@ -142,7 +118,7 @@ public class DriverClustersWindow {
 
 			//if (authorMax[i] != 0 && presentValues[i] != 0 && authorMin[i] != 0) {
 				System.out.println(i + ", " + minimums[i] + ", " + maximums[i] + ", " + authorMin[i] + ", " + authorMax[i] + ", " + presentValues[i]);
-				JPanel clusterPanel = new ClusterPanel(outerLevel.next(),i,minimums[i],maximums[i], authorMin[i],authorMax[i],presentValues[i]);
+				JPanel clusterPanel = new ClusterPainter(outerLevel.next(),i,minimums[i],maximums[i], authorMin[i],authorMax[i],presentValues[i]);
 				clusterPanels[i] = clusterPanel;
 
 				MigLayout layout = new MigLayout(
@@ -159,17 +135,6 @@ public class DriverClustersWindow {
 			initialLayoverVals[i] = 1;
 			i++;
 		}
-		
-		//GUIMain.inst.clustersWindow.addClusterFeatures(usedNames); //--- fills the features and subfeatures list for searching
-		/*
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ClusterViewerFrame inst = new ClusterViewerFrame();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-				}
-			});
-			*/
 	}
 
 	public static void initializeClusterViewer(GUIMain main, boolean showMessage) {
@@ -183,11 +148,11 @@ public class DriverClustersWindow {
 			if (i == 0 || i % 2 == 0) {
 				nameLabels[i].setBackground(Color.WHITE);
 				clusterPanels[i].setBackground(Color.WHITE);
-				finalPanels[i].setBorder(GUIMain.rlborder);
+				finalPanels[i].setBorder(main.rlborder);
 			} else {
 				nameLabels[i].setBackground(main.blue);
 				clusterPanels[i].setBackground(main.blue);
-				finalPanels[i].setBorder(GUIMain.rlborder);
+				finalPanels[i].setBorder(main.rlborder);
 			}
 			nameLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			nameLabels[i].setOpaque(true);
@@ -217,25 +182,27 @@ public class DriverClustersWindow {
 			clusterPanels[i].repaint();
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public static class alignListRenderer implements ListCellRenderer {
 
-	public static void initListeners(final GUIMain main) {	
-//		main.clustersWindow.featuresList.setCellRenderer(new alignListRenderer(SwingConstants.CENTER));
-//		main.clustersWindow.subFeaturesList.setCellRenderer(new alignListRenderer(SwingConstants.CENTER));
+		int alignValue;
+		protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
-//		main.clustersWindow.featuresList.addListSelectionListener(new ListSelectionListener() {
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				int index = main.clustersWindow.featuresList.getSelectedIndices()[0];
-//				main.clustersWindow.subFeaturesListModel = new DefaultListModel();
-//				for (int i = 0; i < main.clustersWindow.subfeatures.get(index).size(); i++)
-//					main.clustersWindow.subFeaturesListModel.addElement(main.clustersWindow.subfeatures.get(index).get(i));
-//				main.clustersWindow.subFeaturesList.setModel(main.clustersWindow.subFeaturesListModel);
-//				main.clustersWindow.subFeaturesListScrollPane.getVerticalScrollBar().setValue(0);
-//				if (main.clustersWindow.subfeatures.get(index).isEmpty()) {
-//					main.clustersWindow.subFeaturesList.setEnabled(false);
-//				} else
-//					main.clustersWindow.subFeaturesList.setEnabled(true);
-//			}
-//		});
+		public alignListRenderer(int value) {
+			super();
+			alignValue = value;
+		}
+
+		public Component getListCellRendererComponent(JList list, Object value, int index,
+	      boolean isSelected, boolean cellHasFocus) {
+
+		    JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index,
+		        isSelected, cellHasFocus);
+
+		    renderer.setHorizontalAlignment(alignValue);
+
+		    return renderer;
+	    }
 	}
 }
