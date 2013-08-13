@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * Provides a convenient interface to load many different kinds of Images that may be needed by Anonymouth 
@@ -23,7 +24,9 @@ public class ImageLoader {
 
 	/**
 	 * Loads and returns an Image Icon with the specified name
-	 * @param name - The name of the Image Icon to load
+	 * 
+	 * @param name
+	 * 		The name of the Image Icon to load
 	 * @return
 	 */
 	public static ImageIcon getImageIcon(String name) {
@@ -32,7 +35,7 @@ public class ImageLoader {
 		try {
 			icon = new ImageIcon(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+name));
 		} catch (Exception e) {
-			Logger.logln(NAME+"Error loading Image Icon " + name);
+			Logger.logln(NAME+"Error loading Image Icon " + name, LogOut.STDERR);
 		}
 
 		return icon;
@@ -40,7 +43,9 @@ public class ImageLoader {
 
 	/**
 	 * Loads and returns an Image with the specified name
-	 * @param name - The name of the Image to load
+	 * 
+	 * @param name
+	 * 		The name of the Image to load
 	 * @return
 	 */
 	public static Image getImage(String name) {
@@ -50,7 +55,7 @@ public class ImageLoader {
 			image = ImageIO.read(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+name));
 		} catch (IOException e) {
 			e.printStackTrace();
-			Logger.logln(NAME+"Error loading Image " + name);
+			Logger.logln(NAME+"Error loading Image " + name, LogOut.STDERR);
 		}
 
 		return image;
@@ -58,7 +63,9 @@ public class ImageLoader {
 
 	/**
 	 * Loads and returns a Buffered Image with the specified name
-	 * @param name - The name of the Buffered Image to load
+	 * 
+	 * @param name
+	 * 		The name of the Buffered Image to load
 	 * @return
 	 */
 	public static BufferedImage getBufferedImage(String name) {
@@ -67,7 +74,7 @@ public class ImageLoader {
 		try {
 			bufImage = ImageIO.read(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+name));
 		} catch (IOException e) {
-			Logger.logln(NAME+"Error loading the Buffered Image " + name);
+			Logger.logln(NAME+"Error loading the Buffered Image " + name, LogOut.STDERR);
 		}
 
 		return bufImage;
@@ -75,6 +82,7 @@ public class ImageLoader {
 
 	/**
 	 * Loads and returns an Icon with the specified name
+	 * 
 	 * @param name
 	 * 		The name of the Icon you want to load (Must be in resources/graphics)
 	 * @return
@@ -86,7 +94,7 @@ public class ImageLoader {
 		try {
 			icon = new ImageIcon(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+name));
 		} catch (Exception e) {
-			Logger.logln(NAME+"Error loading Image Icon " + name);
+			Logger.logln(NAME+"Error loading Image Icon " + name, LogOut.STDERR);
 		}
 
 		return icon;

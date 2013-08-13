@@ -45,7 +45,6 @@ public class PreProcessAdvancedDriver {
 
 	//Variables
 	private PreProcessAdvancedWindow advancedWindow;
-	private GUIMain main;
 	protected CumulativeFeatureDriver cfd;
 	private Classifier testClassifier;
 
@@ -76,9 +75,8 @@ public class PreProcessAdvancedDriver {
 	 * @param advancedWindow - PreProcessAdvancedWindow instance, so we can access the swing components
 	 * @param main - GUIMain instance
 	 */
-	public PreProcessAdvancedDriver(PreProcessAdvancedWindow advancedWindow, GUIMain main) {
+	public PreProcessAdvancedDriver(PreProcessAdvancedWindow advancedWindow) {
 		this.advancedWindow = advancedWindow;
-		this.main = main;
 		initListeners();
 	}
 
@@ -488,7 +486,7 @@ public class PreProcessAdvancedDriver {
 	 * Updates the "Feature Set" tab to reflect a newly selected feature set.
 	 */
 	protected void updateFeatureSetTab() {
-		cfd = main.presetCFDs.get(advancedWindow.featureChoice.getSelectedIndex());
+		cfd = advancedWindow.presetCFDs.get(advancedWindow.featureChoice.getSelectedIndex());
 		Logger.logln(NAME+"Successfully loaded feature set: "+cfd.getName());
 
 		clearFeatureView();

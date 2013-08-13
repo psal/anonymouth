@@ -1,13 +1,19 @@
 package edu.drexel.psal.anonymouth.helpers;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -107,7 +113,7 @@ public class FileHelper {
 	 * 		pass some arbitrarily large number, depending on how many lines you expect).
 	 * @return
 	 */
-	public static ArrayList<String> ArrayListFromFile(String path, int expectedSize) {
+	public static ArrayList<String> arrayListFromFile(String path, int expectedSize) {
 		ArrayList<String> lines = new ArrayList<String>(expectedSize);
 
 		try {
@@ -125,5 +131,34 @@ public class FileHelper {
 		}
 		
 		return lines;
+	}
+	
+	/**
+	 * Writes the contents of the passed String to the given path. If something goes wrong, it will display an error message and
+	 * print problem to the Logger.
+	 * 
+	 * @param path
+	 * 		The absolute path you want to save your file to
+	 * @param textToSave
+	 * 		The text you want to write out in the form of a String
+	 */
+	public static void writeToFile(String path, String textToSave) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+			bw.write(textToSave);
+			bw.flush();
+			bw.close();
+			Logger.log(NAME+"Saved contents of document to "+path);
+
+			GUIMain.saved = true;
+		} catch (IOException exc) {
+			Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
+			JOptionPane.showMessageDialog(null,
+					"Anonymouth ran into an issue saving document to:\n"+path+
+					"\nBe sure that you have proper permissions or try\n" +
+					"saving to a different directory instead.",
+					"Save Error",
+					JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
+		}
 	}
 }

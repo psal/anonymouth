@@ -421,13 +421,14 @@ public class Attribute {
 	 * @param takeAbsVal
 	 * @return
 	 */
-	public double getPercentChangeNeeded(boolean normalizeToBaseline, boolean invertPercentage, boolean takeAbsVal){
+	public double getPercentChangeNeeded(boolean normalizeToBaseline, boolean invertPercentage, boolean takeAbsVal) {
 		double temp = 0;
 		double perm = 0;
 		double minimumPercentChangeUnit = 0;
 		double halfOfMin;
 		double theModulus;
-		if(toModifyValue != 0){
+		
+		if (toModifyValue != 0) {
 			minimumPercentChangeUnit = ((100/toModifyValue)/100);
 			halfOfMin =minimumPercentChangeUnit / 2;
 			temp = (targetValue - toModifyValue)/toModifyValue;// signedness matters, don't take abs. value
@@ -440,32 +441,34 @@ public class Attribute {
 			else // otherwise, if percent change needed is greater than or exactly halfway between a minimumPercentChangeUnit,
 				temp = temp + (minimumPercentChangeUnit - theModulus); // round up to the next highest minimumPercentChangeUnit
 				
-		}
-		else
+		} else {
 			temp = Math.ceil(this.targetValue); // if value doesnt exist in document, set percent change needed to the ceil value of the  target value (e.g. add 5 occurrences of 'if': 500%)
 			// XXX NOTE: I am rounding this up because if the feature doesn't exist, and it should be present, it seems that it would be
 			// fairly important to add. However, taking the actual percent change that it would need is impossible (div. by zero)...
-		if(!haveSetBaselinePercentChangeNeeded){
+		}
+
+		if (!haveSetBaselinePercentChangeNeeded) {
 			baselinePercentChangeNeeded = temp*100;
 			haveSetBaselinePercentChangeNeeded = true;
 		}
-		if(normalizeToBaseline){
+		
+		if (normalizeToBaseline) {
 			perm = (((temp*100)-baselinePercentChangeNeeded)/baselinePercentChangeNeeded);
 			if(invertPercentage)
 				perm = 100 - perm;
-		}
-		else{
+		} else {
 			perm = temp;
-			if(invertPercentage)
+			if (invertPercentage)
 				perm = baselinePercentChangeNeeded - perm;
 		}
+		
 		if(takeAbsVal)
 			return Math.abs(perm); 
 		else
 			return perm;
 	}
 
-	public double getFeatureBaselinePercentChangeNeeded(){
+	public double getFeatureBaselinePercentChangeNeeded() {
 		return baselinePercentChangeNeeded;
 	}
 		

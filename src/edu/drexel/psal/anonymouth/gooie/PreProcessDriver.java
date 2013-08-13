@@ -51,10 +51,10 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  * @author Marc Barrowclift
  *
  */
-public class PreProcessWindowDriver {
+public class PreProcessDriver {
 	
 	//Constants
-	private final static String NAME = "( PreProcessWindowDriver ) - ";
+	private final static String NAME = "( PreProcessDriver ) - ";
 	private final int REPLACE = 0;
 	private final int KEEP_BOTH = 1;
 
@@ -100,7 +100,7 @@ public class PreProcessWindowDriver {
 	 * @param advancedWindow - PreProcessAdvancedWindow instance
 	 * @param main - GUIMain instance
 	 */
-	public PreProcessWindowDriver(PreProcessWindow preProcessWindow, GUIMain main) {
+	public PreProcessDriver(PreProcessWindow preProcessWindow, GUIMain main) {
 		this.main = main;
 		this.preProcessWindow = preProcessWindow;
 		
@@ -217,7 +217,7 @@ public class PreProcessWindowDriver {
 						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.testNextButton);
 						preProcessWindow.testNextButton.requestFocusInWindow();
 						
-						main.updateDocLabel(file.getName());
+						//main.updateDocLabel(file.getName(), 0);
 					}
 				} else {
 					Logger.logln(NAME+"Load test documents canceled");
@@ -1145,6 +1145,7 @@ public class PreProcessWindowDriver {
 			try {
 				String testDocText = main.mainDocPreview.stringify();
 				main.getDocumentPane().setText(testDocText);
+				main.originalDocPane.setText(testDocText);
 				preProcessWindow.testDocPane.setText(testDocText);
 				if (titles.get(ANONConstants.DUMMY_NAME) == null)
 					titles.put(ANONConstants.DUMMY_NAME, new ArrayList<String>());

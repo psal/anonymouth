@@ -91,7 +91,7 @@ public class ThePresident {
 							System.exit(0);
 						}
 					} else if (PropertiesUtil.getAutoSave()) {
-						DriverEditor.save(GUIMain.inst);
+						DriverMenu.save(GUIMain.inst);
 						System.exit(0);
 					} else {
 						System.exit(0);

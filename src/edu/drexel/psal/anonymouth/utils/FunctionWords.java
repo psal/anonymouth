@@ -52,7 +52,7 @@ public class FunctionWords implements Runnable {
 	public void run() {
 		Logger.logln(NAME+"Beginning to initialize function words...");
 
-		functionWordList = FileHelper.ArrayListFromFile(ANONConstants.KOPPEL_FUNCTION_WORDS, 1000);
+		functionWordList = FileHelper.arrayListFromFile(ANONConstants.KOPPEL_FUNCTION_WORDS, 1000);
 		functionWordArray = new String[NUM_OF_WORDS];
 
 		//We only want to use a predetermined number of words from the ArrayList we obtained

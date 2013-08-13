@@ -90,9 +90,9 @@ public class ClusterAnalyzer {
 				clustersByDoc[col][row] = orderedClusters[i]; 
 			}
 			// So, now clustersByDoc is an array with each row containing all cluster numbers of all features in a given document. 
-			// Each column corresponds to a certain feature. 
-			
+			// Each column corresponds to a certain feature. 	
 		}
+		
 		return true;
 	}
 	
@@ -100,7 +100,7 @@ public class ClusterAnalyzer {
 	 * Runs analysis of the ClusterGroups, and orders them such that the ClusterGroup(s) most likely to be make the user anonymous, are at the top of
 	 * the array returned by {@link #getClusterGroupArray()}
 	 */
-	public void analyzeNow(){ 
+	public void analyzeNow() { 
 		Logger.logln(NAME+"Begin analysis of clusters in analyzeNow in ClusterAnalyzer");
 		int i,j,k;
 		commonClusterSetMap = new HashMap<SmartIntegerArray,Integer>(theDocs.size()); // worst case, no two documents fall in same set of clusters

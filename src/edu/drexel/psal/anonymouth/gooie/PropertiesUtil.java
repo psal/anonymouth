@@ -450,7 +450,7 @@ public class PropertiesUtil {
 	 * Sets the index of the current client to use for the next time Anonymouth loads.
 	 * @param client - the index of the client wanted.
 	 */
-	protected static void setCurrentClient(int client) {
+	public static void setCurrentClient(int client) {
 		BufferedWriter writer;
 		
 		try {
@@ -467,7 +467,7 @@ public class PropertiesUtil {
 	 * Gets the index of the current client to use for translations
 	 * @return
 	 */
-	protected static int getCurrentClient() {
+	public static int getCurrentClient() {
 		String client;
 		
 		try {
@@ -489,7 +489,7 @@ public class PropertiesUtil {
 	 * @param availability - An ArrayList<String> containing one of two values for each client: Either the string "ready" or a date,
 	 * meaning that the client is not ready and will only be available after the specified date.
 	 */
-	protected static void setClientAvailability(ArrayList<String> availability) {
+	public static void setClientAvailability(ArrayList<String> availability) {
 		BufferedWriter writer;
 		
 		try {
@@ -507,7 +507,7 @@ public class PropertiesUtil {
 	 * @return Unlike every other get method here, this return value can be empty if the developer hadn't first set the availability (Since
 	 * there is no "default" availability value to fall back on)
 	 */
-	protected static ArrayList<String> getClientAvailability() {
+	public static ArrayList<String> getClientAvailability() {
 		ArrayList<String> availability = new ArrayList<String>(10);
 		
 		try {
@@ -552,7 +552,7 @@ public class PropertiesUtil {
 	 * Gets the user's translate preference
 	 * @return
 	 */
-	protected static boolean getDoTranslations() {
+	public static boolean getDoTranslations() {
 		String translate = "";
 		
 		try {
@@ -668,7 +668,7 @@ public class PropertiesUtil {
 	 * Gets the user's warn on quit preference
 	 * @return
 	 */
-	protected static boolean getWarnQuit() {
+	public static boolean getWarnQuit() {
 		String warnQuit = "";
 		try {
 			warnQuit = prop.getProperty("warnQuit");
@@ -709,7 +709,7 @@ public class PropertiesUtil {
 	 * Gets the user's preference on auto-saving
 	 * @return
 	 */
-	protected static boolean getAutoSave() {
+	public static boolean getAutoSave() {
 		String autoSave = "";
 		try {
 			autoSave = prop.getProperty("autoSave");

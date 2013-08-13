@@ -312,6 +312,11 @@ public class StartWindow extends JFrame {
 		if (ANONConstants.IS_USER_STUDY && ThePresident.sessionName.equals("")) {
 			userStudySessionName.showSessionWindow();
 		} else {
+			ThePresident.sessionName = "Anonymouth";
+			Logger.setFilePrefix(ThePresident.sessionName);
+			Logger.logFile = true;
+			Logger.initLogFile();
+			Logger.logln(NAME+"Logger initialized, session name = " + ThePresident.sessionName);
 			Logger.logln(NAME+"Displaying Anonymouth Start Window");
 
 			if (ThePresident.canDoQuickStart) {
@@ -348,7 +353,7 @@ public class StartWindow extends JFrame {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
 				
-				main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle());
+				//main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle(), 0);
 				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getTestDoc().getFilePath(), false);
 				main.preProcessWindow.driver.updateOpeningDir(main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath(), true);
 			} else {

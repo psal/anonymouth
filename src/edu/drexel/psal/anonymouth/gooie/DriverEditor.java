@@ -1,6 +1,5 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
@@ -12,24 +11,17 @@ import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
-import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -60,7 +52,6 @@ public class DriverEditor {
 	protected static Attribute currentAttrib;
 	public static boolean hasCurrentAttrib = false;
 	public static boolean isWorkingOnUpdating = false;
-	private static String savePath;
 	
 	// It seems redundant to have these next four variables, but they are used in slightly different ways, and are all necessary.
 	public static int currentCaretPosition = -1;
@@ -87,8 +78,6 @@ public class DriverEditor {
 
 	private static String cleanWordRegex=".*([\\.,!?])+";//REFINE THIS??
 
-	protected static Translation translator = new Translation();
-
 	public static TaggedDocument taggedDoc;
 	public static boolean doHighlight = PropertiesUtil.getHighlightSents();
 	public static boolean autoHighlight = PropertiesUtil.getAutoHighlight();
@@ -98,7 +87,7 @@ public class DriverEditor {
 	protected static int curCharBackupBuffer = 0;
 	public static int currentSentNum = 0;
 	protected static int lastSentNum = -1;
-	protected static int sentToTranslate = 0;
+	public static int sentToTranslate = 0;
 	public static int[] selectedSentIndexRange = new int[]{-2,-2}; 
 	protected static int[] lastSelectedSentIndexRange = new int[]{-3,-3};
 	protected static int lastCaretLocation = -1;
@@ -125,8 +114,8 @@ public class DriverEditor {
 	public static int[] leftSentInfo = new int[0];
 	public static int[] rightSentInfo = new int[0];
 	private static boolean translate = false;
-	protected static ActionListener saveAsTestDoc;
 	public static ActionListener processButtonListener;
+	public static ActionListener viewResultsListener;
 	protected static Object lock = new Object();
 	private static boolean wholeLastSentDeleted = false;
 	private static boolean wholeBeginningSentDeleted = false;
@@ -139,7 +128,7 @@ public class DriverEditor {
 	}
 
 	protected static void doTranslations(ArrayList<TaggedSentence> sentences, GUIMain main) {
-		GUIMain.GUITranslator.load(sentences);
+		main.translationsDriver.translator.load(sentences);
 	}
 
 
@@ -167,7 +156,7 @@ public class DriverEditor {
 	 * @param main GUIMain object
 	 */
 	public static void setAllDocTabUseable(boolean b, GUIMain main) {
-		main.saveButton.setEnabled(b);
+		main.viewResultsButton.setEnabled(b);
 		main.fileSaveTestDocMenuItem.setEnabled(b);
 		main.fileSaveAsTestDocMenuItem.setEnabled(b);
 		main.viewClustersMenuItem.setEnabled(b);
@@ -212,8 +201,8 @@ public class DriverEditor {
 		 */
 		if (translate && !main.startTranslations.isEnabled() && PropertiesUtil.getDoTranslations()) {
 			translate = false;
-			GUIMain.GUITranslator.replace(taggedDoc.getSentenceNumber(oldSelectionInfo[0]), originals.get(originalSents.get(oldSelectionInfo[0])));//new old
-			main.anonymityDrawingPanel.updateAnonymityBar();
+			main.translationsDriver.translator.replace(taggedDoc.getSentenceNumber(oldSelectionInfo[0]), originals.get(originalSents.get(oldSelectionInfo[0])));//new old
+			main.anonymityBar.updateBar();
 			originals.remove(originalSents.get(oldSelectionInfo[0]));
 			originals.put(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false), taggedDoc.getSentenceNumber(oldSelectionInfo[0]));
 			originalSents.remove(oldSelectionInfo[0]);
@@ -234,7 +223,7 @@ public class DriverEditor {
 		selectedSentIndexRange[0] = selectionInfo[1]; //start highlight
 		selectedSentIndexRange[1] = selectionInfo[2]; //end highlight
 		moveHighlight(main,selectedSentIndexRange);
-		main.anonymityDrawingPanel.updateAnonymityBar();
+		main.anonymityBar.updateBar();
 	}
 
 	/**
@@ -259,7 +248,7 @@ public class DriverEditor {
 		selectedSentIndexRange[1] = selectionInfo[2]; //end highlight
 
 		moveHighlight(main,selectedSentIndexRange);
-		main.anonymityDrawingPanel.updateAnonymityBar();
+		main.anonymityBar.updateBar();
 	}
 
 	/**
@@ -501,7 +490,7 @@ public class DriverEditor {
 								for (int i = 0; i < size; i++) {
 									Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i));
 								}
-								
+
 								Logger.logln(e1);
 								return;
 							}
@@ -598,7 +587,7 @@ public class DriverEditor {
 						currentSentenceString = main.getDocumentPane().getText().substring(lastSelectedSentIndexRange[0],lastSelectedSentIndexRange[1]);
 
 						if (!taggedDoc.getSentenceNumber(lastSentNum).getUntagged(false).equals(currentSentenceString)) {
-							main.anonymityDrawingPanel.updateAnonymityBar();
+							main.anonymityBar.updateBar();
 							setSelectionInfoAndHighlight = false;
 							GUIMain.saved = false;
 						}
@@ -630,7 +619,7 @@ public class DriverEditor {
 					lastCaretLocation = currentCaretPosition;
 					sentToTranslate = currentSentNum;
 					if (!inRange) {
-						DriverTranslationsTab.showTranslations(taggedDoc.getSentenceNumber(sentToTranslate));
+						main.translationsPanel.showTranslations(taggedDoc.getSentenceNumber(sentToTranslate));
 					}
 					
 					if (shouldUpdate && !ignoreVersion && (curCharBackupBuffer >= CHARS_TIL_BACKUP)) {
@@ -820,7 +809,6 @@ public class DriverEditor {
 					JOptionPane.showMessageDialog(main, errorMessage, "Configuration Error!",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					main.leftTabPane.setSelectedIndex(0);
 					// ----- confirm they want to process
 					if (true) {// ---- can be a confirm dialog to make sure they want to process.
 						setAllDocTabUseable(false, main);
@@ -880,52 +868,14 @@ public class DriverEditor {
 			}
 		};
 		main.processButton.addActionListener(processButtonListener);
-
-		saveAsTestDoc = new ActionListener() {
+		
+		viewResultsListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Logger.logln(NAME+"Save As document button clicked.");
-				JFileChooser save = new JFileChooser();
-				
-				File dir;
-				try {
-					dir = new File(new File(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
-					save.setCurrentDirectory(dir);
-				} catch (IOException e1) {
-					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
-				}
-				
-				save.setSelectedFile(new File("anonymizedDoc.txt"));
-				save.addChoosableFileFilter(new ExtFilter("txt files (*.txt)", "txt"));
-				int answer = save.showSaveDialog(main);
-
-				if (answer == JFileChooser.APPROVE_OPTION) {
-					File f = save.getSelectedFile();
-					String path = f.getAbsolutePath();
-					savePath = path;
-					if (!path.toLowerCase().endsWith(".txt"))
-						path += ".txt";
-					try {
-						BufferedWriter bw = new BufferedWriter(new FileWriter(path));
-						bw.write(main.getDocumentPane().getText());
-						bw.flush();
-						bw.close();
-						Logger.log("Saved contents of current tab to "+path);
-
-						GUIMain.saved = true;
-					} catch (IOException exc) {
-						Logger.logln(NAME+"Failed opening "+path+" for writing",LogOut.STDERR);
-						Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-						JOptionPane.showMessageDialog(null,
-								"Failed saving contents of current tab into:\n"+path,
-								"Save Problem Set Failure",
-								JOptionPane.ERROR_MESSAGE);
-					}
-				} else
-					Logger.logln(NAME+"Save As contents of current tab canceled");
+				main.resultsWindow.showResultsWindow();
 			}
 		};
-		main.saveButton.addActionListener(saveAsTestDoc);
+		main.viewResultsButton.addActionListener(viewResultsListener);
 	}
 
 	/**
@@ -934,12 +884,11 @@ public class DriverEditor {
 	 */
 	public static void resetAll(GUIMain main, boolean reprocessing) {
 		reset();
-		GUIMain.GUITranslator.reset();	
-		DriverTranslationsTab.reset(reprocessing);
+		main.translationsDriver.translator.reset();	
+		main.translationsPanel.reset(reprocessing);
 		main.versionControl.reset();
-		main.anonymityDrawingPanel.reset();
+		main.anonymityBar.reset();
 		main.resultsWindow.reset();
-		ResultsChartWindow.updateResultsPrepColor(main);
 		main.elementsToRemoveTable.removeAllElements();
 		main.elementsToAdd.removeAllElements();
 		
@@ -973,31 +922,6 @@ public class DriverEditor {
 		caretPositionPriorToAction = 0;
 		oldSelectionInfo = new int[3];
 		wordsToRemove.clear();
-	}
-
-	public static void save(GUIMain main) {
-		Logger.logln(NAME+"Save document button clicked.");
-
-		if (savePath == null) {
-			DriverEditor.saveAsTestDoc.actionPerformed(new ActionEvent(main.saveButton, ActionEvent.ACTION_PERFORMED, "Save As..."));
-		} else {
-			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(savePath));
-				bw.write(main.getDocumentPane().getText());
-				bw.flush();
-				bw.close();
-				Logger.log("Saved contents of document to "+savePath);
-
-				GUIMain.saved = true;
-			} catch (IOException exc) {
-				Logger.logln(NAME+"Failed opening "+savePath+" for writing",LogOut.STDERR);
-				Logger.logln(NAME+exc.toString(),LogOut.STDERR);
-				JOptionPane.showMessageDialog(null,
-						"Failed saving contents of current tab into:\n"+savePath,
-						"Save Problem Set Failure",
-						JOptionPane.ERROR_MESSAGE);
-			}
-		}
 	}
 
 	public static int getSelection(JOptionPane oPane){

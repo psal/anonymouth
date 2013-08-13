@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Toolkit;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -81,23 +82,32 @@ public class ErrorHandler {
 	 * and quit when the user clicks "Ok"
 	 */
 	public static void StanfordPOSError() {
-		Toolkit.getDefaultToolkit().beep();
-		JOptionPane.showMessageDialog(null,
-				"The Stanford POS (Part of Speech) tagged has caused a fatal error. This happens\n" +
-				"occasionally, and so far only on Mac OS X. Anonymouth will have to close to recover.\n\n" +
-				"If you are running Mac OS X and this occurs often, try using less threads (1 or 2).\n" +
-				"You can change this by navigating to Anonymouth > Preferences > Advanced and sliding\n" +
-				"the thread slider down.",
-				"Stanford Part-Of-Speech Tagger Fatal Error", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
-		
-		Logger.logln(NAME+"Stanford POS Error occurred, will exit now...", LogOut.STDERR);
-		System.exit(STANFORD_POS);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showMessageDialog(null,
+						"The Stanford POS (Part of Speech) tagged has caused a fatal error. This happens\n" +
+						"occasionally, and so far only on Mac OS X. Anonymouth will have to close to recover.\n\n" +
+						"If you are running Mac OS X and this occurs often, try using less threads (1 or 2).\n" +
+						"You can change this by navigating to Anonymouth > Preferences > Advanced and sliding\n" +
+						"the thread slider down.",
+						"Stanford Part-Of-Speech Tagger Fatal Error", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
+				
+				Logger.logln(NAME+"Stanford POS Error occurred, will exit now...", LogOut.STDERR);
+				System.exit(STANFORD_POS);
+			}
+		});
 	}	
 	
 	/**
 	 * Main method for testing
 	 */
 	public static void main(String[] args) {
+		//==========TESTING STANDFORD POS ERROR===========
+		System.out.println("StanfordPOSError()...");
+		StanfordPOSError();
+		
 		//==========TESTING FATAL ERROR==========
 		System.out.println("fatalError()...");
 		fatalError(null, null);

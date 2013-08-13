@@ -77,6 +77,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	protected PreProcessWindow preProcessWindow;
 	protected GUIMain main;
 	protected List<Classifier> classifiers;
+	protected List<CumulativeFeatureDriver> presetCFDs;
 	private String[] classifierNames;
 	protected Hashtable<String, String> fullClassPath;
 	protected Hashtable<String, String> shortClassName;
@@ -183,7 +184,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	 * Initializes all our data used in the window
 	 */
 	private void initData() {
-		driver = new PreProcessAdvancedDriver(this, main);
+		driver = new PreProcessAdvancedDriver(this);
 		driver.cfd = new CumulativeFeatureDriver();
 		classifiers = new ArrayList<Classifier>();
 		FeatureWizardDriver.populateAll();
@@ -613,7 +614,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	 * @param main - GUIMain instance
 	 */
 	protected void initFeaturesList() {
-		main.presetCFDs = new ArrayList<CumulativeFeatureDriver>();
+		presetCFDs = new ArrayList<CumulativeFeatureDriver>();
 
 		try {
 			File[] featureSetFiles = new File(JSANConstants.JSAN_FEATURESETS_PREFIX).listFiles(new FilenameFilter() {
@@ -625,12 +626,12 @@ public class PreProcessAdvancedWindow extends JDialog {
 			String path;
 			for (File f: featureSetFiles) {
 				path = f.getAbsolutePath();
-				main.presetCFDs.add(new CumulativeFeatureDriver(path));
+				presetCFDs.add(new CumulativeFeatureDriver(path));
 			}
 
-			String[] presetCFDsNames = new String[main.presetCFDs.size()];
-			for (int i = 0; i < main.presetCFDs.size(); i++)
-				presetCFDsNames[i] = main.presetCFDs.get(i).getName();
+			String[] presetCFDsNames = new String[presetCFDs.size()];
+			for (int i = 0; i < presetCFDs.size(); i++)
+				presetCFDsNames[i] = presetCFDs.get(i).getName();
 
 			featureChoiceModel = new DefaultComboBoxModel<String>(presetCFDsNames);
 			featureChoice.setModel(featureChoiceModel);

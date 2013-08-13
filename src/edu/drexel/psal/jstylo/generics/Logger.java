@@ -16,6 +16,7 @@ import edu.drexel.psal.ANONConstants;
  */
 public class Logger {
 	
+	private static String NAME = "( Logger ) - ";
 	public static final boolean loggerFlag = true;
 	public static boolean logFile = false;
 	
@@ -57,8 +58,10 @@ public class Logger {
 	public static void initLogFile() {
 		if (loggerFlag && logFile) {
 			out = fileDirPath+"/"+filePrefix+"_"+date()+"_"+time()+".txt";
-			System.out.println(out);
-			String msg = "Started log "+out+"\n===================================================\n";
+			String msg = NAME+"Started log "+out+"\n" +
+					"=======================ALL PREVIOUS OUTPUT WRITTEN TO LOG FILE============================\n";
+			System.out.println(msg);
+			
 			try {
 				if (logFile) {
 					bw = new BufferedWriter(new FileWriter(out));
@@ -72,10 +75,9 @@ public class Logger {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("Failed opening log file!");
+				System.out.println(NAME+"Failed opening log file!");
 				System.exit(0);
 			}
-			System.out.println(msg);
 		}
 	}
 	
@@ -102,6 +104,8 @@ public class Logger {
 				if (logFile) {
 					bw.write(timedMsg);
 					bw.flush();
+				} else {
+					printBuffer.concat(timedMsg);
 				}
 			} catch (IOException e) {
 				System.err.println("Failed writing to log file!");
@@ -117,15 +121,16 @@ public class Logger {
 		if (loggerFlag) {
 			log(msg);
 			System.out.println();
+			
 			try {
 				if (logFile) {
 					bw.write("\n");
 					bw.flush();
 				} else {
-					printBuffer.concat(msg+"\n");
+					printBuffer.concat("\n");
 				}
 			} catch (IOException e) {
-				System.err.println("Failed writing to log file!");
+				System.err.println(NAME+"Failed writing to log file!");
 			}
 		}
 	}
@@ -158,7 +163,7 @@ public class Logger {
 					printBuffer.concat(msg);
 				}
 			} catch (IOException e) {
-				System.err.println("Failed writing to log file!");
+				System.err.println(NAME+"Failed writing to log file!");
 			}
 		}
 	}
@@ -187,10 +192,10 @@ public class Logger {
 					bw.write("\n");
 					bw.flush();
 				} else {
-					printBuffer.concat(msg+"\n");
+					printBuffer.concat("\n");
 				}
 			} catch (IOException e) {
-				System.err.println("Failed writing to log file!");
+				System.err.println(NAME+"Failed writing to log file!");
 			}
 		}
 	}
@@ -199,24 +204,28 @@ public class Logger {
 	 * Prints a stack trace for an exception to the log file as well as to Standard Error Output
 	 * 
 	 * @param e
-	 * 		The Exception you want to log the stack trace of
+	 * 		The StackTraceElement array from the thread where the error occurred. 
 	 */
 	public static void logln(Exception e) {
 		if (loggerFlag) {
-			String msg = e.toString();
+			StackTraceElement[] stack = e.getStackTrace();
 			
-			log(">>>>>>>>>>>>>>>>>>>>>>>   LOGGING STACK TRACE   <<<<<<<<<<<<<<<<<<<<<<<<<", LogOut.STDERR);
-			log(msg, LogOut.STDERR);
+			log(">>>>>>>>>>>>>>>>>>>>>>>   LOGGING STACK TRACE   <<<<<<<<<<<<<<<<<<<<<<<<<\n", LogOut.STDERR);
+			log(e.toString()+"\n", LogOut.STDERR);
+			for (int i = 0; i < stack.length; i++) {
+				log(stack[i].toString()+"\n", LogOut.STDERR);
+			}
+			
 			System.err.println();
 			try {
 				if (logFile) {
 					bw.write("\n");
 					bw.flush();
 				} else {
-					printBuffer.concat(msg+"\n");
+					printBuffer.concat("\n");
 				}
 			} catch (IOException e1) {
-				System.err.println("Failed writing to log file!");
+				System.err.println(NAME+"Failed writing to log file!");
 			}
 		}
 	}
@@ -229,7 +238,7 @@ public class Logger {
 			try {
 				bw.close();
 			} catch (IOException e) {
-				System.err.println("Failed closing log file!");
+				System.err.println(NAME+"Failed closing log file!");
 			}
 		}
 	}

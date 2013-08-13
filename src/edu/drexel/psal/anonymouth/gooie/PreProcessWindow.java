@@ -59,7 +59,7 @@ public class PreProcessWindow extends JDialog {
 	private final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 22);
 	
 	//Variables
-	public PreProcessWindowDriver driver;
+	public PreProcessDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
 	protected ProblemSet ps;
@@ -161,7 +161,7 @@ public class PreProcessWindow extends JDialog {
 		initPanels();
 		initWindow();
 		
-		driver = new PreProcessWindowDriver(this, main);
+		driver = new PreProcessDriver(this, main);
 	}
 
 	/**

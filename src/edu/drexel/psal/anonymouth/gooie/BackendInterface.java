@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import com.jgaap.generics.Document;
 
@@ -167,7 +168,7 @@ public class BackendInterface {
 				DriverEditor.theFeatures = wizard.getAllRelevantFeatures();
 				Logger.logln(NAME+"The Features are: "+DriverEditor.theFeatures.toString());
 
-				if(DriverEditor.isFirstRun) {
+				if (DriverEditor.isFirstRun) {
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), true);
 					
 					List<Document> sampleDocs = magician.getDocumentSets().get(0);
@@ -176,8 +177,6 @@ public class BackendInterface {
 					for (int i = 0; i < size; i++) {
 						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
 					}
-					
-					main.anonymityDrawingPanel.setMaxPercent(DriverEditor.taggedDoc.getMaxChangeNeeded());
 				} else
 					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.getDocumentPane().getText(), false);
 
@@ -187,15 +186,17 @@ public class BackendInterface {
 				makeResultsChart(wekaResults, main);
 
 				
-				main.anonymityDrawingPanel.updateAnonymityBar();
-				main.anonymityDrawingPanel.showPointer(true);
+				main.anonymityBar.updateBar();
+				if (DriverEditor.isFirstRun)
+					main.anonymityBar.setMaxFill(DriverEditor.taggedDoc.getMaxChangeNeeded());
+				main.anonymityBar.updateBar();
+				main.anonymityBar.showFill(true);
 
 				for (int i = 0; i < DriverEditor.taggedDoc.getTaggedSentences().size(); i++)
 					DriverEditor.originals.put(DriverEditor.taggedDoc.getUntaggedSentences(false).get(i), DriverEditor.taggedDoc.getTaggedSentences().get(i));
 
 				DriverEditor.originalSents = DriverEditor.taggedDoc.getUntaggedSentences(false);
 				main.suggestionsTabDriver.placeSuggestions();
-				ResultsChartWindow.updateResultsPrepColor(main);
 
 				DriverEditor.setAllDocTabUseable(true, main);		
 
@@ -238,10 +239,7 @@ public class BackendInterface {
 
 				Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
 
-				main.processButton.setText("Re-Process");
-				main.resultsLabel.setToolTipText("Click here for larger graph");
 				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
-				main.resultsMainPanel.setToolTipText("Re-Process your document to get updated ownership probability");
 				main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 
 				DriverEditor.backedUpTaggedDoc = new TaggedDocument(DriverEditor.taggedDoc);
@@ -249,6 +247,13 @@ public class BackendInterface {
 				GUIMain.processed = true;
 				pw.stop();
 				main.showMainGUI();
+				
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						main.resultsWindow.showResultsWindow();
+					}
+				});
 			} catch (Exception e) {
 				e.printStackTrace();
 				// Get current size of heap in bytes
@@ -265,6 +270,7 @@ public class BackendInterface {
 				Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize);
 			}
 
+			/*
 			if (PropertiesUtil.showBarTutorial()) {
 				//Needed, without it the Progress bar window just sort of chills around and doesn't close itself like it should (If showing
 				//A JOptionPane, otherwise it's fine, weird.)
@@ -274,7 +280,7 @@ public class BackendInterface {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				*/
+				
 				JOptionPane.showMessageDialog(null,
 						"<html><left>" +
 						"There are two main ways to identify how anonymous your document is, the <b>Anonymity Bar</b> and " +
@@ -293,6 +299,7 @@ public class BackendInterface {
 						JOptionPane.INFORMATION_MESSAGE);
 				PropertiesUtil.setBarTutorial(false);
 			}
+			*/
 		}
 	}
 
@@ -342,7 +349,5 @@ public class BackendInterface {
 		DriverEditor.maxValue = (Object)biggest;
 
 		main.resultsWindow.makeChart();
-		main.resultsWindow.drawingPanel.repaint();
-		main.resultsMainPanel.repaint();
 	}
 }

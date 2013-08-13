@@ -3,10 +3,10 @@ package edu.drexel.psal.anonymouth.gooie;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -40,33 +40,20 @@ import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import com.apple.eawt.AppEvent.FullScreenEvent;
 import com.apple.eawt.FullScreenListener;
 
-
 /**
- * This code was edited or generated using CloudGarden's Jigloo
- * SWT/Swing GUI Builder, which is free for non-commercial
- * use. If Jigloo is being used commercially (ie, by a corporation,
- * company or business for any purpose whatever) then you
- * should purchase a license for each developer using Jigloo.
- * Please visit www.cloudgarden.com for details.
- * Use of Jigloo implies acceptance of these licensing terms.
- * A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
- * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
- * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
- */
-/**
- * JStylo main GUI class.
+ * The main window of Anonymouth. Initializes nearly all other
+ * important classes and lays out the main window swing components
  * 
  * @author Andrew W.E. McDonald
  * @author Marc Barrowclift
  */
-//This is a comment from Joe Muoio to see if he can commit changes.
+
 public class GUIMain extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 
 	{
-		@SuppressWarnings("unused")
 		boolean lookAndFeelSet = false;
 		//Set Look & Feel 
 		// -- start patch submitted by Sebastian Pipping
@@ -95,16 +82,10 @@ public class GUIMain extends javax.swing.JFrame {
 			}
 		}
 	}
-
-	// main instance
+	
+	//Our main instance for easy access anywhere in the code.
 	public static GUIMain inst;
-	protected JPanel mainPanel;
 
-	// ------------------------
-
-	// data
-	protected List<CumulativeFeatureDriver> presetCFDs;
-	protected WekaInstancesBuilder wib;
 	protected WekaAnalyzer wad;
 	protected Thread analysisThread;
 	protected List<String> results;
@@ -113,11 +94,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 	protected Font defaultLabelFont = new Font("Verdana",0,16);
 	protected static int cellPadding = 5;
-
-	protected final Color ready = new Color(0,255,128);
-	protected final Color notReady = new Color(255,102,102);
 	protected final Color blue = new Color(136,166,233,200);
-	//protected final Color blue = new Color((float)0.62f, (float)0.71, (float)0.93); //without alpha
 
 	// tabs
 	protected JTabbedPane mainJTabbedPane;
@@ -185,17 +162,19 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton clearAddHighlights;
 	protected JButton clearRemoveHighlights;
 
-	protected JPanel translationsPanel;
+	protected JPanel translationsMainPanel;
+	public TranslationsPanel translationsPanel;
+	public TranslationsDriver translationsDriver;
 	protected JLabel translationsLabel;
 	protected JButton resetTranslator;
-	protected JButton stopTranslations;
-	protected JButton startTranslations;
-	protected ScrollablePanel translationsHolderPanel;
+	public JButton stopTranslations;
+	public JButton startTranslations;
+	public ScrollablePanel translationsHolderPanel;
 	protected JScrollPane translationsScrollPane;
 	protected JPanel progressPanel;
-	protected JLabel translationsProgressLabel;
-	protected JProgressBar translationsProgressBar;
-	protected JTextPane notTranslated;
+	public JLabel translationsProgressLabel;
+	public JProgressBar translationsProgressBar;
+	public JTextPane notTranslated;
 
 	protected JPanel informationPanel;
 	protected JLabel sentenceEditorLabel;
@@ -216,6 +195,7 @@ public class GUIMain extends javax.swing.JFrame {
 	//--------------- Editor Tab Pane stuff ----------------------
 	protected JTabbedPane topTabPane;
 	protected JPanel documentsPanel;
+	protected JPanel originalDocumentPanel;
 	protected JPanel sentenceAndDocumentPanel;
 	protected JPanel sentenceLabelPanel;
 
@@ -230,7 +210,9 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JButton restoreSentenceButton;
 	protected JLabel documentLabel;
 	private JTextPane documentPane;
+	protected JTextPane originalDocPane;
 	protected JScrollPane documentScrollPane;
+	protected JScrollPane originalDocScrollPane;
 
 	protected JPanel sentenceAndSentenceLabelPanel;
 	protected JLabel translationsBoxLabel;
@@ -241,13 +223,10 @@ public class GUIMain extends javax.swing.JFrame {
 	protected int resultsMaxIndex;
 	protected String chosenAuthor;
 
-	protected JButton saveButton;
-	protected JButton processButton;
+	protected JButton viewResultsButton;
+	public JButton processButton;
 	//---------------------------------------------------------------------
 	protected JTabbedPane bottomTabPane;
-	protected JPanel resultsOptionsPanel;
-	protected JPanel resultsMainPanel;
-	protected JScrollPane resultsScrollPane;
 	protected JTextArea displayTextArea;
 	protected JPanel resultsBoxPanel_InnerBottomPanel;
 	protected JTable resultsTable;
@@ -260,10 +239,13 @@ public class GUIMain extends javax.swing.JFrame {
 	//---------------------------------------------------------------------
 
 	protected JTabbedPane rightTabPane;
-	protected JPanel anonymityPanel;
-	protected JLabel anonymityLabel;
-	public AnonymityDrawingPanel anonymityDrawingPanel;
-	protected JLabel anonymityDescription;
+	protected JPanel anonymityHoldingPanel;	//The "main" anonymity bar panel, holds the bar, label, and anything else we want to add
+	protected JPanel anonymityPanel;		//The entire left-hand tab of Anonymouth
+	protected JLabel anonymityLabel;		//The "Anonymity: " banner label
+	public AnonymityBar anonymityBar;		//The actual bar
+	protected JLabel anonymityDescription;	//The Anonymity percentage/description label
+	protected int anonymityWidth = 200;			//The current height of the panel
+	protected int anonymityHeight = 450;			//The current width of the panel
 
 	//--------------------------------------------------------------------
 
@@ -295,6 +277,7 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JLabel suggestionListLabel;
 	protected JButton verboseButton;
 	protected JScrollPane suggestionListPane;
+	protected JButton resultsButton;
 
 	// Analysis tab
 	protected JCheckBox analysisOutputAccByClassJCheckBox;
@@ -325,11 +308,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected static Border rlborder = BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder());
 	protected static Font titleFont = new Font("Ariel", Font.BOLD, 12);
 	protected static String titleHeight = "25";
-	protected static Boolean saved = true;
+	public static Boolean saved = true;
 	protected static Boolean processed = false;
-
-	// used for translation of sentences
-	protected static Translator GUITranslator;
 
 	// not yet used, may be used to minimize the document, features, or classifiers part of the preprocess panel
 	protected boolean docPPIsShowing = true;
@@ -339,18 +319,16 @@ public class GUIMain extends javax.swing.JFrame {
 	protected FAQWindow suggestionsWindow;
 	protected ClustersTutorial clustersTutorial;
 	protected VersionControl versionControl;
-	protected ResultsChartWindow resultsWindow;
+	protected ResultsWindow resultsWindow;
 	protected RightClickMenu rightClickMenu;
 	protected Clipboard clipboard;
 	protected StartWindow startingWindows;
 	protected static Runnable mainThread;
-	protected JPanel anonymityHoldingPanel;
 	protected JScrollPane anonymityScrollPane;
 	public SuggestionsTabDriver suggestionsTabDriver;
 	protected Font normalFont;
 	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 
-	private int resultsHeight;
 	protected Map<Integer, ArrayList<int[]>> highlights = new HashMap<Integer, ArrayList<int[]>>();
 
 	//used mostly for loading the main document without having to alter the main.ps.testDocAt(0) directly
@@ -366,7 +344,6 @@ public class GUIMain extends javax.swing.JFrame {
 				Logger.initLogFile();
 				
 				inst = new GUIMain();
-				GUITranslator = new Translator(inst);
 
 				WindowListener exitListener = new WindowListener() {
 					@Override
@@ -384,7 +361,8 @@ public class GUIMain extends javax.swing.JFrame {
 								System.exit(0);
 							}
 						} else if (PropertiesUtil.getAutoSave()) {
-							DriverEditor.save(inst);
+							Logger.logln(inst.NAME+"Auto-saving document");
+							DriverMenu.save(inst);
 							System.exit(0);
 						} else {
 							System.exit(0);
@@ -403,13 +381,27 @@ public class GUIMain extends javax.swing.JFrame {
 					@Override
 					public void windowOpened(WindowEvent arg0) {}
 				};
+				inst.addWindowListener(exitListener);
+				
+				inst.addComponentListener(new ComponentListener() {
+					@Override
+					public void componentResized(ComponentEvent e) {
+						inst.updateSizeVariables();
+					}
+					
+					@Override
+					public void componentMoved(ComponentEvent e) {}
+					@Override
+					public void componentShown(ComponentEvent e) {}
+					@Override
+					public void componentHidden(ComponentEvent e) {}
+				});
 
 				if (ANONConstants.IS_MAC) {
 					enableOSXFullscreen(inst);
 				}
 				
 				ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep tooltips from disappearing so fast
-				inst.addWindowListener(exitListener);
 				inst.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				inst.setLocationRelativeTo(null);
 			}
@@ -489,7 +481,6 @@ public class GUIMain extends javax.swing.JFrame {
 
 	private void initPropertiesUtil() {
 		ThePresident.splash.updateText("Initializing preferences");
-		wib = new WekaInstancesBuilder(true);
 		results = new ArrayList<String>();
 
 		// properties file -----------------------------------
@@ -608,8 +599,9 @@ public class GUIMain extends javax.swing.JFrame {
 			createSugTab();
 			createTransTab();
 			createEditorTab();
+			resultsWindow = new ResultsWindow(this);
 			createAnonymityTab();
-
+			
 			setUpContentPane();
 			DriverEditor.setAllDocTabUseable(false, this);
 
@@ -623,7 +615,6 @@ public class GUIMain extends javax.swing.JFrame {
 			suggestionsWindow = new FAQWindow();
 			clustersTutorial = new ClustersTutorial();
 			versionControl = new VersionControl(this);
-			resultsWindow = new ResultsChartWindow(this);
 			rightClickMenu = new RightClickMenu(this);
 
 			ThePresident.splash.updateText("Initializing listeners");
@@ -632,14 +623,23 @@ public class GUIMain extends javax.swing.JFrame {
 			suggestionsTabDriver.initListeners();
 			DriverMenu.initListeners(this);
 			DriverEditor.initListeners(this);
-			DriverResultsTab.initListeners(this);
 			DriverClustersWindow.initListeners(this);
-			DriverResultsWindow.initListeners(this);
-			DriverTranslationsTab.initListeners(this);
+			ResultsDriver.initListeners(this);
+			translationsPanel = new TranslationsPanel(this);
+			translationsDriver = translationsPanel.driver;
 			DictionaryBinding.init();
+			
+			pack();
+			updateSizeVariables();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void updateSizeVariables() {
+		anonymityHeight = anonymityHoldingPanel.getHeight() + 15;
+		anonymityWidth = anonymityPanel.getWidth();
+		anonymityBar.updateForNewSize();
 	}
 
 	/**
@@ -673,8 +673,6 @@ public class GUIMain extends javax.swing.JFrame {
 			String classifier = PropertiesUtil.getClassifier();
 			ppAdvancedWindow.setClassifier(classifier);
 		}
-		
-		ResultsChartWindow.updateResultsPrepColor(this);
 	}
 
 	/**
@@ -688,19 +686,22 @@ public class GUIMain extends javax.swing.JFrame {
 		ArrayList<String> panelNames = new ArrayList<String>();
 		panelNames.add("Word Suggestions");
 		panelNames.add("Translations");
-		panelNames.add("Document");
+		panelNames.add("Document to Anonymize");
+		panelNames.add("Original Document");
 		panelNames.add("Anonymity");
 		panelNames.add("Results");
 
 		HashMap<String, JPanel> panels = new HashMap<String, JPanel>(6);
 		panels.put("Word Suggestions", suggestionsPanel);
-		panels.put("Translations", translationsPanel);
-		panels.put("Document", documentsPanel);
+		panels.put("Translations", translationsMainPanel);
+		panels.put("Document to Anonymize", documentsPanel);
+		panels.put("Original Document", originalDocumentPanel);
 		panels.put("Anonymity", anonymityPanel);
 
 		ArrayList<PropertiesUtil.Location> panelLocations = new ArrayList<PropertiesUtil.Location>();
 		panelLocations.add(PropertiesUtil.getSuggestionsTabLocation());
 		panelLocations.add(PropertiesUtil.getTranslationsTabLocation());
+		panelLocations.add(PropertiesUtil.getDocumentsTabLocation());
 		panelLocations.add(PropertiesUtil.getDocumentsTabLocation());
 		panelLocations.add(PropertiesUtil.getAnonymityTabLocation());
 		panelLocations.add(PropertiesUtil.getResultsTabLocation());
@@ -750,7 +751,7 @@ public class GUIMain extends javax.swing.JFrame {
 
 		// ------ add all tab panes, if they need to be added
 		if (panelLocations.contains(PropertiesUtil.Location.LEFT))
-			getContentPane().add(leftTabPane, "width 200!, spany, shrinkprio 1");
+			getContentPane().add(anonymityPanel, "width 80!, spany, shrinkprio 1");
 		if (panelLocations.contains(PropertiesUtil.Location.TOP))
 			getContentPane().add(topTabPane, "width 100:400:, grow, shrinkprio 3");
 		if (panelLocations.contains(PropertiesUtil.Location.RIGHT))
@@ -868,8 +869,8 @@ public class GUIMain extends javax.swing.JFrame {
 
 	@SuppressWarnings("serial")
 	private JPanel createTransTab() {
-		translationsPanel = new JPanel();
-		translationsPanel.setLayout(new MigLayout(
+		translationsMainPanel = new JPanel();
+		translationsMainPanel.setLayout(new MigLayout(
 				"wrap, ins 0, gap 0 0",
 				"grow, fill",
 				"[][grow, fill][]"));
@@ -947,14 +948,14 @@ public class GUIMain extends javax.swing.JFrame {
 			startTranslations = new JButton("Start");
 			startTranslations.setEnabled(false);
 			
-			translationsPanel.add(translationsLabel, "grow, h 25!, split 1");
-			translationsPanel.add(stopTranslations, "split, h 30!");
-			translationsPanel.add(startTranslations, "h 30!, wrap");
-			translationsPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
-			translationsPanel.add(resetTranslator, "h 30!, wrap");
-			translationsPanel.add(progressPanel, "grow");
+			translationsMainPanel.add(translationsLabel, "grow, h 25!, split 1");
+			translationsMainPanel.add(stopTranslations, "split, h 30!");
+			translationsMainPanel.add(startTranslations, "h 30!, wrap");
+			translationsMainPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
+			translationsMainPanel.add(resetTranslator, "h 30!, wrap");
+			translationsMainPanel.add(progressPanel, "grow");
 		}
-		return translationsPanel;
+		return translationsMainPanel;
 	}
 
 	private JPanel createEditorTab() {
@@ -962,43 +963,57 @@ public class GUIMain extends javax.swing.JFrame {
 		if(tabMade == false) {
 			normalFont = new Font("Ariel", Font.PLAIN, PropertiesUtil.getFontSize());
 			
+			originalDocumentPanel = new JPanel();
+			originalDocumentPanel.setLayout(new MigLayout(
+				"fill, wrap, ins 0, gap 0 0",
+				"[grow, fill]",
+				"[grow, fill]"
+			));
+			
 			documentsPanel = new JPanel();
 			MigLayout EBPLayout = new MigLayout(
 					"fill, wrap, ins 0, gap 0 0",
 					"[grow, fill]",
-					"[][grow, fill][]");
+					"[grow, fill][]");
 			documentsPanel.setLayout(EBPLayout);
 			{
-				documentLabel = new JLabel("Document:");
-				documentLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				documentLabel.setFont(titleFont);
-				documentLabel.setOpaque(true);
-				documentLabel.setBackground(blue);
-				documentLabel.setBorder(rlborder);
-
 				documentScrollPane = new JScrollPane();
-				setDocumentPane(new JTextPane());
-				getDocumentPane().setDragEnabled(false);
-				getDocumentPane().setText("This is where the latest version of your document will be.");
-				getDocumentPane().setFont(normalFont);
-				getDocumentPane().setEnabled(false);
-				getDocumentPane().setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.GRAY), BorderFactory.createEmptyBorder(1,3,1,3)));
+				documentPane = new JTextPane();
+				documentPane.setDragEnabled(false);
+				documentPane.setText("This is where the latest version of your document will be.");
+				documentPane.setFont(normalFont);
+				documentPane.setEnabled(false);
+				documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 
 				InputFilter documentFilter = new InputFilter();
 				((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
 
-				documentScrollPane.setViewportView(getDocumentPane());
+				documentScrollPane.setViewportView(documentPane);
+				
+				originalDocScrollPane = new JScrollPane();
+				originalDocPane = new JTextPane();
+				originalDocPane.setDragEnabled(false);
+				originalDocPane.setText("This is where the original version of your document will be.");
+				originalDocPane.setFont(normalFont);
+				originalDocPane.setEnabled(true);
+				originalDocPane.setEditable(false);
+				originalDocPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
+				originalDocScrollPane.setViewportView(originalDocPane);
+				
+				viewResultsButton = new JButton("View Process Results");
+				viewResultsButton.setToolTipText("Displays the results from the most recent process");
+				viewResultsButton.setFocusable(false);
 
-				saveButton = new JButton("Save As...");
-				saveButton.setToolTipText("Saves the modified document above to a new file.");
+				processButton = new JButton("Reprocess");
+				processButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
+												"and updates the results graph with the new results.</center></html>");
+				processButton.setFocusable(false);
 
-				processButton = new JButton("Process");
-				processButton.setToolTipText("Processes the document.");
-
-				documentsPanel.add(documentLabel, "grow, h " + titleHeight + "!");
 				documentsPanel.add(documentScrollPane, "grow");
-				documentsPanel.add(processButton, "right, split");
-				documentsPanel.add(saveButton, "right");
+				documentsPanel.add(processButton, "right");
+//				documentsPanel.add(viewResultsButton, "right");
+				
+				originalDocumentPanel.add(originalDocScrollPane, "grow");
 			}
 			tabMade = true;
 		}
@@ -1012,10 +1027,10 @@ public class GUIMain extends javax.swing.JFrame {
 			anonymityPanel.setLayout(new MigLayout(
 					"wrap, ins 0, gap 0 0",
 					"grow, fill",
-					"[][grow, fill][]"));
+					"[grow, fill]"));
 		else if (location == PropertiesUtil.Location.TOP)
 			anonymityPanel.setLayout(new MigLayout(
-					"wrap 2, fill, ins 0, gap 0",
+					"wrap 2, fill, ins 0, gap 0 0",
 					"[70%][30%]",
 					"[][][grow, fill]"));
 		else
@@ -1028,88 +1043,40 @@ public class GUIMain extends javax.swing.JFrame {
 			anonymityLabel.setOpaque(true);
 			anonymityLabel.setBackground(blue);
 			anonymityLabel.setBorder(rlborder);
-
-			anonymityDrawingPanel = new AnonymityDrawingPanel(this);
+	
+			anonymityBar = new AnonymityBar(this);
+			
+			resultsButton = new JButton();
+			resultsButton.setBackground(Color.WHITE);
+			resultsButton.setIcon(resultsWindow.getButtonIcon());
+			resultsButton.setToolTipText("Click to reopen process results");
+			resultsButton.setFocusable(false);
 
 			anonymityDescription = new JLabel();
 			anonymityDescription.setFont(new Font("Helvatica", Font.PLAIN, 15));
 			anonymityDescription.setText("<html><center>Test document must<br>be processed to<br>receive results</center></html>");
 			anonymityDescription.setHorizontalAlignment(SwingConstants.CENTER);
+			anonymityDescription.setHorizontalTextPosition(SwingConstants.CENTER);
 
 			anonymityHoldingPanel = new JPanel();
 			anonymityHoldingPanel.setBackground(Color.WHITE);
 			anonymityHoldingPanel.setLayout(new MigLayout(
 					"wrap, ins 0, gap 0 0",
 					"grow, fill",
-					"[][grow, fill][]"));
-			anonymityHoldingPanel.add(anonymityDrawingPanel, "h 494!, pad -10 0");
-			anonymityHoldingPanel.add(anonymityDescription, "alignx 50%, growy, w ::150, gap 0 5"); //growy
-
-			anonymityScrollPane = new JScrollPane(anonymityHoldingPanel);
-			anonymityScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-			resultsTableLabel = new JLabel("Ownership Certainty:");
-			resultsTableLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			resultsTableLabel.setFont(titleFont);
-			resultsTableLabel.setOpaque(true);
-			resultsTableLabel.setBackground(blue);
-			resultsTableLabel.setBorder(rlborder);
-
-			makeResultsPanel();
-			resultsMainPanel.setLayout(new MigLayout(
-					"aligny 50%"));
-			resultsMainPanel.setBackground(Color.WHITE);
+					"[grow, fill]"));
+			anonymityHoldingPanel.add(anonymityBar, "grow");
+			anonymityHoldingPanel.setBackground(Color.white);
 
 			if (location== PropertiesUtil.Location.LEFT || location == PropertiesUtil.Location.RIGHT) {
-				anonymityPanel.add(anonymityLabel, "h " + titleHeight + "!, width 100:220:220");
-				anonymityPanel.add(anonymityScrollPane, "h 200::, width 100:220:220");
-				anonymityPanel.add(resultsTableLabel, "h " + titleHeight + "!, width 100:220:220");
-				anonymityPanel.add(resultsScrollPane, "h 80:150:200, width 100:220:220");
+				anonymityPanel.add(anonymityHoldingPanel, "width 80!");
+				anonymityPanel.add(resultsButton, "dock south, gapbottom 9");
 			}
 		}
 		return anonymityPanel;
 	}
 
-	@SuppressWarnings("serial")
-	private void makeResultsPanel() {
-		resultsMainPanel = new JPanel() {
-			public void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				Graphics2D g2d = (Graphics2D)g;
-
-				if (resultsAreReady()) {
-					resultsLabel.setText("");
-
-					if (resultsWindow.getAuthorSize() <= 20) {
-						resultsHeight = 25 * resultsWindow.getAuthorSize();
-					}
-
-					resultsMainPanel.setPreferredSize(new Dimension(160, resultsHeight));
-					g2d.drawImage(resultsWindow.getPanelChart(170, resultsHeight), -10, -6, null);
-				} else {
-					resultsLabel.setText("<html><center>Please wait while<br>re-processing</center></html>");
-				}
-			}
-		};
-		resultsLabel = new JLabel("");
-		resultsLabel.setFont(new Font("Helvatica", Font.PLAIN, 15));
-		resultsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-		resultsMainPanel.setPreferredSize(new Dimension(175, 110));
-		resultsMainPanel.setToolTipText("Process your document to see ownership probability");
-		resultsMainPanel.add(resultsLabel);
-
-		resultsScrollPane = new JScrollPane(resultsMainPanel);
-		resultsScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		resultsScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-	}
-
 	public JTextPane getDocumentPane() {
 		return documentPane;
-	}
-
-	public void setDocumentPane(JTextPane documentPane) {
-		this.documentPane = documentPane;
 	}
 	
 	public void enableUndo(boolean b) {
@@ -1120,7 +1087,8 @@ public class GUIMain extends javax.swing.JFrame {
 		editRedoMenuItem.setEnabled(b);
 	}
 	
-	public void updateDocLabel(String title) {
-		documentLabel.setText("Document: " + title);
+	public void updateDocLabel(String title, int index) {
+		title = title.replaceAll(".[Tt][Xx][Tt]$", "");
+		topTabPane.setTitleAt(index, title);
 	}
 }

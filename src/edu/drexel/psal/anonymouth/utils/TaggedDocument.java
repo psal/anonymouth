@@ -530,7 +530,7 @@ public class TaggedDocument implements Serializable{
 	 * @param sentsToAdd a String representing the sentence(s) from the editBox
 	 * @return the TaggedSentence that was removed
 	 */
-	public TaggedSentence removeAndReplace(int sentNumber, String sentsToAdd){//, int indexToRemove, int placeToAdd){
+	public TaggedSentence removeAndReplace(int sentNumber, String sentsToAdd) {//, int indexToRemove, int placeToAdd){
 		TaggedSentence toReplace = taggedSentences.get(sentNumber);
 		Logger.logln(NAME+"removing: "+toReplace.getUntagged(false));
 		Logger.logln(NAME+"adding: "+sentsToAdd);
@@ -689,7 +689,7 @@ public class TaggedDocument implements Serializable{
 	 * Calculates and returns the anonymity index of the document if the all of the document's features (that are in 'topAttributes') are equal to their target values.
 	 * @return
 	 */
-	public double getMaxChangeNeeded(){
+	public double getMaxChangeNeeded() {
 		int i;
 		int numAttribs = DataAnalyzer.topAttributes.length;
 		double maxChange = 0;
@@ -700,10 +700,10 @@ public class TaggedDocument implements Serializable{
 				continue; // not really sure how to handle this...
 			if(tempAttrib.getToModifyValue() <= 0)
 				continue;
-			maxChange += Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded())/100;
+			maxChange += Math.abs(tempAttrib.getFeatureBaselinePercentChangeNeeded()) / 100;
 		}
-		return maxChange;
 		
+		return maxChange;
 	}
 	
 

@@ -63,6 +63,7 @@ public class ClusterPanel extends JPanel {
 		
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+				
 		setPreferredSize(new Dimension(800,50));
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -85,7 +86,8 @@ public class ClusterPanel extends JPanel {
 		g2.drawString(roundToString(100,minimum),(int)xoffset/2,(int)(.75*yoffset));
 		g2.drawString(roundToString(100,maximum),(int)(width-3*xoffset),(int)(.75*yoffset));
 		double[][] thisClustersMinsAndMaxes = new double[numClusters][2]; // [min,max] (index == cluster number) => used to update cluster colors
-		for (i=0;i<numClusters;i++) {
+		
+		for (i = 0; i < numClusters; i++) {
 			Cluster current = clusters[i];
 			double maxValue = transform(current.getMaxValue(),false);
 			double minValue = transform(current.getMinValue(),false);
@@ -107,12 +109,14 @@ public class ClusterPanel extends JPanel {
 			*/
 			
 			int selectedCluster = DriverClustersWindow.selectedClustersByFeature[featureNumber];
-			System.out.println("selectedCluster = " + selectedCluster);
-			if (i == selectedCluster-1) { // this needs to be offset by 1, because a '1' was added to the cluster numbers to avoid
-				// a cluster being number '0'. 
+
+			/**
+			 * this needs to be offset by 1, because a '1' was added to the cluster numbers to avoid a cluster being number '0'.
+			 */
+			if (i == selectedCluster-1) {
 				g2.setColor(highlightColor);
 				g2.fill(new Ellipse2D.Double(minValue,yoffset*.68,maxValue - minValue,yoffset*.75));
-			} 
+			}
 //			else {
 //				g2.setColor(Color.green);
 //				g2.draw(new Ellipse2D.Double(minValue,yoffset*.75,maxValue - minValue,yoffset*.5));

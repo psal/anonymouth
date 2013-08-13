@@ -132,7 +132,7 @@ public class DriverClustersWindow {
 		clusterPanels = new JPanel[numFeatures];// everySingleCluster.size()
 		nameLabels = new JLabel[numFeatures];
 		finalPanels = new JPanel[numFeatures];
-		i=0;
+		i = 0;
 		int[] initialLayoverVals = new int[numFeatures];
 		String[] usedNames = new String[numFeatures];
 		
@@ -140,16 +140,21 @@ public class DriverClustersWindow {
 			nameLabels[i] = new JLabel(names[i]); // for if you want to edit the label in any way
 			usedNames[i] = names[i];
 
-			JPanel clusterPanel = new ClusterPanel(outerLevel.next(),i,minimums[i],maximums[i], authorMin[i],authorMax[i],presentValues[i]);
-			clusterPanels[i] = clusterPanel;
+			//if (authorMax[i] != 0 && presentValues[i] != 0 && authorMin[i] != 0) {
+				System.out.println(i + ", " + minimums[i] + ", " + maximums[i] + ", " + authorMin[i] + ", " + authorMax[i] + ", " + presentValues[i]);
+				JPanel clusterPanel = new ClusterPanel(outerLevel.next(),i,minimums[i],maximums[i], authorMin[i],authorMax[i],presentValues[i]);
+				clusterPanels[i] = clusterPanel;
 
-			MigLayout layout = new MigLayout(
-					"fill, wrap, ins 0",
-					"fill, grow",
-					"[20]0[grow, fill]");
-			finalPanels[i] = new JPanel(layout);
-			finalPanels[i].add(nameLabels[i], "grow");
-			finalPanels[i].add(clusterPanels[i], "grow");
+				MigLayout layout = new MigLayout(
+						"fill, wrap, ins 0",
+						"fill, grow",
+						"[20]0[grow, fill]");
+				finalPanels[i] = new JPanel(layout);
+				finalPanels[i].add(nameLabels[i], "grow");
+				finalPanels[i].add(clusterPanels[i], "grow");
+			//} else {
+			//	outerLevel.next();
+			//}
 
 			initialLayoverVals[i] = 1;
 			i++;
@@ -171,6 +176,10 @@ public class DriverClustersWindow {
 		Logger.logln("Initializing ClusterViewer");
 		int numPanels = clusterPanels.length;
 		for (int i = 0; i < numPanels; i++) {
+			//if (clusterPanels[i] == null) {
+			//	continue;
+			//}
+			
 			if (i == 0 || i % 2 == 0) {
 				nameLabels[i].setBackground(Color.WHITE);
 				clusterPanels[i].setBackground(Color.WHITE);
@@ -201,6 +210,9 @@ public class DriverClustersWindow {
 		selectedClustersByFeature = theOne;
 		lenJPanels = clusterPanels.length;
 		for (int i = 0; i < lenJPanels; i++) {
+			//if (clusterPanels[i] == null) {
+			//	continue;
+			//}
 			clusterPanels[i].revalidate();
 			clusterPanels[i].repaint();
 		}
