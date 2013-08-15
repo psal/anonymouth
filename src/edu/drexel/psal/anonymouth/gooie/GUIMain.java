@@ -43,7 +43,7 @@ import com.apple.eawt.FullScreenListener;
  * @author Marc Barrowclift
  */
 
-public class GUIMain extends javax.swing.JFrame {
+public class GUIMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
@@ -88,8 +88,8 @@ public class GUIMain extends javax.swing.JFrame {
 	protected JPanel anonymityPanel;		//The entire left-hand tab of Anonymouth
 	protected JLabel anonymityLabel;		//The "Anonymity: " banner label
 	protected JLabel anonymityDescription;	//The Anonymity percentage/description label
-	protected int anonymityWidth = 200;			//The current height of the panel
-	protected int anonymityHeight = 450;			//The current width of the panel
+	protected int anonymityWidth = 200;		//The current height of the panel
+	protected int anonymityHeight = 450;	//The current width of the panel
 	
 	//Results
 	protected ResultsWindow resultsWindow;
@@ -200,7 +200,8 @@ public class GUIMain extends javax.swing.JFrame {
 	public GUIMain() {
 		Logger.logln(NAME+"GUIMain being created...");
 		ThePresident.splash.updateText("Initializing Anonymouth");
-		inst = this;
+		inst = this; //Initializing our GUIMain static instance so we can reference the class instances from anywhere.
+		//NOTE, better way to do this? This was the way it was when I came in, not very keen on static references though...
 		
 		initPropertiesUtil();		//Open the preferences file for reading and writing
 		initWindow();				//Initializes The actual frame
@@ -251,7 +252,7 @@ public class GUIMain extends javax.swing.JFrame {
 	private void initWindow() {
 		//We want to enable the system-wide full screen functionality present in OS X if possible
 		if (ANONConstants.IS_MAC) {
-			enableOSXFullscreen();
+			enableOSXFullscreen(this);
 		}
 				
 		ToolTipManager.sharedInstance().setDismissDelay(20000); //To keep Tool Tips from disappearing so fast
@@ -860,14 +861,14 @@ public class GUIMain extends javax.swing.JFrame {
 	 * depending on what state we are in.
 	 */
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void enableOSXFullscreen() {
+	public void enableOSXFullscreen(Window window) {
 		try {
 			Class util = Class.forName("com.apple.eawt.FullScreenUtilities");
 			Class params[] = new Class[]{Window.class, Boolean.TYPE};
 			Method method = util.getMethod("setWindowCanFullScreen", params);
-			method.invoke(util, this, true);
+			method.invoke(util, window, true);
 
-			com.apple.eawt.FullScreenUtilities.addFullScreenListenerTo(this, new FullScreenListener () {
+			com.apple.eawt.FullScreenUtilities.addFullScreenListenerTo(window, new FullScreenListener () {
 				@Override
 				public void windowEnteredFullScreen(FullScreenEvent arg0) {
 					GUIMain.inst.viewEnterFullScreenMenuItem.setText("Exit Full Screen");
@@ -882,9 +883,9 @@ public class GUIMain extends javax.swing.JFrame {
 				public void windowExitingFullScreen(FullScreenEvent arg0) {}
 			});
 		} catch (ClassNotFoundException e1) {
-			Logger.logln(NAME+"Failed initializing Anonymouth for full-screen", LogOut.STDERR);
+			Logger.logln(NAME+ "Failed initializing Anonymouth for full-screen", LogOut.STDERR);
 		} catch (Exception e) {
-			Logger.logln(NAME+"Failed initializing Anonymouth for full-screen", LogOut.STDERR);
+			Logger.logln(NAME + "Failed initializing Anonymouth for full-screen", LogOut.STDERR);
 		}
 	}
 }

@@ -86,7 +86,8 @@ public class StartWindow extends JFrame {
 	
 	/**
 	 * Constructor
-	 * @param main - Instance of GUIMain
+	 * @param main
+	 * 		Instance of GUIMain
 	 */
 	public StartWindow(GUIMain main) {	
 		initGUI();
