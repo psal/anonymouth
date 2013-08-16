@@ -38,7 +38,8 @@ public class TranslationsDriver implements ActionListener {
 	public TranslationsDriver(TranslationsPanel translationsPanel, GUIMain main) {
 		this.main = main;
 		this.translationsPanel = translationsPanel;
-
+		translator = new TranslatorThread(main);
+		
 		initListeners();
 	}
 

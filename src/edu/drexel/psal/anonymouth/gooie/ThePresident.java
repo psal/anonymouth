@@ -57,7 +57,7 @@ public class ThePresident {
 	
 	public ThePresident() {
 		splash = new SplashScreen();
-		splash.start();
+		splash.showSplashScreen();
 		
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
@@ -146,7 +146,7 @@ public class ThePresident {
 		main = new GUIMain();
 		startWindow = new StartWindow(main);
 		
-		ThePresident.splash.hideSplashScreen();
+		splash.hideSplashScreen();
 		startWindow.showStartWindow();
 	}
 	

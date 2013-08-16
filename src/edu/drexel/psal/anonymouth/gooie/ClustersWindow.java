@@ -17,6 +17,7 @@ import net.miginfocom.swing.MigLayout;
 /**
  * A modified version of the existing ClusterPanel such that it will be removed from the main window and relocated to it's own window
  * accessed by the pull-down menu.
+ * 
  * @author Marc Barrowclift
  */
 public class ClustersWindow extends JFrame {

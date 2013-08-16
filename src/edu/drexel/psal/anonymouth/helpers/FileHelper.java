@@ -1,5 +1,6 @@
 package edu.drexel.psal.anonymouth.helpers;
 
+import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -24,8 +25,22 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 public class FileHelper {
 
 	private static final String NAME = "( FileHelper ) - ";
-	public static JFileChooser load = new JFileChooser(); //Whenever you want to load something, use this
-	public static JFileChooser save = new JFileChooser(); //Whenever you want to save something, use this
+	/**
+	 * Default, standard, kinda shitty file chooser for Java. Use only when necessary.
+	 */
+	public static JFileChooser load = new JFileChooser(); //Whenever you want to load something
+	public static JFileChooser save = new JFileChooser(); //Whenever you want to save something
+	/**
+	 * To use the FileDialogs, you should initialize them in the constructors of the classes you desire them to be
+	 * used in since they take a second or two to be created (so this will be taken care of on start up and not slow
+	 * the user down on run time) and since they require you to pass the parent frame or dialog upon initialization
+	 * (so it can be modular).
+	 * 
+	 * Because of this, if you require more than one load or save FileDialog in a specific class you will have to
+	 * declare your own for each additional one.
+	 */
+	public static FileDialog goodLoad; //Whenever you want to load something, use this
+	public static FileDialog goodSave; //Whenever you want to save something, use this
 
 	/**
 	 * Creates and returns a ready BufferedReader instance to read. Returns null if file was not found or another error occurred.

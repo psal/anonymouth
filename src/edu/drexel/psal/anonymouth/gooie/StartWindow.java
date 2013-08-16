@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Dialog.ModalityType;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +18,6 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -55,7 +53,6 @@ public class StartWindow extends JFrame {
 	
 	private GUIMain main;
 	private int width = 520, height = 135;
-	private FileDialog load;
 	private StartWindow startingWindows;
 	private UserStudySessionName userStudySessionName;
 	
@@ -95,8 +92,7 @@ public class StartWindow extends JFrame {
 		initLookAndFeel();
 		initListeners();
 		
-		load = new FileDialog(this);
-		load.setModalityType(ModalityType.DOCUMENT_MODAL);
+		FileHelper.goodLoad = new FileDialog(this);
 		
 		userStudySessionName = new UserStudySessionName(this);
 		setLastDocumentSet();
@@ -238,7 +234,7 @@ public class StartWindow extends JFrame {
 	private void initListeners() {
 		startListener = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {				
 				startingWindows.setVisible(false);
 				EditorDriver.processButtonListener.actionPerformed(e);
 			}
@@ -251,6 +247,11 @@ public class StartWindow extends JFrame {
 				try {
 					Logger.logln(NAME+"'Load' button clicked on the documents tab");
 
+					/**
+					 * In case something starts to go wrong with the FileDialogs (they are older and
+					 * may be deprecated as some point). If this be the case, just swap in this code instead
+					 */
+					/*
 					FileHelper.load.setName("Load Saved Document Set Set");
 					FileHelper.load.setCurrentDirectory(new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX));
 					FileHelper.load.setFileFilter(ANONConstants.XML);
@@ -261,6 +262,22 @@ public class StartWindow extends JFrame {
 					
 					if (answer == JFileChooser.APPROVE_OPTION) {
 						File file = FileHelper.load.getSelectedFile();
+						*/
+					
+					FileHelper.goodLoad.setTitle("Load Your Document To Anonymize");
+					if (PropertiesUtil.getProbSet() != "") {
+						FileHelper.goodLoad.setDirectory(PropertiesUtil.getProbSet());
+					} else {
+						FileHelper.goodLoad.setDirectory(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
+					}
+					FileHelper.goodLoad.setMultipleMode(false);
+					FileHelper.goodLoad.setFilenameFilter(ANONConstants.TXT);
+					FileHelper.goodLoad.setLocationRelativeTo(null);
+					FileHelper.goodLoad.setVisible(true);
+
+					String fileName = FileHelper.goodLoad.getFile();
+					if (fileName != null) {
+						File file = new File(FileHelper.goodLoad.getDirectory()+fileName);
 						loadProblemSet(file.getAbsolutePath());
 					} else {
 						Logger.logln(NAME+"Load document set canceled");

@@ -704,7 +704,9 @@ public class PropertiesUtil {
 	
 	/**
 	 * Gets the path to the default problem set.
-	 * @return probSet - path to the default problem set.
+	 * 
+	 * @return probSet
+	 * 		Path to the default problem set, returns "" if none exists.
 	 */
 	protected static String getProbSet() {
 		String probSet = "";

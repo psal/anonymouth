@@ -1,104 +1,122 @@
 package edu.drexel.psal.anonymouth.gooie;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
+import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.Image;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * A simple splash screen displayed on start up to serve two main purposes:
+ * 
  * 	1. Since Anonymouth on first load takes a while to load, we want to show some indication that it is doing so (like Photoshop)
  * 	2. Help give Anonymouth a professional sheen.
+ * 
  * @author Marc Barrowclift
  *
  */
-public class SplashScreen extends Thread {
-	
+public class SplashScreen extends JFrame {
+
+	private static final long serialVersionUID = 1L;
 	private final String NAME = "( SplashScreen) - ";
-	private static final int WIDTH = 520, HEIGHT = 135;
-	private static final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 18);
+	private final String SPLASH_NAME = "anonymouth_SPLASH.png";
 	
-	private static String message = "Starting Anonymouth";
-	private java.awt.SplashScreen splash;
-	private boolean showSplash = true;
+	private int width = 520, height = 135;
+	private Image splashImage;
+	public JLabel progressLabel;
+	public String newText;
+	private JPanel panel;
 
 	/**
-	 * Paints the changes on top of the splash screen image;
-	 * @param g
-	 */
-	static void renderSplashFrame(Graphics2D g) {
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setComposite(AlphaComposite.Clear);
-		g.fillRect(0,0,WIDTH,HEIGHT);
-		g.setPaintMode();
-		g.setColor(Color.BLACK);
-		g.setFont(HELVETICA);
-		g.drawString(message+"...", 240, 128);
-	}
-	
-	/**
-	 * Constructor
-	 * @param message
+	 * Constructor, initializes the splash screen
 	 */
 	public SplashScreen() {
-		super("SplashScreen");
+		this.setSize(width, height);
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
+		this.setUndecorated(true);
+		this.setVisible(false);
+		
+		splashImage = ImageLoader.getImage(SPLASH_NAME);
+		panel = new JPanel(new BorderLayout()) {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Graphics2D g2d = (Graphics2D)g;
+				g2d.drawImage(splashImage, 0, 0, null);
+			}
+		};
+		
+		progressLabel = new JLabel("Beginning Anonymouth...");
+		progressLabel.setFont(new Font("Helvetica", Font.PLAIN, 18));
+		progressLabel.setBorder(new EmptyBorder(5, 5, 0, 20));
+		progressLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		progressLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
+		
+		panel.setLayout(new BorderLayout());
+		panel.add(progressLabel, BorderLayout.SOUTH);
+		this.add(panel);
 	}
 
 	/**
 	 * Updates the message text with the new status
+	 * 
 	 * @param newText
+	 * 		The new message you want to display. A "..." will be appended to it before updating.
 	 */
-	public void updateText(String newText) {
-		message = newText+"...";	
+	public void updateText(final String newText) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				progressLabel.setText(newText+"...");	
+			}
+		});
+	}
+
+	/**
+	 * Displays the splash screen
+	 */
+	public void showSplashScreen() {
+		Logger.logln(NAME+"Displaying Splash Screen");
+		this.setOpacity((float)0/(float)100);
+		this.setVisible(true);
+		for (int i = 0; i <= 100; i+=2) {
+			this.setOpacity((float)i/(float)100);
+			
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		this.setOpacity((float)1.0);
 	}
 	
 	/**
 	 * Trashes the splash screen
 	 */
 	public void hideSplashScreen() {
-		showSplash = false;
-		try {
-			splash.close();
-		} catch (IllegalStateException e) {
-			Logger.logln(NAME+"SplashScreen had trouble being closed, must have closed earlier due to an error of some sort",
-					LogOut.STDERR);
-		}
-	}
-
-	/**
-	 * Updates the splash screen for as long as necessary
-	 */
-	@Override
-	public void run() {
-		splash = java.awt.SplashScreen.getSplashScreen();
-		if (splash == null) {
-			Logger.logln(NAME+"SplashScreen.getSplashScreen() returned null", LogOut.STDERR);
-			return;
-		}
-		Graphics2D g = splash.createGraphics();
-		if (g == null) {
-			Logger.logln(NAME+"Graphics returned null", LogOut.STDERR);
-			return;
-		}
-		
-		while (showSplash) {
-			renderSplashFrame(g);
-			try {
-				splash.update();
-			} catch (IllegalStateException e) {
-				Logger.logln(NAME+"Splash screen not configured by Java properly and unavailable," +
-						" happens every once in a while. As far as I know nothing I can do.", LogOut.STDERR);
-				return;
-			}
+		Logger.logln(NAME+"Closing Splash Screen");
+		for (int i = 100; i >= 0; i-=2) {
+			this.setOpacity((float)i/(float)100);
 			
 			try {
-				Thread.sleep(90);
+				Thread.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			catch(InterruptedException e) {}
 		}
+		this.setVisible(false);
 	}
 }

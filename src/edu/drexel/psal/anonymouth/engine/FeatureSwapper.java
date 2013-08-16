@@ -10,6 +10,7 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import weka.core.Instance;
 import weka.core.Instances;
 
@@ -111,9 +112,9 @@ public class FeatureSwapper {
 			}
 			//System.out.println("representative: "+wekaResultsArray[i].representativeValue+" ==> "+clusterGroups[wekaResultsArray[i].respectiveIndexInClusterGroupArray].toString());
 		}
-		Logger.logln("If all features are moved to their target values, the following classification will result: "+clusterGroups[wekaResultsArray[0].respectiveIndexInClusterGroupArray].toString());
+		Logger.logln(NAME+"If all features are moved to their target values, the following classification will result: "+clusterGroups[wekaResultsArray[0].respectiveIndexInClusterGroupArray].toString());
 		if (allEqual && i != 1)
-			Logger.logln("Oops! Weka must have been called incorrectly. All ClusterGroup representativeValue's are the same!\nThis is known to happen when the SMO is run without the '-M' flag. Howev");
+			Logger.logln(NAME+"Oops! Weka must have been called incorrectly. All ClusterGroup representativeValue's are the same!\nThis is known to happen when the SMO is run without the '-M' flag.", LogOut.STDERR);
 		return clusterGroups[wekaResultsArray[0].respectiveIndexInClusterGroupArray];
 	}
 	

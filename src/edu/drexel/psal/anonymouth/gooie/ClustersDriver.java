@@ -117,7 +117,7 @@ public class ClustersDriver {
 			usedNames[i] = names[i];
 
 			//if (authorMax[i] != 0 && presentValues[i] != 0 && authorMin[i] != 0) {
-				System.out.println(i + ", " + minimums[i] + ", " + maximums[i] + ", " + authorMin[i] + ", " + authorMax[i] + ", " + presentValues[i]);
+				//System.out.println(i + ", " + minimums[i] + ", " + maximums[i] + ", " + authorMin[i] + ", " + authorMax[i] + ", " + presentValues[i]);
 				JPanel clusterPanel = new ClusterPainter(outerLevel.next(),i,minimums[i],maximums[i], authorMin[i],authorMax[i],presentValues[i]);
 				clusterPanels[i] = clusterPanel;
 

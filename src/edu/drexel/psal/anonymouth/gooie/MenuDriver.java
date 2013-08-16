@@ -1,15 +1,14 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.helpers.ExtFilter;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.*;
@@ -52,6 +51,9 @@ public class MenuDriver {
 	 */
 	public MenuDriver(GUIMain main) {
 		this.main = main;
+		
+		FileHelper.goodSave = new FileDialog(main);
+		
 		initListeners();
 	}
 	
@@ -95,6 +97,11 @@ public class MenuDriver {
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"Save As menu item clicked.");
 				
+				/**
+				 * In case something starts to go wrong with the FileDialogs (they are older and
+				 * may be deprecated as some point). If this be the case, just swap in this code instead
+				 */
+				/*
 				File dir;
 				if (savedPath != "") {
 					dir = new File(savedPath);
@@ -115,6 +122,26 @@ public class MenuDriver {
 				if (answer == JFileChooser.APPROVE_OPTION) {
 					File f = FileHelper.save.getSelectedFile();
 					String path = f.getAbsolutePath();
+					*/
+				
+				if (savedPath != "") {
+					FileHelper.goodSave.setDirectory(savedPath);
+				} else {
+					try {
+						FileHelper.goodSave.setDirectory(new File(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
+					} catch (IOException e1) {
+						Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
+					}
+				}
+				
+				FileHelper.goodSave.setFile("anonymizedDoc.txt");
+				FileHelper.goodSave.setFilenameFilter(ANONConstants.TXT);
+				FileHelper.goodSave.setLocationRelativeTo(null);
+				FileHelper.goodSave.setVisible(true);
+				
+				File[] files = FileHelper.goodSave.getFiles();
+				if (files.length != 0) {		
+					String path = files[0].getAbsolutePath();
 					
 					if (!path.toLowerCase().endsWith(".txt"))
 						path += ".txt";

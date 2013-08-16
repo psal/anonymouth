@@ -4,12 +4,14 @@ import edu.drexel.psal.anonymouth.utils.SmartIntegerArray;
 
 /**
  * holds a group of clusters pertaining to one or more documents, and facilitates operations on it.
+ * 
  * @author Andrew W.E. McDonald
  *
  */
 public class ClusterGroup implements Comparable<ClusterGroup>{
 	
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	@SuppressWarnings("unused")
+	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	
 	private SmartIntegerArray groupKey; 
 	private double preferenceValue;
@@ -20,7 +22,7 @@ public class ClusterGroup implements Comparable<ClusterGroup>{
 	 * @param groupKey the key containing cluster preference numbers by feature for this group of clusters
 	 * @param preferenceValue the calculated value that identifies this clusterGroup's desirability as being the user's set of targets
 	 */
-	public ClusterGroup(SmartIntegerArray groupKey, double preferenceValue, double[] centroids){
+	public ClusterGroup(SmartIntegerArray groupKey, double preferenceValue, double[] centroids) {
 		this.groupKey=groupKey;
 		this.preferenceValue = preferenceValue;
 		this.centroids = centroids;
@@ -29,7 +31,7 @@ public class ClusterGroup implements Comparable<ClusterGroup>{
 	/**
 	 * returns a string representation of this object, in the form of: 'groupKey' - {'preferenceValue}
 	 */
-	public String toString(){
+	public String toString() {
 		String centroids = "[ ";
 		for(int i = 0; i < this.centroids.length; i++)
 			centroids += this.centroids[i]+", ";
@@ -44,7 +46,7 @@ public class ClusterGroup implements Comparable<ClusterGroup>{
 	 * 	-1 if *_one > *_two
 	 * 	0 if *_one == *_two 
 	 */
-	public int compareTo(ClusterGroup cGroup){
+	public int compareTo(ClusterGroup cGroup) {
 		if (this.preferenceValue > cGroup.preferenceValue)
 			return -1;
 		else if (this.preferenceValue < cGroup.preferenceValue)
@@ -57,7 +59,7 @@ public class ClusterGroup implements Comparable<ClusterGroup>{
 	 * returns the cluster group represented as a SmartIntegerArray object
 	 * @return
 	 */
-	public SmartIntegerArray getGroupKey(){
+	public SmartIntegerArray getGroupKey() {
 		return groupKey;
 	}
 	
@@ -65,7 +67,7 @@ public class ClusterGroup implements Comparable<ClusterGroup>{
 	 * returns the array of centroids for this cluster group
 	 * @return
 	 */
-	public double[] getCentroids(){
+	public double[] getCentroids() {
 		return centroids;
 	}
 
