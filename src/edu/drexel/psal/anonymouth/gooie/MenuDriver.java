@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import net.miginfocom.swing.MigLayout;
+
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.About;
@@ -36,6 +38,8 @@ public class MenuDriver {
 	protected ActionListener undoListener;
 	protected ActionListener redoListener;
 	protected ActionListener fullScreenListener;
+	protected ActionListener hideAnonymityBarListener;
+	protected ActionListener hideSuggestionTabsListener;
 	//protected ActionListener printMenuItemListener;
 	
 	//Variables
@@ -231,6 +235,55 @@ public class MenuDriver {
         };
         main.editRedoMenuItem.addActionListener(redoListener);
         
+        hideAnonymityBarListener = new ActionListener() {
+        	@Override
+			public void actionPerformed(ActionEvent e) {
+        		main.documentPanel.removeAll();
+				main.documentPanel.setLayout(new MigLayout(
+						"fill, wrap, ins 0, gap 0 0",
+						"[grow, fill]",
+						"[grow, fill][]"));
+				
+				if (main.anonymityBarState == ANONConstants.STATE.VISIBLE) {
+					Logger.logln(NAME+"Hiding anonymity bar");
+					main.anonymityBarState = ANONConstants.STATE.HIDDEN;
+					main.viewHideAnonymityBar.setText("Show Anonymity Bar");
+					
+					main.documentPanel.add(main.documentScrollPane, "grow");
+					main.documentPanel.add(main.anonymityPercent, "split");
+					main.documentPanel.add(main.processButton, "growx, right");
+				} else {
+					Logger.logln(NAME+"Showing anonymity bar");
+					main.anonymityBarState = ANONConstants.STATE.VISIBLE;
+					main.viewHideAnonymityBar.setText("Hide Anonymity Bar");
+					
+					main.documentPanel.add(main.documentScrollPane, "grow");
+					main.documentPanel.add(main.processButton, "right");
+				}
+				
+				updateStates();
+			}
+        };
+        main.viewHideAnonymityBar.addActionListener(hideAnonymityBarListener);
+        
+        hideSuggestionTabsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (main.suggestionTabsState == ANONConstants.STATE.VISIBLE) {
+					Logger.logln(NAME+"Hiding suggestion tabs");
+					main.suggestionTabsState = ANONConstants.STATE.HIDDEN;
+					main.viewHideSuggestions.setText("Show Suggestion Tabs");
+				} else {
+					Logger.logln(NAME+"Showing suggestion tabs");
+					main.suggestionTabsState = ANONConstants.STATE.VISIBLE;
+					main.viewHideSuggestions.setText("Hide Suggestion Tabs");
+				}
+				
+				updateStates();
+			}
+        };
+        main.viewHideSuggestions.addActionListener(hideSuggestionTabsListener);
+        
         if (ANONConstants.IS_MAC) {
         	fullScreenListener = new ActionListener() {
             	@Override
@@ -257,6 +310,48 @@ public class MenuDriver {
         };
         main.filePrintMenuItem.addActionListener(printMenuItemListener);
         */
+	}
+	
+	private void updateStates() {
+		main.getContentPane().removeAll();
+		
+		//If both are visible...
+		if (main.anonymityBarState == ANONConstants.STATE.VISIBLE && main.suggestionTabsState == ANONConstants.STATE.VISIBLE) {
+			main.setLayout(new MigLayout(
+					"wrap 3, gap 10 10",//layout constraints
+					"[][grow, fill][shrink]", //column constraints
+					"[grow, fill]"));	// row constraints
+			main.add(main.anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
+			main.add(main.editorTabPane, "width 100:400:, grow, shrinkprio 3");		//MIDDLE	(Editor)
+			main.add(main.helpersTabPane, "width :353:353, spany, shrinkprio 1");	//RIGHT		(Word Suggestions, Translations, etc.)
+		//If Anonymity Bar is visible but Suggestion Tabs are hidden
+		} else if (main.anonymityBarState == ANONConstants.STATE.VISIBLE && main.suggestionTabsState == ANONConstants.STATE.HIDDEN) {
+			main.setLayout(new MigLayout(
+					"wrap 2, gap 10 10",//layout constraints
+					"[][grow, fill]", //column constraints
+					"[grow, fill]"));	// row constraints
+			main.add(main.anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
+			main.add(main.editorTabPane, "width 100:400:, grow, shrinkprio 3");		//MIDDLE	(Editor)
+		//If Anonymity Bar is hidden but Suggestion Tabs are visible
+		} else if (main.anonymityBarState == ANONConstants.STATE.HIDDEN && main.suggestionTabsState == ANONConstants.STATE.VISIBLE) {
+			main.setLayout(new MigLayout(
+					"wrap 3, gap 10 10",//layout constraints
+					"[grow, fill][shrink]", //column constraints
+					"[grow, fill]"));	// row constraints
+			main.add(main.editorTabPane, "width 100:400:, grow, shrinkprio 3");		//MIDDLE	(Editor)
+			main.add(main.helpersTabPane, "width :353:353, spany, shrinkprio 1");	//RIGHT		(Word Suggestions, Translations, etc.)
+		//If nether are visible...
+		} else {
+			main.setLayout(new MigLayout(
+					"gap 10 10",//layout constraints
+					"[grow, fill][shrink]", //column constraints
+					"[grow, fill]"));	// row constraints
+			main.add(main.editorTabPane, "grow");	//MIDDLE	(Editor)
+		}
+
+		main.revalidate();
+		main.repaint();
+		main.updateSizeVariables(); //Preparing the Anonymity bar for a new size (if needed)
 	}
 	
 	/**

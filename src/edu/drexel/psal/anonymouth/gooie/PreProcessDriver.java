@@ -38,7 +38,6 @@ import javax.swing.tree.TreePath;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.helpers.ScrollToTop;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -781,8 +780,8 @@ public class PreProcessDriver {
 					Logger.logln(NAME+"Chooser root directory: " + PropertiesUtil.getProbSet());
 					FileHelper.goodSave.setDirectory(PropertiesUtil.getProbSet());
 				} else {
-					FileHelper.goodSave.setDirectory(new File(JSANConstants.JSAN_PROBLEMSETS_PREFIX).getAbsolutePath());
-					Logger.logln(NAME+"Chooser root directory: " + JSANConstants.JSAN_PROBLEMSETS_PREFIX);
+					FileHelper.goodSave.setDirectory(new File(ANONConstants.PROBLEMSETS_PREFIX).getAbsolutePath());
+					Logger.logln(NAME+"Chooser root directory: " + ANONConstants.PROBLEMSETS_PREFIX);
 				}
 				FileHelper.goodSave.setFile(ThePresident.sessionName+"_docSet.xml");
 				FileHelper.goodSave.setMultipleMode(false);
@@ -1380,7 +1379,7 @@ public class PreProcessDriver {
 		if (trainDocs) {
 			if (trainDocsDirectory == null) {
 				try {
-					trainDocsDirectory = new File(JSANConstants.JSAN_CORPORA_PREFIX).getCanonicalPath();
+					trainDocsDirectory = new File(ANONConstants.CORPORA_PREFIX).getCanonicalPath();
 					load.setDirectory(trainDocsDirectory);
 				} catch (IOException e1) {
 					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
@@ -1414,7 +1413,7 @@ public class PreProcessDriver {
 		if (trainDocs) {
 			if (trainDocsDirectory == null) {
 				try {
-					trainDocsDirectory = new File(JSANConstants.JSAN_CORPORA_PREFIX).getCanonicalPath();
+					trainDocsDirectory = new File(ANONConstants.CORPORA_PREFIX).getCanonicalPath();
 					load.setCurrentDirectory(new File(trainDocsDirectory));
 				} catch (IOException e1) {
 					Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);

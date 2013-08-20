@@ -40,6 +40,7 @@ public class ResultsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( ResultsWindow ) - ";
 	private final String RESULTS_ICON = "resultsButton.png";
+	private final int MAX_HEIGHT = 522;
 	
 	//Images/charts/renders
 	private CategoryItemRenderer renderer;
@@ -54,7 +55,7 @@ public class ResultsWindow extends JFrame {
 	private ArrayList<Integer> percent;
 	private DefaultCategoryDataset dataSet;
 	private Font labelFont;
-	private int width;
+	private int pictureWidth; //The width of the graph picture, NOT necessarily the width of the window holding it
 	
 	/**
 	 * Constructor, initializes the results window and all variables needed to properly
@@ -76,7 +77,7 @@ public class ResultsWindow extends JFrame {
 		this.add(drawingScrollPane);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Process Results");
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(false);
 	}
 	
@@ -143,17 +144,18 @@ public class ResultsWindow extends JFrame {
 				);
         chart.getCategoryPlot().setRenderer(renderer);
 		
-		width = 100 * authors.size();
+		pictureWidth = 100 * authors.size();
 		
 		/**
 		 * This (hopefully) allows us to have the image itself be larger than the window if it's too big
 		 * to all fit nicely in the screen size.
 		 */
+		int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+		this.setMaximumSize(new Dimension(screenWidth - 300, MAX_HEIGHT));
+		this.setSize(new Dimension(screenWidth - 300, MAX_HEIGHT));
 		
-		this.setMaximumSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width - 300, 522));
-		this.setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width - 300, 522));
-		
-		chartImage = chart.createBufferedImage(width, 478);
+		drawingPanel.setPreferredSize(new Dimension(pictureWidth, 478));
+		chartImage = chart.createBufferedImage(pictureWidth, 478);
 	}
 	
 	/**

@@ -28,7 +28,6 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -36,11 +35,8 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 /**
- * The starting window of Anonymouth that asks for a session name and allows the user to do one of three actions:
- * 	1.Start Anonymouth (Only available if they have previous document set saved, otherwise it will be greyed out, default action if otherwise).
- * 	2.Create a new problem set (Default action if no previous problem set in records, load and start will be greyed out in this case).
- * 	3.Load a new problem set, action always available.
- * 	4.quitButton, action always available.
+ * The starting window of Anonymouth that allows the user to load, modify, or start a new document set,
+ * Make changes in advanced configuration, or start Anonymouth.<br><br>
  * 
  * This is created in an effort to help guide the user along and not throw too much at them at the beginning.
  * @author Marc Barrowclift
@@ -268,10 +264,10 @@ public class StartWindow extends JFrame {
 					if (PropertiesUtil.getProbSet() != "") {
 						FileHelper.goodLoad.setDirectory(PropertiesUtil.getProbSet());
 					} else {
-						FileHelper.goodLoad.setDirectory(JSANConstants.JSAN_PROBLEMSETS_PREFIX);
+						FileHelper.goodLoad.setDirectory(ANONConstants.PROBLEMSETS_PREFIX);
 					}
 					FileHelper.goodLoad.setMultipleMode(false);
-					FileHelper.goodLoad.setFilenameFilter(ANONConstants.TXT);
+					FileHelper.goodLoad.setFilenameFilter(ANONConstants.XML);
 					FileHelper.goodLoad.setLocationRelativeTo(null);
 					FileHelper.goodLoad.setVisible(true);
 

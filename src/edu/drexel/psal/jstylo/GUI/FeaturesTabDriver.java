@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.GUI.DocsTabDriver.ExtFilter;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.FeatureDriver;
@@ -470,7 +470,7 @@ public class FeaturesTabDriver {
 		main.presetCFDs = new ArrayList<CumulativeFeatureDriver>();
 		
 		try {
-			File file = new File(JSANConstants.JSAN_FEATURESETS_PREFIX);
+			File file = new File(ANONConstants.FEATURESETS_PREFIX);
 			File[] featureSetFiles = file.listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".xml");

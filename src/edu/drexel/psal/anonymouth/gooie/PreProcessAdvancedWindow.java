@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -335,15 +335,15 @@ public class PreProcessAdvancedWindow extends JDialog {
 			viewInfoListLabel.setHorizontalAlignment(JLabel.CENTER);
 			viewInfoListLabel.setFont(new Font("Helvetica", Font.BOLD, 12));
 			viewInfoListLabel.setOpaque(true);
-			viewInfoListLabel.setBackground(main.blue);
-			viewInfoListLabel.setBorder(main.rlborder);
+			viewInfoListLabel.setBackground(main.DEFAULT_COLOR);
+			viewInfoListLabel.setBorder(main.BANNER_BORDER);
 
 			viewInfoInfoLabel = new JLabel("Feature Information:");
 			viewInfoInfoLabel.setFont(new Font("Ariel", Font.BOLD, 12));
 			viewInfoInfoLabel.setHorizontalAlignment(JLabel.CENTER);
 			viewInfoInfoLabel.setOpaque(true);
-			viewInfoInfoLabel.setBackground(main.blue);
-			viewInfoInfoLabel.setBorder(main.rlborder);
+			viewInfoInfoLabel.setBackground(main.DEFAULT_COLOR);
+			viewInfoInfoLabel.setBorder(main.BANNER_BORDER);
 
 			viewInfoListModel = new DefaultComboBoxModel<String>();
 			viewInfoList = new JList<String>(viewInfoListModel);
@@ -617,7 +617,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 		presetCFDs = new ArrayList<CumulativeFeatureDriver>();
 
 		try {
-			File[] featureSetFiles = new File(JSANConstants.JSAN_FEATURESETS_PREFIX).listFiles(new FilenameFilter() {
+			File[] featureSetFiles = new File(ANONConstants.FEATURESETS_PREFIX).listFiles(new FilenameFilter() {
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".xml");
 				}

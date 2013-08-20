@@ -69,9 +69,7 @@ public class TranslatorThread implements Runnable {
 			this.oldSentence = oldSentence;
 		} else {
 			if (accountsUsed == false) {
-				ArrayList<TaggedSentence> loaded = new ArrayList<TaggedSentence>();
-				loaded.add(newSentence);
-				load(loaded);
+				load(newSentence);
 			}
 		}
 	}
@@ -82,9 +80,9 @@ public class TranslatorThread implements Runnable {
      * translations are already running, adds new sentences into the front of
      * the queue.
 	 */
-	public void load(ArrayList<TaggedSentence> loaded)  {
+	public void load(TaggedSentence loaded)  {
 		if (PropertiesUtil.getDoTranslations()) {
-			sentences.addAll(loaded);
+			sentences.add(loaded);
 			transThread = new Thread(this);
 			transThread.start(); // calls run below
 		}
@@ -128,8 +126,6 @@ public class TranslatorThread implements Runnable {
 		// set up the progress bar
 		main.translationsProgressBar.setIndeterminate(false);
 		main.translationsProgressBar.setMaximum(sentences.size() * translationFetcher.getUsedLangs().length);
-		// finish set up for translation
-		main.translationsProgressLabel.setText("Sentence: 1/" + sentences.size() + " Languages: 0/"  + translationFetcher.getUsedLangs().length);
 
 		// translate all languages for each sentence, sorting the list based on anon index after each translation
 		while (!sentences.isEmpty() && currentSentNum <= sentences.size()) {			
@@ -166,7 +162,6 @@ public class TranslatorThread implements Runnable {
 							return;
 						}
 						
-						main.translationsProgressLabel.setText("Sentence: " + currentSentNum + "/" + sentences.size() + " Languages: " + currentLangNum + "/"  + translationFetcher.getUsedLangs().length);
 						currentLangNum++;
 						TaggedSentence taggedTrans = new TaggedSentence(translation);
 						taggedTrans.tagAndGetFeatures();
@@ -210,15 +205,20 @@ public class TranslatorThread implements Runnable {
 	 * Cleans up resources used by the translator at the end of translating all sentences.
 	 */
 	private void translationsEnded() {
+		/**
+		 * We're making another outside call to a "switchTo" method since we want the progress bar to immediately disappear
+		 * when all translations are obtained (instead of having to wait a second or two for the TranslationsPanel to get to
+		 * it).
+		 */
+		main.translationsPanel.switchToEmptyPanel();
+		
 		finished = true;
 		sentences.clear();
 		currentSentNum = 1;
 		main.translationsProgressBar.setIndeterminate(false);
 		main.translationsProgressBar.setValue(0);
-		main.translationsProgressLabel.setText("No Translations Pending.");
 		main.processButton.setEnabled(true);
-		main.stopTranslations.setEnabled(false);
-		main.startTranslations.setEnabled(true);
+		
 		transThread.interrupt();
 	}
 }

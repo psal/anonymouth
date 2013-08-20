@@ -1,6 +1,6 @@
 package edu.drexel.psal.jstylo.GUI;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.FeatureDriver;
 import edu.drexel.psal.jstylo.generics.NormBaselineEnum;
 
@@ -266,7 +266,7 @@ public class FeatureWizard extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			{
 				setTitle("Feature Configuration");
-				setIconImage(new ImageIcon(Thread.currentThread().getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"icon32.jpg")).getImage());
+				setIconImage(new ImageIcon(Thread.currentThread().getClass().getResource(ANONConstants.GRAPHICS_PREFIX+"icon32.jpg")).getImage());
 				
 				mainJTabbedPane = new JTabbedPane();
 				setPreferredSize(new Dimension(800, 500));

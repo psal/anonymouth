@@ -507,7 +507,7 @@ public class TaggedDocument implements Serializable{
 	 * @param indexToRemove
 	 * @return the removed TaggedSentence
 	 */
-	private TaggedSentence removeTaggedSentence(int indexToRemove){
+	private TaggedSentence removeTaggedSentence(int indexToRemove) {
 		return taggedSentences.remove(indexToRemove);
 	}
 	
@@ -516,13 +516,12 @@ public class TaggedDocument implements Serializable{
 	 * @param indicesToRemove
 	 * @return an array of the removed TaggedSentences
 	 */
-	public TaggedSentence[] removeTaggedSentences(int[] indicesToRemove){
+	public void removeTaggedSentences(int[] indicesToRemove){
 		int i;
 		int numToRemove = indicesToRemove.length;
-		TaggedSentence[] removed = new TaggedSentence[numToRemove];
+		
 		for (i = 0; i < numToRemove; i++)
-			removed[i] = removeAndReplace(indicesToRemove[i],"");
-		return removed;
+			removeAndReplace(indicesToRemove[i],"");
 	}
 	
 	/**
@@ -530,7 +529,7 @@ public class TaggedDocument implements Serializable{
 	 * @param sentsToAdd a String representing the sentence(s) from the editBox
 	 * @return the TaggedSentence that was removed
 	 */
-	public TaggedSentence removeAndReplace(int sentNumber, String sentsToAdd) {//, int indexToRemove, int placeToAdd){
+	public void removeAndReplace(int sentNumber, String sentsToAdd) {//, int indexToRemove, int placeToAdd){
 		TaggedSentence toReplace = taggedSentences.get(sentNumber);
 		Logger.logln(NAME+"removing: "+toReplace.getUntagged(false));
 		Logger.logln(NAME+"adding: "+sentsToAdd);
@@ -538,16 +537,20 @@ public class TaggedDocument implements Serializable{
 		if (sentsToAdd.matches("^\\s*$")) {//checks to see if the user deleted the current sentence
 			//CALL COMPARE
 			TaggedSentence wasReplaced = removeTaggedSentence(sentNumber);
+
 			Logger.logln(NAME+"User deleted a sentence.");
 			updateReferences(toReplace,new TaggedSentence(""));//all features must be deleted
+			
+			wasReplaced.delete();
+			wasReplaced = null;
 			totalSentences--;
 			userDeletedSentence = true;
-			return wasReplaced;
 		}
 		
 		ArrayList<TaggedSentence> taggedSentsToAdd = makeAndTagSentences(sentsToAdd,false);
 
 		TaggedSentence wasReplaced = removeTaggedSentence(sentNumber);
+		
 		totalSentences--;
 		//call compare
 		int i;
@@ -561,7 +564,9 @@ public class TaggedDocument implements Serializable{
 		TaggedSentence concatted = concatSentences(taggedSentsToAdd);
 
 		updateReferences(toReplace,concatted);
-		return wasReplaced;
+		
+		wasReplaced.delete();
+		wasReplaced = null;
 	}
 	
 	/**

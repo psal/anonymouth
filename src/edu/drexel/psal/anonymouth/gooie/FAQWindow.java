@@ -10,13 +10,13 @@ import javax.swing.JTextPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 public class FAQWindow extends JFrame {
 
 	private static final String NAME = "( FAQWindow ) - ";
-	private static final String FILEPATH = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"faq.html";
+	private static final String FILEPATH = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"faq.html";
 	private static final long serialVersionUID = 1L;
 	private String text = "";
 	private JTextPane textPane;

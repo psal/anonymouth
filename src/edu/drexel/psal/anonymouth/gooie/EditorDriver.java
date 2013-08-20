@@ -7,7 +7,6 @@ import edu.drexel.psal.anonymouth.engine.FeatureList;
 import edu.drexel.psal.anonymouth.engine.HighlighterEngine;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
-import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -30,10 +29,10 @@ import javax.swing.event.DocumentListener;
 
 /**
  * editorTabDriver does the work for the editorTab (Editor) in the main GUI (GUIMain)
+ * 
  * @author Andrew W.E. McDonald
  * @author Marc Barrowclift
  * @author Joe Muoio
- * 
  */
 public class EditorDriver {
 
@@ -81,8 +80,6 @@ public class EditorDriver {
 	public static TaggedDocument taggedDoc;
 	public static boolean doHighlight = PropertiesUtil.getHighlightSents();
 	public static boolean autoHighlight = PropertiesUtil.getAutoHighlight();
-	protected static Map<String, TaggedSentence> originals = new HashMap<String, TaggedSentence>();
-	protected static ArrayList<String> originalSents = new ArrayList<String>();
 	protected static int CHARS_TIL_BACKUP = 20;
 	protected static int curCharBackupBuffer = 0;
 	public static int currentSentNum = 0;
@@ -113,7 +110,6 @@ public class EditorDriver {
 	public static Boolean EOSJustRemoved = false;
 	public static int[] leftSentInfo = new int[0];
 	public static int[] rightSentInfo = new int[0];
-	private static boolean translate = false;
 	public static ActionListener processButtonListener;
 	protected static Object lock = new Object();
 	private static boolean wholeLastSentDeleted = false;
@@ -125,11 +121,6 @@ public class EditorDriver {
 	public static int getCurrentSentNum() {
 		return currentSentNum;
 	}
-
-	protected static void doTranslations(ArrayList<TaggedSentence> sentences, GUIMain main) {
-		main.translationsDriver.translator.load(sentences);
-	}
-
 
 	protected static boolean checkSentFor(String currentSent, String str) {
 		@SuppressWarnings("resource")
@@ -166,9 +157,9 @@ public class EditorDriver {
 		main.clipboard.setEnabled(b);
 		
 		if (PropertiesUtil.getDoTranslations() && b) {
-			main.startTranslations.setEnabled(true);
+			main.translateSentenceButton.setEnabled(true);
 		} else {
-			main.startTranslations.setEnabled(false);
+			main.translateSentenceButton.setEnabled(false);
 		}
 
 		if (b) {
@@ -193,27 +184,13 @@ public class EditorDriver {
 		System.out.println("   To Remove = \"" + taggedDoc.getSentenceNumber(sentenceNumberToRemove).getUntagged(false) + "\"");
 		System.out.println("   To Add = \"" + sentenceToReplaceWith + "\"");
 
-		/**
-		 * We must do this AFTER creating the new tagged sentence so that the translations are attached to the most recent tagged sentence, not the old
-		 * one that was replaced. 
-		 */
-		if (translate && !main.startTranslations.isEnabled() && PropertiesUtil.getDoTranslations()) {
-			translate = false;
-			main.translationsDriver.translator.replace(taggedDoc.getSentenceNumber(oldSelectionInfo[0]), originals.get(originalSents.get(oldSelectionInfo[0])));//new old
-			main.anonymityBar.updateBar();
-			originals.remove(originalSents.get(oldSelectionInfo[0]));
-			originals.put(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false), taggedDoc.getSentenceNumber(oldSelectionInfo[0]));
-			originalSents.remove(oldSelectionInfo[0]);
-			originalSents.add(taggedDoc.getSentenceNumber(oldSelectionInfo[0]).getUntagged(false));
-			main.wordSuggestionsDriver.placeSuggestions();
-		}
-
 		if (shouldUpdate) {
 			ignoreNumActions = 3;
 			main.documentPane.setText(taggedDoc.getUntaggedDocument(false)); // NOTE should be false after testing!!!
 			main.documentPane.getCaret().setDot(caretPositionPriorToAction);
 			main.documentPane.setCaretPosition(caretPositionPriorToAction);
 			ignoreNumActions = 0;
+			main.wordSuggestionsDriver.placeSuggestions();
 		}
 
 		int[] selectionInfo = calculateIndicesOfSentences(currentCaretPosition)[0];
@@ -561,16 +538,6 @@ public class EditorDriver {
 							InputFilter.isEOS = false;
 							changedCaret = false;
 							shouldUpdate = true;
-
-							/**
-							 * Exists for the sole purpose of pushing a sentence that has been edited and finished to the appropriate place in
-							 * The Translation.java class so that it can be promptly translated. This will ONLY happen when the user has clicked
-							 * away from the sentence they were editing to work on another one (the reason behind this being we don't want to be
-							 * constantly pushing now sentences to be translated is the user's immediately going to replace them again, we only
-							 * want to translate completed sentences).
-							 */
-							if (!originals.keySet().contains(main.documentPane.getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
-								translate = true;
 						}
 					}
 
@@ -594,16 +561,6 @@ public class EditorDriver {
 							charsWereInserted = false;
 							charsWereRemoved = false;
 							shouldUpdate = true;
-
-							/**
-							 * Exists for the sole purpose of pushing a sentence that has been edited and finished to the appropriate place in
-							 * The Translation.java class so that it can be promptly translated. This will ONLY happen when the user has clicked
-							 * away from the sentence they were editing to work on another one (the reason behind this being we don't want to be
-							 * constantly pushing now sentences to be translated is the user's immediately going to replace them again, we only
-							 * want to translate completed sentences).
-							 */
-							if (!originals.keySet().contains(main.documentPane.getText().substring(selectedSentIndexRange[0],selectedSentIndexRange[1])))
-								translate = true;
 						}
 					}
 
@@ -894,9 +851,7 @@ public class EditorDriver {
 		endSelection = -1;
 		noCalcHistFeatures.clear();
 		yesCalcHistFeatures.clear();
-
-		originals.clear();
-		originalSents.clear();
+		
 		currentSentNum = 0;
 		lastSentNum = -1;
 		sentToTranslate = 0;

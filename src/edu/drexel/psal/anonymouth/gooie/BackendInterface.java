@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import com.jgaap.generics.Document;
 
@@ -191,20 +190,10 @@ public class BackendInterface {
 					main.anonymityBar.setMaxFill(EditorDriver.taggedDoc.getMaxChangeNeeded());
 				main.anonymityBar.updateBar();
 				main.anonymityBar.showFill(true);
-
-				for (int i = 0; i < EditorDriver.taggedDoc.getTaggedSentences().size(); i++)
-					EditorDriver.originals.put(EditorDriver.taggedDoc.getUntaggedSentences(false).get(i), EditorDriver.taggedDoc.getTaggedSentences().get(i));
-
-				EditorDriver.originalSents = EditorDriver.taggedDoc.getUntaggedSentences(false);
+				
 				main.wordSuggestionsDriver.placeSuggestions();
 
-				EditorDriver.setAllDocTabUseable(true, main);		
-
-				if (PropertiesUtil.getDoTranslations()) {
-					main.helpersTabPane.setSelectedIndex(1);
-				} else {
-					main.helpersTabPane.setSelectedIndex(0);
-				}
+				EditorDriver.setAllDocTabUseable(true, main);	
 				
 				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
 				int caret = 0;
@@ -228,7 +217,7 @@ public class BackendInterface {
 
 				//no longer automatically translating even if checkmarked, only when the user clicks "start"
 				//GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
-				main.notTranslated.setText("You granted access for translations to be obtained from Microsoft Bing in Preferences.\n\nTo begin, click the Start button");
+				main.notTranslated.setText("");
 				main.translationsHolderPanel.add(main.notTranslated, "");
 				EditorDriver.charsInserted = 0; // this gets updated when the document is loaded.
 				EditorDriver.charsRemoved = 0;	
@@ -247,13 +236,6 @@ public class BackendInterface {
 				main.processed = true;
 				pw.stop();
 				main.showGUIMain();
-				
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						main.resultsWindow.showResultsWindow();
-					}
-				});
 			} catch (Exception e) {
 				e.printStackTrace();
 				// Get current size of heap in bytes

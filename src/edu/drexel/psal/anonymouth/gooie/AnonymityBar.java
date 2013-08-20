@@ -22,7 +22,7 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * If you wish to make any changes to the Anonymouth Anonymity Bar, it would
  * be easier and quicker to test them out in the standalone AnonymityBar.java
  * file located in:<br>
- * 		<code>jsan_resources/resources</code><br>
+ * 		<code>jsan_resources</code><br>
  * In there are test methods so you can quickly modify and change values and
  * easily see whether or not they work quickly.
  * 
@@ -67,6 +67,7 @@ public class AnonymityBar extends JPanel {
 	private float newValue = 0.0f; //The new percent obtained from the tagged document (but not yet implemented)
 	private float maxFill = 100.0f; //The maximum value the fill can reach, MUST ONLY BE SET ONCE!
 	private boolean showFill;
+	private String percentString = "";
 	
 	//Others
 	private GUIMain main;
@@ -152,6 +153,17 @@ public class AnonymityBar extends JPanel {
 		curHeight = (int)((bottomY-topY)*curPercent + 0.5);
 
 		updateColor();
+		
+		//Obtaining the string we will use for displaying the percent text
+		BigDecimal bd = new BigDecimal(Float.toString(curPercent*100));
+		bd = bd.setScale(4, BigDecimal.ROUND_HALF_UP);
+		percentString = bd+"%";
+		
+		//Just in case the Anonymity bar is hidden, we want to also update the JLabel with the percent string
+		if (main.anonymityPercent != null) {
+			main.anonymityPercent.setText(percentString);
+			main.anonymityPercent.setForeground(color);
+		}
 		
 		repaint();
 	}
@@ -271,10 +283,6 @@ public class AnonymityBar extends JPanel {
 		//========================================================================
 		//******************		BAR PERCENT LABEL		**********************
 		//========================================================================
-		BigDecimal bd = new BigDecimal(Float.toString(curPercent*100));
-		bd = bd.setScale(4, BigDecimal.ROUND_HALF_UP);
-		String percentString = bd+"%";
-
 		gbi.setPaintMode();
 		gbi.setColor(color);
 		gbi.setFont(new Font("Helvetica", Font.BOLD, 16));

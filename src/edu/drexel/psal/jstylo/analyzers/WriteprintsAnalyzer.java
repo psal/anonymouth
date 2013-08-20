@@ -17,7 +17,7 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader.ArffReader;
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.*;
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.SynsetType;
@@ -573,7 +573,7 @@ public class WriteprintsAnalyzer extends Analyzer {
 	 * @throws IOException 
 	 */
 	private static void initWordnetDB() {
-		URL url = Thread.currentThread().getClass().getResource(JSANConstants.JGAAP_RESOURCE_WORDNET);
+		URL url = Thread.currentThread().getClass().getResource(ANONConstants.JGAAP_RESOURCE_WORDNET);
 		//TODO have to change this to deal with jars, not directories
 		System.setProperty("wordnet.database.dir", url.getPath());
 		wndb = WordNetDatabase.getFileInstance();

@@ -1,11 +1,10 @@
 package edu.drexel.psal.jstylo.GUI;
 
 import javax.swing.*;
-import javax.swing.table.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.FeatureDriver;
@@ -25,7 +24,7 @@ public class GUIUpdateInterface {
 	protected static String version = "1.1";
 	
 	protected static void showAbout(GUIMain main) {
-		ImageIcon logo = new ImageIcon(Thread.currentThread().getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"logo.png"), "JStylo Logo");
+		ImageIcon logo = new ImageIcon(Thread.currentThread().getClass().getResource(ANONConstants.GRAPHICS_PREFIX+"logo.png"), "JStylo Logo");
 		String content =
 				"<html><p>" +
 				"<h3>JStylo</h3><br>" +

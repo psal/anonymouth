@@ -148,11 +148,11 @@ public class ClustersDriver {
 			if (i == 0 || i % 2 == 0) {
 				nameLabels[i].setBackground(Color.WHITE);
 				clusterPanels[i].setBackground(Color.WHITE);
-				finalPanels[i].setBorder(main.rlborder);
+				finalPanels[i].setBorder(main.BANNER_BORDER);
 			} else {
-				nameLabels[i].setBackground(main.blue);
-				clusterPanels[i].setBackground(main.blue);
-				finalPanels[i].setBorder(main.rlborder);
+				nameLabels[i].setBackground(main.DEFAULT_COLOR);
+				clusterPanels[i].setBackground(main.DEFAULT_COLOR);
+				finalPanels[i].setBorder(main.BANNER_BORDER);
 			}
 			nameLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			nameLabels[i].setOpaque(true);

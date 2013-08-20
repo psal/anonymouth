@@ -1,15 +1,5 @@
 package edu.drexel.psal.anonymouth.utils;
 
-import java.awt.BorderLayout;
-
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import edu.drexel.psal.JSANConstants;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
-
 public class About {
 	
 	protected static String version = "0.5";

@@ -70,10 +70,10 @@ public class ClustersWindow extends JFrame {
 		{ // --------------cluster panel components
 			clustersLabel = new JLabel("Clusters:");
 			clustersLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			clustersLabel.setFont(GUIMain.inst.titleFont);
+			clustersLabel.setFont(GUIMain.inst.BANNER_FONT);
 			clustersLabel.setOpaque(true);
 			clustersLabel.setBackground(new Color(252,242,206));
-			clustersLabel.setBorder(GUIMain.inst.rlborder);
+			clustersLabel.setBorder(GUIMain.inst.BANNER_BORDER);
 			
 			clusterHolderPanel = new ScrollablePanel() {
 				private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Analyzer;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.InstancesBuilder;
@@ -24,7 +24,6 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.*;
 import javax.swing.tree.*;
 
 /**
@@ -381,7 +380,7 @@ public class GUIMain extends javax.swing.JFrame {
 			
 			setSize(1024, 768);
 			setTitle("JStylo");
-			setIconImage(new ImageIcon(Thread.currentThread().getClass().getResource(JSANConstants.JSAN_GRAPHICS_PREFIX+"icon32.jpg")).getImage());
+			setIconImage(new ImageIcon(Thread.currentThread().getClass().getResource(ANONConstants.GRAPHICS_PREFIX+"icon32.jpg")).getImage());
 			
 			{
 				mainJTabbedPane = new JTabbedPane();

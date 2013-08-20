@@ -34,7 +34,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	protected ArrayList<String> translationNames = new ArrayList<String>();
 	protected ArrayList<TaggedSentence> translations = new ArrayList<TaggedSentence>();
 
-	private int PROBABLE_MAX = 3;
+	private final int PROBABLE_MAX = 3;
 
 	protected ArrayList<TENSE> tense = new ArrayList<TENSE>(PROBABLE_MAX);
 	protected ArrayList<POV> pointOfView = new ArrayList<POV>(PROBABLE_MAX);
@@ -259,6 +259,24 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public ArrayList<Word> getWordsInSentence(){
 		return wordsInSentence;
 	}
+	
+	/**
+	 * Clears all variables tied to this specific taggedSentence before finally setting itself to null
+	 */
+	public void delete() {
+		sentenceLevelFeaturesFound = null;
+		untagged = null;
+		untaggedWithEOSSubs = null;
+		wordsInSentence = null;
+		translationNames = null;
+		translations = null;
+		tense = null;
+		pointOfView = null;
+		conjugations = null;
+		sentenceTokenized = null;
+		toke = null;
+		tlp = null;
+	}
 
 	/**
 	 * Allows comparing two TaggedSentence objects based upon anonymity index
@@ -288,7 +306,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		SparseReferences oldRefs = oldOne.getReferences();
 		return this.getReferences().leftMinusRight(oldRefs); 	
 	}
-
 
 	/**
 	 * Computes the AnonymityIndex of this sentence: SUM ((#appearancesOfFeature[i]/numFeaturesFoundInWord)*(infoGainOfFeature[i])*(%changeNeededOfFeature[i])). 

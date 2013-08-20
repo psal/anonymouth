@@ -7,16 +7,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 public class MisspelledWords {
 
-	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	@SuppressWarnings("unused")
+	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	protected String[] misspelledWordArray=new String[5513];//make this larger if more words are added
 	private ArrayList<String> misspelledWordList;
-	private static String filePath = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"writeprints_misspellings.txt";
-	private static String filePath2 = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"wikipedia_misspellings_sequences.txt";//not sure if needed
+	private static String filePath = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"writeprints_misspellings.txt";
+	private static String filePath2 = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"wikipedia_misspellings_sequences.txt";//not sure if needed
 	private Trie node;
 	
 	public MisspelledWords(){

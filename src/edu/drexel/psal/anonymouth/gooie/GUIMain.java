@@ -56,12 +56,14 @@ public class GUIMain extends JFrame {
 	//						VARIOUS STUFF
 	//=====================================================================
 	
-	//Translation and suggestion banners
-	protected Border rlborder = BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(),
+	//Banners / Titles
+	protected final Border BANNER_BORDER = BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(),
 			BorderFactory.createLoweredBevelBorder()); //The border of the banners used for translations and suggestions
-	protected Font titleFont = new Font("Ariel", Font.BOLD, 12); //The font of the banners used for translations and suggestions
-	protected String titleHeight = "25"; //The height of the banners used for translations and suggestions
-	protected final Color blue = new Color(136,166,233,200); //The color of the banners used for translations and suggestions
+	protected final Font BANNER_FONT = new Font("Ariel", Font.BOLD, 12); //The font of the banners used for translations and suggestions
+	protected final String BANNER_HEIGHT = "25"; //The height of the banners used for translations and suggestions
+	protected final Color DEFAULT_COLOR = new Color(136,166,233,200); //The background color of the banner used for translations and others
+	private final Color ADD_COLOR = new Color(0,190,0,200); //The background color of the banner used for words to add
+	private final Color REMOVE_COLOR = new Color(190,0,0,200); //The background color of the banner used for words to remove
 	
 	//Pre Processing windows
 	public PreProcessWindow preProcessWindow;
@@ -75,6 +77,8 @@ public class GUIMain extends JFrame {
 	protected Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
 	private WindowListener exitListener; //To know when the window is being closed
 	private ComponentListener resizeListener; //To know when the window is resizing (so we can repaint the anonymity bar)
+	public ANONConstants.STATE anonymityBarState = ANONConstants.STATE.VISIBLE;
+	public ANONConstants.STATE suggestionTabsState = ANONConstants.STATE.VISIBLE;
 	
 	//=====================================================================
 	//				LEFT TAB (anonymity bar, results, etc.)
@@ -86,10 +90,10 @@ public class GUIMain extends JFrame {
 	public AnonymityBar anonymityBar;		//The actual bar
 	protected JPanel anonymityHoldingPanel;	//The "main" anonymity bar panel, holds the bar, label, and anything else we want to add
 	protected JPanel anonymityPanel;		//The entire left-hand tab of Anonymouth
-	protected JLabel anonymityLabel;		//The "Anonymity: " banner label
 	protected JLabel anonymityDescription;	//The Anonymity percentage/description label
 	protected int anonymityWidth = 200;		//The current height of the panel
 	protected int anonymityHeight = 450;	//The current width of the panel
+	protected JLabel anonymityPercent;		//Used only when the Anonymity bar is hidden
 	
 	//Results
 	protected ResultsWindow resultsWindow;
@@ -100,7 +104,7 @@ public class GUIMain extends JFrame {
 	//						TOP TAB (middle editor)
 	//=====================================================================
 	
-	protected JTabbedPane EditorTabPane;
+	protected JTabbedPane editorTabPane;
 	
 	//Editor
 	protected JPanel documentPanel;
@@ -135,24 +139,22 @@ public class GUIMain extends JFrame {
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected DefaultListModel<String> elementsToAdd;
 	protected DefaultListModel<String> elementsToRemove;
-	protected JButton clearAddHighlights;
 	protected JButton clearRemoveHighlights;
+	protected JButton highlightAllRemoveHighlights;
 	
 	//Translations
 	public TranslationsPanel translationsPanel;
 	public TranslationsDriver translationsDriver;
 	protected JPanel translationsMainPanel;
-	protected JLabel translationsLabel;
 	protected JButton resetTranslator;
-	public JButton stopTranslations;
-	public JButton startTranslations;
+	public JButton translateSentenceButton;
+	public JButton translationHelpButton;
 	public ScrollablePanel translationsHolderPanel;
 	protected JScrollPane translationsScrollPane;
-	protected JPanel progressPanel;
-	public JLabel translationsProgressLabel;
 	public JProgressBar translationsProgressBar;
 	public JTextPane notTranslated;
-	private JLabel translationsProgressTitleLabel;
+	public JPanel translationsTopPanel;
+	public ANONConstants.TRANSLATIONS translationsTopPanelShown;
 	
 	//=====================================================================
 	//			MENU BAR (Preferences, pull down menus, etc.)
@@ -168,6 +170,8 @@ public class GUIMain extends JFrame {
 	protected JMenuItem helpSuggestionsMenuItem;
 	protected JMenuItem helpClustersMenuItem;
 	protected JMenuItem viewMenuItem;
+	protected JMenuItem viewHideAnonymityBar;
+	protected JMenuItem viewHideSuggestions;
 	protected JMenuItem viewClustersMenuItem;
 	public JMenuItem viewEnterFullScreenMenuItem;
 	protected JMenuItem helpMenu;
@@ -208,6 +212,26 @@ public class GUIMain extends JFrame {
 		initMenuBar();				//Initializes the menu bar
 		initComponents();			//All of the window's Swing Components
 		initClassesAndListeners();	//Other class instances and their listeners/drivers
+	}
+	
+	/**
+	 * Displays Anonymouth's main GUI.
+	 */
+	public void showGUIMain() {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				setExtendedState(MAXIMIZED_BOTH);
+				setLocationRelativeTo(null);
+				GUIMain.inst.setVisible(true);
+			}
+		});
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				resultsWindow.showResultsWindow();
+			}
+		});
 	}
 	
 	/**
@@ -273,6 +297,7 @@ public class GUIMain extends JFrame {
 		clustersWindow = new ClustersWindow(); //The Clusters Viewer Window in the "View" pull-down menu for OS X, "Window" for others
 
 		//--------------------------------------------
+		
 		fileMenu = new JMenu("File");
 		fileSaveProblemSetMenuItem = new JMenuItem("Save Document Set");
 		fileSaveTestDocMenuItem = new JMenuItem("Save");
@@ -284,6 +309,7 @@ public class GUIMain extends JFrame {
 		fileMenu.add(fileSaveAsTestDocMenuItem);
 
 		//--------------------------------------------
+		
 		editMenu = new JMenu("Edit");
 		editUndoMenuItem = new JMenuItem("Undo");
 		editUndoMenuItem.setEnabled(false);
@@ -295,6 +321,34 @@ public class GUIMain extends JFrame {
 		versionControl = new VersionControl(this); //The Class that handles undo/redo functionality
 		
 		//--------------------------------------------
+		
+		//"View" is a very OS X/(Linux?) menu bar, thus it's only available for it
+		viewMenuItem = new JMenu("View");
+		
+		viewHideAnonymityBar = new JMenuItem("Hide Anonymity Bar");
+		viewHideSuggestions = new JMenuItem("Hide Suggestion Tabs");
+		viewMenuItem.add(viewHideAnonymityBar);
+		viewMenuItem.add(viewHideSuggestions);
+		viewMenuItem.add(new JSeparator());
+		
+		//We want the "Enter Full Screen" Menu Item to stay consistent with the Lion+ look and feel
+		viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
+		viewMenuItem.add(viewEnterFullScreenMenuItem);
+		
+		//--------------------------------------------
+		
+		JMenu windowMenu = new JMenu("Window");
+		if (!ANONConstants.IS_MAC) {
+			settingsGeneralMenuItem = new JMenuItem("Preferences");
+			windowMenu.add(settingsGeneralMenuItem);
+			windowMenu.add(new JSeparator());
+		}
+
+		viewClustersMenuItem = new JMenuItem("Clusters");
+		windowMenu.add(viewClustersMenuItem);
+		
+		//--------------------------------------------
+		
 		helpMenu = new JMenu("Help");
 		helpAboutMenuItem = new JMenuItem("About Anonymouth");
 		helpClustersMenuItem = new JMenuItem("Clusters Tutorial");
@@ -308,8 +362,6 @@ public class GUIMain extends JFrame {
 		helpMenu.add(helpClustersMenuItem);
 		faqWindow = new FAQWindow();				//The FAQ window in the "Help" pull-down menu
 		clustersTutorial = new ClustersTutorial();	//The clusters tutorial in the "Help" pull-down menu
-		
-		//--------------------------------------------
 
 		/**
 		 * The Menu location/text/keyboard shortcuts all change depending on the OS (and thus, the look and feel)
@@ -322,40 +374,19 @@ public class GUIMain extends JFrame {
 			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
-			//"View" is a very OS X/(Linux?) menu bar, thus it's only available for it
-			viewMenuItem = new JMenu("View");
-			viewClustersMenuItem = new JMenuItem("Clusters");
-			viewMenuItem.add(viewClustersMenuItem);
-			
-			//We also want the "Enter Full Screen" Menu Item to stay consistent with the Lion+ look and feel
-			viewMenuItem.add(new JSeparator());
-			viewEnterFullScreenMenuItem = new JMenuItem("Enter Full Screen");
-			viewMenuItem.add(viewEnterFullScreenMenuItem);
 			viewEnterFullScreenMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));	
 		} else {
 			fileSaveAsTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
 			fileSaveTestDocMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
 			editUndoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
 			editRedoMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
-			
-			/*
-			 * "Window" is more predominant in Windows, and since "View" isn't really used for it we will stick our menu items such
-			 * as Preferences and Clusters here instead
-			 */
-			JMenu windowMenu = new JMenu("Window");
-			settingsGeneralMenuItem = new JMenuItem("Preferences");
-			viewClustersMenuItem = new JMenuItem("Clusters");
-			windowMenu.add(settingsGeneralMenuItem);
-			windowMenu.add(viewClustersMenuItem);
 		}
-
+		
 		//Adding everything to the menu bar, and finally adding that to the frame.
 		menuBar.add(fileMenu);
 		menuBar.add(editMenu);
-		if (ANONConstants.IS_MAC)
-			menuBar.add(viewMenuItem);
-		else
-			menuBar.add(windowMenu);
+		menuBar.add(viewMenuItem);
+		menuBar.add(windowMenu);
 		menuBar.add(helpMenu);
 
 		this.setJMenuBar(menuBar);
@@ -373,7 +404,7 @@ public class GUIMain extends JFrame {
 		initAnonymityTab();
 		
 		//TOP TAB (Actually middle tab, Editor)
-		EditorTabPane = new JTabbedPane();
+		editorTabPane = new JTabbedPane();
 		initEditorTab();
 		
 		//RIGHT TAB (All helpers, including word to remove/add, translations, etc.)
@@ -384,19 +415,19 @@ public class GUIMain extends JFrame {
 		//Now we organize all these tabs and fit them into the window
 		//Adding multiple tabs to areas where it is needed (i.e., same location)
 		//Top
-		EditorTabPane.add("Document to Anonymize", documentPanel);
-		EditorTabPane.add("Original Document", originalDocumentPanel);
+		editorTabPane.add("Document to Anonymize", documentPanel);
+		editorTabPane.add("Original Document", originalDocumentPanel);
 		//Right
 		helpersTabPane.add("Word Suggestions", wordSuggestionsPanel);
 		helpersTabPane.add("Translations", translationsMainPanel);
 		
 		this.setLayout(new MigLayout(
 				"wrap 3, gap 10 10",//layout constraints
-				"[][grow, fill][]", //column constraints
+				"[][grow, fill][shrink]", //column constraints
 				"[grow, fill]"));	// row constraints
 		this.add(anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
-		this.add(EditorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
-		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 2");//RIGHT		(Word Suggestions, Translations, etc.)
+		this.add(editorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
+		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 1");//RIGHT		(Word Suggestions, Translations, etc.)
 
 		/**
 		 * This is needed so we can ensure that the Anonymity bar is getting the correct width and height needed
@@ -433,6 +464,7 @@ public class GUIMain extends JFrame {
 		
 		EditorDriver.initListeners(this);
 		
+		//So we can intercept the window close if they didn't save changes
 		exitListener = new WindowListener() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -471,6 +503,7 @@ public class GUIMain extends JFrame {
 		};
 		this.addWindowListener(exitListener);
 		
+		//So we can repaint the anonymity bar accordingly
 		resizeListener = new ComponentListener() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -486,30 +519,6 @@ public class GUIMain extends JFrame {
 		};
 		this.addComponentListener(resizeListener);
 	}
-	
-	/**
-	 * Displays Anonymouth's main GUI.
-	 */
-	public void showGUIMain() {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				setExtendedState(MAXIMIZED_BOTH);
-				setLocationRelativeTo(null);
-				GUIMain.inst.setVisible(true);
-			}
-		});
-	}
-	
-	/**
-	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel
-	 * and anonymityHoldingPanel, respectively, so that it can be drawn to fit nicely with whatever
-	 * size the window is (basically, it resizes like any javax swing component)
-	 */
-	private void updateSizeVariables() {
-		anonymityHeight = anonymityHoldingPanel.getHeight() + 15;
-		anonymityWidth = anonymityPanel.getWidth();
-		anonymityBar.updateForNewSize();
-	}
 
 	/**
 	 * Creates and lays out all swing components in the word Suggestions tab
@@ -523,12 +532,11 @@ public class GUIMain extends JFrame {
 		wordSuggestionsPanel.setLayout(settingsLayout);
 		{
 			//--------- Elements to Add Label ------------------
-			elementsToAddLabel = new JLabel("Words To Add:");
+			elementsToAddLabel = new JLabel("+");
 			elementsToAddLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			elementsToAddLabel.setFont(titleFont);
+			elementsToAddLabel.setFont(BANNER_FONT);
 			elementsToAddLabel.setOpaque(true);
-			elementsToAddLabel.setBackground(blue);
-			elementsToAddLabel.setBorder(rlborder);
+			elementsToAddLabel.setBackground(ADD_COLOR);
 			elementsToAddLabel.setToolTipText("<html><center>Words in your document that Anonymouth believes may<br>" +
 											  "be helpful in masking your identity and that you should<br>" +
 											  "consider using more often (where applicable)</center></html>");
@@ -543,16 +551,13 @@ public class GUIMain extends JFrame {
 			elementsToAddPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			elementsToAddPane.setDragEnabled(false);
 			elementsToAddPane.setFocusable(false);
-			
-			clearAddHighlights = new JButton("Clear \"Add\" Highlights");
 
 			//--------- Elements to Remove Label  ------------------
-			elementsToRemoveLabel = new JLabel("Words To Remove:");
+			elementsToRemoveLabel = new JLabel("-");
 			elementsToRemoveLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			elementsToRemoveLabel.setFont(titleFont);
+			elementsToRemoveLabel.setFont(BANNER_FONT);
 			elementsToRemoveLabel.setOpaque(true);
-			elementsToRemoveLabel.setBackground(blue);
-			elementsToRemoveLabel.setBorder(rlborder);
+			elementsToRemoveLabel.setBackground(REMOVE_COLOR);
 			elementsToRemoveLabel.setToolTipText("<html><center>Words that Anonymouth believes may be more likely to expose<br>" +
 												 "you and you should consider replacing.</center></html>");
 
@@ -585,16 +590,17 @@ public class GUIMain extends JFrame {
 			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
-			clearRemoveHighlights = new JButton("Clear \"Remove\" Highlights");
+			highlightAllRemoveHighlights = new JButton("Highlight All");
+			clearRemoveHighlights = new JButton("Clear All");
 		}
 		
 		//Adding everything in...
-		wordSuggestionsPanel.add(elementsToAddLabel, "h " + titleHeight + "!");
+		wordSuggestionsPanel.add(elementsToAddLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
-		wordSuggestionsPanel.add(clearAddHighlights, "growx");
-		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + titleHeight + "!");
+		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
-		wordSuggestionsPanel.add(clearRemoveHighlights, "growx");
+		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split, w 50%");
+		wordSuggestionsPanel.add(clearRemoveHighlights, "w 50%");
 	}
 
 	/**
@@ -607,16 +613,18 @@ public class GUIMain extends JFrame {
 		translationsMainPanel.setLayout(new MigLayout(
 			"wrap, ins 0, gap 0 0",
 			"grow, fill",
-			"[][grow, fill][]"));
-		{			
-			//--------- Translations Label ------------------
-			translationsLabel = new JLabel("Translations:");
-			translationsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			translationsLabel.setFont(titleFont);
-			translationsLabel.setOpaque(true);
-			translationsLabel.setBackground(blue);
-			translationsLabel.setBorder(rlborder);
-
+			"[][grow, fill]"));
+		{
+			//----------- Top Portion (Translate button, progress bar, etc.) -------------
+			translateSentenceButton = new JButton("Translate Sentence");
+			translationHelpButton = new JButton("?");
+			resetTranslator = new JButton("Reset Translator");
+			
+			if (!PropertiesUtil.getDoTranslations())
+				translateSentenceButton.setEnabled(false);
+			
+			translationsProgressBar = new JProgressBar();
+			
 			//--------- Holds all translations ------------------
 			translationsHolderPanel = new ScrollablePanel() {
 				private static final long serialVersionUID = 1L;
@@ -634,74 +642,26 @@ public class GUIMain extends JFrame {
 					"grow, fill",
 					""));
 
+			translationsScrollPane = new JScrollPane(translationsHolderPanel);
+			translationsScrollPane.setOpaque(true);
+			translationsScrollPane.setAutoscrolls(false);
+
 			//------------ Text Pane displayed when no translations ------------------
 			notTranslated = new JTextPane();
-
-			if (PropertiesUtil.getDoTranslations()) {
-				String text;
-				if (ANONConstants.IS_MAC)
-					text = "Anonymouth > Preferences";
-				else
-					text = "Window > Preferences";
-				notTranslated.setText("Translations are off\n\nTo turn them on, navigate to " + text);
-			}
-
 			notTranslated.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 			notTranslated.setDragEnabled(false);
 			notTranslated.setEditable(false);
 			notTranslated.setFocusable(false);
 			translationsHolderPanel.add(notTranslated);
-
-			//----------- Scroll pane for all translations -------------
-			translationsScrollPane = new JScrollPane(translationsHolderPanel);
-			translationsScrollPane.setOpaque(true);
-			translationsScrollPane.setAutoscrolls(false);
-			
-			//=============================================
-			//The bottom of the translations, where we show the progress, allow them to reset, and so forth
-			//=============================================
-			
-			progressPanel = new JPanel();
-			progressPanel.setLayout(new MigLayout(
-					"wrap, fill, ins 0",
-					"grow, fill",
-					"[][][20]"));
-			{
-				translationsProgressTitleLabel = new JLabel("Progress:");
-				translationsProgressTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				translationsProgressTitleLabel.setFont(titleFont);
-				translationsProgressTitleLabel.setOpaque(true);
-				translationsProgressTitleLabel.setBackground(blue);
-				translationsProgressTitleLabel.setBorder(rlborder);
-
-				translationsProgressLabel = new JLabel("No Translations Pending.");
-				translationsProgressLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-				translationsProgressBar = new JProgressBar();
-			}
-			progressPanel.add(translationsProgressTitleLabel, "grow, h 25!");
-			progressPanel.add(translationsProgressLabel, "grow");
-			progressPanel.add(translationsProgressBar, "grow");
-
-			//----------- All buttons (top start/stop, bottom reset) -------------
-			resetTranslator = new JButton("Reset Translator");
-			resetTranslator.setEnabled(false);
-			
-			stopTranslations = new JButton("Stop");
-			stopTranslations.setEnabled(false);
-			startTranslations = new JButton("Start");
-			startTranslations.setEnabled(false);
 		}
 		
 		//The Class that handles obtaining and displaying all the different translations.
 		translationsPanel = new TranslationsPanel(this);
+		translationsTopPanel = new JPanel();
+		translationsPanel.switchToButtonPanel();
 		
-		translationsMainPanel.add(translationsLabel, "grow, h 25!, split 1");
-		translationsMainPanel.add(stopTranslations, "split, h 30!");
-		translationsMainPanel.add(startTranslations, "h 30!, wrap");
+		translationsMainPanel.add(translationsTopPanel);
 		translationsMainPanel.add(translationsScrollPane, "grow, h :100%:, wrap");
-		translationsMainPanel.add(resetTranslator, "h 30!, wrap");
-		translationsMainPanel.add(progressPanel, "grow");
 	}
 
 	/**
@@ -776,14 +736,7 @@ public class GUIMain extends JFrame {
 			"grow, fill",
 			"[grow, fill]"));
 
-		{
-			anonymityLabel = new JLabel("Anonymity:");
-			anonymityLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			anonymityLabel.setFont(titleFont);
-			anonymityLabel.setOpaque(true);
-			anonymityLabel.setBackground(blue);
-			anonymityLabel.setBorder(rlborder);
-	
+		{	
 			anonymityBar = new AnonymityBar(this);
 			
 			resultsButton = new JButton();
@@ -806,9 +759,40 @@ public class GUIMain extends JFrame {
 					"[grow, fill]"));
 			anonymityHoldingPanel.add(anonymityBar, "grow");
 			anonymityHoldingPanel.setBackground(Color.white);
+			
+			anonymityPercent = new JLabel();
 
 			anonymityPanel.add(anonymityHoldingPanel, "width 80!");
 			anonymityPanel.add(resultsButton, "dock south, gapbottom 9");
+		}
+	}
+	
+	/**
+	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel
+	 * and anonymityHoldingPanel, respectively, so that it can be drawn to fit nicely with whatever
+	 * size the window is (basically, it resizes like any javax swing component)
+	 */
+	protected void updateSizeVariables() {
+		anonymityHeight = anonymityHoldingPanel.getHeight() + 15;
+		anonymityWidth = anonymityPanel.getWidth();
+		anonymityBar.updateForNewSize();
+	}
+	
+	/**
+	 * Updates the given editor tab's title with a new one
+	 * 
+	 * @param title
+	 * 		The new title you wish to use
+	 * @param index
+	 * 		The index of the editor tab you wish to change
+	 */
+	public void updateDocLabel(String title, int index) {
+		try {
+			title = title.replaceAll(".[Tt][Xx][Tt]$", "");
+			editorTabPane.setTitleAt(index, title);
+		} catch (Exception e) { //In case the index doesn't exit
+			Logger.logln(NAME+"Tried to change the name of an editor tab that doesn't edit, index = " +
+				index + ", name change to " + title);
 		}
 	}
 	
@@ -830,24 +814,6 @@ public class GUIMain extends JFrame {
 	 */
 	public void enableRedo(boolean b) {
 		editRedoMenuItem.setEnabled(b);
-	}
-	
-	/**
-	 * Updates the given editor tab's title with a new one
-	 * 
-	 * @param title
-	 * 		The new title you wish to use
-	 * @param index
-	 * 		The index of the editor tab you wish to change
-	 */
-	public void updateDocLabel(String title, int index) {
-		try {
-			title = title.replaceAll(".[Tt][Xx][Tt]$", "");
-			EditorTabPane.setTitleAt(index, title);
-		} catch (Exception e) { //In case the index doesn't exit
-			Logger.logln(NAME+"Tried to change the name of an editor tab that doesn't edit, index = " +
-				index + ", name change to " + title);
-		}
 	}
 	
 	/**

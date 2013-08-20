@@ -11,7 +11,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.jgaap.generics.Document;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
@@ -20,31 +20,36 @@ import edu.drexel.psal.jstylo.generics.Logger;
 /**
  * Handles (nearly) all listeners relating to the Suggestions tab, as well as handles the big update method "placeSuggestions()", which
  * refreshes both the words to add and words to remove table's contents.
+ * 
  * @author ? (Most likely Andrew McDonald or Jeff Ulman)
  * @author Marc Barrowclift
- *
  */
 public class WordSuggestionsDriver {
 
+	//Constants
 	private final static String NAME = "( WordSuggestionsDriver ) - ";
 	private final String PUNCTUATION = "?!,.\"`'";
-	private final String DICTIONARY = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"words.txt";
+	private final String DICTIONARY = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"words.txt";
 
+	//Listeners
 	private ListSelectionListener elementsToAddListener;
-	private ActionListener clearAddListener;
 	private ActionListener clearRemoveListener;
-	private HashSet<String> words;
-	private boolean filterWordsToAdd;
+	private ActionListener highlightAllRemoveListener;
 	
+	//Instances and misc. variables
 	private GUIMain main;
 	private DocumentMagician magician;
 	private ArrayList<String[]> topToRemove;
 	private ArrayList<String> topToAdd;
 	private int addSize = 0, removeSize = 0;
+	private HashSet<String> words;
+	private boolean filterWordsToAdd;
 
 	/**
 	 * Constructor
-	 * @param main - GUIMain instance
+	 * 
+	 * @param main
+	 * 		GUIMain instance
 	 */
 	public WordSuggestionsDriver(GUIMain main) {
 		this.main = main;
@@ -56,6 +61,17 @@ public class WordSuggestionsDriver {
 		initListeners();
 	}
 
+	/**
+	 * Sets whether or not to filter out "words" such as:<br>
+	 * <ul>
+	 * <li>Email addresses</li>
+	 * <li>Random dates and numbers</li>
+	 * <li>Websites</li>
+	 * </ul>
+	 * 
+	 * @param filter
+	 * 		Whether or not to turn the filter on
+	 */
 	public void setFilterWordsToAdd(boolean filter) {
 		filterWordsToAdd = filter;
 	}
@@ -84,12 +100,19 @@ public class WordSuggestionsDriver {
 		return removeSize;
 	}
 
+	/**
+	 * Sets the DocumentMagician instance used to obtain words to remove/add
+	 * 
+	 * @param magician
+	 * 		DOcumentMagician instance
+	 */
 	public void setMagician(DocumentMagician magician) {
 		this.magician = magician;
 	}
 	
 	/**
-	 * Updates the lists of words to remove and words to add and then refreshes both components in the main gui to reflect the new values
+	 * Updates the lists of words to remove and words to add and then refreshes both
+	 * components in GUIMain to reflect the new values
 	 */
 	public void placeSuggestions() {
 		//We must first clear any existing highlights the user has and remove all existing suggestions		
@@ -186,6 +209,7 @@ public class WordSuggestionsDriver {
 			}
 		}
 		
+		//Prints out the results of the filter (for debugging purposes)
 		/*
 		System.out.println("============GOOD===========");
 		for (int i = 0; i < good.size(); i++) {
@@ -221,15 +245,6 @@ public class WordSuggestionsDriver {
 		};
 		main.elementsToAddPane.addListSelectionListener(elementsToAddListener);
 
-		clearAddListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EditorDriver.highlightEngine.removeAllAddHighlights();
-				main.elementsToAddPane.clearSelection();
-			}
-		};
-		main.clearAddHighlights.addActionListener(clearAddListener);
-
 		clearRemoveListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
@@ -238,5 +253,17 @@ public class WordSuggestionsDriver {
 			}
 		};
 		main.clearRemoveHighlights.addActionListener(clearRemoveListener);
+		
+		highlightAllRemoveListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EditorDriver.highlightEngine.removeAllRemoveHighlights();
+				for (int i = 0; i < removeSize; i++) {
+					EditorDriver.highlightEngine.addAllRemoveHighlights(topToRemove.get(i)[0]);
+				}
+				main.elementsToRemoveTable.clearSelection();
+			}
+		};
+		main.highlightAllRemoveHighlights.addActionListener(highlightAllRemoveListener);
 	}
 }

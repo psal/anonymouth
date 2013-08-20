@@ -205,33 +205,8 @@ public class PreferencesDriver {
 							JOptionPane.WARNING_MESSAGE,
 							null, buttons, 1);
 					if (answer == 0) {
-						if (main.processed)
-							main.resetTranslator.setEnabled(true);
 						PropertiesUtil.setDoTranslations(true);
-						
-						if (BackendInterface.processed) {
-							answer = JOptionPane.showOptionDialog(main.preferencesWindow,
-									"Being translating now?",
-									"Begin Translations",
-									JOptionPane.YES_NO_OPTION,
-									JOptionPane.QUESTION_MESSAGE,
-									null, null, null);
-							
-							if (answer == JOptionPane.YES_OPTION) {
-								main.translationsDriver.translator.load(EditorDriver.taggedDoc.getTaggedSentences());
-								main.translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
-								
-								main.startTranslations.setEnabled(false);
-								main.stopTranslations.setEnabled(true);
-							} else {
-								main.startTranslations.setEnabled(true);
-								main.stopTranslations.setEnabled(false);
-								main.translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
-							}
-						} else {
-							main.notTranslated.setText("Please process your document to recieve translation suggestions.");
-							main.translationsHolderPanel.add(main.notTranslated, "");
-						}
+						main.translateSentenceButton.setEnabled(true);
 					}					
 				} else {
 					main.resetTranslator.setEnabled(false);
@@ -239,8 +214,7 @@ public class PreferencesDriver {
 					PropertiesUtil.setDoTranslations(false);
 					main.notTranslated.setText("You have turned translations off.");
 					main.translationsHolderPanel.add(main.notTranslated, "");
-					main.startTranslations.setEnabled(false);
-					main.stopTranslations.setEnabled(false);
+					main.translateSentenceButton.setEnabled(false);
 				}
 			}
 		};

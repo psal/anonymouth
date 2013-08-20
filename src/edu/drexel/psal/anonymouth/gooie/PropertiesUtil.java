@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 
-import edu.drexel.psal.JSANConstants;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -19,7 +19,7 @@ public class PropertiesUtil {
 		{0,128,255,80},		//Blue
 		{128,0,255,80}};	//Purple
 
-	protected static final String propFileName = JSANConstants.JSAN_EXTERNAL_RESOURCE_PACKAGE+"anonymouth_prop.prop";
+	protected static final String propFileName = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"anonymouth_prop.prop";
 	protected static File propFile = new File(propFileName);
 	protected static Properties prop = new Properties();
 	protected static String defaultClass = "SMO";
