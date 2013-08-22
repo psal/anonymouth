@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -21,12 +22,16 @@ import edu.drexel.psal.jstylo.generics.Logger;
 public class ProgressWindow extends JDialog implements PropertyChangeListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
+	private final String[] ACTIONS = {"Quit", "Cancel"};
+	
 	protected Thread t;
 	private Task task;
 	private JLabel firstMessage;
 	private String progressMessage;
 	private JProgressBar editorProgressBar;
 	private JLabel editingProgressBarLabel;
+	private ProgressWindow pw;
+	private WindowListener closeListener;
 
 	/**
 	 * Constructor
@@ -35,6 +40,7 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	 */
 	public ProgressWindow(String title, GUIMain main) {
 		super(main, title, null); // MODELESS lets it stay on top, but not block any processes
+		pw = this;
 		
 		firstMessage = new JLabel("<html><link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\" media=\"screen\" />" +
 				"<center>Document currently processing, depending on the size of your dataset and computer this may take " +
@@ -58,6 +64,42 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 		completePanel.add(firstMessage, BorderLayout.NORTH);
 		completePanel.add(progressPanel, BorderLayout.SOUTH);
 		
+		closeListener = new WindowListener() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						int confirm = JOptionPane.showOptionDialog(GUIMain.inst,
+								"Are you sure you want to quit Anonymouth?\nYour document's still processing.",
+								"Document Still Processing!",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.WARNING_MESSAGE,
+								UIManager.getIcon("OptionPane.warningIcon"),
+								ACTIONS, ACTIONS[1]);
+						
+						if (confirm == JOptionPane.YES_OPTION) {
+							System.exit(0);
+						} else {
+							pw.setVisible(true);
+						}
+					}
+				});
+			}
+			@Override
+			public void windowActivated(WindowEvent arg0) {}
+			@Override
+			public void windowClosed(WindowEvent arg0) {}
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {}
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {}
+			@Override
+			public void windowIconified(WindowEvent arg0) {}
+			@Override
+			public void windowOpened(WindowEvent arg0) {}
+		};
+		this.addWindowListener(closeListener);
 		this.add(completePanel);
 		this.setResizable(false);
 		this.setSize(320, 150);

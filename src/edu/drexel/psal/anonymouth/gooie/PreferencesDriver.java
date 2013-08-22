@@ -206,10 +206,12 @@ public class PreferencesDriver {
 					if (answer == 0) {
 						PropertiesUtil.setDoTranslations(true);
 						main.translateSentenceButton.setEnabled(true);
+						main.translationHelpButton.setEnabled(true);
 					}					
 				} else {
 					main.resetTranslator.setEnabled(false);
 					main.translateSentenceButton.setEnabled(false);
+					main.translationHelpButton.setEnabled(false);
 					PropertiesUtil.setDoTranslations(false);
 				}
 			}

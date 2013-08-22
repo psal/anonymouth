@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import edu.drexel.psal.anonymouth.helpers.DisableFocus;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 import javax.swing.*;
@@ -89,6 +90,8 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 		this.setSize(new Dimension(500, generalHeight));
 		this.setResizable(false);
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
+		
+		DisableFocus.removeAllFocus(this);
 	}
 	
 	/**

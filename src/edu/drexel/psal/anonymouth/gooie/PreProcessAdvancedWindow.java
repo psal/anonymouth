@@ -54,8 +54,9 @@ public class PreProcessAdvancedWindow extends JDialog {
 
 	//Constants
 	private static final long serialVersionUID = 1L;
-	private static final String NAME = "( PreProcessAdvancedWindow ) - ";
-	private final Font HELVETICA = new Font("Helvetica", Font.PLAIN, 22);
+	private final String NAME = "( "+ this.getClass().getSimpleName() +" ) - ";
+	private final int WINDOW_WIDTH = 480;
+	private final int WINDOW_HEIGHT = 280;
 	private final String[] WEKACLASSNAMES = new String[] {
 			//Bayes
 			"weka.classifiers.bayes.NaiveBayes",
@@ -86,7 +87,6 @@ public class PreProcessAdvancedWindow extends JDialog {
 	protected JTabbedPane tabbedPane;
 	//========Features=========
 	protected JPanel featureMainPanel;
-	protected JLabel featureTitleLabel;
 	protected JLabel featureNameLabel;
 	protected JComboBox<String> featureChoice;
 	protected DefaultComboBoxModel<String> featureChoiceModel;
@@ -140,7 +140,6 @@ public class PreProcessAdvancedWindow extends JDialog {
 	//========Classifier=========
 	private JPanel classMainPanel;
 	private JPanel classMiddlePanel;
-	private JLabel classTitleLabel;
 	private JPanel classMiddleFirstPanel;
 	private JPanel classMiddleSecondPanel;
 	private JLabel classNameLabel;
@@ -196,11 +195,9 @@ public class PreProcessAdvancedWindow extends JDialog {
 	 * Initializes the window and it's attributes
 	 */
 	private void initWindow() {
-		Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(new Dimension((int)(screensize.width*.8), (int)(screensize.height*.8)));
 		this.setLocationRelativeTo(null); // makes it form in the center of the screen
 		this.setResizable(false);
-		this.setSize(480, 310);
+		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		this.setIconImage(ThePresident.logo);
 	}
 
@@ -256,14 +253,9 @@ public class PreProcessAdvancedWindow extends JDialog {
 		featureMainPanel = new JPanel();
 		featureMainPanel.setLayout(new BorderLayout(0, 0));
 		{
-			featureTitleLabel = new JLabel("Current Feature Set");
-			featureTitleLabel.setFont(HELVETICA);
-			featureTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			featureTitleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-
 			featureMiddlePanel = new JPanel();
 			featureMiddlePanel.setLayout(new BorderLayout(0, 2));
-			featureMiddlePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+			featureMiddlePanel.setBorder(new EmptyBorder(10, 10, 0, 10));
 			{
 				featureMiddleFirstPanel = new JPanel();
 				featureMiddleFirstPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -307,12 +299,11 @@ public class PreProcessAdvancedWindow extends JDialog {
 			featureBottomPanel.add(featureOKButton);
 			
 			featureCompleteBottomPanel = new JPanel();
-			featureCompleteBottomPanel.setLayout(new BorderLayout(0, 10));
+			featureCompleteBottomPanel.setLayout(new BorderLayout(0, 0));
 			featureCompleteBottomPanel.add(featureMiddlePanel, BorderLayout.NORTH);
 			featureCompleteBottomPanel.add(featureBottomPanel, BorderLayout.SOUTH);
 		}
-		featureMainPanel.add(featureTitleLabel, BorderLayout.NORTH);
-		featureMainPanel.add(featureCompleteBottomPanel, BorderLayout.SOUTH);		
+		featureMainPanel.add(featureCompleteBottomPanel, BorderLayout.CENTER);		
 	}
 	
 	/**
@@ -514,14 +505,9 @@ public class PreProcessAdvancedWindow extends JDialog {
 		classMainPanel = new JPanel();
 		classMainPanel.setLayout(new BorderLayout(0, 0));
 		{
-			classTitleLabel = new JLabel("Classifier");
-			classTitleLabel.setFont(HELVETICA);
-			classTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			classTitleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-
 			classMiddlePanel = new JPanel();
 			classMiddlePanel.setLayout(new BorderLayout(0, 2));
-			classMiddlePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+			classMiddlePanel.setBorder(new EmptyBorder(10, 10, 0, 10));
 			{
 				classMiddleFirstPanel = new JPanel();
 				classMiddleFirstPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -565,12 +551,11 @@ public class PreProcessAdvancedWindow extends JDialog {
 			classBottomPanel.add(classOKButton);
 
 			classCompleteBottomPanel = new JPanel();
-			classCompleteBottomPanel.setLayout(new BorderLayout(0, 10));
+			classCompleteBottomPanel.setLayout(new BorderLayout(0, 0));
 			classCompleteBottomPanel.add(classMiddlePanel, BorderLayout.NORTH);
 			classCompleteBottomPanel.add(classBottomPanel, BorderLayout.SOUTH);
 		}
-		classMainPanel.add(classTitleLabel, BorderLayout.NORTH);
-		classMainPanel.add(classCompleteBottomPanel, BorderLayout.SOUTH);
+		classMainPanel.add(classCompleteBottomPanel, BorderLayout.CENTER);
 	}
 	
 	/**

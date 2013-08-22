@@ -22,6 +22,7 @@ import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
 import edu.drexel.psal.anonymouth.engine.VersionControl;
+import edu.drexel.psal.anonymouth.helpers.DisableFocus;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -213,6 +214,8 @@ public class GUIMain extends JFrame {
 		initMenuBar();				//Initializes the menu bar
 		initComponents();			//All of the window's Swing Components
 		initClassesAndListeners();	//Other class instances and their listeners/drivers
+		
+		DisableFocus.removeAllFocus(this); //Now that everything's added, let's disable focus traversal
 	}
 	
 	/**
@@ -552,7 +555,6 @@ public class GUIMain extends JFrame {
 			elementsToAddPane.setEnabled(false);
 			elementsToAddPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			elementsToAddPane.setDragEnabled(false);
-			elementsToAddPane.setFocusable(false);
 
 			//--------- Elements to Remove Label  ------------------
 			elementsToRemoveLabel = new JLabel("-");
@@ -588,7 +590,6 @@ public class GUIMain extends JFrame {
 			elementsToRemoveTable.getColumn("Occurrences").setMaxWidth(90);
 			elementsToRemoveTable.getColumn("Occurrences").setMinWidth(90);
 			elementsToRemoveTable.setEnabled(false);
-			elementsToRemoveTable.setFocusable(false);
 			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
 			elementsToRemoveScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -654,7 +655,6 @@ public class GUIMain extends JFrame {
 			notTranslated.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 			notTranslated.setDragEnabled(false);
 			notTranslated.setEditable(false);
-			notTranslated.setFocusable(false);
 			translationsHolderPanel.add(notTranslated);
 		}
 		
@@ -718,7 +718,6 @@ public class GUIMain extends JFrame {
 			processButton = new JButton("Reprocess");
 			processButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
 											"and updates the results graph with the new results.</center></html>");
-			processButton.setFocusable(false);
 
 			documentPanel.add(documentScrollPane, "grow");
 			documentPanel.add(processButton, "right");
@@ -746,7 +745,6 @@ public class GUIMain extends JFrame {
 			resultsButton.setBackground(Color.WHITE);
 			resultsButton.setIcon(resultsWindow.getButtonIcon());
 			resultsButton.setToolTipText("Click to reopen process results");
-			resultsButton.setFocusable(false);
 
 			anonymityDescription = new JLabel();
 			anonymityDescription.setFont(new Font("Helvatica", Font.PLAIN, 15));

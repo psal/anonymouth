@@ -35,6 +35,7 @@ public class TranslationsDriver implements MouseListener {
 	//Listeners
 	private ActionListener resetTranslatorListener;
 	private ActionListener translateSentenceListener;
+	private ActionListener helpTranslationListener;
 	
 	//Anonymouth class instances
 	private GUIMain main;
@@ -116,6 +117,31 @@ public class TranslationsDriver implements MouseListener {
 			}
 		};
 		main.resetTranslator.addActionListener(resetTranslatorListener);
+		
+		helpTranslationListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(main,
+						"<html>" +
+						"Sometimes it's difficult to think of different ways to phrase<br>" +
+						"or structure a sentence even if you know what you're supposed<br>" +
+						"to change.<br><br>" +
+						
+						"This is where translations can help. For sentences you have<br>" +
+						"difficulty with click the \"Translate Sentence\" button and<br>" +
+						"Anonymouth will translate your sentence into 15 different <br>" +
+						"languages and back to English again. In some cases this can<br>" +
+						"provide you with new ideas and help break through a writer's<br>" +
+						"block (or if you're lucky, provides you with a perfect<br>" +
+						"restructured sentence, in which case click the translation's<br>" +
+						"arrow to swap it in automatically)" +
+						"</html>",
+						"Translations Help",
+						JOptionPane.INFORMATION_MESSAGE,
+						ThePresident.dialogIcon);
+			}
+		};
+		main.translationHelpButton.addActionListener(helpTranslationListener);
 	}
 	
 	/**

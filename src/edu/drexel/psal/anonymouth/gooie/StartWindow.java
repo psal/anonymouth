@@ -358,18 +358,15 @@ public class StartWindow extends JFrame {
 			textLabel.setForeground(Color.BLACK);
 			startButton.setEnabled(true);
 			this.getRootPane().setDefaultButton(startButton);
-			startButton.requestFocusInWindow();
 			main.preProcessWindow.saved = true;
 		} else {
 			if (loaded) {
 				textLabel.setText("Please finish incomplete document set");
 				modifyDocSetButton.setEnabled(true);
 				this.getRootPane().setDefaultButton(modifyDocSetButton);
-				modifyDocSetButton.requestFocusInWindow();
 			} else {
 				textLabel.setText("No previous document set found");
 				this.getRootPane().setDefaultButton(newDocSetButton);
-				newDocSetButton.requestFocusInWindow();
 				modifyDocSetButton.setEnabled(false);
 			}
 			textLabel.setForeground(Color.LIGHT_GRAY);
