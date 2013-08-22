@@ -150,8 +150,8 @@ public class ClustersDriver {
 				clusterPanels[i].setBackground(Color.WHITE);
 				finalPanels[i].setBorder(main.BANNER_BORDER);
 			} else {
-				nameLabels[i].setBackground(main.DEFAULT_COLOR);
-				clusterPanels[i].setBackground(main.DEFAULT_COLOR);
+				nameLabels[i].setBackground(main.BANNER_BACKGROUND_COLOR);
+				clusterPanels[i].setBackground(main.BANNER_BACKGROUND_COLOR);
 				finalPanels[i].setBorder(main.BANNER_BORDER);
 			}
 			nameLabels[i].setHorizontalAlignment(SwingConstants.CENTER);

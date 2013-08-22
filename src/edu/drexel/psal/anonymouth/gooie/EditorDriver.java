@@ -626,12 +626,11 @@ public class EditorDriver {
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if (!main.processed){
+				if (!main.processed || ignoreNumActions > 0) {
 					return;
 				}
-				
+
 				charsInserted = e.getLength();
-//				System.out.println("LENGTH = " + e.getLength());
 				curCharBackupBuffer += e.getLength();
 
 				if (main.versionControl.isUndoEmpty() && main.processed && !ignoreVersion) {
@@ -657,7 +656,7 @@ public class EditorDriver {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				if (!main.processed) {
+				if (!main.processed || ignoreNumActions > 0) {
 					if (!EditorDriver.isFirstRun)
 						main.processed = true;
 					return;
@@ -667,7 +666,6 @@ public class EditorDriver {
 					InputFilter.ignoreDeletion = false;
 				} else {
 					charsRemoved = e.getLength();
-//					System.out.println("LENGTH = " + e.getLength());
 					curCharBackupBuffer += e.getLength();
 				}
 

@@ -335,14 +335,14 @@ public class PreProcessAdvancedWindow extends JDialog {
 			viewInfoListLabel.setHorizontalAlignment(JLabel.CENTER);
 			viewInfoListLabel.setFont(new Font("Helvetica", Font.BOLD, 12));
 			viewInfoListLabel.setOpaque(true);
-			viewInfoListLabel.setBackground(main.DEFAULT_COLOR);
+			viewInfoListLabel.setBackground(main.BANNER_BACKGROUND_COLOR);
 			viewInfoListLabel.setBorder(main.BANNER_BORDER);
 
 			viewInfoInfoLabel = new JLabel("Feature Information:");
 			viewInfoInfoLabel.setFont(new Font("Ariel", Font.BOLD, 12));
 			viewInfoInfoLabel.setHorizontalAlignment(JLabel.CENTER);
 			viewInfoInfoLabel.setOpaque(true);
-			viewInfoInfoLabel.setBackground(main.DEFAULT_COLOR);
+			viewInfoInfoLabel.setBackground(main.BANNER_BACKGROUND_COLOR);
 			viewInfoInfoLabel.setBorder(main.BANNER_BORDER);
 
 			viewInfoListModel = new DefaultComboBoxModel<String>();

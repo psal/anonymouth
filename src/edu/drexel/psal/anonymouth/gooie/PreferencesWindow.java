@@ -32,7 +32,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 	protected JCheckBox autoSave;
 	protected JLabel autoSaveNote;
 	protected JCheckBox warnQuit;
-	protected JCheckBox showWarnings;
 	protected JCheckBox translations;
 	protected JCheckBox filterAddWords;
 	protected JLabel translationsNote;
@@ -164,11 +163,6 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			JSeparator sep2 = new JSeparator(JSeparator.HORIZONTAL);
 			sep2.setPreferredSize(new Dimension(484, 15));
 			
-			showWarnings = new JCheckBox();
-			showWarnings.setText("Displays all warnings");
-			if (PropertiesUtil.getWarnAll())
-				showWarnings.setSelected(true);
-			
 			general.add(autoSave, "wrap");
 			general.add(autoSaveNote, "alignx 50%, wrap");
 			general.add(warnQuit, "wrap");
@@ -176,8 +170,7 @@ public class PreferencesWindow extends JFrame implements WindowListener {
 			general.add(filterAddWords, "wrap");
 			general.add(translations, "wrap");
 			general.add(translationsNote, "alignx 50%, wrap");
-			general.add(sep2, "alignx 50%, wrap");
-			general.add(showWarnings);
+			general.add(sep2, "alignx 50%");
 			
 			generalHeight = 340;
 		}

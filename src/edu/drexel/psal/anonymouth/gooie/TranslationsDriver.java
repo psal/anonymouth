@@ -2,6 +2,8 @@ package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -12,25 +14,43 @@ import edu.drexel.psal.anonymouth.utils.TranslatorThread;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
- * Fetches the translations for the selected sentence (if available) and displays them to the user as they come.
+ * All listeners relating to the translations including:
+ * <ul>
+ * <li>Translate sentence button</li>
+ * <li>Reset translator button (if shown)</li>
+ * </ul>
+ * This driver, unlike most others in Anonymouth, also acts as a mouse listener itself
+ * (so it can be added to every translation swap button instance easily), so in order to
+ * truly initialize all listeners for this driver it must be initilazed and ALSO added to
+ * each translation swap button instance.
  * 
  * @author Marc Barrowclift
- * @author Unknown
  */
 
-public class TranslationsDriver implements ActionListener {
+public class TranslationsDriver implements MouseListener {
 	
-	private final String NAME = "( TranslationsDriver ) - ";
+	//Constants
+	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 
+	//Listeners
 	private ActionListener resetTranslatorListener;
 	private ActionListener translateSentenceListener;
 	
+	//Anonymouth class instances
 	private GUIMain main;
 	protected TranslatorThread translator;
 	private TranslationsPanel translationsPanel;
+	
+	//Others
+	private String actionCommand;
 
 	/**
-	 * Constructor
+	 * Constructor, automatically initializes all listeners associated with translations
+	 * including:
+	 * <ul>
+	 * <li>Translate sentence button</li>
+	 * <li>Reset translator button (if shown)</li>
+	 * </ul>
 	 *
 	 * @param
 	 * 		GUIMain instance
@@ -97,28 +117,68 @@ public class TranslationsDriver implements ActionListener {
 		};
 		main.resetTranslator.addActionListener(resetTranslatorListener);
 	}
-
+	
 	/**
-	 * The user clicked the translation swap-in arrow button.
+	 * Acts as the "ActionListener" to the translation swap arrow by immediately swapping
+	 * the sentence in the working document with the relevant translation, clearing all
+	 * translations from the translations holder scroll pane (since they were for the old sentence
+	 * not the new one), and switching the translations top panel back to the default button panel
+	 * with the "Translate Sentence", "?", and "Reset" button if shown.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseReleased(MouseEvent e) {
 		Logger.logln(NAME+"User clicked the Translation swap-in arrow button");
+		actionCommand = ((SwapButtonPanel)e.getComponent()).getActionCommand();
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				translationsPanel.switchToButtonPanel();
+			}
+		});
+		
 		EditorDriver.backedUpTaggedDoc = new TaggedDocument(EditorDriver.taggedDoc);
 		main.versionControl.addVersion(EditorDriver.backedUpTaggedDoc, main.documentPane.getCaret().getDot());
-		
+
 		main.saved = false;
 		InputFilter.ignoreTranslation = true;
-		EditorDriver.removeReplaceAndUpdate(main, EditorDriver.sentToTranslate, translationsPanel.translationsMap.get(e.getActionCommand()).getUntagged(false), true);
-		translator.replace(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate), translationsPanel.current);
-		
-		main.anonymityBar.updateBar();
-		main.wordSuggestionsDriver.placeSuggestions();
-		
+		EditorDriver.removeReplaceAndUpdate(
+				main,
+				EditorDriver.sentToTranslate,
+				translationsPanel.translationsMap.get(actionCommand).getUntagged(false), true);
+
 		main.translationsHolderPanel.removeAll();
-		main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
+		main.notTranslated.setText("");
 		main.translationsHolderPanel.add(main.notTranslated, "");
 		main.translationsHolderPanel.revalidate();
 		main.translationsHolderPanel.repaint();
 	}
+	
+	/**
+	 * For when the mouse hovers over a particular translation's swap arrow, we want to
+	 * immediately being the hoverOn Swing Worker thread to animate a nice "hover" animation
+	 */
+	@Override
+	public void mouseEntered(final MouseEvent e) {
+		SwapButtonPanel panel = ((SwapButtonPanel)e.getComponent());
+		panel.readyHoverOnThread();
+		panel.hoverOn.execute();
+	}
+	
+	/**
+	 * For when the mouse exits hovering over a particular translation's swap arrow, we want
+	 * to immediately begin the hoverOff Swing Worker thread to animate a nice "hover" turn off
+	 * animation 
+	 */
+	@Override
+	public void mouseExited(final MouseEvent e) {
+		SwapButtonPanel panel = ((SwapButtonPanel)e.getComponent());
+		panel.readyHoverOffThread();
+		panel.hoverOff.execute();
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {}
+	@Override
+	public void mousePressed(MouseEvent e) {}
 }

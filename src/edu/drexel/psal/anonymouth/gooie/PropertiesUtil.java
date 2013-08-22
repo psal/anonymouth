@@ -32,7 +32,6 @@ public class PropertiesUtil {
 	protected static Boolean defaultWarnQuit = false;
 	protected static Boolean defaultBarTutorial = true;
 	protected static Boolean defaultHighlightSents = true;
-	protected static Boolean defaultWarnAll = true;
 	protected static Boolean defaultAutoHighlight = true;
 	protected static Boolean defaultVersionAutoSave = false;
 	protected static Boolean defaultFilterAddSuggestions = true;
@@ -48,7 +47,6 @@ public class PropertiesUtil {
 		setWarnQuit(defaultWarnQuit);
 		setAutoSave(defaultAutoSave);
 		setDoTranslations(defaultTranslation);
-		setWarnAll(defaultWarnAll);
 		
 		//editor
 		setFontSize(defaultFontSize);
@@ -278,47 +276,6 @@ public class PropertiesUtil {
 		}
 		
 		if (highlight.equals("true"))
-			return true;
-		else
-			return false;
-	}
-	
-	/**
-	 * Sets whether or not to display all warnings for actions such as deleting a sample document and whatnot
-	 * @param warnAll - whether or not to display the warnings
-	 */
-	protected static void setWarnAll(Boolean warnAll) {
-		BufferedWriter writer;
-		
-		try {
-			prop.setProperty("warnAll", warnAll.toString());
-			writer = new BufferedWriter(new FileWriter(propFileName));
-			prop.store(writer, "User Preferences");
-			writer.close();
-		} catch (Exception e) {
-			Logger.logln(NAME + "Failed setting whether or not to display all warnings", LogOut.STDERR);
-		}
-	}
-	
-	/**
-	 * Gets whether or not to display generic warnings
-	 * @return
-	 */
-	protected static boolean getWarnAll() {
-		String warnAll = "";
-		
-		try {
-			warnAll = prop.getProperty("warnAll");
-			if (warnAll == null)  {
-				prop.setProperty("warnAll", defaultWarnAll.toString());
-				warnAll = prop.getProperty("warnAll");
-			}
-		} catch (NullPointerException e) {
-			prop.setProperty("warnAll", defaultWarnAll.toString());
-			warnAll = prop.getProperty("warnAll");
-		}
-		
-		if (warnAll.equals("true"))
 			return true;
 		else
 			return false;

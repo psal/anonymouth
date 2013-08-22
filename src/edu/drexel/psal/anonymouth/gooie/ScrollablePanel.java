@@ -315,6 +315,10 @@ public class ScrollablePanel extends JPanel implements Scrollable, SwingConstant
 
 		return false;
 	}
+	
+	public JViewport getViewport() {
+		return ((JViewport)getParent());
+	}
 
 	/**
 	 *  Helper class to hold the information required to calculate the scroll amount.

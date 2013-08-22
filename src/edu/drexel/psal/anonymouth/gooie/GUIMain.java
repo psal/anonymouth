@@ -61,7 +61,8 @@ public class GUIMain extends JFrame {
 			BorderFactory.createLoweredBevelBorder()); //The border of the banners used for translations and suggestions
 	protected final Font BANNER_FONT = new Font("Ariel", Font.BOLD, 12); //The font of the banners used for translations and suggestions
 	protected final String BANNER_HEIGHT = "25"; //The height of the banners used for translations and suggestions
-	protected final Color DEFAULT_COLOR = new Color(136,166,233,200); //The background color of the banner used for translations and others
+	protected final Color BANNER_BACKGROUND_COLOR = new Color(212,212,212); //The background color of the banner
+	protected final Color BANNER_FOREGROUND_COLOR = new Color(100,100,100); //The text color of the banner
 	private final Color ADD_COLOR = new Color(0,190,0,200); //The background color of the banner used for words to add
 	private final Color REMOVE_COLOR = new Color(190,0,0,200); //The background color of the banner used for words to remove
 	
@@ -204,8 +205,8 @@ public class GUIMain extends JFrame {
 	public GUIMain() {
 		Logger.logln(NAME+"GUIMain being created...");
 		ThePresident.splash.updateText("Initializing Anonymouth");
-		inst = this; //Initializing our GUIMain static instance so we can reference the class instances from anywhere.
 		//NOTE, better way to do this? This was the way it was when I came in, not very keen on static references though...
+		inst = this; //Initializing our GUIMain static instance so we can reference the class instances from anywhere.
 		
 		initPropertiesUtil();		//Open the preferences file for reading and writing
 		initWindow();				//Initializes The actual frame
@@ -545,6 +546,7 @@ public class GUIMain extends JFrame {
 			elementsToAddPane = new JList<String>();
 			elementsToAddScrollPane = new JScrollPane(elementsToAddPane);
 			elementsToAddPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
+			elementsToAddScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 			elementsToAdd = new DefaultListModel<String>();
 			elementsToAddPane.setModel(elementsToAdd);
 			elementsToAddPane.setEnabled(false);
@@ -588,6 +590,7 @@ public class GUIMain extends JFrame {
 			elementsToRemoveTable.setEnabled(false);
 			elementsToRemoveTable.setFocusable(false);
 			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
+			elementsToRemoveScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			
 			highlightAllRemoveHighlights = new JButton("Highlight All");

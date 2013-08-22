@@ -52,6 +52,21 @@ public class ThePresident {
 	public static SplashScreen splash;
 
 	public static void main(String[] args) {
+		/**
+		 * XXX TODO XXX
+		 * THIS SHOULD BE INVOKED AS A RUNNABLE!
+		 * The only reason it's not is this for some reason screws up the splash screen,
+		 * and until I figure out why we'll set run Anonymouth on the main thread, but this
+		 * should NOT be the case (all Swing should be done on the EDT)
+		 */
+		/*
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		        new ThePresident();
+		    }
+		});
+		*/
+		
 		new ThePresident();
 	}
 	

@@ -3,6 +3,8 @@ package edu.drexel.psal.anonymouth.helpers;
 import java.awt.Point;
 import javax.swing.JScrollPane;
 
+import edu.drexel.psal.anonymouth.gooie.ScrollablePanel;
+
 /**
  * ==========Made with help from Carl Smotricz from StackOverflow==========<br>
  * Simple class to ensure that the scroll pane's scroll position is ACTUALLY
@@ -30,11 +32,18 @@ import javax.swing.JScrollPane;
 public class ScrollToTop implements Runnable {
 	
 	private Point point;
+	
 	private JScrollPane scrollPane;
+	private ScrollablePanel scrollablePanel;
 	
 	public ScrollToTop(Point point, JScrollPane scrollPane) {
 		this.point = point;
 		this.scrollPane = scrollPane;
+	}
+	
+	public ScrollToTop(Point point, ScrollablePanel scrollablePanel) {
+		this.point = point;
+		this.scrollablePanel = scrollablePanel;
 	}
 	
 	/**
@@ -45,6 +54,9 @@ public class ScrollToTop implements Runnable {
 	 * For more information see class documentation.
 	 */
 	public void run() {
-		scrollPane.getViewport().setViewPosition(point);
+		if (scrollPane != null)
+			scrollPane.getViewport().setViewPosition(point);
+		else
+			scrollablePanel.getViewport().setViewPosition(point);
 	}
 }

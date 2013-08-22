@@ -58,7 +58,6 @@ public class PreferencesDriver {
 	private ActionListener highlightSentsListener;
 	private KeyListener maxFeaturesBoxListener;
 	private KeyListener numOfThreadsBoxListener;
-	private ActionListener showWarningsListener;
 	private ActionListener highlightElemsListener;
 	private ActionListener versionAutoSaveListener;
 	private ActionListener filterAddWordsListener;
@@ -210,11 +209,8 @@ public class PreferencesDriver {
 					}					
 				} else {
 					main.resetTranslator.setEnabled(false);
-					main.translationsDriver.translator.reset();
-					PropertiesUtil.setDoTranslations(false);
-					main.notTranslated.setText("You have turned translations off.");
-					main.translationsHolderPanel.add(main.notTranslated, "");
 					main.translateSentenceButton.setEnabled(false);
+					PropertiesUtil.setDoTranslations(false);
 				}
 			}
 		};
@@ -264,7 +260,6 @@ public class PreferencesDriver {
 						prefWin.warnQuit.setSelected(PropertiesUtil.getWarnQuit());
 						prefWin.autoSave.setSelected(PropertiesUtil.getAutoSave());
 						prefWin.translations.setSelected(PropertiesUtil.getDoTranslations());
-						prefWin.showWarnings.setSelected(PropertiesUtil.getWarnAll());
 						
 						//editor
 						prefWin.highlightElems.setSelected(PropertiesUtil.getAutoHighlight());
@@ -361,20 +356,6 @@ public class PreferencesDriver {
 			}
 		};
 		prefWin.numOfThreadsBox.addKeyListener(numOfThreadsBoxListener);
-		
-		showWarningsListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (prefWin.showWarnings.isSelected()) {
-					PropertiesUtil.setWarnAll(true);
-					Logger.logln(NAME+"Show all warnings checkbox checked");
-				} else {
-					PropertiesUtil.setWarnAll(false);
-					Logger.logln(NAME+"Show all warnings checkbox unchecked");
-				}
-			}
-		};
-		prefWin.showWarnings.addActionListener(showWarningsListener);
 		
 		highlightElemsListener = new ActionListener() {
 			@Override

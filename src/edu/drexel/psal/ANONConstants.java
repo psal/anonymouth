@@ -42,8 +42,10 @@ public class ANONConstants {
 	public static final boolean IS_USER_STUDY = false; //whether or not to show the session name dialog
 	public static final boolean SHOULD_KEEP_AUTO_SAVED_ORIGINAL_DOC = false;
 	public static final boolean SAVE_TAGGED_DOCUMENTS = true; // TODO: Put in Preferences and create implementation for it
-	public static final boolean SHOW_ADVANCED_SETTINGS = true;
-	public static final boolean SHOW_TRANSLATIONS_RESET_BUTTON = true; //Whether or not to display the reset button in the translations tab
+	
+	//Whether or not to show certain components in the GUIs
+	public static final boolean SHOW_ADVANCED_SETTINGS = true; //In Anonymouth's Start Window
+	public static final boolean SHOW_TRANSLATION_NAME_LABELS = false; //For translations in the translations holder scroll pane
 	
 	//=====================================================================
 	//						VARIOUS / UNCATEGORIZED
