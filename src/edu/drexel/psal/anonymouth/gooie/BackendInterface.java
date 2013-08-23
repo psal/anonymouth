@@ -14,278 +14,181 @@ import com.jgaap.generics.Document;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.DocumentMagician;
+import edu.drexel.psal.anonymouth.engine.FeatureList;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.FunctionWords;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 public class BackendInterface {
 
-	private final String NAME = "( BackendInterface ) - ";
+	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
+	
+	private GUIMain main;
 	private ProgressWindow pw;
-	public static Boolean processed = false;
 	private FunctionWords functionWords;
+	private DataAnalyzer dataAnalyzer;
+	private DocumentMagician documentMagician;
 
-	protected static BackendInterface bei = new BackendInterface();
-
-	public class GUIThread implements Runnable {
-		GUIMain main;
-
-		public GUIThread(GUIMain main) {
-
-			this.main = main;
-		}
-
-		public void run() {}
+	public BackendInterface(GUIMain main) {
+		this.main = main;
 	}
 
-	/* ========================
-	 * documents tab operations
-	 * ========================
-	 */
-
-	// -- none --
-	// all operations are fast, so no backend threads are ran.
-
-
-	/**
-	 * documents tab >> create new problem set
-	 */
-	protected void docTabCreateNewProblemSet(GUIMain main) {
-		Logger.logln(NAME+"Create new problem set");
-		(new Thread(bei.new DocTabNewProblemSetButtonClick(main))).start();
-	}
-
-	public class DocTabNewProblemSetButtonClick extends GUIThread {
-
-		public DocTabNewProblemSetButtonClick(GUIMain main) {
-			super(main);
+	protected void process() {
+		if (!main.processed) {
+			prepareForFirstProcess();
 		}
 
-		public void run() {
-			Logger.logln(NAME+"Backend: create new problem set thread started.");
+		try {
+			pw = new ProgressWindow("Processing...", main);
+			pw.run();
 
-			// initialize probelm set
-			main.preProcessWindow.ps = new ProblemSet();
-			main.preProcessWindow.ps.setTrainCorpusName(main.preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
-			main.preProcessDriver.updateAllComponents();
+			DocumentMagician.numProcessRequests++;
+			String tempDoc = "";
+			functionWords = new FunctionWords();
 
-			Logger.logln(NAME+"Backend: create new problem set thread finished.");
-		}
-	}
+			if (main.processed != true) {
+				functionWords.run();
+				tempDoc = main.documentPane.getText();
+				Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 
-	protected void runVerboseOutputWindow(GUIMain main) {
-		new Thread(bei.new RunVerboseOutputWindow(main)).start();
-	}
-
-	public class RunVerboseOutputWindow extends GUIThread {
-		public RunVerboseOutputWindow(GUIMain main) {
-			super(main);
-		}
-
-		public void run() {
-			new Console();
-		}
-	}
-
-	protected static void preTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
-		(new Thread(bei.new PreTargetSelectionProcessing(main,wizard,magician))).start();
-	}
-
-	public class PreTargetSelectionProcessing extends GUIThread {
-		private DataAnalyzer wizard;
-		private DocumentMagician magician;		
-
-		public PreTargetSelectionProcessing(GUIMain main,DataAnalyzer wizard, DocumentMagician magician) {
-			super(main);
-			this.wizard = wizard;
-			this.magician = magician;
-		}
-
-		public String getDocFromCurrentTab()
-		{
-			return main.documentPane.getText();
-		}
-
-		public void run() {
-			try {
-				pw = new ProgressWindow("Processing...", main);
-				pw.run();
-
-				processed = true;
-				DocumentMagician.numProcessRequests++;
-				String tempDoc = "";
-				functionWords = new FunctionWords();
-
-				if (EditorDriver.isFirstRun == true) {
-					functionWords.run();
-					tempDoc = getDocFromCurrentTab();
-					Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
+				pw.setText("Extracting and Clustering Features...");
+				try {
+					dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+					pw.setText("Initializing Tagger...");
+					Tagger.initTagger();
+					pw.setText("Classifying Documents...");
+					documentMagician.runWeka();
+					dataAnalyzer.runClusterAnalysis(documentMagician);
+					ClustersDriver.initializeClusterViewer(main,false);
+				} catch(Exception e) {
+					pw.stop();
+					ErrorHandler.fatalProcessingError(e);
+				}
+			} else {
+				Logger.logln(NAME+"Process button pressed to re-process document to modify.");
+				tempDoc = main.documentPane.getText();
+				if(tempDoc.equals("") == true) {
+					JOptionPane.showMessageDialog(null,
+							"It is not possible to process an empty document.",
+							"Document processing error",
+							JOptionPane.ERROR_MESSAGE,
+							null);
+				} else {
+					documentMagician.setModifiedDocument(tempDoc);
 
 					pw.setText("Extracting and Clustering Features...");
 					try {
-						wizard.runInitial(magician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
-						pw.setText("Initializing Tagger...");
-						Tagger.initTagger();
-						pw.setText("Classifying Documents...");
-						magician.runWeka();
-						wizard.runClusterAnalysis(magician);
+						dataAnalyzer.reRunModified(documentMagician);
+						pw.setText("Initialize Cluster Viewer...");
 						ClustersDriver.initializeClusterViewer(main,false);
-					} catch(Exception e) {
+						pw.setText("Classifying Documents...");
+						documentMagician.runWeka();
+					} catch (Exception e) {
 						pw.stop();
 						ErrorHandler.fatalProcessingError(e);
 					}
-				} else {
-					Logger.logln(NAME+"Process button pressed to re-process document to modify.");
-					tempDoc = getDocFromCurrentTab();
-					if(tempDoc.equals("") == true) {
-						JOptionPane.showMessageDialog(null,
-								"It is not possible to process an empty document.",
-								"Document processing error",
-								JOptionPane.ERROR_MESSAGE,
-								null);
-					} else {
-						magician.setModifiedDocument(tempDoc);
-
-						pw.setText("Extracting and Clustering Features...");
-						try {
-							wizard.reRunModified(magician);
-							pw.setText("Initialize Cluster Viewer...");
-							ClustersDriver.initializeClusterViewer(main,false);
-							pw.setText("Classifying Documents...");
-							magician.runWeka();
-						} catch (Exception e) {
-							pw.stop();
-							ErrorHandler.fatalProcessingError(e);
-						}
-					}
 				}
-
-				EditorDriver.theFeatures = wizard.getAllRelevantFeatures();
-				Logger.logln(NAME+"The Features are: "+EditorDriver.theFeatures.toString());
-
-				if (EditorDriver.isFirstRun) {
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
-					
-					List<Document> sampleDocs = magician.getDocumentSets().get(0);
-					int size = sampleDocs.size();
-					ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
-					for (int i = 0; i < size; i++) {
-						ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
-					}
-				} else
-					ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), false);
-
-				Map<String,Map<String,Double>> wekaResults = magician.getWekaResultList();
-				Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
-				Logger.logln(NAME+wekaResults.toString());
-				makeResultsChart(wekaResults, main);
-
-				
-				main.anonymityBar.updateBar();
-				if (EditorDriver.isFirstRun)
-					main.anonymityBar.setMaxFill(EditorDriver.taggedDoc.getMaxChangeNeeded());
-				main.anonymityBar.updateBar();
-				main.anonymityBar.showFill(true);
-				
-				main.wordSuggestionsDriver.placeSuggestions();
-
-				EditorDriver.setAllDocTabUseable(true, main);	
-				
-				//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
-				int caret = 0;
-				while (Character.isWhitespace(main.documentPane.getText().charAt(caret))) {
-					caret++;
-				}
-
-				EditorDriver.ignoreNumActions = 1; // must be set to 1, otherwise "....setDot(0)" (2 lines down) will screw things up when it fires the caretUpdate listener.
-				if (!EditorDriver.isFirstRun)
-					InputFilter.ignoreTranslation = true;
-				main.documentPane.setText(EditorDriver.taggedDoc.getUntaggedDocument(false));// NOTE this won't fire the caretListener because (I THINK) this method isn't in a listener, because setting the text from within a listener (directly or indirectly) DOES fire the caretUpdate.
-				main.documentPane.getCaret().setDot(caret); // NOTE However, THIS DOES fire the caretUpdate, because we are messing with the caret itself.
-				main.documentPane.setCaretPosition(caret); // NOTE And then this, again, does not fire the caretUpdate
-				EditorDriver.currentCaretPosition = caret;
-				EditorDriver.ignoreNumActions = 0; //We MUST reset this to 0 because, for whatever reason, sometimes setDot() does not fire the caret listener, so ignoreNumActions is never reset. This is to ensure it is.
-				
-				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(0)[0];
-				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
-				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
-				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
-
-				//no longer automatically translating even if checkmarked, only when the user clicks "start"
-				//GUIMain.GUITranslator.load(DriverEditor.taggedDoc.getTaggedSentences());
-				main.notTranslated.setText("");
-				main.translationsHolderPanel.add(main.notTranslated, "");
-				EditorDriver.charsInserted = 0; // this gets updated when the document is loaded.
-				EditorDriver.charsRemoved = 0;	
-				EditorDriver.caretPositionPriorToCharInsertion = 0;
-				EditorDriver.isFirstRun = true;
-
-				DictionaryBinding.init();//initializes the dictionary for wordNEt
-
-				Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
-
-				main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
-				main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
-
-				EditorDriver.backedUpTaggedDoc = new TaggedDocument(EditorDriver.taggedDoc);
-
-				main.processed = true;
-				pw.stop();
-				main.showGUIMain();
-			} catch (Exception e) {
-				e.printStackTrace();
-				// Get current size of heap in bytes
-				long heapSize = Runtime.getRuntime().totalMemory();
-
-				// Get maximum size of heap in bytes. The heap cannot grow beyond this size.
-				// Any attempt will result in an OutOfMemoryException.
-				long heapMaxSize = Runtime.getRuntime().maxMemory();
-
-				// Get amount of free memory within the heap in bytes. This size will increase
-				// after garbage collection and decrease as new objects are created.
-				long heapFreeSize = Runtime.getRuntime().freeMemory();
-				Logger.logln(NAME+"Something happend. Here are the total, max, and free heap sizes:");
-				Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize);
 			}
 
-			/*
-			if (PropertiesUtil.showBarTutorial()) {
-				//Needed, without it the Progress bar window just sort of chills around and doesn't close itself like it should (If showing
-				//A JOptionPane, otherwise it's fine, weird.)
-				/*
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+			if (main.processed) {
+				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
 				
-				JOptionPane.showMessageDialog(null,
-						"<html><left>" +
-						"There are two main ways to identify how anonymous your document is, the <b>Anonymity Bar</b> and " +
-						"the <b>Ownership<br>Certainty Graph</b>. While they may seem similar, they serve two different purposes:<br>" +
-						"<ul><li><b>Anonymity Bar-</b> Tries to get you to move your document's features toward the best combination that<br>" +
-						"it could find.This doesn't necessarily guarantee that you will be anonymous if full, and likewise that you will<br>" +
-						"not be anonymous if low, but it will guarantee that the more full it is the closer your document will get to a<br>" +
-						"lower classification (which is good!) while at the same time taking care to not simply \"copy\" a single author's<br>" +
-						"style." +
-						"<li><b>Ownership Certainty Graph-</b> This is Anonymouth making an educated guess as to who was the most likely<br>" +
-						"author for the given test document with the given set of sample authors. This should give you a broad idea of<br>" +
-						"where your document stands in comparison to these particular authors, and while it is helpful in getting a<br>" +
-						"general idea it should not be used as an absolute confirmation.</ul>" +
-						"</left></html>",
-						"Understanding the Anonymity Bar and Ownership Certainity Graph",
-						JOptionPane.INFORMATION_MESSAGE);
-				PropertiesUtil.setBarTutorial(false);
+				List<Document> sampleDocs = documentMagician.getDocumentSets().get(0);
+				int size = sampleDocs.size();
+				ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
+				for (int i = 0; i < size; i++) {
+					ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
+				}
+			} else
+				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), false);
+
+			Map<String,Map<String,Double>> wekaResults = documentMagician.getWekaResultList();
+			Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
+			Logger.logln(NAME+wekaResults.toString());
+			sendResultsToResultsChart(wekaResults);
+
+			
+			main.anonymityBar.updateBar();
+			if (main.processed)
+				main.anonymityBar.setMaxFill(main.editorDriver.taggedDoc.getMaxChangeNeeded());
+			main.anonymityBar.updateBar();
+			main.anonymityBar.showFill(true);
+			
+			main.wordSuggestionsDriver.placeSuggestions();
+
+			main.enableEverything(true);	
+			
+			//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
+			int caret = 0;
+			while (Character.isWhitespace(main.documentPane.getText().charAt(caret))) {
+				caret++;
 			}
-			*/
+
+			main.editorDriver.caretPosition = caret;
+			main.editorDriver.refreshEditor();
+			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
+
+			DictionaryBinding.init();//initializes the dictionary for wordNEt
+
+			Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
+
+			main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
+			main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
+			main.processed = true;
+			pw.stop();
+			main.showGUIMain();
+		} catch (Exception e) {
+			// Get current size of heap in bytes
+			long heapSize = Runtime.getRuntime().totalMemory();
+
+			// Get maximum size of heap in bytes. The heap cannot grow beyond this size.
+			// Any attempt will result in an OutOfMemoryException.
+			long heapMaxSize = Runtime.getRuntime().maxMemory();
+
+			// Get amount of free memory within the heap in bytes. This size will increase
+			// after garbage collection and decrease as new objects are created.
+			long heapFreeSize = Runtime.getRuntime().freeMemory();
+			Logger.logln(NAME+"ERROR WHILE PROCESSING. Here are the total, max, and free heap sizes:");
+			Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize);
+			
+			ErrorHandler.fatalProcessingError(e);
 		}
 	}
+	
+	private void prepareForFirstProcess() {
+		// ----- create the main document and add it to the appropriate array list.
+		// ----- may not need the arraylist in the future since you only really can have one at a time
+		TaggedDocument taggedDocument = new TaggedDocument();
+		ConsolidationStation.toModifyTaggedDocs = new ArrayList<TaggedDocument>();
+		ConsolidationStation.toModifyTaggedDocs.add(taggedDocument);
+		main.editorDriver.taggedDoc = ConsolidationStation.toModifyTaggedDocs.get(0);
 
-	public void makeResultsChart(Map<String,Map<String,Double>> resultMap, GUIMain main) {
+		Logger.logln(NAME+"Initial processing starting...");
+
+		// initialize all arraylists needed for feature processing
+		int sizeOfCfd = main.ppAdvancedDriver.cfd.numOfFeatureDrivers();
+		ArrayList<String> featuresInCfd = new ArrayList<String>(sizeOfCfd);
+		ArrayList<FeatureList> yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
+
+		for(int i = 0; i < sizeOfCfd; i++) {
+			String theName = main.ppAdvancedDriver.cfd.featureDriverAt(i).getName();
+
+			// capitalize the name and replace all " " and "-" with "_"
+			theName = theName.replaceAll("[ -]","_").toUpperCase(); 
+			main.ppAdvancedDriver.cfd.featureDriverAt(i).isCalcHist();
+			yesCalcHistFeatures.add(FeatureList.valueOf(theName));
+			featuresInCfd.add(i,theName);
+		}
+		dataAnalyzer = new DataAnalyzer(main.preProcessWindow.ps);
+		documentMagician = new DocumentMagician(false);
+		main.wordSuggestionsDriver.setMagician(documentMagician);
+		Logger.logln(NAME+"Beginning main process...");
+	}
+
+	public void sendResultsToResultsChart(Map<String,Map<String,Double>> resultMap) {
 
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();
 		Map<String,Double> tempMap = resultMap.get(mapKeyIter.next()); 
@@ -295,7 +198,6 @@ public class BackendInterface {
 		Object[] authors = (tempMap.keySet()).toArray();
 
 		Object[] keyRing = tempMap.values().toArray();
-		int maxIndex = 0;
 		Double biggest = .01;
 		
 		double[][] predictionMapArray = new double[authors.length][2];
@@ -304,7 +206,6 @@ public class BackendInterface {
 			// compare PRIOR to rounding.
 			if(biggest < tempVal){
 				biggest = tempVal;
-				maxIndex = i;
 			}
 			predictionMapArray[i][0] = tempVal;
 			predictionMapArray[i][1] = i;
@@ -325,10 +226,6 @@ public class BackendInterface {
 		for (int i = 0; i < numAuthors; i++){
 			main.resultsWindow.addAttrib((String)authors[(int)predictionMapArray[i][1]], (int)(predictionMapArray[i][0] + .5));
 		}
-
-		EditorDriver.resultsMaxIndex = maxIndex;
-		EditorDriver.chosenAuthor = (String)authors[maxIndex];
-		EditorDriver.maxValue = (Object)biggest;
 
 		main.resultsWindow.makeChart();
 	}

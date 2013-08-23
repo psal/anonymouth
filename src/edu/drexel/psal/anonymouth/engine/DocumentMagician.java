@@ -181,7 +181,7 @@ public class DocumentMagician {
 	/**
 	 * Re-classifies the document that has been modified
 	 */
-	public void reRunModified(){ 
+	public void reRunModified() { 
 		Logger.logln(NAME+"Called reRunModified (DocumentMagician)");
 		InstanceConstructor oneAndDone = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
 		String pathToTempModdedDoc = writeDirectory+ThePresident.sessionName+"_"+numProcessRequests+".txt";
@@ -197,7 +197,7 @@ public class DocumentMagician {
 			Logger.logln(NAME+"Error saving temporary file to: "+pathToTempModdedDoc,Logger.LogOut.STDERR);
 			e.printStackTrace();
 		}
-		Document newModdedDoc = new Document(pathToTempModdedDoc,toModifySet.get(0).getAuthor(),toModifySet.get(0).getTitle());
+		Document newModdedDoc = new Document(pathToTempModdedDoc,toModifySet.get(0).getAuthor(), toModifySet.get(0).getTitle());
 		Logger.logln(NAME+"Document opened");
 		toModifySet.clear();
 		toModifySet.add(0,newModdedDoc);

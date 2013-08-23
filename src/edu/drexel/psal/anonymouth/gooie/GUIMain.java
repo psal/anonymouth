@@ -119,9 +119,11 @@ public class GUIMain extends JFrame {
 	public Boolean saved = true;
 	protected Font normalFont; //The editor's font
 	public Document mainDocPreview; //Allows us to load the main document without having to alter the main.ps.testDocAt(0) directly
+	public EditorDriver editorDriver;
+	protected BackendInterface backendInterface;
 	
 	//Bottom Button
-	public JButton processButton;
+	public JButton reProcessButton;
 	protected Boolean processed = false;
 	
 	//=====================================================================
@@ -467,8 +469,10 @@ public class GUIMain extends JFrame {
 		translationsDriver = translationsPanel.driver;				//Translations listeners
 		preProcessDriver = preProcessWindow.driver;					//preProcess set-up wizard listeners
 		ppAdvancedDriver = ppAdvancedWindow.driver;					//preProcess "Advanced Configuration" listeners
-		
-		EditorDriver.initListeners(this);
+		backendInterface = new BackendInterface(this);				//The processing God
+		editorDriver = new EditorDriver(this);						//The main text editor driver
+		InputFilter documentFilter = new InputFilter(editorDriver);	//A helper filter to the main text editor driver
+		((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
 		
 		//So we can intercept the window close if they didn't save changes
 		exitListener = new WindowListener() {
@@ -578,7 +582,7 @@ public class GUIMain extends JFrame {
 			    }
 			};
 			
-			elementsToRemoveTable = new WordsToRemoveTable(elementsToRemoveModel);
+			elementsToRemoveTable = new WordsToRemoveTable(this, elementsToRemoveModel);
 			elementsToRemoveTable.getTableHeader().setToolTipText("<html><b>Occurrances:</b> The number of times each word appears<br>" +
 																"in all given docs written by the user.<br>" +
 													"<br><b>Word To Remove:</b> The words you should consider<br>" +
@@ -702,9 +706,6 @@ public class GUIMain extends JFrame {
 			documentPane.setEnabled(false);
 			documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 
-			InputFilter documentFilter = new InputFilter();
-			((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
-
 			documentScrollPane.setViewportView(documentPane);
 			
 			originalDocScrollPane = new JScrollPane();
@@ -717,12 +718,12 @@ public class GUIMain extends JFrame {
 			originalDocPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
 			originalDocScrollPane.setViewportView(originalDocPane);
 
-			processButton = new JButton("Reprocess");
-			processButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
+			reProcessButton = new JButton("Reprocess");
+			reProcessButton.setToolTipText("<html><center>Reprocesses any changes you've made your document to anonymize<br>" +
 											"and updates the results graph with the new results.</center></html>");
 
 			documentPanel.add(documentScrollPane, "grow");
-			documentPanel.add(processButton, "right");
+			documentPanel.add(reProcessButton, "right");
 			
 			originalDocumentPanel.add(originalDocScrollPane, "grow");
 		}
@@ -817,6 +818,43 @@ public class GUIMain extends JFrame {
 	 */
 	public void enableRedo(boolean b) {
 		editRedoMenuItem.setEnabled(b);
+	}
+	
+	/**
+	 * Sets nearly everything in GUIMain to be enabled or disable
+	 * 
+	 * @param enable
+	 * 		Whether or not to enable all components
+	 */
+	public void enableEverything(final boolean enable) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				fileSaveTestDocMenuItem.setEnabled(enable);
+				fileSaveAsTestDocMenuItem.setEnabled(enable);
+				viewClustersMenuItem.setEnabled(enable);
+				elementsToAddPane.setEnabled(enable);
+				elementsToAddPane.setFocusable(enable);
+				elementsToRemoveTable.setEnabled(enable);
+				elementsToRemoveTable.setFocusable(enable);
+				documentPane.setEnabled(enable);
+				clipboard.setEnabled(enable);
+				
+				if (PropertiesUtil.getDoTranslations() && enable) {
+					translateSentenceButton.setEnabled(true);
+				} else {
+					translateSentenceButton.setEnabled(false);
+				}
+
+				if (enable) {
+					if (PropertiesUtil.getDoTranslations()) {
+						main.resetTranslator.setEnabled(true);
+					} else {
+						main.resetTranslator.setEnabled(false);
+					}
+				}
+			}
+		});
 	}
 	
 	/**

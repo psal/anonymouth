@@ -255,7 +255,7 @@ public class TranslationsPanel {
 	/**
 	 * Resets all variables and clears panel of all translations, to be used for re-processing
 	 */
-	public void reset(boolean reprocessing) {
+	public void reset() {
 		Logger.logln(NAME+"Reset");
 		switchToEmptyPanel();
 	}

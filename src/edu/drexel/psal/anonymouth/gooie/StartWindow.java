@@ -230,9 +230,15 @@ public class StartWindow extends JFrame {
 	private void initListeners() {
 		startListener = new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				startingWindows.setVisible(false);
-				EditorDriver.processButtonListener.actionPerformed(e);
+				
+				/**
+				 * makes sure to internally rename files by different authors that have the same name.
+				 * It Used to be handed upon adding, but better for the user if they never have to worry about it
+				 */
+				main.preProcessWindow.assertUniqueTitles();
+				main.backendInterface.process();
 			}
 		};
 		startButton.addActionListener(startListener);

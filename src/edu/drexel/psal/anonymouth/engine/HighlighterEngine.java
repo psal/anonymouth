@@ -7,7 +7,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
-import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.HighlightMapper;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
@@ -220,7 +219,7 @@ public class HighlighterEngine {
 	 */
 	public void addAutoRemoveHighlights(int start, int end) {
 		//if we don't increment by one, it gets the previous sentence.
-		String[] words = EditorDriver.taggedDoc.getWordsInSentenceNoDups(EditorDriver.taggedDoc.getTaggedSentenceAtIndex(start+1));
+		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(start+1));
 		int removeSize = main.wordSuggestionsDriver.getRemoveSize();
 		ArrayList<int[]> index = new ArrayList<int[]>(removeSize);
 		ArrayList<String[]> topToRemove = main.wordSuggestionsDriver.getTopToRemove();

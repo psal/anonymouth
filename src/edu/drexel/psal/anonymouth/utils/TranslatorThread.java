@@ -3,7 +3,6 @@ package edu.drexel.psal.anonymouth.utils;
 import com.memetix.mst.language.Language;
 import java.util.ArrayList;
 
-import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -168,7 +167,7 @@ public class TranslatorThread implements Runnable {
 						sentences.get(currentSentNum-1).getTranslations().add(taggedTrans);
 						sentences.get(currentSentNum-1).getTranslationNames().add(translationFetcher.getName(lang));
 						sentences.get(currentSentNum-1).sortTranslations();
-						String one = EditorDriver.taggedDoc.getUntaggedSentences(false).get(EditorDriver.sentToTranslate).trim();
+						String one = main.editorDriver.taggedDoc.getUntaggedSentences(false).get(main.editorDriver.sentNum).trim();
 						String two = sentences.get(currentSentNum-1).getUntagged(false).trim();
 
 						if (one.equals(two))
@@ -217,7 +216,7 @@ public class TranslatorThread implements Runnable {
 		currentSentNum = 1;
 		main.translationsProgressBar.setIndeterminate(false);
 		main.translationsProgressBar.setValue(0);
-		main.processButton.setEnabled(true);
+		main.reProcessButton.setEnabled(true);
 		
 		transThread.interrupt();
 	}

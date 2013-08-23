@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 import com.jgaap.generics.Document;
 
-import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.InputFilter;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
@@ -135,20 +134,20 @@ public class SentenceTools implements Serializable  {
 				buffer = mark;
 			else if (mark > dot)
 				buffer = dot;
-			else if (lenText == EditorDriver.taggedDoc.getUntaggedDocument(false).length())
+			else if (lenText == GUIMain.inst.editorDriver.taggedDoc.getUntaggedDocument(false).length())
 				buffer = 0;
 			else {
 				continueLoop = false;
 //				if (DriverEditor.EOSJustRemoved)
 //					buffer = DriverEditor.leftSentInfo[1];
 //				else
-				buffer = EditorDriver.selectedSentIndexRange[0];
+				buffer = GUIMain.inst.editorDriver.selectionIndices[0];
 			}
 			
 			try {
 				while (continueLoop && index < lenText-1) {
 					index = sent.start() + index;
-					if (!EditorDriver.taggedDoc.specialCharTracker.EOSAtIndex(index+buffer)) {
+					if (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(index+buffer)) {
 						foundEOS = false;
 					} else {
 						foundEOS = true;
@@ -190,7 +189,7 @@ public class SentenceTools implements Serializable  {
 		int trimmedTextLength = trimmedText.length();
 
 		//We want to make sure that if there is an EOS character at the end that it is not supposed to be ignored
-		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && EditorDriver.taggedDoc.specialCharTracker.EOSAtIndex(EditorDriver.selectedSentIndexRange[1]-2);
+		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.selectionIndices[1]-2);
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
 
 		//Needed so that if we are deleting abbreviations like "Ph.D." this is not triggered.
@@ -204,7 +203,7 @@ public class SentenceTools implements Serializable  {
 			
 			//We want to make sure currentStop skips over ignored EOS characters and stops only when we hit a true EOS character
 			try {
-				while (!EditorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop-1+buffer) && currentStop != lenText) {
+				while (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop-1+buffer) && currentStop != lenText) {
 					sent.find(currentStop+1);
 					currentStop = sent.end();
 				}

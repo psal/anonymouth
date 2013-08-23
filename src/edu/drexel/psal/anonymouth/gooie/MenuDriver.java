@@ -251,14 +251,14 @@ public class MenuDriver {
 					
 					main.documentPanel.add(main.documentScrollPane, "grow");
 					main.documentPanel.add(main.anonymityPercent, "split");
-					main.documentPanel.add(main.processButton, "growx, right");
+					main.documentPanel.add(main.reProcessButton, "growx, right");
 				} else {
 					Logger.logln(NAME+"Showing anonymity bar");
 					main.anonymityBarState = ANONConstants.STATE.VISIBLE;
 					main.viewHideAnonymityBar.setText("Hide Anonymity Bar");
 					
 					main.documentPanel.add(main.documentScrollPane, "grow");
-					main.documentPanel.add(main.processButton, "right");
+					main.documentPanel.add(main.reProcessButton, "right");
 				}
 				
 				updateStates();

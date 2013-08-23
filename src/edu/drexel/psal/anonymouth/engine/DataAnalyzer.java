@@ -8,7 +8,6 @@ import java.util.List;
 
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.ClustersDriver;
-import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.jstylo.generics.*;
 
@@ -195,8 +194,6 @@ public class DataAnalyzer{
 		strippedAttributeNames = new String[numFeatures];
 		int j = 0;
 		String strippedAttrib;
-		FeatureList genName;
-		EditorDriver.attributesMappedByName = new HashMap<FeatureList,Integer>(numFeatures);
 		
 		int numAvailableFeatures=0;
 		if (numFeatures < numAttributes) 
@@ -235,8 +232,6 @@ public class DataAnalyzer{
 			topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
 			topAttribs[j].setInfoGain(allInfoGain[j][0]);
 			topAttribs[j].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
-			genName = topAttribs[j].getGenericName();
-			EditorDriver.attributesMappedByName.put(genName, j);
 			featuresForClusterAnalyzer.add(topAttribs[j].getConcatGenNameAndStrInBraces());
 			strippedAttributeNames[j] = strippedAttrib;	
 			Logger.logln(NAME+topAttribs[j].getFullName()+" info gain for this feature is: "+topAttribs[j].getInfoGain()+", calcHist is: "+topAttribs[j].getCalcHist()+" string in the braces (if applicable): "+topAttribs[j].getStringInBraces()+" toModify value is: "+topAttribs[j].getToModifyValue()); 

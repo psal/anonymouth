@@ -85,8 +85,9 @@ public class TranslationsDriver implements MouseListener {
 					}
 				});
 				
-				translator.load(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
-				translationsPanel.updateTranslationsPanel(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
+				translator.load(main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
+				translationsPanel.updateTranslationsPanel(
+						main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
 			}
 		};
 		main.translateSentenceButton.addActionListener(translateSentenceListener);
@@ -106,7 +107,7 @@ public class TranslationsDriver implements MouseListener {
 					main.translationsHolderPanel.add(main.notTranslated, "");
 					main.translateSentenceButton.setEnabled(true);
 					translator.reset();
-					EditorDriver.taggedDoc.deleteTranslations();
+					main.editorDriver.taggedDoc.deleteTranslations();
 					
 					try {
 						Thread.sleep(500);
@@ -163,15 +164,14 @@ public class TranslationsDriver implements MouseListener {
 			}
 		});
 		
-		EditorDriver.backedUpTaggedDoc = new TaggedDocument(EditorDriver.taggedDoc);
-		main.versionControl.addVersion(EditorDriver.backedUpTaggedDoc, main.documentPane.getCaret().getDot());
+		main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
+		main.versionControl.addVersion(main.editorDriver.pastTaggedDoc, main.documentPane.getCaret().getDot());
 
 		main.saved = false;
 		InputFilter.ignoreTranslation = true;
-		EditorDriver.removeReplaceAndUpdate(
-				main,
-				EditorDriver.sentToTranslate,
-				translationsPanel.translationsMap.get(actionCommand).getUntagged(false), true);
+		main.editorDriver.updateSentence(
+				main.editorDriver.sentNum,
+				translationsPanel.translationsMap.get(actionCommand).getUntagged(false));
 
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("");

@@ -98,16 +98,16 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent arg0) {
 				if (prefWin.highlightSent.isSelected()) {
 					PropertiesUtil.setHighlightSents(true);
-					EditorDriver.doHighlight = true;
-					if (EditorDriver.highlightEngine.isSentenceHighlighted())
-						EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
+					main.editorDriver.doHighlight = true;
+					if (main.editorDriver.highlighterEngine.isSentenceHighlighted())
+						main.editorDriver.moveHighlights();
 					
 					Logger.logln(NAME+"Highlight Sents checkbox checked");
 				} else {
 					PropertiesUtil.setHighlightSents(false);
-					EditorDriver.doHighlight = false;
-					if (EditorDriver.highlightEngine.isSentenceHighlighted())
-						EditorDriver.highlightEngine.removeSentenceHighlight();
+					main.editorDriver.doHighlight = false;
+					if (main.editorDriver.highlighterEngine.isSentenceHighlighted())
+						main.editorDriver.highlighterEngine.removeSentenceHighlight();
 					
 					Logger.logln(NAME+"Highlight Sents checkbox unchecked");
 				}
@@ -121,9 +121,9 @@ public class PreferencesDriver {
 				int color = prefWin.sentHighlightColors.getSelectedIndex();
 				PropertiesUtil.setHighlightColor(color);
 				
-				if (EditorDriver.taggedDoc != null) {
-					EditorDriver.highlightEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
-					EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
+				if (main.editorDriver.taggedDoc != null) {
+					main.editorDriver.highlighterEngine.setSentHighlightColor(PropertiesUtil.getHighlightColor());
+					main.editorDriver.moveHighlights();
 				}
 			}
 		};
@@ -364,13 +364,14 @@ public class PreferencesDriver {
 			public void actionPerformed(ActionEvent e) {
 				if (prefWin.highlightElems.isSelected()) {
 					PropertiesUtil.setAutoHighlight(true);
-					EditorDriver.autoHighlight = true;
-					EditorDriver.highlightEngine.addAutoRemoveHighlights(EditorDriver.selectedSentIndexRange[0], EditorDriver.selectedSentIndexRange[1]);
+					main.editorDriver.autoHighlight = true;
+					main.editorDriver.highlighterEngine.addAutoRemoveHighlights(
+							main.editorDriver.selectionIndices[0], main.editorDriver.selectionIndices[1]);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);
-					EditorDriver.autoHighlight = false;
-					EditorDriver.highlightEngine.removeAutoRemoveHighlights();
+					main.editorDriver.autoHighlight = false;
+					main.editorDriver.highlighterEngine.removeAutoRemoveHighlights();
 					Logger.logln(NAME+"Auto highlights checkbox unchecked");
 				}
 			}

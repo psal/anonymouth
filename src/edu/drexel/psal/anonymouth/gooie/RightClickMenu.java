@@ -103,21 +103,20 @@ public class RightClickMenu extends JPopupMenu {
 					char character = main.documentPane.getText().charAt(length-1+PopupListener.mark+pastLength);
 
 					if ((character == '.' || character == '!' || character == '?') && size-1 != i) {
-						EditorDriver.taggedDoc.specialCharTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
+						main.editorDriver.taggedDoc.specialCharTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
 					}
 										
-					taggedSentences.add(EditorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
+					taggedSentences.add(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
 					pastLength += length;
 				}
 				
 				//We're borrowing a variable used by translations to solve a similar purpose, we do not want the InputFilter to fire removeReplaceAndUpdate in the DriverEditor.
 				InputFilter.ignoreTranslation = true;
 				
-				TaggedSentence replacement = EditorDriver.taggedDoc.concatSentences(taggedSentences);
-				EditorDriver.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
-				EditorDriver.update(main, true);
+				TaggedSentence replacement = main.editorDriver.taggedDoc.concatSentences(taggedSentences);
+				main.editorDriver.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
 				
-				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(PopupListener.mark)[0];
+				int[] selectedSentInfo = main.editorDriver.getSentencesIndices(PopupListener.mark)[0];
 
 				//We want to make sure we're setting the caret at the actual start of the sentence and not in white space (so it gets highlighted)
 				int space = 0;
@@ -126,10 +125,8 @@ public class RightClickMenu extends JPopupMenu {
 					space++;
 				}
 				
-				main.documentPane.getCaret().setDot(selectedSentInfo[1]+space);
-				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
-				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
-				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
+				main.editorDriver.caretPosition = selectedSentInfo[1]+space;
+				main.editorDriver.refreshEditor();
 			}
 		};
 		combineSentences.addActionListener(combineSentencesListener);
@@ -137,14 +134,9 @@ public class RightClickMenu extends JPopupMenu {
 		resetHighlighterListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EditorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
-				EditorDriver.taggedDoc = new TaggedDocument(main.documentPane.getText());
-				EditorDriver.isFirstRun = true;
-				
-				int[] selectedSentInfo = EditorDriver.calculateIndicesOfSentences(EditorDriver.currentCaretPosition)[0];
-				EditorDriver.selectedSentIndexRange[0] = selectedSentInfo[1];
-				EditorDriver.selectedSentIndexRange[1] = selectedSentInfo[2];
-				EditorDriver.moveHighlight(main, EditorDriver.selectedSentIndexRange);
+				main.editorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
+				main.editorDriver.taggedDoc = new TaggedDocument(main.documentPane.getText());
+				main.editorDriver.refreshEditor();
 			}
 		};
 		resetHighlighter.addActionListener(resetHighlighterListener);

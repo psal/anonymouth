@@ -2,7 +2,6 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.Stack;
 
-import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.MenuDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
@@ -84,14 +83,14 @@ public class VersionControl {
 //				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
 //			}
 //		});
-		redo.push(new TaggedDocument(EditorDriver.taggedDoc));
+		redo.push(new TaggedDocument(main.editorDriver.taggedDoc));
 		indicesRedo.push(main.documentPane.getCaret().getDot());
 		
-		EditorDriver.ignoreVersion = true;
-		EditorDriver.taggedDoc = undo.pop();
-		EditorDriver.update(main, true);
-		main.documentPane.getCaret().setDot(indicesUndo.pop());
-		EditorDriver.ignoreVersion = false;
+		main.editorDriver.ignoreBackup = true;
+		main.editorDriver.taggedDoc = undo.pop();
+		main.editorDriver.caretPosition = indicesUndo.pop();
+		main.editorDriver.refreshEditor();
+		main.editorDriver.ignoreBackup = true;
 		
 		main.enableRedo(true);
 		
@@ -121,14 +120,14 @@ public class VersionControl {
 //				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
 //			}
 //		});
-		undo.push(new TaggedDocument(EditorDriver.taggedDoc));
+		undo.push(new TaggedDocument(main.editorDriver.taggedDoc));
 		indicesUndo.push(main.documentPane.getCaret().getDot());
 		
-		EditorDriver.ignoreVersion = true;
-		EditorDriver.taggedDoc = redo.pop();
-		EditorDriver.update(main, true);
-		main.documentPane.getCaret().setDot(indicesRedo.pop());
-		EditorDriver.ignoreVersion = false;
+		main.editorDriver.ignoreBackup = true;
+		main.editorDriver.taggedDoc = redo.pop();
+		main.editorDriver.caretPosition = indicesRedo.pop();
+		main.editorDriver.refreshEditor();
+		main.editorDriver.ignoreBackup = true;
 
 		main.enableUndo(true);	
 		

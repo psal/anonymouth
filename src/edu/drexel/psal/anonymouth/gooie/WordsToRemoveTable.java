@@ -16,11 +16,13 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
  */
 public class WordsToRemoveTable extends JTable implements ListSelectionListener {
 
-	private static final String NAME = "( WordsToRemoveTable ) - ";
 	private static final long serialVersionUID = 1L;
+	private final String NAME = "( WordsToRemoveTable ) - ";
+	private GUIMain main;
 
-	public WordsToRemoveTable(DefaultTableModel model) {
+	public WordsToRemoveTable(GUIMain main, DefaultTableModel model) {
 		super(model);
+		this.main = main;
 	}
 
 	/**
@@ -50,8 +52,8 @@ public class WordsToRemoveTable extends JTable implements ListSelectionListener 
 			Logger.logln(NAME+"Elements to remove value changed");
 
 			if (this.getSelectedRow() != -1) {
-				EditorDriver.highlightEngine.removeAllRemoveHighlights();
-				EditorDriver.highlightEngine.addAllRemoveHighlights((String)this.getModel().getValueAt(this.getSelectedRow(), 0));
+				main.editorDriver.highlighterEngine.removeAllRemoveHighlights();
+				main.editorDriver.highlighterEngine.addAllRemoveHighlights((String)this.getModel().getValueAt(this.getSelectedRow(), 0));
 			}
 		}
 		super.valueChanged(e);

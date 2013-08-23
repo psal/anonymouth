@@ -116,8 +116,8 @@ public class WordSuggestionsDriver {
 	 */
 	public void placeSuggestions() {
 		//We must first clear any existing highlights the user has and remove all existing suggestions		
-		EditorDriver.highlightEngine.removeAllAddHighlights();
-		EditorDriver.highlightEngine.removeAllRemoveHighlights();
+		main.editorDriver.highlighterEngine.removeAllAddHighlights();
+		main.editorDriver.highlighterEngine.removeAllRemoveHighlights();
 
 		//If the user had a word highlighted and we're updating the list, we want to keep the word highlighted if it's in the updated list
 		String prevSelectedElement = "";
@@ -233,12 +233,12 @@ public class WordSuggestionsDriver {
 					Logger.logln(NAME+"Elements to add value changed");
 
 					if (main.elementsToAddPane.getSelectedIndex() != -1) {
-						EditorDriver.highlightEngine.removeAllAddHighlights();
+						main.editorDriver.highlighterEngine.removeAllAddHighlights();
 
 						if (main.elementsToAddPane.getSelectedIndex() == -1)
 							return;
 
-						EditorDriver.highlightEngine.addAllAddHighlights(main.elementsToAddPane.getSelectedValue());
+						main.editorDriver.highlighterEngine.addAllAddHighlights(main.elementsToAddPane.getSelectedValue());
 					}
 				}
 			}
@@ -248,7 +248,7 @@ public class WordSuggestionsDriver {
 		clearRemoveListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {	
-				EditorDriver.highlightEngine.removeAllRemoveHighlights();
+				main.editorDriver.highlighterEngine.removeAllRemoveHighlights();
 				main.elementsToRemoveTable.clearSelection();
 			}
 		};
@@ -257,9 +257,9 @@ public class WordSuggestionsDriver {
 		highlightAllRemoveListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EditorDriver.highlightEngine.removeAllRemoveHighlights();
+				main.editorDriver.highlighterEngine.removeAllRemoveHighlights();
 				for (int i = 0; i < removeSize; i++) {
-					EditorDriver.highlightEngine.addAllRemoveHighlights(topToRemove.get(i)[0]);
+					main.editorDriver.highlighterEngine.addAllRemoveHighlights(topToRemove.get(i)[0]);
 				}
 				main.elementsToRemoveTable.clearSelection();
 			}

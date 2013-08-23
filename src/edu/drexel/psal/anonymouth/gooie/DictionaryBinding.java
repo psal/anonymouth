@@ -42,7 +42,7 @@ public class DictionaryBinding {
 	protected static boolean wordSynSetUpdated = false;
 	protected static String wordSynSetResult = "";
 	protected static String gramFindings = "";
-	protected static ViewerTabGenerator vtg; 	
+	//protected static ViewerTabGenerator vtg; 	
 	protected static String currentWord = "";
 	protected static boolean isFirstGramSearch = true;
 	protected static ArrayList<String> allWords = new ArrayList<String>();
@@ -102,10 +102,10 @@ public class DictionaryBinding {
 						}
 						//wordSynSetResult = wordSynSetResult+"\n";
 					}
-					vtg = new ViewerTabGenerator().generateTab(wordSynSetResult);
+					//vtg = new ViewerTabGenerator().generateTab(wordSynSetResult);
 					wordSynSetUpdated = true;
-					dc.viewerTP.addTab("syn: "+currentWord, null, vtg.jScrollPane1, null);
-					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
+//					dc.viewerTP.addTab("syn: "+currentWord, null, vtg.jScrollPane1, null);
+//					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
 				}
 			}			
 		});
@@ -155,9 +155,9 @@ public class DictionaryBinding {
 						scanAllWords(theGram);
 					}
 
-					vtg = new ViewerTabGenerator().generateTab(gramFindings);
-					dc.viewerTP.addTab("gram: "+theGram, null, vtg.jScrollPane1, null);
-					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
+					//vtg = new ViewerTabGenerator().generateTab(gramFindings);
+//					dc.viewerTP.addTab("gram: "+theGram, null, vtg.jScrollPane1, null);
+//					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
 				}
 			}
 		});
@@ -167,7 +167,7 @@ public class DictionaryBinding {
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"Dictionary is being disposed of.. ");
 				dc.dispose();
-				EditorDriver.dictDead = true;
+				//EditorDriver.dictDead = true;
 			}
 		});
 		
@@ -177,7 +177,7 @@ public class DictionaryBinding {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				Logger.logln(NAME+"Window close killed poor dictionary");
-				EditorDriver.dictDead = true;
+				//EditorDriver.dictDead = true;
 			}
 			@Override
 			public void windowClosing(WindowEvent arg0) {}

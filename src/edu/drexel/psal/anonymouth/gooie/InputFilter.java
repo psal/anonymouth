@@ -39,21 +39,26 @@ public class InputFilter extends DocumentFilter {
 	public static boolean shouldBackup = false;
 	private boolean watchForEOS = false; //Lets us know if the previous character(s) were EOS characters.
 	private boolean addingAbbreviation = false;
+	private EditorDriver driver;
+	
+	public InputFilter(EditorDriver driver) {
+		this.driver = driver;
+	}
 	
 	/**
 	 * If the user types a character or pastes in text this will get called BEFORE updating the documentPane and firing the listeners.
 	 */
 	public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attr) throws BadLocationException {	
 		if (text.length() == 1) { //If the user is just typing (single character)
-			EditorDriver.shouldUpdate = false;
+			driver.updateBackend = false;
 			
 			checkAddingEllipses(text);
 			checkAddingAbbreviations(text);
 			
-			if (EditorDriver.startSelection != EditorDriver.endSelection)
-				EditorDriver.skipDeletingEOSes = true; 
+			if (driver.selectionIndices[0] != driver.selectionIndices[1])
+				driver.ignoreEOSDeletion = true; 
 		} else { //If the user pasted in text of length greater than a single character
-			EditorDriver.shouldUpdate = true; //If the user pasted in a massive chunk of text we want to update no matter what.
+			driver.updateBackend = true; //If the user pasted in a massive chunk of text we want to update no matter what.
 			Logger.logln(NAME + "User pasted in text, will update");
 		}
 				
@@ -71,11 +76,11 @@ public class InputFilter extends DocumentFilter {
 		if (isEOS && !addingAbbreviation) {
 			watchForEOS = true;
 			//For whatever reason, startSelection must be subtracted by 1, and refuses to work otherwise.
-			EditorDriver.taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], EditorDriver.endSelection-1, false);
+			driver.taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], driver.selectionIndices[1]-1, false);
 		} else if (!isEOS && !watchForEOS) { //If the user isn't typing an EOS character and they weren't typing one previously, then it's just a normal character, update.
-			EditorDriver.shouldUpdate = true;
+			driver.updateBackend = true;
 		} else if (isEOS && addingAbbreviation) {
-			EditorDriver.shouldUpdate = true;
+			driver.ignoreEOSDeletion = true;
 			addingAbbreviation = false;
 		}
 
@@ -90,7 +95,7 @@ public class InputFilter extends DocumentFilter {
 			 * this is just have a little flag at the end of the caret listener that calls removeReplaceAndUpdate only when we command
 			 * it to from the InputFilter.
 			 */
-			EditorDriver.shouldUpdate = true;
+			driver.updateBackend = true;
 		}
 	}
 	
@@ -103,23 +108,23 @@ public class InputFilter extends DocumentFilter {
 		try {
 			boolean isAdding = false;
 			
-			String textBeforePeriod = GUIMain.inst.documentPane.getText().substring(EditorDriver.startSelection-2, EditorDriver.startSelection);
+			String textBeforePeriod = GUIMain.inst.documentPane.getText().substring(driver.selectionIndices[0]-2, driver.selectionIndices[0]);
 			if (textBeforePeriod.substring(1, 2).equals(".") && !EOS.contains(text)) {
 				for (int i = 0; i < ABBREVIATIONS.length; i++) {
 					if (ABBREVIATIONS[i].endsWith(textBeforePeriod)) {
 						int length = ABBREVIATIONS[i].length();
-						textBeforePeriod = GUIMain.inst.documentPane.getText().substring(EditorDriver.startSelection-length, EditorDriver.startSelection);
+						textBeforePeriod = GUIMain.inst.documentPane.getText().substring(driver.selectionIndices[0]-length, driver.selectionIndices[0]);
 						
 						System.out.println (textBeforePeriod + " = " + ABBREVIATIONS[i]);
 						if (textBeforePeriod.equals(ABBREVIATIONS[i])) {
-							EditorDriver.shouldUpdate = false;
+							driver.updateBackend = false;
 							addingAbbreviation = true;
 							isAdding = true;
 							break;
 						}
 					} else if (ABBREVIATIONS[i].contains(textBeforePeriod)) {
 						System.out.println(ABBREVIATIONS[i]);
-						EditorDriver.shouldUpdate = false;
+						driver.updateBackend = false;
 						addingAbbreviation = true;
 						isAdding = true;
 						break;
@@ -143,8 +148,8 @@ public class InputFilter extends DocumentFilter {
 	 */
 	public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
 		if (length == 1) { //If the user is just deleting character by character
-			EditorDriver.shouldUpdate = false;
-			EditorDriver.EOSesRemoved = false;
+			driver.updateBackend = false;
+			driver.ignoreEOSDeletion = false;
 
 			checkRemoveEllipses(offset);
 			checkRemoveAbbreviations(offset);
@@ -154,7 +159,7 @@ public class InputFilter extends DocumentFilter {
 			 * removeReplaceAndUpdate() in DriverEditor and screw all the highlighting up. There may be a better way to do this...
 			 */
 			if (GUIMain.inst.processed && !ignoreTranslation) {
-				EditorDriver.shouldUpdate = true; //We want to update no matter what since the user is dealing with a chunk of text
+				driver.updateBackend = true; //We want to update no matter what since the user is dealing with a chunk of text
 				Logger.logln(NAME + "User deleted multiple characters in text, will update");
 			} else
 				ignoreTranslation = false;
@@ -174,13 +179,13 @@ public class InputFilter extends DocumentFilter {
 		if (isEOS && EOS.contains(GUIMain.inst.documentPane.getText().substring(offset-1, offset))) { //if it was AND the character before it is ALSO an EOS character...
 			watchForEOS = true;
 		} else if (!isEOS && !watchForEOS) { //The user deleted a character and didn't delete one previously, nothing to do, update.
-			EditorDriver.shouldUpdate = true;
+			driver.updateBackend = true;
 		}
 		
 		if (watchForEOS && !isEOS) { //if the user previously deleted an EOS character AND the one they just deleted is not an EOS character, we should update.
 			watchForEOS = false;
 			shouldBackup = true;
-			EditorDriver.shouldUpdate = true;
+			driver.updateBackend = true;
 		}
 	}
 	
@@ -194,7 +199,7 @@ public class InputFilter extends DocumentFilter {
 
 			for (int i = 0; i < ABBREVIATIONS.length; i++) {
 				if (ABBREVIATIONS[i].contains(textBeforeDeletion))
-					EditorDriver.shouldUpdate = false;
+					driver.updateBackend = false;
 			}
 		} catch(StringIndexOutOfBoundsException e) {} //most likely the user is deleting at the first index of their document, move on
 	}
