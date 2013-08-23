@@ -540,11 +540,12 @@ public class TaggedDocument implements Serializable{
 
 			Logger.logln(NAME+"User deleted a sentence.");
 			updateReferences(toReplace,new TaggedSentence(""));//all features must be deleted
+			userDeletedSentence = true;
+			totalSentences--;
 			
 			wasReplaced.delete();
 			wasReplaced = null;
-			totalSentences--;
-			userDeletedSentence = true;
+			return;
 		}
 		
 		ArrayList<TaggedSentence> taggedSentsToAdd = makeAndTagSentences(sentsToAdd,false);
