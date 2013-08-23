@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
@@ -22,6 +21,7 @@ import edu.drexel.psal.jstylo.generics.Logger;
 public class ProgressWindow extends JDialog implements PropertyChangeListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
+	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
 	private final String[] ACTIONS = {"Quit", "Cancel"};
 	
 	protected Thread t;
@@ -169,9 +169,14 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	public void stop() {
 		editorProgressBar.setValue(100);
 		editingProgressBarLabel.setText("Final Preparations...");
-		Logger.logln("Stopping ProgressBar");
+		Logger.logln(NAME+"Stopping ProgressBar");
 		t.interrupt();
-		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				pw.dispose();
+			}
+		});
 	}
 }
