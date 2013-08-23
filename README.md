@@ -7,6 +7,8 @@ The Privacy, Security and Automation Lab (PSAL)<br>
 Drexel University, Philadelphia PA<br>
 http://psal.cs.drexel.edu/
 
+![](/src/edu/drexel/psal/resources/graphics/anonymouth_LOGO.png)
+
 Introduction
 ------------------------------------------------
 
