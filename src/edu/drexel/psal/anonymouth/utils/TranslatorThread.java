@@ -136,7 +136,7 @@ public class TranslatorThread implements Runnable {
 						if (sentences.size() == 0) {
 							stop = false;
 							translationsEnded();
-							main.translationsPanel.showTranslations(new TaggedSentence(""));
+							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
 						}
 						
@@ -146,19 +146,19 @@ public class TranslatorThread implements Runnable {
 							Logger.logln(NAME+"No internet connection", LogOut.STDERR);
 							noInternet = true;
 							translationsEnded();
-							main.translationsPanel.showTranslations(new TaggedSentence(""));
+							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
 						} else if (translation.equals("account")) {
 							Logger.logln(NAME+"Account used up", LogOut.STDERR);
 							reset();
 							accountsUsed = true;
 							translationsEnded();
-							main.translationsPanel.showTranslations(new TaggedSentence(""));
+							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
 						} else if (stop) {
 							stop = false;
 							translationsEnded();
-							main.translationsPanel.showTranslations(new TaggedSentence(""));
+							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
 						}
 						
@@ -172,7 +172,7 @@ public class TranslatorThread implements Runnable {
 						String two = sentences.get(currentSentNum-1).getUntagged(false).trim();
 
 						if (one.equals(two))
-							main.translationsPanel.showTranslations(sentences.get(currentSentNum-1));
+							main.translationsPanel.updateTranslationsPanel(sentences.get(currentSentNum-1));
 						
 						if (main.translationsProgressBar.getValue() + 1 <= main.translationsProgressBar.getMaximum())
 							main.translationsProgressBar.setValue(main.translationsProgressBar.getValue() + 1);

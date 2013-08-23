@@ -52,6 +52,7 @@ public class GUIMain extends JFrame {
 	private final int MIN_HEIGHT = 578;
 	
 	public static GUIMain inst; //Our main instance for easy access anywhere in the code.
+	private GUIMain main;
 
 	//=====================================================================
 	//						VARIOUS STUFF
@@ -208,6 +209,7 @@ public class GUIMain extends JFrame {
 		ThePresident.splash.updateText("Initializing Anonymouth");
 		//NOTE, better way to do this? This was the way it was when I came in, not very keen on static references though...
 		inst = this; //Initializing our GUIMain static instance so we can reference the class instances from anywhere.
+		main = this;
 		
 		initPropertiesUtil();		//Open the preferences file for reading and writing
 		initWindow();				//Initializes The actual frame
@@ -226,7 +228,7 @@ public class GUIMain extends JFrame {
 			public void run() {
 				setExtendedState(MAXIMIZED_BOTH);
 				setLocationRelativeTo(null);
-				GUIMain.inst.setVisible(true);
+				main.setVisible(true);
 			}
 		});
 		
@@ -472,10 +474,10 @@ public class GUIMain extends JFrame {
 		exitListener = new WindowListener() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (PropertiesUtil.getWarnQuit() && !GUIMain.inst.saved) {
-					inst.toFront();
-					inst.requestFocus();
-					int confirm = JOptionPane.showOptionDialog(GUIMain.inst,
+				if (PropertiesUtil.getWarnQuit() && !main.saved) {
+					main.toFront();
+					main.requestFocus();
+					int confirm = JOptionPane.showOptionDialog(main,
 							"Close Application?\nYou will lose all unsaved changes.",
 							"Unsaved Changes Warning",
 							JOptionPane.YES_NO_OPTION,
@@ -485,8 +487,8 @@ public class GUIMain extends JFrame {
 						System.exit(0);
 					}
 				} else if (PropertiesUtil.getAutoSave()) {
-					Logger.logln(inst.NAME+"Auto-saving document");
-					menuDriver.save(inst);
+					Logger.logln(NAME+"Auto-saving document");
+					menuDriver.save(main);
 					System.exit(0);
 				} else {
 					System.exit(0);
@@ -511,7 +513,7 @@ public class GUIMain extends JFrame {
 		resizeListener = new ComponentListener() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				inst.updateSizeVariables();
+				main.updateSizeVariables();
 			}
 			
 			@Override
@@ -838,13 +840,13 @@ public class GUIMain extends JFrame {
 			com.apple.eawt.FullScreenUtilities.addFullScreenListenerTo(window, new FullScreenListener () {
 				@Override
 				public void windowEnteredFullScreen(FullScreenEvent arg0) {
-					GUIMain.inst.viewEnterFullScreenMenuItem.setText("Exit Full Screen");
+					main.viewEnterFullScreenMenuItem.setText("Exit Full Screen");
 				}
 				@Override
 				public void windowEnteringFullScreen(FullScreenEvent arg0) {}
 				@Override
 				public void windowExitedFullScreen(FullScreenEvent arg0) {
-					GUIMain.inst.viewEnterFullScreenMenuItem.setText("Enter Full Screen");
+					main.viewEnterFullScreenMenuItem.setText("Enter Full Screen");
 				}
 				@Override
 				public void windowExitingFullScreen(FullScreenEvent arg0) {}

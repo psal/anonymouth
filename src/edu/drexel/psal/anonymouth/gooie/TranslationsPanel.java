@@ -68,7 +68,7 @@ public class TranslationsPanel {
 	 * @param sentence
 	 * 		The TaggedSentence to show the translations for
 	 */
-	public void showTranslations(TaggedSentence sentence) {
+	public void updateTranslationsPanel(TaggedSentence sentence) {
 		// remove all the current translations shown
 		if (main.documentPane.isEnabled()) {
 			main.translationsHolderPanel.removeAll();

@@ -463,7 +463,7 @@ public class EditorDriver {
 								Logger.logln(NAME+"->Tagged Document Text (The Backend)", LogOut.STDERR);
 								int size = taggedDoc.getNumSentences();
 								for (int i = 0; i < size; i++) {
-									Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i));
+									Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i), LogOut.STDERR);
 								}
 
 								Logger.logln(e1);
@@ -517,7 +517,7 @@ public class EditorDriver {
 						// update from previous caret
 						if (charsInserted > 0 ) {// && lastSentNum != -1){
 							selectedSentIndexRange[1] += charsInserted;
-							charsInserted = ~-1; // puzzle: what does this mean? (scroll to bottom of file for answer) - AweM
+							charsInserted = 0; // puzzle: what does this mean? (scroll to bottom of file for answer) - AweM
 							charsWereInserted = true;
 							charsWereRemoved = false;
 						} else if (charsRemoved > 0) {// && lastSentNum != -1){
@@ -557,6 +557,14 @@ public class EditorDriver {
 							main.saved = false;
 						}
 
+						/**
+						 * Apologizes to whoever is trying to figure this shit out, I did this all so long ago now
+						 * that I completely forgot the precise purpose this was supposed to serve and I wasn't good
+						 * about documenting stuff then.
+						 * 
+						 * I can tell you that this seems to trigger whenever one's deleting a chunk of text including
+						 * a newly added EOS character and that without this things break very quickly.
+						 */
 						if ((currentCaretPosition-1 != lastCaretLocation && !charsWereRemoved && charsWereInserted) || (currentCaretPosition != lastCaretLocation-1) && !charsWereInserted && charsWereRemoved) {
 							charsWereInserted = false;
 							charsWereRemoved = false;
@@ -574,7 +582,7 @@ public class EditorDriver {
 					lastCaretLocation = currentCaretPosition;
 					sentToTranslate = currentSentNum;
 					if (!inRange) {
-						main.translationsPanel.showTranslations(taggedDoc.getSentenceNumber(sentToTranslate));
+						main.translationsPanel.updateTranslationsPanel(taggedDoc.getSentenceNumber(sentToTranslate));
 					}
 					
 					if (shouldUpdate && !ignoreVersion && (curCharBackupBuffer >= CHARS_TIL_BACKUP)) {

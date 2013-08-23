@@ -86,7 +86,7 @@ public class TranslationsDriver implements MouseListener {
 				});
 				
 				translator.load(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
-				translationsPanel.showTranslations(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
+				translationsPanel.updateTranslationsPanel(EditorDriver.taggedDoc.getSentenceNumber(EditorDriver.sentToTranslate));
 			}
 		};
 		main.translateSentenceButton.addActionListener(translateSentenceListener);
