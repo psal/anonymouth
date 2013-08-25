@@ -68,13 +68,14 @@ public class EditorDriver {
 	/**
 	 * The indices of a selection (if any, both are the same number if none)
 	 */
-	public int[] selectionIndices;
+	protected int[] selectionIndices;
 	private int[] oldSelectionIndices;
 
 	//Sentence variables
 	public int sentNum;			//The current sentence number (0, 1, 2, ...)
-	private int[] sentIndices;		//The indices of the sentence
+	public int[] sentIndices;		//The indices of the sentence
 	private int pastSentNum;		//The past sentence number
+	private int[] pastSentIndices;
 	private boolean wholeLastSentDeleted;
 	private boolean wholeBeginningSentDeleted;
 
@@ -132,6 +133,7 @@ public class EditorDriver {
 				}
 
 				System.out.println("============================================");
+				updateHighlight = true;		//Resetting, we're going to assume that we will highlight everytime
 				caretPosition = e.getDot();	//Current caret position
 				pastCaretPosition = caretPosition - charsInserted + charsRemoved; //see above
 
@@ -163,8 +165,8 @@ public class EditorDriver {
 				//Update the position variables
 				pastSentNum = sentNum; 		//The current sent number is now the past sent number
 				sentNum = selectionInfo[0]; //Set the new sent number
-				selectionIndices[0] = selectionInfo[1];
-				selectionIndices[1] = selectionInfo[2];
+				sentIndices[0] = selectionInfo[1];
+				sentIndices[1] = selectionInfo[2];
 
 				/**
 				 * check to see if the current caret location is
@@ -184,8 +186,8 @@ public class EditorDriver {
 					main.translationsPanel.updateTranslationsPanel(taggedDoc.getSentenceNumber(sentNum));
 				}
 
-				oldSelectionIndices[0] = selectionIndices[0];
-				oldSelectionIndices[1] = selectionIndices[1];
+				pastSentIndices[0] = sentIndices[0];
+				pastSentIndices[1] = sentIndices[1];
 
 				/**
 				 * Apologizes to whoever is trying to figure this shit out, I did this all so long
@@ -208,13 +210,16 @@ public class EditorDriver {
 				if (updateBackend && !ignoreBackup && (curCharBackupBuffer >= CHARS_TIL_BACKUP)) {
 					curCharBackupBuffer = 0;
 					pastTaggedDoc = new TaggedDocument(taggedDoc);
-					main.versionControl.addVersion(pastTaggedDoc, oldSelectionIndices[0]);
+					main.versionControl.addVersion(pastTaggedDoc, caretPosition);
 				}
 
 				if (updateBackend) {
 					updateBackend = false;
-					updateSentence(pastSentNum, main.documentPane.getText().substring(oldSelectionIndices[0],oldSelectionIndices[1]));
+					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
 				}
+				
+				oldSelectionIndices[0] = selectionIndices[0];
+				oldSelectionIndices[1] = selectionIndices[1];
 			}
 		};
 		main.documentPane.addCaretListener(caretListener);
@@ -682,7 +687,7 @@ public class EditorDriver {
 		int[] sentenceInfo = getSentencesIndices(caretPosition)[0];
 		sentNum = sentenceInfo[0];			//The sentence number
 		sentIndices[0] = sentenceInfo[1];	//The start of the sentence
-		sentIndices[0] = sentenceInfo[2];	//The end of the sentence
+		sentIndices[1] = sentenceInfo[2];	//The end of the sentence
 
 		//Move the highlight to fit around any sentence changes
 		moveHighlights();
@@ -735,11 +740,13 @@ public class EditorDriver {
 
 		//Selection indices
 		selectionIndices = new int[]{0,0};
+		oldSelectionIndices = new int[]{0,0};
 
 		//Sentence variables
 		sentNum = 0;
 		sentIndices = new int[]{0,0};
 		pastSentNum = 0;
+		pastSentIndices = new int[]{0,0};
 		wholeLastSentDeleted = false;
 		wholeBeginningSentDeleted = false;
 

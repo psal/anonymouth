@@ -141,7 +141,7 @@ public class SentenceTools implements Serializable  {
 //				if (DriverEditor.EOSJustRemoved)
 //					buffer = DriverEditor.leftSentInfo[1];
 //				else
-				buffer = GUIMain.inst.editorDriver.selectionIndices[0];
+				buffer = GUIMain.inst.editorDriver.sentIndices[0];
 			}
 			
 			try {
@@ -189,7 +189,7 @@ public class SentenceTools implements Serializable  {
 		int trimmedTextLength = trimmedText.length();
 
 		//We want to make sure that if there is an EOS character at the end that it is not supposed to be ignored
-		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.selectionIndices[1]-2);
+		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.sentIndices[1]-2);
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
 
 		//Needed so that if we are deleting abbreviations like "Ph.D." this is not triggered.

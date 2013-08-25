@@ -561,6 +561,7 @@ public class GUIMain extends JFrame {
 			elementsToAddPane.setEnabled(false);
 			elementsToAddPane.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			elementsToAddPane.setDragEnabled(false);
+			elementsToAddPane.setFocusable(false);
 
 			//--------- Elements to Remove Label  ------------------
 			elementsToRemoveLabel = new JLabel("-");
@@ -596,6 +597,7 @@ public class GUIMain extends JFrame {
 			elementsToRemoveTable.getColumn("Occurrences").setMaxWidth(90);
 			elementsToRemoveTable.getColumn("Occurrences").setMinWidth(90);
 			elementsToRemoveTable.setEnabled(false);
+			elementsToRemoveTable.setFocusable(false);
 			elementsToRemoveScrollPane = new JScrollPane(elementsToRemoveTable);
 			elementsToRemoveScrollPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 			elementsToRemoveTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

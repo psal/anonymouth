@@ -76,6 +76,8 @@ public class InputFilter extends DocumentFilter {
 		if (isEOS && !addingAbbreviation) {
 			watchForEOS = true;
 			//For whatever reason, startSelection must be subtracted by 1, and refuses to work otherwise.
+			//TODO Is it supposed to be selectionIndices[1] here? The comment says start, so it should be selectionIndices[0] according
+			//to that, look into it.
 			driver.taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], driver.selectionIndices[1]-1, false);
 		} else if (!isEOS && !watchForEOS) { //If the user isn't typing an EOS character and they weren't typing one previously, then it's just a normal character, update.
 			driver.updateBackend = true;

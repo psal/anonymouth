@@ -93,7 +93,7 @@ public class BackendInterface {
 				}
 			}
 
-			if (main.processed) {
+			if (!main.processed) {
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
 				
 				List<Document> sampleDocs = documentMagician.getDocumentSets().get(0);
