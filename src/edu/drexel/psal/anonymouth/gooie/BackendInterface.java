@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 import com.jgaap.generics.Document;
 
@@ -31,12 +32,24 @@ public class BackendInterface {
 	private FunctionWords functionWords;
 	private DataAnalyzer dataAnalyzer;
 	private DocumentMagician documentMagician;
+	private SwingWorker<Void, Void> processing;
 
 	public BackendInterface(GUIMain main) {
 		this.main = main;
+		readyProcessingThread();
 	}
-
-	protected void process() {
+	
+	private void readyProcessingThread() {
+		processing = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				processDocuments();
+				return null;
+			}	
+		};
+	}
+	
+	private void processDocuments() {
 		if (!main.processed) {
 			prepareForFirstProcess();
 		}
@@ -112,12 +125,12 @@ public class BackendInterface {
 
 			
 			main.anonymityBar.updateBar();
-			if (main.processed)
+			if (!main.processed)
 				main.anonymityBar.setMaxFill(main.editorDriver.taggedDoc.getMaxChangeNeeded());
-			main.anonymityBar.updateBar();
-			main.anonymityBar.showFill(true);
 			
-			main.wordSuggestionsDriver.placeSuggestions();
+			main.anonymityBar.showFill(true);
+			main.editorDriver.placeWordSuggestions.execute();
+			main.editorDriver.updateAnonymityBar.execute();
 
 			main.enableEverything(true);	
 			
@@ -156,6 +169,10 @@ public class BackendInterface {
 			
 			ErrorHandler.fatalProcessingError(e);
 		}
+	}
+	
+	protected void process() {
+		processing.execute();
 	}
 	
 	private void prepareForFirstProcess() {

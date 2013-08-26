@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -34,8 +35,8 @@ public class EditorDriver {
 	private DocumentListener documentListener;
 	private MouseListener mouseListener;
 	private GUIMain main;
-	private Runnable placeWordSuggestions;
-	private Runnable updateAnonymityBar;
+	protected SwingWorker<Void, Void> placeWordSuggestions;
+	protected SwingWorker<Void, Void> updateAnonymityBar;
 	private Runnable moveHighlightTread;
 
 	//============Highlighters============	
@@ -135,6 +136,8 @@ public class EditorDriver {
 				System.out.println("============================================");
 				updateHighlight = true;		//Resetting, we're going to assume that we will highlight everytime
 				caretPosition = e.getDot();	//Current caret position
+				selectionIndices[0] = caretPosition;
+				selectionIndices[1] = e.getMark();
 				pastCaretPosition = caretPosition - charsInserted + charsRemoved; //see above
 
 				if (charsRemoved > 0) {
@@ -195,8 +198,7 @@ public class EditorDriver {
 				 * and I wasn't good about documenting stuff then.
 				 * 
 				 * I can tell you that this seems to trigger whenever one's deleting a chunk of text
-				 * including a newly added EOS character and that without this things break very
-				 * quickly.
+				 * OR pasting a chunk of text (though I thought this was handled in input handler, TODO)
 				 */
 				if ((caretPosition - 1 != pastCaretPosition && charsRemoved == 0 && charsInserted != 0) ||
 					(caretPosition != pastCaretPosition - 1 && charsRemoved != 0 && charsInserted == 0)) {
@@ -328,19 +330,8 @@ public class EditorDriver {
 	 * their respective tasks
 	 */
 	private void initThreads() {
-		placeWordSuggestions = new Runnable() {
-			@Override
-			public void run() {
-				main.wordSuggestionsDriver.placeSuggestions();
-			}
-		};
-
-		updateAnonymityBar = new Runnable() {
-			@Override
-			public void run() {
-				main.anonymityBar.updateBar();
-			}
-		};
+		readyWordSuggestionsThread();
+		readyAnonymityBarThread();
 
 		moveHighlightTread = new Runnable() {
 			@Override
@@ -370,6 +361,28 @@ public class EditorDriver {
 						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace,
 							sentIndices[1]);
 				}
+			}
+		};
+	}
+	
+	private void readyWordSuggestionsThread() {
+		placeWordSuggestions = new SwingWorker<Void, Void>() {
+			@Override
+			public Void doInBackground() throws Exception {
+				System.out.println("PLACING SUGGESTIONS");
+				main.wordSuggestionsDriver.placeSuggestions();
+				SwingUtilities.invokeLater(moveHighlightTread);
+				return null;
+			}
+		};
+	}
+	
+	private void readyAnonymityBarThread() {
+		updateAnonymityBar = new SwingWorker<Void, Void>() {
+			@Override
+			protected Void doInBackground() throws Exception {
+				main.anonymityBar.updateBar();
+				return null;
 			}
 		};
 	}
@@ -562,8 +575,14 @@ public class EditorDriver {
 		 * sentence it gets processed.
 		 */
 		if (caretPosition != pastCaretPosition && InputFilter.isEOS) {
+			System.out.println("EOS ALERT");
 			InputFilter.isEOS = false;
 			updateBackend = true;
+		
+			if (placeWordSuggestions.isDone()) {
+				readyWordSuggestionsThread();
+				placeWordSuggestions.execute();
+			}
 		}
 	}
 
@@ -690,7 +709,7 @@ public class EditorDriver {
 		sentIndices[1] = sentenceInfo[2];	//The end of the sentence
 
 		//Move the highlight to fit around any sentence changes
-		moveHighlights();
+		SwingUtilities.invokeLater(this.moveHighlightTread);
 	}
 
 	/**
@@ -713,10 +732,20 @@ public class EditorDriver {
 	protected void updateSentence(int sentNumToRemove, String updatedText) {
 		taggedDoc.removeAndReplace(sentNumToRemove, updatedText);
 
-		refreshEditor();
+		if (updateBackend) {
+			refreshEditor();
+		}
 
-		SwingUtilities.invokeLater(placeWordSuggestions);
-		SwingUtilities.invokeLater(updateAnonymityBar);
+		if (updateAnonymityBar.isDone()) {
+			readyAnonymityBarThread();
+			updateAnonymityBar.execute();
+		}
+		
+		//Bookkeeping
+		int[] sentenceInfo = getSentencesIndices(caretPosition)[0];
+		sentNum = sentenceInfo[0];			//The sentence number
+		sentIndices[0] = sentenceInfo[1];	//The start of the sentence
+		sentIndices[1] = sentenceInfo[2];	//The end of the sentence
 	}
 
 	/**
