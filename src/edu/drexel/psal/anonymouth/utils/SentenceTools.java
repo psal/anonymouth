@@ -189,6 +189,7 @@ public class SentenceTools implements Serializable  {
 
 		//We want to make sure that if there is an EOS character at the end that it is not supposed to be ignored
 		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.sentIndices[1]-2);
+		System.out.println("EOS At sentence end = " + EOSAtSentenceEnd);
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
 
 		//Needed so that if we are deleting abbreviations like "Ph.D." this is not triggered.
@@ -202,7 +203,8 @@ public class SentenceTools implements Serializable  {
 			
 			//We want to make sure currentStop skips over ignored EOS characters and stops only when we hit a true EOS character
 			try {
-				while (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop-1+buffer) && currentStop != lenText) {
+				while (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop+1+buffer) && currentStop != lenText) {
+					System.out.println("SHOULD NOT HAVE EXECUTED");
 					sent.find(currentStop+1);
 					currentStop = sent.end();
 				}

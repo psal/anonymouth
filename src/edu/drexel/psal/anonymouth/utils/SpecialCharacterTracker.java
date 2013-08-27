@@ -127,7 +127,8 @@ public class SpecialCharacterTracker implements Serializable {
 			result = true;
 		} else {
 			for (int i = 0; i < length; i++) {
-				if (index-1 == eoses.get(i).location) {
+				System.out.println("   " + eoses.get(i) + " " + (index));
+				if (index == eoses.get(i).location) {
 					if (!eoses.get(i).ignore) {
 						result = true;
 					}
