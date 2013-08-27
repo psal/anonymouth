@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
-import edu.drexel.psal.anonymouth.gooie.InputFilter;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -193,7 +192,7 @@ public class SentenceTools implements Serializable  {
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
 
 		//Needed so that if we are deleting abbreviations like "Ph.D." this is not triggered.
-		if (!EOSAtSentenceEnd && !InputFilter.isEOS)
+		if (!EOSAtSentenceEnd && (GUIMain.inst.editorDriver.watchForEOS == -1))
 			EOSAtSentenceEnd = true;
 
 		String currentEOS;

@@ -144,9 +144,8 @@ public class BackendInterface {
 			main.editorDriver.refreshEditor();
 			main.editorDriver.moveHighlights();
 			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
-			main.editorDriver.chunkOfText = true;
-			main.editorDriver.updateUndoRedo();
-			main.editorDriver.chunkOfText = false;
+			main.versionControl.addVersion(main.editorDriver.pastTaggedDoc, main.editorDriver.priorCaretPosition);
+			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
 
 			DictionaryBinding.init();//initializes the dictionary for wordNEt
 

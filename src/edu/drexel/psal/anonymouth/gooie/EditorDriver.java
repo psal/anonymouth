@@ -1,16 +1,20 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import edu.drexel.psal.anonymouth.engine.HighlighterEngine;
+import edu.drexel.psal.anonymouth.utils.SpecialCharacterTracker;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 
 import javax.swing.SwingWorker;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /** 
  * Handles all the listeners for the Document tabs, but mainly handles all the
@@ -25,8 +29,17 @@ public class EditorDriver {
 
 	//============Assorted=======================================================
 	private final String NAME = "( " + this.getClass().getSimpleName() + " )- ";
+	private final HashSet<Character> EOS;
+	private final char NEWLINE = System.lineSeparator().charAt(0);
+	private final char TAB = '\t';
+	private final char SPACE = ' ';
+	public int watchForEOS;
+	//we only need to worry about these kinds of abbreviations since SentenceTools takes care of the others
+//	private final String[] ABBREVIATIONS = {"U.S.","R.N.","M.D.","i.e.","e.x.","e.g.","D.C.","B.C.","B.S.",
+//			"Ph.D.","B.A.","A.B.","A.D.","A.M.","P.M.","r.b.i.","V.P."};
 	private ActionListener reProcessListener;
 	private CaretListener caretListener;
+	private DocumentListener documentListener;
 	private GUIMain main;
 	protected SwingWorker<Void, Void> updateSuggestionsThread;
 	protected SwingWorker<Void, Void> updateBarThread;
@@ -67,7 +80,7 @@ public class EditorDriver {
 	 */
 	public int[] newCaretPosition;
 	private int[] oldCaretPosition;
-	private int priorCaretPosition;
+	protected int priorCaretPosition;
 
 	//Sentence variables
 	public int sentNum;				//The current sentence number (0, 1, 2, ...)
@@ -100,12 +113,6 @@ public class EditorDriver {
 	 * happens and when.
 	 */
 	public boolean updateTaggedSentence;
-	/**
-	 * Whether or not the user has inserted or deleted a chunk of text. This
-	 * is set by the InputFilter when it notices we are handling more than one
-	 * character of text
-	 */
-	protected boolean chunkOfText;
 
 	//=======================================================================
 	//*					INITIALIZATION AND LISTENERS						*	
@@ -117,6 +124,10 @@ public class EditorDriver {
 	public EditorDriver(GUIMain main) {
 		this.main = main;
 		highlighterEngine = new HighlighterEngine(main);
+		EOS = new HashSet<Character>();
+		EOS.add('.');
+		EOS.add('!');
+		EOS.add('?');
 
 		initListeners();
 		initThreads();
@@ -204,17 +215,6 @@ public class EditorDriver {
 					main.translationsPanel.updateTranslationsPanel(taggedDoc.getSentenceNumber(sentNum));
 				}
 
-				/**
-				 * When the user's editing a chunk of text (whether with
-				 * paste, cut, or deleting a chunk), we want to ALWAYS update
-				 * the Tagged Sentence(s) it affects. It's strange though
-				 * since this should be handled by the InputFilter, TODO.
-				 */
-				if (chunkOfText) {
-					updateTaggedSentence = true;
-					chunkOfText = false;
-				}
-
 				if (updateTaggedSentence) {
 					updateTaggedSentence = false;
 					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
@@ -229,6 +229,30 @@ public class EditorDriver {
 		};
 		main.documentPane.addCaretListener(caretListener);
 
+		documentListener = new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				if (ignoreChanges) {
+					charsInserted = 0;
+				} else {
+					charsInserted = e.getLength();
+				}	
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				if (ignoreChanges) {
+					charsRemoved = 0;
+				} else {
+					charsRemoved = e.getLength();
+				}
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {}
+		};
+		main.documentPane.getDocument().addDocumentListener(documentListener);
+		
 		reProcessListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -466,6 +490,7 @@ public class EditorDriver {
 			 */
 			charsRemoved = 0;
 		}
+		updateTaggedSentence = true;
 	}
 
 	/**
@@ -475,25 +500,44 @@ public class EditorDriver {
 	 * main document listener.
 	 */
 	private void insertion() {
-		/**
-		 * Because we're supposed to wait in InputFilter when the user types
-		 * an EOS character since they may type more and we're not sure yet if
-		 * they are actually done with the sentence (for example "hello!!!!",
-		 * nothing will be updated until we have confirmation that it's the
-		 * actual end of sentence. This means that if they click/move away
-		 * from the sentence after typing a period or finish it off with a
-		 * space INSTEAD of typing more EOS characters, we will then prepare
-		 * to make a new sentence.
-		 */
-		if (newCaretPosition[0] != priorCaretPosition && InputFilter.isEOS) {
-			InputFilter.isEOS = false;
-			updateTaggedSentence = true;
-		
-			if (updateSuggestionsThread.isDone()) {
-				prepareWordSuggestionsThread();
-				updateSuggestionsThread.execute();
+		System.out.println("TEXT WAS INSERTED");
+		if (charsInserted > 1) {
+			if (watchForEOS != -1) {
+				char beginningChar = main.documentPane.getText().charAt(priorCaretPosition);
+				
+				if (beginningChar == SPACE || beginningChar == NEWLINE || beginningChar == TAB) {
+					updateTaggedSentence = true;
+					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+				} else {
+					updateTaggedSentence = true;
+				}
+				
+				watchForEOS = -1;
+			} else {
+				updateTaggedSentence = true;
+			}
+		} else {
+			if (watchForEOS != -1) {
+				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+				
+				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+					updateTaggedSentence = true;
+					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+				} else {
+					updateTaggedSentence = true;
+				}
+				
+				watchForEOS = -1;
+			} else {
+				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+				if (EOS.contains(newChar)) {
+					watchForEOS = priorCaretPosition;
+					taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], watchForEOS, true);
+					updateTaggedSentence = true;
+				}
 			}
 		}
+		updateTaggedSentence = true;
 	}
 
 	//=======================================================================
@@ -544,7 +588,7 @@ public class EditorDriver {
 			return;
 		}
 
-		if (chunkOfText) {
+		if (charsInserted > 1 || charsRemoved > 1) {
 			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition);
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
 		} else if (curCharBackupBuffer >= CHARS_TIL_BACKUP) {
@@ -735,11 +779,11 @@ public class EditorDriver {
 
 		ignoreChanges = false;
 		updateTaggedSentence = false;
-		chunkOfText = false;
 
 		curCharBackupBuffer = 0;
 		ignoreBackup = false;
 
 		highlighterEngine.clearAll();
+		watchForEOS = -1;
 	}
 }
