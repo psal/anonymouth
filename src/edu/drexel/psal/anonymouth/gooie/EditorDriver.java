@@ -8,7 +8,6 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -31,7 +30,6 @@ public class EditorDriver {
 	private GUIMain main;
 	protected SwingWorker<Void, Void> updateSuggestionsThread;
 	protected SwingWorker<Void, Void> updateBarThread;
-	private Runnable moveHighlightTread;
 
 	//============Highlighters=============================================
 	protected HighlighterEngine highlighterEngine;
@@ -73,7 +71,7 @@ public class EditorDriver {
 	//Sentence variables
 	public int sentNum;				//The current sentence number (0, 1, 2, ...)
 	public int[] sentIndices;		//The indices of the sentence
-	private int pastSentNum;		//The past sentence number
+	public int pastSentNum;		//The past sentence number
 	private boolean wholeLastSentDeleted;		//Used for EOS character deletion
 	private boolean wholeBeginningSentDeleted;	//Used for EOS character deletion
 
@@ -213,11 +211,12 @@ public class EditorDriver {
 				 */
 				if (chunkOfText) {
 					updateTaggedSentence = true;
+					chunkOfText = false;
 				}
 
 				if (updateTaggedSentence) {
 					updateTaggedSentence = false;
-					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
 				} else {
 					//Move the highlight to fit around any sentence changes
 					moveHighlights();
@@ -251,35 +250,6 @@ public class EditorDriver {
 	private void initThreads() {
 		prepareWordSuggestionsThread();
 		prepareAnonymityBarThread();
-
-		moveHighlightTread = new Runnable() {
-			@Override
-			public void run() {
-				//Clearing all sentences so they can be highlighted somewhere else
-				highlighterEngine.removeAutoRemoveHighlights();
-				highlighterEngine.removeSentenceHighlight();
-
-				//If user is selecting text, don't make new highlights in this case
-				if (newCaretPosition[0] != newCaretPosition[1]) {
-					return;
-				}
-
-				Logger.logln(NAME+"Moving highlight to " + sentIndices[0] + "-" + sentIndices[1]);
-
-				int whiteSpace = 0;
-				while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
-					whiteSpace++;
-				}
-
-				if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
-					if (doHighlight)
-						highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
-					
-					if (autoHighlight && updateSuggestionsThread.isDone())
-						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
-				}
-			}
-		};
 	}
 	
 	/**
@@ -515,7 +485,6 @@ public class EditorDriver {
 		 * to make a new sentence.
 		 */
 		if (newCaretPosition[0] != priorCaretPosition[0] && InputFilter.isEOS) {
-			System.out.println("EOS ALERT");
 			InputFilter.isEOS = false;
 			updateTaggedSentence = true;
 		
@@ -537,7 +506,29 @@ public class EditorDriver {
 	 * to invoke the runnable themselves
 	 */
 	public void moveHighlights() {
-		SwingUtilities.invokeLater(moveHighlightTread);
+		//Clearing all sentences so they can be highlighted somewhere else
+		highlighterEngine.removeAutoRemoveHighlights();
+		highlighterEngine.removeSentenceHighlight();
+
+		//If user is selecting text, don't make new highlights in this case
+		if (newCaretPosition[0] != newCaretPosition[1]) {
+			return;
+		}
+
+		Logger.logln(NAME+"Moving highlight to " + sentIndices[0] + "-" + sentIndices[1]);
+
+		int whiteSpace = 0;
+		while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
+			whiteSpace++;
+		}
+
+		if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
+			if (doHighlight)
+				highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
+			
+			if (autoHighlight && updateSuggestionsThread.isDone())
+				highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+		}
 	}
 
 	/**
@@ -546,7 +537,7 @@ public class EditorDriver {
 	 * when the user is manipulating chunks of text. You should just have to
 	 * call this once at the beginning of the main document listener.
 	 */
-	private void updateUndoRedo() {	
+	protected void updateUndoRedo() {	
 		if (ignoreBackup) {
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
 			return;
@@ -696,7 +687,8 @@ public class EditorDriver {
 	 * @param updatedText
 	 *        The updated sentence text
 	 */
-	protected void updateSentence(int sentNumToRemove, String updatedText) {
+	public void updateSentence(int sentNumToRemove, String updatedText) {
+		Logger.logln(NAME+"Updating sentence # = " + sentNumToRemove + " with new string: " + updatedText);
 		taggedDoc.removeAndReplace(sentNumToRemove, updatedText);
 
 		if (updateBarThread.isDone()) {

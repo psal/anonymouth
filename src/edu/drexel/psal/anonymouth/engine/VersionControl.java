@@ -88,11 +88,10 @@ public class VersionControl {
 		
 		main.editorDriver.ignoreBackup = true;
 		main.editorDriver.taggedDoc = undo.pop();
-		main.editorDriver.updateTaggedSentence = true;
 		main.editorDriver.newCaretPosition[0] = indicesUndo.pop();
 		main.editorDriver.newCaretPosition[1]= main.editorDriver.newCaretPosition[0];
 		main.editorDriver.refreshEditor();
-		main.documentPane.getCaret().setDot(main.editorDriver.newCaretPosition[0]);
+		main.editorDriver.updateSentence(main.editorDriver.pastSentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
 		main.editorDriver.ignoreBackup = false;
 		
 		main.enableRedo(true);
@@ -128,11 +127,10 @@ public class VersionControl {
 		
 		main.editorDriver.ignoreBackup = true;
 		main.editorDriver.taggedDoc = redo.pop();
-		main.editorDriver.updateTaggedSentence = true;
 		main.editorDriver.newCaretPosition[0] = indicesRedo.pop();
 		main.editorDriver.newCaretPosition[1]= main.editorDriver.newCaretPosition[0];
 		main.editorDriver.refreshEditor();
-		main.documentPane.getCaret().setDot(main.editorDriver.newCaretPosition[0]);
+		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
 		main.editorDriver.ignoreBackup = false;
 
 		main.enableUndo(true);	

@@ -218,6 +218,7 @@ public class HighlighterEngine {
 	 * @param end
 	 */
 	public void addAutoRemoveHighlights(int start, int end) {
+		Logger.logln(NAME+"Adding highlights for sentence: \""+main.documentPane.getText().substring(start, end)+"\"");
 		//if we don't increment by one, it gets the previous sentence.
 		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(start+1));
 		int removeSize = main.wordSuggestionsDriver.getRemoveSize();

@@ -1144,7 +1144,9 @@ public class PreProcessDriver {
 
 			try {
 				String testDocText = main.mainDocPreview.stringify();
+				main.editorDriver.ignoreChanges = true;
 				main.documentPane.setText(testDocText);
+				main.editorDriver.ignoreChanges = false;
 				main.originalDocPane.setText(testDocText);
 				preProcessWindow.testDocPane.setText(testDocText);
 				if (titles.get(ANONConstants.DUMMY_NAME) == null)

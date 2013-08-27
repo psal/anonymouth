@@ -130,7 +130,6 @@ public class BackendInterface {
 			main.anonymityBar.showFill(true);
 			main.editorDriver.updateSuggestionsThread.execute();
 			main.editorDriver.updateBarThread.execute();
-			
 
 			main.enableEverything(true);	
 			
@@ -145,6 +144,9 @@ public class BackendInterface {
 			main.editorDriver.refreshEditor();
 			main.editorDriver.moveHighlights();
 			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
+			main.editorDriver.chunkOfText = true;
+			main.editorDriver.updateUndoRedo();
+			main.editorDriver.chunkOfText = false;
 
 			DictionaryBinding.init();//initializes the dictionary for wordNEt
 

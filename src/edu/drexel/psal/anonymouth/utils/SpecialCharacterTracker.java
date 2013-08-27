@@ -6,6 +6,8 @@ package edu.drexel.psal.anonymouth.utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import edu.drexel.psal.jstylo.generics.Logger;
+
 /**
  * @author Andrew W.E. McDonald
  *
@@ -73,7 +75,7 @@ public class SpecialCharacterTracker implements Serializable {
 		int size = eoses.size();
 		
 		for (int i = 0; i < size; i++)
-			System.out.println(NAME + "EOS = " + eoses.get(i).location + ", " + eoses.get(i).ignore);
+			Logger.logln(NAME + "EOS = " + eoses.get(i).location + ", " + eoses.get(i).ignore);
 	}
 	
 	/**
@@ -141,7 +143,7 @@ public class SpecialCharacterTracker implements Serializable {
 	 * @param upperBound
 	 */
 	public boolean removeEOSesInRange(int lowerBound, int upperBound) {
-		System.out.println(NAME+"Removing EOSes in range " + lowerBound + " - " + upperBound);
+		Logger.logln(NAME+"Removing EOSes in range " + lowerBound + " - " + upperBound);
 		int i;
 		int numEOSes = eoses.size();
 		int thisEOSLoc;
@@ -172,9 +174,9 @@ public class SpecialCharacterTracker implements Serializable {
 		// note: right now, we'll just loop through the whole ArrayList of EOS objects, and check each one to see if its location is >= startIndex. 
 		//There is almost certainly a more efficient way to do this, but as it's a small list, and I just want to get something working, I'm going to leave it like this for now.
 		if (shiftRight)
-			System.out.println("shifting all EOS characters right starting from "+startIndex+" by "+shiftAmount+" places...");
+			Logger.logln(NAME+"shifting all EOS characters right starting from "+startIndex+" by "+shiftAmount+" places...");
 		else
-			System.out.println("shifting all EOS characters left starting from "+startIndex+" by "+shiftAmount+" places...");
+			Logger.logln(NAME+"shifting all EOS characters left starting from "+startIndex+" by "+shiftAmount+" places...");
 		int i;
 		int numEOSes = eoses.size();
 		if (shiftRight) { // add shiftAmount

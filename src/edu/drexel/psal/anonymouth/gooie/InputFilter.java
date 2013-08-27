@@ -159,7 +159,7 @@ public class InputFilter extends DocumentFilter {
 	/**
 	 * If the user deletes a character or a section of text this will get called BEFORE updating the documentPane and firing the listeners.
 	 */
-	public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+	public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {		
 		if (driver.ignoreChanges) {
 			driver.charsRemoved = 0;
 			driver.charsInserted = 0;
@@ -182,8 +182,9 @@ public class InputFilter extends DocumentFilter {
 			if (main.processed && !ignoreTranslation) {
 				driver.updateTaggedSentence = true; //We want to update no matter what since the user is dealing with a chunk of text
 				Logger.logln(NAME + "User deleted multiple characters in text, will update");
-			} else
+			} else {
 				ignoreTranslation = false;
+			}
 		}
 
 		fb.remove(offset, length);
