@@ -150,6 +150,7 @@ public class EditorDriver {
 				newCaretPosition[0] = e.getDot();
 				newCaretPosition[1] = e.getMark();
 				priorCaretPosition = newCaretPosition[0] - charsInserted + charsRemoved;
+				updateTaggedSentence = true;
 
 				//================ SIDE UPDATES =======================================================================
 				
@@ -338,6 +339,8 @@ public class EditorDriver {
 			 * catch so we can document what happened and
 			 * hopefully patch it in the future.
 			 */
+			watchForEOS = newCaretPosition[0];
+			updateTaggedSentence = false;
 			int[] leftSentInfo = new int[0];
 			int[] rightSentInfo = new int[0];
 			try {
@@ -489,8 +492,11 @@ public class EditorDriver {
 			 * code to be executed (since it's already taken care of here since)
 			 */
 			charsRemoved = 0;
+		} else {
+			watchForEOS = -1;
+			updateTaggedSentence = true;
 		}
-		updateTaggedSentence = true;
+		watchForEOS = -1;
 	}
 
 	/**
@@ -500,7 +506,6 @@ public class EditorDriver {
 	 * main document listener.
 	 */
 	private void insertion() {
-		System.out.println("TEXT WAS INSERTED");
 		if (charsInserted > 1) {
 			if (watchForEOS != -1) {
 				char beginningChar = main.documentPane.getText().charAt(priorCaretPosition);
@@ -521,9 +526,12 @@ public class EditorDriver {
 				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
 				
 				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+					System.out.println("ACTUALLY IS EOS CHARACTER");
 					updateTaggedSentence = true;
-					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+					System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
+					taggedDoc.specialCharTracker.setIgnore(watchForEOS+charsInserted, false);
 				} else {
+					System.out.println("PROBLEM 1");
 					updateTaggedSentence = true;
 				}
 				
@@ -532,8 +540,13 @@ public class EditorDriver {
 				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
 				if (EOS.contains(newChar)) {
 					watchForEOS = priorCaretPosition;
+					System.out.println("ENTERED EOS CHARACTER, WILL WAIT");
+					System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
+					
 					taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], watchForEOS, true);
 					updateTaggedSentence = true;
+				} else {
+					System.out.println("PROBLEM 2");
 				}
 			}
 		}

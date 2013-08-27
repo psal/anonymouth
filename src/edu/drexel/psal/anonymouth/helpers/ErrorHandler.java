@@ -62,19 +62,24 @@ public class ErrorHandler {
 	 * @param e
 	 * 		An exception (if there was one) for Logging the stack trace. null is an acceptable value if there is no exception.		
 	 */
-	public static void fatalProcessingError(Exception e) {
-		if (e != null)
-			Logger.logln(e);
-		
-		Toolkit.getDefaultToolkit().beep();
-		JOptionPane.showMessageDialog(null,
-				"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
-				"longer run properly.\n\n" +
-				"We apologize for the inconvenience and are hard at work to solve the issue.",
-				"Fatal Error", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
-		
-		Logger.logln(NAME+"Fatal error encountered, will exit now...", LogOut.STDERR);
-		System.exit(FATAL_ERROR);
+	public static void fatalProcessingError(final Exception e) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				if (e != null)
+					Logger.logln(e);
+				
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showMessageDialog(null,
+						"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
+						"longer run properly.\n\n" +
+						"We apologize for the inconvenience and are hard at work to solve the issue.",
+						"Fatal Error", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
+				
+				Logger.logln(NAME+"Fatal error encountered, will exit now...", LogOut.STDERR);
+				System.exit(FATAL_ERROR);
+			}
+		});
 	}
 	
 	/**

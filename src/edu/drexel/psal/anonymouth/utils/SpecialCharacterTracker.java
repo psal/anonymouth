@@ -62,7 +62,9 @@ public class SpecialCharacterTracker implements Serializable {
 		int length = eoses.size();
 		
 		for (int i = 0; i < length; i++) {
-			if (index-1 == eoses.get(i).location) {
+			System.out.println("   " + eoses.get(i) + " " + index);
+			if (index == eoses.get(i).location) {
+				System.out.println("IGNORE SUCCESS!");
 				eoses.get(i).setIgnore(b);
 			}
 		}
