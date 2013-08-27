@@ -168,10 +168,10 @@ public class TranslationsDriver implements MouseListener {
 		main.versionControl.addVersion(main.editorDriver.pastTaggedDoc, main.documentPane.getCaret().getDot());
 
 		main.saved = false;
-		InputFilter.ignoreTranslation = true;
 		main.editorDriver.updateSentence(
 				main.editorDriver.sentNum,
 				translationsPanel.translationsMap.get(actionCommand).getUntagged(false));
+		main.editorDriver.refreshEditor();
 
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("");

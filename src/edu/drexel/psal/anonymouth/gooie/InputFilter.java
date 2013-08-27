@@ -34,8 +34,6 @@ public class InputFilter extends DocumentFilter {
 	
 	public static int currentCharacterBuffer = 0;
 	public static boolean isEOS = false; //keeps track of whether or not the current character is an EOS character.
-	public static boolean ignoreTranslation = false;
-	public static boolean shouldBackup = false;
 	private boolean watchForEOS = false; //Lets us know if the previous character(s) were EOS characters.
 	private boolean addingAbbreviation = false;
 	private EditorDriver driver;
@@ -99,7 +97,6 @@ public class InputFilter extends DocumentFilter {
 
 		//if the user previously entered an EOS character and the new character is not an EOS character, then we should update
 		if (watchForEOS && !isEOS) {
-			shouldBackup = true;
 			watchForEOS = false;
 			/**
 			 * NOTE: We must NOT call removeReplaceAndUpdate() directly since the currentSentenceString variable that's used for the
@@ -122,14 +119,14 @@ public class InputFilter extends DocumentFilter {
 			boolean isAdding = false;
 			
 			String textBeforePeriod = main.documentPane.getText().substring(driver.newCaretPosition[0]-2, driver.newCaretPosition[0]);
+
 			if (textBeforePeriod.substring(1, 2).equals(".") && !EOS.contains(text)) {
 				for (int i = 0; i < ABBREVIATIONS.length; i++) {
 					if (ABBREVIATIONS[i].endsWith(textBeforePeriod)) {
 						int length = ABBREVIATIONS[i].length();
 						textBeforePeriod = main.documentPane.getText().substring(driver.newCaretPosition[0]-length, driver.newCaretPosition[0]);
-						
+
 						if (textBeforePeriod.equals(ABBREVIATIONS[i])) {
-							System.out.println (textBeforePeriod + " = " + ABBREVIATIONS[i]);
 							driver.updateTaggedSentence = false;
 							addingAbbreviation = true;
 							isAdding = true;
@@ -179,11 +176,9 @@ public class InputFilter extends DocumentFilter {
 			 * I know this looks goofy, but without some sort of check to make sure that the document is done processing, this would fire
 			 * removeReplaceAndUpdate() in DriverEditor and screw all the highlighting up. There may be a better way to do this...
 			 */
-			if (main.processed && !ignoreTranslation) {
+			if (main.processed) {
 				driver.updateTaggedSentence = true; //We want to update no matter what since the user is dealing with a chunk of text
 				Logger.logln(NAME + "User deleted multiple characters in text, will update");
-			} else {
-				ignoreTranslation = false;
 			}
 		}
 
@@ -206,7 +201,6 @@ public class InputFilter extends DocumentFilter {
 		
 		if (watchForEOS && !isEOS) { //if the user previously deleted an EOS character AND the one they just deleted is not an EOS character, we should update.
 			watchForEOS = false;
-			shouldBackup = true;
 			driver.updateTaggedSentence = true;
 		}
 	}

@@ -66,7 +66,8 @@ public class EditorDriver {
 	 * and second indices of these arrays will be equal
 	 */
 	public int[] newCaretPosition;
-	private int[] priorCaretPosition;
+	private int[] oldCaretPosition;
+	private int priorCaretPosition;
 
 	//Sentence variables
 	public int sentNum;				//The current sentence number (0, 1, 2, ...)
@@ -137,7 +138,7 @@ public class EditorDriver {
 				System.out.println("============================================");
 				newCaretPosition[0] = e.getDot();
 				newCaretPosition[1] = e.getMark();
-				priorCaretPosition[0] = newCaretPosition[0] - charsInserted + charsRemoved;
+				priorCaretPosition = newCaretPosition[0] - charsInserted + charsRemoved;
 
 				//================ SIDE UPDATES =======================================================================
 				
@@ -157,16 +158,16 @@ public class EditorDriver {
 				if (charsRemoved > 0) {
 					deletion(); //We MUST make sure we handle any TaggedSentence deletion if needed
 					main.saved = false;
-					taggedDoc.specialCharTracker.shiftAllEOSChars(false, priorCaretPosition[0], charsRemoved);
+					taggedDoc.specialCharTracker.shiftAllEOSChars(false, priorCaretPosition, charsRemoved);
 				} else if (charsInserted > 0) {
 					insertion(); //We MUST make sure to handle any EOS characters being added
 					main.saved = false;
-					taggedDoc.specialCharTracker.shiftAllEOSChars(true, priorCaretPosition[0], charsInserted);
+					taggedDoc.specialCharTracker.shiftAllEOSChars(true, priorCaretPosition, charsInserted);
 				}
 
 				int[] selectionInfo;
 				try {
-					selectionInfo = getSentencesIndices(newCaretPosition[0])[0];
+					selectionInfo = getSentencesIndices(priorCaretPosition)[0];
 
 					if (selectionInfo == null)
 						return;
@@ -190,7 +191,7 @@ public class EditorDriver {
 				 * within the selectedSentIndexRange ([0] is min, [1] is max)
 				 */
 				//IN SENTENCE
-				if (priorCaretPosition[0] >= sentIndices[0] && priorCaretPosition[0] < sentIndices[1]) {
+				if (priorCaretPosition >= sentIndices[0] && priorCaretPosition < sentIndices[1]) {
 					if (charsInserted > 0) {
 						sentIndices[1] += charsInserted;
 						charsInserted = 0;
@@ -222,8 +223,8 @@ public class EditorDriver {
 					moveHighlights();
 				}
 
-				priorCaretPosition[0] = newCaretPosition[0];
-				priorCaretPosition[1] = newCaretPosition[1];
+				oldCaretPosition[0] = newCaretPosition[0];
+				oldCaretPosition[1] = newCaretPosition[1];
 			}
 		};
 		main.documentPane.addCaretListener(caretListener);
@@ -304,7 +305,7 @@ public class EditorDriver {
 		}
 
 		//If we removed an EOS in the given range...
-		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0]-1, priorCaretPosition[0]-1)) {
+		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0]-1, priorCaretPosition-1)) {
 			/**
 			 * This is usually where we discover that something
 			 * was broken somewhere in the editor, which is why we
@@ -316,7 +317,7 @@ public class EditorDriver {
 			int[] leftSentInfo = new int[0];
 			int[] rightSentInfo = new int[0];
 			try {
-				int[][] allSentInfo = getSentencesIndices(newCaretPosition[0], priorCaretPosition[0]);
+				int[][] allSentInfo = getSentencesIndices(newCaretPosition[0], priorCaretPosition);
 				leftSentInfo = allSentInfo[0];
 				rightSentInfo = allSentInfo[1];
 
@@ -407,7 +408,7 @@ public class EditorDriver {
 						rightSentInfo[0] = rightSentInfo[0]-1;
 					}
 					//we need to shift our indices over by the number of characters removed.
-					String rightSentCurrent = docText.substring((priorCaretPosition[0]-charsRemoved), (rightSentInfo[2]-charsRemoved));
+					String rightSentCurrent = docText.substring((priorCaretPosition-charsRemoved), (rightSentInfo[2]-charsRemoved));
 
 					if (wholeLastSentDeleted && wholeBeginningSentDeleted) {
 						wholeLastSentDeleted = false;
@@ -484,7 +485,7 @@ public class EditorDriver {
 		 * space INSTEAD of typing more EOS characters, we will then prepare
 		 * to make a new sentence.
 		 */
-		if (newCaretPosition[0] != priorCaretPosition[0] && InputFilter.isEOS) {
+		if (newCaretPosition[0] != priorCaretPosition && InputFilter.isEOS) {
 			InputFilter.isEOS = false;
 			updateTaggedSentence = true;
 		
@@ -544,17 +545,12 @@ public class EditorDriver {
 		}
 
 		if (chunkOfText) {
-			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition[0]);
+			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition);
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
 		} else if (curCharBackupBuffer >= CHARS_TIL_BACKUP) {
 			curCharBackupBuffer = 0;
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
-			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition[0]);
-		} else {
-			if (InputFilter.shouldBackup) {
-				main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition[0]);
-				pastTaggedDoc = new TaggedDocument(pastTaggedDoc);
-			}
+			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition);
 		}
 	}
 
@@ -600,12 +596,12 @@ public class EditorDriver {
 
 			/** 
 			 * The start and end indices of the new sentence. This could be as
-             * simple as the previous sentence minus a character or as drastic
-             * as two previous sentences combined
+			 * simple as the previous sentence minus a character or as drastic
+			 * as two previous sentences combined
 			 */
 			int startIndex = 0;
 			int endIndex = 0;
-			
+
 			if (selectedSentence >= numSents)
 				return null; //Should never be greater than or equal to the number of sents
 			else if (selectedSentence <= 0)
@@ -627,14 +623,14 @@ public class EditorDriver {
 		 */
 		if (results.length > 1) {
 			if ((results[1][0] - results[0][0]) >= 4 &&
-				(results[1][2] == priorCaretPosition[0] + (results[1][2] - results[1][1]) ||
-				results[1][2] == priorCaretPosition[1] + (results[1][2] - results[1][1]))) {
+					(results[1][2] == oldCaretPosition[0] + (results[1][2] - results[1][1]) ||
+					results[1][2] == oldCaretPosition[1] + (results[1][2] - results[1][1]))) {
 				wholeLastSentDeleted = true;
 			}
-			
+
 			if (results[1][0] - results[0][0] >= 4 &&
-				(results[0][2] == priorCaretPosition[0] + (results[0][2] - results[0][1]) ||
-				results[0][2] == priorCaretPosition[1] + (results[0][2] - results[0][1]))) {
+					(results[0][2] == oldCaretPosition[0] + (results[0][2] - results[0][1]) ||
+					results[0][2] == oldCaretPosition[1] + (results[0][2] - results[0][1]))) {
 				wholeBeginningSentDeleted = true;
 			}
 		}
@@ -723,7 +719,8 @@ public class EditorDriver {
 	private void resetToDefaults() {
 		//Selection indices
 		newCaretPosition = new int[]{0,0};
-		priorCaretPosition = new int[]{0,0};
+		oldCaretPosition = new int[]{0,0};
+		priorCaretPosition = 0;
 
 		//Sentence variables
 		sentNum = 0;

@@ -91,7 +91,7 @@ public class VersionControl {
 		main.editorDriver.newCaretPosition[0] = indicesUndo.pop();
 		main.editorDriver.newCaretPosition[1]= main.editorDriver.newCaretPosition[0];
 		main.editorDriver.refreshEditor();
-		main.editorDriver.updateSentence(main.editorDriver.pastSentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
+		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
 		main.editorDriver.ignoreBackup = false;
 		
 		main.enableRedo(true);

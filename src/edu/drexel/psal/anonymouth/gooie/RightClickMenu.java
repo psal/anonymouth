@@ -109,10 +109,7 @@ public class RightClickMenu extends JPopupMenu {
 					taggedSentences.add(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
 					pastLength += length;
 				}
-				
-				//We're borrowing a variable used by translations to solve a similar purpose, we do not want the InputFilter to fire removeReplaceAndUpdate in the DriverEditor.
-				InputFilter.ignoreTranslation = true;
-				
+								
 				TaggedSentence replacement = main.editorDriver.taggedDoc.concatSentences(taggedSentences);
 				main.editorDriver.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
 				
