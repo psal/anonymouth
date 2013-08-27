@@ -224,25 +224,38 @@ public class HighlighterEngine {
 		ArrayList<int[]> index = new ArrayList<int[]>(removeSize);
 		ArrayList<String[]> topToRemove = main.wordSuggestionsDriver.getTopToRemove();
 		
-		int sentenceSize = words.length;
-		for (int i = 0; i < sentenceSize; i++) {
-			if (words[i] != null) {
-				for (int x = 0; x < removeSize; x++) {
-					String wordToRemove = topToRemove.get(x)[0];
+		/**
+		 * We have this surrounded by a try catch to protect against the possibility of the updateSuggestionsThread is EditorDriver
+		 * and the automatic highlight code happening at the same time. These two running at the same time is no good.
+		 * 
+		 * We DO have safety measures in place that should in all cases prevent this from happening, but just in the off-chance
+		 * we missed something or if a freak occurrence happens and our safety measures aren't enacted for whatever reason, we
+		 * want to at least be prepared for it.
+		 */
+		try {
+			int sentenceSize = words.length;
+			for (int i = 0; i < sentenceSize; i++) {
+				if (words[i] != null) {
+					for (int x = 0; x < removeSize; x++) {
+						String wordToRemove = topToRemove.get(x)[0];
 
-					//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
-					//to just extract the "..." for highlighting
-					String[] test = wordToRemove.split(" ");
-					if (test.length > 2) {
-						wordToRemove = test[1].substring(0, test.length-2);
-						System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
-					}
+						//If the "word to remove" is punctuation and in the form of "Remove ...'s" for example, we want
+						//to just extract the "..." for highlighting
+						String[] test = wordToRemove.split(" ");
+						if (test.length > 2) {
+							wordToRemove = test[1].substring(0, test.length-2);
+							System.out.println("\"" + wordToRemove + "\"" + ", and \"" + words[i] + "\"");
+						}
 
-					if (words[i].equals(wordToRemove)) {
-						index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
+						if (words[i].equals(wordToRemove)) {
+							index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
+						}
 					}
 				}
 			}
+		} catch (Exception e) {
+			Logger.logln(NAME+"Threading issue occurred in addAutoRemoveHighlights, should not have happened.", LogOut.STDERR);
+			Logger.logln(e);
 		}
 
 		int indexSize = index.size();

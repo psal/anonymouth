@@ -125,7 +125,7 @@ public class RightClickMenu extends JPopupMenu {
 					space++;
 				}
 				
-				main.editorDriver.caretPosition = selectedSentInfo[1]+space;
+				main.editorDriver.newCaretPosition[0] = selectedSentInfo[1]+space;
 				main.editorDriver.refreshEditor();
 			}
 		};

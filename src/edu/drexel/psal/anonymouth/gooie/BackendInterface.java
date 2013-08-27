@@ -122,15 +122,15 @@ public class BackendInterface {
 			Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
 			Logger.logln(NAME+wekaResults.toString());
 			sendResultsToResultsChart(wekaResults);
-
 			
 			main.anonymityBar.updateBar();
 			if (!main.processed)
 				main.anonymityBar.setMaxFill(main.editorDriver.taggedDoc.getMaxChangeNeeded());
 			
 			main.anonymityBar.showFill(true);
-			main.editorDriver.placeWordSuggestions.execute();
-			main.editorDriver.updateAnonymityBar.execute();
+			main.editorDriver.updateSuggestionsThread.execute();
+			main.editorDriver.updateBarThread.execute();
+			
 
 			main.enableEverything(true);	
 			
@@ -140,8 +140,10 @@ public class BackendInterface {
 				caret++;
 			}
 
-			main.editorDriver.caretPosition = caret;
+			main.editorDriver.newCaretPosition[0] = caret;
+			main.editorDriver.newCaretPosition[1]= caret;
 			main.editorDriver.refreshEditor();
+			main.editorDriver.moveHighlights();
 			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
 
 			DictionaryBinding.init();//initializes the dictionary for wordNEt

@@ -471,7 +471,7 @@ public class GUIMain extends JFrame {
 		ppAdvancedDriver = ppAdvancedWindow.driver;					//preProcess "Advanced Configuration" listeners
 		backendInterface = new BackendInterface(this);				//The processing God
 		editorDriver = new EditorDriver(this);						//The main text editor driver
-		InputFilter documentFilter = new InputFilter(editorDriver);	//A helper filter to the main text editor driver
+		InputFilter documentFilter = new InputFilter(this, editorDriver);	//A helper filter to the main text editor driver
 		((AbstractDocument)documentPane.getDocument()).setDocumentFilter(documentFilter);
 		
 		//So we can intercept the window close if they didn't save changes
