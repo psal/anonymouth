@@ -202,6 +202,7 @@ public class TaggedDocument implements Serializable{
 			tempSentWithEOSSubs = tempRay[1];
 			
 			TaggedSentence taggedSentence = new TaggedSentence(tempSent);
+//			tempSent.replaceAll("", ".");
 			toke = tlp.getTokenizerFactory().getTokenizer(new StringReader(tempSent));
 			sentenceTokenized = toke.tokenize();
 			taggedSentence.setTaggedSentence(Tagger.mt.tagSentence(sentenceTokenized));
@@ -230,13 +231,13 @@ public class TaggedDocument implements Serializable{
 		int i;
 		for (i=0; i < numChars; i++){
 			if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[0]){ // period replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i-1,false);
+				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
 			}
 			else if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[1]){ // question mark replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i-1,false);
+				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
 			}
 			else if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[2]){ // exclamation point replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i-1,false);
+				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
 			}
 		}
 	}

@@ -55,6 +55,7 @@ public class EditorDriver {
 	 * in the current sentence
 	 */
 	protected boolean autoHighlight = PropertiesUtil.getAutoHighlight();
+	private boolean placeAutoHighlightsWhenDone;
 
 	//============Undo/Redo "Version Control"=================================
 	private final int CHARS_TIL_BACKUP = 20;
@@ -80,12 +81,13 @@ public class EditorDriver {
 	 */
 	public int[] newCaretPosition;
 	private int[] oldCaretPosition;
-	protected int priorCaretPosition;
+	public int priorCaretPosition;
 
 	//Sentence variables
 	public int sentNum;				//The current sentence number (0, 1, 2, ...)
 	public int[] sentIndices;		//The indices of the sentence
 	public int pastSentNum;		//The past sentence number
+	private int[] pastSentIndices;
 	private boolean wholeLastSentDeleted;		//Used for EOS character deletion
 	private boolean wholeBeginningSentDeleted;	//Used for EOS character deletion
 
@@ -100,12 +102,6 @@ public class EditorDriver {
 	 * everything will break.
 	 */
 	protected boolean ignoreChanges;
-	/**
-	 * In some cases with EOS deletion we aren't actually deleting a sentence
-	 * and we want to therefore ignore the standard EOS code (which assumes
-	 * deleting a sentence). This is triggered by InputFilter
-	 */
-	protected boolean ignoreEOSDeletion;
 	/**
 	 * In some cases (much of which are explained in InputFilter), we want to
 	 * have the listener code be executed but DON'T want to update the backend
@@ -147,16 +143,24 @@ public class EditorDriver {
 				}
 
 				System.out.println("============================================");
+				System.out.println("charsInserted = " + charsInserted + ", charsRemoved = " + charsRemoved);
 				newCaretPosition[0] = e.getDot();
 				newCaretPosition[1] = e.getMark();
 				priorCaretPosition = newCaretPosition[0] - charsInserted + charsRemoved;
-				updateTaggedSentence = true;
+				updateTaggedSentence = false;
 
 				//================ SIDE UPDATES =======================================================================
 				
 				//Undo/redo updates
 				if (charsInserted > 0 || charsRemoved > 0) {
+					updateTaggedSentence = true;
 					updateUndoRedo();
+				} else if (watchForEOS != -1) {
+					System.out.println("MOVED AWAY, WILL TRY TO MAKE INDEPENDENT SENTENCE");
+					
+					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+					watchForEOS = -1;
+					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
 				}
 				
 				//Copy/Cut/Paste updates
@@ -170,11 +174,11 @@ public class EditorDriver {
 				if (charsRemoved > 0) {
 					deletion(); //We MUST make sure we handle any TaggedSentence deletion if needed
 					main.saved = false;
-					taggedDoc.specialCharTracker.shiftAllEOSChars(false, priorCaretPosition, charsRemoved);
+					taggedDoc.specialCharTracker.shiftAllEOSChars(false, newCaretPosition[0], charsRemoved);
 				} else if (charsInserted > 0) {
 					insertion(); //We MUST make sure to handle any EOS characters being added
 					main.saved = false;
-					taggedDoc.specialCharTracker.shiftAllEOSChars(true, priorCaretPosition, charsInserted);
+					taggedDoc.specialCharTracker.shiftAllEOSChars(true, newCaretPosition[0], charsInserted);
 				}
 
 				int[] selectionInfo;
@@ -220,12 +224,20 @@ public class EditorDriver {
 					updateTaggedSentence = false;
 					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
 				} else {
+					//Bookkeeping
+					int[] sentenceInfo = getSentencesIndices(newCaretPosition[0])[0];
+					sentNum = sentenceInfo[0];			//The sentence number
+					sentIndices[0] = sentenceInfo[1];	//The start of the sentence
+					sentIndices[1] = sentenceInfo[2];	//The end of the sentence
+					
 					//Move the highlight to fit around any sentence changes
 					moveHighlights();
 				}
 
 				oldCaretPosition[0] = newCaretPosition[0];
 				oldCaretPosition[1] = newCaretPosition[1];
+				pastSentIndices[0] = sentIndices[0];
+				pastSentIndices[1] = sentIndices[1];
 			}
 		};
 		main.documentPane.addCaretListener(caretListener);
@@ -293,7 +305,18 @@ public class EditorDriver {
 			
 			@Override
 			public void done() {
-				highlighterEngine.addAutoRemoveHighlights(sentIndices[0], sentIndices[1]);
+				if (placeAutoHighlightsWhenDone) {
+					placeAutoHighlightsWhenDone = false;
+					
+					int whiteSpace = 0;
+					while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
+						whiteSpace++;
+					}
+
+					if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
+						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+					}
+				}
 			}
 		};
 	}
@@ -324,13 +347,8 @@ public class EditorDriver {
 	 * between.
 	 */
 	private void deletion() {
-		if (ignoreEOSDeletion) {
-			ignoreEOSDeletion = false;
-			return;
-		}
-
 		//If we removed an EOS in the given range...
-		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0]-1, priorCaretPosition-1)) {
+		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
 			/**
 			 * This is usually where we discover that something
 			 * was broken somewhere in the editor, which is why we
@@ -462,6 +480,7 @@ public class EditorDriver {
 				if (leftSentInfo != null) {
 					for (int i = 0; i < leftSentInfo.length; i++)
 						Logger.logln(NAME+"\tleftSentInfo["+i+"] = " + leftSentInfo[i], LogOut.STDERR);
+					Logger.logln(NAME+"\"" + main.documentPane.getText().substring(leftSentInfo[0], leftSentInfo[1]) + "\"");
 				} else {
 					Logger.logln(NAME+"\tleftSentInfo was null!", LogOut.STDERR);
 				}
@@ -470,6 +489,7 @@ public class EditorDriver {
 				if (rightSentInfo != null) {
 					for (int i = 0; i < leftSentInfo.length; i++)
 						Logger.logln(NAME+"\trightSentInfo["+i+"] = " + rightSentInfo[i], LogOut.STDERR);
+					Logger.logln(NAME+"\"" + main.documentPane.getText().substring(rightSentInfo[0], rightSentInfo[1]) + "\"");
 				} else {
 					Logger.logln(NAME+"\rightSentInfo was null!", LogOut.STDERR);
 				}
@@ -487,6 +507,9 @@ public class EditorDriver {
 				return;
 			}
 
+			Logger.logln(NAME+"\"" + main.documentPane.getText().substring(leftSentInfo[0], leftSentInfo[1]) + "\"");
+			Logger.logln(NAME+"\"" + main.documentPane.getText().substring(rightSentInfo[0], rightSentInfo[1]) + "\"");
+			
 			/** 
 			 * This needs to be reset since we don't want the standard, ordinatry remove character
 			 * code to be executed (since it's already taken care of here since)
@@ -513,6 +536,12 @@ public class EditorDriver {
 				if (beginningChar == SPACE || beginningChar == NEWLINE || beginningChar == TAB) {
 					updateTaggedSentence = true;
 					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+					
+					if (updateSuggestionsThread.isDone()) {
+						prepareWordSuggestionsThread();
+						updateSuggestionsThread.execute();
+					}
+					
 				} else {
 					updateTaggedSentence = true;
 				}
@@ -529,9 +558,14 @@ public class EditorDriver {
 					System.out.println("ACTUALLY IS EOS CHARACTER");
 					updateTaggedSentence = true;
 					System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
-					taggedDoc.specialCharTracker.setIgnore(watchForEOS+charsInserted, false);
+					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+					
+					if (updateSuggestionsThread.isDone()) {
+						prepareWordSuggestionsThread();
+						updateSuggestionsThread.execute();
+					}
 				} else {
-					System.out.println("PROBLEM 1");
+//					System.out.println("PROBLEM 1");
 					updateTaggedSentence = true;
 				}
 				
@@ -546,7 +580,7 @@ public class EditorDriver {
 					taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], watchForEOS, true);
 					updateTaggedSentence = true;
 				} else {
-					System.out.println("PROBLEM 2");
+//					System.out.println("PROBLEM 2");
 				}
 			}
 		}
@@ -567,7 +601,8 @@ public class EditorDriver {
 		//Clearing all sentences so they can be highlighted somewhere else
 		highlighterEngine.removeAutoRemoveHighlights();
 		highlighterEngine.removeSentenceHighlight();
-
+		System.out.println("TESTING TO MOVE HIGHLIGHT...");
+		System.out.println(newCaretPosition[0] + ", " + newCaretPosition[1]);
 		//If user is selecting text, don't make new highlights in this case
 		if (newCaretPosition[0] != newCaretPosition[1]) {
 			return;
@@ -577,15 +612,22 @@ public class EditorDriver {
 
 		int whiteSpace = 0;
 		while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
+			System.out.println("\"" + main.documentPane.getText().charAt(sentIndices[0]+whiteSpace) + "\"");
 			whiteSpace++;
 		}
 
+		System.out.println("HIGHLIGHT? " + (sentIndices[0]+whiteSpace) + " <= " + newCaretPosition[0]);
 		if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
+			System.out.println("They're highlighting");
 			if (doHighlight)
 				highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
 			
 			if (autoHighlight && updateSuggestionsThread.isDone())
 				highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+			else
+				placeAutoHighlightsWhenDone = true;
+		} else {
+			System.out.println("Should not be highlighting");
 		}
 	}
 
@@ -783,6 +825,7 @@ public class EditorDriver {
 		sentNum = 0;
 		sentIndices = new int[]{0,0};
 		pastSentNum = 0;
+		pastSentIndices = new int[]{0,0};
 		wholeLastSentDeleted = false;
 		wholeBeginningSentDeleted = false;
 
@@ -798,5 +841,6 @@ public class EditorDriver {
 
 		highlighterEngine.clearAll();
 		watchForEOS = -1;
+		placeAutoHighlightsWhenDone = false;
 	}
 }

@@ -125,25 +125,10 @@ public class SentenceTools implements Serializable  {
 		int buffer = 0;
 		int index = 0;
 		if (foundEOS) {
-			int mark = GUIMain.inst.documentPane.getCaret().getMark();
-			int dot = GUIMain.inst.documentPane.getCaret().getDot();
-
-			//we want to find whatever the starting index is for the selected text with respect to the length of all the text before it.
-			if (mark < dot)
-				buffer = mark;
-			else if (mark > dot)
-				buffer = dot;
-			else if (lenText == GUIMain.inst.editorDriver.taggedDoc.getUntaggedDocument(false).length())
-				buffer = 0;
-			else {
-				continueLoop = false;
-//				if (DriverEditor.EOSJustRemoved)
-//					buffer = DriverEditor.leftSentInfo[1];
-//				else
-				buffer = GUIMain.inst.editorDriver.sentIndices[0];
-			}
+			buffer = GUIMain.inst.editorDriver.sentIndices[0];
 			
 			try {
+				System.out.println("Beginning first check");
 				while (continueLoop && index < lenText-1) {
 					index = sent.start() + index;
 					if (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(index+buffer)) {
@@ -188,6 +173,7 @@ public class SentenceTools implements Serializable  {
 		int trimmedTextLength = trimmedText.length();
 
 		//We want to make sure that if there is an EOS character at the end that it is not supposed to be ignored
+		System.out.println("Checking if EOS at sentence end");
 		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.sentIndices[1]-2);
 		System.out.println("EOS At sentence end = " + EOSAtSentenceEnd);
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
@@ -203,7 +189,7 @@ public class SentenceTools implements Serializable  {
 			
 			//We want to make sure currentStop skips over ignored EOS characters and stops only when we hit a true EOS character
 			try {
-				while (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop+1+buffer) && currentStop != lenText) {
+				while (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(currentStop+buffer-1) && currentStop != lenText) {
 					System.out.println("SHOULD NOT HAVE EXECUTED");
 					sent.find(currentStop+1);
 					currentStop = sent.end();

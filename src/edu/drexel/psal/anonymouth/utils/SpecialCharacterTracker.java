@@ -64,7 +64,7 @@ public class SpecialCharacterTracker implements Serializable {
 		for (int i = 0; i < length; i++) {
 			System.out.println("   " + eoses.get(i) + " " + index);
 			if (index == eoses.get(i).location) {
-				System.out.println("IGNORE SUCCESS!");
+				System.out.println("EOS SETTING SUCCESS!");
 				eoses.get(i).setIgnore(b);
 			}
 		}
@@ -153,6 +153,7 @@ public class SpecialCharacterTracker implements Serializable {
 		boolean haveRemoved = false;
 		for (i=0; i < numEOSes; i++) {
 			thisEOSLoc = eoses.get(i).location;
+			System.out.println("   " + eoses.get(i) + " " + (lowerBound));
 			if (thisEOSLoc >= lowerBound && thisEOSLoc < upperBound) {
 				eoses.remove(i);
 				i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
