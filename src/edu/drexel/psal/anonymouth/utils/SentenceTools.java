@@ -2,13 +2,16 @@ package edu.drexel.psal.anonymouth.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jgaap.generics.Document;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -62,19 +65,17 @@ public class SentenceTools implements Serializable  {
 	 */
 	private static final Pattern citation = Pattern.compile("^[?!.]?\\s*\\(((\\s*[A-Za-z.]*\\s*(et\\.?\\s*al\\.)?\\s*[0-9]*\\s*[-,]*\\s*[0-9]*\\s*)|(\\s*[0-9]*\\s*[-,]*\\s*[0-9]*\\s*[A-Za-z.]*\\s*(et\\.?\\s*al\\.)?\\s*))\\)"); 
 	
-	private static final String t_PERIOD_REPLACEMENT = ""; // XXX: Hopefully it is safe to assume no one sprinkles apple symbols in their paper
-	// The below three "permanent" replacments are to mark EOS characters in text that the user has told us are not actually ending a sentence. 
-	// DO NOT remove these... in order to get them back, you need to know the unicode code
-	public static final String p_PERIOD_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[0]);
-	public static final String p_EXCLAMATION_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[1]);
-	public static final String p_QUESTION_REPLACEMENT = String.valueOf(SpecialCharacterTracker.replacementEOS[2]);
+	private final HashSet<String> ABBREVIATIONS;
+	private final Pattern abbreviationPattern = Pattern.compile("\\.\\s");
+	
 	private static int MAX_SENTENCES = 500;
 	//private ArrayList<String> sentsToEdit = new ArrayList<String>(MAX_SENTENCES);
 	private static int sentNumber = -1;
 	private int totalSentences = 0;
 	
-	private String[] notEndsOfSentence = {"Dr.","Mr.","Mrs.","Ms.","St.","vs.","U.S.","Sr.","Sgt.","R.N.","pt.","mt.","mts.","M.D.","Ltd.","Jr.","Lt.","Hon.","i.e.","e.x.","e.g.","inc.",
-			"et al.","est.","ed.","D.C.","B.C.","B.S.","Ph.D.","B.A.","A.B.","A.D.","A.M.","P.M.","Ln.","fig.","p.","pp.","ref.","r.b.i.","V.P.","yr.","yrs.","etc."};
+	public SentenceTools() {
+		ABBREVIATIONS = FileHelper.hashSetFromFile(ANONConstants.ABBREVIATIONS_FILE);
+	}
 	
 	/**
 	 * Takes a text (one String representing an entire document), and breaks it up into sentences. Tries to find true ends of sentences: shouldn't break up sentences containing quoted sentences, 
@@ -91,10 +92,6 @@ public class SentenceTools implements Serializable  {
 		boolean forceNoMerge=false;
 		int currentStart = 1;
 		int currentStop = 0;
-		String safeString_subbedEOS;
-		int quoteAtEnd;
-		int parenAtEnd;
-		int citationAtEnd;
 		String temp;
 		text = text.replaceAll("\u201C","\"");
 		text = text.replaceAll("\u201D","\"");
@@ -102,16 +99,36 @@ public class SentenceTools implements Serializable  {
 		// Note that we must use "Cf" rather than "C". If we use "C" or "Cc" (which includes control characters), we remove our newline characters and this screws up the document.
 		// "Cf" is "other, format". "Cc" is "other, control". Using "C" will match both of them.
 		int lenText = text.length();
-		int notEOSNumber = 0;
-		int numNotEOS = notEndsOfSentence.length;
-		String replacementString = "";
+		int index = 0;
+		int buffer = GUIMain.inst.editorDriver.sentIndices[0];
 		String safeString = "";
+		Matcher abbreviationFinder = abbreviationPattern.matcher(text);
 		
-		for (notEOSNumber = 0; notEOSNumber < numNotEOS; notEOSNumber++) {
-			replacementString = notEndsOfSentence[notEOSNumber].replaceAll("\\.",t_PERIOD_REPLACEMENT);
-			safeString = notEndsOfSentence[notEOSNumber].replaceAll("\\.","\\\\.");
-			text = text.replaceAll("(?i)\\b"+safeString,replacementString); // the "(?i)" tells Java to do a case-insensitive search.
-		}
+		while (index < lenText-1 && abbreviationFinder.find(index)) {
+			index = abbreviationFinder.start();
+			
+			try {
+				int abbrevLength = index;
+				try {
+				System.out.println("index = " + index + ", lenText-1 = " + (lenText-1) + ", char = " + text.charAt(abbrevLength));
+				} catch(Exception e) {
+					System.out.println("index = " + index + ", lenText-1 = " + (lenText-1));
+				}
+				while (text.charAt(abbrevLength) != ' ') {
+					abbrevLength--;
+				}
+				
+				System.out.println("ABBREVIATION = \"" + text.substring(abbrevLength+1, index+1) + "\"");
+				if (ABBREVIATIONS.contains(text.substring(abbrevLength+1, index+1))) {
+					GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.setIgnore(index+buffer, true);
+				}
+			} catch (Exception e) {
+				System.out.println("STUPID");
+			}
+			
+			
+			index++;
+		}		
 		
 		Matcher sent = EOS_chars.matcher(text);
 		boolean foundEOS = sent.find(currentStart); // xxx TODO xxx take this EOS character, and if not in quotes, swap it for a permanent replacement, and create and add an EOS to the calling TaggedDocument's eosTracker.
@@ -121,25 +138,20 @@ public class SentenceTools implements Serializable  {
 		 * find it. If there are multiple sentences with multiple EOS characters passed it will go through each to check, foundEOS will only be true if
 		 * an EOS exists in "text" that would normally be an EOS character and is not set to be ignored.
 		 */
-		boolean continueLoop = true;
-		int buffer = 0;
-		int index = 0;
-		if (foundEOS) {
-			buffer = GUIMain.inst.editorDriver.sentIndices[0];
-			
+		
+		index = 0;
+		if (foundEOS) {	
 			try {
 				System.out.println("Beginning first check");
-				while (continueLoop && index < lenText-1) {
-					index = sent.start() + index;
+				while (index < lenText-1 && sent.find(index)) {
+					index = sent.start();
 					if (!GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(index+buffer)) {
 						foundEOS = false;
 					} else {
 						foundEOS = true;
 						break;
 					}
-					index ++;
-					sent = EOS_chars.matcher(text.substring(index, lenText));
-					continueLoop = sent.find(0);
+					index++;
 				}
 			} catch (IllegalStateException e) {}
 		}
@@ -182,9 +194,7 @@ public class SentenceTools implements Serializable  {
 		if (!EOSAtSentenceEnd && (GUIMain.inst.editorDriver.watchForEOS == -1))
 			EOSAtSentenceEnd = true;
 
-		String currentEOS;
 		while (foundEOS == true) {
-			currentEOS = sent.group(0);
 			currentStop = sent.end();
 			
 			//We want to make sure currentStop skips over ignored EOS characters and stops only when we hit a true EOS character
@@ -244,8 +254,6 @@ public class SentenceTools implements Serializable  {
 			}
 			safeString = text.substring(currentStart-1,currentStop);
 
-			quoteAtEnd = 0;
-			citationAtEnd = 0;
 			if (foundQuote) {
 				sentEnd = sentence_quote.matcher(text);	
 				isSentence = sentEnd.find(currentStop-2); // -2 so that we match the EOS character before the quotes (not -1 because currentStop is one greater than the last index of the string -- due to the way substring works, which is includes the first index, and excludes the end index: [start,end).)
@@ -257,11 +265,9 @@ public class SentenceTools implements Serializable  {
 					safeString = text.substring(currentStart-1,currentStop);
 					forceNoMerge = true;
 					mergeNext = false;
-					quoteAtEnd = 1;
 				}
 			}
 			
-			parenAtEnd = 0;
 			if (foundParentheses) {
 				sentEnd = sentence_parentheses.matcher(text);
 				isSentence = sentEnd.find(currentStop-2);
@@ -271,7 +277,6 @@ public class SentenceTools implements Serializable  {
 					safeString = text.substring(currentStart-1, currentStop);
 					forceNoMerge = true;
 					mergeNext = false;
-					parenAtEnd = 1;
 				}
 			}
 			//System.out.println("POST quote finder: "+safeString);
@@ -285,7 +290,6 @@ public class SentenceTools implements Serializable  {
 				currentStop = text.indexOf(")",citationFinder.start()+currentStop)+1;
 				safeString = text.substring(currentStart-1,currentStop);
 				mergeNext = false;
-				citationAtEnd = citationFinder.group(0).length() - 1;// citationFinder will match either the last EOS character or "double" quote, so we subtract one to negate that
 			}	
 			
 			if (mergeWithLast) {
@@ -299,10 +303,7 @@ public class SentenceTools implements Serializable  {
 				mergeWithLast=true;
 			} else {
 				forceNoMerge = false;
-				safeString_subbedEOS = subOutEOSChars(currentEOS, safeString, quoteAtEnd + citationAtEnd + parenAtEnd);
-				safeString = safeString.replaceAll(t_PERIOD_REPLACEMENT,".");
-				safeString_subbedEOS = safeString_subbedEOS.replaceAll(t_PERIOD_REPLACEMENT,".");
-				finalSents.add(new String[]{safeString, safeString_subbedEOS});
+				finalSents.add(new String[]{safeString, safeString});
 			}
 		
 			sents.add(safeString);
@@ -329,33 +330,6 @@ public class SentenceTools implements Serializable  {
 		}
 		
 		return finalSents;
-	}
-	
-	/**
-	 * Substitutes the '.','?', and '!' (and any combination of any number of '?' and/or '!') characters at the END of a sentence.
-	 * @param currentEOS
-	 * @param needsSubbing
-	 * @param quoteAndOrCitationAtEnd
-	 * @return
-	 * 	a version of the string with the EOS characters replaced. 
-	 */
-	public String subOutEOSChars(String currentEOS, String needsSubbing, int quoteAndOrCitationAtEnd){
-		int numEOSes = currentEOS.length();
-		int startOfEOS = needsSubbing.length() - numEOSes - quoteAndOrCitationAtEnd; // quoteAndOrCitationAtEnd will be '0' unless there is a quote after the EOS character(s), a citation, or both. This will be the length of (quote length + citation length).
-		for (int currentEOSnum = 0; currentEOSnum < numEOSes; currentEOSnum++){
-			switch(currentEOS.charAt(currentEOSnum)){
-				case '.': 
-					needsSubbing = needsSubbing.substring(0, startOfEOS + currentEOSnum) + p_PERIOD_REPLACEMENT + needsSubbing.substring(startOfEOS + currentEOSnum+1);
-					break;
-				case '?': 
-					needsSubbing = needsSubbing.substring(0, startOfEOS + currentEOSnum) + p_QUESTION_REPLACEMENT + needsSubbing.substring(startOfEOS + currentEOSnum+1);
-					break;
-				case '!': 
-					needsSubbing = needsSubbing.substring(0, startOfEOS + currentEOSnum) + p_EXCLAMATION_REPLACEMENT + needsSubbing.substring(startOfEOS + currentEOSnum+1);
-					break;
-			}
-		}			
-		return needsSubbing;
 	}
 	
 	public static int getSentNumb(){
@@ -392,48 +366,4 @@ public class SentenceTools implements Serializable  {
 			return dirtyDoc;
 		}
 	}
-		
-	
-//}	
-	
-	/*
-	public String editBySentence(){
-		while(moreToCheck()){
-			String editedSentence = JOptionPane.showInputDialog("Edit this: ",getNext().getSentence());
-			editedText += editedSentence+" ";
-		}
-		editedText = editedText.substring(0,editedText.length()-1);
-		return editedText;
-	}
-	*/
-//	public static void main(String[] args) throws IOException{
-//		SentenceTools ss = new SentenceTools();
-//		//String testText = "This is a test text. I said, \"this, is a test text.\", didn't you hear me? You said, \"I didn't hear you!\"... well, did you? Or, did you not!? I am hungry.";
-//		String testText = "This sentence, \"has many eos characters. However, they are mostly within a single quote. just to check! check what? Check that this whole quote will be treated as one sentence.\". (McDonald 123) But this, should not be in the first sentence. (123 - 345  Andrew et. al.) Nor should this!";
-//		//String testText = "There are many issues with the\n concept of intelligence and the way it is tested in people. As stated by David Myers, intelligence is the �mental quality consisting of the ability. to learn from experience�, solve problems, and use knowledge �to adapt. to new situations� (2010). Is there really just one intelligence? According to many psychologists, there exists numerous intelligences. One such psychologist, Sternberg, believes there are three: Analytical Intelligence, Creative Intelligence, and Practical Intelligence. Analytical Intelligence is the intelligence assessed by intelligence tests which presents well-defined problems with set answers and predicts school grades reasonably well and to a lesser extent, job success! \n \tCreative Intelligence is demonstrated by the way one reacts to certain unforeseen situations in �new� ways. The last of the three is Practical intelligence which is the type of intelligence required for everyday tasks. This is what is used by business managers and the like to manage and motivate people, promote themselves, and delegate tasks efficiently. In contrast to this idea of 3 separate intelligences is the idea of just one intelligence started by Charles Spearman. He thought we had just one intelligence that he called �General Intelligence� which is many times shortened to just: �G�. This G factor was an underlying factor in all areas of our intelligence. Spearman was the one who also developed factor analysis which is a statistics method which allowed him to track different clusters of topics being tested in an intelligence test which showed that those who score higher in one area are more likely to score higher in another. This is the reason why he believed in this concept of G.";
-//		//String testText = "Hello?, Dr., this! is my \"t!est?\"ing tex\"t?\".\nI need!? to. See if it \"correctly (i.e. nothing goes wrong) ... and finds the first, and every other sentence, etc.. These quotes are silly, and it is 1 A.m.! a.m.? just for testing purposes?\" No! Okay, yes. What? that isn't a \"real\" \"quote\".";
-//		//testText = " Or maybe, he did understand, but had more to share with humanity before his inevitable death. Maybe still, he was forecasting his own suicide twenty-eight years before it happened. No matter what Hemingway might have felt at the time, the deep nothingness that he shows in 'A Clean Well-Lighted Place,' is a nothingness that pervades the story and becomes more apparent to the characters as they age as humans do not last forever. Ernest Hemingway wrote much about the struggle to cope with the nothingness in the world, but eventually succumbed to the nothingness that he wrote about.";
-//		//testText=" After living so long, the old man lacks some of the gifts that people are born with that the young man takes for granted. The old man�s long life shows that as humans age, the length of time they have been around not only ages their body, but it ages their soul.";
-//		ArrayList<String[]> sTok=ss.makeSentenceTokens(testText);
-//
-//		Object[] arr = sTok.toArray();
-//		try {
-//			OutputStreamWriter outStream=new OutputStreamWriter(System.out,"UTF8");
-//			Writer out=outStream;
-//			for (int i = 0; i<arr.length; i++){
-//				for(int j=0;j<arr[i].toString().length();j++){
-//					//System.out.println(arr[i].toString().charAt(j));
-//					//out.write("Character Coding of the output Stream is " + outStream.getEncoding()+"\n");
-//					//out.flush();
-//				}
-//			}
-//			
-//			 out.close();
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}		
-//	}
 }
-
-

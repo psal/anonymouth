@@ -1,7 +1,8 @@
 package edu.drexel.psal.anonymouth.gooie;
 
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.HighlighterEngine;
-import edu.drexel.psal.anonymouth.utils.SpecialCharacterTracker;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -29,11 +30,13 @@ public class EditorDriver {
 
 	//============Assorted=======================================================
 	private final String NAME = "( " + this.getClass().getSimpleName() + " )- ";
+	
 	private final HashSet<Character> EOS;
 	private final char NEWLINE = System.lineSeparator().charAt(0);
 	private final char TAB = '\t';
 	private final char SPACE = ' ';
 	public int watchForEOS;
+	private int indexOfLastSpace;
 	//we only need to worry about these kinds of abbreviations since SentenceTools takes care of the others
 //	private final String[] ABBREVIATIONS = {"U.S.","R.N.","M.D.","i.e.","e.x.","e.g.","D.C.","B.C.","B.S.",
 //			"Ph.D.","B.A.","A.B.","A.D.","A.M.","P.M.","r.b.i.","V.P."};
@@ -535,6 +538,7 @@ public class EditorDriver {
 				
 				if (beginningChar == SPACE || beginningChar == NEWLINE || beginningChar == TAB) {
 					updateTaggedSentence = true;
+
 					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
 					
 					if (updateSuggestionsThread.isDone()) {
@@ -577,7 +581,7 @@ public class EditorDriver {
 					System.out.println("ENTERED EOS CHARACTER, WILL WAIT");
 					System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
 					
-					taggedDoc.specialCharTracker.addEOS(SpecialCharacterTracker.replacementEOS[0], watchForEOS, true);
+					taggedDoc.specialCharTracker.addEOS(newChar, watchForEOS, true);
 					updateTaggedSentence = true;
 				} else {
 //					System.out.println("PROBLEM 2");
@@ -842,5 +846,6 @@ public class EditorDriver {
 		highlighterEngine.clearAll();
 		watchForEOS = -1;
 		placeAutoHighlightsWhenDone = false;
+		indexOfLastSpace = 0;
 	}
 }

@@ -22,8 +22,7 @@ public class SpecialCharacterTracker implements Serializable {
 	// Basically parallel arrays... we use the replacement characters instead of the corresponding eos characters. 
 	// Doing this allows us to break sentences only where we are sure we want to break them, and will allow the user more flexibility.
 	// as a side note, while realEOS[2] and replacementEOS[2] look very similar, they are not the same character.. this can be tested (which I did at the bottom of 'main', below) by asking Java if they are equal to eachother.
-	public static char[] realEOS = {'.', '?', '!'};
-	public static char[] replacementEOS = {'๏', 'ʔ', '˩'};
+	public final char[] EOS = {'.', '!', '?'};
 	private ArrayList<EOS> eoses;
 
 	/**
@@ -31,6 +30,18 @@ public class SpecialCharacterTracker implements Serializable {
 	 */
 	public SpecialCharacterTracker() {
 		eoses = new ArrayList<EOS>(100); //note at this point, it's unlikely that we'll have more than 100 sentences.. but this should eventually be changed to some global parameter than is relative to the length of the document or something.
+	}
+	
+	public boolean isEOS(char testChar) {
+		boolean result = false;
+		
+		if (testChar == EOS[0] ||
+				testChar== EOS[1] ||
+				testChar == EOS[2]) {
+			result = true;
+		}
+		
+		return result;
 	}
 	
 	/**
@@ -206,27 +217,6 @@ public class SpecialCharacterTracker implements Serializable {
 	}
 	
 	/**
-	 * @param args
-	 */
-//	public static void main(String[] args) {
-//		// NOTE Auto-generated method stub
-//		SpecialCharacterTracker ect = new SpecialCharacterTracker();
-//		ect.addEOS('.',5);
-//		ect.addEOS('!',7);
-//		ect.addEOS('?',9);
-//		ect.addEOS('!',6);
-//		ect.addEOS('.',12);
-//		System.out.println(ect.toString());
-//		ect.shiftAllEOSChars(true, 4, 5);
-//		System.out.println(ect.toString());
-//		ect.removeEOSesInRange(11, 15);
-//		System.out.println(ect.toString());
-//		System.out.println(SpecialCharacterTracker.realEOS[0] == SpecialCharacterTracker.replacementEOS[0]);
-//		System.out.println(SpecialCharacterTracker.realEOS[1] == SpecialCharacterTracker.replacementEOS[1]);
-//		System.out.println(SpecialCharacterTracker.realEOS[2] == SpecialCharacterTracker.replacementEOS[2]);
-//	}
-	
-	/**
 	 * Returns a string representation of this SpecialCharacterTracker
 	 */
 	public String toString() {
@@ -272,7 +262,7 @@ class EOS implements Serializable {
 	}
 	
 	public String toString() {
-		return "[ "+eos+", "+location+" ]";
+		return "[ "+eos+" : "+location+" ]";
 	}
 	
 	public void setIgnore(boolean b) {

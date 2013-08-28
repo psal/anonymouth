@@ -33,6 +33,7 @@ public class ANONConstants {
 	public static final String SER_DIR = WORKING_DIR + ".serialized_objects/";
 	public static final String GRAPHICS = "/edu/drexel/psal/resources/graphics/";
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
+	public static final String ABBREVIATIONS_FILE = EXTERNAL_RESOURCE_PACKAGE+"abbreviations.txt";
 	
 	//=====================================================================
 	//							BOOLEAN FLAGS

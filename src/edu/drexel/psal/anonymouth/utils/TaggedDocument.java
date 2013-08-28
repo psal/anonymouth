@@ -202,7 +202,6 @@ public class TaggedDocument implements Serializable{
 			tempSentWithEOSSubs = tempRay[1];
 			
 			TaggedSentence taggedSentence = new TaggedSentence(tempSent);
-//			tempSent.replaceAll("", ".");
 			toke = tlp.getTokenizerFactory().getTokenizer(new StringReader(tempSent));
 			sentenceTokenized = toke.tokenize();
 			taggedSentence.setTaggedSentence(Tagger.mt.tagSentence(sentenceTokenized));
@@ -213,31 +212,26 @@ public class TaggedDocument implements Serializable{
 			taggedSentences.add(taggedSentence); 
 			
 		}
-		if(appendTaggedSentencesToGlobalArrayList == true){
+		if (appendTaggedSentencesToGlobalArrayList == true) {
 			int i = 0;
 			int len = taggedSentences.size();
-			for(i=0;i<len;i++){
+			for (i = 0; i < len; i++) {
 				totalSentences++;
 				this.taggedSentences.add(taggedSentences.get(i)); 
 			}
+			
 			initializeSpecialCharTracker();
 		}
 		return taggedSentences;
 	}
 	
-	private void initializeSpecialCharTracker(){
-		char[] EOSSubbedDoc = getUntaggedDocument(true).toCharArray();
-		int numChars = EOSSubbedDoc.length;
+	private void initializeSpecialCharTracker() {
+		char[] docToAnonymize = getUntaggedDocument(true).toCharArray();
+		int numChars = docToAnonymize.length;
 		int i;
-		for (i=0; i < numChars; i++){
-			if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[0]){ // period replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
-			}
-			else if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[1]){ // question mark replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
-			}
-			else if (EOSSubbedDoc[i] == SpecialCharacterTracker.replacementEOS[2]){ // exclamation point replacement
-				specialCharTracker.addEOS(EOSSubbedDoc[i],i,false);
+		for (i = 0; i < numChars; i++) {
+			if (specialCharTracker.isEOS(docToAnonymize[i])) {
+				specialCharTracker.addEOS(docToAnonymize[i],i,false);
 			}
 		}
 	}
