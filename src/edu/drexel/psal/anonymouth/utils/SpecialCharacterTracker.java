@@ -73,9 +73,9 @@ public class SpecialCharacterTracker implements Serializable {
 		int length = eoses.size();
 		
 		for (int i = 0; i < length; i++) {
-			System.out.println("   " + eoses.get(i) + " " + index);
+//			System.out.println("   " + eoses.get(i) + " " + index);
 			if (index == eoses.get(i).location) {
-				System.out.println("EOS SETTING SUCCESS!");
+//				System.out.println("EOS SETTING SUCCESS!");
 				eoses.get(i).setIgnore(b);
 			}
 		}
@@ -88,7 +88,7 @@ public class SpecialCharacterTracker implements Serializable {
 		int size = eoses.size();
 		
 		for (int i = 0; i < size; i++)
-			Logger.logln(NAME + "EOS = " + eoses.get(i).location + ", " + eoses.get(i).ignore);
+			Logger.logln(NAME + "   " + eoses.get(i));
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class SpecialCharacterTracker implements Serializable {
 			result = true;
 		} else {
 			for (int i = 0; i < length; i++) {
-				System.out.println("   " + eoses.get(i) + " " + (index));
+//				System.out.println("   " + eoses.get(i) + " " + (index));
 				if (index == eoses.get(i).location) {
 					if (!eoses.get(i).ignore) {
 						result = true;
@@ -162,10 +162,11 @@ public class SpecialCharacterTracker implements Serializable {
 		int numEOSes = eoses.size();
 		int thisEOSLoc;
 		boolean haveRemoved = false;
-		for (i=0; i < numEOSes; i++) {
+		for (i = 0; i < numEOSes; i++) {
 			thisEOSLoc = eoses.get(i).location;
 			System.out.println("   " + eoses.get(i) + " " + (lowerBound));
 			if (thisEOSLoc >= lowerBound && thisEOSLoc < upperBound) {
+				System.out.println(eoses.get(i).location + " REMOVED");
 				eoses.remove(i);
 				i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
 				numEOSes--; // also decrement numEOSes so that 
@@ -173,6 +174,10 @@ public class SpecialCharacterTracker implements Serializable {
 			}
 		}
 
+//		if (haveRemoved) {
+//			shiftAllEOSChars(false, lowerBound, upperBound-lowerBound);
+//		}
+		
 		return haveRemoved;		
 	}
 	
@@ -186,6 +191,7 @@ public class SpecialCharacterTracker implements Serializable {
 	 * @param shiftAmount number to add to each location (locations past startIndex)
 	 */
 	public void shiftAllEOSChars(boolean shiftRight, int startIndex, int shiftAmount) {
+		//Thread.dumpStack();
 		// note: right now, we'll just loop through the whole ArrayList of EOS objects, and check each one to see if its location is >= startIndex. 
 		//There is almost certainly a more efficient way to do this, but as it's a small list, and I just want to get something working, I'm going to leave it like this for now.
 		if (shiftRight)

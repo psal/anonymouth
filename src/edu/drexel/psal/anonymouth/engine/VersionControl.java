@@ -93,6 +93,7 @@ public class VersionControl {
 		main.editorDriver.refreshEditor();
 		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
 		main.editorDriver.ignoreBackup = false;
+		main.editorDriver.textLength = main.documentPane.getText().length();
 		
 		main.enableRedo(true);
 		
@@ -132,6 +133,7 @@ public class VersionControl {
 		main.editorDriver.refreshEditor();
 		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
 		main.editorDriver.ignoreBackup = false;
+		main.editorDriver.textLength = main.documentPane.getText().length();
 
 		main.enableUndo(true);	
 		

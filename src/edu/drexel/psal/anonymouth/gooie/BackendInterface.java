@@ -139,6 +139,7 @@ public class BackendInterface {
 				caret++;
 			}
 
+			main.editorDriver.textLength = main.documentPane.getText().length();
 			main.editorDriver.newCaretPosition[0] = caret;
 			main.editorDriver.newCaretPosition[1]= caret;
 			main.editorDriver.refreshEditor();

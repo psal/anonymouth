@@ -85,6 +85,12 @@ public class SentenceTools implements Serializable  {
 	 * @return
 	 */
 	public ArrayList<String[]> makeSentenceTokens(String text) {
+		if (text.equals("")) {
+			ArrayList<String[]> finalSents = new ArrayList<String[]>();
+			finalSents.add(new String[]{"", ""});
+			return finalSents;
+		}
+		
 		ArrayList<String> sents = new ArrayList<String>(MAX_SENTENCES);
 		ArrayList<String[]> finalSents = new ArrayList<String[]>(MAX_SENTENCES);
 		boolean mergeNext=false;
@@ -110,20 +116,20 @@ public class SentenceTools implements Serializable  {
 			try {
 				int abbrevLength = index;
 				try {
-				System.out.println("index = " + index + ", lenText-1 = " + (lenText-1) + ", char = " + text.charAt(abbrevLength));
+//				System.out.println("index = " + index + ", lenText-1 = " + (lenText-1) + ", char = " + text.charAt(abbrevLength));
 				} catch(Exception e) {
-					System.out.println("index = " + index + ", lenText-1 = " + (lenText-1));
+//					System.out.println("index = " + index + ", lenText-1 = " + (lenText-1));
 				}
 				while (text.charAt(abbrevLength) != ' ') {
 					abbrevLength--;
 				}
 				
-				System.out.println("ABBREVIATION = \"" + text.substring(abbrevLength+1, index+1) + "\"");
+//				System.out.println("ABBREVIATION = \"" + text.substring(abbrevLength+1, index+1) + "\"");
 				if (ABBREVIATIONS.contains(text.substring(abbrevLength+1, index+1))) {
 					GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.setIgnore(index+buffer, true);
 				}
 			} catch (Exception e) {
-				System.out.println("STUPID");
+//				System.out.println("STUPID");
 			}
 			
 			
@@ -186,7 +192,12 @@ public class SentenceTools implements Serializable  {
 
 		//We want to make sure that if there is an EOS character at the end that it is not supposed to be ignored
 		System.out.println("Checking if EOS at sentence end");
-		boolean EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.sentIndices[1]-2);
+		boolean EOSAtSentenceEnd = true;
+		if (trimmedTextLength != 0) {
+			EOSAtSentenceEnd = EOS.contains(trimmedText.substring(trimmedTextLength-1, trimmedTextLength)) && GUIMain.inst.editorDriver.taggedDoc.specialCharTracker.EOSAtIndex(GUIMain.inst.editorDriver.sentIndices[1]-2);
+		} else {
+			EOSAtSentenceEnd = false;
+		}
 		System.out.println("EOS At sentence end = " + EOSAtSentenceEnd);
 //		boolean EOSAtSentenceEnd = EOS.contains(text.substring(lenText-1, lenText));
 

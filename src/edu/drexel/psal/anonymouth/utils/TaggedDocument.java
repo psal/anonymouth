@@ -189,29 +189,38 @@ public class TaggedDocument implements Serializable{
 	 */
 	public ArrayList<TaggedSentence> makeAndTagSentences(String untagged, boolean appendTaggedSentencesToGlobalArrayList){
 		ArrayList<String[]> untaggedSents = jigsaw.makeSentenceTokens(untagged);
-		
 		ArrayList<TaggedSentence> taggedSentences = new ArrayList<TaggedSentence>(untaggedSents.size());
 		//sentencesPreTagging = new ArrayList<List<? extends HasWord>>();
 		Iterator<String[]> strRayIter = untaggedSents.iterator();
 		String[] tempRay; // 
 		String tempSent;
 		String tempSentWithEOSSubs;
-		while(strRayIter.hasNext()){
-			tempRay = strRayIter.next();
-			tempSent = tempRay[0];
-			tempSentWithEOSSubs = tempRay[1];
-			
-			TaggedSentence taggedSentence = new TaggedSentence(tempSent);
-			toke = tlp.getTokenizerFactory().getTokenizer(new StringReader(tempSent));
-			sentenceTokenized = toke.tokenize();
-			taggedSentence.setTaggedSentence(Tagger.mt.tagSentence(sentenceTokenized));
-			consolidateFeatures(taggedSentence);
-			taggedSentence.untaggedWithEOSSubs = tempSentWithEOSSubs;
-			
-			// todo: put stuff here
-			taggedSentences.add(taggedSentence); 
-			
+		
+		if (untagged.matches("\\s\\s*")) {
+			TaggedSentence taggedSentence = new TaggedSentence(untagged);
+			taggedSentences.add(taggedSentence);
+		} else if (untagged.matches("")) {
+			TaggedSentence taggedSentence = new TaggedSentence(untagged);
+			taggedSentences.add(taggedSentence);
+		} else {
+			while (strRayIter.hasNext()) {
+				tempRay = strRayIter.next();
+				tempSent = tempRay[0];
+				tempSentWithEOSSubs = tempRay[1];
+				
+				TaggedSentence taggedSentence = new TaggedSentence(tempSent);
+				toke = tlp.getTokenizerFactory().getTokenizer(new StringReader(tempSent));
+				sentenceTokenized = toke.tokenize();
+				taggedSentence.setTaggedSentence(Tagger.mt.tagSentence(sentenceTokenized));
+				consolidateFeatures(taggedSentence);
+				taggedSentence.untaggedWithEOSSubs = tempSentWithEOSSubs;
+				
+				// todo: put stuff here
+				taggedSentences.add(taggedSentence);
+				
+			}
 		}
+		
 		if (appendTaggedSentencesToGlobalArrayList == true) {
 			int i = 0;
 			int len = taggedSentences.size();
@@ -449,7 +458,7 @@ public class TaggedDocument implements Serializable{
 	 */
 	public TaggedSentence concatRemoveAndReplace(TaggedSentence taggedSentenceOne, int tsOneIndex, TaggedSentence taggedSentenceTwo, int tsTwoIndex){
 		TaggedSentence replaceWith = concatSentences(taggedSentenceOne, taggedSentenceTwo);
-		removeAndReplace(tsTwoIndex, "");// delete the second sentence
+		removeAndReplace(tsTwoIndex, "///");// delete the second sentence
 		System.out.println("*** Replacing: "+taggedSentenceOne.getUntagged(false)+"\n*** With: "+replaceWith.getUntagged(false));
 		return removeAndReplace(tsOneIndex,replaceWith);
 	}
@@ -464,7 +473,7 @@ public class TaggedDocument implements Serializable{
 		int i =0;
 		int numSents = taggedSentences.size();
 		int[] lengthsToReturn = new int[numSents];
-		for(i = 0; i < numSents; i++){
+		for (i = 0; i < numSents; i++) {
 			lengthsToReturn[i] = taggedSentences.get(i).getLength();
 		}
 		return lengthsToReturn;
@@ -516,7 +525,13 @@ public class TaggedDocument implements Serializable{
 		int numToRemove = indicesToRemove.length;
 		
 		for (i = 0; i < numToRemove; i++)
-			removeAndReplace(indicesToRemove[i],"");
+			removeAndReplace(indicesToRemove[i],"///");
+	}
+	
+	public void makeNewEndSentence(String text) {
+		TaggedSentence newSentence = new TaggedSentence(text);
+		taggedSentences.add(newSentence);
+		totalSentences++;
 	}
 	
 	/**
@@ -526,10 +541,10 @@ public class TaggedDocument implements Serializable{
 	 */
 	public void removeAndReplace(int sentNumber, String sentsToAdd) {//, int indexToRemove, int placeToAdd){
 		TaggedSentence toReplace = taggedSentences.get(sentNumber);
-		Logger.logln(NAME+"removing: "+toReplace.getUntagged(false));
-		Logger.logln(NAME+"adding: "+sentsToAdd);
+		Logger.logln(NAME+"removing: \""+toReplace.getUntagged(false) + "\"");
+		Logger.logln(NAME+"adding: \""+sentsToAdd + "\"");
 		
-		if (sentsToAdd.matches("^\\s*$")) {//checks to see if the user deleted the current sentence
+		if (sentsToAdd.equals("///")) {//checks to see if the user deleted the current sentence
 			//CALL COMPARE
 			TaggedSentence wasReplaced = removeTaggedSentence(sentNumber);
 
