@@ -167,7 +167,7 @@ public class TranslatorThread implements Runnable {
 						sentences.get(currentSentNum-1).getTranslations().add(taggedTrans);
 						sentences.get(currentSentNum-1).getTranslationNames().add(translationFetcher.getName(lang));
 						sentences.get(currentSentNum-1).sortTranslations();
-						String one = main.editorDriver.taggedDoc.getUntaggedSentences(false).get(main.editorDriver.sentNum).trim();
+						String one = main.editorDriver.taggedDoc.getUntaggedSentences().get(main.editorDriver.sentNum).trim();
 						String two = sentences.get(currentSentNum-1).getUntagged(false).trim();
 
 						if (one.equals(two))

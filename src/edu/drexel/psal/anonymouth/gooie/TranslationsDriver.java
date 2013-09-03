@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.TranslatorThread;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -107,7 +106,7 @@ public class TranslationsDriver implements MouseListener {
 					main.translationsHolderPanel.add(main.notTranslated, "");
 					main.translateSentenceButton.setEnabled(true);
 					translator.reset();
-					main.editorDriver.taggedDoc.deleteTranslations();
+					main.editorDriver.taggedDoc.clearAllTranslations();
 					
 					try {
 						Thread.sleep(500);
@@ -164,14 +163,13 @@ public class TranslationsDriver implements MouseListener {
 			}
 		});
 		
-		main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
-		main.versionControl.addVersion(main.editorDriver.pastTaggedDoc, main.documentPane.getCaret().getDot());
+		main.versionControl.updateUndoRedo(main.editorDriver.taggedDoc, main.editorDriver.newCaretPosition[0], true);
 
-		main.saved = false;
+		main.documentSaved = false;
 		main.editorDriver.updateSentence(
 				main.editorDriver.sentNum,
 				translationsPanel.translationsMap.get(actionCommand).getUntagged(false));
-		main.editorDriver.refreshEditor();
+		main.editorDriver.syncTextPaneWithTaggedDoc();
 
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("");

@@ -2,6 +2,8 @@ package edu.drexel.psal.anonymouth.utils;
 
 import java.util.*;
 import com.jgaap.generics.Document;
+
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -31,7 +33,7 @@ public class DocumentTagger {
 			*/
 				d.load();
 				fullDoc = d.stringify();//.replaceAll("\\p{C}"," ");// get rid of unicode control chars (causes parse errors).
-				td = new TaggedDocument(fullDoc,docTitle,currentAuthor);
+				td = new TaggedDocument(GUIMain.inst, fullDoc,docTitle,currentAuthor);
 				/*
 				if (ThePresident.SAVE_TAGGED_DOCUMENTS == true)
 					td.writeSerializedSelf(ThePresident.GRAMMAR_DIR);

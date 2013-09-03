@@ -95,17 +95,17 @@ public class Logger {
 	 */
 	public static void log(String msg) {
 		if (loggerFlag) {
-			String timedMsg = time()+": "+msg;
+			//String timedMsg = time()+": "+msg;
 
 			// write to screen
-			System.out.print(timedMsg);
+			System.out.print(msg);
 			// write to file
 			try {
 				if (logFile) {
-					bw.write(timedMsg);
+					bw.write(msg);
 					bw.flush();
 				} else {
-					printBuffer.concat(timedMsg);
+					printBuffer.concat(msg);
 				}
 			} catch (IOException e) {
 				System.err.println("Failed writing to log file!");
@@ -142,22 +142,22 @@ public class Logger {
 	 */
 	public static void log(String msg, LogOut target) {
 		if (loggerFlag) {
-			String timedMsg = time()+": "+msg;
+			//String timedMsg = time()+": "+msg;
 
 			// write to logger
 			switch (target) {
 				case STDOUT:
-					System.out.print(timedMsg);	
+					System.out.print(msg);	
 					break;
 				case STDERR:
-					System.err.print(timedMsg);
+					System.err.print(msg);
 					break;
 			}
 
 			// write to file
 			try {
 				if (logFile) {
-					bw.write(timedMsg);
+					bw.write(msg);
 					bw.flush();
 				} else {
 					printBuffer.concat(msg);

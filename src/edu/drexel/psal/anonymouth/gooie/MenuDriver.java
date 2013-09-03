@@ -151,7 +151,7 @@ public class MenuDriver {
 						path += ".txt";
 					
 					FileHelper.writeToFile(path, main.documentPane.getText());
-					main.saved = true;
+					main.documentSaved = true;
 					savedPath = path;
 				} else
 					Logger.logln(NAME+"Save As contents of current tab canceled");
@@ -371,7 +371,7 @@ public class MenuDriver {
 			saveAsTestDocListener.actionPerformed(new ActionEvent(main.fileSaveAsTestDocMenuItem, ActionEvent.ACTION_PERFORMED, "Save As..."));
 		} else {
 			FileHelper.writeToFile(savedPath, main.documentPane.getText());
-			main.saved = true;
+			main.documentSaved = true;
 		}
 	}
 }

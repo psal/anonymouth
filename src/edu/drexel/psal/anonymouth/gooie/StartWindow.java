@@ -238,7 +238,7 @@ public class StartWindow extends JFrame {
 				 * It Used to be handed upon adding, but better for the user if they never have to worry about it
 				 */
 				main.preProcessWindow.assertUniqueTitles();
-				main.backendInterface.process();
+				main.documentProcessor.process();
 			}
 		};
 		startButton.addActionListener(startListener);

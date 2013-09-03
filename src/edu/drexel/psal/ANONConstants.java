@@ -54,6 +54,8 @@ public class ANONConstants {
 	
 	public static final String DUMMY_NAME = "~* you *~"; // NOTE DO NOT CHANGE THIS unless you have a very good reason to do so.
 	
+	public static final int EXPECTED_NUM_OF_SENTENCES = 100;
+	
 	public static final ExtFilter TXT = new ExtFilter("Text files (*.txt)", ".txt");
 	public static final ExtFilter XML = new ExtFilter("XML files (*.xml)", ".xml");
 	

@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
-import edu.drexel.psal.anonymouth.utils.SentenceTools;
+import edu.drexel.psal.anonymouth.utils.SentenceMaker;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 
@@ -35,7 +35,7 @@ public class RightClickMenu extends JPopupMenu {
 	private ActionListener combineSentencesListener;
 	private ActionListener resetHighlighterListener;
 	private MouseListener popupListener;
-	public ArrayList<String[]> sentences;
+	public ArrayList<String> sentences;
 
 	private static final long serialVersionUID = 1L;
 
@@ -99,11 +99,11 @@ public class RightClickMenu extends JPopupMenu {
 				
 				//Goes through the selected sentences and for each EOS character we find (EXCLUDING the EOS character at the end of the last sentence) marks them as ignorable.
 				for (int i = 0; i < size; i++) {
-					length = sentences.get(i)[0].length();
+					length = sentences.get(i).length();
 					char character = main.documentPane.getText().charAt(length-1+PopupListener.mark+pastLength);
 
 					if ((character == '.' || character == '!' || character == '?') && size-1 != i) {
-						main.editorDriver.taggedDoc.specialCharTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
+						main.editorDriver.taggedDoc.eosTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
 					}
 										
 					taggedSentences.add(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
@@ -123,7 +123,8 @@ public class RightClickMenu extends JPopupMenu {
 				}
 				
 				main.editorDriver.newCaretPosition[0] = selectedSentInfo[1]+space;
-				main.editorDriver.refreshEditor();
+				main.editorDriver.newCaretPosition[1] = selectedSentInfo[1]+space;
+				main.editorDriver.syncTextPaneWithTaggedDoc();
 			}
 		};
 		combineSentences.addActionListener(combineSentencesListener);
@@ -131,9 +132,10 @@ public class RightClickMenu extends JPopupMenu {
 		resetHighlighterListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				main.editorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
-				main.editorDriver.taggedDoc = new TaggedDocument(main.documentPane.getText());
-				main.editorDriver.refreshEditor();
+				main.editorDriver.taggedDoc.eosTracker.resetEOSCharacters();
+				main.editorDriver.taggedDoc = new TaggedDocument(main, main.documentPane.getText());
+				main.editorDriver.syncTextPaneWithTaggedDoc();
+				main.versionControl.init();
 			}
 		};
 		resetHighlighter.addActionListener(resetHighlighterListener);
@@ -168,7 +170,7 @@ class PopupListener extends MouseAdapter {
 	private final String EOS = ".!?";
 	private JPopupMenu popup;
 	private GUIMain main;
-	private SentenceTools sentenceTools;
+	private SentenceMaker sentenceTools;
 	private RightClickMenu rightClickMenu;
 	public static int mark;
 
@@ -181,7 +183,7 @@ class PopupListener extends MouseAdapter {
 	public PopupListener(JPopupMenu popupMenu, GUIMain main, RightClickMenu rightClickMenu) {
 		popup = popupMenu;
 		this.main = main;
-		sentenceTools = new SentenceTools();
+		sentenceTools = new SentenceMaker(main);
 		this.rightClickMenu = rightClickMenu;
 	}
 
@@ -225,7 +227,7 @@ class PopupListener extends MouseAdapter {
 				}
 				
 				text = text.substring(mark, dot+padding);
-				rightClickMenu.sentences = sentenceTools.makeSentenceTokens(text);
+				rightClickMenu.sentences = sentenceTools.splitIntoSentences(text);
 				
 				if (rightClickMenu.sentences.size() > 1)
 					rightClickMenu.enableCombineSentences(true);

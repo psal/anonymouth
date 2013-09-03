@@ -259,7 +259,7 @@ public class TranslationFetcher {
 									UIManager.getIcon("OptionPane.warningIcon"), RESTART_OPTIONS, 0);
 
 					if (answer == 1) {
-						if (GUIMain.inst.saved) {
+						if (GUIMain.inst.documentSaved) {
 							System.exit(0);
 						}
 

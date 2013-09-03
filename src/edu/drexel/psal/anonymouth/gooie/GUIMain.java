@@ -115,11 +115,11 @@ public class GUIMain extends JFrame {
 	protected JTextPane originalDocPane;
 	protected JScrollPane documentScrollPane;
 	protected JScrollPane originalDocScrollPane;
-	public Boolean saved = true;
+	public Boolean documentSaved = true;
 	protected Font normalFont; //The editor's font
 	public Document mainDocPreview; //Allows us to load the main document without having to alter the main.ps.testDocAt(0) directly
 	public EditorDriver editorDriver;
-	protected BackendInterface backendInterface;
+	protected DocumentProcessor documentProcessor;
 	
 	//Bottom Button
 	public JButton reProcessButton;
@@ -468,14 +468,14 @@ public class GUIMain extends JFrame {
 		translationsDriver = translationsPanel.driver;				//Translations listeners
 		preProcessDriver = preProcessWindow.driver;					//preProcess set-up wizard listeners
 		ppAdvancedDriver = ppAdvancedWindow.driver;					//preProcess "Advanced Configuration" listeners
-		backendInterface = new BackendInterface(this);				//The processing God
+		documentProcessor = new DocumentProcessor(this);				//The processing God
 		editorDriver = new EditorDriver(this);						//The main text editor driver
 		
 		//So we can intercept the window close if they didn't save changes
 		exitListener = new WindowListener() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (PropertiesUtil.getWarnQuit() && !main.saved) {
+				if (PropertiesUtil.getWarnQuit() && !main.documentSaved) {
 					main.toFront();
 					main.requestFocus();
 					int confirm = JOptionPane.showOptionDialog(main,

@@ -94,7 +94,7 @@ public class ThePresident {
 			app.addApplicationListener(new ApplicationAdapter() {
 				@Override
 				public void handleQuit(ApplicationEvent e) {
-					if (PropertiesUtil.getWarnQuit() && !main.saved) {
+					if (PropertiesUtil.getWarnQuit() && !main.documentSaved) {
 						main.toFront();
 						main.requestFocus();
 						int confirm = JOptionPane.showOptionDialog(null,

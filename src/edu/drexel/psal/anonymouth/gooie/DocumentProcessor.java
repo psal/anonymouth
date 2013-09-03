@@ -22,23 +22,44 @@ import edu.drexel.psal.anonymouth.utils.FunctionWords;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
-public class BackendInterface {
+/**
+ * The class that manages all document processing and all relating classes.
+ * Whenever you want to process you should make a call to this class and let
+ * it handle the rest.
+ *
+ * @author Andrew W.E. McDonald
+ * @author Marc Barrowclift
+ */
+
+public class DocumentProcessor {
 
 	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
 	
 	private GUIMain main;
+	private EditorDriver editorDriver;
 	private ProgressWindow pw;
 	private FunctionWords functionWords;
 	private DataAnalyzer dataAnalyzer;
 	private DocumentMagician documentMagician;
 	private SwingWorker<Void, Void> processing;
 
-	public BackendInterface(GUIMain main) {
+	/**
+	 * Constructor
+	 * 
+	 * @param  main
+	 *         GUIMain instance
+	 */
+	public DocumentProcessor(GUIMain main) {
 		this.main = main;
-		readyProcessingThread();
 	}
 	
+	/**
+	 * To be called before whenever you want to process or reprocess the
+	 * document since by design SwingWorker instances may only be executed
+	 * once (meaning we need to initiate a new instance every time)
+	 */
 	private void readyProcessingThread() {
 		processing = new SwingWorker<Void, Void>() {
 			@Override
@@ -48,12 +69,62 @@ public class BackendInterface {
 			}	
 		};
 	}
+
+	/**
+	 * The process call that any outside class should call when we want to
+	 * process.
+	 */
+	protected void process() {
+		this.editorDriver = main.editorDriver;
+		readyProcessingThread();
+		processing.execute();
+	}
+
+	/**
+	 * If it's the first time the documents are being processed we
+	 * have a few additional steps that need only be executed once.
+	 */
+	private void prepareForFirstProcess() {
+		/*
+		 * Create the main document and add it to the appropriate array list.
+		 * May not need the ArrayList in the future since you only really can
+		 * have one at a time.
+		 */
+		TaggedDocument taggedDocument = new TaggedDocument(main);
+		ConsolidationStation.toModifyTaggedDocs = new ArrayList<TaggedDocument>();
+		ConsolidationStation.toModifyTaggedDocs.add(taggedDocument);
+		editorDriver.taggedDoc = ConsolidationStation.toModifyTaggedDocs.get(0);
+		Logger.logln(NAME+"Initial processing starting...");
+
+		//Initialize all arraylists needed for feature processing
+		int sizeOfCfd = main.ppAdvancedDriver.cfd.numOfFeatureDrivers();
+		ArrayList<String> featuresInCfd = new ArrayList<String>(sizeOfCfd);
+		ArrayList<FeatureList> yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
+
+		for (int i = 0; i < sizeOfCfd; i++) {
+			String theName = main.ppAdvancedDriver.cfd.featureDriverAt(i).getName();
+
+			//Capitalize the name and replace all " " and "-" with "_"
+			theName = theName.replaceAll("[ -]","_").toUpperCase(); 
+			main.ppAdvancedDriver.cfd.featureDriverAt(i).isCalcHist();
+			yesCalcHistFeatures.add(FeatureList.valueOf(theName));
+			featuresInCfd.add(i,theName);
+		}
+
+		dataAnalyzer = new DataAnalyzer(main.preProcessWindow.ps);
+		documentMagician = new DocumentMagician(false);
+		main.wordSuggestionsDriver.setMagician(documentMagician);
+		Logger.logln(NAME+"Beginning main process...");
+	}
 	
+	/**
+	 * Main process method
+	 */
 	private void processDocuments() {
 		if (!main.processed) {
 			prepareForFirstProcess();
 		}
-
+		
 		try {
 			pw = new ProgressWindow("Processing...", main);
 			pw.run();
@@ -113,7 +184,7 @@ public class BackendInterface {
 				int size = sampleDocs.size();
 				ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
 				for (int i = 0; i < size; i++) {
-					ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(sampleDocs.get(i).stringify()));
+					ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(main, sampleDocs.get(i).stringify()));
 				}
 			} else
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), false);
@@ -125,32 +196,24 @@ public class BackendInterface {
 			
 			main.anonymityBar.updateBar();
 			if (!main.processed)
-				main.anonymityBar.setMaxFill(main.editorDriver.taggedDoc.getMaxChangeNeeded());
+				main.anonymityBar.setMaxFill(editorDriver.taggedDoc.getMaxChangeNeeded());
 			
 			main.anonymityBar.showFill(true);
-			main.editorDriver.updateSuggestionsThread.execute();
-			main.editorDriver.updateBarThread.execute();
+			editorDriver.updateSuggestionsThread.execute();
+			editorDriver.updateBarThread.execute();
 
 			main.enableEverything(true);	
 			
-			//needed so if the user has some strange spacing for their first sentence we are placing the caret where the sentence actually begins (and thus highlighting it, otherwise it wouldn't)
-			int caret = 0;
-			while (Character.isWhitespace(main.documentPane.getText().charAt(caret))) {
-				caret++;
-			}
+			int caret = editorDriver.getWhiteSpaceBuffer(0);
+			editorDriver.newCaretPosition[0] = caret;
+			editorDriver.newCaretPosition[1]= caret;
+			editorDriver.syncTextPaneWithTaggedDoc();
 
-			main.editorDriver.textLength = main.documentPane.getText().length();
-			main.editorDriver.newCaretPosition[0] = caret;
-			main.editorDriver.newCaretPosition[1]= caret;
-			main.editorDriver.refreshEditor();
-			main.editorDriver.moveHighlights();
-			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
-			main.versionControl.addVersion(main.editorDriver.pastTaggedDoc, main.editorDriver.priorCaretPosition);
-			main.editorDriver.pastTaggedDoc = new TaggedDocument(main.editorDriver.taggedDoc);
+			main.versionControl.init();
 
 			DictionaryBinding.init();//initializes the dictionary for wordNEt
 
-			Logger.logln(NAME+"Finished in BackendInterface - postTargetSelection");
+			Logger.logln(NAME+"Finished in DocumentProcessor - postTargetSelection");
 
 			main.resultsWindow.resultsLabel.setText("Re-Process your document to get updated ownership probability");
 			main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
@@ -168,47 +231,20 @@ public class BackendInterface {
 			// Get amount of free memory within the heap in bytes. This size will increase
 			// after garbage collection and decrease as new objects are created.
 			long heapFreeSize = Runtime.getRuntime().freeMemory();
-			Logger.logln(NAME+"ERROR WHILE PROCESSING. Here are the total, max, and free heap sizes:");
-			Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize);
+			Logger.logln(NAME+"ERROR WHILE PROCESSING. Here are the total, max, and free heap sizes:", LogOut.STDERR);
+			Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize, LogOut.STDERR);
 			
 			ErrorHandler.fatalProcessingError(e);
 		}
 	}
-	
-	protected void process() {
-		processing.execute();
-	}
-	
-	private void prepareForFirstProcess() {
-		// ----- create the main document and add it to the appropriate array list.
-		// ----- may not need the arraylist in the future since you only really can have one at a time
-		TaggedDocument taggedDocument = new TaggedDocument();
-		ConsolidationStation.toModifyTaggedDocs = new ArrayList<TaggedDocument>();
-		ConsolidationStation.toModifyTaggedDocs.add(taggedDocument);
-		main.editorDriver.taggedDoc = ConsolidationStation.toModifyTaggedDocs.get(0);
 
-		Logger.logln(NAME+"Initial processing starting...");
-
-		// initialize all arraylists needed for feature processing
-		int sizeOfCfd = main.ppAdvancedDriver.cfd.numOfFeatureDrivers();
-		ArrayList<String> featuresInCfd = new ArrayList<String>(sizeOfCfd);
-		ArrayList<FeatureList> yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
-
-		for(int i = 0; i < sizeOfCfd; i++) {
-			String theName = main.ppAdvancedDriver.cfd.featureDriverAt(i).getName();
-
-			// capitalize the name and replace all " " and "-" with "_"
-			theName = theName.replaceAll("[ -]","_").toUpperCase(); 
-			main.ppAdvancedDriver.cfd.featureDriverAt(i).isCalcHist();
-			yesCalcHistFeatures.add(FeatureList.valueOf(theName));
-			featuresInCfd.add(i,theName);
-		}
-		dataAnalyzer = new DataAnalyzer(main.preProcessWindow.ps);
-		documentMagician = new DocumentMagician(false);
-		main.wordSuggestionsDriver.setMagician(documentMagician);
-		Logger.logln(NAME+"Beginning main process...");
-	}
-
+	/**
+	 * Parses through the passed WEKA results map and passes relevant
+	 * information on to the results window for displaying.
+	 * 
+	 * @param Map<String,Map<String,resultMap
+	 *        WEKA results map from processing
+	 */
 	public void sendResultsToResultsChart(Map<String,Map<String,Double>> resultMap) {
 
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();

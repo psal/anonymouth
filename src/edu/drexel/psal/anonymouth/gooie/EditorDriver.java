@@ -21,30 +21,33 @@ import javax.swing.event.DocumentListener;
  * isn't actually editing text but rather editing the TaggedDocument, which
  * has TaggedSentences and their TaggedWords)
  *
- * @author Andrew W.E. McDonald
  * @author Marc Barrowclift
+ * @author Andrew W.E. McDonald
  */
 public class EditorDriver {
 
-	//============Assorted=======================================================
+	//============Assorted=================================================
+
 	private final String NAME = "( " + this.getClass().getSimpleName() + " )- ";
-	
 	private final HashSet<Character> EOS;
 	private final char NEWLINE = System.lineSeparator().charAt(0);
 	private final char TAB = '\t';
 	private final char SPACE = ' ';
-	public int watchForEOS;
-	public int watchForLastSentenceEOS;
+	private GUIMain main;
 
+	//----------- Listeners -----------------------------------------------
 	private ActionListener reProcessListener;
 	private CaretListener caretListener;
 	private DocumentListener documentListener;
-	private GUIMain main;
-	protected SwingWorker<Void, Void> updateSuggestionsThread;
-	protected SwingWorker<Void, Void> updateBarThread;
+
+	//----------- Threads -------------------------------------------------
+	public SwingWorker<Void, Void> updateSuggestionsThread;
+	public SwingWorker<Void, Void> updateBarThread;
 
 	//============Highlighters=============================================
+
 	protected HighlighterEngine highlighterEngine;
+
 	/**
 	 * Whether or not to highlight the current sentence
 	 */
@@ -54,63 +57,124 @@ public class EditorDriver {
 	 * in the current sentence
 	 */
 	protected boolean autoHighlight = PropertiesUtil.getAutoHighlight();
+	/**
+	 * In some cases, the updateSuggestionsThread will still be excuting (thus
+	 * updating the suggestions that auto highlights uses) when the call is
+	 * made to calculate the indices for the automatic highlights. When this
+	 * is the case, we switch this to true and the updateSuggestionsThread
+	 * will then do auto highlights upon completion.
+	 */
 	private boolean placeAutoHighlightsWhenDone;
-
-	//============Undo/Redo "Version Control"=================================
-	private final int CHARS_TIL_BACKUP = 20;
-	//The current character since last version was added to the undo stack
-	protected int curCharBackupBuffer;
-	public boolean ignoreBackup;
-	protected TaggedDocument pastTaggedDoc;
-	private boolean additionEndSentenceCreated;
 	
 	//================Editor=================================================
 
+	//----------- Things relating to Tagged objects -------------------------
 	public TaggedDocument taggedDoc;
-	
-	//Caret variables
+
+	/**
+	 * The way we have taggedSentences structured, while easy in most cases,
+	 * breaks whenever the user tries to type after the last sentence. That's
+	 * why we need to actively detect when they are doing so and create an
+	 * empty tagged sentence for their new writing to go into every caret
+	 * event that calls for it.<br><br>
+	 * 
+	 * We create this blank tagged sentence whenever they are typing at the
+	 * end of a document OR when they click to the end of document from
+	 * somewhere else and there isn't already a blank sentence in place ready
+	 * to accept the new text. That's where this boolean comes in, it keeps
+	 * track for us whether or not it's necessary to create a new extra tagged
+	 * sentence.
+	 */
+	private boolean endSentenceExists;
+
+	//----------- Caret Variables -------------------------------------------
 	/**
 	 * An array of 2 values that holds what will be the new position of the
 	 * caret AND the end position of the selection (if there is one), and
 	 * another array that holds the what the previous "newCaretPosition"s
-	 * were.
+	 * were.<br><br>
 	 *
 	 * This is NOT the sentence indices, which is the start and end of a given
 	 * sentence. Most of the time, since the user is just typing, the first
-	 * and second indices of these arrays will be equal
+	 * and second indices of these arrays will be equal.
 	 */
 	public int[] newCaretPosition;
+	/**
+	 * Holds the newCaretPosition values from the previous caret event.
+	 */
 	private int[] oldCaretPosition;
+	/**
+	 * NOT the same thing as oldCaretPosition! PriorCaretPosition is new caret
+	 * position PRIOR to having any characters inserted or removed. This means
+	 * that if the user's just moving the cursor around and not typing
+	 * anything it will be equal to newCaretPosition[0] since charsRemoved and
+	 * charsInserted are 0. However, if the user has typed or pasted text this
+	 * will reflect the length of those changes with respect to
+	 * newCaretPosition[0]
+	 */
 	public int priorCaretPosition;
-
-	public int textLength;
 	
-	//Sentence variables
-	public int sentNum;				//The current sentence number (0, 1, 2, ...)
-	public int[] sentIndices;		//The indices of the sentence
-	public int pastSentNum;		//The past sentence number
+	//------------- Sentence Variables --------------------------------------
+	/**
+	 * The current sentence number (0, 1, 2, ...)
+	 */
+	public int sentNum;
+	/**
+	 * The indices of the sentence (meaning the position immediately after the
+	 * previous sentence ended to this sentence's end.)
+	 */
+	public int[] sentIndices;
+	/**
+	 * The old sentNum value from the prievous caret event.
+	 */
+	public int pastSentNum;
+	/**
+	 * The old sentence indices from the previous caret event.
+	 */
 	private int[] pastSentIndices;
+
 	private boolean wholeLastSentDeleted;		//Used for EOS character deletion
 	private boolean wholeBeginningSentDeleted;	//Used for EOS character deletion
 
-	//Editing variables
-	protected int charsInserted;		//The number of characters inserted
-	protected int charsRemoved;		//The number of characters removed
+	//--------------- Editing variables -------------------------------------
+	/**
+	 * The number of characters inserted into the document this caret event
+	 * (default is 0 is none were added)
+	 */
+	protected int charsInserted;
+	/**
+	 * The number of characters removed from the document this caret event
+	 * (default is 0 if none were removed)
+	 */
+	protected int charsRemoved;
 
 	/**
-	 * Whether or not to process changes made to the text. Exists because in
-	 * some instances we manipulate the data in the editor but we don't want
-	 * the change listeners to fire and start running their code, otherwise
-	 * everything will break.
+	 * Whether or not to process changes made to the JTextPane. Exists because
+	 * sometimes we remove all text from the pane and replace it with new text
+	 * (like in syncTextPaneWithTaggedDoc() and VersionControl's undo and
+	 * redo) but we don't want the changes to actually be processed since it
+	 * would break things.
 	 */
-	protected boolean ignoreChanges;
+	public boolean ignoreChanges;
+	
 	/**
-	 * In some cases (much of which are explained in InputFilter), we want to
-	 * have the listener code be executed but DON'T want to update the backend
-	 * immediately. This is used as a way to control whether or not that
-	 * happens and when.
+	 * Greater than -1 when we are supposed to be keeping an eye out for a
+	 * specific EOS character that we are as of yet unsure whether or not it's
+	 * an EOS or just an abbreviation, ellipses, etc. Should be equal to the
+	 * index of the EOS character we're watching so we can use it to set ignore
+	 * to false if necessary.
 	 */
-	public boolean updateTaggedSentence;
+	public int watchForEOS;
+	
+	/**
+	 * Greater than -1 when we are supposed to be keeping an eye out for a
+	 * specific EOS character at the very end of the document that we are as
+	 * of yet unsure whether or not it's an EOS or just an abbreviation, ellispes,
+	 * etc. Should be equal to the index of the EOS character (length of the
+	 * document) we're watching so we can use it to set ignore to false if necessary.
+	 */
+	private int watchForLastSentenceEOS;
+	
 
 	//=======================================================================
 	//*					INITIALIZATION AND LISTENERS						*	
@@ -122,6 +186,7 @@ public class EditorDriver {
 	public EditorDriver(GUIMain main) {
 		this.main = main;
 		highlighterEngine = new HighlighterEngine(main);
+
 		EOS = new HashSet<Character>();
 		EOS.add('.');
 		EOS.add('!');
@@ -136,35 +201,35 @@ public class EditorDriver {
 	 * Initializes all listeners used by the Document tabs
 	 */
 	private void initListeners() {
+		/**
+		 * The main document event listener, this fires whenever the user is
+		 * typing or moving around in the document.
+		 */
 		caretListener = new CaretListener() {
 			@Override
 			public void caretUpdate(CaretEvent e) {
-				//If we are not supposed to update backend, don't update
+				//Don't go any further if we're supposed to ignore the event, it would break things
 				if (ignoreChanges) {
 					return;
 				}
 
-				System.out.println("============================================");
-				System.out.println("LENGTH PRIOR TO CHANGES = " + textLength);
-				taggedDoc.specialCharTracker.printEOSes();
-//				System.out.println("charsInserted = " + charsInserted + ", charsRemoved = " + charsRemoved);
+				Logger.logln(NAME+"=============================================================================");
+				boolean textChanged = false;
 				newCaretPosition[0] = e.getDot();
 				newCaretPosition[1] = e.getMark();
 				priorCaretPosition = newCaretPosition[0] - charsInserted + charsRemoved;
-				updateTaggedSentence = false;
 
 				//================ SIDE UPDATES =======================================================================
 				
-				//Undo/redo updates
-				if (charsInserted > 0 || charsRemoved > 0) {
-					updateTaggedSentence = true;
-					updateUndoRedo();
-				} else if (watchForEOS != -1) {
-					System.out.println("MOVED AWAY, WILL TRY TO MAKE INDEPENDENT SENTENCE");
-					
-					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
-					watchForEOS = -1;
-					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+				//UNDO REDO
+				//If the user has pasted or deleted/cut a chunk of text, always immediately backup past version
+				if (charsInserted > 1 || charsRemoved > 1) {
+					textChanged = true;
+					main.versionControl.updateUndoRedo(taggedDoc, priorCaretPosition, true);
+				//Otherwise, do a standard update
+				} else if (charsInserted == 1 || charsRemoved == 1) {
+					textChanged = true;
+					main.versionControl.updateUndoRedo(taggedDoc, priorCaretPosition, false);
 				}
 				
 				//Copy/Cut/Paste updates
@@ -175,100 +240,112 @@ public class EditorDriver {
 
 				//================ MAIN BACKEND UPDATES ================================================================
 
+				/**
+				 * If the user had previous typed an EOS character and we were
+				 * unsure whether or not it was an actual EOS and not an
+				 * abbreviation, ellipses, etc. AND they have navigated away
+				 * from said EOS character (clicking somewhere else in the
+				 * document to edit another sentence), we will assume that
+				 * what was the end of the sentence and update it as such.
+				 */
+				if (watchForEOS != -1 && charsInserted == 0 && charsRemoved == 0) {
+					taggedDoc.eosTracker.setIgnore(watchForEOS, false);
+					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+					watchForEOS = -1;
+				}
+
 				if (charsRemoved > 0) {
+					taggedDoc.incrementDocumentLength(charsRemoved * -1);
+
+					//If we are unsure about an EOS character at the end of the doc, keep track of it.
 					if (watchForLastSentenceEOS != -1) {
 						watchForLastSentenceEOS -= charsRemoved;
 					}
-					textLength -= charsRemoved;
+
 					deletion(); //We MUST make sure we handle any TaggedSentence deletion if needed
-					main.saved = false;
-					
-					
+
+					main.documentSaved = false;
 				} else if (charsInserted > 0) {
+					taggedDoc.incrementDocumentLength(charsInserted);
+					
+					//If we are unsure about an EOS character at the end of the doc, keep track of it.
 					if (watchForLastSentenceEOS != -1) {
 						watchForLastSentenceEOS += charsInserted;
 					}
-					textLength += charsInserted;
+
 					insertion(); //We MUST make sure to handle any EOS characters being added
-					main.saved = false;
-					taggedDoc.specialCharTracker.shiftAllEOSChars(true, newCaretPosition[0], charsInserted);
+
+					main.documentSaved = false;
+					taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsInserted);
 				}
 
 				int[] selectionInfo;
 				try {
-//					System.out.println(priorCaretPosition);
 					selectionInfo = getSentencesIndices(priorCaretPosition)[0];
 
 					if (selectionInfo == null)
 						return;
 				} catch (ArrayIndexOutOfBoundsException e1) {
-					/**
-					 * Not a problem if this gets thrown, just means they tried
-					 * clicking in a place that's outside the text bounds.
-					 */
 					Logger.logln(NAME+"An issue occured while calculating the sentence indices of the current selection.", LogOut.STDERR);
-					Logger.logln(NAME+"priorCaretPosition = " + priorCaretPosition);
 					Logger.logln(e1);
 					return;
 				}
 
-				//Update the position variables
+				//Update the position variables based on those sentence indices just calculated
 				pastSentNum = sentNum; 		//The current sent number is now the past sent number
 				sentNum = selectionInfo[0]; //Set the new sent number
 				sentIndices[0] = selectionInfo[1];
 				sentIndices[1] = selectionInfo[2];
 
 				/**
-				 * check to see if the current caret location is
-				 * within the selectedSentIndexRange ([0] is min, [1] is max)
+				 * We do NOT want the code inside here to run if the current
+				 * sentence is the last one in the document (Screws things up)
+				 *
+				 * Otherwise, checks to see if the current caret position is
+				 * within the sentIndices, meaning within the sentence. If
+				 * not, it's outside the sentence and we make the call to
+				 * updateTranslationsPanel().
 				 */
-				//TODO newCaretPosition[0] instead for deletion??????
-				//IN SENTENCE
-				if (sentNum != (taggedDoc.getNumSentences()-1)) {
-					if (priorCaretPosition >= sentIndices[0] && priorCaretPosition < sentIndices[1]) {
-						System.out.println("IN: " + priorCaretPosition + " >= " + sentIndices[0] + " && " + priorCaretPosition + " < " + sentIndices[1]);
-
+				if (sentNum != (taggedDoc.numOfSentences-1)) {
+					//IN SENTENCE
+					if (newCaretPosition[0] >= pastSentIndices[0] && newCaretPosition[0] < pastSentIndices[1]) {
 						if (charsInserted > 0) {
 							sentIndices[1] += charsInserted;
 							charsInserted = 0;
 						} else if (charsRemoved > 0) {
-//							System.out.println("SHOULD HAVE EXECUTED");
 							sentIndices[1] -= charsRemoved;
 							charsRemoved = 0;
 						}
 					//OUT OF SENTENCE
+					} else if (charsInserted > 1) {
+						sentIndices[1] += charsInserted;
+						charsInserted = 0;
 					} else {
-						System.out.println("OUT: " + priorCaretPosition + " >= " + sentIndices[0] + " && " + priorCaretPosition + " < " + sentIndices[1]);
 						main.translationsPanel.updateTranslationsPanel(taggedDoc.getSentenceNumber(sentNum));
 					}
-				} else {
-					
 				}
 				
-				charsRemoved = 0;
-				charsInserted = 0;
-				
-				System.out.println("taggedDoc.getNumSentences() = " + taggedDoc.getNumSentences());
-				if (updateTaggedSentence) {
-					updateTaggedSentence = false;
-					System.out.println("LENGTH AFTER CHANGES = " + textLength);
-					System.out.println("sentIndices[0] = " + sentIndices[0] + ", sentIndices[1] = " + sentIndices[1]);
-					
-					while (sentIndices[1] > textLength) {
+				if (textChanged) {
+					/**
+					 * We need to do a little cleaning up with the end
+					 * sentence index sometimes with respect to the last
+					 * sentence since we don't want a string index out of
+					 * bounds exception for highlighting and other things
+					 * going wrong.
+					 */
+					while (sentIndices[1] > taggedDoc.length) {
 						sentIndices[1]--;
 					}
-					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
-				} else {
-					//Bookkeeping
-					int[] sentenceInfo = getSentencesIndices(newCaretPosition[0])[0];
-					sentNum = sentenceInfo[0];			//The sentence number
-					sentIndices[0] = sentenceInfo[1];	//The start of the sentence
-					sentIndices[1] = sentenceInfo[2];	//The end of the sentence
-					
-					//Move the highlight to fit around any sentence changes
-					moveHighlights();
-				}
 
+					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+				}
+				
+				updateEditorVariables();
+				updateBarAndHighlight();
+
+				//Preparing everything for the next event
+				charsRemoved = 0;
+				charsInserted = 0;
 				oldCaretPosition[0] = newCaretPosition[0];
 				oldCaretPosition[1] = newCaretPosition[1];
 				pastSentIndices[0] = sentIndices[0];
@@ -278,6 +355,10 @@ public class EditorDriver {
 		};
 		main.documentPane.addCaretListener(caretListener);
 
+		/**
+		 * Needed so we can catch and updated the insert or remove variables for
+		 * the caret event updates. This gets fired BEFORE the caret listener.
+		 */
 		documentListener = new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -310,8 +391,8 @@ public class EditorDriver {
 				prepareForReprocessing();
 				main.enableEverything(false);
 
-				taggedDoc = new TaggedDocument(main.documentPane.getText());
-				main.backendInterface.process();
+				taggedDoc = new TaggedDocument(main, main.documentPane.getText());
+				main.documentProcessor.process();
 			}
 		};
 		main.reProcessButton.addActionListener(reProcessListener);
@@ -327,9 +408,9 @@ public class EditorDriver {
 	}
 	
 	/**
-	 * Prepares the updateSuggestionsThread SwingWorker thread for running. This
+	 * Prepares the updateSuggestionsThread SwingWorker for running. This
 	 * MUST be called before every new execution since by design a single
-	 * SwingWorker instance cannot be executed more than once
+	 * SwingWorker instance cannot be executed more than once.
 	 */
 	private void prepareWordSuggestionsThread() {
 		updateSuggestionsThread = new SwingWorker<Void, Void>() {
@@ -344,17 +425,7 @@ public class EditorDriver {
 				if (placeAutoHighlightsWhenDone) {
 					placeAutoHighlightsWhenDone = false;
 					
-					//for last sentence
-					int whiteSpace = 0;
-					try {
-						while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
-							whiteSpace++;
-						}
-					} catch (Exception e) {
-						
-					}
-					
-
+					int whiteSpace = getWhiteSpaceBuffer(sentIndices[0]);
 					if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
 						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
 					}
@@ -389,44 +460,25 @@ public class EditorDriver {
 	 * between.
 	 */
 	private void deletion() {
-//		System.out.println("ENTERING DELETION");
 		//If we removed an EOS in the given range...
-		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
-			System.out.println("DELETING: watchForLastSentenceEOS = " + (watchForLastSentenceEOS+charsRemoved) + " >= " + newCaretPosition[0] + " && < " + priorCaretPosition);
+		if (taggedDoc.eosTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
+			/**
+			 * If the user is editing after the last tagged sentence and
+			 * decids to delete their EOS character before it was set as a
+			 * sentence end we want to reset the watch variable (otherwise
+			 * we'd keep watching an EOS character that no longer exists)
+			 */
 			if ((watchForLastSentenceEOS+charsRemoved) >= newCaretPosition[0] && (watchForLastSentenceEOS+charsRemoved) < priorCaretPosition) {
-				System.out.println("Not watching anymore");
 				watchForLastSentenceEOS = -1;
 			}
-//			System.out.println("THERE WERE EOSES IN RANGE");
-			/**
-			 * This is usually where we discover that something
-			 * was broken somewhere in the editor, which is why we
-			 * encased the entire thing in a try catch and provide
-			 * detailed stack traces and error messages in the
-			 * catch so we can document what happened and
-			 * hopefully patch it in the future.
-			 */
-			//updateTaggedSentence = false;
+
 			int[] leftSentInfo = new int[0];
 			int[] rightSentInfo = new int[0];
 			try {
-//				System.out.println("Getting sentence indices for " + newCaretPosition[0] + " and " + priorCaretPosition);
 				int[][] allSentInfo = getSentencesIndices(newCaretPosition[0], priorCaretPosition);
 				leftSentInfo = allSentInfo[0];
 				rightSentInfo = allSentInfo[1];
-				
-//				Logger.logln(NAME+"FIND ME \"" + main.documentPane.getText().substring(leftSentInfo[0], leftSentInfo[1]) + "\"");
-//				Logger.logln(NAME+"FIND ME \"" + main.documentPane.getText().substring(rightSentInfo[0], rightSentInfo[1]) + "\"");
 
-				/**
-				 * If I recall correctly, this is one last ditch
-				 * effort to ensure that this code isn't executed
-				 * if it's not actually two different sentences
-				 * but rather a rouge, undocumentented EOS
-				 * character like in Ph.D., Mr., test..., etc.
-				 *
-				 * TODO: Double check this is what it does
-				 */
 				if (rightSentInfo[0] != leftSentInfo[0]) {
 					/**
 					 * Add '1' because we don't want to count the
@@ -497,9 +549,8 @@ public class EditorDriver {
 					 * Needed so that we don't delete more than we should if that be the
 					 * case
 					 * 
-					 * TODO integrate this better with wholeLastSentDeleted and
-					 * wholeBeginningSentDeleted so it's cleaner, right now this is
-					 * pretty sloppy and confusing
+					 * TODO integrate this better within EditorDriver so it's
+					 * cleaner, right now this is pretty sloppy and confusing
 					 */
 					if (TaggedDocument.userDeletedSentence) {
 						rightSentInfo[0] = rightSentInfo[0]-1;
@@ -518,7 +569,7 @@ public class EditorDriver {
 					} else {
 						try {
 							taggedDoc.removeAndReplace(leftSentInfo[0]+1, rightSentCurrent);
-							taggedDoc.concatRemoveAndReplace(taggedDoc.getTaggedDocument().get(leftSentInfo[0]),leftSentInfo[0], taggedDoc.getTaggedDocument().get(leftSentInfo[0]+1), leftSentInfo[0]+1);
+							taggedDoc.concatRemoveAndReplace(taggedDoc.getTaggedDocument().get(leftSentInfo[0]), leftSentInfo[0], taggedDoc.getTaggedDocument().get(leftSentInfo[0]+1), leftSentInfo[0]+1);
 						} catch (Exception e1) {
 							taggedDoc.removeAndReplace(leftSentInfo[0], rightSentCurrent);
 						}
@@ -529,7 +580,7 @@ public class EditorDriver {
 			} catch (Exception e) {
 				Logger.logln(NAME+"Error occurred while attempting to delete an EOS character.", LogOut.STDERR);
 				Logger.logln(NAME+"Document length = " + main.documentPane.getText().length());
-				Logger.logln(NAME+"Tagged Document length = " + taggedDoc.getUntaggedDocument(false).length());
+				Logger.logln(NAME+"Tagged Document length = " + taggedDoc.getUntaggedDocument().length());
 				Logger.logln(NAME+"-> leftSentInfo", LogOut.STDERR);
 				if (leftSentInfo != null) {
 					for (int i = 0; i < leftSentInfo.length; i++)
@@ -554,29 +605,25 @@ public class EditorDriver {
 				Logger.logln(NAME+"\t" + main.documentPane.getText(), LogOut.STDERR);
 				
 				Logger.logln(NAME+"->Tagged Document Text (The Backend)", LogOut.STDERR);
-				int size = taggedDoc.getNumSentences();
+				int size = taggedDoc.numOfSentences;
 				for (int i = 0; i < size; i++) {
-					Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences(false).get(i));
+					Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences().get(i));
 				}
 
 				Logger.logln(e);
 				return;
 			}
-
-//			Logger.logln(NAME+"FIND ME 2 \"" + main.documentPane.getText().substring(leftSentInfo[0], leftSentInfo[1]) + "\"");
-//			Logger.logln(NAME+"FIND ME 2 \"" + main.documentPane.getText().substring(rightSentInfo[0], rightSentInfo[1]) + "\"");
 			
 			/** 
 			 * This needs to be reset since we don't want the standard, ordinatry remove character
 			 * code to be executed (since it's already taken care of here since)
 			 */
-			taggedDoc.specialCharTracker.shiftAllEOSChars(false, newCaretPosition[0], charsRemoved);
+			taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
 			charsRemoved = 0;
 		} else {
-			watchForEOS = -1;
-			updateTaggedSentence = true;
-			taggedDoc.specialCharTracker.shiftAllEOSChars(false, newCaretPosition[0], charsRemoved);
+			taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
 		}
+
 		watchForEOS = -1;
 	}
 
@@ -588,178 +635,98 @@ public class EditorDriver {
 	 */
 	private void insertion() {
 		if (charsInserted > 1) {
-			if (watchForEOS != -1) {
-				char beginningChar = main.documentPane.getText().charAt(priorCaretPosition);
-				
-				if (beginningChar == SPACE || beginningChar == NEWLINE || beginningChar == TAB) {
-					updateTaggedSentence = true;
-
-					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
-					
-					if (updateSuggestionsThread.isDone()) {
-						prepareWordSuggestionsThread();
-						updateSuggestionsThread.execute();
-					}
-					
-				} else {
-					updateTaggedSentence = true;
-				}
-				
-				watchForEOS = -1;
-			} else {
-				updateTaggedSentence = true;
-			}
+//			if (watchForEOS != -1) {
+//				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+//				
+//				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+//					taggedDoc.eosTracker.setIgnore(watchForEOS, false);
+//					
+//					if (updateSuggestionsThread.isDone()) {
+//						prepareWordSuggestionsThread();
+//						updateSuggestionsThread.execute();
+//					}
+//				}
+//				
+//				watchForEOS = -1;
+//			} else if (watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
+//				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+//				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+//					endSentenceExists = false;
+//					taggedDoc.eosTracker.setIgnore(watchForLastSentenceEOS, false);
+//					
+//					if (updateSuggestionsThread.isDone()) {
+//						prepareWordSuggestionsThread();
+//						updateSuggestionsThread.execute();
+//					}
+//				}
+//				
+//				watchForLastSentenceEOS = -1;
+//			} else {
+//				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+//				
+//				if (EOS.contains(newChar)) {
+//					if (sentNum == taggedDoc.numOfSentences-1) {
+//						watchForLastSentenceEOS = priorCaretPosition;
+//						
+//						taggedDoc.eosTracker.addEOS(newChar, watchForLastSentenceEOS, true);
+//					} else {
+//						watchForEOS = priorCaretPosition;
+//						
+//						taggedDoc.eosTracker.addEOS(newChar, watchForEOS, true);
+//					}
+//				}
+//			}
 		} else {
+			char newChar = main.documentPane.getText().charAt(priorCaretPosition);
+
+			//If we're keeping an eye out for a possible end of sentence...
 			if (watchForEOS != -1) {
-				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
-				
 				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
-					System.out.println("ACTUALLY IS EOS CHARACTER, " + sentNum + ", " + (taggedDoc.getNumSentences()-1));
-					updateTaggedSentence = true;
-					if (sentNum == taggedDoc.getNumSentences() - 1) {
-						additionEndSentenceCreated = false;
+					if (sentNum == taggedDoc.numOfSentences - 1) {
+						endSentenceExists = false;
 					}
-//					System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
-					taggedDoc.specialCharTracker.setIgnore(watchForEOS, false);
+					taggedDoc.eosTracker.setIgnore(watchForEOS, false);
 					
 					if (updateSuggestionsThread.isDone()) {
-						System.out.println("Should be getting word suggestions...");
 						prepareWordSuggestionsThread();
 						updateSuggestionsThread.execute();
 					}
-				} else {
-//					System.out.println("PROBLEM 1");
-					updateTaggedSentence = true;
 				}
 				
 				watchForEOS = -1;
-			} else if (watchForLastSentenceEOS != -1 && newCaretPosition[0] == textLength) {
-				System.out.println("Ether creating new sentence or wiping watchForLastSentenceEOS = " + watchForLastSentenceEOS);
-				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
-				
+			//If we're keeping an eye out for a possible end of sentence at the VERY END of the document
+			} else if (watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {	
 				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
-					System.out.println("ACTUALLY IS EOS CHARACTER, " + sentNum + ", " + (taggedDoc.getNumSentences()-1));
-					updateTaggedSentence = true;
-					additionEndSentenceCreated = false;
-					taggedDoc.specialCharTracker.setIgnore(watchForLastSentenceEOS, false);
+					endSentenceExists = false;
+					taggedDoc.eosTracker.setIgnore(watchForLastSentenceEOS, false);
 					
 					if (updateSuggestionsThread.isDone()) {
-						System.out.println("Should be getting word suggestions...");
 						prepareWordSuggestionsThread();
 						updateSuggestionsThread.execute();
 					}
-				} else {
-//					System.out.println("PROBLEM 1");
-					updateTaggedSentence = true;
 				}
 				
 				watchForLastSentenceEOS = -1;
+			//If we're not currently watching for any end of sentence, then check the new character
 			} else {
-				char newChar = main.documentPane.getText().charAt(priorCaretPosition);
 				if (EOS.contains(newChar)) {
-					if (sentNum == taggedDoc.getNumSentences()-1) {
+					if (sentNum == taggedDoc.numOfSentences-1) {
 						watchForLastSentenceEOS = priorCaretPosition;
 						
-						System.out.println("WATCH FOR LAST SENTENCE EOS = " + watchForLastSentenceEOS);
-						System.out.println("ENTERED EOS CHARACTER AT LAST SENT, WILL WAIT, " + watchForLastSentenceEOS);
-//						System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
-						
-						taggedDoc.specialCharTracker.addEOS(newChar, watchForLastSentenceEOS, true);
+						taggedDoc.eosTracker.addEOS(newChar, watchForLastSentenceEOS, true);
 					} else {
 						watchForEOS = priorCaretPosition;
 						
-						System.out.println("ENTERED EOS CHARACTER, WILL WAIT, " + watchForEOS);
-//						System.out.println("\"" + main.documentPane.getText().charAt(watchForEOS) + "\", " + watchForEOS);
-						
-						taggedDoc.specialCharTracker.addEOS(newChar, watchForEOS, true);
+						taggedDoc.eosTracker.addEOS(newChar, watchForEOS, true);
 					}
-
-					updateTaggedSentence = true;
-				} else {
-//					System.out.println("PROBLEM 2");
 				}
 			}
 		}
-		updateTaggedSentence = true;
 	}
 
 	//=======================================================================
-	//*							MAIN TASKS									*	
+	//*							OTHER TASKS									*	
 	//=======================================================================
-
-	/**
-	 * Updates the sentence highlight indices with the new indices in
-	 * sentIndices. It may seem silly to have it in it's own method like here,
-	 * but it's so other external classes can call a method instead of having
-	 * to invoke the runnable themselves
-	 */
-	public void moveHighlights() {
-		try {
-			//Clearing all sentences so they can be highlighted somewhere else
-			highlighterEngine.removeAutoRemoveHighlights();
-			highlighterEngine.removeSentenceHighlight();
-//			System.out.println("TESTING TO MOVE HIGHLIGHT...");
-//			System.out.println(newCaretPosition[0] + ", " + newCaretPosition[1]);
-			//If user is selecting text, don't make new highlights in this case
-			if (newCaretPosition[0] != newCaretPosition[1] || sentIndices[0] == sentIndices[1] || taggedDoc.getSentenceNumber(sentNum).getUntagged(false).matches("\\s\\s*")) {
-				System.out.println("!!! sentIndices[0] = " + sentIndices[0] + ", sentIndices[1] = " + sentIndices[1] + ", textLength = " + textLength);
-				return;
-			} else {
-				System.out.println("GOOD sentIndices[0] = " + sentIndices[0] + ", sentIndices[1] = " + sentIndices[1] + ", textLength = " + textLength);
-			}
-
-			Logger.logln(NAME+"Moving highlight to " + sentIndices[0] + "-" + sentIndices[1]);
-
-			//For the last sentence
-			int whiteSpace = 0;
-			try {
-				while (Character.isWhitespace(main.documentPane.getText().charAt(sentIndices[0]+whiteSpace))) {
-//					System.out.println("\"" + main.documentPane.getText().charAt(sentIndices[0]+whiteSpace) + "\"");
-					whiteSpace++;
-				}
-			} catch (Exception e) {}
-			
-
-//			System.out.println("HIGHLIGHT? " + (sentIndices[0]+whiteSpace) + " <= " + newCaretPosition[0]);
-			if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
-//				System.out.println("They're highlighting");
-				if (doHighlight)
-					highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
-				
-				if (autoHighlight && updateSuggestionsThread.isDone())
-					highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
-				else
-					placeAutoHighlightsWhenDone = true;
-			} else {
-//				System.out.println("Should not be highlighting");
-			}
-		} catch (Exception e1) {
-			Logger.logln(NAME+"Problem moving highlight", LogOut.STDERR);
-			Logger.logln(e1);
-		}
-	}
-
-	/**
-	 * Handles everything related to the undo/redo functionality. It
-	 * automatically backs up an undo "version" when the buffer's ready or
-	 * when the user is manipulating chunks of text. You should just have to
-	 * call this once at the beginning of the main document listener.
-	 */
-	protected void updateUndoRedo() {	
-		if (ignoreBackup) {
-			pastTaggedDoc = new TaggedDocument(taggedDoc);
-			return;
-		}
-
-		if (charsInserted > 1 || charsRemoved > 1) {
-			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition);
-			pastTaggedDoc = new TaggedDocument(taggedDoc);
-		} else if (curCharBackupBuffer >= CHARS_TIL_BACKUP) {
-			curCharBackupBuffer = 0;
-			pastTaggedDoc = new TaggedDocument(taggedDoc);
-			main.versionControl.addVersion(pastTaggedDoc, priorCaretPosition);
-		}
-	}
 
 	/**
 	 * Calculates the indices of all passed "positions". This can ether be a
@@ -768,11 +735,7 @@ public class EditorDriver {
 	 * values (meaning there's a selection and we're finding out it's indices)
 	 */
 	protected int[][] getSentencesIndices(int ... positions) {
-//		System.out.println("calculating sentence indices...");
 		int[] sentenceLengths = taggedDoc.getSentenceLengths();
-//		for (int i = 0; i < sentenceLengths.length; i++) {
-//			System.out.println("     " + sentenceLengths[i] + " \"" + taggedDoc.getUntaggedSentences(false).get(i) + "\"");
-//		}
 		int numSents = sentenceLengths.length;
 		int numPositions = positions.length;
 		int currentPosition;
@@ -793,7 +756,6 @@ public class EditorDriver {
 			int[] allSentIndices = new int[numSents];
 			currentPosition = positions[positionNumber];
 
-//			System.out.println("FOR CARET POSITION = " + currentPosition);
 			if (currentPosition > 0) {
 				while (length <= currentPosition && i < numSents) {
 					length += sentenceLengths[i];
@@ -813,44 +775,44 @@ public class EditorDriver {
 			 */
 			int startIndex = 0;
 			int endIndex = 0;
-
-			System.out.println("sentence = " + selectedSentence + ", currentPosition = " + currentPosition + ", allSentIndices[numSents-1] = " + allSentIndices[numSents-1] + ", textLength = " + textLength + ", newCaretPosition[0] = " + newCaretPosition[0]);
 			
 			try {
 				if (selectedSentence >= numSents)
 					return null; //Should never be greater than or equal to the number of sents
 				else if (selectedSentence <= 0)
 					endIndex = sentenceLengths[0]; //The end of the first sentence, 0.
-				else if (!ignoreChanges && newCaretPosition[0] >= textLength) {
-					System.out.println("Everything good so far...");
-					if (!additionEndSentenceCreated && watchForLastSentenceEOS == -1) {
-						System.out.println("Made new last sentence, charsInserted = " + charsInserted);
+				else if (!ignoreChanges && newCaretPosition[0] >= taggedDoc.length) {
+					if (!endSentenceExists && watchForLastSentenceEOS == -1) {
 						if (charsInserted > 0) {
-							System.out.println("\"" + main.documentPane.getText().substring(priorCaretPosition, newCaretPosition[0]) + "\"");
 							taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(priorCaretPosition, newCaretPosition[0]));
 						} else {
 							taggedDoc.makeNewEndSentence("");
 						}
-						additionEndSentenceCreated = true;
+						endSentenceExists = true;
 						selectedSentence++;
-						startIndex = textLength-charsInserted;
-						endIndex = textLength;
+						startIndex = taggedDoc.length - charsInserted;
+						endIndex = taggedDoc.length;
 					} else {
 						startIndex = allSentIndices[selectedSentence-1];
 						endIndex = allSentIndices[selectedSentence]+charsInserted;
 					}
 				} else {
-//					System.out.println("So far so good...");
 					//Start highlighting JUST after the previous sentence stops
 					startIndex = allSentIndices[selectedSentence-1];
-					//Stop highlighting when the current sentence stops
-					endIndex = allSentIndices[selectedSentence];
+					//Stop highlighting when the current sentence stops'
+					if (selectedSentence == taggedDoc.numOfSentences-1) {
+						endIndex = allSentIndices[selectedSentence]+charsInserted;
+					} else {
+						endIndex = allSentIndices[selectedSentence];
+					}
 				}
+				
 				//This new sentence's number and start and end indices.
-				System.out.println("SENTENCE # = " + selectedSentence + ", " + startIndex + "-" + endIndex);
+				Logger.logln(NAME+"Calculated sentence # = " + selectedSentence + ", " + startIndex + "-" + endIndex);
 				results[positionNumber] = new int[]{selectedSentence, startIndex, endIndex};
 			} catch (Exception e) {
-				e.printStackTrace();
+				Logger.logln(NAME+"Something went dreadfully wrong calculating the sentence indices");
+				Logger.logln(e);
 			}
 		}
 
@@ -864,13 +826,11 @@ public class EditorDriver {
 					(results[1][2] == oldCaretPosition[0] + (results[1][2] - results[1][1]) ||
 					results[1][2] == oldCaretPosition[1] + (results[1][2] - results[1][1]))) {
 				wholeLastSentDeleted = true;
-//				System.out.println("WHOLE LAST SENT DELETED");
 			}
 
 			if (results[1][0] - results[0][0] >= 4 &&
 					(results[0][2] == oldCaretPosition[0] + (results[0][2] - results[0][1]) ||
 					results[0][2] == oldCaretPosition[1] + (results[0][2] - results[0][1]))) {
-//				System.out.println("WHOLE BEGINNING SENT DELETED");
 				wholeBeginningSentDeleted = true;
 			}
 		}
@@ -879,6 +839,70 @@ public class EditorDriver {
 	}
 
 	/**
+	 * Calculates how much extra space should be added to the given index
+	 * before it hits the first actual character of the text (meaning we don't
+	 * want to "trim" the whitespace out of the highlight)
+	 * 
+	 * @param index
+	 *        The index you want to "pad"
+	 *
+	 * @return
+	 * 		The number of spaces you should add to the index to get the proper start of
+	 * 		the sentence
+	 */
+	public int getWhiteSpaceBuffer(int index) {
+		/**
+		 * In try catch to prevent it breaking when the user it typing after the last sentence
+		 */
+		int whiteSpace = 0;
+		try {
+			while (Character.isWhitespace(main.documentPane.getText().charAt(index+whiteSpace))) {
+				whiteSpace++;
+			}
+		} catch (Exception e) {}
+
+		return whiteSpace;
+	}
+
+	/**
+	 * Updates the sentence highlight indices with the new indices in
+	 * sentIndices.
+	 */
+	public void moveHighlights() {
+		try {
+			//Clearing all sentences so they can be highlighted somewhere else
+			highlighterEngine.removeAutoRemoveHighlights();
+			highlighterEngine.removeSentenceHighlight();
+
+			//If user is selecting text, don't make new highlights in this case
+			if (newCaretPosition[0] != newCaretPosition[1] || sentIndices[0] == sentIndices[1] || taggedDoc.getSentenceNumber(sentNum).getUntagged(false).matches("\\s\\s*")) {
+				return;
+			}
+
+			Logger.logln(NAME+"Moving highlight to " + sentIndices[0] + "-" + sentIndices[1]);
+
+			//Catch for the last sentence 
+			int whiteSpace = getWhiteSpaceBuffer(sentIndices[0]);
+			if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
+				if (doHighlight)
+					highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
+				
+				if (autoHighlight && updateSuggestionsThread.isDone())
+					highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+				else
+					placeAutoHighlightsWhenDone = true;
+			}
+		} catch (Exception e1) {
+			Logger.logln(NAME+"Problem moving highlight", LogOut.STDERR);
+			Logger.logln(e1);
+		}
+	}
+
+	//=======================================================================
+	//*							UPDATE METHODS								*	
+	//=======================================================================
+	
+	/**
 	 * Doesn't change ANYTHING in the backend (meaning the TaggedDocument),
 	 * all it does is completely replace the current text in the JTextPane
 	 * with the backend contents. This means we're just scanning through all
@@ -886,67 +910,68 @@ public class EditorDriver {
 	 * main JTextPane.<br><br>
 	 *
 	 * The highlighter and all the sentence, selection, and caret bookkeeping
-	 * variables will also be udated to reflect any changes.
+	 * variables will also be udated automatically to reflect any changes.
 	 */
-	public void refreshEditor() {
+	public void syncTextPaneWithTaggedDoc() {
 		//Updating the JTextPane
 		ignoreChanges = true;
-		main.documentPane.setText(taggedDoc.getUntaggedDocument(false));
+		main.documentPane.setText(taggedDoc.getUntaggedDocument());
 		main.documentPane.getCaret().setDot(newCaretPosition[0]);
 		main.documentPane.setCaretPosition(newCaretPosition[0]);
 		ignoreChanges = false;
 		
-		//Bookkeeping
-		int[] sentenceInfo = getSentencesIndices(newCaretPosition[0])[0];
-		sentNum = sentenceInfo[0];			//The sentence number
-		sentIndices[0] = sentenceInfo[1];	//The start of the sentence
-		sentIndices[1] = sentenceInfo[2];	//The end of the sentence
-		
-		//Move the highlight to fit around any sentence changes
-		moveHighlights();
+		updateEditorVariables();
+		updateBarAndHighlight();
 	}
 
 	/**
-	 * Relaces a given sentence number with a new sentence. This DOES update
+	 * Updates a given sentence number with a new text. This DOES update
 	 * the backend (meaning the TaggedDocument) by updating the given
-	 * taggedSentence with the new string and bookkeeping all the information
-	 * that needs it in TaggedSentence and TaggedWord to reflect the change
-	 * (handled within TaggedDocument's removeAndReplace).<br><br>
-	 *
-	 * This also calls refreshEditor, so that means the highlighter and all
-	 * the sentence, selection, and caret bookkeeeping variables will also be
-	 * updated to reflect any changes. In addition, the word suggestions and
-	 * anonymity bar are also updated to reflect changes.
+	 * taggedSentence with the new string.
 	 * 
-	 * @param sentNumToRemove 
+	 * @param sentNumToUpdate 
 	 *        The sentence number to update (0, 1, 2, ...)
 	 * @param updatedText
 	 *        The updated sentence text
 	 */
-	public void updateSentence(int sentNumToRemove, String updatedText) {
-		Logger.logln(NAME+"Updating sentence # = " + sentNumToRemove + " with new string: " + updatedText);
-		taggedDoc.removeAndReplace(sentNumToRemove, updatedText);
+	public void updateSentence(int sentNumToUpdate, String updatedText) {
+		Logger.logln(NAME+"Updating sentence # = " + sentNumToUpdate + " with new string: " + updatedText);
+		taggedDoc.removeAndReplace(sentNumToUpdate, updatedText);
+	}
 
-		if (updateBarThread.isDone()) {
-			prepareAnonymityBarThread();
-			updateBarThread.execute();
-		}
-		
-		//Bookkeeping
+	/**
+	 * Updates all editor variables that may need changing at end of caret
+	 * event (say, if the user started a new sentence, split one into two,
+	 * deleted one, etc.). Should be called every caret event.
+	 */
+	private void updateEditorVariables() {
 		int[] sentenceInfo = getSentencesIndices(newCaretPosition[0])[0];
 		sentNum = sentenceInfo[0];			//The sentence number
 		sentIndices[0] = sentenceInfo[1];	//The start of the sentence
 		sentIndices[1] = sentenceInfo[2];	//The end of the sentence
-
-		//Move the highlight to fit around any sentence changes
-		moveHighlights();
 	}
+
+	/**
+	 * Updates the Anonymity bar and highlights, should be called every caret event.
+	 */
+	private void updateBarAndHighlight() {
+		moveHighlights();
+		if (updateBarThread.isDone()) {
+			prepareAnonymityBarThread();
+			updateBarThread.execute();
+		}
+	}
+
+	//=======================================================================
+	//*						RESET / REPROCESSING METHODS					*	
+	//=======================================================================
+	
 
 	/**
 	 * Stops any translation threads going on (if any) and also resets
 	 * the EditorDriver instance to it's default values
 	 */
-	public void prepareForReprocessing() {
+	private void prepareForReprocessing() {
 		resetToDefaults();
 		main.translationsDriver.translator.reset();
 		main.translationsPanel.reset();
@@ -970,21 +995,19 @@ public class EditorDriver {
 		wholeLastSentDeleted = false;
 		wholeBeginningSentDeleted = false;
 
+		//Highlighters
+		highlighterEngine.clearAll();
+		placeAutoHighlightsWhenDone = false;
+
 		//Editing variables
 		charsInserted = 0;
 		charsRemoved = 0;
 
 		ignoreChanges = false;
-		updateTaggedSentence = false;
 
-		curCharBackupBuffer = 0;
-		ignoreBackup = false;
-
-		highlighterEngine.clearAll();
 		watchForEOS = -1;
 		watchForLastSentenceEOS = -1;
-		placeAutoHighlightsWhenDone = false;
-		textLength = 0;
-		additionEndSentenceCreated = false;
+		
+		endSentenceExists = false;
 	}
 }

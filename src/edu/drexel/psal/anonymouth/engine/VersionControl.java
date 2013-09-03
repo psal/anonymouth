@@ -2,19 +2,44 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.Stack;
 
+import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.MenuDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 
 /**
  * Adds undo/redo functionality to the documents pane.
+ * 
  * @author Marc Barrowclift
- *
  */
 public class VersionControl {
 	
+	/**
+	 * The absolute max allowed stack size for ether undo or redo.<br><br>
+	 * 
+	 * TODO: This could use some testing, we're not sure how large a given
+	 * TaggedDocument is. If it turns out it doesn't use up that much space,
+	 * then we can most certainly increase this cap.
+	 */
 	private final int SIZECAP = 30;
+	/**
+	 * The number of characters to accept before "backing up" a new version to
+	 * undo/redo
+	 */
+	private final int CHARS_TIL_BACKUP = 15;
+	/**
+	 * The current number of characters inserted or removed since a version was
+	 * added to the undo stack
+	 */
+	protected int curCharBackupBuffer;
+	/**
+	 * The past version of the taggedDocument
+	 */
+	public TaggedDocument pastTaggedDoc;
+
 	private GUIMain main;
+	private EditorDriver editor;
+
 	private boolean ready;
 	private Stack<TaggedDocument> undo;
 	private Stack<TaggedDocument> redo;
@@ -23,38 +48,93 @@ public class VersionControl {
 	
 	/**
 	 * Constructor
-	 * @param main - Instance of GUIMain
+	 * 
+	 * @param main
+	 *        GUIMain instance
 	 */
 	public VersionControl(GUIMain main) {
 		this.main = main;
+
 		ready = true;
+
 		undo = new Stack<TaggedDocument>();
 		redo = new Stack<TaggedDocument>();
 		indicesUndo = new Stack<Integer>();
 		indicesRedo = new Stack<Integer>();
 	}
 	
+	/**
+	 * Should be called after processing to set up the initial backups and
+	 * prepare undo/redo. Can't be handled by the constructor since we don't
+	 * yet have tagged documents ready when that happens, we have to wait.
+	 */
+	public void init() {
+		editor = main.editorDriver;
+		pastTaggedDoc = new TaggedDocument(editor.taggedDoc);
+		addVersion(pastTaggedDoc, editor.priorCaretPosition);
+		pastTaggedDoc = new TaggedDocument(editor.taggedDoc);
+	}
+
+	/**
+	 * Returns whether or not the undo or redo threads are done
+	 * and ready for another action
+	 * 
+	 * @return
+	 * 		True or false, depending on whether or not it's ready
+	 */
 	public boolean isReady() {
 		return ready;
 	}
 	
 	/**
-	 * Must be called in DriverEditor or wherever you want a "version" to be backed up in the undo stack.
-	 * @param taggedDoc - The TaggedDocument instance you want to capture.
+	 * Automatically handles whether or not it's appropriate to add a copy of
+	 * the current taggedDoc to the undo stack, simply call this every
+	 * caretListener update from editorDriver
+	 *
+	 * @param taggedDoc
+	 *        The TaggedDocument instance you want to capture.
+	 * @param priorCaretPosition
+	 *        The position the caret was at for this particular backup
+	 * @param forceBackup 
+	 *        Whether or not to bypass and reset the curCharBackupBuffer and immediately backup
 	 */
-	
-	public void addVersion(TaggedDocument taggedDoc, int offset) {
+	public void updateUndoRedo(TaggedDocument taggedDoc, int priorCaretPosition, boolean forceBackup) {
+		if (editor.ignoreChanges) {
+			pastTaggedDoc = new TaggedDocument(taggedDoc);
+			return;
+		}
+
+		curCharBackupBuffer++;
+
+		if (forceBackup) {
+			addVersion(pastTaggedDoc, priorCaretPosition);
+			pastTaggedDoc = new TaggedDocument(taggedDoc);
+			curCharBackupBuffer = 0;
+		} else if (curCharBackupBuffer >= CHARS_TIL_BACKUP) {
+			pastTaggedDoc = new TaggedDocument(taggedDoc);
+			addVersion(pastTaggedDoc, priorCaretPosition);
+			curCharBackupBuffer = 0;
+		}
+	}
+
+	/**
+	 * Adds a version to the undo stack, should only be called by
+	 * updateUndoRedo() when it deems appropriate to do so.
+	 * 
+	 * @param taggedDoc
+	 *        The TaggedDocument instance you want to capture.
+	 * @param priorCaretPosition
+	 *        The position the caret was at for this particular backup
+	 */
+	private void addVersion(TaggedDocument taggedDoc, int priorCaretPosition) {
 		ready = false;
 		if (undo.size() >= SIZECAP) {
 			undo.remove(0);
 		}
 
-		for (int i = 0; i < taggedDoc.getNumSentences(); i++) {
-			taggedDoc.getTaggedSentences().get(i).getTranslations().clear();
-		}
-		
+		taggedDoc.clearAllTranslations();
 		undo.push(new TaggedDocument(taggedDoc));
-		indicesUndo.push(offset);
+		indicesUndo.push(priorCaretPosition);
 		
 		main.enableUndo(true);
 		main.enableRedo(false);
@@ -64,36 +144,24 @@ public class VersionControl {
 		ready = true;
 	}
 	
-	public void addVersion(TaggedDocument taggedDoc) {
-		addVersion(taggedDoc, main.documentPane.getCaret().getDot());
-	}
-	
 	/**
-	 * Should be called in the program whenever you want a undo action to occur.
+	 * Should be called whenever you want a undo action to occur (so in Undo listeners)
 	 * 
-	 * Swaps the current taggedDoc in DriverEditor with the version on the top of the undo stack, updates the document text pane with
-	 * the new taggedDoc, and pushed the taggedDoc that was just on the undo stack to the redo one. 
+	 * Swaps the current taggedDoc in DriverEditor with the version on the top
+	 * of the undo stack, updates the document text pane with the new
+	 * taggedDoc, and pushed the taggedDoc that was just on the undo stack to
+	 * the redo one.
 	 */
 	public void undo() {
 		ready = false;
 		
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				redo.push(new TaggedDocument(DriverEditor.taggedDoc));
-//			}
-//		});
-		redo.push(new TaggedDocument(main.editorDriver.taggedDoc));
+		redo.push(new TaggedDocument(editor.taggedDoc));
 		indicesRedo.push(main.documentPane.getCaret().getDot());
 		
-		main.editorDriver.ignoreBackup = true;
-		main.editorDriver.taggedDoc = undo.pop();
-		main.editorDriver.newCaretPosition[0] = indicesUndo.pop();
-		main.editorDriver.newCaretPosition[1]= main.editorDriver.newCaretPosition[0];
-		main.editorDriver.refreshEditor();
-		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
-		main.editorDriver.ignoreBackup = false;
-		main.editorDriver.textLength = main.documentPane.getText().length();
+		editor.taggedDoc = undo.pop();
+		editor.newCaretPosition[0] = indicesUndo.pop();
+		editor.newCaretPosition[1]= editor.newCaretPosition[0];
+		editor.syncTextPaneWithTaggedDoc();
 		
 		main.enableRedo(true);
 		
@@ -109,31 +177,23 @@ public class VersionControl {
 	}
 	
 	/**
-	 * Should be called in the program whenever you want a redo action to occur.
+	 * Should be called whenever you want a redo action to occur (so in Redo listeners)
 	 * 
-	 * Swaps the current taggedDoc in DriverEditor with the version on the top of the redo stack, updates the document text pane with
-	 * the new taggedDoc, and pushed the taggedDoc that was just on the redo stack to the undo one. 
+	 * Swaps the current taggedDoc in DriverEditor with the version on the top
+	 * of the redo stack, updates the document text pane with the new
+	 * taggedDoc, and pushed the taggedDoc that was just on the redo stack to
+	 * the undo one.
 	 */
 	public void redo() {
 		ready = false;
-		
-//		SwingUtilities.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				undo.push(new TaggedDocument(DriverEditor.taggedDoc));
-//			}
-//		});
-		undo.push(new TaggedDocument(main.editorDriver.taggedDoc));
+
+		undo.push(new TaggedDocument(editor.taggedDoc));
 		indicesUndo.push(main.documentPane.getCaret().getDot());
 		
-		main.editorDriver.ignoreBackup = true;
-		main.editorDriver.taggedDoc = redo.pop();
-		main.editorDriver.newCaretPosition[0] = indicesRedo.pop();
-		main.editorDriver.newCaretPosition[1]= main.editorDriver.newCaretPosition[0];
-		main.editorDriver.refreshEditor();
-		main.editorDriver.updateSentence(main.editorDriver.sentNum, main.documentPane.getText().substring(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]));
-		main.editorDriver.ignoreBackup = false;
-		main.editorDriver.textLength = main.documentPane.getText().length();
+		editor.taggedDoc = redo.pop();
+		editor.newCaretPosition[0] = indicesUndo.pop();
+		editor.newCaretPosition[0] = editor.newCaretPosition[0];
+		editor.syncTextPaneWithTaggedDoc();
 
 		main.enableUndo(true);	
 		
@@ -146,20 +206,5 @@ public class VersionControl {
 		    ready = true;
 		    MenuDriver.class.notifyAll();
 		}
-	}
-	
-	/**
-	 * Clears all stacks, should be used only for pre-processed documents
-	 */
-	public void reset() {
-		undo.clear();
-		redo.clear();
-		ready = false;
-		indicesUndo.clear();
-		indicesRedo.clear();
-	}
-	
-	public boolean isUndoEmpty() {
-		return undo.isEmpty();
 	}
 }
