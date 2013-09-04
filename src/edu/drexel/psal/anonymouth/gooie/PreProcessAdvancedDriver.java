@@ -45,7 +45,7 @@ public class PreProcessAdvancedDriver {
 
 	//Variables
 	private PreProcessAdvancedWindow advancedWindow;
-	protected CumulativeFeatureDriver cfd;
+	public CumulativeFeatureDriver cfd;
 	private Classifier testClassifier;
 
 	//Listeners

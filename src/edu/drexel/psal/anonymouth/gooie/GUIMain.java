@@ -21,6 +21,7 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
+import edu.drexel.psal.anonymouth.engine.DocumentProcessor;
 import edu.drexel.psal.anonymouth.engine.VersionControl;
 import edu.drexel.psal.anonymouth.helpers.DisableFocus;
 
@@ -71,7 +72,7 @@ public class GUIMain extends JFrame {
 	public PreProcessWindow preProcessWindow;
 	public PreProcessAdvancedWindow ppAdvancedWindow;
 	protected PreProcessDriver preProcessDriver;
-	protected PreProcessAdvancedDriver ppAdvancedDriver;
+	public PreProcessAdvancedDriver ppAdvancedDriver;
 	public MenuDriver menuDriver;
 	public ClustersDriver clustersDriver; 
 	
@@ -98,7 +99,7 @@ public class GUIMain extends JFrame {
 	protected JLabel anonymityPercent;		//Used only when the Anonymity bar is hidden
 	
 	//Results
-	protected ResultsWindow resultsWindow;
+	public ResultsWindow resultsWindow;
 	protected ResultsDriver	resultsDriver;
 	protected JButton resultsButton;
 	
@@ -113,7 +114,7 @@ public class GUIMain extends JFrame {
 	protected JPanel originalDocumentPanel;
 	public JTextPane documentPane;
 	protected JTextPane originalDocPane;
-	protected JScrollPane documentScrollPane;
+	public JScrollPane documentScrollPane;
 	protected JScrollPane originalDocScrollPane;
 	public Boolean documentSaved = true;
 	protected Font normalFont; //The editor's font
@@ -123,7 +124,7 @@ public class GUIMain extends JFrame {
 	
 	//Bottom Button
 	public JButton reProcessButton;
-	protected Boolean processed = false;
+	public Boolean processed = false;
 	
 	//=====================================================================
 	//			RIGHT TAB (words to remove/add, translations, etc.)
@@ -190,7 +191,7 @@ public class GUIMain extends JFrame {
 	protected ClustersWindow clustersWindow;
 	protected FAQWindow faqWindow;
 	protected ClustersTutorial clustersTutorial;
-	protected VersionControl versionControl; //Undo/Redo
+	public VersionControl versionControl; //Undo/Redo
 	protected RightClickMenu rightClickMenu; //Not really menu bar, but it's a menu
 	protected Clipboard clipboard; //Edit > Copy/Paste/Cut
 

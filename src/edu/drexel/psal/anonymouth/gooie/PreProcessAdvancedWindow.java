@@ -77,7 +77,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 	protected PreProcessAdvancedDriver driver;
 	protected PreProcessWindow preProcessWindow;
 	protected GUIMain main;
-	protected List<Classifier> classifiers;
+	public List<Classifier> classifiers;
 	protected List<CumulativeFeatureDriver> presetCFDs;
 	private String[] classifierNames;
 	protected Hashtable<String, String> fullClassPath;

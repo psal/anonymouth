@@ -1,4 +1,4 @@
-package edu.drexel.psal.anonymouth.gooie;
+package edu.drexel.psal.anonymouth.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +13,12 @@ import javax.swing.SwingWorker;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
-import edu.drexel.psal.anonymouth.engine.DocumentMagician;
-import edu.drexel.psal.anonymouth.engine.FeatureList;
+import edu.drexel.psal.anonymouth.gooie.ClustersDriver;
+import edu.drexel.psal.anonymouth.gooie.DictionaryBinding;
+import edu.drexel.psal.anonymouth.gooie.EditorDriver;
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
+import edu.drexel.psal.anonymouth.gooie.ProgressWindow;
+import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.FunctionWords;
@@ -74,7 +77,7 @@ public class DocumentProcessor {
 	 * The process call that any outside class should call when we want to
 	 * process.
 	 */
-	protected void process() {
+	public void process() {
 		this.editorDriver = main.editorDriver;
 		readyProcessingThread();
 		processing.execute();

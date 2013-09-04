@@ -50,7 +50,7 @@ public class ResultsWindow extends JFrame {
 	//Various Variables
 	protected JScrollPane drawingScrollPane;
 	protected JPanel drawingPanel;
-	protected JLabel resultsLabel;
+	public JLabel resultsLabel;
 	private ArrayList<String> authors;
 	private ArrayList<Integer> percent;
 	private DefaultCategoryDataset dataSet;

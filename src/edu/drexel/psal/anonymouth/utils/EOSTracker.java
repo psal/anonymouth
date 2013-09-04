@@ -16,8 +16,8 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * character, and SentenceMaker will then skip over these since they aren't
  * actually and EOS.
  *
- * @author  Marc Barrowclift
  * @author  Andrew W.E. McDonald
+ * @author  Marc Barrowclift
  */
 public class EOSTracker implements Serializable {
 	

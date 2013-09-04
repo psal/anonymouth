@@ -249,7 +249,7 @@ public class SentenceMaker implements Serializable  {
 		}
 		
 		//Needed so that if we are deleting abbreviations like "Ph.D." this is not triggered.
-		if (!EOSAtSentenceEnd && (editorDriver.watchForEOS == -1))
+		if (!EOSAtSentenceEnd && (editorDriver.taggedDoc.watchForEOS == -1))
 			EOSAtSentenceEnd = true;
 
 		while (foundEOS == true) {

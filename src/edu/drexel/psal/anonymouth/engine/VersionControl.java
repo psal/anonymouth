@@ -3,9 +3,9 @@ package edu.drexel.psal.anonymouth.engine;
 import java.util.Stack;
 
 import edu.drexel.psal.anonymouth.gooie.EditorDriver;
-import edu.drexel.psal.anonymouth.gooie.MenuDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
+import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
  * Adds undo/redo functionality to the documents pane.
@@ -14,6 +14,7 @@ import edu.drexel.psal.anonymouth.utils.TaggedDocument;
  */
 public class VersionControl {
 	
+	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
 	/**
 	 * The absolute max allowed stack size for ether undo or redo.<br><br>
 	 * 
@@ -71,8 +72,6 @@ public class VersionControl {
 	public void init() {
 		editor = main.editorDriver;
 		pastTaggedDoc = new TaggedDocument(editor.taggedDoc);
-		addVersion(pastTaggedDoc, editor.priorCaretPosition);
-		pastTaggedDoc = new TaggedDocument(editor.taggedDoc);
 	}
 
 	/**
@@ -127,11 +126,19 @@ public class VersionControl {
 	 *        The position the caret was at for this particular backup
 	 */
 	private void addVersion(TaggedDocument taggedDoc, int priorCaretPosition) {
+		Logger.logln(NAME+"A new backup has been added to the Undo stack");
 		ready = false;
 		if (undo.size() >= SIZECAP) {
 			undo.remove(0);
 		}
 
+		if (redo.size() == 0) {
+			main.enableRedo(false);
+		}
+		if (undo.size() == 0) {
+			main.enableUndo(false);
+		}
+		
 		taggedDoc.clearAllTranslations();
 		undo.push(new TaggedDocument(taggedDoc));
 		indicesUndo.push(priorCaretPosition);
@@ -153,10 +160,11 @@ public class VersionControl {
 	 * the redo one.
 	 */
 	public void undo() {
+		Logger.logln(NAME+"UNDO ----------------------------------");
 		ready = false;
 		
 		redo.push(new TaggedDocument(editor.taggedDoc));
-		indicesRedo.push(main.documentPane.getCaret().getDot());
+		indicesRedo.push(editor.newCaretPosition[0]);
 		
 		editor.taggedDoc = undo.pop();
 		editor.newCaretPosition[0] = indicesUndo.pop();
@@ -165,15 +173,18 @@ public class VersionControl {
 		
 		main.enableRedo(true);
 		
+		if (redo.size() == 0) {
+			main.enableRedo(false);
+		}
 		if (undo.size() == 0) {
 			main.enableUndo(false);
 		}
 		
-		synchronized(MenuDriver.class) {
-		    //set ready flag to true (so isReady returns true)
-		    ready = true;
-		    MenuDriver.class.notifyAll();
-		}
+//		synchronized(MenuDriver.class) {
+//		    //set ready flag to true (so isReady returns true)
+//		    ready = true;
+//		    MenuDriver.class.notifyAll();
+//		}
 	}
 	
 	/**
@@ -185,14 +196,15 @@ public class VersionControl {
 	 * the undo one.
 	 */
 	public void redo() {
+		Logger.logln(NAME+"REDO ----------------------------------");
 		ready = false;
 
 		undo.push(new TaggedDocument(editor.taggedDoc));
-		indicesUndo.push(main.documentPane.getCaret().getDot());
+		indicesUndo.push(editor.newCaretPosition[0]);
 		
 		editor.taggedDoc = redo.pop();
-		editor.newCaretPosition[0] = indicesUndo.pop();
-		editor.newCaretPosition[0] = editor.newCaretPosition[0];
+		editor.newCaretPosition[0] = indicesRedo.pop();
+		editor.newCaretPosition[1] = editor.newCaretPosition[0];
 		editor.syncTextPaneWithTaggedDoc();
 
 		main.enableUndo(true);	
@@ -200,11 +212,14 @@ public class VersionControl {
 		if (redo.size() == 0) {
 			main.enableRedo(false);
 		}
-		
-		synchronized(MenuDriver.class) {
-		    //set ready flag to true (so isReady returns true)
-		    ready = true;
-		    MenuDriver.class.notifyAll();
+		if (undo.size() == 0) {
+			main.enableUndo(false);
 		}
+		
+//		synchronized(MenuDriver.class) {
+//		    //set ready flag to true (so isReady returns true)
+//		    ready = true;
+//		    MenuDriver.class.notifyAll();
+//		}
 	}
 }

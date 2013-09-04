@@ -203,15 +203,15 @@ public class MenuDriver {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Undo menu item clicked");
-        		synchronized(main.versionControl){
-        		    while (!main.versionControl.isReady()){
-        		        try {
-							this.wait();
-						} catch (InterruptedException e1) {
-							Logger.logln(NAME+"Issue occurred while waiting for version control thread to sleep");
-						}
-        		    }
-        		}
+//        		synchronized(main.versionControl){
+//        		    while (!main.versionControl.isReady()){
+//        		        try {
+//							this.wait();
+//						} catch (InterruptedException e1) {
+//							Logger.logln(NAME+"Issue occurred while waiting for version control thread to sleep");
+//						}
+//        		    }
+//        		}
         		main.versionControl.undo();
         	}
         };
@@ -221,15 +221,15 @@ public class MenuDriver {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Logger.logln(NAME+"Redo menu item clicekd");
-        		synchronized(main.versionControl){
-        		    while (!main.versionControl.isReady()){
-        		        try {
-							this.wait();
-						} catch (InterruptedException e1) {
-							Logger.logln(NAME+"Issue occurred while waiting for version control thread to sleep");
-						}
-        		    }
-        		}
+//        		synchronized(main.versionControl){
+//        		    while (!main.versionControl.isReady()){
+//        		        try {
+//							this.wait();
+//						} catch (InterruptedException e1) {
+//							Logger.logln(NAME+"Issue occurred while waiting for version control thread to sleep");
+//						}
+//        		    }
+//        		}
         		main.versionControl.redo();
         	}
         };

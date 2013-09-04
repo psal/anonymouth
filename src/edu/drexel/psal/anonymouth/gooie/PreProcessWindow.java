@@ -62,7 +62,7 @@ public class PreProcessWindow extends JDialog {
 	protected PreProcessDriver driver;
 	private static final long serialVersionUID = 1L;
 	protected PreProcessAdvancedWindow advancedWindow;
-	protected ProblemSet ps;
+	public ProblemSet ps;
 	private int width = 500, height = 410;
 	protected Container currentContainer;
 	protected boolean saved = false;

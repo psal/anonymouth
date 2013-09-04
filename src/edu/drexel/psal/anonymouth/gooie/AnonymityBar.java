@@ -318,7 +318,7 @@ public class AnonymityBar extends JPanel {
 	 * @param  show
 	 *         Whether or not you want the bar's fill to be visible
 	 */
-	protected void showFill(boolean show) {
+	public void showFill(boolean show) {
 		showFill = show;
 		repaint(); //no variables to update, just paint the fill
 	}
@@ -331,7 +331,7 @@ public class AnonymityBar extends JPanel {
 	 *        The value you want the bar to treat as the max, basically as the
 	 *        "100" in 0-100%.
 	 */
-	protected void setMaxFill(double maxPercent) {
+	public void setMaxFill(double maxPercent) {
 		maxFill = (float)maxPercent;
 	}
 

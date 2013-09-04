@@ -136,90 +136,83 @@ public class WordSuggestionsDriver {
 		documents.add(magician.getDocumentSets().get(2).get(0)); //we also want to count the user's test document
 
 		topToRemove = ConsolidationStation.getPriorityWordsToRemove(documents, .1);
-		if (filterWordsToAdd)
-			topToAdd = ConsolidationStation.getPriorityWordsToAdd(ConsolidationStation.otherSampleTaggedDocs, .05);
-		else
-			topToAdd = ConsolidationStation.getPriorityWordsToAdd(ConsolidationStation.otherSampleTaggedDocs, .06);
+		try {
+			if (filterWordsToAdd)
+				topToAdd = ConsolidationStation.getPriorityWordsToAdd(ConsolidationStation.otherSampleTaggedDocs, .05);
+			else
+				topToAdd = ConsolidationStation.getPriorityWordsToAdd(ConsolidationStation.otherSampleTaggedDocs, .06);
 
-		//-----------------HANDLING WORDS TO REMOVE-------------------
-		removeSize = topToRemove.size();
+			//-----------------HANDLING WORDS TO REMOVE-------------------
+			removeSize = topToRemove.size();
 
-		for (int i = 0; i < removeSize; i++) {
-			if (!topToRemove.get(i).equals("''") && !topToRemove.get(i).equals("``")) {
-				String left, right;
+			for (int i = 0; i < removeSize; i++) {
+				if (!topToRemove.get(i).equals("''") && !topToRemove.get(i).equals("``")) {
+					String left, right;
 
-				//The element to remove
-				if (PUNCTUATION.contains(topToRemove.get(i)[0].trim()))
-					left = "Reduce " + topToRemove.get(i)[0] + "'s";
-				else
-					left = topToRemove.get(i)[0];
+					//The element to remove
+					if (PUNCTUATION.contains(topToRemove.get(i)[0].trim()))
+						left = "Reduce " + topToRemove.get(i)[0] + "'s";
+					else
+						left = topToRemove.get(i)[0];
 
-				//The number of occurrences
-				if (topToRemove.get(i)[1].equals("0"))
-					right = "None";
-				else if (topToRemove.get(i)[1].equals("1"))
-					right = "1 time";
-				else
-					right = topToRemove.get(i)[1] + " times";
+					//The number of occurrences
+					if (topToRemove.get(i)[1].equals("0"))
+						right = "None";
+					else if (topToRemove.get(i)[1].equals("1"))
+						right = "1 time";
+					else
+						right = topToRemove.get(i)[1] + " times";
 
-				main.elementsToRemoveModel.insertRow(i, new String[] {left, right});
+					main.elementsToRemoveModel.insertRow(i, new String[] {left, right});
 
-				if (topToRemove.get(i)[0].trim().equals(prevSelectedElement)) {
-					main.elementsToRemoveTable.setRowSelectionInterval(i, i);
-				}
-			}		
-		}
-
-		//-----------------HANDLING WORDS TO ADD-------------------
-		addSize = topToAdd.size();
-		int tableIndex = 0;
-		ArrayList<String> good = new ArrayList<String>();
-		ArrayList<String> bad = new ArrayList<String>();
-
-		for (int i = 0; i < addSize; i++) {
-			boolean add = false;
-			String curWord = topToAdd.get(i);
-			
-			if (filterWordsToAdd) {
-				if (words.contains(curWord)) {
-					//If the word's a word, don't even question it, just add it.
-					add = true;
-				} else if (curWord.matches("^[a-z-'A-Z\\.]*$")) { //^[A-Z][a-zA-Z]*$
-					//If the word's sane, basically like We'd, need-based, but may not exactly show up in a dictionary, add it
-					//This also accounts for made up words.
-					add = true;
-				} else if (curWord.equals("...")) {
-					//We don't want to leave this out as a suggestion if possible
-					add = true;
-				}
-			} else {
-				add = true;
+					if (topToRemove.get(i)[0].trim().equals(prevSelectedElement)) {
+						main.elementsToRemoveTable.setRowSelectionInterval(i, i);
+					}
+				}		
 			}
-			
-			if (add) {
-				good.add(topToAdd.get(i));
-				main.elementsToAdd.add(tableIndex, topToAdd.get(i));
-				tableIndex++;
 
-				if (topToAdd.get(i).equals(prevSelectedElement)) {
-					main.elementsToAddPane.setSelectedValue(topToAdd.get(i), true);
+			//-----------------HANDLING WORDS TO ADD-------------------
+			addSize = topToAdd.size();
+			int tableIndex = 0;
+			ArrayList<String> good = new ArrayList<String>();
+			ArrayList<String> bad = new ArrayList<String>();
+
+			for (int i = 0; i < addSize; i++) {
+				boolean add = false;
+				String curWord = topToAdd.get(i);
+				
+				if (filterWordsToAdd) {
+					if (words.contains(curWord)) {
+						//If the word's a word, don't even question it, just add it.
+						add = true;
+					} else if (curWord.matches("^[a-z-'A-Z\\.]*$")) { //^[A-Z][a-zA-Z]*$
+						//If the word's sane, basically like We'd, need-based, but may not exactly show up in a dictionary, add it
+						//This also accounts for made up words.
+						add = true;
+					} else if (curWord.equals("...")) {
+						//We don't want to leave this out as a suggestion if possible
+						add = true;
+					}
+				} else {
+					add = true;
 				}
-			} else {
-				bad.add(topToAdd.get(i));
+				
+				if (add) {
+					good.add(topToAdd.get(i));
+					main.elementsToAdd.add(tableIndex, topToAdd.get(i));
+					tableIndex++;
+
+					if (topToAdd.get(i).equals(prevSelectedElement)) {
+						main.elementsToAddPane.setSelectedValue(topToAdd.get(i), true);
+					}
+				} else {
+					bad.add(topToAdd.get(i));
+				}
 			}
+		} catch (Exception e) {
+			Logger.logln(NAME+"An error occured while obtaining and placing Word Suggestions");
+			Logger.logln(e);
 		}
-		
-		//Prints out the results of the filter (for debugging purposes)
-		/*
-		System.out.println("============GOOD===========");
-		for (int i = 0; i < good.size(); i++) {
-			System.out.println(good.get(i));
-		}
-		System.out.println("=============BAD===========");
-		for (int i = 0; i < bad.size(); i++) {
-			System.out.println(bad.get(i));
-		}
-		*/
 	}
 
 	/**

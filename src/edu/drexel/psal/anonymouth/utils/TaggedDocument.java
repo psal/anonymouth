@@ -58,6 +58,22 @@ public class TaggedDocument implements Serializable {
 	protected transient List<? extends HasWord> sentenceTokenized;
 	protected transient Tokenizer<? extends HasWord> toke;
 	public SentenceMaker sentenceMaker;
+	
+	/**
+	 * The way we have taggedSentences structured, while easy in most cases,
+	 * breaks whenever the user tries to type after the last sentence. That's
+	 * why we need to actively detect when they are doing so and create an
+	 * empty tagged sentence for their new writing to go into every caret
+	 * event that calls for it.<br><br>
+	 * 
+	 * We create this blank tagged sentence whenever they are typing at the
+	 * end of a document OR when they click to the end of document from
+	 * somewhere else and there isn't already a blank sentence in place ready
+	 * to accept the new text. That's where this boolean comes in, it keeps
+	 * track for us whether or not it's necessary to create a new extra tagged
+	 * sentence.
+	 */
+	public boolean endSentenceExists;
 
 	/**
 	 * Instead of having to call size() on taggedSentences every time we want
@@ -72,7 +88,26 @@ public class TaggedDocument implements Serializable {
 	 * ourselves and keep things constant time.
 	 */
 	public int length = 0;
-	public static boolean userDeletedSentence = false;
+	
+	/**
+	 * Greater than -1 when we are supposed to be keeping an eye out for a
+	 * specific EOS character that we are as of yet unsure whether or not it's
+	 * an EOS or just an abbreviation, ellipses, etc. Should be equal to the
+	 * index of the EOS character we're watching so we can use it to set ignore
+	 * to false if necessary.
+	 */
+	public int watchForEOS;
+	
+	/**
+	 * Greater than -1 when we are supposed to be keeping an eye out for a
+	 * specific EOS character at the very end of the document that we are as
+	 * of yet unsure whether or not it's an EOS or just an abbreviation, ellispes,
+	 * etc. Should be equal to the index of the EOS character (length of the
+	 * document) we're watching so we can use it to set ignore to false if necessary.
+	 */
+	public int watchForLastSentenceEOS;
+	
+	public boolean userDeletedSentence = false;
 
 	//=======================================================================
 	//*						CONSTRUCTORS / INITIALIZES						*	
@@ -86,6 +121,7 @@ public class TaggedDocument implements Serializable {
 		sentenceMaker = new SentenceMaker(main);
 		eosTracker = new EOSTracker();
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
+		endSentenceExists = false;
 	}
 
 	/**
@@ -101,6 +137,7 @@ public class TaggedDocument implements Serializable {
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		makeAndTagSentences(untaggedDocument, true);
 		setDocumentLength(untaggedDocument);
+		endSentenceExists = false;
 	}
 
 	/**
@@ -123,6 +160,7 @@ public class TaggedDocument implements Serializable {
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		makeAndTagSentences(untaggedDocument, true);
 		setDocumentLength(untaggedDocument);
+		endSentenceExists = false;
 	}
 
 	/**
@@ -154,6 +192,7 @@ public class TaggedDocument implements Serializable {
 		
 		setDocumentLength(td.getUntaggedDocument());
 		sentenceMaker = td.sentenceMaker;
+		endSentenceExists = td.endSentenceExists;
 	}
 
 	/**
