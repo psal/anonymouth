@@ -35,6 +35,7 @@ public class SentenceMaker implements Serializable  {
 	private static final long serialVersionUID = -5007508872576011005L;
 	private final String NAME = "( " + this.getClass().getName() + " ) - ";
 
+	private GUIMain main;
 	private EditorDriver editorDriver;
 	private EOSTracker eosTracker;
 	
@@ -100,7 +101,7 @@ public class SentenceMaker implements Serializable  {
 	 */
 	public SentenceMaker(GUIMain main) {
 		ABBREVIATIONS = FileHelper.hashSetFromFile(ANONConstants.ABBREVIATIONS_FILE);
-		this.editorDriver = main.editorDriver;
+		this.main = main;
 	}
 	
 	/**
@@ -124,7 +125,8 @@ public class SentenceMaker implements Serializable  {
 	 * 		An ArrayList of Strings (which are the sentence representation
 	 * 		of the given text)
 	 */
-	public ArrayList<String> splitIntoSentences(String text) {
+	public ArrayList<String> makeSentences(String text) {
+		System.out.println("+++++++++++++++++++++");
 		/*
 		 * Quick check so we're not trying to split up an empty
 		 * String. This only happens right before the user types
@@ -132,12 +134,18 @@ public class SentenceMaker implements Serializable  {
 		 * split, so return.
 		 */
 		if (text.equals("")) {
-			ArrayList<String> finalSents = new ArrayList<String>();
-			finalSents.add("");
-			return finalSents;
+			ArrayList<String> sents = new ArrayList<String>();
+			sents.add("");
+			return sents;
 		}
 		
-		this.eosTracker = editorDriver.taggedDoc.eosTracker;
+		/**
+		 * Because the eosTracker isn't initialized until the TaggedDocument is,
+		 * it won't be ready until near the end of DocumentProcessor, in which
+		 * case we want to set it to the correct
+		 */
+		this.eosTracker = main.editorDriver.taggedDoc.eosTracker;
+		this.editorDriver = main.editorDriver;
 		
 		ArrayList<String> sents = new ArrayList<String>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		ArrayList<String> finalSents = new ArrayList<String>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);

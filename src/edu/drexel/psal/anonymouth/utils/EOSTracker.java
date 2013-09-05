@@ -35,7 +35,7 @@ public class EOSTracker implements Serializable {
 	/**
 	 * The number of EOSes we are currently tracking
 	 */
-	private int size;
+	protected int size;
 
 	/**
 	 * Constructor
@@ -51,7 +51,7 @@ public class EOSTracker implements Serializable {
 	 * @param eosCT
 	 *        EOSTracker instance
 	 */
-	public EOSTracker( EOSTracker eosTracker) {
+	public EOSTracker(EOSTracker eosTracker) {
 		int tempSize = eosTracker.eoses.size();
 		eoses = new ArrayList<EOS>(size);
 
@@ -106,11 +106,7 @@ public class EOSTracker implements Serializable {
 		size++;
 	}
 	
-	/**
-	 * Obtains the EOS character at the index given and sets whether or not to ignore it.
-	 * @param index - The index of the EOS character to ignore/not ignore
-	 * @param b - whether or not to ignore the EOS character
-	 */
+
 	/**
 	 * Obtains the EOS character at the given index and sets whether or not to ignore it.
 	 * 
@@ -127,7 +123,7 @@ public class EOSTracker implements Serializable {
 		
 		for (int i = 0; i < size; i++) {
 			if (index == eoses.get(i).location) {
-				Logger.logln(NAME+"Now recognizing EOS character at " + index);
+				Logger.logln(NAME+"Will ignore EOS character at " + index + ": " + ignore);
 				eoses.get(i).ignore = ignore;
 				found = true;
 				break;
@@ -135,15 +131,6 @@ public class EOSTracker implements Serializable {
 		}
 
 		return found;
-	}
-
-	/**
-	 * Used for debugging purposes, prints out all EOSes,
-	 * their respective locations, and whether or not we're ignoring them.
-	 */
-	public void printEOSes() {
-		for (int i = 0; i < size; i++)
-			Logger.logln(NAME + "   " + eoses.get(i));
 	}
 	
 	/**
@@ -241,19 +228,17 @@ public class EOSTracker implements Serializable {
 	 */
 	public void resetEOSCharacters() {
 		eoses.clear();
+		size = 0;
 	}
 	
 	/**
 	 * Returns a string representation of this EOSTracker
 	 */
 	public String toString() {
-		String toReturn = "[ ";
-
+		String toReturn = "";
 		for (int i = 0; i < size; i++) {
-			toReturn += eoses.get(i).toString() + ", ";
+			toReturn += NAME+ "   " + eoses.get(i) + "\n";
 		}
-
-		toReturn = toReturn.substring(0, toReturn.length()-1) + "]";
 
 		return toReturn;
 	}
@@ -306,6 +291,6 @@ class EOS implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "[ "+eos+" : "+location+" ]";
+		return "[ "+eos+" : "+location+", is end of sentence = " + ignore + " ]";
 	}
 }	

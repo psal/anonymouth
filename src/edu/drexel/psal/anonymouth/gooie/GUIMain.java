@@ -834,9 +834,7 @@ public class GUIMain extends JFrame {
 				fileSaveAsTestDocMenuItem.setEnabled(enable);
 				viewClustersMenuItem.setEnabled(enable);
 				elementsToAddPane.setEnabled(enable);
-				elementsToAddPane.setFocusable(enable);
 				elementsToRemoveTable.setEnabled(enable);
-				elementsToRemoveTable.setFocusable(enable);
 				documentPane.setEnabled(enable);
 				clipboard.setEnabled(enable);
 				

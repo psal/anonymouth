@@ -50,6 +50,7 @@ public class TaggedDocument implements Serializable {
 	protected ArrayList<TaggedSentence> taggedSentences;
 	
 	public EOSTracker eosTracker;
+	private GUIMain main;
 	
 	protected String documentTitle = "None";
 	protected String documentAuthor = "None";
@@ -57,7 +58,6 @@ public class TaggedDocument implements Serializable {
 	protected transient TreebankLanguagePack tlp = new PennTreebankLanguagePack(); 
 	protected transient List<? extends HasWord> sentenceTokenized;
 	protected transient Tokenizer<? extends HasWord> toke;
-	public SentenceMaker sentenceMaker;
 	
 	/**
 	 * The way we have taggedSentences structured, while easy in most cases,
@@ -96,7 +96,7 @@ public class TaggedDocument implements Serializable {
 	 * index of the EOS character we're watching so we can use it to set ignore
 	 * to false if necessary.
 	 */
-	public int watchForEOS;
+	public int watchForEOS = -1;
 	
 	/**
 	 * Greater than -1 when we are supposed to be keeping an eye out for a
@@ -105,7 +105,7 @@ public class TaggedDocument implements Serializable {
 	 * etc. Should be equal to the index of the EOS character (length of the
 	 * document) we're watching so we can use it to set ignore to false if necessary.
 	 */
-	public int watchForLastSentenceEOS;
+	public int watchForLastSentenceEOS = -1;
 	
 	public boolean userDeletedSentence = false;
 
@@ -118,26 +118,35 @@ public class TaggedDocument implements Serializable {
 	 * Constructor, creates a blank taggedDocument.
 	 */
 	public TaggedDocument(GUIMain main) {
-		sentenceMaker = new SentenceMaker(main);
+		this.main = main;
 		eosTracker = new EOSTracker();
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		endSentenceExists = false;
 	}
-
+	
 	/**
 	 * Constructor, accepts an untagged string (a whole document), and makes
 	 * sentence tokens out of it to create a full Tagged Document
 	 * 
+	 * @param main
+	 * 		  GUIMain instance
 	 * @param untaggedDocument
 	 *        The String of the document you want to tag.
+	 * @param waitToTag
+	 * 		  Whether or not to immediately makeandTagSentences or to wait until directly called later
 	 */
-	public TaggedDocument(GUIMain main, String untaggedDocument) {
-		sentenceMaker = new SentenceMaker(main);
+	public TaggedDocument(GUIMain main, String untaggedDocument, boolean waitToTag) {
+		this.main = main;
 		eosTracker = new EOSTracker();
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
-		makeAndTagSentences(untaggedDocument, true);
 		setDocumentLength(untaggedDocument);
 		endSentenceExists = false;
+		
+		if (waitToTag) {
+			initEOSTracker(untaggedDocument);
+		} else {
+			makeAndTagSentences(untaggedDocument, true);
+		}
 	}
 
 	/**
@@ -152,15 +161,15 @@ public class TaggedDocument implements Serializable {
 	 *        The author of the document.
 	 */
 	public TaggedDocument(GUIMain main, String untaggedDocument, String docTitle, String author){
+		this.main = main;
 		this.documentTitle = docTitle;
 		this.documentAuthor = author;
 		eosTracker = new EOSTracker();
 
-		sentenceMaker = new SentenceMaker(main);
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
-		makeAndTagSentences(untaggedDocument, true);
 		setDocumentLength(untaggedDocument);
 		endSentenceExists = false;
+		makeAndTagSentences(untaggedDocument, true);
 	}
 
 	/**
@@ -171,6 +180,7 @@ public class TaggedDocument implements Serializable {
 	 *         The TaggedDocument you want to initiate a deep copy for
 	 */
 	public TaggedDocument(TaggedDocument td) {
+		this.main = td.main;
 		int numTaggedSents = td.taggedSentences.size();
 		numOfSentences = numTaggedSents;
 		
@@ -191,7 +201,6 @@ public class TaggedDocument implements Serializable {
 		eosTracker = new EOSTracker(td.eosTracker);
 		
 		setDocumentLength(td.getUntaggedDocument());
-		sentenceMaker = td.sentenceMaker;
 		endSentenceExists = td.endSentenceExists;
 	}
 
@@ -205,7 +214,18 @@ public class TaggedDocument implements Serializable {
 
 		for (int i = 0; i < numChars; i++) {
 			if (eosTracker.isEOS(docToAnonymize[i])) {
-				eosTracker.addEOS(docToAnonymize[i],i,false);
+				eosTracker.addEOS(docToAnonymize[i], i, false);
+			}
+		}
+	}
+	
+	private void initEOSTracker(String document) {
+		char[] docToAnonymize = document.toCharArray();
+		int numChars = docToAnonymize.length;
+		
+		for (int i = 0; i < numChars; i++) {
+			if (eosTracker.isEOS(docToAnonymize[i])) {
+				eosTracker.addEOS(docToAnonymize[i], i, false);
 			}
 		}
 	}
@@ -297,8 +317,8 @@ public class TaggedDocument implements Serializable {
 		if (length == 0 ) {
 			setDocumentLength(untagged);
 		}
-		
-		ArrayList<String> untaggedSents = sentenceMaker.splitIntoSentences(untagged);
+
+		ArrayList<String> untaggedSents = main.editorDriver.sentenceMaker.makeSentences(untagged);
 		ArrayList<TaggedSentence> taggedSentences = new ArrayList<TaggedSentence>(untaggedSents.size());
 		Iterator<String> strRayIter = untaggedSents.iterator();
 		String tempSent;
@@ -334,7 +354,8 @@ public class TaggedDocument implements Serializable {
 				this.taggedSentences.add(taggedSentences.get(i)); 
 			}
 			
-			initEOSTracker();
+			if (eosTracker.size == 0)
+				initEOSTracker();
 		}
 		return taggedSentences;
 	}

@@ -4,16 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
-import edu.drexel.psal.anonymouth.utils.SentenceMaker;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
-import edu.drexel.psal.anonymouth.utils.TaggedSentence;
+import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
  * Provides the framework for a right-click menu in the editor.
@@ -22,6 +20,12 @@ import edu.drexel.psal.anonymouth.utils.TaggedSentence;
  */
 public class RightClickMenu extends JPopupMenu {
 
+	//Constants
+	private static final long serialVersionUID = 1L;
+	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
+	private final HashSet<Character> EOS;
+	
+	//Variables
 	private JMenuItem cut;
 	private JMenuItem copy;
 	private JMenuItem paste;
@@ -29,15 +33,14 @@ public class RightClickMenu extends JPopupMenu {
 	private JMenuItem combineSentences;
 	private JMenuItem resetHighlighter;
 	private GUIMain main;
+	
+	//Listeners
 	private ActionListener cutListener;
 	private ActionListener copyListener;
 	private ActionListener pasteListener;
 	private ActionListener combineSentencesListener;
 	private ActionListener resetHighlighterListener;
-	private MouseListener popupListener;
-	public ArrayList<String> sentences;
-
-	private static final long serialVersionUID = 1L;
+	private PopupListener popupListener;
 
 	/**
 	 * CONSTRUCTOR
@@ -49,6 +52,11 @@ public class RightClickMenu extends JPopupMenu {
 		separator = new JSeparator();
 		combineSentences = new JMenuItem("Make a single sentence");
 		resetHighlighter = new JMenuItem("Reset Highlighter");
+		
+		EOS = new HashSet<Character>(3);
+		EOS.add('.');
+		EOS.add('!');
+		EOS.add('?');
 		
 		this.add(cut);
 		this.add(copy);
@@ -92,38 +100,22 @@ public class RightClickMenu extends JPopupMenu {
 		combineSentencesListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int size = sentences.size();
-				int pastLength = 0;
-				int length = 0;
-				ArrayList<TaggedSentence> taggedSentences = new ArrayList<TaggedSentence>();
-				
-				//Goes through the selected sentences and for each EOS character we find (EXCLUDING the EOS character at the end of the last sentence) marks them as ignorable.
-				for (int i = 0; i < size; i++) {
-					length = sentences.get(i).length();
-					char character = main.documentPane.getText().charAt(length-1+PopupListener.mark+pastLength);
-
-					if ((character == '.' || character == '!' || character == '?') && size-1 != i) {
-						main.editorDriver.taggedDoc.eosTracker.setIgnore(length - 1 + PopupListener.mark+pastLength, true);
-					}
-										
-					taggedSentences.add(main.editorDriver.taggedDoc.getTaggedSentenceAtIndex(length + PopupListener.mark + pastLength));
-					pastLength += length;
-				}
-								
-				TaggedSentence replacement = main.editorDriver.taggedDoc.concatSentences(taggedSentences);
-				main.editorDriver.taggedDoc.removeMultipleAndReplace(taggedSentences, replacement);
-				
-				int[] selectedSentInfo = main.editorDriver.getSentencesIndices(PopupListener.mark)[0];
-
-				//We want to make sure we're setting the caret at the actual start of the sentence and not in white space (so it gets highlighted)
-				int space = 0;
 				String text = main.documentPane.getText();
-				while (text.charAt(selectedSentInfo[1] + space)  == ' ' || text.charAt(selectedSentInfo[1] + space) == '\n') {
-					space++;
+				main.editorDriver.taggedDoc = new TaggedDocument(main, text, true);
+				
+				for (int i = popupListener.start; i < popupListener.stop; i++) {
+					if (EOS.contains(text.charAt(i))) {
+						main.editorDriver.taggedDoc.eosTracker.setIgnore(i, true);
+					}
 				}
 				
-				main.editorDriver.newCaretPosition[0] = selectedSentInfo[1]+space;
-				main.editorDriver.newCaretPosition[1] = selectedSentInfo[1]+space;
+
+				main.editorDriver.newCaretPosition[0] = popupListener.start;
+				main.editorDriver.newCaretPosition[1] = main.editorDriver.newCaretPosition[0];
+				main.editorDriver.sentIndices[0] = 0;
+				
+				main.editorDriver.taggedDoc.makeAndTagSentences(text, true);
+				
 				main.editorDriver.syncTextPaneWithTaggedDoc();
 			}
 		};
@@ -132,10 +124,15 @@ public class RightClickMenu extends JPopupMenu {
 		resetHighlighterListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				main.editorDriver.taggedDoc.eosTracker.resetEOSCharacters();
-				main.editorDriver.taggedDoc = new TaggedDocument(main, main.documentPane.getText());
-				main.editorDriver.syncTextPaneWithTaggedDoc();
-				main.versionControl.init();
+				try {
+					main.editorDriver.taggedDoc.eosTracker.resetEOSCharacters();
+					main.editorDriver.taggedDoc = new TaggedDocument(main, main.documentPane.getText(), false);
+					main.editorDriver.syncTextPaneWithTaggedDoc();
+					main.versionControl.init();
+				} catch (Exception e1) {
+					Logger.logln(NAME+"Editor reset FAILED");
+					Logger.logln(e1);
+				}
 			}
 		};
 		resetHighlighter.addActionListener(resetHighlighterListener);
@@ -146,12 +143,25 @@ public class RightClickMenu extends JPopupMenu {
 	
 	/**
 	 * Enables or disables the combine sentences action.
-	 * @param b - Whether or not to enable to menu item.
+	 * 
+	 * @param b
+	 * 		Whether or not to enable to menu item.
 	 */
 	public void enableCombineSentences(boolean b) {
 		combineSentences.setEnabled(b);
 	}
 	
+	/**
+	 * Allows us to enable or disable all our cut, copy, and paste
+	 * items.
+	 * 
+	 * @param cut
+	 * 		Whether or not to enable the cut right click menu item.
+	 * @param copy
+	 * 		Whether or not to enable the copy right click menu item.
+	 * @param paste
+	 * 		Whether or not to enable the paste right click menu item.
+	 */
 	public void setEnabled(boolean cut, boolean copy, boolean paste) {
 		this.cut.setEnabled(cut);
 		this.copy.setEnabled(copy);
@@ -167,69 +177,78 @@ public class RightClickMenu extends JPopupMenu {
  */
 class PopupListener extends MouseAdapter {
 	
+	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
 	private final String EOS = ".!?";
 	private JPopupMenu popup;
 	private GUIMain main;
-	private SentenceMaker sentenceTools;
 	private RightClickMenu rightClickMenu;
-	public static int mark;
+	protected int start;
+	protected int stop;
 
 	/**
 	 * CONSTRUCTOR
-	 * @param popupMenu - An instance of the menu desired to present when the user right clicks.
-	 * @param main - An instance of GUIMain.
-	 * @param rightClickMenu - An instance of RightClickMenu.
+	 * 
+	 * @param popupMenu
+	 * 		An instance of the menu desired to present when the user right clicks.
+	 * @param main
+	 * 		An instance of GUIMain.
+	 * @param rightClickMenu
+	 * 		An instance of RightClickMenu.
 	 */
 	public PopupListener(JPopupMenu popupMenu, GUIMain main, RightClickMenu rightClickMenu) {
 		popup = popupMenu;
 		this.main = main;
-		sentenceTools = new SentenceMaker(main);
 		this.rightClickMenu = rightClickMenu;
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		maybeShowPopup(e);
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		maybeShowPopup(e);
+		try {
+			showPopup(e);
+		} catch (Exception e1) {
+			Logger.logln(NAME+"Error occurred while attempting to show popup, will force show");
+			Logger.logln(e1);
+			
+			rightClickMenu.enableCombineSentences(false);
+			popup.show(e.getComponent(), e.getX(), e.getY());
+		}	
 	}
 	
 	/**
-	 * Displays the right-click menu. Also checks whether or not the user has selected acceptable text and enables/disables combining sentences based on that.
-	 * @param e - MouseEvent
+	 * Displays the right-click menu. Also checks whether or not the user has
+	 * selected acceptable text and enables/disables combining sentences based on that.
+	 * @param e
 	 */
-	private void maybeShowPopup(MouseEvent e) {
+	private void showPopup(MouseEvent e) {
 		/*
-		 * While it does seem a bit silly, we need a check to make sure the documentPane is enabled since this method will get called during the processing stage and
-		 * we don't want anything below to be fired during so. This checks to make sure the user has selected appropriate text for the combine sentences option to be
-		 * enabled.
+		 * While it does seem a bit silly, we need a check to make sure the
+		 * documentPane is enabled since this method will get called during
+		 * the processing stage and we don't want anything below to be fired
+		 * during so. This checks to make sure the user has selected
+		 * appropriate text for the combine sentences option to be enabled.
 		 */
 		if (e.isPopupTrigger() && main.documentPane.isEnabled()) {
-			mark = main.documentPane.getCaret().getMark();
-			int dot = main.documentPane.getCaret().getDot();
-			
-			if (dot == mark) {
+			if (main.editorDriver.newCaretPosition[0] > main.editorDriver.newCaretPosition[1]) {
+				start = main.editorDriver.newCaretPosition[1];
+				stop = main.editorDriver.newCaretPosition[0];
+			} else {
+				start = main.editorDriver.newCaretPosition[0];
+				stop = main.editorDriver.newCaretPosition[1];
+			}
+
+			if (start == stop) {
 				rightClickMenu.enableCombineSentences(false);
 				rightClickMenu.setEnabled(false, false, true);
-			} else {
+			} else {				
+				int numOfEOSes = 0;
 				String text = main.documentPane.getText();
-				
-				int padding = 0;
-				int length = text.length();
-				while (!EOS.contains(text.substring(dot-1+padding, dot+padding))) {
-					padding++;
-					
-					if (dot+padding >= length)
-						break;
+				for (int i = start; i < stop-1; i++) {
+					if (EOS.contains(text.substring(i, i+1))) {
+						numOfEOSes++;
+					}
 				}
-				
-				text = text.substring(mark, dot+padding);
-				rightClickMenu.sentences = sentenceTools.splitIntoSentences(text);
-				
-				if (rightClickMenu.sentences.size() > 1)
+
+				if (numOfEOSes >= 1)
 					rightClickMenu.enableCombineSentences(true);
 				else
 					rightClickMenu.enableCombineSentences(false);

@@ -57,7 +57,8 @@ public class VersionControl {
 		this.main = main;
 
 		ready = true;
-
+		curCharBackupBuffer = CHARS_TIL_BACKUP-1;
+		
 		undo = new Stack<TaggedDocument>();
 		redo = new Stack<TaggedDocument>();
 		indicesUndo = new Stack<Integer>();
@@ -70,6 +71,15 @@ public class VersionControl {
 	 * yet have tagged documents ready when that happens, we have to wait.
 	 */
 	public void init() {
+		/*
+		undo.clear();
+		redo.clear();
+		indicesUndo.clear();
+		indicesRedo.clear();
+		main.enableRedo(false);
+		main.enableUndo(false);
+		*/
+		
 		editor = main.editorDriver;
 		pastTaggedDoc = new TaggedDocument(editor.taggedDoc);
 	}

@@ -187,7 +187,7 @@ public class DocumentProcessor {
 				int size = sampleDocs.size();
 				ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
 				for (int i = 0; i < size; i++) {
-					ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(main, sampleDocs.get(i).stringify()));
+					ConsolidationStation.otherSampleTaggedDocs.add(new TaggedDocument(main, sampleDocs.get(i).stringify(), false));
 				}
 			} else
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), false);

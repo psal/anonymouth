@@ -1,6 +1,7 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import edu.drexel.psal.anonymouth.engine.HighlighterEngine;
+import edu.drexel.psal.anonymouth.utils.SentenceMaker;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -34,6 +35,7 @@ public class EditorDriver {
 	private final char TAB = '\t';
 	private final char SPACE = ' ';
 	private GUIMain main;
+	public SentenceMaker sentenceMaker;
 
 	//----------- Listeners -----------------------------------------------
 	private ActionListener reProcessListener;
@@ -151,6 +153,7 @@ public class EditorDriver {
 	public EditorDriver(GUIMain main) {
 		this.main = main;
 		highlighterEngine = new HighlighterEngine(main);
+		sentenceMaker = new SentenceMaker(main);
 
 		EOS = new HashSet<Character>();
 		EOS.add('.');
@@ -356,7 +359,7 @@ public class EditorDriver {
 				prepareForReprocessing();
 				main.enableEverything(false);
 
-				taggedDoc = new TaggedDocument(main, main.documentPane.getText());
+				taggedDoc = new TaggedDocument(main, main.documentPane.getText(), false);
 				main.documentProcessor.process();
 			}
 		};
@@ -925,11 +928,13 @@ public class EditorDriver {
 		}
 		main.documentPane.getCaret().setDot(newCaretPosition[0]);
 		main.documentPane.setCaretPosition(newCaretPosition[0]);
-		
 		ignoreChanges = false;
-		
+		charsInserted = 0;
+		charsRemoved = 0;
 		updateEditorVariables();
 		updateBarAndHighlight();
+		charsInserted = 0;
+		charsRemoved = 0;
 	}
 
 	/**
@@ -943,7 +948,7 @@ public class EditorDriver {
 	 *        The updated sentence text
 	 */
 	public void updateSentence(int sentNumToUpdate, String updatedText) {
-		Logger.logln(NAME+"Updating sentence # = " + sentNumToUpdate + " with new string: " + updatedText);
+		Logger.logln(NAME+"UPDATING sentence # = " + sentNumToUpdate + " with new string: " + updatedText);
 		taggedDoc.removeAndReplace(sentNumToUpdate, updatedText);
 	}
 
