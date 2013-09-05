@@ -126,7 +126,6 @@ public class SentenceMaker implements Serializable  {
 	 * 		of the given text)
 	 */
 	public ArrayList<String> makeSentences(String text) {
-		System.out.println("+++++++++++++++++++++");
 		/*
 		 * Quick check so we're not trying to split up an empty
 		 * String. This only happens right before the user types

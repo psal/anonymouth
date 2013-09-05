@@ -780,7 +780,7 @@ public class EditorDriver {
 			 */
 			int startIndex = 0;
 			int endIndex = 0;
-			
+
 			try {
 				if (selectedSentence >= numSents)
 					return null; //Should never be greater than or equal to the number of sents
