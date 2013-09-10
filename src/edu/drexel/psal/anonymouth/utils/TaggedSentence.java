@@ -56,7 +56,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	 * Constructor -- accepts an untagged string.
 	 * @param untagged
 	 */
-	public TaggedSentence(String untagged){
+	public TaggedSentence(String untagged) {
 		sentenceLevelFeaturesFound = new SparseReferences(10); // probably won't find more than 10 features in the sentence.
 		wordsInSentence = new ArrayList<Word>(10);
 		this.untagged = untagged;
@@ -104,7 +104,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		numElements = ts.conjugations.size();
 		for(i = 0; i < numElements; i++)
 			conjugations.add(ts.conjugations.get(i));
-				
 	}
 	
 

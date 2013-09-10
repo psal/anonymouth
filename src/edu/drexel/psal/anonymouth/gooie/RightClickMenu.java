@@ -105,7 +105,7 @@ public class RightClickMenu extends JPopupMenu {
 				
 				for (int i = popupListener.start; i < popupListener.stop; i++) {
 					if (EOS.contains(text.charAt(i))) {
-						main.editorDriver.taggedDoc.eosTracker.setIgnore(i, true);
+						main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(i, true);
 					}
 				}
 				
@@ -125,7 +125,7 @@ public class RightClickMenu extends JPopupMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					main.editorDriver.taggedDoc.eosTracker.resetEOSCharacters();
+					main.editorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
 					main.editorDriver.taggedDoc = new TaggedDocument(main, main.documentPane.getText(), false);
 					main.editorDriver.syncTextPaneWithTaggedDoc();
 					main.versionControl.init();

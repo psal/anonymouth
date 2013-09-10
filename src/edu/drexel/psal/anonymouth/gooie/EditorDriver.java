@@ -8,7 +8,6 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
 
 import javax.swing.SwingWorker;
 import javax.swing.event.CaretEvent;
@@ -30,7 +29,6 @@ public class EditorDriver {
 	//============Assorted=================================================
 
 	private final String NAME = "( " + this.getClass().getSimpleName() + " )- ";
-	private final HashSet<Character> EOS;
 	private final char NEWLINE = System.lineSeparator().charAt(0);
 	private final char TAB = '\t';
 	private final char SPACE = ' ';
@@ -67,6 +65,9 @@ public class EditorDriver {
 	 * will then do auto highlights upon completion.
 	 */
 	private boolean placeAutoHighlightsWhenDone;
+	
+	private int extraSentences;
+	private boolean textChanged;
 	
 	//================Editor=================================================
 
@@ -109,6 +110,8 @@ public class EditorDriver {
 	 * previous sentence ended to this sentence's end.)
 	 */
 	public int[] sentIndices;
+	
+	private int[] highlightIndices;
 	/**
 	 * The old sentNum value from the prievous caret event.
 	 */
@@ -116,7 +119,7 @@ public class EditorDriver {
 	/**
 	 * The old sentence indices from the previous caret event.
 	 */
-	private int[] pastSentIndices;
+	public int[] pastSentIndices;
 
 	private boolean wholeLastSentDeleted;		//Used for EOS character deletion
 	private boolean wholeBeginningSentDeleted;	//Used for EOS character deletion
@@ -155,11 +158,6 @@ public class EditorDriver {
 		highlighterEngine = new HighlighterEngine(main);
 		sentenceMaker = new SentenceMaker(main);
 
-		EOS = new HashSet<Character>();
-		EOS.add('.');
-		EOS.add('!');
-		EOS.add('?');
-
 		initListeners();
 		initThreads();
 		resetToDefaults();
@@ -182,7 +180,8 @@ public class EditorDriver {
 				}
 
 				Logger.logln(NAME+"=============================================================================");
-				boolean textChanged = false;
+				textChanged = false;
+				pastSentNum = sentNum;
 				newCaretPosition[0] = e.getDot();
 				newCaretPosition[1] = e.getMark();
 				priorCaretPosition = newCaretPosition[0] - charsInserted + charsRemoved;
@@ -217,12 +216,13 @@ public class EditorDriver {
 				 * what was the end of the sentence and update it as such.
 				 */
 				if (taggedDoc.watchForEOS != -1 && charsInserted == 0 && charsRemoved == 0) {
-					taggedDoc.eosTracker.setIgnore(taggedDoc.watchForEOS, false);
+					taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
 					updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
 					taggedDoc.watchForEOS = -1;
 				}
 
 				if (charsRemoved > 0) {
+					System.out.println("SHOULD BE DELETING!!!!!");
 					taggedDoc.incrementDocumentLength(charsRemoved * -1);
 
 					//If we are unsure about an EOS character at the end of the doc, keep track of it.
@@ -244,27 +244,11 @@ public class EditorDriver {
 					insertion(); //We MUST make sure to handle any EOS characters being added
 
 					main.documentSaved = false;
-					taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsInserted);
+					taggedDoc.specialCharTracker.shiftAll(newCaretPosition[0], charsInserted);
 				}
-
-				int[] selectionInfo;
-				try {
-					selectionInfo = getSentencesIndices(priorCaretPosition)[0];
-
-					if (selectionInfo == null)
-						return;
-				} catch (ArrayIndexOutOfBoundsException e1) {
-					Logger.logln(NAME+"An issue occured while calculating the sentence indices of the current selection.", LogOut.STDERR);
-					Logger.logln(e1);
-					return;
-				}
-
-				//Update the position variables based on those sentence indices just calculated
-				pastSentNum = sentNum; 		//The current sent number is now the past sent number
-				sentNum = selectionInfo[0]; //Set the new sent number
-				sentIndices[0] = selectionInfo[1];
-				sentIndices[1] = selectionInfo[2];
-
+				
+				System.out.println(taggedDoc.specialCharTracker);
+				
 				/**
 				 * We do NOT want the code inside here to run if the current
 				 * sentence is the last one in the document (Screws things up)
@@ -289,10 +273,11 @@ public class EditorDriver {
 						sentIndices[1] += charsInserted;
 						charsInserted = 0;
 					} else {
+						taggedDoc.specialCharTracker.indicesAlreadyAdjusted = null;
 						main.translationsPanel.updateTranslationsPanel(taggedDoc.getSentenceNumber(sentNum));
 					}
 				}
-				
+
 				if (textChanged) {
 					/**
 					 * We need to do a little cleaning up with the end
@@ -306,11 +291,14 @@ public class EditorDriver {
 					}
 
 					updateSentence(sentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+					
+					updateEditorVariables();
+					updateBarAndHighlight();
+				} else {
+					updateEditorVariables();
+					updateBarAndHighlight();
 				}
 				
-				updateEditorVariables();
-				updateBarAndHighlight();
-
 				//Preparing everything for the next event
 				charsRemoved = 0;
 				charsInserted = 0;
@@ -318,7 +306,6 @@ public class EditorDriver {
 				oldCaretPosition[1] = newCaretPosition[1];
 				pastSentIndices[0] = sentIndices[0];
 				pastSentIndices[1] = sentIndices[1];
-				
 			}
 		};
 		main.documentPane.addCaretListener(caretListener);
@@ -395,7 +382,7 @@ public class EditorDriver {
 					
 					int whiteSpace = getWhiteSpaceBuffer(sentIndices[0]);
 					if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
-						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+						highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1], extraSentences);
 					}
 				}
 			}
@@ -428,8 +415,12 @@ public class EditorDriver {
 	 * between.
 	 */
 	private void deletion() {
+		//Remove all Quotes and Parenthesis in range
+		taggedDoc.specialCharTracker.removeTextWrappersInRange(newCaretPosition[0], priorCaretPosition);
+		
 		//If we removed an EOS in the given range...
-		if (taggedDoc.eosTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
+		if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
+			textChanged = false;
 			/**
 			 * If the user is editing after the last tagged sentence and
 			 * decids to delete their EOS character before it was set as a
@@ -587,10 +578,10 @@ public class EditorDriver {
 			 * This needs to be reset since we don't want the standard, ordinatry remove character
 			 * code to be executed (since it's already taken care of here since)
 			 */
-			taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
+			taggedDoc.specialCharTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
 			charsRemoved = 0;
 		} else {
-			taggedDoc.eosTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
+			taggedDoc.specialCharTracker.shiftAll(newCaretPosition[0], charsRemoved*-1);
 		}
 
 		taggedDoc.watchForEOS = -1;
@@ -613,25 +604,17 @@ public class EditorDriver {
 		 */
 		if (charsInserted > 1) {
 			if (taggedDoc.watchForEOS != -1) {
-				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
-					taggedDoc.eosTracker.setIgnore(taggedDoc.watchForEOS, false);
-					
-					if (updateSuggestionsThread.isDone()) {
-						prepareWordSuggestionsThread();
-						updateSuggestionsThread.execute();
-					}
+				if (isWhiteSpace(newChar)) {
+					taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
+					updateSuggestions();
 				}
 				
 				taggedDoc.watchForEOS = -1;
 			} else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
-				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+				if (isWhiteSpace(newChar)) {
 					taggedDoc.endSentenceExists = false;
-					taggedDoc.eosTracker.setIgnore(taggedDoc.watchForLastSentenceEOS, false);
-					
-					if (updateSuggestionsThread.isDone()) {
-						prepareWordSuggestionsThread();
-						updateSuggestionsThread.execute();
-					}
+					taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
+					updateSuggestions();
 				}
 				
 				taggedDoc.watchForLastSentenceEOS = -1;
@@ -642,28 +625,32 @@ public class EditorDriver {
 				while (tempIndex < newCaretPosition[0]) {
 					newChar = main.documentPane.getText().charAt(tempIndex);
 					if (taggedDoc.watchForEOS != -1) {
-						if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
-							taggedDoc.eosTracker.setIgnore(taggedDoc.watchForEOS, false);
+						if (isWhiteSpace(newChar)) {
+							taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
 						}
 						
 						taggedDoc.watchForEOS = -1;
 					} else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
-						if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+						if (isWhiteSpace(newChar)) {
 							taggedDoc.endSentenceExists = false;
-							taggedDoc.eosTracker.setIgnore(taggedDoc.watchForLastSentenceEOS, false);
+							taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
 						}
 						
 						taggedDoc.watchForLastSentenceEOS = -1;
 					} else {
-						if (EOS.contains(newChar)) {
+						if (taggedDoc.specialCharTracker.isEOS(newChar)) {
 							if (taggedDoc.length == priorCaretPosition+charsInserted) {
 								taggedDoc.watchForLastSentenceEOS = tempIndex;
 								lastSentence = taggedDoc.watchForLastSentenceEOS;
-								taggedDoc.eosTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
+								taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
 							} else {
 								taggedDoc.watchForEOS = tempIndex;
-								taggedDoc.eosTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
+								taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
 							}
+						} else if (taggedDoc.specialCharTracker.isQuote(newChar)) {
+							taggedDoc.specialCharTracker.addQuote(priorCaretPosition);
+						} else if (taggedDoc.specialCharTracker.isParenthesis(newChar)) {
+							taggedDoc.specialCharTracker.addParenthesis(priorCaretPosition);
 						}
 					}					
 					
@@ -674,10 +661,7 @@ public class EditorDriver {
 					taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(lastSentence, taggedDoc.length-1));
 				}
 				
-				if (updateSuggestionsThread.isDone()) {
-					prepareWordSuggestionsThread();
-					updateSuggestionsThread.execute();
-				}
+				updateSuggestions();
 			}
 		/**
 		 * Otherwise the user's just entering a single character, in which case we
@@ -686,44 +670,40 @@ public class EditorDriver {
 		} else {
 			//If we're keeping an eye out for a possible end of sentence...
 			if (taggedDoc.watchForEOS != -1) {
-				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+				if (isWhiteSpace(newChar)) {
 					if (sentNum == taggedDoc.numOfSentences - 1) {
 						taggedDoc.endSentenceExists = false;
 					}
-					taggedDoc.eosTracker.setIgnore(taggedDoc.watchForEOS, false);
-					
-					if (updateSuggestionsThread.isDone()) {
-						prepareWordSuggestionsThread();
-						updateSuggestionsThread.execute();
-					}
+					taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
+					updateSuggestions();
+					taggedDoc.specialCharTracker.indicesAlreadyAdjusted = null; 
 				}
 				
 				taggedDoc.watchForEOS = -1;
 			//If we're keeping an eye out for a possible end of sentence at the VERY END of the document
 			} else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {	
-				if (newChar == SPACE || newChar == NEWLINE || newChar == TAB) {
+				if (isWhiteSpace(newChar)) {
 					taggedDoc.endSentenceExists = false;
-					taggedDoc.eosTracker.setIgnore(taggedDoc.watchForLastSentenceEOS, false);
-					
-					if (updateSuggestionsThread.isDone()) {
-						prepareWordSuggestionsThread();
-						updateSuggestionsThread.execute();
-					}
+					taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
+					updateSuggestions();
+					taggedDoc.specialCharTracker.indicesAlreadyAdjusted = null; 
 				}
 				
 				taggedDoc.watchForLastSentenceEOS = -1;
 			//If we're not currently watching for any end of sentence, then check the new character
 			} else {
-				if (EOS.contains(newChar)) {
+				if (taggedDoc.specialCharTracker.isEOS(newChar)) {
 					if (sentNum == taggedDoc.numOfSentences-1) {
 						taggedDoc.watchForLastSentenceEOS = priorCaretPosition;
-						
-						taggedDoc.eosTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
+						taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
 					} else {
 						taggedDoc.watchForEOS = priorCaretPosition;
-						
-						taggedDoc.eosTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
+						taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
 					}
+				} else if (taggedDoc.specialCharTracker.isQuote(newChar)) {
+					taggedDoc.specialCharTracker.addQuote(priorCaretPosition);
+				} else if (taggedDoc.specialCharTracker.isParenthesis(newChar)) {
+					taggedDoc.specialCharTracker.addParenthesis(priorCaretPosition);
 				}
 			}
 		}
@@ -733,13 +713,23 @@ public class EditorDriver {
 	//*							OTHER TASKS									*	
 	//=======================================================================
 
+	private boolean isWhiteSpace(char unknownChar) {
+		boolean result = false;
+
+		if (unknownChar == SPACE || unknownChar == NEWLINE || unknownChar == TAB) {
+			result = true;
+		}
+
+		return result;
+	}
+
 	/**
 	 * Calculates the indices of all passed "positions". This can ether be a
 	 * since int value (meaning it's just a single caret position in the
 	 * document and we're finding out it's indices), or it can be multiple int
 	 * values (meaning there's a selection and we're finding out it's indices)
 	 */
-	protected int[][] getSentencesIndices(int ... positions) {
+	protected int[][] getSentencesIndices(int... positions) {
 		int[] sentenceLengths = taggedDoc.getSentenceLengths();
 		int numSents = sentenceLengths.length;
 		int numPositions = positions.length;
@@ -770,6 +760,18 @@ public class EditorDriver {
 
 				//After exiting the loop, i will be 1 more than it should
 				selectedSentence = i - 1;
+				
+				while (i < numSents) {
+					length += sentenceLengths[i];
+					allSentIndices[i] = length;
+					i++;
+				}
+			}
+			
+			length = 0;
+			for (int x = 0; x < numSents-10; x++) {
+				System.out.println(length + " - " + (sentenceLengths[x]+length) + " : \"" + main.documentPane.getText().substring(length, sentenceLengths[x]+length) + "\"");
+				length += sentenceLengths[x];
 			}
 
 			/** 
@@ -780,7 +782,7 @@ public class EditorDriver {
 			 */
 			int startIndex = 0;
 			int endIndex = 0;
-
+			
 			try {
 				if (selectedSentence >= numSents)
 					return null; //Should never be greater than or equal to the number of sents
@@ -811,6 +813,67 @@ public class EditorDriver {
 						endIndex = allSentIndices[selectedSentence];
 					}
 				}
+				
+				int highlightStart = startIndex;
+				int highlightEnd = endIndex;
+				for (int quote = 0; quote < taggedDoc.specialCharTracker.quoteSize; quote++) {
+					if (taggedDoc.specialCharTracker.quotes.get(quote).startIndex > highlightStart && taggedDoc.specialCharTracker.quotes.get(quote).endIndex < highlightEnd) {
+						//Full quote within sentence
+						if (taggedDoc.specialCharTracker.quotes.get(quote).closed) {
+							System.out.println("FULL QUOTE WITHIN SENTENCE");
+							continue;
+						//Quote not closed!
+						} else {
+							highlightEnd = taggedDoc.length-1;
+						}
+					} else if (highlightStart > taggedDoc.specialCharTracker.quotes.get(quote).startIndex && !taggedDoc.specialCharTracker.quotes.get(quote).closed) {
+						highlightEnd = taggedDoc.length-1;
+					//Whole sentence between quotes
+					} else if (highlightStart >= taggedDoc.specialCharTracker.quotes.get(quote).startIndex && highlightEnd <= taggedDoc.specialCharTracker.quotes.get(quote).endIndex) {
+						System.out.println("WHOLE SENTENCE BETWEEN QUOTES");
+						highlightStart = taggedDoc.specialCharTracker.quotes.get(quote).startIndex;
+						for (int sent = 0; sent < numSents; sent++) {
+							if (highlightStart > (allSentIndices[sent] - sentenceLengths[sent]) && highlightStart < allSentIndices[sent]) {
+								highlightStart = allSentIndices[sent] - sentenceLengths[sent];
+								extraSentences = sent - selectedSentence;
+							}
+						}
+						highlightEnd = taggedDoc.specialCharTracker.quotes.get(quote).endIndex;
+						for (int sent = 0; sent < numSents; sent++) {
+							if (highlightEnd > (allSentIndices[sent] - sentenceLengths[sent]) && highlightEnd < allSentIndices[sent]) {
+								highlightEnd = allSentIndices[sent];
+								extraSentences = sent - selectedSentence;
+							}
+						}
+					//Start of quote in sentence
+					} else if (highlightStart < taggedDoc.specialCharTracker.quotes.get(quote).startIndex && highlightEnd > taggedDoc.specialCharTracker.quotes.get(quote).startIndex) {
+						System.out.println("START OF QUOTE IN SENTENCE, end quote index = " + taggedDoc.specialCharTracker.quotes.get(quote).endIndex);
+						highlightEnd = taggedDoc.specialCharTracker.quotes.get(quote).endIndex;
+						for (int sent = 0; sent < numSents; sent++) {
+							System.out.println(highlightEnd + " >= " + (allSentIndices[sent] - sentenceLengths[sent]) + " && " +  highlightEnd + " < " + allSentIndices[sent]);
+							if (highlightEnd >= (allSentIndices[sent] - sentenceLengths[sent]) && highlightEnd < allSentIndices[sent]) {
+								System.out.println("PASSED");
+								highlightEnd = allSentIndices[sent];
+								extraSentences = sent - selectedSentence;
+								break;
+							}
+						}
+					//End of quote in sentence
+					} else if (highlightStart <= taggedDoc.specialCharTracker.quotes.get(quote).endIndex && highlightEnd > taggedDoc.specialCharTracker.quotes.get(quote).endIndex) {
+						System.out.println("END OF QUOTE IN SENTENCE");
+						highlightStart = taggedDoc.specialCharTracker.quotes.get(quote).startIndex;
+						for (int sent = 0; sent < numSents; sent++) {
+							System.out.println(highlightStart + " > " + (allSentIndices[sent] - sentenceLengths[sent]) + " && " +  highlightStart + " < " + allSentIndices[sent]);
+							if (highlightStart > (allSentIndices[sent] - sentenceLengths[sent]) && highlightStart < allSentIndices[sent]) {
+								highlightStart = allSentIndices[sent] - sentenceLengths[sent];
+								extraSentences = sent - selectedSentence;
+							}
+						}
+					}
+//					System.out.println(highlightStart + " <= " + taggedDoc.specialCharTracker.quotes.get(quote).endIndex + " && " +  highlightEnd + " > " + taggedDoc.specialCharTracker.quotes.get(quote).endIndex);
+				}
+				highlightIndices[0] = highlightStart;
+				highlightIndices[1] = highlightEnd;
 				
 				//This new sentence's number and start and end indices.
 				Logger.logln(NAME+"Calculated sentence # = " + selectedSentence + ", " + startIndex + "-" + endIndex);
@@ -885,16 +948,16 @@ public class EditorDriver {
 				return;
 			}
 
-			Logger.logln(NAME+"Moving highlight to " + sentIndices[0] + "-" + sentIndices[1]);
+			Logger.logln(NAME+"Moving highlight to " + highlightIndices[0] + "-" + highlightIndices[1]);
 
 			//Catch for the last sentence 
-			int whiteSpace = getWhiteSpaceBuffer(sentIndices[0]);
-			if (sentIndices[0]+whiteSpace <= newCaretPosition[0]) {
+			int whiteSpace = getWhiteSpaceBuffer(highlightIndices[0]);
+			if (highlightIndices[0]+whiteSpace <= newCaretPosition[0]) {
 				if (doHighlight)
-					highlighterEngine.addSentenceHighlight(sentIndices[0]+whiteSpace, sentIndices[1]);
+					highlighterEngine.addSentenceHighlight(highlightIndices[0]+whiteSpace, highlightIndices[1]);
 				
 				if (autoHighlight && updateSuggestionsThread.isDone())
-					highlighterEngine.addAutoRemoveHighlights(sentIndices[0]+whiteSpace, sentIndices[1]);
+					highlighterEngine.addAutoRemoveHighlights(highlightIndices[0]+whiteSpace, highlightIndices[1], extraSentences);
 				else
 					placeAutoHighlightsWhenDone = true;
 			}
@@ -907,7 +970,7 @@ public class EditorDriver {
 	//=======================================================================
 	//*							UPDATE METHODS								*	
 	//=======================================================================
-	
+
 	/**
 	 * Doesn't change ANYTHING in the backend (meaning the TaggedDocument),
 	 * all it does is completely replace the current text in the JTextPane
@@ -975,6 +1038,16 @@ public class EditorDriver {
 		}
 	}
 
+	/**
+	 * Updates the suggestions in a thread (if done from previous update)
+	 */
+	private void updateSuggestions() {
+		if (updateSuggestionsThread.isDone()) {
+			prepareWordSuggestionsThread();
+			updateSuggestionsThread.execute();
+		}
+	}
+
 	//=======================================================================
 	//*						RESET / REPROCESSING METHODS					*	
 	//=======================================================================
@@ -1011,11 +1084,13 @@ public class EditorDriver {
 		//Highlighters
 		highlighterEngine.clearAll();
 		placeAutoHighlightsWhenDone = false;
+		highlightIndices = new int[]{0,0};
 
 		//Editing variables
 		charsInserted = 0;
 		charsRemoved = 0;
 
 		ignoreChanges = false;
+		textChanged = false;
 	}
 }

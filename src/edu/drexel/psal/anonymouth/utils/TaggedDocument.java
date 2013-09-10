@@ -28,10 +28,10 @@ enum CONJ {SIMPLE,PROGRESSIVE,PERFECT,PERFECT_PROGRESSIVE};
  * based plain string text, methods to manipulate and access TaggedSentences,
  * etc.<br><br>
  *
- * Since the EOSTracker is specific to each individual TaggedDocument instance
+ * Since the SpecialCharTracker is specific to each individual TaggedDocument instance
  * (for example, a version on the undo stack may have EOS characters in a
  * different location than the one in the current TaggedDocument instance
- * does), we keep our EOSTracker instances here so they are backed up in
+ * does), we keep our SpecialCharTracker instances here so they are backed up in
  * addition to the other variables for undo/redo.
  * 
  * @author Andrew W.E. McDonald
@@ -49,7 +49,7 @@ public class TaggedDocument implements Serializable {
 	 */
 	protected ArrayList<TaggedSentence> taggedSentences;
 	
-	public EOSTracker eosTracker;
+	public SpecialCharTracker specialCharTracker;
 	private GUIMain main;
 	
 	protected String documentTitle = "None";
@@ -119,7 +119,7 @@ public class TaggedDocument implements Serializable {
 	 */
 	public TaggedDocument(GUIMain main) {
 		this.main = main;
-		eosTracker = new EOSTracker();
+		specialCharTracker = new SpecialCharTracker(main);
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		endSentenceExists = false;
 	}
@@ -137,13 +137,14 @@ public class TaggedDocument implements Serializable {
 	 */
 	public TaggedDocument(GUIMain main, String untaggedDocument, boolean waitToTag) {
 		this.main = main;
-		eosTracker = new EOSTracker();
+		untaggedDocument = formatDocument(untaggedDocument);
+		specialCharTracker = new SpecialCharTracker(main);
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		setDocumentLength(untaggedDocument);
 		endSentenceExists = false;
 		
 		if (waitToTag) {
-			initEOSTracker(untaggedDocument);
+			initSpecialCharTracker(untaggedDocument);
 		} else {
 			makeAndTagSentences(untaggedDocument, true);
 		}
@@ -164,7 +165,8 @@ public class TaggedDocument implements Serializable {
 		this.main = main;
 		this.documentTitle = docTitle;
 		this.documentAuthor = author;
-		eosTracker = new EOSTracker();
+		untaggedDocument = formatDocument(untaggedDocument);
+		specialCharTracker = new SpecialCharTracker(main);
 
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		setDocumentLength(untaggedDocument);
@@ -197,37 +199,70 @@ public class TaggedDocument implements Serializable {
 		//Then the total number of sentences (could probably chuck ths)
 		numOfSentences = td.numOfSentences;
 		
-		//Finally, copy the EOSTracker
-		eosTracker = new EOSTracker(td.eosTracker);
+		//Finally, copy the SpecialCharTracker
+		specialCharTracker = new SpecialCharTracker(td.specialCharTracker);
 		
 		setDocumentLength(td.getUntaggedDocument());
 		endSentenceExists = td.endSentenceExists;
 	}
-
-	/**
-	 * Initializes the EOSTracker by adding all EOSes currently present in
-	 * this instance.
-	 */
-	private void initEOSTracker() {
-		char[] docToAnonymize = getUntaggedDocument().toCharArray();
-		int numChars = docToAnonymize.length;
-
-		for (int i = 0; i < numChars; i++) {
-			if (eosTracker.isEOS(docToAnonymize[i])) {
-				eosTracker.addEOS(docToAnonymize[i], i, false);
-			}
-		}
-	}
 	
-	private void initEOSTracker(String document) {
+	/**
+	 * Initializes the SpecialCharTracker by adding all EOSes currently present in
+	 * the passed document (to be used ONLY when using the "waitToTag" flag in the
+	 * appropriate constructor
+	 * 
+	 * @param document
+	 * 		The String that this TaggedDocument instance will represent
+	 */
+	private void initSpecialCharTracker(String document) {
 		char[] docToAnonymize = document.toCharArray();
 		int numChars = docToAnonymize.length;
 		
+		//EOS Characters
 		for (int i = 0; i < numChars; i++) {
-			if (eosTracker.isEOS(docToAnonymize[i])) {
-				eosTracker.addEOS(docToAnonymize[i], i, false);
+			if (specialCharTracker.isEOS(docToAnonymize[i])) {
+				specialCharTracker.addEOS(docToAnonymize[i], i, false);
 			}
 		}
+		
+		//Quotes
+		for (int i = 0; i < numChars; i++) {
+			if (specialCharTracker.isQuote(docToAnonymize[i])) {
+				specialCharTracker.addQuote(i);
+			}
+		}
+		
+		//Parenthesis
+		for (int i = 0; i < numChars; i++) {
+			if (specialCharTracker.isParenthesis(docToAnonymize[i])) {
+				specialCharTracker.addParenthesis(i);
+			}
+		}
+		
+		specialCharTracker.indicesAlreadyAdjusted = null;
+	}
+	
+	/**
+	 * Replace Unicode format characters that will ruin the regular
+	 * expressions (because non-printable characters in the document still
+	 * take up indices, but you won't know they're there until you
+	 * "arrow" though the document and have to hit the same arrow twice to
+	 * move past a certain point. Note that we must use "Cf" rather than
+	 * "C". If we use "C" or "Cc" (which includes control characters), we
+	 * remove our newline characters and this screws up the document. "Cf"
+	 * is "other, format". "Cc" is "other, control". Using "C" will match
+	 * both of them.
+	 * 
+	 * @param text
+	 * 		The document String you want to format
+	 */
+	private String formatDocument(String text) {
+		text = text.replaceAll("\u201C","\""); 		//Unicode left quotation mark
+		text = text.replaceAll("\u201D","\"");		//Unicode right quotation mark
+		text = text.replaceAll("\u2026", "...");	//Unicode ellipsis
+		text = text.replaceAll("\\p{Cf}", "?");  	//Anything else
+		
+		return text;
 	}
 
 	//=======================================================================
@@ -314,8 +349,15 @@ public class TaggedDocument implements Serializable {
 	 * 		An ArrayList of the completed TaggedSentences
 	 */
 	public ArrayList<TaggedSentence> makeAndTagSentences(String untagged, boolean appendTaggedSentencesToGlobalArrayList) {
+		/**
+		 * If our length variable is 0, that means that the constructor
+		 * with NO INITIAL DOCUMENT TEXT was run, therefore we set the
+		 * length of the string as the TaggedDocument length and format
+		 * the String since it's our main document
+		 */
 		if (length == 0 ) {
 			setDocumentLength(untagged);
+			untagged = formatDocument(untagged);
 		}
 
 		ArrayList<String> untaggedSents = main.editorDriver.sentenceMaker.makeSentences(untagged);
@@ -354,8 +396,8 @@ public class TaggedDocument implements Serializable {
 				this.taggedSentences.add(taggedSentences.get(i)); 
 			}
 			
-			if (eosTracker.size == 0)
-				initEOSTracker();
+			if (specialCharTracker.eosSize == 0)
+				initSpecialCharTracker(getUntaggedDocument());
 		}
 		return taggedSentences;
 	}
@@ -729,9 +771,9 @@ public class TaggedDocument implements Serializable {
 	 * @return
 	 * 		The number of words (>= 0)
 	 */
-	public int getWordCount(){
+	public int getWordCount() {
 		int wordCount = 0;
-		for (TaggedSentence ts:taggedSentences) {
+		for (TaggedSentence ts : taggedSentences) {
 			wordCount += ts.size();
 		}
 
@@ -789,8 +831,13 @@ public class TaggedDocument implements Serializable {
 	 * 		An array of strings representing all unique words from the
 	 * 		TaggedSentence
 	 */
-	public String[] getWordsInSentenceNoDups(TaggedSentence sentence) {
-		ArrayList<Word> unfiltered = sentence.getWordsInSentence();
+	public String[] getWordsInSentenceNoDups(TaggedSentence[] sentences) {
+		ArrayList<Word> unfiltered = new ArrayList<Word>();
+		int length = sentences.length;
+		for (int i = 0; i < length; i++) {
+			unfiltered.addAll(sentences[i].getWordsInSentence());
+		}
+	
 		int size = unfiltered.size();
 		HashSet<String> wordList = new HashSet<String>(size);
 		String curWord;
@@ -911,8 +958,30 @@ public class TaggedDocument implements Serializable {
 			length = taggedSentences.get(i).getUntagged(false).length();
 			newIndex = length + pastIndex;
 			
-			if (index >= pastIndex && index <= newIndex) {
+			if (index >= pastIndex && index < newIndex) {
 				returnValue = taggedSentences.get(i);
+				break;
+			} else {
+				pastIndex = newIndex;
+			}
+		}
+		
+		return returnValue;
+	}
+	
+	public int[] getIndicesOfTaggedSentenceAtIndex(int index) {
+		int newIndex = 0;
+		int pastIndex = 0;
+		int length = 0;
+		int[] returnValue = new int[2];
+		
+		for (int i = 0; i < numOfSentences; i++) {
+			length = taggedSentences.get(i).getUntagged(false).length();
+			newIndex = length + pastIndex;
+			
+			if (index >= pastIndex && index < newIndex) {
+				returnValue[0] = pastIndex;
+				returnValue[1] = newIndex;
 				break;
 			} else {
 				pastIndex = newIndex;
@@ -986,4 +1055,3 @@ public class TaggedDocument implements Serializable {
 		return maxChange;
 	}
 }
-	

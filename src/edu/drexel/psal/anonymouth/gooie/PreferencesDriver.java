@@ -366,7 +366,7 @@ public class PreferencesDriver {
 					PropertiesUtil.setAutoHighlight(true);
 					main.editorDriver.autoHighlight = true;
 					main.editorDriver.highlighterEngine.addAutoRemoveHighlights(
-							main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]);
+							main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1], 0);
 					Logger.logln(NAME+"Auto highlights checkbox checked");
 				} else {
 					PropertiesUtil.setAutoHighlight(false);

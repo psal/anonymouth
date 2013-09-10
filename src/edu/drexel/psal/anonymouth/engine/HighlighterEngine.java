@@ -11,6 +11,7 @@ import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.HighlightMapper;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
 import edu.drexel.psal.anonymouth.utils.IndexFinder;
+import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -217,9 +218,28 @@ public class HighlighterEngine {
 	 * @param start
 	 * @param end
 	 */
-	public void addAutoRemoveHighlights(int start, int end) {
+	public void addAutoRemoveHighlights(int start, int end, int extraSentences) {
+		System.out.println("ADDING AUTO HIGHLIGHTS FOR SENTENCE: " + start + " - " + end);
+		TaggedSentence[] sentences;
+		if (extraSentences < 0) {
+			sentences = new TaggedSentence[(extraSentences*-1)+1];
+			sentences[0] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum);
+			extraSentences = extraSentences*-1;
+			for (int i = 1; i <= extraSentences; i++) {
+				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum-i);
+			}
+		} else {
+			sentences = new TaggedSentence[extraSentences+1];
+			sentences[0] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum);
+			for (int i = 1; i <= extraSentences; i++) {
+				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum+i);
+			}
+		}
+		
+		
 		//if we don't increment by one, it gets the previous sentence.
-		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
+		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(sentences);
+		
 		int removeSize = main.wordSuggestionsDriver.getRemoveSize();
 		ArrayList<int[]> index = new ArrayList<int[]>(removeSize);
 		ArrayList<String[]> topToRemove = main.wordSuggestionsDriver.getTopToRemove();
