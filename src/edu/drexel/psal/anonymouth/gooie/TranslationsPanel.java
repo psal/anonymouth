@@ -102,7 +102,7 @@ public class TranslationsPanel {
 		}
 		
 		if (sentence.hasTranslations()) {
-			Logger.logln(NAME+"Showing translations for sentence: " + sentence.getUntagged(false));
+			Logger.logln(NAME+"Showing translations for sentence: " + sentence.getUntagged());
 			
 			boolean translated = sentence.isTranslated();
 			if (translated && main.translationsTopPanelShown != ANONConstants.TRANSLATIONS.DONE) {
@@ -145,7 +145,7 @@ public class TranslationsPanel {
 				// set up translation text area
 				translationTextAreas[i] = new JTextPane();
 				translationTextAreas[i].setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
-				translationTextAreas[i].setText(translations.get(i).getUntagged(false).trim());
+				translationTextAreas[i].setText(translations.get(i).getUntagged().trim());
 				translationTextAreas[i].setEditable(false);
 				translationTextAreas[i].setFocusable(false);
 

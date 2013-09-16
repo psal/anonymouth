@@ -119,7 +119,7 @@ public class TaggedDocument implements Serializable {
 	 */
 	public TaggedDocument(GUIMain main) {
 		this.main = main;
-		specialCharTracker = new SpecialCharTracker(main);
+		specialCharTracker = new SpecialCharTracker();
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		endSentenceExists = false;
 	}
@@ -132,21 +132,23 @@ public class TaggedDocument implements Serializable {
 	 * 		  GUIMain instance
 	 * @param untaggedDocument
 	 *        The String of the document you want to tag.
-	 * @param waitToTag
-	 * 		  Whether or not to immediately makeandTagSentences or to wait until directly called later
+	 * @param usersDocument
+	 * 		  Whether or not to just init the tracker and that's it, or to instead
+	 * 		  makeAndTagSentences and that's it.
 	 */
-	public TaggedDocument(GUIMain main, String untaggedDocument, boolean waitToTag) {
+	public TaggedDocument(GUIMain main, String untaggedDocument, boolean initTracker) {
 		this.main = main;
 		untaggedDocument = formatDocument(untaggedDocument);
-		specialCharTracker = new SpecialCharTracker(main);
+		specialCharTracker = new SpecialCharTracker();
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
-		setDocumentLength(untaggedDocument);
 		endSentenceExists = false;
 		
-		if (waitToTag) {
-			initSpecialCharTracker(untaggedDocument);
-		} else {
+		if (!initTracker) {
+			length = -1; //
 			makeAndTagSentences(untaggedDocument, true);
+		} else {
+			initSpecialCharTracker(untaggedDocument);
+			setDocumentLength(untaggedDocument);
 		}
 	}
 
@@ -161,12 +163,12 @@ public class TaggedDocument implements Serializable {
 	 * @param author
 	 *        The author of the document.
 	 */
-	public TaggedDocument(GUIMain main, String untaggedDocument, String docTitle, String author){
+	public TaggedDocument(GUIMain main, String untaggedDocument, String docTitle, String author) {
 		this.main = main;
 		this.documentTitle = docTitle;
 		this.documentAuthor = author;
 		untaggedDocument = formatDocument(untaggedDocument);
-		specialCharTracker = new SpecialCharTracker(main);
+		specialCharTracker = new SpecialCharTracker();
 
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		setDocumentLength(untaggedDocument);
@@ -217,10 +219,12 @@ public class TaggedDocument implements Serializable {
 	private void initSpecialCharTracker(String document) {
 		char[] docToAnonymize = document.toCharArray();
 		int numChars = docToAnonymize.length;
-		
+
 		//EOS Characters
 		for (int i = 0; i < numChars; i++) {
+			System.out.println(i + ", " + docToAnonymize[i]);
 			if (specialCharTracker.isEOS(docToAnonymize[i])) {
+				System.out.println("EOS! " + i);
 				specialCharTracker.addEOS(docToAnonymize[i], i, false);
 			}
 		}
@@ -238,8 +242,6 @@ public class TaggedDocument implements Serializable {
 				specialCharTracker.addParenthesis(i);
 			}
 		}
-		
-		specialCharTracker.indicesAlreadyAdjusted = null;
 	}
 	
 	/**
@@ -257,11 +259,13 @@ public class TaggedDocument implements Serializable {
 	 * 		The document String you want to format
 	 */
 	private String formatDocument(String text) {
-		text = text.replaceAll("\u201C","\""); 		//Unicode left quotation mark
-		text = text.replaceAll("\u201D","\"");		//Unicode right quotation mark
-		text = text.replaceAll("\u2026", "...");	//Unicode ellipsis
-		text = text.replaceAll("\\p{Cf}", "?");  	//Anything else
-		
+		text = text.trim();
+		text = text.replaceAll("\n", "<<<NEWLINE>>>");
+		text = text.replaceAll("\u201c","\"");		//Unicode left quotation mark
+		text = text.replaceAll("\u201d","\"");		//Unicode right quotation mark
+		text = text.replaceAll("\\u2026", "...");	//Unicode ellipsis
+		text = text.replaceAll("\\p{C}", "");
+		text = text.replaceAll("<<<NEWLINE>>>", "\n"); 
 		return text;
 	}
 
@@ -349,6 +353,8 @@ public class TaggedDocument implements Serializable {
 	 * 		An ArrayList of the completed TaggedSentences
 	 */
 	public ArrayList<TaggedSentence> makeAndTagSentences(String untagged, boolean appendTaggedSentencesToGlobalArrayList) {
+		boolean fullDocument = false;
+		
 		/**
 		 * If our length variable is 0, that means that the constructor
 		 * with NO INITIAL DOCUMENT TEXT was run, therefore we set the
@@ -356,11 +362,13 @@ public class TaggedDocument implements Serializable {
 		 * the String since it's our main document
 		 */
 		if (length == 0 ) {
-			setDocumentLength(untagged);
 			untagged = formatDocument(untagged);
+			setDocumentLength(untagged);
+			initSpecialCharTracker(untagged);
+			fullDocument = true;
 		}
 
-		ArrayList<String> untaggedSents = main.editorDriver.sentenceMaker.makeSentences(untagged);
+		ArrayList<String> untaggedSents = main.editorDriver.sentenceMaker.makeSentences(untagged, fullDocument);
 		ArrayList<TaggedSentence> taggedSentences = new ArrayList<TaggedSentence>(untaggedSents.size());
 		Iterator<String> strRayIter = untaggedSents.iterator();
 		String tempSent;
@@ -380,7 +388,6 @@ public class TaggedDocument implements Serializable {
 				sentenceTokenized = toke.tokenize();
 				taggedSentence.setTaggedSentence(Tagger.mt.tagSentence(sentenceTokenized));
 				consolidateFeatures(taggedSentence);
-				taggedSentence.untaggedWithEOSSubs = tempSent;
 				
 				// todo: put stuff here
 				taggedSentences.add(taggedSentence);
@@ -395,10 +402,8 @@ public class TaggedDocument implements Serializable {
 				numOfSentences++;
 				this.taggedSentences.add(taggedSentences.get(i)); 
 			}
-			
-			if (specialCharTracker.eosSize == 0)
-				initSpecialCharTracker(getUntaggedDocument());
 		}
+		
 		return taggedSentences;
 	}
 
@@ -529,7 +534,7 @@ public class TaggedDocument implements Serializable {
 	public TaggedSentence concatRemoveAndReplace(TaggedSentence taggedSentenceOne, int tsOneIndex, TaggedSentence taggedSentenceTwo, int tsTwoIndex) {
 		TaggedSentence replaceWith = concatSentences(taggedSentenceOne, taggedSentenceTwo);
 		removeAndReplace(tsTwoIndex, DELETE_STRING); //Delete the second sentence
-		Logger.logln(NAME+"*** Replacing: \""+taggedSentenceOne.getUntagged(false)+"\"\n" + NAME + "*** With: \""+replaceWith.getUntagged(false) + "\"");
+		Logger.logln(NAME+"*** Replacing: \""+taggedSentenceOne.getUntagged()+"\"\n" + NAME + "*** With: \""+replaceWith.getUntagged() + "\"");
 		return removeAndReplace(tsOneIndex,replaceWith);
 	}
 
@@ -583,7 +588,7 @@ public class TaggedDocument implements Serializable {
 	 */
 	public void removeAndReplace(int sentNumber, String sentsToAdd) {//, int indexToRemove, int placeToAdd){
 		TaggedSentence toReplace = taggedSentences.get(sentNumber);
-		Logger.logln(NAME+"Removing: \""+toReplace.getUntagged(false) + "\"");
+		Logger.logln(NAME+"Removing: \""+toReplace.getUntagged() + "\"");
 		Logger.logln(NAME+"Adding: \""+sentsToAdd + "\"");
 		
 		if (sentsToAdd.equals(DELETE_STRING)) {//checks to see if the user deleted the current sentence
@@ -670,9 +675,9 @@ public class TaggedDocument implements Serializable {
 	public TaggedSentence removeAndReplace(int sentNumber, TaggedSentence toAdd) {
 		TaggedSentence toReplace = taggedSentences.get(sentNumber);
 		Logger.logln(NAME+"Removing: "+toReplace.toString());
-		Logger.logln(NAME+"Adding: "+toAdd.getUntagged(false));
+		Logger.logln(NAME+"Adding: "+toAdd.getUntagged());
 
-		if (toAdd.getUntagged(false).matches("^\\s*$")) {//checks to see if the user deleted the current sentence
+		if (toAdd.getUntagged().matches("^\\s*$")) {//checks to see if the user deleted the current sentence
 			//CALL COMPARE
 			TaggedSentence wasReplaced = removeTaggedSentence(sentNumber);
 			Logger.logln(NAME+"User deleted a sentence.");
@@ -876,7 +881,7 @@ public class TaggedDocument implements Serializable {
 	public ArrayList<String> getUntaggedSentences() {
 		ArrayList<String> sentences = new ArrayList<String>();
 		for (int i=0;i<taggedSentences.size();i++)
-			sentences.add(taggedSentences.get(i).getUntagged(false));
+			sentences.add(taggedSentences.get(i).getUntagged());
 
 		return sentences;
 	}
@@ -890,7 +895,7 @@ public class TaggedDocument implements Serializable {
 	public String getUntaggedDocument() {
 		String str = "";
 		for (int i = 0; i < numOfSentences; i++){
-			str += taggedSentences.get(i).getUntagged(false);
+			str += taggedSentences.get(i).getUntagged();
 		}
 
 		return str;	
@@ -955,7 +960,7 @@ public class TaggedDocument implements Serializable {
 		TaggedSentence returnValue = null;
 		
 		for (int i = 0; i < numOfSentences; i++) {
-			length = taggedSentences.get(i).getUntagged(false).length();
+			length = taggedSentences.get(i).getUntagged().length();
 			newIndex = length + pastIndex;
 			
 			if (index >= pastIndex && index < newIndex) {
@@ -976,7 +981,7 @@ public class TaggedDocument implements Serializable {
 		int[] returnValue = new int[2];
 		
 		for (int i = 0; i < numOfSentences; i++) {
-			length = taggedSentences.get(i).getUntagged(false).length();
+			length = taggedSentences.get(i).getUntagged().length();
 			newIndex = length + pastIndex;
 			
 			if (index >= pastIndex && index < newIndex) {

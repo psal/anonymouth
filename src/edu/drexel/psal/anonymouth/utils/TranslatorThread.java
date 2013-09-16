@@ -139,7 +139,7 @@ public class TranslatorThread implements Runnable {
 							return;
 						}
 						
-						String translation = translationFetcher.getTranslation(sentences.get(currentSentNum-1).getUntagged(false), lang);
+						String translation = translationFetcher.getTranslation(sentences.get(currentSentNum-1).getUntagged(), lang);
 						
 						if (translation.equals("internet")) {
 							Logger.logln(NAME+"No internet connection", LogOut.STDERR);
@@ -168,7 +168,7 @@ public class TranslatorThread implements Runnable {
 						sentences.get(currentSentNum-1).getTranslationNames().add(translationFetcher.getName(lang));
 						sentences.get(currentSentNum-1).sortTranslations();
 						String one = main.editorDriver.taggedDoc.getUntaggedSentences().get(main.editorDriver.sentNum).trim();
-						String two = sentences.get(currentSentNum-1).getUntagged(false).trim();
+						String two = sentences.get(currentSentNum-1).getUntagged().trim();
 
 						if (one.equals(two))
 							main.translationsPanel.updateTranslationsPanel(sentences.get(currentSentNum-1));

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TextWrapper;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -29,8 +28,6 @@ public class SpecialCharTracker implements Serializable {
 	
 	public final String NAME = "( " + this.getClass().getSimpleName() +" ) - ";
 	private static final long serialVersionUID = -5900337779583604917L;
-	
-	private GUIMain main;
 
 	/**
 	 * The characters we acknowledge as possible was to end a sentence
@@ -47,7 +44,7 @@ public class SpecialCharTracker implements Serializable {
 	/**
 	 * Our array list of EOS character objects
 	 */
-	private ArrayList<EOS> eoses;
+	public ArrayList<EOS> eoses;
 	/**
 	 * Our array list of quotes
 	 */
@@ -59,7 +56,7 @@ public class SpecialCharTracker implements Serializable {
 	/**
 	 * The number of EOSes we are currently tracking
 	 */
-	protected int eosSize;
+	public int eosSize;
 	/**
 	 * The number of quotes we're currently tracking
 	 */
@@ -68,22 +65,11 @@ public class SpecialCharTracker implements Serializable {
 	 * The number of parenthesis we're currently tracking
 	 */
 	protected int parenthesisSize;
-	/**
-	 * Whether or not the user is typing in between a text wrapper or not. We
-	 * have this in addition to the calculating method because we don't want
-	 * to have to check all indices every single document change (costly),
-	 * especially since we know if the user was already proven to be typing
-	 * inbetween a wrapper there's no need to reCalculate it every time since
-	 * we know that until they move away or type a closer character they're
-	 * still in it, which is what this flag represents
-	 */
-	public int[] indicesAlreadyAdjusted;
 
 	/**
 	 * Constructor
 	 */
-	public SpecialCharTracker(GUIMain main) {
-		this.main = main;
+	public SpecialCharTracker() {
 		EOS = new HashSet<Character>(3);
 		EOS.add('.');
 		EOS.add('!');
@@ -104,7 +90,6 @@ public class SpecialCharTracker implements Serializable {
 		eosSize = 0;
 		quoteSize = 0;
 		parenthesisSize = 0;
-		indicesAlreadyAdjusted = null;
 	}
 	
 	/**
@@ -160,8 +145,6 @@ public class SpecialCharTracker implements Serializable {
 			parenthesisSize++;
 			parenthesis.add(new TextWrapper(specialCharTracker.parenthesis.get(i)));
 		}
-
-		indicesAlreadyAdjusted = specialCharTracker.indicesAlreadyAdjusted;
 	}
 	
 	/**
@@ -195,14 +178,6 @@ public class SpecialCharTracker implements Serializable {
 				parenthesis.get(i).startIndex += shiftAmount;
 			if (parenthesis.get(i).closed == true && parenthesis.get(i).endIndex >= index)
 				parenthesis.get(i).endIndex += shiftAmount;
-		}
-		
-		if (indicesAlreadyAdjusted != null) {
-			for (int i = 0; i < indicesAlreadyAdjusted.length; i++) {
-				if (indicesAlreadyAdjusted[i] >= index) {
-					indicesAlreadyAdjusted[i] += shiftAmount;
-				}
-			}
 		}
 	}
 
@@ -259,7 +234,7 @@ public class SpecialCharTracker implements Serializable {
 		
 		toReturn += NAME+"PARENTHESIS:\n";
 		for (int i = 0; i < parenthesisSize; i++) {
-			toReturn += NAME+ "   " + quotes.get(i) + "\n";
+			toReturn += NAME+ "   " + parenthesis.get(i) + "\n";
 		}
 
 		return toReturn;
@@ -287,7 +262,7 @@ public class SpecialCharTracker implements Serializable {
 		int closingQuote = -1;
 		for (int i = 0; i < quoteSize; i++) {
 			if (!quotes.get(i).closed) {
-				System.out.println("QUOTE NOT CLOSED");
+//				System.out.println("QUOTE NOT CLOSED");
 				closingQuote = i;
 				break;
 			}
@@ -296,16 +271,10 @@ public class SpecialCharTracker implements Serializable {
 		//It's a new quote, create a new TextWrapper Object with this as start index
 		if (closingQuote == -1) {
 			quotes.add(new TextWrapper(index));
-			indicesAlreadyAdjusted = new int[2];
-			indicesAlreadyAdjusted[0] = main.editorDriver.sentIndices[0];
-			System.out.println("THIS LENGTH 301 = " + + main.editorDriver.taggedDoc.length);
-			indicesAlreadyAdjusted[1] = main.editorDriver.taggedDoc.length-1;
 			quoteSize++;
 		//It's a closing quote, simply add this as the endIndex of that Object
 		} else {
-			quotes.get(closingQuote).closed = true;
-			quotes.get(closingQuote).endIndex = index;
-			indicesAlreadyAdjusted = null;
+			quotes.get(closingQuote).setClosingQuote(index);
 		}
 	}
 
@@ -348,7 +317,7 @@ public class SpecialCharTracker implements Serializable {
 	}
 
 	/**
-	 * Adds a Parentehsis to the tracker, should be called EVERY TIME a new quote is
+	 * Adds a Parenthesis to the tracker, should be called EVERY TIME a new quote is
 	 * typed, regardless of whether or not it's the starting quote or a
 	 * closing one.
 	 *
@@ -373,16 +342,12 @@ public class SpecialCharTracker implements Serializable {
 		//It's a new quote, create a new TextWrapper Object with this as start index
 		if (closingParenthesis == -1) {
 			parenthesis.add(new TextWrapper(index));
-			indicesAlreadyAdjusted = new int[2];
-			indicesAlreadyAdjusted[0] = main.editorDriver.sentIndices[0];
-			System.out.println("THIS LENGTH 378 = "+ main.editorDriver.taggedDoc.length);
-			indicesAlreadyAdjusted[1] = main.editorDriver.taggedDoc.length-1;
+//			System.out.println("THIS LENGTH 378 = "+ main.editorDriver.taggedDoc.length);
 			parenthesisSize++;
 		//It's a closing quote, simply add this as the endIndex of that Object
 		} else {
 			parenthesis.get(closingParenthesis).closed = true;
 			parenthesis.get(closingParenthesis).endIndex = index;
-			indicesAlreadyAdjusted = null;
 		}
 	}
 
@@ -565,7 +530,9 @@ public class SpecialCharTracker implements Serializable {
 	public boolean setIgnoreEOS(int index, boolean ignore) {
 		boolean found = false;
 		
+//		System.out.println("IGNORE");
 		for (int i = 0; i < eosSize; i++) {
+//			System.out.println(index + ", " + eoses.get(i).location);
 			if (index == eoses.get(i).location) {
 				Logger.logln(NAME+"Will ignore EOS character at " + index + ": " + ignore);
 				eoses.get(i).ignore = ignore;
@@ -637,6 +604,10 @@ public class SpecialCharTracker implements Serializable {
 		return result;
 	}
 	
+	public int getLocation(int index) {
+		return eoses.get(index).location;
+	}
+	
 	/**
 	 * Removes any EOS objects in between the given indices as [5, 10),
 	 * meaning inclusive for the first and exclusive for the last.
@@ -680,9 +651,9 @@ class EOS implements Serializable {
 
 	private static final long serialVersionUID = -3147071940148952343L;
 	
-	protected char eos;
-	protected int location;
-	protected boolean ignore;
+	public char eos;
+	public int location;
+	public boolean ignore;
 	
 	/**
 	 * Constructor
@@ -718,6 +689,6 @@ class EOS implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "[ "+eos+" : "+location+", is end of sentence = " + ignore + " ]";
+		return "[ "+eos+" : "+location+", is end of sentence = " + !ignore + " ]";
 	}
 }

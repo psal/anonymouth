@@ -39,6 +39,8 @@ public class SentenceMaker implements Serializable  {
 	private SpecialCharTracker specialCharTracker;
 	
 	private final HashSet<Character> EOS;
+	private final HashSet<Character> WORD_END;
+	private final char NEWLINE = System.lineSeparator().charAt(0);
 	
 	/**
 	 * This pattern, "EOS_CHARS" matches:
@@ -85,6 +87,18 @@ public class SentenceMaker implements Serializable  {
 		EOS.add('.');
 		EOS.add('!');
 		EOS.add('?');
+		
+		WORD_END = new HashSet<Character>();
+		WORD_END.add(' ');
+		WORD_END.add(NEWLINE);
+		WORD_END.add('\t');
+		WORD_END.add('\"');
+		WORD_END.add('(');
+		WORD_END.add('[');
+		WORD_END.add('{');
+		WORD_END.add(')');
+		WORD_END.add(']');
+		WORD_END.add('}');
 	}
 	
 	/**
@@ -108,13 +122,13 @@ public class SentenceMaker implements Serializable  {
 	 * 		An ArrayList of Strings (which are the sentence representation
 	 * 		of the given text)
 	 */
-	public ArrayList<String> makeSentences(String text) {
+	public ArrayList<String> makeSentences(String text, boolean fullDocument) {
 		//=======================================================================
 		//*							PREPARATIONS								*	
 		//=======================================================================
 
 		//================ PRIOR CHECKS =========================================
-
+		
 		/*
 		 * Quick check so we're not trying to split up an empty
 		 * String. This only happens right before the user types
@@ -145,6 +159,7 @@ public class SentenceMaker implements Serializable  {
 		int pastIndex = 0;
 		int index = 0;
 		int indexBuffer = editorDriver.sentIndices[0];
+		String pastText = "";
 
 		/**
 		 * Only picks EOS characters that are NOT ellipses, so we
@@ -166,7 +181,9 @@ public class SentenceMaker implements Serializable  {
 		while (index < length - 1) {
 			//================ FINDING EOS NOT YET BEING IGNORED ====================
 
+//			System.out.println("HERE!!!");
 			EOSFound = sent.find(index);
+//			System.out.println(EOSFound + ", index = " + index);
 
 			/**
 			 * If we didn't find an EOS character in the entire passed text,
@@ -174,6 +191,11 @@ public class SentenceMaker implements Serializable  {
 			 * (incomplete) sentence, so break and return the text as is.
 			 */
 			if (!EOSFound) {
+//				 if (pastText != "") {
+//				 	System.out.println("ADDING LAST: \"" + pastText + "\"");
+//				 	sents.add(pastText);
+//				 }
+
 				break;
 			}
 
@@ -187,6 +209,8 @@ public class SentenceMaker implements Serializable  {
 					while (index < length - 1 && EOSFound) {
 						index = sent.start();
 						if (!specialCharTracker.isSentenceEndAtIndex(index + indexBuffer)) {
+//							System.out.println("INDEX = " + (index+indexBuffer));
+//							System.out.println(specialCharTracker);
 							EOSFound = false;
 						} else {
 							EOSFound = true;
@@ -198,6 +222,8 @@ public class SentenceMaker implements Serializable  {
 					}
 				} catch (IllegalStateException e) {}
 			}
+			
+//			System.out.println(EOSFound + ", index = " + index + " > " + (length-1));
 
 			/**
 			 * If no EOS character was found that's not being ignored in the
@@ -221,14 +247,37 @@ public class SentenceMaker implements Serializable  {
 					/**
 					 * Obtaining the whole abbreviation from beginning to end
 					 */
-					int abbrevLength = index;
-					while (text.charAt(abbrevLength) != ' ') {
-						abbrevLength--;
+					int abbrevStart = index;
+					while (!WORD_END.contains(text.charAt(abbrevStart))) {
+						abbrevStart--;
+					}
+					int abbrevEnd = index;
+					while (!WORD_END.contains(text.charAt(abbrevEnd))) {
+						abbrevEnd++;
 					}
 
-					if (ABBREVIATIONS.contains(text.substring(abbrevLength + 1, index + 1))) {
-						specialCharTracker.setIgnoreEOS(index + indexBuffer, true);
+					abbrevStart++;
+//					System.out.println("CHECKING ABBREVIATION: \"" + text.substring(abbrevStart, abbrevEnd) + "\"");
+					if (ABBREVIATIONS.contains(text.substring(abbrevStart, abbrevEnd))) {
+//						System.out.println("ABBREVIAITON");
+						int temp = pastIndex;
+						while (abbrevStart != abbrevEnd) {
+//							System.out.println("char = \"" + text.substring(abbrevStart, abbrevStart+1) + "\"");
+							if (EOS.contains(text.charAt(abbrevStart))) {
+//								System.out.println("EOS found");
+								specialCharTracker.setIgnoreEOS(abbrevStart + indexBuffer, true);
+							}
+
+							abbrevStart++;
+						}
+						
 						EOSFound = false;
+//						System.out.println("PREPARING PAST TEXT: \"" + text.substring(temp, abbrevEnd) + "\"");
+						pastText = text.substring(temp, abbrevEnd);
+						pastIndex = abbrevEnd;
+//						System.out.println("INDEX: \"" + text.charAt(abbrevEnd) + "\"");
+						index = abbrevEnd;
+						continue;
 					}
 				} catch (Exception e) {}
 			}
@@ -264,10 +313,13 @@ public class SentenceMaker implements Serializable  {
 			index++;
 			
 			if (EOSFound) {
-				sents.add(text.substring(pastIndex, index));
+//				System.out.println("ADDING: \"" + pastText+text.substring(pastIndex, index) + "\"");
+				sents.add(pastText+text.substring(pastIndex, index));
+				pastText = "";
 			}
 
 			pastIndex = index;
+//			System.out.println("Continue? " + index + " < " + (length-1));
 		}
 
 		if (sents.isEmpty()) {

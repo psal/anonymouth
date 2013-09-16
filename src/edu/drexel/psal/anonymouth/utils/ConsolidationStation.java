@@ -186,7 +186,7 @@ public class ConsolidationStation {
 				anonymityIndices[optionNumber][0] = ts.getSentenceAnonymityIndex();
 				anonymityIndices[optionNumber][1] = optionNumber; // need a way to keep track of the indices of the actual replacement sentences
 				taggedOptions.add(optionNumber,ts);
-				System.out.printf("option '%d' (with AI '%f'): %s\n",optionNumber,anonymityIndices[optionNumber][0],ts.getUntagged(false));
+				System.out.printf("option '%d' (with AI '%f'): %s\n",optionNumber,anonymityIndices[optionNumber][0],ts.getUntagged());
 				optionNumber += 1;
 			}
 			allAnonymityIndices.add(sentenceNumber,anonymityIndices); 
@@ -212,13 +212,13 @@ public class ConsolidationStation {
 		if(!doVersionTwo){
 			double ayEye;
 			for(sentenceNumber = 0; sentenceNumber < numSents; sentenceNumber++){
-				String untaggedOrig = attributable.taggedSentences.get(sentenceNumber).getUntagged(false);
+				String untaggedOrig = attributable.taggedSentences.get(sentenceNumber).getUntagged();
 				numOptions = replacements.get(sentenceNumber).size();
 				if(numOptions < 1)
 					continue;
 				ayEye = allAnonymityIndices.get(sentenceNumber)[0][0]; // Since this was sorted in reverse order, index '0' contains the highest AI, and index '1' tells us the index of the corresponding sentence in its array.
 				actualSentenceIndex = (int) allAnonymityIndices.get(sentenceNumber)[0][1]; // Since this was sorted in reverse order, index '0' contains the highest AI, and index '1' tells us the index of the corresponding sentence in its array.
-				String untaggedNew = replacements.get(sentenceNumber).get(actualSentenceIndex).getUntagged(false);
+				String untaggedNew = replacements.get(sentenceNumber).get(actualSentenceIndex).getUntagged();
 				// test code to make sure that everything is working as planned
 				System.out.printf("The original sentence: %s\n",untaggedOrig);	
 				System.out.printf("Will be replaced with (AI of '%f'); %s\n",ayEye,untaggedNew);
@@ -254,14 +254,14 @@ public class ConsolidationStation {
 					for(sentenceNumber = 0; sentenceNumber < numSents; sentenceNumber++){
 						numOptions = replacements.get(sentenceNumber).size();
 						if(numOptions < 1){
-							replacementSent = "["+attributable.taggedSentences.get(sentenceNumber).getUntagged(false) +"]";
+							replacementSent = "["+attributable.taggedSentences.get(sentenceNumber).getUntagged() +"]";
 							ayEyeRay[sentenceNumber] = attributable.taggedSentences.get(sentenceNumber).getSentenceAnonymityIndex();
 						}
 						else{
 							//System.out.println("sentenceNumber: "+sentenceNumber+" numOptions: "+numOptions+"+ qualityRank = "+qualityRank);
 							ayEyeRay[sentenceNumber] = allAnonymityIndices.get(sentenceNumber)[qualityRank][0]; // Since this was sorted in reverse order, index '0' contains the highest AI, and index '1' tells us the index of the corresponding sentence in its array.
 							actualSentenceIndex = (int) allAnonymityIndices.get(sentenceNumber)[qualityRank][1]; // Since this was sorted in reverse order, index '0' contains the highest AI, and index '1' tells us the index of the corresponding sentence in its array.
-							replacementSent = replacements.get(sentenceNumber).get(actualSentenceIndex).getUntagged(false);
+							replacementSent = replacements.get(sentenceNumber).get(actualSentenceIndex).getUntagged();
 						}
 						replacementDoc += replacementSent;
 					}

@@ -218,24 +218,32 @@ public class HighlighterEngine {
 	 * @param start
 	 * @param end
 	 */
-	public void addAutoRemoveHighlights(int start, int end, int extraSentences) {
-		System.out.println("ADDING AUTO HIGHLIGHTS FOR SENTENCE: " + start + " - " + end);
-		TaggedSentence[] sentences;
-		if (extraSentences < 0) {
-			sentences = new TaggedSentence[(extraSentences*-1)+1];
-			sentences[0] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum);
-			extraSentences = extraSentences*-1;
-			for (int i = 1; i <= extraSentences; i++) {
-				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum-i);
-			}
-		} else {
-			sentences = new TaggedSentence[extraSentences+1];
-			sentences[0] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum);
-			for (int i = 1; i <= extraSentences; i++) {
-				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum+i);
+	public void addAutoRemoveHighlights(int start, int end, int leftSentencesInTextWrapper, int rightSentencesInTextWrapper) {
+//		System.out.println("ADDING AUTO HIGHLIGHTS to " + start +  " - " + end);
+		end = end - 1;
+		
+		int total = leftSentencesInTextWrapper + rightSentencesInTextWrapper + 1;
+//		if (leftSentencesInTextWrapper == 0 && rightSentencesInTextWrapper == 0) {
+//			total++;
+//		}
+		
+//		System.out.println("leftSentencesInTextWrapper = " + leftSentencesInTextWrapper);
+//		System.out.println("rightSentencesInTextWrapper = " + rightSentencesInTextWrapper);
+//		System.out.println("Total sentences getting auto highlights: " + (leftSentencesInTextWrapper + rightSentencesInTextWrapper));
+		TaggedSentence[] sentences = new TaggedSentence[total];
+		for (int i = 0; i < total; i++) {
+			if (leftSentencesInTextWrapper >= 0) {
+				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum - leftSentencesInTextWrapper);
+				leftSentencesInTextWrapper--;
+			} else {
+				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum + rightSentencesInTextWrapper);
+				rightSentencesInTextWrapper--;
 			}
 		}
 		
+//		for (int i = 0; i < sentences.length; i++) {
+//			System.out.println("--> \"" + sentences[i].getUntagged() + "\"");
+//		}
 		
 		//if we don't increment by one, it gets the previous sentence.
 		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(sentences);
@@ -254,6 +262,7 @@ public class HighlighterEngine {
 		 */
 		try {
 			int sentenceSize = words.length;
+//			System.out.println("Num of words = " + sentenceSize); 
 			for (int i = 0; i < sentenceSize; i++) {
 				if (words[i] != null) {
 					for (int x = 0; x < removeSize; x++) {
@@ -266,7 +275,9 @@ public class HighlighterEngine {
 							wordToRemove = test[1].substring(0, test.length-2);
 						}
 
+//						System.out.println("words[i]=" + words[i] + ", wordToRemove="+wordToRemove);
 						if (words[i].equals(wordToRemove)) {
+//							System.out.println("FOUND--------------------------------------------------------------------------");
 							index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
 						}
 					}
@@ -278,10 +289,12 @@ public class HighlighterEngine {
 		}
 
 		int indexSize = index.size();
+		System.out.println("total Found = " + indexSize);
 		for (int i = 0; i < indexSize; i++) {
 			//Since words may or may have not been skipped (don't want to highlight twice, the list might not be completely full, in which
 			//case we got to check to make sure each index not null before proceeding
 			if (index.get(i) != null) {
+//				System.out.println("ADDING");
 				try {
 					elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], mainHighlight.addHighlight(index.get(i)[0], index.get(i)[1], painterRemove)));
 				} catch (BadLocationException e) {

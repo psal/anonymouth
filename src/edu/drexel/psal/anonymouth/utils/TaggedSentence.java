@@ -29,7 +29,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	protected SparseReferences sentenceLevelFeaturesFound;
 
 	protected String untagged;
-	protected String untaggedWithEOSSubs = "";
 	protected ArrayList<Word> wordsInSentence;
 	protected ArrayList<String> translationNames = new ArrayList<String>();
 	protected ArrayList<TaggedSentence> translations = new ArrayList<TaggedSentence>();
@@ -78,9 +77,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 
 		// copy the untagged string
 		untagged = ts.untagged;
-		
-		// then the untagged string with EOS subs
-		untaggedWithEOSSubs = ts.untaggedWithEOSSubs;
 		
 		// Next copy the Word objects that make up the sentence
 		for(i = 0; i < numWords; i++)
@@ -265,7 +261,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public void delete() {
 		sentenceLevelFeaturesFound = null;
 		untagged = null;
-		untaggedWithEOSSubs = null;
 		wordsInSentence = null;
 		translationNames = null;
 		translations = null;
@@ -460,11 +455,8 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	 * @param returnWithEOSSubs 
 	 * @return
 	 */
-	public String getUntagged(boolean returnWithEOSSubs){
-		if (returnWithEOSSubs)
-			return untaggedWithEOSSubs;
-		else
-			return untagged;
+	public String getUntagged() {
+		return untagged;
 	}
 
 	public String toString(){

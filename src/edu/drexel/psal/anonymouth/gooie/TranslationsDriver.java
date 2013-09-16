@@ -168,7 +168,7 @@ public class TranslationsDriver implements MouseListener {
 		main.documentSaved = false;
 		main.editorDriver.updateSentence(
 				main.editorDriver.sentNum,
-				translationsPanel.translationsMap.get(actionCommand).getUntagged(false));
+				translationsPanel.translationsMap.get(actionCommand).getUntagged());
 		main.editorDriver.syncTextPaneWithTaggedDoc();
 
 		main.translationsHolderPanel.removeAll();
