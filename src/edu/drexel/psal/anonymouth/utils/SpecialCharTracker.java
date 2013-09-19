@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.utils.TextWrapper;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -18,11 +19,12 @@ import edu.drexel.psal.jstylo.generics.Logger;
  * character, and SentenceMaker will then skip over these since they aren't
  * actually and EOS.<br><br>
  *
- * Now also tracks Quotes and Parenthesis both in the similar way of tracking
- * their start and end (if exists) indices.
+ * Now also tracks all TextWrappers in the similar way with a few additional
+ * stuff like extend highlights and whatnot. For more details on what the hell
+ * TextWrappers are and why they exist at all, see TextWrapper.java
  *
- * @author  Andrew W.E. McDonald
  * @author  Marc Barrowclift
+ * @author  Andrew W.E. McDonald
  */
 public class SpecialCharTracker implements Serializable {
 	
@@ -33,6 +35,7 @@ public class SpecialCharTracker implements Serializable {
 	 * The characters we acknowledge as possible was to end a sentence
 	 */
 	private final HashSet<Character> EOS;
+	private GUIMain main;
 	/**
 	 * The character we acknowledge as a quote
 	 */
@@ -40,7 +43,9 @@ public class SpecialCharTracker implements Serializable {
 	/**
 	 * The characters we acknowledge as parenthesis
 	 */
-	private final HashSet<Character> PARENTHESIS;
+	private final String PARENTHESIS = "()";
+	private final String BRACKETS = "[]";
+	private final String SQUIGGLIES = "{}";
 	/**
 	 * Our array list of EOS character objects
 	 */
@@ -53,43 +58,37 @@ public class SpecialCharTracker implements Serializable {
 	 * Our array list of parenthesis
 	 */
 	private ArrayList<TextWrapper> parenthesis;
+	private ArrayList<TextWrapper> brackets;
+	private ArrayList<TextWrapper> squigglies;
+
+	private ArrayList<ArrayList<TextWrapper>> allTextWrappers;
+	private int[] allTextWrapperSizes;
+	private final int NUM_OF_TEXT_WRAPPERS = 4;
 	/**
 	 * The number of EOSes we are currently tracking
 	 */
 	public int eosSize;
-	/**
-	 * The number of quotes we're currently tracking
-	 */
-	public int quoteSize;
-	/**
-	 * The number of parenthesis we're currently tracking
-	 */
-	protected int parenthesisSize;
 
 	/**
 	 * Constructor
 	 */
-	public SpecialCharTracker() {
+	public SpecialCharTracker(GUIMain main) {
 		EOS = new HashSet<Character>(3);
 		EOS.add('.');
 		EOS.add('!');
 		EOS.add('?');
-
-		PARENTHESIS = new HashSet<Character>(2);
-		PARENTHESIS.add('(');
-		PARENTHESIS.add(')');
-		PARENTHESIS.add('[');
-		PARENTHESIS.add(']');
-		PARENTHESIS.add('{');
-		PARENTHESIS.add('}');
 		
 		eoses = new ArrayList<EOS>(100);
 		quotes = new ArrayList<TextWrapper>(50);
 		parenthesis = new ArrayList<TextWrapper>(50);
+		brackets = new ArrayList<TextWrapper>(50);
+		squigglies = new ArrayList<TextWrapper>(50);
 
 		eosSize = 0;
-		quoteSize = 0;
-		parenthesisSize = 0;
+
+		initAllTextWrappers();
+		initAllTextWrapperSizes();
+		this.main = main;
 	}
 	
 	/**
@@ -104,47 +103,77 @@ public class SpecialCharTracker implements Serializable {
 		EOS.add('.');
 		EOS.add('!');
 		EOS.add('?');
+		this.main = specialCharTracker.main;
+		quotes = new ArrayList<TextWrapper>(50);
+		parenthesis = new ArrayList<TextWrapper>(50);
+		brackets = new ArrayList<TextWrapper>(50);
+		squigglies = new ArrayList<TextWrapper>(50);
+		initAllTextWrappers();
+		initAllTextWrapperSizes();
 
-		PARENTHESIS = new HashSet<Character>(2);
-		PARENTHESIS.add('(');
-		PARENTHESIS.add(')');
-		PARENTHESIS.add('[');
-		PARENTHESIS.add(']');
-		PARENTHESIS.add('{');
-		PARENTHESIS.add('}');
-		
+		//EOS characters
 		int tempSize = specialCharTracker.eosSize;
 		eoses = new ArrayList<EOS>(tempSize);
 		eosSize = 0;
 		for (int i = 0; i < tempSize; i++) {
 			if (specialCharTracker.eoses.get(i) == null) {
-				return;
+				break;
 			}
 			eosSize++;
 			eoses.add(new EOS(specialCharTracker.eoses.get(i)));
 		}
 
-		tempSize = specialCharTracker.quoteSize;
-		quotes = new ArrayList<TextWrapper>(tempSize);
-		quoteSize = 0;
-		for (int i = 0; i < tempSize; i++) {
-			if (specialCharTracker.quotes.get(i) == null) {
-				return;
-			}
-			quoteSize++;
-			quotes.add(new TextWrapper(specialCharTracker.quotes.get(i)));
+		//Text Wrappers
+		for (int i = 0; i < NUM_OF_TEXT_WRAPPERS; i++) {
+			deepCopy(specialCharTracker, i);
 		}
+	}
 
-		tempSize = specialCharTracker.parenthesisSize;
-		parenthesis = new ArrayList<TextWrapper>(tempSize);
-		parenthesisSize= 0;
+	/**
+	 * Utilities method for the SpecialCharTracker constructor above and
+	 * performs a deep copy for the current TextWrapper object ArrayList.
+	 * 
+	 * @param specialCharTracker
+	 *        The instance of specialCharTracker we're deep copying
+	 * @param curIndex
+	 *        The current index we're on, representing the current
+	 *        TextWrapper array and size we're working with (Quotes,
+	 *        Parenthesis, Brackets, etc.)
+	 */
+	private void deepCopy(SpecialCharTracker specialCharTracker, int curIndex) {
+		int tempSize = specialCharTracker.allTextWrapperSizes[curIndex];
 		for (int i = 0; i < tempSize; i++) {
-			if (specialCharTracker.parenthesis.get(i) == null) {
-				return;
+			if (specialCharTracker.allTextWrappers.get(curIndex) == null) {
+				break;
 			}
-			parenthesisSize++;
-			parenthesis.add(new TextWrapper(specialCharTracker.parenthesis.get(i)));
+			
+			allTextWrapperSizes[curIndex]++;
+			allTextWrappers.get(curIndex).add(specialCharTracker.allTextWrappers.get(curIndex).get(i));
 		}
+	}
+	
+	/**
+	 * Initialies the textWrappers array with empty
+	 * TextWrapper Arrays
+	 */
+	private void initAllTextWrappers() {
+		allTextWrappers = new ArrayList<ArrayList<TextWrapper>>(NUM_OF_TEXT_WRAPPERS);
+		allTextWrappers.add(quotes);		//Quotes
+		allTextWrappers.add(parenthesis);	//Parenthesis
+		allTextWrappers.add(brackets);		//Brackets
+		allTextWrappers.add(squigglies);	//Squigglies
+	}
+	
+	/**
+	 * Initializes the textWrapperSizes array with 0's for
+	 * each one.
+	 */
+	private void initAllTextWrapperSizes() {
+		allTextWrapperSizes = new int[NUM_OF_TEXT_WRAPPERS];
+		allTextWrapperSizes[0] = 0;	//Quotes
+		allTextWrapperSizes[1] = 0;	//Parenthesis
+		allTextWrapperSizes[2] = 0;	//Brackets
+		allTextWrapperSizes[3] = 0;	//Squigglies
 	}
 	
 	/**
@@ -164,20 +193,18 @@ public class SpecialCharTracker implements Serializable {
 				eoses.get(i).location += shiftAmount;
 		}
 
-		//Quotes
-		for (int i = 0; i < quoteSize; i++) {
-			if (quotes.get(i).startIndex >= index)
-				quotes.get(i).startIndex += shiftAmount;
-			if (quotes.get(i).closed == true && quotes.get(i).endIndex >= index)
-				quotes.get(i).endIndex += shiftAmount;
+		//Text Wrappers
+		for (int i = 0; i < NUM_OF_TEXT_WRAPPERS; i++) {
+			shift(allTextWrappers.get(i), allTextWrapperSizes[i], index, shiftAmount);
 		}
+	}
 
-		//Parenthesis
-		for (int i = 0; i < parenthesisSize; i++) {
-			if (parenthesis.get(i).startIndex >= index)
-				parenthesis.get(i).startIndex += shiftAmount;
-			if (parenthesis.get(i).closed == true && parenthesis.get(i).endIndex >= index)
-				parenthesis.get(i).endIndex += shiftAmount;
+	private void shift(ArrayList<TextWrapper> curTextWrapper, int curSize, int index, int shiftAmount) {
+		for (int i = 0; i < curSize; i++) {
+			if (curTextWrapper.get(i).startIndex >= index)
+				curTextWrapper.get(i).startIndex += shiftAmount;
+			if (curTextWrapper.get(i).closed == true && curTextWrapper.get(i).endIndex >= index)
+				curTextWrapper.get(i).endIndex += shiftAmount;
 		}
 	}
 
@@ -196,7 +223,7 @@ public class SpecialCharTracker implements Serializable {
 	 */
 	public void resetQuotes() {
 		quotes.clear();
-		quoteSize = 0;
+		allTextWrapperSizes[0] = 0;
 	}
 
 	/**
@@ -204,7 +231,23 @@ public class SpecialCharTracker implements Serializable {
 	 */
 	public void resetParenthesis() {
 		parenthesis.clear();
-		parenthesisSize = 0;
+		allTextWrapperSizes[1] = 0;
+	}
+
+	/**
+	 * Clears all Brackets so we can recalculate them and reset the tracker
+	 */
+	public void resetBrackets() {
+		brackets.clear();
+		allTextWrapperSizes[2] = 0;
+	}
+
+	/**
+	 * Clears all Squigglies so we can recalculate them and reset the tracker
+	 */
+	public void resetSquigglies() {
+		squigglies.clear();
+		allTextWrapperSizes[3] = 0;
 	}
 
 	/**
@@ -214,6 +257,8 @@ public class SpecialCharTracker implements Serializable {
 		resetEOSCharacters();
 		resetQuotes();
 		resetParenthesis();
+		resetBrackets();
+		resetSquigglies();
 	}
 	
 	//================ ASSORTED ================
@@ -228,20 +273,183 @@ public class SpecialCharTracker implements Serializable {
 		}
 		
 		toReturn += NAME+"QUOTES:\n";
-		for (int i = 0; i < quoteSize; i++) {
+		for (int i = 0; i < allTextWrapperSizes[0]; i++) {
 			toReturn += NAME+ "   " + quotes.get(i) + "\n";
 		}
 		
 		toReturn += NAME+"PARENTHESIS:\n";
-		for (int i = 0; i < parenthesisSize; i++) {
+		for (int i = 0; i < allTextWrapperSizes[1]; i++) {
 			toReturn += NAME+ "   " + parenthesis.get(i) + "\n";
+		}
+
+		toReturn += NAME+"BRACKETS:\n";
+		for (int i = 0; i < allTextWrapperSizes[2]; i++) {
+			toReturn += NAME+ "   " + brackets.get(i) + "\n";
+		}
+		
+		toReturn += NAME+"SQUIGGLIES:\n";
+		for (int i = 0; i < allTextWrapperSizes[3]; i++) {
+			toReturn += NAME+ "   " + squigglies.get(i) + "\n";
 		}
 
 		return toReturn;
 	}
 
 	//=======================================================================
-	//*					QUOTE AND PARENTHESIS METHODS						*	
+	//*					TEXT WRAPPER GENERAL METHODS						*	
+	//=======================================================================
+	
+	/**
+	 * To be called by EditorDriver's getSentenceIndices() every single time
+	 * the sentence highlight is being changed (new sentence, sentence
+	 * changes, etc). This is to ensure that the highlight extends to what the
+	 * user precieves as a full sentence to give the illusion of a complete
+	 * one (while in actuality they are separate tagged sentence objects). We
+	 * do it this way since, in the past, we were actually combining and
+	 * splitting this sentences based on text wrapper positions but to be
+	 * quite honest it sucked. This way, it's faster, smarter, and all around
+	 * easier to understand.
+	 *
+	 * Say a sentence like "Hi."'s indices is passed. This will determine if
+	 * it's in between text wrappers, like "She said "Nice to meet you. Hi. My
+	 * name's Lucy." kind of loud." If this is the case, instead of just
+	 * highlighting the sentence "Hi.", we extend the highlight to all the
+	 * tagged sentences we deem to be part of a single one. The best way to
+	 * understand how this is done is simply to read the code.
+	 *
+	 * @param  start
+	 *         The start index of the sentence
+	 * @param  end
+	 *         The end index of the sentence
+	 * @param  allSentIndices
+	 *         The allSentIndices int array straight from getSentenceIndices()
+	 * @param  selectedSentence
+	 *         The selectedSentence int straight from getSentenceIndices()
+	 *
+	 * @return
+	 * 	An integer array representing the new highlights. The indices represent:<br>
+	 * 		[0] = Where the start of the highlight should be<br>
+	 * 		[1] = Where the end of the highlight should be<br>
+	 * 		[2] = The number of extra sentences included in the extended highlight to the LEFT<br>
+	 * 		[3] = The number of extra sentences included in the extended highlight to the RIGHT<br><br>
+	 *
+	 *	The last two indices of the array are specifically for the automatic word to
+	 *	remove highlights, as they require the sentence numbers to obtain the words
+	 *	to remove. If that could be updated with no loss in performance to instead
+	 *	use just indices then we could get ride of these "extra sentences" portion of
+	 *	this return array.
+	 */
+	public int[] extendHighlights(int start, int end, int[] allSentIndices, int[] sentenceLengths, int selectedSentence) {
+		int[] highlightIndices = {start, end, 0, 0};
+		for (int i = 0; i < NUM_OF_TEXT_WRAPPERS; i++) {
+			highlightIndices = extendHighlights(highlightIndices[0], highlightIndices[1], allSentIndices, sentenceLengths, selectedSentence, allTextWrappers.get(i), allTextWrapperSizes[i], highlightIndices);
+		}
+		
+		return highlightIndices;
+	}
+
+	private int[] extendHighlights(int asdf, int endgf, int[] allSentIndices, int[] sentenceLengths,
+			int selectedSentence, ArrayList<TextWrapper> curTextWrapper, int curSize, int[] highlightIndices) {
+		for (int t = 0; t < curSize; t++) {
+			if (curTextWrapper.get(t).closed) {
+				//Full text wrapper within sentence
+				if (curTextWrapper.get(t).startIndex > highlightIndices[0] && curTextWrapper.get(t).endIndex < highlightIndices[1]) {
+					continue;
+				//Whole sentence between text wrapper
+				} else if (highlightIndices[0] >= curTextWrapper.get(t).startIndex && highlightIndices[1] <= curTextWrapper.get(t).endIndex) {
+					highlightIndices[0] = curTextWrapper.get(t).startIndex;
+					for (int sent = selectedSentence; sent >= 0; sent--) {
+						if (highlightIndices[0] > (allSentIndices[sent] - sentenceLengths[sent]) && highlightIndices[0] < allSentIndices[sent]) {
+							highlightIndices[0] = allSentIndices[sent] - sentenceLengths[sent];
+							highlightIndices[2] = selectedSentence - sent;
+							break;
+						}
+					}
+					highlightIndices[1] = curTextWrapper.get(t).endIndex;
+					for (int sent = selectedSentence; sent < main.editorDriver.taggedDoc.numOfSentences; sent++) {
+						if (highlightIndices[1] > (allSentIndices[sent] - sentenceLengths[sent]) && highlightIndices[1] < allSentIndices[sent]) {
+							highlightIndices[1] = allSentIndices[sent];
+							highlightIndices[3] = sent - selectedSentence;
+							break;
+						}
+					}
+				//Start of text wrapper in sentence
+				} else if (highlightIndices[0] < curTextWrapper.get(t).startIndex && highlightIndices[1] > curTextWrapper.get(t).startIndex) {
+					highlightIndices[1] = curTextWrapper.get(t).endIndex;
+					for (int sent = selectedSentence; sent < main.editorDriver.taggedDoc.numOfSentences; sent++) {
+						if (highlightIndices[1] > (allSentIndices[sent] - sentenceLengths[sent]) && highlightIndices[1] < allSentIndices[sent]) {
+							highlightIndices[1] = allSentIndices[sent];
+							highlightIndices[3] = sent - selectedSentence;
+							break;
+						}
+					}
+				//End of text wrapper in sentence
+				} else if (highlightIndices[0] <= curTextWrapper.get(t).endIndex && highlightIndices[1] > curTextWrapper.get(t).endIndex) {
+					highlightIndices[0] = curTextWrapper.get(t).startIndex;
+					for (int sent = selectedSentence; sent >= 0; sent--) {
+						if (highlightIndices[0] > (allSentIndices[sent] - sentenceLengths[sent]) && highlightIndices[0] < allSentIndices[sent]) {
+							highlightIndices[0] = allSentIndices[sent] - sentenceLengths[sent];
+							highlightIndices[2] = selectedSentence - sent;
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return highlightIndices;
+	}
+
+	/**
+	 * Removes any Text Wrapper Objects between the given indices as [5, 10),
+	 * meaning inclusive for the first and exclusive for the last.
+	 * 
+	 * @param  lowerBound
+	 *         The beginning of hte range you want to remove from (includes this position)
+	 * @param  upperBound
+	 *         The end fo the range you want to remove from (does not include this position)
+	 *         
+	 * @return
+	 * 		Whether or not any Text Wrapper Objects were removed from the given range
+	 */
+	public void removeTextWrappersInRange(int lowerBound, int upperBound) {
+		Logger.logln(NAME+"Removing Text Wrappers in range " + lowerBound + " - " + upperBound);
+
+		for (int i = 0; i < NUM_OF_TEXT_WRAPPERS; i++) {
+			removeTextWrappersInRange(lowerBound, upperBound, allTextWrappers.get(i), i);
+		}
+	}
+	
+	public void removeTextWrappersInRange(int lowerBound, int upperBound, ArrayList<TextWrapper> curTextWrapper, int curSize) {
+		for (int i = 0; i < allTextWrapperSizes[curSize]; i++) {
+			if (curTextWrapper.get(i).startIndex >= lowerBound && curTextWrapper.get(i).startIndex < upperBound) {
+				if (curTextWrapper.get(i).closed) {
+					if (curTextWrapper.get(i).endIndex >= lowerBound && curTextWrapper.get(i).endIndex < upperBound) {
+						Logger.logln(NAME+"Removed TextWrapper Object at " + curTextWrapper.get(i).startIndex + " - " + curTextWrapper.get(i).endIndex);
+						curTextWrapper.remove(i);
+						i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
+						allTextWrapperSizes[curSize]--; // also decrement quoteSize
+					} else {
+						curTextWrapper.get(i).startIndex = -1;
+						curTextWrapper.get(i).closed = false;
+					}
+				} else {
+					Logger.logln(NAME+"Removed TextWrapper Object at " + curTextWrapper.get(i).startIndex + " - " + curTextWrapper.get(i).endIndex);
+					curTextWrapper.remove(i);
+					i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
+					allTextWrapperSizes[curSize]--; // also decrement quoteSize
+				}
+			} else if (curTextWrapper.get(i).closed) {
+				if (curTextWrapper.get(i).endIndex >= lowerBound && curTextWrapper.get(i).endIndex < upperBound) {
+					curTextWrapper.get(i).endIndex = -1;
+					curTextWrapper.get(i).closed = false;
+				}
+			}
+		}
+	}
+
+	//=======================================================================
+	//*								QUOTES									*	
 	//=======================================================================
 	
 	/**
@@ -260,21 +468,41 @@ public class SpecialCharTracker implements Serializable {
 	 */
 	public void addQuote(int index) {
 		int closingQuote = -1;
-		for (int i = 0; i < quoteSize; i++) {
+		for (int i = 0; i < allTextWrapperSizes[0]; i++) {
 			if (!quotes.get(i).closed) {
-//				System.out.println("QUOTE NOT CLOSED");
-				closingQuote = i;
-				break;
+				//If the text wrapper doesn't have an end index
+				if (quotes.get(i).endIndex == -1) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (closingQuote == -1) {
+						closingQuote = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (quotes.get(i).startIndex > quotes.get(closingQuote).startIndex) {
+							closingQuote = i;
+						}
+					}
+				//If the text wrapper doesn't have a start index
+				} else if (quotes.get(i).startIndex == -1) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (closingQuote == -1) {
+						closingQuote = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (quotes.get(i).endIndex < quotes.get(closingQuote).endIndex) {
+							closingQuote = i;
+						}
+					}
+				}
 			}
 		}
 
 		//It's a new quote, create a new TextWrapper Object with this as start index
 		if (closingQuote == -1) {
-			quotes.add(new TextWrapper(index));
-			quoteSize++;
+			quotes.add(new TextWrapper(index, '"'));
+			allTextWrapperSizes[0]++;
 		//It's a closing quote, simply add this as the endIndex of that Object
 		} else {
-			quotes.get(closingQuote).setClosingQuote(index);
+			quotes.get(closingQuote).setClosingWrapper(index);
 		}
 	}
 
@@ -297,6 +525,10 @@ public class SpecialCharTracker implements Serializable {
 		return result;
 	}
 
+	//=======================================================================
+	//*							PARENTHESIS									*	
+	//=======================================================================
+
 	/**
 	 * Checks if a given character is a parenthesis
 	 * 
@@ -309,7 +541,27 @@ public class SpecialCharTracker implements Serializable {
 	public boolean isParenthesis(char unknownChar) {
 		boolean result = false;
 
-		if (PARENTHESIS.contains(unknownChar)) {
+		if (PARENTHESIS.charAt(0) == unknownChar || PARENTHESIS.charAt(1) == unknownChar) {
+			result = true;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Determines whether or not the passed paren is a closing
+	 * one or not
+	 * @param  paren
+	 *         The paren char you want to check
+	 *         
+	 * @return
+	 * 	True or false, depending on whether or not it's a closing
+	 * 	paren
+	 */
+	private boolean isClosingParenthesis(char paren) {
+		boolean result = false;
+
+		if (PARENTHESIS.charAt(1) == paren) {
 			result = true;
 		}
 
@@ -330,163 +582,238 @@ public class SpecialCharTracker implements Serializable {
 	 * @param index
 	 *        The index of the newly added Quote
 	 */
-	public void addParenthesis(int index) {
-		int closingParenthesis = -1;
-		for (int i = 0; i < parenthesisSize; i++) {
+	public void addParenthesis(int index, char paren) {
+		int parenthesisOfInterest = -1;
+		for (int i = 0; i < allTextWrapperSizes[1]; i++) {			
 			if (!parenthesis.get(i).closed) {
-				closingParenthesis = i;
-				break;
+				//If the text wrapper doesn't have an end index and the new character is a closing one
+				if (parenthesis.get(i).endIndex == -1 && isClosingParenthesis(paren)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (parenthesisOfInterest == -1) {
+						parenthesisOfInterest = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (parenthesis.get(i).startIndex > parenthesis.get(parenthesisOfInterest).startIndex) {
+							parenthesisOfInterest = i;
+						}
+					}
+				//If the text wrapper doesn't have a start index and the new character is a starting one
+				} else if (parenthesis.get(i).startIndex == -1 && !isClosingParenthesis(paren)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (parenthesisOfInterest == -1) {
+						parenthesisOfInterest = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (parenthesis.get(i).endIndex < parenthesis.get(parenthesisOfInterest).endIndex) {
+							parenthesisOfInterest = i;
+						}
+					}
+				}
 			}
 		}
 
-		//It's a new quote, create a new TextWrapper Object with this as start index
-		if (closingParenthesis == -1) {
-			parenthesis.add(new TextWrapper(index));
-//			System.out.println("THIS LENGTH 378 = "+ main.editorDriver.taggedDoc.length);
-			parenthesisSize++;
-		//It's a closing quote, simply add this as the endIndex of that Object
+		//It won't fit into any existing objects, create a new one for it.
+		if (parenthesisOfInterest == -1) {
+			parenthesis.add(new TextWrapper(index, paren));
+			allTextWrapperSizes[1]++;
+		//It's closuing up (ether with a start or end) and existing wrapper object
 		} else {
-			parenthesis.get(closingParenthesis).closed = true;
-			parenthesis.get(closingParenthesis).endIndex = index;
+			parenthesis.get(parenthesisOfInterest).setClosingWrapper(index);
 		}
 	}
 
+	//=======================================================================
+	//*							BRACKETS									*	
+	//=======================================================================
+	
 	/**
-	 * Determines whether or not the given index (most likely the caret position)
-	 * is inbetween a given pair of quotes or parenthesis.
-	 * @param  index [description]
-	 * @return       [description]
-	 */
-	public int[] adjustIndicesToIgnoreWrappers(int start, int end) {
-		int[] indices = {start, end};
-
-//		if (indicesAlreadyAdjusted != null) {
-//			indices = indicesAlreadyAdjusted;
-//		} else {
-//			for (int i = 0; i < quoteSize; i++) {
-//				/**
-//				 * We want to check if:
-//				 * 		Test sentence "Test.
-//				 * If not, then:
-//				 * 		Sentence." End of actual sentence.
-//				 */
-//				if (start < quotes.get(i).startIndex && end > quotes.get(i).startIndex) {
-//					if (quotes.get(i).closed) {
-//						//Just this sentence, no EOS characters between quotes, just use passed start and end indices
-//						if (quotes.get(i).endIndex < end) {
-//							continue;
-//						//Get the closing quote index, calculate sentence indices of that index position, then highlight
-//						} else {
-//							System.out.println(">>>>> SENTENCE END <<<<<< = " + quotes.get(i).sentenceEnd);
-//							indices[1] = quotes.get(i).sentenceEnd;
-//							break;
-//						}
-//					//Not closed, highlight EVERYTHING past this point (because it's all enclosed in the wrapper until it's closed)
-//					} else {
-//						System.out.println("THIS LENGTH 420 = " + main.editorDriver.taggedDoc.length);
-//						indices[1] = main.editorDriver.taggedDoc.length;
-//						indices[0] = quotes.get(i).sentenceStart;
-//						break;
-//					}
-//				} else if (quotes.get(i).closed) {
-//					//Get starting quote index, calculate sentence indices of that index position, then highlight
-//					if (start <= quotes.get(i).endIndex && end > quotes.get(i).endIndex) {
-//						System.out.println("FIND ME = " + quotes.get(i).sentenceLength + ", " + quotes.get(i).sentenceStart);
-//						indices[0] = quotes.get(i).sentenceStart;
-//						break;
-//					}
-//				} else {
-//					indices[0] = quotes.get(i).sentenceStart;
-//					indices[1] = main.editorDriver.taggedDoc.length;
-//					break;
-//				}
-//			}
-//
-//			indicesAlreadyAdjusted = indices;
-//		}
-
-		return indices;
-	}
-
-	/**
-	 * Removes any Text Wrapper Objects between the given indices as [5, 10),
-	 * meaning inclusive for the first and exclusive for the last.
+	 * Checks if a given character is a bracket
 	 * 
-	 * @param  lowerBound
-	 *         The beginning of hte range you want to remove from (includes this position)
-	 * @param  upperBound
-	 *         The end fo the range you want to remove from (does not include this position)
+	 * @param  unknownChar
+	 *      The character you want to test
 	 *         
 	 * @return
-	 * 		Whether or not any Text Wrapper Objects were removed from the given range
+	 * 		True or false, depending on whether or not it's a bracket
 	 */
-	public boolean removeTextWrappersInRange(int lowerBound, int upperBound) {
-		Logger.logln(NAME+"Removing Text Wrappers in range " + lowerBound + " - " + upperBound);
-		boolean removed = false;
+	public boolean isBracket(char unknownChar) {
+		boolean result = false;
 
-		for (int i = 0; i < quoteSize; i++) {
-			if (quotes.get(i).startIndex >= lowerBound && quotes.get(i).startIndex < upperBound) {
-				if (quotes.get(i).closed) {
-					if (quotes.get(i).endIndex >= lowerBound && quotes.get(i).endIndex < upperBound) {
-						Logger.logln(NAME+"Removed Quote TextWrapper Object from " + quotes.get(i).startIndex + " - " + quotes.get(i).endIndex);
-						quotes.remove(i);
-						i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
-						quoteSize--; // also decrement quoteSize
-						removed = true;
+		if (BRACKETS.charAt(0) == unknownChar || BRACKETS.charAt(1) == unknownChar) {
+			result = true;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Determines whether or not the passed bracket is a closing
+	 * one or not
+	 * @param  bracket
+	 *         The bracket char you want to check
+	 *         
+	 * @return
+	 * 	True or false, depending on whether or not it's a closing
+	 * 	bracket
+	 */
+	private boolean isClosingBracket(char bracket) {
+		boolean result = false;
+
+		if (BRACKETS.charAt(1) == bracket) {
+			result = true;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Adds a Bracket to the tracker, should be called EVERY TIME a new bracket is
+	 * typed, regardless of whether or not it's the opening bracket or a
+	 * closing one.
+	 *
+	 * addBracket() checks to see if there there is a non-closed bracket prior to
+	 * this one's index, and if there is it will treat this ass the closing
+	 * index and add that index as endIndex to that TextWrapper object,
+	 * otherwise it will create a new Bracket object with this passed index as
+	 * the startIndex, endIndex = -1, and closed = false
+	 * 
+	 * @param index
+	 *        The index of the newly added Bracket
+	 */
+	public void addBracket(int index, char bracket) {
+		int bracketOfInterest = -1;
+		for (int i = 0; i < allTextWrapperSizes[2]; i++) {			
+			if (!brackets.get(i).closed) {
+				//If the text wrapper doesn't have an end index and the new character is a closing one
+				if (brackets.get(i).endIndex == -1 && isClosingBracket(bracket)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (bracketOfInterest == -1) {
+						bracketOfInterest = i;
 					} else {
-						quotes.get(i).startIndex = quotes.get(i).endIndex;
-						quotes.get(i).endIndex = -1;
-						quotes.get(i).closed = false;
-						removed = true;
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (brackets.get(i).startIndex > brackets.get(bracketOfInterest).startIndex) {
+							bracketOfInterest = i;
+						}
 					}
-				} else {
-					Logger.logln(NAME+"Removed Quote TextWrapper Object from " + quotes.get(i).startIndex + " - " + quotes.get(i).endIndex);
-					quotes.remove(i);
-					i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
-					quoteSize--; // also decrement quoteSize
-					removed = true;
-				}
-			} else if (quotes.get(i).closed) {
-				if (quotes.get(i).endIndex >= lowerBound && quotes.get(i).endIndex < upperBound) {
-					quotes.get(i).endIndex = -1;
-					quotes.get(i).closed = false;
-					removed = true;
+				//If the text wrapper doesn't have a start index and the new character is a starting one
+				} else if (brackets.get(i).startIndex == -1 && !isClosingBracket(bracket)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (bracketOfInterest == -1) {
+						bracketOfInterest = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (brackets.get(i).endIndex < brackets.get(bracketOfInterest).endIndex) {
+							bracketOfInterest = i;
+						}
+					}
 				}
 			}
 		}
 
-		for (int i = 0; i < parenthesisSize; i++) {
-			if (parenthesis.get(i).startIndex >= lowerBound && parenthesis.get(i).startIndex < upperBound) {
-				if (parenthesis.get(i).closed) {
-					if (parenthesis.get(i).endIndex >= lowerBound && parenthesis.get(i).endIndex < upperBound) {
-						Logger.logln(NAME+"Removed Parenthesis TextWrapper Object from " + parenthesis.get(i).startIndex + " - " + parenthesis.get(i).endIndex);
-						parenthesis.remove(i);
-						i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
-						parenthesisSize--; // also decrement parenthesisSize
-						removed = true;
+		//It won't fit into any existing objects, create a new one for it.
+		if (bracketOfInterest == -1) {
+			brackets.add(new TextWrapper(index, bracket));
+			allTextWrapperSizes[2]++;
+		//It's closing up (either with a start or end) and existing wrapper object
+		} else {
+			brackets.get(bracketOfInterest).setClosingWrapper(index);
+		}
+	}
+
+	//=======================================================================
+	//*							SQUIGGLIES									*	
+	//=======================================================================
+	
+	/**
+	 * Checks if a given character is a squiggly
+	 * 
+	 * @param  unknownChar
+	 *      The character you want to test
+	 *         
+	 * @return
+	 * 		True or false, depending on whether or not it's a squiggly
+	 */
+	public boolean isSquiggly(char unknownChar) {
+		boolean result = false;
+
+		if (SQUIGGLIES.charAt(0) == unknownChar || SQUIGGLIES.charAt(1) == unknownChar) {
+			result = true;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Determines whether or not the passed squiggly is a closing
+	 * one or not.
+	 * @param  squiggly
+	 *         The squiggly char you want to check
+	 *         
+	 * @return
+	 * 	True or false, depending on whether or not it's a closing
+	 * 	squiggly
+	 */
+	private boolean isClosingSquiggly(char squiggly) {
+		boolean result = false;
+
+		if (SQUIGGLIES.charAt(1) == squiggly) {
+			result = true;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Adds a squiggly to the tracker, should be called EVERY TIME a new squiggly is
+	 * typed, regardless of whether or not it's the opening squiggly or a
+	 * closing one.
+	 *
+	 * addsquiggly() checks to see if there there is a non-closed squiggly prior to
+	 * this one's index, and if there is it will treat this ass the closing
+	 * index and add that index as endIndex to that TextWrapper object,
+	 * otherwise it will create a new squiggly object with this passed index as
+	 * the startIndex, endIndex = -1, and closed = false
+	 * 
+	 * @param index
+	 *        The index of the newly added Bracket
+	 */
+	public void addSquiggly(int index, char squiggly) {
+		int squigglyOfInterest = -1;
+		for (int i = 0; i < allTextWrapperSizes[3]; i++) {			
+			if (!squigglies.get(i).closed) {
+				//If the text wrapper doesn't have an end index and the new character is a closing one
+				if (squigglies.get(i).endIndex == -1 && isClosingSquiggly(squiggly)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (squigglyOfInterest == -1) {
+						squigglyOfInterest = i;
 					} else {
-						parenthesis.get(i).startIndex = parenthesis.get(i).endIndex;
-						parenthesis.get(i).endIndex = -1;
-						parenthesis.get(i).closed = false;
-						removed = true;
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (squigglies.get(i).startIndex > squigglies.get(squigglyOfInterest).startIndex) {
+							squigglyOfInterest = i;
+						}
 					}
-				} else {
-					Logger.logln(NAME+"Removed Parenthesis TextWrapper Object from " + parenthesis.get(i).startIndex + " - " + parenthesis.get(i).endIndex);
-					parenthesis.remove(i);
-					i--; // decrement 'i' so that we don't miss the object that shifts down into the spot just freed.
-					parenthesisSize--; // also decrement parenthesisSize
-					removed = true;
-				}
-			} else if (parenthesis.get(i).closed) {
-				if (parenthesis.get(i).endIndex >= lowerBound && parenthesis.get(i).endIndex < upperBound) {
-					parenthesis.get(i).endIndex = -1;
-					parenthesis.get(i).closed = false;
-					removed = true;
+				//If the text wrapper doesn't have a start index and the new character is a starting one
+				} else if (squigglies.get(i).startIndex == -1 && !isClosingSquiggly(squiggly)) {
+					//We need to check to make sure we are closing the closest available unclosed text wrapper
+					if (squigglyOfInterest == -1) {
+						squigglyOfInterest = i;
+					} else {
+						//If it's closer, then we're closing this text wrapper and not the one farther away
+						if (squigglies.get(i).endIndex < squigglies.get(squigglyOfInterest).endIndex) {
+							squigglyOfInterest = i;
+						}
+					}
 				}
 			}
 		}
-		
-		return removed;
+
+		//It won't fit into any existing objects, create a new one for it.
+		if (squigglyOfInterest == -1) {
+			squigglies.add(new TextWrapper(index, squiggly));
+			allTextWrapperSizes[3]++;
+		//It's closing up (ether with a start or end) and existing wrapper object
+		} else {
+			squigglies.get(squigglyOfInterest).setClosingWrapper(index);
+		}
 	}
 
 	//=======================================================================
@@ -530,9 +857,7 @@ public class SpecialCharTracker implements Serializable {
 	public boolean setIgnoreEOS(int index, boolean ignore) {
 		boolean found = false;
 		
-//		System.out.println("IGNORE");
 		for (int i = 0; i < eosSize; i++) {
-//			System.out.println(index + ", " + eoses.get(i).location);
 			if (index == eoses.get(i).location) {
 				Logger.logln(NAME+"Will ignore EOS character at " + index + ": " + ignore);
 				eoses.get(i).ignore = ignore;

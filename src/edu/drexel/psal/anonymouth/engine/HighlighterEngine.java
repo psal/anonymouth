@@ -16,7 +16,9 @@ import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
- * Manages all highlighter objects including the words to remove and add and sentence highlighting.
+ * Manages all highlighter objects including the words to remove and add and
+ * sentence highlighting.
+ * 
  * @author Marc Barrowclift
  *
  */
@@ -215,21 +217,41 @@ public class HighlighterEngine {
 	
 	/**
 	 * Adds all highlights for all words to remove currently within a selected sentence
+	 * 
 	 * @param start
+	 *        The start index of the selected sentence (Including any
+	 *        additional indices caused by extended highlight)<br><br>
+	 *
+	 * 		  The should be "highlightIndices[0]" in EditorDriver.
 	 * @param end
+	 *        The end index of the selected sentence (Including any
+	 *        additional indices caused by extended highlight)<br><br>
+	 *
+	 * 		  The should be "highlightIndices[1]" in EditorDriver.
+	 * @param leftSentencesInTextWrapper   
+	 *        The number of additional sentences to the left included in what
+	 *        is the extended highlight (meaning that the tagged sentence
+	 *        start and end are referencing is not actually the "full
+	 *        sentence" as perceived by the user). This is so we can extend
+	 *        our automatic word to remove highlights to the full extended
+	 *        highlight.<br><br>
+	 *
+	 * 		  The should be "highlightIndices[2]" in EditorDriver.
+	 * @param right SentencesInTextWrapper
+	 *        The number of additional sentences to the right included in what
+	 *        is the extended highlight (meaning that the tagged sentence
+	 *        start and end are referencing is not actually the "full
+	 *        sentence" as perceived by the user). This is so we can extend
+	 *        our automatic word to remove highlights to the full extended
+	 *        highlight.<br><br>
+	 *
+	 * 		  The should be "highlightIndices[3]" in EditorDriver.
 	 */
 	public void addAutoRemoveHighlights(int start, int end, int leftSentencesInTextWrapper, int rightSentencesInTextWrapper) {
-//		System.out.println("ADDING AUTO HIGHLIGHTS to " + start +  " - " + end);
 		end = end - 1;
 		
 		int total = leftSentencesInTextWrapper + rightSentencesInTextWrapper + 1;
-//		if (leftSentencesInTextWrapper == 0 && rightSentencesInTextWrapper == 0) {
-//			total++;
-//		}
-		
-//		System.out.println("leftSentencesInTextWrapper = " + leftSentencesInTextWrapper);
-//		System.out.println("rightSentencesInTextWrapper = " + rightSentencesInTextWrapper);
-//		System.out.println("Total sentences getting auto highlights: " + (leftSentencesInTextWrapper + rightSentencesInTextWrapper));
+
 		TaggedSentence[] sentences = new TaggedSentence[total];
 		for (int i = 0; i < total; i++) {
 			if (leftSentencesInTextWrapper >= 0) {
@@ -240,10 +262,6 @@ public class HighlighterEngine {
 				rightSentencesInTextWrapper--;
 			}
 		}
-		
-//		for (int i = 0; i < sentences.length; i++) {
-//			System.out.println("--> \"" + sentences[i].getUntagged() + "\"");
-//		}
 		
 		//if we don't increment by one, it gets the previous sentence.
 		String[] words = main.editorDriver.taggedDoc.getWordsInSentenceNoDups(sentences);
@@ -262,7 +280,6 @@ public class HighlighterEngine {
 		 */
 		try {
 			int sentenceSize = words.length;
-//			System.out.println("Num of words = " + sentenceSize); 
 			for (int i = 0; i < sentenceSize; i++) {
 				if (words[i] != null) {
 					for (int x = 0; x < removeSize; x++) {
@@ -275,9 +292,7 @@ public class HighlighterEngine {
 							wordToRemove = test[1].substring(0, test.length-2);
 						}
 
-//						System.out.println("words[i]=" + words[i] + ", wordToRemove="+wordToRemove);
 						if (words[i].equals(wordToRemove)) {
-//							System.out.println("FOUND--------------------------------------------------------------------------");
 							index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
 						}
 					}
@@ -289,12 +304,10 @@ public class HighlighterEngine {
 		}
 
 		int indexSize = index.size();
-		System.out.println("total Found = " + indexSize);
 		for (int i = 0; i < indexSize; i++) {
 			//Since words may or may have not been skipped (don't want to highlight twice, the list might not be completely full, in which
 			//case we got to check to make sure each index not null before proceeding
 			if (index.get(i) != null) {
-//				System.out.println("ADDING");
 				try {
 					elementsToRemoveInSentence.add(new HighlightMapper(index.get(i)[0], index.get(i)[1], mainHighlight.addHighlight(index.get(i)[0], index.get(i)[1], painterRemove)));
 				} catch (BadLocationException e) {

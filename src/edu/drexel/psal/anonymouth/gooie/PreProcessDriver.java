@@ -892,89 +892,95 @@ public class PreProcessDriver {
 	 * same code 
 	 */
 	private void trainRemove() {
-		preProcessWindow.saved = false;
-		boolean removingAuthor = false;
-		boolean removingAll = false;
-		int docCounter = 0;
-		TreePath[] paths = preProcessWindow.trainDocsTree.getSelectionPaths();
-		List<DefaultMutableTreeNode> selectedDocs = new ArrayList<DefaultMutableTreeNode>();
-
-		if (paths != null) {
-			if (paths[0].getPath().length == 1) { //Deleting everything
-				removingAll = true;
-				DefaultMutableTreeNode root = (DefaultMutableTreeNode)paths[0].getPath()[0];
-				@SuppressWarnings("unchecked")
-				Enumeration<DefaultMutableTreeNode> authors = root.children();
-				while (authors.hasMoreElements())
-					selectedDocs.add(authors.nextElement());
-			} else if (paths[0].getPath().length == 2) { //Deleting author and all their documents
-				removingAuthor = true;
-				for (TreePath path: paths)
-					if (path.getPath().length == 2)
-						selectedDocs.add((DefaultMutableTreeNode)path.getPath()[1]);
-			} else if (paths[0].getPath().length == 3) { //Deleting document(s)
-				for (TreePath path: paths)
-					if (path.getPath().length == 3) {
-						selectedDocs.add((DefaultMutableTreeNode)path.getPath()[2]);
-						docCounter++;
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				preProcessWindow.saved = false;
+				boolean removingAuthor = false;
+				boolean removingAll = false;
+				int docCounter = 0;
+				TreePath[] paths = preProcessWindow.trainDocsTree.getSelectionPaths();
+				List<DefaultMutableTreeNode> selectedDocs = new ArrayList<DefaultMutableTreeNode>();
+				
+				if (paths != null) {
+					if (paths[0].getPath().length == 1) { //Deleting everything
+						removingAll = true;
+						DefaultMutableTreeNode root = (DefaultMutableTreeNode)paths[0].getPath()[0];
+						@SuppressWarnings("unchecked")
+						Enumeration<DefaultMutableTreeNode> authors = root.children();
+						while (authors.hasMoreElements())
+							selectedDocs.add(authors.nextElement());
+					} else if (paths[0].getPath().length == 2) { //Deleting author and all their documents
+						removingAuthor = true;
+						for (TreePath path: paths)
+							if (path.getPath().length == 2)
+								selectedDocs.add((DefaultMutableTreeNode)path.getPath()[1]);
+					} else if (paths[0].getPath().length == 3) { //Deleting document(s)
+						for (TreePath path: paths)
+							if (path.getPath().length == 3) {
+								selectedDocs.add((DefaultMutableTreeNode)path.getPath()[2]);
+								docCounter++;
+							}
 					}
-			}
-		}
+				}
 
-		if (selectedDocs.isEmpty()) {
-			Logger.logln(NAME+"Failed removing training documents/authors - no documents/authors are selected",LogOut.STDERR);
-		} else {
-			String msg;
-			
-			if (removingAll) {
-				msg = "Removed all:\n";
-				for (DefaultMutableTreeNode curAuthor: selectedDocs) {
-					titles.remove(curAuthor.toString());
+				if (selectedDocs.isEmpty()) {
+					Logger.logln(NAME+"Failed removing training documents/authors - no documents/authors are selected",LogOut.STDERR);
+				} else {
+					String msg;
 					
-					preProcessWindow.ps.removeAuthor(curAuthor.toString());
-					removeTrainNode(curAuthor.toString(), false);
-					msg += "\t\t> " + curAuthor.toString() + "\n";
-				}
-			} else if (removingAuthor) {
-				msg = "Removed author:\n";
-				for (DefaultMutableTreeNode author: selectedDocs) {
-					titles.remove(author.toString());
+					if (removingAll) {
+						msg = "Removed all:\n";
+						for (DefaultMutableTreeNode curAuthor: selectedDocs) {
+							titles.remove(curAuthor.toString());
+							
+							preProcessWindow.ps.removeAuthor(curAuthor.toString());
+							removeTrainNode(curAuthor.toString(), false);
+							msg += "\t\t> " + curAuthor.toString() + "\n";
+						}
+					} else if (removingAuthor) {
+						msg = "Removed author:\n";
+						for (DefaultMutableTreeNode author: selectedDocs) {
+							titles.remove(author.toString());
 
-					preProcessWindow.ps.removeAuthor(author.toString());
-					removeTrainNode(author.toString(), false);
-					msg += "\t\t> "+author.toString()+"\n";
-				}
-			} else {
-				msg = "Removed training documents:\n";
-				String author;
-				for (DefaultMutableTreeNode doc: selectedDocs) {
-					author = doc.getParent().toString();
+							preProcessWindow.ps.removeAuthor(author.toString());
+							removeTrainNode(author.toString(), false);
+							msg += "\t\t> "+author.toString()+"\n";
+						}
+					} else {
+						msg = "Removed training documents:\n";
+						String author;
+						for (DefaultMutableTreeNode doc: selectedDocs) {
+							author = doc.getParent().toString();
 
-					if (doc.getParent().getChildCount() == docCounter) {
-						docCounter = -1;
+							if (doc.getParent().getChildCount() == docCounter) {
+								docCounter = -1;
+							}
+
+							String title = preProcessWindow.ps.trainDocAt(author, doc.toString()).getTitle();
+							titles.get(author).remove(title);
+							
+							preProcessWindow.ps.removeTrainDocAt(author, doc.toString());
+							removeTrainNode(doc.toString(), true);
+							msg += "\t\t> "+doc.toString()+"\n";
+						}
 					}
 
-					String title = preProcessWindow.ps.trainDocAt(author, doc.toString()).getTitle();
-					titles.get(author).remove(title);
+					Logger.log(msg);
+					updateBar(preProcessWindow.trainBarPanel);
 					
-					preProcessWindow.ps.removeTrainDocAt(author, doc.toString());
-					removeTrainNode(doc.toString(), true);
-					msg += "\t\t> "+doc.toString()+"\n";
+					if (preProcessWindow.trainDocsEmpty()) {
+						preProcessWindow.trainRemoveButton.setEnabled(false);
+					} else if (!preProcessWindow.trainDocsReady()) {
+						preProcessWindow.trainNextButton.setEnabled(false);
+						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.trainAddButton);
+					}
+					
+					preProcessWindow.revalidate();
+					preProcessWindow.repaint();
 				}
 			}
-
-			Logger.log(msg);
-			updateBar(preProcessWindow.trainBarPanel);
-			
-			if (preProcessWindow.trainDocsEmpty()) {
-				preProcessWindow.trainRemoveButton.setEnabled(false);
-			} else if (!preProcessWindow.trainDocsReady()) {
-				preProcessWindow.trainNextButton.setEnabled(false);
-				preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.trainAddButton);
-			}
-			preProcessWindow.revalidate();
-			preProcessWindow.repaint();	
-		}
+		});
 	}
 	
 	/**
@@ -1258,8 +1264,9 @@ public class PreProcessDriver {
 				preProcessWindow.trainTreeTop.remove(authorNode);
 			}
 		}
-		DefaultTreeModel trainTreeModel = new DefaultTreeModel(preProcessWindow.trainTreeTop, true);
-		preProcessWindow.trainDocsTree.setModel(trainTreeModel);
+
+		preProcessWindow.trainTreeModel = new DefaultTreeModel(preProcessWindow.trainTreeTop, true);
+		preProcessWindow.trainDocsTree.setModel(preProcessWindow.trainTreeModel);
 		
 		return passed;
 	}

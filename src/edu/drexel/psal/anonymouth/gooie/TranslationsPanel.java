@@ -151,7 +151,6 @@ public class TranslationsPanel {
 
 				translationButtons[i] = new SwapButtonPanel(this);
 				translationButtons[i].setColor(i, numTranslations);
-				translationButtons[i].setToolTipText("Click to replace selected sentence with this translation");
 				translationButtons[i].setActionCommand(translationNames.get(i));
 				translationButtons[i].addMouseListener(driver);
 

@@ -145,17 +145,28 @@ public class TranslationsDriver implements MouseListener {
 	}
 	
 	/**
-	 * Acts as the "ActionListener" to the translation swap arrow by immediately swapping
-	 * the sentence in the working document with the relevant translation, clearing all
-	 * translations from the translations holder scroll pane (since they were for the old sentence
-	 * not the new one), and switching the translations top panel back to the default button panel
-	 * with the "Translate Sentence", "?", and "Reset" button if shown.
+	 * Acts as the "ActionListener" to the translation swap arrow by
+	 * immediately swapping the sentence in the working document with the
+	 * relevant translation, clearing all translations from the translations
+	 * holder scroll pane (since they were for the old sentence not the new
+	 * one), and switching the translations top panel back to the default
+	 * button panel with the "Translate Sentence", "?", and "Reset" button if
+	 * shown.
+	 *
+	 * NOTE: In it's current state this is admittedly a bit of a mess. I'm
+	 * about to leave PSAL in a bit so I'm sadly not able to polish this up as
+	 * much as I'd like to, so please anywhere you find code find of shit like
+	 * this please feel free to organize and rewrite in a way that's a bit more
+	 * sane.
+	 * -Marc
 	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		Logger.logln(NAME+"User clicked the Translation swap-in arrow button");
 		actionCommand = ((SwapButtonPanel)e.getComponent()).getActionCommand();
+		String newSentence = translationsPanel.translationsMap.get(actionCommand).getUntagged();
 		
+		//We don't want to display translations for this sentence anymore since the sentence is changing
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
@@ -164,18 +175,81 @@ public class TranslationsDriver implements MouseListener {
 		});
 		
 		main.versionControl.updateUndoRedo(main.editorDriver.taggedDoc, main.editorDriver.newCaretPosition[0], true);
-
+		int lengthShift = newSentence.length() - main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum).getLength();
 		main.documentSaved = false;
-		main.editorDriver.updateSentence(
-				main.editorDriver.sentNum,
-				translationsPanel.translationsMap.get(actionCommand).getUntagged());
-		main.editorDriver.syncTextPaneWithTaggedDoc();
+		main.editorDriver.taggedDoc.length = main.editorDriver.taggedDoc.length + lengthShift;
+		main.editorDriver.updateSentence(main.editorDriver.sentNum, newSentence);
 
+		/**
+		 * Everything in this chunk here is a near copy and past of the code
+		 * for inserting more than two characters of text in EditorDriver's
+		 * insertion() method (which is part of the reason this is ugly as
+		 * sin)
+		 *
+		 * This only concerns itself with tracking any special characters in
+		 * the sentence text being swapped in
+		 */
+		main.editorDriver.taggedDoc.specialCharTracker.removeEOSesInRange(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]);
+		main.editorDriver.taggedDoc.specialCharTracker.removeTextWrappersInRange(main.editorDriver.sentIndices[0], main.editorDriver.sentIndices[1]);
+		
+		char[] sentChars = newSentence.toCharArray();
+		int buffer = main.editorDriver.sentIndices[0];
+		int lastSentence = -1;
+		for (int i = 0; i < sentChars.length; i++) {
+			if (main.editorDriver.taggedDoc.watchForEOS != -1) {
+				if (main.editorDriver.isWhiteSpace(sentChars[i])) {
+					main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(main.editorDriver.taggedDoc.watchForEOS, false);
+				}
+				
+				main.editorDriver.taggedDoc.watchForEOS = -1;
+			} else if (main.editorDriver.taggedDoc.watchForLastSentenceEOS != -1 && main.editorDriver.newCaretPosition[0] == main.editorDriver.taggedDoc.length) {
+				if (main.editorDriver.isWhiteSpace(sentChars[i])) {
+					main.editorDriver.taggedDoc.endSentenceExists = false;
+					main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(main.editorDriver.taggedDoc.watchForLastSentenceEOS, false);
+				}
+				
+				main.editorDriver.taggedDoc.watchForLastSentenceEOS = -1;
+			} else {
+				if (main.editorDriver.taggedDoc.specialCharTracker.isEOS(sentChars[i])) {
+					if (main.editorDriver.taggedDoc.length == main.editorDriver.priorCaretPosition+main.editorDriver.charsInserted) {
+						main.editorDriver.taggedDoc.watchForLastSentenceEOS = i+buffer;
+						lastSentence = main.editorDriver.taggedDoc.watchForLastSentenceEOS;
+						main.editorDriver.taggedDoc.specialCharTracker.addEOS(sentChars[i], main.editorDriver.taggedDoc.watchForLastSentenceEOS, false);
+					} else {
+						main.editorDriver.taggedDoc.watchForEOS = i+buffer;
+						main.editorDriver.taggedDoc.specialCharTracker.addEOS(sentChars[i], main.editorDriver.taggedDoc.watchForEOS, false);
+					}
+				} else {
+					trackCharIfSpecial(sentChars[i], i+buffer);
+				}
+			}					
+		}
+		
+		if (lastSentence != -1) {
+			main.editorDriver.taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(lastSentence, main.editorDriver.taggedDoc.length-1));
+		}
+		
+		main.editorDriver.taggedDoc.specialCharTracker.shiftAll(sentChars.length+buffer, lengthShift);
+
+		/**
+		 * At last, we will sync all changes we have made to the tagged
+		 * document to the main JTextPane so the user sees the changes made.
+		 * There's absolutely more effecient ways to do this.
+		 */
+		main.editorDriver.syncTextPaneWithTaggedDoc();
+		
 		main.translationsHolderPanel.removeAll();
 		main.notTranslated.setText("");
 		main.translationsHolderPanel.add(main.notTranslated, "");
 		main.translationsHolderPanel.revalidate();
 		main.translationsHolderPanel.repaint();
+	}
+	
+	private void trackCharIfSpecial(char sentChar, int index) {
+		main.editorDriver.trackCharIfSpecial(sentChar, index);
+		if (main.editorDriver.taggedDoc.specialCharTracker.isEOS(sentChar)) {
+			main.editorDriver.taggedDoc.specialCharTracker.addEOS(sentChar, index, false);
+		}
 	}
 	
 	/**

@@ -119,7 +119,7 @@ public class TaggedDocument implements Serializable {
 	 */
 	public TaggedDocument(GUIMain main) {
 		this.main = main;
-		specialCharTracker = new SpecialCharTracker();
+		specialCharTracker = new SpecialCharTracker(main);
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		endSentenceExists = false;
 	}
@@ -139,7 +139,7 @@ public class TaggedDocument implements Serializable {
 	public TaggedDocument(GUIMain main, String untaggedDocument, boolean initTracker) {
 		this.main = main;
 		untaggedDocument = formatDocument(untaggedDocument);
-		specialCharTracker = new SpecialCharTracker();
+		specialCharTracker = new SpecialCharTracker(main);
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		endSentenceExists = false;
 		
@@ -168,7 +168,7 @@ public class TaggedDocument implements Serializable {
 		this.documentTitle = docTitle;
 		this.documentAuthor = author;
 		untaggedDocument = formatDocument(untaggedDocument);
-		specialCharTracker = new SpecialCharTracker();
+		specialCharTracker = new SpecialCharTracker(main);
 
 		taggedSentences = new ArrayList<TaggedSentence>(ANONConstants.EXPECTED_NUM_OF_SENTENCES);
 		setDocumentLength(untaggedDocument);
@@ -220,26 +220,17 @@ public class TaggedDocument implements Serializable {
 		char[] docToAnonymize = document.toCharArray();
 		int numChars = docToAnonymize.length;
 
-		//EOS Characters
 		for (int i = 0; i < numChars; i++) {
-			System.out.println(i + ", " + docToAnonymize[i]);
 			if (specialCharTracker.isEOS(docToAnonymize[i])) {
-				System.out.println("EOS! " + i);
 				specialCharTracker.addEOS(docToAnonymize[i], i, false);
-			}
-		}
-		
-		//Quotes
-		for (int i = 0; i < numChars; i++) {
-			if (specialCharTracker.isQuote(docToAnonymize[i])) {
+			} else if (specialCharTracker.isQuote(docToAnonymize[i])) {
 				specialCharTracker.addQuote(i);
-			}
-		}
-		
-		//Parenthesis
-		for (int i = 0; i < numChars; i++) {
-			if (specialCharTracker.isParenthesis(docToAnonymize[i])) {
-				specialCharTracker.addParenthesis(i);
+			} else if (specialCharTracker.isParenthesis(docToAnonymize[i])) {
+				specialCharTracker.addParenthesis(i, docToAnonymize[i]);
+			} else if (specialCharTracker.isBracket(docToAnonymize[i])) {
+				specialCharTracker.addBracket(i, docToAnonymize[i]);
+			} else if (specialCharTracker.isSquiggly(docToAnonymize[i])) {
+				specialCharTracker.addSquiggly(i, docToAnonymize[i]);
 			}
 		}
 	}
@@ -965,28 +956,6 @@ public class TaggedDocument implements Serializable {
 			
 			if (index >= pastIndex && index < newIndex) {
 				returnValue = taggedSentences.get(i);
-				break;
-			} else {
-				pastIndex = newIndex;
-			}
-		}
-		
-		return returnValue;
-	}
-	
-	public int[] getIndicesOfTaggedSentenceAtIndex(int index) {
-		int newIndex = 0;
-		int pastIndex = 0;
-		int length = 0;
-		int[] returnValue = new int[2];
-		
-		for (int i = 0; i < numOfSentences; i++) {
-			length = taggedSentences.get(i).getUntagged().length();
-			newIndex = length + pastIndex;
-			
-			if (index >= pastIndex && index < newIndex) {
-				returnValue[0] = pastIndex;
-				returnValue[1] = newIndex;
 				break;
 			} else {
 				pastIndex = newIndex;

@@ -128,6 +128,8 @@ public class MenuDriver {
 					String path = f.getAbsolutePath();
 					*/
 				
+				FileHelper.goodSave.setTitle("Save As...");
+				FileHelper.goodSave.setMode(FileDialog.SAVE);
 				if (savedPath != "") {
 					FileHelper.goodSave.setDirectory(savedPath);
 				} else {

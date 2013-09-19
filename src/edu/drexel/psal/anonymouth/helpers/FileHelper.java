@@ -28,8 +28,8 @@ public class FileHelper {
 	/**
 	 * Default, standard, kinda shitty file chooser for Java. Use only when necessary.
 	 */
-	public static JFileChooser load = new JFileChooser(); //Whenever you want to load something
-	public static JFileChooser save = new JFileChooser(); //Whenever you want to save something
+	public static JFileChooser load = new JFileChooser();
+	public static JFileChooser save = new JFileChooser();
 	/**
 	 * To use the FileDialogs, you should initialize them in the constructors of the classes you desire them to be
 	 * used in since they take a second or two to be created (so this will be taken care of on start up and not slow

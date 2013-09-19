@@ -10,29 +10,20 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
-//import edu.drexel.psal.jstylo.generics.Logger;
-//import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * Receives a chunk of text or a seemingly single sentence and scans through
  * it and splits it up whenever we see EOS characters that DON'T have the
- * ignore flag. These are currently the times we can expect ignore flags to
- * pop up and are responded to correctly:<br><br>
+ * ignore flag. So far, the only instances we mess with the ignore flag are
+ * abbreviations.
  * 
- * <ul>
- * 	<li>EOS characters inside quotes or paranthesis</li>
- * 	<li>EOS characters that are actually abbreviations</li>
- * 	<li>EOS characters that are what we believe to be citations</li>
- * </ul>
- * 
- * @author Andrew W.E. McDonald
  * @author Marc Barrowclift
+ * @author Andrew W.E. McDonald
  *
  */
 public class SentenceMaker implements Serializable  {
 	
 	private static final long serialVersionUID = -5007508872576011005L;
-//	private final String NAME = "( " + this.getClass().getName() + " ) - ";
 
 	private GUIMain main;
 	private EditorDriver editorDriver;
@@ -181,9 +172,7 @@ public class SentenceMaker implements Serializable  {
 		while (index < length - 1) {
 			//================ FINDING EOS NOT YET BEING IGNORED ====================
 
-//			System.out.println("HERE!!!");
 			EOSFound = sent.find(index);
-//			System.out.println(EOSFound + ", index = " + index);
 
 			/**
 			 * If we didn't find an EOS character in the entire passed text,
@@ -191,11 +180,6 @@ public class SentenceMaker implements Serializable  {
 			 * (incomplete) sentence, so break and return the text as is.
 			 */
 			if (!EOSFound) {
-//				 if (pastText != "") {
-//				 	System.out.println("ADDING LAST: \"" + pastText + "\"");
-//				 	sents.add(pastText);
-//				 }
-
 				break;
 			}
 
@@ -209,8 +193,6 @@ public class SentenceMaker implements Serializable  {
 					while (index < length - 1 && EOSFound) {
 						index = sent.start();
 						if (!specialCharTracker.isSentenceEndAtIndex(index + indexBuffer)) {
-//							System.out.println("INDEX = " + (index+indexBuffer));
-//							System.out.println(specialCharTracker);
 							EOSFound = false;
 						} else {
 							EOSFound = true;
@@ -222,8 +204,6 @@ public class SentenceMaker implements Serializable  {
 					}
 				} catch (IllegalStateException e) {}
 			}
-			
-//			System.out.println(EOSFound + ", index = " + index + " > " + (length-1));
 
 			/**
 			 * If no EOS character was found that's not being ignored in the
@@ -257,14 +237,16 @@ public class SentenceMaker implements Serializable  {
 					}
 
 					abbrevStart++;
-//					System.out.println("CHECKING ABBREVIATION: \"" + text.substring(abbrevStart, abbrevEnd) + "\"");
 					if (ABBREVIATIONS.contains(text.substring(abbrevStart, abbrevEnd))) {
-//						System.out.println("ABBREVIAITON");
 						int temp = pastIndex;
+						/**
+						 * Since an abbreviation is found, we want to traverse through the
+						 * entirety of the abbreviation to set any EOS characters we find
+						 * in it to IGNORE (so ones with multiple EOS characters like Ph.D.
+						 * are handled correctly)
+						 */
 						while (abbrevStart != abbrevEnd) {
-//							System.out.println("char = \"" + text.substring(abbrevStart, abbrevStart+1) + "\"");
 							if (EOS.contains(text.charAt(abbrevStart))) {
-//								System.out.println("EOS found");
 								specialCharTracker.setIgnoreEOS(abbrevStart + indexBuffer, true);
 							}
 
@@ -272,10 +254,8 @@ public class SentenceMaker implements Serializable  {
 						}
 						
 						EOSFound = false;
-//						System.out.println("PREPARING PAST TEXT: \"" + text.substring(temp, abbrevEnd) + "\"");
 						pastText = text.substring(temp, abbrevEnd);
 						pastIndex = abbrevEnd;
-//						System.out.println("INDEX: \"" + text.charAt(abbrevEnd) + "\"");
 						index = abbrevEnd;
 						continue;
 					}
@@ -313,13 +293,11 @@ public class SentenceMaker implements Serializable  {
 			index++;
 			
 			if (EOSFound) {
-//				System.out.println("ADDING: \"" + pastText+text.substring(pastIndex, index) + "\"");
 				sents.add(pastText+text.substring(pastIndex, index));
 				pastText = "";
 			}
 
 			pastIndex = index;
-//			System.out.println("Continue? " + index + " < " + (length-1));
 		}
 
 		if (sents.isEmpty()) {
