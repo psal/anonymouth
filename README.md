@@ -1,6 +1,6 @@
 #<a id="top"></a>Anonymouth
 
-![](src/edu/drexel/psal/resources/graphics/Readme_logo.png)
+![](src/edu/drexel/psal/resources/graphics/readme_Logo.png)
 
 Document Anonymization Tool, Version 0.5<br>
 
