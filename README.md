@@ -198,7 +198,7 @@ Anonymouth loosly follows these guidelines for class organization in packages:
 - `anonymouth.helpers` For classes that aren't necessarily Anonymouth specific, but are used by Anonymouth for general purposes and tasks (for example, `FileHelper`, `ScrollToTop`, `ImageLoader`, etc.)
 - `anonymouth.utils` For classes that serve only as a means for storing and manupulating data (For example, `TaggedSentence`, `TaggedDocument`, `Word`, `TextWrapper`, etc.)
 
-There are still quite a few classes that are clearly where they don't belong, so feel free to oragnize Anonymouth so that it best fits these guidelines.
+There are still quite a few classes that are clearly where they don't belong, so feel free to organize Anonymouth so that it best fits these guidelines.
 
 [Back to top](#top)
 
