@@ -365,6 +365,7 @@ public class EditorDriver {
 				main.enableEverything(false);
 
 				taggedDoc = new TaggedDocument(main, main.documentPane.getText(), false);
+				taggedDoc.setDocumentLength(main.documentPane.getText());
 				main.documentProcessor.process();
 			}
 		};
