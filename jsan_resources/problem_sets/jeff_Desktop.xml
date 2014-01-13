@@ -1,0 +1,69 @@
+<problem-set>
+	<training name="Authors">
+		<author name="f">
+			<document title="f_01.txt">jsan_resources/corpora/drexel_1/f/f_01.txt</document>
+			<document title="f_02.txt">jsan_resources/corpora/drexel_1/f/f_02.txt</document>
+			<document title="f_03.txt">jsan_resources/corpora/drexel_1/f/f_03.txt</document>
+			<document title="f_04.txt">jsan_resources/corpora/drexel_1/f/f_04.txt</document>
+			<document title="f_05.txt">jsan_resources/corpora/drexel_1/f/f_05.txt</document>
+			<document title="f_06.txt">jsan_resources/corpora/drexel_1/f/f_06.txt</document>
+			<document title="f_07.txt">jsan_resources/corpora/drexel_1/f/f_07.txt</document>
+			<document title="f_08.txt">jsan_resources/corpora/drexel_1/f/f_08.txt</document>
+			<document title="f_09.txt">jsan_resources/corpora/drexel_1/f/f_09.txt</document>
+		</author>
+		<author name="g">
+			<document title="g_01.txt">jsan_resources/corpora/drexel_1/g/g_01.txt</document>
+			<document title="g_02.txt">jsan_resources/corpora/drexel_1/g/g_02.txt</document>
+			<document title="g_03.txt">jsan_resources/corpora/drexel_1/g/g_03.txt</document>
+			<document title="g_04.txt">jsan_resources/corpora/drexel_1/g/g_04.txt</document>
+			<document title="g_05.txt">jsan_resources/corpora/drexel_1/g/g_05.txt</document>
+			<document title="g_06.txt">jsan_resources/corpora/drexel_1/g/g_06.txt</document>
+			<document title="g_07.txt">jsan_resources/corpora/drexel_1/g/g_07.txt</document>
+			<document title="g_08.txt">jsan_resources/corpora/drexel_1/g/g_08.txt</document>
+		</author>
+		<author name="h">
+			<document title="h_01.txt">jsan_resources/corpora/drexel_1/h/h_01.txt</document>
+			<document title="h_02.txt">jsan_resources/corpora/drexel_1/h/h_02.txt</document>
+			<document title="h_03.txt">jsan_resources/corpora/drexel_1/h/h_03.txt</document>
+			<document title="h_04.txt">jsan_resources/corpora/drexel_1/h/h_04.txt</document>
+			<document title="h_05.txt">jsan_resources/corpora/drexel_1/h/h_05.txt</document>
+			<document title="h_06.txt">jsan_resources/corpora/drexel_1/h/h_06.txt</document>
+			<document title="h_07.txt">jsan_resources/corpora/drexel_1/h/h_07.txt</document>
+			<document title="h_08.txt">jsan_resources/corpora/drexel_1/h/h_08.txt</document>
+		</author>
+		<author name="k">
+			<document title="k_01.txt">jsan_resources/corpora/drexel_1/k/k_01.txt</document>
+			<document title="k_02.txt">jsan_resources/corpora/drexel_1/k/k_02.txt</document>
+			<document title="k_03.txt">jsan_resources/corpora/drexel_1/k/k_03.txt</document>
+			<document title="k_04.txt">jsan_resources/corpora/drexel_1/k/k_04.txt</document>
+			<document title="k_05.txt">jsan_resources/corpora/drexel_1/k/k_05.txt</document>
+			<document title="k_06.txt">jsan_resources/corpora/drexel_1/k/k_06.txt</document>
+			<document title="k_07.txt">jsan_resources/corpora/drexel_1/k/k_07.txt</document>
+			<document title="k_08.txt">jsan_resources/corpora/drexel_1/k/k_08.txt</document>
+			<document title="k_09.txt">jsan_resources/corpora/drexel_1/k/k_09.txt</document>
+		</author>
+		<author name="m">
+			<document title="m_01.txt">jsan_resources/corpora/drexel_1/m/m_01.txt</document>
+			<document title="m_02.txt">jsan_resources/corpora/drexel_1/m/m_02.txt</document>
+			<document title="m_03.txt">jsan_resources/corpora/drexel_1/m/m_03.txt</document>
+			<document title="m_04.txt">jsan_resources/corpora/drexel_1/m/m_04.txt</document>
+			<document title="m_05.txt">jsan_resources/corpora/drexel_1/m/m_05.txt</document>
+			<document title="m_06.txt">jsan_resources/corpora/drexel_1/m/m_06.txt</document>
+			<document title="m_07.txt">jsan_resources/corpora/drexel_1/m/m_07.txt</document>
+			<document title="m_08.txt">jsan_resources/corpora/drexel_1/m/m_08.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="e_02.txt">jsan_resources/corpora/drexel_1/e/e_02.txt</document>
+			<document title="e_03.txt">jsan_resources/corpora/drexel_1/e/e_03.txt</document>
+			<document title="e_04.txt">jsan_resources/corpora/drexel_1/e/e_04.txt</document>
+			<document title="e_05.txt">jsan_resources/corpora/drexel_1/e/e_05.txt</document>
+			<document title="e_06.txt">jsan_resources/corpora/drexel_1/e/e_06.txt</document>
+			<document title="e_07.txt">jsan_resources/corpora/drexel_1/e/e_07.txt</document>
+			<document title="e_08.txt">jsan_resources/corpora/drexel_1/e/e_08.txt</document>
+			<document title="e_09.txt">jsan_resources/corpora/drexel_1/e/e_09.txt</document>
+		</author>
+	</training>
+	<test>
+		<document title="e_01.txt">jsan_resources/corpora/drexel_1/e/e_01.txt</document>
+	</test>
+</problem-set>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/jaws-bin.jar" sourcepath="/jstylo/lib/jaws-bin.jar"/>
+	<classpathentry kind="lib" path="lib/Jama-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/stanford-postagger-2012-01-06.jar"/>
+	<classpathentry kind="lib" path="lib/fasttag_v2.jar"/>
+	<classpathentry kind="lib" path="lib/org.annolab.tt4j-1.0.15.jar" sourcepath="C:/Users/Mordio/.m2/repository/org/annolab/tt4j/org.annolab.tt4j/1.0.15/org.annolab.tt4j-1.0.15-sources.jar"/>
+	<classpathentry kind="lib" path="lib/miglayout-4.0-swing.jar"/>
+	<classpathentry kind="lib" path="lib/microsoft-translator-java-api-0.6.1-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.14.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="lib/weka_3_7_9.jar"/>
+	<classpathentry kind="lib" path="lib/ui.jar"/>
+	<classpathentry kind="lib" path="lib/jgaap-5.2.0-lite.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/NR/Software/JDE/plugins/jd.ide.eclipse.win32.x86_64_0.1.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

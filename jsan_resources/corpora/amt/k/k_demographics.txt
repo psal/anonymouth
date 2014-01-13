@@ -1,0 +1,9 @@
+
+
+Age: 23
+Language: English
+Gender: male
+Education: Some College
+Occupation: Unemployed
+Background: N,N,N,N,N
+

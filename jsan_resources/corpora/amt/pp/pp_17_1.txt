@@ -1,0 +1,15 @@
+Briefly, the other options you have to further limit what people see about you include disabling Connections Browse, which keeps your connections private, Profile Views, which limits what information people who you have browsed can see, opting out of the Service Provider Directory and the LinkedIn Partner Advertising directory. These settings will limit the number of eyes on your profile but will not limit your ability to use your LinkedIn profile as a resume. 
+You can also use this page to control the unsolicited e-mail you receive by modifying the settings on the Receiving Messages settings page as well as the InMails page.
+MyID Can Protect Your Privacy Settings and Alert You If They Change
+The MyID suite of privacy applications can protect your privacy as it monitors dozens of social network privacy settings. MyID can change privacy settings to a more secure setting and help you understand what information is private and public. Protect personal information with the MyID identity theft monitoring solution.
+
+If you’d like to make your whole blog private, head to Settings and then Privacy and check the radio button for I would like my blog to be visible only to users I choose. Click Save Changes, and then you can start to add users by their Wordpress username.
+
+The Word Press Blog Visibility settings have three options which will allow you to set the level of privacy of your blog. The default setting allows everyone, including search engines, to access your blog. The second, more limited, setting blocks search engines from crawling your blog, requiring users to type in your URL directly. Depending on how much personal information you post on your blog, you can choose to change privacy settings to a high level in order to protect your privacy.
+If you’d like to make a particular post private so that only you or a bunch of people you choose can see it, all you need to do is head to the post editor and click on Visibility in the Publish pane. You can choose to make the post either password protected, in which case you’ll need to supply a password, or private, which means only that you or other blog contributors will be able to see it. Click OK and that will be made effective immediately.
+By changing privacy settings of your WordPress blog, you can protect your privacy and be sure that only approved users read your content. 
+Maximize Privacy on Social Networks with MyID
+Any time you post private information to WordPress, MyID will find it and alert you, allowing you to remove it before any search engine has a chance to archive it, maximizing your privacy on social networks.
+
+Without resorting to Hollywood stereotypes about hackers, let’s take a look at the demographics, psychology, and goals of your average online computer hacker.
+The vast majority of hackers are from China or Russia. These nations serve as a breeding ground for criminals of every kind, not just computer criminals. 

@@ -1,0 +1,9 @@
+
+
+Age: 24
+Language: English
+Gender: female
+Education: Bachelors Degree
+Occupation: Student
+Background: Y,Y,Y,Y,Y
+

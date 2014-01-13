@@ -1,0 +1,10 @@
+bin/*
+.DS_Store
+/.edited_documents
+/_active-auth.lnk
+
+/log
+/bin
+
+/anonymouth_prop.prop
+/JStylo_prop.prop

@@ -1,0 +1,13 @@
+bin/*
+.DS_Store
+.edited_documents
+_active-auth.lnk
+.serialized_objects
+
+anonymouth_prop.prop
+JStylo_prop.prop
+
+anonymouth_log
+build.xml
+dist
+/bin

@@ -1,0 +1,9 @@
+
+
+Age: 25
+Language: English
+Gender: female
+Education: College - Bachelors
+Occupation: Substitute Teacher
+Background: Y,Y,Y,Y,Y
+
