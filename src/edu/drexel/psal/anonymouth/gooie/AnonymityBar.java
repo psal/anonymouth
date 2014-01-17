@@ -80,7 +80,7 @@ public class AnonymityBar extends JPanel {
 	
 	//Others
 	private GUIMain main;
-	InstanceConstructor instance;
+	private InstanceConstructor instance;
 
 	/**
 	 * Updates the panel width and height based on the new values of the frame

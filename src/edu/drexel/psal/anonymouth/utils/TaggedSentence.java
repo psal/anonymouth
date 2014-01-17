@@ -1,15 +1,25 @@
 package edu.drexel.psal.anonymouth.utils;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
+import com.jgaap.generics.Document;
+
 import edu.stanford.nlp.ling.TaggedWord;
+import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
+import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
+import edu.drexel.psal.anonymouth.gooie.GUIMain;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
@@ -41,6 +51,9 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	protected transient List<? extends HasWord> sentenceTokenized;
 	protected transient Tokenizer<? extends HasWord> toke;
 	protected transient TreebankLanguagePack tlp = new PennTreebankLanguagePack(); 
+	
+	private InstanceConstructor instance;
+	private boolean done = false;
 
 	/*
 	private TaggedSentence(int numWords, int numTranslations) {
@@ -136,14 +149,58 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	}
 
 	/**
-	 * Sorts the translations of this tagged sentence by Anonyimity Index.
+	 * Sorts the translations of this tagged sentence by Anonymity Index.
 	 */
 	public void sortTranslations() {
 		int numTranslations = translations.size();
 		double[][]  toSort = new double[translations.size()][2]; // [Anonymity Index][index of specific translation] => will sort by col 1 (AI)
 		int i;
+		if (!done)
+			instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
 		for(i = 0; i < numTranslations; i++){
-			toSort[i][0] = translations.get(i).getSentenceAnonymityIndex();
+			String doc; 
+			do {
+				doc = translations.get(i).getUntagged();
+			} while(doc.isEmpty());
+			String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "Trans" + ".txt";
+			List<Document> toModifySet = new LinkedList<Document>();
+				try {
+					File tempModdedDoc;
+					tempModdedDoc = new File(pathToTempModdedDoc);
+					tempModdedDoc.deleteOnExit();
+					FileWriter writer = new FileWriter(tempModdedDoc,false);
+					writer.write(doc);
+					writer.close(); 
+				} catch (IOException e) {
+					e.printStackTrace();
+					try {
+						File tempModdedDoc;
+						tempModdedDoc = new File(pathToTempModdedDoc);
+						tempModdedDoc.deleteOnExit();
+						FileWriter writer = new FileWriter(tempModdedDoc,false);
+						writer.write(doc);
+						writer.close();
+					} catch (IOException ex) {}
+				}
+				Document newModdedDoc = new Document(pathToTempModdedDoc,"","Trans");
+				toModifySet.add(newModdedDoc);
+				try {
+					toModifySet.get(0).load();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			
+			try {
+				if (!done) {
+					instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+					done = true;
+				}
+				instance.wid.prepareTestSetReducedVersion(toModifySet);
+			} catch(Exception e) {
+				e.printStackTrace();
+				ErrorHandler.StanfordPOSError();
+			}
+			toSort[i][0] = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
 			toSort[i][1] = (double) i;
 		}
 
