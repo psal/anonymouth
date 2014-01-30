@@ -206,7 +206,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 
 		Arrays.sort(toSort, new Comparator<double[]>(){
 			public int compare(final double[] first, final double[] second){
-				return ((-1)*((Double)first[0]).compareTo(((Double)second[0]))); // multiplying by -1 will sort from greatest to least, which saves work.
+				return (((Double)first[0]).compareTo(((Double)second[0]))); 
 			}
 		});
 
