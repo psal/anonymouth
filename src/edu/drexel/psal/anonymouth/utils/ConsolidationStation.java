@@ -407,6 +407,8 @@ public class ConsolidationStation {
 		    }
 			toReturn.put("wordsToRemove", returnWordsToRemove);
 			
+			
+			
 			//Start finding words to add	
 			//we do the same as the above
 			toModifySet = new LinkedList<Document>();
@@ -457,8 +459,10 @@ public class ConsolidationStation {
 					ErrorHandler.StanfordPOSError();
 				}
 				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
-				if (currValue == newStartingValue)
+				if (currValue >= newStartingValue) {
 					possibleWordsToAdd.remove(k);
+					k--;
+				}
 				else
 					datWTA.add(currValue);
 			}
