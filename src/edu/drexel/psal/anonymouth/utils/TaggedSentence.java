@@ -147,7 +147,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public void setTranslationNames(ArrayList<String> set) {
 		translationNames = set;
 	}
-
+	
 	/**
 	 * Sorts the translations of this tagged sentence by Anonymity Index.
 	 */
@@ -160,7 +160,9 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		for(i = 0; i < numTranslations; i++){
 			String doc; 
 			do {
-				doc = translations.get(i).getUntagged();
+				doc = GUIMain.inst.editorDriver.taggedDoc.getUntaggedDocument();
+				String translatedSent = translations.get(i).getUntagged();
+				doc = doc.replaceFirst(untagged, translatedSent);
 			} while(doc.isEmpty());
 			String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "Trans" + ".txt";
 			List<Document> toModifySet = new LinkedList<Document>();
@@ -201,14 +203,14 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 				ErrorHandler.StanfordPOSError();
 			}
 			toSort[i][0] = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
-			toSort[i][1] = (double) i;
+			toSort[i][1] = i;
 		}
 
-		Arrays.sort(toSort, new Comparator<double[]>(){
-			public int compare(final double[] first, final double[] second){
-				return ((-1)*((Double)first[0]).compareTo(((Double)second[0]))); // multiplying by -1 will sort from greatest to least, which saves work.
-			}
-		});
+	    Arrays.sort(toSort, new Comparator<double[]>() {
+	        public int compare(double[] a, double[] b) {
+	            return Double.compare(a[0], b[0]);
+	        }
+	    });
 
 		ArrayList<TaggedSentence> sortedTrans = new ArrayList<TaggedSentence>(numTranslations);
 		ArrayList<String> sortedTranNames = new ArrayList<String>(numTranslations);

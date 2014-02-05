@@ -105,7 +105,7 @@ public class ListEventDriver extends EventDriver {
 	private List<String> lexicon;
 
 	@Override
-	public EventSet createEventSet(Document ds) throws EventGenerationException {
+	public EventSet createEventSet(Document ds) {
 		
 		String param;
 
@@ -135,7 +135,6 @@ public class ListEventDriver extends EventDriver {
 			}
 
 			BufferedReader br = null;
-			lexicon = new ArrayList<String>();
 			String word;
 
 			if (filename != null) {
@@ -151,6 +150,7 @@ public class ListEventDriver extends EventDriver {
 						br = new BufferedReader(new InputStreamReader(in));
 					}
 
+					lexicon = new ArrayList<String>();
 					while ((word = br.readLine()) != null) {
 						lexicon.add(word.trim());
 					}
@@ -174,7 +174,13 @@ public class ListEventDriver extends EventDriver {
 		}
 		
 		// extract event set and filter
-		EventSet es = underlyingEvents.createEventSet(ds);
+		EventSet es = new EventSet();
+		try {
+			es = underlyingEvents.createEventSet(ds);
+		} catch (EventGenerationException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		if (lexicon == null)
 			return es;
 		
@@ -194,13 +200,19 @@ public class ListEventDriver extends EventDriver {
 			Collections.sort(eventList);
 			
 			int i = 0, j = 0, c;
-			String e1, e2;
+			String e1 = "", e2 = "";
 			
 			// first handle all events < list[0]
-			for (; i<eventList.size() && j<lexicon.size() ;) {
+			int lexiconSize = lexicon.size();
+			for (; i<eventList.size() && j<lexiconSize ;) {
 				
 				e1 = eventList.get(i);
-				e2 = lexicon.get(j);
+				try {
+					e2 = lexicon.get(j);
+				} catch (NullPointerException e) {
+					e.printStackTrace();
+					e2 = avoidOccasionallyBug(e2,j);
+				}
 				c = e1.compareTo(e2);
 				
 				if (c < 0) {
@@ -238,13 +250,18 @@ public class ListEventDriver extends EventDriver {
 		} else {
 			// unsorted
 			for (Event e : es) {
-				String s = e.toString();
-				if (lexicon.contains(s) && whiteList) {
-					// white-list
-					newEs.addEvent(e);
-				} else if (!lexicon.contains(s) && !whiteList) {
-					// black-list
-					newEs.addEvent(e);
+				try {
+					String s = e.toString();
+					if (lexicon.contains(s) && whiteList) {
+						// white-list
+						newEs.addEvent(e);
+					} else if (!lexicon.contains(s) && !whiteList) {
+						// black-list
+						newEs.addEvent(e);
+					}
+				} catch (NullPointerException ex) {
+					ex.printStackTrace();
+					newEs = avoidOccasionallyBug(newEs, e);
 				}
 			}
 		}
@@ -254,6 +271,97 @@ public class ListEventDriver extends EventDriver {
 			lexicon = null;
 		
 		return newEs;
+	}
+	
+	private EventSet avoidOccasionallyBug (EventSet newEs, Event e) {
+		BufferedReader br = null;
+		String word;
+		try {
+			try {
+				// look in file system
+				//System.out.println(filename);
+				br = new BufferedReader(new FileReader(filename));
+			} catch (IOException ex) {
+				// look in resources
+				
+				InputStream in = getClass().getClassLoader().getResourceAsStream(filename);
+				br = new BufferedReader(new InputStreamReader(in));
+			}
+
+			lexicon = new ArrayList<String>();
+			while ((word = br.readLine()) != null) {
+				lexicon.add(word.trim());
+			}
+
+		} catch (IOException ex) {
+			System.err.println("Error reading file "+filename);
+			ex.printStackTrace();
+			
+		} finally {
+			// if the file opened okay, make sure we close it
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException ioe) {
+				}
+			}
+		}
+		try {
+			String s = e.toString();
+			if (lexicon.contains(s) && whiteList) {
+				newEs.addEvent(e);
+			} else if (!lexicon.contains(s) && !whiteList) {
+				newEs.addEvent(e);
+			}
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+			newEs = avoidOccasionallyBug(newEs, e);
+		}
+		
+		return newEs;
+	}
+	
+	private String avoidOccasionallyBug (String e2, int j) {
+		BufferedReader br = null;
+		String word;
+		try {
+			try {
+				// look in file system
+				//System.out.println(filename);
+				br = new BufferedReader(new FileReader(filename));
+			} catch (IOException e) {
+				// look in resources
+				
+				InputStream in = getClass().getClassLoader().getResourceAsStream(filename);
+				br = new BufferedReader(new InputStreamReader(in));
+			}
+
+			lexicon = new ArrayList<String>();
+			while ((word = br.readLine()) != null) {
+				lexicon.add(word.trim());
+			}
+
+		} catch (IOException e) {
+			System.err.println("Error reading file "+filename);
+			e.printStackTrace();
+			
+		} finally {
+			// if the file opened okay, make sure we close it
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException ioe) {
+				}
+			}
+		}
+		try {
+			e2 = lexicon.get(j);
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+			e2 = avoidOccasionallyBug(e2 , j);
+		}
+		
+		return e2;
 	}
 
 	public EventDriver getUnderlyingEvents() {

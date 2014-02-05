@@ -1,0 +1,9 @@
+
+
+Age: 43
+Language: English
+Gender: male
+Education: Master's degree, working on PhD
+Occupation: Freelance writing and nonprofit administration
+Background: N,N,N,N,N
+

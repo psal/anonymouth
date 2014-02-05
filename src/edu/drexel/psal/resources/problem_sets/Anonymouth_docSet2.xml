@@ -1,0 +1,91 @@
+<problem-set>
+	<training name="Authors">
+		<author name="h">
+			<document title="h_01_1.txt">./jsan_resources/corpora/amt/h/h_01_1.txt</document>
+			<document title="h_02_1.txt">./jsan_resources/corpora/amt/h/h_02_1.txt</document>
+			<document title="h_03_1.txt">./jsan_resources/corpora/amt/h/h_03_1.txt</document>
+			<document title="h_04_1.txt">./jsan_resources/corpora/amt/h/h_04_1.txt</document>
+			<document title="h_05_1.txt">./jsan_resources/corpora/amt/h/h_05_1.txt</document>
+			<document title="h_06_1.txt">./jsan_resources/corpora/amt/h/h_06_1.txt</document>
+			<document title="h_07_1.txt">./jsan_resources/corpora/amt/h/h_07_1.txt</document>
+			<document title="h_08_1_2.txt">./jsan_resources/corpora/amt/h/h_08_1_2.txt</document>
+			<document title="h_09_2.txt">./jsan_resources/corpora/amt/h/h_09_2.txt</document>
+			<document title="h_10_2.txt">./jsan_resources/corpora/amt/h/h_10_2.txt</document>
+			<document title="h_11_2.txt">./jsan_resources/corpora/amt/h/h_11_2.txt</document>
+			<document title="h_12_2.txt">./jsan_resources/corpora/amt/h/h_12_2.txt</document>
+			<document title="h_13_2.txt">./jsan_resources/corpora/amt/h/h_13_2.txt</document>
+			<document title="h_14_2.txt">./jsan_resources/corpora/amt/h/h_14_2.txt</document>
+			<document title="h_15_2.txt">./jsan_resources/corpora/amt/h/h_15_2.txt</document>
+			<document title="h_16_2.txt">./jsan_resources/corpora/amt/h/h_16_2.txt</document>
+			<document title="h_17_2.txt">./jsan_resources/corpora/amt/h/h_17_2.txt</document>
+			<document title="h_18_2.txt">./jsan_resources/corpora/amt/h/h_18_2.txt</document>
+		</author>
+		<author name="k">
+			<document title="k_01_1.txt">./jsan_resources/corpora/amt/k/k_01_1.txt</document>
+			<document title="k_02_1.txt">./jsan_resources/corpora/amt/k/k_02_1.txt</document>
+			<document title="k_03_1.txt">./jsan_resources/corpora/amt/k/k_03_1.txt</document>
+			<document title="k_04_1_2.txt">./jsan_resources/corpora/amt/k/k_04_1_2.txt</document>
+			<document title="k_05_2.txt">./jsan_resources/corpora/amt/k/k_05_2.txt</document>
+			<document title="k_06_2.txt">./jsan_resources/corpora/amt/k/k_06_2.txt</document>
+			<document title="k_07_2.txt">./jsan_resources/corpora/amt/k/k_07_2.txt</document>
+			<document title="k_08_2.txt">./jsan_resources/corpora/amt/k/k_08_2.txt</document>
+			<document title="k_09_2.txt">./jsan_resources/corpora/amt/k/k_09_2.txt</document>
+			<document title="k_10_2.txt">./jsan_resources/corpora/amt/k/k_10_2.txt</document>
+			<document title="k_11_2.txt">./jsan_resources/corpora/amt/k/k_11_2.txt</document>
+			<document title="k_12_2.txt">./jsan_resources/corpora/amt/k/k_12_2.txt</document>
+			<document title="k_13_2.txt">./jsan_resources/corpora/amt/k/k_13_2.txt</document>
+			<document title="k_14_2.txt">./jsan_resources/corpora/amt/k/k_14_2.txt</document>
+			<document title="k_15_2.txt">./jsan_resources/corpora/amt/k/k_15_2.txt</document>
+			<document title="k_16_2_3.txt">./jsan_resources/corpora/amt/k/k_16_2_3.txt</document>
+			<document title="k_17_3.txt">./jsan_resources/corpora/amt/k/k_17_3.txt</document>
+			<document title="k_18_3.txt">./jsan_resources/corpora/amt/k/k_18_3.txt</document>
+			<document title="k_19_3.txt">./jsan_resources/corpora/amt/k/k_19_3.txt</document>
+		</author>
+		<author name="p">
+			<document title="p_01_1.txt">./jsan_resources/corpora/amt/p/p_01_1.txt</document>
+			<document title="p_02_1.txt">./jsan_resources/corpora/amt/p/p_02_1.txt</document>
+			<document title="p_03_1.txt">./jsan_resources/corpora/amt/p/p_03_1.txt</document>
+			<document title="p_04_1.txt">./jsan_resources/corpora/amt/p/p_04_1.txt</document>
+			<document title="p_05_1.txt">./jsan_resources/corpora/amt/p/p_05_1.txt</document>
+			<document title="p_06_1.txt">./jsan_resources/corpora/amt/p/p_06_1.txt</document>
+			<document title="p_07_1.txt">./jsan_resources/corpora/amt/p/p_07_1.txt</document>
+			<document title="p_08_1_2.txt">./jsan_resources/corpora/amt/p/p_08_1_2.txt</document>
+			<document title="p_09_2.txt">./jsan_resources/corpora/amt/p/p_09_2.txt</document>
+			<document title="p_10_2.txt">./jsan_resources/corpora/amt/p/p_10_2.txt</document>
+			<document title="p_11_2.txt">./jsan_resources/corpora/amt/p/p_11_2.txt</document>
+			<document title="p_12_2.txt">./jsan_resources/corpora/amt/p/p_12_2.txt</document>
+			<document title="p_13_2_3.txt">./jsan_resources/corpora/amt/p/p_13_2_3.txt</document>
+			<document title="p_14_3.txt">./jsan_resources/corpora/amt/p/p_14_3.txt</document>
+			<document title="p_15_3.txt">./jsan_resources/corpora/amt/p/p_15_3.txt</document>
+			<document title="p_16_3.txt">./jsan_resources/corpora/amt/p/p_16_3.txt</document>
+			<document title="p_17_3.txt">./jsan_resources/corpora/amt/p/p_17_3.txt</document>
+			<document title="p_18_3.txt">./jsan_resources/corpora/amt/p/p_18_3.txt</document>
+			<document title="p_19_3.txt">./jsan_resources/corpora/amt/p/p_19_3.txt</document>
+			<document title="p_20_3.txt">./jsan_resources/corpora/amt/p/p_20_3.txt</document>
+		</author>
+		<author name="t">
+			<document title="t_01_1.txt">./jsan_resources/corpora/amt/t/t_01_1.txt</document>
+			<document title="t_02_1.txt">./jsan_resources/corpora/amt/t/t_02_1.txt</document>
+			<document title="t_03_1_2.txt">./jsan_resources/corpora/amt/t/t_03_1_2.txt</document>
+			<document title="t_04_2.txt">./jsan_resources/corpora/amt/t/t_04_2.txt</document>
+			<document title="t_05_2.txt">./jsan_resources/corpora/amt/t/t_05_2.txt</document>
+			<document title="t_06_2_3.txt">./jsan_resources/corpora/amt/t/t_06_2_3.txt</document>
+			<document title="t_07_3.txt">./jsan_resources/corpora/amt/t/t_07_3.txt</document>
+			<document title="t_08_3.txt">./jsan_resources/corpora/amt/t/t_08_3.txt</document>
+			<document title="t_09_3_4.txt">./jsan_resources/corpora/amt/t/t_09_3_4.txt</document>
+			<document title="t_10_4.txt">./jsan_resources/corpora/amt/t/t_10_4.txt</document>
+			<document title="t_11_4.txt">./jsan_resources/corpora/amt/t/t_11_4.txt</document>
+			<document title="t_12_4.txt">./jsan_resources/corpora/amt/t/t_12_4.txt</document>
+			<document title="t_13_4.txt">./jsan_resources/corpora/amt/t/t_13_4.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="kk_02_1.txt">./jsan_resources/corpora/amt/kk/kk_02_1.txt</document>
+			<document title="kk_03_1.txt">./jsan_resources/corpora/amt/kk/kk_03_1.txt</document>
+		</author>
+	</training>
+	<test>
+		<author name="~* you *~">
+			<document title="kk_01_1.txt">./jsan_resources/corpora/amt/kk/kk_01_1.txt</document>
+		</author>
+	</test>
+</problem-set>

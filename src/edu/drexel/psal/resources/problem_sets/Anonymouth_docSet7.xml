@@ -1,0 +1,53 @@
+<problem-set>
+	<training name="Authors">
+		<author name="a">
+			<document title="a_01.txt">./jsan_resources/corpora/drexel_1/a/a_01.txt</document>
+			<document title="a_02.txt">./jsan_resources/corpora/drexel_1/a/a_02.txt</document>
+			<document title="a_03.txt">./jsan_resources/corpora/drexel_1/a/a_03.txt</document>
+			<document title="a_04.txt">./jsan_resources/corpora/drexel_1/a/a_04.txt</document>
+			<document title="a_05.txt">./jsan_resources/corpora/drexel_1/a/a_05.txt</document>
+			<document title="a_06.txt">./jsan_resources/corpora/drexel_1/a/a_06.txt</document>
+			<document title="a_07.txt">./jsan_resources/corpora/drexel_1/a/a_07.txt</document>
+		</author>
+		<author name="c">
+			<document title="c_01.txt">./jsan_resources/corpora/drexel_1/c/c_01.txt</document>
+			<document title="c_02.txt">./jsan_resources/corpora/drexel_1/c/c_02.txt</document>
+			<document title="c_03.txt">./jsan_resources/corpora/drexel_1/c/c_03.txt</document>
+			<document title="c_04.txt">./jsan_resources/corpora/drexel_1/c/c_04.txt</document>
+			<document title="c_05.txt">./jsan_resources/corpora/drexel_1/c/c_05.txt</document>
+			<document title="c_06.txt">./jsan_resources/corpora/drexel_1/c/c_06.txt</document>
+			<document title="c_07.txt">./jsan_resources/corpora/drexel_1/c/c_07.txt</document>
+			<document title="c_08.txt">./jsan_resources/corpora/drexel_1/c/c_08.txt</document>
+			<document title="c_09.txt">./jsan_resources/corpora/drexel_1/c/c_09.txt</document>
+		</author>
+		<author name="cm">
+			<document title="Anonymouth_docSet.xml">./jsan_resources/corpora/drexel_1/cm/Anonymouth_docSet.xml</document>
+			<document title="cm_01.txt">./jsan_resources/corpora/drexel_1/cm/cm_01.txt</document>
+			<document title="cm_02.txt">./jsan_resources/corpora/drexel_1/cm/cm_02.txt</document>
+			<document title="cm_03.txt">./jsan_resources/corpora/drexel_1/cm/cm_03.txt</document>
+			<document title="cm_04.txt">./jsan_resources/corpora/drexel_1/cm/cm_04.txt</document>
+			<document title="cm_05.txt">./jsan_resources/corpora/drexel_1/cm/cm_05.txt</document>
+			<document title="cm_06.txt">./jsan_resources/corpora/drexel_1/cm/cm_06.txt</document>
+			<document title="cm_07.txt">./jsan_resources/corpora/drexel_1/cm/cm_07.txt</document>
+			<document title="cm_08.txt">./jsan_resources/corpora/drexel_1/cm/cm_08.txt</document>
+			<document title="cm_09.txt">./jsan_resources/corpora/drexel_1/cm/cm_09.txt</document>
+			<document title="cm_10.txt">./jsan_resources/corpora/drexel_1/cm/cm_10.txt</document>
+			<document title="cm_11.txt">./jsan_resources/corpora/drexel_1/cm/cm_11.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="d_02.txt">./jsan_resources/corpora/drexel_1/d/d_02.txt</document>
+			<document title="d_03.txt">./jsan_resources/corpora/drexel_1/d/d_03.txt</document>
+			<document title="d_04.txt">./jsan_resources/corpora/drexel_1/d/d_04.txt</document>
+			<document title="d_05.txt">./jsan_resources/corpora/drexel_1/d/d_05.txt</document>
+			<document title="d_06.txt">./jsan_resources/corpora/drexel_1/d/d_06.txt</document>
+			<document title="d_07.txt">./jsan_resources/corpora/drexel_1/d/d_07.txt</document>
+			<document title="d_08.txt">./jsan_resources/corpora/drexel_1/d/d_08.txt</document>
+			<document title="d_09.txt">./jsan_resources/corpora/drexel_1/d/d_09.txt</document>
+		</author>
+	</training>
+	<test>
+		<author name="~* you *~">
+			<document title="d_01.txt">./jsan_resources/corpora/drexel_1/d/d_01.txt</document>
+		</author>
+	</test>
+</problem-set>

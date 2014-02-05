@@ -26,7 +26,7 @@ public class WordSuggestionsDriver {
 	//Constants
 	private final static String NAME = "( WordSuggestionsDriver ) - ";
 	private final String PUNCTUATION = "?!,.\"`'";
-	private final String DICTIONARY = ANONConstants.EXTERNAL_RESOURCE_PACKAGE+"words.txt";
+	private final String DICTIONARY = ANONConstants.RESOURCE_PACKAGE+"words.txt";
 
 	//Listeners
 	private ListSelectionListener elementsToAddListener;
@@ -141,9 +141,8 @@ public class WordSuggestionsDriver {
 
 					main.elementsToRemoveModel.insertRow(i, new String[] {left, right});
 
-					if (topToRemove.get(i)[0].trim().equals(prevSelectedElement)) {
+					if (topToRemove.get(i)[0].trim().equals(prevSelectedElement))
 						main.elementsToRemoveTable.setRowSelectionInterval(i, i);
-					}
 				}		
 			}
 
@@ -181,6 +180,8 @@ public class WordSuggestionsDriver {
 				if (add) {
 					good.add(curWord);
 					main.elementsToAdd.add(tableIndex, curWord);
+					while (main.elementsToAdd.get(tableIndex) == null)
+						main.elementsToAdd.add(tableIndex, curWord);
 					tableIndex++;
 
 					if (curWord.equals(prevSelectedElement)) {

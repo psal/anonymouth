@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<feature-set name="9 feature-set">
+	<description value="9 features used by Brennan and Greenstadt."/>
+	<feature name="Unique Words Count" calc_hist="false">
+		<description value="Number of unique words in the document, after removing punctuation and unifying case."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.UniqueWordsCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
+			</canonicizer>
+			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
+			</canonicizer>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Complexity" calc_hist="false">
+		<description value="Ratio of unique words to total number of words in the document."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.UniqueWordsCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
+			</canonicizer>
+			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
+			</canonicizer>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="WORDS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Sentence Count" calc_hist="false">
+		<description value="Number of sentences in the document."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.SentenceCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Average Sentence Length" calc_hist="false">
+		<description value="Average sentence length in words (total number of words / total number of sentences)."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="SENTENCES_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Average Syllables in Word" calc_hist="false">
+		<description value="Average syllables in word."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.SyllableCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="WORDS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Gunning-Fog Readability Index" calc_hist="false">
+		<description value="The Gunning-Fog readability index: 0.4*((total words / total sentences) + 100*(total complex words / total words)) [where complex words are words with 3 or more syllables]."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.GunningFogIndexEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Character Space" calc_hist="false">
+		<description value="The total number of characters in the document, spaces included."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.CharCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Letter Space" calc_hist="false">
+		<description value="The total number of letters (excluding spaces and punctuation)."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Flesch Reading Ease Score" calc_hist="false">
+		<description value="The Flesch reading ease score: 206.835 - 1.015*(total words / total sentences) -84.6*(total syllables / total words)"/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.FleschReadingEaseScoreEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
+	</feature>
+</feature-set>

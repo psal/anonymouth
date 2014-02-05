@@ -29,11 +29,11 @@ public class ANONConstants {
 	public static final String FEATURESETS_PREFIX = EXTERNAL_RESOURCE_PACKAGE+"feature_sets/";
 	public static final String JGAAP_RESOURCE_WORDNET = "/com/jgaap/resources/wordnet/";
 	public static final String DOC_MAGICIAN_WRITE_DIR = WORKING_DIR + ".edited_documents/";
-	public static final String KOPPEL_FUNCTION_WORDS = EXTERNAL_RESOURCE_PACKAGE+"koppel_function_words.txt";
+	public static final String KOPPEL_FUNCTION_WORDS = RESOURCE_PACKAGE+"koppel_function_words.txt";
 	public static final String SER_DIR = WORKING_DIR + ".serialized_objects/";
 	public static final String GRAPHICS = "/edu/drexel/psal/resources/graphics/";
 	public static final String PATH_TO_CLASSIFIER = SER_DIR+"saved_classifier.model";
-	public static final String ABBREVIATIONS_FILE = EXTERNAL_RESOURCE_PACKAGE+"abbreviations.txt";
+	public static final String ABBREVIATIONS_FILE = RESOURCE_PACKAGE+"abbreviations.txt";
 	
 	//=====================================================================
 	//							BOOLEAN FLAGS

@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -101,11 +103,12 @@ public class FileHelper {
 		HashSet<String> tokens = new HashSet<String>();
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(path));
+			InputStream in = FileHelper.class.getResourceAsStream(path);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
 			String line = "";
 			while ((line = reader.readLine()) != null) {
-				tokens.add(line);
+				tokens.add(line.trim());
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -131,16 +134,18 @@ public class FileHelper {
 		ArrayList<String> lines = new ArrayList<String>(expectedSize);
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(path));
+			InputStream in = FileHelper.class.getResourceAsStream(path);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			
 			String line = "";
 			while ((line = reader.readLine()) != null) {
-				lines.add(line);
+				lines.add(line.trim());
 			}
 			reader.close();
 		} catch (FileNotFoundException e) {
 			Logger.logln(NAME+"Error loading file at path: "+path+", file was not found", LogOut.STDERR);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Logger.logln(NAME+"Unknown error occurred loading file at path: "+path);
 		}
 		

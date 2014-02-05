@@ -621,6 +621,7 @@ public class PreProcessAdvancedWindow extends JDialog {
 			featureChoiceModel = new DefaultComboBoxModel<String>(presetCFDsNames);
 			featureChoice.setModel(featureChoiceModel);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Logger.logln(NAME+"Failed to read feature set files.",LogOut.STDERR);
 		}
 	}

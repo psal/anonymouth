@@ -9,8 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.anonymouth.utils.TranslatorThread;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * All listeners relating to the translations including:
@@ -84,9 +86,15 @@ public class TranslationsDriver implements MouseListener {
 					}
 				});
 				
-				translator.load(main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
-				translationsPanel.updateTranslationsPanel(
-						main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
+				int sentNum = main.editorDriver.sentNum;
+				TaggedSentence currSent = main.editorDriver.taggedDoc.getSentenceNumber(sentNum);
+				if (!currSent.getUntagged().equals(""))
+					translator.load(currSent);
+				else {
+					Logger.logln(NAME+"Empty string", LogOut.STDERR);
+					return;
+				}
+				translationsPanel.updateTranslationsPanel(currSent);
 			}
 		};
 		main.translateSentenceButton.addActionListener(translateSentenceListener);

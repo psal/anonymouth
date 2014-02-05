@@ -839,6 +839,7 @@ public class EditorDriver {
                          * as two or more previous sentences deleted between two new
                          * combined sentences
                          */
+
                         int startIndex = 0;
                         int endIndex = 0;
                         try {
@@ -854,7 +855,7 @@ public class EditorDriver {
                                                         taggedDoc.makeNewEndSentence("");
                                                 }
                                                 taggedDoc.endSentenceExists = true;
-                                                selectedSentence++;
+                                                selectedSentence++; 
                                                 startIndex = taggedDoc.length - charsInserted;
                                                 endIndex = taggedDoc.length;
                                         } else {

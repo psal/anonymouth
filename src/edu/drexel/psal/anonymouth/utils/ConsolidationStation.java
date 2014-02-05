@@ -42,8 +42,7 @@ public class ConsolidationStation {
 	public static ArrayList<TaggedDocument> toModifyTaggedDocs;//init in editor Tab Driver
 	private static boolean firstTime;
 	private static double oldStartingValue = 0;
-	private static ArrayList<Word> oldWords = new ArrayList<Word>();
-	private static ArrayList<Double> oldDat = new ArrayList<Double>();
+	private static HashMap<String, ArrayList<String[]>> toReturn = new HashMap<String,ArrayList<String[]>>(2);
 	
 	/**
 	 * constructor for ConsolidationStation. Depends on target values, and should not be called until they have been selected.
@@ -308,29 +307,30 @@ public class ConsolidationStation {
 	
 	public static HashMap<String,ArrayList<String[]>> getWordToRemoveAndWordToAdd () {
 		TaggedDocument toModifyDoc = toModifyTaggedDocs.get(0);
-		HashMap<String, ArrayList<String[]>> toReturn = new HashMap<String,ArrayList<String[]>>(2);
-		ArrayList<Word> wordsSuggestion;
-		ArrayList<Double> newDat = new ArrayList<Double>();
+		ArrayList<Word> possibleWordsToRemove;
+		ArrayList<Word> possibleWordsToAdd = new ArrayList<Word>();
+		ArrayList<Double> datWTR = new ArrayList<Double>();
 		Double newStartingValue = GUIMain.inst.anonymityBar.getAnonymityBarValue();
 		
 		if (oldStartingValue != newStartingValue) {// an attempt to reduce work done. If nothing change, do nothing
+			toReturn = new HashMap<String,ArrayList<String[]>>(2);
+			
 			// get word's list. Sometimes (yeah, sometimes) the list return empty so we do it this way
 			ArrayList<Word> wordList;
 			do {
 				wordList = toModifyDoc.getWords();
 			} while (wordList.isEmpty());
-			wordsSuggestion = getFilteredWordList(wordList);
+			possibleWordsToRemove = getFilteredWordList(wordList);
 		
 			// what we do here is create a "ghost" document by eliminating a word in author's document, then evaluate the new document 
 			//(most parts are copied from DocumentMagician with some modifications to reduce runtime to acceptable level without making the program broken down)
-			String docToUse = toModifyDoc.getUntaggedDocument();
 			List<Document> toModifySet = new LinkedList<Document>();
 			InstanceConstructor instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
 
 			firstTime = true;
-			for (int k = 0; k < wordsSuggestion.size(); k++) {
-				String doc = docToUse;
-				doc = removeWord(doc,wordsSuggestion.get(k).getUntagged());
+			for (int k = 0; k < possibleWordsToRemove.size(); k++) {
+				String doc = toModifyDoc.getUntaggedDocument();
+				doc = removeWord(doc,possibleWordsToRemove.get(k).getUntagged());
 			
 				toModifySet.clear();
 				String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "WTR.txt";
@@ -371,54 +371,118 @@ public class ConsolidationStation {
 					ErrorHandler.StanfordPOSError();
 				}
 				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
-				if (currValue == newStartingValue)
-					wordsSuggestion.remove(k);
-				else
-					newDat.add(currValue);
+				if (currValue == newStartingValue) {// eliminate words have no effect on docToAnonymize
+					possibleWordsToRemove.remove(k);
+					k--;
+				}
+				else if (currValue < newStartingValue) // add words fit WTR list
+					datWTR.add(currValue);
+				else if (currValue > newStartingValue) {// add words that may fit WTA list 
+					possibleWordsToAdd.add(possibleWordsToRemove.get(k));
+					possibleWordsToRemove.remove(k);
+					k--;
+				}
 			}
-			newStartingValue = GUIMain.inst.anonymityBar.getAnonymityBarValue();
+			newStartingValue = GUIMain.inst.anonymityBar.getAnonymityBarValue(); //for some reasons, sometimes the value is not up-to-date so need to get the most recent one
 			oldStartingValue = newStartingValue;
-			oldWords = wordsSuggestion;
-			oldDat = newDat;
-		}
-		else {
-			wordsSuggestion = oldWords;
-			newDat = oldDat;
-		}
+			
+			//sort values
+			double[][] toSort = new double[datWTR.size()][2];
+			for (int i = 0; i < datWTR.size(); i++) {
+				toSort[i][0] = datWTR.get(i);
+				toSort[i][1] = i;
+			}
+		    Arrays.sort(toSort, new Comparator<double[]>() {
+		        public int compare(double[] a, double[] b) {
+		            return Double.compare(a[0], b[0]);
+		        }
+		    });
 
-		//sort values
-		double[][] toSort = new double[newDat.size()][2];
-		for (int i = 0; i < newDat.size(); i++) {
-			toSort[i][0] = newDat.get(i);
-			toSort[i][1] = i;
-		}
-	    Arrays.sort(toSort, new Comparator<double[]>() {
-	        public int compare(double[] a, double[] b) {
-	            return Double.compare(a[0], b[0]);
-	        }
-	    });
-
-	    //get Words-To-Remove and Words-To-Add lists
-	    ArrayList<String[]> returnWordsToRemove = new ArrayList<String[]>();
-	    int h = 0;
-	    while (newDat.get((int)toSort[h][1]) < newStartingValue) {
-	    	String word = wordsSuggestion.get((int)toSort[h][1]).getUntagged();
-	    	int occurances = getWordOccurances(toModifyDoc.getUntaggedDocument(), word);
-			if (occurances != 0)
+		    //get Words-To-Remove lists
+		    ArrayList<String[]> returnWordsToRemove = new ArrayList<String[]>();
+		    for (int h = 0; h < datWTR.size(); h++) {
+		    	String word = possibleWordsToRemove.get((int)toSort[h][1]).getUntagged();
+		    	int occurances = getWordOccurances(toModifyDoc.getUntaggedDocument(), word);
 				returnWordsToRemove.add(new String[] {word, Integer.toString(occurances)});
-			h++;
-	    }
-		toReturn.put("wordsToRemove", returnWordsToRemove);
-	    ArrayList<String[]> returnWordsToAdd = new ArrayList<String[]>();
-	    h = newDat.size() - 1;
-	    while (newDat.get((int)toSort[h][1]) > newStartingValue) {
-	    	String word = wordsSuggestion.get((int)toSort[h][1]).getUntagged();
-	    	int occurances = getWordOccurances(toModifyDoc.getUntaggedDocument(), word);
-			if (occurances != 0)
-			    returnWordsToAdd.add(new String[] {word});
-			h--;
-	    }
-		toReturn.put("wordsToAdd", returnWordsToAdd);
+		    }
+			toReturn.put("wordsToRemove", returnWordsToRemove);
+			
+			//Start finding words to add	
+			//we do the same as the above
+			toModifySet = new LinkedList<Document>();
+			instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
+			ArrayList<Double> datWTA = new ArrayList<Double>();
+
+			firstTime = true;
+			for (int k = 0; k < possibleWordsToAdd.size(); k++) {
+				String doc = toModifyDoc.getUntaggedDocument();
+				doc = doc + possibleWordsToAdd.get(k).getUntagged();
+			
+				toModifySet.clear();
+				String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "WTA.txt";
+				try {
+					File tempModdedDoc;
+					tempModdedDoc = new File(pathToTempModdedDoc);
+					tempModdedDoc.deleteOnExit();
+					FileWriter writer = new FileWriter(tempModdedDoc,false);
+					writer.write(doc);
+					writer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					try {
+						File tempModdedDoc;
+						tempModdedDoc = new File(pathToTempModdedDoc);
+						tempModdedDoc.deleteOnExit();
+						FileWriter writer = new FileWriter(tempModdedDoc,false);
+						writer.write(doc);
+						writer.close();
+					} catch (IOException ex) {}
+				}
+				Document newModdedDoc = new Document(pathToTempModdedDoc,"","WTA");
+				toModifySet.add(newModdedDoc);
+				try {
+					toModifySet.get(0).load();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					if (firstTime) {
+						instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+						firstTime = false;
+					}
+					instance.wid.prepareTestSetReducedVersion(toModifySet);
+				} catch(Exception e) {
+					e.printStackTrace();
+					ErrorHandler.StanfordPOSError();
+				}
+				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+				if (currValue == newStartingValue)
+					possibleWordsToAdd.remove(k);
+				else
+					datWTA.add(currValue);
+			}
+
+			toSort = new double[datWTA.size()][2];
+			for (int i = 0; i < datWTA.size(); i++) {
+				toSort[i][0] = datWTA.get(i);
+				toSort[i][1] = i;
+			}
+	    	Arrays.sort(toSort, new Comparator<double[]>() {
+	    		public int compare(double[] a, double[] b) {
+	        		return Double.compare(a[0], b[0]);
+	        	}
+	    	});
+			
+			ArrayList<String[]> returnWordsToAdd = new ArrayList<String[]>();
+			for (int h = 0; h < possibleWordsToAdd.size(); h++) {
+				String word = possibleWordsToAdd.get((int)toSort[h][1]).getUntagged();
+		   		returnWordsToAdd.add(new String[] {word});
+			}
+			toReturn.put("wordsToAdd", returnWordsToAdd);
+		}
+		else
+			return toReturn;
 		
 		return toReturn;
 	}
