@@ -35,7 +35,7 @@ public class PropertiesUtil {
 	protected static Boolean defaultAutoHighlight = true;
 	protected static Boolean defaultVersionAutoSave = false;
 	protected static Boolean defaultFilterAddSuggestions = true;
-	protected static int defaultThreads = 4;
+	protected static int defaultThreads = 2;
 	protected static int defaultFeatures = 500;
 	protected static Boolean defaultTranslation = false;
 	

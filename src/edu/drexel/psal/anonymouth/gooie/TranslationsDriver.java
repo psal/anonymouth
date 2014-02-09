@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.anonymouth.utils.TranslatorThread;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -45,6 +46,7 @@ public class TranslationsDriver implements MouseListener {
 	
 	//Others
 	private String actionCommand;
+	private volatile boolean emptyString = false;
 
 	/**
 	 * Constructor, automatically initializes all listeners associated with translations
@@ -78,11 +80,13 @@ public class TranslationsDriver implements MouseListener {
 				 * replace the button near immediately so the user knows something's happening (and also to prevent
 				 * them from clicking on it numerous times because they don't think it did anything)
 				 */
+				
 				SwingUtilities.invokeLater(new Runnable() {
 					//If it's not in a invoke later thread, it doesn't immediately update
 					@Override
 					public void run() {
-						translationsPanel.switchToProgressPanel();
+						if (!emptyString)
+							translationsPanel.switchToProgressPanel();
 					}
 				});
 				
@@ -92,6 +96,18 @@ public class TranslationsDriver implements MouseListener {
 					translator.load(currSent);
 				else {
 					Logger.logln(NAME+"Empty string", LogOut.STDERR);
+					emptyString = true;
+					main.translationsHolderPanel.removeAll();
+					main.notTranslated.setText("");
+					main.translationsHolderPanel.add(main.notTranslated, "");
+					main.translationsHolderPanel.revalidate();
+					main.translationsHolderPanel.repaint();
+					JOptionPane.showMessageDialog(null, 
+							"There's no sentence to translate, please choose one to use this feature",
+							"Translation Warning",
+							JOptionPane.INFORMATION_MESSAGE,
+							null);
+					main.translationsPanel.switchToButtonPanel();
 					return;
 				}
 				translationsPanel.updateTranslationsPanel(currSent);

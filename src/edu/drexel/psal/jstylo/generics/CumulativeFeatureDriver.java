@@ -64,10 +64,19 @@ public class CumulativeFeatureDriver {
 	{
 		String path = "tmp.xml";
 		File xml = new File(path);
+		try {
 		PrintWriter pw = new PrintWriter(xml);
 		pw.print(other.toXMLString());
 		pw.flush();
 		pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			xml = new File(path);
+			PrintWriter pw = new PrintWriter(xml);
+			pw.print(other.toXMLString());
+			pw.flush();
+			pw.close();
+		}
 		XMLParser parser = new XMLParser(path,other);
 		CumulativeFeatureDriver generated = parser.cfd;
 		this.name = generated.name;

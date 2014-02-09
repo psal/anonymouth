@@ -629,6 +629,8 @@ public class GUIMain extends JFrame {
 		{
 			//----------- Top Portion (Translate button, progress bar, etc.) -------------
 			translateSentenceButton = new JButton("Translate Sentence");
+			translateSentenceButton.setToolTipText("<html><center>Translate the sentence where <br>" +
+					"the crusor currently is.</center></html>");
 			translationHelpButton = new JButton("?");
 			resetTranslator = new JButton("Reset Translator");
 			

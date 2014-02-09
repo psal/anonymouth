@@ -265,14 +265,25 @@ public class HighlighterEngine {
 		int total = leftSentencesInTextWrapper + rightSentencesInTextWrapper + 1;
 
 		TaggedSentence[] sentences = new TaggedSentence[total];
+		int sentNum = main.editorDriver.sentNum;
+		
 		for (int i = 0; i < total; i++) {
-			if (leftSentencesInTextWrapper >= 0) {
-				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum - leftSentencesInTextWrapper);
-				leftSentencesInTextWrapper--;
-			} else {
-				sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum + rightSentencesInTextWrapper);
-				rightSentencesInTextWrapper--;
-			}
+			if (sentNum != 0)
+				if (leftSentencesInTextWrapper >= 0) {
+					sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(sentNum - leftSentencesInTextWrapper);
+					leftSentencesInTextWrapper--;
+				} else {
+					sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(sentNum + rightSentencesInTextWrapper);
+					rightSentencesInTextWrapper--;
+				}
+			else
+				if (leftSentencesInTextWrapper >= 0) {
+					sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(leftSentencesInTextWrapper);
+					leftSentencesInTextWrapper--;
+				} else {
+					sentences[i] = main.editorDriver.taggedDoc.getSentenceNumber(rightSentencesInTextWrapper);
+					rightSentencesInTextWrapper--;
+				}
 		}
 		
 		//if we don't increment by one, it gets the previous sentence.

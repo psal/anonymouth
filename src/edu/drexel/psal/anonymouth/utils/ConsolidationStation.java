@@ -332,45 +332,7 @@ public class ConsolidationStation {
 				String doc = toModifyDoc.getUntaggedDocument();
 				doc = removeWord(doc,possibleWordsToRemove.get(k).getUntagged());
 			
-				toModifySet.clear();
-				String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "WTR.txt";
-				try {
-					File tempModdedDoc;
-					tempModdedDoc = new File(pathToTempModdedDoc);
-					tempModdedDoc.deleteOnExit();
-					FileWriter writer = new FileWriter(tempModdedDoc,false);
-					writer.write(doc);
-					writer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					try {
-						File tempModdedDoc;
-						tempModdedDoc = new File(pathToTempModdedDoc);
-						tempModdedDoc.deleteOnExit();
-						FileWriter writer = new FileWriter(tempModdedDoc,false);
-						writer.write(doc);
-						writer.close();
-					} catch (IOException ex) {}
-				}
-				Document newModdedDoc = new Document(pathToTempModdedDoc,"","WTR");
-				toModifySet.add(newModdedDoc);
-				try {
-					toModifySet.get(0).load();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				try {
-					if (firstTime) {
-						instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
-						firstTime = false;
-					}
-					instance.wid.prepareTestSetReducedVersion(toModifySet);
-				} catch(Exception e) {
-					e.printStackTrace();
-					ErrorHandler.StanfordPOSError();
-				}
-				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+				double currValue = getWordValue(doc, toModifySet, instance);
 				if (currValue == newStartingValue) {// eliminate words have no effect on docToAnonymize
 					possibleWordsToRemove.remove(k);
 					k--;
@@ -420,45 +382,7 @@ public class ConsolidationStation {
 				String doc = toModifyDoc.getUntaggedDocument();
 				doc = doc + possibleWordsToAdd.get(k).getUntagged();
 			
-				toModifySet.clear();
-				String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "WTA.txt";
-				try {
-					File tempModdedDoc;
-					tempModdedDoc = new File(pathToTempModdedDoc);
-					tempModdedDoc.deleteOnExit();
-					FileWriter writer = new FileWriter(tempModdedDoc,false);
-					writer.write(doc);
-					writer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					try {
-						File tempModdedDoc;
-						tempModdedDoc = new File(pathToTempModdedDoc);
-						tempModdedDoc.deleteOnExit();
-						FileWriter writer = new FileWriter(tempModdedDoc,false);
-						writer.write(doc);
-						writer.close();
-					} catch (IOException ex) {}
-				}
-				Document newModdedDoc = new Document(pathToTempModdedDoc,"","WTA");
-				toModifySet.add(newModdedDoc);
-				try {
-					toModifySet.get(0).load();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-				try {
-					if (firstTime) {
-						instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
-						firstTime = false;
-					}
-					instance.wid.prepareTestSetReducedVersion(toModifySet);
-				} catch(Exception e) {
-					e.printStackTrace();
-					ErrorHandler.StanfordPOSError();
-				}
-				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+				double currValue = getWordValue(doc, toModifySet, instance);
 				if (currValue >= newStartingValue) {
 					possibleWordsToAdd.remove(k);
 					k--;
@@ -489,6 +413,50 @@ public class ConsolidationStation {
 			return toReturn;
 		
 		return toReturn;
+	}
+	
+	private static double getWordValue(String doc, List<Document> toModifySet, InstanceConstructor instance) {
+		toModifySet.clear();
+		String pathToTempModdedDoc = ANONConstants.DOC_MAGICIAN_WRITE_DIR + "WS.txt";
+		try {
+			File tempModdedDoc;
+			tempModdedDoc = new File(pathToTempModdedDoc);
+			tempModdedDoc.deleteOnExit();
+			FileWriter writer = new FileWriter(tempModdedDoc,false);
+			writer.write(doc);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			try {
+				File tempModdedDoc;
+				tempModdedDoc = new File(pathToTempModdedDoc);
+				tempModdedDoc.deleteOnExit();
+				FileWriter writer = new FileWriter(tempModdedDoc,false);
+				writer.write(doc);
+				writer.close();
+			} catch (IOException ex) {}
+		}
+		Document newModdedDoc = new Document(pathToTempModdedDoc,"","WS");
+		toModifySet.add(newModdedDoc);
+		try {
+			toModifySet.get(0).load();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if (firstTime) {
+				instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+				firstTime = false;
+			}
+			instance.wid.prepareTestSetReducedVersion(toModifySet);
+		} catch(Exception e) {
+			e.printStackTrace();
+			ErrorHandler.StanfordPOSError();
+		}
+		double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+		
+		return currValue;
 	}
 
 	/**

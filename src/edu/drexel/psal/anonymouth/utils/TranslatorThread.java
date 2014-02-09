@@ -203,7 +203,7 @@ public class TranslatorThread implements Runnable {
 	/**
 	 * Cleans up resources used by the translator at the end of translating all sentences.
 	 */
-	private void translationsEnded() {
+	public void translationsEnded() {
 		/**
 		 * We're making another outside call to a "switchTo" method since we want the progress bar to immediately disappear
 		 * when all translations are obtained (instead of having to wait a second or two for the TranslationsPanel to get to
