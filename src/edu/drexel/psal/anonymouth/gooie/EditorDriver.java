@@ -984,8 +984,6 @@ public class EditorDriver {
         public void syncTextPaneWithTaggedDoc() {
                 //Updating the JTextPane
                 ignoreChanges = true;
-                // update taggedDoc in editorDriver, sincee for some reasons, it isn't done in the first process
-                taggedDoc = ConsolidationStation.toModifyTaggedDocs.get(0);
                 
                 main.documentPane.setText(taggedDoc.getUntaggedDocument());
                 if (newCaretPosition[0] > taggedDoc.length) {

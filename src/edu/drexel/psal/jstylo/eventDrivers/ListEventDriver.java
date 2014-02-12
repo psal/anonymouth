@@ -200,7 +200,7 @@ public class ListEventDriver extends EventDriver {
 			Collections.sort(eventList);
 			
 			int i = 0, j = 0, c;
-			String e1 = "", e2 = "";
+			String e1, e2 = "";
 			
 			// first handle all events < list[0]
 			int lexiconSize = lexicon.size();
@@ -209,11 +209,13 @@ public class ListEventDriver extends EventDriver {
 				e1 = eventList.get(i);
 				try {
 					e2 = lexicon.get(j);
+					c = e1.compareTo(e2);
 				} catch (NullPointerException e) {
 					e.printStackTrace();
 					e2 = avoidOccasionallyBug(e2,j);
+					c = e1.compareTo(e2);
 				}
-				c = e1.compareTo(e2);
+				
 				
 				if (c < 0) {
 					// if blacklist, add events
