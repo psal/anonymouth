@@ -163,7 +163,7 @@ The main gui window is displayed. This is also the central "hub" for Anonymouth.
 
 <b>From here the logic flow depends largely on what the user does:</b>
 
-- If they're editing in the editor, the main class handling that is `anonymouth.googie.EditorDriver`
+- If they're editing in the editor, the main class handling that is `anonymouth.gooie.EditorDriver`
 - If they are using translations the main class handling that is `anonymouth.gooie.TranslationsPanel`
 - If they are using word suggestions, the main class handling that is `anonymouth.gooie.WordSuggestionsDriver`
 - If they are changing Preferences, the main class handling that is `anonymouth.gooie.PreferencesWindow`
