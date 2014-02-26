@@ -1,9 +1,0 @@
-
-
-Age: 18
-Language: English
-Gender: female
-Education: Some college
-Occupation: Student
-Background: Y,Y,Y,Y,Y
-

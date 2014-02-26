@@ -1,9 +1,0 @@
-
-
-Age: 34
-Language: English
-Gender: male
-Education: Master's
-Occupation: Student
-Background: Y,Y,Y,Y,Y
-

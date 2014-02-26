@@ -1,9 +1,0 @@
-
-
-Age: 33
-Language: English
-Gender: female
-Education: Bachelor's
-Occupation: Lab tech
-Background: N,N,N,N,N
-

@@ -1,9 +1,0 @@
-
-
-Age: 54
-Language: English
-Gender: female
-Education: Master's degree
-Occupation: Writer
-Background: Y,Y,Y,Y,Y
-

@@ -1,9 +1,0 @@
-
-
-Age: 24
-Language: English
-Gender: male
-Education: High School
-Occupation: construction worker
-Background: N,N,N,N,N
-

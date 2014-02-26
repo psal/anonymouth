@@ -1,9 +1,0 @@
-
-
-Age: 28
-Language: English
-Gender: female
-Education: MA
-Occupation: unemployed
-Background: Y,Y,Y,Y,Y
-

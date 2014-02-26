@@ -1,9 +1,0 @@
-
-
-Age: 23
-Language: English
-Gender: male
-Education: Associates
-Occupation: Student
-Background: Y,Y,Y,Y,Y
-

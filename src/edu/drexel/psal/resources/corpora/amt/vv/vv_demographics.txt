@@ -1,9 +1,0 @@
-
-
-Age: 28
-Language: English
-Gender: female
-Education: bachelor's degree
-Occupation: administrative assistant
-Background: Y,Y,Y,Y,Y
-

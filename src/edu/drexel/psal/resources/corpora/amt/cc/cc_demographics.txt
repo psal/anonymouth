@@ -1,9 +1,0 @@
-
-
-Age: 22
-Language: English
-Gender: male
-Education: Bachelor's
-Occupation: Web/Graphic Designer
-Background: Y,Y,Y,Y,Y
-

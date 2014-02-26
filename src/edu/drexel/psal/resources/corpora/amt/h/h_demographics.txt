@@ -1,9 +1,0 @@
-
-
-Age: 31
-Language: English
-Gender: male
-Education: pursuing a Master's of Public Health
-Occupation: student
-Background: Y,Y,Y,Y,Y
-

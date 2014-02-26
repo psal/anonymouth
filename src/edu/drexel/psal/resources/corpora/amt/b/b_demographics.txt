@@ -1,9 +1,0 @@
-
-
-Age: 40
-Language: English
-Gender: female
-Education: Masters
-Occupation: Student
-Background: Y,Y,Y,Y,Y
-

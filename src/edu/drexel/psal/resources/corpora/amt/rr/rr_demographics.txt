@@ -1,9 +1,0 @@
-
-
-Age: 25
-Language: English
-Gender: female
-Education: Bacholers
-Occupation: temp agency
-Background: N,N,N,N,N
-

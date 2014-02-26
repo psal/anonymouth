@@ -1,9 +1,0 @@
-
-
-Age: 22
-Language: English
-Gender: female
-Education: Some college
-Occupation: food service
-Background: Y,Y,Y,Y,Y
-
