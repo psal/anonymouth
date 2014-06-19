@@ -102,7 +102,7 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 		this.addWindowListener(closeListener);
 		this.add(completePanel);
 		this.setResizable(false);
-		this.setSize(320, 150);
+		this.setSize(500, 150); //320 150
 		this.setLocationRelativeTo(null);
 	}
 
@@ -123,6 +123,7 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 
 				try {
 					Thread.sleep(400);
+					
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -167,7 +168,7 @@ public class ProgressWindow extends JDialog implements PropertyChangeListener, R
 	 * Stops the progress bar and trashes the window
 	 */
 	public void stop() {
-		editorProgressBar.setValue(100);
+		editorProgressBar.setValue(150); 
 		editingProgressBarLabel.setText("Final Preparations...");
 		Logger.logln(NAME+"Stopping ProgressBar");
 		t.interrupt();

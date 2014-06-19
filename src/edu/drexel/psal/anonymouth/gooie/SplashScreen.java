@@ -35,7 +35,7 @@ public class SplashScreen extends JFrame {
 	private final String NAME = "( SplashScreen) - ";
 	private final String SPLASH_NAME = "anonymouth_SPLASH.png";
 	private final int ANIMATION_SPEED = 3;
-	private final int ANIMATION_FRAMES = 50;
+	private final int ANIMATION_FRAMES = 50; 
 	
 	private int width = 520, height = 135;
 	private Image splashImage;
@@ -127,6 +127,7 @@ public class SplashScreen extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				System.out.println(newText + "................................." );
 				progressLabel.setText(newText+"...");
 			}
 		});

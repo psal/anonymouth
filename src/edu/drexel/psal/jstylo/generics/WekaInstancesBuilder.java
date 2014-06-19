@@ -803,9 +803,11 @@ public class WekaInstancesBuilder {
 				SingleNumericEventDriver counter = new SentenceCounterEventDriver();
 				for (j=0; j<numOfVectors; j++) {
 					doc = knownDocs.get(j);
+					System.out.println(doc);
 					doc.load();
 					sentencesPerInst.put(trainingSet.instance(j),(int)counter.getValue(doc));
 				}
+				
 				
 			} else if (norm == NormBaselineEnum.WORDS_IN_DOC) {
 				// initialize

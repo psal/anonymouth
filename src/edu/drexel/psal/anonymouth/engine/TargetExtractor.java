@@ -49,11 +49,12 @@ public class TargetExtractor {
 	 * @param attrib the Attribute to extract a target for
 	 */
 	public TargetExtractor(int numAuthors, Attribute attrib){//, boolean usePreviousInitialization){
+		
 		this.featName = attrib.getConcatGenNameAndStrInBraces();
 		//Logger.logln(NAME+"In TargetExtractor extracting targets for "+featName);
 		this.trainTitlesList = DocumentMagician.getTrainTitlesList();
-		this.numAuthors = numAuthors;
-		this.numMeans = numAuthors-2;// todo maybe remove this. (xxx xxx xxx try n-2, n-3, n-1, n, etc xxx xxx xxx)
+		this.numAuthors = numAuthors;//CHANGE THIS TO 'numAuthors' TURN IT BACK TO NORMAL!!!!!!!!!!!
+		this.numMeans = numAuthors;// todo maybe remove this. (xxx xxx xxx try n-2, n-3, n-1, n, etc) //change to numAuthors-2
 		double[] thisFeature = attrib.getTrainVals();
 		int lenThisFeature = thisFeature.length;
 		int i=0;
@@ -198,6 +199,7 @@ public class TargetExtractor {
 		double[] allCentroids = getAllCentroids();
 	
 		// Initialize cluster element sets based on distance from each centroid
+		
 		double[][] differences = new double[numMeans][thePairs.length];
 		for(i=0;i<numMeans;i++){
 			double  tempCentroid = allCentroids[i];

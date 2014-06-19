@@ -43,7 +43,7 @@ import edu.drexel.psal.jstylo.generics.ProblemSet;
  *
  */
 public class StartWindow extends JFrame {
-
+    
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( StartWindow ) - ";
 	
@@ -54,12 +54,14 @@ public class StartWindow extends JFrame {
 	
 	//Swing Components
 	private JPanel completePanel;	
+	
 	//Top
 	private JPanel topPanel;
 	private JLabel textLabel;
 	private JButton startButton;
 	private JPanel startPanel;
 	private JPanel textPanel;
+	
 	//Bottom
 	private JPanel bottomPanel;
 	private JPanel rightButtonsPanel;

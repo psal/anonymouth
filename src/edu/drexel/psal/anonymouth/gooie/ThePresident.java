@@ -45,7 +45,7 @@ public class ThePresident {
 	public static String sessionName = "";
 	public static boolean classifier_Saved = false;
 	public static int max_Features_To_Consider = PropertiesUtil.defaultFeatures;
-	public static int num_Tagging_Threads = PropertiesUtil.defaultThreads;
+	public static int num_Tagging_Threads = 6;// PropertiesUtil.defaultThreads;
 	public static boolean should_Keep_Auto_Saved_Anonymized_Docs = PropertiesUtil.defaultVersionAutoSave;
 	public static boolean autosave_Latest_Version = PropertiesUtil.defaultAutoSave;
 	public static boolean canDoQuickStart = false;
@@ -79,6 +79,9 @@ public class ThePresident {
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
 		dialogIcon = ImageLoader.getIcon(ANONYMOUTH_LOGO_SMALL);
 		
+	//	System.out.println("Free Heap size is: " + Runtime.getRuntime().freeMemory()/(1024*1024));
+	//	System.out.println("Total Heap Size is: "  + Runtime.getRuntime().totalMemory()/(1024*1024));
+	//	System.out.println("Maximum Heap size is :" + Runtime.getRuntime().maxMemory()/(1024*1024));
 		if (ANONConstants.IS_MAC) {
 			System.setProperty("WEKA_HOME", "/dev/null");
 			

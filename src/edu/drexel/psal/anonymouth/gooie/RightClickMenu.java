@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashSet;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
 
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -167,6 +169,7 @@ public class RightClickMenu extends JPopupMenu {
 		this.copy.setEnabled(copy);
 		this.paste.setEnabled(paste);
 	}
+
 }
 
 /**
@@ -227,7 +230,9 @@ class PopupListener extends MouseAdapter {
 		 * during so. This checks to make sure the user has selected
 		 * appropriate text for the combine sentences option to be enabled.
 		 */
-		if (e.isPopupTrigger() && main.documentPane.isEnabled()) {
+		
+		//e.isPopupTrigger()
+		if (SwingUtilities.isRightMouseButton(e) && main.documentPane.isEnabled()) {
 			if (main.editorDriver.newCaretPosition[0] > main.editorDriver.newCaretPosition[1]) {
 				start = main.editorDriver.newCaretPosition[1];
 				stop = main.editorDriver.newCaretPosition[0];
@@ -237,7 +242,7 @@ class PopupListener extends MouseAdapter {
 			}
 
 			if (start == stop) {
-				rightClickMenu.enableCombineSentences(false);
+				rightClickMenu.enableCombineSentences(false); 
 				rightClickMenu.setEnabled(false, false, true);
 			} else {				
 				int numOfEOSes = 0;

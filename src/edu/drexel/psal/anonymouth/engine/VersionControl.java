@@ -1,9 +1,15 @@
 package edu.drexel.psal.anonymouth.engine;
 
+import java.awt.event.ActionEvent;
 import java.util.Stack;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.undo.UndoManager;
 
 import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
+import edu.drexel.psal.anonymouth.gooie.MenuDriver;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -16,7 +22,7 @@ public class VersionControl {
 	
 	private final String NAME = "( " + this.getClass().getSimpleName() + " ) - ";
 	/**
-	 * The absolute max allowed stack size for ether undo or redo.<br><br>
+	 * The absolute max allowed stack size for either undo or redo.<br><br>
 	 * 
 	 * TODO: This could use some testing, we're not sure how large a given
 	 * TaggedDocument is. If it turns out it doesn't use up that much space,
@@ -46,7 +52,7 @@ public class VersionControl {
 	private Stack<TaggedDocument> redo;
 	private Stack<Integer> indicesUndo;
 	private Stack<Integer> indicesRedo;
-	
+	private UndoManager undoManager;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/**
 	 * Constructor
 	 * 
@@ -63,6 +69,11 @@ public class VersionControl {
 		redo = new Stack<TaggedDocument>();
 		indicesUndo = new Stack<Integer>();
 		indicesRedo = new Stack<Integer>();
+//		undoManager = new UndoManager();
+//		main.documentPane.getDocument().addUndoableEditListener(undoManager);
+		
+//		Action undoAction = new UndoAction(undoManager);
+		
 	}
 	
 	/**
@@ -169,6 +180,8 @@ public class VersionControl {
 	 * taggedDoc, and pushed the taggedDoc that was just on the undo stack to
 	 * the redo one.
 	 */
+	
+	
 	public void undo() {
 		Logger.logln(NAME+"UNDO ----------------------------------");
 		ready = false;
@@ -184,9 +197,11 @@ public class VersionControl {
 		main.enableRedo(true);
 		
 		if (redo.size() == 0) {
+			System.out.println("!!!!Redo stack size is 0 - Redo is disabled");
 			main.enableRedo(false);
 		}
 		if (undo.size() == 0) {
+			System.out.println("!!!!Undo stack size is 0 - Undo is disabled");
 			main.enableUndo(false);
 		}
 		
@@ -195,7 +210,9 @@ public class VersionControl {
 //		    ready = true;
 //		    MenuDriver.class.notifyAll();
 //		}
+		
 	}
+	
 	
 	/**
 	 * Should be called whenever you want a redo action to occur (so in Redo listeners)

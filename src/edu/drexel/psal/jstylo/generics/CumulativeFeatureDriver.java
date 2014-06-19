@@ -63,7 +63,8 @@ public class CumulativeFeatureDriver {
 	public CumulativeFeatureDriver(CumulativeFeatureDriver other) throws Exception
 	{
 		String path = "tmp.xml";
-		File xml = new File(path);
+		//File xml = new File(path);
+		File xml = java.io.File.createTempFile("tmp", "xml");
 		PrintWriter pw = new PrintWriter(xml);
 		pw.print(other.toXMLString());
 		pw.flush();

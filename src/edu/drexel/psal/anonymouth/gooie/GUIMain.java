@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
@@ -22,12 +23,17 @@ import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
 import edu.drexel.psal.anonymouth.engine.DocumentProcessor;
+import edu.drexel.psal.anonymouth.engine.SearchBar;
 import edu.drexel.psal.anonymouth.engine.VersionControl;
 import edu.drexel.psal.anonymouth.helpers.DisableFocus;
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.table.*;
+import javax.swing.undo.UndoManager;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -45,6 +51,7 @@ import com.apple.eawt.FullScreenListener;
 
 public class GUIMain extends JFrame {
 
+	private final String icon = "icon48.jpg";
 	private static final long serialVersionUID = 1L;
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private final int MIN_WIDTH = 800;
@@ -184,9 +191,10 @@ public class GUIMain extends JFrame {
 	protected JMenuItem helpMenu;
 	protected JMenuItem fileMenu;
 	protected JMenu windowMenu;
-	protected JMenuItem editMenu;
+	protected JMenu editMenu;
 	public JMenuItem editUndoMenuItem;
 	public JMenuItem editRedoMenuItem;
+	
 	
 	//Pull down selections
 	protected PreferencesWindow preferencesWindow;
@@ -196,12 +204,88 @@ public class GUIMain extends JFrame {
 	public VersionControl versionControl; //Undo/Redo
 	protected RightClickMenu rightClickMenu; //Not really menu bar, but it's a menu
 	protected Clipboard clipboard; //Edit > Copy/Paste/Cut
-
+	public UndoManager undoManager;
+	public UndoAction undoAction;
+	public RedoAction redoAction;
+	//private SearchBar searchBar;
+	private JTextField searchBar;
 	//=====================================================================
 	//---------------------------METHODS-----------------------------------
 	//=====================================================================
+	// ------------Undo / Redo class definition- --------------------------
+	
+	public class UndoListener implements UndoableEditListener {
 
-	/**
+		@Override
+		public void undoableEditHappened(UndoableEditEvent e) {
+			undoManager.addEdit(e.getEdit());
+			undoAction.update();
+			redoAction.update();
+		}
+	}
+		public class UndoAction extends AbstractAction {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public UndoAction() {
+				System.out.println("!!!!!!!!!!");
+				this.putValue(Action.NAME, undoManager.getUndoPresentationName());
+				this.setEnabled(false);
+			}
+		
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("!!!!!!!!!!In UndoAction: this.isEnabled() = " + this.isEnabled());
+				if (this.isEnabled()) {
+					undoManager.undo();
+					System.out.println("!!!!!!!!!!!!!!After the undomanager");
+					undoAction.update();
+					System.out.println("After the undoActionUpdate");
+					redoAction.update();
+					System.out.println("After the redoActionUpdate");
+				}
+			}
+			
+			public void update() {
+				this.putValue(Action.NAME, undoManager.getUndoPresentationName());
+				this.setEnabled(undoManager.canUndo());			
+			}
+		}
+		
+		public class RedoAction extends AbstractAction {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public RedoAction () {
+				this.putValue(Action.NAME, undoManager.getRedoPresentationName());
+				this.setEnabled(false);
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (this.isEnabled()) {
+					undoManager.redo();
+					undoAction.update();
+					redoAction.update();
+				}
+			}
+			
+			public void update() {
+				this.putValue(Action.NAME, undoManager.getRedoPresentationName());
+				this.setEnabled(undoManager.canRedo());
+			}
+		}
+	
+	
+	//======================================================================
+	//----------------------------------------------------------------------
+	//======================================================================
+	
+	/** 
 	 * Constructor, constructs nearly everything used by Anonymouth including
 	 * all swing components, listeners, and other class instances.<br><br>
 	 * 
@@ -220,7 +304,7 @@ public class GUIMain extends JFrame {
 		initMenuBar();				//Initializes the menu bar
 		initComponents();			//All of the window's Swing Components
 		initClassesAndListeners();	//Other class instances and their listeners/drivers
-		
+				
 		DisableFocus.removeAllFocus(this); //Now that everything's added, let's disable focus traversal
 	}
 	
@@ -319,6 +403,9 @@ public class GUIMain extends JFrame {
 		fileMenu.add(fileSaveAsTestDocMenuItem);
 
 		//--------------------------------------------
+		
+		
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		
 		editMenu = new JMenu("Edit");
 		editUndoMenuItem = new JMenuItem("Undo");
@@ -422,6 +509,12 @@ public class GUIMain extends JFrame {
 		initWordSuggestionsTab();
 		initTranslationsTab();
 		
+		//Adding a search bar on top of the editor pane!
+		//searchBar = new SearchBar();
+		//searchBar.paintComponent((ImageLoader.getImage(icon)).getGraphics());
+		searchBar = new JTextField();
+	    main.add(searchBar);
+		
 		//Now we organize all these tabs and fit them into the window
 		//Adding multiple tabs to areas where it is needed (i.e., same location)
 		//Top
@@ -438,7 +531,7 @@ public class GUIMain extends JFrame {
 		this.add(anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
 		this.add(editorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
 		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 1");//RIGHT		(Word Suggestions, Translations, etc.)
-
+		this.add(searchBar, "dock north");
 		/**
 		 * This is needed so we can ensure that the Anonymity bar is getting the correct width and height needed
 		 * to draw itself. pack() here calculates the component width and heights, which is what the anonymity
@@ -474,30 +567,56 @@ public class GUIMain extends JFrame {
 		documentProcessor = new DocumentProcessor(this);				//The processing God
 		editorDriver = new EditorDriver(this);						//The main text editor driver
 		
+		main.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
 		//So we can intercept the window close if they didn't save changes
 		exitListener = new WindowListener() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (PropertiesUtil.getWarnQuit() && !main.documentSaved) {
-					main.toFront();
-					main.requestFocus();
-					int confirm = JOptionPane.showOptionDialog(main,
-							"Close Application?\nYou will lose all unsaved changes.",
+				
+				int confirm2 = JOptionPane.showOptionDialog(main, 
+						"Are you sure you want to close this Application?\n", 
+						"Unsaved Changes Warning", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, 
+						UIManager.getIcon("OptionPane.warningIcon"), null, null);
+				
+				if (!main.documentSaved) {
+					
+					if (confirm2 == 0) {   //PropertiesUtil.getWarnQuit() && 
+						main.toFront();
+						main.requestFocus();
+/*
+						confirm = JOptionPane.showOptionDialog(main,							//showOptionalDialog (main,
+							"Close Application?\nYou will lose all unsaved changes.", //Change to "Would you like to save to a specific document before closing?
+																					  //If not, the document will be autoSaved.
 							"Unsaved Changes Warning",
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE,
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, 
 							UIManager.getIcon("OptionPane.warningIcon"), null, null);
-					if (confirm == 0) {
+*/									
+						//JFileChooser chooser = new JFileChooser("c:/users/denisaqori/My Documents/GitHub/anonymouth/jsan_resources/problem_sets");
+						//int returnVal = chooser.showSaveDialog(main);
+						//if (returnVal == JFileChooser.APPROVE_OPTION) {
+						//	System.out.println("You chose to save the file " + chooser.getSelectedFile().getName());
+							menuDriver.save(main);
+						//}
 						System.exit(0);
 					}
-				} else if (PropertiesUtil.getAutoSave()) {
-					Logger.logln(NAME+"Auto-saving document");
-					menuDriver.save(main);
-					System.exit(0);
+					
+				} 
+				  else if (main.documentSaved) {  //PropertiesUtil.getAutoSave() && 
+
+					if (confirm2 == 0) {
+						//Logger.logln(NAME+"Auto-saving document");
+						//menuDriver.save(main);
+						System.exit(0);
+					}
 				} else {
 					System.exit(0);
 				}
 			}
+			
 			@Override
 			public void windowActivated(WindowEvent arg0) {}
 			@Override
@@ -705,9 +824,22 @@ public class GUIMain extends JFrame {
 			documentPane.setDragEnabled(false);
 			documentPane.setText("This is where the latest version of your document will be.");
 			documentPane.setFont(normalFont);
-			documentPane.setEnabled(false);
+			documentPane.setEnabled(true); // Original was false!!!!
 			documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			System.out.println("Before undomanager created !!!!!!!!");
+			undoManager = new UndoManager();
+			System.out.println("Document pane get document!!!!!!!!");
+			documentPane.getDocument().addUndoableEditListener(new UndoListener());
+			System.out.println("After get Documentt --!!!!!!!!!!!- Before UndoAction Called");
+			undoAction = new UndoAction();
+			System.out.println("After UndoAction -!!!!!!!!! Before RedoAction created");
+			redoAction = new RedoAction();
+			System.out.println("Before adding undoAction to edit Menu - -After creating redoAction");
+			editMenu.add(undoAction);
+			System.out.println("Before adding redoAction to edit MEnu - After adding Undo Action")
+;			editMenu.add(redoAction);
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
 			documentScrollPane.setViewportView(documentPane);
 			
 			originalDocScrollPane = new JScrollPane();

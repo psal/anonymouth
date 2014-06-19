@@ -317,7 +317,9 @@ public class ConsolidationStation {
 			// get word's list. Sometimes (yeah, sometimes) the list return empty so we do it this way
 			ArrayList<Word> wordList;
 			do {
+				System.out.println("ConsolidationStation 320: wordlist is emplty");
 				wordList = toModifyDoc.getWords();
+				System.out.println("The wordlist is: " + wordList);
 			} while (wordList.isEmpty());
 			wordsSuggestion = getFilteredWordList(wordList);
 		
@@ -367,6 +369,7 @@ public class ConsolidationStation {
 					}
 					instance.wid.prepareTestSetReducedVersion(toModifySet);
 				} catch(Exception e) {
+					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();
 					ErrorHandler.StanfordPOSError();
 				}

@@ -28,6 +28,7 @@ import java.io.Serializable;
  *
  * @author  Marc Barrowclift
  */
+
 public class TextWrapper implements Serializable {
 
 	private static final long serialVersionUID = 1166206447149377187L;

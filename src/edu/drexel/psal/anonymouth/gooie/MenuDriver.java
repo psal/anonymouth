@@ -1,15 +1,20 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.FileDialog;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 
 import net.miginfocom.swing.MigLayout;
-
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.utils.About;
@@ -47,7 +52,7 @@ public class MenuDriver {
 	private GUIMain main;
 	
 	/**
-	 * Constructor, takes care of everything, all you need to do is initialize it and you're listeners
+	 * Constructor, takes care of everything, all you need to do is initialize it and your listeners
 	 * are good to go.
 	 * 
 	 * @param main
@@ -57,7 +62,6 @@ public class MenuDriver {
 		this.main = main;
 		
 		FileHelper.goodSave = new FileDialog(main);
-		
 		initListeners();
 	}
 	
@@ -95,7 +99,7 @@ public class MenuDriver {
         	}
         };
         main.fileSaveTestDocMenuItem.addActionListener(saveTestDocListener);
-
+        
         saveAsTestDocListener = new ActionListener() {
         	@Override
 			public void actionPerformed(ActionEvent e) {
@@ -200,7 +204,7 @@ public class MenuDriver {
         	}
         };
         main.helpClustersMenuItem.addActionListener(helpClustersListener);
-        
+        		
         undoListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -215,10 +219,37 @@ public class MenuDriver {
 //        		    }
 //        		}
         		main.versionControl.undo();
-        	}
+          	}
         };
         main.editUndoMenuItem.addActionListener(undoListener);
+ /*       
+        main.editUndoMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				System.out.println("!!!!!!!Can undoManager Undo? " + main.undoManager.canUndo());
+				
+				if (main.undoManager.canUndo()) {
+					main.undoManager.undo();
+				}
+				main.editUndoMenuItem.setEnabled(main.undoManager.canUndo());
+				main.editRedoMenuItem.setEnabled(main.undoManager.canRedo());
+			}
+        });
         
+        main.editRedoMenuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (main.undoManager.canRedo()) {
+					main.undoManager.redo();
+				}
+				main.editRedoMenuItem.setEnabled(main.undoManager.canRedo());
+				main.editRedoMenuItem.setEnabled(main.undoManager.canUndo());
+			}
+
+        });
+  */      
         redoListener = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -235,7 +266,7 @@ public class MenuDriver {
         		main.versionControl.redo();
         	}
         };
-        main.editRedoMenuItem.addActionListener(redoListener);
+        //main.editRedoMenuItem.addActionListener(redoListener);
         
         hideAnonymityBarListener = new ActionListener() {
         	@Override
@@ -376,4 +407,7 @@ public class MenuDriver {
 			main.documentSaved = true;
 		}
 	}
+	
+
+	
 }

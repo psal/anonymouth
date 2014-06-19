@@ -67,7 +67,7 @@ public class ANONConstants {
 	 * Used for the Hide/Show menu items<br><br>
 	 * 
 	 * Keeps track of whether or not certain components are visible to the user.
-	 * Please not this is NOT the same thing as isVisible(), we are still keeping and updating
+	 * Please note this is NOT the same thing as isVisible(), we are still keeping and updating
 	 * those components in the background and they are still "visible" ready to go, the only
 	 * difference is we don't actually have them added to the frame or not (depending on which
 	 * state they are in).

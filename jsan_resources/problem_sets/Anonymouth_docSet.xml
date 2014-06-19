@@ -1,25 +1,59 @@
 <problem-set>
 	<training name="Authors">
-		<author name="a">
-			<document title="a_01.txt">./jsan_resources/corpora/drexel_1/a/a_01.txt</document>
-			<document title="a_02.txt">./jsan_resources/corpora/drexel_1/a/a_02.txt</document>
+		<author name="dickson-s">
+			<document title="0.txt">./jsan_resources/corpora/enron_demo/dickson-s/0.txt</document>
+			<document title="1.txt">./jsan_resources/corpora/enron_demo/dickson-s/1.txt</document>
+			<document title="10.txt">./jsan_resources/corpora/enron_demo/dickson-s/10.txt</document>
+			<document title="11.txt">./jsan_resources/corpora/enron_demo/dickson-s/11.txt</document>
+			<document title="12.txt">./jsan_resources/corpora/enron_demo/dickson-s/12.txt</document>
+			<document title="2.txt">./jsan_resources/corpora/enron_demo/dickson-s/2.txt</document>
+			<document title="3.txt">./jsan_resources/corpora/enron_demo/dickson-s/3.txt</document>
+			<document title="4.txt">./jsan_resources/corpora/enron_demo/dickson-s/4.txt</document>
+			<document title="5.txt">./jsan_resources/corpora/enron_demo/dickson-s/5.txt</document>
+			<document title="6.txt">./jsan_resources/corpora/enron_demo/dickson-s/6.txt</document>
+			<document title="7.txt">./jsan_resources/corpora/enron_demo/dickson-s/7.txt</document>
+			<document title="8.txt">./jsan_resources/corpora/enron_demo/dickson-s/8.txt</document>
+			<document title="9.txt">./jsan_resources/corpora/enron_demo/dickson-s/9.txt</document>
 		</author>
-		<author name="c">
-			<document title="c_01.txt">./jsan_resources/corpora/drexel_1/c/c_01.txt</document>
-			<document title="c_02.txt">./jsan_resources/corpora/drexel_1/c/c_02.txt</document>
+		<author name="dorland-c">
+			<document title="0.txt">./jsan_resources/corpora/enron_demo/dorland-c/0.txt</document>
+			<document title="1.txt">./jsan_resources/corpora/enron_demo/dorland-c/1.txt</document>
+			<document title="10.txt">./jsan_resources/corpora/enron_demo/dorland-c/10.txt</document>
+			<document title="11.txt">./jsan_resources/corpora/enron_demo/dorland-c/11.txt</document>
+			<document title="12.txt">./jsan_resources/corpora/enron_demo/dorland-c/12.txt</document>
+			<document title="2.txt">./jsan_resources/corpora/enron_demo/dorland-c/2.txt</document>
+			<document title="3.txt">./jsan_resources/corpora/enron_demo/dorland-c/3.txt</document>
+			<document title="4.txt">./jsan_resources/corpora/enron_demo/dorland-c/4.txt</document>
+			<document title="5.txt">./jsan_resources/corpora/enron_demo/dorland-c/5.txt</document>
+			<document title="6.txt">./jsan_resources/corpora/enron_demo/dorland-c/6.txt</document>
+			<document title="7.txt">./jsan_resources/corpora/enron_demo/dorland-c/7.txt</document>
+			<document title="8.txt">./jsan_resources/corpora/enron_demo/dorland-c/8.txt</document>
+			<document title="9.txt">./jsan_resources/corpora/enron_demo/dorland-c/9.txt</document>
 		</author>
-		<author name="d">
-			<document title="d_01.txt">./jsan_resources/corpora/drexel_1/d/d_01.txt</document>
-			<document title="d_02.txt">./jsan_resources/corpora/drexel_1/d/d_02.txt</document>
+		<author name="farmer-d">
+			<document title="0.txt">./jsan_resources/corpora/enron_demo/farmer-d/0.txt</document>
+			<document title="1.txt">./jsan_resources/corpora/enron_demo/farmer-d/1.txt</document>
+			<document title="10.txt">./jsan_resources/corpora/enron_demo/farmer-d/10.txt</document>
+			<document title="11.txt">./jsan_resources/corpora/enron_demo/farmer-d/11.txt</document>
+			<document title="12.txt">./jsan_resources/corpora/enron_demo/farmer-d/12.txt</document>
+			<document title="2.txt">./jsan_resources/corpora/enron_demo/farmer-d/2.txt</document>
+			<document title="3.txt">./jsan_resources/corpora/enron_demo/farmer-d/3.txt</document>
+			<document title="4.txt">./jsan_resources/corpora/enron_demo/farmer-d/4.txt</document>
+			<document title="5.txt">./jsan_resources/corpora/enron_demo/farmer-d/5.txt</document>
+			<document title="6.txt">./jsan_resources/corpora/enron_demo/farmer-d/6.txt</document>
+			<document title="7.txt">./jsan_resources/corpora/enron_demo/farmer-d/7.txt</document>
+			<document title="8.txt">./jsan_resources/corpora/enron_demo/farmer-d/8.txt</document>
+			<document title="9.txt">./jsan_resources/corpora/enron_demo/farmer-d/9.txt</document>
 		</author>
 		<author name="~* you *~">
-			<document title="p_02.txt">./jsan_resources/corpora/drexel_1/p/p_02.txt</document>
-			<document title="p_03.txt">./jsan_resources/corpora/drexel_1/p/p_03.txt</document>
+			<document title="1.txt">./jsan_resources/corpora/enron_demo/allen-p/1.txt</document>
+			<document title="2.txt">./jsan_resources/corpora/enron_demo/allen-p/2.txt</document>
+			<document title="3.txt">./jsan_resources/corpora/enron_demo/allen-p/3.txt</document>
 		</author>
 	</training>
 	<test>
 		<author name="~* you *~">
-			<document title="p_01.txt">./jsan_resources/corpora/drexel_1/p/p_01.txt</document>
+			<document title="0.txt">./jsan_resources/corpora/enron_demo/allen-p/0.txt</document>
 		</author>
 	</test>
 </problem-set>

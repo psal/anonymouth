@@ -142,8 +142,7 @@ public class ListEventDriver extends EventDriver {
 				try {
 					try {
 						// look in file system
-						//System.out.println(filename);
-						br = new BufferedReader(new FileReader(filename));
+					br = new BufferedReader(new FileReader(filename));
 					} catch (IOException e) {
 						// look in resources
 						

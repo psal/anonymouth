@@ -41,7 +41,7 @@ public class DocumentProcessor {
 	
 	private GUIMain main;
 	private EditorDriver editorDriver;
-	private ProgressWindow pw;
+	public ProgressWindow pw;
 	private DataAnalyzer dataAnalyzer;
 	public DocumentMagician documentMagician;
 	private SwingWorker<Void, Void> processing;
@@ -132,6 +132,7 @@ public class DocumentProcessor {
 			DocumentMagician.numProcessRequests++;
 			String tempDoc = "";
 			if (!main.processed) {
+						
 				tempDoc = main.documentPane.getText();
 				Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 				pw.setText("Extracting and Clustering Features...");
@@ -143,6 +144,8 @@ public class DocumentProcessor {
 					documentMagician.runWeka();
 					dataAnalyzer.runClusterAnalysis(documentMagician);
 					ClustersDriver.initializeClusterViewer(main,false);
+					pw.setText("Loading the word suggestions...");
+					
 				} catch(Exception e) {
 					pw.stop();
 					ErrorHandler.fatalProcessingError(e);
@@ -171,12 +174,15 @@ public class DocumentProcessor {
 						ClustersDriver.initializeClusterViewer(main,false);
 						pw.setText("Classifying Documents...");
 						documentMagician.runWeka();
+						pw.setText("Loading the word suggestions...");
+						
 					} catch (Exception e) {
 						pw.stop();
 						ErrorHandler.fatalProcessingError(e);
 					}
 				}
 			}
+			
 			if (!main.processed) {
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
 				List<Document> sampleDocs = documentMagician.getDocumentSets().get(0);
@@ -190,6 +196,7 @@ public class DocumentProcessor {
 				// prepare to update Word Suggestion's lists and Anonymity Bar
 				main.editorDriver.initThreads();
 			}
+			
 			// prepare data for Result Window
 			Map<String,Map<String,Double>> wekaResults = documentMagician.getWekaResultList();
 			Logger.logln(NAME+" ****** WEKA RESULTS for session '"+ThePresident.sessionName+" process number : "+DocumentMagician.numProcessRequests);
@@ -203,7 +210,7 @@ public class DocumentProcessor {
 			// get data for Word Suggestion's lists and Anonymity Bar
 			editorDriver.updateSuggestionsThread.execute();
 			editorDriver.updateBarThread.execute();
-
+			
 			main.enableEverything(true);	
 			
 			int caret = editorDriver.getWhiteSpaceBuffer(0);
@@ -220,8 +227,9 @@ public class DocumentProcessor {
 			main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 			main.processed = true;
 			main.reprocessing = false;
-			pw.stop();
-			main.showGUIMain();
+			
+			//pw.stop();
+			//main.showGUIMain();
 		} catch (Exception e) {
 			// Get current size of heap in bytes
 			long heapSize = Runtime.getRuntime().totalMemory();

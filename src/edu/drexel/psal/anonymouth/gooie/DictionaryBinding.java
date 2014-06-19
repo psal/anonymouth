@@ -1,22 +1,14 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 //import edu.drexel.psal.anonymouth.utils.POS;
-import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.jstylo.generics.Logger;
-/*
-import com.wintertree.wthes.CompressedThesaurus;
-import com.wintertree.wthes.LicenseKey;
-import com.wintertree.wthes.TextThesaurus;
-import com.wintertree.wthes.Thesaurus;
-import com.wintertree.wthes.ThesaurusSession;
-*/
-import edu.smu.tspell.wordnet.Synset;
-import edu.smu.tspell.wordnet.WordNetDatabase;
-
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -26,9 +18,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextPane;
+import javax.swing.JViewport;
+import javax.swing.plaf.metal.MetalIconFactory;
 
 import com.jgaap.JGAAPConstants;
+
+import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.jstylo.generics.Logger;
+
+/*
+import com.wintertree.wthes.CompressedThesaurus;
+import com.wintertree.wthes.LicenseKey;
+import com.wintertree.wthes.TextThesaurus;
+import com.wintertree.wthes.Thesaurus;
+import com.wintertree.wthes.ThesaurusSession;
+*/
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
 
 /**
  * Provides the support needed for the DictionaryConsole to function - hense, its name. 
@@ -42,13 +56,14 @@ public class DictionaryBinding {
 	protected static boolean wordSynSetUpdated = false;
 	protected static String wordSynSetResult = "";
 	protected static String gramFindings = "";
-	//protected static ViewerTabGenerator vtg; 	
 	protected static String currentWord = "";
 	protected static boolean isFirstGramSearch = true;
 	protected static ArrayList<String> allWords = new ArrayList<String>();
+	protected static int tabCount = 0;
 	
 	public static void init() {
-		System.setProperty("wordnet.database.dir", ANONConstants.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet");
+		System.setProperty("wordnet.database.dir", //ANONConstants.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet" );
+												   ANONConstants.WORKING_DIR +"src/edu/drexel/psal/resources/wordnet");
 	}
 	
 	public static void initDictListeners (final DictionaryConsole dc) {
@@ -85,27 +100,28 @@ public class DictionaryBinding {
 					int i;
 					for(i = 0; i< testSet.length; i++){
 						String [] wfs = testSet[i].getWordForms();
-						//String def = testSet[i].getDefinition();
+						String def = testSet[i].getDefinition();
 						String [] use = testSet[i].getUsageExamples();
 						int j;
-						//wordSynSetResult = wordSynSetResult+"Synonym set "+(i+1)+" for entered search '"+currentWord+"' :\n";
-						//if(def.equals("") == false)
-							//wordSynSetResult= wordSynSetResult +"Definition of synonym set "+(i+1)+" is: "+def+"\n";
-						//else
-							//wordSynSetResult=wordSynSetResult+"Synonym set "+i+" does not appear to have a defintion attached\n";
+						if(def.equals("") == false) {
+							wordSynSetResult = wordSynSetResult + "(" + (i+1) + "): " + def + "\n"; 
+						}
+						else {
+							wordSynSetResult=wordSynSetResult+"Synonym set "+i+" does not appear to have a defintion attached\n";
+						}
 						for (j = 0; j < wfs.length; j++) {
 							try {
-								//wordSynSetResult = wordSynSetResult+"Synonym number ("+(j+1)+"): "+wfs[j]+"  => usage (if specified): "+use[j]+"\n";
-								wordSynSetResult = wordSynSetResult+"("+synNumber+"): "+wfs[j]+" => "+ use[j]+"\n";
+								//System.out.println("j = " + j);
+								wordSynSetResult = wordSynSetResult + wfs[j]+" => "+ use[j]+"\n";
 								synNumber++;
 							} catch (ArrayIndexOutOfBoundsException aioobe) {}
 						}
-						//wordSynSetResult = wordSynSetResult+"\n";
+						wordSynSetResult = wordSynSetResult+"\n";
 					}
-					//vtg = new ViewerTabGenerator().generateTab(wordSynSetResult);
+					System.out.println(wordSynSetResult);
 					wordSynSetUpdated = true;
-//					dc.viewerTP.addTab("syn: "+currentWord, null, vtg.jScrollPane1, null);
-//					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
+					createTab("SynSet \""+ currentWord + "\"", wordSynSetResult,dc,tabCount);
+					tabCount = tabCount + 1;
 				}
 			}			
 		});
@@ -142,24 +158,35 @@ public class DictionaryBinding {
 				Logger.logln(NAME+"Preparing to search for character grams");
 				String theGram = dc.gramField.getText();
 				if (theGram.trim().equals("") == false) {
-
-					if (isFirstGramSearch == true) {
 						try {
-							readInAndScan(theGram);
+							readInAndScan(theGram, false, dc);
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						isFirstGramSearch = false;
 					} else {
 						scanAllWords(theGram);
 					}
+			}
+		});
+		
+		dc.gramStartSearchButton.addActionListener(new ActionListener() {
 
-					//vtg = new ViewerTabGenerator().generateTab(gramFindings);
-//					dc.viewerTP.addTab("gram: "+theGram, null, vtg.jScrollPane1, null);
-//					dc.viewerTP.setSelectedComponent(vtg.jScrollPane1);
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Logger.logln(NAME+"Preparing to search for character grams in the beginnning of the word");
+				String theGram = dc.gramStartField.getText();
+				if (theGram.trim().equals("") == false) {
+					try {
+						readInAndScan(theGram, true, dc);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					scanAllWords(theGram);
 				}
 			}
+			
 		});
 		
 		dc.closeButton.addActionListener(new ActionListener() {
@@ -193,25 +220,73 @@ public class DictionaryBinding {
 		
 	}
 	
-	public static boolean readInAndScan(String nGram) throws IOException {
+	public static boolean readInAndScan(String nGram, boolean wordStart, DictionaryConsole dc) throws IOException {
 		Logger.logln(NAME+"reading in comprehensive word list");
 		FileReader fr = new FileReader(new File("./allWords.txt"));
 		BufferedReader buff = new BufferedReader(fr);
 		String temp;
 		gramFindings = "";
+		String tabTitle ="";
 		
 		while ((temp = buff.readLine()) != null) {
 			StringTokenizer st = new StringTokenizer(temp);
 			while (st.hasMoreTokens()) {
 				String token = st.nextToken();
-				if (token.contains(nGram))
-					gramFindings = gramFindings+ token+"\n";
-				allWords.add(token);
+			
+				if (wordStart == false) {
+					if (token.contains(nGram)) {
+						gramFindings = gramFindings+ token+"\n";
+						System.out.println(token);
+						tabTitle = "Contains \"" + nGram +"\"";
+					}
+					allWords.add(token);
+				} else {
+					if (token.substring(0).startsWith(nGram) == true) {
+						gramFindings = gramFindings+ token+"\n";
+						System.out.println(token);
+						tabTitle = "Starts with \"" + nGram +"\"";
+					}
+					allWords.add(token);
+				}
 			}
+
 		}
+		createTab(tabTitle, gramFindings, dc, tabCount);
+		tabCount = tabCount + 1;
 		buff.close();
+		System.out.println("Done reading the word list");
 		return true;
 	}
+	
+	public static void createTab (String title, String resultsList, final DictionaryConsole dc, final int tabCount) {
+		JTextPane textPane = new JTextPane();
+		textPane.setText(resultsList);
+	//	ImageIcon icon = (ImageIcon) MetalIconFactory.getInternalFrameCloseIcon(16);
+		
+		ImageIcon icon2 = new ImageIcon ("edu/drexel/psal/resources/graphics/icon16.jpg", "blablab");
+		System.out.println("Supposed to create icon");
+		dc.viewerTP.addTab (title, new JScrollPane(textPane));
+		dc.viewerTP.setSelectedIndex(tabCount);					//set the focus on the new tab
+		
+		//from now on all this is to add a close button to each tab
+//		JButton button = new JButton(icon);
+		
+//		button.setMargin(new Insets(0,0,0,0));
+//		button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
+//		button.setVisible(true);
+//		
+//		button.addActionListener(new ActionListener() {		
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				dc.viewerTP.removeTabAt(tabCount);
+//			}
+			
+//		});
+		
+//		Component tabComp = dc.viewerTP.getTabComponentAt(tabCount);
+	//	tabComp.add(button);
+	}
+	
 	
 	public static boolean scanAllWords(String nGram) {
 		Logger.logln(NAME+"Scanning all words for occurances of '"+nGram+"'");
@@ -221,8 +296,10 @@ public class DictionaryBinding {
 		
 		while (i < max) {
 			String temp = allWords.get(i);
-			if (temp.contains(nGram))
+			if (temp.contains(nGram)) {
 				gramFindings = gramFindings + temp +"\n";
+			System.out.println("The gramFinding: " + temp);
+			}
 			i++;
 		}
 		return true;
@@ -260,17 +337,10 @@ public class DictionaryBinding {
 				}
 			}
 			//wordSynSetResult = wordSynSetResult+"\n";
-			return wfs;
-			
+			return wfs;		
 		}
 		return null;//BIG PROBLEM
 	}
 
-//	 public static void main(String args[]) {
-//		 String [] temp=getSynonyms("walk", "verb");
-//		 for(String s:temp){
-//			 System.out.println(s);
-//		 }
-//	 }
 	
 }

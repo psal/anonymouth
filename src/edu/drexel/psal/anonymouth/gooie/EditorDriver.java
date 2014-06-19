@@ -389,6 +389,7 @@ public class EditorDriver {
                 updateSuggestionsThread = new SwingWorker<Void, Void>() {
                         @Override
                         public Void doInBackground() throws Exception {
+                        	System.out.println("In thread prepareWrodSuggestions - doInBackGround!!!!!!!!!!!");
                                 main.wordSuggestionsDriver.placeSuggestions();
                                 return null;
                         }
@@ -403,6 +404,8 @@ public class EditorDriver {
                                                 highlighterEngine.addAutoRemoveHighlights(highlightIndices[0]+whiteSpace, highlightIndices[1], highlightIndices[2], highlightIndices[3]);
                                         }
                                 }
+                                main.documentProcessor.pw.stop();
+                                main.showGUIMain();
                         }
                 };
         }

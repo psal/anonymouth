@@ -561,7 +561,7 @@ public class PreProcessWindow extends JDialog {
 			int numGoodAuthors = size;
 			
 			//4 because we want to adjust for the user as one of the authors (which we don't want to count)
-			if (size == 0 || size < 4)
+			if (size == 0 || size < 2)//!!!! CHANGE BACK TO ORIGINAL (4) - imitation (2)
 				result = false;
 			else {
 				Set<String> authors = ps.getAuthors();
@@ -571,17 +571,19 @@ public class PreProcessWindow extends JDialog {
 					if (curAuthor.equals(ANONConstants.DUMMY_NAME))
 						continue;
 					
-					if (ps.numTrainDocs(curAuthor) < 2) {
+					if (ps.numTrainDocs(curAuthor) < 0) { //!!!CHANGE BACK TO ORIGINAL (2) - imitation(4)
+						System.out.println("THE number of trained documents is less than 0");
 						numGoodAuthors--;
 
-						if (numGoodAuthors < 4) {
+						if (numGoodAuthors < 2) { //!!CHANGE BACK TO ORIGINAL (4) - imitation (2)
+							System.out.println("The nubmer of good authors is less than 2");
 							result = false;
 							break;
 						}
 					}
 				}
 			}
-
+			System.out.println("The result is: " + result);
 			return result;
 		} catch (Exception e) {
 			return false;
@@ -604,6 +606,8 @@ public class PreProcessWindow extends JDialog {
 		}
 	}
 	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	/**
 	 * Determines whether or not the user has entered at least three different authors for the train documents
 	 * @return
@@ -611,9 +615,10 @@ public class PreProcessWindow extends JDialog {
 	protected boolean hasAtLeastThreeOtherAuthors() {
 		Set<String> trainAuthors = ps.getAuthors();
 		
-		if ((trainAuthors == null) || (trainAuthors.size() < 3))
+		if ((trainAuthors == null) || (trainAuthors.size() < 3)) // CHANGE BACK TO 3 !!!!!!!!!!!!!!!!!!!!!! - imitation (1)
 			return false;
 		else
+			System.out.println("Done with the necessay number of authors");
 			return true;
 	}
 	
