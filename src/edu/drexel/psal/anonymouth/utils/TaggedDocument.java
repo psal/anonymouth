@@ -364,13 +364,12 @@ public class TaggedDocument implements Serializable {
 		Iterator<String> strRayIter = untaggedSents.iterator();
 		String tempSent;
 		
-		if (untagged.matches("\\s\\s*") || untagged.matches("")) {
-			TaggedSentence taggedSentence = new TaggedSentence(untagged);
-			taggedSentences.add(taggedSentence);
-		} else {
-			while (strRayIter.hasNext()) {
-				tempSent = strRayIter.next();
-				
+		while (strRayIter.hasNext()) {
+			tempSent = strRayIter.next();
+			if (tempSent.matches("\\s\\s*") || tempSent.matches("")) {
+				TaggedSentence taggedSentence = new TaggedSentence(tempSent);
+				taggedSentences.add(taggedSentence);
+			} else {
 				TaggedSentence taggedSentence = new TaggedSentence(tempSent);
 				toke = tlp.getTokenizerFactory().getTokenizer(new StringReader(tempSent));
 				sentenceTokenized = toke.tokenize();
@@ -379,8 +378,8 @@ public class TaggedDocument implements Serializable {
 				
 				// todo: put stuff here
 				taggedSentences.add(taggedSentence);
-				
 			}
+			
 		}
 		
 		if (appendTaggedSentencesToGlobalArrayList == true) {
@@ -664,7 +663,7 @@ public class TaggedDocument implements Serializable {
 		Logger.logln(NAME+"Removing: "+toReplace.toString());
 		Logger.logln(NAME+"Adding: "+toAdd.getUntagged());
 
-		if (toAdd.getUntagged().matches("^\\s*$")) {//checks to see if the user deleted the current sentence
+		if (toAdd.getUntagged().matches(DELETE_STRING)) {//checks to see if the user deleted the current sentence
 			//CALL COMPARE
 			TaggedSentence wasReplaced = removeTaggedSentence(sentNumber);
 			Logger.logln(NAME+"User deleted a sentence.");

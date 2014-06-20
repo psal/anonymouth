@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import edu.drexel.psal.anonymouth.gooie.EditorDriver;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
+import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.jstylo.generics.Logger;
 
@@ -176,7 +177,8 @@ public class VersionControl {
 		redo.push(new TaggedDocument(editor.taggedDoc));
 		indicesRedo.push(editor.newCaretPosition[0]);
 		
-		editor.taggedDoc = undo.pop();
+		//editor.taggedDoc = undo.pop();
+		ConsolidationStation.toModifyTaggedDocs.set(0,undo.pop());
 		editor.newCaretPosition[0] = indicesUndo.pop();
 		editor.newCaretPosition[1]= editor.newCaretPosition[0];
 		editor.syncTextPaneWithTaggedDoc();
@@ -212,7 +214,8 @@ public class VersionControl {
 		undo.push(new TaggedDocument(editor.taggedDoc));
 		indicesUndo.push(editor.newCaretPosition[0]);
 		
-		editor.taggedDoc = redo.pop();
+		//editor.taggedDoc = redo.pop();
+		ConsolidationStation.toModifyTaggedDocs.set(0,redo.pop());
 		editor.newCaretPosition[0] = indicesRedo.pop();
 		editor.newCaretPosition[1] = editor.newCaretPosition[0];
 		editor.syncTextPaneWithTaggedDoc();

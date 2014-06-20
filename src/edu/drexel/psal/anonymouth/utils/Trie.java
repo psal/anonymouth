@@ -56,9 +56,14 @@ public class Trie{
 		TrieNode t = this.trie;
 		for(char c:chars){
 			c=checkOddChars(c);
-			if(t.children[c-OFFSET] == null)
-					return false;
-			t = t.children[c-OFFSET];
+			try {
+				if(t.children[c-OFFSET] == null)
+						return false;
+				t = t.children[c-OFFSET];
+			} catch (ArrayIndexOutOfBoundsException e) {
+				//An unsupported character slipped through, assume it's not in the trie
+				return false;
+			}
 		}
 		if(t.children[27]==null)
 			return false;

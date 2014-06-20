@@ -839,6 +839,7 @@ public class GUIMain extends JFrame {
 				elementsToRemoveTable.setEnabled(enable);
 				documentPane.setEnabled(enable);
 				clipboard.setEnabled(enable);
+				reProcessButton.setEnabled(enable);
 				
 				if (PropertiesUtil.getDoTranslations() && enable) {
 					translateSentenceButton.setEnabled(true);

@@ -138,12 +138,12 @@ public class SentenceMaker implements Serializable  {
 		/**
 		 * Because the specialCharTracker isn't initialized until the TaggedDocument is,
 		 * it won't be ready until near the end of DocumentProcessor, in which
-		 * case we want to set it to the correct address
+		 * case we want to set it to the correct address. We also want to make sure we
+		 * have the specialCharTracker from the current taggedDoc, in case the taggedDoc
+		 * was replaced by a copy from the undo or redo stacks.
 		 */
-		if (!main.processed || main.reprocessing) {
-			this.specialCharTracker = main.editorDriver.taggedDoc.specialCharTracker;
-			this.editorDriver = main.editorDriver;
-		}
+		this.specialCharTracker = main.editorDriver.taggedDoc.specialCharTracker;
+		this.editorDriver = main.editorDriver;
 		
 		//================ VARIABLES ============================================
 
@@ -253,7 +253,6 @@ public class SentenceMaker implements Serializable  {
 						}
 						EOSFound = false;
 						pastText = text.substring(temp, abbrevEnd);
-						pastIndex = abbrevEnd;
 						index = abbrevEnd;
 						continue;
 					}
@@ -296,6 +295,9 @@ public class SentenceMaker implements Serializable  {
 		}
 		if (sents.isEmpty()) {
 			sents.add(text);
+		} else if (pastIndex < length) {
+			//Add any remaining text as its own sentence
+			sents.add(text.substring(pastIndex));
 		}
 		return sents;
 	}

@@ -136,9 +136,6 @@ public class EditorDriver {
          */
         public int[] pastSentIndices;
 
-        private boolean wholeLastSentDeleted;                //Used for EOS character deletion
-        private boolean wholeBeginningSentDeleted;        //Used for EOS character deletion
-
         //--------------- Editing variables -------------------------------------
         /**
          * The number of characters inserted into the document this caret event
@@ -236,6 +233,16 @@ public class EditorDriver {
                                                 taggedDoc.watchForEOS = -1;
                                         }
                                 }
+                                //Same as above, but for EOS characters at the end of the document, which are tracked separately
+                                if (taggedDoc.watchForLastSentenceEOS != -1 && charsInserted == 0 && charsRemoved == 0) {
+                                    if (taggedDoc.specialCharTracker.isSentenceEndAtIndex(taggedDoc.watchForLastSentenceEOS+1)) {
+                                            taggedDoc.watchForLastSentenceEOS = -1;
+                                    } else {
+                                            taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
+                                            updateSentence(pastSentNum, main.documentPane.getText().substring(sentIndices[0], sentIndices[1]));
+                                            taggedDoc.watchForLastSentenceEOS = -1;
+                                    }
+                                }
 
                                 if (charsRemoved > 0) {
                                         textChanged = true;
@@ -266,7 +273,8 @@ public class EditorDriver {
                                         taggedDoc.specialCharTracker.shiftAll(priorCaretPosition, charsInserted);
                                         
                                         //If we are unsure about an EOS character at the end of the doc, keep track of it.
-                                        if (taggedDoc.watchForLastSentenceEOS != -1) {
+                                        //But we only need to increase it if the character we're tracking is after the prior caret position
+                                        if (taggedDoc.watchForLastSentenceEOS != -1  && taggedDoc.watchForLastSentenceEOS > priorCaretPosition) {
                                                 taggedDoc.watchForLastSentenceEOS += charsInserted;
                                         }
 
@@ -443,15 +451,7 @@ public class EditorDriver {
                 
                 //If we removed an EOS in the given range...
                 if (taggedDoc.specialCharTracker.removeEOSesInRange(newCaretPosition[0], priorCaretPosition)) {
-                        /**
-                         * We're going to be handling all the TaggedDocument manipulation HERE
-                         * instead of in the standard updateSentence() method call at the end
-                         * of the listener since we have a lot more work to do than a standard
-                         * change. Therefore, since we are already updating the backend here,
-                         * we should NOT update it an additional time, otherwise it screws everything
-                         * up.
-                         */
-                        textChanged = false;
+                        
                         
                         /**
                          * If the user is editing after the last tagged sentence and
@@ -468,10 +468,27 @@ public class EditorDriver {
                         int[] rightSentInfo = new int[0];
                         try {
                                 int[][] allSentInfo = getSentencesIndices(newCaretPosition[0], priorCaretPosition);
-                                leftSentInfo = allSentInfo[0];
-                                rightSentInfo = allSentInfo[1];
+                                // The order of sentences can be reversed in some cases
+                                if (allSentInfo[0][0] < allSentInfo[1][0]) {
+                                	leftSentInfo = allSentInfo[0];
+                                    rightSentInfo = allSentInfo[1];
+                                } else {
+                                	leftSentInfo = allSentInfo[1];
+                                    rightSentInfo = allSentInfo[0];
+                                }
 
                                 if (rightSentInfo[0] != leftSentInfo[0]) {
+                                	
+	                                	/**
+	                                     * We're going to be handling all the TaggedDocument manipulation HERE
+	                                     * instead of in the standard updateSentence() method call at the end
+	                                     * of the listener since we have a lot more work to do than a standard
+	                                     * change. Therefore, since we are already updating the backend here,
+	                                     * we should NOT update it an additional time, otherwise it screws everything
+	                                     * up.
+	                                     */
+	                                    textChanged = false;
+	                                    
                                         /**
                                          * Add '1' because we don't want to count the
                                          * lower bound (e.g. if midway through
@@ -490,26 +507,10 @@ public class EditorDriver {
                                          * sentence).
                                          */
                                         int j = 0;
-                                        if (wholeLastSentDeleted) {
-                                                /**
-                                                 * We want to ignore the rightmost sentence from our deletion
-                                                 * process since we didn't actually delete anything from it.
-                                                 */
-                                                taggedSentsToDelete = new int[sentsBetweenToDelete-1];
-                                                for (int i = (leftSentInfo[0] + 1); i < rightSentInfo[0]-1; i++) {
-                                                        taggedSentsToDelete[j] = leftSentInfo[0] + 1;
-                                                        j++;
-                                                }
-                                        } else {
-                                                /**
-                                                 * We want to include the rightmost sentence in our deletion
-                                                 * process since we are partially deleting some of it.
-                                                 */
-                                                taggedSentsToDelete = new int[sentsBetweenToDelete];
-                                                for (int i = (leftSentInfo[0] + 1); i < rightSentInfo[0]; i++) {
-                                                        taggedSentsToDelete[j] = leftSentInfo[0] + 1;
-                                                        j++;
-                                                }
+                                        taggedSentsToDelete = new int[sentsBetweenToDelete];
+                                        for (int i = (leftSentInfo[0] + 1); i < rightSentInfo[0]; i++) {
+                                                taggedSentsToDelete[j] = leftSentInfo[0] + 1;
+                                                j++;
                                         }
 
                                         /**
@@ -550,21 +551,11 @@ public class EditorDriver {
                                         //we need to shift our indices over by the number of characters removed.
                                         String rightSentCurrent = docText.substring((priorCaretPosition-charsRemoved), (rightSentInfo[2]-charsRemoved));
 
-                                        if (wholeLastSentDeleted && wholeBeginningSentDeleted) {
-                                                wholeLastSentDeleted = false;
-                                                wholeBeginningSentDeleted = false;
-                                                taggedDoc.removeAndReplace(leftSentInfo[0], "");
-                                        } else if (wholeLastSentDeleted && !wholeBeginningSentDeleted) {
-                                                wholeLastSentDeleted = false;
-                                                taggedDoc.removeAndReplace(leftSentInfo[0]+1, "");
-                                                taggedDoc.concatRemoveAndReplace(taggedDoc.getTaggedDocument().get(leftSentInfo[0]),leftSentInfo[0], taggedDoc.getTaggedDocument().get(leftSentInfo[0]+1), leftSentInfo[0]+1);
-                                        } else {
-                                                try {
-                                                        taggedDoc.removeAndReplace(leftSentInfo[0]+1, rightSentCurrent);
-                                                        taggedDoc.concatRemoveAndReplace(taggedDoc.getTaggedDocument().get(leftSentInfo[0]), leftSentInfo[0], taggedDoc.getTaggedDocument().get(leftSentInfo[0]+1), leftSentInfo[0]+1);
-                                                } catch (Exception e1) {
-                                                        taggedDoc.removeAndReplace(leftSentInfo[0], rightSentCurrent);
-                                                }
+                                        try {
+                                                taggedDoc.removeAndReplace(leftSentInfo[0]+1, rightSentCurrent);
+                                                taggedDoc.concatRemoveAndReplace(taggedDoc.getTaggedDocument().get(leftSentInfo[0]), leftSentInfo[0], taggedDoc.getTaggedDocument().get(leftSentInfo[0]+1), leftSentInfo[0]+1);
+                                        } catch (Exception e1) {
+                                                taggedDoc.removeAndReplace(leftSentInfo[0], rightSentCurrent);
                                         }
 
                                         /**
@@ -575,10 +566,19 @@ public class EditorDriver {
                                          * character at the end of a sentence then we will make THAT the new
                                          * EOS character we are watching for with watchForLastSentenceEOS
                                          */
-                                        if (sentNum == taggedDoc.numOfSentences-1) {
+                                        if (sentNum == taggedDoc.numOfSentences-1 && taggedDoc.length > 0) {
                                                 if (taggedDoc.specialCharTracker.isEOS(main.documentPane.getText().charAt(taggedDoc.length-1))) {
                                                         taggedDoc.watchForLastSentenceEOS = taggedDoc.length - 1;
                                                 }
+                                        }
+                                        
+                                        /**
+                                         * In the extreme case that the entire document was deleted
+                                         * Make sure we have an empty sentence to type new text into
+                                         */
+                                        if  (taggedDoc.numOfSentences == 0) {
+                                        	taggedDoc.makeNewEndSentence("");
+                                        	taggedDoc.endSentenceExists = true;
                                         }
 
                                         taggedDoc.userDeletedSentence = false; //Resetting for next time
@@ -629,8 +629,7 @@ public class EditorDriver {
          * main document listener.
          */
         private void insertion() {
-                char newChar = main.documentPane.getText().charAt(priorCaretPosition);
-                
+        		char newChar;
                 /**
                  * If the user is pasting text in (meaning the charsInserted is greater
                  * than a single character) we will want to parse through the entire text
@@ -638,69 +637,46 @@ public class EditorDriver {
                  * it all in character by character
                  */
                 if (charsInserted > 1) {
-                        if (taggedDoc.watchForEOS != -1) {
-                                if (isWhiteSpace(newChar)) {
-                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
-                                        updateSuggestions();
-                                }
-                                
-                                taggedDoc.watchForEOS = -1;
-                        } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
-                                if (isWhiteSpace(newChar)) {
-                                        taggedDoc.endSentenceExists = false;
-                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
-                                        updateSuggestions();
-                                }
-                                
-                                taggedDoc.watchForLastSentenceEOS = -1;
-                        } else {
-                                int tempIndex = priorCaretPosition;
-                                int lastSentence = -1;
-                                
-                                while (tempIndex < newCaretPosition[0]) {
-                                        newChar = main.documentPane.getText().charAt(tempIndex);
-                                        if (taggedDoc.watchForEOS != -1) {
-                                                if (isWhiteSpace(newChar)) {
-                                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
-                                                }
-                                                
-                                                taggedDoc.watchForEOS = -1;
-                                        } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
-                                                if (isWhiteSpace(newChar)) {
-                                                        taggedDoc.endSentenceExists = false;
-                                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
-                                                }
-                                                
-                                                taggedDoc.watchForLastSentenceEOS = -1;
-                                        } else {
-                                                if (taggedDoc.specialCharTracker.isEOS(newChar)) {
-                                                        if (taggedDoc.length == priorCaretPosition+charsInserted) {
-                                                                taggedDoc.watchForLastSentenceEOS = tempIndex;
-                                                                lastSentence = taggedDoc.watchForLastSentenceEOS;
-                                                                taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
-                                                        } else {
-                                                                taggedDoc.watchForEOS = tempIndex;
-                                                                taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
-                                                        }
-                                                } else {
-                                                        trackCharIfSpecial(newChar, priorCaretPosition);
-                                                }
-                                        }                                        
-                                        
-                                        tempIndex++;
-                                }
-                                
-                                if (lastSentence != -1) {
-                                        taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(lastSentence, taggedDoc.length-1));
-                                }
-                                
-                                updateSuggestions();
-                        }
+	                int tempIndex = priorCaretPosition;
+	                while (tempIndex < newCaretPosition[0]) {
+	                        newChar = main.documentPane.getText().charAt(tempIndex);
+	                        if (taggedDoc.watchForEOS != -1) {
+	                                if (isWhiteSpace(newChar)) {
+	                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
+	                                }
+	                                
+	                                taggedDoc.watchForEOS = -1;
+	                        } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
+	                                if (isWhiteSpace(newChar)) {
+	                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
+	                                }
+	                                
+	                                taggedDoc.watchForLastSentenceEOS = -1;
+	                        } else {
+	                                if (taggedDoc.specialCharTracker.isEOS(newChar)) {
+	                                        if (taggedDoc.length == priorCaretPosition+charsInserted) {
+	                                                taggedDoc.watchForLastSentenceEOS = tempIndex;
+	                                                taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForLastSentenceEOS, true);
+	                                        } else {
+	                                                taggedDoc.watchForEOS = tempIndex;
+	                                                taggedDoc.specialCharTracker.addEOS(newChar, taggedDoc.watchForEOS, true);
+	                                        }
+	                                } else {
+	                                        trackCharIfSpecial(newChar, priorCaretPosition);
+	                                }
+	                        }                                        
+	                        
+	                        tempIndex++;
+	                }
+	                
+	                updateSuggestions();
+                        
                 /**
                  * Otherwise the user's just entering a single character, in which case we
                  * just analyze the single character.
                  */
                 } else {
+                		newChar = main.documentPane.getText().charAt(priorCaretPosition);
                         //If we're keeping an eye out for a possible end of sentence...
                         if (taggedDoc.watchForEOS != -1) {
                                 if (isWhiteSpace(newChar)) {
@@ -715,7 +691,6 @@ public class EditorDriver {
                         //If we're keeping an eye out for a possible end of sentence at the VERY END of the document
                         } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {        
                                 if (isWhiteSpace(newChar)) {
-                                        taggedDoc.endSentenceExists = false;
                                         taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
                                         updateSuggestions();
                                 }
@@ -845,8 +820,25 @@ public class EditorDriver {
                                 if (selectedSentence >= numSents)
                                         return null; //Should never be greater than or equal to the number of sents
                                 else if (selectedSentence <= 0)
-                                        endIndex = sentenceLengths[0]; //The end of the first sentence, 0.
-                                else if (!ignoreChanges && newCaretPosition[0] >= taggedDoc.length) {
+                                		//Possible for first sentence to also be the last, so need to check for this
+	                                	if (!ignoreChanges && currentPosition >= taggedDoc.length + charsRemoved && taggedDoc.numOfSentences == 1) {
+	                                        if (!taggedDoc.endSentenceExists && taggedDoc.watchForLastSentenceEOS == -1) {
+	                                                if (charsInserted > 0) {
+	                                                        taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(priorCaretPosition, newCaretPosition[0]));
+	                                                } else {
+	                                                        taggedDoc.makeNewEndSentence("");
+	                                                }
+	                                                taggedDoc.endSentenceExists = true;
+	                                                selectedSentence++;
+	                                                startIndex = taggedDoc.length - charsInserted + charsRemoved;
+	                                                endIndex = taggedDoc.length + charsRemoved;
+	                                        } else {
+                                                endIndex = allSentIndices[0]+charsInserted;
+	                                        }
+	                                	} else {
+	                                		endIndex = sentenceLengths[0]; //The end of the first sentence, 0.
+	                                	}
+                                else if (!ignoreChanges && currentPosition >= taggedDoc.length + charsRemoved) {
                                         if (!taggedDoc.endSentenceExists && taggedDoc.watchForLastSentenceEOS == -1) {
                                                 if (charsInserted > 0) {
                                                         taggedDoc.makeNewEndSentence(main.documentPane.getText().substring(priorCaretPosition, newCaretPosition[0]));
@@ -855,8 +847,8 @@ public class EditorDriver {
                                                 }
                                                 taggedDoc.endSentenceExists = true;
                                                 selectedSentence++;
-                                                startIndex = taggedDoc.length - charsInserted;
-                                                endIndex = taggedDoc.length;
+                                                startIndex = taggedDoc.length - charsInserted + charsRemoved;
+                                                endIndex = taggedDoc.length + charsRemoved;
                                         } else {
                                                 startIndex = allSentIndices[selectedSentence-1];
                                                 endIndex = allSentIndices[selectedSentence]+charsInserted;
@@ -880,25 +872,6 @@ public class EditorDriver {
                         } catch (Exception e) {
                                 Logger.logln(NAME+"Something went dreadfully wrong calculating the sentence indices");
                                 Logger.logln(e);
-                        }
-                }
-
-                /**
-                 * We need to check if the user deleted a whole sentence at BOTH the
-                 * end and beginning of their selection. This changes how we handle
-                 * deleting the TaggedSentences.
-                 */
-                if (results.length > 1) {
-                        if ((results[1][0] - results[0][0]) >= 4 &&
-                                        (results[1][2] == oldCaretPosition[0] + (results[1][2] - results[1][1]) ||
-                                        results[1][2] == oldCaretPosition[1] + (results[1][2] - results[1][1]))) {
-                                wholeLastSentDeleted = true;
-                        }
-
-                        if (results[1][0] - results[0][0] >= 4 &&
-                                        (results[0][2] == oldCaretPosition[0] + (results[0][2] - results[0][1]) ||
-                                        results[0][2] == oldCaretPosition[1] + (results[0][2] - results[0][1]))) {
-                                wholeBeginningSentDeleted = true;
                         }
                 }
 
@@ -1094,8 +1067,6 @@ public class EditorDriver {
                 sentIndices = new int[]{0,0};
                 pastSentNum = 0;
                 pastSentIndices = new int[]{0,0};
-                wholeLastSentDeleted = false;
-                wholeBeginningSentDeleted = false;
 
                 //Highlighters
                 highlighterEngine.clearAll();
