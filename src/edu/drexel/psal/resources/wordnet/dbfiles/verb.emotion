@@ -1,0 +1,348 @@
+($RCSfile: verb.emotion,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:58 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.emotion)
+
+{ [ arouse, noun.act:arousal,+ ] [ elicit, noun.cognition:elicitation,+ ] enkindle, kindle, [ evoke, adj.all:mindful^evocative,+ noun.cognition:evocation1,+ ] fire, raise8, [ provoke, adj.all:provocative,+ noun.motive:provocation,+ ] verb.creation:create,@ frames: 8 (call forth (emotions, feelings, and responses); "arouse pity"; "raise a smile"; "evoke sympathy") }
+{ strike_a_chord1, touch_a_chord, arouse,@ frames: 1,2 (evoke a reaction, response, or emotion; "this writer strikes a chord with young women"; "The storyteller touched a chord")}
+{ [ invite1, noun.attribute:invitation,+ ] ask_for, provoke,@ frames: 8 (increase the likelihood of; "ask for trouble"; "invite criticism") }
+{ draw1, elicit,@ frames: 8 (elicit responses, such as objections, criticism, applause, etc.; "The President's comments drew sharp criticism from the Republicans"; "The comedian drew a lot of laughter")}
+{ rekindle, arouse,@ frames: 8,11 (arouse again; "rekindle hopes"; "rekindle her love") }
+{ [ infatuate, noun.feeling:infatuation2,+ noun.feeling:infatuation,+ noun.cognition:infatuation,+ ] arouse,@ frames: 10,9 (arouse unreasoning love or passion in and cause to behave in an irrational way; "His new car has infatuated him"; "love has infatuated her")}
+{ prick, provoke,@ frames: 8,9,10,11 (to cause a sharp emotional pain; "The thought of her unhappiness pricked his conscience") }
+{ [ inflame, adj.all:provocative^inflammatory,+ noun.act:inflammation,+ noun.act:inflaming,+ ] stir_up, wake, ignite, [ heat, noun.attribute:heat2,+ ] fire_up, arouse,@ frames: 8,11 (arouse or excite feelings and passions; "The ostentatious way of living of the rich ignites the hatred of the poor"; "The refugees' fate stirred up compassion around the world"; "Wake old feelings of hatred") }
+{ [ ferment, noun.state:fermentation,+ ] inflame,@ frames: 9,10,8,11 (work up into agitation or excitement; "This religion is fermenting Africa")}
+{ stimulate, shake, shake_up, [ excite, noun.state:excitement1,+ noun.state:excitation1,+ ] [ stir1, noun.feeling:stir,+ noun.person:stirrer,+ verb.social:stir_up,^ ] arouse,@ frames: 10,9,8,11 (stir the feelings, emotions, or peace of; "These stories shook the community"; "the civil war shook the country") }
+{ fuel, stimulate,@ frames: 10 (stimulate; "fuel the debate on creationism") }
+{ arouse1, [ sex, noun.feeling:sex,+ noun.act:sex,+ ] excite1, [turn_on, noun.cognition:turn-on,+ ] wind_up, stimulate,@ frames: 9,10 (stimulate sexually; "This movie usually arouses the male audience") }
+{ [ agitate, adj.all:provocative^agitative,+ calm,! ] [ rouse4, noun.act:rousing,+ ] [turn_on2, noun.cognition:turn-on,+ ] [ charge5, noun.feeling:charge,+ ] commove, [ excite3, adj.all:stimulative^excitant,+ noun.act:excitement,+ ] charge_up, disturb,@ frames: 10,9 (cause to be agitated, excited, or roused; "The speaker charged up the crowd with his inflammatory remarks") }
+{ jolt, disturb,@ frames: 9,10 (disturb (someone's) composure; "The audience was jolted by the play") }
+{ bubble_over, overflow, spill_over, seethe,@ frames: 2 (overflow with a certain feeling; "The children bubbled over with joy"; "My boss was bubbling over with anger") }
+{ [ ferment1, noun.state:fermentation,+ ] seethe,@ frames: 1,2 (be in an agitated or excited state; "The Middle East is fermenting"; "Her mind ferments")}
+{ hype_up, psych_up, agitate,@ frames: 9,10 (get excited or stimulated; "The children were all psyched up after the movie") }
+{ [ lull1, noun.state:lull,+ noun.time:lull,+ ] calm,@ frames: 10,9 (calm by deception; "Don't let yourself be lulled into a false state of security") }
+{ [ calm1, noun.attribute:calm,+ ] calm_down1, cool_off, chill_out, simmer_down, settle_down, cool_it, verb.change:change_state,@ frames: 1,2 (become quiet or calm, especially after a state of agitation; "After the fight both men need to cool off."; "It took a while after the baby was born for things to settle down again.") }
+{ [ perturb, noun.state:perturbation,+ noun.attribute:perturbation,+ ] unhinge, [ disquiet, noun.attribute:disquiet,+ noun.feeling:disquiet,+ ] [ trouble, noun.feeling:trouble3,+ noun.event:trouble,+ ] cark, [ distract2, noun.cognition:distraction,+ ] disorder, upset,@ frames: 9,10 (disturb in mind or make uneasy or cause to be worried or alarmed; "She was rather perturbed by the news that her father was seriously ill") }
+{ [ unbalance, noun.state:unbalance1,+ ] [ derange1, noun.state:derangement,+ ] madden2,@ frames: 10 (derange mentally, throw out of mental balance; make insane; "The death of his parents unbalanced him") }
+{ [calm, agitate,!] calm_down, [ quiet, noun.attribute:quiet,+ ] [ tranquilize, noun.artifact:tranquilizer,+ ] tranquillize, tranquillise, quieten, [ lull, noun.time:lull,+ ] [ still, noun.attribute:still,+ ] comfort1,@ frames: 9,10 (make calm or still; "quiet the dragons of worry and fear") }
+{ [ compose, noun.attribute:composure,+ ] calm,@ frames: 9,10 (calm (someone, especially oneself); make quiet; "She had to compose herself before she could reply to this terrible insult") }
+{ [ pacify, noun.act:pacification,+ noun.state:peace1,+ noun.feeling:peace,+ noun.artifact:pacifier,+ ] lenify, [ conciliate, adj.all:conciliative,+ noun.state:conciliation,+ noun.act:conciliation,+ noun.person:conciliator,+ ] assuage, [ appease, adj.all:placable^appeasable,+ ] [ mollify, noun.state:mollification,+ noun.act:mollification,+ ] [ placate, adj.all:conciliatory^placative,+ adj.all:conciliatory^placatory,+ noun.act:placation,+ ] gentle, gruntle, calm,@ frames: 10,9,8 (cause to be more favorably inclined; gain the good will of; "She managed to mollify the angry customer") }
+{ [ worry1, noun.cognition:worry,+ noun.act:worrying,+ reassure,!] [ vex2, noun.cognition:vexation,+ ] worry,> perturb,@ frames: 9,10 (disturb the peace of mind of; afflict with mental agitation or distress; "I cannot sleep--my daughter's health is worrying me") }
+{ eat, eat_on, worry1,@ frames: 10 (worry or cause anxiety in a persistent way; "What's eating you?") }
+{ [ reassure, noun.act:reassurance,+ worry1,! ] assure, calm,@ frames: 9,10 (cause to feel sure; give reassurance to; "The airline tried to reassure the customers that the planes were safe") }
+{ nag, worry1,@ frames: 10 (worry persistently; "nagging concerns and doubts")}
+{ [ worry12, noun.feeling:worry,+ noun.cognition:worry,+ ] [ care12, noun.feeling:care1,+ noun.feeling:care,+ ] verb.cognition:mind2,@ frames: 22 (be concerned with; "I worry about my grades") }
+{ retire, [ withdraw, noun.person:withdrawer4,+ noun.feeling:withdrawal,+ ] verb.body:tire,@ frames: 2,22 (lose interest; "he retired from life when his wife died") }
+{ [ worry, noun.attribute:worriment,+ noun.person:worrier,+ noun.feeling:worry,+ noun.cognition:worry,+ ] worry1,$ frames: 2,22,26 (be worried, concerned, anxious, troubled, or uneasy; "I worry about my job") }
+{ fret, worry,@ frames: 2,22 (be agitated or irritated; "don't fret over these small details") }
+{ seethe, boil, verb.stative:be3,@ frames: 2,22 (be in an agitated emotional state; "The customer was seething with anger")}
+{ sizzle, seethe,@ frames: 1 (seethe with deep anger or resentment; "She was sizzling with anger") }
+{ [ affect, adj.all:emotional^affective,+ noun.feeling:affect,+ ] [ impress1, adj.all:impressible,+ adj.all:effective^impressive,+ adj.all:impressive,+ ] move, strike, verb.perception:strike,$ feel,> frames: 10 (have an emotional or cognitive impact upon; "This child impressed me as unusually mature"; "This behavior struck me as odd"; "he was dumb-struck by the news"; "her comments struck a sour note") }
+{ engrave, impress1,@ frames: 4 (impress or affect deeply; "The event engraved itself into her memory")}
+{ strike_dumb, affect,@ frames: 10 (render speechless, as by surprising or shocking; "we were struck dumb by the candidate's announcement")}
+{ zap, affect,@ frames: 9,10 (strike suddenly and with force; "This show zaps the viewers with some shocking scenes")}
+{ jar, affect,@ frames: 9,10 (affect in a disagreeable way; "This play jarred the audience") }
+{ hit_home, strike_home, [strike_a_chord, frames: 4] strike_a_note, affect,@ frames: 1 (refer to or be relevant or familiar to; "I hope this message hits home!") }
+{ smite, affect,@ frames: 9,10 (affect suddenly with deep feeling; "He was smitten with love for this young girl") }
+{ cloud, affect,@ frames: 10 (make gloomy or depressed; "Their faces were clouded with sadness") }
+{ pierce, affect,@ frames: 10,9 (move or affect (a person's emotions or bodily feelings) deeply or sharply; "The cold pierced her bones"; "Her words pierced the students") }
+{ [ impress, adj.all:impressive,+ ] strike,@ frames: 9,10 (impress positively; "The young chess player impressed her audience") }
+{ prepossess1, impress,@ frames: 9,8 (make a positive impression (on someone) beforehand; "A prepossessing appearance") }
+{ wow, impress,@ frames: 9,10 (impress greatly; "The speaker wowed the audience") }
+{ sweep_away, sweep_off, affect,@ frames: 9,10 (overwhelm emotionally; "Her swept her away") }
+{ [ disturb, noun.state:disturbance2,+ ] [ upset, noun.act:upset1,+ noun.state:upset,+ ] [ trouble1, noun.feeling:trouble3,+ noun.event:trouble,+ ] affect,@ frames: 10 (move deeply; "This book upset me"; "A troubling thought") }
+{ touch, [ stir, noun.feeling:stir,+ noun.act:stirring1,+ stir_up,^ ] move,@ frames: 9,10 (affect emotionally; "A stirring movie"; "I was touched by your kind letter of sympathy")}
+{ get11, touch,@ frames: 10,9 (evoke an emotional response; "Brahms's `Requiem' gets me every time") }
+{ get12, get_under_one's_skin, get11,$ annoy,@ frames: 9,10,12 (irritate; "Her childish behavior really get to me"; "His lying really gets me") }
+{ move1, affect,@ frames: 9,10 (arouse sympathy or compassion in; "Her fate moved us all") }
+{ [ feel, noun.feeling:feelings,+ noun.Tops:feeling,+ feel_for,^ frames: 5,6,22 ] [ experience, noun.cognition:experience,+ noun.event:experience,+ ] frames: 8 (undergo an emotional sensation or be in a particular state of mind; "She felt resentful"; "He felt regret") }
+{ incline, feel,@ frames: 22 (feel favorably disposed or willing; "She inclines to the view that people should be allowed to expres their religious beliefs")}
+{ recapture, feel,@ frames: 8 (experience anew; "She could not recapture that feeling of happiness") }
+{ [ pride, noun.feeling:pride1,+ ] plume, [ congratulate, adj.all:felicitous^congratulatory,+ noun.communication:congratulation1,+ ] feel,@ frames: 20 (be proud of; "He prides himself on making it into law school") }
+{ smolder, smoulder, feel,@ frames: 2 (have strong suppressed feelings) }
+{ [ emote, adj.all:emotional^emotive,+ noun.feeling:emotion,+ ] verb.creation:act,@ frames: 8 (give expression or emotion to, in a stage or movie role) }
+{ [ excite2, noun.state:excitement1,+ noun.feeling:excitement,+ noun.state:excitation1,+ ] arouse,@ frames: 9,10 (arouse or elicit a feeling) }
+{ harbor, harbour, hold, entertain, nurse, feel,@ frames: 8 (maintain (a theory, thoughts, or feelings); "bear a grudge"; "entertain interesting notions"; "harbor a resentment") }
+{ [ resent, noun.feeling:resentment,+ ] dislike,@ frames: 8,9 (feel bitter or indignant about; "She resents being paid less than her co-workers") }
+{ [ embitter, noun.state:embitterment,+ ] envenom, [ acerbate, noun.attribute:acerbity,+ ] resent,> frames: 10 (cause to be bitter or resentful; "These injustices embittered her even more") }
+{ grudge, resent,* frames: 8 (accept or admit unwillingly) }
+{ eat_into, fret2, rankle, grate, annoy,@ frames: 10 (gnaw into; make resentful or angry; "The injustice rankled her"; "his resentment festered") }
+{ stew, [ grudge1, noun.feeling:grudge,+ ] resent,@ frames: 2,22 (bear a grudge; harbor ill feelings)}
+{ [ hate, noun.person:hater,+ noun.feeling:hate,+ love,!] [ detest, noun.feeling:detestation,+ ] dislike,@ frames: 8,9 (dislike intensely; feel antipathy or aversion towards; "I hate Mexican food"; "She detests politicians")}
+{ [ abhor, adj.all:offensive1^abhorrent,+ noun.feeling:abhorrence,+ ] [ loathe, noun.person:loather,+ noun.feeling:loathing,+ ] [ abominate, adj.all:hateful^abominable,+ noun.person:abomination,+ noun.feeling:abomination,+ noun.act:abomination,+ noun.person:abominator,+ ] [ execrate, noun.feeling:execration,+ noun.cognition:execration,+ ] hate,@ frames: 8,9 (find repugnant; "I loathe that man"; "She abhors cats") }
+{ contemn, [ despise, noun.feeling:despising,+ noun.feeling:despisal,+ ] [ scorn, noun.communication:scorn,+ noun.feeling:scorn,+ noun.person:scorner,+ ] [ disdain, noun.feeling:disdain,+ ] hate,@ frames: 8,9 (look down on with disdain; "He despises the people he has to work for"; "The professor scorns the students who don't catch on immediately") }
+{ [ love, adj.all:loveable,+ adj.all:lovable,+ noun.person:love,+ noun.cognition:love,+ noun.feeling:love,+ noun.person:lover1,+ noun.person:lover,+ hate,!] frames: 8,9 (have a great affection or liking for; "I love French food"; "She loves her boss and works hard for him") }
+{ [ love1, adj.all:loveable,+ adj.all:lovable,+ noun.person:love,+ noun.cognition:love,+ noun.feeling:love,+ noun.person:lover,+ ] love,@ frames: 9 (be enamored or in love with; "She loves her husband deeply") }
+{ [ romance, noun.communication:romance2,+ noun.state:romance,+ ] love1,@ frames: 8,9 (have a love affair with) }
+{ fall_for, verb.change:change,@ frames: 9,8 (fall in love with; become infatuated with; "She fell for the man from Brazil") }
+{ cling, frames: 11 (to remain emotionally or intellectually attached; "He clings to the idea that she might still love him.") }
+{ care_for8, cherish, hold_dear, [ treasure, noun.possession:treasure1,+ ] love,@ frames: 8,9 (be fond of; be attached to) }
+{ enshrine, saint, venerate,@ frames: 8 (hold sacred) }
+{ [ fancy, noun.feeling:fancy,+ noun.person:fancier,+ ] go_for, take_to, like5,* desire,@ frames: 8,9 (have a fancy or particular liking or desire for; "She fancied a necklace that she had seen in the jeweler's window") }
+{ [ dislike, noun.feeling:dislike,+ like5,!] verb.cognition:disapprove,* frames: 8,9,32 (have or feel a dislike or distaste for; "I really dislike this salesman") }
+{ [ like4, adj.all:liked^likeable,+ adj.all:likeable2,+ adj.all:liked^likable,+ adj.all:likable2,+ ] frames: 8,9 (be fond of; "I like my nephews") }
+{ cotton, like5,@ frames: 22 (take a liking to; "cotton to something") }
+{ [like5, dislike,!] verb.cognition:approve,* frames: 8,33,28 (find enjoyable or agreeable; "I like jogging"; "She likes to read Russian novels") }
+{ dote2, love,@ frames: 22 (shower with love; show excessive affection for; "Grandmother dotes on the twins") }
+{ yearn10, care_for8,@ frames: 9 (have affection for; feel tenderness for) }
+{ cool_off1, feel,@ frames: 2 (feel less enamoured of something or somebody) }
+{ [ adore, adj.all:lovable^adorable,+ noun.person:adorer,+ ] love,@ frames: 8,9,32,28 (love intensely; "he just adored his wife")}
+{ [ idolize, noun.act:idolization1,+ noun.act:idolization,+ noun.person:idolizer1,+ noun.person:idol,+ noun.cognition:idol,+ noun.artifact:idol,+ ] [ idolise, noun.act:idolisation1,+ noun.act:idolisation,+ noun.person:idol,+ noun.cognition:idol,+ noun.artifact:idol,+ ] [ worship, noun.feeling:worship1,+ noun.person:worshiper1,+ noun.person:worshipper1,+ ] hero-worship, [ revere1, adj.all:pious^reverent,+ adj.all:reverent,+ noun.cognition:reverence,+ ] adore,@ frames: 8,9 (love unquestioningly and uncritically or to excess; venerate as an idol; "Many teenagers idolized the Beatles")}
+{ [ reverence, noun.cognition:reverence,+ noun.feeling:reverence,+ ] [ fear1, noun.feeling:fear2,+ ] [ revere, adj.all:pious^reverent,+ adj.all:reverent,+ noun.feeling:reverence,+ ] [ venerate, noun.feeling:veneration,+ noun.person:venerator,+ ] verb.cognition:respect,@ frames: 8,9 (regard with feelings of respect and reverence; consider hallowed or exalted or be in awe of; "Fear God as your father"; "We venerate genius") }
+{ [ worship1, noun.person:worshiper,+ noun.person:worshipper,+ ] reverence,@ noun.cognition:religion,;c frames: 8 (show devotion to (a deity); "Many Hindus worship Shiva") }
+{ [ frighten, noun.act:frightening,+ frighten_off,^ frighten_away,^ ] [ fright, noun.feeling:fright,+ ] [ scare, noun.feeling:scare,+ noun.artifact:scarer,+ ] [ affright, noun.feeling:affright,+ ] fear,> excite,@ frames: 9,10 (cause fear in; "The stranger who hangs around the building frightens me"; "Ghosts could never affright her") }
+{ [ awe, noun.feeling:awe2,+ ] frighten,@ frames: 9 (inspire awe in; "The famous professor awed the undergraduates") }
+{ overawe, [ cow, noun.person:coward,+ ] awe,@ frames: 9,10 (subdue, restrain, or overcome by affecting with a feeling of awe; frighten (as with threats)) }
+{ buffalo, overawe,@ frames: 9,10 (intimidate or overawe) }
+{ [ fear, noun.feeling:fear,+ ] [ dread, noun.feeling:dread,+ ] frames: 8,9,28 (be afraid or scared of; be frightened of; "I fear the winters in Moscow"; "We should not fear the Communists!") }
+{ [ fear13, noun.feeling:fear1,+ ] frames: 8 (be uneasy or apprehensive about; "I fear the results of the final exams") }
+{ fear2, verb.communication:regret2,@ frames: 26 (be sorry; used to introduce an unpleasant statement; "I fear I won't make it to your wedding party") }
+{ [ fear3, noun.feeling:fear1,+ ] worry,@ frames: 26,22 (be afraid or feel anxious or apprehensive about a possible or probable situation or event; "I fear she might get aggressive") }
+{ [ terrify, noun.feeling:terror,+ ] [ terrorize, noun.act:terrorization,+ noun.feeling:terror,+ ] [ terrorise, noun.act:terrorisation,+ noun.feeling:terror,+ ] frighten,@ frames: 9,10 (fill with terror; frighten greatly) }
+{ [ intimidate, noun.feeling:intimidation,+ noun.communication:intimidation,+ noun.act:intimidation1,+ ] frighten,@ frames: 9 (make timid or fearful; "Her boss intimidates her") }
+{ hold_over, intimidate,@ frames: 9 (intimidate somebody (with a threat); "She was holding it over him") }
+{ strong-arm, bully, browbeat, bullyrag, ballyrag, boss_around, hector, push_around, intimidate,@ frames: 9 (be bossy towards; "Her big brother always bullied her when she was young") }
+{ [ tyrannize, noun.person:tyrant,+ ] tyrannise, domineer, bully,@ frames: 9 (rule or exercise power over (somebody) in a cruel and autocratic manner; "her husband and mother-in-law tyrannize her") }
+{ [ panic1, noun.feeling:panic,+ noun.state:panic1,+ ] panic,> terrify,@ frames: 9,10 (cause sudden fear in or fill with sudden panic; "The mere thought of an isolation cell panicked the prisoners") }
+{ [ panic, noun.feeling:panic,+ ] fear,@ frames: 2,22 (be overcome by a sudden fear; "The students panicked when told that final exams were less than a week away")}
+{ [ apprehend, adj.all:uneasy^apprehensive,+ adj.all:afraid^apprehensive,+ noun.feeling:apprehension,+ noun.cognition:apprehension1,+ noun.person:apprehender1,+ ] quail_at, fear,* anticipate,@ frames: 8 (anticipate with dread or anxiety) }
+{ [ dismay, noun.feeling:dismay,+ ] [ alarm, noun.person:alarmist,+ noun.feeling:alarm,+ ] appal1, appall10, [ horrify1, noun.feeling:horror1,+ ] frighten,@ frames: 9,10 (fill with apprehension or alarm; cause to be unpleasantly surprised; "I was horrified at the thought of being late for my interview"; "The news of the executions horrified us")}
+{ [ shock, noun.feeling:shock1,+ noun.event:shock1,+ noun.communication:shocker,+ ] horrify1,@ frames: 9,10 (strike with horror or terror; "The news of the bombing shocked her") }
+{ haunt, [ obsess, noun.cognition:obsession,+ ] [ ghost, noun.cognition:ghost,+ ] preoccupy,@ frames: 9,10 (haunt like a ghost; pursue; "Fear of illness haunts her") }
+{ [ preoccupy, noun.cognition:preoccupation2,+ noun.cognition:preoccupation,+ noun.cognition:preoccupancy,+ ] verb.social:control,@ frames: 10 (engage or engross the interest or attention of beforehand or occupy urgently or obsessively; "His work preoccupies him"; "The matter preoccupies her completely--she cannot think of anything else") }
+{ prepossess, preoccupy,@ frames: 10 (cause to be preoccupied; "The idea of his failure prepossesses him") }
+{ faze, unnerve, enervate, unsettle, upset1,@ frames: 10,11 (disturb the composure of) }
+{ unman, unnerve,@ frames: 9,10 (cause to lose one's nerve; "an unmanning experience") }
+{ freak_out, freak, gross_out, panic,@ frames: 2 (lose one's nerve; "When he saw the accident, he freaked out") }
+{ [break_down, noun.state:breakdown1,+ ] lose_it, snap, verb.body:behave,@ frames: 2 (lose control of one's emotions; "When she heard that she had not passed the exam, she lost it completely"; "When her baby died, she snapped") }
+{ dissolve, break_down,@ frames: 22 (lose control emotionally; "She dissolved into tears when she heard that she had lost all her savings in the pyramid scheme") }
+{ dissolve4, dissolve,$ upset1,@ frames: 10 (cause to lose control emotionally; "The news dissolved her into tears")}
+{ die, lose_it,@ frames: 22,33 (be brought to or as if to the point of death by an intense emotion such as embarrassment, amusement, or shame; "I was dying with embarrassment when my little lie was discovered"; "We almost died laughing during the show") }
+{ die1, languish,@ frames: 22,28 (languish as with love or desire; "She dying for a cigarette"; "I was dying to leave") }
+{ break, burst, erupt, express_emotion,@ frames: 22 (force out or release suddenly and often violently something pent up; "break into tears"; "erupt in anger") }
+{ [crack_up, noun.state:crack-up,+] crack, crock_up, break_up4, [ collapse, noun.state:collapse1,+ ] verb.body:suffer1,@ frames: 2 (suffer a nervous breakdown) }
+{ daunt, dash, scare_off, [ pall, noun.feeling:pall,+ ] frighten_off, scare_away, frighten_away, [ scare4, noun.state:scare,+ ] intimidate1,@ frames: 10 (cause to lose courage; "dashed by the refusal") }
+{ [ anger, noun.state:anger,+ noun.feeling:anger,+ noun.act:anger,+ ] anger1,> arouse,@ frames: 10,9 (make angry; "The news angered him") }
+{ bridle, anger1,@ frames: 2 (anger or take offense; "She bridled at his suggestion to elope")}
+{ combust1, combust,> anger,@ frames: 9,10,11 (cause to become violent or angry; "Riots combusted Pakistan after the U.S. air attacks on Afghanistan")}
+{ [ miff, noun.state:miff,+ ] anger,@ frames: 9,10 (cause to be annoyed; "His behavior really miffed me") }
+{ [ gall, noun.feeling:gall,+ ] irk, anger,@ frames: 10,9 (irritate or vex; "It galls me that we lost the suit") }
+{ [ infuriate, noun.state:fury,+ noun.feeling:fury,+ noun.feeling:infuriation,+ ] [ exasperate1, noun.feeling:exasperation,+ noun.act:exasperation,+ ] incense1, anger,@ frames: 10,9 (make furious) }
+{ [ anger1, noun.state:anger,+ noun.feeling:anger,+ noun.act:anger,+ ] see_red, feel,@ frames: 2 (become angry; "He angers easily") }
+{ steam, anger1,@ frames: 2 (get very angry; "her indifference to his amorous advances really steamed the young man")}
+{ raise_the_roof, anger1,@ frames: 2 (get very angry; "He will raise the roof when he hears this") }
+{ madden, anger,@ frames: 10,9 (make mad; "His behavior is maddening") }
+{ madden1, torment1,@ frames: 10,9 (drive up the wall; go on someone's nerves) }
+{ madden2, [ craze, noun.state:craze,+ ] frames: 10 (cause to go crazy; cause to lose one's mind) }
+{ [ annoy, noun.person:annoyer,+ noun.act:annoyance,+ ] rag1, get_to, [ bother, noun.state:botheration,+ noun.cognition:botheration,+ noun.cognition:bother,+ ] get_at, [ irritate, noun.state:irritation,+ noun.feeling:irritation1,+ noun.act:irritation1,+ noun.act:irritation,+ noun.cognition:irritant,+ ] rile, nark, nettle, gravel, [ vex, noun.state:vexation,+ noun.act:vexation,+ noun.person:vexer,+ ] chafe, [ devil, noun.act:devilment,+ noun.act:deviltry1,+ noun.act:devilry1,+ ] displease,@ frames: 9,10 (cause annoyance in; disturb, especially by minor irritations; "Mosquitoes buzzing in my ear really bothers me"; "It irritates me that she never closes the door after she leaves") }
+{ chafe1, chafe,$ feel,@ frames: 2 (feel extreme irritation or anger; "He was chafing at her suggestion that he stay at home while she went on a vacation") }
+{ peeve, annoy,@ frames: 9,10 (cause to be annoyed, irritated, or resentful) }
+{ ruffle, vex,@ frames: 8,11 (trouble or vex; "ruffle somebody's composure") }
+{ fret1, fret,> irritate,@ frames: 9,10 (cause annoyance in) }
+{ [ pique, noun.feeling:pique,+ ] [ offend1, adj.all:offensive2,+ noun.feeling:offence,+ ] resent,> anger,@ frames: 9,10 (cause to feel resentment or indignation; "Her tactless remark offended me")}
+{ [ harass, noun.person:harasser1,+ noun.act:harassment,+ ] [ hassle, noun.event:hassle,+ ] [ harry, noun.person:harrier,+ ] chivy, chivvy, chevy, chevvy, beset, [ plague, noun.cognition:plague,+ ] [ molest, noun.act:molestation,+ ] [ provoke1, adj.all:provocative,+ noun.act:provocation,+ noun.person:provoker,+ ] annoy,@ frames: 10,9 (annoy continually or chronically; "He is known to harry his staff when he is overworked"; "This man harasses his female co-workers") }
+{ [ upset1, noun.state:upset,+ ] [ discompose, noun.feeling:discomposure,+ noun.attribute:discomposure,+ ] untune, [ disconcert1, noun.feeling:disconcertment,+ noun.feeling:disconcertion,+ ] [ discomfit, noun.feeling:discomfiture,+ ] arouse,@ frames: 9,10 (cause to lose one's composure) }
+{ inhibit, upset1,@ frames: 9,10 (make (someone) self-conscious and as a result unable to act naturally; "his father's cold and distant demeanor inhibited him emotionally") }
+{ [ fluster, noun.attribute:fluster,+ ] fluster1,> confuse,@ frames: 10,9 (cause to be nervous or upset) }
+{ ruffle1, fluster,@ frames: 8,9,10,11 (discompose; "This play is going to ruffle some people"; "She has a way of ruffling feathers among her colleagues")}
+{ [ confuse, noun.feeling:confusion,+ ] flurry, [ disconcert2, noun.feeling:disconcertment,+ noun.feeling:disconcertion,+ ] put_off2, verb.cognition:confuse3,$ embarrass,@ frames: 9,10 (cause to feel embarrassment; "The constant attention of the young man confused her") }
+{ consternate, frighten,@ frames: 9,10 (fill with anxiety, dread, dismay, or confusion; "After the terrorist attack, people look consternated")}
+{ bewilder, [ bemuse, noun.cognition:bemusement,+ ] [ discombobulate, noun.feeling:discombobulation,+ ] throw, upset1,@ frames: 10,9 (cause to be confused emotionally) }
+{ bother2, confuse,@ frames: 9,10 (make confused or perplexed or puzzled)}
+{ [ bother3, noun.state:botheration,+ noun.cognition:botheration,+ ] bother2,$ agitate,@ frames: 9,10 (make nervous or agitated; "The mere thought of her bothered him and made his heart beat faster") }
+{ [ distract, noun.act:distraction2,+ ] deflect6, confuse,@ frames: 9,10 (draw someone's attention away from something; "The thief distracted the bystanders"; "He deflected his competitors") }
+{ [ fluster1, noun.attribute:fluster,+ ] verb.social:behave1,@ frames: 2 (be flustered; behave in a confused manner) }
+{ [ embarrass, noun.event:embarrassment,+ ] [ abash, noun.feeling:abashment,+ ] upset1,@ frames: 9,10 (cause to be embarrassed; cause to feel self-conscious) }
+{ [ shame, noun.feeling:shame,+ ] elicit,@ frames: 9,10 (cause to be ashamed) }
+{ discountenance, shame,@ frames: 9,10 (look with disfavor on; "The republic soon discountenanced its few friends") }
+{ [ pain, noun.cognition:pain1,+ noun.feeling:pain,+ noun.state:pain,+ ] [ anguish, noun.state:anguish,+ noun.feeling:anguish2,+ ] [ hurt1, noun.feeling:hurt1,+ ] suffer,> upset1,@ frames: 10 (cause emotional anguish or make miserable; "It pains me to see my children not being taught well in school") }
+{ break_someone's_heart, pain,@ frames: 10,9 (cause deep emotional pain and grief to somebody; "The young man broke the girl's heart when he told her was going to marry her best friend")}
+{ hurt, wound, injure, bruise, [ offend, adj.all:offensive2,+ noun.act:offence2,+ ] [ spite, noun.attribute:spite,+ noun.feeling:spite,+ ] arouse,@ frames: 10,9 (hurt the feelings of; "She hurt me when she did not include me among her guests"; "This remark really bruised my ego") }
+{ [ lacerate, noun.act:laceration,+ ] hurt,@ frames: 10,9 (deeply hurt the feelings of; distress; "his lacerating remarks")}
+{ [ sting, noun.state:sting2,+ noun.communication:stinger,+ noun.state:stinging,+ ] hurt,@ frames: 9,10 (cause an emotional pain, as if by stinging; "His remark stung her") }
+{ [ fuss, noun.state:fuss,+ ] niggle, [ fret3, noun.state:fret,+ ] worry,@ frames: 2,22 (worry unnecessarily or excessively; "don't fuss too much over the grandchildren--they are quite big now") }
+{ [ scruple, noun.cognition:scruple,+ noun.feeling:scruple,+ ] fret3,@ frames: 8,22 (raise scruples; "He lied and did not even scruple about it") }
+{ [ agonize, noun.state:agony,+ ] [ agonise, noun.state:agony,+ noun.feeling:agony,+ ] suffer,@ frames: 2,22 (suffer agony or anguish) }
+{ agonize1, [ agonise1, noun.state:agony,+ noun.feeling:agony,+ ] agonize,> anguish,@ frames: 10 (cause to agonize) }
+{ [ suffer, noun.person:sufferer1,+ noun.state:suffering1,+ noun.feeling:suffering2,+ frames: 8 ] verb.cognition:suffer,$ feel,@ frames: 2,22 (experience (emotional) pain; "Every time her husband gets drunk, she suffers") }
+{ [ anguish2, noun.feeling:anguish2,+ ] suffer,@ frames: 2 (suffer great pains or distress) }
+{ lose, suffer,@ frames: 9,10 (suffer the loss of a person through death or removal; "She lost her husband in the war"; "The couple that wanted to adopt the child lost her when the biological parents claimed her") }
+{ fume, feel,@ frames: 2,22 (be mad, angry, or furious) }
+{ flip_one's_lid, [blow_up, noun.communication:blowup,+ ] throw_a_fit, hit_the_roof, hit_the_ceiling, have_kittens, have_a_fit, combust, blow_one's_stack, fly_off_the_handle, flip_one's_wig, lose_one's_temper, blow_a_fuse, go_ballistic, rage,@ frames: 2,22 (get very angry and fly into a rage; "The professor combusted when the student didn't know the answer to a very elementary question"; "Spam makes me go ballistic") }
+{ [ enrage, noun.feeling:enragement,+ ] rage,> anger,@ frames: 10,9 (put into a rage; make violently angry) }
+{ [ rage, noun.state:rage,+ noun.feeling:rage,+ ] frames: 2,22 (feel intense anger; "Rage against the dying of the light!") }
+{ foam_at_the_mouth, froth_at_the_mouth, rage,@ frames: 2 (be in a state of uncontrolled anger)}
+{ [ thrill2, noun.feeling:thrill2,+ noun.act:thrill,+ noun.feeling:thrill,+ ] tickle1, vibrate2, excite,@ frames: 10 (feel sudden intense sensation or emotion; "he was thrilled by the speed and the roar of the engine") }
+{ [ repent, adj.all:repentant,+ noun.feeling:repentance,+ ] [ regret, noun.feeling:regret,+ frames: 26,33 ] [ rue, noun.feeling:rue,+ ] feel,@ frames: 8 (feel remorse for; feel sorry for; be contrite about) }
+{ [ repent1, adj.all:repentant,+ ] [ atone, noun.act:atonement,+ ] frames: 2 (turn away from sin or do penitence) }
+{ [ regret1, noun.feeling:regret,+ ] miss,@ frames: 8,9 (feel sad about the loss or absence of) }
+{ [ mourn, noun.person:mourner,+ noun.state:mourning,+ ] grieve,@ frames: 2,22 (feel sadness; "She is mourning her dead child") }
+{ [ mourn1, noun.person:mourner,+ ] verb.social:observe2,@ frames: 2 (observe the customs of mourning after the death of a loved one) }
+{ [ grieve, noun.person:griever,+ ] [ sorrow, noun.state:sorrow,+ noun.cognition:sorrow,+ noun.feeling:sorrow1,+ noun.feeling:sorrow,+ noun.person:sorrower,+ ] suffer,@ frames: 2,22 (feel grief) }
+{ grieve1, aggrieve, grieve,> afflict,@ frames: 10 (cause to feel sorrow; "his behavior grieves his mother") }
+{ [ afflict, adj.all:unpleasant^afflictive,+ noun.state:affliction2,+ noun.event:affliction,+ ] upset1,@ frames: 10 (cause great unhappiness for; distress; "she was afflicted by the death of her parents") }
+{ [ tribulate, noun.event:tribulation,+ ] afflict,@ frames: 10 (oppress or trouble greatly)}
+{ [ distress, noun.feeling:distress2,+ ] upset,@ frames: 9,10 (cause mental pain to; "The news of her child's illness distressed the mother") }
+{ besiege, distress,@ frames: 10 (cause to feel distressed or worried; "She was besieged by so many problems that she got discouraged")}
+{ try, [ strain, noun.act:strain2,+ ] [ stress, noun.state:stress2,+ noun.state:stress1,+ noun.object:stressor,+ ] afflict,@ frames: 11,8 (test the limits of; "You are trying my patience!") }
+{ rack, strain,@ frames: 8 (stretch to the limits; "rack one's brains") }
+{ [ try1, noun.event:trial,+ ] pain,@ frames: 9,10 (give pain or trouble to; "I've been sorely tried by these students") }
+{ [ disappoint, noun.feeling:disappointment,+ noun.act:disappointment,+ ] [let_down, noun.feeling:letdown,+] verb.social:frustrate,@ frames: 9,10 (fail to meet the hopes or expectations of; "Her boyfriend let her down when he did not propose marriage") }
+{ fail, betray, let_down,@ frames: 9,10 (disappoint, prove undependable to; abandon, forsake; "His sense of smell failed him this time"; "His strength finally failed him"; "His children failed him in the crisis") }
+{ fall_short12, come_short12, disappoint,@ frames: 1,2,4,22 (fail to meet (expectations or standards)) }
+{ hamstring, frustrate,@ frames: 8,11 (make ineffective or powerless; "The teachers were hamstrung by the overly rigid schedules") }
+{ [ humiliate, noun.state:humiliation,+ noun.feeling:humiliation,+ noun.event:humiliation,+ noun.act:humiliation,+ ] [ mortify1, noun.feeling:mortification,+ noun.event:mortification,+ ] [ chagrin1, noun.feeling:chagrin,+ ] humble, [ abase, noun.act:abasement,+ ] hurt,@ frames: 9,10 (cause to feel shame; hurt the pride of; "He humiliated his colleague by criticising him in front of the boss")}
+{ crush, smash, humiliate,@ frames: 9,10 (humiliate or depress completely; "She was crushed by his refusal of her invitation"; "The death of her son smashed her") }
+{ [take_down, noun.communication:takedown,+] [ degrade, noun.state:degradation,+ noun.act:degradation,+ ] disgrace, demean, [put_down, noun.communication:put-down,+ ] humiliate,@ frames: 9,10 (reduce in worth or character, usually verbally; "She tends to put down younger women colleagues"; "His critics took him down after the lecture") }
+{ [ efface, noun.act:effacement,+ ] humble1,@ frames: 9 (make inconspicuous; "efface oneself") }
+{ reduce, degrade,@ frames: 21 (lower in grade or rank or force somebody into an undignified situation; "She reduced her niece to a servant" )}
+{ [ stultify, noun.communication:stultification,+ ] verb.cognition:demonstrate,@ noun.group:law,;c frames: 9 (prove to be of unsound mind or demonstrate someone's incompetence; "nobody is legally allowed to stultify himself") }
+{ [ dehumanize, noun.act:dehumanization,+ humanize,!] [ dehumanise, noun.act:dehumanisation,+ ] degrade,@ frames: 10 (deprive of human qualities; "Life in poverty has dehumanized them") }
+{ [ humanize, noun.act:humanization,+ dehumanize,!] [ humanise, noun.act:humanisation,+ ] verb.change:change1,@ frames: 10 (make more humane; "The mayor tried to humanize life in the big city") }
+{ humble1, verb.change:change1,@ frames: 9,10 (cause to be unpretentious; "This experience will humble him") }
+{ [ mortify2, noun.act:mortification,+ ] subdue, crucify3, verb.consumption:abstain,* verb.social:contain,@ frames: 9,8 (hold within limits and control; "subdue one's appetites"; "mortify the flesh") }
+{ [ mortify4, noun.act:mortification,+ ] mortify2,@ verb.social:discipline1,@ frames: 2 (practice self-denial of one's body and appetites)}
+{ [ lament, noun.communication:lament,+ noun.communication:lament1,+ noun.communication:lament2,+ noun.communication:lamentation,+ noun.act:lamentation,+ noun.person:lamenter,+ ] [ keen, noun.communication:keen,+ ] grieve,* express_emotion,@ frames: 8 (express grief verbally; "we lamented the death of the child") }
+{ express_emotion, express_feelings, frames: 2 (give verbal or other expression to one's feelings) }
+{ [ torment, noun.feeling:torment1,+ noun.feeling:torment2,+ noun.person:tormenter,+ noun.person:tormentor,+ ] [ torture, noun.feeling:torture1,+ noun.feeling:torture2,+ noun.person:torturer,+ ] [ excruciate, noun.state:excruciation,+ ] [ rack1, noun.artifact:rack2,+ ] anguish,@ frames: 10,9 (torment emotionally or mentally) }
+{ [ torment1, noun.act:torment,+ noun.feeling:torment3,+ noun.person:tormenter,+ noun.person:tormentor,+ ] rag, [ bedevil, noun.act:bedevilment,+ ] [ crucify, noun.act:crucifixion1,+ ] dun, [ frustrate, noun.feeling:frustration1,+ ] harass,@ frames: 10,9 (treat cruelly; "The children tormented the stuttering teacher") }
+{ [ tease, noun.act:tease,+ noun.person:tease,+ noun.person:teaser,+ ] [ badger, noun.person:badgerer,+ ] [ pester, noun.person:pesterer,+ ] bug, beleaguer, torment1,@ frames: 9 (annoy persistently; "The children teased the boy because of his stammer") }
+{ [ tease1, noun.person:tease1,+ ] arouse1,* disappoint,* manipulate,@ frames: 9 (to arouse hope, desire, or curiosity without satisfying them; "The advertisement is intended to tease the customers"; "She has a way of teasing men with her flirtatious behavior") }
+{ [ manipulate, adj.all:artful^manipulative,+ noun.act:manipulation,+ ] keep_in_line, [ control6, noun.person:controller1,+ noun.act:control,+ ] verb.social:interact,@ frames: 9,8 (maintain influence over (others or oneself) skillfully, usually to one's advantage; "She manipulates her boss"; "She is a very controlling mother and doesn't let her children grow up"; "The teacher knew how to keep the class in line"; "she keeps in line") }
+{ [ handle5, noun.person:handler1,+ noun.person:handler,+ ] control6,@ frames: 8 (show and train; "The prize-winning poodle was handled by Mrs. Priscilla Prescott")}
+{ [ ingratiate, adj.all:flattering^ingratiatory,+ ] manipulate,@ frames: 9,20 (gain favor with somebody by deliberate efforts) }
+{ cozy_up9, cotton_up9, shine_up9, play_up9, sidle_up9, suck_up9, ingratiate,@ frames: 22 (ingratiate oneself to; often with insincere behavior; "She is playing up to the chairman") }
+{ [ anticipate, adj.all:hopeful^anticipative,+ ] look_for, look_to, verb.cognition:expect1,@ frames: 8 (be excited or anxious about) }
+{ warm_to, verb.cognition:consider1,@ frames: 8 (become excited about; "He warmed to the idea of a trip to Antarctica") }
+{ [ mope, noun.person:mope,+ ] moon_around, moon_about, verb.stative:be3,@ frames: 2 (be apathetic, gloomy, or dazed) }
+{ grizzle, brood, [ stew1, noun.state:stew,+ ] verb.stative:sulk,@ frames: 2,22 (be in a huff; be silent or sullen) }
+{ miss, regret,* desire,@ frames: 9,8 (feel or suffer from the lack of; "He misses his mother") }
+{ ache6, [ yearn1, noun.person:yearner,+ noun.feeling:yearning,+ ] [ yen, noun.feeling:yen,+ ] [ pine, noun.feeling:pining,+ ] languish, long2,@ frames: 22 (have a desire for something or someone who is not present; "She ached for a cigarette"; "I am pining for my lover") }
+{ [ appreciate, adj.all:grateful^appreciative,+ ] verb.communication:acknowledge1,@ frames: 8 (recognize with gratitude; be grateful for) }
+{ brace, [ poise, noun.attribute:poise,+ ] verb.change:prepare,@ frames: 9 (prepare (oneself) for something unpleasant or difficult) }
+{ steel, [ nerve, noun.attribute:nerve,+ ] brace,@ frames: 9 (get ready for something difficult or unpleasant) }
+{ take_heart, buck_up, hearten,@ frames: 2,22 (gain courage) }
+{ capture, enamour, [ trance, noun.state:trance,+ ] [ catch5, noun.person:catch,+ ] becharm, enamor, [ captivate, noun.person:captive2,+ noun.state:captivation,+ noun.feeling:captivation,+ ] [ beguile, noun.attribute:beguilement,+ noun.person:beguiler,+ ] [ charm, noun.person:charmer1,+ noun.attribute:charm,+ noun.person:charmer,+ ] [ fascinate1, noun.feeling:fascination,+ ] [ bewitch, noun.attribute:bewitchery,+ ] [ entrance, noun.feeling:entrancement,+ ] [ enchant1, noun.feeling:enchantment,+ ] attract,@ frames: 10,9 (attract; cause to be enamored; "She captured all the men's hearts") }
+{ beckon, attract,@ frames: 1 (appear inviting; "The shop window decorations beckoned") }
+{ [ endear, noun.act:endearment,+ ] please,@ frames: 20 (make attractive or lovable; "This behavior endeared her to me") }
+{ [ antagonize, noun.state:antagonism,+ noun.feeling:antagonism2,+ ] [ antagonise, noun.state:antagonism,+ noun.feeling:antagonism2,+ ] irritate,@ frames: 9,10 (provoke the hostility of; "Don't antagonize your boss") }
+{ [ tempt, adj.all:susceptible^temptable,+ noun.cognition:temptation,+ noun.person:tempter,+ ] [ invite, noun.attribute:invitation,+ ] stimulate,@ frames: 10 (give rise to a desire by being attractive or inviting; "the window displays tempted the shoppers") }
+{ [ tempt1, adj.all:susceptible^temptable,+ noun.person:tempter,+ ] arouse1,@ frames: 9 (try to seduce) }
+{ [ attract, adj.all:attractive1,+ noun.communication:attraction,+ noun.cognition:attraction,+ noun.attribute:attraction,+ noun.cognition:attractor,+ repel,!] [ appeal, noun.attribute:appeal,+ ] frames: 4 please,* frames: 10,9 (be attractive to; "The idea of a vacation appeals to me"; "The beautiful garden attracted many people") }
+{ bring5, verb.communication:bring3,$ verb.contact:attract,@ frames: 10 (attract the attention of; "The noise and the screaming brought the curious") }
+{ [ disgust, noun.feeling:disgust,+ ] revolt, [ nauseate, noun.feeling:nausea,+ ] sicken, churn_up, repel,@ frames: 9,10 (cause aversion in; offend the moral sense of; "The pornographic pictures sickened us") }
+{[turn_off, noun.cognition:turnoff,+ ] put_off4, repel,@ frames: 9,10 (cause to feel intense dislike or distaste) }
+{ [ repel, adj.all:ugly^repulsive,+ adj.all:offensive1^repulsive,+ adj.all:unpleasant^repellant,+ adj.all:offensive1^repellant,+ adj.all:offensive1^repellent,+ noun.substance:repellent,+ noun.substance:repellant,+ attract,!] repulse, displease,@ frames: 9,10 (be repellent to; cause aversion in) }
+{ [ shock1, noun.event:shock1,+ ] floor, ball_over, blow_out_of_the_water, take_aback, verb.cognition:surprise,@ frames: 9,10 (surprise greatly; knock someone's socks off; "I was floored when I heard that I was promoted") }
+{ overwhelm, overpower, sweep_over, whelm, overcome, overtake, arouse,@ frames: 10 (overcome, as with emotions or perceptual stimuli) }
+{ kill, overwhelm,@ frames: 10,9 (overwhelm with hilarity, pleasure, or admiration; "The comedian was so funny, he was killing me!") }
+{ shout_down, verb.change:silence,@ frames: 9 (silence or overwhelm by shouting) }
+{ benight, overwhelm,@ frames: 10 (overtake with darkness or night) }
+{ knock_out, overwhelm,@ frames: 10,9 (overwhelm with admiration; "All the guys were knocked out by her charm") }
+{ stagger, overwhelm,@ frames: 10 (astound or overwhelm, as with shock; "She was staggered with bills after she tried to rebuild her house following the earthquake") }
+{ lock, overwhelm,@ frames: 10 (hold fast (in a certain state); "He was locked in a laughing fit") }
+{ [ shock2, noun.feeling:shock1,+ noun.person:shocker,+ ] [ offend2, adj.all:unwholesome^offensive,+ adj.all:offensive4,+ adj.all:offensive1,+ ] [ scandalize, noun.act:scandalization,+ noun.event:scandal,+ noun.communication:scandal,+ ] [ scandalise, noun.act:scandalisation,+ noun.event:scandal,+ noun.communication:scandal,+ ] appal, appall, [ outrage1, noun.event:outrage,+ noun.act:outrage,+ noun.feeling:outrage,+ ] disgust,@ frames: 10,9 (strike with disgust or revulsion; "The scandalous behavior of this married woman shocked her friends") }
+{ [ despair, noun.feeling:despair,+ noun.state:despair,+ noun.state:desperation1,+ noun.person:desperate,+ hope,! ] frames: 2,22 (abandon hope; give up hope; lose heart; "Don't despair--help is on the way!") }
+{ [ despond, adj.all:hopeless^despondent,+ noun.feeling:despondency,+ noun.feeling:despondence,+ ] despair,@ frames: 2 (lose confidence or hope; become dejected; "The supporters of the Presidential candidate desponded when they learned the early results of the election")}
+{ [ hope, noun.attribute:hope,+ noun.person:hope,+ noun.cognition:hope,+ noun.feeling:hope,+ noun.feeling:hope1,+ noun.person:hoper,+ despair,!] desire,@ frames: 2,22,26 (be optimistic; be full of hope; have hopes; "I am still hoping that all will turn out well") }
+{ [ elate, noun.state:elation,+ noun.feeling:elation,+ depress,! ] lift_up, uplift, pick_up, [ intoxicate, noun.feeling:intoxication,+ ] rejoice,> stimulate,@ frames: 9,10 (fill with high spirits; fill with optimism; "Music can uplift your spirits") }
+{ [ beatify1, noun.state:beatification,+ noun.act:beatification1,+ ] elate,@ frames: 9,10 (make blessedly happy)}
+{ puff, elate,@ frames: 11,10 (make proud or conceited; "The sudden fame puffed her ego")}
+{ [ exhilarate, noun.feeling:exhilaration,+ ] tickle_pink, inebriate, [ thrill1, noun.act:thrill,+ noun.feeling:thrill2,+ noun.feeling:thrill,+ ] [ exalt1, noun.state:exaltation,+ ] [ beatify3, noun.state:beatification,+ noun.act:beatification1,+ ] elate,@ frames: 9,10 (fill with sublime emotion; "The children were thrilled at the prospect of going to the movies"; "He was inebriated by his phenomenal success") }
+{ inspire, animate, [ invigorate, noun.act:invigoration,+ ] enliven, [ exalt, noun.state:exaltation,+ ] stimulate,@ frames: 9,10 (heighten or intensify; "These paintings exalt the imagination")}
+{ [gladden, sadden,! ] rejoice,@ frames: 2 (become glad or happy) }
+{ [sadden1, gladden1,! ] sadden,> affect,@ frames: 9,10 (make unhappy; "The news of her death saddened me") }
+{ overjoy, gladden1,@ frames: 9,10 (cause to feel extremely joyful or happy; "the economic growth overjoyed the German industry")}
+{ [sadden, gladden,! ] feel,@ frames: 2,22 (come to feel sad) }
+{ [gladden1, sadden1,! ] [ joy1, noun.cognition:joy,+ noun.feeling:joy,+ ] gladden,> frames: 9,10 (make glad or happy) }
+{ [ exult, adj.all:elated^exultant,+ noun.feeling:exultation,+ ] [ walk_on_air, noun.state:walking_on_air,+ ] be_on_cloud_nine, jump_for_joy, rejoice,@ frames: 2 (feel extreme happiness or elation) }
+{ [ rejoice, noun.feeling:rejoicing,+ ] [ joy, noun.feeling:joy,+ ] feel,@ frames: 2,22 (feel happiness or joy) }
+{ [lighten1, weigh_down,! ] lighten_up1, buoy_up1, verb.communication:lighten,> verb.communication:cheer2,@ frames: 9,10 (make more cheerful; "the conversation lightened me up a bit") }
+{ [weigh_down, lighten1,! ] weigh_on, sadden1,@ frames: 10 (be oppressive or disheartening to) }
+{ [ depress, adj.all:depressant,+ noun.artifact:depressant,+ elate,!] [ deject, noun.state:dejection,+ ] cast_down, get_down, [ dismay1, noun.feeling:dismay2,+ ] dispirit, [ demoralize, noun.feeling:demoralization,+ ] [ demoralise, noun.feeling:demoralisation,+ ] discourage,@ frames: 9,10 (lower someone's spirits; make downhearted; "These news depressed her"; "The bad state of her child's health demoralizes her") }
+{ [ comfort1, noun.act:comfort,+ noun.person:comforter1,+ noun.person:comforter,+ ] soothe, [ console, adj.all:consolable,+ adj.all:reassuring^consolatory,+ noun.feeling:consolation,+ noun.act:consolation,+ ] [ solace, noun.act:solace,+ noun.state:solace,+ noun.feeling:solace,+ noun.state:solacement,+ noun.feeling:solacement,+ ] frames: 9,10 (give moral or emotional strength to) }
+{ [ still1, noun.attribute:still,+ ] [ allay, noun.person:allayer,+ ] [ relieve, noun.person:reliever2,+ ] [ ease, noun.state:ease2,+ noun.act:easement,+ ] comfort1,@ frames: 8,11 (lessen the intensity of or calm; "The news eased my conscience"; "still the fears") }
+{ [ abreact, noun.act:abreaction,+ ] relieve,@ noun.act:psychoanalysis,;c frames: 2 (discharge bad feelings or tension through verbalization) }
+{ [ please, adj.all:pleasant,+ noun.feeling:pleasure,+ noun.cognition:pleasure,+ noun.act:pleasure2,+ noun.person:pleaser,+ noun.act:pleasing,+ displease,!] [ delight, noun.cognition:delight,+ noun.feeling:delight,+ ] like5,> like4,> satisfy,@ frames: 9,10 (give pleasure to or be pleasing to; "These colors please the senses"; "a pleasing sensation") }
+{ [ please3, adj.all:nice^pleasant,+ ] please,$ satisfy,@ frames: 9,10 (give satisfaction; "The waiters around her aim to please")}
+{ [ titillate, noun.act:titillation1,+ ] please,* excite,@ frames: 9,10 (excite pleasurably or erotically; "A titillating story appeared in the usually conservative magazine") }
+{ [ satisfy, noun.object:satisfier,+ dissatisfy,! ] [ gratify, noun.state:gratification,+ noun.act:gratification,+ ] frames: 9,10 (make happy or satisfied) }
+{ [ dissatisfy, adj.all:unsatisfactory^dissatisfactory,+ noun.feeling:dissatisfaction,+ satisfy,! ] disappoint,* displease,@ frames: 9,10 (fail to satisfy) }
+{ [ content, noun.state:content,+ discontent,! ] satisfy,@ frames: 9,10 (make content; "I am contented") }
+{ [ discontent, noun.feeling:discontentment,+ noun.feeling:discontent,+ content,! ] dissatisfy,@ frames: 9,10 (make dissatisfied) }
+{ [ displease, noun.feeling:displeasure,+ please,!] dislike,> frames: 9,10 (give displeasure to) }
+{ [ enchant, noun.state:enchantment,+ noun.cognition:enchantment,+ disenchant,! ] enrapture, [ transport, noun.state:transport,+ ] [ enthrall, noun.feeling:enthrallment,+ ] [ ravish, noun.feeling:ravishment,+ ] enthral, delight2, please,@ frames: 9,10 (hold spellbound) }
+{ work10, enchant1,@ frames: 9,10 (gratify and charm, usually in order to influence; "the political candidate worked the crowds")}
+{ [ disenchant, noun.cognition:disenchantment,+ enchant,! ] [ disillusion, noun.cognition:disillusionment,+ noun.cognition:disillusion,+ ] disappoint,@ frames: 9,10 (free from enchantment) }
+{ [ cheer2, noun.communication:cheering,+ ] [hearten, dishearten,!] recreate, embolden, encourage,@ frames: 10,9 (give encouragement to) }
+{ rise, frames: 1 (become heartened or elated; "Her spirits rose when she heard the good news") }
+{ [ encourage, noun.feeling:encouragement,+ discourage,! ] hope,> inspire,@ frames: 9,10 (inspire with confidence; give hope or courage to) }
+{ draw_out, encourage,@ frames: 9,10 (make more sociable; "The therapist drew out the shy girl")}
+{ bring_out, encourage,@ frames: 8,9,10,11 (encourage to be less reserved; "The teacher tried to bring out the shy boy") }
+{ [ spur, noun.communication:spur,+ ] [ goad, noun.communication:goad,+ ] encourage,@ frames: 9,10 (give heart or courage to) }
+{ [ chill, noun.feeling:chill,+ ] dispirit,@ frames: 9,10,11 (depress or discourage; "The news of the city's surrender chilled the soldiers") }
+{ [ discourage, noun.feeling:discouragement2,+ encourage,! ] frames: 9,10 (deprive of courage or hope; take away hope from; cause to feel discouraged) }
+{ [ dishearten, noun.feeling:disheartenment,+ noun.communication:disheartenment,+ hearten,! ] put_off, discourage,@ frames: 9,10 (take away the enthusiasm of) }
+{ [ intimidate1, noun.communication:intimidation,+ noun.act:intimidation1,+ ] discourage,@ verb.communication:warn,* frames: 9,10 (to compel or deter by or as if by threats) }
+{ throw_cold_water_on, pour_cold_water_on, discourage,@ frames: 8,9 (be discouraging or negative about) }
+{ [ dither, noun.state:dither,+ ] [ flap, noun.state:flap,+ ] [ pother, noun.state:pother,+ ] fuss,@ frames: 2,22 (make a fuss; be agitated) }
+{ [ pother1, noun.state:pother,+ ] agitate,@ frames: 10,9 (make upset or troubled) }
+{ dither1, fret,@ frames: 2,22 (act nervously; be undecided; be uncertain) }
+{ [ enjoy, noun.feeling:enjoyment,+ noun.act:enjoyment,+ noun.person:enjoyer,+ ] [bask13, frames: 22] [ relish, noun.feeling:relish2,+ ] savor, savour, like5,* frames: 8,9,33 (derive or receive pleasure from; get enjoyment from; take pleasure in; "She relished her fame and basked in her glory") }
+{ feast_one's_eyes, enjoy,@ frames: 22 (look at with great enjoyment; "She feasted her eyes on the Tuscan landscape")}
+{ devour, enjoy,@ frames: 8 (enjoy avidly; "She devoured his novels") }
+{ [ exacerbate, noun.act:exacerbation,+ ] [ exasperate, noun.feeling:exasperation,+ noun.act:exasperation,+ ] [ aggravate, noun.act:aggravation,+ noun.feeling:aggravation,+ noun.person:aggravator,+ ] anger,@ frames: 9,10 (exasperate or irritate) }
+{ [ fascinate, noun.state:fascination,+ noun.attribute:fascination,+ ] transfix, [ grip, noun.attribute:grip,+ ] [ spellbind, noun.person:spellbinder,+ ] interest,@ frames: 9,10 (to render motionless, as with a fixed stare or by arousing terror or awe; "The snake charmer fascinates the cobra") }
+{ [ interest, noun.attribute:interest2,+ noun.cognition:interest,+ bore,! ] arouse,@ frames: 9,10 (excite the curiosity of; engage the interest of) }
+{ startle, [ galvanize, noun.act:galvanization1,+ noun.person:galvanizer,+ ] [ galvanise, noun.person:galvaniser,+ ] shock1,@ frames: 10,9,30 (to stimulate to action; "the loud noise startled him awake"; "galvanized into action") }
+{ [ bore, noun.person:bore,+ interest,! ] tire1, frames: 9,10 (cause to be bored) }
+{ feel_for, [ pity, noun.attribute:pity,+ noun.feeling:pity,+ ] [ compassionate, noun.feeling:compassion,+ noun.attribute:compassion,+ ] condole_with, sympathize_with, grieve,@ frames: 9 (share the suffering of) }
+{ [ commiserate, adj.all:sympathetic^commiserative,+ noun.feeling:commiseration,+ noun.communication:commiseration,+ ] [ sympathize, noun.person:sympathizer1,+ noun.feeling:sympathy,+ ] [ sympathise, noun.person:sympathiser1,+ noun.feeling:sympathy,+ ] sympathize_with,@ frames: 2,22 (to feel or express sympathy or compassion) }
+{ [ condole, noun.communication:condolence,+ ] sympathize,@ frames: 2,22 (express one's sympathetic grief, on the occasion of someone's death; "You must condole the widow") }
+{ [ sympathize1, noun.person:sympathizer,+ noun.relation:sympathy,+ ] [ sympathise1, noun.person:sympathiser,+ noun.relation:sympathy,+ ] feel,@ frames: 2,22 (share the feelings of; understand the sentiments of) }
+{ [ care2, noun.feeling:care,+ noun.feeling:caring1,+ verb.social:care13,^ care_for8,^ ] sympathize_with,@ frames: 22,2 (feel concern or interest; "I really care about my work"; "I don't care") }
+{ care_a_hang, give_a_hoot, give_a_hang, give_a_damn, frames: 2,22 (show no concern or interest; always used in the negative; "I don't give a hoot"; "She doesn't give a damn about her job") }
+{ wallow, [ rejoice2, noun.feeling:rejoicing,+ ] [ triumph, adj.all:elated^triumphant,+ noun.feeling:triumph,+ ] exult,@ frames: 21 (be ecstatic with joy) }
+{ [ estrange, noun.state:estrangement,+ ] [ alienate, noun.person:alienator,+ ] [ disaffect, noun.feeling:disaffection,+ ] verb.change:change1,@ frames: 9,10 (arouse hostility or indifference in where there had formerly been love, affection, or friendliness; "She alienated her friends when she became fanatically religious") }
+{ alienate1, affect,@ frames: 10 (make withdrawn or isolated or emotionally dissociated; "the boring work alienated his employees")}
+{ drift_apart, drift_away3, estrange,@ frames: 2 (lose personal contact over time; "The two women, who had been roommates in college, drifted apart after they got married")}
+{ wean, estrange,@ frames: 9 (detach the affections of) }
+{ [ wish, noun.feeling:wish,+ noun.communication:wish,+ noun.feeling:wishing,+ ] desire,@ frames: 8,28 (hope for; have a wish; "I wish I could go home now") }
+{ [ wish1, noun.feeling:wish,+ noun.communication:wish,+ begrudge,! ] [wish_well, frames: 9 ] desire,@ frames: 14 (feel or express a desire or hope concerning the future or fortune of) }
+{ [ wish2, noun.feeling:wish,+ ] care, like1, desire,@ frames: 28 (prefer or wish to do something; "Do you care to try this dish?"; "Would you like to come along to the movies?") }
+{ [ please1, noun.act:pleasure2,+ ] wish2,@ frames: 1,2 (be the will of or have the will (to); "he could do many things if he pleased") }
+{ [begrudge, wish1,! frames: 14 ] resent1, frames: 26 (wish ill or allow unwillingly) }
+{ [ desire, noun.feeling:desire,+ noun.state:desire,+ noun.attribute:desire,+ ] [ want, noun.person:wanter,+ noun.feeling:want,+ frames: 24] frames: 8,26,28 (feel or have a desire for; want strongly; "I want to go home now"; "I want my own room") }
+{ [ itch, noun.feeling:itch,+ ] spoil, desire,@ frames: 28 (have a strong desire or urge to do something; "She is itching to start the project"; "He is spoiling for a fight")}
+{ like6, want,@ frames: 8 (want to have; "I'd like a beer now!") }
+{ [ ambition, noun.feeling:ambition,+ noun.attribute:ambition,+ ] desire,@ frames: 28 (have as one's ambition) }
+{ feel_like, want,@ frames: 8,33 (have an inclination for something or some activity; "I feel like staying in bed all day"; "I feel like a cold beer now") }
+{ [ desire1, noun.state:desire,+ noun.attribute:desire,+ ] verb.communication:request1,@ frames: 8 (express a desire for) }
+{ [ prefer, noun.feeling:preference,+ ] like5,@ frames: 8,9,15,27,33 (like better; value more highly; "Some people prefer camping to staying in hotels"; "We prefer sleeping outside") }
+{ [ hope1, noun.attribute:hope,+ noun.person:hope,+ noun.cognition:hope,+ noun.feeling:hope,+ noun.feeling:hope1,+ noun.person:hoper,+ ] trust, [ desire2, noun.attribute:desire,+ noun.state:desire,+ ] wish,@ frames: 26 (expect and wish; "I trust you will behave better from now on"; "I hope she understands that she cannot expect a raise") }
+{ [ envy, noun.feeling:envy,+ noun.act:envy,+ frames: 9 ] begrudge1, desire,@ frames: 14 (be envious of; set one's heart on) }
+{ covet, envy,@ frames: 8 (wish, long, or crave for (something, especially the property of another person); "She covets her sister's house") }
+{ salivate, drool, covet,@ frames: 22 (be envious, desirous, eager for, or extremely happy about something; "She was salivating over the raise she anticipated") }
+{ [ envy1, noun.feeling:envy,+ frames: 14 ] admire,@ frames: 9 (feel envious towards; admire enviously) }
+{ drool_over, slobber_over, idolize,@ frames: 8,9 (envy without restraint) }
+{ [ admire, noun.feeling:admiration1,+ noun.person:admirer1,+ noun.person:admirer2,+ noun.person:admirer,+ look_down_on,!] look_up_to, verb.cognition:respect,@ frames: 8,9 (feel admiration for) }
+{ look_down_on, contemn,@ frames: 9,8 (regard with contempt; "the new neighbor looks down on us because our house is very modest")}
+{ lust_after, lech_after, desire,@ frames: 9 (have a strong sexual desire for; "he is lusting after his secretary") }
+{ [ hanker, noun.feeling:hankering,+ ] [ long2, noun.person:longer,+ noun.feeling:longing,+ ] [ yearn, noun.person:yearner,+ noun.feeling:yearning,+ ] desire,@ frames: 22 (desire strongly or persistently) }
+{ care_for1, like5,@ frames: 8,33 (have a liking, fondness, or taste (for)) }
+{ [ love2, noun.cognition:love,+ noun.feeling:love,+ noun.person:lover1,+ noun.person:lover,+ ] [ enjoy1, noun.feeling:enjoyment,+ noun.act:enjoyment,+ noun.person:enjoyer,+ ] like5,@ frames: 8,28 (get pleasure from; "I love cooking") }
+{ take_pride9, pride_oneself9, feel,@ frames: 22 (feel proud of; "She took great pride in her sons") }
+{ fall_apart, go_to_pieces, lose_it,@ frames: 2 (lose one's emotional or mental composure; "She fell apart when her only child died") }
+{ burn, feel,@ frames: 2 (feel strong emotion, especially anger or passion; "She was burning with anger"; "He was burning to try out his new skies")}
+{ die3, feel,@ frames: 22 (feel indifferent towards; "She died to worldly things and eventually entered a monastery") }
+{ fly_high, feel,@ frames: 2 (be elated; "He was flying high during the summer months") }
+{ [ glow, noun.state:glow,+ noun.feeling:glow,+ ] beam1, [ radiate, noun.state:radiance,+ ] shine, feel,@ frames: 2 (experience a feeling of well-being or happiness, as from good health or an intense emotion; "She was beaming with joy"; "Her face radiated with happiness") }
+{ [ glow1, noun.state:glow,+ ] feel,@ frames: 1,2 (be exuberant or high-spirited; "Make the people's hearts glow")}
+{ enthuse, excite2,@ frames: 9,10 (cause to feel enthusiasm) }
+{ bring_down, enthuse,@ frames: 9,10 (cause to be enthusiastic; "Her playing brought down the house") }
+{ disarm, verb.communication:win_over,@ frames: 9,10 (make less hostile; win over; "Her charm disarmed the prosecution lawyer completely") }
+{ [ disgruntle, noun.feeling:disgruntlement,+ ] dissatisfy,@ frames: 9,10 (put into a bad mood or into bad humour; "The employees were disgruntled by their bad working conditions") }
+{ [ electrify, noun.feeling:electricity,+ noun.act:electrification,+ ] charge5,@ frames: 9,10 (excite suddenly and intensely; "The news electrified us") }
+{ [ spook, noun.cognition:spook,+ ] frighten,@ frames: 9,10 (frighten or scare, and often provoke into a violent action; "The noise spooked the horse") }
+{ [ obsess3, adj.all:neurotic^obsessive,+ noun.cognition:obsession,+ ] worry,@ frames: 22 (be preoccupied with something; "She is obsessing over her weight") }
+{ [ puzzle3, noun.communication:puzzle,+ noun.cognition:puzzlement,+ ] verb.cognition:ponder,@ frames: 22 (be uncertain about; think about without fully understanding or being able to decide; "We puzzled over her sudden departure") }

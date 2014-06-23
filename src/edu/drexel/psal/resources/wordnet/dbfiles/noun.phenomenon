@@ -1,0 +1,649 @@
+($RCSfile: noun.phenomenon,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:48 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.phenomenon)
+
+{ natural_phenomenon, noun.Tops:phenomenon,@ (all phenomena that are not artificial) }
+{ [ levitation, verb.motion:levitate1,+ verb.motion:levitate,+ ] noun.Tops:phenomenon,@ (the phenomenon of a person or thing rising into the air by apparently supernatural means) }
+{ metempsychosis, rebirth, noun.Tops:phenomenon,@ (after death the soul begins a new cycle of existence in another human body) }
+{ chemical_phenomenon, natural_phenomenon,@ noun.cognition:chemistry,;c (any natural phenomenon involving chemistry (as changes to atoms or molecules)) }
+{ [ allotropy, adj.pert:allotropical,+ adj.pert:allotropic,+ ] [ allotropism, adj.pert:allotropical,+ adj.pert:allotropic,+ ] chemical_phenomenon,@ (the phenomenon of an element existing in two or more physical forms) }
+{ exchange, chemical_phenomenon,@ (chemical process in which one atom or ion or group changes places with another) }
+{ [ photoconductivity, adj.pert:photoconductive,+ ] photoconduction, electrical_conduction,@ (change in the electrical conductivity of a substance as a result of absorbing electromagnetic radiation) }
+{ superconductivity, electrical_conduction,@ (the disappearance of electrical resistance at very low temperatures) }
+{ photochemical_exchange, exchange,@ (an exchange produced by the chemical action of radiant energy (especially light)) }
+{ photoemission, noun.process:emission,@ (an emission of photoelectrons (especially from a metallic surface)) }
+{ [ crystallization, verb.change:crystallize1,+ verb.change:crystallize,+ ] [ crystallisation, verb.change:crystallise1,+ ] [ crystallizing, verb.change:crystallize1,+ verb.change:crystallize,+ ] chemical_phenomenon,@ (the formation of crystals) }
+{ efflorescence, bloom, crystallization,@ (a powdery deposit on a surface) }
+{ [ consequence, adj.all:subsequent^consequent,+ ] [ effect, verb.social:effect15,+ verb.creation:effectuate,+ ] outcome, [ result, verb.stative:result2,+ verb.stative:result,+ ] [ event1, verb.stative:eventuate,+ ] issue, upshot, noun.Tops:phenomenon,@ (a phenomenon that follows and is caused by some previous phenomenon; "the magnetic effect was greater when the rod was lengthwise"; "his decision had depressing consequences for business"; "he acted very wise after the event") }
+{ aftereffect, consequence,@ (any result that follows its cause after an interval) }
+{ aftermath, wake, backwash1, consequence,@ (the consequences of an event (especially a catastrophic event); "the aftermath of war"; "in the wake of the accident no one knew how many had been injured") }
+{ bandwagon_effect, consequence,@ (the phenomenon of a popular trend attracting even greater popularity; "in periods of high merger activity there is a bandwagon effect with more and more firms seeking to engage in takeover activity"; "polls are accused of creating a bandwagon effect to benefit their candidate") }
+{ [ brisance, adj.pert:brisant,+ ] consequence,@ (the shattering or crushing effect of a sudden release of energy as in an explosion) }
+{ butterfly_effect, consequence,@ (the phenomenon whereby a small change at one place in a complex system can have large effects elsewhere, e.g., a butterfly flapping its wings in Rio de Janeiro might change the weather in Chicago) }
+{ by-product, byproduct, consequence,@ (a secondary and sometimes unexpected consequence) }
+{ [ change, verb.change:change2,+ verb.change:change1,+ verb.change:change,+ ] consequence,@ (the result of alteration or modification; "there were marked changes in the lining of the lungs"; "there had been no change in the mountains") }
+{ coattails_effect, consequence,@ noun.cognition:politics,;c ((politics) the consequence of one popular candidate in an election drawing votes for other members of the same political party; "he counted on the coattails effect to win him the election") }
+{ Coriolis_effect, consequence,@ noun.cognition:physics,;c ((physics) an effect whereby a body moving in a rotating frame of reference experiences the Coriolis force acting perpendicular to the direction of motion and to the axis of rotation; on Earth the Coriolis effect deflects moving bodies to the right in the northern hemisphere and to the left in the southern hemisphere) }
+{ dent, consequence,@ (an appreciable consequence (especially a lessening); "it made a dent in my bank account") }
+{ [ dominance, adj.all:dominant2,+ ] organic_phenomenon,@ noun.cognition:genetics,;c (the organic phenomenon in which one of a pair of alleles present in a genotype is expressed in the phenotype and the other allele of the pair is not) }
+{ domino_effect, consequence,@ noun.communication:figure_of_speech,;u (the consequence of one event setting off a chain of similar events (like a falling domino causing a whole row of upended dominos to fall)) }
+{ harvest, consequence,@ (the consequence of an effort or activity; "they gathered a harvest of examples"; "a harvest of love") }
+{ [ impact, verb.change:impact,+ ] wallop, consequence,@ (a forceful consequence; a strong effect; "the book had an important impact on my thinking"; "the book packs a wallop") }
+{ [ influence, adj.all:influential,+ verb.communication:influence,+ verb.cognition:influence,+ verb.social:influence,+ ] consequence,@ (the effect of one thing (or person) on another; "the influence of mechanical action") }
+{ [ perturbation, verb.motion:perturb1,+ verb.motion:perturb,+ ] influence,@ noun.cognition:physics,;c ((physics) a secondary influence on a system that causes it to deviate slightly) }
+{ [ variation, verb.stative:vary1,+ verb.stative:vary,+ ] perturbation,@ noun.cognition:astronomy,;c ((astronomy) any perturbation of the mean motion or orbit of a planet or satellite (especially a perturbation of the earth's moon)) }
+{ purchase1, influence,@ (a means of exerting influence or gaining advantage; "he could get no purchase on the situation") }
+{ wind1, influence,@ (a tendency or force that influences events; "the winds of change") }
+{ knock-on_effect, consequence,@ noun.location:Britain,;r (a secondary or incidental effect) }
+{ outgrowth, branch, offshoot, offset, consequence,@ (a natural consequence of development) }
+{ [ product, verb.creation:produce3,+ ] consequence,@ (a consequence of someone's efforts or of a particular set of circumstances; "skill is the product of hours of practice"; "his reaction was the product of hunger and fatigue") }
+{ placebo_effect, consequence,@ (any effect that seems to be a consequence of administering a placebo; the change is usually beneficial and is assumed result from the person's faith in the treatment or preconceptions about what the experimental drug was supposed to do; pharmacologists were the first to talk about placebo effects but now the idea has been generalized to many situations having nothing to do with drugs) }
+{ position_effect, consequence,@ noun.cognition:genetics,;c ((genetics) the effect on the expression of a gene that is produced by changing its location in a chromosome) }
+{ [ repercussion, verb.change:repercuss,+ ] [ reverberation, verb.stative:reverberate,+ ] consequence,@ (a remote or indirect consequence of some action; "his declaration had unforeseen repercussions"; "reverberations of the market crash were felt years later") }
+{ response, consequence,@ (a result; "this situation developed in response to events in Africa") }
+{ [ reaction1, verb.cognition:react,+ ] response,@ (a response that reveals a person's feelings or attitude; "he was pleased by the audience's reaction to his performance"; "John feared his mother's reaction when she saw the broken lamp") }
+{ side_effect, fallout, consequence,@ (any adverse and unwanted secondary effect; "a strategy to contain the fallout from the accounting scandal") }
+{ engine, noun.Tops:causal_agent,@ (something used to achieve a purpose; "an engine of change") }
+{ geological_phenomenon, natural_phenomenon,@ noun.cognition:geology,;c (a natural phenomenon involving the structure or composition of the earth) }
+{ [ endogeny, adj.all:integrative^endogenetic,+ ] geological_phenomenon,@ (a geological phenomenon below the surface of the earth) }
+{ luck, fortune, [ chance, verb.social:chance1,+ ] [ hazard, verb.communication:hazard,+ ] noun.Tops:phenomenon,@ (an unknown and unpredictable phenomenon that causes an event to result one way rather than another; "bad luck caused his downfall"; "we ran into each other by pure chance") }
+{ [ luck1, adj.all:fortunate^lucky,+ adj.all:lucky,+ ] fortune1, noun.Tops:phenomenon,@ (an unknown and unpredictable phenomenon that leads to a favorable outcome; "it was my good luck to be there"; "they say luck is a lady"; "it was as if fortune guided his hand") }
+{ organic_phenomenon, natural_phenomenon,@ noun.cognition:biology,;c ((biology) a natural phenomenon involving living plants and animals) }
+{ physical_phenomenon, natural_phenomenon,@ (a natural phenomenon involving the physical properties of matter and energy) }
+
+{ [ aberration, verb.stative:aberrate,+ ] distortion, optical_aberration, optical_phenomenon,@ (an optical phenomenon resulting from the failure of a lens or mirror to produce a good image) }
+{ [ abiogenesis, adj.pert:abiogenetic,+ noun.person:abiogenist,+ ] [ autogenesis, adj.pert:autogenetic,+ ] autogeny, spontaneous_generation, organic_phenomenon,@ (a hypothetical organic phenomenon by which living organisms are created from nonliving matter) }
+{ absorption_band, optical_phenomenon,@ (a dark band in the spectrum of white light that has been transmitted through a substance that exhibits absorption at selective wavelengths) }
+{ [ spectrum, adj.pert:spectral,+ ] noun.group:array,@ (an ordered array of the components of an emission or wave) }
+{ absorption_spectrum, spectrum,@ (the spectrum of electromagnetic radiation that has passed through a medium that absorbed radiation of certain wavelengths) }
+{ actinic_radiation, actinic_ray, electromagnetic_radiation,@ electromagnetic_spectrum,#p (electromagnetic radiation that can produce photochemical reactions) }
+{ action_spectrum, spectrum,@ (the efficiency with which electromagnetic radiation produces a photochemical reaction plotted as a function of the wavelength of the radiation) }
+{ activation_energy, energy_of_activation, energy,@ (the energy that an atomic system must acquire before a process (such as an emission or reaction) can occur; "catalysts are said to reduce the energy of activation during the transition phase of a reaction") }
+{ aerodynamic_force, force,@ (forces acting on airfoils in motion relative to the air (or other gaseous fluids)) }
+{ aerodynamic_lift, lift, aerodynamic_force,@ (the component of the aerodynamic forces acting on an airfoil that opposes gravity) }
+{ ground_effect, aerodynamic_lift,@ (apparent increase in aerodynamic lift experienced by an aircraft flying close to the ground) }
+{ [ aerosol, verb.contact:aerosolize1,+ verb.contact:aerosolize,+ verb.contact:aerosolise1,+ verb.contact:aerosolise,+ ] cloud1,@ (a cloud of solid or liquid particles in a gas) }
+{ affinity1, chemical_attraction, force,@ (the force attracting atoms to each other and binding them together in a molecule; "basic dyes have an affinity for wool and silk") }
+{ air_pocket, pocket, air_hole, atmospheric_phenomenon,@ (a local region of low pressure or descending air that causes a plane to lose height suddenly) }
+{ slipstream, airstream1, race, backwash, wash, noun.process:flow,@ (the flow of air that is driven backwards by an aircraft propeller) }
+{ airstream, wind,@ (a relatively well-defined prevailing wind) }
+{ alluvial_fan, alluvial_cone, geological_phenomenon,@ (a fan-shaped deposit where a fast flowing stream flattens out) }
+{ alpha_radiation, alpha_ray, corpuscular_radiation,@ ionizing_radiation,@ (the radiation of alpha particles during radioactive decay) }
+{ alpha_rhythm, alpha_wave, brainwave,@ (the normal brainwave in the electroencephalogram of a person who is awake but relaxed; occurs with a frequency of 8-12 hertz) }
+{ [ alternating_current, direct_current,! ] AC, alternating_electric_current, electricity1,@ (an electric current that reverses direction sinusoidally; "In the US most household current is AC at 60 cycles per second") }
+{ alternation_of_generations, heterogenesis, xenogenesis, organic_phenomenon,@ (the alternation of two or more different forms in the life cycle of a plant or animal) }
+{ alternative_energy, energy,@ (energy derived from sources that do not use up natural resources or harm the environment) }
+{ metagenesis, digenesis, alternation_of_generations,@ (alternation of sexual and asexual generations) }
+{ amperage, electrical_phenomenon,@ (the strength of an electrical current measured in amperes) }
+{ annual_ring, growth_ring, organic_phenomenon,@ (an annual formation of wood in plants as they grow) }
+{ antitrades, prevailing_wind,@ (wind in the upper atmosphere blowing above but in the opposite direction from the trade winds) }
+{ apparent_motion, motion, apparent_movement, movement, optical_illusion,@ (an optical illusion of motion produced by viewing a rapid succession of still pictures of a moving object; "the cinema relies on apparent motion"; "the succession of flashing lights gave an illusion of movement") }
+{ acoustic_phenomenon, physical_phenomenon,@ (a physical phenomenon associated with the production or transmission of sound) }
+{ atmospheric_phenomenon, physical_phenomenon,@ (a physical phenomenon associated with the atmosphere) }
+{ atomic_energy, nuclear_energy, energy,@ (the energy released by a nuclear reaction) }
+{ atomic_power, nuclear_power, atomic_energy,@ (nuclear energy regarded as a source of electricity for the power grid (for civilian use)) }
+{ atomic_spectrum, spectrum,@ noun.cognition:physics,;c ((physics) a spectrum of radiation caused by electron transitions within an atom; the series of spectrum lines is characteristic of the element) }
+{ [ attraction, verb.contact:attract1,+ repulsion,!] attractive_force, force,@ (the force by which one object attracts another) }
+{ affinity2, attraction,@ noun.cognition:immunology,;c ((immunology) the attraction between an antigen and an antibody) }
+{ [ repulsion, attraction,!] repulsive_force, force,@ (the force by which bodies repel one another) }
+{ aureole, corona, glowing,@ noun.object:nimbus,#p (the outermost region of the sun's atmosphere; visible as a white halo during a solar eclipse) }
+{ [ aurora, adj.pert:auroral2,+ ] atmospheric_phenomenon,@ (an atmospheric phenomenon consisting of bands of light caused by charged solar particles following the earth's magnetic lines of force) }
+{ aurora_australis, southern_lights, aurora,@ (the aurora of the southern hemisphere) }
+{ aurora_borealis, northern_lights, aurora,@ (the aurora of the northern hemisphere) }
+{ [ autofluorescence, adj.all:light6^autofluorescent,+ ] fluorescence,@ (self-induced fluorescence) }
+{ bad_luck, mischance1, mishap1, luck,@ (an unpredictable outcome that is unfortunate; "if I didn't have bad luck I wouldn't have any luck at all") }
+{ [ beam, adj.all:bright^beamy,+ verb.weather:beam3,+ ] beam_of_light, light_beam, [ ray, verb.weather:ray,+ ] ray_of_light, shaft, shaft_of_light, [ irradiation, verb.change:irradiate1,+ ] light,@ (a column of light (as from a beacon)) }
+{ beam1, [ ray1, verb.change:ray1,+ ] electron_beam, electromagnetic_radiation,@ (a group of nearly parallel lines of electromagnetic radiation) }
+{ cathode_ray, beam1,@ (a beam of electrons emitted by the cathode of an electrical discharge tube) }
+{ beta_radiation, beta_ray, electron_radiation, corpuscular_radiation,@ ionizing_radiation,@ (radiation of beta particles during radioactive decay) }
+{ beta_rhythm, beta_wave, brainwave,@ (the normal brainwave in the encephalogram of a person who is awake and alert; occurs with a frequency between 12 and 30 hertz) }
+{ binding_energy, separation_energy, energy,@ (the energy required to separate particles from a molecule or atom or nucleus; equals the mass defect) }
+{ bioelectricity, organic_phenomenon,@ (electric phenomena in animals or plants) }
+{ bise, bize, north_wind,@ (a dry cold north wind in southeastern France) }
+{ atmospheric_pressure, air_pressure, pressure1, gas_pressure,@ (the pressure exerted by the atmosphere) }
+{ black-body_radiation, blackbody_radiation, electromagnetic_radiation,@ (the electromagnetic radiation that would be radiated from an ideal black body; the distribution of energy in the radiated spectrum of a black body depends only on temperature and is determined by Planck's radiation law) }
+{ blood_pressure, noun.state:vital_sign,@ pressure,@ circulation,#p (the pressure of the circulating blood against the walls of the blood vessels; results from the systole of the left ventricle of the heart; sometimes measured for a quick evaluation of a person's health; "adult blood pressure is considered normal at 120/80 where the first number is the systolic pressure and the second is the diastolic pressure") }
+{ systolic_pressure, blood_pressure,@ (the blood pressure (as measured by a sphygmomanometer) during the contraction of the left ventricle of the heart) }
+{ diastolic_pressure, blood_pressure,@ (the blood pressure (as measured by a sphygmomanometer) after the contraction of the heart while the chambers of the heart refill with blood) }
+{ arterial_pressure, blood_pressure,@ (the pressure of the circulating blood on the arteries; "arterial pressure is the product of cardiac output and vascular resistance") }
+{ venous_pressure, blood_pressure,@ (the pressure exerted on the walls of the veins by the circulating blood) }
+{ boundary_layer, physical_phenomenon,@ (the layer of slower flow of a fluid past a surface) }
+{ brainwave, brain_wave, cortical_potential, bioelectricity,@ noun.cognition:neurophysiology,;c ((neurophysiology) rapid fluctuations of voltage between parts of the cerebral cortex that are detectable with an electroencephalograph) }
+{ calm_air, calm, wind,@ noun.relation:Beaufort_scale,#p (wind moving at less than 1 knot; 0 on the Beaufort scale) }
+{ [ breeze, adj.all:stormy^breezy,+ verb.weather:breeze,+ ] zephyr, gentle_wind, [ air, adj.all:ventilated^airy,+ ] wind,@ (a slight wind (usually refreshing); "the breeze was cooled by the lake"; "as he waited he could feel the air on his neck") }
+{ sea_breeze, breeze,@ (a cooling breeze from the sea (during the daytime)) }
+{ breath, breeze,@ (a slight movement of the air; "there wasn't a breath of air in the room") }
+{ light_air, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 1-3 knots; 1 on the Beaufort scale) }
+{ light_breeze, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 4-7 knots; 2 on the Beaufort scale) }
+{ gentle_breeze, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 8-12 knots; 3 on the Beaufort scale) }
+{ moderate_breeze, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 13-18 knots; 4 on the Beaufort scale) }
+{ fresh_breeze, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 19-24 knots; 5 on the Beaufort scale) }
+{ strong_breeze, breeze,@ noun.relation:Beaufort_scale,#p (wind moving 25-31 knots; 6 on the Beaufort scale) }
+{ Brownian_movement, Brownian_motion, pedesis, noun.event:movement,@ (the random motion of small particles suspended in a gas or liquid) }
+{ brush_discharge, discharge,@ (discharge between electrodes creating visible streamers of ionized particles) }
+
+{ candlelight, candle_flame, light,@ (the light provided by a burning candle) }
+{ capacitance, electrical_capacity, capacity, electrical_phenomenon,@ (an electrical phenomenon whereby an electric charge is stored) }
+{ elastance, electrical_elastance, electrical_phenomenon,@ (the reciprocal of capacitance) }
+{ [ capillarity, adj.all:thin1^capillary,+ ] capillary_action, surface_tension,@ (a phenomenon associated with surface tension and resulting in the elevation or depression of liquids in capillaries) }
+{ catastrophe, cataclysm, geological_phenomenon,@ (a sudden violent change in the earth's surface) }
+{ nuclear_winter, catastrophe,@ (a long period of darkness and extreme cold that scientists predict would follow a full-scale nuclear war; a layer of dust and smoke in the atmosphere would cover the earth and block the rays of the sun; most living organisms would perish) }
+{ continental_drift, geological_phenomenon,@ (the gradual movement and formation of continents (as described by plate tectonics)) }
+{ [ centrifugal_force, centripetal_force,! ] force,@ (the outward force on a body moving in a curved path around another body) }
+{ [ centripetal_force, centrifugal_force,! ] force,@ (the inward force on a body moving in a curved path around another body) }
+{ chaos, physical_phenomenon,@ (the formless and disordered state of matter before the creation of the cosmos) }
+{ [ charge, verb.change:charge3,+ verb.change:charge,+ ] electric_charge, electrical_phenomenon,@ (the quantity of unbalanced electricity in a body (either positive or negative) and construed as an excess or deficiency of electrons; "the battery needed a fresh charge") }
+{ electrostatic_charge, charge,@ (the electric charge at rest on the surface of an insulated body (which establishes and adjacent electrostatic field)) }
+{ electrostatic_field, electric_field,@ (electric field associated with static electric charges) }
+{ [ pyroelectricity, adj.pert:pyroelectrical,+ adj.pert:pyroelectric,+ ] electrical_phenomenon,@ (generation of an electric charge on certain crystals (such as tourmaline) as a result of a change in temperature) }
+{ [ positive_charge, negative_charge,! ] charge,@ (having a deficiency of electrons; having a higher electric potential) }
+{ [ negative_charge, positive_charge,! ] charge,@ (having a surplus of electrons; having a lower electric potential) }
+{ chatter_mark, noun.process:erosion,@ (marks on a glaciated rock caused by the movement of a glacier) }
+{ chemical_bond, bond, attraction,@ (an electrical force linking atoms) }
+{ valency, chemical_phenomenon,@ (the phenomenon of forming chemical bonds) }
+{ cohesion, force,@ noun.cognition:physics,;c ((physics) the intermolecular force that holds together the molecules in a solid or liquid) }
+{ covalent_bond, chemical_bond,@ (a chemical bond that involves sharing a pair of electrons between atoms in a molecule) }
+{ [ cross-link, verb.contact:cross-link,+ ] [ cross-linkage, verb.contact:cross-link,+ ] chemical_bond,@ (a side bond that links two adjacent chains of atoms in a complex molecule) }
+{ hydrogen_bond, chemical_bond,@ (a chemical bond consisting of a hydrogen atom between two electronegative atoms (e.g., oxygen or nitrogen) with one side be a covalent bond and the other being an ionic bond) }
+{ ionic_bond, electrovalent_bond, electrostatic_bond, chemical_bond,@ (a chemical bond in which one atom loses an electron to form a positive ion and the other atom gains an electron to form a negative ion) }
+{ ionizing_radiation, radiation,@ (high-energy radiation capable of producing ionization in substances through which it passes) }
+{ double_bond, covalent_bond,@ (a covalent bond in which two pairs of electrons are shared between two atoms) }
+{ coordinate_bond, dative_bond, covalent_bond,@ (a covalent bond in which both electrons are provided by one of the atoms) }
+{ metallic_bond, chemical_bond,@ (a chemical bond in which electrons are shared over many nuclei and electronic conduction occurs) }
+{ peptide_bond, peptide_linkage, chemical_bond,@ (the primary linkage of all protein structures; the chemical bond between the carboxyl groups and amino groups that unites a peptide) }
+{ chemical_energy, energy,@ (that part of the energy in a substance that can be released by a chemical reaction) }
+{ chinook, chinook_wind, snow_eater, wind,@ (a warm dry wind blowing down the eastern slopes of the Rockies) }
+{ harmattan, wind,@ (a dusty wind from the Sahara that blows toward the western coast of Africa during the winter) }
+{ chromatic_aberration, aberration,@ (an optical aberration in which the image has colored fringes) }
+{ [ circulation, verb.motion:circulate4,+ verb.motion:circulate1,+ ] organic_phenomenon,@ (movement through a circuit; especially the movement of blood through the heart and blood vessels) }
+{ systemic_circulation, circulation,@ (circulation that supplies blood to all the body except to the lungs) }
+{ pulmonary_circulation, circulation,@ (circulation of blood between the heart and the lungs) }
+{ vitelline_circulation, circulation,@ (circulation of blood between the embryo and the yolk sac) }
+{ cloud1, physical_phenomenon,@ (any collection of particles (e.g., smoke or dust) or gases that is visible) }
+{ cold_wave, wave,@ (a wave of unusually cold weather) }
+{ cold_weather, weather,@ (a period of unusually cold weather) }
+{ Coriolis_force, force,@ noun.cognition:physics,;c ((physics) a force due to the earth's rotation; acts on a body in motion (airplane or projectile) in a rotating reference frame; in a rotating frame of reference Newton's second law of motion can be made to apply if in addition to the real forces acting on a body a Coriolis force and a centrifugal force are introduced) }
+{ [ freeze, verb.weather:freeze10,+ verb.body:freeze,+ ] [ frost, adj.all:cold1^frosty1,+ verb.change:frost,+ ] cold_weather,@ (weather cold enough to cause freezing) }
+{ corona2, light,@ (one or more circles of light seen around a luminous object) }
+{ corona_discharge, corona1, corposant, St._Elmo's_fire, Saint_Elmo's_fire, Saint_Elmo's_light, Saint_Ulmo's_fire, Saint_Ulmo's_light, electric_glow, discharge,@ (an electrical discharge accompanied by ionization of surrounding atmosphere) }
+{ cosmic_background_radiation, CBR, cosmic_microwave_background_radiation, CMBR, cosmic_microwave_background, CMB, cosmic_radiation,@ noun.cognition:cosmology,;c ((cosmology) the cooled remnant of the hot big bang that fills the entire universe and can be observed today with an average temperature of about 2.725 kelvin) }
+{ cosmic_dust, cloud1,@ noun.group:galaxy,#s (clouds of particles or gases occurring throughout interstellar space) }
+{ cosmic_radiation, radiation,@ (radiation coming from outside the solar system) }
+{ cosmic_ray, ionizing_radiation,@ cosmic_radiation,#p (highly penetrating ionizing radiation of extraterrestrial origin; consisting chiefly of protons and alpha particles; collision with atmospheric particles results in rays and particles of many kinds) }
+{ dust_cloud, cloud1,@ (a cloud of dust suspended in the air) }
+{ mushroom, mushroom_cloud, mushroom-shaped_cloud, cloud1,@ (a large cloud of rubble and dust shaped like a mushroom and rising into the sky after an explosion (especially of a nuclear bomb)) }
+{ counterglow, gegenschein, light,@ (a faint spot of light in the night sky that appears directly opposite the position of the sun; a reflection of sunlight by micrometeoric material in space) }
+{ crosswind, wind,@ (wind blowing across the path of a ship or aircraft) }
+{ fohn, foehn, wind,@ (a warm dry wind that blows down the northern slopes of the Alps) }
+{ khamsin, wind,@ (an oppressively hot southerly wind from the Sahara that blows across Egypt in the spring) }
+{ Santa_Ana, wind,@ (a strong hot dry wind that blows in winter from the deserts of southern California toward the Pacific Coast) }
+{ high_wind, wind,@ (a very strong wind; "rain and high winds covered the region") }
+{ headwind, wind,@ (wind blowing opposite to the path of a ship or aircraft) }
+{ katabatic_wind, catabatic_wind, wind,@ (a wind caused by the downward motion of cold air) }
+{ tailwind, wind,@ (wind blowing in the same direction as the path of a ship or aircraft) }
+{ current1, electric_current, electrical_phenomenon,@ (a flow of electricity through a conductor; "the current was measured in amperes") }
+{ [ cyclone, adj.pert:cyclonic1,+ adj.pert:cyclonic,+ adj.pert:cyclonal,+ adj.pert:cyclonical,+ ] windstorm,@ (a violent rotating windstorm) }
+{ cyclosis, streaming, organic_phenomenon,@ (the circulation of cytoplasm within a cell) }
+{ daylight, light,@ (light during the daytime) }
+{ [ death, verb.change:die,+ verb.perception:die,+ ] organic_phenomenon,@ (the permanent end of all life functions in an organism or part of an organism; "the animal died a painful death") }
+{ [ decalescence, adj.all:endothermic^decalescent,+ ] physical_phenomenon,@ (phenomenon that occurs when a metal is being heated and there is a sudden slowing in the rate of temperature increase; slowing is caused by a change in the internal crystal structure of the metal) }
+{ [ decay, verb.change:decay2,+ verb.change:decay,+ ] [ decomposition, adj.all:disintegrative^decompositional,+ verb.change:decompose1,+ ] organic_phenomenon,@ (the organic phenomenon of rotting) }
+{ [ dehiscence, adj.all:dehiscent,+ verb.change:dehisce,+ ] organic_phenomenon,@ noun.cognition:biology,;c ((biology) release of material by splitting open of an organ or tissue; the natural bursting open at maturity of a fruit or other reproductive body to release seeds or spores or the bursting open of a surgically closed wound) }
+{ delta_rhythm, delta_wave, brainwave,@ (the normal brainwave in the encephalogram of a person in deep dreamless sleep; occurs with high voltage and low frequency (1 to 4 hertz)) }
+{ deposit, [ sedimentation, verb.motion:sediment1,+ ] alluviation, geological_phenomenon,@ (the phenomenon of sediment or gravel accumulating) }
+{ [ desquamation, verb.body:desquamate,+ ] [ peeling, verb.contact:peel1,+ ] shedding, organic_phenomenon,@ (loss of bits of outer skin by peeling or shedding or coming off in scales) }
+{ [ exfoliation, verb.contact:exfoliate3,+ verb.contact:exfoliate1,+ verb.contact:exfoliate,+ ] organic_phenomenon,@ (the peeling off in flakes or scales of bark or dead skin; "exfoliation is increased by sunburn") }
+{ mother_lode, champion_lode, lode,@ (the main vein of ore in a deposit) }
+{ lode, load, deposit,@ (a deposit of valuable ore occurring within definite boundaries separating it from surrounding rocks) }
+{ [ condensation, verb.change:condense3,+ ] [ condensate, verb.change:condense3,+ verb.change:condense1,+ ] atmospheric_phenomenon,@ (atmospheric moisture that has condensed because of cold) }
+{ sweat, condensation,@ (condensation of moisture on a cold surface; "the cold glasses were streaked with sweat") }
+{ diapedesis, organic_phenomenon,@ (passage of blood cells (especially white blood cells) through intact capillary walls and into the surrounding tissue) }
+{ dichroism, pleochroism,@ (pleochroism of a crystal so that it exhibits two different colors when viewed from two different directions) }
+{ [ diffraction, verb.motion:diffract,+ ] optical_phenomenon,@ (when light passes sharp edges or goes through narrow slits the rays are deflected and produce fringes of light and dark bands) }
+{ [ direct_current, alternating_current,! ] DC, direct_electric_current, electricity1,@ (an electric current that flows in one direction steadily) }
+{ signal, electricity1,@ (an electric quantity (voltage or current or field strength) whose modulation represents coded information about the source from which it comes) }
+{ interrupt, signal,@ (a signal that temporarily stops the execution of a program so that another procedure can be carried out) }
+{ doldrums, wind,@ (a belt of calms and light winds between the northern and southern trade winds of the Atlantic and Pacific) }
+{ [ drift, verb.motion:drift6,+ verb.motion:drift2,+ ] impetus, [ impulsion, verb.creation:impel,+ ] force,@ (a force that moves something along) }
+{ languor, wind,@ (oppressively still air; "the afternoon was hot, quiet, and heavy with languor"; "Summer shows all the languor of a hot, breezeless day as the dancer lazily brushes her hand over her brow") }
+{ dust_devil, whirlwind,@ (a miniature whirlwind strong enough to whip dust and leaves and litter into the air) }
+{ dust_storm, duster, sandstorm, sirocco, windstorm,@ (a windstorm that lifts up clouds of dust or sand; "it was the kind of duster not experienced in years") }
+{ east_wind, [ easter, adj.all:east^easterly1,+ ] easterly, wind,@ (a wind from the east) }
+{ northwest_wind, [ northwester, adj.all:north^northwesterly2,+ ] wind,@ (a wind from the northwest) }
+{ [ southwester, adj.all:south^southwesterly2,+ ] sou'wester, wind,@ (a strong wind from the southwest) }
+{ [ southeaster, adj.all:south^southeasterly2,+ ] sou'easter, wind,@ (a strong wind from the southeast) }
+{ elastic_energy, elastic_potential_energy, potential_energy,@ (potential energy that is stored when a body is deformed (as in a coiled spring)) }
+{ electrical_phenomenon, physical_phenomenon,@ (a physical phenomenon involving electricity) }
+{ electrical_power, electric_power, wattage, power,@ (the product of voltage and current) }
+{ load1, electrical_power,@ (the power output of a generator or power plant) }
+{ electric_field, field,@ (a field of force surrounding a charged particle) }
+{ dielectric_heating, electrical_phenomenon,@ (heating of an insulator by a high-frequency electric field) }
+{ [ electricity, adj.pert:electric,+ verb.change:electrify1,+ verb.change:electrify,+ ] physical_phenomenon,@ (a physical phenomenon associated with stationary or moving electrons and protons) }
+{ [ galvanism, adj.pert:galvanic,+ ] electricity,@ (electricity produced by chemical action) }
+{ [ electricity1, adj.pert:electric,+ verb.change:electrify1,+ verb.change:electrify,+ ] electrical_energy, power1, energy,@ (energy made available by the flow of electric charge through a conductor; "they built a car that runs on electricity"; "The power went oout around midnight") }
+{ electromagnetic_radiation, electromagnetic_wave, nonparticulate_radiation, radiation,@ (radiation consisting of waves of energy associated with electric and magnetic fields resulting from the acceleration of an electric charge) }
+{ Hertzian_wave, radio_wave,@ (a former name for a radio wave; an electromagnetic wave of radio frequency generated by oscillations in an electric circuit) }
+{ electromagnetic_spectrum, spectrum,@ (the entire frequency range of electromagnetic waves) }
+{ emission_spectrum, spectrum,@ (spectrum of electromagnetic radiation emitted by a self-luminous source) }
+{ energy1, physical_phenomenon,@ (any source of usable power; "the DOE is responsible for maintaining the energy policy") }
+{ [ energy, verb.change:energize,+ verb.body:energize,+ ] free_energy, physical_phenomenon,@ noun.cognition:physics,;c ((physics) a thermodynamic quantity equivalent to the capacity of a physical system to do work; the units of energy are joules or ergs; "energy can take a wide variety of forms") }
+{ energy_level, energy_state, energy,@ (a definite stable energy that a physical system can have; used especially of the state of electrons in atoms or molecules; "according to quantum theory only certain energy levels are possible") }
+{ [ power, verb.consumption:power,+ ] physical_phenomenon,@ noun.cognition:physics,;c ((physics) the rate of doing work; measured in watts (= joules/second)) }
+{ rest_energy, energy,@ (the energy equivalent to the mass of a particle at rest in an inertial frame of reference; equal to the rest mass times the square of the speed of light) }
+{ work, energy,@ noun.cognition:physics,;c ((physics) a manifestation of energy; the transfer of energy from one physical system to another expressed as the product of a force and the distance through which it moves a body in the direction of that force; "work equals force times distance") }
+{ epiphenomenon, by-product,@ (a secondary phenomenon that is a by-product of another phenomenon) }
+{ event, physical_phenomenon,@ noun.cognition:relativity_theory,;c (a phenomenon located at a single point in space-time; the fundamental observational entity in relativity theory) }
+{ [ facilitation, verb.creation:facilitate3,+ ] organic_phenomenon,@ noun.cognition:neurophysiology,;c ((neurophysiology) phenomenon that occurs when two or more neural impulses that alone are not enough to trigger a response in a neuron combine to trigger an action potential) }
+{ flare1, reflection,@ (am unwanted reflection in an optical system (or the fogging of an image that is caused by such a reflection)) }
+{ flashover, discharge,@ (an unintended electric discharge (as over or around an insulator)) }
+{ [ flood, verb.change:flood1,+ verb.change:flood,+ verb.contact:flood,+ ] [ inundation, verb.contact:inundate,+ verb.change:inundate,+ ] [ deluge1, verb.change:deluge,+ ] alluvion, geological_phenomenon,@ (the rising of a body of water and its overflowing onto normally dry land; "plains fertilized by annual inundations") }
+{ debacle, flood,@ (flooding caused by a tumultuous breakup of ice in a river during the spring or summer) }
+{ flash_flood, flashflood, flood,@ (a sudden local flood of great volume and short duration) }
+{ floodhead, flash_flood,@ (a wall of water rushing ahead of the flood; "we were lucky to be safe when the floodheads hit") }
+{ Noah's_flood, Noachian_deluge, Noah_and_the_Flood, the_Flood, flood,@ noun.communication:Bible,;c ((Biblical) the great deluge that is said in the Book of Genesis to have occurred in the time of Noah; it was brought by God upon the earth because of the wickedness of human beings) }
+{ [ focus, adj.pert:focal,+ verb.change:focus,+ verb.perception:focus,+ ] focal_point, noun.location:point,@ (a point of convergence of light (or other radiation) or a point from which it diverges) }
+{ food_chain, organic_phenomenon,@ food_web,#p noun.cognition:ecology,;c ((ecology) a community of organisms where each member is eaten in turn by another member) }
+{ food_pyramid, organic_phenomenon,@ noun.cognition:ecology,;c ((ecology) a hierarchy of food chains with the principal predator at the top; each level preys on the level below) }
+{ food_web, food_cycle, organic_phenomenon,@ noun.cognition:ecology,;c ((ecology) a community of organisms where there are several interrelated food chains) }
+{ fair_weather, sunshine1, [ temperateness, adj.all:temperate1,+ ] weather,@ (moderate weather; suitable for outdoor activities) }
+{ fata_morgana, mirage,@ (a mirage in the Strait of Messina (attributed to the Arthurian sorcerer Morgan le Fay)) }
+{ field, field_of_force, force_field, physical_phenomenon,@ (the space around a radiating body within which its electromagnetic oscillations can exert force on another similar body not in contact with it) }
+{ line_of_force, field_line, noun.location:line,@ (an imaginary line in a field of force; direction of the line at any point is the direction of the force at that point) }
+{ electrical_line_of_force, line_of_force,@ (a line of force in an electrical field) }
+{ magnetic_line_of_force, line_of_force,@ (a line of force in a magnetic field) }
+{ fine_spray, precipitation,@ (precipitation in very small drops) }
+{ fine_structure, noun.communication:spectrum_line,@ atomic_spectrum,#p (the presence of groups of closely spaced spectrum lines observed in the atomic spectrum of certain elements; "the fine structure results from slightly different energy levels") }
+{ firelight, light,@ (the light of a fire (especially in a fireplace)) }
+{ firestorm, storm,@ (a storm in which violent winds are drawn into the column of hot air rising over a severely bombed area) }
+{ [ fluorescence, adj.all:light6^fluorescent,+ verb.perception:fluoresce,+ ] light,@ (light emitted during absorption of radiation of some other (invisible) wavelength) }
+{ [ fog, adj.all:cloudy^foggy,+ ] aerosol,@ (droplets of water vapor suspended in the air near the ground) }
+{ fogbank, fog,@ (a large mass of fog on the sea (as seen from a distance)) }
+{ [ force, verb.contact:force5,+ verb.motion:force,+ ] physical_phenomenon,@ noun.cognition:physics,;c ((physics) the influence that produces a change in a physical quantity; "force equals mass times acceleration") }
+{ forked_lightning, chain_lightning, lightning,@ (a form of lightning that moves rapidly in a zigzag path with one end divided (fork-like)) }
+{ friar's_lantern, ignis_fatuus, jack-o'-lantern, will-o'-the-wisp, light,@ (a pale light sometimes seen at night over marshy ground) }
+{ [ friction, adj.pert:frictional,+ ] [ rubbing, verb.contact:rub1,+ ] resistance,@ (the resistance encountered when one body is moved in contact with another) }
+{ fringe, interference_fringe, optical_phenomenon,@ (one of the light or dark bands produced by the interference and diffraction of light) }
+{ gene_expression, organic_phenomenon,@ (conversion of the information encoded in a gene first into messenger RNA and then to a protein) }
+{ [ grinding, verb.change:grind,+ ] [ abrasion, verb.contact:abrade,+ ] [ attrition, adj.pert:attritional,+ ] detrition, friction,@ (the wearing down of rock particles by friction due to water or wind or ice) }
+{ grip, traction, adhesive_friction, friction,@ noun.artifact:automobile,;c (the friction between a body and the surface on which it moves (as between an automobile tire and the road)) }
+{ [ front, adj.pert:frontal2,+ ] atmospheric_phenomenon,@ noun.cognition:meteorology,;c ((meteorology) the atmospheric phenomenon created at the boundary between two different air masses) }
+{ warm_front, front,@ (the front of an advancing mass of warmer air) }
+{ cold_front, polar_front, front,@ (the front of an advancing mass of colder air) }
+{ squall_line, cold_front,@ (a cold front along which squalls or thunderstorms are likely) }
+{ occluded_front, occlusion, front,@ noun.cognition:meteorology,;c ((meteorology) a composite front when colder air surrounds a mass of warm air and forces it aloft) }
+{ greenhouse_effect, greenhouse_warming, atmospheric_phenomenon,@ (warming that results when solar radiation is trapped by the atmosphere; caused by atmospheric gases that allow sunshine to pass through but absorb heat that is radiated back from the warmed surface of the earth) }
+{ inversion, atmospheric_phenomenon,@ (the layer of air near the earth is cooler than an overlying layer) }
+{ frost_heave, frost_heaving, geological_phenomenon,@ (upthrust of ground or pavement caused by the freezing of moist soil) }
+{ gale, wind,@ (a strong wind moving 45-90 knots; force 7 to 10 on Beaufort scale) }
+{ moderate_gale, near_gale, gale,@ noun.relation:Beaufort_scale,#p (wind moving 32-38 knots; 7 on the Beaufort scale) }
+{ fresh_gale, gale,@ noun.relation:Beaufort_scale,#p (wind moving 39-46 knots; 8 on the Beaufort scale) }
+{ strong_gale, gale,@ noun.relation:Beaufort_scale,#p (wind moving 47-54 knots; 9 on the Beaufort scale) }
+{ whole_gale, gale,@ noun.relation:Beaufort_scale,#p (wind moving 55-63 knots; 10 on the Beaufort scale) }
+{ [ storm, adj.all:stormy,+ verb.weather:storm,+ verb.weather:storm1,+ ] violent_storm, atmospheric_phenomenon,@ noun.relation:Beaufort_scale,#p (a violent weather condition with winds 64-72 knots (11 on the Beaufort scale) and precipitation and thunder and lightning) }
+{ [ northeaster, adj.all:north^northeasterly2,+ ] noreaster, storm,@ (a storm blowing from the northeast) }
+{ gamma_radiation, gamma_ray, electromagnetic_radiation,@ electromagnetic_spectrum,#p (electromagnetic radiation emitted during radioactive decay and having an extremely short wavelength) }
+{ gaslight, light,@ (light yielded by the combustion of illuminating gas) }
+{ radiance, glow1, glowing, light,@ (the amount of electromagnetic radiation leaving or arriving at a point on a surface) }
+{ glow2, light,@ (a steady even light without flames) }
+{ sky_glow, glow2,@ (illumination of the night sky in urban areas) }
+{ good_luck, [ fluke, adj.all:uncertain3^fluky,+ adj.all:uncertain3^flukey,+ ] good_fortune, luck1,@ (a stroke of luck) }
+{ [ serendipity, adj.all:lucky^serendipitous,+ ] good_luck,@ (good luck in making unexpected and fortunate discoveries) }
+{ gravitational_field, field,@ (a field of force surrounding a body of finite mass) }
+{ [ gravity, verb.motion:gravitate,+ ] [ gravitation, adj.pert:gravitational,+ verb.motion:gravitate,+ ] gravitational_attraction, gravitational_force, attraction,@ noun.cognition:physics,;c ((physics) the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface; "the more remote the body the less the gravity"; "the gravitation between two bodies is proportional to the product of their masses and inversely proportional to the square of the distance between them"; "gravitation cannot be held responsible for people falling in love"--Albert Einstein) }
+{ solar_gravity, gravity,@ (the gravity of the sun; "solar gravity creates extreme pressures and temperatures") }
+{ gun_smoke, smoke,@ (smoke created by the firing of guns) }
+{ [ gust, adj.all:stormy^gusty,+ ] blast, [ blow, adj.all:stormy^blowy,+ verb.weather:blow,+ verb.motion:blow3,+ verb.motion:blow,+ ] wind,@ (a strong current of air; "the tree was bent almost double by the gust") }
+{ [ bluster, adj.all:stormy^blustery,+ adj.all:stormy^blusterous,+ verb.weather:bluster,+ ] gust,@ (a violent gusty wind) }
+{ [ sandblast, verb.contact:sandblast,+ ] gust,@ (a blast of wind laden with sand) }
+{ [ hail, verb.weather:hail,+ ] precipitation,@ (precipitation of ice pellets when there are strong rising air currents) }
+{ hailstorm, storm,@ (a storm during which hail falls) }
+{ half-light, light,@ (a greyish light (as at dawn or dusk or in dim interiors)) }
+{ [ haze, adj.all:cloudy^hazy,+ verb.weather:haze,+ ] aerosol,@ (atmospheric moisture or dust or smoke that causes reduced visibility) }
+{ [ heat, verb.change:heat,+ verb.possession:heat,+ verb.change:heat1,+ ] heat_energy, energy,@ (a form of energy that is transferred by a difference in temperature) }
+{ geothermal_energy, heat,@ (energy derived from the heat in the interior of the earth) }
+{ histocompatibility, organic_phenomenon,@ (condition in which the cells of one tissue can survive in the presence of cells of another tissue; "a successful graft or transplant requires a high degree of histocompatibility") }
+{ hot_weather, weather,@ (a period of unusually high temperatures) }
+{ scorcher, hot_weather,@ (an extremely hot day) }
+{ [ sultriness, adj.all:hot1^sultry,+ ] hot_weather,@ (oppressively hot and humid weather) }
+{ hurricane, cyclone,@ noun.relation:Beaufort_scale,#p (a severe tropical cyclone usually with heavy rains and winds moving at 63-136 knots (12 on the Beaufort scale)) }
+{ [ hydroelectricity, adj.pert:hydroelectric,+ ] electricity,@ (electricity produced by water power) }
+{ hysteresis, physical_phenomenon,@ (the lagging of an effect behind its cause; especially the phenomenon in which the magnetic induction of a ferromagnetic material lags behind the changing magnetic field) }
+{ ice_fog, pogonip, fog,@ (a dense winter fog containing ice particles) }
+{ ice_storm, silver_storm, storm,@ (a storm with freezing rain that leaves everything glazed with ice) }
+{ [ incandescence, adj.all:light6^incandescent,+ verb.change:incandesce1,+ verb.change:incandesce,+ ] [ glow, verb.weather:glow,+ ] light,@ (the phenomenon of light emission by a body as its temperature is raised) }
+{ [ incidence, adj.pert:incident,+ ] optical_phenomenon,@ (the striking of a light beam on a surface; "he measured the angle of incidence of the reflected light") }
+{ [ induction, verb.creation:induce3,+ verb.creation:induct,+ ] inductance, electrical_phenomenon,@ (an electrical phenomenon whereby an electromotive force (EMF) is generated in a closed circuit by a change in the flow of current) }
+{ mutual_induction, induction,@ (generation of electromotive forces in each other by two adjacent circuits) }
+{ self-induction, induction,@ (generation of an electromotive force (EMF) in a circuit by changing the current in that circuit; usually measured in henries) }
+{ inertia, mechanical_phenomenon,@ noun.cognition:physics,;c ((physics) the tendency of a body to maintain its state of rest or uniform motion unless acted upon by an external force) }
+{ moment_of_inertia, inertia,@ moment,@ (the tendency of a body to resist angular acceleration) }
+{ angular_acceleration, noun.time:acceleration,@ noun.cognition:physics,;c ((physics) the rate of change of the angular velocity of a rotating body) }
+{ angular_velocity, noun.time:velocity,@ noun.cognition:physics,;c ((physics) the rate of change of the angular position of a rotating body; usually expressed in radians per second or radians per minute) }
+{ infrared, infrared_light, infrared_radiation, infrared_emission, actinic_radiation,@ (electromagnetic radiation with wavelengths longer than visible light but shorter than radio waves) }
+{ infrared_spectrum, spectrum,@ electromagnetic_spectrum,#p (the spectrum of infrared radiation) }
+{ interreflection, reflection,@ (reciprocal reflection between two reflecting surfaces; "there was interreflection between the two surfaces of the lens") }
+{ jet_propulsion, reaction_propulsion,@ (propulsion by means of the discharge of a jet of fluid toward the rear) }
+{ jet_stream, airstream,@ (a high-speed high-altitude airstream blowing from west to east near the top of the troposphere; has important effects of the formation of weather fronts) }
+{ juice, current1,@ noun.communication:slang,;u (electric current; "when the wiring was finished they turned on the juice") }
+{ kinetic_energy, K.E., mechanical_energy,@ (the mechanical energy that a body has by virtue of its motion) }
+{ heat_of_dissociation, heat,@ (the heat required for a fluid substance to break up into simpler constituents) }
+{ heat_of_formation, heat,@ (the heat evolved or absorbed during the formation of one mole of a substance from its component elements) }
+{ heat_of_solution, heat,@ (the heat evolved or absorbed when one mole of a substance is dissolved in a large volume of a solvent) }
+{ latent_heat, heat_of_transformation, heat,@ (heat absorbed or radiated during a change of phase at a constant temperature and pressure) }
+{ heat_of_condensation, latent_heat,@ (heat liberated by a unit mass of gas at its boiling point as it condenses into a liquid; "the heat of condensation is equal to the heat of vaporization") }
+{ heat_of_fusion, latent_heat,@ (heat absorbed by a unit mass of a solid at its melting point in order to convert the solid into a liquid at the same temperature; "the heat of fusion is equal to the heat of solidification") }
+{ heat_of_solidification, latent_heat,@ (heat liberated by a unit mass of liquid at its freezing point when it solidifies) }
+{ heat_of_sublimation, latent_heat,@ (heat absorbed by a unit mass of material when it changes from a solid to a gaseous state) }
+{ heat_of_vaporization, heat_of_vaporisation, latent_heat,@ (heat absorbed by a unit mass of a material at its boiling point in order to convert the material into a gas at the same temperature) }
+{ specific_heat, heat,@ (the heat required to raise the temperature of one gram of a substance one degree centigrade) }
+{ heat_ray, beam,@ (a ray that produces a thermal effect) }
+{ heat_wave, wave,@ (a wave of unusually hot weather) }
+{ high_beam, beam,@ (the beam of a car's headlights that provides distant illumination) }
+{ infrared_ray, heat_ray,@ (a ray of infrared radiation; produces a thermal effect (as from an infrared lamp)) }
+{ lamplight, light,@ (light from a lamp) }
+{ levanter, easterly,@ (an easterly wind in the western Mediterranean area) }
+{ [ leverage, verb.contact:lever,+ ] purchase, mechanical_phenomenon,@ (the mechanical advantage gained by being in a position to use a lever) }
+{ life, organic_phenomenon,@ (the organic phenomenon that distinguishes living organisms from nonliving ones; "there is no life on the moon") }
+{ [ biology, adj.pert:biologic,+ adj.pert:biological,+ noun.person:biologist,+ ] life,@ (characteristic life processes and phenomena of living organisms; "the biology of viruses") }
+{ [ aerobiosis, adj.all:aerobic^aerobiotic,+ ] life,@ (life sustained in the presence of air or oxygen) }
+{ life_cycle, organic_phenomenon,@ (a series of stages through which an organism passes between recurrences of a primary stage) }
+{ [ light, verb.change:light,+ ] visible_light, visible_radiation, actinic_radiation,@ electromagnetic_spectrum,#p noun.cognition:physics,;c ((physics) electromagnetic radiation that can produce a visual sensation; "the light was filtered through a soft glass window") }
+{ line, electromagnetic_radiation,@ electromagnetic_spectrum,#p (a single frequency (or very narrow band) of radiation in a spectrum) }
+{ elves, atmospheric_electricity,@ (an acronym for emissions of light and very low frequency perturbations due to electromagnetic pulse sources; extremely bright extremely short (less than a msec) electrical flashes forming a huge ring (up to 400 km diameter) in the ionosphere) }
+{ jet, blue_jet, reverse_lightning, atmospheric_electricity,@ (atmospheric discharges (lasting 10 msec) bursting from the tops of giant storm clouds in blue cones that widen as they flash upward) }
+{ lightning, atmospheric_electricity,@ (abrupt electric discharge from cloud to cloud or from cloud to earth accompanied by the emission of light) }
+{ line_spectrum, spectrum,@ (a spectrum in which energy is concentrated at particular wavelengths; produced by excited atoms and ions as they fall back to a lower energy level) }
+{ Lorentz_force, force,@ (the force experienced by a point charge moving along a wire that is in a magnetic field; the force is at right angles to both the current and the magnetic field; "the Lorentz force can be used to suspend a current-carrying object between two magnets") }
+{ sprites, red_sprites, atmospheric_electricity,@ (atmospheric electricity (lasting 10 msec) appearing as globular flashes of red (pink to blood-red) light rising to heights of 60 miles (sometimes seen together with elves)) }
+{ atmospheric_electricity, noun.event:electrical_discharge,@ atmospheric_phenomenon,@ (electrical discharges in the atmosphere) }
+{ [ luminescence, adj.all:light6^luminescent,+ verb.weather:luminesce,+ ] light,@ (light not due to incandescence; occurs at low temperatures) }
+{ [ bioluminescence, adj.all:light6^bioluminescent,+ ] luminescence,@ (luminescence produced by physiological processes (as in the firefly)) }
+{ [ chemiluminescence, adj.pert:chemiluminescent,+ ] luminescence,@ (luminescence resulting from a chemical reaction as the oxidation of luciferin in fireflies) }
+{ luminous_energy, radiant_energy,@ (the energy associated with visible light) }
+{ magnetosphere, magnetic_field,@ (the magnetic field of a planet; the volume around the planet in which charged particles are subject more to the planet's magnetic field than to the solar magnetic field) }
+{ solar_magnetic_field, magnetic_field,@ noun.object:interplanetary_medium,#p (the magnetic field of the sun) }
+{ magnetic_field, magnetic_flux, flux, field,@ (the lines of force surrounding a permanent magnet or a moving charged particle) }
+{ radiation_field, field,@ (a field that represents the energy lost from the radiator to space) }
+{ beat, noun.event:vibration,@ (a single pulsation of an oscillation produced by adding two waves of different frequencies; has a frequency equal to the difference between the two oscillations) }
+{ [ resonance, adj.all:reverberant^resonant,+ verb.perception:resonate,+ ] noun.event:vibration,@ (a vibration of large amplitude produced by a relatively small vibration near the same frequency of vibration as the natural frequency of the resonating system) }
+{ sympathetic_vibration, noun.event:vibration,@ noun.cognition:physics,;c ((physics) vibration produced by resonance) }
+{ resonance1, physical_phenomenon,@ (an excited state of a stable particle causing a sharp maximum in the probability of absorption of electromagnetic radiation) }
+{ nuclear_resonance, resonance1,@ (the resonance absorption of a gamma ray by a nucleus identical to the nucleus that emitted the gamma ray) }
+{ magnetic_resonance, resonance1,@ (resonance of electrons or atoms or molecules or nuclei to radiation frequencies as a result of space quantization in a magnetic field) }
+{ nuclear_magnetic_resonance, NMR, proton_magnetic_resonance, magnetic_resonance,@ (resonance of protons to radiation in a magnetic field) }
+{ magnetism, magnetic_attraction, magnetic_force, attraction,@ (attraction for iron; associated with electric currents as well as magnets; characterized by fields of force) }
+{ [ electromagnetism, adj.pert:electromagnetic,+ ] magnetism,@ (magnetism produced by an electric current; "electromagnetism was discovered when it was observed that a copper wire carrying an electric current can magnetize pieces of iron or steel near it") }
+{ [ antiferromagnetism, adj.pert:antiferromagnetic,+ ] magnetism,@ (magnetic field creates parallel but opposing spins; varies with temperature) }
+{ [ diamagnetism, adj.pert:diamagnetic,+ ] magnetism,@ (phenomenon exhibited by materials like copper or bismuth that become magnetized in a magnetic field with a polarity opposite to the magnetic force; unlike iron they are slightly repelled by a magnet) }
+{ ferrimagnetism, antiferromagnetism,@ (a phenomenon in ferrites where there can be incomplete cancellation of antiferromagnetic arranged spins giving a net magnetic moment) }
+{ [ ferromagnetism, adj.pert:ferromagnetic,+ ] magnetism,@ (phenomenon exhibited by materials like iron (nickel or cobalt) that become magnetized in a magnetic field and retain their magnetism when the field is removed) }
+{ paramagnetism, magnetism,@ (materials like aluminum or platinum become magnetized in a magnetic field but it disappears when the field is removed) }
+{ mechanical_phenomenon, physical_phenomenon,@ (a physical phenomenon associated with the equilibrium or motion of objects) }
+{ [ sound, verb.perception:sound1,+ verb.perception:sound2,+ verb.perception:sound3,+ verb.perception:sound,+ ] mechanical_phenomenon,@ (mechanical vibrations transmitted by an elastic medium; "falling trees make a sound in the forest even when no one is there to hear them") }
+{ [ ultrasound, adj.all:inaudible^ultrasonic,+ ] sound,@ (very high frequency sound; used in ultrasonography) }
+{ trajectory, flight, mechanical_phenomenon,@ (the path followed by an object moving through space) }
+{ [ ballistics, adj.pert:ballistic,+ ] ballistic_trajectory, trajectory,@ (the trajectory of an object in free flight) }
+{ gravity-assist, trajectory,@ noun.act:spaceflight,;c ((spaceflight) a trajectory that passes close to a planetary body in order to gain energy from its gravitational field) }
+{ mass_defect, mass_deficiency, noun.attribute:mass,@ (the amount by which the mass of an atomic nucleus is less than the sum of the masses of its constituent particles) }
+{ mechanical_energy, energy,@ (energy in a mechanical form) }
+{ [ thaw, verb.change:thaw,+ ] thawing, warming, weather,@ (warm weather following a freeze; snow and ice melt; "they welcomed the spring thaw") }
+{ [ microwave, verb.change:microwave,+ ] electromagnetic_radiation,@ electromagnetic_spectrum,#p (a short electromagnetic wave (longer than infrared but shorter than radio waves); used for radar and microwave ovens and for transmitting telephone, facsimile, video and data) }
+{ midnight_sun, atmospheric_phenomenon,@ (the sun visible at midnight (inside the Arctic or Antarctic Circles)) }
+{ [ mist, adj.all:wet1^misty,+ adj.all:cloudy^misty,+ verb.contact:mist,+ verb.change:mist,+ ] fog,@ (a thin fog with condensation near the ground) }
+{ mistral, north_wind,@ (a strong north wind that blows in France during the winter) }
+{ moment, force,@ (a turning force produced by an object acting at a distance (or a measure of that force)) }
+{ moment_of_a_couple, moment,@ noun.object:couple,#p (given two equal and opposite forces, the product of the force and the distance between them) }
+{ dipole_moment, moment,@ (the moment of a dipole) }
+{ electric_dipole_moment, dipole_moment,@ (the dipole moment in an electric dipole) }
+{ magnetic_dipole_moment, dipole_moment,@ noun.cognition:physics,;c ((physics) a current loop gives rise to a magnetic field characteristic of a magnetic dipole; "An orbiting electron in an atom will have a magnetic dipole moment") }
+{ magnetic_moment, moment_of_a_magnet, torque,@ (the torque exerted on a magnet or dipole when it is placed in a magnetic field) }
+{ meteor, shooting_star, light,@ meteor_shower,#p (a streak of light in the sky at night that results when a meteoroid hits the earth's atmosphere and air friction causes the meteoroid to melt or vaporize or explode) }
+{ bolide, fireball, meteor,@ (an especially luminous meteor (sometimes exploding)) }
+{ mirage, optical_illusion,@ (an optical illusion in which atmospheric refraction by a layer of hot air distorts or inverts reflections of distant objects) }
+{ monsoon, wind,@ (a seasonal wind in southern Asia; blows from the southwest (bringing rain) in summer and from the northeast in winter) }
+{ monsoon1, wind,@ rain,@ (any wind that changes direction with the seasons) }
+{ moonbeam, moon_ray, moon-ray, beam,@ moonlight,#p (a ray of moonlight) }
+{ moonlight, moonshine, [ Moon, adj.all:moony2,+ ] light,@ (the light of the Moon; "moonlight is the smuggler's enemy"; "the Moon was bright enough to read by") }
+{ starlight, light,@ (the light of the stars) }
+{ sunburst, sunlight,@ (a sudden emergence of the sun from behind clouds) }
+{ sunlight, sunshine, [ sun, verb.perception:sun,+ verb.body:sun,+ ] light,@ (the rays of the sun; "the shingles were weathered by the sun and wind") }
+{ sunbeam, sunray, beam,@ sunlight,#p (a ray of sunlight) }
+{ laser_beam, beam,@ (a beam of light generated by a laser) }
+{ low_beam, beam,@ (the beam of a car's headlights that provides illumination for a short distance) }
+{ particle_beam, beam1,@ (a collimated flow of particles (atoms or electrons or molecules)) }
+{ ion_beam, ionic_beam, particle_beam,@ (a beam of ions moving in the same direction at the same speed) }
+{ necrobiosis, cell_death, death,@ noun.cognition:physiology,;c ((physiology) the normal degeneration and death of living cells (as in various epithelial cells)) }
+{ apoptosis, programmed_cell_death, caspase-mediated_cell_death, necrobiosis,@ (a type of cell death in which the cell uses specialized cellular machinery to kill itself; a cell suicide mechanism that enables metazoans to control cell number and eliminate cells that threaten the animal's survival) }
+{ [ necrosis, adj.pert:necrotic,+ ] [ mortification, verb.body:mortify,+ ] [ gangrene, adj.all:unhealthy^gangrenous,+ ] [ sphacelus, verb.body:sphacelate,+ ] death,@ (the localized death of living cells (as from infection or the interruption of blood supply)) }
+{ myonecrosis, necrosis,@ (localized death of muscle cell fibers) }
+{ brain_death, cerebral_death, death,@ (death when respiration and other reflexes are absent; consciousness is gone; organs can be removed for transplantation before the heartbeat stops) }
+{ neutron_radiation, corpuscular_radiation,@ ionizing_radiation,@ (radiation of neutrons (as by a neutron bomb)) }
+{ halo, atmospheric_phenomenon,@ (a circle of light around the sun or moon) }
+{ solar_halo, parhelic_circle, parhelic_ring, halo,@ (a luminous halo parallel to the horizon at the altitude of the sun; caused by ice crystals in the atmosphere) }
+{ [ parhelion, adj.pert:parhelic,+ ] mock_sun, sundog, noun.attribute:spot1,@ (a bright spot on the parhelic circle; caused by diffraction by ice crystals; "two or more parhelia are usually seen at once") }
+{ north_wind, northerly, [ norther, adj.all:north^northerly1,+ ] [ boreas, adj.pert:boreal1,+ ] wind,@ (a wind that blows from the north) }
+{ nuclear_propulsion, propulsion,@ (the use of a nuclear reactor either to produce electricity to power an engine (as in a nuclear submarine) or to directly heat a propellant (as in nuclear rockets)) }
+{ ocean_current, noun.event:current,@ (the steady flow of surface ocean water in a prevailing direction) }
+{ El_Nino, ocean_current,@ noun.cognition:oceanography,;c ((oceanography) a warm ocean current that flows along the equator from the date line and south off the coast of Ecuador at Christmas time) }
+{ El_Nino_southern_oscillation, El_Nino,@ (a more intense El Nino that occurs every few years when the welling up of cold nutrient-rich water does not occur; kills plankton and fish and affects weather patterns) }
+{ equatorial_current, ocean_current,@ (any of the ocean currents that flow westward at the equator) }
+{ North_Equatorial_Current, equatorial_current,@ (an equatorial current that flows west across the Pacific just north of the equator) }
+{ South_Equatorial_Current, equatorial_current,@ (an equatorial current that flows west across the Pacific just south of the equator) }
+{ Gulf_stream, ocean_current,@ (a warm ocean current that flows from the Gulf of Mexico northward through the Atlantic Ocean) }
+{ Japan_current, Kuroshio_current, Kuroshio, ocean_current,@ (a warm ocean current that flows northeastwardly off the coast of Japan into the northern Pacific ocean) }
+{ Peruvian_current, Humboldt_current, ocean_current,@ (a cold ocean current that flows north along the Pacific Coast of South America before turning west) }
+{ [ opacity, adj.all:opaque,+ transparency,!] physical_phenomenon,@ (the phenomenon of not permitting the passage of electromagnetic radiation) }
+{ optical_opacity, opacity,@ (opacity to light) }
+{ [ radiopacity, adj.all:radiopaque,+ ] radio-opacity, opacity,@ (opacity to X-rays or other radiation) }
+{ optical_illusion, optical_phenomenon,@ (an optical phenomenon that results in a false or deceptive visual impression) }
+{ optical_phenomenon, physical_phenomenon,@ (a physical phenomenon related to or involving light) }
+{ pea_soup, pea-souper, fog,@ (a heavy thick yellow fog) }
+{ [ phosphorescence, adj.all:light6^phosphorescent,+ verb.stative:phosphoresce,+ ] fluorescence,@ (a fluorescence that persists after the bombarding radiation has ceased) }
+{ photoelectricity, electricity,@ (electricity generated by light or affected by light) }
+{ [ piezoelectricity, adj.pert:piezoelectric,+ ] piezoelectric_effect, piezo_effect, electricity,@ (electricity produced by mechanical pressure on certain crystals (notably quartz or Rochelle salt); alternatively, electrostatic stress produces a change in the linear dimensions of the crystal) }
+{ pleochroism, optical_phenomenon,@ (the phenomenon of different colors appearing when certain crystals are viewed from different directions) }
+{ [ pleomorphism, adj.pert:pleomorphic,+ ] organic_phenomenon,@ noun.cognition:biology,;c ((biology) the appearance of two or more distinctly different forms in the life cycle of some organisms) }
+{ [ polarization, verb.change:polarize1,+ verb.change:polarize,+ ] [ polarisation, verb.change:polarise2,+ ] optical_phenomenon,@ (the phenomenon in which waves of light or other radiation are restricted in direction of vibration) }
+{ [ depolarization, verb.change:depolarize,+ ] [ depolarisation, verb.change:depolarise,+ ] change,@ (a loss of polarity or polarization) }
+{ [ polymorphism, adj.pert:polymorphic,+ adj.pert:polymorphous,+ ] organic_phenomenon,@ noun.cognition:biology,;c ((biology) the existence of two or more forms of individuals within the same animal species (independent of sex differences)) }
+{ dimorphism, polymorphism,@ noun.cognition:biology,;c ((biology) the existence of two forms of individual within the same animal species (independent of sex differences)) }
+{ [ polymorphism1, adj.pert:polymorphic1,+ adj.pert:polymorphous1,+ ] [ pleomorphism1, adj.pert:pleomorphic,+ ] chemical_phenomenon,@ noun.cognition:chemistry,;c ((chemistry) the existence of different kinds of crystal of the same chemical compound) }
+{ dimorphism1, polymorphism1,@ noun.cognition:chemistry,;c ((chemistry) the property of certain substances that enables them to exist in two distinct crystalline forms) }
+{ polymorphism2, organic_phenomenon,@ noun.cognition:genetics,;c ((genetics) the genetic variation within a population that natural selection can operate on) }
+{ single_nucleotide_polymorphism, SNP, polymorphism2,@ noun.cognition:genetics,;c ((genetics) genetic variation in a DNA sequence that occurs when a single nucleotide in a genome is altered; SNPs are usually considered to be point mutations that have been evolutionarily successful enough to recur in a significant proportion of the population of a species) }
+{ electric_potential, potential, potential_difference, potential_drop, voltage1, electrical_phenomenon,@ (the difference in electrical charge between two points in a circuit expressed in volts) }
+{ evoked_potential, electric_potential,@ (the electrical response of the central nervous system produced by an external stimulus; "he measured evoked potentials with an electroencephalogram") }
+{ resting_potential, electric_potential,@ (the potential difference between the two sides of the membrane of a nerve cell when the cell is not conducting an impulse) }
+{ potential_energy, P.E., mechanical_energy,@ (the mechanical energy that a body has by virtue of its position; stored energy) }
+{ [ precipitation, verb.weather:precipitate,+ ] downfall, weather,@ (the falling to earth of any form of water (rain or snow or hail or sleet or mist)) }
+{ gas_pressure, pressure,@ (the pressure exerted by a gas) }
+{ [ pressure, verb.contact:press,+ verb.change:pressurize2,+ verb.change:pressurize1,+ verb.change:pressurize,+ verb.change:pressurise2,+ verb.change:pressurise1,+ verb.change:pressurise,+ ] pressure_level, force_per_unit_area, physical_phenomenon,@ (the force applied to a unit area of surface; measured in pascals (SI unit) or in dynes (cgs unit); "the compressed gas exerts an increased pressure") }
+{ head, pressure,@ (the pressure exerted by a fluid; "a head of steam") }
+{ barometric_pressure, atmospheric_pressure,@ (atmospheric pressure as indicated by a barometer) }
+{ compartment_pressure, atmospheric_pressure,@ (the air pressure maintained in an air-tight compartment (as in an aircraft)) }
+{ overpressure, atmospheric_pressure,@ (a transient air pressure greater than the surrounding atmospheric pressure; "the overpressure of the blast kills by lethal concussion") }
+{ sea-level_pressure, atmospheric_pressure,@ (the atmospheric pressure reduced by a formula to the pressure at sea level) }
+{ hydrostatic_head, pressure,@ (the pressure at a given point in a liquid measured in terms of the vertical height of a column of the liquid needed to produce the same pressure) }
+{ intraocular_pressure, IOP, pressure,@ (pressure exerted by the fluids inside the eyeball; regulated by resistance to the outward flow of aqueous humor; "glaucoma can result from increased intraocular pressure") }
+{ oil_pressure, pressure,@ (pressure that keeps oil on the moving parts of an internal-combustion engine) }
+{ osmotic_pressure, pressure,@ noun.cognition:physical_chemistry,;c ((physical chemistry) the pressure exerted by a solution necessary to prevent osmosis into that solution when it is separated from the pure solvent by a semipermeable membrane) }
+{ radiation_pressure, corpuscular-radiation_pressure, pressure,@ (the minute pressure exerted on a surface normal to the direction of propagation of a wave) }
+{ sound_pressure, instantaneous_sound_pressure, pressure,@ (the difference between the instantaneous pressure at a point in a sound field and the average pressure at that point) }
+{ prevailing_wind, wind,@ (the predominant wind direction; "the prevailing wind is from the southwest") }
+{ propulsion, force,@ (a propelling force) }
+{ [ puff, adj.all:stormy^puffy,+ ] puff_of_air, [ whiff, verb.motion:whiff,+ verb.communication:whiff,+ ] gust,@ (a short light gust of air) }
+{ [ pull, verb.contact:pull4,+ verb.contact:pull2,+ ] force,@ (the force used in pulling; "the pull of the moon"; "the pull of the current") }
+{ [ push, verb.contact:push6,+ verb.motion:push,+ ] [ thrust, verb.stative:thrust,+ verb.stative:thrust1,+ verb.motion:thrust2,+ ] force,@ (the force used in pushing; "the push of the water on the walls of the tank"; "the thrust of the jet engines") }
+{ reaction, force,@ noun.cognition:mechanics,;c ((mechanics) the equal and opposite force that is produced when any force is applied to a body; "every action has an equal and opposite reaction") }
+{ rocket_propulsion, reaction_propulsion,@ (reaction propulsion using stored oxygen for combustion; used where there is insufficient atmospheric oxygen) }
+{ reaction_propulsion, propulsion,@ (propulsion that results from the ejection at high velocity of a mass of gas to which the vehicle reacts with an equal and opposite momentum) }
+{ radiant_energy, energy,@ (energy that is transmitted in the form of (electromagnetic) radiation; energy that exists in the absence of matter) }
+{ [ radiation, verb.weather:radiate,+ ] energy,@ (energy that is radiated or transmitted in the form of rays or waves or particles) }
+{ corpuscular_radiation, particulate_radiation, noun.process:radiation,@ (a stream of atomic or subatomic particles that may be charged positively (e.g. alpha particles) or negatively (e.g. beta particles) or not at all (e.g. neutrons)) }
+{ radio_wave, radio_emission, radio_radiation, electromagnetic_radiation,@ radio_spectrum,#p (an electromagnetic wave with a wavelength between 0.5 cm to 30,000 m) }
+{ sky_wave, radio_wave,@ (a radio wave that is reflected back to earth by the ionosphere or a communications satellite; permits transmission around the curve of the earth's surface) }
+{ ionospheric_wave, sky_wave,@ (a sky wave that is reflected by the ionosphere) }
+{ ground_wave, radio_wave,@ (a radio wave propagated on or near the earth's surface) }
+{ radio_signal, radio_wave,@ (a radio wave used to transmit and receive messages) }
+{ mass_spectrum, spectrum,@ (a distribution of ions as shown by a mass spectrograph or a mass spectrometer) }
+{ microwave_spectrum, spectrum,@ electromagnetic_spectrum,#p (the part of the electromagnetic spectrum corresponding to microwaves) }
+{ radio_spectrum, radio-frequency_spectrum, spectrum,@ electromagnetic_spectrum,#p (the entire spectrum of electromagnetic frequencies used for communications; includes frequencies used for radio and radar and television) }
+{ carrier_wave, [ carrier, verb.motion:carry3,+ ] radio_wave,@ (a radio wave that can be modulated in order to transmit a signal) }
+{ [ rain, adj.all:wet1^rainy,+ verb.weather:rain,+ ] rainfall, precipitation,@ (water falling in drops from vapor condensed in the atmosphere) }
+{ raindrop, noun.quantity:drop,@ rain,#p (a drop of rain) }
+{ rainstorm, storm,@ rain,@ (a storm with rain) }
+{ line_storm, equinoctial_storm, rainstorm,@ (a violent rainstorm near the time of an equinox) }
+{ thundershower, rainstorm,@ (a short rainstorm accompanied by thunder and lightning) }
+{ downpour, cloudburst, [ deluge, verb.change:deluge,+ verb.contact:deluge,+ ] waterspout1, [ torrent1, adj.all:abundant^torrential,+ ] [ pelter, verb.weather:pelt,+ ] [ soaker, verb.change:soak1,+ ] rain,@ (a heavy rain) }
+{ [ drizzle, adj.all:wet1^drizzly,+ verb.weather:drizzle,+ ] [ mizzle, verb.weather:mizzle,+ ] rain,@ (very light rain; stronger than mist but less than a shower) }
+{ [ shower, adj.all:wet1^showery,+ verb.weather:shower,+ ] rain_shower, rain,@ (a brief period of precipitation; "the game was interrupted by a brief shower") }
+{ recognition, organic_phenomenon,@ noun.cognition:biology,;c ((biology) the ability of one molecule to attach to another molecule that has a complementary shape; "molecular recognition drives all of biology, for instance, hormone and receptor or antibody-antigen interactions or the organization of molecules into larger biologically active entities") }
+{ reflection, reflexion, physical_phenomenon,@ (the phenomenon of a propagating wave (light or sound) being thrown back from a surface) }
+{ [ refraction, verb.perception:refract,+ ] physical_phenomenon,@ (the change in direction of a propagating wave (light or sound) when passing from one medium to another) }
+{ double_refraction, [ birefringence, adj.pert:birefringent,+ ] refraction,@ (splitting a ray into two parallel rays polarized perpendicularly) }
+{ resistance, mechanical_phenomenon,@ (any mechanical force that tends to retard or oppose motion) }
+{ conductance, electrical_phenomenon,@ (a material's capacity to conduct electricity; measured as the reciprocal of electrical resistance) }
+{ electric_resistance, electrical_resistance, impedance, resistance1, [ resistivity, adj.pert:resistive,+ ] ohmic_resistance, electrical_phenomenon,@ (a material's opposition to the flow of electric current; measured in ohms) }
+{ ohmage, electric_resistance,@ (the ohmic resistance of a conductor) }
+{ reactance, electrical_phenomenon,@ (opposition to the flow of electric current resulting from inductance and capacitance (rather than resistance)) }
+{ acoustic_resistance, acoustic_impedance, acoustic_reactance, resistance,@ (opposition to the flow of sound through a surface; acoustic resistance is the real component of acoustic impedance and acoustic reactance is the imaginary component) }
+{ reluctance, electrical_phenomenon,@ noun.cognition:physics,;c ((physics) opposition to magnetic flux (analogous to electric resistance)) }
+{ drag, retarding_force, resistance,@ (the phenomenon of resistance to motion through a fluid) }
+{ sonic_barrier, sound_barrier, drag,@ (the increase in aerodynamic drag as an airplane approaches the speed of sound) }
+{ windage, drag,@ (the retarding force of air friction on a moving object) }
+{ rejection, organic_phenomenon,@ noun.cognition:medicine,;c ((medicine) an immunological response that refuses to accept substances or organisms that are recognized as foreign; "rejection of the transplanted liver") }
+{ [ rejuvenation, verb.change:rejuvenate4,+ verb.body:rejuvenate,+ ] [ greening, verb.change:green,+ ] organic_phenomenon,@ (the phenomenon of vitality and freshness being restored; "the annual rejuvenation of the landscape") }
+{ resolving_power, resolution, physical_phenomenon,@ (the ability of a microscope or telescope to measure the angular separation of images that are close together) }
+{ resolution1, physical_phenomenon,@ noun.cognition:computer_science,;c ((computer science) the number of pixels per square inch on a computer-generated display; the greater the resolution, the better the picture) }
+{ scattering1, [ sprinkle, verb.weather:sprinkle,+ ] [ sprinkling, verb.weather:sprinkle,+ ] shower,@ (a light shower that falls in some locations and not others nearby) }
+{ [ scintillation, verb.perception:scintillate,+ ] light,@ noun.cognition:physics,;c ((physics) a flash of light that is produced in a phosphor when it absorbs a photon or ionizing particle) }
+{ sex_linkage, organic_phenomenon,@ (an association between genes in sex chromosomes that makes some characteristics appear more frequently in one sex than in the other) }
+{ shear, noun.event:deformation1,@ noun.cognition:physics,;c ((physics) a deformation of an object in which parallel planes remain parallel but are shifted in a direction parallel to themselves; "the shear changed the quadrilateral into a parallelogram") }
+{ meteor_shower, meteor_stream, atmospheric_phenomenon,@ (a transient shower of meteors when a meteor swarm enters the earth's atmosphere) }
+{ short_wave, radio_wave,@ (a radio wave with a wavelength less than 100 meters (a frequency greater than 3 megahertz)) }
+{ medium_wave, radio_wave,@ noun.location:Britain,;r (a radio wave with a wavelength between 100 and 1000 meters (a frequency between 300 kilohertz and 3000 kilohertz)) }
+{ long_wave, radio_wave,@ (a radio wave with a wavelength longer than a kilometer (a frequency below 300 kilohertz)) }
+{ simoom, simoon, samiel, wind,@ (a violent hot sand-laden wind on the deserts of Arabia and North Africa) }
+{ skin_effect, electrical_phenomenon,@ (the tendency of high-frequency alternating current to distribute near the surface of a conductor) }
+{ [ sleet, adj.all:frozen^sleety,+ verb.weather:sleet,+ ] precipitation,@ (partially melted snow (or a mixture of rain and snow)) }
+{ [ smoke, adj.all:smoky,+ verb.weather:smoke,+ ] [ fume, verb.weather:fume,+ verb.perception:fumigate,+ ] aerosol,@ (a cloud of fine particles suspended in a gas) }
+{ smother, smoke,@ (a stifling cloud of smoke) }
+{ [ snow, verb.weather:snow,+ ] snowfall, precipitation,@ (precipitation falling from clouds in the form of ice crystals) }
+{ flurry, snow_flurry, snow,@ (a light brief snowfall and gust of wind (or something resembling that); "he had to close the window against the flurries"; "there was a flurry of chicken feathers") }
+{ whiteout, snow,@ (an arctic atmospheric condition with clouds over snow produce a uniform whiteness and objects are difficult to see; occurs when the light reflected off the snow equals the light coming through the clouds) }
+{ snowflake, flake, noun.substance:crystal,@ snow,#p noun.substance:snow,#s (a crystal of snow) }
+{ virga, precipitation,@ (light wispy precipitation that evaporates before it reaches the ground (especially when the lower air is low in humidity)) }
+{ ice_crystal, snow_mist, diamond_dust, poudrin, ice_needle, frost_snow, frost_mist, noun.substance:crystal,@ precipitation,#p (small crystals of ice) }
+{ blizzard, snowstorm, storm,@ (a storm with widespread snowfall accompanied by strong winds) }
+{ solar_energy, solar_power, alternative_energy,@ (energy from the sun that is converted into thermal or electrical energy; "the amount of energy falling on the earth is given by the solar constant, but very little use has been made of solar energy") }
+{ [ insolation, verb.perception:insolate,+ ] solar_radiation,@ (incident solar radiation) }
+{ solar_radiation, radiation,@ (radiation from the sun) }
+{ solar_flare, flare, solar_radiation,@ (a sudden eruption of intense high-energy radiation from the sun's surface; associated with sunspots and radio interference) }
+{ solar_prominence, solar_radiation,@ (large eruptions of luminous hydrogen gas that rise thousands of kilometers above the chromosphere) }
+{ solar_wind, solar_radiation,@ noun.object:interplanetary_medium,#p (a stream of protons moving radially from the sun) }
+{ sound_spectrum, acoustic_spectrum, spectrum,@ (the distribution of energy as a function of frequency for a particular sound source) }
+{ speech_spectrum, sound_spectrum,@ (the average sound spectrum for the human voice) }
+{ sunspot, macula, noun.attribute:spot1,@ (a cooler darker spot appearing periodically on the sun's photosphere; associated with a strong magnetic field) }
+{ facula, solar_facula, noun.attribute:spot1,@ (a large bright spot on the sun's photosphere occurring most frequently in the vicinity of sunspots) }
+{ facula1, noun.attribute:spot1,@ (a bright spot on a planet) }
+{ south_wind, [ souther, adj.all:south^southerly1,+ ] southerly, wind,@ (a wind from the south) }
+{ discharge, [ spark, verb.weather:spark,+ ] arc, electric_arc, electric_discharge, electrical_conduction,@ (electrical conduction through a gas in an applied electric field) }
+{ [ distortion1, verb.communication:distort,+ ] electrical_phenomenon,@ acoustic_phenomenon,@ (a change (usually undesired) in the waveform of an acoustic or analog electrical signal; the difference between two measurements of a signal (as between the input and output signal); "heavy metal guitar players use vacuum tube amplifiers to produce extreme distortion") }
+{ nonlinear_distortion, amplitude_distortion, distortion1,@ (distortion that occurs when the output signal does not have a linear relation to the input signal) }
+{ [ projection, verb.perception:project,+ ] acoustic_projection, sound_projection, acoustic_phenomenon,@ (the acoustic phenomenon that gives sound a penetrating quality; "our ukuleles have been designed to have superior sound and projection"; "a prime ingredient of public speaking is projection of the voice") }
+{ electrical_conduction, conduction,@ (the passage of electricity through a conductor) }
+{ [ conduction, verb.motion:conduct,+ ] [ conductivity, adj.all:conductive,+ ] physical_phenomenon,@ (the transmission of heat or electricity or sound) }
+{ [ propagation, verb.motion:propagate1,+ verb.contact:propagate,+ ] physical_phenomenon,@ (the movement of a wave through a medium) }
+{ Doppler_effect, Doppler_shift, propagation,@ (change in the apparent frequency of a wave as observer and source move toward or away from each other) }
+{ red_shift, redshift, propagation,@ noun.cognition:astronomy,;c ((astronomy) a shift in the spectra of very distant galaxies toward longer wavelengths (toward the red end of the spectrum); generally interpreted as evidence that the universe is expanding) }
+{ wave_front, propagation,@ wave,#p (all the points just reached by a wave as it propagates) }
+{ spherical_aberration, aberration,@ (an optical aberration resulting in a distorted image) }
+{ spillover, consequence,@ noun.cognition:economics,;c ((economics) any indirect effect of public expenditure) }
+{ [ squall, adj.all:stormy^squally,+ verb.weather:squall,+ ] wind,@ (sudden violent winds; often accompanied by precipitation) }
+{ line_squall, squall,@ (a squall advancing along a front that forms a definite line) }
+{ electrical_disturbance, electrical_phenomenon,@ (electrical signals produced by unwanted sources (atmospherics or receiver noise or unwanted transmitters)) }
+{ static_electricity, electricity,@ (electricity produced by friction) }
+{ dynamic_electricity, current_electricity, electricity,@ (a flow of electric charge) }
+{ [ thermoelectricity, adj.pert:thermoelectric,+ ] electricity,@ (electricity produced by heat (as in a thermocouple)) }
+{ stress, force,@ noun.cognition:physics,;c ((physics) force that produces strain on a physical body; "the intensity of stress is expressed in units of force divided by units of area") }
+{ [ tension, verb.contact:tense,+ verb.change:tense,+ ] stress,@ noun.cognition:physics,;c ((physics) a stress that produces an elongation of an elastic physical body; "the direction of maximum tension moves asymptotically toward the direction of the shear") }
+{ [ strain, verb.contact:strain2,+ verb.body:strain,+ ] noun.event:deformation1,@ noun.cognition:physics,;c ((physics) deformation of a physical body under the action of applied forces) }
+{ breaking_point, stress,@ (the degree of tension or stress at which something breaks) }
+{ [ overstrain, verb.consumption:overstrain,+ ] strain,@ (too much strain) }
+{ streamer, light,@ aurora,#p (light that streams; "streamers of flames") }
+{ torchlight, light,@ (light from a torch or torches) }
+{ twilight, light,@ (the diffused light from the sky when the sun is below the horizon but its rays are refracted by the atmosphere of the earth) }
+{ interaction, fundamental_interaction, physical_phenomenon,@ noun.cognition:physics,;c ((physics) the transfer of energy between elementary particles or between an elementary particle and a field or between fields; mediated by gauge bosons) }
+{ electromagnetic_interaction, interaction,@ (an interaction between charged elementary particles that is intermediate in strength between the strong and weak interactions; mediated by photons) }
+{ gravitational_interaction, interaction,@ (a weak interaction between particles that results from their mass; mediated by gravitons) }
+{ strong_interaction, strong_force, color_force, interaction,@ noun.cognition:physics,;c ((physics) the interaction that binds protons and neutrons together in the nuclei of atoms; mediated by gluons) }
+{ supertwister, tornado,@ (the most powerful tornado which can create enormously devastating damage; "supertwisters are fortunately rare") }
+{ weak_interaction, weak_force, interaction,@ noun.cognition:physics,;c ((physics) an interaction between elementary particles involving neutrinos or antineutrinos that is responsible for certain kinds of radioactive decay; mediated by intermediate vector bosons) }
+{ [ suction, adj.pert:suctorial,+ verb.motion:suction,+ verb.body:suction,+ ] pressure,@ (a force over an area produced by a pressure difference) }
+{ sunrise, atmospheric_phenomenon,@ (atmospheric phenomena accompanying the daily appearance of the sun) }
+{ sunset, atmospheric_phenomenon,@ (atmospheric phenomena accompanying the daily disappearance of the sun) }
+{ afterglow, atmospheric_phenomenon,@ (a glow sometimes seen in the sky after sunset) }
+{ surface_tension, physical_phenomenon,@ (a phenomenon at the surface of a liquid caused by intermolecular forces) }
+{ interfacial_tension, interfacial_surface_tension, surface_tension,@ (surface tension at the surface separating two non-miscible liquids) }
+{ syzygy, physical_phenomenon,@ (the straight line configuration of 3 celestial bodies (as the sun and earth and moon) in a gravitational system) }
+{ [ tempest, adj.all:stormy^tempestuous,+ ] windstorm,@ noun.communication:literature,;c ((literary) a violent wind; "a tempest swept over the island") }
+{ [ thermal, adj.pert:thermal,+ ] air_current1,@ (rising current of warm air) }
+{ thermionic_current, current1,@ (an electric current produced between two electrodes as a result of electrons emitted by thermionic emission) }
+{ theta_rhythm, theta_wave, brainwave,@ (the normal brainwave in the encephalogram of a person who is awake but relaxed and drowsy; occurs with low frequency and low amplitude) }
+{ thunderbolt, bolt, bolt_of_lightning, lightning,@ (a discharge of lightning accompanied by thunder) }
+{ thunderstorm, electrical_storm, electric_storm, storm,@ (a storm resulting from strong rising air currents; heavy rain or hail along with thunder and lightning) }
+{ tornado, [ twister, verb.motion:twist1,+ ] cyclone,@ (a localized and violently destructive windstorm occurring over land characterized by a funnel-shaped cloud extending toward the ground) }
+{ torsion, torque, force,@ (a twisting force) }
+{ tossup, toss-up, even_chance, luck,@ (an unpredictable phenomenon; "it's a toss-up whether he will win or lose") }
+{ trade_wind, trade, prevailing_wind,@ (steady winds blowing from east to west above and below the equator; "they rode the trade winds going west") }
+{ antitrade_wind, antitrade, prevailing_wind,@ (winds blowing from west to east and lying above the trade winds in the tropics) }
+{ tramontane, tramontana, north_wind,@ (a cold dry wind that blows south out of the mountains into Italy and the western Mediterranean) }
+{ [ transgression, verb.stative:transgress,+ ] geological_phenomenon,@ (the spreading of the sea over land as evidenced by the deposition of marine strata over terrestrial strata) }
+{ [ transparency, adj.all:thin1^transparent,+ adj.all:clear2^transparent,+ opacity,!] [ transparence, adj.all:clear2^transparent,+ ] physical_phenomenon,@ (permitting the free passage of electromagnetic radiation) }
+{ trichroism, pleochroism,@ (pleochroism of a crystal so that it exhibits three different colors when viewed from three different directions) }
+{ [ turbulence, adj.all:agitated2^turbulent,+ ] [ turbulency, adj.all:agitated2^turbulent,+ ] physical_phenomenon,@ (unstable flow of a liquid or gas) }
+{ typhoon, cyclone,@ (a tropical cyclone occurring in the western Pacific or Indian oceans) }
+{ turbulent_flow, noun.process:flow,@ (flow in which the velocity at any point varies erratically) }
+{ sea, turbulent_flow,@ (turbulent water with swells of considerable size; "heavy seas") }
+{ head_sea, sea,@ (a sea in which the waves are running directly against the course of the ship) }
+{ streamline_flow, noun.process:flow,@ (flow of a gas or liquid in which the velocity at any point is relatively steady) }
+{ laminar_flow, streamline_flow,@ (nonturbulent streamline flow in parallel layers (laminae)) }
+{ [ ultraviolet, adj.all:invisible^ultraviolet,+ ] ultraviolet_radiation, ultraviolet_light, ultraviolet_illumination, UV, actinic_radiation,@ (radiation lying in the ultraviolet range; wave lengths shorter than light but longer than X rays) }
+{ sunray1, sun-ray1, ultraviolet,@ (a ray of artificial ultraviolet light from a sunray lamp) }
+{ ultraviolet_spectrum, spectrum,@ electromagnetic_spectrum,#p (the spectrum of ultraviolet radiation) }
+{ [ draft, adj.all:leaky^drafty,+ ] [ draught, adj.all:leaky^draughty,+ ] wind,@ (a current of air (usually coming into a chimney or room or vehicle)) }
+{ updraft, draft,@ (a strong upward air current) }
+{ downdraft, draft,@ (a strong downward air current) }
+{ van_der_Waal's_forces, attraction,@ (relatively weak attraction between neutral atoms and molecules arising from polarization induced in each particle by the presence of other particles) }
+{ vapor_pressure, vapour_pressure, pressure,@ (the pressure exerted by a vapor; often understood to mean saturated vapor pressure (the vapor pressure of a vapor in contact with its liquid form)) }
+{ virtual_image, reflection,@ (a reflected optical image (as seen in a plane mirror)) }
+{ visible_spectrum, color_spectrum, spectrum,@ electromagnetic_spectrum,#p (the distribution of colors produced when light is dispersed by a prism) }
+{ voltage2, electromotive_force, emf, electrical_phenomenon,@ (the rate at which energy is drawn from a source that produces a flow of electricity in a circuit; expressed in volts) }
+{ magnetomotive_force, force,@ (the force that produces magnetic flux) }
+{ life_force, vital_force, [ vitality, adj.all:essential^vital,+ ] elan_vital, force,@ noun.cognition:biology,;c ((biology) a hypothetical force (not physical or chemical) once thought by Henri Bergson to cause the evolution and development of organisms) }
+{ volcanism, geological_phenomenon,@ (the phenomena associated with volcanic activity) }
+{ waterpower, power,@ (the power to do work that is latent in a head of water) }
+{ waterspout, tornado,@ (a tornado passing over water and picking up a column of water and mist) }
+{ wave, weather,@ (a persistent and widespread unusual weather condition (especially of unusual temperatures); "a heat wave") }
+{ [ weather, verb.change:weather,+ ] weather_condition, conditions, atmospheric_condition, atmospheric_phenomenon,@ noun.cognition:meteorology,;c (the atmospheric conditions that comprise the state of the atmosphere in terms of temperature and wind and clouds and precipitation; "they were hoping for good weather"; "every day we have weather conditions and yesterday was no exception"; "the conditions were too rainy for playing in the snow") }
+{ elements, weather,@ (violent or severe weather (viewed as caused by the action of the four elements); "they felt the full fury of the elements") }
+{ west_wind, [ wester, adj.all:west^westerly1,+ ] wind,@ (wind that blows from west to east) }
+{ prevailing_westerly, [ westerly, adj.all:west^westerly1,+ ] west_wind,@ (the winds from the west that occur in the temperate zones of the Earth) }
+{ whirlwind, windstorm,@ (a more or less vertical column of air whirling around itself as it moves over the surface of the Earth) }
+{ [ wind, adj.all:stormy^windy,+ adj.all:fast1^windy,+ ] air_current1, current_of_air, weather,@ (air moving (sometimes with considerable force) from an area of high pressure to an area of low pressure; "trees bent under the fierce winds"; "when there is no wind, row"; "the radioactivity was being swept upwards by the air current and out into the atmosphere") }
+{ wind_generation, wind_power, alternative_energy,@ (power derived from the wind (as by windmills)) }
+{ windstorm, storm,@ (a storm consisting of violent winds) }
+{ X_ray, X-ray, X-radiation, roentgen_ray, electromagnetic_radiation,@ ionizing_radiation,@ (electromagnetic radiation of short wavelength produced when high-speed electrons strike a solid target) }
+{ X-ray_diffraction, diffraction,@ (the scattering of X rays by the atoms of a crystal; the diffraction pattern shows structure of the crystal) }
+{ zodiacal_light, reflection,@ (a luminous tract in the sky; a reflection of sunlight from cosmic dust in the plane of the ecliptic; visible just before sunrise and just after sunset) }
+{ [ chop, adj.all:stormy^choppy,+ ] physical_phenomenon,@ (the irregular motion of waves (usually caused by wind blowing in a direction opposite to the tide); "the boat headed into the chop") }
+{ [ flotation, verb.motion:float2,+ verb.motion:float1,+ verb.contact:float4,+ ] [ floatation, verb.motion:float2,+ verb.motion:float1,+ verb.contact:float4,+ ] physical_phenomenon,@ (the phenomenon of floating (remaining on the surface of a liquid without sinking)) }
+{ parallax, optical_phenomenon,@ (the apparent displacement of an object as seen from two different points that are not on a line with the object) }
+{ Tyndall_effect, optical_phenomenon,@ (the phenomenon in which light is scattered by very small particles in its path; it makes a beam of light visible; the scattered light is mainly blue) }
+{ heliocentric_parallax, annual_parallax, parallax,@ (the parallax of a celestial body using two points in the earth's orbit around the sun as the baseline) }
+{ stellar_parallax, heliocentric_parallax,@ (the heliocentric parallax of a star) }
+{ geocentric_parallax, diurnal_parallax, parallax,@ (the parallax of a celestial body using two points on the surface of the earth as the earth rotates) }
+{ horizontal_parallax, geocentric_parallax,@ (the maximum parallax observed when the celestial body is at the horizon) }
+{ pulsation, noun.Tops:phenomenon,@ (a periodically recurring phenomenon that alternately increases and decreases some quantity) }
+{ solar_parallax, geocentric_parallax,@ (the angle subtended by the mean equatorial radius of the Earth at a distance of one astronomical unit) }

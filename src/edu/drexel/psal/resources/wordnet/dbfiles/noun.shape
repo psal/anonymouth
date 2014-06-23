@@ -1,0 +1,353 @@
+($RCSfile: noun.shape,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:51 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.shape)
+
+{ [ solid, verb.change:solidify,+ ] noun.Tops:shape,@ (a three-dimensional shape) }
+{ [ plane, adj.all:even1^plane,+ adj.all:planar,+ ] sheet, noun.Tops:shape,@ noun.cognition:math,;c ((mathematics) an unbounded two-dimensional shape; "we will refer to the plane of the graph as the X-Y plane"; "any line joining two points on a plane lies wholly on that plane") }
+{ Cartesian_plane, plane,@ (a plane in which all points can be described in Cartesian coordinates) }
+{ complex_plane, Cartesian_plane,@ (a geometric representation of the complex numbers established by the real axis and the orthogonal imaginary axis; it can be thought of as a modified Cartesian plane, with the real part of a complex number represented by a displacement along the x-axis, and the imaginary part by a displacement along the y-axis) }
+{ facet_plane, plane,@ (the plane of a facet of an object (as of a cube)) }
+{ midplane, midline, plane,@ (the median plane of the body (or some part of the body)) }
+{ orbital_plane, plane,@ noun.cognition:astronomy,;c ((astronomy) the plane on which a body is orbiting) }
+{ picture_plane, plane,@ noun.attribute:perspective,#p (the plane that is in the foreground of a drawing or painting; coextensive with but different from the objective surface of the work) }
+{ tangent_plane, plane,@ (the plane that contains all the lines tangent to a specific point on a surface) }
+{ natural_shape, noun.Tops:shape,@ (a shape created by natural forces; not man-made) }
+{ leaf_shape, leaf_form, natural_shape,@ noun.plant:leaf,#p (any of the various shape that leaves of plants can assume) }
+{ equilateral, figure,@ (a figure whose sides are all equal) }
+{ [ flare, verb.change:flare,+ ] flair, noun.Tops:shape,@ (a shape that spreads outward; "the skirt had a wide flare") }
+{ figure, noun.Tops:shape,@ (a combination of points and lines and planes that form a visible palpable shape) }
+{ pencil, figure,@ noun.cognition:physics,;c noun.cognition:geometry,;c (a figure formed by a set of straight lines or light rays meeting at a point) }
+{ plane_figure, two-dimensional_figure, figure,@ (a two-dimensional shape) }
+{ solid_figure, three-dimensional_figure, figure,@ (a three-dimensional shape) }
+{ subfigure, figure,@ (a figure that is a part of another figure) }
+{ line, noun.Tops:shape,@ (a length (straight or curved) without breadth or thickness; the trace of a moving point) }
+{ [ bulb, adj.all:round^bulblike,+ ] round_shape,@ (anything with a round shape resembling a teardrop) }
+{ convex_shape, [ convexity, adj.all:convex,+ ] solid,@ (a shape that curves or bulges outward) }
+{ [ camber, verb.motion:camber,+ ] convex_shape,@ (a slight convexity (as of the surface of a road)) }
+{ entasis, convex_shape,@ noun.artifact:column,#p (a slight convexity in the shaft of a column; compensates for the illusion of concavity that viewers experience when the sides are perfectly straight) }
+{ angular_shape, [ angularity, adj.all:angular,+ ] noun.Tops:shape,@ (a shape having one or more sharp angles) }
+{ concave_shape, [ concavity, adj.all:concave,+ ] [ incurvation, verb.contact:incurvate,+ verb.motion:incurvate,+ ] incurvature, solid,@ (a shape that curves or bends inward) }
+{ [ cylinder2, adj.all:rounded^cylindric,+ ] solid,@ (a solid bounded by a cylindrical surface and two parallel planes (the bases)) }
+{ round_shape, noun.Tops:shape,@ (a shape that is curved and without sharp angles) }
+{ conglomeration, [ conglobation, verb.change:conglobate,+ ] sphere,@ (a rounded spherical form) }
+{ heart, plane_figure,@ (a plane figure with rounded sides curving inward at the top and intersecting at the bottom; conventionally used on playing cards and valentines; "he drew a heart and called it a valentine") }
+{ polygon, polygonal_shape, plane_figure,@ (a closed plane figure bounded by straight sides) }
+{ [ isogon, adj.all:angular^isogonic,+ ] polygon,@ (an equiangular polygon) }
+{ [ convex_polygon, concave_polygon,!] polygon,@ (a polygon such that no side extended cuts any other side or vertex; it can be cut by a straight line in at most two points) }
+{ [ concave_polygon, convex_polygon,!] polygon,@ (a polygon such that there is a straight line that cuts it in four or more points) }
+{ reentrant_polygon, reentering_polygon, concave_polygon,@ (a polygon with one or more reentrant angles) }
+{ regular_polygon, isogon,@ (a polygon with all sides and all angles equal) }
+{ distorted_shape, [ distortion, noun.person:distortionist,+ verb.contact:distort1,+ verb.contact:distort,+ ] noun.Tops:shape,@ (a shape resulting from distortion) }
+{ amorphous_shape, noun.Tops:shape,@ (an ill-defined or arbitrary shape) }
+{ [ curve, verb.motion:curve,+ straight_line,! ] curved_shape, line,@ (the trace of a point whose direction of motion changes) }
+{ closed_curve, curve,@ (a curve (such as a circle) having no endpoints) }
+{ simple_closed_curve, Jordan_curve, closed_curve,@ (a closed curve that does not intersect itself) }
+{ S-shape, curve,@ (a double curve resembling the letter S) }
+{ catenary, curve,@ (the curve theoretically assumed by a perfectly flexible and inextensible cord of uniform density and cross section hanging freely from two fixed points) }
+{ Cupid's_bow, curve,@ (the double curve of the upper lip when considered to resemble Cupid's bow) }
+{ wave, undulation, curve,@ (an undulating curve) }
+{ extrados, curve,@ (the exterior curve of an arch) }
+{ gooseneck, curved_shape,@ (something in a thin curved form (like the neck of a goose)) }
+{ intrados, curve,@ (the interior curve of an arch) }
+{ [ bend2, verb.motion:bend1,+ verb.motion:bend,+ ] [ crook, verb.motion:crook,+ ] twist1, turn, curve,@ (a circular segment of a curve; "a bend in the road"; "a crook in the path") }
+{ hook, crotchet, curve,@ (a sharp curve or crook; a shape resembling a hook) }
+{ uncus, hook,@ noun.cognition:biology,;c ((biology) any hook-shaped process or part) }
+{ envelope, curve,@ (a curve that is tangent to each of a family of curves) }
+{ bight, turn,@ (a bend or curve (especially in a coastline)) }
+{ [ straight_line, curve,! ] line,@ (a line traced by a point traveling in a constant direction; a line of zero curvature; "the shortest distance between two points is a straight line") }
+{ [ geodesic, adj.pert:geodesic,+ ] geodesic_line, line,@ noun.cognition:math,;c ((mathematics) the shortest line between two points on a mathematically defined surface (as a straight line on a plane or an arc of a great circle on a sphere)) }
+{ [ perpendicular, adj.all:perpendicular,+ ] straight_line,@ (a straight line at right angles to another line) }
+{ connection, connexion, link, noun.Tops:shape,@ (a connecting shape) }
+{ [ asymptote, adj.pert:asymptotic,+ ] straight_line,@ (a straight line that is the limiting value of a curve; can be considered as tangent at infinity; "the asymptote of the curve") }
+{ [ tangent, adj.pert:tangential,+ noun.state:tangency,+ ] straight_line,@ (a straight line or plane that touches a curve or curved surface at a point but does not intersect it at that point) }
+{ secant, straight_line,@ (a straight line that intersects a curve at two or more points) }
+{ perimeter1, line,@ (a line enclosing a plane areas) }
+{ [ radius, adj.pert:radial,+ ] straight_line,@ (a straight line from the center to the perimeter of a circle (or from the center to the surface of a sphere)) }
+{ [ diameter, adj.pert:diametral,+ adj.pert:diametric,+ adj.pert:diametrical,+ ] straight_line,@ (a straight line connecting the center of a circle with two points on its perimeter (or the center of a sphere with two points on its surface)) }
+{ centerline, center_line, line,@ (a line that bisects a plane figure) }
+{ dome, concave_shape,@ (a concave shape whose distinguishing characteristic is that the concavity faces downward) }
+{ [ pit, verb.contact:pit,+ ] fossa, concave_shape,@ noun.body:cavity,@ (a concavity in a surface (especially an anatomical depression)) }
+{ [ recess, verb.contact:recess,+ verb.contact:recess1,+ ] recession, niche, [ corner, verb.motion:corner1,+ ] concave_shape,@ (a small concavity) }
+{ [ cone, adj.pert:conic,+ adj.pert:conical,+ verb.contact:cone,+ ] conoid, cone_shape, round_shape,@ (a shape whose base is a circle and whose sides taper up to a point) }
+{ [ funnel, verb.contact:funnel,+ ] funnel_shape, cone,@ (a conical shape with a wider and a narrower opening at the two ends) }
+{ conic_section, [ conic, adj.pert:conic,+ ] plane_figure,@ noun.cognition:geometry,;c ((geometry) a curve generated by the intersection of a plane and a circular cone) }
+{ intersection, noun.group:set2,@ (a point or set of points common to two or more geometric configurations) }
+{ [ oblong, adj.all:long1^oblong,+ ] plane_figure,@ (a plane figure that deviates from a square or circle due to elongation) }
+{ [ circle, adj.all:circular,+ ] ellipse,@ (ellipse in which the two axes are of equal length; a plane curve generated by one point moving at a constant distance from a fixed point; "he calculated the circumference of the circle") }
+{ circlet, circle,@ (a small circle) }
+{ [ circle1, verb.contact:circle12,+ ] noun.Tops: shape,@ (something approximating the shape of a circle; "the chairs were arranged in a circle") }
+{ [ equator, adj.pert:equatorial2,+ verb.change:equate,+ ] circle,@ (a circle dividing a sphere or other surface into two usually equal and symmetrical parts) }
+{ [ semicircle, adj.all:curved^semicircular,+ ] hemicycle, plane_figure,@ (a plane figure with the shape of half a circle) }
+{ [ arc, verb.motion:arc,+ ] curve,@ circle,#p sector,#p (a continuous portion of a circle) }
+{ [ scallop, verb.change:scallop,+ verb.creation:scallop,+ ] crenation, crenature, crenel, crenelle, curve,@ (one of a series of rounded projections (or the notches between them) formed by curves along an edge (as the edge of a leaf or piece of cloth or the margin of a shell or a shriveled red blood cell observed in a hypertonic solution etc.)) }
+{ chord, straight_line,@ (a straight line connecting two points on a curve) }
+{ [ sector, adj.pert:sectorial,+ ] plane_figure,@ (a plane figure bounded by two radii and the included arc of a circle) }
+{ disk, disc, saucer, round_shape,@ (something with a round shape resembling a flat circular plate; "the moon's disk hung in a cloudless sky") }
+{ ring, halo, annulus, doughnut, anchor_ring, toroid1,@ (a toroidal shape; "a ring of ships in the harbor"; "a halo of smoke") }
+{ [ loop, adj.pert:loopy,+ verb.contact:loop,+ verb.creation:loop,+ ] simple_closed_curve,@ (anything with a round or oval shape (formed by a curve that is closed and does not intersect itself)) }
+{ [ bight1, verb.contact:bight,+ ] loop,@ (a loop in a rope) }
+{ [ coil, verb.motion:coil,+ verb.contact:coil,+ ] whorl, [ roll, verb.change:roll10,+ verb.contact:roll5,+ verb.stative:roll,+ ] [ curl, verb.contact:curl1,+ verb.motion:curl,+ verb.change:curl,+ ] curlicue, ringlet, gyre, scroll, round_shape,@ (a round shape formed by a series of concentric circles (as formed by leaves or flower petals)) }
+{ [ spiral, verb.stative:spiral,+ verb.motion:spiral,+ ] curve,@ (a plane curve traced by a point circling about the center but at increasing distances from the center) }
+{ helix, [ spiral1, verb.stative:spiral,+ ] curve,@ (a curve that lies on the surface of a cylinder or cone and cuts the element at a constant angle) }
+{ double_helix, helix,@ (a pair of parallel helices intertwined about a common axis; "the shape of the DNA molecule is a double helix") }
+{ perversion, curve,@ (a curve that reverses the direction of something; "the tendrils of the plant exhibited perversion"; "perversion also shows up in kinky telephone cords") }
+{ [ eccentricity, adj.all:eccentric,+ ] noun.relation:ratio1,@ noun.cognition:geometry,;c ((geometry) a ratio describing the shape of a conic section; the ratio of the distance between the foci to the length of the major axis; "a circle is an ellipse with zero eccentricity") }
+{ element, straight_line,@ (a straight line that generates a cylinder or cone) }
+{ element_of_a_cone, element,@ (a straight line joining the apex and a point on the base) }
+{ element_of_a_cylinder, element,@ (a straight line running the length of the cylinder) }
+{ helix_angle, angle,@ (the constant angle at which a helix cuts the elements of a cylinder or cone) }
+{ [ kink, verb.change:kink,+ verb.contact:kink,+ ] [ twist, verb.contact:twist1,+ ] twirl, fold,@ (a sharp bend in a line produced when a line having a loop is pulled tight) }
+{ [ whirl, verb.motion:whirl4,+ verb.motion:whirl2,+ ] [ swirl, verb.motion:swirl,+ verb.motion:swirl1,+ ] vortex, convolution, round_shape,@ (the shape of something rotating rapidly) }
+{ [ ellipse, adj.all:rounded^elliptic,+ adj.all:rounded^elliptical,+ ] [ oval, adj.all:rounded^oval,+ ] conic_section,@ (a closed plane curve resulting from the intersection of a circular cone and a plane cutting completely through it; "the sums of the distances from the foci to any point on an ellipse is constant") }
+{ [ square, verb.change:square,+ ] foursquare, rectangle,@ regular_polygon,@ noun.cognition:geometry,;c ((geometry) a plane rectangle with four equal sides and four right angles; a four-sided regular polygon; "you can compute the area of a square if you know the length of its sides") }
+{ square1, noun.Tops:shape,@ (something approximating the shape of a square) }
+{ quadrate1, square,@ (a square-shaped object) }
+{ quadrilateral, [ quadrangle, adj.pert:quadrangular,+ ] [ tetragon, adj.pert:tetragonal,+ ] polygon,@ (a four-sided polygon) }
+{ [ triangle, adj.all:multilateral^triangular,+ adj.all:angular^triangular,+ verb.social:triangulate,+ verb.cognition:triangulate,+ ] trigon, trilateral, polygon,@ (a three-sided polygon) }
+{ triangle1, noun.Tops:shape,@ (something approximating the shape of a triangle; "the coastline of Chile and Argentina and Brazil forms two legs of a triangle") }
+{ acute_triangle, acute-angled_triangle, triangle,@ (a triangle whose interior angles are all acute) }
+{ equilateral_triangle, equiangular_triangle, triangle,@ regular_polygon,@ (a three-sided regular polygon) }
+{ delta, equilateral_triangle,@ (an object shaped like an equilateral triangle) }
+{ isosceles_triangle, triangle,@ (a triangle with two equal sides) }
+{ [ oblique_triangle, right_triangle,! ] triangle,@ (a triangle that contains no right angle) }
+{ obtuse_triangle, obtuse-angled_triangle, triangle,@ (a triangle that contains an obtuse interior angle) }
+{ [ right_triangle, oblique_triangle,! ] right-angled_triangle, triangle,@ (a triangle with one right angle) }
+{ scalene_triangle, triangle,@ (a triangle with no two sides of equal length) }
+{ hexagram, star,@ (a regular polygon formed by extending each of the sides of a regular hexagon to form two equilateral triangles) }
+{ parallel, figure,@ noun.cognition:mathematics,;c ((mathematics) one of a set of parallel geometric figures (parallel lines or planes); "parallels never meet") }
+{ [ parallelogram, trapezium,! ] quadrilateral,@ (a quadrilateral whose opposite sides are both parallel and equal in length) }
+{ [ trapezium, parallelogram,! ] quadrilateral,@ noun.location:US,;r (a quadrilateral with no parallel sides) }
+{ [ trapezoid, adj.pert:trapezoidal,+ ] quadrilateral,@ noun.location:US,;r (a quadrilateral with two parallel sides) }
+{ star, plane_figure,@ (a plane figure with 5 or more points; often used as an emblem) }
+{ asterism, star,@ noun.cognition:mineralogy,;c ((mineralogy) a star-shaped figure with six rays that is seen in some crystal structures under reflected or transmitted light) }
+{ pentacle, pentagram, pentangle, star,@ (a star with 5 points; formed by 5 straight lines between the vertices of a pentagon and enclosing another pentagon) }
+{ pentagon, polygon,@ (a five-sided polygon) }
+{ [ hexagon, adj.pert:hexagonal,+ ] polygon,@ (a six-sided polygon) }
+{ regular_hexagon, hexagon,@ (a hexagon with six sides of equal length) }
+{ heptagon, polygon,@ (a seven-sided polygon) }
+{ octagon, polygon,@ (an eight-sided polygon) }
+{ nonagon, polygon,@ (a nine-sided polygon) }
+{ decagon, polygon,@ (a polygon with 10 sides and 10 angles) }
+{ undecagon, polygon,@ (an eleven-sided polygon) }
+{ dodecagon, polygon,@ (a twelve-sided polygon) }
+{ [ rhombus, adj.pert:rhombic,+ ] rhomb, diamond, parallelogram,@ (a parallelogram with four equal sides; an oblique-angled equilateral parallelogram) }
+{ [ rhomboid, adj.pert:rhomboid,+ adj.pert:rhomboidal,+ ] parallelogram,@ (a parallelogram with adjacent sides of unequal lengths; an oblique-angled parallelogram with only the opposite sides equal) }
+{ [ rectangle, adj.all:angular^rectangular,+ ] parallelogram,@ (a parallelogram with four right angles) }
+{ box, rectangle,@ (a rectangular drawing; "the flowchart contained many boxes") }
+{ spherical_polygon, polygon,@ (a figure on the surface of a sphere bounded by arcs of 3 or more great circles) }
+{ spherical_triangle, spherical_polygon,@ (a spherical polygon formed by the arcs of 3 great circles) }
+{ [ polyhedron, adj.pert:polyhedral,+ ] solid,@ (a solid figure bounded by plane polygons or faces) }
+{ convex_polyhedron, polyhedron,@ (a polyhedron any plane section of which is a convex polygon) }
+{ concave_polyhedron, polyhedron,@ (a polyhedron some of whose plane sections are concave polygons) }
+{ [ prism, adj.pert:prismatic,+ ] polyhedron,@ (a polyhedron with two congruent and parallel faces (the bases) and whose lateral faces are parallelograms) }
+{ parallelepiped, parallelopiped, parallelepipedon, parallelopipedon, prism,@ (a prism whose bases are parallelograms) }
+{ cuboid, parallelepiped,@ (a rectangular parallelepiped) }
+{ quadrangular_prism, prism,@ (a prism whose bases are quadrangles) }
+{ triangular_prism, prism,@ (a prism whose bases are triangles) }
+{ [ sinuosity, adj.all:curved^sinuous,+ ] [ sinuousness, adj.all:curved^sinuous,+ ] curved_shape,@ (having curves; "he hated the sinuosity of mountain roads") }
+{ [ tortuosity, adj.all:crooked1^tortuous,+ ] [ tortuousness, adj.all:crooked1^tortuous,+ ] torsion, [ contortion, noun.person:contortionist,+ verb.contact:contort,+ ] crookedness, distorted_shape,@ (a tortuous and twisted shape or position; "they built a tree house in the tortuosities of its boughs"; "the acrobat performed incredible contortions") }
+{ [ warp, verb.change:warp,+ ] [ buckle, verb.change:buckle,+ ] distorted_shape,@ (a shape distorted by twisting or folding) }
+{ [ knot, adj.all:tangled^knotty,+ verb.contact:knot2,+ verb.creation:knot,+ ] [ gnarl, adj.all:crooked1^gnarly,+ verb.contact:gnarl,+ ] distorted_shape,@ (something twisted and tight and swollen; "their muscles stood out in knots"; "the old man's fists were two great gnarls"; "his stomach was in knots") }
+{ [ arch, verb.motion:arch,+ ] curved_shape,@ (a curved shape in the vertical plane that spans an opening) }
+{ bell, bell_shape, [ campana, adj.pert:campanular,+ ] curved_shape,@ (the shape of a bell) }
+{ [ parabola, adj.all:rounded^parabolic,+ adj.all:rounded^parabolical,+ ] conic_section,@ (a plane curve formed by the intersection of a right circular cone and a plane parallel to an element of the curve) }
+{ [ hyperbola, adj.pert:hyperbolic,+ ] conic_section,@ (an open curve formed by a plane that cuts the base of a right circular cone) }
+{ [ furcation, verb.change:furcate,+ ] [ forking, verb.change:fork,+ ] angular_shape,@ (the place where something divides into branches) }
+{ [ bifurcation, verb.change:bifurcate,+ ] furcation,@ (the place where something divides into two branches) }
+{ [ bifurcation1, verb.stative:bifurcate,+ verb.change:bifurcate,+ ] branch,@ bifurcation,#p (a bifurcating branch (one or both of them)) }
+{ jog, angular_shape,@ (a sharp change in direction; "there was a jog in the road") }
+{ [ zigzag, adj.all:crooked1^zigzag,+ verb.motion:zigzag,+ ] zig, zag, angular_shape,@ (an angular shape characterized by sharp turns in alternating directions) }
+{ [ angle, adj.pert:angular,+ adj.all:angular,+ verb.change:angulate,+ verb.motion:angle1,+ verb.motion:angle,+ ] space,@ (the space between two lines or planes that intersect; the inclination of one line to another; measured in degrees or radians) }
+{ complementary_angles, angle,@ (two angles whose sum is a right angle) }
+{ angular_distance, angle,@ (the angular separation between two objects as perceived by an observer; "he recorded angular distances between the stars") }
+{ hour_angle, HA, angular_distance,@ noun.cognition:astronomy,;c ((astronomy) the angular distance of a celestial point measured westward along the celestial equator from the zenith crossing; the right ascension for an observer at a particular location and time of day) }
+{ true_anomaly, angular_distance,@ (the angular distance of a point in an orbit past the point of periapsis measured in degrees) }
+{ plane_angle, angle,@ (an angle formed by two straight lines (in the same plane)) }
+{ spherical_angle, angle,@ (an angle formed at the intersection of the arcs of two great circles) }
+{ solid_angle, angle,@ (an angle formed by three or more planes intersecting at a common point (the vertex)) }
+{ [ inclination1, verb.motion:incline,+ ] angle_of_inclination, angle,@ noun.cognition:geometry,;c ((geometry) the angle formed by the x-axis and a given line (measured counterclockwise from the positive half of the x-axis)) }
+{ [ inclination2, verb.motion:incline,+ ] inclination_of_an_orbit, angle,@ noun.cognition:astronomy,;c ((astronomy) the angle between the plane of the orbit and the plane of the ecliptic stated in degrees) }
+{ reentrant_angle, reentering_angle, interior_angle,@ (an interior angle of a polygon that is greater than 180 degrees) }
+{ [ salient_angle, reentrant_angle,! ] angle,@ (an angle pointing outward; an interior angle of a polygon that is less than 180 degrees) }
+{ interior_angle, internal_angle, angle,@ (the angle inside two adjacent sides of a polygon) }
+{ exterior_angle, external_angle, angle,@ (the supplement of an interior angle of a polygon) }
+{ hip, exterior_angle,@ noun.artifact:hip_roof,#p noun.cognition:architecture,;c ((architecture) the exterior angle formed by the junction of a sloping side and a sloping end of a roof) }
+{ angle_of_incidence, incidence_angle, angle,@ (the angle that a line makes with a line perpendicular to the surface at the point of incidence) }
+{ angle_of_attack, angle_of_incidence,@ (the acute angle between the direction of the undisturbed relative wind and the chord of an airfoil) }
+{ critical_angle, angle_of_incidence,@ (the smallest angle of incidence for which light is totally reflected) }
+{ angle_of_reflection, angle,@ (the angle between a reflected ray and a line perpendicular to the reflecting surface at the point of incidence) }
+{ angle_of_refraction, angle,@ (the angle between a refracted ray and a line perpendicular to the surface between the two media at the point of refraction) }
+{ angle_of_extinction, extinction_angle, angle,@ (the angle from its axis that a crystal must be rotated before appearing maximally dark when viewed in polarized light) }
+{ acute_angle, oblique_angle,@ (an angle less than 90 degrees but more than 0 degrees) }
+{ obtuse_angle, oblique_angle,@ (an angle between 90 and 180 degrees) }
+{ dogleg, angle,@ (angle that resembles the hind leg of a dog) }
+{ [ right_angle, oblique_angle,! ] angle,@ (the 90 degree angle between two perpendicular lines) }
+{ [ oblique_angle, right_angle,! ] angle,@ (an angle that is not a right angle or a multiple of a right angle) }
+{ reflex_angle, angle,@ (an angle greater than 180 degrees (but less than 360)) }
+{ perigon, round_angle, angle,@ (an angle of 360 degrees) }
+{ cutting_angle, angle,@ (the angle between the face of a cutting tool and the surface of the work) }
+{ dip, angle_of_dip, magnetic_dip, magnetic_inclination, [ inclination, verb.motion:incline,+ ] angle,@ noun.cognition:physics,;c ((physics) the angle that a magnetic needle makes with the plane of the horizon) }
+{ lead, angle,@ (the angle between the direction a gun is aimed and the position of a moving target (correcting for the flight time of the missile)) }
+{ magnetic_declination, magnetic_variation, [ variation, verb.stative:vary1,+ ] angle,@ (the angle (at a particular location) between magnetic north and true north) }
+{ [ azimuth, adj.pert:azimuthal,+ ] AZ, angle,@ (the azimuth of a celestial body is the angle between the vertical plane containing it and the plane of the meridian) }
+{ bowl, trough, concave_shape,@ (a concave shape with an open top) }
+{ [ groove, verb.contact:groove,+ verb.contact:groove2,+ ] channel, depression,@ (a long narrow furrow cut either by a natural process (such as erosion) or by a tool (as e.g. a groove in a phonograph record)) }
+{ [ rut, adj.all:furrowed^rutty,+ verb.contact:rut,+ ] groove,@ (a groove or furrow (especially one in soft earth caused by wheels)) }
+{ [ scoop, verb.contact:scoop1,+ ] pocket1, concave_shape,@ (a hollow concave shape made by removing something) }
+{ [ bulge, adj.all:protrusive^bulgy,+ verb.stative:bulge,+ verb.motion:bulge,+ verb.change:bulge1,+ verb.change:bulge,+ ] bump, [ hump, verb.motion:hump,+ ] swelling, [ gibbosity, adj.all:unfit1^gibbous,+ ] [ gibbousness, adj.all:unfit1^gibbous,+ ] jut, prominence, [ protuberance, adj.all:protrusive^protuberant,+ verb.stative:protuberate1,+ ] [ protrusion, verb.motion:protrude,+ verb.change:protrude,+ ] extrusion, [ excrescence, adj.pert:excrescent,+ ] projection,@ (something that bulges out or is protuberant or projects from its surroundings; "the gun in his pocket made an obvious bulge"; "the hump of a camel"; "he stood on the rocky prominence"; "the occipital protuberance was well developed"; "the bony excrescence between its horns") }
+{ belly, bulge,@ (a part that bulges deeply; "the belly of a sail") }
+{ caput, bulge,@ (a headlike protuberance on an organ or structure; "the caput humeri is the head of the humerus which fits into a cavity in the scapula") }
+{ mogul, bulge,@ (a bump on a ski slope) }
+{ [ nub, adj.all:rough^nubby,+ ] [ nubble, adj.all:rough^nubbly,+ ] bulge,@ (a small lump or protuberance) }
+{ [ snag, verb.contact:snag1,+ verb.contact:snag,+ ] bulge,@ (a sharp protuberance) }
+{ wart, bulge,@ noun.Tops:animal,;c (any small rounded protuberance (as on certain plants or animals)) }
+{ node1, [ knob, adj.all:unshapely^knobby,+ ] thickening, convex_shape,@ (any thickened enlargement) }
+{ bow, [ arc1, verb.motion:arc,+ ] curved_shape,@ (something curved in shape) }
+{ [ crescent, adj.all:rounded^crescent,+ ] curved_shape,@ (any shape resembling the curved shape of the moon in its first or last quarters) }
+{ depression, impression, imprint, concave_shape,@ (a concavity in a surface produced by pressing; "he left the impression of his fingers in the soft mud") }
+{ [ dimple, verb.change:dimple,+ ] depression,@ (any slight depression in a surface; "there are approximately 336 dimples on a golf ball") }
+{ [ hyperboloid, adj.all:rounded^hyperboloidal,+ ] quadric,@ (a quadric surface generated by rotating a hyperbola around its main axis) }
+{ [ paraboloid, adj.all:rounded^paraboloidal,+ ] plane_figure,@ (a surface having parabolic sections parallel to a single coordinate axis and elliptic sections perpendicular to that axis) }
+{ [ ellipsoid, adj.all:rounded^ellipsoid,+ adj.all:rounded^ellipsoidal,+ ] plane_figure,@ (a surface whose plane sections are all ellipses or circles; "the Earth is an ellipsoid") }
+{ [ flank, verb.stative:flank,+ ] subfigure,@ (a subfigure consisting of a side of something) }
+{ hypotenuse, flank,@ right_triangle,#p (the side of a right triangle opposite the right angle) }
+{ [ altitude, adj.pert:altitudinal,+ ] noun.attribute:distance1,@ (the perpendicular distance from the base of a geometric figure to the opposite vertex (or side if parallel)) }
+{ base, flank,@ (the bottom side of a geometric figure from which the altitude can be constructed; "the base of the triangle") }
+{ balance, [ equilibrium, verb.stative:equilibrate,+ verb.change:equilibrate,+ verb.stative:equilibrize,+ ] equipoise, counterbalance, noun.artifact:structure,@ (equality of distribution) }
+{ conformation, balance,@ (a symmetrical arrangement of the parts of a thing) }
+{ [ symmetry, adj.all:symmetric,+ verb.change:symmetrize,+ verb.change:symmetrise,+ ] [ proportion, verb.change:proportion1,+ disproportion,! ] balance,@ (balance among the parts of something) }
+{ [ disproportion, proportion,! ] noun.attribute:disparity,@ (lack of proportion; imbalance among the parts of something) }
+{ [ spheroid, adj.all:rounded^spheroidal,+ ] ellipsoid_of_revolution, round_shape,@ (a shape that is generated by rotating an ellipse around one of its axes; "it looked like a sphere but on closer examination I saw it was really a spheroid") }
+{ [ sphere1, adj.all:round^spherical,+ adj.all:round^spheric,+ ] round_shape,@ (a three-dimensional closed surface such that every point on the surface is equidistant from the center) }
+{ [ hemisphere, adj.pert:hemispherical,+ ] subfigure,@ (half of a sphere) }
+{ [ sphere, adj.all:round^spheric,+ ] round_shape,@ (a solid figure bounded by a spherical surface (including the space it encloses)) }
+{ ball, [ globe, adj.all:round^globular,+ adj.all:round^global,+ verb.change:conglobate,+ ] orb, sphere,@ (an object with a spherical shape; "a ball of fire") }
+{ spherule, ball,@ (a small sphere) }
+{ [ cylinder, adj.all:rounded^cylindric,+ ] round_shape,@ (a surface generated by rotating a parallel line around a fixed line) }
+{ torus, [ toroid, adj.pert:toroidal,+ ] round_shape,@ (a ring-shaped surface generated by rotating a circle around an axis that does not intersect the circle) } 
+{ [ toroid1, adj.pert:toroidal,+ ] solid,@ (the doughnut-shaped object enclosed by a torus) }
+{ [ column2, adj.all:columned^columnar2,+ ] [ tower, verb.stative:tower,+ ] pillar, noun.Tops:shape,@ (anything that approximates the shape of a column or tower; "the test tube held a column of white powder"; "a tower of dust rose above the horizon"; "a thin pillar of smoke betrayed their campsite") }
+{ plume, noun.Tops:shape,@ (anything that resembles a feather in shape or lightness; "a plume of smoke"; "grass with large plumes") }
+{ columella, column2,@ (a small column (or structure resembling a column) that is a part of a plant or animal) }
+{ hoodoo, column2,@ noun.cognition:geology,;c ((geology) a column of weathered and unusually shaped rock; "a tall sandstone hoodoo") }
+{ barrel, drum, cylinder,@ (a bulging cylindrical shape; hollow with flat ends) }
+{ pipe, [ tube, verb.contact:tube,+ ] cylinder,@ (a hollow cylindrical shape) }
+{ pellet, ball,@ (a small sphere) }
+{ bolus, ball,@ (a small round soft mass (as of chewed food)) }
+{ [ drop, noun.quantity:droplet,+ ] [ bead, adj.all:bright^beady,+ verb.stative:bead,+ ] pearl, sphere,@ (a shape that is spherical and small; "he studied the shapes of low-viscosity drops"; "beads of sweat on his forehead") }
+{ dewdrop, drop,@ (a drop of dew) }
+{ teardrop, drop,@ (anything shaped like a falling drop (as a pendant gem on an earring)) }
+{ [ ridge, verb.change:ridge,+ verb.contact:ridge,+ verb.contact:ridge1,+ verb.creation:ridge,+ ] convex_shape,@ (any long raised strip) }
+{ [ corrugation, verb.contact:corrugate,+ ] ridge,@ (a ridge on a corrugated surface) }
+({ slope, surface,@ (any inclined surface) })
+{ [ rim, verb.possession:rim,+ ] boundary,@ round_shape,@ (the shape of a raised edge of a more or less circular object) }
+{ [ point, verb.change:point,+ ] tip, peak1, convex_shape,@ cone,#p noun.artifact:alpenstock,#p noun.artifact:sword,#p noun.artifact:pencil,#p noun.artifact:arrowhead,#p noun.artifact:knife1,#p (a V shape; "the cannibal's teeth were filed to sharp points") }
+{ [ taper, verb.change:taper,+ ] convex_shape,@ (a convex shape that narrows toward a point) }
+{ quadric, quadric_surface, curved_shape,@ (a curve or surface whose equation (in Cartesian coordinates) is of the second degree) }
+{ lemniscate, curved_shape,@ noun.cognition:geometry,;c (any of several plane algebraic curves in the shape of a figure eight) }
+{ figure_eight, figure_8", [ figure_of_eight, noun.location:Britain,;r ] plane_figure,@ (a two-dimensionsal figure having the shape of the number eight) }
+{ [ boundary, verb.stative:bound,+ ] [ edge, verb.contact:edge,+ ] [ bound, verb.stative:bound,+ verb.change:bound,+ ] line,@ (a line determining the limits of an area) }
+{ [ margin, adj.all:peripheral^marginal,+ ] [ border, verb.stative:border,+ ] perimeter, boundary,@ (the boundary line or the area immediately inside the boundary) }
+{ [ periphery, adj.all:peripheral,+ ] [ fringe, adj.all:peripheral^fringy,+ ] outer_boundary, boundary,@ (the outside boundary or surface of something) }
+{ brink, threshold, [ verge, verb.stative:verge1,+ ] boundary,@ (a region marking a boundary) }
+{ upper_bound, boundary,@ noun.cognition:math,;c ((mathematics) a number equal to or greater than any other number in a given set) }
+{ lower_bound, boundary,@ noun.cognition:math,;c ((mathematics) a number equal to or less than any other number in a given set) }
+{ [ diagonal, adj.all:inclined1^diagonal,+ ] bias, straight_line,@ (a line or cut across a fabric that is not at right angles to a side of the fabric) }
+{ [ diagonal1, adj.all:oblique^diagonal2,+ ] straight_line,@ noun.cognition:geometry,;c ((geometry) a straight line connecting any two vertices of a polygon that are not adjacent) }
+{ [ dip1, verb.motion:dip2,+ verb.change:dip1,+ ] depression,@ (a depression in an otherwise level surface; "there was a dip in the road") }
+{ cup, concave_shape,@ (any cup-shaped concavity; "bees filled the waxen cups with honey"; "he wore a jock strap with a metal cup"; "the cup of her bra") }
+{ [ incision, adj.all:sharp^incisive,+ verb.contact:incise,+ ] [ scratch, verb.contact:scratch,+ ] [ prick, verb.contact:prick,+ ] [ slit, verb.contact:slit,+ verb.contact:slit1,+ ] [ dent, verb.contact:dent,+ ] depression,@ (a depression scratched or carved into a surface) }
+{ [ incisure, verb.contact:incise,+ ] incisura, notch,@ noun.cognition:anatomy,;c ((anatomy) a notch or small hollow) }
+{ [ notch, verb.contact:notch,+ ] indentation,@ (a V-shaped indentation; "mandibular notch") }
+{ [ score, verb.contact:score,+ ] [ scotch, verb.contact:scotch,+ ] incision,@ (a slight surface cut (especially a notch that is made to keep a tally)) }
+{ [ sag, verb.motion:sag1,+ verb.motion:sag,+ ] [ droop, adj.all:lax1^droopy,+ verb.change:droop,+ verb.stative:droop,+ verb.motion:droop,+ ] depression,@ (a shape that sags; "there was a sag in the chair seat") }
+{ [ wrinkle, verb.contact:wrinkle2,+ verb.contact:wrinkle1,+ verb.contact:wrinkle,+ verb.change:wrinkle10,+ ] [ furrow, verb.contact:furrow1,+ ] [ crease1, verb.change:crease10,+ verb.contact:crease1,+ verb.contact:crease,+ ] [ crinkle, adj.all:uneven^crinkly,+ verb.change:crinkle10,+ verb.contact:crinkle,+ ] seam1, [ line1, verb.contact:line2,+ ] depression,@ noun.body:skin,#p (a slight depression or fold in the smoothness of a surface; "his face has many lines"; "ironing gets rid of most wrinkles") }
+{ crow's_foot, crow's_feet, laugh_line, wrinkle,@ (a wrinkle in the skin at the outer corner of your eyes) }
+{ dermatoglyphic, wrinkle,@ (the lines that form patterns on the skin (especially on the fingertips and the palms of the hands and the soles of the feet)) }
+{ frown_line, wrinkle,@ (a facial wrinkle associated with frowning) }
+{ line_of_life, life_line, lifeline, wrinkle,@ (a crease on the palm; its length is said by palmists to indicate how long you will live) }
+{ line_of_heart, heart_line, love_line, mensal_line, wrinkle,@ (a crease on the palm; palmists say it indicates your emotional nature) }
+{ line_of_fate, line_of_destiny, line_of_Saturn, wrinkle,@ (a crease on the palm; palmists say it indicates how successful you will be) }
+{ crevice, cranny1, crack, [ fissure, verb.change:fissure,+ ] chap, depression,@ (a long narrow depression in a surface) }
+{ [ fold, verb.contact:fold,+ ] crease2, [ plication, verb.contact:plicate,+ ] [ flexure, verb.motion:flex,+ ] [ crimp, verb.contact:crimp1,+ ] [ bend1, verb.motion:bend,+ verb.contact:bend,+ ] angular_shape,@ (an angular or rounded shape made by folding; "a fold in the napkin"; "a crease in his trousers"; "a plication on her blouse"; "a flexure of the colon"; "a bend of his elbow") }
+{ [ pucker, verb.contact:pucker2,+ verb.contact:pucker1,+ ] [ ruck, verb.contact:ruck,+ ] fold,@ (an irregular fold in an otherwise even surface (as in cloth)) }
+{ indentation, indenture, concave_shape,@ (a concave cut into a surface or edge (as in a coastline)) }
+{ [ cleft, verb.contact:cleave,+ verb.contact:cleave1,+ ] indentation,@ (a split or indentation in something (as the palate or chin)) }
+{ [ stria, verb.change:striate,+ ] [ striation, verb.change:striate,+ ] groove,@ (any of a number of tiny parallel grooves such as: the scratches left by a glacier on rocks or the streaks or ridges in muscle tissue) }
+
+{ roulette, line_roulette, curved_shape,@ (a line generated by a point on one figure rolling around a second figure) }
+{ [ cycloid, adj.all:rounded^cycloidal,+ ] roulette,@ (a line generated by a point on a circle rolling along a straight line) }
+{ curtate_cycloid, cycloid,@ (a cycloid generated by a point inside the rolling circle) }
+{ prolate_cycloid, cycloid,@ (a cycloid generated by a point outside the rolling circle) }
+{ sine_curve, [ sinusoid, adj.all:curved^sinusoidal,+ ] wave,@ (the curve of y=sin x) }
+{ [ epicycle, adj.pert:epicyclic,+ adj.pert:epicyclical,+ ] circle,@ (a circle that rolls around (inside or outside) another circle; generates an epicycloid or hypocycloid) }
+{ epicycloid, roulette,@ (a line generated by a point on a circle rolling around another circle) }
+{ cardioid, epicycloid,@ (an epicycloid in which the rolling circle equals the fixed circle) }
+{ hypocycloid, roulette,@ (a line generated by a point on a circle that rolls around inside another circle) }
+{ [ shapelessness, adj.all:unformed^shapeless,+ ] amorphous_shape,@ (an amorphous or indefinite shape; "a shapeless mass") }
+{ [ blob, verb.contact:blob,+ ] amorphous_shape,@ (an indistinct shapeless form) }
+{ [ void, adj.all:empty^void,+ verb.change:void4,+ ] [ vacancy, adj.all:empty^vacant1,+ ] emptiness, vacuum, space,@ (an empty area or space; "the huge desert voids"; "the emptiness of outer space"; "without their support he'll be ruling in a vacuum") }
+{ [ space, verb.motion:space,+ ] amorphous_shape,@ noun.Tops:location,@ (an empty area (usually bounded in some way between things); "the architect left space in front of the building"; "they stopped at an open space in the jungle"; "the space between his teeth") }
+{ [ hollow2, adj.all:hollow,+ ] cavity,@ (a cavity or space in something; "hunger had caused the hollows in their cheeks")}
+{ node2, connection,@ (a connecting point at which several lines come together) }
+{ [ articulation, verb.possession:articulate,+ ] join, [ joint, verb.contact:joint,+ verb.possession:joint,+ verb.stative:joint,+ ] [ juncture, verb.stative:join1,+ ] junction, connection,@ (the shape or manner in which things come together and a connection is made) }
+{ hole, space,@ (an unoccupied space) }
+{ cavity, enclosed_space, space,@ (space that is surrounded by something) }
+{ pocket2, space,@ noun.act:bowling,;c ((bowling) the space between the headpin and the pins behind it on the right or left; "the ball hit the pocket and gave him a perfect strike") }
+{ [ point2, verb.contact:point12,+ verb.contact:point11,+ verb.contact:point13,+ ] [ dot, verb.change:dot,+ verb.communication:dot,+ verb.stative:dot,+ ] disk,@ (a very small circular shape; "a row of points"; "draw lines between the dots") }
+{ [ pore, adj.all:leaky^porous,+ adj.all:poriferous,+ ] hole,@ (any tiny hole admitting passage of a liquid (fluid or gas)) }
+{ tree, tree_diagram, plane_figure,@ (a figure that branches from a single root; "genealogical tree") }
+{ cladogram, tree,@ (a tree diagram used to illustrate phylogenetic relationships) }
+{ stemma, tree,@ (a tree diagram showing a reconstruction of the transmission of manuscripts of a literary work) }
+{ thalweg, boundary,@ (the middle of the chief navigable channel of a waterway that forms the boundary line between states) }
+{ [ spur, verb.contact:spur2,+ ] [ spine, adj.all:pointed^spinous,+ ] [ acantha, adj.all:pointed^acanthous,+ ] projection,@ (any sharply pointed projection) }
+{ [ constriction, verb.change:constrict,+ ] [ bottleneck, verb.change:bottleneck,+ ] chokepoint, noun.attribute:narrowing,@ (a narrowing that reduces the flow through a channel) }
+{ facet, subfigure,@ (a smooth surface (as of a bone or cut gemstone)) }
+{ vector, straight_line,@ (a straight line segment whose length is magnitude and whose orientation in space is direction) }
+{ [ ray, verb.stative:ray,+ ] vector,@ noun.cognition:math,;c ((mathematics) a straight line extending from a point) }
+{ [ cast, verb.communication:cast,+ ] [ mold, verb.creation:mold1,+ verb.creation:mold,+ verb.creation:mold2,+ ] mould, [ stamp, verb.creation:stamp,+ verb.perception:stamp,+ ] solid,@ (the distinctive form in which a thing is made; "pottery of this cast was found throughout the region") }
+{ [ branch, adj.all:branchy,+ verb.change:branch,+ ] leg, [ ramification, verb.change:ramify1,+ verb.change:ramify,+ ] subfigure,@ furcation,#p (a part of a forked or branching shape; "he broke off one of the branches") }
+{ brachium, branch,@ noun.cognition:biology,;c ((biology) a branching or armlike part of an animal) }
+{ [ fork, verb.change:fork1,+ ] crotch, branch,@ (the region of the angle formed by the junction of two branches; "they took the south fork"; "he climbed into the crotch of a tree") }
+{ pouch, sac, sack, pocket, enclosed_space,@ (an enclosed space; "the trapped miners found a pocket of air") }
+{ [ block1, adj.all:cubic^blocky,+ verb.change:block1,+ ] [ cube1, adj.all:cubic^cuboidal,+ adj.all:cubic^cubical,+ verb.contact:cube,+ ] solid,@ (a three-dimensional shape with six square or rectangular sides) }
+{ [ pyramid, adj.all:pointed^pyramidal,+ adj.all:pointed^pyramidical,+ verb.contact:pyramid,+ ] polyhedron,@ (a polyhedron having a polygonal base and triangular sides with a common vertex) }
+{ [ ovoid, adj.all:rounded^ovoid,+ ] solid,@ (an egg-shaped object) }
+{ tetrahedron, polyhedron,@ (any polyhedron having four plane faces) }
+{ pentahedron, polyhedron,@ (any polyhedron having five plane faces) }
+{ hexahedron, polyhedron,@ (any polyhedron having six plane faces) }
+{ [ rhombohedron, adj.all:symmetrical^rhombohedral,+ ] parallelepiped,@ hexahedron,@ (a parallelepiped bounded by six similar faces (either rhombuses or parallelograms)) }
+{ octahedron, polyhedron,@ (any polyhedron having eight plane faces) }
+{ decahedron, polyhedron,@ (any polyhedron having ten plane faces) }
+{ dodecahedron, polyhedron,@ (any polyhedron having twelve plane faces) }
+{ [ icosahedron, adj.pert:icosahedral,+ ] polyhedron,@ (any polyhedron having twenty plane faces) }
+{ regular_polyhedron, regular_convex_solid, regular_convex_polyhedron, Platonic_body, Platonic_solid, ideal_solid, polyhedron,@ (any one of five solids whose faces are congruent regular polygons and whose polyhedral angles are all congruent) }
+{ polyhedral_angle, angle,@ (the space enclosed by three or more planes that intersect in a vertex) }
+{ face_angle, angle,@ (the angle formed by two edges of a polyhedral angle) }
+{ regular_tetrahedron, regular_polyhedron,@ (a tetrahedron with four equilateral triangular faces) }
+{ [ cube, adj.all:cubic^cuboidal,+ adj.all:cubic^cubical,+ verb.contact:cube,+ ] regular_hexahedron, regular_polyhedron,@ (a hexahedron with six equal squares as faces) }
+{ tesseract, cube,@ (the four-dimensional analogue of a cube) }
+{ quadrate2, cube,@ (a cubelike object) }
+{ regular_dodecahedron, regular_polyhedron,@ (a dodecahedron with twelve regular pentagons as faces) }
+{ regular_octahedron, regular_polyhedron,@ (an octahedron with eight equilateral triangles as faces) }
+{ regular_icosahedron, regular_polyhedron,@ (an icosahedron with twenty equilateral triangles as faces) }
+{ frustum, solid,@ (a truncated cone or pyramid; the part that is left when a cone or pyramid is cut by a plane parallel to the base and the apical part is removed) }
+{ truncated_pyramid, frustum,@ (a frustum formed from a pyramid) }
+{ truncated_cone, frustum,@ (a frustum formed from a cone) }
+{ prismatoid, polyhedron,@ (a polyhedron whose vertices all lie in one or the other of two parallel planes; the faces that lie in those planes are the bases of the prismatoid) }
+{ prismoid, prismatoid,@ (a prismatoid whose bases are polygons having the same number of sides and whose other faces are trapezoids or parallelograms) }
+{ tail, tail_end, projection,@ (any projection that resembles the tail of an animal) }
+{ tongue, knife, projection,@ (any long thin projection that is transient; "tongues of flame licked at the walls"; "rifles exploded quick knives of fire into the dark") }
+{ tilt_angle, angle,@ (the angle a rocket makes with the vertical as it curves along its trajectory) }
+{ trapezohedron, polyhedron,@ (a polyhedron whose faces are trapeziums) }
+{ vertical_angle, angle,@ (either of two equal and opposite angles formed by the intersection of two straight lines) }
+{ verticil, coil,@ (a whorl of leaves growing around a stem) }
+{ view_angle, angle_of_view, angle,@ (the angle included by a photographic lens) }
+{ washout, groove,@ (the channel or break produced by erosion of relatively soft soil by water; "it was several days after the storm before they could repair the washout and open the road") }
+{ wave_angle, angle,@ (the angle of arrival (or departure) of a radio wave with respect to the axis of an antenna array) }
+{ [ wedge, verb.contact:wedge,+ ] wedge_shape, cuneus, triangle,@ (any shape that is triangular in cross section) }
+{ projection, convex_shape,@ (any solid convex shape that juts out from something) }
+{ keel, projection,@ (a projection or ridge that suggests a keel) }
+
+

@@ -1,0 +1,703 @@
+($RCSfile: verb.creation,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:57 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.creation)
+
+{ [ make, noun.act:making,+ make_over,^ make_up1,^ ] [ create, noun.person:creature1,+ noun.Tops:creature,+ ] frames: 8,11 (make or cause to be or to become; "make a mess in one's office"; "create a furor")}
+{ track, make,@ frames: 8 (make tracks upon) }
+{ institute, bring1, create,@ frames: 8 (advance or set forth in court; "bring charges"; "institute proceedings") }
+{ introduce1, establish1,@ frames: 8,11 (bring in or establish in a new place or environment; "introduce a rule"; "introduce exotic fruits") }
+{ short-circuit, [ short, noun.artifact:short1,+ ] create,@ frames: 8,11 (create a short circuit in) }
+{ do, make5, create13,@ frames: 8,21 (create or design, often in a certain way; "Do my room in blue"; "I did this piece in wood to express my love for the forest") }
+{ [unmake, make5,!] undo, frames: 8 (deprive of certain characteristics) }
+{ [ re-create, noun.act:re-creation,+ ] create,@ frames: 8,11 (create anew; "Re-create the boom of the West on a small scale") }
+{ [ remake, noun.artifact:remake,+ ] refashion1, redo, [make_over, noun.act:makeover1,+ ] make1,@ frames: 8 (make new; "She is remaking her image") }
+{ [ destroy, adj.all:destructible,+ adj.all:destructive,+ noun.act:destruction,+ noun.person:destroyer,+ noun.artifact:destroyer,+ ] destruct, unmake,@ frames: 8,11 (do away with, cause the destruction or undoing of; "The fire destroyed the house")}
+{ [ self-destruct, noun.act:self-destruction1,+ noun.act:self-destruction,+ ] [ self-destroy, noun.act:self-destruction1,+ noun.act:self-destruction,+ ] destruct,@ frames: 1,2 (do away with oneself or itself; "The machine will self-destruct if you tamper with it") }
+{ destruct1, destroy,@ frames: 8 (destroy (one's own missile or rocket); "The engineers had to destruct the rocket for safety reasons")}
+{ [ end13, noun.communication:end,+ noun.state:end,+ noun.event:end,+ noun.time:end,+ noun.event:ending,+ ] destroy,@ frames: 8,11 (put an end to; "The terrible news ended our hopes that he had survived")}
+{ fracture, destroy,@ frames: 8,11 (interrupt, break, or destroy; "fracture the balance of power") }
+{ [wipe_out, noun.event:wipeout,+] sweep_away, destroy,@ frames: 8,9,10,11 (eliminate completely and without a trace; "The old values have been wiped out") }
+{ interdict, destroy,@ frames: 8,11 (destroy by firepower, such as an enemy's line of communication) }
+{ [ produce, noun.person:producer1,+ noun.artifact:product1,+ noun.artifact:product,+ ] [ make1, noun.person:maker,+ noun.group:maker,+ noun.cognition:make,+ noun.act:making,+ ] [ create3, noun.artifact:creation,+ noun.act:creation,+ ] create13,$ frames: 8,11 (create or manufacture a man-made product; "We produce more cars than we can sell"; "The company has been making toys for two centuries")}
+{ prefabricate1, produce,@ frames: 8,11 (produce synthetically, artificially, or stereotypically and unoriginally)}
+{ [ underproduce, noun.act:underproduction,+ ] produce,@ frames: 1,8,11 (produce below capacity or demand; "The East German factories were underproducing for many years")}
+{ [ output, noun.artifact:output1,+ noun.act:output,+ noun.artifact:output,+ ] produce,@ frames: 8,11 (to create or manufacture a specific amount; "the computer is outputting the data from the job I'm running") }
+{ [ pulse, noun.event:pulse1,+ noun.event:pulsing,+ ] [ pulsate, noun.event:pulsation,+ noun.event:pulse1,+ ] produce,@ frames: 8,11 (produce or modulate (as electromagnetic waves) in the form of short bursts or pulses or cause an apparatus to produce pulses; "pulse waves"; "a transmitter pulsed by an electronic tube") }
+{ clap_up, clap_together, slap_together, make1,@ frames: 8 (make hastily and carelessly) }
+{ custom-make, customize, customise, tailor-make1, produce,@ frames: 8 (make to specifications; "I had this desk custom-made for me") }
+{ dummy, dummy_up, make1,@ frames: 8 (make a dummy of; "dummy up the books that are to be published") }
+{ [turn_out1, noun.artifact:turnout,+ ] produce,@ frames: 8,11 (produce quickly or regularly, usually with machinery; "This factory turns out saws") }
+{ [ machine, noun.artifact:machine,+ noun.person:machinist,+ noun.artifact:machinery,+ ] make1,@ frames: 8 (make by machinery; "The Americans were machining while others still hand-made cars") }
+{ [ machine1, noun.artifact:machine,+ noun.person:machinist,+ ] shape,@ frames: 8 (turn, shape, mold, or otherwise finish by machinery) }
+{ grind4, shape,@ frames: 8 (shape or form by grinding; "grind lenses for glasses and cameras")}
+{ grind5, create,@ frames: 8 (created by grinding; "grind designs into the glass bowl")}
+{ [ stamp, noun.shape:stamp,+ noun.person:stamper1,+ noun.artifact:stamper,+ ] shape,@ frames: 8 (form or cut out with a mold, form, or die; "stamp needles")}
+{ [ puddle, noun.substance:puddle,+ noun.person:puddler,+ ] shape,@ frames: 8 (subject to puddling or form by puddling; "puddle iron") }
+{ [ beat, noun.act:beat1,+ ] shape,@ frames: 8 (shape by beating; "beat swords into ploughshares") }
+{ churn_out, produce,@ frames: 8 (produce something at a fast rate; "He churns out papers, but they are all about the same topic") }
+{ [ overproduce1, noun.act:overproduction,+ ] produce,@ frames: 8 (produce in excess; "The country overproduces cars") }
+{ [ elaborate, noun.act:elaboration,+ ] produce,@ frames: 8 (produce from basic elements or sources; change into a more developed product; "The bee elaborates honey")}
+{ put_out, produce,@ frames: 8 (put out considerable effort; "He put out the same for seven managers") }
+{ [ laminate, noun.artifact:laminate,+ noun.body:lamina,+ noun.artifact:lamination,+ noun.act:lamination,+ noun.person:laminator,+ ] produce,@ frames: 8 (create laminate by bonding sheets of material with a bonding material) }
+{ mass-produce, manufacture,@ frames: 8 (produce on a large scale) }
+{ [ bootleg, noun.food:bootleg,+ ] make1,@ frames: 8 (produce or distribute illegally; "bootleg tapes of the diva's singing") }
+{ [ compose9, noun.person:compositor,+ ] [ compile, noun.communication:compilation,+ noun.act:compilation,+ noun.person:compiler,+ noun.act:compiling,+ ] make11,@ frames: 8,21 (put together out of existing material; "compile a list") }
+{ [ confect, noun.act:confection,+ ] [ confection, noun.act:confection,+ ] comfit, assemble,@ frames: 8 (make into a confection; "This medicine is home-confected") }
+{ cobble_together, cobble_up, compose9,@ frames: 8 (put together hastily) }
+{ [ anthologize, noun.communication:anthology,+ ] [ anthologise, noun.communication:anthology,+ ] compile,@ frames: 8 (compile an anthology) }
+{ [ catalogue, noun.communication:catalogue1,+ noun.communication:catalogue,+ noun.person:cataloguer,+ noun.person:cataloger,+ ] [ catalog, noun.communication:catalog1,+ noun.communication:catalog,+ ] compose9,@ frames: 2 (make a catalogue, compile a catalogue; "She spends her weekends cataloguing") }
+{ [ compile1, noun.act:compilation,+ noun.communication:compiler,+ ] make11,@ frames: 8 (use a computer program to translate source code written in a particular programming language into computer-readable machine code that can be executed) }
+{ [ generate, adj.all:generative,+ noun.time:generation1,+ noun.event:generation,+ noun.person:generator,+ ] bring_forth1, create,@ frames: 8,11 (bring into existence; "The new manager generated a lot of problems"; "The computer bug generated chaos in the office"; "The computer generated this image"; "The earthquake generated a tsunami")}
+{ come_up3, generate,@ frames: 8 (bring forth, usually something desirable; "The committee came up with some interesting recommendations") }
+{ develop9, generate,@ frames: 8,9,10,11 (generate gradually; "We must develop more potential customers"; "develop a market for the new mobile phone") }
+{ [ generate1, adj.all:generative,+ noun.act:generation1,+ noun.artifact:generator,+ ] produce,@ frames: 8 (produce (energy); "We can't generate enough power for the entire city"; "The hydroelectric plant needs to generate more electricity")}
+{ fire, generate1,@ noun.attribute:physiology,;c frames: 1 (generate an electrical impulse; "the neurons fired fast")}
+{ [ originate, adj.all:originative,+ noun.event:origin,+ noun.act:origination,+ noun.person:originator,+ verb.stative:originate_in,^ ] [ initiate1, adj.all:opening^initiative,+ adj.all:opening^initiatory,+ noun.act:initiation2,+ noun.act:initiation1,+ ] [ start, noun.act:start,+ noun.time:start,+ noun.event:start,+ noun.person:starter1,+ ] create,@ frames: 8,11 (bring into being; "He initiated a new program"; "Start a foundation") }
+{ set12, start,@ frames: 8 (apply or start; "set fire to a building") }
+{ render, [ yield, noun.possession:yield,+ noun.artifact:yield,+ noun.act:yield,+ ] [ return, noun.possession:return,+ ] give, [ generate2, noun.act:generation1,+ ] produce,@ frames: 8,11 (give or supply; "The cow brings in 5 liters of milk"; "This year's crop yielded 1,000 bushels of corn"; "The estate renders some revenue for the family") }
+{ give3, yield1, give,$ create,@ frames: 11,14,15 (cause to happen or be responsible for; "His two singles gave the team the victory") }
+{ [bring, bring_on,^ verb.social:bring_off,^ bring_up,^ ] [ work1, adj.all:possible^workable,+ ] play13, wreak, make_for, create,@ frames: 11,8 (cause to happen or to occur as a consequence; "I cannot work a miracle"; "wreak havoc"; "bring comments"; "play a joke"; "The rain brought relief to the drought-stricken area") }
+{ raise1, [ conjure, noun.person:conjurer1,+ noun.communication:conjuration,+ noun.cognition:conjuration,+ noun.person:conjuror1,+ noun.cognition:conjury,+ noun.cognition:conjuring,+ ] conjure_up, [ invoke, noun.communication:invocation1,+ noun.cognition:invocation,+ ] [ evoke2, noun.cognition:evocation2,+ ] stir, call_down, arouse, bring_up, put_forward, call_forth, call_forth1,$ summon,@ frames: 8,11 (summon into action or bring into existence, often as if by magic; "raise the specter of unemployment"; "he conjured wild birds in the air"; "call down the spirits from the mountain")}
+{ call_up, summon, create,@ frames: 8,11 (cause to become available for use, either literally or figuratively; "clicking on the icon calls up the program"; "the author's description of the banquet called up delicious aromas"; "running into an old friend summoned up memories of her childhood")}
+{ educe, evoke1, elicit, extract, draw_out, verb.cognition:construe,@ frames: 8 (deduce (a principle) or construe (a meaning); "We drew out some interesting linguistic data from the native informant")}
+{ extort, wring_from, verb.possession:obtain,@ frames: 8 (get or cause to become in a difficult or laborious manner) }
+{ [ pry, noun.cognition:prying,+ ] prise, extort,@ frames: 8 (make an uninvited or presumptuous inquiry; "They pried the information out of him") }
+{ [ regenerate, noun.act:regeneration1,+ ] [ renew, noun.act:renewal1,+ ] re-create,@ frames: 8,11 (reestablish on a new, usually improved, basis or make new or like new; "We renewed our friendship after a hiatus of twenty years"; "They renewed their membership") }
+{ create_by_mental_act, create_mentally, create,@ frames: 8 (create mentally and abstractly rather than with one's hands) }
+{ give_birth, create_mentally,@ frames: 8,11 (create or produce an idea; "Marx and Engels gave birth to communism") }
+{ [ schematize, noun.act:schematization,+ noun.cognition:scheme2,+ noun.cognition:scheme1,+ noun.cognition:schema1,+ noun.cognition:schema,+ ] verb.change:organize,* create_by_mental_act,@ frames: 8 (formulate in regular order; to reduce to a scheme or formula; "The chemists schematized the various reactions in a coherent fashion")}
+{ [ invent, adj.all:creative^inventive,+ noun.cognition:invention,+ noun.act:invention,+ noun.person:inventor,+ ] [ contrive, noun.act:contrivance1,+ ] [ devise, noun.person:deviser,+ noun.act:devising,+ noun.act:devisal,+ ] [ excogitate, noun.cognition:excogitation1,+ noun.cognition:excogitation,+ noun.person:excogitator,+ ] [ formulate, noun.communication:formula1,+ noun.act:formulation,+ ] forge8, create_by_mental_act,@ frames: 8 (come up with (an idea, plan, explanation, theory, or principle) after a mental effort; "excogitate a way to measure the speed of light") }
+{ project3, [ cast2, noun.act:cast3,+ ] contrive2, throw2, verb.motion:send1,@ frames: 8,11 (put or send forth; "She threw the flashlight beam into the corner"; "The setting sun threw long shadows"; "cast a spell"; "cast a warm light") }
+{ [ formulate1, noun.communication:formula2,+ noun.cognition:formula1,+ noun.substance:formulation,+ ] create_from_raw_material,@ noun.cognition:chemistry,;c frames: 8 (prepare according to a formula) }
+{ [ gestate3, noun.cognition:gestation,+ ] [ conceive, noun.cognition:conception3,+ noun.cognition:concept,+ noun.person:conceiver,+ ] [ conceptualize, adj.all:abstract^conceptual,+ noun.cognition:conceptualization,+ noun.act:conceptualization,+ noun.cognition:concept,+ ] [ conceptualise, noun.cognition:conceptualisation,+ noun.act:conceptualisation,+ noun.cognition:concept,+ ] create_by_mental_act,@ frames: 8,22 (have the idea for; "He conceived of a robot that would help paralyzed patients"; "This library was well conceived")}
+{ [ design9, noun.cognition:design3,+ ] conceive,@ frames: 8 (conceive or fashion in the mind; invent; "She designed a good excuse for not attending classes that day") }
+{ [ preconceive, noun.cognition:preconception,+ ] conceive,@ frames: 8 (conceive beforehand; "a preconceived notion") }
+{ think_up, think_of, dream_up, hatch, [ concoct, noun.cognition:concoction,+ ] create_by_mental_act,@ frames: 8 (devise or invent; "He thought up a plan to get rich quickly"; "no-one had ever thought of such a clever piece of software") }
+{ [ fabricate, noun.communication:fabrication,+ noun.act:fabrication2,+ noun.person:fabricator,+ ] manufacture1, cook_up, make_up1, [ invent1, noun.act:invention,+ ] think_up,@ frames: 8 (concoct something artificial or untrue) }
+{ mythologize, mythologise, fabricate,@ frames: 8 (construct a myth; "The poet mythologized that the King had three sons")}
+{ [ confabulate3, noun.cognition:confabulation,+ ] fabricate,@ noun.cognition:psychiatry,;c frames: 2,8 (unconsciously replace fact with fantasy in one's memory)}
+{ trump_up, [ concoct2, noun.cognition:concoction,+ ] fabricate,@ frames: 8 (invent; "trump up charges") }
+{ [ fictionalize, noun.communication:fictionalization,+ noun.act:fictionalization,+ noun.communication:fiction1,+ noun.communication:fiction,+ ] fictionalise, retell7, re-create,@ frames: 8 (make into fiction; "The writer fictionalized the lives of his parents in his latest novel") }
+{ [ visualize, noun.cognition:visualization,+ noun.person:visualizer,+ ] visualise, [ envision, noun.cognition:envisioning,+ ] project, [ fancy, noun.cognition:fancy2,+ noun.cognition:fancy1,+ ] [ see, noun.person:seer,+ ] [ figure, noun.act:figuration1,+ ] [ picture1, noun.cognition:picture,+ noun.cognition:picturing,+ ] [ image, noun.cognition:image,+ noun.artifact:image1,+ noun.artifact:image,+ noun.cognition:imaging,+ noun.cognition:imagery,+ ] imagine,@ frames: 8,26 (imagine; conceive of; see in one's mind; "I can't see him on horseback!"; "I can see what will happen"; "I can see a risk in this strategy") }
+{ visualize2, [ visualise2, noun.cognition:visualisation,+ ] visualize,$ imagine,@ frames: 2 (form a mental picture of something that is invisible or abstract; "Mathematicians often visualize")}
+{ [ envision1, noun.cognition:envisioning,+ ] foresee, imagine,@ frames: 8,26 (picture to oneself; imagine possible; "I cannot envision him as President") }
+{ [ imagine, adj.all:creative^imaginative,+ noun.cognition:imagination2,+ noun.cognition:imagination1,+ ] conceive_of1, [ ideate1, noun.cognition:idea,+ noun.cognition:ideation,+ ] envisage, create_by_mental_act,@ frames: 8,26 (form a mental image of something that is not present or that is not the case; "Can you conceive of him as the president?")}
+{ fantasize1, fantasise1, imagine,@ frames: 8 (portray in the mind; "he is fantasizing the ideal wife")}
+{ [ prefigure1, noun.cognition:prefiguration1,+ noun.cognition:prefiguration,+ ] imagine,@ frames: 8 (imagine or consider beforehand; "It wasn't as bad as I had prefigured")}
+{ [ think, noun.cognition:think,+ noun.cognition:thought1,+ ] imagine,@ frames: 2 (imagine or visualize; "Just think--you could be rich one day!"; "Think what a scene it must have been!") }
+{ [fantasy, noun.cognition:fantasy1,+ noun.cognition:fantasy,+] [ fantasize, noun.cognition:fantasy1,+ noun.cognition:fantasy,+ ] fantasise, imagine,@ frames: 2,26,22 (indulge in fantasies; "he is fantasizing when he says he plans to start his own company") }
+{ [ dream, noun.cognition:dream2,+ noun.person:dreamer1,+ noun.person:dreamer,+ noun.cognition:dreaming2,+ dream_up,^ ] [ daydream, noun.cognition:daydream,+ noun.person:daydreamer,+ noun.cognition:daydreaming,+ ] [ woolgather, noun.person:woolgatherer,+ noun.cognition:woolgathering,+ ] [ stargaze, noun.person:stargazer1,+ ] imagine,@ frames: 2,22,26 (have a daydream; indulge in a fantasy) }
+{ [ discover, noun.person:discoverer1,+ noun.communication:discovery,+ noun.cognition:discovery,+ noun.act:discovery,+ ] [ find, noun.cognition:find,+ noun.act:find,+ noun.object:finding,+ ] verb.cognition:discover,$ conceive,@ frames: 8,26 (make a discovery, make a new finding; "Roentgen discovered X-rays"; "Physicists believe they found a new elementary particle") }
+{ [ plan, noun.cognition:plan1,+ noun.cognition:plan,+ noun.person:planner,+ noun.cognition:planning,+ ] [ project1, noun.cognition:project,+ noun.act:project,+ ] [ contrive1, noun.person:contriver,+ ] [ design2, noun.cognition:design,+ noun.cognition:design3,+ noun.cognition:design1,+ ] create_by_mental_act,@ frames: 8,28 (make or work out a plan for; devise; "They contrived to murder their boss"; "design a new sales strategy"; "plan an attack") }
+{ plot3, contrive1,@ frames: 8 (devise the sequence of events in (a literary work or a play, movie, or ballet); "the writer is plotting a new novel")}
+{ concert, contrive1,@ frames: 8 (contrive (a plan) by mutual agreement) }
+{ [ mint, noun.artifact:mint,+ noun.person:minter,+ noun.act:mintage,+ ] [ coin, noun.possession:coin2,+ noun.person:coiner2,+ noun.person:coiner,+ ] strike2, create_from_raw_material,@ frames: 8 (form by stamping, punching, or printing; "strike coins"; "strike a medal") }
+{ spin, extrude,* create_from_raw_material,@ frames: 11 (form a web by making a thread; "spiders spin a fine web") }
+{ spin1, fabricate,@ frames: 8 (make up a story; "spin a yarn") }
+{ spatchcock, verb.communication:insert,@ frames: 8 (interpolate or insert (words) into a sentence or story) }
+{ [ design, noun.cognition:design,+ noun.artifact:design1,+ noun.act:design,+ noun.person:designer,+ noun.act:designing,+ ] [ plan1, noun.artifact:plan,+ noun.person:planner,+ noun.act:planning2,+ ] create_by_mental_act,@ frames: 8 (make a design of; plan out in systematic, often graphic form; "design a better mousetrap"; "plan the new wing of the museum") }
+{ redesign, design,@ frames: 8 (design anew, make a new design for) }
+{ [ create13, adj.all:constructive^creative,+ adj.all:creative,+ noun.event:creation,+ ] [ make9, noun.act:making,+ ] create,@ frames: 8 (create by artistic means; "create a poem"; "Schoenberg created twelve-tone music"; "Picasso created Cubism"; "Auden made verses")}
+{ [ design1, noun.artifact:design,+ noun.person:designer1,+ noun.person:designer,+ noun.act:designing,+ ] create13,@ frames: 8 (create the design for; create or execute in an artistic or highly skilled manner; "Chanel designed the famous suit") }
+{ carry_through, [ accomplish, adj.all:possible^accomplishable,+ noun.act:accomplishment,+ ] [ execute, adj.pert:executive,+ noun.act:execution3,+ ] carry_out, action, [ fulfill, noun.act:fulfillment,+ ] [ fulfil, noun.act:fulfilment,+ ] verb.change:carry_out,$ verb.change:complete2,@ effect,@ frames: 8 (put in effect; "carry out a task"; "execute the decision of the people"; "He actioned the operation")}
+{ get_over, carry_through,@ frames: 8 (to bring (a necessary but unpleasant task) to an end; "Let's get this job over with"; "It's a question of getting over an unpleasant task") }
+{ run, accomplish,@ frames: 8 (carry out; "run an errand") }
+{ [ consummate, noun.act:consummation,+ ] carry_through,@ frames: 8 (make perfect; bring to perfection) }
+{ [ consummate1, noun.act:consummation1,+ noun.act:consummation,+ ] verb.contact:make_love,* carry_through,@ frames: 8 (fulfill sexually; "consummate a marriage") }
+{ [ initiate, noun.act:initiation1,+ noun.person:initiator,+ ] [ pioneer1, noun.person:pioneer1,+ ] cause,@ frames: 8 (take the lead or initiative in; participate in the development of; "This South African surgeon pioneered heart transplants") }
+{ strike_up, initiate,@ frames: 8 (begin; "strike up a conversation"; "strike up a friendship") }
+{ introduce, [ innovate, adj.all:original^innovative,+ noun.artifact:innovation,+ noun.act:innovation,+ noun.person:innovator,+ ] initiate,@ frames: 8 (bring something new to an environment; "A new word processor was introduced") }
+{ [phase_in, phase_out,!] introduce,@ frames: 8 (introduce gradually) }
+{ [phase_out, phase_in,!] verb.change:terminate1,@ frames: 8 (terminate gradually) }
+{ [ effect, adj.all:competent^effective,+ adj.all:effective,+ noun.cognition:effect,+ noun.person:effecter,+ ] [ effectuate, noun.state:effect,+ noun.phenomenon:effect,+ noun.act:effectuation,+ ] set_up3, verb.change:happen,> cause,@ frames: 8,11 (produce; "The scientists set up a shock wave") }
+{ draw1, get, effect,@ noun.act:baseball,;c frames: 8 (earn or achieve a base by being walked by the pitcher; "He drew a base on balls") }
+{ [ draw2, noun.person:drawer,+ noun.communication:drawing,+ noun.act:drawing1,+ ] create1,@ frames: 2 (engage in drawing; "He spent the day drawing in the garden") }
+{ [ trip, noun.artifact:trip,+ noun.artifact:tripper,+ ] [ actuate, noun.artifact:actuator,+ noun.Tops:act,+ noun.act:actuation,+ ] [ trigger, noun.act:trigger,+ ] [ activate, noun.process:activation,+ ] set_off, spark_off, [ spark, noun.quantity:spark,+ ] trigger_off, touch_off, verb.change:happen,> initiate,@ frames: 8,11 (put in motion or move to act; "trigger a reaction"; "actuate the circuits") }
+{ [ induce, adj.all:causative^inducive,+ noun.act:inducement,+ noun.act:induction,+ noun.act:inducing,+ ] bring_on, generate,@ frames: 8,11 (cause to arise; "induce a crisis") }
+{ bring_on1, frames: 8,11 (cause to appear; "bring on the birthday cake") }
+{ [ precipitate, adj.all:hurried^precipitant,+ noun.attribute:precipitation,+ ] effect,@ frames: 8,11 (bring about abruptly; "The crisis precipitated by Russia's revolution") }
+{ [ induce1, noun.act:induction,+ noun.act:inducing,+ ] stimulate, rush, hasten, effect,@ frames: 11,8 (cause to occur rapidly; "the infection precipitated a high fever and allergic reactions") }
+{ [ realize, noun.act:realization2,+ noun.act:realization,+ ] [ realise, noun.act:realisation2,+ noun.act:realisation,+ ] [ actualize, adj.all:real^actual2,+ adj.all:real^actual,+ adj.all:actual,+ noun.act:actualization,+ ] [ actualise, noun.act:actualisation,+ ] substantiate4, create,@ frames: 8 (make real or concrete; give reality or substance to; "our ideas must be substantiated into actions") }
+{ [ incarnate, noun.person:incarnation,+ disincarnate,!] actualize,@ frames: 8,11 (make concrete and real) }
+{ [disincarnate, incarnate,!] verb.change:immaterialize,@ frames: 11 (make immaterial; remove the real essence of) }
+{ [ pioneer, noun.person:pioneer1,+ ] open_up, innovate,@ frames: 8 (open up an area or prepare a way; "She pioneered a graduate program for women students") }
+{ [ cause, adj.all:causative,+ noun.act:causation,+ noun.event:cause,+ noun.communication:cause,+ noun.Tops:cause,+ ] do2, make8, create,@ frames: 11,8 (give rise to; cause to happen or occur, not always intentionally; "cause a commotion"; "make a stir"; "cause an accident")}
+{ make15, cause,@ frames: 24 (compel or make somebody or something to act in a certain way; "People cannot be made to integrate just by passing a law!"; "Heat makes you sweat") }
+{ [ drive, noun.act:drive2,+ ] verb.social:drive2,$ verb.contact:drive,$ make15,@ frames: 24 (compel somebody to do something, often against his own will or judgment; "She finally drove him to change jobs") }
+{ [ occasion, noun.state:occasion,+ noun.motive:occasion,+ noun.time:occasion,+ ] cause,@ frames: 11 (give occasion to) }
+{ [ inspire, noun.cognition:inspiration2,+ ] occasion,@ frames: 11 (supply the inspiration for; "The article about the artist inspired the exhibition of his recent work") }
+{ [ provoke, noun.motive:provocation,+ ] [ evoke, noun.cognition:evocation1,+ ] call_forth1, kick_up, cause,@ frames: 11,8 (evoke or provoke to appear or occur; "Her behavior provoked a quarrel between the couple") }
+{ pick, provoke,@ frames: 8 (provoke; "pick a fight or a quarrel") }
+{ [ establish, noun.act:establishment,+ ] [ found, noun.act:foundation,+ noun.person:founder,+ noun.act:founding,+ ] plant, [ constitute, noun.act:constitution,+ ] [ institute1, noun.act:institution,+ ] initiate,@ frames: 8 (set up or lay the groundwork for; "establish a new department") }
+{ fix1, establish,@ frames: 8,11 (set or place definitely; "Let's fix the date for the party!") }
+{ establish1, give1, give,$ create,@ frames: 11,8 (bring about; "The trompe l'oeil-illusion establishes depth") }
+{ [ pacify, noun.communication:pacification,+ noun.state:peace2,+ noun.state:peace,+ noun.communication:peace,+ noun.person:pacifier,+ ] establish1,@ frames: 8 (fight violence and try to establish peace in (a location); "The U.N. troops are working to pacify Bosnia")}
+{ [ stage1, noun.location:stage,+ noun.person:stager,+ ] arrange3, initiate,@ frames: 8 (plan, organize, and carry out (an event); "the neighboring tribe staged an invasion")}
+{ [dogfight, noun.act:dogfight,+] arrange3,@ frames: 8 (arrange for an illegal dogfight)}
+{ [ concord, noun.communication:concord,+ ] verb.communication:arrange4,@ frames: 8 (arrange by concord or agreement; "Concord the conditions for the marriage of the Prince of Wales with a commoner")}
+{ tee_up, arrange3,@ frames: 8 (make detailed arrangements or preparations) }
+{ [ prearrange, noun.cognition:prearrangement,+ ] arrange,@ frames: 8 (arrange beforehand) }
+{ [ phase, noun.time:phase,+ ] arrange3,@ frames: 8 (arrange in phases or stages; "phase a withdrawal") }
+{ engender, breed, spawn, cause,@ frames: 8,11 (call forth) }
+{ mount, initiate,@ frames: 8,11 (put up or launch; "mount a campaign against pornography") }
+{ mount1, put_on, organize,@ frames: 8 (prepare and supply with the necessary equipment for execution or performance; "mount a theater production"; "mount an attack"; "mount a play") }
+{ [ rerun, noun.communication:rerun,+ ] mount1,@ frames: 8 (rerun a performance of a play, for example) }
+{ [ riff, noun.communication:riff,+ ] play,@ frames: 2 (play riffs)}
+{ misplay, play,@ frames: 2,8 (play incorrectly, e.g., play a wrong note) }
+{ put_on1, turn_in, create,@ frames: 8 (carry out (performances); "They turned in a splendid effort"; "They turned in top jobs for the second straight game") }
+{ [ motivate, adj.all:causative^motivative,+ noun.state:motivation,+ noun.act:motivation,+ noun.Tops:motivation,+ noun.Tops:motive,+ noun.motive:motivator,+ ] [ actuate2, noun.Tops:act,+ ] [ propel, noun.act:propulsion,+ ] move, prompt, [ incite, noun.communication:incitement1,+ noun.motive:incitation,+ ] verb.emotion:move,$ verb.emotion:move1,$ cause,@ frames: 8,11,10,9,24 (give an incentive for action; "This moved me to sacrifice my career") }
+{ [ impel, adj.all:dynamic^impulsive,+ noun.phenomenon:impulsion,+ ] [ force, noun.attribute:force1,+ ] cause,@ frames: 24 (urge or force (a person) to an action; constrain or motivate) }
+{ [ start1, noun.act:start,+ noun.time:start,+ noun.event:start,+ ] [start_up, noun.act:startup,+ ] embark_on, [ commence, noun.act:commencement,+ ] verb.change:begin1,@ frames: 8,11 (get off the ground; "Who started this company?"; "We embarked on an exciting enterprise"; "I start my day with a good breakfast"; "We began the new semester"; "The afternoon session begins at 4 PM"; "The blood shed started when the partisans launched a surprise attack") }
+{ sound_off, strike_up1, play12,@ noun.communication:music,;c noun.cognition:music1,;c noun.act:music,;c frames: 2 (start playing; "The musicians struck up a tune") }
+{ [ undertake, noun.act:undertaking,+ ] set_about, attempt, initiate,@ frames: 8,33 (enter upon an activity or enterprise) }
+{ [ organize, noun.group:organization,+ noun.act:organization2,+ noun.act:organization,+ ] [ organise, noun.group:organisation,+ noun.act:organisation2,+ ] [ prepare, adj.all:preceding^preparative,+ ] [ devise1, noun.person:deviser,+ noun.act:devising,+ ] get_up, [ machinate, noun.cognition:machination,+ ] initiate,@ frames: 8 (arrange by systematic planning and united effort; "machinate a plot"; "organize a strike"; "devise a plan to take over the director's office") }
+{ lay, prepare,@ frames: 8 (prepare or position for action or operation; "lay a fire"; "lay the foundation for a new health care plan") }
+{ [bear, verb.stative:bear_out,^ ] turn_out, create,@ frames: 11 (bring forth; "The apple tree bore delicious apples this year"; "The unidentified plant bore gorgeous flowers") }
+{ [ seed, noun.plant:seed2,+ noun.plant:seed,+ ] bear,@ frames: 1 (bear seeds) }
+{ [ crop, noun.plant:crop,+ ] bear,@ frames: 1 (yield crops; "This land crops well") }
+{ overbear, bear,@ frames: 11 (bear too much) }
+{ [ fruit, noun.plant:fruit,+ noun.state:fruition,+ noun.plant:fruitage,+ ] bear,@ frames: 1 (bear fruit; "the trees fruited early this year") }
+{ [ fruit1, noun.plant:fruit,+ noun.plant:fruitage,+ ] fruit,> frames: 8 (cause to bear fruit) }
+{ create_from_raw_material, create_from_raw_stuff, create,@ frames: 8 (make from scratch) }
+{ [ manufacture, noun.act:manufacture1,+ noun.act:manufacture,+ noun.person:manufacturer,+ noun.group:manufacturer,+ ] [ fabricate1, noun.act:fabrication3,+ noun.act:fabrication1,+ noun.act:fabrication,+ ] construct1, make11,@ frames: 8,11 (put together out of artificial or natural components or parts; "the company fabricates plastic chairs"; "They manufacture small toys"; "He manufactured a popular cereal") }
+{ [ make11, noun.act:making,+ ] create_from_raw_material,@ frames: 8,11 (make by shaping or bringing together constituents; "make a dress"; "make a cake"; "make a wall of stones") }
+{ [ raft, noun.artifact:raft,+ ] manufacture,@ frames: 8 (make into a raft; "raft these logs") }
+{ [ forge1, noun.person:forger1,+ noun.artifact:forgery,+ noun.act:forgery1,+ ] [ fake, noun.person:fake,+ noun.artifact:fake,+ noun.act:fakery,+ ] [ counterfeit, noun.person:counterfeiter,+ noun.artifact:counterfeit,+ ] re-create,@ frames: 8 (make a copy of with the intent to deceive; "he faked the signature"; "they counterfeited dollar bills"; "She forged a Green Card") }
+{ [ construct, noun.act:construction,+ noun.person:constructor,+ ] [ build, noun.person:builder,+ noun.act:building,+ frames: 2] [ make13, noun.person:maker,+ noun.cognition:make,+ noun.act:making,+ ] create,@ frames: 8 (make by combining materials and parts; "this little pig made his house out of straw"; "Some eccentric constructed an electric brassiere warmer") }
+{ dry-wall, construct,@ frames: 8 (construct with drywall; "dry-wall the basement of the house")}
+{ [ lock4, noun.artifact:lock2,+ noun.artifact:lockage,+ ] build,@ frames: 2 (build locks in order to facilitate the navigation of vessels)}
+{ build9, establish10, create,@ frames: 8 (build or establish something abstract; "build a reputation") }
+{ [ wattle, noun.artifact:wattle,+ ] build,@ noun.act:construction,;c frames: 8 (build of or with wattle) }
+{ frame, frame_up, construct,@ noun.act:construction,;c frames: 8 (construct by fitting or uniting parts together) }
+{ [ rebuild, noun.act:rebuilding,+ ] [ reconstruct, noun.act:reconstruction,+ ] construct,@ noun.act:construction,;c frames: 2,8 (build again; "The house was rebuild after it was hit by a bomb") }
+{ groin, construct,@ noun.act:construction,;c frames: 8 (build with groins; "The ceiling was groined") }
+{ [ cantilever, noun.artifact:cantilever,+ ] build,@ noun.act:architecture,;c frames: 8 (construct with girders and beams such that only one end is fixed; "Frank Lloyd Wright liked to cantilever his buildings") }
+{ [ demolish, noun.event:demolition,+ noun.act:demolition,+ noun.act:demolishing,+ ] [ pulverize, noun.act:pulverization1,+ ] [ pulverise, noun.act:pulverisation1,+ ] destroy,@ frames: 8,11 (destroy completely; "the wrecking ball demolished the building") }
+{ demolish1, destroy,@ frames: 8,9,10,11 (ruin or destroy; "his book demolishes an old myth"; "demolished my reputation"; "the professor demolished the student's argument")}
+{ [ assemble, noun.group:assemblage1,+ noun.artifact:assemblage,+ disassemble,! ] [ piece, noun.artifact:piece,+ ] put_together, set_up, tack5, tack_together, verb.contact:join1,@ create,@ frames: 8,11,10 (create by putting components or members together; "She pieced a quilt"; "He tacked together some verses"; "They set up a committee") }
+{ [ jumble, noun.state:jumble,+ noun.cognition:jumble,+ ] [ confuse, noun.act:confusion1,+ ] mix_up, verb.cognition:confuse2,$ assemble,@ frames: 8 (assemble without order or sense; "She jumbles the words when she is supposed to write a sentence") }
+{ reassemble, assemble,@ frames: 8 (assemble once again, after taking something apart) }
+{ [ configure, noun.cognition:configuration,+ ] set_up,@ frames: 8 (set up for a particular purpose; "configure my new computer"; "configure a plane for a combat mission") }
+{ [ compound, noun.substance:compound,+ noun.cognition:compound,+ noun.act:compounding,+ ] assemble,@ frames: 8 (create by mixing or combining) }
+{ [disassemble, assemble,! ] [ dismantle, noun.act:dismantlement,+ noun.act:dismantling,+ ] take_apart, break_up, break_apart, destroy,@ frames: 8 (take apart into its constituent pieces) }
+{ strike3, disassemble,@ frames: 8 (disassemble a temporary structure, such as a tent or a theatrical set; "after the show, we'll have to strike the set and pack up")}
+{ [ fashion, noun.act:fashioning,+ ] forge2, make11,@ frames: 8 (make out of components (often in an improvising manner); "She fashioned a tent out of a sheet and a few sticks")}
+{ [ tie, noun.act:tying,+ ] fashion,@ frames: 8 (make by tying pieces together; "The fishermen tied their flies") }
+{ recast2, reforge, remodel, remake,@ frames: 8 (cast or model anew; "She had to recast her image to please the electorate in her home state") }
+{ [ craft, noun.cognition:craft1,+ noun.group:craft,+ noun.act:craft,+ noun.person:crafter,+ ] fashion,@ frames: 8 (make by hand and with much skill; "The artisan crafted a complicated tool") }
+{ [ handcraft, noun.artifact:handcraft,+ ] craft,@ frames: 8 (make something by hand; "We handcraft all our paper") }
+{ [ cooper, noun.person:cooper3,+ ] make11,@ frames: 8 (make barrels and casks) }
+{ [ shape, noun.attribute:shape1,+ noun.person:shaper,+ noun.act:shaping,+ ] [ form, noun.artifact:form1,+ noun.artifact:formation,+ noun.act:formation1,+ noun.act:formation,+ ] work12, [ mold1, noun.shape:mold,+ ] mould1, forge3, create_from_raw_material,@ frames: 8,21 (make something, usually for a specific function; "She molded the rice balls carefully"; "Form cylinders from the dough"; "shape a figure"; "Work the metal into a sword")}
+{ [ preform, noun.cognition:preformation,+ ] form,@ frames: 8,11 (form or shape beforehand or determine the shape of beforehand)}
+{ preform1, preform,$ form,@ frames: 8 (form into a shape resembling the final, desired one)}
+{ [ mound, noun.artifact:mound,+ noun.object:mound,+ ] shape,@ frames: 8 (form into a rounded elevation; "mound earth") }
+{ mound_over, mound,@ frames: 8,11 (form a mound over) }
+{ [ hill, noun.object:hill,+ noun.artifact:hill1,+ noun.artifact:hill,+ ] shape,@ frames: 8 (form into a hill) }
+{ [ roughcast, noun.artifact:roughcast,+ ] shape,@ frames: 8 (shape roughly) }
+{ reshape, remold1, shape,@ frames: 8 (shape again or shape differently) }
+{ [ dip, noun.artifact:dip,+ ] create_from_raw_material,@ frames: 8 (place (candle wicks) into hot, liquid wax) }
+{ sinter, form,@ frames: 8 (cause (ores or powdery metals) to become a coherent mass by heating without melting) }
+{ [ raise2, level,! ] [ erect, noun.artifact:erection,+ noun.act:erection,+ noun.act:erecting,+ ] rear, set_up1, put_up, construct,@ noun.act:construction,;c frames: 8 (construct, build, or erect; "Raise a barn")}
+{ set_up2, prepare,@ frames: 8,11 (begin, or enable someone else to begin, a venture by providing the means, logistics, etc.; "set up an election") }
+{ rig_up, set_up,@ frames: 8 (erect or construct, especially as a temporary measure; "Can he rig up a P.A. system?") }
+{ [ level, noun.artifact:level3,+ noun.artifact:level,+ raise2,! ] [ raze, noun.event:razing,+ noun.act:razing,+ ] rase, dismantle2, tear_down, take_down, pull_down, destroy,@ frames: 8,11 (tear down so as to make flat with the ground; "The building was levelled") }
+{ [ uproot, noun.person:uprooter,+ ] [ eradicate, noun.event:eradication,+ noun.person:eradicator,+ ] [ extirpate, noun.act:extirpation1,+ ] root_out, exterminate, destroy,@ frames: 8,9 (destroy completely, as if down to the roots; "the vestiges of political democracy were soon uprooted"; "root out corruption")}
+{ [ dilapidate, noun.state:dilapidation,+ noun.process:dilapidation,+ ] destroy,@ frames: 8,11 (bring into a condition of decay or partial ruin by neglect or misuse) }
+{ [ press, noun.artifact:press,+ noun.artifact:pressing,+ ] press_out, mold,@ frames: 8,11 (press from a plastic; "press a record") }
+{ [ cast, noun.artifact:cast,+ noun.person:caster,+ noun.artifact:casting1,+ noun.act:casting1,+ ] [ mold, adj.all:elastic^moldable,+ noun.artifact:mold2,+ noun.artifact:mold,+ noun.shape:mold,+ noun.artifact:molding2,+ noun.act:molding1,+ ] [ mould, noun.artifact:mould2,+ noun.artifact:moulding2,+ ] shape,@ frames: 8 (form by pouring (e.g., wax or hot metal) into a cast or mold; "cast a bronze sculpture") }
+{ recast1, remold, remould, cast,@ frames: 8 (cast again; "The bell cracked and had to be recast") }
+{ sand_cast, cast,@ frames: 8 (pour molten metal into a mold of sand) }
+{ [ throw, noun.person:thrower1,+ ] shape,@ frames: 8 (make on a potter's wheel; "she threw a beautiful teapot") }
+{ handbuild, hand-build, coil, shape,@ frames: 8 (make without a potter's wheel; "This famous potter hand-builds all of her vessels") }
+{ [ bake, noun.person:baker1,+ noun.person:baker,+ noun.act:baking1,+ ] create_from_raw_material,@ frames: 8,2 (prepare with dry heat in an oven; "bake a cake") }
+{ [ brew, noun.food:brew,+ noun.person:brewer1,+ noun.person:brewer,+ noun.food:brewage,+ noun.artifact:brewery,+ ] verb.change:ferment,* create_from_raw_material,@ frames: 8,1 (prepare by brewing; "people have been brewing beer for thousands of years") }
+{ [ cook, noun.person:cook,+ noun.artifact:cooker,+ noun.act:cooking,+ noun.act:cookery,+ ] fix, ready, make7, [ prepare1, noun.act:preparation3,+ ] create_from_raw_material,@ frames: 8 (prepare for eating by applying heat; "Cook me dinner, please"; "can you make me an omelette?"; "fix breakfast for the guests, please") }
+{ deglaze, cook,@ frames: 8 (dissolve cooking juices or solid food in (a pan) by adding liquid and stirring)}
+{ scallop1, escallop, cook,@ frames: 8 (bake in a sauce, milk, etc., often with breadcrumbs on top)}
+{ flambe, cook,@ frames: 8 (pour liquor over and ignite (a dish))}
+{ [ sandwich, noun.food:sandwich,+ ] prepare,@ frames: 8 (make into a sandwich)}
+{ put_on2, cook,@ noun.act:cookery,;c frames: 8 (put on the stove or ready for cooking; "put on the tea, please!") }
+{ [ spatchcock1, noun.food:spatchcock,+ ] prepare,@ noun.act:cookery,;c frames: 8 (prepare for eating if or as if a spatchcock; "spatchcock a guinea hen") }
+{ devil, prepare1,@ noun.act:cookery,;c frames: 8 (coat or stuff with a spicy paste; "devilled eggs") }
+{ [ cook1, noun.person:cook,+ noun.act:cooking,+ noun.act:cookery,+ ] verb.change:cook,* create_from_raw_material,@ noun.act:cookery,;c frames: 2 (prepare a hot meal; "My husband doesn't cook") }
+{ precook, cook,@ noun.act:cookery,;c frames: 8 (cook beforehand so that the actual preparation won't take long; "precook the rice") }
+{ whip_up, whomp_up, cook,@ noun.act:cookery,;c frames: 8 (prepare or cook quickly or hastily) }
+{ [ concoct1, noun.act:concoction,+ noun.food:concoction,+ ] cook_up1, cook,@ noun.act:cookery,;c frames: 8 (prepare or cook by mixing ingredients; "concoct a strange mixture") }
+{ [ sew, noun.person:sewer,+ noun.artifact:sewing,+ ] [ tailor, noun.person:tailor,+ noun.act:tailoring,+ ] tailor-make, fashion,@ frames: 2,8 (create (clothes) with cloth; "Can the seamstress sew me a suit by next week?") }
+{ run_up, sew,@ frames: 1 (make by sewing together quickly; "run up a skirt") }
+{ cut, [ tailor1, noun.person:tailor,+ ] design1,@ noun.cognition:fashion,;c frames: 8 (style and tailor in a certain fashion; "cut a dress") }
+{ [ style, noun.cognition:style1,+ noun.person:stylist1,+ noun.person:styler,+ ] make,@ noun.cognition:fashion,;c frames: 8 (make consistent with a certain fashion or style; "Style my hair"; "style the dress" ) }
+{ [ alter, adj.all:alterable,+ noun.act:alteration1,+ ] sew,* verb.change:change1,@ frames: 8 (make an alteration to; "This dress needs to be altered")}
+{ [ quilt, noun.artifact:quilt,+ noun.artifact:quilting1,+ ] verb.change:pad,* sew,@ frames: 8 (create by stitching together) }
+{ [ quilt1, noun.artifact:quilt,+ noun.artifact:quilting1,+ ] verb.contact:join,@ verb.contact:sew,* frames: 8 (stitch or sew together; "quilt the skirt") }
+{ [ embroider, noun.person:embroiderer,+ noun.artifact:embroidery,+ ] broider, verb.contact:stitch,* decorate,@ frames: 8 (decorate with needlework) }
+{ faggot, fagot, embroider,@ frames: 2 (ornament or join (fabric) by faggot stitch; "He fagotted the blouse for his wife")}
+{ stick3, decorate,@ frames: 8 (cover and decorate with objects that pierce the surface; "stick some feathers in the turkey before you serve it")}
+{ [ purl, noun.artifact:purl1,+ ] purl1,$ embroider,@ frames: 8 (embroider with gold or silver thread) }
+{ [ purl1, noun.artifact:purl1,+ ] embroider,@ frames: 8 (edge or border with gold or silver embroidery) }
+{ [ illustrate1, noun.communication:illustration,+ noun.artifact:illustration,+ noun.person:illustrator,+ ] decorate,@ frames: 8 (supply with illustrations; "illustrate a book with drawings") }
+{ [ work, adj.all:possible^workable,+ ] work_on, [ process, noun.act:process,+ ] work12,$ verb.change:transform,@ frames: 8 (shape, form, or improve a material; "work stone into tools"; "process iron"; "work the metal") }
+{ hot-work, work,@ frames: 8 (roll, press, forge, or shape (metal) while hot)}
+{ coldwork, cold_work, work,@ frames: 8 (shape (metal) without heat)}
+{ overwork, work,@ frames: 8 (use too much; "This play has been overworked") }
+{ rework, make_over2, retread, work,@ frames: 8 (use again in altered form; "retread an old plot") }
+{ [ rack, noun.artifact:rack1,+ ] verb.contact:stretch,* work,@ frames: 8 (work on a rack; "rack leather") }
+{ [ tool, noun.artifact:tool,+ ] work,@ frames: 8 (work with a tool) }
+{ [ garland, noun.artifact:garland,+ ] decorate,@ frames: 8 (adorn with bands of flowers or leaves; "They garlanded the statue") }
+{ fledge, flight, adorn,@ frames: 8 (decorate with feathers; "fledge an arrow") }
+{ [ spangle, noun.artifact:spangle,+ ] bespangle, decorate,@ frames: 8 (decorate with spangles; "the star-spangled banner") }
+{ [ foliate1, noun.artifact:foliage,+ noun.artifact:foliation,+ ] decorate,@ frames: 8 (decorate with leaves) }
+{ [ flag, noun.artifact:flag,+ ] decorate,@ frames: 8 (decorate with flags; "the building was flagged for the holiday") }
+{ [ caparison, noun.artifact:caparison,+ ] [ bard, noun.artifact:bard,+ ] barde, dress_up, decorate,@ frames: 8 (put a caparison on; "caparison the horses for the festive occasion") }
+{ [ bead, noun.artifact:bead,+ ] decorate,@ frames: 8 (decorate by sewing beads onto; "bead the wedding gown") }
+{ [ pipe1, noun.artifact:piping1,+ ] sew,* decorate,@ frames: 8 (trim with piping; "pipe the skirt") }
+{ [ applique, noun.artifact:applique,+ ] sew,* decorate,@ frames: 8 (sew on as a decoration) }
+{ [ macrame, noun.artifact:macrame,+ ] knot,@ frames: 2,8 (make knotted patterns; "macrame a plant holder") }
+{ [ knit, noun.artifact:knit,+ noun.artifact:knit1,+ noun.artifact:knit2,+ noun.person:knitter,+ noun.artifact:knitting,+ noun.act:knitting,+ ] verb.contact:stitch,* create_from_raw_material,@ noun.act:handicraft,;c frames: 2,8 (make (textiles) by knitting; "knit a scarf") }
+{ [ purl2, noun.artifact:purl,+ ] knit,@ noun.act:handicraft,;c frames: 2,8 (knit with a purl stitch) }
+{ [cast_on, cast_off,!] verb.contact:stitch,@ noun.act:handicraft,;c frames: 8 (make the first row of stitches when knitting) }
+{ [cast_off, cast_on,!] verb.contact:stitch,@ noun.act:handicraft,;c frames: 8 (make the last row of stitches when knitting) }
+{ rib, knit,@ noun.act:handicraft,;c frames: 8 (form vertical ribs by knitting; "A ribbed sweater") }
+{ [ purl_stitch, noun.artifact:purl_stitch,+ ] knit1,@ noun.act:handicraft,;c frames: 8 (make with purl stitches) }
+{ [ knit1, noun.artifact:knit,+ ] entwine, verb.contact:join,@ frames: 8,21 (tie or link together) }
+{ [ web, noun.object:web,+ noun.group:web,+ noun.artifact:web1,+ noun.artifact:webbing,+ ] [ net, noun.artifact:net,+ noun.act:netting,+ ] weave,@ frames: 8 (construct or form a web, as if by weaving) }
+{ loom, weave,@ frames: 1 (weave on a loom; "materials loomed in Egypt")}
+{ [ crochet, noun.artifact:crocheting,+ ] [ hook, noun.artifact:hook,+ ] loop,@ noun.act:handicraft,;c frames: 8 (make a piece of needlework by interlocking and looping thread with a hooked needle; "She sat there crocheting all day") }
+{ [ crochet1, noun.artifact:crochet,+ noun.act:crocheting,+ ] crochet,$ create_from_raw_material,@ noun.act:handicraft,;c frames: 2,8 (create by looping or crocheting; "crochet a bedspread") }
+{ [ shell_stitch, noun.artifact:shell_stitch,+ ] crochet1,@ noun.act:handicraft,;c frames: 8 (make by shell stitching) }
+{ [ double_crochet, noun.artifact:double_crochet,+ ] [ double_stitch, noun.artifact:double_stitch,+ ] crochet1,@ noun.act:handicraft,;c frames: 8 (make by double stitching ) }
+{ [ single_crochet, noun.artifact:single_crochet,+ ] [ single_stitch, noun.artifact:single_stitch,+ ] crochet1,@ noun.act:handicraft,;c frames: 8 (make by single stitching) }
+{ [ loop, noun.shape:loop,+ ] intertwine, knit1,@ frames: 8 (make a loop in; "loop a rope") }
+{ [ noose, noun.artifact:noose1,+ ] loop,@ frames: 8 (make a noose in or of) }
+{ [ knot, noun.shape:knot,+ ] create_from_raw_material,@ frames: 8 (make into knots; make knots out of; "She knotted her fingers") }
+{ [ weave, noun.artifact:weave,+ noun.person:weaver,+ noun.act:weaving,+ ] tissue, create_from_raw_material,@ noun.act:handicraft,;c frames: 8 (create a piece of cloth by interlacing strands of fabric, such as wool or cotton; "tissue textiles") }
+{ [ brocade, noun.artifact:brocade,+ ] weave,@ noun.act:handicraft,;c frames: 8 (weave a design into (textiles)) }
+{ [ lace, noun.artifact:lace,+ ] weave,@ noun.act:handicraft,;c frames: 2 (do lacework; "The Flemish women were lacing in front of the cathedral") }
+{ [ tat, noun.act:tatting,+ ] intertwine1, knot,* create_from_raw_material,@ noun.act:handicraft,;c frames: 2,8 (make lacework by knotting or looping) }
+{ [ braid, noun.artifact:braid,+ ] [ lace1, noun.artifact:lace,+ ] [ plait, noun.artifact:plait,+ noun.person:plaiter,+ ] weave,@ noun.act:handicraft,;c frames: 8 (make by braiding or interlacing; "lace a tablecloth") }
+{ [ twill, noun.artifact:twill,+ noun.artifact:twill1,+ ] weave,@ frames: 8 (weave diagonal lines into (textiles)) }
+{ strike, make,@ frames: 8,11 (produce by ignition or a blow; "strike fire from the flintstone"; "strike a match") }
+{ [ forge, noun.artifact:forge,+ noun.person:forger,+ noun.act:forging,+ ] [ hammer, noun.artifact:hammer,+ ] verb.contact: hammer,$ beat,@ frames: 8 (create by hammering; "hammer the silver into a bowl"; "forge a pair of tongues") }
+{ [ foliate, noun.artifact:foil1,+ noun.act:foliation,+ ] hammer,@ frames: 8 (hammer into thin flat foils; "foliate metal") }
+{ dropforge, forge,@ frames: 8 (forge with a dropforge; "drop-force the metal") }
+{ [ extrude, adj.all:extrusive,+ noun.act:extrusion,+ ] squeeze_out, produce,@ frames: 8,11 (form or shape by forcing through an opening; "extrude steel") }
+{ [ decorate, adj.all:nonfunctional^decorative,+ noun.artifact:decor,+ noun.artifact:decoration,+ noun.act:decoration,+ noun.person:decorator,+ ] [ adorn, noun.act:adornment,+ ] [ grace, noun.attribute:grace1,+ ] [ ornament, noun.act:ornamentation,+ noun.artifact:ornament,+ ] [ embellish, noun.act:embellishment,+ ] [ beautify, noun.act:beautification,+ noun.attribute:beauty,+ ] verb.change:change1,@ frames: 8,11 (make more attractive by adding ornament, colour, etc.; "Decorate the room for the party"; "beautify yourself for the special day") }
+{ gild_the_lily, paint_the_lily, adorn,@ frames: 2 (adorn unnecessarily (something that is already beautiful))}
+{ [ vermiculate, noun.artifact:vermiculation,+ ] adorn,@ frames: 8 (decorate with wavy or winding lines)}
+{ [ smock, noun.artifact:smocking,+ noun.artifact:smock,+ ] ornament,@ frames: 8 (embellish by sewing in straight lines crossing each other diagonally; "The folk dancers wore smocked shirts")}
+{ [ hang, noun.artifact:hanging,+ ] decorate,@ frames: 8 (decorate or furnish with something suspended; "Hang wallpaper") }
+{ prank, adorn,@ frames: 8 (dress or decorate showily or gaudily; "Roses were pranking the lawn") }
+{ [ tinsel, noun.artifact:tinsel,+ noun.artifact:tinsel1,+ ] adorn,@ frames: 8 (adorn with tinsel; "snow flakes tinseled the trees") }
+{ tart_up, decorate,@ frames: 8 (decorate in a cheap and flashy way; "the small-town bar was all tarted up") }
+{ [ stucco, noun.substance:stucco,+ ] decorate,@ frames: 8 (decorate with stucco work; "stuccoed ceilings") }
+{ redecorate, decorate,@ frames: 8 (redo the decoration of an apartment or house) }
+{ [ panel, noun.artifact:panel,+ noun.artifact:panelling,+ noun.artifact:paneling,+ ] decorate,@ frames: 8 (decorate with panels; "panel the walls with wood") }
+{ bejewel, [ jewel, noun.artifact:jewel,+ noun.person:jeweller,+ noun.person:jeweler,+ noun.person:jeweller1,+ noun.person:jeweler1,+ noun.artifact:jewelry,+ noun.artifact:jewellery,+ ] decorate,@ frames: 8,9,10 (adorn or decorate with precious stones; "jeweled dresses") }
+{ [ fillet, noun.artifact:fillet,+ ] [ filet, noun.artifact:filet,+ ] decorate,@ frames: 8 (decorate with a lace of geometric designs) } 
+{ [ scallop, noun.shape:scallop,+ ] decorate,@ frames: 8 (decorate an edge with scallops; "the dress had a scalloped skirt") }
+{ bedizen, decorate,@ frames: 8 (decorate tastelessly) }
+{ dress_ship, decorate,@ frames: 2 (decorate a ship with flags) }
+{ [ trim, noun.artifact:trim,+ ] [ garnish, noun.artifact:garnish,+ noun.food:garnish,+ ] dress, decorate,@ frames: 8,11 (decorate (food), as with parsley or other ornamental foods) }
+{ [ lard, noun.food:lard,+ ] cook,@ noun.act:cookery,;c frames: 8 (prepare or cook with lard; "lard meat") }
+{ [ trim1, noun.artifact:trim,+ noun.artifact:trimming,+ ] decorate,@ frames: 8 (decorate, as with ornaments; "trim the christmas tree"; "trim a shop window") }
+{ deck, bedight, bedeck, decorate,@ frames: 8,17,21 (decorate; "deck the halls with holly") }
+{ [ plume, noun.artifact:plume,+ noun.animal:plume,+ ] deck,@ frames: 8 (deck with a plume; "a plumed helmet") }
+{ [ festoon, noun.artifact:festoon,+ noun.artifact:festoon1,+ noun.artifact:festoonery,+ ] decorate,@ frames: 8 (decorate with strings of flowers; "The public buildings were festooned for the holiday") }
+{ sensualize, carnalize, represent1,@ frames: 8,9 (represent materialistically, as in a painting or a sculpture) }
+{ [ silhouette, noun.artifact:silhouette,+ ] represent1,@ frames: 8,9,10,11 (represent by a silhouette) }
+{ [ animalize, noun.Tops:animal,+ ] [animalise, noun.Tops:animal,+ ] represent1,@ frames: 8,9 (represent in the form of an animal) }
+{ [ profile, noun.location:profile1,+ ] represent1,@ frames: 8,9 (represent in profile, by drawing or painting) }
+{ [ finger-paint, noun.artifact:finger-painting,+ noun.act:finger-painting,+ ] paint1,@ noun.act:art,;c frames: 2,8 (apply colors with one's fingers) }
+{ [ stipple2, noun.person:stippler,+ ] paint1,@ frames: 8 (apply (paint) in small dots or strokes) }
+{ [ tattoo, noun.act:tattoo,+ noun.artifact:tattoo,+ ] verb.contact:prick,* verb.change:stain1,@ frames: 19,9 (stain (skin) with indelible color) }
+{ [ marble, noun.substance:marble,+ ] verb.change:stain1,@ noun.act:handicraft,;c frames: 8 (paint or stain like marble; "marble paper") }
+{ bodypaint, paint1,@ frames: 9 (apply paint to a body) }
+{ [ enamel, noun.substance:enamel,+ noun.body:enamel,+ noun.artifact:enamel,+ ] verb.change:fire,* decorate,@ noun.act:handicraft,;c frames: 8 (coat, inlay, or surface with enamel) }
+{ [ smelt, noun.artifact:smelter,+ ] verb.change:heat1,* produce,@ frames: 8 (extract (metals) by heating) }
+{ [ inlay, noun.artifact:inlay,+ ] decorate,@ noun.act:handicraft,;c frames: 8 (decorate the surface of by inserting wood, stone, and metal) }
+{ [ hatch3, noun.attribute:hatch,+ ] inlay,@ noun.act:handicraft,;c frames: 8 (inlay with narrow strips or lines of a different substance such as gold or silver, for the purpose of decorating)}
+{ [ damascene, noun.artifact:damascene,+ ] inlay,@ noun.act:handicraft,;c frames: 8 (inlay metal with gold and silver) }
+{ [ gloss, noun.attribute:gloss,+ verb.social:gloss_over,^ verb.perception:gloss_over,^ ] verb.contact:rub,* verb.contact:polish,@ frames: 8 (give a shine or gloss to, usually by rubbing) }
+{ [ lacquer, noun.artifact:lacquer,+ noun.substance:lacquer,+ ] decorate,@ noun.act:handicraft,;c frames: 8 (coat with lacquer; "A lacquered box from China") }
+{ [ japan, noun.artifact:japan,+ noun.artifact:japan1,+ ] lacquer,@ noun.act:handicraft,;c frames: 8 (coat with a lacquer, as done in Japan) }
+{ [ gild, noun.person:gilder,+ noun.artifact:gilding,+ ] begild, engild, decorate,@ frames: 8 (decorate with, or as if with, gold leaf or liquid gold) }
+{ [ fresco, noun.act:fresco,+ noun.artifact:fresco,+ ] paint1,@ noun.act:art,;c frames: 8 (paint onto wet plaster on a wall) }
+{ [ distemper, noun.act:distemper,+ noun.artifact:distemper,+ noun.state:distemper,+ ] paint1,@ noun.act:art,;c frames: 8 (paint with distemper) }
+{ [ blueprint, noun.cognition:blueprint,+ noun.artifact:blueprint,+ ] [ draft5, noun.artifact:draft1,+ noun.act:drafting2,+ ] draught, design,@ frames: 8 (make a blueprint of) }
+{ [ illuminate, noun.artifact:illumination,+ ] paint,* decorate,@ noun.act:art,;c frames: 8 (add embellishments and paintings to (medieval manuscripts)) }
+{ miniate1, [ rubricate, noun.communication:rubric3,+ ] illuminate,@ noun.act:art,;c frames: 8 (decorate (manuscripts) with letters painted red; "In this beautiful book, all the place names are rubricated") }
+{ emblazon, [ blazon, noun.artifact:blazonry,+ noun.artifact:blazon,+ ] decorate,@ noun.act:art,;c frames: 8 (decorate with heraldic arms) }
+{ [ sculpt, noun.artifact:sculpture,+ noun.act:sculpture,+ noun.person:sculptor,+ ] [ sculpture, noun.act:sculpture,+ noun.artifact:sculpture,+ noun.person:sculpturer,+ ] shape,@ noun.act:art,;c frames: 2,8 (create by shaping stone or wood or any other hard material; "sculpt a swan out of a block of ice") }
+{ [ paint, noun.artifact:paint,+ noun.person:painter,+ noun.artifact:painting,+ noun.act:painting,+ ] represent1,@ noun.act:art,;c frames: 8,9 (make a painting of; "He painted his mistress many times") }
+{ [ paint1, noun.artifact:paint,+ noun.person:painter,+ noun.artifact:painting,+ noun.act:painting,+ ] create1,@ noun.act:art,;c frames: 2,8 (make a painting; "he painted all day in the garden"; "He painted a painting of the garden") }
+{ [ create1, adj.all:constructive^creative,+ adj.all:creative,+ noun.act:creation,+ noun.person:creator,+ ] verb.social:act,@ frames: 2 (pursue a creative activity; be engaged in a creative activity; "Don't disturb him--he is creating") }
+{ [ build10, noun.act:building1,+ ] build,$ create1,@ noun.cognition:architecture,;c frames: 2 (be engaged in building; "These architects build in interesting and new styles") }
+{ repaint, paint,@ noun.act:art,;c frames: 8,9 (paint again; "He repainted the same scenery many times during his life") }
+{ [ charge, noun.artifact:charge1,+ ] paint1,@ noun.act:art,;c frames: 8 (place a heraldic bearing on; "charge all weapons, shields, and banners") }
+{ [ represent1, noun.artifact:representation,+ ] [ interpret1, noun.act:interpretation2,+ noun.person:interpreter2,+ ] re-create,@ noun.act:art,;c frames: 8,9 (create an image or likeness of; "The painter represented his wife as a young girl") }
+{ capture, represent1,@ frames: 11,8 (succeed in representing or expressing something intangible; "capture the essence of Spring"; "capture an idea") }
+{ recapture, capture,@ frames: 8,11 (take up anew; "The author recaptures an old idea here") }
+{ [ picture, noun.communication:picture,+ noun.artifact:picture1,+ noun.artifact:picture,+ noun.act:picturing,+ ] [ depict, adj.all:representational^depictive,+ noun.act:depiction,+ noun.communication:picture,+ noun.artifact:picture,+ noun.cognition:depicting,+ ] render4, show, represent1,@ noun.act:art,;c frames: 8 (show in, or as in, a picture; "This scene depicts country life"; "the face of the child is rendered with much tenderness in this painting") }
+{ [ illustrate, adj.all:instructive^illustrative,+ noun.communication:illustration,+ noun.artifact:illustration,+ ] picture,@ noun.act:art,;c frames: 8 (depict with an illustration) }
+{ [ stylize, noun.act:stylization,+ noun.communication:style,+ noun.cognition:style1,+ noun.cognition:style,+ noun.attribute:style,+ ] [ stylise, noun.act:stylisation,+ ] [ conventionalize, noun.act:conventionalization,+ ] represent1,@ noun.act:art,;c frames: 8 (represent according to a conventional style; "a stylized female head")}
+{ [ map, noun.person:mapper,+ noun.artifact:map,+ ] represent1,@ frames: 8 (make a map of; show or establish the features of details of; "map the surface of Venus") }
+{ map1, map,$ depict,@ frames: 11 (depict as if on a map; "sorrow was mapped on the mother's face") }
+{ [ portray, noun.person:portraitist,+ noun.act:portraiture,+ noun.cognition:portraying,+ noun.cognition:portrayal,+ ] [ depict1, adj.all:representational^depictive,+ noun.cognition:depiction,+ noun.artifact:picture1,+ noun.cognition:depicting,+ ] [ limn, noun.person:limner,+ ] represent1,@ noun.act:art,;c frames: 8,9 (make a portrait of; "Goya wanted to portray his mistress, the Duchess of Alba")}
+{ [ pencil, noun.artifact:pencil,+ ] verb.contact:trace,* draw,@ frames: 8,9 (write, draw, or trace with a pencil; "he penciled a figure") }
+{ [ portray2, noun.person:portraitist,+ noun.act:portraiture,+ noun.person:portrayer,+ noun.cognition:portraying,+ noun.act:portrayal,+ ] [ present8, noun.act:presentment2,+ noun.artifact:presentation,+ ] represent1,@ noun.act:art,;c frames: 8,9,10,11 (represent abstractly, for example in a painting, drawing, or sculpture; "The father is portrayed as a good-looking man in this painting") }
+{ [ commend, noun.communication:commendation1,+ ] present8,@ frames: 10,8,9,11 (present as worthy of regard, kindness, or confidence; "His paintings commend him to the artistic world") }
+{ [ delineate, adj.all:representational^delineative,+ noun.artifact:delineation,+ noun.act:delineation,+ ] limn1, [ outline1, noun.location:outline,+ ] draw,@ frames: 8 (trace the shape of) }
+{ [ lipstick, noun.artifact:lipstick,+ ] delineate,@ frames: 8 (form by tracing with lipstick; "The clown had lipsticked circles on his cheeks") }
+{ [ contour, noun.communication:contour,+ noun.attribute:contour,+ ] outline1,@ frames: 8,11 (form the contours of) }
+{ [ streamline, noun.artifact:streamliner,+ ] contour,@ frames: 8 (contour economically or efficiently)}
+{ [ rule, noun.artifact:rule,+ noun.artifact:ruler,+ ] draw,@ frames: 8 (mark or draw with a ruler; "rule the margins") }
+{ [ chalk, noun.artifact:chalk,+ ] verb.contact:trace,* draw,@ frames: 8 (write, draw, or trace with chalk) }
+{ [ draw, noun.person:drawer,+ noun.communication:drawing,+ noun.artifact:drawing,+ ] represent1,@ noun.act:art,;c frames: 8,9,2 (represent by making a drawing of, as with a pencil, chalk, etc. on a surface; "She drew an elephant"; "Draw me a horse") }
+{ [draw7, verb.cognition:draw_up,^ ] write,@ frames: 8 (write a legal document or paper; "The deed was drawn in the lawyer's office") }
+{ project8, draw,@ frames: 8 (draw a projection of) }
+{ [ write1, noun.person:writer1,+ ] verb.contact:trace,@ frames: 2,8 (mark or trace on a surface; "The artist wrote Chinese characters on a big piece of white paper"; "Russian is written with the Cyrillic alphabet") }
+{ stenograph, write1,@ frames: 2 (write in shorthand; "The students were able to stenograph and record the conversation")}
+{ [ calligraph, noun.person:calligrapher,+ noun.person:calligraphist,+ ] write1,@ frames: 2 (write beautifully and ornamentally)}
+{ [ cross9, noun.attribute:cross,+ ] write1,@ frames: 8 (trace a line through or across; "cross your `t'")}
+{ [ superscribe, noun.communication:superscription,+ noun.act:superscription,+ ] write1,@ frames: 8 (write on the outside or upper part of; "superscribe an envelope")}
+{ [ superscribe1, noun.communication:superscription,+ noun.act:superscription,+ ] write1,@ frames: 8 (write on the top or outside; "superscribe one's name and address")}
+{ [ capitalize, noun.communication:capitalization,+ noun.communication:capital,+ ] [ capitalise, noun.communication:capitalisation,+ noun.communication:capital,+ ] write1,@ frames: 8 (write in capital letters) }
+{ [ letter, noun.communication:letter1,+ noun.person:letterer,+ ] write1,@ frames: 8 (mark letters on or mark with letters) }
+{ [ letter1, noun.communication:letter1,+ noun.person:letterer,+ ] print,@ frames: 8 (set down or print with letters) }
+{ [ crayon, noun.artifact:crayon,+ ] draw,@ frames: 8,9 (write, draw, or trace with a crayon) }
+{ write10, create_by_mental_act,@ frames: 8 (create code, write a computer program; "She writes code faster than anybody else")}
+{ [ check, noun.artifact:check,+ ] checker, chequer, draw,@ frames: 8 (mark into squares or draw squares on; draw crossed lines on) }
+{ [ charcoal, noun.artifact:charcoal1,+ noun.artifact:charcoal,+ ] verb.contact:trace,* draw,@ noun.act:art,;c frames: 8,9 (draw, trace, or represent with charcoal) }
+{ [ doodle, noun.artifact:doodle,+ ] verb.contact:trace,* draw,@ frames: 2 (make a doodle; draw aimlessly) }
+{ [ diagram, noun.act:diagramming,+ noun.artifact:diagram,+ ] [ plot, noun.person:plotter2,+ noun.artifact:plotter,+ ] draw,@ frames: 8 (make a schematic or technical drawing of that shows interactions among variables or how something is constructed)}
+{ [ cartoon, noun.person:cartoonist,+ noun.communication:cartoon2,+ noun.communication:cartoon,+ ] draw,@ noun.act:art,;c frames: 8 (draw cartoons of) }
+{ [ copy1, noun.person:copyist,+ noun.artifact:copy,+ noun.artifact:copier,+ noun.act:copying,+ ] [ re-create1, noun.act:re-creation,+ ] make,@ frames: 8 (make a replica of; "copy that drawing"; "re-create a picture by Rembrandt") }
+{ [ imitate3, adj.all:imitative4,+ ] copy1,@ frames: 8 (make a reproduction or copy of)}
+{ [ trace, noun.artifact:trace,+ noun.artifact:tracer2,+ ] copy1,@ frames: 8 (copy by following the lines of the original drawing on a transparent sheet placed upon it; make a tracing of; "trace a design"; "trace a pattern")}
+{ [back_up, noun.artifact:backup,+ ] copy1,@ noun.artifact:computer,;c frames: 8 (make a copy of (a computer file) especially for storage in another place as a security copy; "You'd better back up these files!") }
+{ [ hectograph, noun.artifact:hectograph,+ ] copy1,@ frames: 8 (copy on a duplicator; "hectograph the hand-outs") }
+{ [ clone, noun.group:clone,+ ] copy1,@ frames: 8,9 (make multiple identical copies of; "people can clone a sheep nowadays")}
+{ recopy, copy5,@ frames: 8 (copy again; "The child had to recopy the homework") }
+{ [ mimeograph, noun.artifact:mimeograph,+ ] [ mimeo, noun.artifact:mimeo,+ ] copy1,@ frames: 8 (print copies from (a prepared stencil) using a mimeograph; "She mimeographed the syllabus") }
+{ [ roneo, noun.artifact:roneo,+ ] copy1,@ frames: 1 (make copies on a Roneograph) }
+{ [ shade, noun.artifact:shade1,+ noun.attribute:shading,+ ] fill_in, draw,@ paint1,@ noun.act:art,;c frames: 8 (represent the effect of shade or shadow on) }
+{ [ stipple1, noun.person:stippler,+ ] paint1,@ noun.act:art,;c frames: 8 (make by small short touches that together produce an even or softly graded shadow, as in paint or ink) }
+{ [ crosshatch, noun.attribute:crosshatch,+ ] shade,@ frames: 8 (shade with multiple crossing lines; "the draftsman crosshatched the area")}
+{ [ mottle, noun.act:mottling,+ ] [ streak, noun.attribute:streak,+ ] [ blotch, noun.attribute:blotch,+ ] verb.change:color,@ frames: 8 (mark with spots or blotches of different color or shades of color as if stained) }
+{ vein, verb.change:stain1,@ frames: 8 (make a veinlike pattern) }
+{ [ watercolour, noun.person:watercolourist,+ ] [ watercolor, noun.person:watercolorist,+ noun.substance:watercolor,+ noun.artifact:watercolor1,+ noun.artifact:watercolor,+ ] paint1,@ noun.act:art,;c frames: 8 (paint with watercolors) }
+{ [ color1, noun.person:colorist,+ noun.act:coloration,+ noun.attribute:color,+ ] [ colour1, noun.substance:colour,+ ] emblazon1, decorate,@ frames: 8,11 (decorate with colors; "color the walls with paint in warm tones") }
+{ [ miniate, noun.substance:minium,+ ] color1,@ noun.act:art,;c frames: 8 (paint with red lead or vermilion) }
+{ [ model, noun.act:model,+ noun.artifact:model,+ noun.act:modelling1,+ noun.artifact:modeling,+ noun.act:modeling1,+ ] [ mold2, adj.all:elastic^moldable,+ noun.artifact:mold2,+ noun.artifact:mold,+ noun.shape:mold,+ noun.act:molding1,+ noun.act:molding,+ ] [ mould2, noun.artifact:mould2,+ noun.act:moulding,+ ] shape,@ noun.act:art,;c frames: 8 (form in clay, wax, etc; "model a head with clay") }
+{ [ model1, noun.artifact:model,+ noun.act:model,+ noun.person:modeller,+ noun.person:modeler,+ noun.act:modelling,+ noun.act:modeling,+ ] mock_up, represent1,@ frames: 8 (construct a model of; "model an airplane") }
+{ [ sketch, noun.artifact:sketch,+ noun.person:sketcher,+ noun.artifact:sketcher,+ ] chalk_out, draw,@ noun.act:art,;c frames: 8 (make a sketch of; "sketch the building") }
+{ create_verbally, create,@ frames: 8 (create with or from words)}
+{ [ coin1, noun.person:coiner1,+ noun.communication:coinage,+ noun.act:coinage2,+ ] create_verbally,@ frames: 8 (make up; "coin phrases or words") }
+{ [ sloganeer, noun.communication:sloganeering,+ noun.person:sloganeer,+ ] coin1,@ frames: 2 (coin new slogans) }
+{ [ write, noun.person:writer,+ noun.act:writing2,+ write_out,^ ] [ compose1, noun.act:composition1,+ ] [ pen, noun.artifact:pen,+ noun.act:penning,+ ] indite, write3,* create_verbally,@ noun.act:authorship,;c frames: 8 (produce a literary work; "She composed a poem"; "He wrote four novels") }
+{ [ lyric, noun.communication:lyric1,+ ] write,@ noun.communication:poetry2,;c frames: 8 (write lyrics for (a song)) }
+{ relyric, lyric,@ noun.communication:poetry2,;c frames: 8 (write new lyrics for (a song)) }
+{ write_on, write_of, write_about, write,@ noun.act:authorship,;c frames: 8,9 (write about a particular topic; "Snow wrote about China") }
+{ [ profile1, noun.communication:profile,+ ] write,@ noun.act:authorship,;c frames: 8,9,10,11 (write about; "The author of this article profiles a famous painter") }
+{ [ paragraph, noun.communication:paragraph,+ noun.person:paragrapher,+ ] write,@ noun.act:authorship,;c frames: 2 (write paragraphs; work as a paragrapher) }
+{ [ paragraph1, noun.communication:paragraph,+ noun.person:paragrapher,+ ] write,@ frames: 8,9 (write about in a paragraph; "All her friends were paragraphed in last Monday's paper") }
+{ [ spell, noun.communication:spelling,+ ] write3, frames: 8 (write or name the letters that comprise the conventionally accepted form of (a word or part of a word); "He spelled the word wrong in this letter") }
+{ spell_out, spell,@ frames: 8 (spell fully and without abbreviating; "Can you spell out your middle name instead of just giving the initial?")}
+{ [ hyphenate, noun.act:hyphenation2,+ noun.act:hyphenation,+ noun.communication:hyphen,+ ] [ hyphen, noun.communication:hyphen,+ ] spell,@ frames: 8 (divide or connect with a hyphen; "hyphenate these words and names") }
+{ write_off, write,@ frames: 8 (write something fluently, and without hesitation) }
+{ dash_off, scratch_off, knock_off, toss_off, fling_off, write,@ noun.act:authorship,;c frames: 8 (write quickly; "She dashed off a note to her husband saying she would not be home for supper"; "He scratched off a thank-you note to the hostess") }
+{ [ rewrite, noun.communication:rewrite,+ noun.person:rewriter,+ ] write,@ noun.act:authorship,;c frames: 8 (rewrite so as to make fit to suit a new or different purpose; "re-write a play for use in schools") }
+{ write_copy, write,@ noun.act:authorship,;c frames: 2 (write for commercial publications; "She writes copy for Harper's Bazaar")}
+{ [ dramatize, noun.person:dramatist,+ noun.act:dramatization1,+ noun.act:dramatization,+ noun.communication:drama1,+ noun.communication:drama,+ ] [ dramatise, noun.person:dramatist,+ noun.act:dramatisation,+ noun.communication:drama1,+ noun.communication:drama,+ ] adopt, write,@ noun.act:authorship,;c frames: 8 (put into dramatic form; "adopt a book for a screenplay") }
+{ [ draft, noun.communication:draft,+ noun.person:drafter,+ noun.act:drafting1,+ ] [ outline3, noun.cognition:outline,+ ] write,@ noun.act:authorship,;c frames: 8 (draw up an outline or sketch for something; "draft a speech") }
+{ [ rhyme, noun.communication:rhyme1,+ noun.person:rhymer,+ ] rime, create_verbally,@ noun.communication:poetry2,;c frames: 2 (compose rhymes) }
+{ tag, rhyme,@ noun.communication:poetry2,;c frames: 8 (supply (blank verse or prose) with rhymes) }
+{ [ alliterate, adj.all:rhymed^alliterative,+ noun.communication:alliteration,+ noun.person:alliterator,+ ] rhyme,@ noun.communication:poetry2,;c frames: 2 (use alliteration as a form of poetry) }
+{ [ pun, noun.communication:punning,+ noun.communication:pun,+ ] verb.communication:joke,@ frames: 2 (make a play on words; "Japanese like to pun--their language is well suited to punning")}
+{ [ verse, noun.communication:verse1,+ noun.communication:verse,+ noun.communication:verse2,+ ] [ versify, noun.communication:versification2,+ noun.communication:versification1,+ noun.communication:versification,+ noun.person:versifier,+ noun.communication:verse2,+ noun.communication:verse1,+ noun.communication:verse,+ ] [ poetize, noun.person:poetizer,+ noun.person:poet,+ ] [ poetise, noun.person:poetiser,+ noun.person:poet,+ ] write,@ noun.communication:poetry2,;c frames: 2,8 (compose verses or put into verse; "He versified the ancient saga")}
+{ [ metrify, noun.act:metrification1,+ ] versify,@ noun.communication:poetry2,;c frames: 8 (compose in poetic meter; "The bard metrified his poems very precisely")}
+{ spondaize, spondaise, versify,@ noun.communication:poetry2,;c frames: 8 (make spondaic; "spondaize verses") }
+{ [ elegize, noun.communication:elegy,+ ] elegise, versify,@ noun.communication:poetry2,;c frames: 2 (compose an elegy) }
+{ [ recite, noun.communication:recitation,+ noun.communication:recital2,+ ] retell, re-create,@ frames: 8 (render verbally; "recite a poem"; "retell a story") }
+{ [ sonnet, noun.communication:sonnet,+ ] versify,@ noun.communication:poetry2,;c frames: 2 (compose a sonnet)}
+{ [ sonnet1, noun.communication:sonnet,+ ] verb.communication:praise,@ noun.communication:poetry2,;c frames: 8,9 (praise in a sonnet)}
+{ [ serenade, noun.communication:serenade1,+ noun.communication:serenade,+ ] perform,@ frames: 2,9 (sing and play for somebody; "She was serenaded by her admirers") }
+{ belt_out, belt, sing,@ frames: 8 (sing loudly and forcefully) }
+{ descant_on, sing,@ frames: 8 (sing a descant on a main tune or melody) }
+{ [ vocalize, adj.pert:vocal2,+ noun.person:vocalizer,+ noun.act:vocalizing,+ ] [ vocalise, noun.person:vocaliser,+ ] sing,@ frames: 2,8 (sing (each note a scale or in a melody) with the same vowel) }
+{ [ author, noun.person:author,+ ] write,@ noun.act:authorship,;c frames: 8 (be the author of; "She authored this play") }
+{ co-author, author,@ noun.act:authorship,;c frames: 8 (be a co-author on (a book, a paper))}
+{ [ ghost, noun.person:ghost1,+ ] [ ghostwrite, noun.person:ghostwriter,+ ] author,@ noun.act:authorship,;c frames: 8 (write for someone else; "How many books have you ghostwritten so far?")}
+{ [ annotate, noun.communication:note2,+ noun.communication:annotation,+ noun.act:annotation,+ noun.person:annotator,+ ] [ footnote, noun.communication:footnote,+ ] write,@ noun.act:authorship,;c frames: 8 (add explanatory notes to or supply with critical comments; "The scholar annotated the early edition of a famous novel") }
+{ [ reference, noun.communication:reference7,+ noun.communication:reference3,+ ] [ cite, noun.communication:citation4,+ noun.communication:citation3,+ noun.communication:citation1,+ ] write,@ noun.act:authorship,;c frames: 8,9 (refer to; "he referenced his colleagues' work") }
+{ [ compose3, noun.communication:composition1,+ noun.act:composition2,+ noun.person:composer,+ noun.act:composing,+ ] write4, create,@ noun.communication:music,;c frames: 2,8 (write music; "Beethoven composed nine symphonies") }
+{ [ counterpoint, noun.communication:counterpoint,+ ] compose3,@ noun.communication:music,;c frames: 8 (write in counterpoint; "Bach perfected the art of counterpointing")}
+{ set_to_music, compose3,@ noun.communication:music,;c frames: 8 (write (music) for (a text))}
+{ [ arrange, noun.person:arranger1,+ ] set, compose3,@ noun.communication:music,;c frames: 8 (adapt for performance in a different way; "set this poem to music") }
+{ put13, arrange,@ noun.communication:music,;c frames: 8 (adapt; "put these words to music") }
+{ [ score, noun.communication:score,+ ] compose3,@ noun.communication:music,;c frames: 8 (write a musical score for) }
+{ transpose, arrange,@ noun.communication:music,;c frames: 8 (put (a piece of music) into another key) }
+{ [ melodize, noun.communication:melody,+ ] melodise, compose3,@ noun.communication:music,;c frames: 8 (supply a melody for) }
+{ [ harmonize, noun.act:harmonization,+ ] [ harmonise, noun.act:harmonisation,+ ] sing,@ noun.communication:music,;c noun.act:music,;c noun.cognition:music1,;c frames: 2,22 (sing or play in harmony) }
+{ [ reharmonize, noun.communication:reharmonization,+ ] reharmonise, harmonize1,@ noun.cognition:music,;c frames: 8 (provide with a different harmony; "reharmonize the melody")}
+{ [ harmonize1, noun.communication:harmonization,+ ] [ harmonise1, noun.communication:harmonisation,+ ] compose3,@ noun.cognition:music,;c frames: 8 (write a harmony for) }
+{ [ realize7, noun.communication:realization,+ noun.act:realization3,+ ] realise7, harmonize1,@ noun.communication:music,;c frames: 8 (expand or complete (a part in a piece of baroque music) by supplying the harmonies indicated in the figured bass)}
+{ [ orchestrate, noun.group:orchestra,+ noun.communication:orchestration,+ noun.act:orchestration1,+ noun.person:orchestrator,+ ] score,@ noun.cognition:music,;c frames: 8 (write an orchestra score for) }
+{ [ instrument, noun.artifact:instrument1,+ noun.act:instrumentation1,+ ] [ instrumentate, noun.artifact:instrument1,+ ] compose3,@ noun.cognition:music,;c frames: 8 (write an instrumental score for) }
+{ [ transcribe, noun.person:transcriber2,+ ] verb.change:adapt1,@ noun.cognition:music,;c frames: 8 (rewrite or arrange a piece of music for an instrument or medium other than that originally intended) }
+{ [ choreograph, noun.person:choreographer,+ ] create,@ noun.communication:dance,;c frames: 2,8 (compose a sequence of dance steps, often to music; "Balanchine choreographed many pieces to Stravinsky's music") }
+{ [ jive, noun.communication:jive,+ ] dance,@ noun.act:dancing,;c frames: 2 (dance to jive music; dance the jive) }
+{ [ dance, noun.event:dance,+ noun.act:dance,+ noun.group:dance,+ noun.communication:dance,+ noun.person:dancer1,+ noun.person:dancer,+ noun.act:dancing,+ ] trip_the_light_fantastic, trip_the_light_fantastic_toe, verb.motion:dance1,$ verb.motion:move,@ noun.act:dancing,;c frames: 8,22 (move in a pattern; usually to musical accompaniment; do or perform a dance; "My husband and I like to dance at home to the radio") }
+{ [ hoof3, noun.person:hoofer,+ ] dance,@ noun.communication:slang,;u noun.communication:dance,;c frames: 2 (dance in a professional capacity)}
+{ [ clog, noun.act:clog,+ ] dance,@ noun.act:dancing,;c frames: 2 (dance a clog dance) }
+{ [ tap_dance, noun.act:tap_dance,+ ] dance,@ noun.act:dance,;c noun.communication:dance,;c frames: 2 (perform a tap dance) }
+{ [ belly_dance, noun.act:belly_dance,+ ] dance,@ noun.act:dance,;c frames: 2 (perform a belly dance) }
+{ [ direct, noun.person:director2,+ ] create,@ noun.cognition:performing_arts,;c frames: 2,8 (guide the actors in (plays and films)) }
+{ [ cast1, noun.group:cast,+ ] film,* stage,* perform,* verb.social:assign,@ noun.cognition:performing_arts,;c frames: 9 (select to play,sing, or dance a part in a play, movie, musical, opera, or ballet; "He cast a young woman in the role of Desdemona") }
+{ [ descant, noun.communication:descant,+ ] sing,@ frames: 2 (sing in descant) }
+{ recast, cast1,@ noun.cognition:performing_arts,;c frames: 9 (cast again, in a different role; "He was recast as Iago") }
+{ miscast, cast1,@ noun.cognition:performing_arts,;c frames: 9 (cast an actor, singer, or dancer in an unsuitable role)}
+{ typecast, cast1,@ noun.cognition:performing_arts,;c frames: 9 (cast repeatedly in the same kind of role) }
+{ stage_direct, direct,@ noun.cognition:performing_arts,;c frames: 8 (direct for the stage)}
+{ [ stage, noun.communication:stage,+ noun.artifact:stage,+ noun.person:stager,+ noun.communication:staging,+ ] [ present, noun.act:presentment2,+ ] [ represent11, noun.communication:representation1,+ ] re-create,@ noun.cognition:performing_arts,;c frames: 8 (perform (a play), especially on a stage; "we are going to stage `Othello'") }
+{ [ set1, noun.act:set1,+ ] [ localize, noun.act:localization,+ noun.location:locale,+ ] localise, [ place, noun.location:place,+ noun.attribute:placement,+ ] present,@ frames: 21 (locate; "The film is set in Africa") }
+{ [ film, noun.communication:film,+ noun.artifact:film1,+ noun.communication:film1,+ noun.act:filming,+ frames: 2 ] verb.communication:record,@ create,@ frames: 8 (record in film; "The coronation was filmed") }
+{ film-make, create,@ frames: 2 (make films; be a film maker) }
+{ cinematize, cinematise, film,@ frames: 8 (make a film of or adopt so as to make into a film; "cinematize history") }
+{ [ microfilm, noun.artifact:microfilm,+ ] film,@ frames: 8 (record on microfilm) }
+{ cut_corners, do1,@ frames: 13 (do something the cheapest or easiest way; "Cut corners to make a cheaper product") }
+{ [ perform, noun.act:performance,+ ] [ execute1, noun.act:execution2,+ noun.person:executant,+ ] [ do1, noun.person:doer,+ ] frames: 8 (carry out or perform an action; "John did the painting, the weeding, and he cleaned out the gutters"; "the skater executed a triple pirouette"; "she did a little dance") }
+{ [ stunt, noun.act:stunt,+ noun.act:stunting,+ ] perform,@ noun.cognition:performing_arts,;c frames: 2 (perform a stunt or stunts)}
+{ cut15, perform,@ frames: 8 (perform or carry out; "cut a caper") }
+{ blaze_away, perform,@ noun.cognition:performing_arts,;c frames: 2 (perform (an acting passage) brilliantly and rapidly; "Mr. Jones blazed away in one passage after another to loud applause") }
+{ [ interlude, noun.act:interlude,+ ] perform1,@ noun.act:music,;c frames: 2 (perform an interlude; "The guitar player interluded with a beautiful improvisation") }
+{ scamp, perform,@ noun.act:music,;c frames: 8 (perform hastily and carelessly) }
+{ churn_out1, perform,@ noun.act:music,;c frames: 8 (perform in a mechanical way) }
+{ [ perform1, noun.person:performer,+ noun.act:performing,+ noun.communication:performance,+ ] re-create,@ noun.cognition:performing_arts,;c frames: 2,8,22 (give a performance (of something); "Horowitz is performing at Carnegie Hall tonight"; "We performed a popular Gilbert and Sullivan opera") }
+{ [grandstand, noun.person:grandstander,+ ] perform1,@ noun.cognition:performing_arts,;c frames: 2 (perform ostentatiously in order to impress the audience and with an eye to the applause; "She never misses a chance to grandstand")}
+{ [ solo, noun.communication:solo,+ noun.person:soloist,+ ] perform1,@ frames: 2 (perform a piece written for a single instrument)}
+{ play_out, verb.competition:play_out,$ perform1,@ frames: 1,8 (perform or be performed to the end; "How will the election drama be played out?")}
+{ underperform, perform1,@ noun.cognition:performing_arts,;c frames: 8 (perform too rarely; "Her plays are underperformed, although they are very good")}
+{ [ sightread, noun.person:sightreader,+ ] sight-read, perform1,@ noun.act:music,;c frames: 2,8 (perform music from a score without having seen the score before; "He is a brilliant pianist but he cannot sightread")}
+{ sightsing, sight-sing, sightread,@ noun.cognition:performing_arts,;c frames: 2,8 (sing from a score without having seen it before; "This tenor can sightsing even the most difficult pieces")}
+{ [ rap10, noun.communication:rap2,+ ] perform1,@ noun.act:music,;c frames: 2 (perform rap music) }
+{ give12, perform1,@ noun.cognition:performing_arts,;c frames: 8 (perform for an audience; "Pollini is giving another concert in New York") }
+{ give13, give12,$ verb.perception:show,@ frames: 8 (present to view; "He gave the sign to start") }
+{ [ concertize, noun.communication:concert,+ ] [ concertise, noun.communication:concert,+ ] perform1,@ noun.act:music,;c frames: 2 (give concerts; perform in concerts; "My niece is off concertizing in Europe") }
+{ [ play3, noun.communication:play3,+ noun.communication:play1,+ ] perform1,@ noun.cognition:performing_arts,;c frames: 8 (perform on a certain location; "The prodigy played Carnegie Hall at the age of 16"; "She has been playing on Broadway for years") }
+{ [ play4, noun.communication:play1,+ noun.communication:play3,+ ] noun.cognition:performing_arts,;c frames: 1,4 (be performed or presented for public viewing; "What's playing in the local movie theater?"; "`Cats' has been playing on Broadway for many years") }
+{ play5, run1, verb.change:run7,$ verb.social:run,$ frames: 8,11 (cause to emit recorded audio or video; "They ran the tapes over and over again"; "I'll play you my favorite record"; "He never tires of playing that video") }
+{ play11, verb.creation:play5,$ verb.perception:sound3,@ frames: 1,11 (emit recorded sound; "The tape was playing for hours"; "the stereo was playing Beethoven when I entered")}
+{ [ debut, noun.act:debut,+ ] play4,@ noun.cognition:performing_arts,;c frames: 1,4 (appear for the first time in public; "The new ballet that debuts next months at Covent Garden, is already sold out") }
+{ debut1, perform1,@ noun.cognition:performing_arts,;c frames: 2 (make one's debut; "This young soprano debuts next month at the Metropolitan Opera") }
+{ debut2, introduce,@ noun.cognition:performing_arts,;c frames: 8 (present for the first time to the public; "The band debuts a new song or two each month") }
+{ premier, [ premiere, noun.communication:premiere,+ ] perform,@ noun.cognition:performing_arts,;c frames: 8 (perform a work for the first time) }
+{ premier1, [ premiere1, noun.communication:premiere,+ ] noun.cognition:performing_arts,;c frames: 1 (be performed for the first time; "We premiered the opera of the young composer and it was a critical success") }
+{ [ audition, noun.act:audition1,+ ] [try_out, noun.act:tryout,+] perform1,@ noun.cognition:performing_arts,;c frames: 2 (perform in order to get a role; "She auditioned for a role on Broadway") }
+{ read5, audition,@ noun.cognition:performing_arts,;c frames: 22 (audition for a stage role by reading parts of a role; "He is auditioning for `Julius Caesar' at Stratford this year")}
+{ [cybernate, noun.act:cybernation,+ ] [ computerize, noun.artifact:computer,+ noun.act:computerization,+ ] [ computerise, noun.person:computer,+ noun.artifact:computer,+ ] verb.social:work1,@ noun.cognition:computing,;c frames: 8 (control a function, process, or creation by a computer; "They computerized the car industry"; "we live in a cybernated age"; "cybernate a factory") }
+{ [ act, adj.all:actable,+ noun.person:actor,+ noun.communication:act2,+ noun.act:acting,+ ] [ play2, noun.communication:play3,+ noun.communication:play1,+ noun.person:player,+ noun.act:playing2,+ ] [ represent2, noun.communication:representation1,+ ] verb.body:act1,$ play6,$ act3,$ re-create,@ noun.cognition:performing_arts,;c frames: 2,9,8 (play a role or part; "Gielgud played Hamlet"; "She wants to act Lady Macbeth, but she is too young for the role"; "She played the servant to her husband's master") }
+{ [ act3, adj.all:actable,+ noun.person:actor,+ noun.communication:act2,+ noun.act:acting,+ ] [ play10, noun.communication:play3,+ noun.communication:play1,+ noun.person:player,+ noun.act:playing2,+ ] [ roleplay, noun.act:roleplaying,+ ] [ playact, noun.person:playactor,+ noun.act:playacting,+ ] play3,$ play4,$ perform1,@ noun.communication:theater,;c frames: 2 (perform on a stage or theater; "She acts in this play"; "He acted in `Julius Caesar'"; "I played in `A Christmas Carol'") }
+{ [ stooge, noun.person:stooge1,+ ] act3,@ noun.communication:theater,;c frames: 2 (act as the stooge; "His role was to stooge for the popular comedian") }
+{ [ enter, noun.act:entering,+ ] act,* noun.communication:theater,;c frames: 2 (come on stage) }
+{ [ support, noun.communication:support1,+ ] act,@ noun.communication:theater,;c frames: 9 (play a subordinate role to (another performer); "Olivier supported Gielgud beautifully in the second act")}
+{ [ star, noun.person:star2,+ noun.person:star,+ noun.person:star1,+ ] perform,@ noun.communication:theater,;c frames: 2,22 (be the star in a performance) }
+{ [ appear, noun.act:appearance,+ ] perform,@ noun.communication:theater,;c frames: 22 (appear as a character on stage or appear in a play, etc.; "Gielgud appears briefly in this movie"; "She appeared in `Hamlet' on the London stage") }
+{ [ co-star, noun.person:co-star,+ ] star,@ noun.communication:theater,;c frames: 2,22 (be the co-star in a performance) }
+{ dissemble, [ pretend, noun.person:pretender,+ ] [ act4, noun.communication:act3,+ ] verb.body:act,$ frames: 2,8 (behave unnaturally or affectedly; "She's just acting") }
+{ [ simulate, noun.act:simulation,+ ] assume, [ sham, noun.person:sham,+ noun.person:shammer1,+ noun.person:shammer,+ ] [ feign, noun.act:feigning,+ ] act4,@ frames: 8 (make a pretence of; "She assumed indifference, even though she was seething with anger"; "he feigned sleep") }
+{ play6, simulate,@ frames: 26,8,9 (pretend to be somebody in the framework of a game or playful activity; "Let's play like I am mommy"; "Play cowboy and Indians") }
+{ [feint, noun.act:feint,+ ] simulate,@ frames: 8,9 (deceive by a mock action; "The midfielder feinted to shoot") }
+{ [ enact, noun.act:enactment,+ ] reenact, act_out, act,@ frames: 8 (act out; represent or perform as if in a play; "She reenacted what had happened earlier that day")}
+{ act_out1, represent2,@ frames: 8 (represent an incident, state, or emotion by action, especially on stage; "She could act neurotic anxiety") }
+{ [ reenact1, noun.person:reenactor,+ noun.act:reenactment,+ ] re-create,@ frames: 8 (enact or perform again; "They reenacted the battle of Princeton")}
+{ [ model4, noun.cognition:model,+ ] [ simulate2, noun.cognition:simulation,+ noun.artifact:simulator,+ ] re-create,@ frames: 8,11 (create a representation or model of; "The pilots are trained in conditions simulating high-altitude flights")}
+{ [ rehearse, noun.act:rehearsal1,+ ] practise, [ practice, noun.act:practice2,+ ] perform,@ noun.cognition:performing_arts,;c frames: 2,8 (engage in a rehearsal (of))}
+{ [walk_through, noun.act:walk-through,+ ] rehearse,@ frames: 8 (perform in a perfunctory way, as for a first rehearsal)}
+{ [ scrimmage, noun.act:scrimmage1,+ ] practice,@ frames: 2 (practice playing (a sport)) }
+{ [ impersonate, noun.cognition:persona,+ noun.act:impersonation1,+ noun.act:impersonation,+ ] [ portray1, noun.act:portrayal2,+ ] act,@ noun.cognition:performing_arts,;c frames: 9 (assume or act the character of; "She impersonates Madonna"; "The actor portrays an elderly, lonely man") }
+{ [ parody, noun.act:parody,+ ] act,@ frames: 8,9 (make a spoof of or make fun of) }
+{ [ travesty, noun.communication:travesty,+ ] verb.communication:parody,@ frames: 8 (make a travesty of) }
+{ [ mime, noun.person:mimer,+ noun.act:mime,+ ] [ pantomime, noun.person:pantomimist,+ noun.person:pantomimer,+ noun.act:pantomime,+ ] act3,@ frames: 2 (act out without words but with gestures and bodily movements only; "The acting students mimed eating an apple")}
+{ [ play, noun.act:playing1,+ ] spiel, re-create,@ frames: 8 (replay (as a melody); "Play it again, Sam"; "She played the third movement very beautifully") }
+{ fiddle2, fiddle,$ play,@ noun.communication:music,;c frames: 8 (play on a violin; "Zuckerman fiddled that song very nicely")}
+{ [ play12, noun.person:player2,+ noun.act:playing1,+ ] play1,$ play,$ perform1,@ noun.communication:music,;c frames: 2,1 (play on an instrument; "The band played all night long") }
+{ [ swing3, noun.attribute:swing,+ ] play12,@ noun.communication:music,;c frames: 2 (play with a subtle and intuitively felt sense of rhythm)}
+{ replay, play,@ frames: 8 (play (a melody) again) }
+{ [ prelude, noun.communication:prelude,+ ] play,@ noun.act:music,;c frames: 8 (play as a prelude) }
+{ [ jazz, noun.communication:jazz1,+ noun.communication:jazz,+ ] play,@ noun.act:music,;c frames: 8 (play something in the style of jazz) }
+{ [ rag, noun.communication:rag1,+ ] play,@ noun.communication:music,;c noun.act:music,;c frames: 8 (play in ragtime; "rag that old tune") }
+{ [ bugle, noun.artifact:bugle,+ noun.person:bugler,+ ] play,@ noun.act:music,;c frames: 8 (play on a bugle) }
+{ [ play1, noun.act:playing1,+ ] verb.perception:sound1,@ noun.communication:music,;c noun.act:music,;c frames: 8 (perform music on (a musical instrument); "He plays the flute"; "Can you play on this old recorder?") }
+{ [ register, noun.attribute:register,+ noun.attribute:registration,+ ] play1,@ noun.act:music,;c frames: 2 (manipulate the registers of an organ)}
+{ [ skirl, noun.event:skirl,+ ] play1,@ noun.act:music,;c frames: 2 (play the bagpipes)}
+{ [ beat5, noun.communication:beat,+ ] play1,@ noun.communication:music,;c frames: 8 (produce a rhythm by striking repeatedly; "beat the drum") }
+{ [ symphonize, noun.group:symphony,+ noun.communication:symphony,+ ] symphonise, play12,@ noun.act:music,;c frames: 2,1 (play or sound together, in harmony) }
+{ tweedle, play1,@ noun.act:music,;c frames: 2 (play negligently on a musical instrument) }
+{ [ chord, noun.communication:chord,+ ] play1,@ noun.communication:music,;c frames: 8 (play chords on (a stringed instrument)) }
+{ reprise, reprize, [ repeat1, noun.event:repeat,+ ] [ recapitulate, noun.communication:recapitulation1,+ ] play,@ noun.act:music,;c frames: 8 (repeat an earlier theme of a composition) }
+{ [ pipe, noun.person:piper,+ noun.act:piping,+ verb.communication:pipe_up,^ ] play1,@ noun.act:music,;c frames: 8 (play on a pipe; "pipe a tune") }
+{ [ slur, noun.communication:slur1,+ ] play,@ noun.act:music,;c frames: 8 (play smoothly or legato; "the pianist slurred the most beautiful passage in the sonata") }
+{ [ pedal, noun.communication:pedal,+ ] play,* verb.contact:operate,@ noun.act:music,;c frames: 2 (operate the pedals on a keyboard instrument)}
+{ bang_out, play,@ noun.act:music,;c frames: 8 (play loudly; "They banged out `The star-spangled banner'") }
+{ play_along, [ accompany, noun.person:accompanist,+ noun.communication:accompaniment,+ ] follow1, play12,@ noun.act:music,;c frames: 9,8 (perform an accompaniment to; "The orchestra could barely follow the frequent pitch changes of the soprano") }
+{ [sing_along, noun.act:singalong,+ ] sing,@ frames: 2 (sing with a choir or an orchestra; "Every year the local orchestra and choir perform the `Messiah' and the audience is invited to sing along")}
+{ [ improvise, noun.artifact:improvisation,+ noun.act:improvisation1,+ noun.act:improvisation,+ ] improvize, [ ad-lib, noun.communication:ad-lib,+ ] [ extemporize, noun.act:extemporization,+ ] [ extemporise, noun.act:extemporisation,+ ] perform,@ frames: 2,8 (perform without preparation; "he extemporized a speech at the wedding") }
+{ [ modulate, noun.communication:modulation1,+ ] play,@ noun.act:music,;c frames: 8 (change the key of, in music; "modulate the melody")}
+{ [ bow, noun.artifact:bow,+ ] play12,@ noun.act:music,;c frames: 2 (play on a stringed instrument with a bow) }
+{ [ sing, noun.communication:song,+ noun.act:song,+ noun.person:singer,+ noun.act:singing,+ ] verb.communication:utter,@ noun.act:music,;c frames: 2,27,22 (produce tones with the voice; "She was singing while she was cooking"; "My brother sings very well") }
+{ [ psalm, noun.person:psalmist,+ ] sing,@ noun.act:music,;c frames: 8 (sing or celebrate in psalms; "He psalms the works of God")}
+{ [ minstrel, noun.person:minstrel1,+ noun.person:minstrel,+ ] sing,@ noun.act:music,;c frames: 8 (celebrate by singing, in the style of minstrels) }
+{ [ solmizate, noun.communication:solmization,+ noun.act:solmization,+ ] sing,@ noun.act:music,;c frames: 2 (sing using syllables like `do', `re' and `mi' to represent the tones of the scale; "The voice teacher showed the students how to solmizate")}
+{ tweedle1, [ chirp, noun.event:chirp,+ ] sing,@ noun.act:music,;c frames: 1,2 (sing in modulation) }
+{ [ choir, noun.group:choir1,+ noun.group:choir,+ noun.artifact:choir,+ ] [ chorus, noun.group:chorus2,+ noun.group:chorus1,+ noun.group:chorus,+ noun.communication:chorus,+ ] sing,@ noun.act:music,;c frames: 2 (sing in a choir) }
+{ [ sing1, noun.communication:song,+ noun.act:song,+ noun.person:singer,+ noun.act:singing,+ ] sing,@ verb.communication:sing8,$ interpret,@ noun.act:music,;c frames: 8 (deliver by singing; "Sing Christmas carols")}
+{ [ solmizate1, noun.communication:solmization,+ noun.act:solmization,+ ] solmizate,$ sing1,@ noun.communication:music,;c frames: 8 (sing by the syllables of solmization; "solmizate a song before you learn the lyrics") }
+{ [ troll, noun.communication:troll,+ ] sing1,@ noun.act:music,;c frames: 8 (sing the parts of (a round) in succession) }
+{ [ hymn, noun.communication:hymn,+ ] noun.act:music,;c sing1,@ frames: 2 (sing a hymn) }
+{ [ carol, noun.act:carol,+ noun.person:caroller,+ noun.person:caroler,+ ] sing1,@ noun.act:music,;c frames: 8 (sing carols; "They went caroling on Christmas Day") }
+{ [ madrigal, noun.communication:madrigal,+ ] sing1,@ noun.act:music,;c frames: 8 (sing madrigals; "The group was madrigaling beautifully") }
+{ [ interpret, adj.all:instructive^interpretive,+ adj.all:instructive^interpretative,+ noun.cognition:interpretation,+ noun.act:interpretation2,+ noun.person:interpreter2,+ ] [ render3, noun.act:rendition1,+ noun.communication:rendering1,+ noun.act:rendering1,+ ] perform,@ noun.cognition:performing_arts,;c frames: 8,9 (give an interpretation or rendition of; "The pianist rendered the Beethoven sonata beautifully") }
+{ [ drum, noun.event:drum,+ noun.artifact:drum,+ noun.person:drummer,+ noun.act:drumming,+ ] play1,@ noun.act:music,;c frames: 2 (play a percussion instrument) }
+{ [ harp, noun.artifact:harp2,+ noun.artifact:harp,+ noun.person:harper,+ ] verb.contact:pluck,* play1,@ noun.act:music,;c frames: 2 (play the harp; "She harped the Saint-Saens beautifully")}
+{ [ conduct, noun.act:conducting1,+ ] [ lead, noun.act:lead1,+ ] [ direct2, noun.person:director1,+ ] perform,@ noun.act:music,;c frames: 8 (lead, as in the performance of a composition; "conduct an orchestra; Barenboim conducted the Chicago symphony for years") }
+{ [ conduct4, noun.person:conductor,+ noun.act:conducting1,+ ] conduct,$ perform1,@ noun.act:music,;c frames: 8 (lead musicians in the performance of; "Bernstein conducted Mahler like no other conductor"; "she cannot conduct modern pieces")}
+{ hold, throw8, have, make4, give2, verb.social:direct,@ frames: 8 (organize or be responsible for; "hold a reception"; "have, throw, or make a party"; "give a course") }
+{ [ fiddle, noun.artifact:fiddle,+ noun.person:fiddler,+ ] play1,@ noun.act:music,;c frames: 2 (play the violin or fiddle) }
+{ [ trumpet, noun.artifact:trumpet,+ noun.person:trumpeter,+ ] verb.body:blow,*play1,@ noun.act:music,;c frames: 2 (play or blow on the trumpet) }
+{ [ clarion, noun.artifact:clarion,+ ] play1,@ noun.act:music,;c noun.cognition:music1,;c frames: 2 (blow the clarion) }
+{ double_tongue, triple-tongue, tongue,@ noun.cognition:music1,;c noun.act:music,;c frames: 2,8 (play fast notes on a wind instrument) }
+{ [ tongue, noun.body:tongue,+ ] play,@ noun.cognition:music1,;c noun.act:music,;c frames: 2,8 (articulate by tonguing, as when playing wind instruments) }
+{ duplicate, reduplicate, [ double, noun.cognition:double,+ ] [ repeat, adj.all:continual^repetitive,+ noun.event:repeat,+ noun.act:repetition,+ noun.person:repeater1,+ noun.person:repeater,+ noun.act:repeating,+ ] [ replicate, noun.act:replication1,+ noun.artifact:replica,+ ] reproduce,@ frames: 8 (make or do or perform again; "He could never replicate his brilliant performance of the magic trick") }
+{ [ replicate1, noun.process:replication,+ ] copy3, duplicate,@ noun.cognition:biology,;c frames: 8,11,1 (reproduce or make an exact copy of; "replicate the cell"; "copy the genetic information")}
+{ [ recapitulate1, noun.process:recapitulation,+ ] repeat,@ frames: 11 (repeat stages of evolutionary development during the embryonic phase of life)}
+{ [ duplicate1, noun.artifact:duplicate,+ noun.artifact:duplicate1,+ noun.artifact:duplication,+ noun.act:duplication,+ noun.artifact:duplicator,+ ] reproduce,@ frames: 8,11 (make a duplicate or duplicates of; "Could you please duplicate this letter for me?")}
+{ reduplicate1, geminate, duplicate,@ noun.cognition:linguistics,;c frames: 8 (form by reduplication; "The consonant reduplicates after a short vowel"; "The morpheme can be reduplicated to emphasize the meaning of the word") }
+{ [ triplicate, noun.artifact:triplicate,+ ] reproduce,@ frames: 8 (reproduce threefold; "triplicate the letter for the committee") }
+{ [ quadruplicate, noun.cognition:quadruple,+ noun.artifact:quadruplicate,+ ] reproduce,@ frames: 8 (reproduce fourfold; "quadruplicate the bill") }
+{ [ reprint, noun.communication:reprint,+ noun.communication:reprint1,+ noun.communication:reprinting,+ ] [ reissue, noun.communication:reissue,+ ] reproduce,@ frames: 8 (print anew; "They never reprinted the famous treatise") }
+{ [ photocopy, noun.artifact:photocopier,+ noun.artifact:photocopy,+ ] run_off, [ xerox, noun.artifact:xerox1,+ noun.artifact:xerox,+ ] reproduce,@ frames: 2,8 (reproduce by xerography) }
+{ microcopy, photocopy,@ frames: 8,11 (photocopy printed or other graphic matter so that it is reduced in size) }
+{ [ photostat, noun.artifact:photostat1,+ noun.artifact:photostat,+ ] photocopy,@ frames: 2,8 (make a copy by means of a Photostat device) }
+{ [ reproduce, noun.act:reproduction1,+ ] produce,@ frames: 8 (make a copy or equivalent of; "reproduce the painting") }
+{ reproduce3, verb.cognition:re-create,@ noun.cognition:fine_arts,;c frames: 8 (recreate a sound, image, idea, mood, atmosphere, etc.; "this DVD player reproduces the sound of the piano very well"; "He reproduced the feeling of sadness in the portrait") }
+{ [ induce3, noun.phenomenon:induction,+ ] [ induct, noun.phenomenon:induction,+ ] produce3,@ noun.cognition:physics,;c frames: 8,11 ( produce electric current by electrostatic or magnetic processes)}
+{ recreate5, create,@ frames: 8 (create anew; "she recreated the feeling of the 1920's with her stage setting")}
+{ reinvent, recreate5,@ frames: 8 (create anew and make over; "He reinvented African music for American listeners")}
+{ reinvent1, create2,@ frames: 8 (bring back into existence; "The candidate reinvented the concept of national health care so that he would get elected")}
+{ catch12, get14, verb.cognition:catch3,$ reproduce3,@ frames: 8,11 (apprehend and reproduce accurately; "She really caught the spirit of the place in her drawings"; "She got the mood just right in her photographs") }
+{ [play_back, noun.act:playback,+ noun.artifact:playback,+ ] [ replay1, noun.act:replay,+ ] reproduce,@ frames: 8 (reproduce (a recording) on a recorder; "The lawyers played back the conversation to show that their client was innocent") }
+{ evolve, [ germinate, noun.cognition:germ,+ ] develop, develop1,$ create_by_mental_act,@ frames: 8 (work out; "We have developed a new theory of evolution") }
+{ [ develop1, noun.act:development1,+ ] create2,@ frames: 8,11 (make something new, such as a product or a mental or artistic creation; "Her company developed a new kind of building material that withstands all kinds of weather"; "They developed a new technique") }
+{ build4, develop1,@ frames: 8,11 (give form to, according to a plan; "build a modern nation"; "build a million-dollar business") }
+{ [ prefabricate, noun.act:prefabrication,+ ] preassemble, produce,@ noun.act:construction,;c frames: 8 (to manufacture sections of (a building), especially in a factory, so that they can be easily transported to and rapidly assembled on a building site of buildings) }
+{ vamp, vamp_up, fabricate,@ frames: 8 (make up; "vamp up an excuse for not attending the meeting") }
+{ fudge_together, throw_together, produce,@ frames: 8 (produce shoddily, without much attention to detail) }
+{ [ grow, noun.group:growth,+ noun.person:grower,+ ] [ raise3, noun.person:raiser,+ ] [ farm, noun.artifact:farm,+ noun.person:farmer,+ noun.act:farming,+ ] [ produce5, noun.food:produce,+ ] cultivate,@ noun.act:agriculture,;c frames: 8,11 (cultivate by growing, often involving improvements by means of agricultural techniques; "The Bordeaux region produces great red wines"; "They produce good ham in Parma"; "We grow wheat here"; "We raise hogs here") }
+{ carry8, verb.consumption:carry1,$ produce5,@ noun.act:agriculture,;c frames: 11 (bear (a crop); "this land does not carry olives") }
+{ [ overproduce, noun.act:overproduction,+ ] produce5,@ frames: 8 (produce in excess; produce more than needed or wanted) }
+{ [ till, noun.substance:till,+ noun.person:tiller,+ noun.artifact:tiller1,+ noun.object:tillage,+ noun.act:tillage,+ noun.act:tilling,+ ] cultivate1,* work,@ noun.act:agriculture,;c frames: 2,8 (work land as by ploughing, harrowing, and manuring, in order to make it ready for cultivation; "till the soil")}
+{ [ garden, noun.group:garden,+ noun.artifact:garden1,+ noun.artifact:garden,+ noun.person:gardener1,+ noun.person:gardener,+ noun.act:gardening,+ ] verb.social:tend,@ noun.act:horticulture,;c frames: 2 (work in the garden; "My hobby is gardening")}
+{ [ landscape, noun.person:landscapist1,+ noun.act:landscaping,+ ] garden,@ noun.act:horticulture,;c frames: 2 (do landscape gardening; "My sons landscapes for corporations and earns a good living") }
+{ [ cultivate1, noun.act:cultivation,+ noun.artifact:cultivator,+ ] [ crop1, noun.plant:crop,+ ] work9, verb.change:prepare,@ noun.act:farming,;c frames: 8 (prepare for crops; "Work the soil"; "cultivate the land") }
+{ overcrop, overcultivate, cultivate1,@ noun.act:farming,;c frames: 8 (to exhaust by excessive cultivation; "the farmers overcropped the land") }
+{ [ plow, noun.person:plower,+ noun.artifact:plow,+ noun.act:plowing,+ ] [ plough, noun.artifact:plough,+ noun.act:ploughing,+ ] turn, verb.contact:dig,* till,@ noun.act:farming,;c frames: 2,8 (to break and turn over earth especially with a plow; "Farmer Jones plowed his east field last week"; "turn the earth in the Spring") }
+{ [ ridge, noun.shape:ridge,+ ] plough,@ noun.act:farming,;c frames: 8 (plough alternate strips by throwing the furrow onto an unploughed strip) }
+{ [ harrow, noun.artifact:harrow,+ ] disk, plow,@ noun.act:farming,;c frames: 2,8 (draw a harrow over (land))}
+{ [ hoe, noun.artifact:hoe,+ ] verb.contact:dig,* till,@ noun.act:farming,;c frames: 2,8 (dig with a hoe; "He is hoeing the flower beds") }
+{ [ cultivate, noun.act:cultivation,+ noun.person:cultivator,+ ] noun.act:farming,;c frames: 8 (foster the growth of) }
+{ [ imitate, adj.all:imitative,+ noun.act:imitation,+ noun.person:imitator,+ ] [ copy, noun.artifact:copy,+ noun.act:copying,+ ] simulate4, reproduce,@ frames: 8 (reproduce someone's behavior or looks; "The mime imitated the passers-by"; "Children often copy their parents or older siblings") }
+{ [take_off, noun.act:takeoff1,+ noun.communication:takeoff,+ ] imitate,@ frames: 8,11,9,10 (mimic or imitate in an amusing or satirical manner; "This song takes off from a famous aria") }
+{ [ mimic, noun.person:mimicker,+ noun.person:mimic,+ ] mime1, imitate,@ frames: 8,9,11 (imitate (a person or manner), especially for satirical effect; "The actor mimicked the President very accurately") }
+{ [ model2, noun.act:model,+ noun.cognition:model2,+ noun.artifact:model,+ noun.cognition:model,+ noun.person:modeller,+ noun.person:modeler,+ ] [ pattern, noun.cognition:pattern1,+ noun.cognition:pattern2,+ ] imitate,@ frames: 21 (plan or create according to a model or models) }
+{ [ scale, noun.relation:scale1,+ noun.relation:scale3,+ ] pattern,@ frames: 8 (pattern, make, regulate, set, measure, or estimate according to some rate or standard) }
+{ sovietize, sovietise, model2,@ frames: 8 (model a country's social, political, and economic structure on the Soviet Union; "Castro sovietized Cuba") }
+{ take_after, follow, imitate,@ frames: 9 (imitate in behavior; take as a model; "Teenagers follow their friends in everything") }
+{ [ publish, noun.communication:publication,+ ] frames: 2,8 (have (one's work) issued for publication; "She published 25 books during her long career"; "Mozart didn't publish all of his works") }
+{ [ typeset, noun.person:typesetter,+ ] set11, print,@ frames: 8 (set in type; "My book will be typeset nicely"; "set these words in italics") }
+{ prove, print,@ frames: 8 (take a trial impression of) }
+{ [ format, noun.attribute:format,+ noun.communication:formatting,+ ] arrange2, verb.change:change,@ frames: 8 (set (printed matter) into a specific format; "Format this letter so it can be printed out") }
+{ [ indent, noun.communication:indent1,+ noun.communication:indentation,+ ] format,@ frames: 8 (set in from the margin; "Indent the paragraphs of a letter")}
+{ table, tabularize, tabularise, [ tabulate, noun.communication:tabulation,+ noun.act:tabulation,+ noun.group:table,+ ] arrange,@ frames: 8 (arrange or enter in tabular form) }
+{ [ print2, noun.communication:print,+ noun.person:printer,+ noun.artifact:printer1,+ noun.artifact:printer,+ noun.communication:printing,+ ] [ publish1, noun.communication:publication,+ noun.act:publication1,+ noun.act:publication,+ noun.person:publisher1,+ noun.person:publisher,+ noun.group:publisher,+ ] produce,@ frames: 8 (put into print; "The newspaper published the news of the royal couple's divorce"; "These news should not be printed") }
+{ [ republish, noun.communication:republication,+ noun.act:republication,+ noun.act:republishing,+ ] publish1,@ frames: 2,8 (publish again; "The scientist republished his results after he made some corrections")}
+{ carry, run2, verb.communication:distribute,@ frames: 8,11 (include as the content; broadcast or publicize; "We ran the ad three times"; "This paper carries a restaurant review"; "All major networks carried the press conference") }
+{ [ gazette, noun.communication:gazette,+ ] publish1,@ frames: 8,26 (publish in a gazette) }
+{ print3, write1,@ frames: 2,8 (write as if with print; not cursive)}
+{ [ misprint, noun.communication:misprint,+ ] print3,@ frames: 8 (print incorrectly) }
+{ [ offset, noun.communication:offset,+ ] print,@ frames: 8 (produce by offset printing; "offset the conference proceedings")}
+{ [ offset1, noun.artifact:offset,+ ] make,@ frames: 8 (create an offset in; "offset a wall")}
+{ [ scribble, noun.communication:scribble,+ noun.person:scribbler,+ ] [ scrawl, noun.person:scrawler,+ noun.communication:scrawl,+ ] write1,@ frames: 2,8 (write carelessly) }
+{ [ copy5, noun.person:copyist,+ noun.communication:copy,+ noun.act:copying,+ ] write1,@ frames: 8 (copy down as is; "The students were made to copy the alphabet over and over") }
+{ copy_out, copy5,@ frames: 8 (copy very carefully and as accurately as possible) }
+{ [ program, noun.communication:program2,+ noun.person:programmer,+ noun.act:programing,+ ] [ programme, noun.communication:programme2,+ noun.act:programming,+ ] create_mentally,@ noun.cognition:computing,;c frames: 2 (write a computer program) }
+{ [ print, noun.communication:print,+ noun.person:printer,+ noun.artifact:printer1,+ noun.artifact:printer,+ noun.communication:printing,+ ] impress, write1,@ frames: 8 (reproduce by printing) }
+{ [ overprint, noun.artifact:overprint,+ ] print_over, print,@ frames: 11,8 (print (additional text or colors) onto an already imprinted paper) }
+{ surcharge, overprint,@ frames: 8 (print a new denomination on a stamp or a banknote) }
+{ [ cyclostyle, noun.artifact:cyclostyle,+ ] print,@ frames: 8 (print with an implement with small toothed wheels that cuts small holes in a stencil) }
+{ [ fingerprint, noun.attribute:fingerprint,+ noun.communication:fingerprint1,+ noun.act:fingerprinting,+ ] reproduce,@ frames: 8 (take an impression of a person's fingerprints) }
+{ [ boldface, noun.communication:boldface,+ ] print,@ frames: 8 (print in boldface) }
+{ [ italicize, noun.communication:italic2,+ noun.communication:italic1,+ ] [ italicise, noun.communication:italic2,+ noun.communication:italic1,+ ] print,@ frames: 8 (print in italics) }
+{ [ print1, noun.artifact:print2,+ ] reproduce,@ frames: 8 (make into a print; "print the negative") }
+{ [ lithograph, noun.artifact:lithograph,+ noun.artifact:lithograph1,+ noun.person:lithographer,+ ] print1,@ noun.act:art,;c frames: 8 (make by lithography) }
+{ silkscreen, print1,@ noun.act:art,;c frames: 8 (print by silkscreen) }
+{ [ stencil, noun.artifact:stencil,+ ] print1,@ noun.act:art,;c frames: 8 (mark or print with a stencil) }
+{ [ engrave, noun.act:gravure,+ noun.person:engraver,+ noun.act:engraving,+ ] etch2, print1,@ noun.act:art,;c frames: 8 (carve or cut into a block used for printing or print from such a block; "engrave a letter") }
+{ benday, engrave,@ frames: 8 (reproduce by the Benday process) }
+{ [ scrape, noun.artifact:scraper,+ ] make,@ frames: 8,11 (make by scraping; "They scraped a letter into the stone") }
+{ stipple, engrave,@ noun.act:art,;c frames: 8 (engrave by means of dots and flicks) }
+{ [ etch, noun.person:etcher,+ noun.artifact:etching1,+ noun.artifact:etching,+ noun.act:etching,+ ] verb.change:corrode,* print1,@ noun.act:art,;c frames: 8 (make an etching of; "He etched her image into the surface") }
+{ [ aquatint, noun.artifact:aquatint,+ noun.act:aquatint,+ ] etch,@ noun.act:art,;c frames: 2,8 (etch in aquatint) }
+{ confect1, produce,@ frames: 8 (make or construct) }
+{ [ corduroy, noun.artifact:corduroy1,+ ] build,@ frames: 8 (build (a road) from logs laid side by side) }
+{ [ fringe, noun.artifact:fringe,+ ] adorn,@ noun.act:handicraft,;c frames: 8 (adorn with a fringe; "The weaver fringed the scarf") }
+{ [ overact, noun.act:overacting,+ underact,!] ham_it_up, [ ham, noun.person:ham,+ noun.act:hamming,+ ] overplay, act3,@ noun.communication:theater,;c frames: 2,8 (exaggerate one's acting) }
+{ [underact, overact,!] underplay, act3,@ noun.communication:theater,;c frames: 2,8 (act (a role) with great restraint) }
+{ [ heel, noun.body:heel,+ noun.artifact:heel,+ ] dance,@ noun.act:dance,;c noun.communication:dance,;c frames: 8 (perform with the heels; "heel that dance") }
+{ [ fret, noun.artifact:fret1,+ ] decorate,@ frames: 8 (decorate with an interlaced design) }
+{ [ landscape1, noun.person:landscapist1,+ noun.artifact:landscaping,+ ] landscape,$ decorate,@ noun.act:horticulture,;c frames: 8 (embellish with plants; "Let's landscape the yard") }
+{ [ fret1, noun.artifact:fret1,+ ] verb.contact:carve1,@ noun.act:handicraft,;c frames: 8 (carve a pattern into) }
+{ [ honeycomb, noun.artifact:honeycomb,+ ] fret1,@ frames: 8,11 (carve a honeycomb pattern into; "The cliffs were honeycombed") }
+{ [ proof, noun.artifact:proof,+ noun.communication:proof1,+ ] produce,@ frames: 8 (make or take a proof of, such as a photographic negative, an etching, or typeset) }
+{ [ produce2, noun.event:producer,+ ] bring_forth, create,@ frames: 8,11 (bring forth or yield; "The tree would not produce fruit") }
+{ [ sporulate, noun.process:sporulation,+ ] produce2,@ noun.cognition:botany,;c frames: 1 (produce spores; "plants sporulate")}
+{ [produce3, noun.phenomenon:product,+ ] bring_about3, [give_rise1, frames: 22] create,@ frames: 11 (cause to happen, occur or exist; "This procedure produces a curious effect"; "The new law gave rise to many complaints"; "These chemicals produce a noxious vapor"; "the new President must bring about a change in the health care system") }
+{ grind_out, crank_out, produce2,@ frames: 8,11 (produce in a routine or monotonous manner; "We have to crank out publications in order to receive funding") }
+{ make_up3, design1,@ frames: 8 (devise or compose; "This designer makes up our Spring collections") }
+{ [ design7, noun.artifact:design,+ noun.person:designer2,+ noun.person:designer1,+ ] design1,$ create13,@ frames: 2 (create designs; "Dupont designs for the house of Chanel")}
+{ [ create2, adj.all:constructive^creative,+ noun.event:creation,+ noun.artifact:creation,+ noun.act:creation2,+ noun.act:creation1,+ noun.act:creation,+ ] frames: 8,11 (bring into existence; "The company was created 25 years ago"; "He created a new movement in painting") }
+{ [ press1, noun.act:press,+ noun.artifact:press,+ ] create,@ frames: 8,11 (create by pressing; "Press little holes into the soft clay") }
+{ prepare2, make,@ frames: 8 (to prepare verbally, either for written or spoken delivery; "prepare a report"; "prepare a speech") }
+{ rough_in, rough1, rough_out, prepare2,@ frames: 8 (prepare in preliminary or sketchy form) }
+{ write_out, write_up, write,@ noun.act:authorship,;c frames: 8 (put into writing; write in complete form; "write out a contract") }
+{ [ cut11, noun.act:cutting5,+ noun.act:cutting,+ ] create,@ frames: 8,11 (form or shape by cutting or incising; "cut paper dolls") }
+{ cut1, cut11,$ create,@ frames: 8,11 (form by probing, penetrating, or digging; "cut a hole"; "cut trenches"; "The sweat cut little rivulets into her face") }
+{ [ graph, noun.communication:graph,+ ] [ chart4, noun.person:chartist,+ ] represent1,@ frames: 8 (represent by means of a graph; "chart the data") }
+{ [ graph1, noun.communication:graph,+ ] plot,@ frames: 8 (plot upon a graph) }
+{ [ shimmy, noun.act:shimmy,+ ] dance,@ noun.act:dance,;c frames: 2 (dance a shimmy) }
+{ make10, make7,$ verb.change:make2,$ create_from_raw_material,@ frames: 8 (gather and light the materials for; "make a fire") }
+{ raise6, create,@ frames: 8 (create a disturbance, especially by making a great noise; "raise hell"; "raise the roof"; "raise Cain") }
+{ make12, verb.social:make,$ do1,@ frames: 8 (perform or carry out; "make a decision"; "make a move"; "make advances"; "make a phone call") }
+{ beat2, verb.motion:tread,* make,@ frames: 8 (make by pounding or trampling; "beat a path through the forest") }
+{ map3, map_out3, plan,@ frames: 8 (plan, delineate, or arrange in detail; "map one's future") }
+{ cut6, burn5, create3,@ frames: 8 (create by duplicating data; "cut a disk"; "burn a CD")}
+{ cut4, cut6,$ verb.communication:record1,@ frames: 8 (record a performance on (a medium); "cut a record") }
+{ cut5, cut4,$ verb.communication:record1,@ frames: 8 (make a recording of; "cut the songs"; "She cut all of her major titles again") }
+{ [ script, noun.communication:script,+ ] write,@ noun.act:authorship,;c frames: 8 (write a script for; "The playwright scripted the movie") }
+{ rubricate1, arrange2,@ frames: 8 (furnish with rubrics or regulate by rubrics; "the manuscript is not rubricated")}
+{ channelize, channelise, make13,@ frames: 8 (make a channel for; provide with a channel; "channelize the country for better transportation")}
+{ demyelinate, destroy,@ frames: 11 (destroy the myelin sheath of; "the disease demyelinated the nerve fibers")}
+{ [ facilitate3, adj.all:helpful^facilitatory,+ noun.phenomenon:facilitation,+ ] cause,@ noun.attribute:physiology,;c frames: 11 (increase the likelihood of (a response); "The stimulus facilitates a delayed impulse")}
+{ construct2, create_by_mental_act,@ frames: 8 (create by organizing and linking ideas, arguments, or concepts; "construct a proof"; "construct an argument")}
+{ construct3, create_by_mental_act,@ frames: 8 (create by linking linguistic units; "construct a sentence"; "construct a paragraph")}
+{ [filigree, noun.artifact:filigree,+] craft,@ frames: 2 (make filigree, as with a precious metal)}
+{ release3, free3, liberate3, generate,@ noun.cognition:chemistry,;c frames: 8 (release (gas or energy) as a result of a chemical reaction or physical decomposition)}
+{ embattle, prepare,@ frames: 2 (prepare for battle or conflict)}
+{ blast2, cut1,@ frames: 8 (make with or as if with an explosion; "blast a tunnel through the Alps")}
+{ chop, make,@ frames: 8 (form or shape by chopping; "chop a hole in the ground")}
+{ carve_out, create2,@ frames: 8 (establish or create through painstaking effort; "She carved out a reputation among her male colleagues")}
+{ manufacture2, create,@ frames: 8 (create or produce in a mechanical way; "This novelist has been manufacturing his books following his initial success")}
+{ manufacture3, produce2,@ frames: 11 (produce naturally; "this gland manufactures a specific substance only")}
+{ blast, shell, create,@ frames: 8,11 (create by using explosives; "blast a passage through the mountain")}
+{ busk, play12,@ frames: 2 (play music in a public place and solicit money for it; "three young men were busking in the plaza")}

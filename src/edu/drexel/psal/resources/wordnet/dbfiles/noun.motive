@@ -1,0 +1,53 @@
+($RCSfile: noun.motive,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:46 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.motive)
+
+{ life, noun.Tops:motive,@ (a motive for living; "pottery was his life") }
+{ rational_motive, noun.Tops:motive,@ (a motive that can be defended by reasoning or logical argument) }
+{ [ reason, verb.cognition:reason1,+ ] [ ground, verb.cognition:ground,+ ] rational_motive,@ (a rational motive for a belief or action; "the reason that war was declared"; "the grounds for their declaration") }
+{ [ occasion, verb.creation:occasion,+ ] reason,@ (reason; "there was no occasion for complaint") }
+{ score, account, reason,@ (grounds; "don't do it on my account"; "the paper was rejected on account of its length"; "he tried to blame the victim but his success on that score was doubtful") }
+{ why, wherefore, reason,@ (the cause or intention underlying an action or situation, especially in the phrase `the whys and wherefores') }
+{ [ incentive, disincentive,!] [ inducement, verb.communication:induce,+ ] [ motivator, verb.creation:motivate,+ ] rational_motive,@ (a positive motivational influence) }
+{ moral_force, dynamic, incentive,@ (an efficient incentive; "they hoped it would act as a spiritual dynamic on all churches") }
+{ [ disincentive, incentive,!] [ deterrence, adj.all:preventive^deterrent,+ ] rational_motive,@ (a negative motivational influence) }
+{ irrational_motive, noun.Tops:motive,@ (a motivation that is inconsistent with reason or logic) }
+{ urge, impulse, noun.Tops:motive,@ (an instinctive motive; "profound religious impulses") }
+{ [ abience, adj.pert:abient,+ adience,! ] urge,@ noun.cognition:psychology,;c ((psychology) an urge to withdraw or avoid a situation or an object) }
+{ [ adience, adj.pert:adient,+ abience,! ] urge,@ noun.cognition:psychology,;c ((psychology) an urge to accept or approach a situation or an object) }
+{ death_instinct, death_wish, Thanatos, urge,@ noun.act:psychoanalysis,;c ((psychoanalysis) an unconscious urge to die) }
+{ irrational_impulse, irrational_motive,@ (a strong spontaneous and irrational motivation; "his first impulse was to denounce them"; "the urge to find out got him into trouble") }
+{ [ compulsion1, adj.all:neurotic^compulsive,+ ] irresistible_impulse, irrational_impulse,@ (an urge to do or say something that might be better left undone or unsaid; "he felt a compulsion to babble on about the accident") }
+{ [ mania, adj.all:wild2^manic,+ ] passion, cacoethes, irrational_motive,@ (an irrational but irresistible motive for a belief or action) }
+{ agromania, mania,@ (an intense desire to be alone or out in the open) }
+{ dipsomania, alcoholism1, potomania, mania,@ (an intense persistent desire to drink alcoholic beverages to excess) }
+{ egomania, mania,@ (an intense and irresistible love for yourself and concern for your own needs) }
+{ kleptomania, mania,@ (an irresistible impulse to steal in the absence of any economic motive) }
+{ logorrhea, logomania, mania,@ (pathologically excessive (and often incoherent) talking) }
+{ [ monomania, adj.all:neurotic^monomaniacal,+ ] possession, mania,@ (a mania restricted to one thing or idea) }
+{ necrophilia, necrophilism, necromania, mania,@ (an irresistible sexual attraction to dead bodies) }
+{ phaneromania, mania,@ (an irresistible desire to pick at superficial body parts (as in obsessive nail-biting)) }
+{ pyromania, mania,@ (an uncontrollable desire to set fire to things) }
+{ trichotillomania, mania,@ (an irresistible urge to pull out your own hair) }
+{ wanderlust, itchy_feet, impulse,@ (very strong or irresistible impulse to travel) }
+{ [ compulsion, adj.all:neurotic^compulsive,+ noun.person:compulsive,+ ] [ obsession, adj.all:neurotic^obsessional,+ ] irrational_motive,@ (an irrational motive for performing trivial or repetitive actions, even against your will; "her compulsion to wash her hands repeatedly") }
+{ onomatomania, compulsion,@ (obsession with a particular word which the person uses repeatedly or which intrudes into consciousness) }
+
+{ ethical_motive, [ ethics, adj.all:right1^ethical,+ adj.all:ethical,+ noun.person:ethicist,+ noun.person:ethician,+ ] morals, [ morality, adj.all:moral^moralistic,+ ] noun.Tops:motive,@ (motivation based on ideas of right and wrong) }
+{ [ hedonism, adj.all:indulgent^hedonistic,+ adj.all:indulgent^hedonic,+ noun.person:hedonist,+ ] ethical_motive,@ (the pursuit of pleasure as a matter of ethical principle) }
+{ conscience, scruples, moral_sense, sense_of_right_and_wrong, ethical_motive,@ (motivation deriving logically from ethical or moral principles that govern a person's thoughts and actions) }
+{ wee_small_voice, small_voice, voice_of_conscience, conscience,@ (an inner voice that judges your behavior) }
+{ sense_of_shame, sense_of_duty, conscience,@ (a motivating awareness of ethical responsibility) }
+{ Inner_Light, Light, Light_Within, Christ_Within, ethical_motive,@ (a divine presence believed by Quakers to enlighten and guide the soul) }
+{ psychic_energy, mental_energy, noun.Tops:motive,@ (an actuating force or factor) }
+{ [ incitement, verb.contact:incite,+ ] [ incitation, verb.creation:incite,+ verb.contact:incite,+ verb.communication:incite,+ ] [ provocation, verb.emotion:provoke,+ verb.creation:provoke,+ verb.communication:provoke,+ ] psychic_energy,@ (something that incites or provokes; a means of arousing or stirring to action) }
+{ signal, incitement,@ (any incitement to action; "he awaited the signal to start"; "the victory was a signal for wild celebration") }
+{ libidinal_energy, psychic_energy,@ noun.act:psychoanalysis,;c ((psychoanalysis) psychic energy produced by the libido) }
+{ [ cathexis, adj.pert:cathectic,+ ] charge, libidinal_energy,@ noun.act:psychoanalysis,;c ((psychoanalysis) the libidinal energy invested in some idea or person or object; "Freud thought of cathexis as a psychic analog of an electrical charge") }
+{ acathexis, libidinal_energy,@ noun.act:psychoanalysis,;c ((psychoanalysis) a lack of cathexis; a condition in which significant objects or memories arouse no emotion in an individual) }
+
+
+
+
+

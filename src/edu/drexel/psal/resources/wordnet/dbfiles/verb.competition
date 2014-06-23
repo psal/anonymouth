@@ -1,0 +1,464 @@
+($RCSfile: verb.competition,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:56 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.competition)
+
+{ [ compete, adj.all:competitive,+ adj.all:competitory,+ noun.act:competition,+ noun.person:competitor,+ frames: 2 ] vie, [ contend, noun.act:contention,+ noun.person:contender,+ ] frames: 22 (compete for something; engage in a contest; measure oneself against others) }
+{ put_in, [ submit2, noun.person:submitter,+ ] verb.communication:apply,@ frames: 2 (make an application as for a job or funding; "We put in a grant to the NSF") }
+{ try_for, go_for, compete,@ frames: 8 (make an attempt at achieving something; "She tried for the Olympics") }
+{ [ play, noun.time:play,+ noun.act:play5,+ noun.person:player1,+ noun.act:playing,+ play_out,^ ] compete,@ frames: 2,8 (participate in games or sport; "We played hockey all afternoon"; "play cards"; "Pele played for the Brazilian teams in many important matches")}
+{ line_up, play,@ noun.act:football,;c frames: 2 (take one's position before a kick-off)}
+{ [ curl, noun.act:curling1,+ ] play,@ noun.act:sport,;c frames: 2 (play the Scottish game of curling)}
+{ [ snooker, noun.act:snooker,+ ] play,@ noun.act:snooker,;c frames: 2 (leave one's opponent unable to take a direct shot)}
+{ [ revoke4, noun.act:revoke,+ ] play,@ noun.act:cards,;c frames: 2 (fail to follow suit when able and required to do so)}
+{ [ develop2, noun.state:development,+ ] develop3,$ play,@ noun.act:chess,;c frames: 8 (move into a strategically more advantageous position; "develop the rook") }
+{ [ develop3, noun.state:development,+ ] play,@ noun.act:chess,;c frames: 2 (move one's pieces into strategically more advantageous positions; "Spassky developed quickly") }
+{ die, play,@ noun.act:baseball,;c frames: 2 (to be on base at the end of an inning, of a player) }
+{ [ misplay, noun.act:misplay,+ ] play,@ frames: 2 (play wrong or in an unskillful manner) }
+{ [ start, noun.act:start,+ noun.act:start2,+ noun.act:starting,+ ] play,@ noun.act:sport,;c frames: 2 (play in the starting lineup) }
+{ [ fumble, noun.act:fumble,+ ] play,@ noun.act:baseball,;c frames: 8 (drop or juggle or fail to play cleanly a grounder; "fumble a grounder") }
+{ [ volley, noun.act:volley1,+ ] play,@ noun.act:court_game,;c frames: 2 (make a volley) }
+{ unblock, play,@ noun.act:cards,;c frames: 8 (play the cards of (a suit) so that the last trick on which a hand can follow suit will be taken by a higher card in the hand of a partner who has the remaining cards of a combined holding) }
+{ [ replay, noun.event:replay,+ ] play,@ frames: 8 (play again; "We replayed the game"; "replay a point") }
+{ [ cricket, noun.act:cricket,+ noun.person:cricketer,+ ] play,@ frames: 2 (play cricket) }
+{ [ backstop, noun.artifact:backstop,+ ] play,@ noun.act:baseball,;c frames: 2 (act as a backstop) }
+{ [ fullback, noun.person:fullback,+ ] play,@ noun.act:football,;c frames: 2 (play the fullback) }
+{ [ quarterback, noun.act:quarterback,+ noun.person:quarterback,+ ] play,@ noun.act:football,;c frames: 2 (play the quarterback) }
+{ cradle, play,@ noun.act:lacrosse,;c frames: 2 (run with the stick) }
+{ [ move, noun.act:move2,+ ] [ go, noun.time:go,+ ] verb.communication:move,$ play,* frames: 2 (have a turn; make one's move in a game; "Can I go now?") }
+{ [ bluff, noun.act:bluff,+ noun.person:bluffer,+ ] bluff_out, move,@ noun.act:cards,;c frames: 2,9 (deceive an opponent by a bold bet on an inferior hand with the result that the opponent withdraws a winning hand) }
+{ [ stalemate, noun.event:stalemate,+ ] move,@ noun.act:chess,;c frames: 9 (subject to a stalemate) }
+{ [ castle, noun.artifact:castle1,+ noun.act:castle,+ noun.act:castling,+ ] move,@ noun.act:chess,;c frames: 8 (move the king two squares toward a rook and in the same move the rook to the square next past the king) }
+{ [ serve1, noun.act:serve,+ noun.person:server1,+ ] move,@ noun.act:court_game,;c frames: 2 (put the ball into play; "It was Agassi's turn to serve") }
+{ [ ace1, noun.act:ace,+ ] serve1,@ noun.act:tennis,;c frames: 9 (serve an ace against (someone)) }
+{ [ open, noun.act:opening3,+ ] move,@ noun.act:chess,;c frames: 2 (make the opening move; "Kasparov opened with a standard opening") }
+{ [ draw1, noun.artifact:draw,+ noun.artifact:draw1,+ noun.act:drawing3,+ ] [ cast, noun.act:cast1,+ ] move,@ frames: 2 (choose at random; "draw a card"; "cast lots") }
+{ [ trump1, noun.artifact:trump,+ noun.act:trumping,+ ] [ ruff, noun.act:ruff,+ ] move,@ noun.act:cards,;c frames: 2 (play a trump) }
+{ overtrump, trump1,@ noun.act:cards,;c frames: 2 (play a trump higher than (one previously played) to the trick) }
+{ crossruff, trump1,@ noun.act:cards,;c frames: 2 (trump alternately in two hands) }
+{ exit, play,@ noun.act:cards,;c frames: 2 (lose the lead) }
+{ [ confront, noun.communication:confrontation1,+ noun.act:confrontation,+ ] [ face, noun.attribute:face2,+ face_off,^ ] meet,@ frames: 9,8,10,11 (oppose, as in hostility or a competition; "You must confront your opponent"; "Jackson faced Smith in the boxing ring"; "The two enemies finally confronted each other")}
+{ [ front, noun.location:front,+ noun.artifact:front,+ ] breast, confront,@ frames: 9,8,10,11 (confront bodily; "breast the storm")}
+{ take_the_bull_by_the_horns, face,@ frames: 2 (face a difficulty and grapple with it without avoiding it) }
+{ [ meet, noun.event:meet,+ ] [ encounter, noun.act:encounter,+ ] [ play2, noun.time:play,+ noun.act:playing,+ ] take_on1, play,$ compete,* frames: 9 (contend against an opponent in a sport, game, or battle; "Princeton plays Yale this weekend"; "Charlie likes to play Mary")}
+{ [ play12, noun.act:play5,+ ] play2,$ verb.consumption:use1,@ frames: 9 (employ in a game or in a specific position; "They played him on first base")}
+{ [ play13, noun.act:play5,+ ] play2,$ verb.consumption:use1,@ frames: 8 (use or move; "I had to play my queen")}
+{ promote, play13,@ noun.act:chess,;c frames: 8 (change a pawn for a better piece by advancing it to the eighth row, or change a checker piece for a more valuable piece by moving it to the row closest to your opponent)}
+{ promote1, promote,$ verb.change:change,@ noun.act:board_game,;c frames: 1 (be changed for a superior chess or checker piece)}
+{ [ play9, noun.act:play4,+ ] play2,$ verb.contact:hit3,@ frames: 8 (shoot or hit in a particular manner; "She played a good backhand last night")}
+{ hook, play9,@ noun.act:rugby,;c frames: 8 (secure with the foot; "hook the ball")}
+{ [ replay1, noun.event:replay,+ ] play2,@ frames: 9 (repeat a game against the same opponent; "Princeton replayed Harvard") }
+{ pit, [ oppose, adj.all:hostile1^opponent,+ noun.person:opponent2,+ ] [ match, noun.event:match,+ ] [play_off, noun.event:playoff,+ ] confront,@ frames: 9,10 (set into opposition or rivalry; "let them match their best athletes against ours"; "pit a chess player against the Russian champion"; "He plays his two children off against each other") }
+{ [run_off, noun.act:runoff,+ ] compete,@ noun.act:game,;c frames: 8 (decide (a contest or competition) by a runoff)}
+{ play_out, play,@ noun.act:game,;c frames: 8 (play to a finish; "We have got to play this game out, even thought it is clear that we have last") }
+{ [ field, noun.location:field2,+ noun.person:fielder1,+ noun.person:fielder,+ noun.act:fielding,+ ] play,@ noun.act:sport,;c frames: 2 (play as a fielder) }
+{ bear_down, fight,@ noun.act:baseball,;c frames: 2 (exert full strength; "The pitcher bore down") }
+{ [ fistfight, noun.act:fistfight,+ ] fight,@ frames: 2 (fight with the fists; "The man wanted to fist-fight") }
+{ [ field1, noun.person:fielder1,+ noun.location:field2,+ noun.act:fielding,+ ] verb.contact:handle,@ frames: 8 (catch or pick up (balls) in baseball or cricket) }
+{ [ catch, noun.person:catcher,+ ] play,@ noun.act:baseball,;c frames: 2 (be the catcher; "Who is catching?") }
+{ [ enter, noun.person:entrant,+ drop_out,! ] [ participate, adj.all:democratic^participatory,+ noun.state:participation,+ noun.act:participation,+ noun.person:participant,+ ] frames: 2,8,22 (become a participant; be involved in; "enter a race"; "enter an agreement"; "enter a drug treatment program"; "enter negotiations") }
+{ jump3, enter,@ frames: 22 (enter eagerly into; "He jumped into the game") }
+{ [drop_out, enter,! ] [give_up, frames:8 ] fall_by_the_wayside, drop_by_the_wayside, throw_in, throw_in_the_towel, [ quit5, noun.person:quitter,+ frames:8 ] chuck_up_the_sponge, frames: 2,22 (give up in the face of defeat of lacking hope; admit defeat; "In the second round, the challenger gave up") }
+{ [ demolish, noun.act:demolition,+ ] destroy, defeat,@ frames: 9 (defeat soundly and humiliatingly; "The home team demolished the visitors") }
+{ smash, destroy,@ frames: 8,9 (overthrow or destroy (something considered evil or harmful); "The police smashed the drug ring after they were tipped off")}
+{ swallow, destroy,@ frames: 11,8,10,9 (engulf and destroy; "The Nazis swallowed the Baltic countries") }
+{ cut_to_ribbons, demolish,@ frames: 9 (defeat totally; "We must cut the other team to ribbons!") }
+{ [ face_off, noun.act:face-off,+ ] bully_off, play,@ frames: 2 (start a game by a face-off) }
+{ [tee_off, noun.act:teeoff,+] play,@ noun.act:golf,;c frames: 2 (strike a ball from the teeing ground at the start of a hole) }
+{ [ par, noun.quantity:par,+ ] score,@ noun.act:golf,;c frames: 8 (make a score (on a hole) equal to par) }
+{ shoot6, score,@ noun.act:sport,;c frames: 8 (score; "shoot a basket"; "shoot a goal" )}
+{ convert, score,@ noun.act:bowling,;c frames: 8 (score (a spare) ) }
+{ convert1, convert,$ score,@ frames: 8 (complete successfully; "score a penalty shot or free throw")}
+{ [ convert2, noun.act:conversion2,+ ] convert,$ score,@ frames: 2 (score an extra point or points after touchdown by kicking the ball through the uprights or advancing the ball into the end zone; "Smith converted and his team won")}
+{ ace2, play,@ noun.act:golf,;c frames: 8 (play (a hole) in one stroke) }
+{ [ referee, noun.person:referee,+ noun.act:refereeing,+ ] [ umpire, noun.communication:umpirage,+ noun.act:umpirage,+ noun.person:umpire,+ ] verb.cognition:judge2,@ noun.act:sport,;c frames: 2,8 (be a referee or umpire in a sports competition) }
+{ [ handicap, noun.cognition:handicap,+ ] hinder, [ hamper, noun.artifact:hamper1,+ ] verb.social:disadvantage,@ frames: 9,8 (put at a disadvantage; "The brace I have to wear is hindering my movements") }
+{ [ bias, noun.cognition:bias,+ ] verb.cognition:prejudice,@ frames: 11,10,8,9 (influence in an unfair way; "you are biasing my choice by telling me yours") }
+{ [ handicap1, noun.attribute:handicap2,+ noun.person:handicapper,+ ] bias,@ frames: 8,9,10,11 (attempt to forecast the winner (especially in a horse race) and assign odds for or against a contestant)}
+{ [ race, noun.event:race,+ noun.event:race1,+ noun.artifact:racer,+ noun.animal:racer,+ noun.act:racing,+ ] [ run1, noun.event:run2,+ noun.person:runner,+ noun.act:running,+ run_off,^ ] compete,@ frames: 2,22 (compete in a race; "he is running the Marathon this year"; "let's race and see who gets there first")}
+{ show, race,@ frames: 1 (finish third or better in a horse or dog race; "he bet $2 on number six to show")}
+{ [ place2, noun.communication:place2,+ ] race,@ frames: 1 (finish second or better in a horse or dog race; "he bet $2 on number six to place")}
+{ boat-race, verb.motion:boat,* race,@ frames: 2 (participate in a boat race) }
+{ horse-race, race,@ frames: 2 (compete in a horse race) }
+{ [ jockey3, noun.person:jockey,+ ] horse-race,@ frames: 2 (ride a racehorse as a professional jockey) }
+{ [ arm, noun.group:armor,+ noun.act:armament,+ noun.artifact:arm1,+ disarm,! ] build_up, [ fortify, noun.cognition:fortification,+ noun.artifact:fort1,+ ] gird, frames: 2 (prepare oneself for a military confrontation; "The U.S. is girding for a conflict in the Middle East"; "troops are building up on the Iraqi border") }
+{ [ rearm, noun.act:rearmament,+ ] re-arm, arm,@ frames: 2,1 (arm anew; "After the war, the defeated country was not allowed to rearm") }
+{ forearm, arm,@ frames: 2,9 (arm in advance of a confrontation) }
+{ [ disarm, noun.act:disarmament,+ noun.act:disarming,+ arm,! ] demilitarize2, demilitarise2, frames: 8,9 (remove offensive capability from) }
+{ [ disarm1, noun.act:disarmament,+ noun.person:disarmer,+ noun.act:disarming,+ ] unarm, verb.possession:deprive1,@ frames: 9 (take away the weapons from; render harmless) }
+{ [ demobilize, noun.act:demobilization,+ mobilize,! ] [ demobilise, noun.act:demobilisation,+ mobilise,! ] demob, discharge,@ frames: 2 (retire from military service) }
+{ [ mobilize, noun.act:mobilization1,+ demobilize,! ] [ mobilise, noun.act:mobilisation1,+ demobilise,! ] militarize,@ frames: 2 (get ready for war) }
+{ [ man, noun.person:man5,+ ] staff,@ frames: 8 (provide with workers; "We cannot man all the desks"; "Students were manning the booths") }
+{ [ staff, noun.group:staff,+ noun.group:staff1,+ ] verb.consumption:provide,@ frames: 8 (provide with staff; "This position is not always staffed") }
+{ [ station, noun.location:station,+ noun.location:station1,+ ] post, send, [ place, noun.act:place,+ ] verb.motion:move1,@ frames: 20 (assign to a station) }
+{ [ garrison, noun.group:garrison,+ noun.artifact:garrison,+ ] station,@ frames: 9,8 (station (troops) in a fort or garrison) }
+{ [ team, noun.group:team,+ ] team_up, group,@ frames: 22 (form a team; "We teamed up for this new project") }
+{ embed, group,@ frames: 22 (attach to, as a journalist to a military unit when reporting on a war; "The young reporter was embedded with the Third Division")}
+{ [ crew, noun.group:crew2,+ noun.group:crew1,+ ] man,@ frames: 8 (serve as a crew member on) }
+{ [ gang, noun.group:gang,+ noun.group:gang2,+ ] gang_up, group,@ frames: 9,22 (act as an organized group) }
+{ [ group, noun.Tops:group,+ noun.act:grouping,+ ] aggroup, verb.social:gather,@ frames: 8 (form a group or group together) }
+{ [ pool, noun.group:pool1,+ ] group,@ frames: 2 (join or form a pool of people)}
+{ [ brigade, noun.group:brigade,+ ] group,@ frames: 2,9 (form or unite into a brigade) }
+{ contend1, [ fight, noun.act:fight3,+ noun.act:fight1,+ noun.act:fight2,+ noun.person:fighter,+ noun.artifact:fighter,+ noun.act:fighting,+ fight_off,^ ] [ struggle, noun.act:struggle2,+ ] compete,* frames: 2,9,22 (be engaged in a fight; carry on a fight; "the tribesmen fought each other"; "Siblings are always fighting"; "Militant groups are contending for control of the country") }
+{ join_battle, fight,@ frames: 2 (engage in a conflict; "The battle over health care reform was joined") }
+{ tug, struggle,@ frames: 2 (struggle in opposition; "She tugged and wrestled with her conflicts") }
+{ [ fight1, noun.communication:fight,+ noun.person:fighter,+ noun.artifact:fighter,+ ] [ oppose1, adj.all:hostile1^opponent,+ noun.act:opposition,+ noun.person:opposer,+ ] fight_back, fight_down, [ defend5, adj.all:apologetic^defensive,+ ] struggle,@ frames: 2,8,9 (fight against or resist strongly; "The senator said he would oppose the bill"; "Don't fight it!") }
+{ [ recalcitrate, noun.attribute:recalcitrance,+ ] fight1,@ frames: 22 (show strong objection or repugnance; manifest vigorous opposition or resistance; be obstinately disobedient; "The Democratic senators recalcitrated against every proposal from the Republican side")}
+{ settle10, get_back13, fight,@ frames: 9 (get one's revenge for a wrong or an injury; "I finally settled with my old enemy") }
+{ fight_back1, fight,@ frames: 2 (defend oneself) }
+{ [ battle, noun.act:battle2,+ noun.act:battle,+ noun.person:battler,+ ] [ combat, adj.all:aggressive^combative,+ adj.all:military1^combatant,+ noun.act:combat1,+ noun.act:combat,+ noun.person:combatant,+ ] fight,@ frames: 8,9,2 (battle or contend against in or as if in a battle; "The Kurds are combating Iraqi troops in Northern Iraq"; "We must combat the prejudices against other races"; "they battled over the budget") }
+{ [dogfight, noun.act:dogfight,+] battle,@ frames: 2 (engage in an aerial battle with another fighter plane)}
+{ [ wrestle1, noun.person:wrestler,+ ] combat,@ frames: 22 (combat to overcome an opposing tendency or force; "He wrestled all his life with his feeling of inferiority") }
+{ [ war, noun.state:war,+ noun.act:war,+ noun.person:warrior,+ make_peace,! ] fight,@ frames: 2,22 (make or wage war) }
+{ blitzkrieg, war,@ frames: 2 (fight a quick and surprising war) }
+{ go_to_war, take_arms, take_up_arms, war,@ frames: 2,22 (commence hostilities) }
+{ [make_peace, noun.person:make-peace,+ war,!] verb.communication:reconcile,@ frames: 2 (end hostilities; "The brothers who had been fighting over their inheritance finally made peace") }
+{ [ campaign, noun.act:campaign,+ ] take_the_field1, war,* frames: 2,22 (go on a campaign; go off to war) }
+{ [ crusade, noun.act:crusade1,+ noun.person:crusader1,+ ] campaign,@ frames: 2,22 (go on a crusade; fight a holy war) }
+{ [ campaign1, noun.event:campaign,+ noun.person:campaigner,+ ] [ run6, noun.event:run3,+ ] race,@ frames: 2,22 (run, stand, or compete for an office or a position; "Who's running for treasurer this year?")}
+{ stump, campaign1,@ frames: 8 (travel through a district and make political speeches; "the candidate stumped the Northeast")}
+{ rerun, run6,@ frames: 2,22 (run again for office; "Bush wants to rerun in 1996") }
+{ barnstorm, verb.creation:perform1,@ frames: 2,22 (tour the country making political speeches, giving lectures, or presenting plays; "The presidential candidates are busy barnstorming this month")}
+{ [ barnstorm1, noun.person:barnstormer,+ ] barnstorm,$ verb.creation:perform1,@ frames: 2,22 (appear at county fairs and carnivals as a stunt flier and parachute jumper)}
+{ whistlestop, campaign1,@ frames: 2,22 (tour the country in order to solicit votes for an election)}
+{ serve, verb.social:work,@ frames: 2,22 (do duty or hold offices; serve in a specific function; "He served as head of the department for three years"; "She served in Congress for two terms") }
+{ sit, serve,@ frames: 2 (serve in a specific professional capacity; "the priest sat for confession"; "she sat on the jury")}
+{ [ staff1, noun.group:staff,+ noun.group:staff1,+ ] serve,@ frames: 8 (serve on the staff of; "The two men staff the reception desk")}
+{ [ act, noun.person:actor1,+ ] serve,@ frames: 22 (discharge one's duties; "She acts as the chair"; "In what capacity are you acting?") }
+{ [ criticize, noun.person:critic2,+ noun.person:critic1,+ noun.person:critic,+ ] criticise, act,@ frames: 2 (act as a critic; "Those who criticize others often are not perfect, either")}
+{ [ rotate, noun.attribute:rotation,+ ] verb.social:rotate,$ serve,@ frames: 2,22 (perform a job or duty on a rotating basis; "Interns have to rotate for a few months") }
+{ [ officiate, noun.act:officiation1,+ noun.act:officiation,+ noun.state:office,+ noun.act:office2,+ noun.act:office1,+ noun.act:office,+ noun.act:officiating,+ ] [ function, noun.act:function,+ noun.person:functionary,+ ] serve,@ frames: 2,22 (perform duties attached to a particular office or place or function; "His wife officiated as his private secretary") }
+{ [ caddie, noun.person:caddie,+ ] [ caddy, noun.artifact:caddy,+ ] serve,@ noun.act:golf,;c frames: 2 (act as a caddie and carry clubs for a player) }
+{ [ soldier, noun.person:soldier,+ noun.group:soldiery,+ noun.cognition:soldiering,+ ] verb.stative:spend,@ frames: 2,22 (serve as a soldier in the military) }
+{ [ enlist, noun.time:enlistment,+ ] sign_up,@ frames: 2 (join the military) }
+{ sign_up, verb.social:join,@ frames: 2,22 (join a club, an activity, etc. with the intention to join or participate; "Sign up for yoga classes") }
+{ [ enlist1, noun.time:enlistment,+ noun.person:enlistee,+ noun.act:enlisting,+ discharge,! ] [ draft, noun.act:draft3,+ noun.person:draftee,+ ] muster_in, verb.social:enroll,@ frames: 9 (engage somebody to enter the army) }
+{ [ discharge, noun.act:discharge2,+ enlist1,! ] muster_out, verb.contact:release,@ frames: 9 (release from military service) }
+{ [ call_up, noun.communication:call_up,+ ] [ mobilize1, noun.act:mobilization1,+ demobilize3,!] [ mobilise1, noun.act:mobilisation1,+ noun.act:mobilisation,+ ] [ rally, noun.act:rallying1,+ ] verb.communication:call5,@ frames: 9,8 (call to arms; of military personnel) }
+{ [ demobilize3, noun.act:demobilization,+ mobilize1,!] [ inactivate, noun.act:inactivation,+ ] [ demobilise3, noun.act:demobilisation,+ ] discharge,@ frames: 9 (release from military service or remove from the active list of military service)}
+{ [ recruit, noun.person:recruit,+ noun.person:recruit1,+ noun.act:recruitment,+ noun.person:recruiter,+ ] [ levy, noun.act:levy1,+ ] raise, enlist1,@ frames: 9 (cause to assemble or enlist in the military; "raise an army"; "recruit new soldiers")}
+{ [ conscript, noun.act:conscription,+ noun.person:conscript,+ ] enlist,@ frames: 9 (enroll into service compulsorily; "The men were conscripted")}
+{ [ militarize, noun.act:militarization,+ noun.group:military,+ demilitarize,! ] [ militarise, noun.act:militarisation,+ noun.group:military,+ demilitarise,! ] verb.change:change1,@ frames: 8,11 (lend a military character to (a country), as by building up a military force; "militarize Germany again after the war") }
+{ [ remilitarize, noun.act:remilitarization,+ ] [ remilitarise, noun.act:remilitarisation,+ ] militarize,@ frames: 8 (militarize anew; "Should Japan be remilitarized?") }
+{ [demilitarize, militarize,! ] [demilitarise, militarise,! ] disarm1,@ frames: 8,11 (do away with the military organization and potential of) }
+{ [ lose, noun.person:loser2,+ noun.person:loser1,+ noun.person:loser,+ win,! ] vie,* frames: 2,8,27 (fail to win; "We lost the battle but we won the war")}
+{ go_down, lose,@ frames: 1,2 (be defeated; "If America goes down, the free world will go down, too") }
+{ drop, lose,@ noun.act:sport,;c frames: 8 (lose (a game); "The Giants dropped 11 of their first 13") }
+{ [ win, noun.event:win,+ noun.person:winner1,+ noun.person:winner,+ noun.possession:winnings,+ lose,! ] vie,* frames: 2,8, 22 (be the winner in a contest or competition; be victorious; "He won the Gold Medal in skating"; "Our home team won"; "Win the game") }
+{ [ romp, noun.event:romp,+ ] win,@ frames: 2 (win easily; "romp a race")}
+{ carry12, carry1,$ carry2,$ win,@ frames: 8 (be successful in; "She lost the game but carried the match") }
+{ take8, win,@ frames: 8 (obtain by winning; "Winner takes all"; "He took first prize") }
+{ sweep, win,@ frames: 8,11 (win an overwhelming victory in or on; "Her new show dog swept all championships") }
+{ outpoint, outscore, beat,@ frames: 9 (score more points than one's opponents) }
+{ [ homer, noun.act:homer,+ ] score,@ frames: 2 (hit a home run) }
+{ count_out, verb.communication:declare,@ noun.act:boxing,;c frames: 9 (declare the loser) }
+{ carry1, win,@ frames: 8 (win in an election; "The senator carried his home state")}
+{ carry2, verb.possession:obtain,@ frames: 8 (secure the passage or adoption (of bills and motions); "The motion carried easily") }
+{ prevail, [ triumph, adj.all:undefeated^triumphant,+ noun.event:triumph,+ ] win,@ frames: 2 (prove superior; "The champion prevailed, though it was a hard fight") }
+{ [ beat, adj.all:conquerable^beatable,+ noun.act:beating1,+ ] beat_out, crush, shell3, [ trounce, noun.event:trouncing,+ ] [ vanquish, adj.all:conquerable^vanquishable,+ noun.person:vanquisher,+ ] win,* overcome3,@ frames: 8,9,10 (come out better in a competition, race, or conflict; "Agassi beat Becker in the tennis championship"; "We beat the competition"; "Harvard defeated Yale in the last football game")}
+{ [walk_over, noun.act:walkover,+ ] beat,@ frames: 9,8 (beat easily; "The local team walked over their old rivals for the championship")}
+{ eliminate, beat,@ frames: 9 (remove from a contest or race; "The cyclist has eliminated all the competitors in the race")}
+{ worst, pip, mop_up, [ whip, noun.event:whipping,+ ] rack_up, beat,@ frames: 9,8 (defeat thoroughly; "He mopped up the floor with his opponents") }
+{ [ wallop, noun.person:walloper,+ noun.event:walloping,+ ] defeat,@ frames: 8,9 (defeat soundly and utterly; "We'll wallop them!") }
+{ down, defeat,@ noun.act:sport,;c frames: 9,8 (bring down or defeat (an opponent)) }
+{ overrun4, defeat,@ frames: 8 (seize the position of and defeat; "the Crusaders overran much of the Holy Land")}
+{ whomp, beat,@ frames: 8,9 (beat overwhelmingly) }
+{ [ lurch, noun.event:lurch,+ ] [ skunk, noun.event:skunk,+ ] defeat,@ noun.act:cards,;c frames: 9 (defeat by a lurch) }
+{ [break_down, noun.act:breakdown2,+ ] crush1, verb.change:change1,@ frames: 8,11 (make ineffective; "Martin Luther King tried to break down racial discrimination") }
+{ [get_the_best2, frames: 22] [have_the_best2, frames: 22] overcome2, beat,@ frames: 10 (overcome, usually through no fault or weakness of the person that is overcome; "Heart disease can get the best of us") }
+{ spread-eagle, spreadeagle, [ rout1, noun.event:rout,+ ] beat,@ frames: 9 (defeat disastrously) }
+{ get_the_jump, beat,@ frames: 22 (be there first; "They had gotten the jump on their competitors") }
+{ cut_down, cut_out, stop,@ noun.act:baseball,;c frames: 9 (intercept (a player)) }
+{ [ cheat, noun.act:cheat1,+ noun.person:cheater,+ ] chouse, shaft, screw, [ chicane, noun.act:chicanery,+ noun.act:chicane,+ ] jockey1, beat,@ frames: 9,11 (defeat someone through trickery or deceit)}
+{ outwit, overreach, outsmart, outfox1, [ beat14, adj.all:conquerable^beatable,+ ] circumvent, beat,$ outdo,@ frames: 8,9 (beat through cleverness and wit; "I beat the traffic"; "She outfoxed her competitors") }
+{ outgrow, outdo,@ frames: 11,9 (grow faster than) }
+{ outshout, [ outcry, noun.communication:outcry,+ ] outdo,@ frames: 9 (shout louder than) }
+{ outroar, outdo,@ frames: 9,11 (roar louder than)}
+{ outsail, outdo,@ frames: 9,8,11 (sail faster or better than; "They outsailed the Roman fleet") }
+{ outdraw, outdo,@ frames: 8 (draw a gun faster, or best someone in a gunfight)}
+{ surpass, outstrip, outmatch, outgo, [ exceed, adj.all:immoderate^excessive,+ ] outdo, surmount1, outperform, beat,@ frames: 9,8,10,11 (be or do something to a greater degree; "her performance surpasses that of any other student I know"; "She outdoes all other athletes"; "This exceeds all my expectations"; "This car outperforms all others in its class") }
+{ outsell, exceed,@ frames: 9 (sell more than others; "This salesman outsells his colleagues")}
+{ outsell1, exceed,@ frames: 11 (be sold more often than other, similar products; "The new Toyota outsells the Honda by a wide margin")}
+{ outpace, surpass,@ frames: 11,8,9 (surpass in speed; "Malthus believed that population increase would outpace increases in the means of subsistence") }
+{ [ better, noun.attribute:better1,+ ] break, surpass,@ frames: 8 (surpass in excellence; "She bettered her own record"; "break a record") }
+{ [ upstage, noun.person:upstager,+ ] outshine,@ frames: 9,11,10,8 (steal the show, draw attention to oneself away from someone else; "When the dog entered the stage, he upstaged the actress") }
+{ outshine, surpass,@ frames: 9,11 (attract more attention and praise than others; "This film outshone all the others in quality") }
+{ outrange, exceed,@ frames: 11 (have a greater range than (another gun)) }
+{ outweigh, surpass,@ frames: 8 (be heavier than) }
+{ outbrave, surpass,@ frames: 9 (be braver than) }
+{ out-herod, surpass,@ frames: 9 (surpass someone in cruelty or evil) }
+{ outfox, outdo,@ frames: 9 (outdo someone in trickery) }
+{ take_the_cake, win,@ frames: 1,2 (rank first; used often in a negative context; "He takes the cake for chutzpah!") }
+{ shame, surpass,@ frames: 9 (surpass or beat by a wide margin) }
+{ get_the_better_of, [ overcome3, noun.person:overcomer,+ ] defeat, frames: 8 (win a victory over; "You must overcome all difficulties"; "defeat your enemies"; "He overcame his shyness"; "He overcame his infirmity"; "Her anger got the better of her and she blew up") }
+{ overcome1, get_over, subdue, surmount, master, beat,@ frames: 8 (get on top of; deal with successfully; "He overcame his shyness") }
+{ bulldog1, subdue,@ frames: 8 (throw a steer by seizing the horns and twisting the neck, as in a rodeo) }
+{ rout, rout_out, expel, defeat,@ frames: 9 (cause to flee; "rout out the fighters from their caves") }
+{ [ upset, noun.act:upset,+ noun.person:upsetter,+ ] defeat,@ frames: 9 (defeat suddenly and unexpectedly; "The foreign team upset the local team") }
+{ outdo1, outflank, trump, best, scoop, beat,@ frames: 9 (get the better of; "the goal was to best the competition") }
+{ outfight, beat,@ frames: 8,9,10,11 (to fight better than; get the better of; "the Rangers outfought the Maple Leafs"; "The French forces outfought the Germans")}
+{ [ nose, noun.quantity:nose,+ ] defeat,@ frames: 8,9,10,11 (defeat by a narrow margin) }
+{ outgeneral, outmaneuver,@ frames: 9 (surpass in generalship) }
+{ manoeuver, [ maneuver, noun.act:maneuver2,+ ] [ manoeuvre, noun.act:manoeuvre2,+ ] [ operate, noun.act:operation2,+ ] move,@ frames: 22,21 (perform a movement in military or naval tactics in order to secure an advantage in attack or defense) }
+{ jockey13, maneuver,@ frames: 22 (compete (for an advantage or a position)) }
+{ outmaneuver, outmanoeuvre, outsmart1, outdo1,@ frames: 9 (defeat by more skillful maneuvering; "The English troops outmaneuvered the Germans"; "My new supervisor knows how to outmaneuver the boss in most situations") }
+{ overpower, overmaster, overwhelm, beat,@ frames: 9,10 (overcome by superior force)}
+{ [ steamroller, noun.person:steamroller,+ ] [ steamroll, noun.person:steamroller,+ ] verb.social:steamroller1,$ overwhelm,@ frames: 9,8,10,11 (overwhelm by using great force; "steamroller the opposition") }
+{ outmarch, outdo,@ frames: 9 (march longer distances and for a longer time than; "This guy can outmarch anyone!") }
+{ [ gain, noun.person:gainer,+ fall_back,! ] advance, [ win1, noun.event:win,+ ] pull_ahead, make_headway, get_ahead, gain_ground, frames: 2,1 (obtain advantages, such as points, etc.; "The home team was gaining ground"; "After defeating the Knicks, the Blazers pulled ahead of the Lakers in the battle for the number-one playoff berth in the Western Conference"; "win points")}
+{ [ steal, noun.act:steal,+ ] gain,@ noun.act:baseball,;c frames: 8 (steal a base) }
+{ win_back, get_back1, verb.possession:get,@ frames: 8,9 (recover something or somebody that appeared to be lost; "We got back the money after we threatened to sue the company"; "He got back his son from the kidnappers") }
+{ [ score, noun.act:score,+ noun.quantity:score,+ noun.person:scorer,+ ] [ hit2, noun.act:hit3,+ ] [ tally, noun.act:tally1,+ ] rack_up1, compete,* gain,@ frames: 2,8 (gain points in a game; "The home team scored many times"; "He hit a home run"; "He hit .300 in the past season") }
+{ [ score1, noun.cognition:score,+ ] verb.social:achieve,@ frames: 8,7 (get a certain number or letter indicating quality or performance; "She scored high on the SAT"; "He scored a 200") }
+{ [ test, noun.act:test3,+ noun.act:test2,+ noun.communication:test,+ ] score1,@ frames: 7 (achieve a certain score or rating on a test; "She tested high on the LSAT and was admitted to all the good law schools") }
+{ [ place-kick, noun.act:place-kicking,+ ] kick5,@ noun.act:football,;c frames: 8 (score (a goal) by making a place kick) }
+{ kick5, score,@ noun.act:football,;c frames: 8 (make a goal; "He kicked the extra point after touchdown") }
+{ [ eagle, noun.quantity:eagle,+ ] score,@ noun.act:golf,;c frames: 8 (shoot in two strokes under par) }
+{ hole_up, score,@ noun.act:golf,;c frames: 2 (score a hole in one) }
+{ ace, score,@ frames: 9 (score an ace against; "He aced his opponents") }
+{ [ walk, noun.act:walk1,+ ] walk1,$ score,@ noun.act:baseball,;c frames: 2,9 (obtain a base on balls) }
+{ drive_in, score,> noun.act:baseball,;c frames: 8,9 (cause a run or runner to be scored; "His line double drove in Jim Lemon with the winning run") }
+{ [fall_back, gain,! ] drop_off, fall_behind, [ recede, noun.act:recession1,+ noun.act:receding,+ ] verb.change:regress,@ frames: 2 (retreat) }
+{ keep_up, compete,* frames: 2 (maintain a required pace or level; "He could not keep up and dropped out of the race") }
+{ keep_step, keep_pace, keep_up,@ frames: 2,22 (maintain the same pace; "The child cannot keep step with his big brother") }
+{ [ conquer, noun.person:conqueror,+ noun.act:conquering,+ ] defeat,@ frames: 8,9 (overcome by conquest; "conquer your fears"; "conquer a country") }
+{ [ checkmate, noun.act:checkmate,+ ] [ mate, noun.act:mate,+ ] beat,@ noun.act:chess,;c frames: 8,9 (place an opponent's king under an attack from which it cannot escape and thus ending the game; "Kasparov checkmated his opponent after only a few moves") }
+{ check, move,* attack1,@ noun.act:chess,;c frames: 8,9 (place into check; "He checked my kings") }
+{ bait, attack2,@ frames: 9 (attack with dogs or set dogs upon) }
+{ sic, set, attack2,@ frames: 19 (urge to attack someone; "The owner sicked his dogs on the intruders"; "the shaman sics sorcerers on the evil spirits") }
+{ [ tie, noun.event:tie,+ noun.person:tier1,+ ] [ draw, noun.event:draw,+ ] verb.change:equalize,@ play,* frames: 2 (finish a game with an equal number of points, goals, etc.; "The teams drew a tie") }
+{ [ equalize, noun.act:equalization,+ noun.act:equalizer,+ ] [ equalise, noun.act:equalisation,+ ] get_even, score,@ frames: 2 (compensate; make the score equal) }
+{ [ surrender, noun.act:surrender,+ noun.communication:surrender,+ noun.person:surrenderer,+ resist,! ] give_up1, yield,@ frames: 2,8,15 (give up or agree to forgo to the power or possession of another; "The last Taleban fighters finally surrendered") }
+{ [ resist1, adj.all:nonabsorbent^resistant,+ ] [ stand, noun.act:stand,+ ] [ fend, noun.artifact:fender3,+ noun.artifact:fender2,+ noun.artifact:fender1,+ noun.artifact:fender,+ ] oppose1,@ frames: 8,11 (withstand the force of something; "The trees resisted her"; "stand the test of time"; "The mountain climbers had to fend against the ice and snow") }
+{ [ abnegate, noun.person:abnegator,+ ] surrender,@ frames: 8,15 (surrender (power or a position); "The King abnegated his power to the ministers") }
+{ [ yield, noun.person:yielder,+ ] frames: 2,27 (cease opposition; stop fighting) }
+{ [ resist, adj.all:defiant^resistive,+ adj.all:defiant^resistant,+ noun.act:resistance1,+ surrender,! ] [hold_out, noun.person:holdout,+ noun.communication:holdout,+ ] [ withstand, noun.person:withstander1,+ ] stand_firm, oppose1,@ frames: 8,9 (stand up or offer resistance to somebody or something) }
+{ stand_out1, resist,@ frames: 2 (be stubborn in resolution or resistance) }
+{ stand_up, resist,@ frames: 4,22 (refuse to back down; remain solid under criticism or attack) }
+{ outbrave1, resist,@ frames: 9 (resist bravely; "He outbraved the enemy") }
+{ hold_off, withstand,@ frames: 8,9 (resist and fight to a standoff; "Dallas had enough of a lead to hold the Broncos off") }
+{ [ complete, noun.act:completion2,+ ] nail, play,@ noun.act:football,;c frames: 8 (complete a pass) }
+{ [ concede, noun.communication:concession2,+ noun.communication:conceding,+ ] surrender,@ frames: 2 (acknowledge defeat; "The candidate conceded after enough votes had come in to show that he would lose") }
+{ [ capitulate, noun.act:capitulation,+ ] surrender,@ frames: 2 (surrender under agreed conditions) }
+{ [ neutralize, noun.act:neutralization1,+ ] [ neutralise, noun.act:neutralisation1,+ ] demilitarize,@ frames: 8 (make incapable of military action) }
+{ [ submit, adj.all:servile^submissive,+ adj.all:submissive,+ noun.state:submission,+ noun.act:submission1,+ noun.person:submitter1,+ ] surrender,* frames: 2,22 (yield to the control of another) }
+{ subject, submit,@ frames: 9 (make accountable for; "He did not want to subject himself to the judgments of his superiors") }
+{ [ attack1, noun.act:attack,+ noun.person:attacker,+ frames: 8,9] [ aggress, adj.all:hostile1^aggressive,+ noun.act:aggression2,+ noun.act:aggression,+ noun.person:aggressor,+ ] verb.social:act,@ frames: 2,1 (take the initiative and go on the offensive; "The Serbs attacked the village at night"; "The visiting team started to attack")}
+{ fork, attack1,@ noun.act:chess,;c frames: 8 (place under attack with one's own pieces, of two enemy pieces) }
+{ [ bulldog, noun.animal:bulldog,+ ] attack2,@ frames: 8,9,10,11 (attack viciously and ferociously) }
+{ [ attack, noun.act:attack,+ noun.person:attacker,+ defend,!] [ assail1, adj.all:vulnerable^assailable,+ noun.person:assailant,+ ] attack1,$ fight,@ frames: 8,9 (launch an attack or assault on; begin hostilities or start warfare with; "Hitler attacked Poland on September 1, 1939 and started World War II"; "Serbian forces assailed Bosnian towns all week") }
+{ submarine, attack,@ frames: 2,8,9,11 (attack by submarine; "The Germans submarined the Allies")}
+{ rush, attack2,@ frames: 8,9,10,11 (attack suddenly) }
+{ [ assail, noun.person:assailant,+ ] [ assault, adj.all:offensive3^assaultive,+ noun.act:assault2,+ noun.act:assault1,+ noun.person:assaulter,+ ] set_on, [ attack2, noun.act:attack2,+ noun.person:attacker,+ ] frames: 8,9,10 (attack someone physically or emotionally; "The mugger assaulted the woman"; "Nightmares assailed him regularly")}
+{ blindside, attack2,@ frames: 9 (attack or hit on or from the side where the attacked person's view is obstructed)}
+{ [ harass, noun.person:harasser,+ ] attack1,@ frames: 8,9 (exhaust by attacking repeatedly; "harass the enemy")}
+{ [ savage, noun.person:savage1,+ noun.act:savagery,+ ] assail,@ frames: 9,8,10,11 (attack brutally and fiercely)}
+{ reassail, assail,@ frames: 8,9,10 (assail again; "Her old fears reassailed her") }
+{ jump, assault,@ frames: 9 (make a sudden physical attack on; "The muggers jumped the woman in the fur coat")}
+{ pepper, [ pelt, noun.person:pelter,+ ] verb.contact:throw,* attack,@ frames: 17 (attack and bombard with or as if with missiles; "pelt the speaker with questions") }
+{ immobilize, immobilise, beat,@ frames: 9,10,11 (make defenseless) }
+{ pin, attack1,@ noun.act:chess,;c frames: 8 ((chess) immobilize a piece) }
+{ [ charge, noun.animal:charger,+ noun.act:charge1,+ frames: 2 ] bear_down3, rush,@ frames: 8,9 (to make a rush at or sudden attack upon, as in battle; "he saw Jess charging at him with a pitchfork") }
+{ [ duel, noun.person:duelist,+ noun.act:duel,+ noun.person:dueller,+ noun.person:dueler,+ ] fight,@ frames: 2,9 (fight a duel, as over one's honor or a woman; "In the 19th century, men often dueled over small matters")}
+{ [ rival, noun.person:rival,+ noun.act:rivalry,+ ] compete,@ frames: 11,9 (be the rival of, be in competition with; "we are rivaling for first place in the race") }
+{ [ emulate, noun.feeling:emulation,+ noun.act:emulation,+ ] compete,@ frames: 9,11 (compete with successfully; approach or reach equality with; "This artist's drawings cannot emulate his water colors") }
+{ outrival, outvie, rival,@ frames: 9,11 (be more of a rival than) }
+{ [ joust, noun.event:joust,+ ] fight,@ frames: 2,22 (joust against somebody in a tournament by fighting on horseback) }
+{ [ tilt, noun.event:tilt1,+ noun.person:tilter,+ ] joust,@ frames: 2,22 (charge with a tilt) }
+{ chicken-fight, chickenfight, fight,@ frames: 2 (fight while sitting on somebody's shoulders) }
+{ [ tourney, noun.event:tourney,+ ] fight,@ frames: 2 (engage in a tourney) }
+{ [ feud, noun.act:feud,+ ] fight,@ frames: 2,22 (carry out a feud; "The two professors have been feuding for years") }
+{ [ carry3, noun.act:carry,+ ] carry4,$ verb.motion:travel,@ noun.act:golf,;c frames: 1 (cover a certain distance or advance beyond; "The drive carried to the green") }
+{ [ carry4, noun.act:carry,+ ] verb.stative:have,@ frames: 1 (have a certain range; "This rifle carries for 3,000 feet") }
+{ [ skirmish, noun.person:skirmisher,+ noun.act:skirmish,+ ] fight,@ frames: 2 (engage in a skirmish) }
+{ [ strike, noun.act:strike5,+ noun.act:strike2,+ ] hit, hit1,$ attack,@ frames: 2,8,9,10,11 (make a strategic, offensive, assault against an enemy, opponent, or a target; "The Germans struck Poland on Sept. 1, 1939"; "We must strike the enemy's oil fields"; "in the fifth inning, the Giants struck, sending three runners home to win the game 5 to 2") }
+{ [ slice, noun.act:slice,+ noun.act:slicing1,+ ] hit,@ frames: 2,8 (hit a ball so that it causes a backspin)}
+{ chop, strike,@ frames: 8 (hit sharply) }
+{ [ stroke, noun.act:stroke,+ ] strike,@ frames: 8 (strike a ball with a smooth blow)}
+{ [ stroke1, noun.person:stroke,+ ] verb.motion:row,@ frames: 2 (row at a particular rate) }
+{ [ feather, noun.act:feather,+ noun.act:feathering,+ ] square, verb.motion:row,@ frames: 2 (turn the oar, while rowing) }
+{ [ feather2, noun.act:feather,+ ] square1, verb.motion:paddle,@ frames: 2 (turn the paddle; in canoeing) }
+{ [ counterattack, noun.act:counterattack,+ ] counterstrike, attack,@ frames: 2 (make a counterattack)}
+{ take_the_count, remain_down, noun.act:boxing,;c lose,@ frames: 2 (be counted out; remain down while the referee counts to ten) }
+{ [ gas, noun.act:gassing,+ ] attack,@ frames: 8,9 (attack with gas; subject to gas fumes; "The despot gassed the rebellious tribes") }
+{ teargas, gas,@ frames: 8,9 (attack with teargas; subject to teargas fumes; "The students were teargassed during the riot") }
+{ [ mine, noun.artifact:mine,+ noun.act:mining2,+ ] verb.change:reinforce,@ frames: 8 (lay mines; "The Vietnamese mined Cambodia") }
+{ [ countermine, noun.act:countermine,+ ] mine,@ frames: 8 (destroy enemy mines with one's own mines; "We countermined the banks of the river") }
+{ [ storm, noun.act:storm,+ ] [ surprise, noun.event:surprise,+ noun.person:surpriser,+ ] attack,@ frames: 8,9 (attack by storm; attack suddenly) }
+{ [ blitz, noun.act:blitz,+ ] attack,@ frames: 8 (attack suddenly and without warning; "Hitler blitzed Poland") }
+{ [ invade, adj.all:offensive3^invasive,+ noun.act:invasion,+ noun.person:invader,+ ] [ occupy, noun.person:occupier1,+ noun.act:occupation2,+ ] attack,@ frames: 8,11 (march aggressively into another's territory by military force for the purposes of conquest and occupation; "Hitler invaded Poland on September 1, 1939")}
+{ beset, set_upon, assault,@ frames: 10,9 (assail or attack on all sides: "The zebra was beset by leopards")}
+{ [ blockade, noun.act:blockade,+ ] seal_off, besiege,@ frames: 8 (impose a blockade on) }
+{ [ blockade1, noun.artifact:blockade,+ ] block_off, verb.contact:obstruct,@ frames: 8 (obstruct access to) }
+{ [ barricade, noun.artifact:barricade,+ noun.artifact:barricade1,+ ] barricado, verb.contact:obstruct,@ frames: 8 (block off with barricades) }
+{ [ barricade1, noun.artifact:barricade,+ noun.artifact:barricade1,+ ] verb.contact:obstruct,@ frames: 8 (prevent access to by barricading; "The street where the President lives is always barricaded") }
+{ [ besiege, noun.person:besieger,+ ] beleaguer, surround, hem_in, circumvent1, attack,@ frames: 8 (surround so as to force to give up; "The Turks besieged Vienna") }
+{ ebb, hem_in,@ frames: 8 (hem in fish with stakes and nets so as to prevent them from going back into the sea with the ebb)}
+{ [ defend, adj.all:invulnerable^defensible,+ adj.all:defensive,+ noun.group:defence1,+ attack,!] fight,* verb.social:prevent,@ frames: 9,8 (be on the defensive; act against an attack) }
+{ [ bulwark, noun.artifact:bulwark1,+ noun.artifact:bulwark,+ ] defend,@ frames: 8 (defend with a bulwark) }
+{ [ protect, adj.all:protective,+ noun.artifact:protection,+ noun.act:protection,+ noun.person:protector,+ ] defend,@ frames: 8,9,10,11 (shield from danger, injury, destruction, or damage; "Weatherbeater protects your roof from the rain") }
+{ immunize, immunise, protect,@ frames: 9,10 (law: grant immunity from prosecution)}
+{ [ overprotect, noun.act:overprotection,+ ] protect,@ frames: 8,9 (protect excessively; "Don't overprotect your son--he is an adult now!")}
+{ look_out10, protect,@ frames: 9 (to protect someone's interests; "A man's gotta look out for his family") }
+{ [ cover1, noun.act:cover1,+ ] protect,@ frames: 8 (hold within range of an aimed firearm) }
+{ [ guard, noun.group:guard,+ ] [ ward, noun.person:ward,+ noun.person:warder,+ ] protect,@ frames: 8,9,10,11 (watch over or shield from danger or harm; protect; "guard my possessions while I'm away")}
+{ ward_off, defend,@ frames: 8,9 (avert, turn away, or repel; "Ward off danger") }
+{ [ protect1, adj.all:protective,+ noun.act:protection3,+ ] verb.social:assist,@ noun.act:trade5,;c frames: 8,9 (use tariffs to favor domestic industry) }
+{ [ defend2, adj.all:invulnerable^defensible,+ adj.all:defensive,+ noun.person:defender,+ noun.group:defence3,+ ] guard3, hold5, protect,@ frames: 8 (protect against a challenge or attack; "Hold that position behind the trees!"; "Hold the bridge against the enemy's attacks") }
+{ [ shield, noun.artifact:shield1,+ noun.artifact:shield2,+ noun.person:shielder,+ noun.act:shielding,+ ] [ screen, noun.artifact:screen4,+ noun.artifact:screen,+ noun.artifact:screen3,+ noun.act:screening,+ ] protect,@ frames: 8,9,10,11 (protect, hide, or conceal from danger or harm) }
+{ [ charm, noun.communication:charm,+ noun.artifact:charm,+ ] protect,@ frames: 10,9 (protect through supernatural powers or charms) }
+{ [ wall, noun.artifact:wall2,+ noun.artifact:wall1,+ noun.artifact:wall,+ verb.contact:wall_in,^ verb.contact:wall_up,^] [ palisade, noun.artifact:palisade,+ ] [ fence, noun.artifact:fence,+ ] fence_in, [ surround1, noun.location:surround,+ ] protect,@ frames: 8 (surround with a wall in order to fortify) }
+{ [ stockade, noun.artifact:stockade1,+ ] surround1,@ frames: 8 (surround with a stockade in order to fortify) }
+{ circumvallate, surround1,@ frames: 8,11 (surround with or as if with a rampart or other fortification) }
+{ [ repel, adj.all:repulsive,+ ] [ repulse, noun.communication:repulse,+ noun.act:repulsion,+ ] fight_off, [ rebuff, noun.communication:rebuff,+ ] drive_back, defend5,@ frames: 8,9 (force or drive back; "repel the attacker"; "fight off the onslaught"; "rebuff the attack") }
+{ check6, turn_back, arrest, [ stop, noun.artifact:stop,+ ] [ contain, noun.cognition:containment,+ noun.act:containment,+ ] hold_back, defend,@ frames: 8,9,10,11 (hold back, as of a danger or an enemy; check the expansion or influence of; "Arrest the downward trend"; "Check the growth of communism in South East Asia"; "Contain the rebel movement"; "Turn back the tide of communism")}
+{ [ bombard, noun.act:bombardment1,+ ] [ bomb, noun.person:bomber,+ noun.artifact:bomber,+ noun.artifact:bomb,+ noun.act:bombing,+ ] attack,@ frames: 8,9 (throw bombs at or attack with bombs; "The Americans bombed Dresden") }
+{ carpet_bomb, bomb,@ frames: 8,9 (bomb a large area systematically and extensively; "The U.S. decided to carpet bomb Vietnam")}
+{ bomb_out, bomb,@ frames: 9 (make somebody homeless by destroying their houses with bombs) }
+{ [ dive-bomb, noun.artifact:dive_bomber,+ noun.act:dive-bombing,+ ] bomb,@ frames: 8 (bomb from a diving airplane)}
+{ glide-bomb, bomb,@ frames: 9 (bomb by gliding) }
+{ skip-bomb, bomb,@ frames: 8 (attack with delayed release bombs) }
+{ atom-bomb, [ nuke1, noun.artifact:nuke,+ ] bomb,@ frames: 8 (bomb with atomic weapons) }
+{ hydrogen-bomb, bomb,@ frames: 8 (attack with a hydrogen bomb) }
+{ pattern-bomb, bomb,@ frames: 8 (bomb in certain patterns) }
+{ [ nuke, noun.artifact:nuke,+ ] [ atomize, noun.act:atomization1,+ ] [ atomise, noun.act:atomisation1,+ ] zap, bomb,@ frames: 8,9 (strike at with firepower or bombs; "zap the enemy")}
+{ [ letter_bomb, noun.artifact:letter_bomb,+ ] bomb,@ frames: 9 (send an explosive to; "The Unabomber letter bombed a number of individuals and institutions") }
+{ [ firebomb, noun.artifact:firebomb,+ ] bomb,@ frames: 8,9 (attack with incendiary bombs; "The rioters fire-bombed the stores") }
+{ [ fire, noun.act:fire,+ noun.act:firing2,+ ] [ discharge1, noun.act:discharge,+ ] fire2,> frames: 8 (cause to go off; "fire a gun"; "fire a bullet")}
+{ [ pop, noun.event:pop,+ noun.event:popping,+ ] fire,@ frames: 2 (fire a weapon with a loud explosive noise; "The soldiers were popping") }
+{ [ fire2, noun.act:fire,+ ] [ discharge2, noun.act:discharge,+ ] go_off, frames: 1 (go off or discharge; "The gun fired") }
+{ loose_off, let_fly, let_drive, fire,@ frames: 8 (fire as from a gun; "The soldiers let drive their bullets")}
+{ [ cannon, noun.artifact:cannon1,+ noun.artifact:cannon,+ noun.person:cannoneer,+ ] discharge,@ frames: 2 (fire a cannon) }
+{ [ misfire, noun.event:misfire,+ ] verb.change:fail,@ frames: 1 (fail to fire or detonate; "The guns misfired") }
+{ blast1, [ shoot, noun.person:shooter,+ noun.act:shoot,+ noun.act:shooting,+ ] fire,@ frames: 2,8,22 (fire a shot; "the gunman blasted away") }
+{ blaze_away, blaze, shoot,@ frames: 2 (shoot rapidly and repeatedly; "He blazed away at the men") }
+{ [overshoot, undershoot,!] aim,* verb.contact:miss,@ shoot,@ frames: 8 (shoot beyond or over (a target)) }
+{ [ trigger, noun.artifact:trigger,+ ] fire,* frames: 8 (release or pull the trigger on; "Trigger a gun") }
+{ [ sharpshoot, noun.person:sharpshooter1,+ noun.person:sharpshooter,+ ] [ snipe, noun.act:snipe,+ noun.person:sniper,+ ] shoot,@ frames: 2 (aim and shoot with great precision) }
+{ [ snipe1, noun.animal:snipe,+ ] hunt,@ frames: 2 (hunt or shoot snipe) }
+{ open_fire, [ fire1, noun.act:fire,+ noun.act:firing3,+ ] shoot,@ frames: 2,22 (start firing a weapon) }
+{ [ blast, noun.event:blast,+ noun.person:blaster,+ ] [ shell, noun.artifact:shell,+ noun.act:shelling,+ ] bombard,@ frames: 8 (use explosives on; "The enemy has been shelling us all day") }
+{ [strafe, noun.person:strafer,+ noun.act:strafe,+] attack,@ frames: 9,10,11,11 (attack with machine guns or cannon fire from a low-flying plane; "civilians were strafed in an effort to force the country's surrender")}
+{ crump, shell,@ frames: 8 (bombard with heavy shells) }
+{ [ cannonade, noun.act:cannonade,+ ] attack,@ frames: 2,8,9 (attack with cannons or artillery) }
+{ [ gun, noun.act:gun,+ noun.person:gun,+ noun.person:gun1,+ noun.artifact:gun1,+ noun.artifact:gun,+ noun.person:gunner,+ gun_down,^ ] shoot,@ frames: 2 (shoot with a gun) }
+{ [ machine_gun, noun.artifact:machine_gun,+ ] shoot1,* gun,@ frames: 9 (shoot with a machine gun) }
+{ gun_down, shoot1,@ frames: 9 (strike down or shoot down) }
+{ grass, shoot1,@ frames: 8 (shoot down, of birds) }
+{ [ shoot1, noun.act:shoot,+ noun.person:shooter,+ ] [ hit1, noun.act:hitting,+ ] pip1, shoot,$ verb.social:shoot,$ verb.body:injure,@ frames: 9,8 (hit with a missile from a weapon)}
+{ kneecap, shoot1,@ frames: 9 (shoot in the kneecap, often done by terrorist groups as a warning; "They kneecapped the industrialist") }
+{ [ fusillade, noun.act:fusillade,+ ] fire,@ frames: 8,9 (attack with fusillade) }
+{ [ defuse, noun.act:defusing,+ fuse,! ] verb.change:remove,@ frames: 8 (remove the triggering device from)}
+{ [ fuse, noun.artifact:fuse,+ noun.artifact:fuse1,+ defuse,! ] verb.possession:equip,@ frames: 8 (equip with a fuse; provide with a fuse) }
+{ [ torpedo, noun.artifact:torpedo,+ ] attack,@ frames: 8,9 (attack or hit with torpedoes) }
+{ [ safeguard, noun.act:safeguard,+ ] protect,@ frames: 8,9 (make safe) }
+{ [ ambush, noun.act:ambush,+ noun.person:ambusher,+ ] scupper, [ bushwhack, noun.person:bushwhacker1,+ ] waylay, [ lurk, noun.person:lurker,+ ] [ ambuscade, noun.act:ambuscade,+ ] lie_in_wait, verb.stative:wait,@ frames: 9 (wait in hiding to attack) }
+{ bandy, fight,@ frames: 2 (exchange blows) }
+{ [ gamble, noun.possession:gamble,+ noun.person:gambler,+ noun.act:gambling,+ ] play,@ frames: 2 (play games for money) }
+{ [ dice, noun.artifact:dice,+ ] gamble,@ frames: 2 (play dice) }
+{ shoot_craps, gamble,@ frames: 2 (play a game of craps) }
+{ [ play1, noun.act:play2,+ ] play7,$ gamble,@ frames: 8 (bet or wager (money); "He played $20 on the new horse"; "She plays the races")}
+{ bet_on, back, gage, [ stake, noun.possession:stake,+ ] [ game, noun.act:gaming,+ ] [ punt, noun.person:punter1,+ ] bet,@ frames: 8,13 (place a bet on; "Which horse are you backing?"; "I'm betting on the new horse") }
+{ [ ante, noun.possession:ante,+ ] stake,@ noun.act:cards,;c frames: 8 (place one's stake) }
+{ underplay, play1,@ noun.act:cards,;c frames: 8 (play a card lower than (a held high card)) }
+{ parlay, double_up, bet_on,@ frames: 13,8 (stake winnings from one bet on a subsequent wager) }
+{ check2, move,@ noun.act:cards,;c frames: 2 (decline to initiate betting) }
+{ [ bird, noun.person:birder,+ noun.animal:bird,+ ] [ birdwatch, noun.person:bird_watcher,+ noun.person:bird_watcher1,+ ] verb.perception:observe,@ frames: 2,22 (watch and study birds in their natural habitat) }
+{ [ crab, noun.animal:crab,+ noun.food:crab,+ ] fish,@ frames: 2,22 (fish for crab) }
+{ [ seine, noun.artifact:seine,+ ] fish,@ frames: 8,2 (fish with a seine; catch fish with a seine) }
+{ [ scallop, noun.animal:scallop,+ noun.food:scallop2,+ noun.food:scallop,+ ] [ scollop, noun.food:scollop2,+ noun.animal:scollop,+ noun.food:scollop,+ ] fish,@ frames: 2 (fish for scallops) }
+{ [ harpoon, noun.person:harpooner,+ noun.artifact:harpoon,+ ] verb.contact:catch,@ frames: 8 (spear with a harpoon; "harpoon whales") }
+{ [ walk1, noun.act:walk1,+ ] play,@ noun.act:baseball,;c frames: 9 (give a base on balls to) }
+{ [ fish, noun.food:fish,+ noun.animal:fish,+ noun.person:fisher,+ noun.act:fishing1,+ noun.act:fishing,+ noun.artifact:fishery,+ ] verb.contact:catch,@ frames: 2,8,22 (catch or try to catch fish or shellfish; "I like to go fishing on weekends") }
+{ rail, fish,@ frames: 2 (fish with a handline over the rails of a boat; "They are railing for fresh fish")}
+{ brail, fish,@ frames: 8 (haul fish aboard with brails) }
+{ fly-fish, flyfish, angle,@ frames: 2,22 (fish with flies as lures) }
+{ [ angle, noun.animal:angler,+ noun.person:angler,+ ] fish,@ frames: 2 (fish with a hook) }
+{ [ troll, noun.artifact:troll,+ noun.act:troll,+ noun.person:troller,+ ] angle,@ frames: 2,8 (angle with a hook and line drawn through the water) }
+{ [ whale, noun.animal:whale,+ noun.person:whaler,+ noun.artifact:whaler,+ ] hunt,@ frames: 2 (hunt for whales) }
+{ [ shrimp, noun.food:shrimp,+ noun.animal:shrimp,+ noun.artifact:shrimper,+ ] fish,@ frames: 2 (fish for shrimp) }
+{ still-hunt, [ ambush1, noun.act:ambush,+ noun.person:ambusher,+ ] hunt,@ frames: 2,8 (hunt (quarry) by stalking and ambushing) }
+{ [ turtle, noun.person:turtler,+ ] hunt,@ frames: 2 (hunt for turtles, especially as an occupation)}
+{ drive, noun.act:hunting1,;c hunt,@ frames: 8 ((hunting) chase from cover into more open ground; "drive the game") }
+{ drive1, drive,$ hunt,@ noun.act:hunting1,;c frames: 8 ((hunting) search for game; "drive the forest") }
+{ [ rabbit, noun.food:rabbit,+ noun.substance:rabbit,+ noun.animal:rabbit,+ ] hunt,@ frames: 2,22 (hunt rabbits) }
+{ [ fowl, noun.animal:fowl,+ ] hunt,@ frames: 2,22 (hunt fowl in the forest) }
+{ [ grouse, noun.animal:grouse,+ noun.food:grouse,+ ] fowl,@ frames: 2,22 (hunt grouse) }
+{ [ whelk, noun.food:whelk,+ noun.animal:whelk,+ ] verb.contact:snail,@ frames: 2,22 (gather whelk) }
+{ [ poach, noun.person:poacher,+ ] hunt,@ frames: 2 (hunt illegally; "people are poaching elephants for their ivory") }
+{ net_fish, fish,@ frames: 8,2 (fish with nets) }
+{ [ seal, noun.animal:seal,+ noun.substance:seal,+ ] hunt,@ frames: 2,22 (hunt seals) }
+{ [ shark, noun.animal:shark,+ ] fish,@ frames: 2,22 (hunt shark) }
+{ [ trawl, noun.artifact:trawl1,+ noun.artifact:trawl,+ ] fish,@ frames: 2,22 (fish with trawlers) }
+{ [ hunt, noun.act:hunt1,+ noun.act:hunt,+ noun.person:hunter,+ noun.act:hunting1,+ noun.act:hunting,+ ] run2, hunt_down, track_down, verb.motion:run10,$ verb.contact:capture,@ frames: 2,8,9 (pursue for food or sport (as of wild animals); "Goering often hunted wild boars in Poland"; "The dogs are running deer"; "The Duke hunted in these woods")}
+{ [ ferret, noun.animal:ferret2,+ ] hunt,@ frames: 2,8 (hunt with ferrets)}
+{ [ hunt2, noun.act:hunt1,+ noun.act:hunt,+ noun.person:hunter,+ noun.act:hunting1,+ ] hunt,$ verb.perception:search,@ frames: 8 (search (an area) for prey; "The King used to hunt these forests")}
+{ [ course, noun.act:coursing,+ ] hunt,@ noun.act:game,;c frames: 2,8 (hunt with hounds; "He often courses hares")}
+{ [ foxhunt, noun.act:foxhunt,+ noun.act:fox_hunting,+ ] hunt,@ frames: 2 (hunt foxes, on horseback and with dogs)}
+{ [ tree, noun.plant:tree,+ ] verb.motion:chase,@ frames: 8,11 (chase an animal up a tree; "the hunters treed the bear with dogs and killed it"; "her dog likes to tree squirrels") }
+{ jacklight, jack, hunt,@ frames: 2,8 (hunt with a jacklight) }
+{ still-fish, fish,@ frames: 2,8 (fish with the line and bait resting still or stationary in the water) }
+{ [ hawk, noun.animal:hawk,+ noun.person:hawker1,+ ] hunt,@ frames: 2 (hunt with hawks; "the tribes like to hawk in the desert") }
+{ [ falcon, noun.animal:falcon,+ noun.person:falconer,+ noun.cognition:falconry,+ ] hunt,@ frames: 2 (hunt with falcons; "The tribes like to falcon in the desert") }
+{ [ fowl1, noun.person:fowler,+ noun.animal:fowl,+ ] hunt,@ frames: 2 (hunt fowl) }
+{ strive, reach, [ strain, noun.act:strain2,+ noun.act:strain,+ ] verb.social:push,@ frames: 2,22 (to exert much effort or energy; "straining our ears to hear") }
+{ extend_oneself, strain,@ frames: 2 (strain to the utmost) }
+{ kill_oneself, overexert_oneself, strain,@ frames: 2 (strain oneself more than is healthy) }
+{ [ bowl, noun.artifact:bowl4,+ noun.person:bowler,+ ] play,@ frames: 2 (engage in the sport of bowling; "My parents like to bowl on Friday nights") }
+{ [ skittle, noun.artifact:skittle,+ ] bowl,@ frames: 2 (play skittles) }
+{ [ golf, noun.person:golfer,+ noun.act:golfing,+ noun.act:golf,+ ] play,@ frames: 2 (play golf) }
+{ [ fence1, noun.person:fencer,+ noun.act:fencing,+ ] fight,@ frames: 2 (fight with fencing swords) }
+{ [ parry, noun.act:parry,+ ] [ block, noun.person:blocker,+ noun.act:block,+ noun.act:blockage,+ noun.act:blocking,+ ] deflect, fence1,@ frames: 8 (impede the movement of (an opponent or a ball); "block an attack") }
+{ bandy1, play,@ noun.act:sport,;c frames: 2 (toss or strike a ball back and forth) }
+{ [ shuttlecock, noun.artifact:shuttlecock,+ ] bandy1,@ frames: 8 (send or toss to and fro, like a shuttlecock) }
+{ rule_out, rule_in, verb.cognition:rule,@ frames: 8 (include or exclude by determining judicially or in agreement with rules) }
+{ [ foul, noun.act:foul1,+ ] play,@ frames: 2 (commit a foul; break the rules) }
+{ [ foul1, noun.act:foul1,+ ] verb.contact:hit3,@ noun.act:baseball,;c frames: 2 (hit a foul ball) }
+{ [ cannon1, noun.act:cannon,+ ] verb.contact:hit3,@ noun.act:billiards,;c frames: 2 (make a cannon) }
+{ hack, foul,@ noun.act:rugby,;c frames: 9 (kick on the shins) }
+{ hack1, foul,@ noun.act:basketball,;c frames: 9 (kick on the arms) }
+{ cover, protect,@ frames: 8 (protect or defend (a position in a game); "he covered left field") }
+{ double-team, cover,@ noun.act:sport,;c frames: 9 (cover with two defensive players)}
+{ cover13, cover,$ protect,@ frames: 8 (be responsible for guarding an opponent in a game) }
+{ pull13, root_for, side,@ frames: 22 (take sides with; align oneself with; show strong sympathy for; "We all rooted for the home team"; "I'm pulling for the underdog"; "Are you siding with the defender of the title?")}
+{ side, verb.cognition:align,@ frames: 22 (take sides for or against; "Who are you siding with?"; "I'm siding against the current candidate")}
+{ [ champion, noun.person:champion2,+ noun.person:champion,+ ] [ defend4, adj.all:invulnerable^defensible,+ noun.person:defender,+ ] verb.social:back,@ frames: 8,9 (protect or fight for as a champion) }
+{ [ deploy, noun.act:deployment,+ ] verb.motion:position,@ frames: 8 (place troops or weapons in battle formation) }
+{ [ play3, noun.act:play2,+ ] play12,$ play13,$ deploy,@ frames: 8 (put (a card or piece) into play during a game, or act strategically as if in a card game; "He is playing his cards close to his chest"; "The Democrats still have some cards to play before they will concede the electoral victory") }
+{ [ pitch4, noun.act:pitch1,+ ] play3,@ noun.act:cards,;c frames: 8 (lead (a card) and establish the trump suit)}
+{ cover7, play3,@ noun.act:cards,;c frames: 2 (play a higher card than the one previously played; "Smith covered again") }
+{ [ tackle1, noun.person:tackle,+ noun.act:tackle,+ noun.person:tackler,+ ] attack1,@ noun.act:football,;c frames: 9 (seize and throw down an opponent player, who usually carries the ball) }
+{ weight-lift, [ weightlift, noun.person:weightlifter,+ noun.act:weightlifting,+ ] [ press, noun.act:press2,+ ] verb.body: exercise,@ frames: 2 (lift weights; "This guy can press 300 pounds") }
+{ [ target, noun.cognition:target,+ noun.person:target,+ ] [ aim10, noun.act:aim,+ frames: 22] [ place3, noun.location:place,+ ] direct1, [point10, frames: 22] aim,@ frames: 8,9 (intend (something) to move towards a certain goal; "He aimed his fists towards his opponent's face"; "criticism directed at her superior"; "direct your anger towards others, not towards yourself")}
+{ [ address, noun.person:addressee,+ noun.communication:address3,+ ] target,@ frames: 21 (direct a question at someone) }
+{ [ aim, noun.act:aim,+ ] take9, train, take_aim, direct, verb.motion:position,@ frames: 2,21,22 (point or cause to go (blows, weapons, or objects such as photographic equipment) towards; "Please don't aim at your little brother!"; "He trained his gun on the burglar"; "Don't train your camera on the women"; "Take a swipe at one's opponent") }
+{ draw_a_bead_on, aim,@ frames: 8 (aim with a gun; "The hunter drew a bead on the rabbit")}
+{ hold, aim,@ frames: 20 (aim, point, or direct; "Hold the fire extinguisher directly on the flames") }
+{ turn13, aim,@ frames: 8 (direct at someone; "She turned a smile on me"; "They turned their flashlights on the car")}
+{ [ swing, noun.act:swing6,+ ] aim,@ frames: 22 (hit or aim at with a sweeping arm movement; "The soccer player began to swing at the referee") }
+{ charge1, level1, point, point2,$ aim,@ frames: 2,22 (direct into a position for use; "point a gun"; "He charged his weapon at me") }
+{ [ hit3, noun.act:hitting,+ ] aim,* verb.social:succeed,@ frames: 8,11 (hit the intended target or goal)}
+{ [undershoot, overshoot,!] shoot,* verb.contact:miss,@ frames: 8 (shoot short of or below (a target)) }
+{ [ point2, noun.artifact:point2,+ noun.communication:pointer,+ noun.artifact:pointer1,+ noun.artifact:pointer,+ ] verb.stative:be3,@ frames: 4,6 (be positionable in a specified manner; "The gun points with ease") }
+{ level2, direct,@ frames: 21 (aim at; "level criticism or charges at somebody") }
+{ range_in12, home_in12, zero_in12, target,@ frames: 22 (direct onto a point or target, especially by automatic navigational aids) }
+{ [ retaliate, adj.all:punitive^retaliatory,+ noun.act:retaliation,+ ] strike_back4, strike,@ frames: 2,22 (make a counterattack and return like for like, especially evil for evil; "The Empire strikes back"; "The Giants struck back and won the opener"; "The Israeli army retaliated for the Hamas bombing") }
+{ [ revenge, noun.act:revenge,+ ] [ avenge, noun.person:avenger,+ ] [ retaliate1, adj.all:punitive^retaliatory,+ noun.act:retaliation,+ noun.person:retaliator,+ ] verb.social:punish,@ frames: 8 (take revenge for a perceived wrong; "He wants to avenge the murder of his brother") }
+{ get_even1, get_back, revenge,@ frames: 2,22 (take revenge or even out a score; "I cannot accept the defeat--I want to get even") }
+{ [pay_back, noun.act:payback,+] pay_off, get, fix, get_even1,@ frames: 9,20 (take vengeance on or get even; "We'll get them!"; "That'll fix him good!"; "This time I got him") }
+{ retire, [strike_out, noun.act:strikeout,+ ] verb.motion:move_over,> noun.act:baseball,;c frames: 9 (cause to get out; "The pitcher retired three batters"; "the runner was put out at third base") }
+{[ put_out, noun.act:putout,+ ] play,@ noun.act:baseball,;c frames: 2 (retire; "he was put out at third base on a long throw from left field")}
+{ take_the_field, verb.motion:enter,@ frames: 2 (go on the playing field, of a football team) }
+{ [ croquet, noun.act:croquet,+ ] play,@ frames: 2 (play a game in which players hit a wooden ball through a series of hoops )}
+{ mothproof, protect,@ frames: 8 (protect from moths; "mothproof woollen clothes during the summer") }
+{ outplay, beat,@ frames: 9,11 (excel or defeat in a game; "The Knicks outplayed the Lakers") }
+{ overtake, catch10, catch_up_with, compete,* frames: 9,11 (catch up with and possibly overtake; "The Rolls Royce caught us near the exit ramp") }
+{ pump, shoot,@ frames: 8,21 (deliver forth; "pump bullets into the dummy") }
+{ [ fort, noun.artifact:fort1,+ noun.artifact:fort,+ ] station,@ frames: 9 (station (troops) in a fort) }
+{ rise, verb.social:take_on,@ frames: 22 (exert oneself to meet a challenge; "rise to a challenge"; "rise to the occasion") }
+{ [ bet, noun.person:bettor,+ noun.possession:bet,+ noun.act:bet,+ noun.person:better,+ ] [ wager, noun.possession:wager,+ noun.act:wager,+ noun.person:wagerer,+ ] [ play8, noun.act:play2,+ ] gamble,@ frames: 2,8 (stake on the outcome of an issue; "I bet $100 on that new horse"; "She played all her money on the dark horse") }
+{ [ play7, noun.act:play2,+ ] play8,$ bet,@ frames: 8 (make bets; "Play the races"; "play the casinos in Trouville")}
+{ raise8, bet,@ noun.act:cards,;c frames: 9 (bet more than the previous player) }
+{ [ raise9, noun.act:raise1,+ noun.person:raiser1,+ ] verb.possession:bid1,@ noun.act:bridge,;c frames: 8 (bid (one's partner's suit) at a higher level) }
+{ see, bet,@ noun.act:cards,;c frames: 9 (match or meet; "I saw the bet of one of my fellow players") }
+{ drop_one's_serve, lose,@ noun.act:tennis,;c frames: 2 (lose a game in which one is serving)}

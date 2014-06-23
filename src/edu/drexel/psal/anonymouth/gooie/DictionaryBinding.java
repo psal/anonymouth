@@ -212,6 +212,7 @@ public class DictionaryBinding {
 			
 		});
 		
+		//close console and return it to initial state for next time it is launched
 		dc.closeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

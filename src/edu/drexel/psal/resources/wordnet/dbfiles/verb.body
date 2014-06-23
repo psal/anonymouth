@@ -1,0 +1,551 @@
+($RCSfile: verb.body,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:54 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.body)
+
+{ [ breathe, noun.artifact:breather,+ noun.act:breathing,+ breathe_out,^ breathe_in,^ ] take_a_breath, [ respire, adj.pert:respiratory,+ noun.act:respiration1,+ noun.artifact:respirator,+ ] suspire3, inhale,* exhale,* frames: 2,8 (draw air into, and expel out of, the lungs; "I can breathe better when the air is clean"; "The patient is respiring") }
+{ [ respire1, adj.pert:respiratory,+ noun.act:respiration1,+ noun.act:respiration,+ ] respire,$ verb.perception:undergo4,@ frames: 2 (undergo the biomedical and metabolic processes of respiration by taking up oxygen and producing carbon monoxide)}
+{ [ respire2, adj.pert:respiratory,+ ] respire,$ breathe,@ frames: 2 (breathe easily again, as after exertion or anxiety)}
+{ [ choke, noun.state:choking,+ ] breathe,@ frames: 2 (breathe with great difficulty, as when experiencing a strong emotion; "She choked with emotion when she spoke about her deceased husband") }
+{ [ hyperventilate, noun.act:hyperventilation,+ ] breathe,@ frames: 2 (breathe excessively hard and fast; "The mountain climber started to hyperventilate") }
+{ [ hyperventilate1, noun.act:hyperventilation,+ ] hyperventilate,$ treat,@ frames: 9 (produce hyperventilation in; "The nurses had to hyperventilate the patient")}
+{ [ aspirate, noun.act:aspiration,+ noun.artifact:aspirator,+ ] inhale,@ frames: 8 (inhale (air, water, etc.)) }
+{ [ burp, noun.act:burp,+ ] [ bubble, noun.object:bubble,+ ] [ belch, noun.act:belch,+ ] [ eruct, noun.act:eructation,+ ] emit,@ frames: 2 (expel gas from the stomach; "Please don't burp at the table") }
+{ force_out, emit,@ frames: 8,11 (emit or cause to move with force of effort; "force out the air"; "force out the splinter") }
+{ [ hiccup, noun.state:hiccup,+ ] [ hiccough, noun.state:hiccough,+ ] breathe,@ frames: 2 (breathe spasmodically, and make a sound; "When you have to hiccup, drink a glass of cold water")}
+{ [ sigh, noun.event:sigh,+ noun.communication:sigh,+ ] [ suspire4, noun.communication:suspiration,+ ] breathe,@ frames: 2 (heave or utter a sigh; breathe deeply and heavily; "She sighed sadly") }
+{ [ exhale, noun.substance:exhalation,+ noun.act:exhalation,+ inhale,!] [ expire, adj.pert:expiratory,+ noun.act:expiration,+ ] breathe_out, breathe,@ frames: 2,8 (expel air; "Exhale when you lift the weight") }
+{ hold4, verb.change:restrain1,@ frames: 8 (keep from exhaling or expelling; "hold your breath") }
+{ [ exhale1, noun.substance:exhalation,+ ] give_forth, [ emanate, noun.substance:emanation,+ noun.act:emanation,+ ] emit,@ frames: 11,8 (give out (breath or an odor); "The chimney exhales a thick smoke")}
+{ [ sneeze, noun.person:sneezer,+ noun.state:sneezing,+ noun.state:sneeze,+ ] exhale,* act_involuntarily,@ frames: 2 (exhale spasmodically, as when an irritant entered one's nose; "Pepper makes me sneeze") }
+{ [ inhale, adj.pert:inhalant,+ noun.substance:inhalant,+ noun.act:inhalation,+ noun.artifact:inhalator1,+ exhale,! ] [ inspire, adj.pert:inspiratory,+ noun.act:inspiration,+ ] breathe_in, breathe,@ frames: 2,8 (draw in (air); "Inhale deeply"; "inhale the fresh mountain air"; "The patient has trouble inspiring"; "The lung cancer patient cannot inspire air very well") }
+{ [ pant, noun.act:pant,+ noun.act:panting,+ ] [ puff, noun.act:puff1,+ noun.act:puffing1,+ ] [ gasp, noun.act:gasp,+ ] [ heave1, noun.act:heaving2,+ ] blow,@ frames: 2 (breathe noisily, as when one is exhausted; "The runners reached the finish line, panting heavily") }
+{ [ cough, noun.state:cough,+ noun.state:coughing,+ cough_out,^ cough_up,^ verb.possession:cough_up,^ ] expectorate,@ frames: 2,8 (exhale abruptly, as when one has a chest cold or congestion; "The smoker coughs all day") }
+{ hack, whoop, cough,@ frames: 2 (cough spasmodically; "The patient with emphysema is hacking all day") }
+{ [ expectorate, noun.process:expectoration,+ noun.act:expectoration,+ noun.person:expectorator,+ ] cough_up, cough_out, spit_up, spit_out1, discharge,@ frames: 2 (discharge (phlegm or sputum) from the lungs and out of the mouth)}
+{ [ snort, noun.person:snorter,+ noun.act:snorting,+ ] exhale,@ frames: 2 (make a snorting sound by exhaling hard; "The critic snorted contemptuously") }
+{ [ wheeze, noun.act:wheeze,+ ] breathe,@ frames: 2 (breathe with difficulty) }
+{ [ puff1, noun.act:puff1,+ noun.act:puffing1,+ ] [ huff, noun.act:huffing,+ ] chuff, blow,@ frames: 2 (blow hard and loudly; "he huffed and puffed as he made his way up the mountain") }
+{ [ blow, noun.act:blow2,+ ] exhale,@ frames: 2 (exhale hard; "blow on the soup to cool it down") }
+{ [ insufflate, noun.act:insufflation,+ ] blow,@ frames: 8 (blow or breathe hard on or into)}
+{ [ yawn, noun.act:yawn,+ noun.person:yawner,+ noun.act:yawning,+ ] breathe,@ frames: 2 (utter a yawn, as from lack of oxygen or when one is tired; "The child yawned during the long performance") }
+{ [ sniff, noun.person:sniffer,+ ] [ sniffle, noun.act:sniffle,+ ] inhale,@ frames: 2 (inhale audibly through the nose; "the sick student was sniffling in the back row") }
+{ [ blink, noun.act:blink,+ noun.act:blinking,+ ] [ wink, noun.act:wink,+ noun.person:winker,+ noun.act:winking,+ ] [ nictitate, noun.act:nictitation,+ ] [ nictate, noun.act:nictation,+ ] act_involuntarily,@ frames: 2 (briefly shut the eyes; "The TV announcer never seems to blink") }
+{ [ palpebrate, noun.body:palpebra,+ noun.act:palpebration,+ ] blink,@ frames: 2 (wink or blink, especially repeatedly) }
+{ bat, flutter, wink,@ frames: 8 (wink briefly; "bat one's eyelids") }
+{ [ wink2, noun.communication:wink,+ noun.person:winker,+ ] verb.communication:gesture,@ frames: 22 (signal by winking; "She winked at him") }
+{ [ wink1, noun.communication:wink,+ ] [ blink1, noun.act:blink,+ ] blink_away, verb.change:keep_back,@ frames: 8 (keep back by blinking; "blink away tears") }
+{ [ squint, noun.person:squinter,+ noun.act:squint,+] squinch, grimace,@ frames: 2 (cross one's eyes as if in strabismus; "The children squinted so as to scare each other")}
+{ squint2, look,@ frames: 2 (partly close one's eyes, as when hit by direct blinding light; "The driver squinted as the sun hit his windshield") }
+{ [ wince, noun.communication:wince,+ ] grimace,@ frames: 2 (make a face indicating disgust or dislike; "She winced when she heard his pompous speech") }
+{ [ shed, noun.process:shedding,+ ] [ molt, noun.animal:molter,+ noun.process:molting,+ noun.process:molt,+ ] exuviate, [ moult, noun.animal:moulter,+ noun.process:moulting,+ noun.process:moult,+ ] [ slough, noun.object:slough,+ noun.process:sloughing,+ ] verb.contact:shed1,@ frames: 1 (cast off hair, skin, horn, or feathers; "our dog sheds every Spring") }
+{ [ desquamate, noun.phenomenon:desquamation,+ ] peel_off, slough,@ frames: 1 (peel off in scales; "dry skin desquamates") }
+{ [ twitch, noun.state:twitch,+ noun.state:twitching,+ ] [ jerk, noun.act:jerk,+ noun.act:jerking,+ ] move_involuntarily,@ frames: 2,23 (make an uncontrolled, short, jerky motion; "his face is twitching")}
+{ [ fibrillate, noun.state:fibrillation,+ ] twitch,@ frames: 1 (make fine, irregular, rapid twitching movements; "His heart fibrillated and he died")}
+{ move_involuntarily, move_reflexively, verb.motion:move,@ frames: 2,23 (move in an uncontrolled manner) }
+{ act_involuntarily, act_reflexively, act,@ frames: 2 (act in an uncontrolled manner) }
+{ [act, verb.perception:act_up,^ ] behave, do9, act1,$ frames: 2,7 (behave in a certain manner; show a certain behavior; conduct or comport oneself; "You should act like an adult"; "Don't behave like a fool"; "What makes her do this way?"; "The dog acts ferocious, but he is really afraid of people")}
+{ fall_over_backwards, bend_over_backwards, act,@ frames: 2 (try very hard to please someone; "She falls over backwards when she sees her mother-in-law")}
+{ [ presume, noun.attribute:presumption,+ noun.act:presumption,+ ] act,@ frames: 2 (take liberties or act with too much confidence)}
+{ [ vulgarize, adj.all:unrefined1^vulgar,+ ] vulgarise, act,@ frames: 2 (act in a vulgar manner; "The drunkard tends to vulgarize")}
+{ optimize, optimise, act,@ frames: 2 (act as an optimist and take a sunny view of the world)}
+{ [ quack, noun.person:quack,+ noun.act:quackery,+ ] act,@ noun.act:medicine,;c frames: 2 (act as a medical quack or a charlatan)}
+{ [ menace, noun.communication:menace,+ ] act,@ frames: 2 (act in a threatening manner; "A menacing person") }
+{ make8, verb.possession:make1,$ verb.possession:make2,$ behave,@ frames: 9 (act in a certain way so as to acquire; "make friends"; "make enemies") }
+{ [ swagger, noun.person:swaggerer,+ ] [ bluster, noun.person:blusterer,+ ] swash, act,@ frames: 2 (act in an arrogant, overly self-assured, or conceited manner) }
+{ freeze2, behave,@ frames: 2 (suddenly behave coldly and formally; "She froze when she saw her ex-husband") }
+{ wanton, act,@ frames: 2 (behave extremely cruelly and brutally) }
+{ romanticize, act,@ frames: 2 (act in a romantic way) }
+{ [ sentimentalise, noun.act:sentimentalisation,+ ] [ sentimentalize, noun.act:sentimentalization,+ ] sentimentize, sentimentise, act,@ frames: 2 (act in a sentimental way or indulge in sentimental thoughts or expression) }
+{ [ bungle, noun.act:bungle,+ noun.person:bungler,+ ] behave,@ frames: 2 (spoil by behaving clumsily or foolishly; "I bungled it!") }
+{ [ play, noun.act:playing,+ ] [ toy, noun.artifact:toy,+ ] behave,@ frames: 8 (engage in an activity as if it were a game rather than take it seriously; "They played games on their opponents"; "play the stock market"; "play with her feelings"; "toy with an idea") }
+{ [ act1, noun.communication:act3,+ ] play1, act_as, verb.body:behave,@ frames: 9 (pretend to have certain qualities or state of mind; "He acted the idiot"; "She plays deaf when the news are bad") }
+{ [ stooge, noun.person:stooge,+ ] verb.body:behave,@ frames: 2 (act as a stooge, in a compliant or subordinate manner; "He stooged for the flamboyant Senator") }
+{ [ shake, noun.act:shake,+ noun.state:shaking,+ ] didder, move_involuntarily,@ frames: 1,2 (move with or as if with a tremor; "his hands shook") }
+{ [ shiver, noun.act:shiver,+ noun.state:shivering,+ ] [ shudder, noun.act:shudder,+ ] move_involuntarily,@ frames: 1,2 (shake, as from cold; "The children are shivering--turn on the heat!") }
+{ [ rest, noun.person:rester,+ be_active,! ] verb.contact:repose2,@ frames: 2 (be at rest) }
+{ [ be_active, rest,! ] [ move6, noun.state:motion,+ noun.act:move,+ noun.person:mover1,+ ] frames: 2 (be in a state of action; "she is always moving") }
+{ [ sleep, noun.time:sleep,+ noun.state:sleep,+ noun.person:sleeper,+ noun.cognition:sleeping,+ wake,! sleep_in,^ sleep_late,^ verb.consumption:sleep_in,^ verb.consumption:sleep_out,^ ] [ kip, noun.time:kip,+ ] [ slumber, noun.state:slumber1,+ noun.person:slumberer,+ ] log_Z's, catch_some_Z's, rest,@ frames: 2 (be asleep) }
+{ bundle, practice_bundling, sleep,@ frames: 2 (sleep fully clothed in the same bed with one's betrothed) }
+{ [ snooze, noun.act:snooze,+ ] [ drowse1, noun.act:drowse,+ ] [ doze, noun.act:doze,+ doze_off,^ ] nap,@ frames: 2 (sleep lightly or for a short period of time) }
+{ [ nap, noun.act:nap,+ ] [ catnap, noun.act:catnap,+ ] catch_a_wink, sleep,@ frames: 2 (take a siesta; "She naps everyday after lunch for an hour") }
+{ oversleep, sleep,* frames: 2 (sleep longer than intended) }
+{ sleep_late, sleep_in, sleep,@ frames: 2 (sleep later than usual or customary; "On Sundays, I sleep in")}
+{ [ hibernate, noun.state:hibernation1,+ noun.state:hibernation,+ estivate,! aestivate,! ] hole_up, sleep,@ frames: 1 (sleep during winter; "Bears must eat a lot of food before they hibernate in their caves") }
+{ [ estivate, noun.state:estivation,+ hibernate,! ] [ aestivate, noun.state:aestivation,+ hibernate,! ] sleep,@ frames: 1 (sleep during summer; "certain animals estivate") }
+{ [ drowse, noun.act:drowse,+ drowse_off,^ ] rest,@ frames: 2 (be on the verge of sleeping; "The students were drowsing in the 8 AM class")}
+{ nod2, drowse,@ frames: 1,2 (be almost asleep; "The old man sat nodding by the fireplace") }
+{ [ nod3, noun.act:nod,+ ] frames: 1,2 (let the head fall forward through drowsiness; "The old man was nodding in his chair") }
+{ zonk_out, fall_asleep,@ frames: 2 (fall asleep fast, as when one is extremely tired; "after the long drive, we zonked out and slept for 10 hours") }
+{ [ snore, noun.act:snore,+ noun.event:snore,+ noun.person:snorer,+ noun.act:snoring,+ ] saw_wood, saw_logs, sleep,* breathe,@ frames: 2 (breathe noisily during one's sleep; "she complained that her husband snores") }
+{ [fall_asleep, wake_up,! ] dope_off, flake_out, drift_off, nod_off, drop_off, doze_off, drowse_off, frames: 2 (change from a waking to a sleeping state; "he always falls asleep during lectures")}
+{ bed_down, bunk_down, go_to_bed,@ frames: 2,22 (go to bed; "We bedded down at midnight") }
+{ [ doss, noun.person:dosser,+ ] doss_down, crash, bed_down,@ frames: 2,22 (sleep in a convenient place; "You can crash here, though it's not very comfortable") }
+{ [go_to_bed, get_up,!] [turn_in, turn_out,!] bed, crawl_in, kip_down, hit_the_hay, hit_the_sack, sack_out, go_to_sleep1, retire, frames: 2 (prepare for sleep; "I usually turn in at midnight"; "He goes to bed at the crack of dawn") }
+{ [get_up, go_to_bed,!] [turn_out, turn_in,!] arise, uprise, [ rise8, noun.act:rise,+ noun.person:riser,+ ] frames: 2 (get up and out of bed; "I get up at 7 A.M. every day"; "They rose early"; "He uprose at night") }
+{ get_up1, verb.motion:raise,@ frames: 10,9 (cause to rise; "The sergeant got us up at 2 A.M.") }
+{ [ wake_up, fall_asleep,! ] awake, [ arouse5, noun.cognition:arousal,+ ] [ awaken1, noun.act:awakening,+ ] [ wake1, noun.person:waker,+ ] come_alive, [ waken, noun.act:wakening,+ ] sleep,* verb.change:change_state,@ frames: 2 (stop sleeping; "She woke up to the sound of the alarm clock") }
+{ [ awaken, noun.act:awakening,+ cause_to_sleep,! ] wake2, waken1, [ rouse2, noun.person:rouser,+ ] wake_up1, [ arouse1, noun.person:arouser,+ noun.cognition:arousal,+ ] verb.change:change1,@ frames: 9,10 (cause to become awake or conscious; "He was roused by the drunken men in the street"; "Please wake me at 6 AM.") }
+{ reawaken, awaken,@ frames: 9,10 (awaken once again) }
+{ [ cause_to_sleep, awaken,!] sleep,> verb.change:change1,@ frames: 9,10 (make fall asleep; "The soft music caused us to fall asleep") }
+{ affect, verb.change:change1,@ frames: 8,9,10,11 (act physically on; have an effect upon; "the medicine affects my heart rate") }
+{ [ attack, noun.process:attack,+ noun.person:attacker,+ ] affect,@ frames: 11 (begin to injure; "The cancer cells are attacking his liver"; "Rust is attacking the metal") }
+{ [ ulcerate, adj.pert:ulcerative,+ noun.state:ulcer,+ ] affect,@ frames: 11 (affect with an ulcer; "Her stomach was ulcerated") }
+{ [ wake, noun.cognition:waking,+ sleep,! ] frames: 2 (be awake, be alert, be there) }
+{ stay_up, sit_up, wake,@ frames: 2 (not go to bed; "Don't stay up so late--you have to go to work tomorrow"; "We sat up all night to watch the election") }
+{ keep_up, stay_up,> frames: 9,10 (prevent from going to bed at night; "The anticipation of the trip kept the children up all night"; "I kept myself up all night studying for the exam")}
+{ [ hypnotize, noun.person:hypnotizer,+ noun.state:hypnosis,+ ] [ hypnotise, noun.person:hypnotiser,+ noun.state:hypnosis,+ ] [ mesmerize, noun.person:mesmer,+ ] [ mesmerise, noun.person:mesmer,+ ] sedate,@ frames: 9,10 (induce hypnosis in) }
+{ [ entrance, noun.feeling:entrancement,+ ] [ spellbind, noun.person:spellbinder,+ ] hypnotize,@ frames: 9,10 (put into a trance) }
+{ [ anesthetize, noun.artifact:anesthetic,+ bring_to,! ] [ anaesthetize, adj.pert:anaesthetic,+ noun.artifact:anaesthetic,+ ] [ anesthetise, noun.artifact:anesthetic,+ ] [ anaesthetise, noun.artifact:anaesthetic,+ ] put_under, put_out, drug,@ frames: 8,9,10 (administer an anesthetic drug to; "The patient must be anesthetized before the operation"; "anesthetize the gum before extracting the teeth") }
+{ [ etherize, noun.artifact:ether,+ ] etherise, anesthetize,@ frames: 9,10 (anesthetize with ether) }
+{ [ cocainize, noun.artifact:cocain,+ ] [ cocainise, noun.artifact:cocain,+ ] anesthetize,@ frames: 9,10 (anesthetize with cocaine) }
+{ [ chloroform, noun.artifact:chloroform,+ ] anesthetize,@ frames: 9 (anesthetize with chloroform; "Doctors used to put people under by chloroforming them") }
+{ freeze1, anesthetize,@ noun.act:surgery1,;c frames: 9 (anesthetize by cold) }
+{ [bring_to, anesthetize,! ] bring_back, bring_round, bring_around, awaken,@ frames: 9,10 (return to consciousness; "These pictures bring back sad memories") }
+{ [ sedate, adj.all:depressant^sedative,+ noun.act:sedation,+ stimulate,! ] [ calm, noun.attribute:calm,+ ] [ tranquilize, noun.artifact:tranquilizer,+ ] [ tranquillize, noun.artifact:tranquillizer,+ ] [ tranquillise, noun.artifact:tranquilliser,+ ] affect,@ frames: 9 (cause to be calm or quiet as by administering a sedative to; "The patient must be sedated before the operation") }
+{ [ stimulate, adj.all:stimulative,+ noun.artifact:stimulant,+ sedate,! ] arouse, [ brace, noun.artifact:bracer,+ ] [ energize, noun.person:energizer,+ noun.attribute:energy2,+ noun.attribute:energy,+ noun.state:energy,+ noun.phenomenon:energy,+ noun.act:energizing,+ de-energize,!] [ energise, noun.person:energiser,+ de-energise,! ] perk_up1, affect,@ frames: 8,9,10,11,2 (cause to be alert and energetic; "Coffee and tea stimulate me"; "This herbal infusion doesn't stimulate") }
+{ [ de-energize, energize,! ] [ de-energise, energise,! ]verb.change:weaken1,@ frames: 10 (deprive of energy) }
+{ cathect, energize,@ frames: 10 (inject with libidinal energy) }
+{ perk_up, perk, percolate, [pick_up, noun.artifact:pickup3,+ ] gain_vigor, recuperate,@ frames: 2 (gain or regain energy; "I picked up after a nap") }
+{ [ faint, noun.event:faint,+ ] conk, [ swoon, noun.event:swoon,+ ] pass_out, zonk_out1,@ frames: 2 (pass out from weakness, physical or emotional distress due to a loss of blood supply to the brain) }
+{ zonk_out1, pass_out1, [black_out, noun.cognition:blackout,+] verb.change:change_state,@ frames: 2 (lose consciousness due to a sudden trauma, for example)}
+{ come_to, revive2, resuscitate1, revive,$ revive1,$ verb.change:change_state,@ frames: 2 (return to consciousness; "The patient came to quickly"; "She revived after the doctor gave her an injection") }
+{ animate, [ recreate2, noun.act:recreation1,+ ] reanimate, revive, renovate, repair3, [ quicken, noun.object:quickener,+ ] [ vivify, noun.act:vivification,+ ] [ revivify, noun.act:revivification,+ ] stimulate,@ frames: 9,10 (give new life or energy to; "A hot soup will revive me"; "This will renovate my spirits"; "This treatment repaired my health") }
+{ [ refresh, tire1,! ] [ freshen, noun.artifact:freshener,+ freshen_up2,^ ] refreshen1, verb.change:change1,@ frames: 10,9 (make fresh again) }
+{ freshen2, [ refresh2, noun.act:refreshment,+ ] refreshen, freshen_up2, verb.change:change,@ frames: 1,2 (become or make oneself fresh again; "She freshened up after the tennis game") }
+{ [wash_up, noun.act:washup,+] [ lave2, noun.act:lavation,+ ] refresh2,@ frames: 2 (wash one's face and hands; "She freshened up in the bathroom") }
+{ [ tense, noun.state:tension1,+ relax1,! ] [ strain, noun.phenomenon:strain,+ unstrain,!] tense_up, tense1,> affect,@ frames: 8,10 (cause to be tense and uneasy or nervous or anxious; "he got a phone call from his lawyer that tensed him up") }
+{ [ crick, noun.state:crick,+ ] verb.contact:twist,@ frames: 8 (twist (a body part) into a strained position; "crick your neck") }
+{ [ relax1, adj.all:depressant^relaxant,+ noun.feeling:relaxation,+ noun.object:relaxer,+ noun.artifact:relaxant,+ tense,! ] [unstrain, strain,!] unlax1, loosen_up1, unwind1, make_relaxed, relax,> affect,@ frames: 8,10,9 (cause to feel relaxed; "A hot bath always relaxes me") }
+{ unbend, relax1,@ frames: 8 (release from mental strain, tension, or formality; "unbend the mind from absorbing too much information") }
+{ [ tense1, noun.state:tension1,+ noun.body:tensor,+ relax,! ] tense_up1, verb.change:change_state,@ frames: 1,2,23 (become tense, nervous, or uneasy; "He tensed up when he saw his opponent enter the room") }
+{ [ relax, adj.all:depressant^relaxant,+ noun.process:relaxation1,+ noun.act:relaxation,+ tense1,! ] loosen_up, unbend1, unwind, decompress, slow_down, verb.change:change_state,@ frames: 2,23 (become less tense, rest, or take one's ease; "He relaxed in the hot tub"; "Let's all relax after a hard day's work") }
+{ vege_out, [ vegetate, adj.pert:vegetative1,+ noun.act:vegetation,+ ] relax,@ frames: 2 (engage in passive relaxation; "After a hard day's work, I vegetate in front of the television")}
+{ sit_back, take_it_easy, relax,@ frames: 2 (settle into a comfortable sitting position) }
+{ limber_up, [warm_up, noun.act:warm-up,+] loosen_up3, exercise,@ frames: 2 (make one's body limber or suppler by stretching, as if to prepare for strenuous physical activity) }
+{ [ stretch1, noun.act:stretch,+ noun.act:stretching,+ frames: 2 ] [ extend, noun.act:extension1,+ noun.body:extensor,+ ] tense,@ frames: 8 (extend one's limbs or muscles, or the entire body; "Stretch your legs!"; "Extend your right arm above your head") }
+{ spread-eagle, stretch1,@ frames: 9 (stretch out completely; "They spread-eagled him across the floor") }
+{ exsert, stretch_out1, put_out1, [ extend1, adj.all:extensible,+ adj.all:long1^extendible,+ noun.body:extensor,+ ] hold_out, stretch_forth, verb.communication:gesture,@ frames: 8 (thrust or extend out; "He held out his hand"; "point a finger"; "extend a hand"; "the bee exserted its sting") }
+{ [ hyperextend, noun.act:hyperextension,+ ] extend1,@ frames: 8 (extend a joint beyond its normal range; "Don't hyperextend your elbow")}
+{ [ crane, noun.animal:crane,+ ] stretch_out, stretch1,@ frames: 8 (stretch (the neck) so as to see better; "The women craned their necks to see the President drive by") }
+{ [ invigorate, noun.attribute:invigoration,+ noun.act:invigoration,+ noun.object:invigorator,+ ] reinvigorate, stimulate,@ frames: 10 (impart vigor, strength, or vitality to; "Exercise is invigorating") }
+{ [ smile, noun.communication:smile,+ noun.body:smiler,+ noun.person:smiler,+ noun.communication:smiling,+ ] grimace,@ frames: 2,22 (change one's facial expression by spreading the lips, often to signal pleasure) }
+{ [ dimple, noun.body:dimple,+ ] smile,@ frames: 2 (produce dimples while smiling; "The child dimpled up to the adults") }
+{ [ grin, noun.person:grinner,+ noun.communication:grinning,+ noun.communication:grin,+ ] smile,@ frames: 2 (to draw back the lips and reveal the teeth, in a smile, grimace, or snarl) }
+{ beam, smile,@ frames: 2 (smile radiantly; express joy through one's facial expression) }
+{ [ smirk, noun.person:smirker,+ noun.communication:smirk,+ ] [ simper, noun.person:simperer,+ ] smile,@ frames: 2,22 (smile affectedly or derisively) }
+{ [ fleer, noun.communication:fleer,+ ] smirk,@ frames: 2,22 (to smirk contemptuously) } 
+{ [ bray, noun.event:bray,+ ] laugh,@ frames: 2,22 (laugh loudly and harshly) }
+{ bellylaugh, laugh,@ frames: 2 (laugh a deep, hearty laugh) }
+{ [ roar, noun.communication:roar,+ ] [ howl, noun.communication:howl,+ noun.communication:howler,+ noun.communication:howling,+ ] laugh,@ frames: 2 (laugh unrestrainedly and heartily) }
+{ [ snicker, noun.communication:snicker,+ ] [ snigger, noun.communication:snigger,+ ] laugh,@ frames: 2,22 (laugh quietly) }
+{ [ giggle, noun.person:giggler,+ noun.communication:giggle,+ ] [ titter, noun.person:titterer,+ noun.communication:titter,+ ] laugh,@ frames: 2 (laugh nervously; "The girls giggled when the rock star came into the classroom") }
+{ break_up, crack_up, laugh,@ frames: 2 (laugh unrestrainedly) }
+{ break10, verb.change:weaken1,@ frames: 10 (weaken or destroy in spirit or body; "His resistance was broken"; "a man broken by the terrible experience of near-death") }
+{ [break_down, noun.state:breakdown1,+ ] [ collapse, noun.state:collapse1,+ ] suffer1,@ frames: 2 (collapse due to fatigue, an illness, or a sudden attack) }
+{ drop_like_flies, collapse,@ frames: 1,2 (rapidly collapse, die, or drop out in large numbers; "the contestants dropped like flies when the thermometer hit one hundred degrees")}
+{ cramp, suffer1,@ frames: 2 (suffer from sudden painful contraction of a muscle)}
+{ cramp1, affect,@ frames: 10 (affect with or as if with a cramp)}
+{ fall_over, go_over, collapse,@ frames: 2 (fall forward and down; "The old woman went over without a sound") }
+{ [ cackle, noun.communication:cackle,+ ] laugh,@ frames: 2 (emit a loud, unpleasant kind of laughing) }
+{ [ guffaw, noun.communication:guffaw,+ ] laugh_loudly1, laugh,@ frames: 2,22 (laugh boisterously) }
+{ [ chuckle, noun.communication:chuckle,+ ] [ chortle, noun.communication:chortle,+ ] laugh_softly, laugh,@ frames: 2 (laugh quietly or with restraint) }
+{ [ laugh, adj.all:humorous^laughable,+ noun.communication:laugh1,+ noun.communication:laugh2,+ noun.communication:laugh,+ noun.person:laugher,+ cry,! verb.communication: laugh_off,^ verb.communication:laugh_away,^ verb.communication:laugh_at,^ ] express_joy, express_mirth, verb.emotion:express_emotion,@ frames: 2,22 (produce laughter) }
+{ [ convulse, adj.all:violent^convulsive,+ ] laugh,@ frames: 2,22 (be overcome with laughter) }
+{ [ cachinnate, noun.communication:cachinnation,+ ] laugh,@ frames: 2 (laugh loudly and in an unrestrained way) }
+{ [ sneer, noun.communication:sneer1,+ noun.communication:sneer,+ noun.person:sneerer,+ ] smile,@ frames: 2,22 (smile contemptuously; "she sneered at her little sister's efforts to play the song on the piano") }
+{ [ sneer1, noun.communication:sneer1,+ noun.communication:sneer,+ noun.person:sneerer,+ ] sneer,$ verb.communication:express1,@ frames: 2,22 (express through a scornful smile; "she sneered her contempt") }
+{ [ frown, noun.communication:frown,+ ] [ glower, noun.act:glower,+ ] lour, lower, grimace,@ frames: 2,22 (look angry or sullen, wrinkle one's forehead, as if to signal disapproval) }
+{ [ glower1, noun.act:glower,+ ] [ glare, noun.act:glare,+ ] stare,@ frames: 2,22 (look at with a fixed gaze; "The girl glared at the man who tried to make a pass at her") }
+{ [ stare, noun.act:stare,+ noun.person:starer,+ ] verb.perception:look,@ frames: 2 (fixate one's eyes; "The ancestor in the painting is staring down menacingly") }
+{ [ look, noun.attribute:look1,+ noun.attribute:look,+ ] verb.stative:be3,@ frames: 6,7 (have a certain outward or facial expression; "How does she look?"; "The child looks unhappy"; "She looked pale after the surgery") }
+{ [ scowl, noun.communication:scowl,+ ] frown,@ frames: 2 (frown with displeasure) }
+{ [ shrug, noun.communication:shrug,+ verb.communication:shrug_off,^] verb.communication:gesture,@ frames: 2 (raise one's shoulders to indicate indifference or resignation) }
+{ [ clap, noun.person:clapper,+ noun.communication:clapping,+ ] spat, verb.communication:gesture,@ frames: 2 (clap one's hands together; "The children were clapping to the music") }
+{ [ grimace, noun.communication:grimace,+ ] make_a_face, pull_a_face, verb.communication:communicate,@ frames: 2 (contort the face to indicate a certain mental or emotional state; "He grimaced when he saw the amount of homework he had to do") }
+{ screw_up, grimace,@ frames: 8 (twist into a strained configuration; "screw up one's face") }
+{ [ pout, noun.communication:pout,+ noun.person:pouter,+ ] mop, mow, grimace,@ frames: 2 (make a sad face and thrust out one's lower lip; "mop and mow"; "The girl pouted") }
+{ [ blow1, noun.act:blow2,+ ] discharge,@ frames: 2 (free of obstruction by blowing air through; "blow one's nose") }
+{ clear_the_throat, hawk1, cough,@ frames: 2 (clear mucus or food from one's throat; "he cleared his throat before he started to speak") }
+{ [ shower, noun.artifact:shower,+ noun.act:shower,+ ] bathe,@ frames: 2 (take a shower; wash one's body in the shower; "You should shower after vigorous exercise") }
+{ [ foment, noun.act:fomentation1,+ ] bathe,@ frames: 8 (bathe with warm water or medicated lotions; "His legs should be fomented")}
+{ [ bathe, noun.person:bather1,+ noun.act:bathing1,+ ] cleanse,@ frames: 2 (cleanse the entire body; "bathe daily") }
+{ [ cleanse, noun.artifact:cleanser,+ noun.act:cleansing,+ ] [ clean, noun.act:cleaning,+ ] groom,@ frames: 2,8,9 (clean one's body or parts thereof, as by washing; "clean up before you see your grandparents"; "clean your fingernails before dinner") }
+{ [ wash2, noun.act:wash1,+ ] cleanse,@ frames: 1 (to cleanse (itself or another animal) by licking; "The cat washes several times a day") }
+{ [ wash, noun.act:wash1,+ noun.act:washing,+ wash_up,^ ] [ lave, noun.act:lavation,+ noun.act:lavage,+ ] wash2,$ cleanse,@ frames: 2,8,9 (cleanse (one's body) with soap and water) }
+{ sponge_down, wash,@ frames: 2,9 (wash with a sponge) }
+{ [ scrub, noun.act:scrub,+ ] scrub_up, wash,@ frames: 2 (wash thoroughly; "surgeons must scrub prior to an operation") }
+{ [ soap, noun.artifact:soap,+ ] [ lather, noun.object:lather1,+ noun.object:lather,+ ] wash,* cleanse,@ frames: 8,9 (rub soap all over, usually with the purpose of cleaning) }
+{ [ gargle, noun.substance:gargle,+ ] rinse, wash,@ frames: 2 (rinse one's mouth and throat with mouthwash; "gargle with this liquid") }
+{ [ shave, noun.act:shave,+ noun.person:shaver1,+ noun.artifact:shaver,+ noun.act:shaving,+ ] groom,@ frames: 2,8,9 (remove body hair with a razor) }
+{ epilate, [ depilate, adj.all:hairless^depilatory,+ noun.artifact:depilator,+ noun.act:depilation,+ ] verb.change:remove,@ frames: 8 (remove body hair; "epilate her legs")}
+{ [ razor, noun.artifact:razor,+ ] shave,@ frames: 8 (shave with a razor) }
+{ [ tonsure, noun.act:tonsure,+ noun.body:tonsure,+ ] shave,@ frames: 9 (shave the head of a newly inducted monk) }
+{ [ douche, noun.act:douche,+ noun.artifact:douche,+ ] cleanse,@ frames: 2,9 (direct a spray of water into a bodily cavity, for cleaning) }
+{ [ comb, noun.artifact:comb1,+ noun.artifact:comb,+ noun.act:comb,+ noun.act:combing,+ ] [comb_out, noun.act:comb-out,+] [ disentangle, noun.act:disentanglement1,+ ] groom,@ frames: 8 (smoothen and neaten with or as with a comb; "comb your hair before dinner"; "comb the wool") }
+{ [ slick, noun.attribute:slick,+ ] slick_down, sleek_down, comb,@ frames: 8 (give a smooth and glossy appearance; "slick one's hair") }
+{ dress4, [ arrange, noun.group:arrangement,+ ] set5, do4, [ coif, noun.body:coiffure,+ ] coiffe, [ coiffure, noun.body:coiffure,+ ] groom,@ frames: 8 (arrange attractively; "dress my hair for the wedding") }
+{ [ bob, noun.body:bob,+ ] coif,@ frames: 8 (cut hair in the style of a bob; "Bernice bobs her hair these days!") }
+{ [ pompadour, noun.body:pompadour,+ ] verb.creation:style,@ frames: 8 (style women's hair in a pompadour) }
+{ marcel, wave,@ frames: 2,8 (make a marcel in a woman's hair) }
+{ [ wave, noun.body:wave,+ ] dress4,@ frames: 8 (set waves in; "she asked the hairdresser to wave her hair") }
+{ gauffer, goffer, wave,@ frames: 8 (make wavy with a heated goffering iron; "goffer the trim of the dress")}
+{ [ perm, noun.body:perm,+ ] wave,@ frames: 8 (give a permanent wave to; "She perms her hair") }
+{ [ mousse, noun.artifact:mousse,+ ] gel, groom,@ frames: 8 (apply a styling gel to; "she mousses her hair") }
+{ [ pomade, noun.artifact:pomade,+ ] groom,@ frames: 8 (apply pomade to (hair)) }
+{ [ tease, noun.act:teasing2,+ ] fluff, comb,@ frames: 8 (ruffle (one's hair) by combing the ends towards the scalp, for a full effect) }
+{ [ groom, noun.act:grooming,+ ] neaten, verb.change:embellish,@ frames: 2,9 (care for one's external appearance; "He is always well-groomed") }
+{ [clean_up, noun.act:cleanup,+] groom,@ frames: 2 (make oneself clean, presentable or neat; "Clean up before you go to the party") }
+{ [make_up, noun.artifact:makeup,+ noun.artifact:make-up,+] groom,@ frames: 2,9 (apply make-up or cosmetics to one's face to appear prettier; "She makes herself up every morning") }
+{ [ highlight, noun.artifact:highlighter1,+ ] make_up,@ frames: 8 (apply a highlighter to one's cheeks or eyebrows in order to make them more prominent; "highlight the area above your eyebrows") }
+{ [ lipstick, noun.artifact:lipstick,+ ] make_up,@ frames: 2,8 (apply lipstick to; "She lipsticked her mouth") }
+{ [ rouge, noun.artifact:rouge,+ ] make_up,@ frames: 8 (redden by applying rouge to; "she rouged her cheeks") }
+{ [ condition, noun.artifact:conditioner,+ ] shampoo,@ frames: 8 (apply conditioner to in order to make smooth and shiny; "I condition my hair after washing it") }
+{ [ floss, noun.artifact:floss1,+ ] cleanse,@ frames: 2,8 (use dental floss to clean; "floss your teeth after every meal") }
+{ [ shampoo, noun.act:shampoo,+ noun.artifact:shampoo,+ ] wash,@ frames: 2,8,9 (use shampoo on (hair)) }
+{ [ powder, noun.artifact:powder1,+ noun.person:powderer,+ ] make_up,@ frames: 8 (apply powder to; "She powdered her nose"; "The King wears a powdered wig") }
+{ [ talc, noun.substance:talc,+ ] powder,@ frames: 8 (apply talcum powder to (one's body)) }
+{ [ manicure, noun.act:manicure,+ noun.person:manicurist,+ ] groom,@ frames: 8 (care for (one's hand) by cutting and shaping the nails, etc.) }
+{ [ manicure1, noun.act:manicure,+ noun.person:manicurist,+ ] verb.contact:cut,@ frames: 8 (trim carefully and neatly; "manicure fingernails") }
+{ [ barber, noun.person:barber,+ ] groom,@ frames: 1 (perform the services of a barber: cut the hair and/or beard of) }
+{ [ pedicure, noun.act:pedicure,+ ] groom,@ frames: 8 (care for one's feet by cutting and shaping the nails, etc.) }
+{ doll_up, do_up, pretty_up, glam_up, groom,@ frames: 9 (use special care in dressing, making-up, etc.; "She dolled herself up for the night out with her friends") }
+{ spruce_up, spruce, slick_up, smarten_up, groom,@ frames: 2,9 (dress and groom with particular care, as for a special occasion; "He spruced up for the party") }
+{ [ perfume, noun.cognition:perfume,+ noun.artifact:perfume,+ noun.artifact:perfumery2,+ ] [ scent, noun.cognition:scent1,+ ] groom,@ frames: 9,8 (apply perfume to; "She perfumes herself every day") }
+{ preen, [ primp, noun.act:primping,+ ] plume, [ dress5, noun.artifact:dress2,+ ] dress_up,@ frames: 2,9 (dress or groom with elaborate care; "She likes to dress when going to the opera") }
+{ prank, dress_up,@ frames: 9 (dress up showily; "He pranked himself out in his best clothes") }
+{ tart_up, dress_up,@ frames: 2,9 (dress up in a cheap and provocative way) }
+{ [overdress, underdress,! frames: 2] [dress_up, dress,^ dress_down,! frames: 2 ] fig_out, fig_up, deck_up, gussy_up, fancy_up, trick_up, deck_out, trick_out, prink, [ attire, noun.artifact:attire,+ ] [get_up2, noun.artifact:getup,+] [rig_out, noun.artifact:rigout,+ ] tog_up, tog_out, dress_up6,$ dress_up4,$ dress,@ frames: 9 (put on special clothes to appear particularly appealing and attractive; "She never dresses up, even when she goes to the opera"; "The young girls were all fancied up for the party") }
+{ [ dress7, noun.artifact:dress1,+ noun.person:dresser1,+ ] dress_up6, dress,@ frames: 22 (dress in a certain manner; "She dresses in the latest Paris fashion"; "he dressed up in a suit and tie") }
+{ enrobe, attire,@ frames: 8 (adorn with a robe) }
+{ prim, prim_up, prim_out, dress1,@ frames: 2 (dress primly) }
+{ bedizen, dizen, dress_up,@ frames: 9 (dress up garishly and tastelessly) }
+{ [dress_down, dress_up,!] [underdress, overdress,!] dress,@ frames: 2 (dress informally and casually; "On Fridays, employees can underdress")}
+{ prink1, dress,@ frames: 2 (dress very carefully and in a finicky manner) }
+{ dress6, [ groom3, noun.person:groom1,+ ] curry, dress4,$ verb.change:embellish,@ frames: 8 (give a neat appearance to; "groom the dogs"; "dress the horses") }
+{ [ reduce, noun.process:reducing1,+ gain,! ] [melt_off, frames: 8 ] slim, slenderize, thin, slim_down, verb.change:change_state,@ frames: 2 (take off weight) }
+{ sweat_off, reduce,@ frames: 8 (lose weight by sweating; "I sweated off 3 pounds in the sauna") }
+{ [ gain, noun.person:gainer1,+ reduce,! frames: 8 ] put_on3, verb.change:change_state,@ frames: 2 (increase (one's body weight); "She gained 20 pounds when she stopped exercising") }
+{ round, flesh_out, fill_out, gain,@ frames: 2 (become round, plump, or shapely; "The young woman is fleshing out") }
+{ [ dress, noun.artifact:dress2,+ noun.person:dresser,+ noun.act:dressing,+ undress,! dress_up,^ dress_down,^ ] get_dressed, dress1,$ dress7,$ dress5,$ verb.change:change,@ frames: 2 (put on clothes; "we had to dress quickly"; "dress the patient"; "Can the child dress by herself?") }
+{ bundle_up, dress,@ frames: 9 (dress warmly; "Mother bundled up the children for the long way to school") }
+{ [ hat, noun.artifact:hat,+ ] wear1,@ frames: 2 (put on or wear a hat; "He was unsuitably hatted") }
+{ [try_on, noun.act:try-on,+] try, wear1,@ frames: 8 (put on a garment in order to see whether it fits and looks nice; "Try on this sweater to see how it looks") }
+{ [ bonnet, noun.artifact:bonnet,+ ] hat,@ frames: 9 (dress in a bonnet) }
+{ wear2, verb.stative:have,@ frames: 8,5 (have or show an appearance of; "wear one's hair in a certain way") }
+{ [ wear4, adj.all:wearable,+ noun.artifact:wear,+ noun.act:wear,+ noun.act:wearing,+ ] bear2, verb.stative:have,@ frames: 8 (have on one's person; "He wore a red ribbon"; "bear a scar")}
+{ [ dress1, noun.artifact:dress2,+ noun.person:dresser,+ noun.act:dressing,+ ] [ clothe, noun.artifact:clothing,+ ] enclothe, [ garb, noun.artifact:garb,+ ] [ raiment, noun.artifact:raiment,+ ] tog, [ garment, noun.artifact:garment,+ ] habilitate, fit_out, [ apparel, noun.artifact:apparel,+ ] verb.change:change_state,@ frames: 8,9 (provide with clothes or put clothes on; "Parents must feed and dress their child") }
+{ [ cover15, noun.act:covering,+ ] wrap_up, dress1,@ frames: 8 (clothe, as if for protection from the elements; "cover your head!") }
+{ [ jacket, noun.artifact:jacket,+ ] dress1,@ frames: 9 (put a jacket on; "The men were jacketed") }
+{ [ frock, noun.artifact:frock,+ ] dress1,@ frames: 9 (put a frock on) }
+{ [ shirt, noun.artifact:shirt,+ ] dress1,@ frames: 9 (put a shirt on) }
+{ [ habit, noun.artifact:habit,+ ] dress1,@ frames: 9 (put a habit on) }
+{ [ vesture, noun.artifact:vesture,+ ] clothe,@ frames: 9 (provide or cover with a cloak) }
+{ [overdress1, underdress1,!] overclothe, dress1,@ frames: 9 (dress too warmly; "You should not overclothe the child--she will be too hot") }
+{ [underdress1, overdress1,!] dress1,@ frames: 9 (dress without sufficient warmth; "She was underdressed for the hiking trip and suffered hypothermia")}
+{ [ corset, noun.artifact:corset,+ ] dress1,@ frames: 9 (dress with a corset) }
+{ [ shoe, noun.artifact:shoe,+ ] dress1,@ frames: 9 (furnish with shoes; "the children were well shoed") }
+{ [ undress, noun.state:undress,+ dress1,! ] discase, uncase, unclothe, [ strip1, noun.act:strip,+ noun.person:stripper,+ ] strip_down, disrobe1, [ peel2, noun.person:peeler,+ ] verb.change:take_off,@ frames: 8,9,2 (get undressed; "please don't undress in front of everybody!"; "She strips in front of strangers every night for a living" ) }
+{ peel_off1, take_off3,@ frames: 8 (take off, as with some difficulty; "He peeled off his blood-soaked shirt") }
+{ take_off3, undress,@ frames: 8 (remove clothes; "take off your shirt--it's very hot in here")}
+{ [ wear1, adj.all:wearable,+ noun.artifact:wear,+ ] put_on, get_into, don, assume, dress,@ frames: 8 (put clothing on one's body; "What should I wear today?"; "He put on his best suit for the wedding"; "The princess donned a long blue dress"; "The queen assumed the stately robes"; "He got into his jeans") }
+{ [ scarf, noun.artifact:scarf,+ ] put_on,@ frames: 8 (wrap in or adorn with a scarf) }
+{ [slip_on, noun.artifact:slip-on,+ slip_off,!] put_on,@ frames: 8 (put on with ease or speed; "slip into something more comfortable after work"; "slip on one's shoes") }
+{ [slip_off, slip_on,! ] take_off3,@ frames: 8 (take off with ease or speed; "She slipped off her jacket") }
+{ [ coat, noun.artifact:coat,+ noun.artifact:coating1,+ ] dress1,@ frames: 9 (cover or provide with a coat)}
+{ [ cross-dress, noun.person:cross-dresser,+ ] dress,@ frames: 2 (dress in the clothes of the other sex)}
+{ [ costume, noun.artifact:costume1,+ ] dress_up4, dress1,@ frames: 9,2 (dress in a costume; "We dressed up for Halloween as pumpkins") }
+{ [ dandify, noun.person:dandy,+ ] dress,@ frames: 2 (dress like a dandy) }
+{ [ vest, noun.artifact:vesture,+ noun.artifact:vestment,+ ] [ robe, noun.artifact:robe1,+ noun.artifact:robe,+ ] dress1,@ frames: 9 (clothe formally; especially in ecclesiastical robes) }
+{ vest1, vest,$ dress7,@ frames: 2 (clothe oneself in ecclesiastical garments)}
+{ [ wear, adj.all:wearable,+ noun.artifact:wear,+ noun.person:wearer,+ ] have_on, dress,* frames: 8 (be dressed in; "She was wearing yellow that day") }
+{ [ inseminate, noun.act:insemination,+ noun.body:semen,+ ] [ fecundate, noun.event:fecundation,+ ] [ fertilize, noun.event:fertilization,+ ] fertilise, verb.change:change1,@ frames: 9 (introduce semen into (a female)) }
+{ [ stratify, noun.act:stratification1,+ ] verb.contact:stratify,$ fertilize,@ frames: 11 (render fertile and preserve by placing between layers of earth or sand; "stratify seeds") }
+{ [ quicken2, noun.state:quickening,+ ] verb.motion:move,@ frames: 2 (show signs of life; "the fetus quickened") }
+{ [ impregnate, noun.event:impregnation,+ ] knock_up, bang_up, prang_up, fertilize,@ frames: 9 (make pregnant; "He impregnated his wife again") }
+{ [ impregnate1, noun.event:impregnation,+ ] impregnate,$ fertilize,@ frames: 8 (fertilize and cause to grow; "the egg was impregnated")}
+{ inoculate4, impregnate1,@ frames: 8 (impregnate with the virus or germ of a disease in order to render immune)}
+{ [ cross-fertilize, noun.event:cross-fertilization,+ ] [ cross-fertilise, noun.event:cross-fertilisation,+ ] cross-fertilize1,> fertilize,@ frames: 8 (cause to undergo cross-fertilization; "Mendel cross-fertilized different kinds of beans") }
+{ [ cross-fertilize1, noun.event:cross-fertilization,+ ] [ cross-fertilise1, noun.event:cross-fertilisation,+ ] verb.change:change_state,@ frames: 1 (undergo cross-fertilization; become fertile)}
+{ [ pollinate, noun.plant:pollen,+ noun.event:pollination,+ noun.animal:pollinator,+ ] [ pollenate, noun.event:pollenation,+ ] [ cross-pollinate, noun.event:cross-pollination,+ ] fertilize,@ frames: 8,11 (fertilize by transfering pollen) }
+{ [ conceive, adj.all:fertile^conceptive,+ noun.act:conception1,+ ] verb.contact:mate,* verb.change:change_state,@ frames: 2,8 (become pregnant; undergo conception; "She cannot conceive"; "My daughter was conceived in Christmas Day") }
+{ nick, verb.contact:mate,@ frames: 1 (mate successfully; of livestock) }
+{ [ beget, noun.person:begetter,+ ] get8, engender, [ father, noun.person:father,+ ] [ mother, noun.person:mother,+ ] [ sire, noun.animal:sire,+ noun.person:sire,+ ] [ generate, adj.all:fruitful^generative,+ noun.group:generation,+ noun.event:generation,+ noun.act:generation,+ ] bring_forth, verb.creation:create,@ frames: 9 (make (offspring) by reproduction; "Abraham begot Isaac"; "John fathered four daughters")}
+{ [ ejaculate, noun.process:ejaculation,+ noun.body:ejaculate,+ noun.person:ejaculator1,+ ] discharge,@ frames: 2 (eject semen) }
+{ [ reproduce, adj.all:fruitful^reproductive,+ noun.process:reproduction,+ noun.act:reproduction,+ ] [ procreate, adj.all:fruitful^procreative,+ noun.act:procreation,+ ] [ multiply1, noun.act:multiplication1,+ ] verb.creation:create,@ noun.cognition:biology,;c frames: 2 (have offspring or produce more individuals of a given animal or plant; "The Bible tells people to procreate"; "These bacteria reproduce") }
+{ [ propagate, adj.pert:propagative,+ noun.act:propagation,+ ] reproduce,@ noun.cognition:biology,;c frames: 1 (multiply sexually or asexually) }
+{ [ vegetate1, adj.all:asexual^vegetative,+ ] propagate,@ noun.cognition:biology,;c frames: 1 (propagate asexually; "The bacterial growth vegetated along") }
+{ [ propagate1, adj.pert:propagative,+ noun.act:propagation,+ noun.person:propagator1,+ ] propagate,> verb.change:treat1,@ noun.Tops:plant,;c frames: 8 (cause to propagate, as by grafting or layering) }
+{ inoculate2, propagate1,@ frames: 8 (insert a bud for propagation)}
+{ [ fructify, noun.process:fructification,+ noun.plant:fruit,+ ] set6, reproduce,@ frames: 1 (bear fruit; "the apple trees fructify") }
+{ [ breed, noun.group:breed,+ noun.act:breeding,+ ] [ multiply, noun.act:multiplication1,+ ] reproduce,@ frames: 1 (have young (animals) or reproduce (organisms); "pandas rarely breed in captivity") }
+{ pullulate, breed,@ frames: 1 (breed freely and abundantly) }
+{ [ spawn, noun.animal:spawner,+ ] verb.contact:lay2,@ frames: 1 (lay spawn; "The salmon swims upstream to spawn") }
+{ [ spat1, noun.animal:spat,+ ] spawn,@ frames: 1 (spawn; "oysters spat") }
+{ [give_birth, frames: 2] [ deliver1, noun.act:delivery2,+ ] bear1, [ birth, noun.time:birth,+ noun.process:birth,+ noun.event:birth,+ ] have, conceive,* verb.creation:produce2,@ frames: 9 (cause to be born; "My wife had twins yesterday!")}
+{ lie_in, birth,* frames: 2 (be in confinement for childbirth)}
+{ [ labor, noun.state:labor,+ ] [ labour, noun.state:labour,+ ] birth,* verb.perception:undergo4,@ frames: 2 (undergo the efforts of childbirth)}
+{ [ twin, noun.person:twin,+ ] deliver1,@ frames: 2 (give birth to twins) }
+{ drop, deliver1,@ frames: 11 (give birth; used for animals; "The cow dropped her calf this morning") }
+{ [ foal, noun.animal:foal,+ ] deliver1,@ frames: 1 (give birth to a foal; "the mare foaled") }
+{ [ cub, noun.animal:cub,+ ] give_birth,@ frames: 1 (give birth to cubs; "bears cub every year") }
+{ [ kitten, noun.animal:kitten,+ ] deliver1,@ frames: 1 (give birth to kittens; "our cat kittened again this year") }
+{ [ lamb, noun.food:lamb,+ noun.animal:lamb,+ ] deliver1,@ frames: 1 (give birth to a lamb; "the ewe lambed") }
+{ [ litter, noun.group:litter,+ ] give_birth,@ frames: 1 (give birth to a litter of animals) }
+{ [ whelp, noun.animal:whelp,+ ] [ pup, noun.animal:pup,+ ] give_birth,@ frames: 1 (give birth to (a puppy); "the dog whelped") }
+{ [ farrow, noun.process:farrow,+ noun.process:farrowing,+ ] [ pig, noun.animal:pig,+ ] give_birth,@ frames: 1 (give birth to (piglets); "sows farrow") }
+{ [ fawn, noun.animal:fawn,+ ] give_birth,@ frames: 1 (have fawns; "deer fawn") }
+{ calve, have_young, give_birth,@ frames: 1 (give birth to (a calf); "the whales calve at this time of year") }
+{ have_a_bun_in_the_oven, bear, carry, [ gestate, noun.time:gestation,+ noun.state:gestation,+ ] [ expect, adj.all:pregnant^expectant,+ noun.feeling:expectation,+ ] bear1,$ conceive,* bear1,@ frames: 9 (be pregnant with; "She is bearing his child"; "The are expecting another child in January"; "I am carrying his child") }
+{ [ expect2, adj.all:pregnant^expectant,+ noun.state:expectation,+ ] expect,$ verb.cognition:expect1,@ frames: 2 (look forward to the birth of a child; "She is expecting in March") }
+{ [ carry_to_term, miscarry,! ] expect,* frames: 2,9 (carry out a pregnancy; "She decided to carry the child to term, even though the foetus was shown to be defective") }
+{ [ miscarry, noun.act:miscarriage,+ carry_to_term,! ] abort,@ frames: 2,9 (suffer a miscarriage) }
+{ [ abort, noun.act:abortion,+ ] conceive,* discharge,@ frames: 2 (terminate a pregnancy by undergoing an abortion) }
+{ abort1, verb.change:die,@ frames: 1 (cease development, die, and be aborted; "an aborting fetus")}
+{ [ brood, noun.group:brood,+ noun.artifact:brooder,+ ] [ hatch, noun.process:hatch,+ ] cover2, [ incubate, noun.process:incubation,+ noun.artifact:incubator,+ ] verb.contact:breed,$ hatch1,$ verb.motion:sit,* procreate,@ frames: 2 (sit on (eggs); "Birds brood"; "The female covers the eggs") }
+{ alter, neuter, [ spay, noun.act:spaying,+ ] [ castrate2, noun.act:castration1,+ noun.act:neutering,+ ] sterilize,@ frames: 9 (remove the ovaries of; "Is your cat spayed?") }
+{ defeminize, defeminise, alter,@ frames: 8 (remove the ovaries of (female mammals such as cats)) }
+{ [ emasculate, noun.act:emasculation,+ ] [ castrate, noun.act:castration,+ noun.person:castrate,+ ] demasculinize, demasculinise, sterilize,@ frames: 9,8 (remove the testicles of a male animal) }
+{ [ caponize, noun.animal:capon,+ ] [ caponise, noun.animal:capon,+ ] castrate,@ frames: 8 (convert a cock into a capon) }
+{ [ geld, noun.animal:gelding,+ ] cut, castrate,@ frames: 8,9 (cut off the testicles (of male animals such as horses); "the vet gelded the young horse") }
+{ [ vasectomize, noun.act:vasectomy,+ ] vasectomise, sterilize,@ frames: 9 (remove the vas deferens; "many men choose to be vasectomized as a form of safe birth control") }
+{ [ sterilize, noun.act:sterilization,+ ] [ sterilise, noun.act:sterilisation,+ ] desex, unsex, desexualize, desexualise, [ fix, noun.act:fixing1,+ ] operate_on,@ frames: 9 (make infertile; "in some countries, people with genetically transmissible disabilites are sterilized") }
+{ [ face-lift, noun.act:face_lifting,+ ] lift, operate,@ frames: 8 (perform cosmetic surgery on someone's face) }
+{ [ trephine, noun.act:trephination,+ noun.artifact:trephine,+ ] operate_on,@ frames: 8,9 (operate on with a trephine) }
+{ [ menstruate, noun.process:menstruation,+ ] [ flow, noun.process:flow1,+ ] ovulate,* bleed,@ frames: 2 (undergo menstruation; "She started menstruating at the age of 11") }
+{ [ ovulate, noun.body:ovum,+ noun.body:ovule1,+ noun.process:ovulation,+ ] discharge,@ frames: 2 (produce and discharge eggs; "women ovulate about once every month") }
+{ [ sterilize1, noun.act:sterilization1,+ noun.artifact:sterilizer,+ ] [ sterilise1, noun.act:sterilisation1,+ noun.artifact:steriliser,+ ] disinfect,@ frames: 8 (make free from bacteria) }
+{ antisepticize, disinfect,@ frames: 8,9,10,11 (disinfect with an antiseptic; "The animals were antisepticized by the veterinarian before the operation")}
+{ [ autoclave, noun.artifact:autoclave,+ ] sterilize1,@ frames: 8 (subject to the action of an autoclave) }
+{ [ hatch1, noun.process:hatch,+ noun.process:hatching,+ noun.location:hatchery,+ ] verb.change:be_born,@ frames: 2 (emerge from the eggs; "young birds, fish, and reptiles hatch") }
+{ [ irritate, adj.all:stimulative^irritative,+ noun.state:irritation2,+ noun.feeling:irritation,+ soothe,! ] verb.change:worsen1,@ frames: 11,10 (excite to an abnormal condition, or chafe or inflame; "Aspirin irritates my stomach") }
+{ [ inflame, adj.all:unhealthy^inflammatory,+ noun.state:inflammation,+ ] inflame1,$ verb.change:worsen,@ frames: 1 (become inflamed; get sore; "His throat inflamed") }
+{ [ inflame1, adj.all:unhealthy^inflammatory,+ noun.state:inflammation,+ ] verb.change:worsen1,@ frames: 11,10 (cause inflammation in; "The repetitive motion inflamed her joint")}
+{ [ soothe, irritate,! ] relieve,@ frames: 8,9,11,10 (cause to feel better; "the medicine soothes the pain of the inflammation") }
+{ relieve, [ alleviate, adj.all:moderating^alleviatory,+ adj.all:moderating^alleviative,+ noun.feeling:alleviation,+ noun.act:alleviation,+ noun.person:alleviator,+ noun.artifact:alleviator,+ noun.artifact:alleviant,+ ] [ palliate, adj.all:moderating^palliative,+ noun.act:palliation,+ ] [ assuage, noun.feeling:assuagement,+ ] verb.change:improve1,@ frames: 11 (provide physical relief, as from pain; "This pill will relieve your headaches") }
+{ [ massage, noun.act:massage,+ noun.person:massager,+ ] treat,@ frames: 8,9 (give a massage to; "She massaged his sore back") }
+{ [ hurt1, noun.feeling:hurt2,+ noun.feeling:hurt1,+ ] verb.perception:ache,> indispose,@ frames: 9,11,10 (give trouble or pain to; "This exercise will hurt your back") }
+{ [ indispose, noun.state:indisposition,+ ] verb.change:change1,@ frames: 10 (cause to feel unwell; "She was indisposed") }
+{ [ suffer, noun.person:sufferer,+ noun.state:suffering,+ noun.feeling:suffering1,+ noun.attribute:sufferance,+ be_well,! ] [ hurt2, noun.state:hurt,+ noun.state:hurting,+ ] verb.stative:be3,@ frames: 2,1 (feel pain or be in pain) }
+{ have2, have5,$ suffer,@ frames: 8 (suffer from; be ill with; "She has arthritis") }
+{ [ be_well, suffer,! ] verb.stative:be3,@ frames: 2,1 (be healthy; feel good; "She has not been well lately") }
+{ [ suffer1, noun.person:sufferer,+ ] sustain, have5, get11, verb.perception:experience,@ frames: 8 (undergo (as of injuries and illnesses); "She suffered a fracture in the accident"; "He had an insulin shock after eating three candy bars"; "She got a bruise on her leg"; "He got his arm broken in the scuffle") }
+{ [ wail, noun.communication:wail,+ ] [ whimper, noun.communication:whimper,+ ] mewl, pule, cry,@ frames: 2 (cry weakly or softly; "she wailed with pain") }
+{ [ cry, noun.communication:cry2,+ noun.person:crier1,+ noun.act:crying,+ laugh,! ] [ weep, noun.person:weeper1,+ noun.person:weeper,+ noun.act:weeping,+ ] verb.emotion:express_emotion,@ frames: 2 (shed tears because of sadness, rage, or pain; "She cried bitterly when she heard the news of his death"; "The girl in the wheelchair wept with frustration when she could not get up the stairs") }
+{ [ cry2, noun.act:crying,+ ] cry,$ verb.change:change1,@ frames: 20 (bring into a particular state by crying; "The little boy cried himself to sleep") }
+{ [ bawl, noun.person:bawler1,+ ] cry,@ frames: 2 (cry loudly; "Don't bawl in public!") }
+{ [ tear, noun.body:tear1,+ noun.process:tearing,+ ] cry,@ frames: 1 (fill with tears or shed tears; "Her eyes were tearing") }
+{ [ sob, noun.act:sob,+ noun.act:sobbing,+ ] cry,@ frames: 2 (weep convulsively; "He was sobbing inconsolably")}
+{ [ snivel1, noun.act:snivel,+ noun.person:sniveller,+ noun.act:sniveling,+ ] sniffle1, [ blubber, noun.person:blubberer,+ ] blub, [ snuffle1, noun.act:snuffle,+ ] cry,@ frames: 2 (cry or whine with snuffling; "Stop snivelling--you got yourself into this mess!") }
+{ [ sweat, noun.body:sweat,+ noun.person:sweater,+ noun.process:sweating,+ sweat_off,^ ] [ sudate, noun.process:sudation,+ ] [ perspire, noun.process:perspiration,+ noun.body:perspiration,+ ] excrete,@ frames: 2 (excrete perspiration through the pores in the skin; "Exercise makes one sweat") }
+{ [ superfetate, noun.event:superfetation,+ ] conceive,@ frames: 1,2 (conceive when a fetus is already present in the uterus)}
+{ [ exude, noun.substance:exudation,+ noun.event:exudation,+ noun.substance:exudate,+ ] [ exudate, noun.substance:exudate,+ ] [ transude, noun.event:transudation,+ ] ooze_out, [ ooze, noun.event:ooze,+ noun.event:oozing,+ ] excrete,@ frames: 1,8,11 (release (a liquid) in drops or small quantities; "exude sweat through the pores") }
+{ distill, distil, exude,@ frames: 11 (give off (a liquid); "The doctor distilled a few drops of disinfectant onto the wound")}
+{ reek, fume, exude,@ frames: 1 (be wet with sweat or blood, as of one's face) }
+{ [ transpire, noun.process:transpiration2,+ ] exude,@ frames: 2 (give off (water) through the skin) }
+{ [ extravasate, noun.state:extravasation,+ ] exude,@ frames: 1,11 (geology: cause molten material, such as lava, to pour forth) }
+{ stream, exude,@ frames: 8,11,22 (exude profusely; "She was streaming with sweat"; "His nose streamed blood") }
+{ [ gum, noun.substance:gum,+ ] exude,@ frames: 1 (exude or form gum; "these trees gum in the Spring") }
+{ [ secrete, noun.process:secretion,+ noun.body:secretor,+ ] [ release, noun.process:release,+ ] exude,@ frames: 8,11 (generate and separate from cells or bodily fluids; "secrete digestive juices"; "release a hormone into the blood stream") }
+{ water, secrete,@ frames: 1 (secrete or form water, as tears or saliva; "My mouth watered at the prospect of a good dinner"; "His eyes watered") }
+{ swelter, sweat,@ frames: 2,22 (suffer from intense heat; "we were sweltering at the beach") }
+{ [ injure, noun.state:injury,+ noun.event:injury,+ noun.act:injury2,+ ] [ wound, noun.event:wound,+ noun.act:wound,+ noun.act:wounding,+ ] hurt1,@ frames: 9,8,10,11 (cause injuries or bodily harm to) }
+{ [ trample, noun.event:trample,+ noun.person:trampler1,+ ] injure,@ frames: 10,11 (injure by trampling or as if by trampling; "The passerby was trampled by an elephant") }
+{ concuss, injure,@ frames: 8 (injure the brain; sustain a concussion) }
+{ calk, wound,@ frames: 8 (injure with a calk) }
+{ [ trouble, noun.event:trouble,+ ] [ ail1, noun.state:ailment,+ ] [ pain, noun.cognition:pain,+ noun.state:pain,+ ] hurt1,@ frames: 10 (cause bodily suffering to and make sick or indisposed) }
+{ disagree_with, hurt1,@ frames: 10 (not be very easily digestible; "Spicy food disagrees with some people") }
+{ [ torture, noun.act:torture,+ noun.state:torture,+ noun.person:torturer,+ noun.act:torturing,+ ] [ excruciate, noun.state:excruciation,+ noun.act:excruciation,+ ] [ torment, noun.state:torment,+ noun.person:tormenter,+ ] injure,@ frames: 9 (subject to torture; "The sinners will be tormented in Hell, according to the Bible") }
+{ [ rack, noun.artifact:rack2,+ ] torture,@ frames: 9 (torture on the rack) }
+{ martyr, [ martyrize, noun.person:martyr1,+ noun.person:martyr,+ ] martyrise, torture,@ frames: 9 (torture and torment like a martyr) }
+{ [ pull, noun.state:pull,+ ] overstretch, injure,@ frames: 8 (strain abnormally; "I pulled a muscle in my leg when I jumped up"; "The athlete pulled a tendon in the competition") }
+{ make1, [ urinate, noun.process:urination,+ noun.substance:urine,+ noun.person:urinator,+ ] [ piddle, noun.substance:piddle,+ ] puddle, [ micturate, noun.process:micturition,+ ] [ piss, noun.process:piss,+ noun.substance:piss,+ noun.person:pisser,+ noun.process:pissing,+ ] [ pee, noun.process:pee,+ noun.substance:pee,+ noun.process:peeing,+ ] pee-pee, make_water, relieve_oneself, take_a_leak, spend_a_penny, wee, wee-wee, pass_water, make,$ excrete,@ frames: 2,1 (eliminate urine; "Again, the cat had made on the expensive rug")}
+{ urinate1, urinate,$ excrete,@ frames: 8 (pass after the manner of urine; "The sick men urinated blood")}
+{ [ wet, noun.person:wetter1,+ ] urinate,@ frames: 8 (make one's bed or clothes wet by urinating; "This eight year old boy still wets his bed") }
+{ stale, urinate,@ frames: 1 (urinate, of cattle and horses) }
+{ [ excrete, adj.pert:excretory,+ noun.process:excretion,+ noun.process:excreting,+ ] egest, eliminate, [ pass, noun.act:passing5,+ ] discharge,@ frames: 8 (eliminate from the body; "Pass a kidney stone") }
+{ [ evacuate, adj.all:laxative^evacuant,+ noun.process:evacuation,+ noun.act:evacuation,+ ] [ void, noun.person:voider1,+ noun.process:voiding,+ noun.act:voidance,+ ] empty, eliminate,@ frames: 8 (excrete or discharge from the body) }
+{ [ suction, noun.act:suction,+ noun.phenomenon:suction,+ ] evacuate,@ noun.act:surgery1,;c frames: 8 (empty or clean (a body cavity) by the force of suction; "suction the uterus in an abortion") }
+{ [ purge, adj.all:laxative^purgative,+ noun.act:purgation,+ ] evacuate,> treat,@ frames: 2,9 (excrete or evacuate (someone's bowels or body); "The doctor decided that the patient must be purged")}
+{ [ stool, noun.artifact:stool1,+ noun.substance:stool,+ ] [ defecate, noun.process:defecation,+ noun.person:defecator,+ ] [ shit, noun.process:shit,+ noun.substance:shit,+ noun.person:shitter,+ noun.process:shitting,+ ] take_a_shit, take_a_crap, ca-ca, [ crap, noun.substance:crap,+ noun.artifact:crapper,+ ] make, excrete,@ frames: 2,1 (have a bowel movement; "The dog had made in the flower beds") }
+{ [ dung, noun.substance:dung,+ ] shit,@ frames: 1 (defecate; used of animals) }
+{ [ constipate, noun.state:constipation,+ ] bind, indispose,@ frames: 10 (cause to be constipated; "These foods tend to constipate you") }
+{ [ obstipate, noun.state:obstipation,+ ] constipate,@ frames: 10 (constipate severely)}
+{ shed_blood, [ bleed, noun.person:bleeder,+ noun.state:bleeding,+ ] [ hemorrhage, noun.state:hemorrhage,+ ] discharge,@ frames: 2 (lose blood from one's body)}
+{ [ tire1, refresh,! ] wear_upon, tire_out, [ wear3, noun.state:wear,+ ] weary, [ jade1, noun.animal:jade,+ ] wear_out, outwear, wear_down, fag_out, fag, [ fatigue, noun.state:fatigue,+ ] tire,> indispose,@ frames: 9,10 (exhaust or get tired through overuse or great strain or stress; "We wore ourselves out on this hike") }
+{ [ exhaust, noun.act:exhaustion,+ ] wash_up1, beat, tucker, tucker_out, tire1,@ frames: 10,9 (wear out completely; "This kind of work exhausts me"; "I'm beat"; "He was all washed up after the exam") }
+{ [ frazzle, noun.state:frazzle,+ ] exhaust,@ frames: 10 (exhaust physically or emotionally; "She was frazzled after the visit of her in-laws")}
+{ play4, exhaust,@ frames: 8 (exhaust by allowing to pull on the line; "play a hooked fish") }
+{ overtire, overweary, overfatigue, tire1,@ frames: 9,10 (tire excessively) }
+{ tire, pall, weary1, [ fatigue1, noun.feeling:fatigue,+ ] [ jade, noun.animal:jade,+ ] deteriorate,@ frames: 2 (lose interest or become bored with something or somebody; "I'm so tired of your mother and her complaints about my food") }
+{ [ vomit, noun.act:vomit,+ noun.artifact:vomit,+ noun.substance:vomit,+ noun.person:vomiter,+ noun.act:vomiting,+ keep_down,!] [vomit_up, frames:8 ] purge4, cast, [ sick, noun.group:sick,+ ] cat, be_sick1, [ disgorge, noun.act:disgorgement,+ ] regorge, [ retch, noun.act:retch,+ frames: 8] [ puke, noun.substance:puke,+ noun.act:puking,+ ] barf, [ spew, noun.person:spewer,+ ] spue, chuck, upchuck, honk, [ regurgitate, noun.act:regurgitation,+ frames: 8] [throw_up, frames: 8] eliminate,@ frames: 2 (eject the contents of the stomach through the mouth; "After drinking too much, the students vomited"; "He purged continuously"; "The patient regurgitated the food we gave him last night") }
+{ spew2, spew_out, [ eruct4, noun.state:eructation,+ ] eject,@ frames: 8,11 (eject or send out in large quantities, also metaphorical; "the volcano spews out molten rocks every day"; "The editors of the paper spew out hostile articles about the Presidential candidate")}
+{ [keep_down, vomit,!] frames: 8 (manage not to throw up) }
+{ gag1, [ heave, noun.act:heave3,+ ] [ retch1, noun.act:retch,+ ] frames: 2 (make an unsuccessful effort to vomit; strain to vomit) }
+{ gag2, choke1, sicken1,@ frames: 10 (cause to retch or choke) }
+{ gag, [ choke3, noun.state:choking,+ ] strangle3, [ suffocate1, adj.all:breathless^suffocative,+ noun.state:suffocation,+ ] suffer,@ frames: 2,22,13 (struggle for breath; have insufficient oxygen intake; "he swallowed a fishbone and gagged") }
+{ [ choke4, noun.act:choking,+ ] [ strangle2, noun.state:strangulation,+ ] choke,> verb.contact:constrict,@ frames: 9,10 (constrict (someone's) throat and keep from breathing) }
+{ [ freeze, noun.phenomenon:freeze,+ ] suffer3,@ frames: 2,23 (be cold; "I could freeze to death in this office when the air conditioning is turned on") }
+{ swelter1, suffer3,@ frames: 2 (be uncomfortably hot) }
+{ suffer3, verb.stative:be3,@ frames: 2,22 (feel unwell or uncomfortable; "She is suffering from the hot weather") }
+{ gnash, verb.contact:grind,@ frames: 8 (grind together, of teeth) }
+{ [ ail, noun.state:ailment,+ ] suffer,@ frames: 2 (be ill or unwell) }
+{ [ treat, noun.act:treatment,+ ] care_for, frames: 9,8 (provide treatment for; "The doctor treated my broken leg"; "The nurses cared for the bomb victims"; "The patient must be treated right away or she will die"; "Treat the infection with antibiotics")}
+{ [ correct4, adj.all:bettering^corrective,+ ] treat,@ frames: 4,11 (treat a defect; "The new contact lenses will correct for his myopia")}
+{ [ insufflate1, noun.process:insufflation,+ ] insufflate,$ treat,@ frames: 8 (treat by blowing a powder or vapor into a bodily cavity)}
+{ detox, [ detoxify, noun.act:detoxification1,+ ] treat,@ frames: 9 (treat for alcohol or drug dependence; "He was detoxified in the clinic")}
+{ [ irrigate, noun.act:irrigation1,+ ] treat,@ frames: 8 (supply with a constant flow or sprinkling of some liquid, for the purpose of cooling, cleansing, or disinfecting; "irrigate the wound")}
+{ iodize, iodise, treat,@ frames: 8 (treat with iodine so as to prevent infection; "iodize a wound")}
+{ [ doctor, noun.person:doctor,+ ] treat,@ noun.act:medicine,;c frames: 9,8 (give medical treatment to) }
+{ [ vet, noun.person:vet,+ ] doctor,@ noun.act:medicine,;c frames: 8,9 (provide veterinary care for) }
+{ vet1, care_for,@ noun.act:medicine,;c frames: 9 (provide (a person) with medical care) }
+{ [ nurse, noun.person:nurse,+ noun.act:nursing,+ ] treat,@ noun.act:medicine,;c frames: 8 (try to cure by special care of treatment, of an illness or injury; "He nursed his cold with Chinese herbs") }
+{ [ manipulate, noun.act:manipulation1,+ ] treat,@ frames: 8 (treat manually, as with massage, for therapeutic purposed) }
+{ [ administer, noun.act:administration1,+ ] [ dispense, noun.artifact:dispensary,+ noun.possession:dispensation,+ noun.act:dispensation,+ ] verb.possession:give14,* treat,@ noun.act:medicine,;c frames: 8,15 (give or apply (medications))}
+{ [ transfuse1, noun.act:transfusion,+ ] administer,@ noun.act:medicine,;c frames: 9 (give a transfusion (e.g., of blood) to)}
+{ [ digitalize, noun.act:digitalization,+ noun.substance:digitalis,+ ] administer,@ noun.act:medicine,;c frames: 9 (administer digitalis such that the patient benefits maximally without getting adverse effects)}
+{ bring_around1, [ cure, adj.all:curable,+ adj.all:healthful^curative,+ noun.artifact:cure,+ ] [ heal1, noun.person:healer,+ ] treat,* help,@ noun.act:medicine,;c frames: 9,8 (provide a cure for, make healthy again; "The treatment cured the boy's acne"; "The quack pretended to heal patients but never managed to") }
+{ [ help, noun.attribute:help,+ noun.act:help,+ ] [ aid, noun.act:aid1,+ ] verb.change:improve1,@ frames: 9,10 (improve the condition of; "These pills will help the patient")}
+{ [ comfort, noun.state:comfort,+ noun.artifact:comforter1,+ noun.artifact:comforter,+ ] [ ease, noun.act:easement,+ noun.act:easing,+ ] relieve,@ frames: 9,8 (lessen pain or discomfort; alleviate; "ease the pain in your legs" ) }
+{ [ remedy, noun.artifact:remedy,+ ] relieve2, treat,@ noun.act:medicine,;c frames: 8 (provide relief for; "remedy his illness") }
+{ [ dress2, noun.artifact:dressing,+ noun.act:dressing1,+ ] treat,@ noun.act:medicine,;c frames: 8 (apply a bandage or medication to; "dress the victim's wounds") }
+{ [ poultice, noun.artifact:poultice,+ ] [ plaster, noun.artifact:plaster2,+ noun.act:plastering,+ ] dress2,@ noun.act:medicine,;c frames: 8 (dress by covering with a therapeutic substance) }
+{ [ bandage, noun.artifact:bandage,+ ] dress2,@ noun.act:medicine,;c frames: 8 (dress by covering or binding; "The nurse bandaged a sprained ankle"; "bandage an incision") }
+{ [ ligate, noun.act:ligature,+ noun.act:ligation,+ noun.artifact:ligature1,+ ] bandage,@ noun.cognition:surgery,;c frames: 8 (bind with a bandage or ligature; "ligate the artery")}
+{ [ strap, noun.artifact:strap1,+ ] verb.contact:fasten1,@ noun.act:medicine,;c frames: 8 (secure (a sprained joint) with a strap) }
+{ [ splint, noun.artifact:splint,+ ] treat,@ noun.act:medicine,;c frames: 8 (support with a splint; "splint a broken finger") }
+{ operate_on, [ operate, adj.all:operative4,+ noun.act:operation,+ ] treat,@ noun.act:medicine,;c frames: 9,8 (perform surgery on; "The doctors operated on the patient but failed to save his life") }
+{ [ venesect, noun.act:venesection,+ ] operate,@ noun.act:medicine,;c frames: 2 (practice venesection)}
+{ [ medicate, adj.all:healthful^medicative,+ noun.cognition:medicine,+ noun.artifact:medicine,+ noun.act:medicine,+ noun.artifact:medication,+ noun.act:medication,+ ] [ medicine, noun.act:medicine,+ noun.artifact:medicine,+ noun.cognition:medicine,+ ] noun.act:medicine,;c treat,@ frames: 9 (treat medicinally, treat with medicine) }
+{ [ medicate1, adj.all:healthful^medicative,+ noun.artifact:medicine,+ noun.act:medication,+ ] verb.change:impregnate,@ noun.act:medicine,;c frames: 8 (impregnate with a medicinal substance) }
+{ [ drug, noun.artifact:drug,+ noun.act:drugging,+ ] [ dose, noun.quantity:dosage,+ noun.artifact:dose,+ ] medicate,@ noun.act:medicine,;c frames: 9 (administer a drug to; "They drugged the kidnapped tourist") }
+{ [ dope, noun.artifact:dope,+ ] dope_up, drug,@ noun.act:medicine,;c frames: 9 (give a narcotic to; "The athletes were dope by the coach before the race") }
+{ soup, dope,@ noun.act:medicine,;c frames: 8,9 (dope (a racehorse)) }
+{ overdose, o.d., drug,@ frames: 2 (dose too heavily; "The rock star overdosed and was found dead in his hotel room") }
+{ [ narcotize, noun.artifact:narcotic,+ ] narcotise, drug,@ frames: 9 (administer narcotics to) }
+{ [ anoint, noun.act:anointment,+ noun.person:anointer,+ ] [ inunct, noun.act:inunction,+ ] [ oil, noun.substance:oil,+ ] anele, [ embrocate, noun.artifact:embrocation,+ ] verb.communication:bless,@ frames: 9,8,17 (administer an oil or ointment to; often in a religious ceremony of blessing) }
+{ [ salve, noun.act:salve,+ noun.artifact:salve,+ ] medicate,@ noun.act:medicine,;c frames: 8 (apply a salve to, usually for the purpose of healing) }
+{ bleed1, [ leech, noun.animal:leech,+ ] [ phlebotomize, noun.act:phlebotomy,+ ] phlebotomise, treat,@ noun.act:medicine,;c frames: 9 (draw blood; "In the old days, doctors routinely bled patients as part of the treatment") }
+{ [ inject, adj.all:injectable,+ noun.act:injection1,+ noun.substance:injectant,+ ] shoot, administer,@ noun.act:medicine,;c frames: 9,17 (give an injection to; "We injected the glucose into the patient's vein")}
+{ [ infuse, noun.act:infusion,+ ] inject,@ noun.act:medicine,;c frames: 8 (introduce into the body through a vein, for therapeutic purposes; "Some physiologists infuses sugar solutions into the veins of animals")}
+{ [ immunize, noun.act:immunization,+ ] immunise, [ inoculate, noun.act:inoculation,+ noun.substance:inoculant,+ noun.person:inoculator,+ noun.act:inoculating,+ ] [ vaccinate, noun.state:vaccination,+ noun.act:vaccination,+ noun.artifact:vaccine,+ noun.person:vaccinator,+ noun.act:vaccinating,+ ] shoot,@ noun.act:medicine,;c frames: 2,9 (perform vaccinations or produce immunity in by inoculation; "We vaccinate against scarlet fever"; "The nurse vaccinated the children in the school")}
+{ [ cup, noun.act:cupping,+ ] transfuse, treat,@ noun.act:medicine,;c frames: 9 (treat by applying evacuated cups to the patient's skin) }
+{ sicken, come_down, verb.change:worsen,@ frames: 2 (get sick; "She fell sick last Friday, and now she is in the hospital")}
+{ wan, sicken,@ frames: 2 (become pale and sickly) }
+{ [ contract, noun.act:contracting,+ ] take8, get, catch10,$ sicken,@ frames: 8 (be stricken by an illness, fall victim to an illness; "He got AIDS"; "She came down with pneumonia"; "She took a chill")}
+{ catch10, contract,@ frames: 8 (contract; "did you catch a cold?")}
+{ catch_cold, catch10,@ frames: 2 (come down with a cold) }
+{ sicken1, harm,@ frames: 10 (make sick or ill; "This kind of food sickens me") }
+{ [ poison, noun.act:poisoning,+ ] drug,@ frames: 9,10 (administer poison to; "She poisoned her husband but he did not die")}
+{ [ intoxicate, adj.all:alcoholic^intoxicant,+ noun.state:intoxication1,+ noun.state:intoxication,+ noun.artifact:intoxicant,+ ] poison,@ frames: 10 (have an intoxicating effect on, of a drug) }
+{ [ infect, adj.all:unhealthful^infective,+ adj.all:septic^infective,+ noun.process:infection,+ noun.state:infection,+ disinfect,! ] [ taint, noun.state:taint,+ ] verb.change:contaminate,@ frames: 9 (contaminate with a disease or microorganism) }
+{ [ superinfect, noun.state:superinfection,+ ] infect,@ frames: 8,11 (infect (an infected cell) further or infect a cell already containing similar organisms)}
+{ [ smut, noun.plant:smut,+ noun.state:smut,+ ] taint,@ noun.act:agriculture,;c frames: 11 (affect with smut or mildew, as of a crop such as corn) }
+{ [ disinfect, adj.all:antiseptic^disinfectant,+ noun.act:disinfection,+ noun.artifact:disinfectant,+ infect,! ] verb.contact:clean,@ frames: 9,8,10 (destroy microorganisms or pathogens by cleansing; "disinfect a wound") }
+{ [ chlorinate, noun.substance:chlorine,+ noun.act:chlorination,+ ] disinfect,@ frames: 8 (disinfect with chlorine; "chlorinate a pool") }
+{ [ infect1, adj.all:unhealthful^infective,+ adj.all:septic^infective,+ noun.event:infection,+ ] verb.possession:give3,@ frames: 9,17 (communicate a disease to; "Your children have infected you with this head cold") }
+{ [ canker, noun.state:canker,+ ] infect1,@ frames: 11 (infect with a canker) }
+{ [ canker1, noun.state:canker,+ ] sicken,@ frames: 1 (become infected with a canker) }
+{ [ traumatize, noun.state:trauma2,+ noun.state:trauma1,+ ] [ traumatise, noun.state:trauma2,+ ] [ shock, noun.event:shock1,+ noun.feeling:shock1,+ ] injure,@ frames: 10 (inflict a trauma upon) }
+{ [ shock1, noun.act:shock,+ ] treat,@ frames: 9 (subject to electrical shocks) }
+{ [ galvanize2, noun.process:galvanization,+ noun.act:galvanism,+ ] [ galvanise2, noun.process:galvanisation,+ noun.act:galvanism,+ ] shock1,@ frames: 8 (stimulate (muscles) by administering a shock) }
+{ [ mutilate, noun.event:mutilation,+ noun.person:mutilator,+ ] mar, maim,@ frames: 9,10 (destroy or injure severely; "mutilated bodies") }
+{ [ maim, noun.person:maimer,+ ] injure,@ frames: 9,10 (injure or wound seriously and leave permanent disfiguration or mutilation; "people were maimed by the explosion") }
+{ [ twist, noun.state:twist,+ ] [ sprain, noun.state:sprain,+ ] [ wrench, noun.state:wrench,+ ] turn, [ wrick, noun.state:wrick,+ ] [ rick, noun.state:rick,+ ] injure,@ frames: 8 (twist suddenly so as to sprain; "wrench one's ankle"; "The wrestler twisted his shoulder"; "the hikers sprained their ankles when they fell"; "I turned my ankle and couldn't walk for several days") }
+{ [ subluxate, noun.event:subluxation,+ ] injure,@ frames: 8 (sprain or dislocate slightly; "subluxate the hip")}
+{ [ cripple, noun.person:cripple,+ ] lame, maim,@ frames: 9,10 (deprive of the use of a limb, especially a leg; "The accident has crippled her for life") }
+{ [ hamstring, noun.body:hamstring,+ ] cripple,@ frames: 9 (cripple by cutting the hamstring) }
+{ [ disable, noun.state:disablement,+ ] [ invalid, noun.person:invalid,+ ] incapacitate, [ handicap, noun.state:handicap,+ ] injure,@ frames: 9,10 (injure permanently; "He was disabled in a car accident") }
+{ hock, disable,@ frames: 8 (disable by cutting the hock)}
+{ devolve, [ deteriorate, noun.state:deterioration,+ noun.process:deterioration,+ recuperate,! ] drop1, [ degenerate, adj.all:chronic^degenerative,+ noun.state:degeneration,+ noun.process:degeneration,+ ] verb.change:worsen,@ frames: 1,2 (grow worse; "Her condition deteriorated"; "Conditions in the slums degenerated"; "The discussion devolved into a shouting match") }
+{ [ recuperate, adj.all:healthful^recuperative,+ noun.process:recuperation,+ deteriorate,! ] [ recover, noun.process:recovery,+ ] [ convalesce, adj.all:ill1^convalescent,+ noun.person:convalescent,+ noun.process:convalescence,+ ] verb.change:improve,@ frames: 2 (get over an illness or shock; "The patient is recuperating") }
+{ snap_back, recover,@ frames: 2 (recover quickly; "After the surgery, the patient snapped back in a few days")}
+{ [ recuperate1, adj.all:healthful^recuperative,+ noun.process:recuperation,+ ] recuperate,$ cure,@ frames: 9,10 (restore to good health or strength)}
+{ [ relapse, noun.act:relapse,+ noun.act:relapsing,+ ] [ lapse, noun.act:lapse1,+ ] [ recidivate, noun.act:recidivism,+ ] regress, retrogress, fall_back, verb.change:revert,@ frames: 2 (go back to bad behavior; "Those who recidivate are often minor criminals") }
+{ [ languish, noun.person:languisher,+ ] [ fade, noun.event:fading,+ ] deteriorate,@ frames: 22 (become feeble; "The prisoner has been languishing for years in the dungeon") }
+{ [ waste, noun.process:wastage,+ ] rot, deteriorate,@ frames: 1 (become physically weaker; "Political prisoners are wasting away in many prisons all over the world") }
+{ [ atrophy, noun.state:atrophy,+ noun.event:atrophy,+ ] verb.change:shrink2,@ frames: 1,2,23 (undergo atrophy; "Muscles that are not used will atrophy") }
+{ [ hypertrophy, noun.state:hypertrophy,+ ] verb.change:grow,@ frames: 1 (undergo hypertrophy; "muscles can hypertrophy when people take steroids") }
+{ fledge, [ feather, noun.animal:feather,+ ] grow,@ frames: 1 (grow feathers; "The young sparrows are fledging already") }
+{ grow, [ develop, noun.process:development1,+ ] produce, [ get1, noun.act:getting,+ ] acquire, verb.change:change,@ frames: 8,11 (come to have or undergo a change of (physical features and attributes); "He grew a beard"; "The patient developed abdominal pains"; "I got funny spots all over my body"; "Well-developed breasts") }
+{ regrow, grow,@ frames: 11 (grow anew or continue growth after an injury or interruption; "parts of the trunk of this tree can regrow"; "some invertebrates can regrow limbs or their tail after they lost it due to an injury")}
+{ spring, grow,@ frames: 11 (develop suddenly; "The tire sprang a leak") }
+{ [ sprout1, noun.plant:sprout,+ noun.food:sprout,+ noun.process:sprouting,+ ] [ stock3, noun.plant:stock3,+ ] grow,@ frames: 1 (put forth and grow sprouts or shoots; "the plant sprouted early this year") }
+{ [ stool1, noun.plant:stool,+ ] [ tiller, noun.plant:tiller,+ ] grow,@ frames: 1 (grow shoots in the form of stools or tillers) }
+{ [ leaf, noun.plant:leaf,+ noun.plant:leafage,+ ] grow,@ frames: 1 (produce leaves, of plants) }
+{ [ pod, noun.plant:pod,+ noun.plant:pod1,+ ] grow,@ frames: 1 (produce pods, of plants) }
+{ [ teethe, noun.process:teething,+ ] grow,@ frames: 2 (grow teeth; cut the baby teeth; "The little one is teething now") }
+{ cut14, cut4,$ verb.change:grow2,@ frames: 1 (grow through the gums; "The new tooth is cutting") }
+{ ankylose, ancylose, verb.change:grow2,@ noun.act:medicine,;c frames: 1 (undergo ankylosis; "joints ankylose") }
+{ ankylose1, ancylose1, verb.contact:join1,@ noun.act:medicine,;c frames: 8 (produce ankylosis by surgery) }
+{ [ pupate, noun.animal:pupa,+ ] develop,@ frames: 1 (develop into a pupa; "the insect larva pupate") }
+{ work_up, get_up3, develop,@ frames: 8 (develop; "we worked up an as of an appetite") }
+{ [ fester, noun.process:festering,+ noun.state:fester,+ ] [ maturate, noun.process:maturation2,+ ] [ suppurate, adj.pert:suppurative,+ noun.process:suppuration,+ noun.body:suppuration,+ ] discharge,@ frames: 23 (ripen and generate pus; "her wounds are festering") }
+{ draw, verb.social:localize,@ frames: 1 (cause to localize at one point; "Draw blood and pus") }
+{ [ suppurate1, noun.process:suppuration,+ noun.body:suppuration,+ ] [ mature4, noun.process:maturation2,+ ] suppurate,$ draw,@ frames: 8 (cause to ripen and discharge pus; "The oil suppurates the pustules") }
+{ necrose, [ gangrene, noun.state:gangrene,+ ] [ mortify, noun.phenomenon:mortification,+ ] [ sphacelate, noun.state:sphacelus,+ noun.phenomenon:sphacelus,+ ] rot,@ frames: 23 (undergo necrosis; "the tissue around the wound necrosed") }
+{ regenerate, revitalize, verb.change:improve1,@ frames: 10,11 (restore strength; "This food revitalized the patient") }
+{ [ rejuvenate, noun.phenomenon:rejuvenation,+ ] regenerate1,@ frames: 2 (become young again; "The old man rejuvenated when he became a grandfather")}
+{ [ regenerate1, noun.process:regeneration,+ noun.act:regeneration1,+ ] verb.change:change,@ frames: 1 (undergo regeneration) }
+{ [ resuscitate, noun.act:resuscitation,+ noun.artifact:resuscitator,+ ] revive1, revive2,> bring_to,@ frames: 9,10 (cause to regain consciousness; "The doctors revived the comatose man")}
+{ boot, reboot, bring_up, revive1,@ frames: 8 (cause to load (an operating system) and start the initial processes; "boot your computer") }
+{ [ resurrect, noun.act:resurrection,+ ] raise, upraise, resuscitate,@ frames: 9,10 (cause to become alive again; "raise from the dead"; "Slavery is already dead, and cannot be resurrected"; "Upraising ghosts") }
+{ resurrect1, [ rise, noun.event:rise3,+ ] uprise5, resurrect,$ verb.motion:return,@ frames: 1,2 (return from the dead; "Christ is risen!"; "The dead are to uprise")}
+{ [ scab, noun.body:scab,+ ] heal,@ frames: 23 (form a scab; "the wounds will eventually scab") }
+{ skin_over, heal,@ frames: 23 (grow new skin over an injury) }
+{ [ heal, noun.process:healing,+ ] verb.change:improve,@ frames: 1,23 (get healthy again; "The wound is healing slowly") }
+{ [ granulate, noun.state:granulation,+ ] heal,@ frames: 23 (form granulating tissue; "wounds and ulcers can granulate") }
+{ poop_out, peter_out, run_down, run_out, conk_out, tire,@ frames: 2 (use up all one's strength and energy and stop working; "At the end of the march, I pooped out") }
+{ [ exercise, noun.act:exercise,+ noun.artifact:exerciser,+ noun.act:exercising,+ ] [work_out, noun.act:workout,+] work_out1,$ verb.motion:move,* frames: 2,8 (do physical exercise; "She works out in the gym every day") }
+{ [ train, noun.act:training,+ ] exercise,@ frames: 2 (exercise in order to prepare for an event or competition; "She is training for the Olympics") }
+{ [ tumble, noun.act:tumble,+ noun.person:tumbler,+ noun.act:tumbling,+ ] exercise,@ frames: 2 (do gymnastics, roll and turn skillfully) }
+{ [ roll6, noun.event:roll2,+ ] tumble,@ frames: 2 (execute a roll, in tumbling; "The gymnasts rolled and jumped") }
+{ [ exercise1, noun.act:exercise,+ noun.artifact:exerciser,+ ] work, [work_out1, noun.act:workout,+] exercise,> verb.social:work1,@ frames: 9,8 (give a workout to; "Some parents exercise their infants"; "My personal trainer works me hard"; "work one's muscles"; "this puzzle will exercise your mind") }
+{ [warm_up1, noun.act:warm-up,+] exercise1,@ verb.social:work1,@ frames: 9 (cause to do preliminary exercises so as to stretch the muscles; "The coach warmed up the players before the game") }
+{ limber, warm_up1,@ frames: 8 (cause to become limber; "The violist limbered her wrists before the concert")}
+{ [ tone, noun.state:tone2,+ ] tone_up, strengthen, exercise,@ frames: 8 (give a healthy elasticity to; "Let's tone our muscles") }
+{ [ stretch2, noun.act:stretch1,+ ] stretch_out2, verb.motion:move,@ frames: 2 (extend one's body or limbs; "Let's stretch for a minute--we've been sitting here for over 3 hours") }
+{ [ fart, noun.act:fart,+ noun.act:farting,+ ] break_wind, act_involuntarily,@ frames: 2 (expel intestinal gases through the anus) }
+{ [ snuffle, noun.act:snuffle,+ noun.person:snuffler,+ ] [ snivel, noun.act:snivel1,+ noun.person:sniveller,+ ] inhale,@ frames: 2 (snuff up mucus through the nose) }
+{ [ spit, noun.act:spit,+ noun.body:spit,+ noun.person:spitter,+ noun.act:spitting,+ spit_up,^ verb.possession:spit_up,^ ] [ ptyalize, noun.process:ptyalism,+ ] ptyalise, spew1, spue1, expectorate,@ frames: 2,8 (expel or eject (saliva or phlegm or sputum) from the mouth; "The father of the victim spat at the alleged murderer")}
+{ splutter, sputter, spit_out, spit_up,@ frames: 8 (spit up in an explosive manner) }
+{ stub, verb.contact:strike1,@ frames: 8 (strike (one's toe) accidentally against an object; "She stubbed her toe in the dark and now it's broken") }
+{ [ harm, noun.act:harm,+ noun.event:harm1,+ ] injure,@ frames: 1,2,12,9,10 (cause or do harm to; "These pills won't harm your system") }
+{ [ salivate, noun.process:salivation,+ noun.body:saliva,+ ] act_involuntarily,@ frames: 2 (produce saliva; "We salivated when he described the great meal") }
+{ [ drivel, noun.body:drivel,+ noun.person:driveller1,+ ] [ drool, noun.body:drool,+ noun.person:drooler,+ verb.emotion:drool_over,^ ] slabber, slaver, [ slobber, noun.person:slobberer,+ noun.body:slobber,+ verb.emotion:slobber_over,^ ] [ dribble, noun.body:dribble,+ noun.person:dribbler,+ ] salivate,@ frames: 2 (let saliva drivel from the mouth; "The baby drooled") }
+{ [ blush, noun.act:blush,+ noun.plant:blusher,+ noun.artifact:blusher,+ ] [ crimson, noun.attribute:crimson,+ ] [ flush, noun.state:flush,+ noun.act:flush,+ ] redden, verb.change:discolor,@ frames: 2 (turn red, as if in embarrassment or shame; "The girl blushed when a young man whistled as she walked by")}
+{ [ pale, noun.attribute:pallor,+ ] blanch, blench, verb.change:discolor,@ frames: 2 (turn pale, as if in fear) }
+{ [ etiolate, noun.attribute:etiolation,+ ] verb.change:change1,@ frames: 11 (make pale or sickly; "alcohol etiolates your skin") }
+{ [ tan, noun.state:tan,+ noun.process:tanning,+ ] bronze, verb.change:discolor,@ frames: 2 (get a tan, from wind or sun)}
+{ [ suntan, noun.state:suntan,+ ] tan,@ frames: 2 (get a tan from being exposed to the sun) }
+{ [ sun, noun.phenomenon:sun,+ frames: 9] [ sunbathe, noun.person:sunbather,+ ] verb.contact:lie,@ frames: 2,22 (expose one's body to the sun) }
+{ [ sunburn, noun.state:sunburn,+ noun.state:sunburn1,+ ] [ burn, noun.state:burn2,+ ] verb.change:discolor,@ frames: 2 (get a sunburn by overexposure to the sun) }
+{ generalize, generalise, verb.contact:spread,@ frames: 1,4 (become systemic and spread throughout the body; "this kind of infection generalizes throughout the immune system") }
+{ [ metastasize, noun.process:metastasis1,+ ] metastasise, verb.contact:spread,@ frames: 1,4 (spread throughout the body; "the cancer had metastasized and the patient could not be saved") }
+{ exhaust2, [ discharge, noun.process:discharge,+ ] [ expel, noun.act:expulsion,+ noun.process:expelling,+ ] [ eject, noun.act:ejection1,+ ] [ release1, noun.process:release,+ ] frames: 8,11 (eliminate (a substance); "combustion products are exhausted in the engine"; "the plant releases a gas")}
+{ [ emit, noun.act:emission,+ ] breathe1, pass_off, discharge,@ frames: 8,11 (expel (gases or odors)) }
+{ [ joke, noun.person:joker,+ noun.act:joke1,+ noun.communication:joke,+ ] [ jest, noun.act:jest,+ noun.communication:jest,+ noun.person:jester,+ ] behave,@ frames: 2 (act in a funny or teasing way) }
+{ [ clown, noun.person:clown,+ noun.communication:clowning,+ noun.act:clowning,+ ] clown_around, [ antic, noun.act:antic,+ ] jest,@ frames: 2 (act as or like a clown) }
+{ feel, verb.stative:be3,@ frames: 7 (be conscious of a physical, mental, or emotional state; "My cold is gone--I feel fine today"; "She felt tired after the long hike"; "She felt sad after her loss") }
+{ feel_like_a_million, feel_like_a_million_dollars, feel,@ frames: 2 (be in excellent health and spirits; "he feels like a million after he got the promotion")}
+{ [ suffocate3, adj.all:breathless^suffocative,+ ] feel,@ frames: 8 (feel uncomfortable for lack of fresh air; "The room was hot and stuffy and we were suffocating")}
+{ [ gown, noun.artifact:gown2,+ noun.artifact:gown1,+ noun.artifact:gown,+ ] dress1,@ frames: 9 (dress in a gown) }
+{ [ jaundice, noun.state:jaundice,+ ] affect,@ frames: 10 (affect with, or as if with, jaundice) }
+{ [ piffle, noun.communication:piffle,+ ] act,@ frames: 2 (act in a trivial or ineffective way) }
+{ run_down1, run_over, injure,@ frames: 8,9,10,11 (injure or kill by knocking (someone or something) down and passing over the body, as with a vehicle) }
+{ pack_on, gain,@ frames: 8 (gain (weight); "He packed on two pounds over the summer") }
+{ call5, awaken,@ frames: 9 (rouse somebody from sleep with a call; "I was called at 5 A.M. this morning") }
+{ make6, act,@ frames: 7 (behave in a certain way; "make merry") }
+{ make_as_if, act,@ frames: 28 (begin or appear to begin an action; "He made as if to shake my hand") }
+{ break11, verb.change:diminish,@ frames: 1 (diminish or discontinue abruptly; "The patient's fever broke last night") }
+{ [ fracture, noun.act:fracture,+ noun.state:fracture,+ ] [ break4, noun.state:break,+ ] injure,@ frames: 8 (fracture a bone of; "I broke my foot while playing hockey") }
+{ [ fracture1, noun.act:fracture,+ noun.state:fracture,+ ] break4,$ frames: 8 (break (a bone); "She broke her clavicle") }
+{ refracture, fracture1,@ frames: 8 (break (a bone) that was previously broken but mended in an abnormal way; "The surgeon had to refracture her wrist") }
+{ [ fracture2, noun.state:fracture,+ ] fracture1,$ verb.change:break2,@ frames: 1 (become fractured; "The tibia fractured from the blow of the iron pipe") }
+{ cut4, grow,@ frames: 8 (have grow through the gums; "The baby cut a tooth") }
+{ give10, verb.possession:proffer,@ frames: 15 (proffer (a body part); "She gave her hand to her little sister") }
+{ give11, give10,$ verb.communication:consent,@ frames: 15 (consent to engage in sexual intercourse with a man; "She gave herself to many men") }
+{ [ pack, noun.artifact:pack3,+ ] treat,@ frames: 11 (treat the body or any part of it by wrapping it, as with blankets or sheets, and applying compresses to it, or stuffing it to provide cover, containment, or therapy, or to absorb blood; "The nurse packed gauze in the wound"; "You had better pack your swollen ankle with ice")}
+{ [ snuff2, noun.act:snuff,+ ] inhale,@ frames: 8 (inhale (something) through the nose; "snuff coke")}
+{ froth, exude,@ frames: 1,2 (exude or expel foam; "the angry man was frothing at the mouth")}
+{ lather1, froth,@ frames: 1 (exude sweat or lather; "this unfit horse lathers easily")}

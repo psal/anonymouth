@@ -1,0 +1,1044 @@
+($RCSfile: noun.time,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:54 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.time)
+
+{ time_period, period_of_time, period, noun.quantity:fundamental_quantity,@ (an amount of time; "a time period of 30 years"; "hastened the period of time of his recovery"; "Picasso's blue period") }
+{ trial_period, test_period, time_period,@ (a period of time during which someone or something is tested) }
+{ time_frame, time_period,@ (a time period during which something occurs or is expected to occur; "an agreement can be reached in a reasonably short time frame") }
+{ geological_time, geologic_time, noun.Tops:time,@ (the time of the physical formation and development of the earth (especially prior to human history)) }
+{ biological_time, noun.Tops:time,@ (the time of various biological processes) }
+{ cosmic_time, noun.Tops:time,@ (the time covered by the physical formation and development of the universe) }
+{ civil_time, standard_time, local_time, noun.Tops:time,@ (the official time in a local region (adjusted for location around the Earth); established by law or custom) }
+{ daylight-saving_time, daylight-savings_time, daylight_saving, daylight_savings, noun.Tops:time,@ (time during which clocks are set one hour ahead of local standard time; widely adopted during summer to provide extra daylight in the evenings) }
+{ grace, grace_period, time_period,@ (a period of time past the deadline for fulfilling an obligation during which a penalty that would be imposed for being late is waived, especially an extended period granted as a special favor; "The payment had originally been due on April 1 but we had a grace period which expired in June.") }
+{ hours1, time_period,@ (an indefinite period of time; "they talked for hours") }
+{ [ downtime, uptime,! ] time_period,@ (a period of time when something (as a machine or factory) is not operating (especially as a result of malfunctions)) }
+{ [ uptime, downtime,! ] time_period,@ noun.artifact:factory,;c (a period of time when something (as a machine or factory) is functioning and available for use) }
+{ 24/7", uptime,@ (uptime is 24 hours a day 7 days a week) }
+{ hours, work_time,@ (a period of time assigned for work; "they work long hours") }
+{ [ work_time, time_off,! ] time_period,@ (a time period when you are required to work) }
+{ [ time_off, work_time,! ] time_period,@ (a time period when you are not required to work; "he requested time off to attend his grandmother's funeral") }
+{ face_time, work_time,@ (work time spent at the location of or in the presence of other people; "instead of working on the problem at home he devoted face time to it at the office") }
+{ compensatory_time, time_off,@ (time off that is granted to a worker as compensation for working overtime) }
+{ bout1, time_period,@ (a period of illness; "a bout of fever"; "a bout of depression") }
+{ [ hospitalization, verb.possession:hospitalize,+ ] time_period,@ (a period of time when you are confined to a hospital; "now they try to shorten the patient's hospitalization") }
+{ travel_time, time_period,@ (a period of time spent traveling; "workers were not paid for their travel time between home and factory") }
+{ [ present, adj.all:present1,+ ] nowadays, noun.Tops:time,@ (the period of time that is happening now; any continuous stretch of time including the moment of speech; "that is enough for the present"; "he lives in the present with no thought of tomorrow") }
+{ now, present,@ (the momentary present; "Now is a good time to do it"; "it worked up to right now") }
+{ here_and_now, present_moment, moment2, present,@ (at this time; "the disappointments of the here and now"; "she is studying at the moment") }
+{ date2, present,@ (the present; "they are up to date"; "we haven't heard from them to date") }
+{ times1, time_period,@ (a more or less definite period of time now or previously present; "it was a sign of the times") }
+{ modern_times, present_times, modern_world, contemporary_world, times1,@ (the circumstances and ideas of the present age; "in modern times like these") }
+{ Roman_times, times1,@ (the time period during which Rome dominated Europe) }
+{ [ past, future,! ] past_times, yesteryear, noun.Tops:time,@ (the time that has elapsed; "forget the past") }
+{ yore, past,@ (time long past) }
+{ [ bygone, adj.all:past^bygone,+ ] water_under_the_bridge, past,@ (past events to be put aside; "let bygones be bygones") }
+{ old, past,@ (past times (especially in the phrase `in days of old')) }
+{ [ history, adj.all:past^historic,+ ] past,@ (the aggregate of past events; "a critical time in the school's history") }
+{ [ future, past,! ] hereafter, [ futurity, adj.all:prospective^future,+ adj.all:future,+ ] time_to_come, noun.Tops:time,@ (the time yet to come) }
+{ kingdom_come, future,@ (the end of time; "you can wet the bed till kingdom come, for all I care") }
+{ musical_time, noun.Tops:time,@ noun.communication:music,;c ((music) the beat of musical rhythm) }
+{ [ time, verb.change:time1,+ verb.change:time,+ ] time_period,@ (an indefinite period (usually marked by specific attributes or activities); "the time of year for planting"; "he was a great actor in his time") }
+{ Elizabethan_age, historic_period,@i (a period in British history during the reign of Elizabeth I in the 16th century; an age marked by literary achievement and domestic prosperity) }
+{ Victorian_age, historic_period,@i (a period in British history during the reign of Queen Victoria in the 19th century; her character and moral standards restored the prestige of the British monarchy but gave the era a prudish reputation) }
+{ day3, time,@ (some point or period in time; "it should arrive any day now"; "after that day she never trusted him again"; "those were the days"; "these days it is not unusual") }
+{ dead, time,@ (a time when coldness (or some other quality associated with death) is intense; "the dead of winter") }
+{ hard_times, time,@ (a time of difficulty) }
+{ incarnation, time,@ (time passed in a particular bodily form; "he believes that his life will be better in his next incarnation") }
+
+{ [ continuum, adj.all:continuous2,+ adj.all:continuous1,+ ] noun.Tops:time,@ (a continuous nonspatial whole or extent or succession in which no part or portion is distinct or distinguishable from adjacent parts) }
+{ history2, continuum,@ (the continuum of events occurring in succession leading from the past to the present and even into the future; "all of human history") }
+
+{ Phanerozoic, Phanerozoic_eon, Phanerozoic_aeon, eon1,@i (the period from about 540 million years ago until the present, a period when abundant life existed) }
+{ Cenozoic, Cenozoic_era, Age_of_Mammals, era1,@i Phanerozoic,#p (approximately the last 63 million years) }
+{ Quaternary, Quaternary_period, Age_of_Man, period3,@i Cenozoic_era,#p (last 2 million years) }
+{ Holocene, Holocene_epoch, Recent, Recent_epoch, epoch1,@i Quaternary_period,#p (approximately the last 10,000 years) }
+{ Pleistocene, Pleistocene_epoch, Glacial_epoch, epoch1,@i Quaternary_period,#p (from two million to 11 thousand years ago; extensive glaciation of the northern hemisphere; the time of human evolution) }
+{ Tertiary, Tertiary_period, period3,@i Cenozoic_era,#p (from 63 million to 2 million years ago) }
+{ Pliocene, Pliocene_epoch, epoch1,@i Tertiary_period,#p (from 13 million to 2 million years ago; growth of mountains; cooling of climate; more and larger mammals) }
+{ Miocene, Miocene_epoch, epoch1,@i Tertiary_period,#p (from 25 million to 13 million years ago; appearance of grazing mammals) }
+{ Oligocene, Oligocene_epoch, epoch1,@i Tertiary_period,#p (from 40 million to 25 million years ago; appearance of sabertoothed cats) }
+{ Eocene, Eocene_epoch, epoch1,@i Tertiary_period,#p (from 58 million to 40 million years ago; presence of modern mammals) }
+{ Paleocene, Paleocene_epoch, epoch1,@i Tertiary_period,#p (from 63 million to 58 million years ago; appearance of birds and earliest mammals) }
+{ Mesozoic, Mesozoic_era, Age_of_Reptiles, era1,@i (from 230 million to 63 million years ago) }
+{ [ Cretaceous, adj.pert:cretaceous,+ ] Cretaceous_period, period3,@i Mesozoic_era,#p (from 135 million to 63 million years ago; end of the age of reptiles; appearance of modern insects and flowering plants) }
+{ Jurassic, Jurassic_period, period3,@i Mesozoic_era,#p (from 190 million to 135 million years ago; dinosaurs; conifers) }
+{ Triassic, Triassic_period, period3,@i Mesozoic_era,#p (from 230 million to 190 million years ago; dinosaurs, marine reptiles; volcanic activity) }
+{ Paleozoic, Paleozoic_era, era1,@i (from 544 million to about 230 million years ago) }
+{ Permian, Permian_period, period3,@i Paleozoic_era,#p (from 280 million to 230 million years ago; reptiles) }
+{ [ Carboniferous, adj.pert:carboniferous2,+ ] Carboniferous_period, period3,@i Paleozoic_era,#p (from 345 million to 280 million years ago) }
+{ Pennsylvanian, Pennsylvanian_period, Upper_Carboniferous, Upper_Carboniferous_period, period3,@i Carboniferous_period,#p (from 310 million to 280 million years ago; warm climate; swampy land) }
+{ Mississippian, Missippian_period, Lower_Carboniferous, Lower_Carboniferous_period, period3,@i Carboniferous_period,#p (from 345 million to 310 million years ago; increase of land areas; primitive ammonites; winged insects) }
+{ Devonian, Devonian_period, Age_of_Fishes, period3,@i Paleozoic_era,#p (from 405 million to 345 million years ago; preponderance of fishes and appearance of amphibians and ammonites) }
+{ Silurian, Silurian_period, period3,@i Paleozoic_era,#p (from 425 million to 405 million years ago; first air-breathing animals) }
+{ Ordovician, Ordovician_period, period3,@i Paleozoic_era,#p (from 500 million to 425 million years ago; conodonts and ostracods and algae and seaweeds) }
+{ Cambrian, Cambrian_period, period3,@i Paleozoic_era,#p (from 544 million to about 500 million years ago; marine invertebrates) }
+{ Precambrian, Precambrian_eon, Precambrian_aeon, Precambrian_period, eon1,@i (the eon following the Hadean time and preceding the Phanerozoic eon; from about 3,800 million years ago until 544 million years ago) }
+{ [ Proterozoic, adj.all:early^proterozoic,+ ] Proterozoic_eon, Proterozoic_aeon, eon1,@i Precambrian,#p (from 2,500 to 544 million years ago; bacteria and fungi; primitive multicellular organisms) }
+{ [ Archean, adj.all:early^archean,+ ] Archean_eon, Archean_aeon, [ Archeozoic, adj.all:early^archeozoic,+ ] [ Archaeozoic, adj.all:early^archaeozoic,+ ] Archeozoic_eon, Archaeozoic_aeon, eon1,@i Precambrian_period,#p (the time from 3,800 million years to 2,500 million years ago; earth's crust formed; unicellular organisms are earliest forms of life) }
+{ Hadean, Hadean_time, Hadean_eon, Hadean_aeon, Priscoan, Priscoan_eon, Priscoan_aeon, eon1,@i (the earliest eon in the history of the Earth from the first accretion of planetary material (around 4,600 million years ago) until the date of the oldest known rocks (about 3,800 million years ago); no evidence of life) }
+
+{ clock_time, [ time3, verb.change:time1,+ ] noun.cognition:meter_reading,@ (a reading of a point in time as given by a clock; "do you know what time it is?"; "the time is 10 o'clock") }
+{ Greenwich_Mean_Time, Greenwich_Time, GMT, universal_time, UT, UT1", noun.Tops:time,@ (the local time at the 0 meridian passing through Greenwich, England; it is the same everywhere) }
+{ coordinated_universal_time, UTC, Greenwich_Mean_Time,@ (Greenwich Mean Time updated with leap seconds) }
+{ Earth-received_time, ERT, coordinated_universal_time,@ (the coordinated universal time when an event is received on Earth) }
+{ one-way_light_time, OWLT, elapsed_time,@ (the elapsed time it takes for light (or radio signals) to travel between the Earth and a celestial object) }
+{ round-trip_light_time, RTLT, elapsed_time,@ (the elapsed time it takes for a signal to travel from Earth to a spacecraft (or other body) and back to the starting point) }
+{ elapsed_time, time_period,@ (the time that elapses while some event is occurring) }
+{ transmission_time, TRM, coordinated_universal_time,@ (the coordinated universal time when a transmission is sent from Earth to a spacecraft or other celestial body) }
+{ spacecraft_event_time, SCET, coordinated_universal_time,@ (the coordinated universal time on board the spacecraft; "SCET = TRM + OWLT") }
+{ spacecraft_clock_time, SCLK, clock_time,@ (the clock time given by a clock carried on board a spacecraft) }
+{ Atlantic_Time, Atlantic_Standard_Time, civil_time,@ (standard time in the 4th time zone west of Greenwich, reckoned at the 60th meridian; used in Puerto Rico and the Virgin Islands and Bermuda and the Canadian Maritime Provinces) }
+{ Eastern_Time, Eastern_Standard_Time, EST, civil_time,@ (standard time in the 5th time zone west of Greenwich, reckoned at the 75th meridian; used in the eastern United States) }
+{ Central_Time, Central_Standard_Time, CST, civil_time,@ (standard time in the 6th time zone west of Greenwich, reckoned at the 90th meridian; used in the central United States) }
+{ Mountain_Time, Mountain_Standard_Time, MST, civil_time,@ (standard time in the 7th time zone west of Greenwich, reckoned at the 105th meridian west; used in the mountain states of the United States) }
+{ Pacific_Time, Pacific_Standard_Time, PST, civil_time,@ (standard time in the 8th time zone west of Greenwich, reckoned at the 120th meridian west; used in far western states of the United States) }
+{ Alaska_Standard_Time, Yukon_Time, civil_time,@ (standard time in the 9th time zone west of Greenwich, reckoned at the 135th meridian west; used in Hawaii and most of Alaska) }
+{ Hawaii_Time, Hawaii_Standard_Time, civil_time,@ (standard time in the 10th time zone west of Greenwich, reckoned at the 150th meridian west; used in Hawaii and the western Aleutian Islands) }
+{ Bering_Time, Bering_Standard_Time, civil_time,@ (standard time in the 11th time zone west of Greenwich, reckoned at the 165th meridian west; used in the Midway Islands) }
+
+{ duration, [ continuance, adj.all:soft3^continuant,+ ] noun.Tops:time,@ (the property of enduring or continuing in time) }
+{ duration2, [ continuance2, verb.change:continue10,+ ] time_period,@ (the period of time during which something continues) }
+{ [ clocking, verb.change:clock,+ ] duration2,@ (the time taken to traverse a measured course; "it was a world record clocking") }
+{ longueur, duration2,@ noun.communication:literature,;c noun.act:art,;c (a period of dullness or boredom (especially in a work of literature or performing art)) }
+{ residence_time, duration2,@ (the period of time spent in a particular place) }
+{ span, duration2,@ (the complete duration of something; "the job was finished in the span of an hour") }
+{ stretch, stint, duration2,@ (an unbroken period of time during which you do something; "there were stretches of boredom"; "he did a stretch in the federal penitentiary") }
+{ time_scale, duration2,@ (an arrangement of events used as a measure of duration; "on the geological time scale mankind has existed but for a brief moment") }
+{ value, time_value, note_value, duration2,@ noun.communication:music,;c ((music) the relative duration of a musical note) }
+{ extended_time_scale, slow_time_scale, time_scale,@ noun.cognition:simulation,;c ((simulation) the time scale used in data processing when the time-scale factor is greater than one) }
+{ fast_time_scale, time_scale,@ noun.cognition:simulation,;c ((simulation) the time scale used in data processing when the time-scale factor is less than one) }
+{ time_being, nonce, present,@ (the present occasion; "for the nonce") }
+{ biological_clock, noun.object:mechanism,@ (an innate mechanism in living organisms that controls the periodicity of many physiological functions) }
+{ circadian_rhythm, biological_time,@ (a daily cycle of activity observed in many living organisms) }
+{ fourth_dimension, time4, noun.attribute:dimension,@ (the fourth coordinate that is required (along with three spatial dimensions) to specify a physical event) }
+{ workweek, week1, work_time,@ calendar_week,#p (hours or days of work in a calendar week; "they worked a 40-hour week") }
+{ [ week2, adj.all:periodic^weekly,+ ] calendar_week, time_period,@ calendar_month,#p (a period of seven consecutive days starting on Sunday) }
+{ midweek, time_period,@ week2,#p (the middle of a week) }
+{ day4, work_time,@ (the recurring hours when you are not sleeping (especially those when you are working); "my day began early this morning"; "it was a busy day on the stock exchange"; "she called it a day and went to bed") }
+{ workday, working_day, day4,@ (the amount of time that a worker must work for an agreed daily wage; "they work an 8-hour day") }
+{ [ workday1, rest_day,! ] working_day1, work_day1, weekday,@ (a day on which work is done) }
+{ [ rest_day, workday1,! ] day_of_rest, day_of_the_week,@ (a day set aside for rest) }
+{ overtime1, work_time,@ (work done in addition to regular working hours) }
+{ turnaround, turnaround_time, work_time,@ (time need to prepare a vessel or ship for a return trip) }
+{ spare_time, free_time, time_off,@ (time available for hobbies and other activities that you enjoy) }
+{ day_off, time_off,@ (a day when you are not required to work; "Thursday is his day off") }
+{ [ leisure, adj.all:unhurried^leisurely,+ ] leisure_time, time_off,@ (time available for ease and relaxation; "his job left him little leisure") }
+{ [ vacation, noun.person:vacationist,+ verb.stative:vacation,+ ] [ holiday, verb.stative:holiday,+ ] leisure_time,@ (leisure time away from work devoted to rest or pleasure; "we get two weeks of vacation every summer"; "we took a short holiday in Puerto Rico") }
+{ half-term, vacation,@ noun.location:Britain,;r (a short vacation about halfway through a school term; "he came to visit at half-term") }
+{ [ vac, noun.location:Britain,;r ] vacay, vacation,@ (informal term for vacation) }
+{ half-holiday, holiday1,@ (a day on which half is free from work or duty) }
+{ playtime, playday, leisure,@ (time for play or diversion) }
+{ field_day1, outing, picnic, vacation,@ (a day devoted to an outdoor social gathering) }
+{ field_day3, time_period,@ (a time of unusual pleasure and success) }
+{ [ honeymoon, verb.stative:honeymoon,+ ] vacation,@ (a holiday taken by a newly married couple) }
+{ paid_vacation, vacation,@ (a vacation from work by an employee with pay granted) }
+{ leave, leave_of_absence, time_off,@ (the period of time during which you are absent from work or duty; "a ten day's leave to visit his mother") }
+{ [ furlough, verb.communication:furlough,+ ] leave,@ (a temporary leave of absence from military duty) }
+{ pass, leave,@ noun.group:military,;c ((military) a written leave of absence; "he had a pass for three days") }
+{ compassionate_leave, leave,@ noun.group:military,;c ((military) leave granted in an emergency such as family sickness or death) }
+{ sabbatical, sabbatical_leave, leave,@ (a leave usually taken every seventh year) }
+{ sabbatical_year, sabbatical,@ (a sabbatical leave lasting one year) }
+{ shore_leave, liberty, leave,@ (leave granted to a sailor or naval officer) }
+{ sick_leave, leave,@ (a leave of absence from work because of illness) }
+{ terminal_leave, leave,@ (final leave before discharge from military service) }
+{ [ life, noun.person:lifer,+ ] lifetime, life-time, lifespan, time_period,@ (the period during which something is functional (as between birth and death); "the battery had a short life"; "he lived a long and happy life") }
+{ life1, time_period,@ (the period between birth and the present time; "I have known him all his life") }
+{ [ life2, noun.person:lifer,+ ] time_period,@ (the period from the present until death; "he appointed himself emperor for life") }
+{ days, years2, life2,@ (the time during which someone's life continues; "the monarch's last days"; "in his final years") }
+{ [ millennium, adj.pert:millennial,+ adj.pert:millenary,+ adj.pert:millennian,+ ] millenary, time_period,@ (a span of 1000 years) }
+{ [ bimillennium, adj.pert:bimillenial,+ ] bimillenary, time_period,@ (a span of 2000 years) }
+{ [ occupation, verb.stative:occupy1,+ verb.possession:occupy8,+ ] time_period,@ (the period of time during which a place or position or nation is occupied; "during the German occupation of Paris") }
+{ past1, time_period,@ life1,#p (a earlier period in someone's life (especially one that they have reason to keep secret); "reporters dug into the candidate's past") }
+{ shelf_life, time_period,@ (the length of time a packaged food or drug will last without deteriorating) }
+{ life_expectancy, noun.cognition:anticipation1,@ (an expected time to live as calculated on the basis of statistical probabilities) }
+{ [ birth, verb.body:birth,+ death,! ] beginning,@ life,#p (the time when something begins (especially life); "they divorced after the birth of the child"; "his election signaled the birth of a new age") }
+{ cradle, birth,@ (birth of a person; "he was taught from the cradle never to cry") }
+{ [ puerperium, adj.pert:puerperal,+ ] time_period,@ (time period following childbirth when the mother's uterus shrinks and the other functional and anatomic changes of pregnancy are resolved; "a perinatologist cared for her during the puerperium") }
+{ [ lactation, verb.consumption:lactate,+ ] time_period,@ (the period following birth during which milk is secreted; "lactation normally continues until weaning") }
+{ [ incipiency, adj.all:early2^incipient,+ ] [ incipience, adj.all:early2^incipient,+ ] beginning,@ (beginning to exist or to be apparent; "he placed the incipience of democratic faith at around 1850"; "it is designed to arrest monopolies in their incipiency") }
+{ [ death1, verb.change:die,+ verb.perception:die,+ ] last1, end,@ (the time at which life ends; continuing until dead; "she stayed until his death"; "a struggle to the last") }
+{ [ death, birth,! verb.change:die1,+ ] [ dying, verb.change:die1,+ ] demise, end,@ life,#p (the time when something ends; "it was the death of all his plans"; "a dying of old hopes") }
+{ grave, death,@ (death of a person; "he went to his grave without forgiving me"; "from cradle to grave") }
+{ afterlife, hereafter1, life,@ (life after death) }
+{ kingdom_come1, afterlife,@ (the next world; "he nearly blew us to kingdom come") }
+{ immortality1, afterlife,@ (perpetual life after death) }
+{ period4, end,@  noun.communication:figure_of_speech,;u (the end or completion of something; "death put a period to his endeavors"; "a change soon put a period to my tranquility") }
+{ time_of_life, time_period,@ life,#p (a period of time during which a person is normally in a particular life state) }
+{ summer1, time_of_life,@ noun.communication:figure_of_speech,;u (the period of finest development, happiness, or beauty; "the golden summer of his life") }
+{ [ age, verb.change:age,+ ] eld1, time_of_life,@ life,#p (a time of life (usually defined in years) at which some particular qualification or power arises; "she was now of school age"; "tall for his eld") }
+{ neonatal_period, time_of_life,@ (the first 28 days of life) }
+{ [ infancy, noun.person:infant,+ ] [ babyhood, noun.person:baby,+ noun.animal:baby,+ ] early_childhood, time_of_life,@ (the early stage of growth or development) }
+{ anal_stage, anal_phase, phase,@ childhood,#p noun.act:psychoanalysis,;c ((psychoanalysis) the second sexual and social stage of a child's development during which bowel control is learned) }
+{ genital_stage, genital_phase, phase,@ adolescence,#p noun.act:psychoanalysis,;c ((psychoanalysis) the fifth sexual and social stage in a person's development occurring during adolescence; interest focuses on sexual activity) }
+{ latency_stage, latency_phase, latency_period, phase,@ childhood,#p noun.act:psychoanalysis,;c ((psychoanalysis) the fourth period (from about age 5 or 6 until puberty) during which sexual interests are supposed to be sublimated into other activities) }
+{ oral_stage, oral_phase, phase,@ infancy,#p noun.act:psychoanalysis,;c ((psychoanalysis) the first sexual and social stage of an infant's development; the mouth is the focus of the libido and satisfaction comes from suckling and chewing and biting) }
+{ phallic_stage, phallic_phase, phase,@ childhood,#p noun.act:psychoanalysis,;c ((psychoanalysis) the third stage in a child's development when awareness of and manipulation of the genitals is supposed to be a primary source of pleasure) }
+{ [ childhood, noun.person:child,+ ] time_of_life,@ (the time of person's life when they are a child) }
+{ [ girlhood, noun.person:girl2,+ noun.person:girl,+ ] [ maidenhood, noun.person:maiden,+ ] [ maidhood, noun.person:maid,+ ] childhood,@ (the childhood of a girl) }
+{ [ boyhood, noun.person:boy,+ ] childhood,@ (the childhood of a boy) }
+{ schooldays, schooltime2, time_of_life,@ (the time of life when you are going to school) }
+{ youth, time_of_life,@ (the time of life between childhood and maturity) }
+{ [ adolescence, adj.all:young^adolescent,+ adj.all:immature1^adolescent,+ verb.change:adolesce,+ ] youth,#p time_of_life,@ (the time period between the beginning of puberty and adulthood) }
+{ [ prepuberty, adj.all:immature1^prepubertal,+ ] time_of_life,@ childhood,#p (a period of two years immediately prior to the onset of puberty when growth and changes leading to sexual maturity occur) }
+{ [ puberty, adj.pert:pubertal,+ ] [ pubescence, adj.all:immature1^pubescent,+ ] time_of_life,@ adolescence,#p (the time of life when sex glands become functional) }
+{ teens, time_of_life,@ adulthood,#p (the time of life between the ages of 12 and 20) }
+{ twenties, mid-twenties, time_of_life,@ adulthood,#p (the time of life between 20 and 30) }
+{ 1900"s, decade,@ (the decade from 1900 to 1909) }
+{ 1530"s, decade,@ (the decade from 1530 to 1539) }
+{ twenties1, 1920"s, decade,@ (the decade from 1920 to 1929) }
+{ 1820"s, decade,@ (the decade from 1820 to 1829) }
+{ thirties, mid-thirties, thirty-something, time_of_life,@ adulthood,#p (the time of life between 30 and 40) }
+{ thirties1, 1930"s, decade,@ (the decade from 1930 to 1939) }
+{ 1830"s, decade,@ (the decade from 1830 to 1839) }
+{ forties, mid-forties, time_of_life,@ adulthood,#p (the time of life between 40 and 50) }
+{ forties1, 1940"s, decade,@ (the decade from 1940 to 1949) }
+{ 1840"s, decade,@ (the decade from 1840 to 1849) }
+{ fifties, mid-fifties, time_of_life,@ adulthood,#p (the time of life between 50 and 60) }
+{ fifties1, 1950"s, decade,@ (the decade from 1950 to 1959) }
+{ 1850"s, decade,@ (the decade from 1850 to 1859) }
+{ 1750"s, decade,@ (the decade from 1750 to 1759) }
+{ sixties, mid-sixties, time_of_life,@ old_age,#p (the time of life between 60 and 70) }
+{ sixties1, 1960"s, decade,@ (the decade from 1960 to 1969) }
+{ 1860"s, decade,@ (the decade from 1860 to 1869) }
+{ 1760"s, decade,@ (the decade from 1760 to 1769) }
+{ golden_years, time_of_life,@ (the time of life after retirement from active work) }
+{ seventies, mid-seventies, time_of_life,@ old_age,#p (the time of life between 70 and 80) }
+{ seventies1, 1970"s, decade,@ (the decade from 1970 to 1979) }
+{ 1870"s, decade,@ (the decade from 1870 to 1879) }
+{ 1770"s, decade,@ (the decade from 1770 to 1779) }
+{ eighties, mid-eighties, time_of_life,@ old_age,#p (the time of life between 80 and 90) }
+{ eighties1, 1980"s, decade,@ (the decade from 1980 to 1989) }
+{ eighties2, 1880"s, decade,@ (the decade from 1880 to 1889) }
+{ 1780"s, decade,@ (the decade from 1780 to 1789) }
+{ nineties, mid-nineties, time_of_life,@ old_age,#p (the time of life between 90 and 100) }
+{ nineties1, 1990"s, decade,@ (the decade from 1990 to 1999) }
+{ nineties2, 1890"s, decade,@ (the decade from 1890 to 1899) }
+{ 1790"s, decade,@ (the decade from 1790 to 1799) }
+{ bloom, bloom_of_youth, salad_days, time_of_life,@ youth,#p (the best time of youth) }
+{ age_of_consent, age,@ (the minimum age for marrying without parental consent or the minimum age for consensual sexual relations; intercourse at an earlier age can result in a charge of assault or statutory rape; the age differs in different states of the Union) }
+{ [ majority, adj.all:major3,+ minority,! ] legal_age, age,@ adulthood,#p (the age at which persons are considered competent to manage their own affairs) }
+{ [ minority, adj.all:minor3,+ majority,! ] nonage, age,@ noun.state:legal_status,@ (any age prior to the legal age) }
+{ prime, prime_of_life, maturity,@ (the time of maturity when power and vigor are greatest) }
+{ drinking_age, age,@ adulthood,#p (the age at which is legal for a person to buy alcoholic beverages) }
+{ voting_age, age,@ adulthood,#p (the age at which a person is old enough to vote in public elections) }
+{ [ adulthood, noun.person:adult,+ noun.animal:adult,+ ] [ maturity, adj.all:mature1,+ ] time_of_life,@ (the period of time in your life after your physical growth has stopped and you are fully developed) }
+{ maturity1, maturity_date, due_date, date,@ (the date on which an obligation must be repaid) }
+{ [ bachelorhood, noun.person:bachelor,+ ] time_of_life,@ (the time of a man's life prior to marriage) }
+{ middle_age, time_of_life,@ adulthood,#p (the time of life between youth and old age (e.g., between 40 and 60 years of age)) }
+{ [ widowhood, noun.person:widow,+ ] time_of_life,@ (the time of a woman's life when she is a widow) }
+{ old_age, years, [ age1, verb.change:age2,+ verb.change:age,+ ] eld, [ geezerhood, noun.person:geezer,+ ] time_of_life,@ (a late time of life; "old age is not for sissies"; "he's showing his years"; "age hasn't slowed him down at all"; "a beard white with eld"; "on the brink of geezerhood") }
+{ dotage, second_childhood, [ senility, adj.all:old2^senile,+ ] old_age,@ (mental infirmity as a consequence of old age; sometimes shown by foolish infatuations) }
+{ deathbed, time_of_life,@ (the last few hours before death) }
+{ [ menopause, adj.pert:menopausal,+ ] climacteric1, change_of_life, biological_time,@ middle_age,#p (the time in a woman's life in which the menstrual cycle ends) }
+{ climacteric2, biological_time,@ middle_age,#p (a period in a man's life corresponding to menopause) }
+{ time_unit, unit_of_time, noun.Tops:measure,@ (a unit for measuring time periods) }
+{ [ day, adj.all:periodic^daily,+ ] twenty-four_hours, twenty-four_hour_period, 24-hour_interval, solar_day, mean_solar_day, time_unit,@ (time for Earth to make a complete rotation on its axis; "two days later they left"; "they put on two performances every day"; "there are 30,000 passengers per day") }
+{ night2, time_unit,@ (the dark part of the diurnal cycle considered a time unit; "three nights later he collapsed") }
+{ tomorrow1, day,@ (the day after today; "what are our tasks for tomorrow?") }
+{ today1, day,@ (the day that includes the present moment (as opposed to yesterday or tomorrow); "Today is beautiful"; "did you see today's newspaper?") }
+{ yesterday1, day,@ (the day immediately before today; "it was in yesterday's newspapers") }
+{ morrow, day,@ (the next day; "whenever he arrives she leaves on the morrow") }
+{ eve1, day,@ (the day before; "he always arrives on the eve of her departure") }
+{ mean_time, mean_solar_time, time_unit,@ noun.cognition:astronomy,;c ((astronomy) time based on the motion of the mean sun (an imaginary sun moving uniformly along the celestial equator)) }
+{ terrestrial_time, TT, terrestrial_dynamical_time, TDT, ephemeris_time, time_unit,@ noun.cognition:astronomy,;c ((astronomy) a measure of time defined by Earth's orbital motion; terrestrial time is mean solar time corrected for the irregularities of the Earth's motions) }
+{ calendar_day, civil_day, time_period,@ week,#p (a day reckoned from midnight to midnight) }
+{ day1, calendar_day,@ (a day assigned to a particular purpose or observance; "Mother's Day") }
+{ Admission_Day, day1,@ (in some states of the United States: a legal holiday commemorating the day the state was admitted to the Union) }
+{ Arbor_Day, day1,@ (a day designated for planting trees) }
+{ Cinco_de_Mayo, day1,@ (the fifth of May which is observed in Mexico and Mexican-American communities in the United States to commemorate the Mexican victory over the French in the Battle of Puebla in 1862) }
+{ commencement_day, degree_day, day1,@ (the day on which university degrees are conferred) }
+{ November_5", day1,@ November,#p noun.location:Britain,;r (anniversary of the discovery of the Gunpowder Plot) }
+{ Guy_Fawkes_Day, November_5",@ noun.location:Britain,;r (day for the celebration of the discovery of the Gunpowder Plot) }
+{ Bonfire_Night, Guy_Fawkes_Night, November_5",@ (effigies of Guy Fawkes are burned on this night) }
+{ Inauguration_Day, January_20", day1,@ January,#p (the day designated for inauguration of the United States President) }
+{ leap_day, bissextile_day, February_29", day1,@ February,#p (the name of the day that is added during a leap year) }
+{ [ date, verb.cognition:date1,+ verb.cognition:date,+ verb.cognition:date2,+ ] day_of_the_month, day,@ (the specified day of the month; "what is the date today?") }
+{ [ date5, verb.cognition:date1,+ verb.cognition:date,+ verb.cognition:date2,+ ] day,@ (a particular day specified as the time something happens; "the date of the election is set by law"; "we hope to get together at an early date"; "Mother's Day is always on the same date") }
+{ future_date, date5,@ (a particular day in the future that is specified as the time something will happen) }
+{ rain_date, date5,@ (an alternative date set for some outdoor event in case it rains on the appointed date; "the rain date for the picnic will be the following Sunday") }
+{ sell-by_date, date5,@ noun.location:Britain,;r (a date stamped on perishable produce indicating the date by which it should be sold) }
+{ [ date3, verb.cognition:date,+ ] calendar_day,@ calendar_month,@ calendar_year,@ (the particular day, month, or year (usually according to the Gregorian calendar) that an event occurred; "he tried to memorizes all the dates for his history class") }
+{ quarter_day, Christian_holy_day,@ noun.location:Britain,;r (a Christian holy day; one of four specified days when certain payments are due) }
+{ fast_day, religious_holiday,@ (a day designated for fasting) }
+{ major_fast_day, fast_day,@ (one of two major fast days on the Jewish calendar) }
+{ minor_fast_day, fast_day,@ (one of five minor fast days on the Jewish calendar) }
+{ feast_day, fete_day, holiday1,@ religious_festival,#p (a day designated for feasting) }
+{ Succoth, Sukkoth, Succos, Feast_of_Booths, Feast_of_Tabernacles, Tabernacles, religious_festival,@ Jewish_holy_day,@ Tishri,#p noun.cognition:Judaism,;c (a major Jewish festival beginning on the eve of the 15th of Tishri and commemorating the shelter of the Israelites during their 40 years in the wilderness) }
+{ religious_festival, church_festival, festival,@ (a festival having religious significance) }
+{ festival, time_period,@ (a day or period of time set aside for feasting and celebration) }
+{ D-day, 6"_June_1944", date,@i (date of the Allied landing in France, World War II) }
+{ V-day, Victory_Day, day1,@ (the day of a victory) }
+{ V-E_Day, 8"_May_1945", V-day,@i (the date of Allied victory in Europe, World War II) }
+{ V-J_Day, 15"_August_1945", V-day,@i (the date of Allied victory over Japan, World War II) }
+{ day_of_the_week, calendar_day,@ week,#p (any one of the seven days in a week) }
+{ weekday, day_of_the_week,@ (any day except Sunday (and sometimes except Saturday)) }
+{ [ feria, adj.pert:ferial,+ ] weekday,@ (a weekday on which no festival or holiday is celebrated; "in the middle ages feria was used with a prefixed ordinal number to designate the day of the week, so `secunda feria' meant Monday, but Sunday and Saturday were always called by their names, Dominicus and Sabbatum, and so feria came to mean an ordinary weekday") }
+{ Sunday, Lord's_Day, Dominicus, Sun, rest_day,@ weekend,#p (first day of the week; observed as a day of rest and worship by most Christians) }
+{ Monday, Mon, weekday,@ (the second day of the week; the first working day) }
+{ Tuesday, Tues, weekday,@ (the third day of the week; the second working day) }
+{ Wednesday, Midweek1, Wed, weekday,@ (the fourth day of the week; the third working day) }
+{ Thursday, Th, weekday,@ (the fifth day of the week; the fourth working day) }
+{ Friday, Fri, weekday,@ (the sixth day of the week; the fifth working day) }
+{ Saturday, Sabbatum, Sat, weekday,@ weekend,#p (the seventh and last day of the week; observed as the Sabbath by Jews and some Christians) }
+{ [ Sabbath, adj.pert:sabbatical1,+ adj.pert:sabbatarian,+ ] rest_day,@ (a day of rest and worship: Sunday for most Christians; Saturday for the Jews and a few Christians; Friday for Muslims) }
+{ [ day2, night,!] daytime, daylight, time_period,@ day,#p (the time after sunrise and before sunset while it is light outside; "the dawn turned night into day"; "it is easier to make the repairs in the daytime") }
+{ morning, morn, morning_time, forenoon, time_period,@ day2,#p (the time period between dawn and noon; "I spent the morning running errands") }
+{ noon, twelve_noon, high_noon, midday, noonday, noontide, hour1,@ day,#p (the middle of the day) }
+{ mealtime, hour1,@ (the hour at which a meal is habitually or customarily eaten) }
+{ breakfast_time, mealtime,@ (the customary or habitual hour for eating breakfast) }
+{ lunchtime, lunch_period, mealtime,@ (the customary or habitual hour for eating lunch; "he observed a regular lunchtime") }
+{ dinnertime, suppertime, mealtime,@ (the customary or habitual hour for the evening meal) }
+{ afternoon, daytime,@ (the part of the day between noon and evening; "he spent a quiet afternoon in the park") }
+{ midafternoon, daytime,@ afternoon,#p (the middle part of the afternoon) }
+{ evening, eve, even, eventide, daytime,@ (the latter part of the day (the period of decreasing daylight from late afternoon until nightfall); "he enjoyed the evening light across the lake") }
+{ guest_night, evening,@ noun.location:Britain,;r (an evening when members of a club or college can bring their friends as guests) }
+{ prime_time, time3,@ (the hours between 7 and 11 p.m. when the largest tv audience is available) }
+{ [ night, adj.all:periodic^nightly,+ day2,!] nighttime, dark, time_period,@ day,#p (the time after sunset and before sunrise while it is dark outside) }
+{ night3, time_period,@ (the time between sunset and midnight; "he watched television every night") }
+{ night4, time_period,@ (the period spent sleeping; "I had a restless night") }
+{ night1, time_period,@ (a period of ignorance or backwardness or gloom) }
+{ weeknight, night,@ (any night of the week except Saturday or Sunday) }
+{ eve2, time_period,@ (the period immediately before something; "on the eve of the French Revolution") }
+{ evening2, time_period,@ night,#p (the early part of night (from dinner until bedtime) spent in a special way; "an evening at the opera") }
+{ late-night_hour, hour1,@ night,#p (the latter part of night) }
+{ midnight, hour1,@ night,#p (12 o'clock at night; the middle of the night; "young children should not be allowed to stay up until midnight") }
+{ small_hours, hour1,@ night,#p (the hours just after midnight) }
+{ bedtime, hour1,@ (the time you go to bed) }
+{ lights-out, bedtime,@ night,#p (a prescribed bedtime) }
+{ closing_time, hour1,@ (the regular time of day when an establishment closes to the public) }
+{ [ dawn, verb.change:dawn,+ ] [ dawning, verb.change:dawn,+ ] morning1, [ aurora, adj.pert:auroral1,+ adj.pert:aurorean,+ ] first_light, daybreak, break_of_day, break_of_the_day, dayspring, [ sunrise, sunset,!] sunup, cockcrow, hour1,@ (the first light of day; "we got up before dawn"; "they talked until morning") }
+{ early-morning_hour, hour1,@ morning,#p (an hour early in the morning) }
+{ [ sunset, sunrise,!] sundown, hour1,@ evening,#p (the time in the evening at which the sun begins to fall below the horizon) }
+{ twilight, [ dusk, adj.all:dark1^dusky,+ ] gloaming, gloam, nightfall, evenfall, fall1, [ crepuscule, adj.all:dark1^crepuscular,+ ] [ crepuscle, adj.all:dark1^crepuscular,+ ] hour1,@ evening,#p (the time of day immediately following sunset; "he loved the twilight"; "they finished before the fall of night") }
+{ night5, twilight,@ (a shortening of nightfall; "they worked from morning to night") }
+{ week, [ hebdomad, adj.all:periodic^hebdomadary,+ ] time_period,@ (any period of seven consecutive days; "it rained for a week") }
+{ week_from_Monday, week,@ noun.communication:colloquialism,;u (a time period of a week or more; "a week from Monday will be too soon!") }
+{ [ fortnight, adj.all:periodic^fortnightly,+ ] two_weeks, time_period,@ (a period of fourteen consecutive days; "most major tennis tournaments last a fortnight") }
+{ [ weekend, verb.stative:weekend,+ ] time_period,@ week,#p (a time period usually extending from Friday night through Sunday; more loosely defined as any period of successive days including one and only one Sunday) }
+{ rag, rag_week, week,@ noun.location:Britain,;r (a week at British universities during which side-shows and processions of floats are organized to raise money for charities) }
+{ rag_day, day1,@ rag,#p noun.location:Britain,;r (a day on which university students hold a rag) }
+{ red-letter_day, day1,@ (a memorably happy or noteworthy day (from the custom of marking holy days in red on church calendars)) }
+{ Judgment_Day, Judgement_Day, Day_of_Judgment, Day_of_Judgement, Doomsday, Last_Judgment, Last_Judgement, Last_Day, eschaton, day_of_reckoning, doomsday, crack_of_doom, end_of_the_world, day3,@ noun.communication:New_Testament,;c ((New Testament) day at the end of time following Armageddon when God will decree the fates of all individual humans according to the good and evil of their earthly lives) }
+{ off-day, day3,@ (a day when things go poorly; "I guess this is one of my off-days") }
+{ access_time, time_interval,@ noun.cognition:computer_science,;c ((computer science) the interval between the time data is requested by the system and the time the data is provided by the drive; "access time is the sum of seek time and rotational latency and command processing overhead") }
+{ [ distance, adj.all:far^distant2,+ ] [ space, verb.motion:space,+ ] time_interval,@ (the interval between two times; "the distance from birth to death"; "it all happened in the space of 10 minutes") }
+{ [ distance1, adj.all:distant1,+ adj.all:far^distant2,+ ] point,@ (a remote point in time; "if that happens it will be at some distance in the future"; "at a distance of ten years he had forgotten many of the details") }
+{ embolism, intercalation, time_interval,@ calendar,#p (an insertion into a calendar) }
+{ payday, day1,@ (the day on which you receive pay for your work) }
+{ polling_day, election_day, day1,@ (the day appointed for an election; in the United States it is the 1st Tuesday after the 1st Monday in November) }
+{ church_year, Christian_year, year1,@ (the year in the ecclesiastical calendar; especially feast days and special seasons) }
+{ field_day, day1,@ (a day for outdoor athletic competition) }
+{ field_day2, day1,@ noun.group:military,;c ((military) a day for military exercises and display) }
+{ [ calendar, adj.pert:calendric,+ ] noun.cognition:arrangement,@ (a system of timekeeping that defines the beginning and length and divisions of the year) }
+{ timekeeping, noun.act:activity,@ (the act or process of determining the time) }
+{ Roman_calendar, lunar_calendar,@ (the lunar calendar in use in ancient Rome; replaced by the Julian calendar in 46 BC) }
+{ ides, day1,@ (in the Roman calendar: the 15th of March or May or July or October or the 13th of any other month) }
+{ market_day, day1,@ (a fixed day for holding a public market) }
+{ Gregorian_calendar, New_Style_calendar, solar_calendar,@ (the solar calendar now in general use, introduced by Gregory XIII in 1582 to correct an error in the Julian calendar by suppressing 10 days, making Oct 5 be called Oct 15, and providing that only centenary years divisible by 400 should be leap years; it was adopted by Great Britain and the American colonies in 1752) }
+{ Julian_calendar, Old_Style_calendar, solar_calendar,@ (the solar calendar introduced in Rome in 46 b.c. by Julius Caesar and slightly modified by Augustus, establishing the 12-month year of 365 days with each 4th year having 366 days and the months having 31 or 30 days except for February) }
+{ Revolutionary_calendar, solar_calendar,@ (the calendar adopted by the first French Republic in 1793 and abandoned in 1805; dates were calculated from Sept. 22, 1792) }
+{ Revolutionary_calendar_month, calendar_month,@ Revolutionary_calendar,#p (a month in the Revolutionary calendar) }
+{ Vendemiaire, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (first month of the Revolutionary calendar (September and October); the month of the grape harvest) }
+{ Brumaire, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (second month of the Revolutionary calendar (October and November); the month of mist) }
+{ Frimaire, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (third month of the Revolutionary calendar (November and December); the frosty month) }
+{ Nivose, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (fourth month of the Revolutionary calendar (December and January); the snowy month) }
+{ Pluviose, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (fifth month of the Revolutionary calendar (January and February); the rainy month) }
+{ Ventose, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (sixth month of the Revolutionary calendar (February and March); the windy month) }
+{ Germinal, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (seventh month of the Revolutionary calendar (March and April); the month of buds) }
+{ Floreal, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (eighth month of the Revolutionary calendar (April and May); the month of flowers) }
+{ Prairial, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (ninth month of the Revolutionary calendar (May and June); the month of meadows) }
+{ Messidor, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (tenth month of the Revolutionary calendar (June and July); the month of harvest) }
+{ Thermidor, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (eleventh month of the Revolutionary calendar (July and August); the month of heat) }
+{ Fructidor, Revolutionary_calendar_month,@ Revolutionary_calendar,#p (twelfth month of the Revolutionary calendar (August and September); the month of fruit) }
+{ Jewish_calendar, Hebrew_calendar, lunisolar_calendar,@ noun.cognition:Judaism,;c ((Judaism) the calendar used by the Jews; dates from 3761 BC (the assumed date of the Creation of the world); a lunar year of 354 days is adjusted to the solar year by periodic leap years) }
+{ lunar_calendar, calendar,@ (a calendar based on lunar cycles) }
+{ lunisolar_calendar, calendar,@ (a calendar based on both lunar and solar cycles) }
+{ solar_calendar, calendar,@ (a calendar based on solar cycles) }
+{ Islamic_calendar, Muhammadan_calendar, Mohammedan_calendar, Moslem_calendar, Muslim_calendar, lunar_calendar,@ (the lunar calendar used by Muslims; dates from 622 AD (the year of the Hegira); the beginning of the Muslim year retrogresses through the solar year completing the cycle every 32 years) }
+{ Hindu_calendar, lunisolar_calendar,@ (the lunisolar calendar governing the religious life of Hindus; an extra month is inserted after every month in which there are two new moons (once every three years)) }
+{ deadline, point_in_time,@ (the point in time at which something must be completed) }
+{ curfew, deadline,@ (the time that the curfew signal is sounded) }
+{ [ anachronism, adj.all:asynchronous^anachronistic,+ adj.all:asynchronous^anachronic,+ ] [ mistiming, verb.change:mistime,+ ] [ misdating, verb.cognition:misdate,+ ] timekeeping,@ (something located at a time when it could not have existed or occurred) }
+{ point, point_in_time, noun.Tops:measure,@ (an instant of time; "at that point I had to leave") }
+{ arrival_time, time_of_arrival, point,@ (the time at which a public conveyance is scheduled to arrive at a given destination) }
+{ departure_time, time_of_departure, point,@ (the time at which a public conveyance is scheduled to depart from a given point of origin) }
+{ [ checkout, verb.communication:check_out,+ ] checkout_time, departure_time,@ (the latest time for vacating a hotel room; "the checkout here is 12 noon") }
+
+{ Holy_Week, Passion_Week, week,@ church_calendar,#p (the week before Easter) }
+{ Holy_Year, year1,@ noun.group:Roman_Catholic,;c ((Roman Catholic Church) a period of remission from sin (usually granted every 25 years)) }
+{ church_calendar, ecclesiastical_calendar, Gregorian_calendar,@ (a calendar of the Christian year indicating the dates of fasts and festivals) }
+{ Walpurgis_Night, day1,@ (eve of May Day) }
+{ New_Year's_Eve, December_31", day1,@ December,#p (the last day of the year) }
+{ New_Year's_Day, New_Year's, January_1", legal_holiday,@ January,#p (the first day of the year) }
+{ New_Year, year1,@ (the calendar year just begun) }
+{ Martin_Luther_King_Jr's_Birthday, Martin_Luther_King_Day, legal_holiday,@ January,#p (observed on the Monday closest to January 15) }
+{ Robert_E_Lee's_Birthday, Robert_E_Lee_Day, Lee's_Birthday, January_19", day1,@ (celebrated in southern United States) }
+{ Hogmanay, New_Year's_Eve,@ (New Year's Eve in Scotland) }
+{ Rosh_Hashanah, Rosh_Hashana, Rosh_Hashonah, Rosh_Hashona, Jewish_New_Year, high_holy_day,@ feast_day,@ noun.cognition:Judaism,;c ((Judaism) a solemn Jewish feast day celebrated on the 1st or 1st and 2nd of Tishri; noted for the blowing of the shofar) }
+{ Rosh_Hodesh, Rosh_Chodesh, Jewish_holy_day,@ noun.cognition:Judaism,;c ((Judaism) the beginning of each month in the Jewish calendar; marked by a special liturgy) }
+{ Tet, day1,@ January,#p (the New Year in Vietnam; observed for three days after the first full moon after January 20th) }
+{ holiday1, day1,@ (a day on which work is suspended by law or custom; "no mail is delivered on federal holidays"; "it's a good thing that New Year's was a holiday because everyone had a hangover") }
+{ religious_holiday, holy_day1, holiday1,@ church_year,#p (a day specified for religious observance) }
+{ High_Holy_Day, High_Holiday, Jewish_holy_day,@ (Jewish holy days observed with particular solemnity) }
+{ Christian_holy_day, religious_holiday,@ (a religious holiday for Christians) }
+{ Jewish_holy_day, religious_holiday,@ (a religious holiday for Jews) }
+{ holy_day_of_obligation, Christian_holy_day,@ (a day when Catholics must attend Mass and refrain from servile work, and Episcopalians must take Communion) }
+{ movable_feast, moveable_feast, feast_day,@ (a religious holiday that falls on different dates in different years) }
+{ Yom_Kippur, Day_of_Atonement, high_holy_day,@ major_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a solemn and major fast day on the Jewish calendar; 10th of Tishri; its observance is one of the requirements of the Mosaic law) }
+{ Saint_Agnes's_Eve, January_20"1, Christian_holy_day,@ January,#p (a Christian holy day) }
+{ Martinmas, St_Martin's_Day, 11_November, quarter_day,@ November,#p (the feast of Saint Martin; a quarter day in Scotland) }
+{ Indian_summer, Saint_Martin's_summer, time_period,@ autumn,#p (a period of unusually warm weather in the autumn) }
+{ Annunciation, Lady_Day, Annunciation_Day, March_25", quarter_day,@ March,#p (a festival commemorating the announcement of the Incarnation by the angel Gabriel to the Virgin Mary; a quarter day in England, Wales, and Ireland) }
+{ Michaelmas, Michaelmas_Day, September_29", quarter_day,@ September,#p (honoring the archangel Michael; a quarter day in England, Wales, and Ireland) }
+{ Michaelmastide, season1,@ (the season of Michaelmas) }
+{ Candlemas, Candlemas_Day, Feb_2", quarter_day,@ February,#p (feast day commemorating the presentation of Christ in the temple; a quarter day in Scotland) }
+{ Groundhog_Day, February_2", day1,@ February,#p noun.location:US,;r (if the ground hog emerges and sees his shadow on this day, there will be 6 more weeks of winter) }
+{ Lincoln's_Birthday, February_12", day1,@ February,#p noun.location:US,;r (the day on which President Abraham Lincoln is remembered) }
+{ Valentine_Day, Valentine's_Day, Saint_Valentine's_Day, St_Valentine's_Day, February_14", day1,@ February,#p (a day for the exchange of tokens of affection) }
+{ Washington's_Birthday, February_22", day1,@ February,#p noun.location:US,;r (the day on which George Washington is remembered) }
+{ Presidents'_Day, legal_holiday,@ February,#p noun.location:US,;r (the third Monday in February; commemorates both presidents Lincoln and Washington) }
+{ Texas_Independence_Day, March_2", day1,@ March,#p (Texans celebrate the anniversary of Texas' declaration of independence from Mexico in 1836) }
+{ St_Patrick's_Day, Saint_Patrick's_Day, March_17", day1,@ (a day observed by the Irish to commemorate the patron saint of Ireland) }
+{ Easter, movable_feast,@ (a Christian celebration of the Resurrection of Christ; celebrated on the Sunday following the first full moon after the vernal equinox) }
+{ Easter_Sunday, Easter_Day, Christian_holy_day,@ (the day (in March or April) on which the festival of Easter is celebrated) }
+{ April_Fools', April_Fools'_day, All_Fools'_day, day1,@ April,#p (the first day of April which is celebrated by playing practical jokes) }
+{ Pan_American_Day, April_14", day1,@ April,#p (a day celebrating political and economic unity among American countries) }
+{ Patriot's_Day, day1,@ April,#p (the 3rd Monday in April; Massachusetts and Maine celebrate the battle of Lexington and Concord in 1775) }
+{ May_Day, First_of_May, May_1", day1,@ May,#p (observed in many countries to celebrate the coming of spring; observed in Russia and related countries in honor of labor) }
+{ Mother's_Day, day1,@ May,#p (second Sunday in May) }
+{ Armed_Forces_Day, day1,@ May,#p (the 3rd Saturday in May) }
+{ Memorial_Day, Decoration_Day, legal_holiday,@ May,#p (legal holiday in the United States, last Monday in May; commemorates the members of the United States armed forces who were killed in war) }
+{ Jefferson_Davis'_Birthday, Davis'_Birthday, June_3", day1,@ June,#p (celebrated in southern United States) }
+{ Flag_Day, June_14", day1,@ June,#p (commemorating the adoption of the United States flag in 1777) }
+{ Father's_Day, day1,@ June,#p (US: third Sunday in June) }
+{ Independence_Day, Fourth_of_July, July_4", legal_holiday,@ July,#p (a legal holiday in the United States) }
+{ Lammas, Lammas_Day, August_1", quarter_day,@ (commemorates Saint Peter's miraculous deliverance from prison; a quarter day in Scotland; a harvest festival in England) }
+{ Lammastide, season1,@ noun.location:Scotland,;r (the season of Lammas) }
+{ Labor_Day, legal_holiday,@ September,#p (first Monday in September in the United States and Canada) }
+{ Citizenship_Day, September_17", day1,@ September,#p (celebrated in the United States) }
+{ American_Indian_Day, day1,@ September,#p (US: the 4th Friday in September) }
+{ Columbus_Day, Discovery_Day, October_12", legal_holiday,@ October,#p (a legal holiday commemorating the discovery of America by Christopher Columbus) }
+{ United_Nations_Day, October_24", day1,@ October,#p (a day for celebrating the founding of the United Nations) }
+{ Halloween, Hallowe'en, Allhallows_Eve, day1,@ (the evening before All Saints' Day; often devoted to pranks played by young people) }
+{ Pasch, Pascha, Easter,@ (the Christian festival of Easter) }
+{ Pasch1, Pascha1, Passover,@ (the Jewish feast of the Passover) }
+{ Eastertide, season1,@ (the Easter season) }
+{ Palm_Sunday, Christian_holy_day,@ (Sunday before Easter) }
+{ Passion_Sunday, Christian_holy_day,@ (second Sunday before Easter) }
+{ Good_Friday, Christian_holy_day,@ Lent,#p (Friday before Easter) }
+{ Low_Sunday, Christian_holy_day,@ (the Sunday following Easter) }
+{ Holy_Saturday, Christian_holy_day,@ (the Saturday before Easter; the last day of Lent) }
+{ Holy_Innocents'_Day, Innocents'_Day, Christian_holy_day,@ (December 28, commemorating Herod's slaughter of the children of Bethlehem) }
+{ Septuagesima, Septuagesima_Sunday, Christian_holy_day,@ (the 3rd Sunday before Lent (or the 9th before Easter)) }
+{ Quinquagesima, Quinquagesima_Sunday, Christian_holy_day,@ (the Sunday before Ash Wednesday (the beginning of Lent)) }
+{ Quadragesima, Quadrigesima_Sunday, Christian_holy_day,@ (the first Sunday in Lent) }
+{ Trinity_Sunday, Christian_holy_day,@ (eighth Sunday after Easter) }
+{ Rogation_Day, Christian_holy_day,@ (one of the three days before Ascension Day; observed by some Christians as days of supplication) }
+{ Solemnity_of_Mary, January_1"1, holy_day_of_obligation,@ January,#p noun.group:Roman_Catholic,;c ((Roman Catholic Church) a holy day of obligation) }
+{ Ascension, Ascension_Day, Ascension_of_the_Lord, holy_day_of_obligation,@ noun.cognition:Christianity,;c ((Christianity) celebration of the Ascension of Christ into heaven; observed on the 40th day after Easter) }
+{ Circumcision, Feast_of_the_Circumcision, January_1"2, feast_day,@ noun.group:Roman_Catholic,;c noun.group:Anglican_Church,;c ((Roman Catholic Church and Anglican Church) feast day celebrating the circumcision of Jesus; celebrated on January 1st) }
+{ Maundy_Thursday, Holy_Thursday, Christian_holy_day,@ (the Thursday before Easter; commemorates the Last Supper) }
+{ Corpus_Christi, Christian_holy_day,@ (Thursday after Trinity Sunday; first celebrated in 1246) }
+{ Saints_Peter_and_Paul, June_29", Christian_holy_day,@ June,#p (first celebrated in the 3rd century) }
+{ Assumption, Assumption_of_Mary, August_15", holy_day_of_obligation,@ August,#p (celebration in the Roman Catholic Church of the Virgin Mary's being taken up into heaven when her earthly life ended; corresponds to the Dormition in the Eastern Orthodox Church) }
+{ Dormition, Feast_of_Dormition, religious_holiday,@ August,#p (celebration in the Eastern Orthodox Church of the Virgin Mary's being taken up into heaven when her earthly life ended; corresponds to the Assumption in the Roman Catholic Church and is also celebrated on August 15th) }
+{ Epiphany, Epiphany_of_Our_Lord, Twelfth_day, Three_Kings'_Day, January_6", Christian_holy_day,@ January,#p (twelve days after Christmas; celebrates the visit of the three wise men to the infant Jesus) }
+{ Saint_Joseph, St_Joseph, March_19", Christian_holy_day,@ March,#p (a Christian holy day) }
+{ Twelfthtide, season1,@ (the season of Epiphany) }
+{ Twelfth_night, Christian_holy_day,@ January,#p (eve of Twelfth day; evening of January 5) }
+{ All_Saints'_Day, Allhallows, November_1", Hallowmas, Hallowmass, holy_day_of_obligation,@ November,#p (a Christian feast day honoring all the saints; first observed in 835) }
+{ Immaculate_Conception, December_8", holy_day_of_obligation,@ (Roman Catholic holy day first celebrated in 1854) }
+{ Allhallowtide, season1,@ (the season of All Saints' Day) }
+{ All_Souls'_Day, November_2", Christian_holy_day,@ November,#p (a day of supplication for all the souls in purgatory) }
+{ Ash_Wednesday, Christian_holy_day,@ Lent,#p (the 7th Wednesday before Easter; the first day of Lent; the day following Mardi Gras (`Fat Tuesday'); a day of fasting and repentance) }
+{ Ember_Day, Christian_holy_day,@ (a day set aside for fasting and prayer) }
+{ Passover, Pesach, Pesah, Feast_of_the_Unleavened_Bread, moveable_feast,@ noun.cognition:Judaism,;c ((Judaism) a Jewish festival (traditionally 8 days from Nissan 15) celebrating the exodus of the Israelites from Egypt) }
+{ Christmas, Christmas_Day, Xmas, Dec_25", legal_holiday,@ holy_day_of_obligation,@ quarter_day,@ feast_day,@ December,#p (a Christian holiday celebrating the birth of Christ; a quarter day in England, Wales, and Ireland) }
+{ Christmas_Eve, Dec_24", holiday1,@ (the day before Christmas) }
+{ Christmas1, Christmastide, Christmastime, Yule, Yuletide, Noel, season1,@ December,#p January,#p (period extending from Dec. 24 to Jan. 6) }
+{ Boxing_Day, legal_holiday,@ Christmastide,#p noun.location:Britain,;r (first weekday after Christmas) }
+{ Purim, Jewish_holy_day,@ Adar,#p noun.cognition:Judaism,;c ((Judaism) a Jewish holy day commemorating their deliverance from massacre by Haman) }
+{ Shavous, Shabuoth, Shavuoth, Shavuot, [ Pentecost2, adj.pert:pentecostal,+ ] Feast_of_Weeks, Jewish_holy_day,@ noun.cognition:Judaism,;c ((Judaism) Jewish holy day celebrated on the sixth of Sivan to celebrate Moses receiving the Ten Commandments) }
+{ Shimchath_Torah, Simchat_Torah, Simhath_Torah, Simhat_Torah, Simchas_Torah, Rejoicing_over_the_Law, Rejoicing_of_the_Law, Rejoicing_in_the_Law, Jewish_holy_day,@ noun.cognition:Judaism,;c ((Judaism) a Jewish holy day celebrated on the 22nd or 23rd of Tishri to celebrate the completion of the annual cycle of readings of the Torah) }
+{ Tishah_b'Av, Tishah_b'Ab, Tisha_b'Av, Tisha_b'Ab, Ninth_of_Av, Ninth_of_Ab, Fast_of_Av, Fast_of_Ab, Jewish_holy_day,@ major_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a major fast day on the Jewish calendar commemorating the destruction of the temples in Jerusalem) }
+{ Fast_of_Gedaliah, minor_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a minor fast day on Tishri 3 that commemorates the killing of the Jewish governor of Judah) }
+{ Fast_of_Tevet, minor_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a minor fast day on Tevet 10 commemorates the beginning of the siege of Jerusalem and has also been proclaimed a memorial day for the six million Jews who died in the Holocaust) }
+{ Fast_of_Esther, minor_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a minor fast day on Adar 13 commemorates three days that Esther fasted before approaching the Persian king on behalf of the Jewish people; the fast is connected with Purim) }
+{ Fast_of_the_Firstborn, minor_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a minor fast day on Nissan 14 that is observed only by firstborn males; it is observed on the day before Passover) }
+{ Fast_of_Tammuz, minor_fast_day,@ noun.cognition:Judaism,;c ((Judaism) a minor fast day on Tammuz 17 when the walls of Jerusalem were breached) }
+{ Hanukkah, Hanukah, Hannukah, Chanukah, Chanukkah, Channukah, Channukkah, Festival_of_Lights, Feast_of_Lights, Feast_of_Dedication, Feast_of_the_Dedication, Jewish_holy_day,@ Kislev,#p Tebet,#p noun.cognition:Judaism,;c ((Judaism) an eight-day Jewish holiday commemorating the rededication of the Temple of Jerusalem in 165 BC) }
+{ Lag_b'Omer, Jewish_holy_day,@ Iyar,#p noun.cognition:Judaism,;c ((Judaism) Jewish holy day; the 33rd day after the 2nd day of Passover; the 18th day of Iyar) }
+{ legal_holiday, national_holiday, public_holiday, holiday1,@ (authorized by law and limiting work or official business) }
+{ bank_holiday, legal_holiday,@ (any of several weekdays when banks are closed; a legal holiday in Britain) }
+{ Commonwealth_Day, Empire_day, May_24", legal_holiday,@ May,#p (British, anniversary of Queen Victoria's birth) }
+{ Dominion_Day, July_1", legal_holiday,@ July,#p noun.location:Canada,;r (a legal holiday in Canada commemorating receiving Dominion status in 1867) }
+{ Bastille_Day, 14_July, legal_holiday,@ July,#p (a legal holiday in France celebrating the storming of the Paris bastille in 1789) }
+{ Remembrance_Day, Remembrance_Sunday, Poppy_Day, holiday1,@ noun.location:Great_Britain1,;r noun.location:Canada,;r (the Sunday nearest to November 11 when those who died in World War I and World War II are commemorated) }
+{ Veterans_Day, Veterans'_Day, Armistice_Day, November_11", legal_holiday,@ November,#p (a legal holiday in the United States; formerly Armistice Day but called Veterans' Day since 1954) }
+{ Thanksgiving, Thanksgiving_Day, legal_holiday,@ feast_day,@ November,#p (fourth Thursday in November in the United States; second Monday in October in Canada; commemorates a feast held in 1621 by the Pilgrims and the Wampanoag) }
+{ Victoria_Day, legal_holiday,@ (a public holiday in Canada on the Monday on or before May 24th) }
+{ year, time_period,@ (the period of time that it takes for a planet (as, e.g., Earth or Mars) to make a complete revolution around the sun; "a Martian year takes 687 of our days") }
+{ anomalistic_year, year,@ (time of the earth's revolution from perihelion to perihelion again; 365 days and 6 hr and 13 min and 53.1 sec) }
+{ year-end, end,@ (the end of a calendar year; "he had to unload the merchandise before the year-end") }
+{ common_year, 365"_days, year1,@ (a year that is not a leap year) }
+{ leap_year, intercalary_year, 366_days, bissextile_year, year1,@ (a calendar year with an extra day added in February)}
+{ off_year, year1,@ (a year in which no major political elections are held) }
+{ off_year1, year1,@ (a year in which productivity is low or inferior) }
+{ calendar_year, civil_year, year1,@ (the year (reckoned from January 1 to December 31) according to Gregorian calendar) }
+{ solar_year, tropical_year, astronomical_year, equinoctial_year, year,@ (the time for the earth to make one revolution around the sun, measured between two vernal equinoxes) }
+{ lunar_year, year,@ (a period of 12 lunar months) }
+{ fiscal_year, financial_year, year1,@ (any accounting period of 12 months) }
+{ [ school, adj.pert:scholastic,+ verb.social:school1,+ ] schooltime, school_day1, time_period,@ (the period of instruction in a school; the time period when school is in session; "stay after school"; "he didn't miss a single day of school"; "when the school day was done we would walk home together") }
+{ school_year, academic_year, year2,@ (the period of time each year when the school is open and people are studying) }
+{ [ year1, adj.all:periodic^yearly,+ ] twelvemonth, yr, time_period,@ decade,#p (a period of time containing 365 (or 366) days; "she is 4 years old"; "in the year 1920") }
+{ annum, year1,@ noun.communication:Latin,;c ((Latin) year; "per annum") }
+{ year2, time_period,@ (a period of time occupying a regular part of a calendar year that is used for some particular activity; "a school year") }
+{ [ semester2, adj.all:periodic^semestrial,+ adj.all:periodic^semestral,+ ] time_period,@ (half a year; a period of 6 months) }
+{ [ bimester, adj.all:long2^bimestrial,+ adj.all:periodic^bimestrial,+ ] time_period,@ (a period of 2 months) }
+{ Olympiad, time_period,@ (one of the four-year intervals between Olympic Games; used to reckon time in ancient Greece for twelve centuries beginning in 776 BC) }
+{ lustrum, time_period,@ (a period of five years) }
+{ decade, decennary, decennium, time_period,@ century,#p (a period of 10 years) }
+{ century, time_period,@ millennium,#p (a period of 100 years) }
+{ quadrennium, time_period,@ (a period of four years) }
+{ quinquennium, time_period,@ (a period of five years) }
+{ quattrocento, century,@ Renaissance,#p (the 15th century in Italian art and literature) }
+{ twentieth_century, century,@ (the century from 1901 to 2000) }
+{ half-century, time_period,@ century,#p (a period of 50 years) }
+{ quarter-century, time_period,@ century,#p (a period of 25 years) }
+{ [ month, adj.all:periodic^monthly,+ ] time_unit,@ year,#p (a time unit of approximately 30 days; "he was given a month to pay the bill") }
+{ [ quarter2, adj.pert:quarterly,+ ] time_period,@ (a fourth part of a year; three months; "unemployment fell during the last quarter") }
+{ phase_of_the_moon, time_period,@ noun.attribute:phase,@ (a time when the Moon presents a particular recurring appearance) }
+{ new_moon, new_phase_of_the_moon, phase_of_the_moon,@ month,#p (the time at which the Moon appears as a narrow waxing crescent) }
+{ half-moon, phase_of_the_moon,@ month,#p (the time at which the Moon is at first or last quarter when half its face is illuminated) }
+{ first_quarter, half-moon,@ (the first fourth of the Moon's period of revolution around the Earth) }
+{ last_quarter, half-moon,@ (the last fourth of the Moon's period of revolution around the Earth) }
+{ full_moon, full-of-the-moon, full_phase_of_the_moon, full, phase_of_the_moon,@ month,#p (the time when the Moon is fully illuminated; "the moon is at the full") }
+{ harvest_moon, full_moon,@ (the full moon nearest the September equinox) }
+{ lunar_month, moon, lunation, synodic_month, month,@ lunar_year,#p (the period between successive new moons (29.531 days)) }
+{ anomalistic_month, month,@ (period between successive perigees; approximately 27.5546 days) }
+{ sidereal_time, cosmic_time,@ (measured by the diurnal motion of stars) }
+{ sidereal_day, day6, time_unit,@ sidereal_time,@ (the time for one complete rotation of the earth relative to a particular star, about 4 minutes shorter than a mean solar day) }
+{ day7, time_period,@ (the period of time taken by a particular planet (e.g. Mars) to make a complete rotation on its axis; "how long is a day on Jupiter?") }
+{ lunar_day, day7,@ (the period of time taken for the moon to make one full rotation on its axis (about 27.3 sidereal days)) }
+{ sidereal_year, year,@ sidereal_time,@ (the time for the earth to make one complete revolution around the sun, relative to the fixed stars) }
+{ sidereal_hour, hour,@ sidereal_time,@ (1/24 of a sidereal day) }
+{ sidereal_month, month,@ sidereal_time,@ (period between successive conjunctions with a star, 27.322 days) }
+{ solar_month, month,@ (one-twelfth of a solar or tropical year) }
+{ calendar_month, [ month1, adj.all:periodic^monthly,+ ] time_period,@ (one of the twelve divisions of the calendar year; "he paid the bill last month") }
+{ Gregorian_calendar_month, calendar_month,@ Gregorian_calendar,#p (a month in the Gregorian calendar) }
+{ January, Jan, Gregorian_calendar_month,@ Gregorian_calendar,#p (the first month of the year; begins 10 days after the winter solstice) }
+{ mid-January, time_period,@ January,#p (the middle part of January) }
+{ February, Feb, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following January and preceding March) }
+{ mid-February, time_period,@ February,#p (the middle part of February) }
+{ March, Mar, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following February and preceding April) }
+{ mid-March, time_period,@ March,#p (the middle part of March) }
+{ April, Apr, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following March and preceding May) }
+{ mid-April, time_period,@ April,#p (the middle part of April) }
+{ May, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following April and preceding June) }
+{ mid-May, time_period,@ May,#p (the middle part of May) }
+{ June, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following May and preceding July) }
+{ mid-June, time_period,@ June,#p (the middle part of June) }
+{ July, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following June and preceding August) }
+{ mid-July, time_period,@ July,#p (the middle part of July) }
+{ August, Aug, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following July and preceding September) }
+{ mid-August, time_period,@ August,#p (the middle part of August) }
+{ September, Sep, Sept, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following August and preceding October) }
+{ mid-September, time_period,@ September,#p (the middle part of September) }
+{ October, Oct, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following September and preceding November) }
+{ mid-October, time_period,@ October,#p (the middle part of October) }
+{ November, Nov, Gregorian_calendar_month,@ Gregorian_calendar,#p (the month following October and preceding December) }
+{ mid-November, time_period,@ November,#p (the middle part of November) }
+{ December, Dec, Gregorian_calendar_month,@ Gregorian_calendar,#p (the last (12th) month of the year) }
+{ mid-December, time_period,@ December,#p (the middle part of December) }
+{ Jewish_calendar_month, calendar_month,@ Jewish_calendar,#p (a month in the Jewish calendar) }
+{ Tishri, Jewish_calendar_month,@ Jewish_calendar,#p (the first month of the civil year; the seventh month of the ecclesiastical year in the Jewish calendar (in September and October)) }
+{ Heshvan, Jewish_calendar_month,@ Jewish_calendar,#p (the second month of the civil year; the eighth month of the ecclesiastical year in the Jewish calendar (in October and November)) }
+{ Kislev, Chislev, Jewish_calendar_month,@ Jewish_calendar,#p (the third month of the civil year; the ninth month of the ecclesiastical year in the Jewish calendar (in November and December)) }
+{ Tebet, Tevet, Jewish_calendar_month,@ Jewish_calendar,#p (the fourth month of the civil year; the tenth month of the ecclesiastical year (in December and January)) }
+{ Shebat, Shevat, Jewish_calendar_month,@ Jewish_calendar,#p (the fifth month of the civil year: the eleventh month of the ecclesiastical year in the Jewish calendar (in January and February)) }
+{ Adar, Jewish_calendar_month,@ Jewish_calendar,#p (the sixth month of the civil year; the twelfth month of the ecclesiastic year in the Jewish calendar (in February and March)) }
+{ Veadar, Adar_Sheni, Jewish_calendar_month,@ Jewish_calendar,#p (included seven times in every 19 years) }
+{ Nisan, Nissan, Jewish_calendar_month,@ Jewish_calendar,#p (the seventh month of the civil year; the first month of the ecclesiastic year (in March and April)) }
+{ Iyar, Iyyar, Jewish_calendar_month,@ Jewish_calendar,#p (the eighth month of the civil year; the second month of the ecclesiastical year (in April and May)) }
+{ Sivan, Siwan, Jewish_calendar_month,@ Jewish_calendar,#p (the ninth month of the civil year; the third month of the ecclesiastical year in the Jewish calendar (in May and June)) }
+{ Tammuz, Thammuz, Jewish_calendar_month,@ Jewish_calendar,#p (the tenth month of the civil year; the fourth month of the ecclesiastic year (in June and July)) }
+{ Ab, Av, Jewish_calendar_month,@ Jewish_calendar,#p (the eleventh month of the civil year; the fifth month of the ecclesiastical year in the Jewish calendar (in July and August)) }
+{ Elul, Ellul, Jewish_calendar_month,@ Jewish_calendar,#p (the twelfth month of the civil year; the sixth month of the ecclesiastical year in the Jewish calendar (in August and September)) }
+
+{ Islamic_calendar_month, calendar_month,@ Islamic_calendar,#p (any lunar month in the Muslim calendar) }
+{ Muharram, Moharram, Muharrum, Islamic_calendar_month,@ Muhammadan_calendar,#p (the first month of the Islamic calendar) }
+{ Safar, Saphar, Islamic_calendar_month,@ Muhammadan_calendar,#p (the second month of the Islamic calendar) }
+{ Rabi_I, Islamic_calendar_month,@ Muhammadan_calendar,#p (the third month of the Islamic calendar) }
+{ Rabi_II, Islamic_calendar_month,@ Muhammadan_calendar,#p (the fourth month of the Islamic calendar) }
+{ Jumada_I, Jomada_I, Islamic_calendar_month,@ Muhammadan_calendar,#p (the fifth month of the Islamic calendar) }
+{ Jumada_II, Jomada_II, Islamic_calendar_month,@ Muhammadan_calendar,#p (the sixth month of the Islamic calendar) }
+{ Rajab, Islamic_calendar_month,@ Muhammadan_calendar,#p (the seventh month of the Islamic calendar) }
+{ Sha'ban, Shaaban, Islamic_calendar_month,@ Muhammadan_calendar,#p (the eighth month of the Islamic calendar) }
+{ Ramadan, Islamic_calendar_month,@ Muhammadan_calendar,#p (the ninth month of the Islamic calendar; the month of fasting; the holiest period for the Islamic faith) }
+{ Id_al-Fitr, feast_day,@ (a Muslim day of feasting at the end of Ramadan) }
+{ Shawwal, Islamic_calendar_month,@ Muhammadan_calendar,#p (the tenth month of the Islamic calendar) }
+{ Dhu'l-Qa'dah, Dhu_al-Qadah, Islamic_calendar_month,@ Muhammadan_calendar,#p (the eleventh month of the Islamic calendar) }
+{ Dhu'l-Hijja, Dhu'l-Hijjah, Dhu_al-Hijja, Dhu_al-Hijjah, Islamic_calendar_month,@ Muhammadan_calendar,#p (the twelfth month of the Islamic calendar and the season of the hajj; has one extra day in leap years) }
+{ Id_al-Adha, Feast_of_Sacrifice, feast_day,@ (the 10th day of Dhu'l-Hijja; all Muslims attend a service in the mosques and those who are not pilgrims perform a ritual slaughter of a sheep (commemorating God's ransom of Abraham's son from sacrifice) and give at least a third of the meat to charity) }
+
+{ Hindu_calendar_month, calendar_month,@ Hindu_calendar,#p (any lunisolar month in the Hindu calendar) }
+{ Chait, Caitra, Hindu_calendar_month,@ Hindu_calendar,#p (the first Hindu calendar month (corresponding to March in the Gregorian calendar)) }
+{ Ramanavami, holiday1,@ Chait,#p (Hindu lunar holiday (on the 9th day of Caitra) to celebrate the birth of Rama) }
+{ Baisakh, Vaisakha, Hindu_calendar_month,@ Hindu_calendar,#p (the second month of the Hindu calendar) }
+{ Jeth, Jyaistha, Hindu_calendar_month,@ Hindu_calendar,#p (the third month of the Hindu calendar) }
+{ Asarh, Asadha, Hindu_calendar_month,@ Hindu_calendar,#p (the fourth month of the Hindu calendar) }
+{ Sawan, Sravana, Hindu_calendar_month,@ Hindu_calendar,#p (the fifth month of the Hindu calendar) }
+{ Bhadon, Bhadrapada, Hindu_calendar_month,@ Hindu_calendar,#p (the sixth month of the Hindu calendar) }
+{ Asin, Asvina, Hindu_calendar_month,@ Hindu_calendar,#p (the seventh month of the Hindu calendar) }
+{ Kartik, Karttika, Hindu_calendar_month,@ Hindu_calendar,#p (the eighth month of the Hindu calendar) }
+{ Aghan, Margasivsa, Hindu_calendar_month,@ Hindu_calendar,#p (the ninth month of the Hindu calendar) }
+{ Pus, Pansa, Hindu_calendar_month,@ Hindu_calendar,#p (the tenth month of the Hindu calendar) }
+{ Magh, Magha, Hindu_calendar_month,@ Hindu_calendar,#p (the eleventh month of the Hindu calendar; corresponds to January in the Gregorian calendar) }
+{ Mesasamkranti, holiday1,@ Magh,#p (Hindu solar holiday at the beginning of the new astrological year when the sun enters the constellation Aries) }
+{ Phagun, Phalguna, Hindu_calendar_month,@ Hindu_calendar,#p (the twelfth month of the Hindu calendar) }
+
+{ saint's_day, day1,@ church_year,#p (a day commemorating a saint) }
+{ name_day, saint's_day,@ (the feast day of a saint whose name one bears) }
+{ solstice, cosmic_time,@ (either of the two times of the year when the sun is at its greatest distance from the celestial equator) }
+{ [ summer_solstice, winter_solstice,!] June_21", midsummer, solstice,@ June,#p summer,#p (June 21, when the sun is at its northernmost point) }
+{ Midsummer_Day, Midsummer's_Day, St_John's_Day, June_24", quarter_day,@ June,#p (a quarter day in England, Wales, and Ireland) }
+{ Midsummer_Eve, Midsummer_Night, St_John's_Eve, St_John's_Night, June_23", day1,@ June,#p (the night before Midsummer Day) }
+{ school_day, day1,@ (any day on which school is in session; "go to bed early because tomorrow is a school day") }
+{ speech_day, day1,@ noun.location:Britain,;r (an annual day in the schools when speeches are made and prizes are distributed) }
+{ washday, washing_day, day1,@ (a day set aside for doing household laundry) }
+{ wedding_day, day1,@ (the day of a wedding) }
+{ wedding_night, night,@ wedding_day,#p (the night after the wedding when bride and groom sleep together) }
+{ [ winter_solstice, summer_solstice,!] solstice,@ winter,#p (December 22, when the sun is at its southernmost point) }
+{ [ equinox, adj.pert:equinoctial,+ ] cosmic_time,@ (either of two times of the year when the sun crosses the plane of the earth's equator and day and night are of equal length) }
+{ [ vernal_equinox, autumnal_equinox,!] March_equinox, spring_equinox, equinox,@ spring,#p March,#p (March 21) }
+{ [ autumnal_equinox, vernal_equinox,!] September_equinox, fall_equinox, equinox,@ fall,#p September,#p (September 22) }
+{ Noruz, Nowruz, Nowrooz, vernal_equinox,@ noun.communication:Persian,;c ((Persian) the new year holiday in Iran and Azerbaijan and Afghanistan and Pakistan and parts of India and among the Kurds; comes at the vernal equinox) }
+{ time_limit, time_period,@ (a time period within which something must be done or completed) }
+{ [ limitation, verb.change:limit1,+ verb.change:limit,+ ] time_limit,@ noun.group:law,;c ((law) a time period after which suits cannot be brought; "statute of limitations") }
+{ term, time_period,@ (a limited period of time; "a prison term"; "he left school before the end of term") }
+{ prison_term, [ sentence, verb.communication:sentence,+ ] time1, term,@ (the period of time a prisoner is imprisoned; "he served a prison term of 15 months"; "his sentence was 5 to 10 years"; "he is doing time in the county jail") }
+{ hard_time, prison_term,@ (a term served in a maximum security prison) }
+{ life_sentence, [ life3, noun.person:lifer,+ ] prison_term,@ (a prison term lasting as long as the prisoner lives; "he got life for killing the guard") }
+{ school_term, academic_term, academic_session, session, term,@ school_year,#p (the time during which a school holds classes; "they had to shorten the school term") }
+{ summer_school, school_term,@ (an academic session during the summer; usually for remedial or supplementary study) }
+{ midterm, point_in_time,@ term,#p (middle of an academic term or a political term in office) }
+{ [ semester1, adj.all:periodic^semestral,+ ] school_term,@ school_year,#p (one of two divisions of an academic year) }
+{ trimester1, school_term,@ school_year,#p (one of three divisions of an academic year) }
+{ quarter, school_term,@ school_year,#p (one of four periods into which the school year is divided; "the fall quarter ends at Christmas") }
+{ [ gestation, adj.pert:gestational,+ verb.body:gestate,+ ] gestation_period, biological_time,@ (the period during which an embryo develops (about 266 days in humans)) }
+{ term1, full_term, point_in_time,@ gestation,#p (the end of gestation or point at which birth is imminent; "a healthy baby born at full term") }
+{ midterm1, point_in_time,@ gestation,#p (the middle of the gestation period) }
+{ trimester, time_period,@ gestation,#p (a period of three months; especially one of the three three-month periods into which human pregnancy is divided) }
+{ first_trimester, trimester,@ (time period extending from the first day of the last menstrual period through 12 weeks of gestation) }
+{ second_trimester, trimester,@ (time period extending from the 13th to the 27th week of gestation) }
+{ third_trimester, trimester,@ (time period extending from the 28th week of gestation until delivery) }
+{ refractory_period, biological_time,@ noun.cognition:neurology1,;c ((neurology) the time after a neuron fires or a muscle fiber contracts during which a stimulus will not evoke a response) }
+{ bell, ship's_bell, time_unit,@ noun.act:navigation1,;c ((nautical) each of the eight half-hour units of nautical time signaled by strokes of a ship's bell; eight bells signals 4:00, 8:00, or 12:00 o'clock, either a.m. or p.m.) }
+{ [ hour, adj.all:periodic^hourly,+ adj.pert:horary,+ ] hr, 60"_minutes, time_unit,@ day,#p (a period of time equal to 1/24th of a day; "the job will take more than an hour") }
+{ half-hour, 30"_minutes, time_unit,@ hour,#p (a half of an hour) }
+{ quarter-hour, 15"_minutes, time_unit,@ hour,#p (a quarter of an hour) }
+{ [ hour1, adj.pert:horary,+ ] time_of_day, clock_time,@ (clock time; "the hour is getting late") }
+{ none, hour1,@ (a canonical hour that is the ninth hour of the day counting from sunrise) }
+{ hour2, time_period,@ (a special and memorable period; "it was their finest hour") }
+{ happy_hour, hour1,@ (the time of day when a bar sells alcoholic drinks at a reduced price) }
+{ rush_hour, hour1,@ (the times at the beginning and end of the working day when many people are traveling to or from work) }
+{ zero_hour, hour1,@ (the time set for the start of an action or operation) }
+{ canonical_hour, hour1,@ noun.group:Roman_Catholic,;c ((Roman Catholic Church) one of seven specified times for prayer) }
+{ matins, morning_prayer, canonical_hour,@ (the first canonical hour; at daybreak) }
+{ prime1, canonical_hour,@ (the second canonical hour; about 6 a.m.) }
+{ terce, tierce, canonical_hour,@ (the third canonical hour; about 9 a.m.) }
+{ sext, canonical_hour,@ (the fourth of the seven canonical hours; about noon) }
+{ nones, canonical_hour,@ (the fifth of the seven canonical hours; about 3 p.m.) }
+{ vespers, evensong, canonical_hour,@ (the sixth of the seven canonical hours of the divine office; early evening; now often made a public service on Sundays) }
+{ compline, complin, canonical_hour,@ (last of the seven canonical hours just before retiring) }
+{ man_hour, person_hour, hour,@ workday,#p (a time unit used in industry for measuring work) }
+{ silly_season, time_period,@ (a time usually late summer characterized by exaggerated news stories about frivolous matters for want of real news) }
+{ Golden_Age, time_period,@ noun.group:classical_mythology,;c ((classical mythology) the first and best age of the world, a time of ideal happiness, prosperity, and innocence; by extension, any flourishing and outstanding period) }
+{ silver_age, time_period,@ noun.group:classical_mythology,;c ((classical mythology) the second age of the world, characterized by opulence and irreligion; by extension, a period secondary in achievement to a golden age) }
+{ bronze_age, time_period,@ noun.group:classical_mythology,;c ((classical mythology) the third age of the world, marked by war and violence) }
+{ Bronze_Age1, time_period,@i prehistory,#p noun.cognition:archeology,;c ((archeology) a period between the Stone and Iron Ages, characterized by the manufacture and use of bronze tools and weapons) }
+{ iron_age, time_period,@ noun.group:classical_mythology,;c ((classical mythology) the last and worst age of the world) }
+{ Iron_Age1, time_period,@i prehistory,#p noun.cognition:archeology,;c ((archeology) the period following the Bronze Age; characterized by rapid spread of iron tools and weapons) }
+{ Stone_Age, time_period,@i prehistory,#p noun.cognition:archeology,;c ((archeology) the earliest known period of human culture, characterized by the use of stone implements) }
+{ Eolithic_Age, Eolithic, time_period,@i Stone_Age,#p (the earliest part of the Stone Age marked by the earliest signs of human culture) }
+{ Paleolithic_Age, Paleolithic, Palaeolithic, time_period,@i Stone_Age,#p (second part of the Stone Age beginning about 750,000 to 500,000 years BC and lasting until the end of the last ice age about 8,500 years BC) }
+{ Lower_Paleolithic, time_period,@i Paleolithic_Age,#p (the oldest part of the Paleolithic Age with the emergence of the hand ax; ended about 120,000 years ago) }
+{ Middle_Paleolithic, time_period,@i Paleolithic_Age,#p (the time period of Neanderthal man; ended about 35,000 years BC) }
+{ Upper_Paleolithic, time_period,@i Paleolithic_Age,#p (the time period during which only modern Homo sapiens was known to have existed; ended about 10,000 years BC) }
+{ Mesolithic_Age, Mesolithic, Epipaleolithic, time_period,@i Stone_Age,#p (middle part of the Stone Age beginning about 15,000 years ago) }
+{ Neolithic_Age, Neolithic, New_Stone_Age, time_period,@i Stone_Age,#p (latest part of the Stone Age beginning about 10,000 BC in the Middle East (but later elsewhere)) }
+{ great_year, Platonic_year, time_period,@ (time required for one complete cycle of the precession of the equinoxes, about 25,800 years) }
+{ [ regulation_time, overtime,! ] time_period,@ noun.act:athletic_game,#p noun.act:sport,;c ((sports) the normal prescribed duration of a game; "the game was finished in regulation time") }
+{ [ overtime, regulation_time,! ] extra_time, time_period,@ noun.act:athletic_game,#p (playing time beyond regulation, to break a tie) }
+{ extra_innings, overtime,@ (overtime play until one team is ahead at the end of an inning; e.g. baseball) }
+{ overtime_period, overtime,@ (a period of overtime play to resolve a tie; e.g. basketball) }
+{ tiebreaker, overtime,@ (overtime play in order to break a tie; e.g. tennis and soccer) }
+{ sudden_death, overtime,@ noun.act:sport,;c ((sports) overtime in which play is stopped as soon as one contestant scores; e.g. football and golf) }
+{ minute, min, time_unit,@ hour,#p (a unit of time equal to 60 seconds or 1/60th of an hour; "he ran a 4 minute mile") }
+{ quarter3, time_unit,@ hour,#p (a unit of time equal to 15 minutes or a quarter of an hour; "it's a quarter til 4"; "a quarter after 4 o'clock") }
+{ second, sec, s, time_unit,@ minute,#p (1/60 of a minute; the basic unit of time adopted under the Systeme International d'Unites) }
+{ leap_second, second,@ (a second (as measured by an atomic clock) added to or subtracted from Greenwich Mean Time in order to compensate for slowing in the Earth's rotation) }
+{ attosecond, time_unit,@ femtosecond,#p (one quintillionth (10^-18) of a second; one thousandth of a femtosecond) }
+{ femtosecond, time_unit,@ picosecond,#p (one quadrillionth (10^-15) of a second; one thousandth of a picosecond) }
+{ picosecond, time_unit,@ nanosecond,#p (one trillionth (10^-12) of a second; one thousandth of a nanosecond) }
+{ nanosecond, time_unit,@ microsecond,#p (one billionth (10^-9) of a second; one thousandth of a microsecond) }
+{ microsecond, time_unit,@ millisecond,#p (one millionth (10^-6) of a second; one thousandth of a millisecond) }
+{ millisecond, msec, time_unit,@ second,#p (one thousandth (10^-3) of a second) }
+{ season, time_of_year, time_period,@ year,#p (one of the natural periods into which the year is divided by the equinoxes and solstices or atmospheric conditions; "the regular sequence of the seasons") }
+{ fall, [ autumn, adj.all:autumnal,+ ] season,@ (the season when the leaves fall from the trees; "in the fall of 1973") }
+{ spring, springtime, season,@ (the season of growth; "the emerging buds were a sure sign of spring"; "he will hold office until the spring of next year") }
+{ [ summer, adj.all:summery,+ verb.change:summerize,+ verb.stative:summer,+ ] summertime, season,@ (the warmest season of the year; in the northern hemisphere it extends from the summer solstice to the autumnal equinox; "they spent a lazy summer at the shore") }
+{ dog_days, [ canicule, adj.pert:canicular2,+ adj.pert:canicular,+ ] canicular_days, time_period,@ summer,#p (the hot period between early July and early September; a period of inactivity) }
+{ [ winter, adj.all:wintry,+ adj.all:wintery,+ verb.stative:winter,+ verb.change:winterize,+ ] wintertime, season,@ (the coldest season of the year; in the northern hemisphere it extends from the winter solstice to the vernal equinox) }
+{ midwinter, time_period,@ winter,#p (the middle of winter) }
+{ growing_season, season2,@ (the season during which a crop grows best) }
+{ seedtime, season2,@ (the time during which seeds should be planted) }
+{ sheepshearing, season2,@ (the time or season when sheep are sheared) }
+{ holiday_season, season2,@ (a time when many people take holidays) }
+{ [ high_season, off-season,! ] peak_season, season2,@ (the season when travel is most active and rates are highest; "they traveled to Europe in high season") }
+{ [ off-season, high_season,! ] season2,@ (the season when travel is least active and rates are lowest) }
+{ [ rainy_season, dry_season,!] season,@ (one of the two seasons in tropical climates) }
+{ monsoon, rainy_season,@ (rainy season in southern Asia when the southwestern monsoon blows, bringing heavy rains) }
+{ [ dry_season, rainy_season,!] season,@ (one of the two seasons in tropical climates) }
+{ season1, time_period,@ (a recurrent time marked by major holidays; "it was the Christmas season") }
+{ season2, time_period,@ (a period of the year marked by special events or activities in some field; "he celebrated his 10th season with the ballet company"; "she always looked forward to the avocado season") }
+{ preseason, season2,@ (a period prior to the beginning of the regular season which is devoted to training and preparation) }
+{ spring_training, preseason,@ (preseason training during the spring) }
+{ baseball_season, season2,@ (the season when baseball is played) }
+{ triple-crown_season, baseball_season,@ (a season of baseball during which a player wins the triple crown) }
+{ basketball_season, season2,@ (the season when basketball is played) }
+{ exhibition_season, season2,@ (the time before the regular games begin when football or baseball teams play practice games) }
+{ fishing_season, season2,@ (the season during which it is legal to catch fish) }
+{ football_season, season2,@ (the season when football is played) }
+{ hockey_season, season2,@ (the season when hockey is played) }
+{ hunting_season, season2,@ (the season during which it is legal to kill a particular species) }
+{ social_season, season2,@ (the season for major social events) }
+{ theatrical_season, season2,@ (the season when new plays are produced) }
+{ Advent1, season1,@ church_calendar,#p (the season including the four Sundays preceding Christmas) }
+{ Advent_Sunday, Christian_holy_day,@ Advent1,#p (the first of the four Sundays during Advent) }
+{ Shrovetide, season1,@ church_calendar,#p (immediately preceding Lent) }
+{ Mardi_Gras, Shrove_Tuesday, Fat_Tuesday, pancake_day, Christian_holy_day,@ Shrovetide,#p (the last day before Lent) }
+{ Lent, Lententide, season1,@ church_calendar,#p (a period of 40 weekdays from Ash Wednesday to Holy Saturday) }
+{ [ Pentecost1, adj.pert:pentecostal,+ ] Whitsunday, quarter_day,@ Whitsun,#p (seventh Sunday after Easter; commemorates the emanation of the Holy Spirit to the Apostles; a quarter day in Scotland) }
+{ Whitmonday, Whitsun_Monday, Monday,@ Whitsun,#p (the day after Whitsunday; a legal holiday in England and Wales and Ireland) }
+{ Whit-Tuesday, Whitsun_Tuesday, Tuesday,@ Whitsun,#p (the day after Whitmonday) }
+{ Whitsun, Whitsuntide, Whitweek, season2,@ church_calendar,#p (Christian holiday; the week beginning on Whitsunday (especially the first 3 days)) }
+{ long_time, age3, years1, time_period,@ (a prolonged period of time; "we've known each other for ages"; "I haven't been there for years and years") }
+{ month_of_Sundays, long_time,@ noun.communication:colloquialism,;u (a time perceived as long; "I hadn't seen him in a month of Sundays") }
+{ long_run, long_haul, time_period,@ (a period of time sufficient for factors to work themselves out; "in the long run we will win"; "in the long run we will all be dead"; "he performed well over the long haul") }
+{ [ eon, adj.all:permanent^eonian,+ ] aeon, long_time,@ (an immeasurably long period of time; "oh, that happened eons ago") }
+{ [ eon1, adj.pert:eonian,+ ] [ aeon1, adj.pert:aeonian,+ ] geological_time,@ (the longest division of geological time) }
+{ eternity, [ infinity, adj.all:infinite,+ ] noun.Tops:time,@ (time without end) }
+{ alpha_and_omega, eternity,@ (the first and last; signifies God's eternity) }
+{ blue_moon, long_time,@ noun.communication:colloquialism,;u (a long time; "something that happens once in blue moon almost never happens") }
+{ year_dot, long_time,@ noun.location:Britain,;r (as long ago as anyone can remember; "he has been a conductor since the year dot") }
+{ drought, drouth, time_period,@ (a prolonged shortage; "when England defeated Pakistan it ended a ten-year drought") }
+{ moment, minute2, second2, [ instant, adj.all:fast1^instantaneous,+ ] point_in_time,@ (a particular point in time; "the moment he arrived the party began") }
+{ eleventh_hour, last_minute, moment,@ (the latest possible moment; "money became available at the eleventh hour"; "at the last minute the government changed the rules") }
+{ moment_of_truth, moment,@ (a crucial moment on which much depends) }
+{ moment_of_truth1, moment,@ noun.act:bullfighting,#p (the moment in a bullfight when the matador kills the bull) }
+{ pinpoint, moment,@ (a very brief moment; "they were strangers sharing a pinpoint of time together") }
+{ [ time6, adj.all:opportune^timely,+ verb.change:time6,+ verb.cognition:time1,+ verb.cognition:time,+ ] moment,@ (a suitable moment; "it is time to go") }
+{ high_time, time6,@ (the latest possible moment; "it is high time you went to work") }
+{ [ occasion, verb.creation:occasion,+ ] time6,@ (the time of a particular event; "on the occasion of his 60th birthday") }
+{ meal, occasion,@ (any of the occasions for eating food that occur by custom or habit at more or less fixed times) }
+{ psychological_moment, moment,@ (the most appropriate time for achieving a desired effect) }
+{ wee, time,@ noun.location:Scotland,;r (a short time; "bide a wee") }
+{ while, piece, spell1, patch, time,@ (a period of indeterminate length (usually short) marked by some action or condition; "he was here for a little while"; "I need to rest for a piece"; "a spell of good weather"; "a patch of bad weather") }
+{ cold_spell, cold_snap, while,@ (a spell of cold weather) }
+{ hot_spell, while,@ (a spell of hot weather) }
+{ [ moment1, adj.all:short2^momentary,+ adj.all:short2^momentaneous,+ ] [ mo, noun.location:Britain,;r ] minute1, second1, bit, time,@ (an indefinitely short time; "wait just a moment"; "in a mo"; "it only takes a minute"; "in just a bit") }
+{ blink_of_an_eye, [ flash, verb.perception:flash2,+ ] heartbeat, instant1, jiffy, split_second, trice, twinkling, wink, New_York_minute, moment1,@ (a very short time (as the time it takes the eye to blink or the heart to beat); "if I had the chance I'd do it in a flash") }
+{ [ ephemera, adj.all:impermanent^ephemeral,+ ] time,@ (something transitory; lasting a day) }
+{ period3, geological_period, geological_time,@ era1,#p (a unit of geological time during which a system of rocks formed; "ganoid fishes swarmed during the earlier geological periods") }
+{ era1, geological_era, geological_time,@ eon1,#p (a major division of geological time; an era is usually divided into two or more periods) }
+{ epoch1, geological_time,@ period3,#p (a unit of geological time that is a subdivision of a period and is itself divided into ages) }
+{ era, [ epoch, adj.all:significant^epochal,+ ] time_period,@ (a period marked by distinctive character or reckoned from a fixed point or event) }
+{ Caliphate, era,@i (the era of Islam's ascendancy from the death of Mohammed until the 13th century; some Moslems still maintain that the Moslem world must always have a calif as head of the community; "their goal was to reestablish the Caliphate") }
+{ Christian_era, Common_era, era,@i (the time period beginning with the supposed year of Christ's birth) }
+{ day5, era,@ (an era of existence or influence; "in the day of the dinosaurs"; "in the days of the Roman Empire"; "in the days of sailing ships"; "he was a successful pianist in his day") }
+{ year_of_grace, year1,@ (any year of the Christian era) }
+{ Y2"K, year1,@ (the year 2000 in the Gregorian calendar) }
+{ generation, time_period,@ (the normal time between successive generations; "they had to wait a generation for that prejudice to fade") }
+{ anniversary, day_of_remembrance, day1,@ (the date on which an event occurred in some previous year (or the celebration of it)) }
+{ birthday, anniversary,@ (an anniversary of the day on which a person was born (or the celebration of it)) }
+{ [ jubilee, verb.social:jubilate,+ ] anniversary,@ (a special anniversary (or the celebration of it)) }
+{ diamond_jubilee, jubilee,@ (an anniversary celebrating the passage of 60 years) }
+{ silver_jubilee, jubilee,@ (an anniversary celebrating the passage of 25 years) }
+{ wedding_anniversary, anniversary,@ (the anniversary of the day on which you were married (or the celebration of it)) }
+{ silver_wedding_anniversary, wedding_anniversary,@ (the 25th wedding anniversary) }
+{ golden_wedding_anniversary, wedding_anniversary,@ (the 50th wedding anniversary) }
+{ diamond_wedding_anniversary, diamond_wedding, wedding_anniversary,@ (the 60th wedding anniversary) }
+{ semicentennial, semicentenary, anniversary,@ (the 50th anniversary (or the celebration of it)) }
+{ [ centennial, adj.pert:centennial,+ ] [ centenary, adj.pert:centenary,+ ] anniversary,@ (the 100th anniversary (or the celebration of it)) }
+{ sesquicentennial, anniversary,@ (the 150th anniversary (or the celebration of it)) }
+{ [ bicentennial, adj.pert:bicentennial,+ ] [ bicentenary, adj.pert:bicentenary,+ ] anniversary,@ (the 200th anniversary (or the celebration of it)) }
+{ tercentennial, tercentenary, triennial, anniversary,@ (the 300th anniversary (or the celebration of it)) }
+{ quatercentennial, quatercentenary, anniversary,@ (the 400th anniversary (or the celebration of it)) }
+{ quincentennial, quincentenary, anniversary,@ (the 500th anniversary (or the celebration of it)) }
+{ [ millennium2, adj.pert:millennial,+ adj.pert:millenary,+ ] millenary2, anniversary,@ (the 1000th anniversary (or the celebration of it)) }
+{ bimillennium1, bimillenary1, anniversary,@ (the 2000th anniversary (or the celebration of it)) }
+{ birthday1, natal_day, date,@ (the date on which a person was born) }
+
+{ time_immemorial, time_out_of_mind, past,@ (the distant past beyond memory) }
+{ auld_langsyne, langsyne, old_times, good_old_days, past,@ (past times remembered with nostalgia) }
+{ by-and-by, future,@ (an indefinite time in the future; "he'll get around to it in the sweet by-and-by") }
+{ chapter, phase,@ (any distinct period in history or in a person's life; "the industrial revolution opened a new chapter in British history"; "the divorce was an ugly chapter in their relationship") }
+{ [ antiquity, adj.all:old1^antique1,+ ] historic_period,@ history,#p (the historic period preceding the Middle Ages in Europe) }
+{ golden_age1, age2,@ (any period (sometimes imaginary) of great peace and prosperity and happiness) }
+{ historic_period, age2, era,@ history,#p (an era of history having some distinctive feature; "we live in a litigious age") }
+{ [ prehistory, adj.all:past^prehistoric,+ adj.pert:prehistoric,+ ] prehistoric_culture, time_period,@ (the time during the development of human culture before the appearance of the written word) }
+{ modern_era, era,@ (the present or recent times) }
+{ information_age, modern_era,@ (a period beginning in the last quarter of the 20th century when information became easily accessible through publications and through the manipulation of information by computers and computer networks) }
+{ ice_age, glacial_period, glacial_epoch1, period3,@ prehistory,#p (any period of time during which glaciers covered a large part of the earth's surface; "the most recent ice age was during the Pleistocene") }
+{ Jazz_Age, historic_period,@ (the 1920s in the United States characterized in the novels of F. Scott Fitzgerald as a period of wealth, youthful exuberance, and carefree hedonism) }
+{ chukker, chukka, noun.cognition:division,@ playing_period,#p noun.act:polo,;c ((polo) one of six divisions into which a polo match is divided) }
+{ inning, frame, noun.cognition:division,@ playing_period,#p noun.act:baseball,;c ((baseball) one of nine divisions of play during which each team has a turn at bat) }
+{ [ top, bottom,! ] top_of_the_inning, turn,@ inning,#p (the first half of an inning; while the visiting team is at bat; "a relief pitcher took over in the top of the fifth") }
+{ [ bottom, top,! ] bottom_of_the_inning, turn,@ inning,#p (the second half of an inning; while the home team is at bat) }
+{ set, playing_period,@ (a unit of play in tennis or squash; "they played two sets of tennis after dinner") }
+{ game, noun.cognition:division,@ set,#p noun.act:tennis,;c ((tennis) a division of play during which one player serves) }
+{ turn, bout, round, noun.cognition:division,@ playing_period,#p noun.act:sport,;c ((sports) a division during which one team is on the offensive) }
+{ playing_period, period_of_play, [ play, verb.competition:play2,+ verb.competition:play,+ ] noun.Tops:measure,@ noun.act:athletic_game,#p noun.act:game,;c ((in games or plays or other performances) the time during which play proceeds; "rain stopped play in the 4th inning") }
+{ first_period, noun.cognition:division,@ playing_period,#p (the first division into which the play of a game is divided) }
+{ second_period, noun.cognition:division,@ playing_period,#p (the second division into which the play of a game is divided) }
+{ final_period, noun.cognition:division,@ playing_period,#p (the final division into which the play of a game is divided) }
+{ half, noun.cognition:division,@ playing_period,#p noun.act:football,#p noun.act:basketball,#p (one of two divisions into which some games or performances are divided: the two divisions are separated by an interval) }
+{ first_half, half,@ (the first of two halves of play) }
+{ second_half, last_half, half,@ (the second of two halves of play) }
+{ period7, noun.cognition:division,@ playing_period,#p noun.act:hockey1,;c ((ice hockey) one of three divisions into which play is divided in hockey games) }
+{ quarter1, noun.cognition:division,@ playing_period,#p noun.act:football,;c noun.act:professional_basketball,;c ((football, professional basketball) one of four divisions into which some games are divided; "both teams scored in the first quarter") }
+{ over, noun.cognition:division,@ playing_period,#p noun.act:cricket,;c ((cricket) the division of play during which six balls are bowled at the batsman by one player from the other team from the same end of the pitch) }
+{ maiden_over, maiden, over,@ noun.act:cricket,;c ((cricket) an over in which no runs are scored) }
+{ Baroque, Baroque_era, Baroque_period, historic_period,@i (the historic period from about 1600 until 1750 when the baroque style of art, architecture, and music flourished in Europe) }
+{ Middle_Ages, Dark_Ages, historic_period,@i history,#p (the period of history between classical antiquity and the Italian Renaissance) }
+{ Renaissance, Renascence, historic_period,@i history,#p (the period of European history at the close of the Middle Ages and the rise of the modern world; a cultural rebirth from the 14th through the middle of the 17th centuries) }
+{ Italian_Renaissance, historic_period,@i Renaissance,#p (the early period when Italy was the center of the Renaissance) }
+{ Industrial_Revolution, technological_revolution, historic_period,@i (the transformation from an agricultural to an industrial nation) }
+{ Reign_of_Terror, historic_period,@i (the historic period (1793-94) during the French Revolution when thousands were executed; "the Reign of the Bourbons ended and the Reign of Terror began") }
+{ reign_of_terror1, reign1,@ noun.act:terrorism,;c (any period of brutal suppression thought to resemble the Reign of Terror in France) }
+{ [ reign, verb.social:reign,+ ] historic_period,@ (the period during which a monarch is sovereign; "during the reign of Henry VIII") }
+{ [ reign1, verb.stative:reign,+ ] time_period,@ (a period during which something or somebody is dominant or powerful; "he was helpless under the reign of his egotism") }
+{ turn_of_the_century, historic_period,@ (the period from about ten years before to ten years after a new century) }
+{ Harlem_Renaissance, historic_period,@i (a period in the 1920s when African-American achievements in art and music and literature flourished) }
+{ New_Deal, historic_period,@i (the historic period (1933-1940) in the United States during which President Franklin Roosevelt's economic policies were implemented) }
+{ Reconstruction, Reconstruction_Period, historic_period,@i (the period after the American Civil War when the southern states were reorganized and reintegrated into the Union; 1865-1877) }
+{ Restoration, historic_period,@i (the reign of Charles II in England; 1660-1685) }
+{ print_run, press_run, run,@ (the period that presses run to produce an issue of a newspaper) }
+{ run, time_period,@ (the continuous period of time during which something (a machine or a factory) operates or continues in operation; "the assembly line was on a 12-hour run") }
+{ run-time, run,@ noun.cognition:computer_science,;c ((computer science) the length of time it takes to execute a software program) }
+{ run-time1, point,@ (the time at which a (software or multimedia) program is run) }
+{ split_run, print_run,@ (a print run of a newspaper during which some articles or advertisements are changed to produce a different edition) }
+{ space_age, time,@ (the age beginning with the first space travel; from 1957 to the present) }
+{ today, present,@ (the present time or age; "the world of today"; "today we have computers") }
+{ tonight, present,@ (the present or immediately coming night) }
+{ yesterday, past,@ (the recent past; "yesterday's solutions are not good enough"; "we shared many yesterdays") }
+{ [ millennium1, adj.pert:millenary1,+ ] noun.cognition:doctrine,@ noun.communication:New_Testament,;c ((New Testament) in Revelations it is foretold that those faithful to Jesus will reign with Jesus over the earth for a thousand years; the meaning of these words have been much debated; some denominations (e.g. Jehovah's Witnesses) expect it to be a thousand years of justice and peace and happiness) }
+{ offing, future,@ (the near or foreseeable future; "there was a wedding in the offing") }
+{ tomorrow, future,@ (the near future; "tomorrow's world"; "everyone hopes for a better tomorrow") }
+{ manana, future,@ (an indefinite time in the future) }
+{ common_time, four-four_time, quadruple_time, common_measure, musical_time,@ (a time signature indicating four beats to the bar) }
+{ duple_time, musical_time,@ (musical time with two beats in each bar) }
+{ triple_time, musical_time,@ (musical time with three beats in each bar) }
+{ tempo1, pacing, musical_time,@ noun.communication:music,;c ((music) the speed at which a composition is to be played) }
+{ in_time, musical_time,@ (in the correct rhythm; "the dancers moved in time with the music") }
+{ [ accelerando, adj.all:increasing2^accelerando,+ ] tempo1,@ (a gradually increasing tempo of music; "my ear will not accept such violent accelerandos") }
+{ [ allegretto, adj.all:fast2^allegretto,+ ] tempo1,@ (a quicker tempo than andante but not as fast as allegro) }
+{ [ allegro, adj.all:fast2^allegro,+ ] tempo1,@ (a brisk and lively tempo) }
+{ allegro_con_spirito, allegro,@ (lively with spirit) }
+{ [ andante, adj.all:slow2^andante,+ ] tempo1,@ (a moderately slow tempo (a walking pace)) }
+{ meno_mosso, tempo1,@ (played at reduced speed; less rapid) }
+{ rubato, tempo1,@ (a flexible tempo; not strictly on the beat) }
+{ [ beginning, middle,! end,! ] commencement, first, outset, get-go, [ start, verb.social:start,+ verb.creation:start1,+ verb.creation:start,+ verb.stative:start,+ verb.change:start1,+ verb.change:start,+ ] [ kickoff, verb.social:kick_off,+ ] starting_time, showtime, offset, point_in_time,@ (the time at which something is supposed to begin; "they got an early start"; "she knew from the get-go that he was the man for her") }
+{ youth1, early_days, time_period,@ (an early period of development; "during the youth of the project") }
+{ terminus_a_quo, starting_point, beginning,@ (earliest limiting point) }
+{ [ presidency, noun.person:president4,+ noun.act:president4,+ noun.person:president3,+ noun.person:president2,+ noun.person:president1,+ noun.person:president,+ ] presidential_term, [ administration, verb.social:administer,+ ] tenure,@ (the tenure of a president; "things were quiet during the Eisenhower administration") }
+{ vice-presidency, vice-presidential_term, tenure,@ (the tenure of a vice president) }
+{ [ middle, end,! beginning,!] point_in_time,@ (time between the beginning and the end of a temporal period; "the middle of the war"; "rain during the middle of April") }
+{ [ end, verb.creation:end13,+ verb.stative:end1,+ verb.change:end1,+ verb.stative:end,+ beginning,! middle,! ] [ ending, verb.stative:end1,+ ] point_in_time,@ (the point in time at which something ends; "the end of the year"; "the ending of warranty period") }
+{ [ deep, adj.all:intense^deep1,+ ] middle,@ (the central and most intense or profound part; "in the deep of night"; "in the deep of winter") }
+{ stopping_point, finale, finis, [ finish, verb.change:finish3,+ verb.stative:finish,+ verb.change:finish2,+ ] last, conclusion, [ close, verb.stative:close,+ verb.social:close1,+ verb.social:close,+ ] end,@ (the temporal end; the concluding time; "the stopping point of each round was signaled by a bell"; "the market was up at the finish"; "they were playing better at the close of the season") }
+{ [ dawn1, verb.stative:dawn1,+ ] time_period,@ noun.communication:figure_of_speech,;u (an opening time period; "it was the dawn of the Roman Empire") }
+{ evening1, time_period,@ noun.communication:figure_of_speech,;u (a later concluding time period; "it was the evening of the Roman Empire") }
+{ [ cease, verb.stative:cease,+ ] end,@ ((`cease' is a noun only in the phrase `without cease') end) }
+{ fag_end, tail, tail_end, end,@ (the time of the last part of something; "the fag end of this crisis-ridden century"; "the tail of the storm") }
+{ fin_de_siecle, end,@ noun.communication:French,;u (the end of a century, especially the 19th century) }
+{ last_gasp, end,@ (the point of death or exhaustion or completion; "the last gasp of the cold war") } 
+{ termination, [ expiration, verb.stative:expire,+ ] expiry, end,@ (a coming to an end of a contract period; "the expiry of his driver's license") }
+{ terminus_ad_quem, terminal_point, [ limit, verb.communication:limit,+ ] end,@ (final or latest limiting point) }
+{ threshold, beginning,@ (the starting point for a new state or experience; "on the threshold of manhood") }
+{ seek_time, time_interval,@ access_time,#p noun.cognition:computer_science,;c ((computer science) the time it takes for a read/write head to move to a specific data track) }
+{ track-to-track_seek_time, seek_time,@ noun.cognition:computer_science,;c ((computer science) the time it takes for a read/write head to move to an adjacent data track) }
+{ time_interval, interval, noun.Tops:measure,@ (a definite length of time marked off by two instants) }
+{ time_constant, time_interval,@ noun.cognition:electronics,;c ((electronics) the time required for the current or voltage in a circuit to rise or fall exponentially through approximately 63 per cent of its amplitude) }
+{ time_slot, [ slot, verb.cognition:slot,+ ] time_interval,@ (a time assigned on a schedule or agenda; "the TV program has a new time slot"; "an aircraft landing slot") }
+{ [ time5, verb.change:time,+ ] time_period,@ (a period of time considered as a resource under your control and sufficient to accomplish something; "take time to smell the roses"; "I didn't have time to finish"; "it took more than half my time"; "he waited for a long time") }
+{ lunitidal_interval, time_interval,@ (interval between the moon's transit of a particular meridian and the next high tide at that meridian) }
+{ absence, time_interval,@ (the time interval during which something or somebody is away; "he visited during my absence") }
+{ [ pause, verb.communication:pause1,+ verb.stative:pause,+ ] intermission, [ break, verb.social:break1,+ ] interruption, [ suspension, verb.change:suspend,+ ] time_interval,@ (a time interval during which there is a temporary cessation of something) }
+{ [ lapse, verb.motion:lapse,+ verb.possession:lapse,+ verb.change:lapse1,+ ] pause,@ (a break or intermission in the occurrence of something; "a lapse of three weeks between letters") }
+{ [ blackout, verb.change:black_out,+ ] pause,@ (a suspension of radio or tv broadcasting) }
+{ [ caesura, adj.pert:caesural,+ ] pause,@ (a pause or interruption (as in a conversation); "after an ominous caesura the preacher continued") }
+{ dead_air, pause,@ (an inadvertent interruption in a broadcast during which there is no sound) }
+{ [ delay, verb.change:delay5,+ verb.stative:delay,+ ] [ hold, verb.stative:hold12,+ verb.motion:hold5,+ ] time_lag, postponement, [ wait, verb.stative:wait1,+ ] pause,@ (time during which some action is awaited; "instant replay caused too long a delay"; "he ordered a hold in the action") }
+{ extension, delay,@ (a mutually agreed delay in the date set for the completion of a job or payment of a debt; "they applied for an extension of the loan") }
+{ halftime, pause,@ (an intermission between the first and second half of a game) }
+{ interlude, time_interval,@ (an intervening period or episode) }
+{ entr'acte, interlude,@ (the interlude between two acts of a play) }
+{ interim, meantime, meanwhile, lag, time_interval,@ (the time between one event, process, or period and another; "meanwhile the socialists are running the government") }
+{ latent_period, time_interval,@ (the time that elapses before the presence of a disease is manifested by symptoms) }
+{ reaction_time, response_time, latency, latent_period1, time_interval,@ (the time that elapses between a stimulus and the response to it) }
+{ [ eternity1, adj.all:long2^eternal,+ ] time_interval,@ (a seemingly endless time interval (waiting)) }
+{ interregnum, interim,@ (the time between two reigns, governments, etc.) }
+{ [ sleep, verb.stative:sleep,+ verb.body:sleep,+ ] [ nap, verb.body:nap,+ ] time_period,@ (a period of time spent sleeping; "he felt better after a little sleep"; "there wasn't time for a nap") }
+{ beauty_sleep, sleep,@ (sleep before midnight) }
+{ [ kip, verb.body:kip,+ ] sleep,@ noun.location:Britain,;r (sleep; "roused him from his kip") }
+{ respite, [ rest, verb.communication:rest1,+ verb.communication:rest,+ ] relief, rest_period, pause,@ (a pause for relaxation; "people actually accomplish more when they take time for short rests") }
+{ time-out, pause,@ noun.act:athletic_game,#p (a brief suspension of play; "each team has two time-outs left") }
+{ [ letup, verb.change:let_up,+ verb.change:let_up1,+ ] [ lull, verb.emotion:lull,+ verb.change:lull,+ verb.emotion:lull1,+ ] pause,@ (a pause during which things are calm or activities are diminished; "there was never a letup in the noise") }
+{ breath, [ breather, verb.communication:breathe,+ ] breathing_place, breathing_space, breathing_spell, breathing_time, respite,@ (a short respite) }
+{ [ lease, verb.possession:lease,+ verb.possession:lease1,+ verb.social:lease1,+ verb.social:lease,+ ] term_of_a_contract, time_period,@ (the period of time during which a contract conveying property to a person is in effect) }
+{ half_life, half-life, time_period,@ (the time required for something to fall to half its initial value (in particular, the time for half the atoms in a radioactive substance to disintegrate)) }
+{ relaxation_time, time_constant,@ (the time constant of an exponential return of a system to equilibrium after a disturbance) }
+{ moratorium, delay,@ (a legally authorized postponement before some obligation must be discharged) }
+{ [ retardation, verb.stative:retard,+ ] delay,@ (the extent to which something is delayed or held back) }
+{ tide, lunar_time_period, time_period,@ (there are usually two high and two low tides each day) }
+{ [ acceleration, deceleration,! ] rate,@ noun.cognition:physics,;c ((physics) a rate of increase of velocity) }
+{ centripetal_acceleration, acceleration,@ (the acceleration toward the center that holds a satellite in elliptical orbit) }
+{ [ deceleration, acceleration,! ] rate,@ noun.cognition:physics,;c ((physics) a rate of decrease in velocity) }
+{ attrition_rate, rate_of_attrition, rate,@ (the rate of shrinkage in size or number) }
+{ birthrate, birth_rate, fertility, fertility_rate, natality, rate,@ (the ratio of live births in an area to the population of that area; expressed per 1000 population per year) }
+{ bits_per_second, bps, rate,@ noun.cognition:computer_science,;c ((computer science) the rate at which data is transferred (as by a modem)) }
+{ crime_rate, rate,@ (the ratio of crimes in an area to the population of that area; expressed per 1000 population per year) }
+{ data_rate, rate,@ (the rate at which circuits or other devices operate when handling digital information) }
+{ deathrate, death_rate, mortality, mortality_rate, fatality_rate, rate,@ (the ratio of deaths in an area to the population of that area; expressed per 1000 per year) }
+{ dose_rate, rate,@ (the quantity of radiation absorbed per unit time) }
+{ erythrocyte_sedimentation_rate, ESR, sedimentation_rate, sed_rate, rate,@ (the rate at which red blood cells settle out in a tube of blood under standardized conditions; a high rate usually indicates the presence of inflammation) }
+{ [ flow, verb.stative:flow,+ verb.motion:flow2,+ verb.motion:flow,+ ] flow_rate, rate_of_flow, rate,@ (the amount of fluid that flows in a given time) }
+{ cardiac_output, flow,@ (the amount of blood pumped out by the ventricles in a given period of time; "a resting adult has a cardiac output of about three quarts a minute") }
+{ flux, rate,@ (the rate of flow of energy or particles across a given surface) }
+{ frequency, [ frequence, adj.all:common1^frequent,+ adj.all:frequent,+ ] oftenness, rate,@ (the number of occurrences within a given time period; "the frequency of modulation was 40 cycles per second"; "the frequency of his seizures increased as he grew older") }
+{ gigahertz, GHz, gigacycle_per_second, gigacycle, Gc, rate,@ (1,000,000,000 periods per second) }
+{ growth_rate, rate_of_growth, rate,@ (the rate of increase in size per unit time) }
+{ isometry, growth_rate,@ noun.process:growth,;c (the growth rates in different parts of a growing organism are the same) }
+{ hertz, Hz, cycle_per_second, cycles/second, cps, cycle2, rate,@ kilohertz,#p (the unit of frequency; one hertz has a periodic interval of one second (named for Heinrich Rudolph Hertz)) }
+{ inflation_rate, rate_of_inflation, rate,@ (the rate of change of prices (as indicated by a price index) calculated on a monthly or annual basis) }
+{ jerk, rate,@ noun.cognition:mechanics,;c ((mechanics) the rate of change of acceleration) }
+{ knot, rate,@ ((of ships and wind) a unit of speed equal to one nautical mile per hour or about 1.15 statute miles per hour) }
+{ kilohertz, kHz, kilocycle_per_second, kilocycle, kc, rate,@ megahertz,#p (one thousand periods per second) }
+{ kilometers_per_hour, [ kilometres_per_hour, noun.location:Canada,;r noun.location:Britain,;r ] kph, km/h, rate,@ (the ratio of the distance traveled (in kilometers) to the time spent traveling (in hours)) }
+{ megahertz, MHz, megacycle_per_second, megacycle, Mc, rate,@ (one million periods per second) }
+{ terahertz, THz, rate,@ (one trillion periods per second) }
+{ metabolic_rate, rate,@ (rate of metabolism; the amount of energy expended in a give period) }
+{ miles_per_hour1, mph1, rate,@ (the ratio of the distance traveled (in miles) to the time spent traveling (in hours)) }
+{ [ pace, verb.change:pace,+ verb.motion:pace1,+ verb.motion:pace,+ ] gait, rate,@ (the rate of moving (especially walking or running)) }
+{ [ pulse, verb.motion:pulse,+ verb.motion:pulsate,+ ] pulse_rate, heart_rate, noun.state:vital_sign,@ rate,@ (the rate at which the heart beats; usually measured to obtain a quick evaluation of a person's health) }
+{ femoral_pulse, pulse,@ (pulse of the femoral artery (felt in the groin)) }
+{ radial_pulse, pulse,@ (pulse of the radial artery (felt in the wrist)) }
+{ rate_of_return, rate,@ (the amount returned per unit of time expressed as a percentage of the cost) }
+{ return_on_invested_capital, return_on_investment, ROI, rate_of_return,@ noun.act:corporate_finance,;c ((corporate finance) the amount, expressed as a percentage, that is earned on a company's total capital calculated by dividing the total capital into earnings before interest, taxes, or dividends are paid) }
+{ respiratory_rate, rate_of_respiration, noun.state:vital_sign,@ rate,@ (the rate at which a person inhales and exhales; usually measured to obtain a quick evaluation of a person's health) }
+{ revolutions_per_minute, rpm, [ rev, verb.change:rev,+ ] rate,@ (rate of revolution of a motor; "the engine was doing 6000 revs") }
+{ sampling_rate, rate,@ noun.communication:telecommunication,;c ((telecommunication) the frequency of sampling per unit time) }
+{ Nyquist_rate, sampling_rate,@ noun.communication:telecommunication,;c ((telecommunication) the lowest sampling rate that will permit accurate reconstruction of a sampled analog signal) }
+{ solar_constant, rate,@ (the rate at which radiant solar energy is received at the outer layer of the earth's atmosphere) }
+{ spacing, rate,@ (the time between occurrences of a repeating event; "some women do not control the spacing of their children") }
+{ [ speed, adj.all:fast1^speedy,+ verb.motion:speed1,+ verb.motion:speed,+ verb.change:speed2,+ verb.motion:speed3,+ verb.change:speed,+ ] velocity, rate,@ (distance travelled per unit time) }
+{ tempo, [ pace1, verb.cognition:pace,+ ] rate,@ (the rate of some repeating event) }
+{ quick_time, pace,@ (a normal marching pace of 120 steps per minute) }
+{ double_time, pace,@ (a fast marching pace (180 steps/min) or slow jog) }
+{ airspeed, speed,@ (the speed of an aircraft relative to the air in which it is flying) }
+{ escape_velocity, speed,@ (the minimum velocity needed to escape a gravitational field) }
+{ groundspeed, speed,@ (the speed of an aircraft relative to the ground) }
+{ hypervelocity, speed,@ (excessive velocity; "the meteorites struck the earth with hypervelocity impacts") }
+{ muzzle_velocity, speed,@ (the velocity of a projectile as it leaves the muzzle of a gun) }
+{ peculiar_velocity, speed,@ (velocity with respect to the local standard of rest) }
+{ radial_velocity, speed,@ (velocity along the line of sight toward or away from the observer) }
+{ speed_of_light, light_speed, c, speed,@ noun.quantity:constant,@ (the speed at which light travels in a vacuum; the constancy and universality of the speed of light is recognized by defining it to be exactly 299,792,458 meters per second) }
+{ steerageway, speed,@ noun.act:navigation1,;c ((nautical) the minimum rate of motion needed for a vessel to be maneuvered) }
+{ terminal_velocity, speed,@ (the constant maximum velocity reached by a body falling through the atmosphere under the attraction of gravity) }
+{ miles_per_hour, mph, noun.cognition:meter_reading,@ (a speedometer reading for the momentary rate of travel) }
+{ [ attendance, adj.all:present2^attendant,+ ] frequency,@ (the frequency with which a person is present; "a student's attendance is an important factor in her grade") }
+{ count_per_minute, counts/minute, frequency,@ (frequency per minute) }
+{ sampling_frequency, frequency,@ noun.communication:telecommunication,;c ((telecommunication) the frequency of sampling a continuously varying signal) }
+{ Nyquist_frequency, sampling_frequency,@ noun.communication:telecommunication,;c ((telecommunication) twice the maximum frequency occurring in the transmitted signal) }
+{ infant_deathrate, infant_mortality, infant_mortality_rate, deathrate,@ (the death rate during the first year of life) }
+{ neonatal_mortality, neonatal_mortality_rate, deathrate,@ (the death rate during the first 28 days of life) }
+{ words_per_minute, wpm, rate,@ (the rate at which words are produced (as in speaking or typing)) }
+{ beats_per_minute, bpm, metronome_marking, M.M., tempo,@ noun.act:music,#p noun.communication:music,;c (the pace of music measured by the number of beats occurring in 60 seconds) }
+{ rate, noun.relation:magnitude_relation,@ (a magnitude or frequency relative to a time unit; "they traveled at a rate of 55 miles per hour"; "the rate of change was faster than expected") }
+{ channel_capacity, data_rate,@ (the maximum data rate that can be attained over a given channel) }
+{ neutron_flux, flux,@ (the rate of flow of neutrons; the number of neutrons passing through a unit area in unit time) }
+{ radiant_flux, flux,@ (the rate of flow of radiant energy (electromagnetic waves)) }
+{ luminous_flux, radiant_flux,@ (the rate of flow of light energy) }
+{ [ incubation, verb.change:incubate2,+ ] phase,@ noun.state:infection,#p noun.cognition:pathology,;c ((pathology) the phase in the development of an infection between the time a pathogen enters the body and the time the first symptoms appear) }
+{ [ cycle, adj.all:cyclic1,+ verb.change:cycle,+ verb.motion:cycle2,+ verb.motion:cycle3,+ ] [ rhythm, adj.all:rhythmic,+ ] round1, time_interval,@ (an interval during which a recurring sequence of events occurs; "the never-ending cycle of the seasons") }
+{ menstrual_cycle, noun.event:cycle1,@ (a recurring cycle (beginning at menarche and ending at menopause) in which the endometrial lining of the uterus prepares for pregnancy; if pregnancy does not occur the lining is shed at menstruation; "the average menstrual cycle is 28 days") }
+{ fertile_period, fertile_phase, phase,@ menstrual_cycle,#p (the time in the menstrual cycle when fertilization is most likely to be possible (7 days before to 7 days after ovulation)) }
+{ menstrual_phase, phase,@ menstrual_cycle,#p (the phase of the menstrual cycle during which the lining of the uterus is shed (the first day of menstrual flow is considered day 1 of the menstrual cycle)) }
+{ musth, phase,@ (an annual phase of heightened sexual excitement in the males of certain large mammals (especially elephants); is associated with discharge from a gland between the eye and ear; "the frenzied elephant was in musth") }
+{ secretory_phase, luteal_phase, phase,@ menstrual_cycle,#p (the second half of the menstrual cycle after ovulation; the corpus luteum secretes progesterone which prepares the endometrium for the implantation of an embryo; if fertilization does not occur then menstrual flow begins) }
+{ lead_time, time_interval,@ (the time interval between the initiation and the completion of a production process; "the lead times for many publications can vary tremendously"; "planning is an area where lead time can be reduced") }
+{ [ period2, adj.all:periodical,+ ] time_interval,@ (the interval taken to complete one cycle of a regularly repeating phenomenon) }
+{ orbit_period, period2,@ (the time it takes to complete one full orbit around a celestial body; "the orbit period depends on the altitude of the satellite") }
+{ [ phase1, verb.change:phase,+ ] phase_angle, point_in_time,@ cycle,#p (a particular point in the time of a cycle; measured from some arbitrary zero and expressed as an angle) }
+{ [ phase, verb.creation:phase,+ ] stage, time_period,@ (any distinct time period in a sequence of events; "we are in a transitional stage in which many former ideas must be revised or rejected") }
+{ [ generation1, adj.pert:generational,+ verb.creation:generate,+ ] phase,@ (a stage of technological development or innovation; "the third generation of computers") }
+{ multistage, time_period,@ (occurring in more than one stage) }
+{ apogee, [ culmination, verb.social:culminate,+ verb.change:culminate3,+ verb.change:culminate,+ ] phase,@ (a final climactic stage; "their achievements stand as a culmination of centuries of development") }
+{ seedtime1, phase,@ (any time of new development) }
+{ [ tenure, verb.social:tenure,+ ] term_of_office, [ incumbency, adj.all:current^incumbent,+ ] term,@ (the term during which some position is held) }
+{ episcopate, tenure,@ (the term of office of a bishop) }
+{ shift, work_shift, duty_period, hours,@ workday,#p (the time period during which you are at work) }
+{ [ go, verb.competition:go,+ ] spell, tour, turn1, shift,@ (a time period for working (after which you will be relieved by someone else); "it's my go"; "a spell of work") }
+{ trick, shift,@ (a period of work or duty) }
+{ watch, shift,@ (a period of time (4 or 2 hours) during which some of a ship's crew are on duty) }
+{ watch1, time_period,@ (the period during which someone (especially a guard) is on duty) }
+{ dogwatch, watch,@ (either of two short watches: from 4-6 pm or 6-8 pm) }
+{ day_shift, shift,@ (the work shift during the day (as 8 a.m. to 4 p.m.)) }
+{ evening_shift, swing_shift, shift,@ (the work shift during the evening (as 4 p.m. to midnight)) }
+{ night_shift, graveyard_shift, shift,@ (the work shift during the night (as midnight to 8 a.m.)) }
+{ split_shift, shift,@ (a working shift divided into two periods of time with several hours in between) }
+{ peacetime, time_period,@ (a period of time during which there is no war) }
+{ wartime, time_period,@ (a period of time during which there is armed conflict) }
+{ graveyard_watch, middle_watch, midwatch, night_watch, watch,@ (a watch during the night (as from midnight to 8 a.m.)) }
+{ [ enlistment, verb.competition:enlist1,+ verb.competition:enlist,+ ] hitch, term_of_enlistment, tour_of_duty, duty_tour, tour1, time_period,@ (a period of time spent in military service) }
+{ honeymoon1, time_period,@ (the early (usually calm and harmonious) period of a relationship; business or political) }
+{ indiction, time_period,@ (a 15-year cycle used as a chronological unit in ancient Rome and adopted in some medieval kingdoms) }
+{ float, time_interval,@ (the time interval between the deposit of a check in a bank and its payment) }
+{ Depression, Great_Depression, historic_period,@i (a period during the 1930s when there was a worldwide economic depression and mass unemployment) }
+{ [ prohibition, noun.person:prohibitionist,+ ] prohibition_era, time_period,@ (the period from 1920 to 1933 when the sale of alcoholic beverages was prohibited in the United States by a constitutional amendment) }
+{ incubation_period, time_period,@ (the period between infection and the appearance of symptoms of the disease) }
+{ rainy_day, time_period,@ noun.communication:figure_of_speech,;u (a (future) time of financial need; "I am saving for a rainy day") }
+{ novitiate, noviciate, time_period,@ noun.cognition:religion,;c (the period during which you are a novice (especially in a religious order)) }
+{ flower, prime2, peak, heyday, bloom1, [ blossom, verb.change:blossom,+ ] efflorescence, [ flush, adj.all:rich^flush,+ ] time_period,@ (the period of greatest prosperity or productivity) }
+{ golden_age2, flower,@ (a time period when some activity or skill was at its peak; "it was the golden age of cinema") }
+{ [ rule, verb.social:rule,+ ] duration2,@ (the duration of a monarch's or government's power; "during the rule of Elizabeth") }
+{ Regency, rule,@i noun.location:England,;r (the period from 1811-1820 when the Prince of Wales was regent during George III's periods of insanity) }
+{ running_time, time_period,@ (the length of time that a movie or tv show runs) }
+{ show_time1, point,@ (the point in time at which an entertainment (a movie or television show etc.) is scheduled to begin) }
+{ safe_period, phase,@ menstrual_cycle,#p (that time during a woman's menstrual cycle during which conception is least likely to occur (usually immediately before of after menstruation)) }
+{ octave, religious_festival,@ (a feast day and the seven days following it) }
+{ then, point_in_time,@ (that time; that moment; "we will arrive before then"; "we were friends from then on") }
+{ shiva, shivah, shibah, week,@ noun.cognition:Judaism,;c ((Judaism) a period of seven days of mourning after the death of close relative; "the family is sitting shiva") }
+{ epoch2, date_of_reference, date3,@ noun.cognition:astronomy,;c ((astronomy) an arbitrarily fixed date that is the point in time relative to which information (as coordinates of a celestial body) is recorded) }
+{ clotting_time, time_period,@ (the time it takes for a sample of blood to clot; used to diagnose some clotting disorders) }
+{ rotational_latency, latency1, time_interval,@ access_time,#p noun.cognition:computer_science,;c ((computer science) the time it takes for a specific block of data on a data track to rotate around to the read/write head) }
+{ [ probation, adj.all:conditional^probationary,+ verb.stative:probate,+ ] trial_period,@ (a trial period during which an offender has time to redeem himself or herself) }
+{ [ probation1, adj.all:conditional^probationary,+ ] trial_period,@ (a trial period during which your character and abilities are tested to see whether you are suitable for work or for membership) }
+{ processing_time, time_interval,@ (the time it takes to complete a prescribed procedure; "they increased output by decreasing processing time") }
+{ air_alert, time_period,@ (the time period during which military and civilian agencies are prepared for an enemy air attack) }
+{ command_processing_overhead_time, command_processing_overhead, command_overhead, overhead, processing_time,@ access_time,#p noun.cognition:computer_science,;c ((computer science) the processing time required by a device prior to the execution of a command) }
+{ Great_Schism, time_period,@i noun.event:schism,@i noun.group:Roman_Catholic_Church,;c (the period from 1378 to 1417 during which there were two papacies in the Roman Catholic Church, one in Rome and one in Avignon) }
+{ question_time, time_period,@ noun.location:Great_Britain1,;r (a period during a parliamentary session when members of British Parliament may ask questions of the ministers) }
+{ real_time, time_period,@ noun.cognition:computer_science,;c ((computer science) the time it takes for a process under computer control to occur) }
+{ real_time1, time_period,@ (the actual time that it takes a process to occur; "information is updated in real time") }
+{ regency1, rule,@ (the period of time during which a regent governs) }
+{ [ snap, adj.all:cold1^snappy,+ ] while,@ (a spell of cold weather; "a cold snap in the middle of May") }
+{ study_hall, time_period,@ school_day1,#p (a period of time during the school day that is set aside for study) }
+{ [ Transfiguration, verb.change:transfigure2,+ ] Transfiguration_Day, August_6", Christian_holy_day,@ noun.cognition:Christianity,;c ((Christianity) a church festival held in commemoration of the Transfiguration of Jesus) }
+{ usance, time_period,@ noun.act:commerce,;c (the period of time permitted by commercial usage for the payment of a bill of exchange (especially a foreign bill of exchange)) }
+{ window, time_period,@ (the time period that is considered best for starting or finishing something; "the expanded window will give us time to catch the thieves"; "they had a window of less than an hour when an attack would have succeeded") }
+{ 9/11", 9-11", September_11", Sept._11", Sep_11", September,#p noun.act:terrorist_attack,@i noun.act:terrorism,;c (the day in 2001 when Arab suicide bombers hijacked United States airliners and used them as bombs) }

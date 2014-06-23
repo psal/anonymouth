@@ -1,0 +1,476 @@
+($RCSfile: noun.feeling,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:44 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.feeling)
+
+{ [ affect, adj.all:emotional^affectional,+ verb.emotion:affect,+ ] noun.Tops:feeling,@ (the conscious subjective aspect of feeling or emotion) }
+{ [ emotion, adj.pert:emotional,+ adj.all:emotional2,+ verb.emotion:emote,+ ] noun.Tops:feeling,@ (any strong feeling) }
+{ thing, noun.Tops:feeling,@ (a persistent illogical feeling of desire or aversion; "he has a thing about seafood"; "she has a thing about him") }
+{ [ glow, verb.emotion:glow,+ ] noun.Tops:feeling,@ (a feeling of considerable warmth; "the glow of new love"; "a glow of regret") }
+{ [ faintness, adj.all:ill1^faint,+ ] noun.Tops:feeling,@ (a feeling of faintness and of being ready to swoon) }
+{ soul, [ soulfulness, adj.all:emotional^soulful,+ ] noun.Tops:feeling,@ (deep feeling or emotion) }
+
+{ passion, [ passionateness, adj.all:passionate,+ ] noun.Tops:feeling,@ (a strong feeling or emotion) }
+{ [ infatuation, verb.emotion:infatuate,+ ] passion,@ (a foolish and usually extravagant passion or love or admiration) }
+{ [ wildness, adj.all:passionate^wild,+ ] abandon, passion,@ (a feeling of extreme emotional intensity; "the wildness of his anger") }
+{ ardor2, ardour2, fervor, fervour, [ fervency, adj.all:passionate^fervent,+ ] [ fire, adj.all:passionate^fiery,+ ] [ fervidness, adj.all:passionate^fervid,+ ] passion,@ (feelings of great warmth and intensity; "he spoke with great ardor") }
+{ [ storminess, adj.all:unpeaceful^stormy,+ ] passion,@ (violent passion in speech or action; "frightened by the storminess of their argument") }
+{ [ zeal2, adj.all:enthusiastic^zealous,+ ] fervor,@ (excessive fervor to do something or accomplish some end; "he had an absolute zeal for litigation") }
+
+{ [ sentiment, adj.all:tender3^sentimental,+ adj.all:emotional^sentimental,+ ] noun.Tops:feeling,@ (tender, romantic, or nostalgic feeling or emotion) }
+{ [ sentimentality, adj.all:tender3^sentimental,+ ] sentiment,@ (extravagant or affected feeling or emotion) }
+{ [ mawkishness, adj.all:emotional^mawkish,+ ] bathos, sentimentality,@ (insincere pathos) }
+{ razbliuto, sentiment,@ noun.location:Russia,;r (the sentimental feeling you have about someone you once loved but no longer do) }
+
+{ complex, noun.Tops:feeling,@ noun.act:psychoanalysis,;c ((psychoanalysis) a combination of emotions and impulses that have been rejected from awareness but still influence a person's behavior) }
+{ Oedipus_complex, Oedipal_complex, complex,@ (a complex of males; desire to possess the mother sexually and to exclude the father; said to be a source of personality disorders if unresolved) }
+{ Electra_complex, complex,@ (a complex of females; sexual attraction to the father) }
+{ inferiority_complex, complex,@ (a sense of personal inferiority arising from conflict between the desire to be noticed and the fear of being humiliated) }
+{ [ ambivalence, adj.all:uncertain2^ambivalent,+ ] ambivalency, noun.Tops:feeling,@ (mixed feelings or emotions) }
+{ [ conflict, verb.stative:conflict,+ ] ambivalence,@ (opposition between two simultaneous but incompatible feelings; "he was immobilized by conflict and indecision") }
+
+{ [ apathy, adj.all:uninterested^apathetic,+ adj.all:spiritless^apathetic,+ ] noun.Tops:feeling,@ (an absence of emotion or enthusiasm) }
+{ [ emotionlessness, adj.all:cold2^emotionless,+ ] [ impassivity, adj.all:unemotional^impassive,+ ] [ impassiveness, adj.all:unemotional^impassive,+ adj.all:uncommunicative^impassive,+ ] [ phlegm, adj.all:unemotional^phlegmatic,+ adj.all:unemotional^phlegmatical,+ ] indifference1, [ stolidity, adj.all:unemotional^stolid,+ ] unemotionality, apathy,@ (apathy demonstrated by an absence of emotional reactions) }
+{ languor1, lassitude, [ listlessness, adj.all:spiritless^listless,+ adj.all:lethargic^listless,+ ] apathy,@ (a feeling of lack of interest or energy) }
+
+{ [ desire, verb.emotion:desire,+ ] noun.Tops:feeling,@ (the feeling that accompanies an unsatisfied state) }
+{ [ ambition, adj.all:difficult^ambitious,+ verb.emotion:ambition,+ ] [ aspiration, verb.cognition:aspire,+ ] dream, desire,@ (a cherished desire; "his ambition is to own his own business") }
+{ American_Dream, ambition,@ (the widespread aspiration of Americans to live better than their parents did) }
+{ [ emulation, verb.stative:emulate,+ verb.competition:emulate,+ ] ambition,@ (ambition to equal or excel) }
+{ [ nationalism, noun.person:nationalist1,+ ] ambition,@ (the aspiration for national independence felt by people under foreign domination) }
+{ bloodlust, desire,@ (a desire for bloodshed) }
+{ [ temptation, verb.communication:tempt1,+ ] desire,@ (the desire to have or do something that you know you should avoid; "he felt the temptation and his will power weakened") }
+{ [ craving, verb.consumption:crave,+ ] desire,@ (an intense desire for some particular thing) }
+{ appetite, [ appetency, adj.all:desirous^appetent,+ ] [ appetence, adj.all:desirous^appetent,+ ] craving,@ (a feeling of craving something; "an appetite for life"; "the object of life is to satisfy as many appetencies as possible"- Granville Hicks) }
+{ [ stomach, verb.consumption:stomach,+ ] appetite,@ (an appetite for food; "exercise gave him a good stomach for dinner") }
+{ sweet_tooth, appetite,@ (a strong appetite for sweet food) }
+{ addiction, craving,@ (an abnormally strong craving) }
+{ [ wish, verb.emotion:wish2,+ verb.emotion:wish1,+ verb.emotion:wish,+ verb.communication:wish2,+ ] [ wishing, verb.emotion:wish,+ ] [ want, verb.emotion:want,+ verb.cognition:want1,+ ] desire,@ (a specific feeling of desire; "he got his wish"; "he was above all wishing and desire") }
+{ velleity, wish,@ (a mere wish, unaccompanied by effort to obtain) }
+{ [ longing, verb.emotion:long2,+ ] [ yearning, verb.emotion:yearn1,+ verb.emotion:yearn,+ ] [ hungriness, adj.all:desirous^hungry,+ ] desire,@ (prolonged unfulfilled desire or need) }
+{ [ hankering, verb.emotion:hanker,+ ] [ yen, verb.emotion:yen,+ ] longing,@ (a yearning for something or to do something) }
+{ [ pining, verb.emotion:pine,+ ] longing,@ (a feeling of deep longing) }
+{ [ wishfulness, adj.all:wishful,+ ] longing,@ (an unrealistic yearning) }
+{ [ wistfulness, adj.all:sad^wistful1,+ ] longing,@ (a sadly pensive longing) }
+{ nostalgia, longing,@ (longing for something past) }
+{ [ lovesickness, adj.all:unhappy^lovesick,+ ] pining,@ (a pining for a loved one) }
+{ homesickness, nostalgia,@ (a longing to return home) }
+{ [ sex, adj.all:sexy4,+ adj.all:sexy,+ verb.emotion:sex,+ ] sexual_urge, noun.Tops:feeling,@ (all of the feelings resulting from the urge to gratify sexual impulses; "he wanted a better sex life"; "the film contained no sex or violence") }
+{ sexual_desire, [ eros, adj.all:sexy^erotic,+ ] [ concupiscence, adj.all:passionate^concupiscent,+ ] physical_attraction, desire,@ (a desire for sexual intimacy) }
+{ [ love1, verb.contact:love,+ ] sexual_love, erotic_love, sexual_desire,@ (a deep feeling of sexual desire and attraction; "their love left them indifferent to their surroundings"; "she was his first love") }
+{ [ aphrodisia, anaphrodisia,!] sexual_desire,@ (a desire for heterosexual intimacy) }
+{ [ anaphrodisia, aphrodisia,!] sexual_desire,@ (decline or absence of sexual desire) }
+{ passion2, sexual_desire,@ (a feeling of strong sexual desire) }
+{ [ sensuality, adj.all:physical^sensual,+ ] [ sensualness, adj.all:physical^sensual,+ adj.all:hot2^sensual,+ ] [ sensualism, noun.person:sensualist,+ ] sexual_desire,@ (desire for sensual pleasures) }
+{ [ amorousness2, adj.all:loving^amorous2,+ ] eroticism, erotism, [ sexiness, adj.all:sexy4,+ adj.all:sexy,+ ] [ amativeness, adj.all:loving^amative,+ ] sexual_desire,@ (the arousal of feelings of sexual desire) }
+{ fetish, sexual_desire,@ (a form of sexual desire in which gratification depends to an abnormal degree on some object or item of clothing or part of the body; "common male fetishes are breasts, legs, hair, shoes, and underwear") }
+{ [ libido, adj.all:sexy^libidinous,+ adj.pert:libidinal,+ ] sexual_desire,@ noun.act:psychoanalysis,;c ((psychoanalysis) a Freudian term for sexual urge or desire) }
+{ [ lecherousness, adj.all:sexy^lecherous,+ ] [ lust, adj.all:passionate^lusty,+ verb.consumption:lust,+ ] [ lustfulness, adj.all:sexy^lustful2,+ adj.all:sexy^lustful1,+ adj.all:passionate^lustful,+ ] sexual_desire,@ (a strong sexual desire) }
+{ [ nymphomania, adj.all:neurotic^nymphomaniacal,+ ] sexual_desire,@ (abnormally intense sexual desire in women) }
+{ satyriasis, sexual_desire,@ (abnormally intense sexual desire in men) }
+{ the_hots, sexual_desire,@ (intense sexual desire) }
+{ [ prurience, adj.all:sexy^prurient,+ ] [ pruriency, adj.all:sexy^prurient,+ ] [ lasciviousness, adj.all:sexy^lascivious,+ ] [ carnality, adj.all:physical^carnal,+ ] lubricity, amorousness2,@ (feeling morbid sexual desire or a propensity to lewdness) }
+{ urge, [ itch, verb.emotion:itch,+ ] desire,@ (a strong restless desire; "why this urge to travel?") }
+{ [ caprice, adj.all:arbitrary^capricious,+ ] impulse1, whim, desire,@ (a sudden desire; "he bought it on an impulse") }
+
+{ [ pleasure, verb.emotion:please,+ pain,!] [ pleasance, adj.all:pleasant,+ ] noun.Tops:feeling,@ (a fundamental feeling that is hard to define but that people desire to experience; "he was tingling with pleasure") }
+{ [ delight, verb.consumption:delight,+ verb.emotion:delight,+ ] delectation, pleasure,@ (a feeling of extreme pleasure or satisfaction; "his delight to see her was obvious to all") }
+{ [ entrancement, verb.emotion:entrance,+ verb.body:entrance,+ ] [ ravishment, verb.emotion:ravish,+ ] delight,@ (a feeling of delight at being filled with wonder and enchantment) }
+{ [ amusement, verb.communication:amuse,+ ] delight,@ (a feeling of delight at being entertained) }
+{ Schadenfreude, delight,@ noun.location:Germany,;r (delight in another person's misfortune) }
+{ [ enjoyment, verb.emotion:enjoy1,+ verb.emotion:enjoy,+ verb.consumption:enjoy,+ ] pleasure,@ (the pleasure felt when having a good time) }
+{ joie_de_vivre, enjoyment,@ (a keen enjoyment of living) }
+{ gusto, [ relish2, verb.emotion:relish,+ ] [ zest, adj.all:spirited^zesty,+ ] [ zestfulness, adj.all:spirited^zestful,+ ] enjoyment,@ enthusiasm,@ (vigorous and enthusiastic enjoyment) }
+{ [ pleasantness, adj.all:nice^pleasant,+ unpleasantness,! ] pleasure,@ (the feeling caused by agreeable stimuli; one pole of a continuum of states of feeling) }
+{ afterglow, pleasantness,@ (the pleasure of remembering some pleasant event; "he basked in the afterglow of his victory") }
+{ comfort, pleasure,@ (a feeling of freedom from worry or disappointment) }
+{ [ consolation, verb.emotion:console,+ ] [ solace, verb.emotion:solace,+ ] [ solacement, verb.emotion:solace,+ ] comfort,@ (the comfort you feel when consoled in times of disappointment; "second place was no consolation to him") }
+{ cold_comfort, consolation,@ (very limited consolation or empathy; "he told me that time heals all wounds but that was cold comfort to me") }
+{ silver_lining, bright_side, consolation,@ (a consoling aspect of a difficult situation; "every cloud has a silver lining"; "look on the bright side of it") }
+{ relief, [ alleviation, verb.body:alleviate,+ ] [ assuagement, verb.body:assuage,+ ] comfort,@ (the feeling that comes when something burdensome is removed or reduced; "as he heard the news he was suddenly flooded with relief") }
+{ sexual_pleasure, pleasure,@ (pleasure derived from sexual activities) }
+{ [ algolagnia, adj.pert:algolagnic,+ ] algophilia, sexual_pleasure,@ (sexual pleasure derived from inflicting or experiencing pain) }
+{ [ sadism, adj.all:sadistic,+ noun.person:sadist,+ ] sexual_pleasure,@ (sexual pleasure obtained by inflicting harm (physical or psychological) on others) }
+{ [ sadomasochism, adj.pert:sadomasochistic,+ noun.person:sadomasochist,+ ] sadism,@ masochism,@ (sadism and masochism combined in one person) }
+{ [ masochism, adj.all:masochistic,+ noun.person:masochist,+ ] sexual_pleasure,@ (sexual pleasure obtained from receiving punishment (physical or psychological)) }
+
+{ [ pain, verb.emotion:pain,+ pleasure,!] [ painfulness, adj.all:unpleasant^painful,+ adj.all:painful,+ ] noun.Tops:feeling,@ (emotional distress; a fundamental feeling that people try to avoid; "the pain of loneliness") }
+{ growing_pains, pain,@ (emotional distress arising during adolescence) }
+{ [ unpleasantness, adj.all:unpleasant,+ pleasantness,! ] pain,@ (the feeling caused by disagreeable stimuli; one pole of a continuum of states of feeling) }
+{ pang, stab, twinge, noun.Tops:feeling,@ (a sudden sharp feeling; "pangs of regret"; "she felt a stab of excitement"; "twinges of conscience") }
+{ guilt_pang, pang,@ (pangs of feeling guilty) }
+{ mental_anguish, pain,@ (sustained dull painful emotion) }
+{ [ suffering1, verb.perception:suffer,+ verb.body:suffer,+ ] [ hurt1, verb.emotion:hurt1,+ verb.body:hurt1,+ ] pain,@ (feelings of mental or physical pain) }
+{ [ agony, adj.pert:agonal,+ noun.person:agonist1,+ noun.person:agonist,+ verb.emotion:agonise1,+ verb.emotion:agonise,+ ] [ torment1, verb.emotion:torment,+ ] [ torture1, adj.all:painful^torturous,+ verb.emotion:torture,+ ] suffering1,@ (intense feelings of suffering; acute mental or physical pain; "an agony of doubt"; "the torments of the damned") }
+{ throes, suffering1,@ (violent pangs of suffering; "death throes") }
+{ discomfort, [ soreness, adj.all:unpleasant^sore,+ adj.all:angry^sore,+ ] [ irritation, verb.body:irritate,+ ] suffering1,@ (an uncomfortable feeling of mental painfulness or distress) }
+{ chafing, noun.state:tenderness,@ (soreness or irritation of the skin caused by friction) }
+{ intertrigo, chafing,@ (chafing between two skin surfaces that are in contact (as in the armpit or under the breasts or between the thighs)) }
+{ [ distress2, verb.emotion:distress,+ ] [ hurt2, verb.perception:hurt,+ verb.body:hurt1,+ ] [ suffering2, verb.emotion:suffer,+ ] pain,@ (psychological suffering; "the death of his wife caused him great distress") }
+{ [ anguish2, verb.emotion:anguish2,+ verb.emotion:anguish,+ ] [ torment2, verb.emotion:torment,+ ] [ torture2, verb.emotion:torture,+ ] suffering2,@ (extreme mental distress) }
+{ self-torture, self-torment, suffering2,@ (self-imposed distress) }
+{ tsoris, suffering2,@ noun.communication:Yiddish,;c ((Yiddish) trouble and suffering) }
+{ wound, suffering2,@ (a figurative injury (to your feelings or pride); "he feared that mentioning it might reopen the wound"; "deep in her breast lives the silent wound"; "The right reader of a good poem can tell the moment it strikes him that he has taken an immortal wound--that he will never get over it"--Robert Frost) }
+
+{ [ liking, dislike,!] noun.Tops:feeling,@ (a feeling of pleasure and enjoyment; "I've always had a liking for reading"; "she developed a liking for gin") }
+{ [ fondness1, adj.all:inclined2^fond,+ ] [ fancy, verb.emotion:fancy,+ ] partiality, liking,@ (a predisposition to like something; "he had a fondness for whiskey";  "she had dismissed him quite brutally, relegating him to the status of a passing fancy, or less") }
+{ [ captivation, verb.emotion:captivate,+ ] [ enchantment, verb.emotion:enchant1,+ ] [ enthrallment, verb.emotion:enthrall,+ ] [ fascination, verb.emotion:fascinate1,+ ] liking,@ (a feeling of great liking for something wonderful and unusual) }
+{ [ preference, verb.emotion:prefer,+ ] penchant, predilection, taste2, liking,@ (a strong liking; "my own preference is for good literature"; "the Irish have a penchant for blarney") }
+{ acquired_taste, preference,@ (a preference that is only acquired after considerable experience; "martinis are an acquired taste") }
+{ weakness, preference,@ (a penchant for something even though it might not be good for you; "he has a weakness for chocolate") }
+{ mysophilia, liking,@ (abnormal attraction to filth) }
+{ [ inclination, verb.stative:incline1,+ verb.cognition:incline3,+ disinclination,! ] liking,@ (that toward which you are inclined to feel a liking; "her inclination is for classical music") }
+{ leaning, propensity, [ tendency, verb.stative:tend1,+ ] inclination,@ (an inclination to do something; "he felt leanings toward frivolity") }
+{ stomach1, inclination,@ (an inclination or liking for things involving conflict or difficulty or unpleasantness; "he had no stomach for a fight") }
+{ undertow, inclination,@ (an inclination contrary to the strongest or prevailing feeling; "his account had a poignant undertow of regret") }
+{ [ friendliness, adj.all:amicable^friendly,+ unfriendliness,!] liking,@ (a feeling of liking for another person; enjoyment in their company) }
+{ amicability, amicableness, friendliness,@ (a disinclination to quarrel) }
+{ good_will, goodwill, friendliness,@ (the friendly hope that something will succeed) }
+{ brotherhood, friendliness,@ (the feeling that men should treat one another like brothers) }
+{ [ approval, verb.cognition:approve,+ disapproval,!] liking,@ (a feeling of liking something or someone good; "although she fussed at them, she secretly viewed all her children with approval") }
+{ [ favor, verb.social:favor3,+ verb.cognition:favor,+ verb.social:favor,+ ] [ favour, verb.social:favour,+ verb.social:favour3,+ verb.social:favour1,+ ] approval,@ (a feeling of favorable regard) }
+{ [ approbation, verb.communication:approbate,+ verb.cognition:approbate,+ verb.cognition:approve,+ ] approval,@ (official approval) }
+
+{ [ admiration1, verb.emotion:admire,+ ] [ esteem, verb.cognition:esteem1,+ ] liking,@ (a feeling of delighted approval and liking) }
+{ [ Anglophilia, adj.pert:anglophilic,+ Anglophobia,! ] admiration1,@ (admiration for Britain and British customs) }
+{ hero_worship, admiration1,@ (admiration for great men (or their memory)) }
+{ [ philhellenism, noun.person:philhellenist,+ ] admiration1,@ (admiration for Greece and the Greeks and Greek customs) }
+{ [ philogyny, misogyny,! ] admiration1,@ (admiration for women) }
+{ [ worship1, verb.emotion:worship,+ ] adoration, love,@ (a feeling of profound love and admiration) }
+
+{ [ dislike, verb.emotion:dislike,+ liking,!] noun.Tops:feeling,@ (a feeling of aversion or antipathy; "my dislike of him was instinctive") }
+{ [ disinclination, inclination,! ] dislike,@ (that toward which you are inclined to feel dislike; "his disinclination for modesty is well known") }
+{ [ Anglophobia, adj.pert:anglophobic,+ Anglophilia,! ] dislike,@ (dislike (or fear) of Britain and British customs) }
+
+{ [ unfriendliness, adj.all:hostile1^unfriendly1,+ friendliness,!] dislike,@ (dislike experienced as an absence of friendliness) }
+{ alienation, [ disaffection, verb.emotion:disaffect,+ ] [ estrangement, verb.social:estrange,+ ] dislike,@ (the feeling of being alienated from other people) }
+{ isolation, alienation,@ (a feeling of being disliked and alone) }
+{ [ antipathy, adj.all:hostile1^antipathetic,+ adj.all:disinclined^antipathetic,+ adj.all:hostile1^antipathetical,+ ] aversion, distaste, dislike,@ (a feeling of intense dislike) }
+{ [ disapproval, verb.cognition:disapprove,+ approval,!] dislike,@ (a feeling of disliking something or what someone is doing) }
+
+{ [ contempt, adj.all:disrespectful^contemptuous,+ ] [ disdain, verb.emotion:disdain,+ ] [ scorn, verb.emotion:scorn,+ ] despite, dislike,@ (lack of respect accompanied by a feeling of intense dislike; "he was held in contempt"; "the despite in which outsiders were held is legendary") }
+{ [ disgust, verb.emotion:disgust,+ verb.perception:disgust,+ ] dislike,@ (strong feelings of dislike) }
+{ [ abhorrence, adj.all:offensive1^abhorrent,+ verb.emotion:abhor,+ ] [ abomination, verb.emotion:abominate,+ ] [ detestation, verb.emotion:detest,+ ] [ execration, verb.emotion:execrate,+ ] [ loathing, verb.emotion:loathe,+ ] [ odium, adj.all:hateful^odious,+ ] hate,@ disgust,@ (hate coupled with disgust) }
+{ creepy-crawlies, dislike,@ (feelings of dislike and anxiety; "the cave gave me the creepy-crawlies") }
+{ scunner, dislike,@ noun.location:Scotland,;r (a strong dislike; "they took a scunner against the United States") }
+{ [ repugnance, adj.all:offensive1^repugnant,+ ] repulsion, revulsion, horror, disgust,@ (intense aversion) }
+{ [ nausea, adj.all:unwholesome^nauseous,+ verb.perception:nauseate,+ verb.emotion:nauseate,+ ] disgust,@ (disgust so strong it makes you feel sick) }
+{ technophobia, dislike,@ (dislike for new technology) }
+
+{ [ gratitude, ingratitude,! ] noun.Tops:feeling,@ (a feeling of thankfulness and appreciation; "he was overwhelmed with gratitude for their help") }
+{ [ gratefulness, adj.all:grateful,+ ] [ thankfulness, adj.all:thankful,+ ] [ appreciativeness, adj.all:grateful^appreciative,+ ] gratitude,@ (warm friendly feelings of gratitude) }
+{ [ ingratitude, gratitude,! ] [ ungratefulness, adj.all:ungrateful,+ ] noun.Tops:feeling,@ (a lack of gratitude) }
+
+{ [ concern, unconcern,! ] sympathy,@ (a feeling of sympathy for someone or something; "She felt strong concern for those less fortunate") }
+{ [ care, verb.emotion:care2,+ verb.emotion:care12,+ ] noun.state:predicament,@ (a cause for feeling concern; "his major care was the illness of his wife") }
+{ solicitude, [ solicitousness, adj.all:concerned^solicitous,+ adj.all:attentive^solicitous,+ ] concern,@ (a feeling of excessive concern) }
+{ [ softheartedness, adj.all:softhearted,+ ] [ tenderness, adj.all:tender3,+ ] concern,@ (a feeling of concern for the welfare of someone (especially someone defenseless)) }
+
+{ [ unconcern, concern,! ] noun.Tops:feeling,@ (a feeling of lack of concern) }
+{ [ indifference, adj.all:impartial^indifferent2,+ adj.all:unimportant^indifferent,+ adj.all:unconcerned^indifferent,+ adj.all:impartial^indifferent,+ ] unconcern,@ (unbiased impartial unconcern) }
+{ [ distance, adj.all:reserved1^distant,+ verb.stative:distance,+ ] aloofness2, indifference,@ (indifference by personal withdrawal; "emotional distance") }
+{ [ withdrawal, verb.emotion:withdraw,+ ] detachment, indifference,@ (avoiding emotional involvement) }
+{ [ heartlessness, adj.all:heartless2,+ ] [ coldheartedness, adj.all:coldhearted,+ ] [ hardheartedness, adj.all:uncompassionate^hardhearted,+ adj.all:hardhearted,+ ] unconcern,@ (an absence of concern for the welfare of others) }
+{ cruelty, [ mercilessness, adj.all:merciless,+ ] [ pitilessness, adj.all:inhumane^pitiless,+ ] [ ruthlessness, adj.all:merciless^ruthless,+ ] heartlessness,@ (feelings of extreme heartlessness) }
+
+{ [ shame, verb.emotion:shame,+ verb.social:shame1,+ verb.social:shame,+ ] noun.Tops:feeling,@ (a painful emotion resulting from an awareness of inadequacy or guilt) }
+{ [ conscience, adj.all:conscientious,+ ] shame,@ (a feeling of shame when you do something immoral; "he has no conscience about his cruelty") }
+{ self-disgust, self-hatred, shame,@ (shame resulting from strong dislike of yourself or your actions) }
+{ embarrassment, shame,@ (the shame you feel when your inadequacy or guilt is made public) }
+{ [ self-consciousness, adj.all:uncomfortable1^self-conscious,+ ] [ uneasiness1, adj.all:uncomfortable1^uneasy,+ ] [ uncomfortableness, adj.all:uncomfortable1,+ ] embarrassment,@ (embarrassment deriving from the feeling that others are critically aware of you) }
+{ [ shamefacedness, adj.all:ashamed^shamefaced2,+ adj.all:ashamed^shamefaced1,+ adj.all:modest1^shamefaced,+ ] [ sheepishness, adj.all:ashamed^sheepish,+ ] embarrassment,@ (feeling embarrassed about yourself) }
+{ [ chagrin, verb.emotion:chagrin1,+ ] [ humiliation, verb.emotion:humiliate,+ ] [ mortification, verb.emotion:mortify1,+ ] embarrassment,@ (strong feelings of embarrassment) }
+{ [ confusion, verb.emotion:confuse,+ ] [ discombobulation, verb.emotion:discombobulate,+ verb.cognition:discombobulate,+ ] embarrassment,@ (a feeling of embarrassment that leaves you confused) }
+{ [ abashment, verb.emotion:abash,+ ] [ bashfulness, adj.all:timid^bashful,+ ] embarrassment,@ (feeling embarrassed due to modesty) }
+{ [ discomfiture, verb.emotion:discomfit,+ ] [ discomposure, verb.emotion:discompose,+ ] [ disconcertion, verb.emotion:disconcert2,+ verb.emotion:disconcert1,+ ] [ disconcertment, verb.emotion:disconcert2,+ verb.emotion:disconcert1,+ ] embarrassment,@ anxiety,@ (anxious embarrassment) }
+
+{ [ pride, humility,!] [ pridefulness, adj.all:elated^prideful,+ ] noun.Tops:feeling,@ (a feeling of self-respect and personal worth) }
+{ self-esteem, self-pride, pride,@ (a feeling of pride in yourself) }
+{ ego1, [ egotism, adj.all:proud^egotistic,+ noun.person:egotist,+ ] [ self-importance, adj.all:proud^self-important,+ ] pride,@ (an inflated feeling of pride in your superiority to others) }
+{ amour_propre, conceit, self-love, [ vanity, adj.all:proud^vain,+ ] pride,@ (feelings of excessive pride) }
+
+{ [ humility, pride,!] humbleness, noun.Tops:feeling,@ (a humble feeling; "he was filled with humility at the sight of the Pope") }
+{ [ meekness, adj.all:humble^meek,+ adj.all:docile^meek,+ ] submission, humility,@ (the feeling of patient, submissive humbleness) }
+{ self-depreciation, humility,@ (a feeling of being of little worth) }
+
+{ [ astonishment, verb.cognition:astonish,+ ] [ amazement, verb.cognition:amaze,+ ] noun.Tops:feeling,@ (the feeling that accompanies something extremely surprising; "he looked at me in astonishment") }
+{ [ devastation, verb.change:devastate1,+ ] noun.Tops:feeling,@ (the feeling of being confounded or overwhelmed; "her departure left him in utter devastation") }
+{ [ wonder, verb.communication:wonder12,+ ] [ wonderment, verb.communication:wonder12,+ ] admiration2, astonishment,@ (the feeling aroused by something strange and surprising) }
+{ [ awe2, verb.emotion:awe,+ ] wonder,@ (an overwhelming feeling of wonder or admiration; "he stared over the edge with a feeling of awe") }
+{ [ surprise, verb.cognition:surprise,+ ] astonishment,@ (the astonishment you feel when something totally unexpected happens to you) }
+{ [ stupefaction, verb.cognition:stupefy,+ ] astonishment,@ (a feeling of stupefied astonishment) }
+{ [ daze, verb.perception:daze,+ ] [ shock1, verb.body:shock,+ verb.emotion:shock,+ verb.emotion:shock2,+ ] stupor, stupefaction,@ (the feeling of distress and disbelief that you have when something bad happens accidentally; "his mother's death left him in a daze"; "he was numb with shock") }
+
+{ [ expectation, verb.cognition:expect,+ verb.body:expect,+ ] noun.Tops:feeling,@ (the feeling that something is about to happen) }
+{ anticipation, [ expectancy, adj.all:hopeful^expectant,+ ] expectation,@ (an expectation) }
+{ suspense1, anticipation,@ (excited anticipation of an approaching climax; "the play kept the audience in suspense") }
+{ fever, anticipation,@ (intense nervous anticipation; "in a fever of resentment") }
+{ buck_fever, fever,@ (nervous excitement of an inexperienced hunter) }
+{ gold_fever, fever,@ (greed and the contagious excitement of a gold rush) }
+{ [ hope1, verb.emotion:hope,+ verb.emotion:hope1,+ ] anticipation,@ (a specific instance of feeling hopeful; "it revived their hope of winning the pennant") }
+
+{ [ levity, gravity,!] noun.Tops:feeling,@ (feeling an inappropriate lack of seriousness) }
+{ gaiety1, [ playfulness, adj.all:playful,+ ] levity,@ (a festive merry feeling) }
+{ [ gravity, levity,!] [ solemnity1, adj.all:serious^solemn1,+ adj.all:serious^solemn,+ ] noun.Tops:feeling,@ (a solemn and dignified feeling) }
+{ [ earnestness, adj.all:sincere^earnest,+ ] seriousness, [ sincerity, adj.all:serious^sincere,+ ] gravity,@ (an earnest and sincere feeling) }
+
+{ [ sensitivity, adj.all:sensitive2,+ ] [ sensitiveness, adj.all:sensitive2,+ ] noun.Tops:feeling,@ (sensitivity to emotional feelings (of self and others)) }
+{ [ oversensitiveness, adj.all:sensitive2^oversensitive,+ ] sensitivity,@ (sensitivity leading to easy irritation or upset) }
+{ sensibility, sensitivity,@ (refined sensitivity to pleasurable or painful impressions; "cruelty offended his sensibility") }
+{ [ feelings, verb.emotion:feel,+ verb.cognition:feel1,+ ] sensitivity,@ (emotional or moral sensitivity (especially in relation to personal principles or dignity); "the remark hurt his feelings") }
+{ insight, [ perceptiveness, adj.pert:perceptive,+ adj.all:perceptive,+ ] [ perceptivity, adj.all:perceptive,+ ] sensibility,@ (a feeling of understanding) }
+{ [ sensuousness, adj.all:aesthetic^sensuous,+ ] sensibility,@ (a sensuous feeling) }
+
+{ [ agitation, calmness,! ] noun.Tops:feeling,@ (the feeling of being agitated; not calm) }
+{ unrest, agitation,@ (a feeling of restless agitation) }
+{ [ fidget, verb.motion:fidget,+ ] fidgetiness, restlessness, agitation,@ (a feeling of agitation expressed in continual motion; "he's got the fidgets"; "waiting gave him a feeling of restlessness") }
+{ [ impatience, adj.all:eager^impatient,+ ] restlessness,@ (a restless desire for change and excitement) }
+{ stewing, agitation,@ (an extreme state of worry and agitation; "his stewing over the fight kept him awake most of the night") }
+{ [ stir, verb.emotion:stir,+ verb.emotion:stir1,+ verb.perception:stir,+ ] agitation,@ (emotional agitation and excitement) }
+{ tumult, turmoil, agitation,@ (violent agitation) }
+{ [ electricity, adj.all:tense3^electric,+ verb.emotion:electrify,+ ] stir,@ (keen and shared excitement; "the stage crackled with electricity whenever she was on it") }
+{ sensation, stir,@ (a general feeling of excitement and heightened interest; "anticipation produced in me a sensation somewhere between hope and fear") }
+
+{ [ calmness, adj.all:composed^calm,+ agitation,!] noun.Tops:feeling,@ (a feeling of calm; an absence of agitation or excitement) }
+{ placidity, [ placidness, adj.all:good-natured^placid,+ adj.all:calm^placid,+ ] calmness,@ (a feeling of calmness; a quiet and undisturbed feeling) }
+{ [ coolness, adj.all:fashionable^cool,+ ] [ imperturbability, adj.all:composed^imperturbable,+ ] [ imperturbableness, adj.all:composed^imperturbable,+ ] calmness,@ (calm and unruffled self-assurance; "he performed with all the coolness of a veteran") }
+{ [ tranquillity, adj.all:calm^tranquil,+ ] [ tranquility, adj.all:calm^tranquil,+ ] [ quietness, adj.all:calm^quiet,+ adj.all:quiet2,+ ] quietude, calmness,@ (a state of peace and quiet) }
+{ [ peace, verb.emotion:pacify,+ ] peacefulness, peace_of_mind, repose, serenity, heartsease, ataraxis, tranquillity,@ (the absence of mental stress or anxiety) }
+{ [ easiness, adj.all:easy2,+ ] [ relaxation, verb.social:relax2,+ verb.body:relax1,+ ] tranquillity,@ (a feeling of refreshing tranquility and an absence of tension or worry; "the easiness we feel when sleeping") }
+{ languor, [ dreaminess, adj.all:lethargic^dreamy,+ adj.all:inattentive^dreamy,+ ] relaxation,@ (a relaxed comfortable feeling) }
+
+{ [ anger, adj.all:angry,+ verb.emotion:anger1,+ verb.emotion:anger,+ ] [ choler1, adj.all:passionate^choleric,+ adj.all:ill-natured^choleric,+ adj.all:angry^choleric,+ ] ire, emotion,@ (a strong emotion; a feeling that is oriented toward some real or supposed grievance) }
+{ dudgeon, high_dudgeon, indignation,@ (a feeling of intense indignation (now used only in the phrase `in high dudgeon')) }
+{ wrath, fury,@ (intense anger (usually on an epic scale)) }
+{ [ fury, adj.all:angry^furious,+ verb.emotion:infuriate,+ ] [ rage, verb.stative:rage1,+ verb.emotion:rage,+ ] [ madness, adj.all:angry^mad,+ ] anger,@ (a feeling of intense anger; "hell hath no fury like a woman scorned"; "his face turned red with rage") }
+{ [ lividity, adj.all:angry^livid,+ ] fury,@ (a state of fury so great the face becomes discolored) }
+{ [ infuriation, verb.emotion:infuriate,+ ] [ enragement, verb.emotion:enrage,+ ] anger,@ (a feeling of intense anger) }
+{ [ umbrage, adj.all:angry^umbrageous,+ ] offense, [ offence, verb.emotion:offend1,+ ] anger,@ (a feeling of anger caused by being offended; "he took offence at my question") }
+{ indignation, [ outrage, verb.emotion:outrage1,+ ] anger,@ (a feeling of righteous anger) }
+{ [ huffiness, adj.all:sensitive2^huffy,+ adj.all:angry^huffy,+ ] anger,@ (a passing state of anger and resentment) }
+{ dander, hackles, anger,@ (a feeling of anger and animosity; "having one's hackles or dander up") }
+{ bad_temper, ill_temper, anger,@ (a persisting angry mood) }
+{ annoyance, chafe, vexation, anger,@ (anger produced by some annoying irritation) }
+{ [ pique, verb.emotion:pique,+ ] [ temper1, verb.change:temper3,+ ] [ irritation1, verb.emotion:irritate,+ ] annoyance,@ (a sudden outburst of anger; "his temper sparked like damp firewood") }
+{ [ frustration1, verb.social:frustrate,+ verb.emotion:frustrate,+ ] annoyance,@ (a feeling of annoyance at being hindered or criticized; "her constant complaints were the main source of his frustration") }
+{ [ aggravation, verb.emotion:aggravate,+ ] [ exasperation, verb.emotion:exasperate1,+ verb.emotion:exasperate,+ ] annoyance,@ (an exasperated feeling of annoyance) }
+{ harassment, [ torment3, verb.emotion:torment1,+ ] annoyance,@ (a feeling of intense annoyance caused by being tormented; "so great was his harassment that he wanted to destroy his tormentors") }
+
+{ [ fear, verb.emotion:fear,+ fearlessness,!] [ fearfulness, adj.all:afraid^fearful,+ ] [ fright, verb.emotion:fright,+ ] emotion,@ (an emotion experienced in anticipation of some specific pain or danger (usually accompanied by a desire to flee or fight)) }
+{ [ alarm, verb.emotion:alarm,+ verb.communication:alarm,+ ] [ dismay, verb.emotion:dismay,+ ] consternation, fear,@ (fear resulting from the awareness of danger) }
+{ creeps, fear,@ noun.communication:colloquialism,;u (a feeling of fear and revulsion; "he gives me the creeps") }
+{ frisson, [ shiver, adj.all:alarming^shivery,+ verb.motion:shiver,+ ] chill2, quiver, [ shudder, adj.all:alarming^shuddery,+ ] [ thrill2, verb.emotion:thrill1,+ verb.emotion:thrill2,+ ] [ tingle, verb.perception:tingle,+ ] fear,@ (an almost pleasurable sensation of fright; "a frisson of surprise shot through him") }
+{ [ horror1, verb.emotion:horrify1,+ ] fear,@ (intense and profound fear) }
+{ [ hysteria1, adj.all:agitated^hysterical,+ ] fear,@ (excessive or uncontrollable fear) }
+{ [ panic, adj.all:afraid^panicky,+ verb.emotion:panic1,+ verb.emotion:panic,+ ] [ terror, noun.person:terrorist,+ verb.social:terrorize,+ verb.emotion:terrorize,+ verb.social:terrorise,+ verb.emotion:terrorise,+ verb.emotion:terrify,+ ] [ affright, verb.emotion:affright,+ ] fear,@ (an overwhelming feeling of fear and anxiety) }
+{ swivet, panic,@ (a panic or extreme discomposure; "it threw her into a swivet") }
+{ [ fear2, verb.emotion:fear1,+ ] [ reverence, adj.all:reverent^reverential,+ adj.all:pious^reverent,+ verb.emotion:reverence,+ verb.emotion:revere,+ ] awe, [ veneration, verb.emotion:venerate,+ ] emotion,@ (a feeling of profound respect for someone or something; "the fear of God"; "the Chinese reverence for the dead"; "the French treat food with gentle reverence"; "his respect for the law bordered on veneration") }
+{ [ scare, adj.all:alarming^scary,+ verb.emotion:scare,+ ] panic_attack, fear,@ (a sudden attack of fear) }
+{ stage_fright, fear,@ (fear that affects a person about to face an audience) }
+{ [ apprehension, verb.emotion:apprehend,+ ] [ apprehensiveness, adj.all:uneasy^apprehensive,+ adj.all:afraid^apprehensive,+ ] [ dread, adj.all:alarming^dread,+ verb.emotion:dread,+ ] fearfulness,@ (fearful expectation or anticipation; "the student looked around the examination room with apprehension") }
+{ trepidation, apprehension,@ (a feeling of alarm or dread) }
+{ [ foreboding, verb.communication:forebode,+ ] premonition, presentiment, boding, apprehension,@ (a feeling of evil to come; "a steadily escalating sense of foreboding"; "the lawyer had a presentiment that the judge would dismiss the case") }
+{ shadow, foreboding,@ (a premonition of something adverse; "a shadow over his happiness") }
+{ presage, foreboding,@ (a foreboding about what is about to happen) }
+{ suspense2, apprehension,@ (apprehension about what is going to happen) }
+{ [ timidity, adj.all:timid,+ ] [ timidness, adj.all:cowardly^timid,+ adj.all:timid,+ ] [ timorousness, adj.all:timid^timorous,+ ] fear,@ (fear of the unknown or unfamiliar or fear of making decisions) }
+{ cold_feet, timidity,@ (timidity that prevents the continuation of a course of action; "I was going to tell him but I got cold feet") }
+{ shyness, timidity,@ (a feeling of fear of embarrassment) }
+{ [ diffidence, adj.all:reserved1^diffident,+ confidence,!] self-doubt, self-distrust, timidity,@ (lack of self-confidence) }
+{ [ hesitance, adj.all:indecisive1^hesitant,+ ] [ hesitancy, adj.all:indecisive1^hesitant,+ ] diffidence,@ (a feeling of diffidence and indecision about doing something) }
+{ [ unassertiveness, adj.all:unassertive,+ ] diffidence,@ (diffidence about self promotion) }
+{ [ intimidation, verb.emotion:intimidate,+ ] fearfulness,@ (the feeling of being intimidated; being made to feel afraid or timid) }
+
+{ anxiety, emotion,@ (a vague unpleasant emotion that is experienced in anticipation of some (usually ill-defined) misfortune) }
+{ [ worry, verb.emotion:worry12,+ verb.emotion:worry,+ ] [ trouble3, verb.emotion:trouble,+ verb.emotion:trouble1,+ ] anxiety,@ (a strong feeling of anxiety; "his worry over the prospect of being fired"; "it is not work but worry that kills"; "he wanted to die and end his troubles") }
+{ [ concern1, verb.stative:concern1,+ ] [ care1, verb.emotion:care12,+ ] [ fear1, verb.emotion:fear13,+ verb.emotion:fear3,+ ] anxiety,@ (an anxious feeling; "care had aged him"; "they hushed it up out of fear of public reaction") }
+{ [ anxiousness, adj.all:troubled^anxious,+ ] [ disquiet, verb.emotion:disquiet,+ ] anxiety,@ (a feeling of mild anxiety about possible developments) }
+{ [ insecurity, adj.all:insecure1,+ ] anxiety,@ (the anxiety you experience when you feel vulnerable and insecure) }
+{ [ edginess, adj.all:tense3^edgy,+ ] [ uneasiness2, adj.all:uneasy,+ ] inquietude, disquietude, anxiety,@ (feelings of anxiety that make you tense and irritable) }
+{ willies, edginess,@ (feelings of uneasiness; "that guy gave me the willies") }
+{ sinking, sinking_feeling, anxiety,@ (a feeling caused by uneasiness or apprehension; "with a sinking heart"; "a sinking feeling in the pit of my stomach") }
+{ [ scruple, adj.all:scrupulous,+ verb.communication:scruple,+ verb.emotion:scruple,+ verb.stative:scruple,+ ] qualm, [ misgiving, verb.cognition:misgive,+ ] anxiety,@ (uneasiness about the fitness of an action) }
+{ [ jitteriness, adj.all:tense3^jittery,+ ] [ jumpiness, adj.all:tense3^jumpy,+ ] [ nervousness, adj.all:troubled^nervous,+ adj.all:excited^nervous,+ ] [ restiveness, adj.all:tense3^restive,+ ] anxiety,@ (the anxious feeling you have when you have the jitters) }
+{ angst, anxiety,@ (an acute but unspecific feeling of anxiety; usually reserved for philosophical anxiety about the world or about personal freedom) }
+
+{ [ fearlessness, adj.all:bold^fearless,+ fear,!] bravery, noun.Tops:feeling,@ (feeling no fear) }
+{ [ security, adj.all:secure1,+ ] fearlessness,@ (freedom from anxiety or fear; "the watch dog gave her a feeling of security") }
+{ [ confidence, adj.all:close2^confidential,+ diffidence,!] security,@ (a feeling of trust (in someone or something); "I have confidence in our team"; "confidence is always borrowed, never owned") }
+
+{ [ happiness, adj.all:happy,+ sadness,!] noun.Tops:feeling,@ (emotions experienced when in a state of well-being) }
+{ bonheur, happiness,@ noun.location:France,;r ((French) happiness and good humor) }
+{ [ gladness, adj.all:grateful^glad,+ adj.all:cheerful^glad,+ adj.all:glad,+ ] gladfulness, [ gladsomeness, adj.all:glad^gladsome,+ ] happiness,@ (experiencing joy and pleasure) }
+{ [ joy, adj.all:joyous,+ verb.emotion:joy1,+ verb.emotion:joy,+ sorrow,!] [ joyousness, adj.all:joyous,+ ] [ joyfulness, adj.all:joyous^joyful,+ adj.all:joyful,+ ] emotion,@ (the emotion of great happiness) }
+{ [ rhapsody, verb.communication:rhapsodize,+ ] joy,@ (an enthusiastic expression of emotion; "rhapsodies of joy") }
+{ [ elation, verb.emotion:elate,+ ] high_spirits, [ lightness, adj.all:light2,+ ] joy,@ (a feeling of joy and pride) }
+{ [ exultation, verb.emotion:exult,+ ] [ jubilance, adj.all:joyous^jubilant,+ adj.all:elated^jubilant,+ verb.communication:jubilate,+ ] [ jubilancy, adj.all:joyous^jubilant,+ adj.all:elated^jubilant,+ verb.communication:jubilate,+ ] [ jubilation, verb.communication:jubilate,+ ] joy,@ (a feeling of extreme joy) }
+{ [ triumph, adj.all:elated^triumphal,+ verb.emotion:triumph,+ ] exultation,@ (the exultation of victory) }
+{ [ exhilaration, verb.emotion:exhilarate,+ ] [ excitement, verb.emotion:excite2,+ ] joy,@ (the feeling of lively and cheerful joy; "he could hardly conceal his excitement when she agreed") }
+{ bang, boot, [ charge, verb.emotion:charge5,+ ] rush, flush, [ thrill, verb.emotion:thrill1,+ verb.emotion:thrill2,+ verb.perception:thrill,+ ] kick, excitement,@ (the swift release of a store of affective force; "they got a great bang out of it"; "what a boot!"; "he got a quick rush from injecting heroin"; "he does it for kicks") }
+{ [ intoxication, verb.emotion:intoxicate,+ ] excitement,@ (excitement and elation beyond the bounds of sobriety; "the intoxication of wealth and power") }
+{ titillation, excitement,@ (a tingling feeling of excitement (as from teasing or tickling)) }
+{ [ euphoria, dysphoria,!] [ euphory, adj.all:euphoric,+ ] elation,@ (a feeling of great (usually exaggerated) elation) }
+{ gaiety, merriment, happiness,@ (a gay feeling) }
+{ [ hilarity, adj.all:humorous^hilarious,+ ] mirth, [ mirthfulness, adj.all:joyous^mirthful,+ adj.all:humorous^mirthful,+ ] glee, [ gleefulness, adj.all:joyous^gleeful,+ ] merriment,@ (great merriment) }
+{ [ rejoicing, verb.emotion:rejoice2,+ verb.emotion:rejoice,+ ] happiness,@ (a feeling of great happiness) }
+{ [ jocundity, adj.all:joyous^jocund,+ ] [ jocularity, adj.all:humorous^jocular,+ ] merriment,@ (a feeling facetious merriment) }
+{ belonging, happiness,@ (happiness felt in a secure relationship; "with his classmates he felt a sense of belonging") }
+{ [ comfortableness, adj.all:comfortable1,+ ] belonging,@ (a feeling of being at ease in a relationship) }
+{ [ closeness, adj.all:close2,+ ] intimacy, belonging,@ (a feeling of being intimate and belonging together; "their closeness grew as the night wore on") }
+{ [ togetherness, adj.all:unneurotic^together,+ ] closeness,@ (affectionate closeness; "togetherness is the new wonder ingredient in marriage") }
+{ [ cheerfulness, adj.all:optimistic^cheerful,+ cheerlessness,! ] [ blitheness, adj.all:cheerful^blithe,+ ] happiness,@ (a feeling of spontaneous good spirits; "his cheerfulness made everyone feel better") }
+{ [ buoyancy, adj.all:cheerful^buoyant,+ ] [ perkiness, adj.all:cheerful^perky,+ ] cheerfulness,@ (cheerfulness that bubbles to the surface) }
+{ [ carefreeness, adj.all:irresponsible^carefree,+ ] [ insouciance, adj.all:unconcerned^insouciant,+ ] [ lightheartedness, adj.all:cheerful^lighthearted,+ ] [ lightsomeness, adj.all:cheerful^lightsome,+ ] cheerfulness,@ (the cheerful feeling you have when nothing is troubling you) }
+{ [ contentment, verb.consumption:content,+ discontentment,!] happiness,@ (happiness with one's situation in life) }
+{ [ satisfaction, dissatisfaction,!] contentment,@ (the contentment one feels when one has fulfilled a desire, need, or expectation; "the chef tasted the sauce with great satisfaction") }
+{ [ pride1, verb.emotion:pride,+ ] satisfaction,@ (satisfaction with your (or another's) achievements; "he takes pride in his son's success") }
+{ [ complacency, adj.all:contented^complacent,+ ] [ complacence, adj.all:contented^complacent,+ ] [ self-complacency, adj.all:contented^self-complacent,+ ] self-satisfaction, satisfaction,@ (the feeling you have when you are satisfied with yourself; "his complacency was absolutely disgusting") }
+{ [ smugness, adj.all:contented^smug,+ ] complacency,@ (an excessive feeling of self-satisfaction) }
+{ [ fulfillment, verb.consumption:fulfill,+ ] [ fulfilment, verb.consumption:fulfil,+ ] satisfaction,@ (a feeling of satisfaction at having achieved your desires) }
+{ [ gloat, verb.perception:gloat,+ verb.communication:gloat,+ ] [ gloating, verb.perception:gloat,+ verb.communication:gloat,+ ] glee2, satisfaction,@ (malicious satisfaction) }
+
+{ [ sadness, adj.all:sad,+ happiness,!] [ unhappiness, adj.all:unhappy4,+ adj.all:unhappy,+ ] noun.Tops:feeling,@ (emotions experienced when not in a state of well-being) }
+{ [ dolefulness, adj.all:sad^doleful,+ ] sadness,@ (sadness caused by grief or affliction) }
+{ [ heaviness, adj.all:heavy2,+ ] sadness,@ (persisting sadness; "nothing lifted the heaviness of her heart after her loss") }
+{ melancholy, sadness,@ (a feeling of thoughtful sadness) }
+{ gloom, gloominess, [ somberness, adj.all:cheerless^somber,+ ] [ sombreness, adj.all:cheerless^sombre,+ ] melancholy,@ apprehension,@ (a feeling of melancholy apprehension) }
+{ [ heavyheartedness, adj.all:sad^heavyhearted,+ ] melancholy,@ (a feeling of dispirited melancholy) }
+{ [ pensiveness, adj.all:thoughtful^pensive,+ ] brooding, melancholy,@ (persistent morbid meditation on a problem) }
+{ [ world-weariness, adj.all:tired^world-weary,+ ] Weltschmerz, melancholy,@ (sadness on thinking about the evils of the world) }
+{ woe, [ woefulness, adj.all:sorrowful^woeful,+ ] mournfulness,@ (intense mournfulness) }
+{ misery, sadness,@ (a feeling of intense unhappiness; "she was exhausted by her misery and grief") }
+{ forlornness, [ loneliness, adj.all:dejected^lonely,+ ] [ desolation2, verb.cognition:desolate,+ ] sadness,@ (sadness resulting from being forsaken or abandoned) }
+{ [ weepiness, adj.all:tearful^weepy,+ ] [ tearfulness, adj.all:sorrowful^tearful,+ adj.all:tearful,+ ] sadness,@ (sadness expressed by weeping) }
+{ [ sorrow, verb.emotion:sorrow,+ joy,!] sadness,@ (an emotion of great sadness associated with loss or bereavement; "he tried to express his sorrow at her loss") }
+{ attrition, contrition, [ contriteness, adj.all:penitent^contrite,+ ] sorrow1,@ (sorrow for sin arising from fear of damnation) }
+{ broken_heart, sorrow,@ (devastating sorrow and despair; "he is recovering from a broken heart"; "a broken heart languishes here") }
+{ grief, heartache, heartbreak, [ brokenheartedness, adj.all:sorrowful^brokenhearted,+ ] sorrow,@ (intense sorrow caused by loss of a loved one (especially by death)) }
+{ [ mournfulness, adj.all:sorrowful^mournful1,+ adj.all:sad^mournful,+ ] [ sorrowfulness, adj.all:sorrowful,+ ] [ ruthfulness, adj.all:penitent^ruthful,+ ] sorrow,@ (a state of gloomy sorrow) }
+{ [ plaintiveness, adj.all:sorrowful^plaintive,+ ] mournfulness,@ (expressing sorrowfulness) }
+{ [ dolor, adj.all:sorrowful^dolourous,+ adj.all:sorrowful^dolorous,+ ] dolour, grief,@ noun.communication:poetry2,;c ((poetry) painful grief) }
+{ [ sorrow1, verb.emotion:sorrow,+ ] [ regret, verb.communication:regret2,+ verb.emotion:regret1,+ verb.emotion:regret,+ ] [ rue, verb.emotion:rue,+ ] [ ruefulness, adj.all:penitent^rueful,+ ] sadness,@ (sadness associated with some wrong done or some disappointment; "he drank to drown his sorrows"; "he wrote a note expressing his regret"; "to his rue, the error cost him the game") }
+{ compunction, remorse, self-reproach, sorrow1,@ (a feeling of deep regret (usually for some misdeed)) }
+{ [ guilt, adj.all:ashamed^guilty,+ ] guilty_conscience, guilt_feelings, guilt_trip, compunction,@ (remorse caused by feeling responsible for some offense) }
+{ survivor_guilt, guilt,@ noun.state:posttraumatic_stress_disorder,#p (a deep feeling of guilt often experienced by those who have survived some catastrophe that took the lives of many others; derives in part from a feeling that they did not do enough to save the others who perished and in part from feelings of being unworthy relative to those who died; "survivor guilt was first noted in those who survived the Holocaust") }
+{ [ repentance, adj.all:repentant,+ verb.emotion:repent,+ ] [ penitence, adj.all:penitent^penitential,+ adj.all:punitive^penitentiary,+ adj.all:penitent,+ ] penance, compunction,@ (remorse for your past conduct) }
+{ [ cheerlessness, adj.all:cheerless,+ cheerfulness,!] [ uncheerfulness, adj.all:uncheerful4,+ ] sadness,@ (a feeling of dreary or pessimistic sadness) }
+{ [ chill, verb.emotion:chill,+ ] [ pall, verb.emotion:pall,+ ] apprehension,@ (a sudden numbing dread) }
+{ [ joylessness, adj.all:joyless,+ ] cheerlessness,@ (a feeling of dismal cheerlessness) }
+{ depression, sadness,@ (sad feelings of gloom and inadequacy) }
+{ [ downheartedness, adj.all:dejected^downhearted,+ ] dejectedness, [ low-spiritedness, adj.all:dejected^low-spirited,+ ] [ lowness, adj.all:humble^low,+ adj.all:dejected^low,+ ] [ dispiritedness, adj.all:spiritless^dispirited,+ adj.all:dejected^dispirited,+ ] sadness,@ (a feeling of low spirits; "he felt responsible for her lowness of spirits") }
+{ [ demoralization, verb.emotion:demoralize,+ ] [ demoralisation, verb.emotion:demoralise,+ ] depression,@ (depression resulting from an undermining of your morale) }
+{ [ helplessness, adj.all:hopeless^helpless,+ adj.all:dependent^helpless,+ ] depression,@ (a feeling of being unable to manage) }
+{ self-pity, sorrow,@ (a feeling of sorrow (often self-indulgent) over your own sufferings) }
+{ [ despondency, adj.all:hopeless^despondent,+ verb.emotion:despond,+ ] [ despondence, adj.all:hopeless^despondent,+ verb.emotion:despond,+ ] [ heartsickness, adj.all:sorrowful^heartsick,+ adj.all:hopeless^heartsick,+ ] [ disconsolateness, adj.all:disconsolate4,+ ] depression,@ (feeling downcast and disheartened and hopeless) }
+{ oppression, [ oppressiveness, adj.all:domineering^oppressive,+ ] depression,@ (a feeling of being oppressed) }
+{ [ weight, adj.all:heavy2^weighty,+ ] oppression,@ (an oppressive feeling of heavy force; "bowed down by the weight of responsibility") }
+{ [ discontentment, verb.emotion:discontent,+ contentment,! ] [ discontent, adj.all:discontent,+ verb.emotion:discontent,+ ] [ discontentedness, adj.all:discontented,+ ] longing,@ (a longing for something better than the present situation) }
+{ [ disgruntlement, verb.emotion:disgruntle,+ ] discontentment,@ (a feeling of sulky discontent) }
+{ [ dysphoria, adj.all:dysphoric,+ euphoria,! ] discontentment,@ depression,@ (abnormal depression and discontent) }
+{ [ dissatisfaction, verb.emotion:dissatisfy,+ satisfaction,! ] discontentment,@ (the feeling of being displeased and discontent; "he was never slow to express his dissatisfaction with the service he received") }
+{ boredom, ennui, [ tedium, adj.all:uninteresting^tedious,+ ] dissatisfaction,@ (the feeling of being bored by something tedious) }
+{ blahs, boredom,@ noun.communication:colloquialism,;u (a general feeling of boredom and dissatisfaction) }
+{ [ fatigue, verb.body:fatigue1,+ ] boredom,@ ((always used with a modifier) boredom resulting from overexposure to something; "he was suffering from museum fatigue"; "after watching TV with her husband she had a bad case of football fatigue"; "the American public is experiencing scandal fatigue"; "political fatigue") }
+{ [ displeasure, verb.emotion:displease,+ ] dissatisfaction,@ annoyance,@ (the feeling of being displeased or annoyed or dissatisfied with someone or something) }
+{ [ disappointment, verb.emotion:disappoint,+ ] [ letdown, verb.emotion:let_down,+ ] dissatisfaction,@ (a feeling of dissatisfaction that results when your expectations are not realized; "his hopes were so high he was doomed to disappointment") }
+{ [ frustration, verb.social:frustrate,+ ] [ defeat, noun.person:defeatist,+ ] disappointment,@ (the feeling that accompanies an experience of being thwarted in attaining your goals) }
+
+{ [ hope, verb.emotion:hope,+ verb.emotion:hope1,+ despair,!] noun.Tops:feeling,@ (the general feeling that some desire will be fulfilled; "in spite of his troubles he never gave up hope") }
+{ [ hopefulness, adj.all:hopeful,+ hopelessness,!] hope,@ (the feeling you have when you have hope) }
+{ [ encouragement, verb.emotion:encourage,+ ] hope,@ (the feeling of being encouraged) }
+{ [ optimism, adj.all:positive1^optimistic,+ adj.all:optimistic,+ noun.person:optimist,+ pessimism,!] hope,@ (the optimistic feeling that all is going to turn out well) }
+{ [ sanguinity, adj.all:optimistic^sanguine,+ ] [ sanguineness, adj.all:optimistic^sanguine,+ ] optimism,@ (feeling sanguine; optimistically cheerful and confident) }
+
+{ [ despair, verb.emotion:despair,+ hope,!] noun.Tops:feeling,@ (the feeling that everything is wrong and nothing will turn out well; "they moaned in despair and dismay"; "one harsh word would send her into the depths of despair") }
+{ [ hopelessness, adj.all:unskilled^hopeless3,+ adj.all:hopeless,+ hopefulness,!] despair,@ (the despair you feel when you have abandoned hope of comfort or success) }
+{ [ resignation, verb.cognition:resign,+ ] surrender, despair,@ (acceptance of despair) }
+{ [ defeatism, noun.person:defeatist,+ ] resignation,@ (acceptance of the inevitability of defeat) }
+{ [ discouragement2, verb.emotion:discourage,+ ] [ disheartenment, verb.emotion:dishearten,+ ] [ dismay2, verb.emotion:dismay1,+ ] despair,@ (the feeling of despair in the face of obstacles) }
+{ intimidation1, discouragement2,@ (the feeling of discouragement in the face of someone's superior fame or wealth or status etc.) }
+{ [ pessimism, adj.all:pessimistic,+ noun.person:pessimist,+ optimism,!] despair,@ (the feeling that things will turn out badly) }
+{ cynicism, pessimism,@ (a cynical feeling of distrust) }
+
+{ [ love, verb.emotion:love1,+ verb.emotion:love2,+ verb.emotion:love,+ hate,!] emotion,@ (a strong positive emotion of regard and affection; "his love for his work"; "children need a lot of love") }
+{ agape, agape_love, love,@ (selfless love of one person for another without sexual implications (especially love that is spiritual in nature)) }
+{ agape1, love,@ noun.cognition:Christian_theology,;c ((Christian theology) the love of God or Christ for mankind) }
+{ filial_love, love,@ (the love of a child for a parent) }
+{ ardor, ardour, love,@ (intense feeling of love) }
+{ [ amorousness1, adj.all:loving^amorous1,+ ] [ enamoredness, adj.all:loving^enamored,+ ] love,@ (a feeling of love or fondness) }
+{ puppy_love, calf_love, crush, [ infatuation2, verb.emotion:infatuate,+ ] love,@ (temporary love of an adolescent) }
+{ devotion, [ devotedness, adj.all:dedicated^devoted2,+ ] love,@ (feelings of ardent love; "their devotion to each other was beautiful") }
+{ affection, [ affectionateness, adj.all:loving^affectionate,+ ] [ fondness, adj.all:loving^fond2,+ ] [ tenderness1, adj.all:loving^tender,+ ] [ heart4, adj.all:warm2^hearty,+ ] [ warmness, adj.all:warm2,+ ] [ warmheartedness, adj.all:warmhearted,+ ] philia, noun.Tops:feeling,@ (a positive feeling of liking; "he had trouble expressing the affection he felt"; "the child won everyone's heart"; "the warmness of his welcome made us feel right at home") }
+{ [ attachment, verb.social:attach3,+ ] fond_regard, affection,@ (a feeling of affection for a person or an institution) }
+{ [ protectiveness, adj.all:tender3^protective,+ ] affection,@ (a feeling of protective affection) }
+{ regard2, [ respect, verb.social:respect,+ ] affection,@ (a feeling of friendship and esteem; "she mistook his manly regard for love"; "he inspires respect") }
+{ soft_spot, affection,@ (a sentimental affection; "she had a soft spot for her youngest son") }
+{ [ benevolence, malevolence,!] love,@ (disposition to do good) }
+{ [ beneficence, adj.all:beneficent,+ maleficence,!] benevolence,@ (doing good; feeling beneficent) }
+{ heartstrings, love,@ compassion,@ (your deepest feelings of love and compassion; "many adoption cases tug at the heartstrings") }
+{ [ lovingness, adj.all:loving,+ ] [ caring1, adj.all:compassionate^caring,+ verb.emotion:care2,+ ] love,@ (a loving feeling) }
+{ [ warmheartedness1, adj.all:warmhearted,+ ] warmth, lovingness,@ (a warmhearted feeling) }
+{ loyalty, love,@ (feelings of allegiance) }
+
+{ [ hate, verb.emotion:hate,+ love,!] hatred, emotion,@ (the emotion of intense dislike; a feeling of dislike so strong that it demands action) }
+{ [ misanthropy, adj.all:ill-natured^misanthropic,+ adj.all:ill-natured^misanthropical,+ noun.person:misanthropist,+ ] hate,@ (hatred of mankind) }
+{ [ misogamy, noun.person:misogamist,+ ] hate,@ (hatred of marriage) }
+{ [ misogyny, adj.all:distrustful^misogynic,+ adj.all:ill-natured^misogynous,+ philogyny,! noun.person:misogynist,+ ] misogynism, hate,@ (hatred of women) }
+{ mysoandry, hate,@ (hatred for men or boys)}
+{ misology, hate,@ (hatred of reasoning) }
+{ misoneism, hate,@ (hatred of change or innovation) }
+{ misocainea, misoneism,@ (hatred of new ideas) }
+{ misopedia, hate,@ (hatred of children) }
+{ [ murderousness, adj.all:bloody^murderous,+ ] hate,@ (a bloodthirsty hatred arousing murderous impulses) }
+{ [ despisal, verb.emotion:despise,+ ] [ despising, verb.emotion:despise,+ ] hate,@ (a feeling of scornful hatred) }
+{ [ hostility, adj.all:hostile1,+ ] [ enmity, adj.all:hostile1^inimical,+ ] ill_will, hate,@ (the feeling of a hostile person; "he could no longer contain his hostility") }
+{ animosity, animus, bad_blood, hostility,@ (a feeling of ill will arousing active hostility) }
+{ class_feeling, hostility,@ (feelings of envy and resentment of one social or economic class for toward another) }
+{ [ antagonism2, adj.all:antagonistic1,+ noun.person:antagonist,+ verb.emotion:antagonize,+ verb.emotion:antagonise,+ ] hostility,@ dislike,@ (an actively expressed feeling of dislike and hostility) }
+{ aggression, aggressiveness, hostility,@ (a feeling of hostility that arouses thoughts of attack) }
+{ [ belligerence, adj.all:hostile1^belligerent,+ ] [ belligerency, adj.all:hostile1^belligerent,+ ] hostility,@ (hostile or warlike attitude or nature) }
+{ warpath, belligerence,@ (hostile or belligerent mood; "the chief is on the warpath today") }
+{ [ resentment, verb.emotion:resent,+ ] [ bitterness, adj.all:hostile1^bitter,+ ] [ gall, verb.emotion:gall,+ ] [ rancor, adj.all:resentful^rancorous,+ ] rancour, hostility,@ (a feeling of deep and bitter anger and ill-will) }
+{ heartburning, resentment,@ (intense resentment; "his promotion caused much heartburning among his rivals") }
+{ [ sulkiness, adj.all:ill-natured^sulky,+ ] [ huffishness, adj.all:ill-natured^huffish,+ ] resentment,@ (a feeling of sulky resentment) }
+{ [ grudge, verb.emotion:grudge1,+ ] score, grievance, resentment,@ (a resentment strong enough to justify retaliation; "holding a grudge"; "settling a score") }
+{ [ envy, verb.emotion:envy1,+ verb.emotion:envy,+ ] [ enviousness, adj.all:desirous^envious,+ ] resentment,@ (a feeling of grudging admiration and desire to have something that is possessed by another) }
+{ covetousness1, envy,@ (an envious eagerness to possess something) }
+{ jealousy, green-eyed_monster, envy,@ (a feeling of jealous envy (especially of a rival)) }
+{ penis_envy, envy,@ noun.act:psychoanalysis,;c ((psychoanalysis) a female's presumed envy of the male's penis; said to explain femininity) }
+{ [ malevolence, adj.all:malicious^malevolent,+ benevolence,!] malignity, hate,@ (wishing evil to others) }
+{ [ maleficence, adj.all:maleficent,+ beneficence,!] malevolence,@ (doing or causing evil) }
+{ [ malice, adj.all:malicious,+ ] [ maliciousness, adj.all:malicious,+ ] [ spite, verb.emotion:spite,+ ] [ spitefulness, adj.all:malicious^spiteful,+ ] [ venom, adj.all:malicious^venomous,+ ] malevolence,@ (feeling a need to see others suffer) }
+{ [ vindictiveness, adj.all:unforgiving^vindictive,+ adj.all:malicious^vindictive,+ ] [ vengefulness, adj.all:unforgiving^vengeful,+ ] malevolence,@ (a malevolent desire for revenge) }
+
+{ temper, [ mood, adj.all:emotional^moody,+ ] [ humor, verb.communication:humor,+ ] [ humour, verb.communication:humour,+ ] noun.Tops:feeling,@ (a characteristic (habitual or relatively temporary) state of feeling; "whether he praised or cursed me depended on his temper at the time"; "he was in a bad humor") }
+{ peeve, mood,@ (an annoyed or irritated mood) }
+{ [ sulk, adj.all:ill-natured^sulky,+ verb.stative:sulk,+ ] [ sulkiness1, adj.all:ill-natured^sulky,+ ] mood,@ (a mood or display of sullen aloofness or withdrawal; "stayed home in a sulk") }
+
+{ [ good_humor, ill_humor,!] good_humour, good_temper, [ amiability, adj.all:good-natured^amiable,+ adj.all:friendly1^amiable,+ ] temper,@ (a cheerful and agreeable mood) }
+{ [ jollity, adj.all:joyous^jolly,+ ] [ jolliness, adj.all:joyous^jolly,+ ] [ joviality, adj.all:joyous^jovial,+ ] good_humor,@ merriment,@ (feeling jolly and jovial and full of good humor) }
+{ [ ill_humor, good_humor,!] ill_humour, distemper, temper,@ (an angry and disagreeable mood) }
+{ [ moodiness, adj.all:ill-natured^moody,+ ] ill_humor,@ (a sullen gloomy feeling) }
+{ [ moroseness, adj.all:ill-natured^morose,+ ] [ glumness, adj.all:ill-natured^glum,+ adj.all:dejected^glum,+ ] [ sullenness, adj.all:cloudy^sullen,+ ] moodiness,@ (a gloomy ill-tempered feeling) }
+{ [ irascibility, adj.all:ill-natured^irascible,+ adj.all:angry^irascible,+ ] short_temper, [ spleen, adj.all:ill-natured^splenetic,+ ] quick_temper, bad_temper,@ (a feeling of resentful anger) }
+{ [ irritability, adj.all:ill-natured^irritable,+ ] crossness, [ fretfulness, adj.all:complaining^fretful,+ ] [ fussiness, adj.all:ill-natured^fussy,+ ] [ peevishness, adj.all:ill-natured^peevish,+ ] [ petulance, adj.all:ill-natured^petulant,+ ] choler2, ill_humor,@ (an irritable petulant feeling) }
+{ [ testiness, adj.all:ill-natured^testy,+ ] [ touchiness1, adj.all:sensitive2^touchy,+ ] [ tetchiness, adj.all:ill-natured^tetchy,+ ] irritability,@ (feeling easily irritated) }
+{ pet, irritability,@ (a fit of petulance or sulkiness (especially at what is felt to be a slight)) }
+
+{ [ sympathy, adj.all:sympathetic,+ verb.emotion:sympathize,+ ] fellow_feeling, noun.Tops:feeling,@ (sharing the feelings of others (especially feelings of sorrow or anguish)) }
+{ [ kindheartedness, adj.all:kind^kindhearted,+ ] kind-heartedness, sympathy,@ (sympathy arising from a kind heart) }
+{ [ compassion, verb.emotion:compassionate,+ ] [ compassionateness, adj.all:compassionate,+ ] sympathy,@ (a deep awareness of and sympathy for another's suffering) }
+{ [ commiseration, verb.emotion:commiserate,+ ] [ pity, adj.all:unfortunate^piteous,+ verb.emotion:pity,+ ] ruth, [ pathos, adj.all:unfortunate^pathetic,+ ] sympathy,@ (a feeling of sympathy and sorrow for the misfortunes of others; "the blind are too often objects of pity") }
+{ [ mellowness, adj.all:soft2^mellow,\ adj.all:relaxed^mellow,\ adj.all:intoxicated^mellow,\ ] compassion,@ (a feeling of good humor and sympathy through maturity or intoxication or a relaxed state) }
+{ [ tenderness3, adj.all:tender3,+ ] [ tenderheartedness, adj.all:loving^tenderhearted,+ adj.all:compassionate^tenderhearted,+ ] compassion,@ (warm compassionate feelings) }
+{ [ mercifulness, adj.all:merciful,+ ] mercy, compassion,@ (the feeling that motivates compassion) }
+{ forgiveness, mercy,@ (compassionate feelings that support a willingness to forgive) }
+{ compatibility, sympathy,@ (a feeling of sympathetic understanding) }
+{ [ empathy, adj.all:sympathetic^empathetic,+ verb.cognition:empathize,+ verb.cognition:empathise,+ ] sympathy,@ (understanding and entering into another's feelings) }
+
+{ [ enthusiasm, adj.all:enthusiastic,+ ] noun.Tops:feeling,@ (a feeling of excitement) }
+{ [ eagerness, adj.all:eager,+ ] [ avidity1, adj.all:enthusiastic^avid,+ ] [ avidness, adj.all:enthusiastic^avid,+ ] keenness, enthusiasm,@ (a positive feeling of wanting to push ahead with something) }
+{ ardor1, ardour1, elan, [ zeal1, adj.all:enthusiastic^zealous,+ ] eagerness,@ (a feeling of strong eagerness (usually in favor of a person or cause); "they were imbued with a revolutionary ardor"; "he felt a kind of religious zeal") }
+{ [ exuberance, adj.all:spirited^exuberant,+ verb.communication:exuberate,+ ] enthusiasm,@ joy,@ (joyful enthusiasm) }
+{ technophilia, enthusiasm,@ (enthusiasm for new technology) }
+
+
+

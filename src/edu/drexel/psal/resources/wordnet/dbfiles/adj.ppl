@@ -1,0 +1,65 @@
+($RCSfile: adj.ppl,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:17:50 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1994-2011 by Princeton University)
+
+(adj.ppl)
+
+{ [ avenged, unavenged,! verb.competition:avenge,< ] (for which vengeance has been taken; "an avenged injury") }
+{ [ unavenged, avenged,! verb.competition:avenge,< ] (for which vengeance has not been taken; "an unavenged murder") }
+{ [ beaten, verb.creation:beat,< ] (formed or made thin by hammering; "beaten gold") }
+{ [ calibrated, verb.contact:calibrate2,< ] [ graduated, verb.contact:calibrate2,< ] (marked with or divided into degrees; "a calibrated thermometer") }
+{ [ cantering, verb.motion:canter,< ] (riding at a gait between a trot and a gallop; "the cantering soldiers") }
+{ [ collected, uncollected,! verb.contact:collect,< ] [ gathered, ungathered,! verb.contact:gather,< ] (brought together in one place; "the collected works of Milton"; "the gathered folds of the skirt") }
+{ [ uncollected, collected,! verb.contact:collect,< ] [ ungathered, gathered,! verb.contact:gather,< ] (not brought together in one place; "uncollected garbage in the streets") }
+{ [ contested, verb.communication:contest,< uncontested,! ] (disputed or made the object of contention or competition; "a contested election") }
+{ [ uncontested, verb.communication:contest,< contested,! ] (not disputed and not made the object of contention or competition; "uncontested authority") }
+{ [ corbelled, verb.possession:corbel,< ] (having a corbel) }
+{ [ elapsed, verb.motion:elapse,< ] ((of time) having passed or slipped by; "elapsed time") }
+{ [ forced, verb.motion:force,< ] (produced by or subjected to forcing; "forced-air heating"; "furnaces of the forced-convection type"; "forced convection in plasma generators") }
+{ [ hammered, verb.creation:hammer,< ] (shaped or worked with a hammer and often showing hammer marks; "a bowl of hammered brass") }
+{ [ hand-held, verb.contact:hold,< ] [ handheld, verb.contact:hold,< ] (small and light enough to be operated while you hold it in your hands; "a hand-held computer") }
+{ [ held, verb.social:hold14,< ] (occupied or in the control of; often used in combination; "enemy-held territory") }
+{ [ streaming, verb.body:stream,< ] (exuding a bodily fluid in profuse amounts; "his streaming face"; "her streaming eyes") }
+{ [ surmounted, verb.stative:surmount,< ] (having something on top; "columns surmounted by statues") }
+{ [ filled, unfilled,! verb.consumption:fill2,< ] (of purchase orders that have been filled) }
+{ [ unfilled, filled,! verb.consumption:fill2,< ] (of purchase orders that have not been filled) }
+{ [ fitted, verb.stative:fit2,< ] (being the right size and shape to fit as desired; "a fitted overcoat"; "he quickly assembled the fitted pieces") }
+{ [ hypophysectomized, verb.change:hypophysectomize,< ] [ hypophysectomised, verb.change:hypophysectomise,< ] (having the pituitary gland removed by surgery; "hypophysectomized tadpoles") }
+{ [ malted, unmalted,! verb.change:malt2,< ] (of grain that has been converted into malt; "malted barley") }
+{ [ unmalted, malted,! verb.change:malt2,< ] (of grain that has not been converted into malt; "unmalted barley") }
+{ [ marched_upon, verb.motion:march1,< ] (being or having been trodden or marched on) }
+{ [ mercerized, verb.change:mercerize,< ] [mercerised, verb.change:mercerize,<] (of cotton thread that has been treated with sodium hydroxide to shrink it and increase its luster and affinity for dye; "mercerized cotton") }
+{ [ mounded_over, verb.creation:mound_over,< ] (having a wound formed over it) }
+{ [ operating, verb.contact:operate3,< ] (involved in a kind of operation; "the operating conditions of the oxidation pond") }
+{ [ oxidized, verb.change:oxidize,< ] [ oxidised, verb.change:oxidise,< ] (combined with or having undergone a chemical reaction with oxygen; "the oxidized form of iodine") }
+{ [ parked, verb.contact:park,< ] (that have been left; "there were four parked cars across the street") }
+{ [ pasteurized, verb.change:pasteurize,< ] [ pasteurised, verb.change:pasteurise,< ] (having been subjected to pasteurization in order to halt fermentation) }
+{ [ unpasteurized, verb.change:pasteurize,< ] [ unpasteurised, verb.change:pasteurise,< ] (not having undergone pasteurization) }
+{ [ penciled, verb.creation:pencil,<] [ pencilled, verb.creation:pencil,< ] (drawn or written with a pencil; "a penciled sketch"; "the penciled message") }
+{ [ pitched, verb.change:pitch,< ] ((of sound) set to a certain pitch or key; usually used as a combining form; "high-pitched") }
+{ [ played, verb.competition:play,< ] noun.act:game,;c ((of games) engaged in; "the loosely played game") }
+{ [ plugged, verb.change:plug4,< ] ((of a coin) altered by the insertion of a plug of base metal) }
+{ [ posed, unposed,! verb.perception:pose,< ] (arranged for pictorial purposes) }
+{ [ unposed, posed,! verb.perception:pose,< ] (not arranged for pictorial purposes; "unposed photographs") }
+{ [ posted, verb.communication:post3,< ] (publicly displayed; "the posted speed limit") }
+{ [ preconceived, verb.creation:conceive,< ] ((of an idea or opinion) formed beforehand; especially without evidence or through prejudice; "certain preconceived notions") }
+{ [ punishing, verb.social:punish,< ] (resulting in punishment; "the king imposed a punishing tax") }
+{ [ pursued, verb.motion:pursue,< ] (followed with enmity as if to harm; "running and leaping like a herd of pursued antelopes") }
+{ [ ranging, verb.motion:range,< ] (wandering freely; "at night in bed...his slowly ranging thoughts...encountered her") }
+{ [ re-created, verb.creation:re-create,< ] (created anew; "this re-created literalness") }
+{ [ regenerating, verb.change:regenerate,< ] (that are generating anew; "regenerating fibers") }
+{ [ ridged, verb.change:ridge,< ] [ carinate, noun.animal:carinate,+ ] carinated, keeled, (having a ridge or shaped like a ridge or suggesting the keel of a ship; "a carinate sepal") }
+{ [ sanitized, verb.change:sanitize,< ] [ sanitised, verb.change:sanitise,< ] (made sanitary) }
+{ [ shrieked, verb.communication:shriek,< ] (uttered in a shrill scream as of pain or terror) }
+{ [ sintered, verb.creation:sinter,< ] (formed into a mass by heat and pressure) }
+{ [ sluicing, verb.motion:sluice,< ] (pouring from or as if from a sluice; "the sluicing rain") }
+{ [ spray-dried, verb.change:spray-dry,< ] (dried by bringing a sprayed substance (e.g. milk or soap) into contact with hot air and recovering it in the form of a powder) }
+{ [ squashed, verb.contact:squash,< ] (that has been violently compressed; "the squashed looking nakedness of the fledgling birds") }
+{ [ stacked, verb.contact:stack,< ] (arranged in a stack) }
+{ [ strung, verb.contact:string2,< ] (that is on a string; "keys strung on a red cord") }
+{ [ sublimed, verb.change:sublime,< ] [ sublimated, verb.change:sublimate,< ] (passing or having passed from the solid to the gaseous state (or vice versa) without becoming liquid) }
+{ [ thoriated, verb.change:thoriate,< ] [ tittering, verb.body:titter,< ] (being or sounding of nervous or suppressed laughter) }
+{ [ transpiring, verb.motion:transpire,< ] (that is passing through; "transpiring gas") }
+{ [ sought, verb.contact:seek,< ] (that is looked for; "the long sought relatives") }
+{ [ closed-captioned, verb.possession:caption,< ] noun.communication:television,;c (broadcast with captions that are seen only on receivers having special equipment; can be provided for hard-of-hearing viewers) }
+{ [ saponified, unsaponified,! verb.change:saponify,< ] (converted into soap; "saponified oils") }
+{ [ unsaponified, saponified,! verb.change:saponify,< ] (not converted into soap; "unsaponified fat") }

@@ -6,10 +6,12 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -209,7 +211,6 @@ public class GUIMain extends JFrame {
 	public UndoManager undoManager;
 	public UndoAction undoAction;
 	public RedoAction redoAction;
-	//private SearchBar searchBar;
 	private JTextField searchBar;
 	//=====================================================================
 	//---------------------------METHODS-----------------------------------
@@ -514,10 +515,19 @@ public class GUIMain extends JFrame {
 		initTranslationsTab();
 		
 		//Adding a search bar on top of the editor pane!
-		//searchBar = new SearchBar();
-		//searchBar.paintComponent((ImageLoader.getImage(icon)).getGraphics());
 		searchBar = new JTextField();
-	    main.add(searchBar);
+		searchBar.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {}
+			@Override
+			public void keyReleased(KeyEvent arg0) {}
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				Logger.logln(NAME+"User typing in word field");
+			}
+			
+		});
+		
 		
 		//Now we organize all these tabs and fit them into the window
 		//Adding multiple tabs to areas where it is needed (i.e., same location)
@@ -532,10 +542,10 @@ public class GUIMain extends JFrame {
 				"wrap 3, gap 10 10",//layout constraints
 				"[][grow, fill][shrink]", //column constraints
 				"[grow, fill]"));	// row constraints
+		this.add(searchBar, "width 60:100:150, span 3");
 		this.add(anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
 		this.add(editorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
 		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 1");//RIGHT		(Word Suggestions, Translations, etc.)
-		this.add(searchBar, "dock north");
 		/**
 		 * This is needed so we can ensure that the Anonymity bar is getting the correct width and height needed
 		 * to draw itself. pack() here calculates the component width and heights, which is what the anonymity

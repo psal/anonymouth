@@ -1,0 +1,1068 @@
+($RCSfile: noun.possession,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:49 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.possession)
+
+{ [ ownership, noun.person:owner2,+ noun.person:owner,+ ] noun.Tops:relation,@ (the relation of an owner to the thing possessed; possession with the right to transfer possession to others) }
+{ [ community, adj.all:common2^communal,+ ] ownership,@ (common ownership; "they shared a community of possessions") }
+{ severalty, ownership,@ (exclusive individual ownership) }
+{ property_right, ownership,@ (the legal right of ownership) }
+{ preemptive_right, noun.attribute:preemption,@ (the right granting to shareholders the first opportunity to buy a new issue of stock; provides protection against dilution of the shareholder's ownership interest) }
+{ subscription_right, noun.attribute:preemption,@ (the right of a shareholder in a company to subscribe to shares of a new issue of common stock before it is offered to the public) }
+{ option, noun.communication:derivative_instrument,@ (the right to buy or sell property at an agreed price; the right is purchased and if it is not exercised by a stated date the money is forfeited) }
+{ stock_option1, benefit,@ (a benefit given by a company to an employee in the form of an option to buy stock in the company at a discount or at a fixed price; "stock options are not much use as an incentive if the price at which they can be exercised is out of reach") }
+{ stock_option, option,@ (the right to buy or sell a stock at a specified price within a stated period) }
+{ call_option, stock_option,@ (an option to buy) }
+{ put_option, stock_option,@ (an option to sell) }
+{ lock-up_option, option,@ (an option to buy the crown jewels offered to a white knight in order to forestall a hostile takeover) }
+{ tenure, land_tenure, noun.attribute:legal_right,@ (the right to hold property; part of an ancient hierarchical system of holding lands) }
+{ copyhold, tenure,@ (a medieval form of land tenure in England; a copyhold was a parcel of land granted to a peasant by the lord of the manor in return for agricultural services) }
+{ [ freehold, noun.person:freeholder,+ ] tenure,@ (tenure by which land is held in fee simple or for life) }
+{ [ freehold1, noun.person:freeholder,+ ] estate1,@ (an estate held in fee simple or for life) }
+{ villeinage, tenure,@ (tenure by which a villein held land) }
+{ stock_buyback, purchase,@ (a corporation's purchase of its own outstanding stock; increases earnings/share so stock price rises (which can discourage a takeover attempt)) }
+{ public_domain, property_right,@ (property rights that are held by the public at large) }
+{ [ proprietorship, noun.person:proprietor,+ ] proprietary, ownership,@ (an unincorporated business owned by a single person who is responsible for its liabilities and entitled to its profits) }
+{ employee_ownership, ownership,@ (ownership of a business by the people who work for it) }
+{ property, [ belongings, verb.possession:belong,+ ] [ holding, verb.possession:hold,+ ] noun.Tops:possession,@ (something owned; any tangible or intangible possession that is owned by someone; "that hat is my property"; "he is a man of property") }
+{ tangible_possession, material_possession, property,@ (property or belongings that are tangible) }
+{ worldly_possessions, worldly_belongings, worldly_goods, property,@ (all the property that someone possesses; "he left all his worldly possessions to his daughter") }
+{ ratables, rateables, property,@ noun.location:Britain,;r (property that provides tax income for local governments) }
+{ hereditament, property,@ (any property (real or personal or mixed) that can be inherited) }
+{ intellectual_property, property,@ (intangible property that is the result of creativity (such as patents or trademarks or copyrights)) }
+{ community_property, property,@ (property and income belonging jointly to a married couple) }
+{ personal_property, personal_estate, personalty, private_property, property,@ (movable property (as distinguished from real estate)) }
+{ chattel, personal_chattel, movable, personal_property,@ noun.artifact:furniture,;c noun.artifact:car,;c (personal as opposed to real property; any tangible movable property (furniture or domestic animals or a car etc)) }
+{ effects, personal_effects, personal_property,@ (property of a personal character that is portable but not used in business; "she left some of her personal effects in the house"; "I watched over their effects until they returned") }
+{ things, belongings,@ (any movable possession (especially articles of clothing); "she packed her things and left") }
+{ real_property, real_estate, realty, immovable, property,@ (property consisting of houses and land) }
+{ estate1, land, landed_estate, acres, demesne, real_property,@ (extensive landed property (especially in the country) retained by the owner for his own use; "the family owned a large estate on Long Island") }
+{ commonage, property,@ (property held in common) }
+{ glebe, land,@ (plot of land belonging to an English parish church or an ecclesiastical office) }
+{ landholding, property,@ (a holding in the form of land) }
+{ landholding1, ownership,@ (ownership of land; the state or fact of owning land) }
+{ [ salvage, verb.social:salvage,+ verb.social:salve,+ ] property,@ noun.artifact:commodity,@ (property or goods saved from damage or destruction) }
+{ shareholding, property,@ (a holding in the form of shares of corporations) }
+{ spiritualty, spirituality, church_property, property,@ (property or income owned by a church) }
+{ temporalty, temporality, church_property,@ (the worldly possessions of a church) }
+{ [ benefice, adj.pert:beneficiary,+ verb.possession:benefice,+ ] ecclesiastical_benefice, church_property,@ (an endowed church office giving income to its holder) }
+{ sinecure, benefice,@ (a benefice to which no spiritual or pastoral duties are attached) }
+{ [ lease, verb.possession:lease1,+ verb.social:lease,+ ] [ rental, adj.pert:rental1,+ ] letting, property,@ (property that is leased or rented out or let) }
+{ car_rental, hire_car, rent-a-car, self-drive, u-drive, you-drive, lease,@ (a rented car; "she picked up a hire car at the airport and drove to her hotel") }
+{ [ trade-in, verb.possession:trade_in,+ ] property,@ (an item of property that is given in part payment for a new one) }
+{ [ sublease, verb.possession:sublease,+ ] [ sublet, verb.possession:sublet,+ ] lease,@ (a lease from one lessee to another) }
+{ public_property, property,@ (property owned by a government) }
+{ leasehold, land,@ (land or property held under a lease) }
+{ smallholding, land,@ noun.location:Britain,;r (a piece of land under 50 acres that is sold or let to someone for cultivation) }
+{ [ homestead1, verb.change:homestead,+ ] land,@ (land acquired from the United States public lands by filing a record and living on and cultivating it under the homestead law) }
+{ farmstead, land1,@ (the buildings and adjacent grounds of a farm) }
+{ homestead, land1,@ (the home and adjacent grounds occupied by a family) }
+{ no_man's_land, land1,@ (land that is unowned and uninhabited (and usually undesirable)) }
+{ [ fief, noun.location:fiefdom,+ ] feoff, land,@ (a piece of land held under the feudal system) }
+{ land1, real_property,@ (the land on which real estate is located; "he built the house on land leased from the city") }
+{ mortmain, dead_hand, real_property,@ noun.group:corporation,;c (real property held inalienably (as by an ecclesiastical corporation)) }
+{ wealth, property,@ (property that has economic utility: a monetary value or an exchange value) }
+{ money2, wealth,@ (wealth reckoned in terms of money; "all his money is in real estate") }
+{ pile, bundle, big_bucks, megabucks, big_money, money2,@ noun.communication:slang,;u (a large sum of money (especially as pay or profit); "she made a bundle selling real estate"; "they sank megabucks into their new house") }
+{ estate2, property,@ (everything you own; all of your assets (whether real property or personal property) and liabilities) }
+{ stuff, clobber, personal_property,@ (informal terms for personal possessions; "did you take all your clobber?") }
+{ gross_estate, estate2,@ (the total valuation of the estate's assets at the time of the person's death) }
+{ net_estate, estate2,@ noun.possession:tax,;c (the estate remaining after debts and funeral expenses and administrative expenses have been deducted from the gross estate; the estate then left to be distributed (and subject to federal and state inheritance taxes)) }
+{ life_estate, estate_for_life, estate2,@ noun.group:law,;c ((law) an estate whose duration is limited to the life of the person holding it) }
+{ barony, estate1,@ (the estate of a baron) }
+{ countryseat, estate1,@ (an estate in the country) }
+{ Crown_land, estate1,@ noun.location:Great_Britain1,;r (land that belongs to the Crown) }
+{ [ manor, adj.pert:manorial,+ ] estate1,@ (the landed estate of a lord (including the house on it)) }
+{ seigneury, seigniory, signory, estate1,@ (the estate of a seigneur) }
+{ hacienda, estate1,@ (a large estate in Spanish-speaking countries) }
+{ plantation, estate1,@ (an estate where cash crops are grown on a large scale (especially in tropical areas)) }
+{ orangery, plantation,@ noun.artifact:greenhouse,@ (a place where oranges are grown; a plantation of orange trees in warm climes or a greenhouse in cooler areas) }
+{ white_elephant, noun.Tops:possession,@ (a valuable possession whose upkeep is excessively expensive) }
+{ transferred_property, transferred_possession, noun.Tops:possession,@ (a possession whose ownership changes or lapses) }
+{ acquisition, transferred_property,@ (something acquired; "a recent acquisition by the museum") }
+{ accession, addition, acquisition,@ (something added to what you already have; "the librarian shelved the new accessions"; "he was a new addition to the staff") }
+{ [ purchase, verb.possession:purchase,+ ] acquisition,@ (something acquired by purchase) }
+{ [ bargain1, verb.possession:bargain,+ ] [ buy, verb.stative:buy,+ verb.possession:buy,+ ] steal, purchase,@ (an advantageous purchase; "she got a bargain at the auction"; "the stock was a real buy at that price") }
+{ song, bargain1,@ (a very small sum; "he bought it for a song") }
+{ travel_bargain, bargain1,@ (a bargain rate for travellers on commercial routes (usually air routes)) }
+{ [ grant2, verb.possession:grant2,+ ] [ assignment2, verb.possession:assign,+ ] transferred_property,@ noun.group:law,;c ((law) a transfer of property by deed of conveyance) }
+{ appanage, apanage, grant2,@ (a grant (by a sovereign or a legislative body) of resources to maintain a dependent member of a ruling family; "bishoprics were received as appanages for the younger sons of great families") }
+{ land_grant, grant2,@ (a grant of public land (as to a railway or college)) }
+{ [ gain, loss,! ] sum,@ (the amount by which the revenue of a business exceeds its cost of operating) }
+{ financial_gain, gain,@ (the amount of monetary gain) }
+{ [ income, outgo,! ] financial_gain,@ (the financial gain (earned or unearned) accruing over a given period of time) }
+{ disposable_income, income,@ noun.possession:tax,;c (income (after taxes) that is available to you for saving or spending) }
+{ double_dipping, income,@ (two incomes received from the same source (as by holding a government job and receiving a government pension)) }
+{ easy_money, gravy_train, income,@ (income obtained with a minimum of effort) }
+{ EBITDA, Earnings_Before_Interest_Taxes_Depreciation_and_Amortization, income,@ (income before interest and taxes and depreciation and amortization have been subtracted; an indicator of a company's profitability that is watched by investors (especially in leveraged buyouts)) }
+{ [ easy_money1, tight_money,! ] noun.state:financial_condition,@ (the economic condition in which credit is easy to secure) }
+{ [ tight_money, easy_money1,! ] noun.state:financial_condition,@ (the economic condition in which credit is difficult to secure and interest rates are high) }
+{ escheat1, transferred_property,@ (the property that reverts to the state) }
+{ [ gross, adj.all:gross,+ verb.possession:gross,+ ] revenue1, receipts, sum,@ (the entire amount of income before any deductions are made) }
+{ national_income, noun.attribute:value,@ (the total value of all income in a nation (wages and profits and interest and rents and pension payments) during a given period (usually 1 yr)) }
+{ gross_national_product, GNP, noun.attribute:value,@ (former measure of the United States economy; the total market value of goods and services produced by all citizens and capital during a given period (usually 1 yr)) }
+{ real_gross_national_product, real_GNP, gross_national_product,@ (a version of the GNP that has been adjusted for the effects of inflation) }
+{ gross_domestic_product, GDP, noun.attribute:value,@ (the measure of an economy adopted by the United States in 1991; the total market values of goods and services produced by workers and capital within a nation's borders during a given period (usually 1 year)) }
+{ [ deflator, verb.communication:deflate,+ ] noun.quantity:factor1,@ (a statistical factor designed to remove the effect of inflation; inflation adjusted variables are in constant dollars) }
+{ royalty, payment,@ (payment to the holder of a patent or copyright or resource for the right to use their property; "he received royalties on his book") }
+{ box_office, receipts,@ (total admission receipts for an entertainment) }
+{ gate, receipts,@ (total admission receipts at a sports event) }
+{ net_income, [ net, verb.possession:net1,+ ] net_profit, lucre1, [ profit, noun.person:profiteer,+ verb.possession:profit,+ ] profits1, earnings1, income,@ (the excess of revenues over outlays in a given period of time (including depreciation and other non-cash expenses)) }
+{ [ paper_profit, paper_loss,! ] gain,@ (an unrealized gain on an investment calculated by subtracting the investor's cost from the current market price) }
+{ [ paper_loss, paper_profit,! ] loss,@ (an unrealized loss on an investment calculated by subtracting the current market price from the investor's cost) }
+{ cash_flow, income,@ (the excess of cash revenues over cash outlays in a give period of time (not including non-cash expenses)) }
+{ personal_income, income,@ (the income received by a single individual) }
+{ earning_per_share, net_income,@ (the portion of a company's profit allocated to each outstanding share of common stock) }
+{ windfall_profit, profit,@ (profit that occurs unexpectedly as a consequence of some event not controlled by those who profit from it) }
+{ killing, [ cleanup, verb.possession:clean_up4,+ ] profit,@ noun.communication:colloquialism,;u (a very large profit) }
+{ [ winnings, verb.possession:win,+ verb.competition:win,+ losings,!] [ win, verb.possession:win,+ ] profits2, financial_gain,@ (something won (especially money)) }
+{ rental_income, income,@ (income received from rental properties) }
+{ [ return, verb.creation:return,+ ] issue, [ take, verb.possession:take4,+ ] takings, proceeds, [ yield, verb.creation:yield,+ ] payoff2, income,@ (the income or profit arising from such transactions as the sale of land or other property; "the average return was about 5%") }
+{ fast_buck, quick_buck, net_income,@ (quick or easy earnings; "they are traders out to make a fast buck") }
+{ filthy_lucre, net_income,@ (shameful profit; "he would sell his soul for filthy lucre") }
+{ gross_profit, gross_profit_margin, margin2, profit,@ noun.act:corporate_finance,;c ((finance) the net sales minus the cost of goods and services sold) }
+{ gross_sales, gross_revenue, sales, income,@ (income (at invoice values) received for goods and services over some given period of time) }
+{ net_sales, income,@ (gross sales reduced by customer discounts, returns, freight out, and allowances) }
+{ margin_of_profit, profit_margin, gross_margin, noun.relation:ratio1,@ (the ratio gross profits divided by net sales) }
+{ unearned_income, unearned_revenue, income,@ noun.cognition:accounting,;c ((accounting) income received but not yet earned (usually considered a current liability on a company's balance sheet)) }
+{ unearned_income1, unearned_revenue1, income,@ noun.possession:tax,;c (personal income that you did not earn (e.g., dividends or interest or rent income)) }
+{ government_income, government_revenue, income,@ (income available to the government) }
+{ tax_income, [ taxation1, verb.possession:tax,+ ] tax_revenue, revenue2, government_income,@ (government income due to taxation) }
+{ internal_revenue, tax_income,@ (government revenue from domestic sources (excluding customs)) }
+{ per_capita_income, income,@ (the total national income divided by the number of people in the nation) }
+{ stolen_property, transferred_property,@ (property that has been stolen) }
+{ [ spoil, verb.contact:spoil,+ ] stolen_property,@ noun.communication:plural,;u ((usually plural) valuables taken by violence (especially in war); "to the victor belong the spoils of the enemy") }
+{ [ loot, verb.possession:loot,+ ] booty, [ pillage, verb.possession:pillage,+ ] [ plunder, verb.possession:plunder2,+ verb.possession:plunder1,+ verb.possession:plunder,+ ] prize1, swag, dirty_money, stolen_property,@ (goods or money obtained illegally) }
+{ inheritance, heritage2, transferred_property,@ noun.group:law,;c (that which is inherited; a title or property or estate that passes by law to the heir on the death of the owner) }
+{ primogeniture, inheritance,@ (right of inheritance belongs exclusively to the eldest son) }
+{ borough_English, inheritance,@ (a former English custom by which the youngest son inherited land to the exclusion of his older brothers) }
+{ [ accretion, adj.all:increasing^accretionary,+ ] inheritance,@ noun.group:law,;c ((law) an increase in a beneficiary's share in an estate (as when a co-beneficiary dies or fails to meet some condition or rejects the inheritance)) }
+{ bequest, legacy, gift,@ inheritance,@ noun.group:law,;c ((law) a gift of personal property by will) }
+{ birthright, [ patrimony1, adj.all:inheritable^patrimonial,+ ] inheritance,@ (an inheritance coming by right of birth (especially by primogeniture)) }
+{ devise1, gift,@ inheritance,@ noun.group:law,;c ((law) a gift of real property by will) }
+{ [ dower, verb.possession:dower,+ ] life_estate,@ (a life estate to which a wife is entitled on the death of her husband) }
+{ jointure, legal_jointure, estate2,@ noun.group:law,;c ((law) an estate secured to a prospective wife as a marriage settlement in lieu of a dower) }
+{ free_lunch, gift,@ (something acquired without effort or payment or obligation; "there is no free lunch in politics or Hollywood") }
+{ heirloom, inheritance,@ (something that has been in a family for generations) }
+{ heirloom1, property,@ inheritance,#p noun.group:law,;c ((law) any property that is considered by law or custom as inseparable from an inheritance is inherited with that inheritance) }
+{ [ gift, verb.possession:gift,+ verb.social:gift,+ ] acquisition,@ (something acquired without compensation) }
+{ dowry, [ dowery, verb.possession:dower,+ ] [ dower1, verb.possession:dower,+ ] portion1, gift,@ (money or property brought by a woman to her husband at marriage) }
+{ bride_price, gift,@ (money or property given (in some societies) by the bridegroom to the family of his bride) }
+{ largess, largesse, gift,@ (a gift or money given (as for service or out of benevolence); usually given ostentatiously) }
+{ aid, economic_aid, financial_aid, assistance, financial_assistance, economic_assistance, gift,@ (gift of money or other material help to support a person or cause; "economic assistance to depressed areas") }
+{ [ scholarship, noun.person:scholar2,+ noun.person:scholar1,+ ] aid,@ award,@ (financial aid provided to a student on the basis of academic merit) }
+{ fellowship, aid,@ award,@ (money granted (by a university or foundation or other agency) for advanced study or research) }
+{ foreign_aid, aid,@ noun.group:military,;c (aid (such as economic or military assistance) provided to one nation by another) }
+{ Marshall_Plan, European_Recovery_Program, foreign_aid,@i (a United States program of economic aid for the reconstruction of Europe (1948-1952); named after George Marshall) }
+{ [ grant, verb.possession:grant3,+ ] aid,@ (any monetary aid) }
+{ [ subsidy, verb.possession:subsidize,+ verb.possession:subsidise,+ ] grant,@ (a grant paid by a government to an enterprise that benefits the public; "a subsidy for research in artificial intelligence") }
+{ [ subvention, verb.communication:subvent,+ ] subsidy,@ (grant of financial aid as from a government to an educational institution) }
+{ price_support, subsidy,@ (a government subsidy used to maintain prices at a certain level) }
+{ grant-in-aid, grant,@ aid,@ (a grant to a person or school for some educational project) }
+{ postdoctoral, postdoc, post_doc, grant-in-aid,@ (a grant that funds postdoctoral study or research) }
+{ [ traineeship, noun.person:trainee,+ ] aid,@ (financial aid that enables you to get trained for a specified job; "the bill provided traineeships in vocational rehabilitation") }
+{ gratuity1, award,@ (an award (as for meritorious service) given without claim or obligation) }
+{ prize, [ award, verb.possession:award,+ ] gift,@ (something given for victory or superiority in a contest or competition or for winning a lottery; "the prize was a free trip to Europe") }
+{ door_prize, prize,@ (tickets are passed out at the entrance to a dance or party or other social function and a prize is awarded to the holder of the winning ticket) }
+{ jackpot1, prize,@ (any outstanding award) }
+{ prize_money, prize,@ (any money given as a prize) }
+{ [ present, adj.all:present2,+ verb.possession:present1,+ ] gift,@ (something presented as a gift; "his tie was a present from his wife") }
+{ birthday_present, birthday_gift, present,@ (a present given in celebration of a person's birthday) }
+{ Christmas_present, Christmas_gift, present,@ (a present given at Christmas time) }
+{ stocking_filler, stocking_stuffer, Christmas_present,@ (a small Christmas present included in the Christmas stocking) }
+{ wedding_present, wedding_gift, present,@ (a present given to someone getting married) }
+{ bride-gift, wedding_present,@ (a wedding present to the bride) }
+{ cash_surrender_value, sum,@ (the amount that the insurance company will pay on a given life insurance policy if the policy is cancelled prior to the death of the insured) }
+{ contribution1, sum,@ (an amount of money contributed; "he expected his contribution to be repaid with interest") }
+{ contribution, [ donation, verb.possession:donate,+ ] gift,@ (a voluntary gift (as of money or service or ideas) made to some worthwhile cause) }
+{ [ benefaction, verb.social:benefact,+ ] contribution,@ (a contribution of money or assistance) }
+{ offering, contribution,@ (money contributed to a religious organization) }
+{ tithe1, offering,@ (an offering of a tenth part of some personal income) }
+{ offertory, offering,@ (the offerings of the congregation at a religious service) }
+{ hearth_money, Peter's_pence, offering,@ (an annual contribution made by Roman Catholics to support the papal see) }
+{ political_contribution, political_donation, contribution,@ (a contribution made to a politician or a political campaign or a political party) }
+{ soft_money, political_contribution,@ (political contributions made in such a way as to avoid the United States regulations for federal election campaigns (as by contributions to a political action committee)) }
+{ [ endowment, verb.possession:endow,+ ] endowment_fund, capital,@ (the capital that provides income for an institution) }
+{ [ enrichment, verb.possession:enrich,+ ] gift,@ (a gift that significantly increases the recipient's wealth) }
+{ patrimony2, endowment,@ (a church endowment) }
+{ chantry, endowment,@ (an endowment for the singing of Masses) }
+{ lagniappe, gift,@ (a small gift (especially one given by a merchant to a customer who makes a purchase)) }
+{ bestowal, [ bestowment, verb.possession:bestow2,+ ] gift,@ (a gift that is bestowed or conferred) }
+{ bounty, premium1, reward,@ noun.act:government,;c (payment or reward (especially from a government) for acts such as catching criminals or killing predatory animals or enlisting in the military) }
+{ premium4, bonus,@ prize,@ (a prize, bonus, or award given as an inducement to purchase products, enter competitions initiated by business interests, etc.; "they encouraged customers with a premium for loyal patronage") }
+{ freebie, freebee, gift,@ (something that is free (usually provided as part of a promotional scheme); "the road map was a freebie") }
+{ giveaway, gift,@ noun.communication:colloquialism,;u (a gift of public land or resources for the private gain of a limited group) }
+{ gift_horse, gift,@ (a gift (usually of inferior quality) that should be accepted uncritically; "it wasn't much, but don't look a gift horse in the mouth") }
+{ thank_offering, offering,@ (an offering made as an expression of thanks) }
+{ bonus, incentive, payment,@ incentive_program,#p (an additional payment (or other remuneration) to employees as a means of increasing output) }
+{ incentive_program, incentive_scheme, noun.cognition:scheme,@ (a formal scheme for inducing someone (as employees) to do something) }
+{ [ deductible, adj.all:deductible,+ ] sum,@ noun.possession:tax,;c ((taxes) an amount that can be deducted (especially for the purposes of calculating income tax)) }
+{ defalcation, sum,@ (the sum of money that is misappropriated) }
+{ dividend1, bonus,@ (a bonus; something extra (especially a share of a surplus)) }
+{ sales_incentive, bonus,@ (remuneration offered to a salesperson for exceeding some predetermined sales goal) }
+{ allowance1, [ adjustment, verb.cognition:adjust,+ ] recompense,@ (an amount added or deducted on the basis of qualifying circumstances; "an allowance for profit") }
+{ cost-of-living_allowance, allowance1,@ (an allowance for changes in the consumer price index) }
+{ depreciation_allowance, allowance1,@ (an allowance for loss due to depreciation) }
+{ deduction, [ discount, verb.possession:discount,+ ] allowance1,@ (an amount or percentage deducted) }
+{ trade_discount, deduction,@ (a discount from the list price of a commodity allowed by a manufacturer or wholesaler to a merchant) }
+{ seasonal_adjustment, allowance1,@ (a statistical adjustment made to accommodate predictable fluctuations as a function of the season of the year; "seasonal adjustments for housing starts must be made in mid-winter") }
+{ tare, allowance1,@ (an adjustment made for the weight of the packaging in order to determine the net weight of the goods) }
+{ [ outgo, income,! ] spending, [ expenditure, verb.possession:expend,+ ] outlay1, transferred_property,@ (money paid out; an amount spent) }
+{ expense, disbursal, [ disbursement, verb.possession:disburse,+ ] cost,@ (amounts paid for goods and services that may be currently tax deductible (as opposed to capital expenditures)) }
+{ [ cost, verb.stative:cost,+ ] outgo,@ (the total spent for goods or services including money and time and labor) }
+{ business_expense, trade_expense, expense,@ (ordinary and necessary expenses incurred in a taxpayer's business or trade) }
+{ interest_expense, expense,@ (interest paid on loans) }
+{ lobbying_expense, expense,@ (expenses incurred in promoting or evaluating legislation; "many lobbying expenses are deductible by a taxpayer") }
+{ medical_expense, expense,@ (amount spent for diagnosis or treatment or prevention of medical problems) }
+{ non-cash_expense, expense,@ (an expense (such as depreciation) that is not paid for in cash) }
+{ moving_expense, expense,@ (the cost of moving your residence from one location to another) }
+{ operating_expense, operating_cost, overhead, budget_items, expense,@ operating_budget,#p noun.possession:tax,;c (the expense of maintaining property (e.g., paying property taxes and utilities and insurance); it does not include depreciation or the cost of financing or income taxes) }
+{ organization_expense, business_expense,@ (the cost (over a period of five years) of organizing a new corporation or partnership) }
+{ personal_expense, expense,@ (the cost of personal or family living; "some personal expenses are tax deductible") }
+{ promotional_expense, business_expense,@ (the cost of promoting a product) }
+{ expense1, outgo,@ (money spent to perform work and usually reimbursed by an employer; "he kept a careful record of his expenses at the meeting") }
+{ transfer_payment, outgo,@ (a public expenditure (as for unemployment compensation or veteran's benefits) that is not for goods and services) }
+{ capital_expenditure, cost,@ (the cost of long-term improvements) }
+{ [ payment, verb.possession:pay14,+ verb.possession:pay4,+ verb.possession:pay,+ nonpayment,! ] cost,@ (a sum of money paid or a claim discharged) }
+{ [ overpayment, verb.possession:overpay,+ ] payment,@ (a payment larger than needed or expected) }
+{ underpayment, payment,@ (a payment smaller than needed or expected) }
+{ wage, [ pay1, verb.possession:pay1,+ verb.possession:pay4,+ verb.possession:pay2,+ verb.possession:pay,+ ] [ earnings, verb.possession:earn3,+ ] [ remuneration, verb.possession:remunerate,+ ] salary, regular_payment,@ payroll,#p (something that remunerates; "wages were paid by check"; "he wasted his pay on drink"; "they saved a quarter of all their earnings") }
+{ combat_pay, wage,@ (extra pay for soldiers engaged in active combat) }
+{ double_time, wage,@ (a doubled wage (for working overtime)) }
+{ found, wage,@ (food and lodging provided in addition to money; "they worked for $30 and found") }
+{ half-pay, wage,@ (reduced wage paid to someone who is not working full time) }
+{ living_wage, wage,@ (a wage sufficient for a worker and family to subsist comfortably) }
+{ merit_pay, wage,@ (extra pay awarded to an employee on the basis of merit (especially to school teachers)) }
+{ minimum_wage, wage,@ (the lowest wage that an employer is allowed to pay; determined by contract or by law) }
+{ pay_envelope, pay_packet, wage,@ (wages enclosed in an envelope for distribution to the wage earner) }
+{ sick_pay, wage,@ (wages paid to an employee who is on sick leave) }
+{ strike_pay, wage,@ (money paid to strikers from union funds) }
+{ take-home_pay, wage,@ (what is left of your pay after deductions for taxes and dues and insurance etc) }
+{ subscription, payment,@ (a payment for consecutive issues of a newspaper or magazine for a given period of time) }
+{ regular_payment, payment,@ (a payment made at regular times) }
+{ pay_rate, rate_of_pay, rate,@ (amount of money received per unit time; "women's pay rate is lower than men's") }
+{ time_and_a_half, pay_rate,@ (a rate of pay that is 1.5 times the regular rate; for overtime work) }
+{ payment_rate, rate_of_payment, repayment_rate, installment_rate, rate,@ (the amount of money paid out per unit time) }
+{ blood_money3, payment,@ (paid to a hired murderer) }
+{ [ recompense, verb.possession:recompense,+ ] payment,@ (payment or reward (as for service rendered)) }
+{ [ refund, verb.possession:refund,+ ] payment,@ (money returned to a payer) }
+{ [ rebate, verb.possession:rebate,+ ] discount2, refund,@ (a refund of some fraction of the amount paid) }
+{ rent-rebate, rebate,@ noun.location:Britain,;r (a rebate on rent given by a local government authority) }
+{ [ compensation, verb.social:compensate,+ verb.possession:compensate2,+ verb.possession:compensate1,+ verb.possession:compensate,+ ] recompense,@ (something (such as money) given or received as payment or reparation (as for a service or loss or injury)) }
+{ overcompensation, compensation,@ (excessive compensation) }
+{ workmen's_compensation, compensation,@ (compensation for death or injury suffered by a worker in the course of his employment) }
+{ conscience_money, payment,@ (payment made voluntarily to reduce guilt over dishonest dealings) }
+{ support_payment, payment,@ (a payment made by one person for the support of another) }
+{ palimony, support_payment,@ (support paid by one half of an unmarried partnership after the relationship ends) }
+{ alimony, maintenance1, support_payment,@ (court-ordered support paid by one spouse to another after they are separated) }
+{ reward, payment,@ (payment made in return for a service rendered) }
+{ honorarium, reward,@ (a fee paid for a nominally free service) }
+{ [ ransom, verb.possession:ransom,+ ] ransom_money, cost,@ (money demanded for the return of a captured person) }
+{ blood_money2, reward,@ (a reward for information about a murderer) }
+{ guerdon, reward,@ (a reward or payment) }
+{ meed, reward,@ noun.communication:archaism,;u (a fitting reward) }
+{ hush_money, bribe,@ (a bribe paid to someone to insure that something is kept secret) }
+{ [ bribe, verb.possession:bribe,+ ] payoff1, payment,@ (payment made to a person in a position of trust to corrupt his judgment) }
+{ [ kickback, verb.possession:kick_back,+ ] bribe,@ (a commercial bribe paid by a seller to a purchasing agent in order to induce the agent to enter into the transaction) }
+{ payola, bribe,@ (a bribe given to a disc jockey to induce him to promote a particular record) }
+{ soap, bribe,@ (money offered as a bribe) }
+{ [ share, verb.possession:share1,+ ] portion, part, percentage, assets,@ profit,#p (assets belonging to or due to or contributed by an individual person or group; "he wanted his share in cash") }
+{ tranche, share,@ (a portion of something (especially money)) }
+{ [ dispensation, verb.possession:dispense,+ verb.body:dispense,+ ] share,@ (a share that has been dispensed or distributed) }
+{ dole, share,@ (a share of money or food or clothing that has been charitably given) }
+{ way, share,@ (a portion of something divided into shares; "they split the loot three ways") }
+{ [ ration, verb.possession:ration,+ verb.possession:ration1,+ ] share,@ (a fixed portion that is allotted (especially in times of scarcity)) }
+{ [ allowance, verb.possession:allowance,+ verb.cognition:allow1,+ ] share,@ (an amount allowed or granted (as during a given period); "travel allowance"; "my weekly allowance of two eggs"; "a child's allowance should not be too generous") }
+{ slice, piece, share,@ (a share of something; "a slice of the company's revenue") }
+{ [ split, verb.social:split3,+ ] share,@ (a promised or claimed share of loot or money; "he demanded his split before they disbanded") }
+{ interest3, stake2, share,@ noun.group:law,;c ((law) a right or legal share of something; a financial involvement with something; "they have interests all over the world"; "a stake in the company's future") }
+{ [ grubstake, verb.possession:grubstake,+ ] interest3,@ (funds advanced to a prospector or to someone starting a business in return for a share of the profits) }
+{ controlling_interest, interest3,@ (ownership of more than 50% of a corporation's voting shares) }
+{ insurable_interest, interest3,@ (an interest in a person or thing that will support the issuance of an insurance policy; an interest in the survival of the insured or in the preservation of the thing that is insured) }
+{ vested_interest, interest3,@ noun.group:law,;c ((law) an interest in which there is a fixed right to present or future enjoyment and that can be conveyed to another) }
+{ security_interest, interest3,@ (any interest in a property that secures the payment of an obligation) }
+{ terminable_interest, interest3,@ (an interest in property that terminates under specific conditions) }
+{ undivided_interest, undivided_right, interest3,@ (the interest in property owned by tenants whereby each tenant has an equal right to enjoy the entire property) }
+{ fee1, interest3,@ (an interest in land capable of being inherited) }
+{ fee_simple, fee1,@ (a fee without limitation to any class of heirs; they can sell it or give it away) }
+{ fee_tail, fee1,@ (a fee limited to a particular line of heirs; they are not free to sell it or give it away) }
+{ entail, land,@ (land received by fee tail) }
+{ profit_sharing, share,@ (a system in which employees receive a share of the net profits of the business) }
+{ cut, share,@ loot,#p (a share of the profits; "everyone got a cut of the earnings") }
+{ [ rake-off, verb.possession:rake_off,+ ] vigorish1, cut,@ (a percentage (of winnings or loot or profit) taken by an operator or gangster) }
+{ allotment, [ allocation, verb.possession:allocate,+ ] share,@ (a share set aside for a specific purpose) }
+{ [ reallocation, verb.possession:reallocate,+ ] allotment,@ (a share that has been allocated again) }
+{ quota, allotment,@ (a proportional share assigned to each participant) }
+{ appropriation, money,@ noun.group:legislature,;c (money set aside (as by a legislature) for a specific purpose) }
+{ [ reimbursement, verb.possession:reimburse1,+ verb.possession:reimburse,+ ] compensation,@ (compensation paid (to someone) for damages or losses or money already spent etc.; "he received reimbursement for his travel expenses") }
+{ emolument, compensation,@ (compensation received by virtue of holding an office or having employment (usually in the form of wages or fees); "a clause in the U.S. constitution prevents sitting legislators from receiving emoluments from their own votes") }
+{ blood_money1, compensation,@ (compensation paid to the family of a murdered person) }
+{ damages, amends, [ indemnity, verb.possession:indemnify,+ ] [ indemnification, verb.possession:indemnify,+ ] restitution, [ redress, verb.social:redress,+ ] compensation,@ (a sum of money paid in compensation for loss or injury) }
+{ relief, redress,@ noun.group:law,;c ((law) redress awarded by a court; "was the relief supposed to be protection from future harm or compensation for past injury?") }
+{ [ counterbalance, verb.social:counterbalance,+ verb.stative:counterbalance1,+ ] [ offset, verb.stative:offset,+ verb.stative:offset1,+ ] compensation,@ (a compensating equivalent) }
+{ actual_damages, compensatory_damages, general_damages, damages,@ noun.group:law,;c ((law) compensation for losses that can readily be proven to have occurred and for which the injured party has the right to be compensated) }
+{ nominal_damages, damages,@ noun.group:law,;c ((law) a trivial sum (usually $1.00) awarded as recognition that a legal injury was sustained (as for technical violations of a contract)) }
+{ punitive_damages, exemplary_damages, smart_money1, damages,@ noun.group:law,;c ((law) compensation in excess of actual damages (a form of punishment awarded in cases of malicious or willful misconduct)) }
+{ double_damages, punitive_damages,@ (twice the amount that a court would normally find the injured party entitled to) }
+{ treble_damages, punitive_damages,@ (three times the amount that a court would normally find the injured party entitled to) }
+{ reparation, compensation,@ noun.communication:plural,;u ((usually plural) compensation exacted from a defeated nation by the victors; "Germany was unable to pay the reparations demanded after World War I") }
+{ [ reparation1, verb.possession:repair,+ ] compensation,@ (compensation (given or received) for an insult or injury; "an act for which there is no reparation") }
+{ [ atonement, verb.social:atone12,+ ] [ expiation, verb.social:expiate,+ ] satisfaction, amends,@ (compensation for a wrong; "we were unable to get satisfaction from the local store") }
+{ residual, payment,@ noun.communication:plural,;u ((often plural) a payment that is made to a performer or writer or director of a television show or commercial that is paid for every repeat showing; "he could retire on his residuals") }
+{ poverty_line, poverty_level, personal_income,@ (a level of personal income defining the state of poverty) }
+{ allowance2, reimbursement,@ (a sum granted as reimbursement for expenses) }
+{ breakage, reimbursement,@ (reimbursement for goods damaged while in transit or in use) }
+{ costs, reimbursement,@ (pecuniary reimbursement to the winning party for the expenses of litigation) }
+{ per_diem, allowance2,@ (a daily allowance for living expenses (especially while traveling in connection with your job)) }
+{ travel_allowance, travel_reimbursement, allowance2,@ (a sum allowed for travel) }
+{ mileage, travel_allowance,@ (a travel allowance at a given rate per mile traveled) }
+{ [ stipend, adj.pert:stipendiary,+ ] regular_payment,@ (a sum of money allotted on a regular basis; usually for some specific purpose) }
+{ privy_purse, allowance,@ (allowance for a monarch's personal expenses) }
+{ prebend, stipend,@ (the stipend assigned by a cathedral to a canon) }
+{ annuity, rente1, regular_payment,@ (income from capital investment paid in a series of regular payments; "his retirement fund was set up to be paid as an annuity") }
+{ annuity_in_advance, annuity,@ (an annuity paid in a series of more or less equal payments at the beginning of equally spaced periods; "rent payable in advance constitutes an annuity in advance for the landlord") }
+{ ordinary_annuity, annuity,@ (an annuity paid in a series of more or less equal payments at the end of equally spaced periods) }
+{ reversionary_annuity, survivorship_annuity, annuity,@ (an annuity payable to one person in the event that someone else is unable to receive it) }
+{ tontine, annuity,@ (an annuity scheme wherein participants share certain benefits and on the death of any participant his benefits are redistributed among the remaining participants; can run for a fixed period of time or until the death of all but one participant) }
+{ [ rent, adj.pert:rental,+ verb.social:rent,+ verb.possession:rent,+ verb.possession:rent1,+ verb.social:rent1,+ ] annuity_in_advance,@ (a payment or series of payments made by the lessee to an owner for use of some property, facility, equipment, or service) }
+{ ground_rent, rent,@ (payment for the right to occupy and improve a piece of land) }
+{ peppercorn_rent, rent,@ noun.location:Britain,;r (very low or nominal rent) }
+{ rack_rent, rent,@ (an extortionate rent) }
+{ economic_rent, rent1, return,@ (the return derived from cultivated land in excess of that derived from the poorest land cultivated under similar conditions) }
+{ payback, return,@ (financial return or reward (especially returns equal to the initial investment)) }
+{ installment_plan, installment_buying, time_plan, regular_payment,@ (a system for paying for goods by installments) }
+{ hire-purchase, never-never, installment_plan,@ noun.location:Britain,;r (installment plan; "we bought a car on the never-never") }
+{ benefit, payment,@ (financial assistance in time of need) }
+{ cost-of-living_benefit, benefit,@ (a benefit that goes to anyone whose money receipts increase automatically as prices rise) }
+{ death_benefit, benefit,@ (insurance or pension money payable to a beneficiary of a deceased) }
+{ advance_death_benefit, death_benefit,@ (a percentage of death benefits paid directly to policy holders having a short life expectancy (usually 6 months)) }
+{ viatical_settlement2, advance_death_benefit,@ (cash derived from sale of an insurance policy by a terminally ill policy holder) }
+{ disability_benefit, benefit,@ (insurance benefits paid in case of disability) }
+{ sick_benefit, sickness_benefit, benefit,@ noun.location:Britain,;r (money paid (by the government) to someone who is too ill to work) }
+{ fringe_benefit, perquisite, perk, benefit,@ (an incidental benefit awarded for certain types of employment (especially if it is regarded as a right); "a limousine is one of the fringe benefits of the job") }
+{ appanage1, apanage1, fringe_benefit,@ (any customary and rightful perquisite appropriate to your station in life; "for thousands of years the chair was an appanage of state and dignity rather than an article of ordinary use") }
+{ tax_benefit, tax_break, tax_write-off,@ (a tax deduction that is granted in order to encourage a particular type of commercial activity) }
+{ gratuity, [ tip, verb.possession:tip,+ ] pourboire, baksheesh, bakshish, bakshis, backsheesh, fringe_benefit,@ (a relatively small amount of money given for services rendered (as by a waiter)) }
+{ Christmas_box, gratuity,@ noun.location:Britain,;r (a present given at Christmas for services during the year) }
+{ child_support, support_payment,@ (court-ordered support paid by one spouse to the other who has custody of the children after the parents are separated) }
+{ lump_sum, payment,@ (a complete payment consisting of a single sum of money) }
+{ payoff, final_payment, payment,@ (the final payment of a debt) }
+{ [ remittance, verb.possession:remit,+ ] [ remittal, verb.possession:remit,+ ] remission, [ remitment, verb.possession:remit,+ ] payment,@ (a payment of money sent to a person in another place) }
+{ [ repayment, verb.possession:repay1,+ verb.possession:repay,+ ] quittance, payment,@ (payment of a debt or obligation) }
+{ [ redemption, verb.possession:redeem1,+ ] repayment,@ noun.group:corporation,;c (repayment of the principal amount of a debt or security at or before maturity (as when a corporation repurchases its own stock)) }
+{ token_payment, payment,@ (a small payment made in acknowledgement of an obligation) }
+{ [ nonpayment, payment,! ] [ default, verb.possession:default,+ ] nonremittal, financial_loss,@ (loss resulting from failure of a debt to be paid) }
+{ delinquency, nonpayment,@ (nonpayment of a debt when due) }
+{ [ default2, verb.possession:default,+ ] nonpayment2, nonremittal2, noun.act:failure,@ (act of failing to meet a financial obligation) }
+{ penalty, payment,@ (a payment required for not fulfilling a contract) }
+{ pittance, payment,@ (an inadequate payment; "they work all day for a mere pittance") }
+{ retribution, requital, penalty,@ (a justly deserved penalty) }
+{ [ forfeit, verb.possession:forfeit,+ ] [ forfeiture, verb.possession:forfeit,+ ] penalty,@ (a penalty for a fault or mistake that involves losing or giving up something; "the contract specified forfeits if the work was not completed on time") }
+{ [ forfeit1, verb.possession:forfeit,+ ] [ forfeiture1, verb.possession:forfeit,+ ] loss1,@ (something that is lost or surrendered as a penalty) }
+{ [ fine, verb.social:fine,+ ] [ mulct, verb.possession:mulct,+ ] [ amercement, verb.social:amerce1,+ ] penalty,@ (money extracted as a penalty) }
+{ library_fine, fine,@ (fine imposed by a library on books that overdue when returned) }
+{ premium2, insurance_premium, payment,@ (payment for insurance) }
+{ installment, payment,@ (a payment of part of a debt; usually paid at regular intervals) }
+{ cost_overrun, cost,@ (excess of cost over budget; "the cost overrun necessitated an additional allocation of funds in the budget") }
+{ cost_of_living, cost,@ (average cost of basic necessities of life (as food and shelter and clothing); "a rise in the cost of living reflects the rate of inflation") }
+{ borrowing_cost, cost,@ (the cost of borrowing something) }
+{ distribution_cost, cost,@ (any cost incurred by a producer or wholesaler or retailer or distributor (as for advertising and shipping etc)) }
+{ handling_cost, handling_charge, cost,@ (the cost of handling (especially the cost of packaging and mailing an order)) }
+{ marketing_cost, cost,@ (the cost of marketing (e.g., the cost of transferring title and moving goods to the customer)) }
+{ production_cost, cost,@ (combined costs of raw material and labor incurred in producing goods) }
+{ replacement_cost, cost,@ (current cost of replacing a fixed asset with a new one of equal effectiveness) }
+{ reproduction_cost, physical_value, cost,@ (cost of reproducing physical property minus various allowances (especially depreciation)) }
+{ unit_cost, cost,@ (calculated cost for a given unit of a product) }
+{ [ price, adj.all:expensive^pricy,+ adj.all:expensive^pricey,+ verb.cognition:price,+ verb.possession:price,+ ] terms, damage, cost,@ (the amount of money needed to purchase something; "the price of gasoline"; "he got his new car on excellent terms"; "how much is the damage?") }
+{ price2, cost,@ (cost of bribing someone; "they say that every politician has a price") }
+{ [ markup, verb.possession:mark_up,+ ] profit,@ (the amount added to the cost to determine the asking price) }
+{ asking_price, selling_price, price,@ (the price at which something is offered for sale) }
+{ bid_price, price,@ noun.artifact:stock_market,;c ((stock market) the price at which a broker is willing to buy a certain security) }
+{ closing_price, price,@ noun.artifact:stock_market,;c ((stock market) the price of the last transaction completed during a day's trading session) }
+{ offer_price, asking_price,@ noun.artifact:stock_market,;c ((stock market) the price at which a broker is willing to sell a certain security) }
+{ upset_price, asking_price,@ noun.act:auction,;c ((auction) the minimum price at which a seller of property will entertain bids) }
+{ factory_price, price,@ (price charged for goods picked up at the factory) }
+{ highway_robbery, price,@ (an exorbitant price; "what they are asking for gas these days is highway robbery") }
+{ list_price, asking_price,@ (the selling price of something as stated in a catalogue or price list; often subject to discounts; "I got it at 30% off the list price") }
+{ purchase_price, price,@ (the price at which something is actually purchased) }
+{ spot_price, cash_price, price,@ (the current delivery price of a commodity traded in the spot market) }
+{ support_level, price,@ noun.artifact:stock_market,;c ((stock market) the price at which a certain security becomes attractive to investors) }
+{ valuation, price,@ (assessed price; "the valuation of this property is much too high") }
+{ opportunity_cost, cost,@ (cost in terms of foregoing alternatives) }
+{ cost_of_capital, capital_cost, opportunity_cost,@ (the opportunity cost of the funds employed as the result of an investment decision; the rate of return that a business could earn if it chose another investment with equivalent risk) }
+{ carrying_cost, carrying_charge2, opportunity_cost,@ (the opportunity cost of unproductive assets; the expense incurred by ownership) }
+{ portage, cost,@ (the cost of carrying or transporting) }
+{ incidental_expense, incidental, minor_expense, expense1,@ noun.communication:plural,;u ((frequently plural) an expense not budgeted or not specified; "he requested reimbursement of $7 for incidental expenses") }
+{ travel_expense, expense1,@ noun.communication:plural,;u ((frequently plural) expenses incurred by an employee in the performance of the job and usually reimbursed by the employer) }
+{ [ charge2, verb.possession:charge3,+ verb.possession:charge2,+ verb.cognition:charge12,+ ] cost,@ (the price charged for some article or service; "the admission charge") }
+{ carrying_charge, charge2,@ (charge made for carrying an account or for merchandise sold on an installment plan) }
+{ depreciation_charge, charge2,@ (an amount periodically charged to expense or against revenue in compensation for depreciation of property) }
+{ [ undercharge, verb.possession:undercharge,+ ] charge2,@ (a price that is too low) }
+{ [ overcharge, verb.possession:overcharge,+ ] charge2,@ (a price that is too high) }
+{ [ extortion, verb.possession:extort,+ ] overcharge,@ (an exorbitant charge) }
+{ corkage, service_charge,@ (a charge added at a restaurant for every bottle of wine served that was not bought on the premises) }
+{ fare, transportation, charge2,@ (the sum charged for riding in a public conveyance) }
+{ airfare, fare,@ (the fare charged for traveling by airplane) }
+{ bus_fare, carfare, fare,@ (the fare charged for riding a bus or streetcar) }
+{ cab_fare, taxi_fare, fare,@ (the fare charged for riding in a taxicab) }
+{ subway_fare, train_fare,@ (the fare charged for riding a subway train) }
+{ train_fare, fare,@ (the fare charged for traveling by train) }
+{ [ levy, verb.possession:levy,+ ] charge1,@ (a charge imposed and collected) }
+{ [ tax, verb.possession:tax,+ ] [ taxation, verb.possession:tax,+ ] revenue_enhancement, levy,@ (charge against a citizen's person or property or activity for the support of government) }
+{ tax_base, assets,@ (collective value of taxable assets) }
+{ tax_rate, rate,@ (rate used to calculate tax liability) }
+{ tax_liability, liabilities,@ (the amount of tax owed; calculated by applying the tax rate to the tax base) }
+{ single_tax, tax,@ (a system of taxation in which a tax is levied on a single commodity (usually land)) }
+{ income_tax, tax,@ (a personal tax levied on annual income) }
+{ bracket_creep, income_tax,@ (a movement into a higher tax bracket as taxable income increases) }
+{ estimated_tax, income_tax,@ (income tax paid periodically on income that is not subject to withholding taxes; based on the taxpayer's predicted tax liability) }
+{ FICA, income_tax,@ (a tax on employees and employers that is used to fund the Social Security system) }
+{ business_deduction, tax_write-off,@ (tax write-off for expenses of doing business) }
+{ exemption, tax_write-off,@ (a deduction allowed to a taxpayer because of his status (having certain dependents or being blind or being over 65 etc.); "additional exemptions are allowed for each dependent") }
+{ entertainment_deduction, business_deduction,@ (deduction allowed for some (limited) kinds of entertainment for business purposes) }
+{ withholding_tax, [ withholding, verb.possession:withhold1,+ ] income_tax,@ (income tax withheld from employees' wages and paid directly to the government by the employer) }
+{ PAYE, pay_as_you_earn, withholding_tax,@ (the British system of withholding tax) }
+{ unearned_increment, financial_gain,@ (an unearned rise in the market value of property resulting from general market factors) }
+{ capital_gain, financial_gain,@ (the amount by which the selling price of an asset exceeds the purchase price; the gain is realized when the asset is sold) }
+{ capital_loss, financial_loss,@ (the amount by which the purchase price of an asset exceeds the selling price; the loss is realized when the asset is sold) }
+{ capital_gains_tax, tax,@ (a tax on capital gains; "he avoided the capital gains tax by short selling") }
+{ capital_levy, tax,@ (a tax on capital or property) }
+{ departure_tax, tax,@ (a tax that is levied when you are departing a country by land or sea or air) }
+{ property_tax, land_tax, capital_levy,@ (a capital tax on property imposed by municipalities; based on the estimated value of the property) }
+{ council_tax, property_tax,@ noun.location:Great_Britain1,;r (a tax levied on households by local authorities; based on the estimated value of the property and the number of people living in it) }
+{ franchise_tax, tax,@ (a tax that is imposed by states on corporations; it depends both on the net worth of the corporation and on its net income attributable to activities within the state) }
+{ gift_tax, tax,@ (a tax imposed on transfers of property by gift during the lifetime of the giver) }
+{ inheritance_tax, estate_tax, death_tax, death_duty, transfer_tax,@ (a tax on the estate of the deceased person) }
+{ direct_tax, tax,@ (a tax paid directly by the person or organization on whom it is levied) }
+{ tax_advantage, noun.attribute:advantage,@ (an advantage bestowed by legislation that reduces a tax on some preferred activity) }
+{ tax_shelter, [ shelter, verb.stative:shelter,+ ] noun.act:reduction,@ (a way of organizing business to reduce the taxes it must pay on current earnings) }
+{ indirect_tax, tax,@ (a tax levied on goods or services rather than on persons or organizations) }
+{ hidden_tax, indirect_tax,@ noun.possession:tax,;c (a tax paid unwittingly by the consumer (such as ad valorem taxes)) }
+{ capitation, tax,@ (a tax levied on the basis of a fixed amount per person) }
+{ poll_tax, capitation,@ (a tax of a fixed amount per person and payable as a requirement for the right to vote) }
+{ progressive_tax, graduated_tax, tax,@ (any tax in which the rate increases as the amount subject to taxation increases) }
+{ proportional_tax, tax,@ (any tax in which the rate is constant as the amount subject to taxation increases) }
+{ degressive_tax, tax,@ (any tax in which the rate decreases as the amount subject to taxation increases) }
+{ rates, tax,@ noun.location:Britain,;r (a local tax on property (usually used in the plural)) }
+{ poor_rates, rates,@ noun.location:Britain,;r (a local tax for the relief of the poor) }
+{ stamp_tax, stamp_duty, tax,@ (a tax collected by requiring a stamp to be purchased and attached (usually on documents or publications)) }
+{ [ surtax, verb.possession:surtax,+ ] supertax, income_tax,@ (an additional tax on certain kinds of income that has already been taxed) }
+{ [ pavage, verb.contact:pave,+ ] tax,@ (a tax toward paving streets) }
+{ transfer_tax, tax,@ (any tax levied on the passing of title to property) }
+{ tithe2, levy,@ (a levy of one tenth of something) }
+{ special_assessment, tax,@ (an additional tax levied on private property for public improvements that enhance the value of the property) }
+{ duty, [ tariff, verb.possession:tariff,+ ] indirect_tax,@ (a government tax on imports or exports; "they signed a treaty to lower duties on trade between their countries") }
+{ [ excise, verb.possession:excise,+ ] excise_tax, indirect_tax,@ (a tax that is measured by the amount of business done (not on property or income from real estate)) }
+{ sales_tax, nuisance_tax, excise,@ (a tax based on the cost of the item purchased and collected directly from the buyer) }
+{ VAT, value-added_tax, ad_valorem_tax, excise,@ (a tax levied on the difference between a commodity's price before taxes and its cost of production) }
+{ gasoline_tax, excise,@ (a tax on every gallon of gasoline sold) }
+{ customs, customs_duty, custom, impost, duty,@ (money collected under a tariff) }
+{ ship_money, customs,@ (an impost levied in England to provide money for ships for national defense) }
+{ tonnage, tunnage, tonnage_duty, duty,@ (a tax imposed on ships that enter the US; based on the tonnage of the ship) }
+{ octroi, duty,@ (a tax on various goods brought into a town) }
+{ revenue_tariff, duty,@ (a tariff imposed to raise revenue) }
+{ protective_tariff, duty,@ (a tariff imposed to protect domestic firms from import competition) }
+{ anti-dumping_duty, protective_tariff,@ (a tariff imposed to prevent dumping) }
+{ import_duty, duty,@ (a duty imposed on imports) }
+{ export_duty, duty,@ (a duty imposed on exports) }
+{ countervailing_duty, duty,@ (a duty imposed to offset subsidies by foreign governments) }
+{ fixed_charge, fixed_cost, fixed_costs, charge2,@ (a periodic charge that does not vary with business volume (as insurance or rent or mortgage payments etc.)) }
+{ cover_charge, [ cover, verb.possession:cover,+ ] fixed_charge,@ (a fixed charge by a restaurant or nightclub over and above the charge for food and drink) }
+{ interest, fixed_charge,@ (a fixed charge for borrowing money; usually a percentage of the amount borrowed; "how much interest do you pay on your mortgage?") }
+{ compound_interest, interest,@ (interest calculated on both the principal and the accrued interest) }
+{ simple_interest, interest,@ (interest paid on the principal alone) }
+{ interest_rate, rate_of_interest, rate,@ (the percentage of a sum of money charged for its use) }
+{ discount_rate, discount1, bank_discount, interest_rate,@ (interest on an annual basis deducted in advance on a loan) }
+{ bank_rate, discount_rate,@ (the discount rate fixed by a central bank) }
+{ discount_rate1, interest_rate,@ noun.location:US,;r (the rate of interest set by the Federal Reserve that member banks are charged when they borrow money through the Federal Reserve System) }
+{ base_rate, interest_rate,@ noun.location:Great_Britain1,;r (the interest rate set by the Bank of England for lending to other banks) }
+{ prime_interest_rate, interest_rate,@ (the interest rate on short-term loans that banks charge their commercial customers with high credit ratings) }
+{ [ usury1, adj.all:immoderate^usurious,+ ] vigorish, interest_rate,@ (an exorbitant or unlawful rate of interest) }
+{ fee, fixed_charge,@ (a fixed charge for a privilege or for professional services) }
+{ anchorage, fee,@ (a fee for anchoring) }
+{ cellarage, fee,@ (a charge for storing goods in a cellar) }
+{ commission, fee,@ (a fee for services rendered based on a percentage of an amount received or collected or agreed to be paid (as distinguished from a salary); "he works on commission") }
+{ contingency_fee, fee,@ (a fee that is payable only if the outcome is successful (as for an attorney's services)) }
+{ dockage, docking_fee, fee,@ (a fee charged for a vessel to use a dock) }
+{ drop-off_charge, fee,@ (a fee added for returning a rented car to a location different from the one where it was rented) }
+{ entrance_fee, [ admission, verb.stative:admit3,+ verb.social:admit1,+ ] admission_charge, admission_fee, admission_price, price_of_admission, entrance_money, fee,@ (the fee charged for admission) }
+{ finder's_fee, fee,@ (a fee that is paid to someone who finds a source of financial backing or to someone who brings people together for business purposes; "the agency got a finder's fee when their candidate was hired as the new CEO") }
+{ legal_fee, fee,@ noun.group:law,;c (a fee paid for legal service) }
+{ licensing_fee, license_fee, license_tax, fee,@ noun.cognition:medicine,;c (a fee paid to the government for the privilege of being licensed to do something (as selling liquor or practicing medicine)) }
+{ refresher, legal_fee,@ noun.location:Britain,;r (a fee (in addition to that marked on the brief) paid to counsel in a case that lasts more than one day) }
+{ [ lighterage, verb.motion:lighter,+ ] fee,@ (the fee charged for carrying goods in lighters) }
+{ lockage, fee,@ (a fee charged for passage through a lock in a canal or waterway) }
+{ mintage1, fee,@ (fee paid to a mint by the government for minting a coin) }
+{ moorage, fee,@ (a fee for mooring) }
+{ origination_fee, fee,@ (a fee charged to a borrower (especially for a mortgage loan) to cover the costs of initiating the loan) }
+{ [ pipage, verb.motion:pipe,+ ] fee,@ (a fee charged for the use of pipes) }
+{ poundage, fee,@ (a fee charged for the recovery of impounded animals) }
+{ retainer, consideration, fee,@ (a fee charged in advance to retain the services of someone) }
+{ quid_pro_quo, quid, retainer,@ (something for something; that which a party receives (or is promised) in return for something he does or gives or promises) }
+{ seigniorage, fee,@ (charged by a government for coining bullion) }
+{ [ toll, verb.possession:toll,+ ] fee,@ (a fee levied for the use of roads or bridges (used for maintenance)) }
+{ truckage, fee,@ (a fee charged for transporting goods by truckage) }
+{ tuition, tuition_fee, fee,@ noun.act:education,;c (a fee paid for instruction (especially for higher education); "tuition and room and board were more than $25,000") }
+{ wharfage, quayage, fee,@ (a fee charged for the use of a wharf or quay) }
+{ agio, agiotage, premium3, exchange_premium, charge2,@ (a fee charged for exchanging currencies) }
+{ demurrage, charge2,@ (a charge required as compensation for the delay of a ship or freight car or other cargo beyond its scheduled time of departure) }
+{ installation_charge, charge2,@ (the charge for installing something) }
+{ [ porterage, verb.contact:porter,+ ] charge2,@ (the charge for carrying burdens by porters) }
+{ postage, charge2,@ (the charge for mailing something) }
+{ poundage1, charge2,@ (a charge based on weight measured in pounds) }
+{ rate, charge_per_unit, charge2,@ (amount of a charge or payment relative to some basis; "a 10-minute phone call at that rate would cost $5") }
+{ water-rate, charge2,@ noun.location:Great_Britain1,;r (rate per quarter for water from a public supply) }
+{ [ surcharge, verb.possession:surcharge1,+ ] charge2,@ (an additional charge (as for items previously omitted or as a penalty for failure to exercise common caution or common skill)) }
+{ single_supplement, surcharge,@ (a surcharge added to the cost per person when traveling alone) }
+{ service_charge, service_fee, charge2,@ (a percentage of a bill (as at a hotel or restaurant) added in payment for service) }
+{ stowage, charge2,@ (the charge for stowing goods) }
+{ tankage, charge2,@ (the charge for storing something in tanks) }
+{ [ freight, verb.motion:freight,+ ] [ freightage, verb.motion:freight,+ verb.contact:freight,+ ] freight_rate, rate,@ (the charge for transporting something by common carrier; "we pay the freight"; "the freight rate is usually cheaper") }
+{ rate_of_depreciation, depreciation_rate, rate,@ (the rate at which the value of property is reduced; used to calculate tax deduction) }
+{ rate_of_exchange, exchange_rate, rate,@ (the charge for exchanging currency of one country for currency of another) }
+{ excursion_rate, rate,@ (a reduced rate for a round-trip ticket) }
+{ footage, rate,@ (a rate of charging by the linear foot of work done) }
+{ linage, lineage, rate,@ (a rate of payment for written material that is measured according to the number of lines submitted) }
+{ room_rate, rate,@ (the rate charged daily for a hotel room) }
+{ [ loss, gain,! ] red_ink, red, sum,@ (the amount by which the cost of a business exceeds its revenue; "the company operated at a loss last year"; "the company operated in the red last year") }
+{ squeeze, loss,@ (a situation in which increased costs cannot be passed on to the customer; "increased expenses put a squeeze on profits") }
+{ loss1, transferred_property,@ (something that is lost; "the car was a total loss"; "loss of livestock left the rancher bankrupt") }
+{ financial_loss, loss1,@ (loss of money or decrease in financial value) }
+{ [ sacrifice, verb.possession:sacrifice2,+ ] loss1,@ (a loss entailed by giving up or selling something at less than its value; "he had to sell his car at a considerable sacrifice") }
+{ wastage, loss1,@ (anything lost by wear or waste) }
+{ [ depreciation, verb.change:depreciate1,+ verb.change:depreciate,+ ] wear_and_tear, financial_loss,@ non-cash_expense,@ (decrease in value of an asset due to obsolescence or use) }
+{ straight-line_method, straight-line_method_of_depreciation, depreciation,@ noun.cognition:accounting,;c ((accounting) a method of calculating depreciation by taking an equal amount of the asset's cost as an expense for each year of the asset's useful life) }
+{ [ write-off, verb.change:write_off,+ ] [ write-down, verb.change:write_down10,+ ] depreciation,@ noun.cognition:accounting,;c ((accounting) reduction in the book value of an asset) }
+{ tax_write-off, tax_deduction, deduction1, write-off,@ (a reduction in the gross amount on which a tax is calculated; reduces taxes by the percentage fixed for the taxpayer's income bracket) }
+{ [ losings, verb.possession:lose6,+ verb.possession:lose1,+ winnings,! ] losses, financial_loss,@ (something lost (especially money lost at gambling)) }
+{ circumstances, noun.Tops:possession,@ (a person's financial situation (good or bad); "he found himself in straitened circumstances") }
+{ assets, noun.Tops:possession,@ noun.communication:plural,;u (anything of material value or usefulness that is owned by a person or company) }
+{ payables, liabilities,@ (money that you currently expect to pay on notes and accounts) }
+{ receivables, assets,@ noun.communication:plural,;u (money that you currently expect to receive from notes or accounts) }
+{ crown_jewel, assets,@ (the most desirable assets of a corporation; "their crown jewels figured prominently in the takeover attempt") }
+{ deep_pockets, assets,@ noun.communication:plural,;u ((plural) a source of substantial wealth; "a patron of the arts should have deep pockets") }
+{ reserve_assets, assets,@ noun.communication:plural,;u (capital held back from investment in order to meet probable or possible demands) }
+{ special_drawing_rights, paper_gold, reserve_assets,@ (reserve assets in the International Monetary Fund; designed to supplement reserves of gold and convertible currencies used to maintain stability in the foreign exchange market) }
+
+{ sum, sum_of_money, amount, amount_of_money, assets,@ (a quantity of money; "he borrowed a large sum"; "the amount he had in cash was insufficient") }
+{ [ figure, verb.cognition:figure,+ ] sum,@ (an amount of money expressed numerically; "a figure of $17 was suggested") }
+{ resource, assets,@ (available source of wealth; a new or reserve supply that can be drawn upon when needed) }
+{ natural_resource, natural_resources, resource,@ (resources (actual and potential) supplied by nature) }
+{ labor_resources, resource,@ (resources of available manpower) }
+{ land_resources, natural_resource,@ (natural resources in the form of arable land) }
+{ mineral_resources, natural_resource,@ (natural resources in the form of minerals) }
+{ renewable_resource, natural_resource,@ (any natural resource (as wood or solar energy) that can be replenished naturally with the passage of time) }
+{ intangible, intangible_asset, assets,@ (assets that are saleable though not material or physical) }
+{ good_will, goodwill, intangible_asset,@ noun.cognition:accounting,;c ((accounting) an intangible asset valued according to the advantage or reputation a business has acquired (over and above its tangible assets)) }
+{ liquid_assets, current_assets, quick_assets, assets,@ working_capital,#m noun.communication:plural,;u (assets in the form of cash (or easily convertible into cash)) }
+{ [ investment, verb.possession:invest,+ ] investment_funds, assets,@ (money that is invested with an expectation of profit) }
+{ equity, interest3,@ (the ownership interest of shareholders in a corporation) }
+{ sweat_equity, equity,@ (interest in a building that a tenant earns by contributing to its renovation or maintenance) }
+{ equity1, assets,@ (the difference between the market value of a property and the claims held against it) }
+{ stock, capital1,@ (the capital raised by a corporation through the issue of shares entitling holders to an ownership interest (equity); "he owns a controlling share of the company's stock") }
+{ stockholding1, ownership,@ (ownership of stocks; the state or fact of holding stock; "prohibition of unrestricted intercorporate stockholding"- W.Z.Ripley) }
+{ stockholding2, stockholdings, holding,@ (a specific number of stocks or shares owned; "sell holdings he has in corporations") }
+{ capital_stock1, book_value,@ (the book value of the outstanding shares of a corporation) }
+{ blue_chip, blue-chip_stock, common_stock,@ (a common stock of a nationally known company whose value and dividends are reliable; typically have high price and low yield; "blue chips are usually safe investments") }
+{ classified_stock, common_stock,@ (common stock classified as A or B where A has certain advantages (e.g., voting power) that B does not) }
+{ common_stock, common_shares, ordinary_shares, stock,@ (stock other than preferred stock; entitles the owner to a share of the corporation's profits and a share of the voting power in shareholder elections; "over 40 million Americans invest in common stocks") }
+{ stock_of_record, common_stock,@ (stock held by stockholders of record on a given date) }
+{ par_value, face_value, nominal_value, noun.attribute:value,@ (the value of a security that is set by the company issuing it; unrelated to market value) }
+{ no-par-value_stock, no-par_stock, stock,@ (stock with no par value specified in the corporate charter or on the stock certificate) }
+{ preferred_stock, preferred_shares, preference_shares, stock,@ (stock whose holders are guaranteed priority in the payment of dividends but whose holders have no voting rights) }
+{ cumulative_preferred, cumulative_preferred_stock, preferred_stock,@ (preferred stock whose dividends if omitted accumulate until paid out) }
+{ float, stock,@ (the number of shares outstanding and available for trading by the public) }
+{ common_stock_equivalent, stock,@ (preferred stock or convertible bonds or warrants that can be converted into common stock) }
+{ control_stock, stock,@ (shares owned by shareholders who have a controlling interest) }
+{ growth_stock, stock,@ (stock of a corporation that has had faster than average gains in earnings and is expected to continue to) }
+{ hot_stock, hot_issue, stock,@ (newly issued stock that is in great public demand) }
+{ penny_stock, unlisted_stock,@ (a stock selling for less that $1/share) }
+{ book_value, noun.attribute:value,@ (the value at which an asset is carried on a balance sheet; equals cost minus accumulated depreciation) }
+{ market_value, market_price, noun.attribute:value,@ (the price at which buyers and sellers trade the item in an open marketplace) }
+{ bond_issue, bond2,@ (bonds sold by a corporation or government agency at a particular time and identifiable by date of maturity) }
+{ convertible_bond, bond2,@ (a bond that can be converted to other securities under certain conditions) }
+{ corporate_bond, bond2,@ (a bond issued by a corporation; carries no claim to ownership and pays no dividends but payments to bondholders have priority over payments to stockholders; "a corporate bond is a safer investment than common stock in the same company") }
+{ coupon_bond, bearer_bond, bond2,@ (a bond issued with detachable coupons that must be presented to the issuer for interest payments) }
+{ government_bond, bond2,@ (a bond that is an IOU of the United States Treasury; considered the safest security in the investment world) }
+{ junk_bond, high-yield_bond, bond2,@ (a (speculative) bond with a credit rating of BB or lower; issued for leveraged buyouts and other takeovers by companies with questionable credit) }
+{ municipal_bond, bond2,@ (a bond issued by a state or local government) }
+{ noncallable_bond, bond2,@ (a bond containing a provision that the holder cannot redeem the security before a specific date (usually at maturity)) }
+{ performance_bond, surety_bond, bond2,@ (a bond given to protect the recipient against loss in case the terms of a contract are not filled; a surety company assumes liability for nonperformance) }
+{ post-obit_bond, bond2,@ (a bond made by a reversioner to secure a loan; payable out of his reversion) }
+{ registered_bond, bond2,@ registered_security,@ (a bond whose owner is recorded on the books of the issuer; can be transferred to another owner only when endorsed by the registered owner) }
+{ revenue_bond, bond2,@ (a bond issued by an agency that is commissioned to finance public works; revenue from the public property is used to pay off the bond) }
+{ [ secured_bond, unsecured_bond,! ] bond2,@ (a bond that is back by collateral) }
+{ [ unsecured_bond, secured_bond,! ] debenture, debenture_bond, bond2,@ (the ability of a customer to obtain goods or services before payment, based on the trust that payment will be made in the future) }
+{ government_security, agency_security, security4,@ (a security issued by United States government agencies or the Farm Credit System) }
+{ mortgage-backed_security, security4,@ (a security created when a group of mortgages are gathered together and bonds are sold to other institutions or the public; investors receive a portion of the interest payments on the mortgages as well as the principal payments; usually guaranteed by the government) }
+{ registered_security, security4,@ (a security whose owner's name is recorded on the books of the issuer (or issuer's agent)) }
+{ savings_bond, government_bond,@ (non-negotiable government bond; cannot be bought and sold once the original purchase is made) }
+{ utility_bond, utility_revenue_bond, municipal_bond,@ (a bond issued to finance the construction of public utility services) }
+{ zero_coupon_bond, zero-coupon_bond, zero-coupon_security,@ bond2,@ noun.group:corporation,;c noun.act:government,;c (a bond that is issued at a deep discount from its value at maturity and pays no interest during the life of the bond; the commonest form of zero-coupon security) }
+{ [ reversion, adj.pert:reversionary,+ ] interest3,@ noun.group:law,;c ((law) an interest in an estate that reverts to the grantor (or his heirs) at the end of some period (e.g., the death of the grantee)) }
+{ escheat, reversion,@ noun.group:law,;c (a reversion to the state (as the ultimate owner of property) in the absence of legal heirs) }
+{ [ right, verb.social:right,+ ] interest3,@ noun.communication:plural,;u ((frequently plural) the interest possessed by law or custom in some intangible thing; "mineral rights"; "film rights") }
+{ accession1, property_right,@ noun.group:civil_law,;c ((civil law) the right to all of that which your property produces whether by growth or improvement) }
+{ share1, stock_certificate,@ stock,#p (any of the equal portions into which the capital stock of a corporation is divided and ownership of which is evidenced by a stock certificate; "he bought 100 shares of IBM at the market price") }
+{ authorized_shares, authorized_stock, capital_stock, stock,@ (the maximum number of shares authorized under the terms of a corporation's articles of incorporation) }
+{ quarter_stock, stock,@ (stock with a par value of $25/share) }
+{ [ speculation, verb.possession:speculate,+ ] [ venture, adj.all:adventurous^venturous,+ verb.social:venture,+ ] investment,@ (an investment that is very risky but could yield great profits; "he knew the stock was a speculation when he bought it") }
+{ [ gamble, verb.competition:gamble,+ ] speculation,@ (money that is risked for possible monetary gain) }
+{ smart_money, speculation,@ (money bet or invested by experienced gamblers or investors (especially if they have inside information)) }
+{ pyramid, speculation,@ noun.artifact:stock_exchange,;c ((stock market) a series of transactions in which the speculator increases his holdings by using the rising market value of those holdings as margin for further purchases) }
+{ [ stake, verb.competition:stake,+ verb.social:stake,+ ] stakes, [ bet, verb.competition:bet,+ ] [ wager, verb.competition:wager,+ ] gamble,@ pool,#p (the money risked on a gamble) }
+{ pot, jackpot, kitty1, stake,@ noun.act:poker,;c (the cumulative amount involved in a game (such as poker)) }
+{ [ ante, verb.competition:ante,+ ] stake,@ noun.act:poker,;c ((poker) the initial contribution that each player makes to the pot) }
+{ [ security1, adj.all:sound^secure,+ ] protection, assets,@ (defense against financial failure; financial independence; "his pension gave him security in his old age"; "insurance provided protection against loss of wages due to illness") }
+{ easy_street, security1,@ (financial security) }
+{ hedge, hedging, protection,@ (any technique designed to reduce or eliminate financial risk; for example, taking two positions that will offset each other if prices change) }
+{ [ coverage, verb.communication:cover,+ ] insurance_coverage, sum,@ (the total amount and type of insurance carried) }
+{ [ insurance2, verb.communication:insure,+ ] protection,@ (promise of reimbursement in the case of loss; paid to people or companies so concerned about hazards that they have made prepayments to an insurance company) }
+{ assurance2, insurance2,@ noun.location:Great_Britain1,;r (a British term for some kinds of insurance) }
+{ automobile_insurance, car_insurance, insurance2,@ (insurance against loss due to theft or traffic accidents) }
+{ no_fault_insurance, no_fault_automobile_insurance, automobile_insurance,@ (a system of automobile insurance where a party who is injured in an automobile accident recovers damages up to a specific amount against his own insurance company regardless of who was responsible for the accident; "the amount of litigation resulting from minor accidents is reduced by no fault insurance") }
+{ business_interruption_insurance, insurance2,@ (insurance that provides protection for the loss of profits and continuing fixed expenses resulting from a break in commercial activities due to the occurrence of a peril) }
+{ [ coinsurance, verb.possession:coinsure,+ ] insurance2,@ (insurance issued jointly by two or more underwriters) }
+{ fire_insurance, insurance2,@ (insurance against loss due to fire) }
+{ group_insurance, insurance2,@ (insurance that is purchased by a group (such as the employees of a company) usually at a reduced rate to individual members of the group) }
+{ hazard_insurance, insurance2,@ (insurance that provides protection against certain risks such as storms or fires) }
+{ health_insurance, insurance2,@ (insurance against loss due to ill health) }
+{ hospitalization_insurance, hospitalization, health_insurance,@ (insurance that pays all or part of a patient's hospital expense) }
+{ liability_insurance, insurance2,@ (insurance that provides protection from claims arising from injuries or damage to other people or property) }
+{ life_insurance, life_assurance, insurance2,@ (insurance paid to named beneficiaries when the insured person dies; "in England they call life insurance life assurance") }
+{ endowment_insurance, life_insurance,@ (life insurance for a specified amount which is payable to the insured person at the expiration of a certain period of time or to a designated beneficiary immediately upon the death of the insured) }
+{ tontine2, tontine_insurance, life_insurance,@ (a form of life insurance whereby on the death or default of a participant his share is distributed to the remaining members) }
+{ whole_life_insurance, ordinary_life_insurance, straight_life_insurance, life_insurance,@ (insurance on the life of the insured for a fixed amount at a definite premium that is paid each year in the same amount during the entire lifetime of the insured) }
+{ malpractice_insurance, insurance2,@ (insurance purchased by physicians and hospitals to cover the cost of being sued for malpractice; "obstetricians have to pay high rates for malpractice insurance") }
+{ [ reinsurance, verb.communication:reinsure,+ ] insurance2,@ (sharing the risk by insurance companies; part or all of the insurer's risk is assumed by other companies in return for part of the premium paid by the insured; "reinsurance enables a client to get coverage that would be too great for any one company to assume") }
+{ self-insurance, insurance2,@ (insuring yourself by setting aside money to cover possible losses rather than by purchasing an insurance policy) }
+{ term_insurance, insurance2,@ (low-cost insurance that is valid only for a stated period of time and has no cash surrender value or loan value; "term insurance is most often associated with life insurance policies") }
+{ health_maintenance_organization, HMO, health_insurance,@ (group insurance that entitles members to services of participating hospitals and clinics and physicians) }
+{ security, surety, transferred_property,@ (property that your creditor can claim in case you default on your obligation; "bankers are reluctant to lend without good security") }
+{ deposit2, security,@ (money given as security for an article acquired for temporary use; "his deposit was refunded when he returned the car") }
+{ down_payment, deposit, payment,@ (a partial payment made at the time of purchase; the balance to be paid later) }
+{ satisfaction1, payment,@ noun.group:law,;c ((law) the payment of a debt or fulfillment of an obligation; "the full and final satisfaction of the claim") }
+{ earnest, security,@ (something of value given by one person to another to bind a contract) }
+{ earnest_money, arles, earnest,@ (money given by a buyer to a seller to bind a contract) }
+{ recognizance, recognisance, security,@ noun.group:law,;c ((law) a security entered into before a court with a condition to perform some act required by law; on failure to perform that act a sum is forfeited) }
+{ [ pledge2, verb.communication:pledge2,+ ] security_interest,@ (a deposit of personal property as security for a debt; "his saxophone was in pledge") }
+{ [ pawn, verb.possession:pawn,+ ] pledge2,@ (an article deposited as security) }
+{ [ bail, verb.social:bail,+ ] bail_bond, bond3, recognizance,@ noun.communication:criminal_law,;c ((criminal law) money that must be forfeited by the bondsman if an accused person fails to appear in court for trial; "the judge set bail at $10,000"; "a $10,000 bond was furnished by an alderman") }
+{ margin1, security_deposit, deposit,@ (the amount of collateral a customer deposits with a broker when borrowing from the broker to buy securities) }
+{ brokerage_account, noun.state:account,@ (a fund that a customer has entrusted to a securities brokerage; "you can't get a brokerage account unless you have $20,000") }
+{ [ cash_account, margin_account,! ] brokerage_account,@ (an account with a securities brokerage whose transactions are settled on a cash basis) }
+{ custodial_account, cash_account,@ (a brokerage firm account that parents have created for a minor) }
+{ [ margin_account, cash_account,! ] brokerage_account,@ (an account with a securities brokerage in which the broker extends credit) }
+{ [ mortgage, verb.possession:mortgage,+ ] security_interest,@ (a conditional conveyance of property as security for the repayment of a loan) }
+{ conditional_sale, security_interest,@ (a security interest taken by the seller in return for credit) }
+{ first_mortgage, mortgage,@ (a mortgage that has priority over all mortgages and liens except those imposed by law) }
+{ second_mortgage, mortgage,@ (a mortgage that is subordinate to a first mortgage) }
+{ chattel_mortgage, mortgage,@ (a loan to buy some personal item; the item (or chattel) is security for the loan) }
+{ [ collateral, adj.all:supportive^collateral,+ ] security_interest,@ (a security pledged for the repayment of a loan) }
+{ guarantee3, guaranty, collateral,@ (a collateral agreement to answer for the debt of another in case that person defaults) }
+{ material_resource, assets,@ (assets in the form of material possessions) }
+{ [ wealth2, adj.all:rich^wealthy,+ ] riches, material_resource,@ (an abundance of material possessions and resources) }
+{ gold1, wealth2,@ (great wealth; "Whilst that for which all virtue now is sold, and almost every vice--almighty gold"--Ben Jonson) }
+{ [ capital, noun.person:capitalist,+ verb.cognition:capitalise1,+ ] assets,@ (wealth in the form of money or property owned by a person or business and human resources of economic value) }
+{ means, substance, capital,@ (considerable capital (wealth or income); "he is a man of means") }
+{ pocketbook, means,@ (your personal financial means; "that car is too expensive for my pocketbook") }
+{ wherewithal, means,@ (the necessary means (especially financial means)) }
+{ [ venture_capital, noun.person:venture_capitalist,+ ] risk_capital, capital1,@ (wealth available for investment in new or speculative enterprises) }
+{ [ capital1, noun.person:capitalist,+ verb.cognition:capitalize1,+ verb.change:capitalize,+ verb.possession:capitalise2,+ verb.cognition:capitalise1,+ verb.cognition:capitalise,+ verb.change:capitalise,+ ] working_capital, assets,@ (assets available for use in the production of further assets) }
+{ operating_capital, capital1,@ (capital available for the operations of a firm (e.g. manufacturing or transportation) as distinct from financial transactions and long-term improvements) }
+{ account2, [ accounting, verb.possession:account,+ ] account_statement, noun.communication:financial_statement,@ (a statement of recent transactions and the resulting balance; "they send me an accounting every month") }
+{ income_statement, earnings_report, operating_statement, profit-and-loss_statement, noun.communication:financial_statement,@ (a financial statement that gives operating results for a specific period) }
+{ capital_account1, account2,@ noun.cognition:finance,;c ((finance) an account of the net value of a business at a specified date) }
+{ capital_account2, account2,@ balance_of_payments,#p noun.cognition:economics,;c ((economics) that part of the balance of payments recording a nation's outflow and inflow of financial securities) }
+{ principal2, corpus, principal_sum, capital,@ (capital as contrasted with the income derived from it) }
+{ seed_money, capital1,@ (capital needed to set up a new business or enterprise) }
+{ funds, finances, monetary_resource, cash_in_hand, pecuniary_resource, assets,@ (assets in the form of money) }
+{ bank1, funds,@ (the funds held by a gambling house or the dealer in some gambling games; "he tried to break the bank at Monte Carlo") }
+{ purse_strings, finances,@ (financial resources or support; "who controls the purse strings in this family?")}
+{ bankroll, roll, funds,@ noun.act:business1,;c (a roll of currency notes (often taken as the resources of a person or business etc.); "he shot his roll on a bob-tailed nag") }
+{ pocket, funds,@ (a supply of money; "they dipped into the taxpayers' pockets") }
+{ Medicaid_funds, funds,@ (public funds used to pay for Medicaid) }
+{ treasury, exchequer, funds,@ (the funds of a government or institution or individual) }
+{ money_supply, funds,@ (the total stock of money in the economy; currency held by the public plus money in accounts in banks) }
+{ M1", money_supply,@ (a measure of the money supply; includes currency in circulation plus demand deposits or checking account balances) }
+{ M2", money_supply,@ (a measure of the money supply; M1 plus net time deposits (other than large certificates of deposit)) }
+{ M3", money_supply,@ (a measure of the money supply; M2 plus deposits at institutions that are not banks (such as savings and loan associations)) }
+{ public_treasury, trough, till, treasury,@ (a treasury for government funds) }
+{ pork_barrel, pork, appropriation,@ (a legislative appropriation designed to ingratiate legislators with their constituents) }
+{ bursary, treasury,@ (the treasury of a public institution or religious order) }
+{ subtreasury, treasury,@ (a subordinate treasury or place of deposit) }
+{ [ fisc, adj.pert:fiscal,+ ] treasury,@ (a state treasury or exchequer or a royal treasury; originally the public treasury of Rome or the emperor's private purse) }
+{ [ fund, verb.possession:fund,+ verb.possession:fund1,+ ] monetary_fund, money,@ (a reserve of money set aside for some purpose) }
+{ mutual_fund, fund,@ (the pooled money that is invested in assets) }
+{ exchange_traded_fund, ETF, mutual_fund,@ (a mutual fund that is traded on a stock exchange) }
+{ index_fund, mutual_fund,@ (a mutual fund whose assets are stocks on a given list) }
+{ revolving_fund, fund,@ (a fund which, if borrowed or used, is intended to be replenished so it may be loaned or spent repeatedly) }
+{ sinking_fund, fund,@ (a fund accumulated regularly in a separate account and used to redeem debt securities) }
+{ [ savings, verb.possession:save1,+ ] nest_egg, fund,@ (a fund of money put by as a reserve) }
+{ bank_account, noun.state:account,@ (a fund that a customer has entrusted to a bank and from which the customer can make withdrawals; "he moved his bank account to a new bank") }
+{ giro_account, bank_account,@ noun.location:Britain,;r (an account at a post office that can be used in similar ways to an account at a bank) }
+{ pension_fund, superannuation_fund, fund,@ (a fund reserved to pay workers' pensions when they retire from service) }
+{ war_chest, fund,@ noun.cognition:politics,;c (a fund accumulated to finance a war (or a political campaign)) }
+{ slush_fund, fund,@ (a fund for buying votes or bribing public officials) }
+{ trust3, property,@ (something (as property) held by one party (the trustee) for the benefit of another (the beneficiary); "he is the beneficiary of a generous trust set up by his father") }
+{ [ active_trust, passive_trust,! ] trust3,@ (a trust in which the trustee must perform certain duties) }
+{ blind_trust, trust3,@ (a trust that enables a person to avoid possible conflict of interest by transferring assets to a fiduciary; the person establishing the trust gives up the right to information about the assets) }
+{ [ passive_trust, active_trust,! ] trust3,@ (a trust in which the trustee performs no active duties) }
+{ charitable_trust, public_trust, trust3,@ (a trust created for charitable or religious or educational or scientific purposes) }
+{ Clifford_trust, grantor_trust, trust3,@ (a trust established to shift the income to someone who is taxed at a lower rate than the grantor for a period of 10 years or more) }
+{ implied_trust, trust3,@ (a trust inferred by operation of law) }
+{ constructive_trust, involuntary_trust, implied_trust,@ (a trust created by a court (regardless of the intent of the parties) to benefit a party that has been wrongfully deprived of its rights) }
+{ resulting_trust, implied_trust,@ (a trust created by a court when it is judged that it was the intention of the parties to create a trust) }
+{ direct_trust, express_trust, trust3,@ (a trust created by the free and deliberate act of the parties involved (usually on the basis of written documentation)) }
+{ discretionary_trust, trust3,@ (a trust that gives the trustee discretion to pay the beneficiary as much of the trust income as the trustee believes appropriate) }
+{ nondiscretionary_trust, fixed_investment_trust, noun.group:investment_company,@ (an investment trust that can buy only those securities listed when the trust was organized) }
+{ living_trust, inter_vivos_trust, trust3,@ (a trust created and operating during the grantor's lifetime) }
+{ spendthrift_trust, trust3,@ (a trust created to maintain a beneficiary but to be secure against the beneficiary's improvidence) }
+{ testamentary_trust, trust3,@ (a trust that is created under a will and that becomes active after the grantor dies) }
+{ savings_account_trust, savings_bank_trust, trust_account, trustee_account, Totten_trust, trust3,@ (a savings account deposited by someone who makes themselves the trustee for a beneficiary and who controls it during their lifetime; afterward the balance is payable to the previously named beneficiary) }
+{ voting_trust, trust3,@ (an agreement whereby persons owning stock with voting powers retain ownership while transferring the voting rights to the trustees) }
+{ trust_fund, fund,@ (a fund held in trust) }
+{ [ checking_account, noun.location:United_States,;r ] [ chequing_account, noun.location:Canada,;r ] [ current_account1, noun.location:Britain,;r ] bank_account,@ (a bank account against which the depositor can draw checks that are payable on demand) }
+{ savings_account, bank_account,@ (a bank account that accumulates interest) }
+{ time_deposit_account, deposit_account, savings_account,@ (a savings account in which the deposit is held for a fixed term or in which withdrawals can be made only after giving notice or with loss of interest) }
+{ dormant_account, savings_account,@ (a savings account showing no activity (other than posting interest) for some specified period; "the dormant account reverted to the state under escheat laws") }
+{ passbook_savings_account, savings_account,@ (a savings account in which deposits and withdrawals are recorded in the depositor's passbook) }
+{ cash_equivalent, debt_instrument,@ (a highly liquid debt instrument with maturities of less than three months) }
+{ certificate_of_deposit, CD, debt_instrument,@ (a debt instrument issued by a bank; usually pays interest) }
+{ [ support, verb.possession:support,+ ] [ keep, verb.consumption:keep,+ ] livelihood, living, bread_and_butter, [ sustenance, verb.consumption:sustain,+ ] resource,@ (the financial means whereby one lives; "each child was expected to pay for their keep"; "he applied to the state for support"; "he could no longer earn his own livelihood") }
+{ [ support1, verb.possession:support,+ ] financial_support, [ funding, verb.possession:fund,+ ] [ backing, verb.possession:back,+ ] financial_backing, resource,@ (financial resources provided to make some project possible; "the foundation provided support for the experiment") }
+{ ways_and_means, resource,@ (resources available to meet expenses (especially legislation for raising revenue for a government)) }
+{ comforts, creature_comforts, amenities, conveniences, support,@ (things that make you comfortable and at ease; "all the comforts of home") }
+{ [ maintenance, verb.consumption:maintain,+ ] support,@ (means of maintenance of a family or group) }
+{ meal_ticket, support,@ noun.communication:colloquialism,;u (a source of income or livelihood) }
+{ subsistence, support,@ (minimal (or marginal) resources for subsisting; "social security provided only a bare subsistence") }
+{ accumulation, net_income,@ noun.cognition:finance,;c ((finance) profits that are not paid out as dividends but are added to the capital base of the corporation) }
+{ [ hoard, verb.possession:hoard1,+ ] [ cache, verb.possession:cache,+ ] [ stash, verb.possession:stash,+ ] store,@ (a secret store of valuables or money) }
+{ [ store, verb.possession:store,+ ] [ stock1, noun.person:stockist,+ noun.animal:stocker,+ verb.possession:stock6,+ verb.possession:stock2,+ verb.possession:stock1,+ verb.possession:stock,+ ] fund1, accumulation,@ (a supply of something available for future use; "he brought back a large store of Cuban cigars") }
+{ [ provision, verb.possession:provision,+ ] store,@ (a store or supply of something (especially of food or clothing or arms)) }
+{ [ issue1, verb.social:issue,+ ] military_issue, government_issue, store,@ noun.group:military,;c (supplies (as food or clothing or ammunition) issued by the government) }
+{ seed_stock, store,@ (a supply of seeds (or tubers) reserved for planting) }
+{ seed_corn, seed_grain, seed_stock,@ (good quality seeds (as kernels of corn) that are reserved for planting) }
+{ [ reserve, verb.cognition:reserve,+ verb.possession:reserve3,+ ] [ backlog, verb.change:backlog,+ ] [ stockpile, verb.possession:stockpile,+ ] accumulation,@ (something kept back or saved for future use or a special purpose) }
+{ bank, reserve,@ (a supply or stock held in reserve for future use (especially in emergencies)) }
+{ blood_bank, bank,@ (a place for storing whole blood or blood plasma; "the Red Cross created a blood bank for emergencies") }
+{ eye_bank, bank,@ (a place for storing and preserving corneas that are obtained from human corpses immediately after death; used for corneal transplantation to patients with corneal defects) } 
+{ food_bank, bank,@ (a place where food is contributed and made available to those in need; "they set up a food bank for the flood victims") }
+{ fuel_level, reserve,@ (the amount of fuel remaining) }
+{ hole_card, assets,@ (any assets that are concealed until they can be used advantageously) }
+{ soil_bank, bank,@ (land retired from crop cultivation and planted with soil-building crops; government subsidies are paid to farmers for their retired land) }
+{ pool1, kitty, stake,@ (the combined stakes of the betters) }
+{ hidden_reserve, reserve_account,@ (reserves that do not show up on the balance sheet (as by understating values)) }
+{ cookie_jar_reserve, hidden_reserve,@ (a hidden reserve that can be used to adjust quarterly earning reports) }
+{ [ pool, verb.possession:pool,+ ] reserve_account,@ (any communal combination of funds; "everyone contributed to the pool") }
+{ reserve_account, reserve_fund, reserve,@ (funds taken out of earnings to provide for anticipated future payments) }
+{ valuation_reserve, valuation_account, allowance3, allowance_account, reserve_account,@ (a reserve fund created by a charge against profits in order to provide for changes in the value of a company's assets) }
+{ [ treasure1, verb.emotion:treasure,+ verb.possession:treasure,+ ] noun.Tops:possession,@ (any possession that is highly valued by its owner; "the children returned from the seashore with their shells and other treasures") }
+{ treasure, hoarded_wealth, wealth2,@ (accumulated wealth in the form of money or jewels etc.; "the pirates hid their treasure on a small island in the West Indies") }
+{ fortune, treasure,@ (a large amount of wealth or prosperity) }
+{ [ valuable, adj.all:valuable,+ ] treasure,@ (something of value; "all our valuables were stolen") }
+{ swag1, valuable,@ noun.communication:colloquialism,;u (valuable goods) }
+{ king's_ransom, treasure,@ (a very large treasure) }
+{ treasure_trove, trove, treasure,@ (treasure of unknown ownership found hidden (usually in the earth)) }
+{ precious_metal, valuable,@ (any of the less common and valuable metals often used to make coins or jewelry) }
+{ bullion, precious_metal,@ (a mass of precious metal) }
+{ [ gold, adj.all:metallic^gold,+ ] precious_metal,@ (coins made of gold) }
+{ silver, precious_metal,@ (coins made of silver) }
+{ diamond, noun.artifact:jewel,@ (a transparent piece of diamond that has been cut and polished and is valued as a precious gem) }
+{ ice, [ sparkler, verb.weather:sparkle,+ ] diamond,@ noun.communication:colloquialism,;u (diamonds; "look at the ice on that dame!") }
+{ ruby, noun.artifact:jewel,@ (a transparent piece of ruby that has been cut and polished and is valued as a precious gem) }
+{ [ pearl, verb.contact:pearl,+ ] noun.artifact:jewel,@ (a smooth lustrous round structure inside the shell of a clam or oyster; much valued as a jewel) }
+{ seed_pearl, pearl,@ (a small imperfect pearl) }
+{ emerald, noun.artifact:jewel,@ (a transparent piece of emerald that has been cut and polished and is valued as a precious gem) }
+{ sapphire, noun.artifact:jewel,@ (a transparent piece of sapphire that has been cut and polished and is valued as a precious gem) }
+{ medium_of_exchange, monetary_system, noun.communication:standard,@ (anything that is generally accepted as a standard of value and a measure of wealth in a particular country or region) }
+{ [ standard, verb.change:standardize,+ verb.change:standardise,+ ] monetary_standard, noun.attribute:value,@ (the value behind the money in a monetary system) }
+{ gold_standard, standard,@ (a monetary standard under which the basic unit of currency is defined by a stated quantity of gold) }
+{ silver_standard, standard,@ (a monetary standard under which the basic unit of currency is defined by a stated quantity of silver) }
+{ [ bimetallism, adj.pert:bimetallistic,+ noun.person:bimetallist,+ ] standard,@ (a monetary standard under which the basic unit of currency is defined by stated amounts of two metals (usually gold and silver) with values set at a predetermined ratio) }
+{ tender, legal_tender, stamp, medium_of_exchange,@ (something that can be used as an official medium of payment) }
+{ food_stamp, tender,@ (a government-issued stamp that can be used in exchange for food) }
+{ [ credit, cash2,! ] deferred_payment, payment,@ (arrangement for deferred payment for goods and services) }
+{ consumer_credit, credit_line,@ (a line of credit extended for personal or household use) }
+{ bank_loan, loan,@ (a loan made by a bank; to be repaid with interest on or before a fixed date) }
+{ business_loan, commercial_loan, bank_loan,@ (a bank loan granted for the use of a business) }
+{ interbank_loan, bank_loan,@ (a loan from one bank to another) }
+{ home_loan, home_equity_credit, home_equity_loan, equity_credit_line, consumer_credit,@ loan,@ (a loan secured by equity value in the borrower's home) }
+{ installment_credit, installment_loan, consumer_credit,@ loan,@ (a loan repaid with interest in equal periodic payments) }
+{ open-end_credit, revolving_credit, charge_account_credit, consumer_credit,@ (a consumer credit line that can be used up to a certain limit or paid down at any time) }
+{ credit_account, charge_account, open_account, open-end_credit,@ (credit extended by a business to a customer) }
+{ revolving_charge_account, credit_account,@ (a charge account that does not have to be paid to zero balance) }
+{ [ advance, verb.possession:advance,+ ] cash_advance, sum,@ (an amount paid before it is earned) }
+{ credit_card, charge_card, charge_plate, plastic, open-end_credit,@ noun.communication:positive_identification,@ (a card (usually plastic) that assures a seller that the person using it has a satisfactory credit rating and that the issuer will see to it that the seller receives payment for the merchandise delivered; "do you take plastic?") }
+{ bank_card, credit_card,@ (a credit card issued by a bank) }
+{ calling_card, phone_card, credit_card,@ (a card that is used instead of cash to make telephone calls) }
+{ cash_card, cashcard, credit_card,@ (a credit card that entitles the holder to receive cash) }
+{ debit_card, open-end_credit,@ noun.communication:positive_identification,@ (a card (usually plastic) that enables the holder to withdraw money or to have the cost of purchases charged directly to the holder's bank account) }
+{ smart_card, open-end_credit,@ noun.communication:positive_identification,@ (a plastic card containing a microprocessor that enables the holder to perform operations requiring data that is stored in the microprocessor; typically used to perform financial transactions) }
+{ draft, bill_of_exchange, order_of_payment, noun.communication:negotiable_instrument,@ (a document ordering the payment of money; drawn by one person or bank on another) }
+{ overdraft, draft,@ (a draft in excess of the credit balance) }
+{ foreign_bill, foreign_draft, bill_of_exchange,@ (a bill of exchange that is drawn in one country and made payable in another) }
+{ inland_bill, bill_of_exchange,@ (a bill of exchange that is both drawn and made payable in the same country) }
+{ redraft, bill_of_exchange,@ (a draft for the amount of a dishonored draft plus the costs and charges of drafting again) }
+{ trade_acceptance, bill_of_exchange,@ (a bill of exchange for a specific purchase; drawn on the buyer by the seller and bearing the buyer's acceptance) }
+{ foreign_exchange, noun.act:exchange,@ (the system by which one currency is exchanged for another; enables international transactions to take place) }
+{ credit2, assets,@ (money available for a client to borrow) }
+{ cheap_money, credit2,@ (credit available at low rates of interest) }
+{ overage, assets,@ (a surplus or excess of money or merchandise that is actually on hand and that exceeds expectations) }
+{ tax_credit, noun.act:reduction,@ (a direct reduction in tax liability (not dependent on the taxpayer's tax bracket)) }
+{ export_credit, credit2,@ (a credit opened by an importer with a bank in an exporter's country to finance an export operation) }
+{ import_credit, credit2,@ (credit opened by an importer at a bank in his own country upon which an exporter may draw) }
+{ credit_line, line_of_credit, bank_line, line, personal_credit_line, personal_line_of_credit, credit2,@ (the maximum credit that a customer is allowed) }
+{ commercial_credit, credit2,@ (credit granted by a bank to a business concern for commercial purposes) }
+{ letter_of_credit, document,@ credit2,@ (a document issued by a bank that guarantees the payment of a customer's draft; substitutes the bank's credit for the customer's credit) }
+{ commercial_letter_of_credit, letter_of_credit,@ (a letter of credit given to a business concern for commercial purposes) }
+{ traveler's_letter_of_credit, traveller's_letter_of_credit, letter_of_credit,@ (a letter of credit given to a traveler) }
+{ traveler's_check, traveller's_check, banker's_check, traveler's_letter_of_credit,@ (a letter of credit issued by a bank or express company that is payable on presentation to any correspondent of the issuer) }
+{ bank_draft, banker's_draft, draft,@ (a draft drawn by a bank against funds deposited in another bank) }
+{ dividend_warrant, draft,@ (an order of payment (such as a check payable to a shareholder) in which a dividend is paid) }
+{ money_order, postal_order, draft,@ (a written order for the payment of a sum to a named individual; obtainable and payable at a post office) }
+{ overdraft_credit, check_overdraft_credit, open-end_credit,@ (credit provided by a bank in honoring a customer's overdrafts) }
+{ [ deposit1, verb.possession:deposit,+ ] bank_deposit, fund,@ (money deposited in a bank or some similar institution) }
+{ demand_deposit, deposit1,@ (a bank deposit from which withdrawals can be made without notice) }
+{ time_deposit, certificate_of_deposit,@ (a certificate of deposit from which withdrawals can be made only after advance notice or at a specified future date) }
+{ acceptance, banker's_acceptance, draft,@ (banking: a time draft drawn on and accepted by a bank) }
+{ [ check, verb.communication:check7,+ ] bank_check, [ cheque, verb.possession:cheque,+ ] draft,@ (a written order directing a bank to pay money; "he paid all his bills by check") }
+{ bad_check, bad_cheque, check,@ (a check that is dishonored on presentation because of insufficient funds; "issuing a bad check is a form of larceny") }
+{ [ kite, verb.possession:kite,+ ] check,@ (a bank check drawn on insufficient funds at another bank in order to take advantage of the float) }
+{ [ kite1, verb.possession:kite1,+ ] check,@ (a bank check that has been fraudulently altered to increase its face value) }
+{ counter_check, check,@ (a blank check provided by a bank for the convenience of customers who are making withdrawals) }
+{ giro, giro_cheque, check,@ noun.location:Britain,;r (a check given by the British government to someone who is unemployed; it can be cashed either at a bank or at the post office) }
+{ paycheck, payroll_check, check,@ (a check issued in payment of wages or salary) }
+{ certified_check, certified_cheque, check,@ (a check containing certification that the person who issued the check has sufficient funds on deposit to cover payment) }
+{ personal_check, personal_cheque, check,@ (a check drawn against funds deposited in your personal checking account) }
+{ cashier's_check, treasurer's_check, cashier's_cheque, treasurer's_cheque, check,@ (a check issued by the officer of a bank on the banks own account (not that of a private person); "cashier's checks are as good as cash") }
+{ blank_check, blank_cheque, check,@ checkbook,#m (a check that has been signed but with the amount payable left blank) }
+{ disability_check, disability_payment, regular_payment,@ (a monthly payment made to someone who has become disabled and is unable to work) }
+{ medicare_check, medicare_payment, check,@ (a check reimbursing an aged person for the expenses of health care) }
+{ [ pension, verb.possession:pension,+ ] regular_payment,@ (a regular payment to a person that is intended to allow them to subsist without working) }
+{ old-age_pension, retirement_pension, retirement_check, retirement_benefit, retirement_fund, superannuation, pension,@ (a monthly payment made to someone who is retired from work) }
+{ [ money, adj.pert:monetary,+ noun.person:moneyer,+ ] medium_of_exchange,@ money_supply,#p (the most common medium of exchange; functions as legal tender; "we tried to collect the money he owed us") }
+{ [ money1, adj.pert:monetary,+ noun.person:moneyer,+ ] currency,@ (the official currency issued by a government or national bank; "he changed his money into francs") }
+{ sterling, money1,@ (British money; especially the pound sterling as the basic monetary unit of the UK) }
+{ boodle, bread, [ cabbage, verb.possession:cabbage,+ ] clams, dinero, dough, gelt, kale, lettuce, lolly, lucre2, loot1, moolah, pelf, scratch, shekels, simoleons, sugar, wampum, money,@ (informal terms for money) }
+{ shinplaster, money,@ (paper money of little value issued on insufficient security) }
+{ [ subsidization, verb.possession:subsidize1,+ verb.possession:subsidize,+ ] [ subsidisation, verb.possession:subsidise1,+ verb.possession:subsidise,+ ] money,@ (money (or other benefits) obtained as a subsidy) }
+{ token_money, money,@ (coins of regular issue whose face value is greater than their intrinsic value) }
+{ currency, medium_of_exchange,@ (the metal or paper medium of exchange that is presently used) }
+{ Eurocurrency, currency,@ (currency of the major financial and industrial countries held in those countries for the purpose of lending and borrowing) }
+{ fractional_currency, paper_currency,@ (paper currency in denominations less than the basic monetary unit) }
+{ [ cash2, credit,! ] immediate_payment, payment,@ (prompt payment for goods or services in currency or by check) }
+{ [ cash, verb.possession:cash,+ ] hard_cash, hard_currency, currency,@ (money in the form of bills or coins; "there is a desperate shortage of hard cash") }
+{ hard_currency1, currency,@ (a currency that is not likely to depreciate suddenly in value; "the countries agreed to conduct their bilateral trade in hard currency, replacing previous barter arrangements"; "Germany once had a solid economy, good fiscal and monetary policies, and a hard currency") }
+{ paper_money, folding_money, paper_currency, currency,@ (currency issued by a government or central bank and consisting of printed paper that can circulate as a substitute for specie) }
+{ change3, cash,@ (money received in return for its equivalent in a larger denomination or a different currency; "he got change for a twenty and used it to pay the taxi driver") }
+{ change2, cash,@ (the balance of money received when the amount you tender is greater than the amount due; "I paid with a twenty and pocketed the change") }
+{ coinage, mintage, specie, metal_money, currency,@ (coins collectively) }
+{ small_change, chickenfeed, chump_change, cash,@ (a trifling sum of money) }
+{ change1, coin2,@ (coins of small denomination regarded collectively; "he had a pocketful of change") }
+{ [ coin2, verb.creation:coin,+ ] metal_money,@ (a flat metal piece (usually a disc) used as money) }
+{ bawbee, coin2,@ (an old Scottish coin of little value) }
+{ bezant, bezzant, byzant, solidus, coin2,@ (a gold coin of the Byzantine Empire; widely circulated in Europe in the Middle Ages) }
+{ denier, coin2,@ (any of various former European coins of different denominations) }
+{ ducat, coin2,@ (formerly a gold coin of various European countries) }
+{ real, coin2,@ (an old small silver Spanish coin) }
+{ piece_of_eight, coin2,@ (an old silver Spanish coin; worth 8 reales) }
+{ shilling, coin2,@ (an English coin worth one twentieth of a pound) }
+{ crown, coin2,@ (an English coin worth 5 shillings) }
+{ half_crown, coin2,@ (an English coin worth half a crown) }
+{ dime, coin2,@ (a United States coin worth one tenth of a dollar) }
+{ nickel, coin2,@ (a United States coin worth one twentieth of a dollar) }
+{ quarter, coin2,@ (a United States or Canadian coin worth one fourth of a dollar; "he fed four quarters into the slot machine") }
+{ half_dollar, fifty-cent_piece, coin2,@ (a United States coin worth half of a dollar) }
+{ halfpenny, ha'penny, coin2,@ (an English coin worth half a penny) }
+{ penny, cent, centime, coin2,@ (a coin worth one-hundredth of the value of the basic unit) }
+{ slug, coin2,@ (a counterfeit coin) }
+{ tenpence, coin2,@ noun.location:Great_Britain1,;r (a decimal coin worth ten pennies) }
+{ twopence, tuppence, coin2,@ (a former United Kingdom silver coin; United Kingdom bronze decimal coin worth two pennies) }
+{ threepence, coin2,@ noun.location:Great_Britain1,;r (former cupronickel coin of the United Kingdom equal to three pennies) }
+{ fourpence, groat, coin2,@ (a former English silver coin worth four pennies) }
+{ fivepence, coin2,@ (a coin worth five cents) }
+{ sixpence, tanner, coin2,@ noun.location:Great_Britain1,;r (a small coin of the United Kingdom worth six pennies; not minted since 1970) }
+{ eightpence, coin2,@ (a coin worth eight pennies) }
+{ ninepence, coin2,@ (a coin worth nine pennies) }
+{ copper, penny,@ (a copper penny) }
+{ new_penny, penny,@ (a coin used in Great Britain since 1971 worth one hundredth of a pound) }
+{ dollar1, coin2,@ (a United States coin worth one dollar; "the dollar coin has never been popular in the United States") }
+{ Susan_B_Anthony_dollar, dollar1,@ (a United States coin worth one dollar) }
+{ silver_dollar, cartwheel, dollar1,@ (a dollar made of silver) }
+{ double_eagle, coin2,@ (a former gold coin in the United States worth 20 dollars) }
+{ eagle, coin2,@ (a former gold coin in the United States worth 10 dollars) }
+{ half_eagle, coin2,@ (a former gold coin in United States worth 5 dollars) }
+{ guinea, coin2,@ (a former British gold coin worth 21 shillings) }
+{ farthing, coin2,@ (a former British bronze coin worth a quarter of a penny) }
+{ doubloon, coin2,@ (a former Spanish gold coin) }
+{ louis_d'or, coin2,@ (a former French gold coin) }
+{ medallion, coin2,@ (any of various large ancient Greek coins) }
+{ stater, coin2,@ (any of the various silver or gold coins of ancient Greece) }
+{ sou, coin2,@ (a former French coin of low denomination; often used of any small amount of money; "he hasn't a sou to his name") }
+{ Maundy_money, coin2,@ noun.location:Great_Britain1,;r (specially minted silver coins that are distributed by the British sovereign on Maundy Thursday) }
+{ fiat_money, paper_money,@ (money that the government declares to be legal tender although it cannot be converted into standard specie) }
+{ bill, note1, government_note, bank_bill, banker's_bill, bank_note, banknote, Federal_Reserve_note, greenback1, paper_money,@ (a piece of paper money (especially one issued by a central bank); "he peeled off five one-thousand-zloty notes") }
+{ silver_certificate, bill,@ (formerly a bank note issued by the United States Treasury and redeemable in silver) }
+{ Treasury1, Treasury_obligations, government_bond,@ (negotiable debt obligations of the United States government which guarantees that interest and principal payments will be paid on time) }
+{ Treasury_bill, T-bill, Treasury1,@ (a short-term obligation that is not interest-bearing (it is purchased at a discount); can be traded on a discount basis for 91 days) }
+{ Treasury_bond, Treasury1,@ (a debt instrument with maturities of 10 years or longer) }
+{ Treasury_note, Treasury1,@ (securities with maturities of 1 to 10 years; sold for cash or in exchange for maturing issues or at auction) }
+{ hundred_dollar_bill, c-note, bill,@ (a United States bill worth 100 dollars)}
+{ fifty_dollar_bill, fifty, bill,@ (a United States bill worth 50 dollars) }
+{ twenty_dollar_bill, twenty, bill,@ (a United States bill worth 20 dollars) }
+{ tenner, ten_dollar_bill, bill,@ (a United States bill worth 10 dollars) }
+{ fiver, five-spot, five_dollar_bill, bill,@ (a United States bill worth 5 dollars) }
+{ nickel1, nickel_note, fiver,@ (five dollars worth of a drug; "a nickel bag of drugs"; "a nickel deck of heroin") }
+{ two_dollar_bill, bill,@ (a United States bill worth 2 dollars) }
+{ dollar, dollar_bill, one_dollar_bill, buck, clam, bill,@ noun.location:US,;r (a piece of paper money worth one dollar) }
+{ liabilities, noun.Tops:possession,@ noun.communication:plural,;u (anything that is owed to someone else) }
+{ deficit, liabilities,@ (an excess of liabilities over assets (usually over a certain period); "last year there was a serious budgetary deficit") }
+{ budget_deficit, deficit,@ (an excess of expenditures over revenues) }
+{ federal_deficit, budget_deficit,@ (an excess of the federal government's spending over its revenue; "federal deficits can cause inflation") }
+{ trade_deficit, deficit,@ (an excess of imports over exports) }
+{ due, fixed_charge,@ (a payment that is due (e.g., as the price of membership); "the society dropped him for non-payment of dues") }
+{ limited_liability, noun.state:indebtedness,@ (the liability of a firm's owners for no more than the capital they have invested in the firm) }
+{ debt, liabilities,@ (money or goods or services owed by one person to another) }
+{ arrears, debt,@ (an unpaid overdue debt) }
+{ national_debt, debt,@ (the debt of the national government (as distinguished from the debts of individuals and businesses and political subdivisions)) }
+{ public_debt, debt,@ (the total of the nation's debts: debts of local and state and national governments; an indicator of how much public spending is financed by borrowing instead of taxation) }
+{ debt_limit, debt_ceiling, debt,@ (the maximum borrowing power of a governmental entity) }
+{ national_debt_ceiling, debt_limit,@ (a limit set by Congress beyond which the national debt cannot rise; periodically raised by Congress) }
+{ debt_instrument, obligation, certificate_of_indebtedness, document,@ (a written promise to repay a debt) }
+{ note, promissory_note, note_of_hand, debt_instrument,@ (a promise to pay a specified amount on demand or at a certain time; "I had to co-sign his note at the bank") }
+{ bad_debt, debt,@ (a debt that is unlikely to be repaid) }
+{ installment_debt, debt,@ (debt to be paid by installments) }
+{ [ loan, verb.possession:loan,+ ] debt,@ (the temporary provision of money (usually at interest)) }
+{ call_loan, demand_loan, loan,@ (a loan that is repayable on demand) }
+{ direct_loan, loan,@ (a loan by a lender to a customer without the use of a third party; direct lending gives the lender greater discretion in making loans) }
+{ participation_loan, loan_participation, participation_financing, loan,@ (a loan that is shared by a group of banks that join to make a loan too big for any one of them alone) }
+{ personal_loan, consumer_loan, loan,@ (a loan that establishes consumer credit that is granted for personal use; usually unsecured and based on the borrower's integrity and ability to pay) }
+{ automobile_loan, auto_loan, car_loan, personal_loan,@ (a personal loan to purchase an automobile) }
+{ point, loan,@ (one percent of the total principal of a loan; it is paid at the time the loan is made and is independent of the interest on the loan) }
+{ real_estate_loan, mortgage_loan, loan,@ (a loan on real estate that is usually secured by a mortgage) }
+{ time_loan, loan,@ (a loan that is payable on or before a specified date) }
+{ demand_note, note,@ (a note payable on demand) }
+{ principal1, debt,@ loan,#p (the original amount of a debt on which interest is calculated) }
+{ [ charge1, verb.possession:charge2,+ ] liabilities,@ noun.possession:tax,;c (financial liabilities (such as a tax); "the charges against the estate") }
+{ lien, security_interest,@ (the right to take another's property if an obligation is not discharged) }
+{ artisan's_lien, lien,@ (lien permitting an artisan to retain possession of a piece of work until has been paid for) }
+{ federal_tax_lien, tax_lien,@ (lien of the United States on all property of a taxpayer who fails to pay the federal government the taxes for which he or she is liable) }
+{ general_lien, lien,@ (a lien on all the property owned by a debtor and not just a specific property) }
+{ judgment_lien, lien,@ (lien on a debtor's property that is granted to a creditor by court judgment; lien may be enforced by having the sheriff seize the property and hold a sheriff's sale) }
+{ landlord's_lien, lien,@ (lien on a tenant's property for the satisfaction of unpaid rent or property damage; the landlord is given the status of a preferred creditor with regard to the tenant's property) }
+{ mechanic's_lien, lien,@ (lien to secure payment for work and materials in erecting or repairing a building or other structure) }
+{ garageman's_lien, mechanic's_lien,@ (the extension of a mechanic's lien to include payment for work on automobiles) }
+{ state_tax_lien, tax_lien,@ (a lien on the property of a taxpayer that the tax collector can use upon default of payment of taxes) }
+{ tax_lien, lien,@ (lien of which a tax collector may avail himself in default of taxes (analogous to a judgment lien)) }
+{ warehouseman's_lien, lien,@ (right of a warehouseman to retain goods until all storage charges have been paid) }
+{ encumbrance, incumbrance, charge1,@ (a charge against property (as a lien or mortgage)) }
+{ [ assessment, verb.possession:assess1,+ verb.possession:assess,+ ] charge1,@ (an amount determined as payable; "the assessment for repairs outraged the club's membership") }
+{ [ document, adj.pert:documentary,+ ] noun.Tops:communication,@ (a written account of ownership or obligation) }
+{ quittance1, document,@ (a document or receipt certifying release from an obligation or debt) }
+{ [ record, verb.communication:record,+ ] document,@ noun.group:law,;c (a document that can serve as legal evidence of a transaction; "they could find no record of the purchase") }
+{ balance_sheet, record,@ (a record of the financial situation of an institution on a particular date by listing its assets and the claims against those assets) }
+{ expense_record, record,@ (a written record of money spent) }
+{ ledger, leger, account_book, book_of_account, book, record,@ (a record in which commercial accounts are recorded; "they got a subpoena to examine our books") }
+{ cost_ledger, ledger,@ (ledger showing the accumulated costs classified in various ways) }
+{ general_ledger, ledger,@ (the ledger that contains all of the financial accounts of a business; contains offsetting debit and credit accounts (including control accounts)) }
+{ subsidiary_ledger, ledger,@ (details of an account supporting the amount stated in the general ledger) }
+{ control_account, accounting1,@ general_ledger,#p (an account that shows totals of amounts entered in a subsidiary ledger) }
+{ daybook, journal, ledger,@ (a ledger in which transactions have been recorded as they occurred) }
+{ entry, accounting_entry, ledger_entry, accounting1,@ (a written record of a commercial transaction) }
+{ adjusting_entry, entry,@ (an accounting entry made at the end of an accounting period to allocate items between accounting periods) }
+{ [ credit1, verb.possession:credit,+ debit1,! ] credit_entry, entry,@ (an accounting entry acknowledging income or capital items) }
+{ [ debit1, verb.possession:debit,+ credit1,! ] debit_entry, entry,@ (an accounting entry acknowledging sums that are owing) }
+{ [ accounting1, verb.possession:account,+ ] accounting_system, method_of_accounting, register,@ ledger,#m (a bookkeeper's chronological list of related debits and credits of a business; forms part of a ledger of accounts) }
+{ credit_side, accounting1,@ (account of payments received; usually the right side of a financial statement) }
+{ debit_side, accounting1,@ (account of payments owed; usually the left side of a financial statement) }
+{ [ accrual_basis, cash_basis,! ] accounting1,@ (a method of accounting in which each item is entered as it is earned or incurred regardless of when actual payments are received or made) }
+{ [ cash_basis, accrual_basis,! ] accounting1,@ (a method of accounting in which each item is entered as payments are received or made) }
+{ pooling_of_interest, accounting1,@ (an accounting method used in the merging of companies; the balance sheets are added together item by item; this method is tax-free) }
+{ accounts_receivable, assets,@ noun.communication:plural,;u (a creditor's accounts of money owed to him; normally arise from the sale of products or services) }
+{ note_receivable, note,@ (your right in a promissory note in which the maker promises to pay a certain amount of money at a certain time) }
+{ accounts_payable, liabilities,@ (a debtor's accounts of money he owes; normally arise from the purchase of products or services) }
+{ note_payable, note,@ (a note promising to pay a certain amount of money at a certain time) }
+{ profit_and_loss, profit_and_loss_account, account2,@ (an account compiled at the end of an accounting period to show gross and net profit or loss) }
+{ dividend, profit,@ (that part of the earnings of a corporation that is distributed to its shareholders; usually paid quarterly) }
+{ stock_dividend, dividend,@ (a dividend paid in stock rather than in cash) }
+{ extra_dividend, dividend,@ (a dividend paid in addition to the regular dividend) }
+{ equalizing_dividend, dividend,@ (a dividend paid to compensate shareholders for losses resulting from a change in the dividend schedule) }
+{ divvy, dividend,@ noun.location:Britain,;r (short for dividend; especially one paid by a cooperative society) }
+{ suspense_account, account2,@ (an account used temporarily to carry doubtful receipts and disbursements or discrepancies pending their analysis and permanent classification) }
+{ [ balance, verb.possession:balance,+ ] noun.attribute:equality,@ account2,#p (equality between the totals of the credit and debit sides of an account) }
+{ balance1, noun.quantity:difference,@ (the difference between the totals of the credit and debit sides of an account) }
+{ balance_of_trade, trade_balance, visible_balance, trade_gap, balance1,@ (the difference in value over a period of time of a country's imports and exports of merchandise; "a nation's balance of trade is favorable when its exports exceed its imports") }
+{ carry-over, carry-forward, balance1,@ noun.location:Britain,;r (the accumulated and undivided profits of a corporation after provision has been made for dividends and reserves) }
+{ compensating_balance, offsetting_balance, balance1,@ (a minimum credit balance that a bank may require a borrower to keep on deposit as a condition for granting a loan; a common requirement for establishing a line of credit at a bank; "the compensating balance increases the effective interest rate to the bank since the net amount loaned is reduced but the interest paid is unchanged") }
+{ invisible_balance, balance1,@ (the difference in value over a period of time of a country's imports and exports of services and payments of property incomes) }
+{ balance_of_payments, balance_of_international_payments, noun.cognition:accounting,@ (a system of recording all of a country's economic transactions with the rest of the world over a period of one year; "a favorable balance of payments exists when more payments are coming in than going out") }
+{ current_account, noun.cognition:accounting,@ balance_of_payments,#p (that part of the balance of payments recording a nation's exports and imports of goods and services and transfer payments) }
+{ trial_balance, balance,@ (a balance of debits and credits in double-entry bookkeeping; drawn up to test their equality) }
+{ audited_account, [ audit, verb.cognition:audit1,+ ] accounting1,@ (an inspection of the accounting procedures and records by a trained accountant or CPA) }
+{ limited_audit, audit,@ (an audit of limited scope (limited in time span or confined to particular accounts etc.)) }
+{ review, limited_review, accounting1,@ noun.cognition:accounting,;c ((accounting) a service (less exhaustive than an audit) that provides some assurance to interested parties as to the reliability of financial data) }
+{ analytical_review, review,@ (an auditing procedure based on ratios among accounts and tries to identify significant changes) }
+{ expense_account, travel_and_entertainment_account, account2,@ (an account to which salespersons or executives can charge travel and entertainment expenses) }
+{ payslip, record,@ (a slip of paper included with your pay that records how much money you have earned and how much tax or insurance etc. has been taken out) }
+{ [ register, verb.social:register5,+ verb.communication:register3,+ verb.social:register,+ ] record,@ (a book in which names and transactions are listed) }
+{ inventory, register,@ noun.cognition:accounting,;c ((accounting) the value of a firm's current assets including raw materials and work in progress and finished goods) }
+{ payroll, paysheet, register,@ (a list of employees and their salaries; "the company had a long payroll") }
+{ payroll2, paysheet2, sum,@ (the total amount of money paid in wages; "the company had a large payroll") }
+{ peanuts, sum,@ (an insignificant sum of money; a trifling amount; "her salary is peanuts compared to his") }
+{ purse, sum,@ (a sum of money offered as a prize; "the purse barely covered the winner's expenses") }
+{ purse1, sum,@ (a sum of money spoken of as the contents of a money purse; "he made the contribution out of his own purse"; "he and his wife shared a common purse") }
+{ [ value, verb.cognition:value,+ verb.cognition:value3,+ verb.cognition:evaluate,+ verb.cognition:valuate,+ ] economic_value, noun.Tops:measure,@ (the amount (of money or goods or services) that is considered to be a fair equivalent for something else; "he tried to estimate the value of the produce at normal prices") }
+{ mess_of_pottage, value,@ (anything of trivial value; "Esau sold his birthright to Jacob for a mess of pottage") }
+{ premium, value,@ (the amount that something in scarce supply is valued above its nominal value; "they paid a premium for access to water") }
+{ bankbook, passbook, record,@ (a record of deposits and withdrawals and interest held by depositors at certain banks) }
+{ checkbook, chequebook, record,@ (a book issued to holders of checking accounts) }
+{ pawn_ticket, noun.communication:receipt,@ (a pawnbroker's receipt for articles taken as security) }
+{ escrow, noun.communication:written_agreement,@ (a written agreement (or property or money) delivered to a third party or put in trust by one party to a contract to be returned after fulfillment of some condition) }
+{ escrow_funds, funds,@ (funds held in escrow) }
+{ commercial_paper, cash_equivalent,@ (an unsecured and unregistered short-term obligation issued by an institutional borrower to investors who have temporarily idle cash) }
+{ municipal_note, note,@ (a municipal debt instrument with a maturity of less than 2 years) }
+{ IOU, note,@ (an informal debt instrument; representing `I owe you') }
+{ time_note, note,@ (a note that specifies the time (or times) of repayment) }
+{ floater, debt_instrument,@ (a debt instrument with a variable interest rate tied to some other interest rate (e.g. the rate paid by T-bills)) }
+{ hotel_plan, meal_plan, noun.cognition:plan1,@ (a plan and a room rate for providing a room and meals to guests at a hotel) }
+{ American_plan, hotel_plan,@ (a hotel plan that includes three meals daily) }
+{ modified_American_plan, American_plan,@ (a hotel plan that includes breakfast and dinner (but not lunch)) }
+{ Bermuda_plan, hotel_plan,@ (a hotel plan that provides a full breakfast daily) }
+{ European_plan, continental_plan, hotel_plan,@ (a hotel plan that provides a continental breakfast daily) }
+{ [ devise2, verb.possession:devise,+ ] noun.communication:will,@ (a will disposing of real property) }
+{ security4, [ certificate, verb.possession:certify2,+ verb.possession:certificate,+ verb.communication:certificate,+ ] noun.communication:legal_document,@ (a formal declaration that documents a fact of relevance to finance and investment; the holder has a right to receive interest or dividends; "he held several valuable securities") }
+{ scrip, security4,@ (a certificate whose value is recognized by the payer and payee; scrip is not currency but may be convertible into currency) }
+{ stock_certificate, stock2, security4,@ (a certificate documenting the shareholder's ownership in the corporation; "the value of his stocks doubled during the past year") }
+{ tax-exempt_security, tax-exempt, security4,@ (a security that is not subject to taxation) }
+{ [ bond2, verb.possession:bond,+ ] bond_certificate, debt_instrument,@ security4,@ (a certificate of debt (usually interest-bearing or discounted) that is issued by a government or corporation in order to raise money; the issuer is required to pay a fixed sum annually until maturity and then a fixed sum to repay the principal) }
+{ Premium_Bond, bond2,@ noun.location:Great_Britain1,;r (a government bond that bears no interest or capital gains but enters the holder into lotteries) }
+{ warrant, stock_warrant, stock-purchase_warrant, security,@ (a type of security issued by a corporation (usually together with a bond or preferred stock) that gives the holder the right to purchase a certain amount of common stock at a stated price; "as a sweetener they offered warrants along with the fixed-income securities") }
+{ perpetual_warrant, warrant,@ (a warrant with no expiration date) }
+{ subscription_warrant, warrant,@ (a warrant that expires on a stipulated date) }
+{ zero-coupon_security, zero_coupon_security, certificate,@ (a security that makes no interest payments but instead is sold at a deep discount from its face value) }
+{ partnership_certificate, certificate,@ (a certificate showing the interests of all parties in a business partnership) }
+{ proprietorship_certificate, certificate,@ (a certificate showing who is responsible in an individually owned business) }
+{ convertible, convertible_security, certificate,@ (a corporate security (usually bonds or preferred stock) that can be exchanged for another form of security (usually common stock)) }
+{ letter_security, certificate,@ (a stock or bond that is not registered with the Securities and Exchange Commission and cannot be sold in the public market) }
+{ investment_letter, noun.communication:letter_of_intent,@ (a letter of intent saying that a letter security is being bought for investment and not for resale; avoids need for SEC registration) }
+{ treasury_stock, treasury_shares, reacquired_stock, stock,@ (stock that has been bought back by the issuing corporation and is available for retirement or resale; it is issued but not outstanding; it cannot vote and pays no dividends) }
+{ voting_stock, stock,@ (shares in a corporation that entitle the shareholder to voting and proxy rights) }
+{ watered_stock, stock,@ (stock representing ownership of overvalued assets; stock of a corporation whose total worth is less than its invested capital) }
+{ letter_stock, letter_security,@ (stock that has not been registered with the Securities and Exchange Commission and cannot be sold to the general public) }
+{ letter_bond, letter_security,@ (a bond that has not been registered with the Securities and Exchange Commission and cannot be sold to the general public) }
+{ [ listed_security, unlisted_security,! ] certificate,@ (a security that has been accepted for trading by one of the organized and registered securities exchanges in the US) }
+{ [ unlisted_security, listed_security,! ] over_the_counter_security, OTC_security, certificate,@ (a security traded in the over-the-counter market) }
+{ over_the_counter_stock, OTC_stock, unlisted_stock, unlisted_security,@ (stock that is not listed and traded on an organized exchange) }
+{ [ budget3, adj.pert:budgetary,+ verb.cognition:budget,+ ] noun.cognition:plan,@ (a summary of intended expenditures along with proposals for how to meet them; "the president submitted the annual budget to Congress") }
+{ balanced_budget, budget3,@ (a budget is balanced when current expenditures are equal to receipts) }
+{ [ budget2, adj.pert:budgetary,+ verb.cognition:budget,+ ] fund,@ (a sum of money allocated for a particular purpose; "the laboratory runs on a budget of a million a year") }
+{ Civil_List, budget2,@ noun.location:Great_Britain1,;r (a sum of money voted by British Parliament each year for the expenses of the British royal family) }
+{ operating_budget, budget2,@ (a budget for current expenses as distinct from financial transactions or permanent improvements) }
+{ petty_cash, fund,@ (a small fund of cash that a firm keeps for the payment of incidental expenses) }
+{ pocket_money, pin_money, spending_money, cash,@ (cash for day-to-day spending on incidental expenses) }
+{ ready_cash, cold_cash, ready_money, cash,@ (money in the form of cash that is readily available; "his wife was always a good source of ready cash"; "he paid cold cash for the TV set") }
+{ sight_draft, sight_bill, draft,@ (a draft payable on presentation) }
+{ time_draft, time_bill, draft,@ (a draft payable at a specified future date) }
+{ matching_funds, funds,@ (funds that will be supplied in an amount matching the funds available from other sources) }
+{ bottom_line, noun.communication:line2,@ audit,#p (the last line in an audit; the line that shows profit or loss) }

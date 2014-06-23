@@ -1,0 +1,34 @@
+<problem-set>
+	<training name="Authors">
+		<author name="grigsby-m">
+			<document title="0.txt">./jsan_resources/corpora/enron_demo/grigsby-m/0.txt</document>
+			<document title="1.txt">./jsan_resources/corpora/enron_demo/grigsby-m/1.txt</document>
+			<document title="10.txt">./jsan_resources/corpora/enron_demo/grigsby-m/10.txt</document>
+			<document title="11.txt">./jsan_resources/corpora/enron_demo/grigsby-m/11.txt</document>
+			<document title="12.txt">./jsan_resources/corpora/enron_demo/grigsby-m/12.txt</document>
+			<document title="2.txt">./jsan_resources/corpora/enron_demo/grigsby-m/2.txt</document>
+			<document title="3.txt">./jsan_resources/corpora/enron_demo/grigsby-m/3.txt</document>
+			<document title="4.txt">./jsan_resources/corpora/enron_demo/grigsby-m/4.txt</document>
+			<document title="5.txt">./jsan_resources/corpora/enron_demo/grigsby-m/5.txt</document>
+			<document title="6.txt">./jsan_resources/corpora/enron_demo/grigsby-m/6.txt</document>
+			<document title="7.txt">./jsan_resources/corpora/enron_demo/grigsby-m/7.txt</document>
+			<document title="8.txt">./jsan_resources/corpora/enron_demo/grigsby-m/8.txt</document>
+			<document title="9.txt">./jsan_resources/corpora/enron_demo/grigsby-m/9.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="5.txt">./jsan_resources/corpora/enron_demo/campbell-l/5.txt</document>
+			<document title="6.txt">./jsan_resources/corpora/enron_demo/campbell-l/6.txt</document>
+			<document title="7.txt">./jsan_resources/corpora/enron_demo/campbell-l/7.txt</document>
+			<document title="8.txt">./jsan_resources/corpora/enron_demo/campbell-l/8.txt</document>
+			<document title="9.txt">./jsan_resources/corpora/enron_demo/campbell-l/9.txt</document>
+			<document title="10.txt">./jsan_resources/corpora/enron_demo/campbell-l/10.txt</document>
+			<document title="11.txt">./jsan_resources/corpora/enron_demo/campbell-l/11.txt</document>
+			<document title="12.txt">./jsan_resources/corpora/enron_demo/campbell-l/12.txt</document>
+		</author>
+	</training>
+	<test>
+		<author name="~* you *~">
+			<document title="4.txt">./jsan_resources/corpora/enron_demo/campbell-l/4.txt</document>
+		</author>
+	</test>
+</problem-set>

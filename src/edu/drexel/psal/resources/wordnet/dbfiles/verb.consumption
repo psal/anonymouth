@@ -1,0 +1,247 @@
+($RCSfile: verb.consumption,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:57 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.consumption)
+
+{ [ consume, adj.all:consumptive,+ noun.act:consumption1,+ noun.person:consumer,+ abstain,! ] [ ingest, noun.act:ingestion,+ ] take_in, [take, take_up,^ ] have, frames: 8 (serve oneself to, or consume regularly; "Have another bowl of chicken soup!"; "I don't take sugar in my coffee") }
+{ [ consume1, adj.all:consumptive,+ adj.all:expendable^consumable,+ ] eat_up3, use_up, [eat13, frames: 22] [ deplete, noun.state:depletion,+ noun.act:depletion,+ ] [ exhaust, noun.act:exhaustion,+ ] run_through, wipe_out, verb.possession:spend,@ frames: 8,11 (use up (resources or materials); "this car consumes a lot of gas"; "We exhausted our savings"; "They run through 20 bottles of wine a week") }
+{ [ drain, noun.act:drain1,+ ] consume1,@ frames: 8,11,10 (deplete of resources; "The exercise class drains me of energy") }
+{ consume2, [ squander, noun.person:squanderer,+ noun.act:squandering,+ ] [ waste, noun.act:waste,+ noun.person:waster,+ frames: 2] ware, verb.possession:spend,@ frames: 8 (spend extravagantly; "waste not, want not") }
+{ spare, use,@ frames: 8 (use frugally or carefully) }
+{ [ use, noun.process:use,+ use_up,^ ] [ expend, noun.act:expenditure1,+ ] consume1,* frames: 8,11 (use up, consume fully; "The legislature expended its time on school questions") }
+{ [ use1, adj.all:useful^useable,+ adj.all:serviceable^useable,+ adj.all:disposable2^useable,+ adj.all:useful^usable,+ adj.all:serviceable^usable,+ adj.all:disposable2^usable,+ noun.act:use,+ noun.person:user,+ noun.act:usage,+ ] [ utilize, adj.all:useful^utilizable,+ noun.act:utilization,+ noun.person:utilizer,+ noun.attribute:utility,+ ] [ utilise, noun.act:utilisation,+ noun.attribute:utility,+ ] [ apply, adj.all:practical^applicative,+ adj.all:practical^applicatory,+ noun.act:application2,+ ] [ employ, noun.act:employment1,+ ] verb.social:use4,$ verb.stative:apply,> frames: 8,11,9,24,15,21 (put into service; make work or employ for a particular purpose or for its inherent or natural purpose; "use your head!"; "we only use Spanish at home"; "I can't use this tool"; "Apply a magnetic field here"; "This thinking was applied to many projects"; "How do you utilize this tool?"; "I apply this rule to get good results"; "use the plastic bags to store the food"; "He doesn't know how to use a computer") }
+{ pull_out_all_the_stops, use1,@ frames: 2 (use all resources available; "The organizers pulled out all the stops for the centennial meeting")}
+{ put, assign, apply,@ frames: 21 (attribute or give; "She put too much emphasis on her the last statement"; "He put all his efforts into this job"; "The teacher put an interesting twist to the interpretation of the story") }
+{ repose, put,@ frames: 21 (put or confide something in a person or thing; "These philosophers reposed the law in the people") }
+{ ply1, use1,@ frames: 8 (use diligently; "ply your wits!") }
+{ [ address, adj.all:available^addressable,+ ] use1,@ frames: 15,20 (address or apply oneself to something, direct one's efforts towards something, such as a question) }
+{ [ waste5, noun.attribute:waste,+ noun.act:waste,+ ] use1,@ frames: 8,11 (use inefficiently or inappropriately; "waste heat"; "waste a joke on an unappreciative audience") }
+{ [ misapply, noun.act:misapplication2,+ ] [ misuse, noun.act:misuse,+ ] apply,@ frames: 8 (apply to a wrong thing or person; apply badly or incorrectly; "The words are misapplied in this context"; "You are misapplying the name of this religious group") }
+{ avail, utilize,@ frames: 20 (use to one's advantage; "He availed himself of the available resources") }
+{ [ overuse, noun.act:overuse,+ ] overdrive, use1,@ frames: 8 (make use of too often or too extensively) }
+{ take_in_vain, verb.change:misuse,@ frames: 8 (use a name, such as God, without proper respect) }
+{ work_through, [ run_through1, noun.act:run-through,+ ] go_through1, verb.social:work2,@ frames: 8 (apply thoroughly; think through; "We worked through an example") }
+{ cannibalize1, cannibalise1, verb.creation:dismantle,* use1,@ frames: 8 (use parts of something to repair something else) }
+{ [ cannibalize, noun.person:cannibal,+ ] [ cannibalise, noun.person:cannibal,+ ] consume,@ frames: 2 (eat human flesh) }
+{ [ recycle, noun.act:recycling,+ ] reprocess, reuse, use1,@ frames: 8 (use again after processing; "We must recycle the cardboard boxes") }
+{ [ rehash, noun.communication:rehash,+ ] recycle,@ frames: 8 (present or use over, with no or few changes) }
+{ [ exploit, adj.all:consumptive^exploitive,+ adj.all:consumptive^exploitative,+ adj.all:consumptive^exploitatory,+ noun.act:exploitation1,+ noun.act:exploitation,+ noun.person:exploiter,+ ] work10, use1,@ frames: 8,9 (use or manipulate to one's advantage; "He exploit the new taxation system"; "She knows how to work the system"; "he works his parents for sympathy") }
+{ make_hay, exploit,@ frames: 22 (turn to one's advantage; "The environmentalist lobby made hay of the nuclear plant accident")}
+{ [ play13, noun.act:play4,+ ] exploit,@ frames: 22 (use to one's advantage; "She plays on her clients' emotions") }
+{ harness, exploit1,@ frames: 8 (exploit the power of; "harness natural forces and resources") }
+{ [ mine, noun.artifact:mine1,+ noun.person:miner,+ noun.act:mining,+ ] verb.contact:dig,* exploit1,@ noun.act:mining,;c frames: 8 (get from the earth by excavation; "mine ores and metals") }
+{ [ quarry, noun.artifact:quarry,+ noun.person:quarrier,+ noun.act:quarrying,+ ] verb.contact:dig,* exploit1,@ noun.act:quarrying,;c frames: 8 (extract (something such as stones) from or as if from a quarry; "quarry marble")}
+{ [ strip_mine, noun.person:strip_miner,+ noun.artifact:strip_mine,+ ] surface_mine, surface-mine, mine,@ noun.act:mining,;c frames: 2,8 (extract (ore) from a strip-mine) }
+{ [ exploit1, noun.act:exploitation,+ ] tap, use1,@ frames: 8 (draw from; make good use of; "we must exploit the resources we are given wisely") }
+{ [ overexploit, noun.act:overexploitation,+ ] exploit1,@ frames: 8 (exploit excessively; "We should not overexploit our natural resources")}
+{ commercialize, exploit1,@ frames: 8 (exploit for maximal profit, usually by sacrificing quality; "The hotel owners are commercializing the beaches")}
+{ milk, exploit1,@ frames: 8,9 (exploit as much as possible; "I am milking this for all it's worth") }
+{ [ use2, noun.act:use,+ noun.person:user2,+ ] [ habituate, noun.cognition:habit,+ noun.act:habit2,+ ] consume,@ frames: 8 (take or consume (regularly or habitually); "She uses drugs rarely") }
+{ [ addict, adj.all:addictive,+ noun.act:addiction,+ noun.state:addiction,+ noun.person:addict1,+ noun.person:addict,+ ] [ hook, noun.cognition:hook,+ ] verb.change:accustom,@ use2,* frames: 20 (to cause (someone or oneself) to become dependent (on something, especially a narcotic drug))}
+{ [ strain, noun.act:strain,+ noun.act:strain2,+ noun.act:straining1,+ ] extend, use1,@ frames: 8,11 (use to the utmost; exert vigorously or to full capacity; "He really extended himself when he climbed Kilimanjaro"; "Don't strain your mind too much") }
+{ [ overstrain, noun.phenomenon:overstrain,+ ] overextend, strain,@ frames: 8,11 (strain excessively; "He overextended himself when he accepted the additional assignment") }
+{ exert, [ exercise, noun.act:exercise3,+ ] employ,@ frames: 8,11 (put to use; "exert one's power or influence") }
+{ tax, task, strain,@ frames: 8 (use to the limit; "you are taxing my patience") }
+{ [ eat1, noun.person:eater,+ noun.act:eating,+ eat_in,^ eat_out,^ eat_up,^ ] consume,@ frames: 2 (eat a meal; take a meal; "We did not eat until 10 P.M. because there were so many phone calls"; "I didn't eat yet, so I gladly accept your invitation") }
+{ [take_out, noun.food:takeout,+ ] [take_away, noun.food:takeaway,+ ] eat1,@ frames: 8 (buy and consume food from a restaurant or establishment that sells prepared food; "We'll take out pizza, since I am too tired to cook")}
+{ [ victual, noun.food:victual,+ ] eat1,@ frames: 2 (take in nourishment) }
+{ wash_down, eat,@ frames: 8 (eat food accompanied by lots of liquid; also use metaphorically; "She washed down her dinner with a bottle of red wine"; "He washes down his worries with a nightly glass of whisky") }
+{ [eat_in, eat_out,!] dine_in, eat1,@ frames: 2 (eat at home) }
+{ [eat_out, eat_in,! ] dine_out, eat1,@ frames: 2 (eat at a restaurant or at somebody else's home) }
+{ [ dine2, noun.group:dinner,+ noun.food:dinner,+ noun.artifact:diner1,+ noun.artifact:diner,+ ] feed1,@ frames: 9 (give dinner to; host for dinner; "I'm wining and dining my friends") }
+{ [ dine1, noun.group:dinner,+ noun.food:dinner,+ noun.person:diner,+ noun.artifact:diner1,+ noun.artifact:diner,+ noun.act:dining,+ dine_in,^ dine_out,^ ] eat1,@ frames: 2 (have supper; eat dinner; "We often dine with friends in this restaurant") }
+{ [ picnic, noun.food:picnic,+ noun.person:picnicker,+ noun.person:picknicker,+ ] eat1,@ frames: 2,22 (eat alfresco, in the open air; "We picnicked near the lake on this gorgeous Sunday") }
+{ [ eat, noun.person:eater,+ noun.food:eater,+ noun.act:eating,+ ] eat1,$ eat2,$ eat1,@ chew,* swallow,* consume,@ frames: 8 (take in solid food; "She was eating a banana"; "What did you eat for dinner last night?") }
+{ [ gluttonize, noun.person:glutton,+ ] gluttonise, fress, eat,@ frames: 2 (eat a lot and without restraint) }
+{ wolf, wolf_down, eat,@ frames: 8 (eat hastily; "The teenager wolfed down the pizza") }
+{ slurp, eat,@ frames: 2,8 (eat noisily; "He slurped his soup") }
+{ [ swill, noun.act:swilling,+ ] swill_down, drink,@ frames: 8 (drink large quantities of (liquid, especially alcoholic drink)) }
+{ drench, drink,> provide,@ noun.Tops:animal,;c frames: 8 (force to drink) }
+{ [ suck4, noun.act:suck,+ noun.act:suction,+ noun.person:sucker,+ noun.act:sucking,+ suck_in,^ ] drink,@ frames: 8 (draw into the mouth by creating a practical vacuum in the mouth; "suck the poison from the place where the snake bit"; "suck on a straw"; "the baby sucked on the mother's breast")}
+{ [ drink, noun.food:drink,+ noun.act:drink1,+ noun.food:drink4,+ noun.person:drinker1,+ noun.act:drinking,+ drink_up,^ drink_down,^ ] [ imbibe, noun.act:imbibition,+ noun.person:imbiber,+ noun.act:imbibing,+ ] ingest,@ frames: 8 (take in liquids; "The patient must drink several liters each day"; "The children like to drink soda") }
+{ guggle, gurgle, drink,@ frames: 2,8 (drink from a flask with a gurgling sound) }
+{ [ sip, noun.person:sipper,+ noun.act:sip1,+ ] drink,@ frames: 8 (drink in sips; "She was sipping her tea") }
+{ [ guzzle, noun.act:guzzling,+ ] drink,@ frames: 8 (drink greedily or as if with great thirst; "The boys guzzled the cheap vodka") }
+{ [ lap, noun.act:lap,+ ] lap_up, lick, drink,@ frames: 11 (take up with the tongue; "The cat lapped up the milk"; "the cub licked the milk from its mother's breast")}
+{ hit_the_bottle, [ drink1, noun.act:drink,+ noun.person:drinker,+ noun.act:drinking1,+ ] [ booze, noun.person:boozer,+ noun.food:booze,+ ] fuddle, drink2,$ consume,@ frames: 2 (consume alcohol; "We were up drinking all night")}
+{ tank, drink1,@ frames: 2 (consume excessive amounts of alcohol)}
+{ [ port, noun.food:port,+ ] drink1,@ frames: 2 (drink port; "We were porting all in the club after dinner")}
+{ [ claret, noun.food:claret,+ ] drink1,@ frames: 2 (drink claret; "They were clareting until well past midnight")}
+{ pub-crawl, bar_hop, drink1,@ frames: 2 (go from one pub to the next and get progressively more drunk; "he pub-crawled around Birmingham") }
+{ [ tipple, noun.person:tippler,+ noun.food:tipple,+ ] bib, drink1,@ frames: 2 (drink moderately but regularly; "We tippled the cognac") }
+{ [ drink2, noun.act:drink,+ noun.person:drunkard,+ noun.person:drinker,+ noun.act:drinking1,+ ] [ tope, noun.person:toper,+ ] consume2,@ frames: 2 (drink excessive amounts of alcohol; be an alcoholic; "The husband drinks and beats his wife") }
+{ break_bread, eat1,@ frames: 2 (have a meal, usually with company; "The early Christian disciples broke bread together") }
+{ partake13, touch, consume,@ frames: 8 (consume; "She didn't touch her food all night") }
+{ receive, partake13,@ noun.cognition:christianity,;c frames: 2,8 (partake of the Holy Eucharist sacrament) }
+{ [ fare, noun.food:fare,+ ] eat,@ frames: 2 (eat well) }
+{ pitch_in, dig_in, eat1,@ frames: 2 (eat heartily; "The food was placed on the table and the children pitched in") }
+{ tuck_in, tuck_away, put_away, eat_up,@ eat1,* frames: 8 (eat up; usually refers to a considerable quantity of food; "My son tucked in a whole pizza") }
+{ [ nosh, noun.person:nosher,+ noun.food:nosh,+ ] [ snack, noun.person:snacker,+ noun.food:snack,+ ] eat1,@ frames: 2,22 (eat a snack; eat lightly; "She never loses weight because she snacks between meals") }
+{ [pick_at, frames: 8] [peck_at, frames: 8] peck1, eat,@ frames: 2 (eat like a bird; "The anorexic girl just picks at her food") }
+{ [ peck, noun.animal:pecker1,+ ] pick_up, eat,@ frames: 11 (eat by pecking at, like a bird) }
+{ [ gobble, noun.person:gobbler,+ gobble_up,^ ] bolt, eat,@ frames: 8 (eat hastily without proper chewing; "Don't bolt your food!")}
+{ garbage_down, gobble_up, shovel_in, bolt_down, eat,@ frames: 8 (eat a large amount of food quickly; "The children gobbled down most of the birthday cake") }
+{ [ nibble1, noun.quantity:nibble,+ noun.person:nibbler,+ ] pick, [ piece, noun.food:piece,+ ] eat,@ frames: 8 (eat intermittently; take small bites of; "He pieced at the sandwich all morning"; "She never eats a full meal--she just nibbles") }
+{ [ ruminate, adj.pert:ruminant,+ noun.act:rumination1,+ noun.animal:rumen,+ noun.animal:ruminant,+ ] eat,@ noun.animal:ruminant,;c frames: 2 (chew the cuds; "cows ruminate")}
+{ [ browse, noun.act:browse,+ ] [ graze2, noun.act:graze,+ ] nosh,@ frames: 2,22 (eat lightly, try different dishes; "There was so much food at the party that we quickly got sated just by browsing")}
+{ [ chomp, noun.act:chomping,+ noun.act:chomp,+ ] champ, chew,@ frames: 2,8 (chew noisily; "The boy chomped his sandwich") }
+{ champ1, chew,@ frames: 1 (chafe at the bit, like horses) }
+{ [ mumble, noun.act:mumbling,+ ] [ gum, noun.body:gum,+ noun.act:gumming,+ ] chew,@ frames: 8 (grind with the gums; chew without teeth and with great difficulty; "the old man had no teeth left and mumbled his food") }
+{ [ toast, noun.food:toast1,+ ] [drink12, frames: 22] [ pledge, noun.food:pledge,+ ] [ salute, noun.communication:salute,+ noun.communication:salutation1,+ ] [ wassail, noun.food:wassail,+ noun.person:wassailer1,+ ] drink1,* verb.social:honor,@ frames: 9,8 (propose a toast to; "Let us toast the birthday girl!"; "Let's drink to the New Year")}
+{ give10, toast,@ frames: 8 (propose; "He gave the first of many toasts at the birthday party") }
+{ drain_the_cup, drink_up, drink,@ frames: 2 (drink to the last drop; "drink up--there's more wine coming") }
+{ [ mess, noun.artifact:mess,+ noun.food:mess,+ noun.food:mess1,+ ] eat1,@ noun.group:military,;c frames: 2 (eat in a mess hall) }
+{ regale, [ treat, noun.food:treat,+ ] provide,@ frames: 9,17,20 (provide with choice or abundant food or drink; "Don't worry about the expensive wine--I'm treating"; "She treated her houseguests with good food every night")}
+{ [ wine1, noun.food:wine,+ noun.artifact:winery,+ ] treat,@ frames: 9 (treat to wine; "Our relatives in Italy wined and dined us for a week")}
+{ alcoholize, treat,@ frames: 9 (subject to the influence of alcohol; "After we finished dinner, we were thoroughly alcoholized")}
+{ [ board, noun.food:board,+ noun.artifact:board1,+ ] provide,@ feed1,* frames: 9 (provide food and lodging (for); "The old lady is boarding three men") }
+{ [ board1, noun.food:board,+ noun.artifact:board1,+ noun.person:boarder1,+ noun.person:boarder,+ ] board,$ consume,* verb.stative:live6,@ frames: 22 (lodge and take meals (at)) }
+{ [live_in, live_out,!] sleep_in, board,@ frames: 2 (live in the house where one works; "our babysitter lives in, as it is too far to commute for her") }
+{ [live_out, live_in,!] sleep_out, verb.motion:commute,@ frames: 2 (work in a house where one does not live; "our cook lives out; he can easily commute from his home") }
+{ [ forage, noun.food:forage,+ ] feed,@ frames: 1,4 (wander and feed; "The animals forage in the woods") }
+{ raven1, feed,@ frames: 1,4 (feed greedily; "The lions ravened the bodies") }
+{ [ scavenge, noun.animal:scavenger,+ ] feed1,@ frames: 2 (feed on carrion or refuse; "hyenas scavenge") }
+{ [ fodder, noun.food:fodder,+ ] feed1,@ frames: 8 (give fodder (to domesticated animals)) }
+{ [ slop, noun.food:slop,+ ] [ swill1, noun.food:swill,+ ] feed1,@ frames: 8 (feed pigs) }
+{ regurgitate, feed1,@ frames: 11 (feed through the beak by regurgitating previously swallowed food; "many birds feed their young by regurgitating what they have swallowed and carried to the nest") }
+{ [ feed1, noun.artifact:feeder,+ noun.act:feeding1,+ starve3,! ] [ give, noun.act:giving,+ frames: 14,15] eat,> provide,@ frames: 9 (give food to; "Feed the starving children in India"; "don't give the child this tough meat") }
+{ [ corn, noun.plant:corn2,+ noun.plant:corn,+ ] feed1,@ frames: 8 (feed (cattle) with corn) }
+{ [ undernourish, noun.state:undernourishment,+ ] [ malnourish, noun.state:malnourishment,+ ] feed1,@ frames: 9 (provide with insufficient quality or quantity of nourishment; "The stunted growth of these children shows that they are undernourished")}
+{ [ overfeed, noun.act:overfeeding,+ ] feed1,@ frames: 8,9 (feed excessively) }
+{ [ spoonfeed, noun.act:spoonfeeding,+ ] feed1,@ frames: 9 (feed with a spoon) }
+{ [ force-feed, noun.act:forced_feeding,+ ] feed1,@ frames: 9 (feed someone who will not or cannot eat)}
+{ [ feed, noun.food:feed,+ noun.person:feeder,+ noun.act:feeding,+ ] [ eat2, noun.act:eating,+ ] consume,@ frames: 1,4 (take in food; used of animals only; "This dog doesn't eat certain kinds of meat"; "What do whales eat?") }
+{ [ feed2, noun.food:feed,+ ] provide,@ frames: 10,11 (serve as food for; be the food for; "This dish feeds six")}
+{ serve, serve_up, dish_out, dish_up, [ dish, noun.quantity:dish,+ noun.food:dish,+ noun.artifact:dish,+ ] provide,@ frames: 8 (provide (usually but not necessarily food); "We serve meals for the homeless"; "She dished out the soup at 8 P.M."; "The entertainers served up a lively show") }
+{ [ plank, noun.substance:plank,+ ] serve,@ frames: 8 (cook and serve on a plank; "Planked vegetable"; "Planked shad") }
+{ [ cater1, noun.person:caterer,+ ] provide,@ frames: 8 (supply food ready to eat; for parties and banquets) }
+{ [ pander, noun.person:pander,+ noun.person:panderer,+ ] [ pimp, noun.person:pimp,+ ] [ procure, noun.person:procurer,+ ] supply,@ frames: 2 (arrange for sexual partners for others) }
+{ [ feed3, noun.object:feeder,+ ] verb.possession:supply,@ frames: 11 (feed into; supply; "Her success feeds her vanity") }
+{ [ serve1, noun.person:server,+ noun.artifact:server,+ noun.food:serving,+ ] [ help, noun.food:helping,+ ] serve,$ provide,@ frames: 9 (help to some food; help with food or drink; "I served him three times, and after that he helped himself")}
+{ [ power, noun.phenomenon:power,+ ] supply,@ frames: 11 (supply the force or power for the functioning of; "The gasoline powers the engines") }
+{ [ drive7, noun.communication:driver,+ noun.artifact:drive2,+ ] power,@ frames: 11 (cause to function by supplying the force or power for or by controlling; "The amplifier drives the tube"; "steam drives the engines"; "this device drives the disks for the computer") }
+{ [ feed4, noun.act:feeding1,+ ] provide,@ frames: 14,15 (provide as food; "Feed the guests the nuts") }
+{ feed5, [ feast2, noun.event:feast,+ ] regale,@ frames: 9,21 (gratify; "feed one's eyes on a gorgeous view")}
+{ [ gratify, noun.act:gratification,+ ] [ pander13, noun.person:panderer1,+ ] [ indulge, noun.attribute:indulgence2,+ noun.act:indulging,+ ] provide,@ frames: 8,9,10,11 (yield (to); give satisfaction to) }
+{ [ spree, noun.act:spree,+ ] indulge,@ frames: 2 (engage without restraint in an activity and indulge, as when shopping) }
+{ [ provide, noun.act:provision1,+ noun.person:provider1,+ frames: 17] [ supply, noun.act:supply,+ noun.quantity:supply,+ frames: 17] [ply, frames: 17] [ cater, noun.person:caterer,+ frames: 27] verb.possession:give,@ frames: 8,21 (give what is desired or needed, especially support, food or sustenance; "The hostess provided lunch for all the guests") }
+{ underlay, provide,@ frames: 8 (provide with a base, support, lining, or backing; "underlay the boards with joists")}
+{ fit, conform_to, meet, [ satisfy1, adj.all:good1^satisfactory,+ adj.all:satisfactory,+ noun.act:satisfaction,+ noun.object:satisfier,+ ] [ fill2, noun.quantity:fill,+ ] [ fulfill, noun.feeling:fulfillment,+ ] [ fulfil, noun.feeling:fulfilment,+ ] provide,@ frames: 8 (fill, satisfy or meet a want or need or condtion ro restriction; "does this paper meet the requirements for the degree?"; "This job doesn't match my dreams"; "meet a need" ) }
+{ answer, satisfy1,@ frames: 11 (be satisfactory for; meet the requirements of or serve the purpose of; "This may answer her needs") }
+{ [ horse, noun.animal:horse,+ ] provide,@ frames: 9,8 (provide with a horse or horses) }
+{ [ remount, noun.animal:remount,+ ] horse,@ frames: 8,9 (provide with fresh horses; "remount a regiment") }
+{ shower12, provide,@ frames: 22 (provide abundantly with; "He showered her with presents") }
+{ [ accommodate, noun.act:accommodation,+ ] provide,@ frames: 17 (provide with something desired or needed; "Can you accommodate me with a rental car?") }
+{ [ sustain, noun.possession:sustenance,+ ] [ keep, noun.possession:keep,+ ] [ maintain, noun.possession:maintenance,+ noun.act:maintenance1,+ ] verb.possession:have,@ frames: 8,9,10,11 (supply with necessities and support; "She alone sustained her family"; "The money will sustain our good cause"; "There's little to earn and many to keep") }
+{ [ patronage, noun.act:patronage1,+ ] sustain,@ frames: 8,9,10,11 (support by being a patron of) }
+{ reseed, maintain,@ frames: 1 (maintain by seeding without human intervention; "Some plants reseed themselves indefinitely") }
+{ [ lunch, noun.person:luncher,+ noun.food:lunch,+ noun.act:lunching,+ ] eat1,@ frames: 2 (take the midday meal; "At what time are you lunching?") }
+{ [ lunch1, noun.food:lunch,+ ] feed1,@ frames: 9 (provide a midday meal for; "She lunched us well") }
+{ [ brunch, noun.food:brunch,+ ] eat1,@ frames: 2 (eat a meal in the late morning; "We brunch in Sundays") }
+{ [ breakfast, noun.food:breakfast,+ ] eat1,@ frames: 2 (eat an early morning meal; "We breakfast at seven") }
+{ [ breakfast1, noun.food:breakfast,+ ] feed1,@ frames: 9 (provide breakfast for) }
+{ [ feast, noun.event:feast1,+ noun.food:feast,+ noun.group:feast,+ noun.act:feasting,+ ] banquet, junket, feast1,$ eat1,@ frames: 2,22 (partake in a feast or banquet)}
+{ [ feast1, noun.event:feast1,+ noun.food:feast,+ noun.group:feast,+ ] [ banquet1, noun.group:banquet,+ noun.food:banquet,+ ] junket1, host,@ frames: 9 (provide a feast or banquet for)}
+{ [breastfeed, bottlefeed,! ] suckle, [ suck2, noun.act:suck,+ noun.animal:sucker2,+ ] [ nurse, noun.person:nurse1,+ noun.act:nursing1,+ noun.artifact:nursery1,+ ] wet-nurse, [ lactate, noun.time:lactation,+ noun.process:lactation,+ noun.act:lactation,+ ] give_suck, suck4,$ feed1,@ frames: 2,9 (give suck to; "The wetnurse suckled the infant"; "You cannot nurse your baby in public in some places")}
+{ dry-nurse, verb.social:care13,@ frames: 9 (take care of an infant without breastfeeding it) }
+{ [ wean, noun.act:weaning,+ ] ablactate, breastfeed,* verb.possession:deprive,@ frames: 9 (gradually deprive (infants and young mammals) of mother's milk; "she weaned her baby when he was 3 months old and started him on powdered milk"; "The kitten was weaned and fed by its owner with a bottle") }
+{ [bottlefeed, breastfeed,! ] feed1,@ frames: 9 (feed (infants) with a bottle) }
+{ suckle1, drink,* feed,@ frames: 2 (suck milk from the mother's breasts; "the infant was suckling happily") }
+{ starve2, famish2, verb.change:die,@ frames: 1,2 (die of food deprivation; "The political prisoners starved to death"; "Many famished in the countryside during the drought") }
+{ [ starve3, noun.act:starvation,+ noun.act:starving,+ feed1,! ] famish3, starve,> verb.possession:deprive,@ frames: 9 (deprive of food; "They starved the prisoners") }
+{ starve4, starve3,$ verb.possession:deprive,@ frames: 9,8 (deprive of a necessity and cause suffering; "he is starving her of love"; "The engine was starved of fuel")}
+{ [ starve, noun.state:starvation,+ be_full,! ] [ hunger, noun.state:hunger,+ ] famish, verb.body:suffer,@ frames: 2,22 (be hungry; go without food; "Let's eat--I'm starving!")}
+{ [be_full, starve,! ] frames: 2 (be sated, have enough to eat; "I'm full--don't give me any more beans, please")}
+{ [ crave, noun.feeling:craving,+ frames: 8] [ hunger1, noun.attribute:hunger,+ ] [ thirst, noun.attribute:thirst,+ ] starve1, [ lust, noun.feeling:lust,+ noun.act:lust,+ ] verb.emotion:desire,@ frames: 22 (have a craving, appetite, or great desire for)}
+{ [ want, noun.person:wanter,+ noun.state:want1,+ noun.object:want,+ ] [ need, noun.state:need,+ ] [ require, noun.object:requirement,+ ] verb.stative:be3,@ frames: 8,11 (have need of; "This piano wants the attention of a competent tuner") }
+{ cry, want,@ frames: 4 (demand immediate action; "This situation is crying for attention") }
+{ need1, frames: 8,9 (have or feel a need for; "always needing friends and money") }
+{ [ diet, noun.person:dieter,+ noun.food:dietary,+ noun.act:diet,+ noun.food:diet,+ noun.act:dieting,+ ] fast,@ frames: 2 (eat sparingly, for health reasons or to lose weight)}
+{ [ fast, noun.act:fast,+ noun.act:fasting,+ ] abstain,@ frames: 2 (abstain from eating; "Before the medical exam, you must fast")}
+{ [ fast1, noun.act:fast,+ noun.act:fasting,+ ] abstain,@ frames: 2 (abstain from certain foods, as for religious or medical reasons; "Catholics sometimes fast during Lent") }
+{ keep_off, avoid, abstain,@ frames: 8 (refrain from certain foods or beverages; "I keep off drugs"; "During Ramadan, Muslims avoid tobacco during the day") }
+{ [ diet1, noun.food:dietary,+ noun.act:diet,+ noun.food:diet,+ noun.act:dieting,+ ] fast1,@ frames: 2 (follow a regimen or a diet, as for health reasons; "He has high blood pressure and must stick to a low-salt diet") }
+{ [ souse, noun.person:souse,+ ] [ soak, noun.person:soaker,+ ] [ inebriate, noun.state:inebriation1,+ noun.state:inebriation,+ noun.person:inebriate,+ ] hit_it_up, drink1,@ frames: 2 (become drunk or drink excessively) }
+{ [ intoxicate, noun.state:intoxication,+ noun.food:intoxicant,+ ] soak1, [ inebriate1, noun.state:inebriation1,+ noun.state:inebriation,+ noun.food:inebriant,+ noun.person:inebriate,+ ] verb.body:affect,@ frames: 10 (make drunk (with alcoholic drinks)) }
+{ befuddle, fuddle1, intoxicate,@ frames: 10 (make stupid with alcohol) }
+{ [ wine, noun.food:wine,+ noun.artifact:winery,+ ] drink1,@ frames: 2 (drink wine) }
+{ [ delight, noun.feeling:delight,+ noun.cognition:delight,+ ] [ enjoy, noun.feeling:enjoyment,+ noun.act:enjoyment,+ noun.person:enjoyer,+ frames: 8] revel, use,* frames: 22 (take delight in; "he delights in his granddaughter") }
+{ have_a_ball, have_a_good_time, enjoy,@ frames: 2 (enjoy oneself greatly; "We had a ball at the party and didn't come home until 2 AM")}
+{ wallow, delight,@ frames: 8 (delight greatly in; "wallow in your success!")}
+{ live_it_up, enjoy,@ frames: 1,22 (enjoy oneself; "it's your birthday, so let's live it up!") }
+{ [ indulge12, noun.attribute:indulgence,+ ] [ luxuriate14, noun.act:luxuriation,+ noun.state:luxury,+ ] consume1,@ frames: 8 (enjoy to excess; "She indulges in ice cream") }
+{ [ surfeit, noun.state:surfeit1,+ noun.act:surfeit,+ ] indulge12,@ frames: 8 (indulge (one's appetite) to satiety) }
+{ wallow1, verb.social:indulge1,@ frames: 8 (devote oneself entirely to something; indulge in to an immoderate degree, usually with pleasure; "Wallow in luxury"; "wallow in your sorrows") }
+{ sow_one's_oats, sow_one's_wild_oats, indulge,@ frames: 2 (live promiscuously and self-indulgently) }
+{ dunk, [ dip, noun.food:dip,+ noun.event:dip,+ noun.artifact:dipper,+ ] verb.contact:immerse,@ frames: 21 (dip into a liquid while eating; "She dunked the piece of bread in the sauce") }
+{ [ enjoy1, noun.attribute:enjoyment,+ ] use1,@ frames: 8 (have benefit from; "enjoy privileges") }
+{ afford, verb.possession:spend,@ frames: 8 (be able to spare or give up; "I can't afford to spend two hours with this person")}
+{ run_low, run_short, go, verb.stative:terminate,@ frames: 1 (to be spent or finished; "The money had gone after a few days"; "Gas is running low at the gas stations in the Midwest") }
+{ go9, go,$ frames: 4 (be spent; "All my money went for food and rent") }
+{ [ gorge, noun.person:gorger,+ ] ingurgitate, [ overindulge, noun.act:overindulgence,+ ] glut, englut, stuff, [ engorge, noun.act:engorgement,+ ] overgorge, [ overeat, noun.act:overeating,+ ] gormandize, gormandise, [ gourmandize, noun.person:gourmand,+ noun.person:gourmandizer,+ ] [ binge, noun.act:binge,+ ] pig_out, satiate1, scarf_out, eat1,@ frames: 22 (overeat or eat immodestly; make a pig of oneself; "She stuffed herself at the dinner"; "The kids binged on ice cream")}
+{ [ avail4, adj.all:available,+ ] help4, exploit,@ frames: 8 (take or use; "She helped herself to some of the office supplies") }
+{ [ satiate, noun.act:satiation,+ ] sate, [ replete, noun.act:repletion,+ ] [ fill, noun.quantity:fill,+ ] consume,@ frames: 9,10,1 (fill to satisfaction; "I am sated") }
+{ cloy, pall, satiate,@ frames: 1,10,11 (cause surfeit through excess though initially pleasing; "Too much spicy food cloyed his appetite") }
+{ quell, stay, appease, satisfy1,@ frames: 1,10 (overcome or allay; "quell my hunger")}
+{ [ content, noun.feeling:contentment,+ noun.state:content,+ ] satisfy1,@ frames: 20 (satisfy in a limited way; "He contented himself with one glass of beer per day") }
+{ [ host, noun.person:host,+ noun.person:host1,+ noun.person:host2,+ ] verb.social:entertain,@ frames: 9 (be the host of or for; "We hosted 4 couples last night") }
+{ wine_and_dine1, host,@ frames: 9 (provide with food and drink, usually lavishly) }
+{ wine_and_dine, eat1,* drink1,* feast,@ frames: 2,22 (eat sumptuously; "we wined and dined in Paris") }
+{ fatten, [ fat, noun.body:fat,+ noun.attribute:fat,+ ] flesh_out, fill_out, plump, plump_out, fatten_out, fatten_up, feed1,* verb.change:change1,@ frames: 9,8 (make fat or plump; "We will plump out that poor starving child") }
+{ inject, feed1,@ frames: 8,17,20 (feed intravenously) }
+{ [ sample, noun.cognition:sample,+ noun.person:sampler,+ noun.group:sampler,+ noun.artifact:sampler,+ ] [ try, noun.person:trier1,+ noun.cognition:trial,+ ] [try_out, noun.cognition:tryout,+] [ taste, noun.food:taste,+ noun.person:taster,+ noun.cognition:tasting,+ noun.act:tasting2,+ ] ingest,@ frames: 8 (take a sample of; "Try these new crackers"; "Sample the regional dishes") }
+{ [ degust, noun.act:degustation,+ ] taste,@ frames: 8 (taste with relish; "degust this wonderful soup")}
+{ fritter, frivol_away, [ dissipate, noun.act:dissipation2,+ ] shoot, fritter_away, fool, fool_away, consume2,@ deplete,* frames: 8 (spend frivolously and unwisely; "Fritter away one's inheritance") }
+{ [ abstain, adj.all:abstemious^abstinent,+ noun.attribute:abstention,+ noun.person:abstinent,+ noun.person:abstainer,+ noun.person:abstainer1,+ noun.attribute:abstinence,+ consume,!] refrain, desist, frames: 33,2,22 (choose not to consume; "I abstain from alcohol")}
+{ [ teetotal, noun.person:teetotaller,+ ] abstain,@ frames: 2 (practice teetotalism and abstain from the consumption of alcoholic beverages)}
+{ kick, give_up, verb.social:forgo,@ frames: 8,33 (stop consuming; "kick a habit"; "give up alcohol") }
+{ devour, guttle, raven, [ pig, noun.person:pig,+ ] eat,@ frames: 8 (eat greedily; "he devoured three sandwiches") }
+{ [eat_up, frames: 2] finish, polish_off, eat,@ frames: 8 (finish eating all the food on one's plate or on the table; "She polished off the remaining potatoes") }
+{ [ devour1, noun.person:devourer,+ ] demolish, down1, consume3, go_through, eat_up,@ frames: 10 (eat up completely, as with great appetite; "Some people can down a pound of meat in the course of one meal"; "The teenagers demolished four pizzas among them") }
+{ smack, verb.communication:utter2,@ frames: 2 (press (the lips) together and open (the lips) noisily, as in eating) }
+{ [ digest, adj.all:digestible,+ adj.pert:digestive,+ noun.process:digestion,+ noun.artifact:digester,+ ] ingest,* verb.change:process,@ frames: 2,8 (convert food into absorbable substances; "I cannot digest milk products") }
+{ [ stomach, noun.feeling:stomach,+ ] digest,@ frames: 8 (bear to eat; "He cannot stomach raw fish") }
+{ [ metabolize, noun.process:metabolism,+ ] metabolise, digest,* frames: 8 (produce by metabolism) }
+{ predigest, digest,@ noun.animal:ruminant,;c frames: 8 (digest (food) beforehand) }
+{ take_in1, sop_up, suck_in, take_up, ingest,@ frames: 8 (take up as if with a sponge) }
+{ [ smoke, noun.act:smoke,+ noun.artifact:smoke1,+ noun.artifact:smoke,+ noun.person:smoker,+ noun.act:smoking,+ ] verb.body:inhale,* verb.body:exhale,* use2,@ frames: 2,8 (inhale and exhale smoke from cigarettes, cigars, pipes; "We never smoked marijuana"; "Do you smoke?") }
+{ [ chain-smoke, noun.person:chain-smoker,+ ] smoke,@ frames: 2 (smoke one cigarette after another; light one cigarette from the preceding one)}
+{ [ puff1, noun.act:puff,+ noun.act:puffing2,+ ] whiff2, smoke,@ frames: 8 (smoke and exhale strongly; "puff a cigar"; "whiff a pipe") }
+{ [ inhale, adj.pert:inhalant,+ noun.artifact:inhalation,+ noun.act:inhalation,+ noun.substance:inhalant,+ ] smoke,@ frames: 2,8 (draw deep into the lungs in by breathing; "Clinton smoked marijuana but never inhaled") }
+{ [ puff, noun.act:puff,+ ] [ drag, noun.act:drag2,+ ] draw1, smoke,* verb.body:inhale,@ frames: 2,22 (suck in or take (air); "draw a deep breath"; "draw on a cigarette") }
+{ [ inject1, noun.substance:injectant,+ ] drug,@ frames: 8 (take by injection; "inject heroin") }
+{ mainline, inject1,@ frames: 2,8 (inject into the vein; "She is mainlining heroin")}
+{ pop, inject1,@ frames: 8 (take drugs, especially orally; "The man charged with murder popped a valium to calm his nerves") }
+{ skin_pop, pop,@ frames: 8 (inject (drugs) into the skin) }
+{ [take_a_hit12, noun.artifact:drug,;c frames: 22] snort1, drug,@ frames: 8 (inhale through the nose) }
+{ light_up, fire_up, [ light, noun.artifact:light1,+ frames: 8 ] smoke,* verb.weather:ignite,@ frames: 2 (begin to smoke; "After the meal, some of the diners lit up") }
+{ free-base, [ base, noun.substance:base,+ noun.artifact:base7,+ ] drug,@ frames: 2,8 (use (purified cocaine) by burning it and inhaling the fumes) }
+{ huff, snort2, verb.body:inhale,@ drug,* frames: 8 (inhale recreational drugs; "The addict was snorting cocaine almost every day"; "the kids were huffing glue") }
+{ [ drug, noun.artifact:drug,+ ] do_drugs, get_off,> use2,@ frames: 9 (use recreational drugs) }
+{ drop, drug,@ frames: 8 (take (a drug, especially LSD), by mouth; "She dropped acid when she was a teenager")}
+{ [ dope, noun.artifact:dope,+ ] drug,@ frames: 2 (take drugs to improve one's athletic performance)}
+{ [ trip, noun.state:trip,+ ] trip_out, turn_on, get_off, frames: 2,13 (get high, stoned, or drugged; "He trips every weekend") }
+{ [ chew, noun.person:chewer,+ noun.food:chew,+ noun.act:chew,+ noun.act:chewing,+ ] [ masticate, noun.act:mastication,+ ] manducate, [ jaw, noun.body:jaw1,+ noun.body:jaw,+ ] verb.contact:grind,@ frames: 2,8 (chew (food); to bite and grind with the teeth; "He jawed his bubble gum"; "Chew your food and don't swallow it!"; "The cows were masticating the grass") }
+{ [ chaw, noun.food:chaw,+ ] chew,@ frames: 8 (chew without swallowing; "chaw tobacco") }
+{ crunch, [ munch, noun.act:munch,+ noun.person:muncher,+ ] chew,@ frames: 8 (chew noisily; "The children crunched the celery sticks") }
+{ [ swallow, noun.act:swallow,+ ] get_down, frames: 8 (pass through the esophagus as part of eating or drinking; "Swallow the raw fish--it won't kill you!") }
+{ [ gulp1, noun.act:gulp1,+ noun.act:gulp,+ noun.person:gulper,+ noun.act:gulping,+ ] [ quaff, noun.person:quaffer,+ noun.food:quaff,+ ] [ swig, noun.act:swig,+ ] swallow,* drink,@ frames: 8 (to swallow hurriedly or greedily or in one draught; "The men gulped down their beers") }
+{ toss_off, pop2, bolt_down1, belt_down, pour_down, down, drink_down, kill, drink,@ frames: 8 (drink down entirely; "He downed three martinis before dinner"; "She killed a bottle of brandy that night"; "They popped a few beer after work")}
+{ bolt1, swallow,@ frames: 8 (swallow hastily) }
+{ [ nourish, adj.all:wholesome^nutrient,+ noun.food:nourishment,+ ] [ nurture, noun.act:nurturance,+ ] [ sustain1, adj.pert:sustainable,+ noun.act:sustainment,+ noun.food:sustenance,+ ] supply,@ frames: 9,10 (provide with nourishment; "We sustained ourselves on bread and water"; "This kind of food is not nourishing for young children") }
+{ carry1, sustain1,@ noun.animal:livestock,;c frames: 11 (be able to feed; "This land will carry ten cows to the acre") }
+{ feed_on, feed_upon, satisfy1,@ frames: 8 (be sustained by; "He fed on the great ideas of her mentor") }
+{ fix_up, supply,@ frames: 17 (find (something or someone) for; "I'll fix you up with a nice girl") }
+{ [raven2, frames: 2] [ prey10, noun.animal:prey,+ frames: 22] [ predate, noun.act:predation1,+ noun.act:predation,+ ] forage,@ frames: 8,11 (prey on or hunt for; "These mammals predate certain eggs")}
+{ [ prey1, noun.person:prey,+ ] feed9, exploit,@ frames: 9,8,10,11 (profit from in an exploitatory manner; "He feeds on her insecurity") }
+{ [fill_up, frames: 22] fill1, eat,@ frames: 9 (eat until one is sated; "He filled up on turkey") }
+{ quench, slake, allay, assuage, ingest,* satisfy1,@ frames: 8,11 (satisfy (thirst); "The cold water quenched his thirst") }
+{ [ nutrify, noun.process:nutrition,+ noun.Tops:nutrient,+ ] [ aliment, adj.pert:alimentative,+ noun.food:alimentation,+ noun.act:alimentation,+ noun.food:aliment,+ ] [ nourish1, adj.all:wholesome^nutrient,+ noun.act:nourishment,+ ] feed1,@ frames: 11 (give nourishment to) }
+{ [ range, noun.location:range2,+ ] feed1,@ frames: 8 (let eat; "range the animals in the prairie") }
+{ [ grass, noun.plant:grass,+ ] verb.contact:graze10,@ frames: 8 (feed with grass) }
+{ [ gutter, noun.artifact:gutter,+ ] provide,@ frames: 8 (provide with gutters; "gutter the buildings") }
+{ [ luxuriate, noun.state:luxury,+ noun.attribute:luxury1,+ noun.attribute:luxury,+ ] wanton, squander,@ frames: 2 (become extravagant; indulge (oneself) luxuriously) }
+{ burn_off, burn, burn_up, consume1,@ frames: 8,11 (use up (energy); "burn off calories through vigorous exercise") }
+{ carry, hold, drink1,@ frames: 8 (drink alcohol without showing ill effects; "He can hold his liquor"; "he had drunk more than he could carry") }
+{ go_down, frames: 1,6 (be ingested; "This wine sure goes down well"; "The food wouldn't go down") }
+{ [ sup2, noun.food:sup,+ noun.group:supper,+ noun.food:supper,+ noun.act:supping,+ ] ingest,@ frames: 8 (take solid or liquid food into the mouth a little at a time either by drinking or by eating with a spoon)}

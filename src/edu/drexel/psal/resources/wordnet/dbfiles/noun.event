@@ -1,0 +1,1084 @@
+($RCSfile: noun.event,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:44 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.event)
+
+{ might-have-been, noun.Tops:event,@ (an event that could have occurred but never did) }
+{ nonevent, noun.Tops:event,@ (an anticipated event that turns out to be far less significant than was expected) }
+{ [ happening, verb.change:happen,+ ] [ occurrence, adj.all:current^occurrent,+ ] occurrent, natural_event, noun.Tops:event,@ (an event that happens) }
+{ [ accompaniment, verb.stative:accompany,+ ] concomitant, [ attendant, adj.all:subsequent^attendant,+ ] [ co-occurrence, adj.all:synchronous^co-occurrent,+ verb.stative:cooccur,+ ] happening,@ (an event or situation that happens at the same time as or in connection with another) }
+{ associate, accompaniment,@ (any event that usually accompanies or is closely connected with another; "first was the lightning and then its thunderous associate") }
+{ avalanche1, happening,@ (a sudden appearance of an overwhelming number of things; "the program brought an avalanche of mail") }
+{ [ background1, verb.change:background,+ ] accompaniment,@ (relatively unimportant or inconspicuous accompanying situation; "when the rain came he could hear the sound of thunder in the background") }
+{ [ experience, verb.change:experience,+ verb.emotion:experience,+ verb.perception:experience,+ verb.perception:experience1,+ ] happening,@ (an event as apprehended; "a surprising experience"; "that painful experience certainly got our attention") }
+{ appalling, experience,@ (an experience that appalls; "is it better to view the appalling or merely hear of it?") }
+{ [ augury, verb.change:inaugurate,+ ] sign, foretoken, preindication, experience,@ (an event that is experienced as indicating important things to come; "he hoped it was an augury"; "it was a sign from God") }
+{ war_cloud, augury,@ (an ominous sign that war threatens) }
+{ [ omen, adj.all:unpropitious^ominous,+ adj.all:alarming^ominous,+ verb.communication:omen,+ ] [ portent, adj.all:significant^portentous,+ adj.all:prophetic^portentous,+ verb.communication:portend,+ ] [ presage, verb.communication:presage,+ ] [ prognostic, adj.all:prophetic^prognostic,+ ] [ prognostication, verb.communication:prognosticate1,+ ] [ prodigy, adj.all:significant^prodigious,+ ] augury,@ (a sign of something about to happen; "he looked for an omen before going into battle") }
+{ [ auspice, verb.communication:auspicate,+ verb.change:auspicate,+ ] omen,@ (a favorable omen) }
+{ [ foreboding, verb.communication:forebode,+ ] omen,@ (an unfavorable omen) }
+{ death_knell, omen,@ (an omen of death or destruction) }
+{ [ flash1, verb.change:flash3,+ ] [ flashing, verb.change:flash3,+ ] experience,@ (a short vivid experience; "a flash of emotion swept over him"; "the flashings of pain were a warning") }
+{ good_time, blast2, experience,@ (a highly pleasurable or exciting experience; "we had a good time at the party"; "celebrating after the game was a blast") }
+{ loss1, experience,@ (the experience of losing a loved one; "he sympathized on the loss of their grandfather") }
+{ near-death_experience, experience,@ (the experience of being close to death but surviving) }
+{ ordeal, experience,@ (a severe or trying experience) }
+{ out-of-body_experience, experience,@ (the dissociative experience of observing yourself from an external perspective as though your mind or soul had left and was observing your body) }
+{ [ taste, verb.cognition:taste5,+ ] experience,@ (a brief experience of something; "he got a taste of life on the wild side"; "she enjoyed her brief taste of independence") }
+{ time1, experience,@ (a person's experience on a particular occasion; "he had a time holding back the tears"; "they had a good time together") }
+{ trip1, head_trip, experience,@ (an exciting or stimulating experience) }
+{ vision, experience,@ (a religious or mystical experience of a supernatural appearance; "he had a vision of the Virgin Mary") }
+{ social_event, noun.Tops:event,@ (an event characteristic of persons forming groups) }
+{ [ miracle1, adj.all:fortunate^miraculous,+ ] noun.Tops:event,@ (a marvellous event manifesting a supernatural act of a divine agent) }
+{ [ trouble, adj.all:troubled^troublous,+ verb.body:trouble,+ verb.emotion:trouble,+ verb.emotion:trouble1,+ ] happening,@ (an event causing distress or pain; "what is the trouble?"; "heart trouble") }
+{ [ treat, verb.possession:treat,+ ] happening,@ (an occurrence that causes special pleasure or delight) }
+{ [ miracle, adj.all:supernatural^miraculous,+ ] happening,@ (any amazing or wonderful occurrence) }
+{ [ wonder, adj.all:extraordinary^wondrous,+ verb.communication:wonder12,+ ] [ marvel, adj.all:supernatural^marvelous,+ adj.all:supernatural^marvellous,+ verb.communication:marvel,+ verb.communication:marvel12,+ ] happening,@ (something that causes feelings of wonder; "the wonders of modern science") }
+{ thing, happening,@ (an event; "a funny thing happened on the way to the...") }
+{ episode, happening,@ (a happening that is distinctive in a series of related events) }
+{ [ feast, verb.consumption:feast2,+ ] thing,@ (something experienced with great delight; "a feast for the eyes") }
+{ [ drama, adj.all:impressive^dramatic,+ adj.all:dramatic,+ verb.communication:dramatize,+ verb.communication:dramatize1,+ verb.communication:dramatise1,+ ] dramatic_event, episode,@ (an episode that is turbulent or highly emotional) }
+{ night_terror, drama,@ (an emotional episode (usually in young children) in which the person awakens in terror with feelings of anxiety and fear but is unable to remember any incident that might have provoked those feelings) }
+{ eventuality, [ contingency, adj.all:possible^contingent,+ ] contingence, happening,@ (a possible event or occurrence or result) }
+{ [ beginning, verb.change:begin1,+ ending,! ] happening,@ (the event consisting of the start of something; "the beginning of the war") }
+{ casus_belli, beginning,@ (an event used to justify starting a war) }
+{ [ ending, verb.stative:end1,+ verb.creation:end13,+ beginning,! ] conclusion, [ finish2, verb.change:finish3,+ verb.stative:finish,+ verb.change:finish2,+ ] happening,@ (event whose occurrence ends something; "his death marked the ending of an era"; "when these final episodes are broadcast it will be the finish of the show") }
+{ [ end, verb.creation:end13,+ verb.stative:end1,+ verb.change:end1,+ verb.stative:end,+ ] last, ending,@ (the final stage or concluding parts of an event or occurrence; "the end was exciting"; "I had to miss the last of the movie") }
+{ endgame, end_game, end,@ (the final stages of a chess game after most of the pieces have been removed from the board) }
+{ endgame1, end_game1, end,@ (the final stages of an extended process of negotiation; "the diplomatic endgame") }
+{ homestretch, end,@ noun.communication:colloquialism,;u (the end of an enterprise; "they were on the homestretch when the computer crashed") }
+{ [ passing2, verb.change:pass1,+ ] end,@ (the end of something; "the passing of winter") }
+{ [ result, verb.stative:result,+ ] [ resultant, adj.all:subsequent^resultant,+ verb.stative:result2,+ ] final_result, outcome, termination, ending,@ (something that results; "he listened for the results on the radio") }
+{ denouement, result,@ (the outcome of a complex sequence of events) }
+{ [ deal, verb.social:deal2,+ ] result,@ (the type of treatment received (especially as the result of an agreement); "he got a good deal on his car") }
+{ fair_deal, square_deal, deal,@ (fair treatment) }
+{ raw_deal, deal,@ (unfair treatment) }
+{ decision1, result,@ (the outcome of a game or contest; "the team dropped three decisions in a row") }
+{ decision2, result,@ noun.act:boxing,;c ((boxing) a victory won on points when no knockout has occurred; "had little trouble in taking a unanimous decision over his opponent") }
+{ split_decision, decision2,@ (a boxing decision in which the judges are not unanimous) }
+{ consequence, aftermath, result,@ (the outcome of an event especially as relative to an individual) }
+{ corollary, consequence,@ (a practical consequence that follows naturally; "blind jealousy is a frequent corollary of passionate love") }
+{ [ just_deserts, noun.communication:plural,;u ] comeuppance, comeupance, poetic_jstice, consequence,@ (an outcome (good or bad) that is well deserved and fitting) }
+{ fruit, consequence,@ (the consequence of some effort or action; "he lived long enough to see the fruit of his policies") }
+{ sequella, consequence,@ (a secondary consequence) }
+{ train, consequence,@ (a series of consequences wrought by an event; "it led to a train of disasters") }
+{ offspring, [ materialization1, verb.change:materialize,+ ] [ materialisation1, verb.change:materialise,+ ] noun.phenomenon:consequence,@ (something that comes into existence as a result; "industrialism prepared the way for acceptance of the French Revolution's various socialistic offspring"; "this skyscraper is the solid materialization of his efforts") }
+{ separation1, result,@ (the termination of employment (by resignation or dismissal)) }
+{ sequel, [ subsequence, adj.all:subsequent,+ ] result,@ (something that follows something else) }
+{ wages, [ reward, verb.social:reward1,+ verb.possession:reward,+ ] payoff, consequence,@ (a recompense for worthy acts or retribution for wrongdoing; "the wages of sin is death"; "virtue is its own reward") }
+{ foregone_conclusion, matter_of_course, ending,@ (an inevitable ending) }
+{ [ worst, adj.all:worst,+ ] result,@ (the least favorable outcome; "the worst that could happen") }
+{ one-off, happening,@ (a happening that occurs only once and is not repeated) }
+{ periodic_event, recurrent_event, happening,@ (an event that recurs at intervals) }
+{ [ change, verb.change:change2,+ verb.change:change1,+ verb.change:change,+ ] [ alteration, verb.change:alter1,+ ] [ modification, verb.change:modify,+ ] happening,@ (an event that occurs when something passes from one state or phase to another; "the change was intended to increase sales"; "this storm is certainly a change for the worse"; "the neighborhood had undergone few modifications since his last visit years ago") }
+{ avulsion, change,@ (an abrupt change in the course of a stream that forms the boundary between two parcels of land resulting in the loss of part of the land of one landowner and a consequent increase in the land of another) }
+{ break4, change,@ (an abrupt change in the tone or register of the voice (as at puberty or due to emotion); "then there was a break in her voice") }
+{ [ mutation1, adj.pert:mutational,+ ] change,@ (a change or alteration in form or qualities) }
+{ [ sublimation1, verb.motion:sublimate,+ ] change,@ noun.cognition:psychology,;c ((psychology) modifying the natural expression of an impulse or instinct (especially a sexual one) to one that is socially acceptable) }
+{ [ surprise, verb.competition:surprise,+ verb.social:surprise,+ verb.cognition:surprise,+ ] change,@ (a sudden unexpected event) }
+{ bombshell, thunderbolt, thunderclap1, surprise,@ (a shocking surprise; "news of the attack came like a bombshell") }
+{ coup_de_theatre, surprise,@ (a dramatic surprise) }
+{ eye_opener, surprise,@ (something surprising and revealing) }
+{ peripeteia, peripetia, peripety, surprise,@ (a sudden and unexpected change of fortune or reverse of circumstances (especially in a literary work); "a peripeteia swiftly turns a routine sequence of events into a story worth telling") }
+{ [ shock1, verb.body:shock,+ verb.emotion:shock,+ verb.emotion:shock1,+ ] blow1, surprise,@ (an unpleasant or disappointing surprise; "it came as a shock to learn that he was injured") }
+{ blip, shock1,@ (a sudden minor shock or meaningless interruption; "the market had one bad blip today"; "you can't react to the day-to-day blips"; "renewed jitters in the wake of a blip in retail sales") }
+{ stunner, surprise,@ (an unexpected and amazing event; "the stunner was what happened on Saturday") }
+{ error, computer_error, happening,@ noun.cognition:computer_science,;c ((computer science) the occurrence of an incorrect result produced by a computer) }
+{ hardware_error, error,@ noun.cognition:computer_science,;c (error resulting from a malfunction of some physical component of the computer) }
+{ disk_error, hardware_error,@ noun.cognition:computer_science,;c (error resulting from malfunction of a magnetic disk) }
+{ software_error, programming_error, error,@ noun.cognition:computer_science,;c (error resulting from bad code in some program involved in producing the erroneous result) }
+{ semantic_error, run-time_error, runtime_error, software_error,@ noun.cognition:computer_science,;c (an error in logic or arithmetic that must be detected at run time) }
+{ syntax_error, software_error,@ noun.cognition:computer_science,;c (an error of language resulting from code that does not conform to the syntax of the programming language; "syntax errors can be recognized at compilation time"; "a common syntax error is to omit a parenthesis") }
+{ algorithm_error, error,@ noun.cognition:computer_science,;c (error resulting from the choice of the wrong algorithm or method for achieving the intended result) }
+{ [ accident, adj.all:unintended^accidental,+ ] stroke2, fortuity, chance_event, happening,@ (anything that happens suddenly or by chance without an apparent cause; "winning the lottery was a happy accident"; "the pregnancy was a stroke of bad luck"; "it was due to an accident or fortuity") }
+{ accident1, mishap,@ (an unfortunate mishap; especially one causing damage or injury) }
+{ [ collision, verb.contact:collide,+ ] accident1,@ (an accident resulting from violent impact of a moving object; "three passengers were killed in the collision"; "the collision of the two ships resulted in a serious oil spill") }
+{ near_miss, mishap,@ (an accidental collision that is narrowly avoided) }
+{ [ crash, verb.contact:crash,+ ] wreck, accident1,@ (a serious accident (usually involving one or more vehicles); "they are still investigating the crash of the TWA plane") }
+{ prang, crash,@ noun.location:Britain,;r (a crash involving a car or plane) }
+{ [ derailment, verb.motion:derail1,+ verb.motion:derail,+ ] mishap,@ (an accident in which a train runs off its track) }
+{ ground_loop, mishap,@ (a sharp uncontrollable turn made by an airplane while moving along the ground) }
+{ [ collision1, verb.contact:collide,+ ] [ hit1, verb.contact:hit1,+ ] contact,@ noun.cognition:physics,;c ((physics) a brief event in which two or more bodies come together; "the collision of the particles resulted in an exchange of energy and a change of direction") }
+{ [ fire, verb.change:fire1,+ ] happening,@ (the event of something burning (often destructive); "they lost everything in the fire") }
+{ backfire3, fire,@ (a fire that is set intentionally in order to slow an approaching forest fire or grassfire by clearing a burned area in its path) }
+{ bonfire, balefire, fire,@ (a large outdoor fire that is lighted as a signal or in celebration) }
+{ brush_fire, fire,@ (an uncontrolled fire that consumes brush and shrubs and bushes) }
+{ campfire, fire,@ (a small outdoor fire for warmth or cooking (as at a camp)) }
+{ conflagration, [ inferno, adj.pert:infernal1,+ ] fire,@ (a very intense and uncontrolled fire) }
+{ forest_fire, fire,@ (an uncontrolled fire in a wooded area) }
+{ grassfire, prairie_fire, fire,@ (an uncontrolled fire in a grassy area) }
+{ [ smoulder, verb.change:smoulder,+ ] smolder, fire,@ (a fire that burns with thick smoke but no flame; "the smoulder suddenly became a blaze") }
+{ smudge, fire,@ (a smoky fire to drive away insects) }
+{ crown_fire, forest_fire,@ (a forest fire that advances with great speed jumping from crown to crown ahead of the ground fire) }
+{ ground_fire, forest_fire,@ (a forest fire that burns the humus; may not appear on the surface) }
+{ surface_fire, forest_fire,@ (a forest fire that burns only the surface litter and undergrowth) }
+{ wildfire, conflagration,@ (a raging and rapidly spreading conflagration) }
+{ misfortune, bad_luck, trouble,@ (unnecessary and unforeseen trouble resulting from an unfortunate event) }
+{ [ pity, adj.all:unfortunate^piteous,+ ] shame, misfortune,@ (an unfortunate development; "it's a pity he couldn't do it") }
+{ [ affliction, verb.emotion:afflict,+ ] trouble,@ (a cause of great suffering and distress) }
+{ convulsion, trouble,@ (a physical disturbance such as an earthquake or upheaval) }
+{ [ embarrassment, verb.emotion:embarrass,+ disembarrassment,! ] trouble,@ (some event that causes someone to be embarrassed; "the outcome of the vote was an embarrassment for the liberals") }
+{ [ disembarrassment, verb.possession:disembarrass,+ embarrassment,! ] easing,@ (something that extricates you from embarrassment) }
+{ hell, blaze, trouble,@ (a cause of difficulty and suffering; "war is hell"; "go to blazes") }
+{ calvary, [ martyrdom1, noun.person:martyr,+ ] affliction,@ (any experience that causes intense suffering) }
+{ onslaught, trouble,@ (a sudden and severe onset of trouble) }
+{ [ scandal, adj.all:immoral^scandalous,+ verb.emotion:scandalize,+ verb.emotion:scandalise,+ ] [ outrage, adj.all:offensive1^outrageous,+ verb.emotion:outrage1,+ ] trouble,@ (a disgraceful event) }
+{ skeleton, skeleton_in_the_closet, skeleton_in_the_cupboard, scandal,@ (a scandal that is kept secret; "there must be a skeleton somewhere in that family's closet" ) }
+{ Teapot_Dome, Teapot_Dome_scandal, scandal,@i (a government scandal involving a former United States Navy oil reserve in Wyoming that was secretly leased to a private oil company in 1921; became symbolic of the scandals of the Harding administration) }
+{ Watergate, Watergate_scandal, scandal,@i (a political scandal involving abuse of power and bribery and obstruction of justice; led to the resignation of Richard Nixon in 1974) }
+{ chapter, episode,@ (a series of related events forming an episode; "a chapter of disasters") }
+{ [ idyll, adj.all:pleasant^idyllic,+ adj.all:perfect^idyllic,+ ] episode,@ (an episode of such pastoral or romantic charm as to qualify as the subject of a poetic idyll) }
+{ incident, happening,@ episode,#p (a single distinct event) }
+{ cause_celebre, incident,@ (an incident that attracts great public attention) }
+{ discharge, happening,@ (the sudden giving off of energy) }
+{ electrical_discharge, discharge,@ (a discharge of electricity) }
+{ nerve_impulse, nervous_impulse, neural_impulse, impulse, electrical_discharge,@ (the electrical discharge that travels along a nerve fiber; "they demonstrated the transmission of impulses from the cortex to the hypothalamus") }
+{ action_potential, nerve_impulse,@ (the local voltage change across the cell wall as a nerve impulse is transmitted) }
+{ [ spike, verb.change:spike4,+ ] electrical_discharge,@ (a transient variation in voltage or current) }
+{ [ explosion, verb.change:explode1,+ ] [ detonation, verb.change:detonate1,+ ] [ blowup, verb.change:blow_up3,+ ] discharge,@ (a violent release of energy caused by a chemical or nuclear reaction) }
+{ case, [ instance, verb.perception:instantiate1,+ verb.perception:instantiate,+ ] [ example, verb.communication:exemplify,+ ] happening,@ (an occurrence of something; "it was a case of bad judgment"; "another instance occurred yesterday"; "but there is always the famous example of the Smiths") }
+{ [ humiliation, verb.emotion:humiliate,+ ] [ mortification, verb.emotion:mortify1,+ ] case,@ (an instance in which you are caused to lose your prestige or self-respect; "he had to undergo one humiliation after another") }
+{ piece, bit, case,@ (an instance of some kind; "it was a nice piece of work"; "he had a bit of good luck") }
+{ time, clip, case,@ (an instance or single occasion for some event; "this time he succeeded"; "he called four times"; "he could do ten at a clip") }
+{ [ movement, verb.motion:move3,+ ] motion, happening,@ (a natural event that involves a change in the position or location of something) }
+{ crustal_movement, tectonic_movement, movement,@ noun.cognition:geology,;c (movement resulting from or causing deformation of the earth's crust) }
+{ [ approach, verb.motion:approach,+ ] approaching, movement,@ (the event of one object coming closer to another) }
+{ [ passing1, verb.motion:pass1,+ ] [ passage, verb.motion:pass1,+ ] movement,@ (the motion of one object relative to another; "stellar passings can perturb the orbits of comets") }
+{ deflection1, deflexion1, movement,@ (the movement of the pointer or pen of a measuring instrument from its zero position) }
+{ bending, bend, movement,@ (movement that causes the formation of a curve) }
+{ change_of_location, [ travel, verb.motion:travel3,+ verb.motion:travel,+ ] movement,@ (a movement through space that changes the location of something) }
+{ fender-bender, collision,@ (a collision between motor vehicles that produces minor damage) }
+{ [ ascension1, adj.pert:ascensional,+ verb.motion:ascend3,+ ] change_of_location,@ noun.cognition:astronomy,;c ((astronomy) the rising of a star above the horizon) }
+{ Ascension2, Ascension_of_Christ, miracle1,@i noun.communication:New_Testament,;c ((New Testament) the rising of the body of Jesus into heaven on the 40th day after his Resurrection) }
+{ Resurrection, Christ's_Resurrection, Resurrection_of_Christ, miracle1,@i noun.communication:New_Testament,;c ((New Testament) the rising of Christ on the third day after the Crucifixion) }
+{ [ circulation, verb.motion:circulate4,+ ] change_of_location,@ noun.Tops:plant,;c (free movement or passage (as of cytoplasm within a cell or sap through a plant); "ocean circulation is an important part of global climate"; "a fan aids air circulation") }
+{ [ creep, verb.motion:creep,+ ] change_of_location,@ (a slow longitudinal movement or deformation) }
+{ [ migration, adj.pert:migrational,+ verb.motion:migrate1,+ ] periodic_event,@ (the periodic passage of groups of animals (especially birds or fishes) from one region to another for feeding or breeding) }
+{ migration1, noun.Tops:event,@ noun.cognition:chemistry,;c ((chemistry) the nonrandom movement of an atom or radical from one place to another within a molecule) }
+{ [ shrinking, verb.change:shrink1,+ ] [ shrinkage, verb.change:shrink1,+ verb.change:shrink,+ ] decrease,@ (process or result of becoming less or smaller; "the material lost 2 inches per yard in shrinkage") }
+{ [ compression, verb.contact:compress,+ ] [ condensation, verb.change:condense6,+ verb.change:condense5,+ verb.change:condense4,+ ] contraction2, shrinkage,@ (the process or result of becoming smaller or pressed together; "the contraction of a gas on cooling") }
+{ [ constriction, verb.change:constrict,+ ] coarctation, compression,@ (tight or narrow compression) }
+{ [ injury, verb.body:injure,+ ] accidental_injury, accident1,@ (an accident that results in physical damage or hurt) }
+{ rupture, breach, [ break3, verb.social:break13,+ ] [ severance, verb.contact:sever1,+ ] rift, falling_out, separation,@ (a personal or social separation (as between opposing factions); "they hoped to avoid a break in relations") }
+{ [ schism, adj.pert:schismatic,+ ] rupture,@ (the formal separation of a church into two churches or the withdrawal of one group over doctrinal differences) }
+{ [ hap, verb.change:hap,+ ] accident,@ (an accidental happening; "he recorded all the little haps and mishaps of his life") }
+{ mishap, misadventure, mischance, misfortune,@ (an instance of misfortune) }
+{ [ puncture, verb.change:puncture3,+ verb.change:puncture,+ verb.contact:puncture,+ ] mishap,@ (loss of air pressure in a tire when a hole is made by some sharp object) }
+{ [ calamity, adj.all:unfortunate^calamitous,+ ] catastrophe, [ disaster, adj.all:unfortunate^disastrous,+ ] [ tragedy, adj.all:sad^tragical,+ adj.all:sad^tragic,+ ] [ cataclysm, adj.all:destructive^cataclysmic,+ adj.all:destructive^cataclysmal,+ ] misfortune,@ (an event resulting in great loss and misfortune; "the whole city was affected by the irremediable calamity"; "the earthquake was a disaster") }
+{ act_of_God, force_majeure, vis_major, inevitable_accident, unavoidable_casualty, calamity,@ (a natural and unavoidable catastrophe that interrupts the expected course of events; "he discovered that his house was not insured against acts of God") }
+{ [ apocalypse, adj.pert:apocalyptic,+ adj.all:prophetic^apocalyptical,+ ] calamity,@ (a cosmic cataclysm in which God destroys the ruling powers of evil) }
+{ famine, calamity,@ (a severe shortage of food (as through crop failure) resulting in violent hunger and starvation and death) }
+{ the_Irish_Famine, the_Great_Hunger, the_Great_Starvation, the_Great_Calamity, famine,@ (a famine in Ireland resulting from a potato blight; between 1846 and 1851 a million people starved to death and 1.6 million emigrated (most to America)) }
+{ kiss_of_death, calamity,@ (something that is ruinous; "if this were known it would be the kiss of death for my political career") }
+{ meltdown, calamity,@ (a disaster comparable to a nuclear meltdown; "there is little likelihood of a meltdown comparable to the American banking collapse in March 1933") }
+{ plague, calamity,@ (any large scale calamity (especially when thought to be sent by God)) }
+{ [ visitation1, verb.change:visit,+ ] calamity,@ (any disaster or catastrophe; "a visitation of the plague") }
+{ break1, good_luck, happy_chance, accident,@ (an unexpected piece of good luck; "he finally got his big break") }
+{ coincidence, happenstance, accident,@ (an event that might have been arranged although it was really accidental) }
+{ lottery, accident,@ (something that is regarded as a chance event; "the election was just a lottery to them") }
+{ pileup, collision,@ (multiple collisions of vehicles) }
+{ [ smash, verb.contact:smash5,+ ] smash-up, collision,@ noun.artifact:motor_vehicle,;c (a serious collision (especially of motor vehicles)) }
+{ slip, [ trip, verb.motion:trip1,+ verb.motion:trip,+ ] mishap,@ (an accidental misstep threatening (or causing) a fall; "he blamed his slip on the ice"; "the jolt caused many slips and a few spills") }
+{ [ failure, verb.social:fail12,+ verb.social:fail,+ success,! ] happening,@ (an event that does not accomplish its intended purpose; "the surprise party was a complete failure") }
+{ downfall1, [ ruin1, verb.social:ruin,+ ] ruination1, failure,@ (failure that results in a loss of position or reputation) }
+{ flame-out1, failure,@ (a complete or conspicuous failure; "the spectacular flame-out of the company's stock cost many people their life savings") }
+{ [ malfunction, verb.contact:malfunction,+ ] failure,@ (a failure to function normally) }
+{ [ blowout, verb.change:blow_out,+ ] malfunction,@ (a sudden malfunction of a part or apparatus; "the right front tire had a blowout"; "as a result of the blowout we lost all the lights") }
+{ [ stall, verb.motion:stall4,+ verb.motion:stall2,+ verb.motion:stall,+ ] malfunction,@ (a malfunction in the flight of an aircraft in which there is a sudden loss of lift that results in a downward plunge; "the plane went into a stall and I couldn't control it") }
+{ [ success, failure,! ] happening,@ (an event that accomplishes its intended purpose; "let's call heads a success and tails a failure"; "the election was a remarkable success for the Whigs") }
+{ barnburner, success,@ noun.communication:colloquialism,;u (an impressively successful event; "the rock concert was a real barnburner") }
+{ Godspeed, success,@ (a successful journey; "they wished him Godspeed") }
+{ [ miscarriage, verb.social:miscarry,+ ] [ abortion, verb.change:abort,+ ] failure,@ (failure of a plan) }
+{ [ miss, verb.contact:miss,+ verb.motion:miss,+ ] misfire1, failure,@ (a failure to hit (or meet or find etc)) }
+{ [ emergence, verb.change:emerge,+ ] [ egress1, verb.change:egress,+ ] issue, beginning,@ (the becoming visible; "not a day's difference between the emergence of the andrenas and the opening of the willow catkins") }
+{ [ eruption2, verb.change:erupt4,+ ] emergence,@ (the emergence of a tooth as it breaks through the gum) }
+{ [ birth, verb.body:birth,+ death,! ] nativity, [ nascency, adj.all:nascent,+ ] nascence, change,@ (the event of being born; "they celebrated the birth of their first child") }
+{ delivery, birth,@ (the event of giving birth; "she had a difficult delivery") }
+{ [ live_birth, noun.act:stillbirth,! ] birth,@ (the birth of a living fetus (regardless of the length of gestation)) }
+{ blessed_event, happy_event, live_birth,@ noun.communication:colloquialism,;u (the live birth of a child) }
+{ posthumous_birth, birth,@ (birth of a child by Caesarean section after the death of the mother) }
+{ posthumous_birth1, birth,@ (birth of a child after the father has died) }
+{ reincarnation, rebirth, renascence, birth,@ (a second or new birth) }
+{ [ transmigration, verb.stative:transmigrate,+ ] reincarnation,@ (the passing of a soul into another body after death) }
+{ cycle_of_rebirth, reincarnation,@ noun.cognition:Hinduism,;c ((Hinduism) repeated rebirth in new forms) }
+{ moksa, cycle_of_rebirth,@ noun.cognition:Hinduism,;c ((Hinduism) release from the cycle of rebirth) }
+{ [ appearance, verb.change:appear,+ disappearance,! ] happening,@ (the event of coming into sight) }
+{ [ reappearance, verb.change:reappear,+ ] appearance,@ (the event of something appearing again; "the reappearance of Halley's comet") }
+{ [ egress, ingress,! ] [ emersion, immersion1,! ] reappearance,@ eclipse,#p noun.cognition:astronomy,;c ((astronomy) the reappearance of a celestial body after an eclipse) }
+{ [ ingress, egress,! ] [ immersion1, emersion,! ] disappearance,@ eclipse,#p noun.cognition:astronomy,;c ((astronomy) the disappearance of a celestial body prior to an eclipse) }
+{ Second_Coming, Second_Coming_of_Christ, Second_Advent, Advent, Parousia, manifestation,@i noun.cognition:Christian_theology,;c ((Christian theology) the reappearance of Jesus as judge for the Last Judgment) }
+{ [ makeup, verb.social:make_up,+ ] [ make-up, verb.social:make_up,+ ] noun.Tops:event,@ (an event that is substituted for a previously cancelled event; "he missed the test and had to take a makeup"; "the two teams played a makeup one week later") }
+{ [ materialization, verb.change:materialize,+ ] [ materialisation, verb.change:materialise,+ ] [ manifestation1, verb.change:manifest,+ ] appearance,@ (an appearance in bodily form (as of a disembodied spirit)) }
+{ manifestation, appearance,@ (a clear appearance; "a manifestation of great emotion") }
+{ apparition, appearance,@ (the appearance of a ghostlike figure; "I was recalled to the present by the apparition of a frightening specter") }
+{ epiphany, manifestation,@ (a divine manifestation) }
+{ theophany, manifestation,@ (a visible (but not necessarily material) manifestation of a deity to a human person) }
+{ Word_of_God, manifestation,@ (a manifestation of the mind and will of God) }
+{ [ origin, verb.stative:originate2,+ verb.stative:originate,+ verb.creation:originate,+ ] [ origination, verb.stative:originate2,+ verb.stative:originate,+ ] inception, beginning,@ (an event that is a beginning; a first part or stage of subsequent events) }
+{ [ germination, verb.change:germinate1,+ ] origin,@ (the origin of some development; "the germination of their discontent") }
+{ genesis, [ generation, verb.creation:generate,+ verb.body:generate,+ ] beginning,@ (a coming into being) }
+{ ground_floor, beginning,@ (becoming part of a venture at the beginning (regarded as position of advantage); "he got in on the ground floor") }
+{ [ emergence1, verb.change:emerge1,+ ] outgrowth, [ growth1, verb.stative:grow,+ verb.change:grow3,+ ] beginning,@ (the gradual beginning or coming forth; "figurines presage the emergence of sculpture in Greece") }
+{ [ rise, verb.change:rise2,+ fall1,! ] growth1,@ (a growth in strength or number or importance) }
+{ crime_wave, rise,@ (a sudden rise in the crime rate) }
+{ [ start, verb.social:start4,+ verb.stative:start3,+ verb.social:start,+ verb.creation:start1,+ verb.creation:start,+ verb.stative:start,+ verb.change:start1,+ verb.change:start,+ ] beginning,@ (the beginning of anything; "it was off to a good start") }
+{ adrenarche, start,@ (the increase in activity of the adrenal glands just before puberty) }
+{ menarche, start,@ (the first occurrence of menstruation in a woman) }
+{ thelarche, start,@ (the start of breast development in a woman at the beginning of puberty) }
+{ onset, oncoming, start,@ (the beginning or early stages; "the onset of pneumonia") }
+{ [ dawn1, verb.stative:dawn1,+ ] morning, start,@ (the earliest period; "the dawn of civilization"; "the morning of the world") }
+{ flying_start, running_start, start,@ (a quick and auspicious beginning) }
+{ [ opener, verb.social:open1,+ ] start,@ (the first event in a series; "she played Chopin for her opener"; "the season's opener was a game against the Yankees") }
+{ [ cause, adj.all:causative^causal,+ verb.creation:cause,+ verb.communication:cause,+ ] origin,@ (events that provide the generative force that is the origin of something; "they are trying to determine the cause of the crash") }
+{ [ antecedent, adj.all:antecedent,+ verb.stative:antecede,+ ] cause,@ (a preceding occurrence or cause or event) }
+{ [ preliminary2, adj.all:exploratory^preliminary,+ ] overture, [ prelude, verb.stative:prelude,+ ] origin,@ (something that serves as a preceding event or introduces what follows; "training is a necessary preliminary to employment"; "drinks were the overture to dinner") }
+{ emanation, [ rise3, verb.body:rise,+ ] procession, origin,@ noun.cognition:theology,;c ((theology) the origination of the Holy Spirit at Pentecost; "the emanation of the Holy Spirit"; "the rising of the Holy Ghost"; "the doctrine of the procession of the Holy Spirit from the Father and the Son") }
+{ [ etiology, adj.pert:etiologic,+ adj.pert:etiological,+ noun.person:etiologist,+ ] [ aetiology, adj.pert:aetiologic,+ noun.person:aetiologist,+ adj.pert:aetiological,+ ] cause,@ (the cause of a disease) }
+{ factor, cause,@ (anything that contributes causally to a result; "a number of factors determined the outcome") }
+{ fundamental, factor,@ (any factor that could be considered important to the understanding of a particular business; "fundamentals include a company's growth, revenues, earnings, management, and capital structure") }
+{ parameter, factor,@ (any factor that defines a system and determines (or limits) its performance) }
+{ unknown_quantity, factor,@ (a factor in a given situation whose bearing and importance is not apparent; "I don't know what the new man will do; he's still an unknown quantity") }
+{ wild_card, factor,@ (an unpredictable factor; "the weather was a wild card") }
+{ [ producer, verb.creation:produce2,+ ] cause,@ (something that produces; "Maine is a leading producer of potatoes"; "this microorganism is a producer of disease") }
+{ [ creation, verb.creation:create13,+ verb.creation:create2,+ ] conception, beginning,@ (the event that occurred at the beginning of something; "from its creation the plan was doomed to failure") }
+{ [ alpha, adj.all:important^alpha,+ ] start,@ (the beginning of a series or sequence; "the Alpha and Omega, the first and the last, the beginning and the end"--Revelations) }
+{ [ opening, adj.all:opening,+ ] opening_night, curtain_raising, start,@ (the first performance (as of a theatrical production); "the opening received good critical reviews") }
+{ [ kickoff, verb.social:kick_off,+ ] send-off, start-off, start,@ (a start given to contestants; "I was there with my parents at the kickoff") }
+{ racing_start, start,@ (the start of a race) }
+{ flying_start1, running_start1, racing_start,@ (a racing start in which the contestants are already in full motion when they pass the starting line) }
+{ destiny, [ fate, verb.communication:fate,+ ] happening,@ (an event (or a course of events) that will inevitably happen in the future) }
+{ inevitable, destiny,@ (an unavoidable event; "don't argue with the inevitable") }
+{ karma, destiny,@ noun.cognition:Hinduism,;c noun.cognition:Buddhism,;c ((Hinduism and Buddhism) the effects of a person's actions that determine his destiny in his next incarnation) }
+{ kismet, kismat, destiny,@ noun.cognition:Islam,;c ((Islam) the will of Allah) }
+{ [ predestination, noun.person:predestinationist,+ verb.communication:predestine,+ verb.cognition:predestine,+ ] destiny,@ (previous determination as if by destiny or fate) }
+{ [ annihilation, verb.change:annihilate,+ ] disintegration1, destruction,@ (total destruction; "bomb tests resulted in the annihilation of the atoll") }
+{ [ eradication, verb.creation:eradicate,+ ] [ obliteration, verb.change:obliterate3,+ verb.change:obliterate2,+ verb.change:obliterate,+ ] destruction,@ (the complete destruction of every trace of something) }
+{ [ debilitation, verb.change:debilitate,+ ] [ enervation, verb.change:enervate,+ ] [ enfeeblement, verb.change:enfeeble,+ ] exhaustion, weakening,@ (serious weakening and loss of energy) }
+{ [ separation, verb.contact:separate,+ ] [ breakup, verb.social:break_up,+ ] [ detachment, verb.contact:detach,+ ] change,@ (coming apart) }
+{ diffusion, spread,@ noun.group:mythology,;c (the spread of social institutions (and myths and skills) from one society to another) }
+{ [ dispersion, verb.motion:disperse,+ ] [ scattering, verb.motion:scatter1,+ ] spread,@ (spreading widely or driving off) }
+{ Diaspora, dispersion,@ (the dispersion of the Jews outside Israel; from the destruction of the temple in Jerusalem in 587-86 BC when they were exiled to Babylonia up to the present time) }
+{ [ dissipation, verb.motion:dissipate1,+ verb.motion:dissipate,+ ] dispersion,@ (breaking up and scattering by dispersion; "the dissipation of the mist") }
+{ [ invasion1, verb.contact:invade,+ ] spread,@ noun.cognition:medicine,;c ((pathology) the spread of pathogenic microorganisms or malignant cells to new sites in the body; "the tumor's invasion of surrounding structures") }
+{ irradiation, spread,@ noun.cognition:physiology,;c ((physiology) the spread of sensory neural impulses in the cortex) }
+{ [ extinction, verb.change:extinguish1,+ ] extermination, annihilation,@ (complete annihilation; "they think a meteor cause the extinction of the dinosaurs") }
+{ Crucifixion, death,@i (the death of Jesus by crucifixion) }
+{ fatality, human_death, death,@ (a death resulting from an accident or a disaster; "a decrease in the number of automobile fatalities") }
+{ finish1, downfall1,@ (the downfall of someone (as of persons on one side of a conflict); "booze will be the finish of him"; "it was a fight to the finish") }
+{ [ martyrdom, noun.person:martyr1,+ ] death,@ (death that is imposed because of the person's adherence of a religious faith or cause) }
+{ megadeath, death,@ (the death of a million people; "they calibrate the effects of atom bombs in megadeaths") }
+{ [ passing, verb.change:pass11,+ ] loss2, [ departure, verb.motion:depart4,+ verb.motion:depart1,+ verb.motion:depart,+ ] [ exit, verb.change:exit,+ ] [ expiration, verb.change:expire,+ ] [ going, verb.change:go,+ ] release, death,@ noun.communication:euphemism,;u (euphemistic expressions for death; "thousands mourned his passing") }
+{ wrongful_death, death,@ (a death that results from a wrongful act or from negligence; a death that can serve as the basis for a civil action for damages on behalf of the dead person's family or heirs) }
+{ [ doom, verb.communication:doom4,+ ] doomsday, day_of_reckoning, end_of_the_world, destiny,@ (an unpleasant or disastrous destiny; "everyone was aware of the approaching doom but was helpless to avoid it"; "that's unfortunate but it isn't the end of the world") }
+{ [ destruction, verb.contact:destroy,+ ] [ demolition, verb.creation:demolish,+ ] [ wipeout, verb.change:wipe_out,+ verb.change:wipe_out2,+ verb.change:wipe_out3,+ verb.change:wipe_out4,+ verb.creation:wipe_out,+ ] ending,@ (an event (or the result of an event) that completely destroys something) }
+{ [ ravage, verb.change:ravage1,+ verb.change:ravage,+ ] depredation, destruction,@ noun.communication:plural,;u ((usually plural) a destructive action; "the ravages of time"; "the depredations of age and disease") }
+{ [ razing, verb.creation:raze,+ ] wrecking, destruction,@ (the event of a structure being completely demolished and leveled) }
+{ [ ruin, adj.all:harmful^ruinous,+ verb.contact:ruin,+ ] ruination, destruction,@ (an event that results in destruction) }
+{ [ devastation, verb.change:devastate,+ ] [ desolation, verb.change:desolate1,+ verb.change:desolate,+ ] ruin,@ (an event that results in total destruction) }
+{ [ wrack, verb.contact:wrack,+ ] rack, destruction,@ (the destruction or collapse of something; "wrack and ruin") }
+{ [ disappearance, verb.perception:disappear,+ appearance,! ] happening,@ (the event of passing out of sight) }
+{ [ evanescence, adj.all:impermanent^evanescent,+ verb.change:evanesce,+ ] disappearance,@ (the event of fading and gradually vanishing from sight; "the evanescence of the morning mist") }
+{ [ vanishing, verb.change:vanish,+ ] disappearance,@ (a sudden or mysterious disappearance) }
+{ [ receding, verb.change:recede,+ ] [ fadeout, verb.change:fade_out,+ ] disappearance,@ (a slow or gradual disappearance) }
+{ disappearance1, happening,@ (ceasing to exist; "he regretted the disappearance of Greek from school curricula"; "what was responsible for the disappearance of the rainforest?"; "the disappearance of resistance at very low temperatures") }
+{ [ adversity, adj.all:unfavorable2^adverse,+ ] misfortune,@ (a stroke of ill fortune; a calamitous event; "a period marked by adversities") }
+{ hardship, misfortune,@ (something that causes or entails suffering; "I cannot think it a hardship that more indulgence is allowed to men than to women"- James Boswell; "the many hardships of frontier life") }
+{ knock2, misfortune,@ (a bad experience; "the school of hard knocks") }
+{ vagary, change,@ (an unexpected and inexplicable change in something (in a situation or a person's behavior, etc.); "the vagaries of the weather"; "his wealth fluctuates with the vagaries of the stock market"; "he has dealt with human vagaries for many years") }
+{ [ variation1, verb.stative:vary1,+ ] [ fluctuation, verb.motion:fluctuate,+ ] change,@ (an instance of change; the rate or magnitude of change) }
+{ vicissitude, variation1,@ (a variation in circumstances or fortune at different times in your life or in the development of something; "the project was subject to the usual vicissitudes of exploratory research") }
+{ [ allomerism, adj.pert:allomerous,+ ] variation1,@ noun.cognition:chemistry,;c ((chemistry) variability in chemical composition without variation in crystalline form) }
+{ [ engagement, verb.contact:engage,+ verb.change:engage,+ ] [ mesh, verb.contact:mesh1,+ ] [ meshing, verb.contact:mesh1,+ ] interlocking, contact,@ (contact by fitting together; "the engagement of the clutch"; "the meshing of gears") }
+{ [ flick, verb.contact:flick3,+ ] contact,@ (a light sharp contact (usually with something flexible); "he gave it a flick with his finger"; "he felt the flick of a whip") }
+{ impact, contact,@ (the striking of one body against another) }
+{ blow, [ bump, adj.all:bumpy,+ verb.contact:bump,+ ] impact,@ (an impact (as from a collision); "the bump threw him off the bicycle") }
+{ [ slam1, verb.contact:slam2,+ verb.contact:slam,+ ] impact,@ (a forceful impact that makes a loud noise) }
+{ [ jolt, verb.motion:jolt,+ ] [ jar, verb.motion:jar,+ ] jounce, shock2, blow,@ (a sudden jarring impact; "the door closed with a jolt"; "all the jars and jolts were smoothed out by the shock absorbers") }
+{ [ contact, verb.contact:contact3,+ ] [ impinging, verb.social:impinge10,+ ] [ striking, verb.contact:strike1,+ ] happening,@ (the physical coming together of two or more things; "contact with the pier scraped paint from the hull") }
+{ damage1, equipment_casualty, casualty1,@ noun.group:military,;c (loss of military equipment) }
+{ battle_damage, combat_casualty, damage1,@ noun.group:military,;c (loss of military equipment in battle) }
+{ operational_damage, operational_casualty, damage1,@ noun.group:military,;c (loss of military equipment in field operations) }
+{ casualty1, decrease,@ noun.group:military,;c (a decrease of military personnel or equipment) }
+{ [ wound, verb.body:wound,+ ] injury1, combat_injury, personnel_casualty,@ noun.group:military,;c (a casualty to military personnel resulting from combat) }
+{ blighty_wound, wound,@ (a wound that would cause an English soldier to be sent home from service abroad) }
+{ flesh_wound, wound,@ (a wound that does not damage important internal organs or shatter any bones) }
+{ personnel_casualty, loss, casualty1,@ noun.group:military,;c (military personnel lost by death or capture) }
+{ sacrifice, personnel_casualty,@ (personnel that are sacrificed (e.g., surrendered or lost in order to gain an objective)) }
+{ cycle1, [ oscillation1, verb.motion:oscillate,+ ] periodic_event,@ (a single complete execution of a periodically repeated phenomenon; "a year constitutes a cycle of the seasons") }
+{ cardiac_cycle, cycle1,@ (the complete cycle of events in the heart from the beginning of one heart beat to the beginning of the next; an electrical impulse conducted through the heart muscle that constricts the atria which is followed by constriction of the ventricles; "the cardiac cycle can be shown on an electrocardiogram") }
+{ Carnot_cycle, Carnot's_ideal_cycle, cycle1,@ (a cycle (of expansion and compression) of an idealized reversible heat engine that does work without loss of heat) }
+{ pass1, cycle1,@ noun.artifact:computer,;c (one complete cycle of operations (as by a computer); "it was not possible to complete the computation in a single pass") }
+{ [ repeat, verb.creation:repeat1,+ verb.social:repeat,+ verb.change:repeat,+ verb.creation:repeat,+ verb.communication:repeat,+ ] [ repetition, adj.all:repetitious,+ verb.change:repeat,+ ] periodic_event,@ (an event that repeats; "the events today were a repeat of yesterday's") }
+{ sequence, repetition,@ (several repetitions of a melodic phrase in different keys) }
+{ [ cycle2, adj.all:periodic^cyclic,+ adj.all:cyclic1,+ adj.all:cyclical,+ verb.change:cycle,+ verb.motion:cycle3,+ verb.motion:cycle2,+ ] repetition,@ (a periodically repeated sequence of events; "a cycle of reprisal and retaliation") }
+{ merry-go-round, cycle2,@ (a never-ending cycle of activities and events (especially when they seem to have little purpose); "if we lose the election the whole legislative merry-go-round will have to start over") }
+{ samsara, cycle2,@ noun.cognition:Hinduism,;c noun.cognition:Buddhism,;c ((Hinduism and Buddhism) the endless cycle of birth and suffering and death and rebirth) }
+{ [ replay, verb.competition:replay1,+ verb.competition:replay,+ ] rematch, repetition,@ noun.act:game,;c (something (especially a game) that is played again) }
+{ [ recurrence, adj.all:continual^recurrent,+ verb.change:recur,+ ] return1, repetition,@ (happening again (especially at regular intervals); "the return of spring") }
+{ [ atavism, noun.person:atavist,+ ] reversion1, throwback, recurrence,@ (a reappearance of an earlier characteristic) }
+{ flashback, recurrence,@ (an unexpected but vivid recurrence of a past experience (especially a recurrence of the effects of an hallucinogenic drug taken much earlier)) }
+{ sunrise, periodic_event,@ (the daily event of the sun rising above the horizon) }
+{ sunset, periodic_event,@ (the daily event of the sun sinking below the horizon) }
+{ ground_swell, heavy_swell, swell,@ (a broad and deep undulation of the ocean) }
+{ [ surf, verb.motion:surf,+ ] [ breaker, verb.motion:break1,+ ] breakers, wave1,@ (waves breaking on the shore) }
+{ wake, backwash, wave1,@ (the wave that spreads behind a boat as it moves forward; "the motorboat's wake capsized the canoe") }
+{ [ swash, verb.contact:swash,+ ] wave1,@ (the movement or sound of water; "the swash of waves on the beach") }
+{ [ ripple, verb.perception:ripple,+ verb.motion:ripple,+ ] [ rippling, verb.motion:ripple,+ ] [ riffle, verb.motion:riffle,+ ] [ wavelet, noun.event:wave1,+ ] wave1,@ (a small wave on the surface of a liquid) }
+{ gravity_wave, gravitation_wave, wave,@ noun.cognition:physics,;c ((physics) a wave that is hypothesized to propagate gravity and to travel at the speed of light) }
+{ sine_wave, wave,@ (a wave whose waveform resembles a sine curve) }
+{ [ oscillation, verb.motion:oscillate,+ ] [ vibration, verb.motion:vibrate1,+ ] wave,@ noun.cognition:physics,;c ((physics) a regular periodic variation in value about a mean) }
+{ ripple1, oscillation,@ noun.cognition:electronics,;c ((electronics) an oscillation of small amplitude imposed on top of a steady value) }
+{ wave, [ undulation, verb.motion:undulate,+ ] movement,@ noun.cognition:physics,;c ((physics) a movement up and down or back and forth) }
+{ [ jitter1, adj.pert:jittery,+ ] movement,@ (a small irregular movement) }
+{ [ fluctuation1, verb.motion:fluctuate3,+ verb.motion:fluctuate,+ ] wave,@ (a wave motion; "the fluctuations of the sea") }
+{ seiche, wave,@ (a wave on the surface of a lake or landlocked bay; caused by atmospheric or seismic disturbances) }
+{ soliton, soliton_wave, solitary_wave, traveling_wave,@ noun.cognition:physics,;c ((physics) a quantum of energy or quasiparticle that can be propagated as a traveling wave in nonlinear systems and is neither preceded nor followed by another such disturbance; does not obey the superposition principle and does not dissipate; "soliton waves can travel long distances with little loss of energy or structure") }
+{ standing_wave, stationary_wave, wave,@ (a wave (as a sound wave in a chamber or an electromagnetic wave in a transmission line) in which the ratio of its instantaneous amplitude at one point to that at any other point does not vary with time) }
+{ traveling_wave, travelling_wave, wave,@ (a wave in which the medium moves in the direction of propagation of the wave) }
+{ sound_wave, acoustic_wave, wave,@ noun.cognition:acoustics,;c ((acoustics) a wave that transmits sound) }
+{ air_wave, sound_wave,@ (a sound wave that is transmitted via air) }
+{ [ transient, adj.all:impermanent^transient,+ ] oscillation,@ noun.cognition:physics,;c ((physics) a short-lived oscillation in a system caused by a sudden change of voltage or current or load) }
+{ wave_form, waveform, wave_shape, wave,@ (the shape of a wave illustrated graphically by plotting the values of the period quantity against time) }
+{ shock_wave, blast_wave, wave,@ (a region of high pressure travelling through a gas at a high velocity; "the explosion created a shock wave") }
+{ sonic_boom, shock_wave,@ (an explosive sound caused by the shock wave of an airplane traveling faster than the speed of sound; "a sonic boom follows an aircraft as a wake follows a ship") }
+{ swell, crestless_wave, wave1,@ (the undulating movement of the surface of the open sea) }
+{ [ lift1, verb.motion:lift,+ ] [ rise1, verb.motion:rise4,+ ] wave1,@ (a wave that lifts the surface of the water or ground) }
+{ [ billow, adj.all:stormy^billowy,+ verb.motion:billow,+ ] [ surge1, verb.motion:surge4,+ verb.motion:surge3,+ ] wave1,@ (a large sea wave) }
+{ tidal_wave, wave1,@ (a wave resulting from the periodic flow of the tides that is caused by the gravitational attraction of the moon and sun) }
+{ tidal_wave1, wave1,@ calamity,@ (an unusual (and often destructive) rise of water along the seashore caused by a storm or a combination of wind and high tide) }
+{ tidal_wave2, manifestation,@ (an overwhelming manifestation of some emotion or phenomenon; "a tidal wave of nausea"; "the flood of letters hit him with the force of a tidal wave"; "a tidal wave of crime") }
+{ tsunami, calamity,@ wave1,@ (a cataclysm resulting from a destructive sea wave caused by an earthquake or volcanic eruption; "a colossal tsunami destroyed the Minoan civilization in minutes") }
+{ [ roller, verb.motion:roll10,+ ] roll1, rolling_wave, wave1,@ (a long heavy sea wave as it advances towards the shore) }
+{ periodic_motion, periodic_movement, movement,@ (motion that recurs over and over and the period of time required for each recurrence remains the same) }
+{ harmonic_motion, periodic_motion,@ (a periodic motion in which the displacement is either symmetrical about a point or is the sum of such motions) }
+{ [ heave, verb.change:heave,+ ] movement,@ noun.cognition:geology,;c ((geology) a horizontal dislocation) }
+{ [ recoil, verb.motion:recoil1,+ ] repercussion, [ rebound, verb.motion:rebound,+ ] backlash, movement,@ (a movement back from an impact) }
+{ [ bounce, adj.all:elastic^bouncy,+ verb.motion:bounce2,+ verb.motion:bounce,+ ] bouncing, recoil,@ (rebounding from an impact (or series of impacts)) }
+{ [ resilience, adj.all:elastic^resilient,+ verb.change:resile2,+ ] [ resiliency, adj.all:elastic^resilient,+ verb.motion:resile,+ ] recoil,@ (an occurrence of rebounding or springing back) }
+{ [ recoil1, verb.contact:recoil,+ ] [ kick, verb.contact:kick8,+ ] movement,@ (the backward jerk of a gun when it is fired) }
+{ seek, movement,@ noun.cognition:computer_science,;c (the movement of a read/write head to a specific data track on a disk) }
+{ [ squeeze, verb.contact:squeeze5,+ verb.contact:squeeze2,+ ] [ wring, verb.contact:wring2,+ ] movement,@ (a twisting squeeze; "gave the wet cloth a wring") }
+{ throw, stroke, cam_stroke, movement,@ (the maximum movement available to a pivoted or reciprocating piece by a cam) }
+{ instroke, throw,@ (the stroke of an engine piston moving away from the crankshaft) }
+{ outstroke, throw,@ (the stroke of an engine piston moving toward the crankshaft) }
+{ [ turning, verb.motion:turn,+ ] [ turn, verb.change:turn,+ verb.motion:turn3,+ verb.motion:turn2,+ verb.motion:turn,+ ] movement,@ (a movement in a new direction; "the turning of the wind") }
+{ [ twist2, verb.contact:twist6,+ verb.motion:twist1,+ ] [ wrench, verb.motion:wrench,+ ] movement,@ (a jerky pulling movement) }
+{ [ undulation1, verb.motion:undulate,+ ] movement,@ (wavelike motion; a gentle rising and falling in the manner of waves) }
+{ [ wave1, noun.event:wavelet,+ ] moving_ridge, movement,@ (one of a series of ridges that moves across the surface of a liquid (especially across a large body of water)) }
+{ comber, wave1,@ (a long curling sea wave) }
+{ whitecap, white_horse, wave1,@ (a wave that is blown by the wind so its crest is broken and appears white) }
+{ wave2, rise,@ (something that rises rapidly; "a wave of emotion swept over him"; "there was a sudden wave of buying before the market closed"; "a wave of conservatism in the country led by the hard right") }
+{ [ shipwreck, verb.contact:shipwreck,+ ] [ wreck1, verb.contact:wreck,+ ] accident1,@ (an accident that destroys a ship at sea) }
+{ capsizing, shipwreck,@ noun.act:navigation1,;c ((nautical) the event of a boat accidentally turning over in the water) }
+{ finish, happening,@ (designated event that concludes a contest (especially a race); "excitement grew as the finish neared"; "my horse was several lengths behind at the finish"; "the winner is the team with the most points at the finish") }
+{ [ draw, verb.competition:draw,+ ] standoff, [ tie, verb.competition:tie,+ ] finish,@ (the finish of a contest in which the score is tied and the winner is undecided; "the game ended in a draw"; "their record was 3 wins, 6 losses and a tie") }
+{ dead_heat, draw,@ (a tie in a race) }
+{ [ stalemate, verb.competition:stalemate,+ ] draw,@ (drawing position in chess: any of a player's possible moves would place his king in check) }
+{ photo_finish, finish,@ (in general, any very close finish; in particular, a finish of a race in which the contestants are so close together that the winner must be determined from a photograph taken at the instant of finishing) }
+{ second-place_finish, runner-up_finish, finish,@ (a finish in second place (as in a race)) }
+{ third-place_finish, finish,@ (a finish in third place (as in a race)) }
+{ [ win, verb.competition:win1,+ verb.competition:win,+ ] victory,@ (a victory (as in a race or other competition); "he was happy to get the win") }
+{ first-place_finish, win,@ (a finish in first place (as in a race)) }
+{ omega, Z, ending,@ (the ending of a series or sequence; "the Alpha and the Omega, the first and the last, the beginning and the end"--Revelation) }
+{ [ conversion1, verb.change:convert1,+ ] change,@ (a change of religion; "his conversion to the Catholic faith") }
+{ [ Christianization, verb.change:Christianize,+ ] [ Christianisation, verb.change:Christianise,+ ] conversion1,@ (conversion to Christianity) }
+{ [ death, birth,! verb.change:die,+ verb.perception:die,+ ] [ decease, verb.change:decease,+ ] expiry, change,@ (the event of dying or departure from life; "her death came as a terrible shock"; "upon your decease the capital will pass to your grandchildren") }
+{ [ decrease, verb.change:decrease1,+ verb.change:decrease,+ increase,! ] lessening, [ drop-off, verb.change:drop_off1,+ ] change,@ (a change downward; "there was a decrease in his temperature as the fever subsided"; "there was a sharp drop-off in sales") }
+{ sinking1, decrease,@ (a slow fall or decline (as for lack of strength); "after several hours of sinking an unexpected rally rescued the market"; "he could not control the sinking of his legs") }
+{ [ destabilization, verb.change:destabilize,+ ] change,@ noun.artifact:ship,;c noun.artifact:aircraft,;c (an event that causes a loss of equilibrium (as of a ship or aircraft)) }
+{ [ increase, verb.change:increase2,+ verb.change:increase,+ decrease,! ] change,@ (a change resulting in an increase; "the increase is scheduled for next month") }
+{ [ attrition, adj.pert:attritional,+ ] decrease,@ (a wearing down to weaken or destroy; "a war of attrition") }
+{ [ easing, verb.change:ease,+ ] moderation, relief, change,@ (a change for the better) }
+{ breath_of_fresh_air, easing,@ (a welcome relief; "the new management was like a breath of fresh air") }
+{ [ improvement, verb.change:improve,+ ] [ betterment, verb.change:better,+ ] [ advance1, verb.social:advance1,+ verb.change:advance,+ ] transformation,@ (a change for the better; progress in development) }
+{ [ refinement, verb.change:refine1,+ ] [ elaboration, verb.change:elaborate,+ ] improvement,@ (the result of improving something; "he described a refinement of this technique") }
+{ [ Assumption, verb.contact:assume,+ ] miracle1,@ noun.cognition:Christianity,;c ((Christianity) the taking up of the body and soul of the Virgin Mary when her earthly life had ended) }
+{ [ deformation1, adj.pert:deformational,+ verb.contact:deform2,+ verb.contact:deform1,+ verb.contact:deform,+ verb.change:deform2,+ verb.change:deform1,+ verb.change:deform,+ ] alteration,@ (alteration in the shape or dimensions of an object as a result of the application of stress to it) }
+{ [ Transfiguration, verb.change:transfigure2,+ ] Transfiguration_of_Jesus, miracle1,@ noun.communication:New_Testament,;c ((New Testament) the sudden emanation of radiance from the person of Jesus) }
+{ [ transition1, verb.change:transition,+ verb.change:transition1,+ ] change,@ (a change from one place or state or subject or stage to another) }
+{ ground_swell1, transition1,@ (an obvious change of public opinion or political sentiment that occurs without leadership or overt expression; "there was a ground swell of antiwar sentiment") }
+{ [ leap, verb.change:leap,+ ] [ jump, verb.change:jump1,+ ] saltation1, transition1,@ (an abrupt transition; "a successful leap from college to the major leagues") }
+{ quantum_leap, quantum_jump1, jump1,@ (a sudden large increase or advance; "this may not insure success but it will represent a quantum leap from last summer") }
+{ quantum_jump, leap,@ noun.cognition:physics,;c ((physics) an abrupt transition of an electron or atom or molecule from one quantum state to another with the emission or absorption of a quantum) }
+{ transformation, transmutation, [ shift1, verb.change:shift4,+ verb.change:shift3,+ ] change,@ (a qualitative change) }
+{ population_shift, transformation,@ (a change in the relative numbers of the different groups of individuals making up a population) }
+{ [ pyrolysis, adj.pert:pyrolytic,+ ] transformation,@ (transformation of a substance produced by the action of heat) }
+{ sea_change, transformation,@ (a profound transformation) }
+{ [ sublimation2, verb.change:sublimate5,+ ] transformation,@ noun.cognition:chemistry,;c ((chemistry) a change directly from the solid to the gaseous state without becoming liquid) }
+{ tin_pest, tin_disease, tin_plague, transformation,@ (the transformation of ordinary white tin into powdery grey tin at very cold temperatures) }
+{ [ infection, verb.body:infect1,+ ] [ contagion, adj.all:infectious^contagious1,+ ] [ transmission, verb.possession:transmit10,+ ] incident,@ (an incident in which an infectious disease is transmitted) }
+{ scene, incident,@ (an incident (real or imaginary); "their parting was a sad scene") }
+{ sideshow, incident,@ (a subordinate incident of little importance relative to the main event; "instruction is not an educational sideshow") }
+{ [ collapse, verb.motion:collapse,+ ] happening,@ (a natural event caused by something suddenly falling down or caving in; "the roof is in danger of collapse"; "the collapse of the old star under its own gravity") }
+{ [ cave_in, verb.motion:cave_in,+ ] [ subsidence1, verb.motion:subside2,+ ] collapse,@ (the sudden collapse of something into a hollow beneath it) }
+{ [ killing, verb.contact:kill1,+ verb.contact:kill,+ ] violent_death, fatality,@ (an event that causes someone to die) }
+{ fatal_accident, casualty2, fatality,@ accident1,@ (an accident that causes someone to die) }
+{ collateral_damage, fatal_accident,@ noun.communication:euphemism,;u noun.group:military,;c ((euphemism) inadvertent casualties and destruction inflicted on civilians in the course of military operations) }
+{ [ cessation, verb.stative:cease,+ ] surcease, stop,@ (a stopping; "a cessation of the thunder") }
+{ [ settling, verb.motion:settle4,+ ] [ subsiding, verb.motion:subside2,+ ] [ subsidence, verb.motion:subside2,+ ] sinking,@ (a gradual sinking to a lower level) }
+{ [ drop, verb.motion:drop,+ verb.motion:drop1,+ ] [ fall, verb.motion:fall15,+ verb.motion:fall3,+ ] descent,@ gravitation,@ (a free and rapid descent by the force of gravity; "it was a miracle that he survived the drop from that height") }
+{ free_fall, drop,@ (the ideal falling motion of something subject only to a gravitational field) }
+{ [ gravitation, adj.pert:gravitational,+ verb.motion:gravitate,+ levitation,! ] change_of_location,@ (movement downward resulting from gravitational attraction; "irrigation by gravitation rather than by pumps") }
+{ [ levitation, gravitation,! ] change_of_location,@ (movement upward in virtue of lightness) }
+{ lightening, descent,@ (descent of the uterus into the pelvic cavity that occurs late in pregnancy; the fetus is said to have dropped) }
+{ [ descent, verb.motion:descend,+ ] change_of_location,@ (a movement downward) }
+{ set, descent,@ (the descent of a heavenly body below the horizon; "before the set of sun") }
+{ [ shower, verb.weather:shower,+ ] cascade, descent,@ (a sudden downpour (as of tears or sparks etc) likened to a rain shower; "a little shower of rose petals"; "a sudden cascade of sparks") }
+{ [ sinking, verb.motion:sink,+ ] descent,@ (a descent as through liquid (especially through water); "they still talk about the sinking of the Titanic") }
+{ [ submergence, verb.motion:submerge,+ verb.contact:submerge1,+ verb.change:submerge2,+ ] [ submerging, verb.motion:submerge,+ verb.contact:submerge1,+ verb.change:submerge2,+ ] [ submersion, verb.motion:submerse,+ verb.contact:submerse,+ verb.motion:submerge,+ ] immersion, sinking,@ (sinking until covered completely with water) }
+{ [ dip, verb.contact:dip11,+ verb.change:dip,+ verb.consumption:dip,+ verb.contact:dip,+ ] immersion,@ (a brief immersion) }
+{ [ foundering, verb.motion:founder1,+ ] going_under, sinking,@ noun.artifact:ship,;c ((of a ship) sinking) }
+{ [ wobble, adj.all:unstable^wobbly,+ verb.motion:wobble,+ verb.motion:wobble2,+ ] movement,@ (an unsteady rocking motion) }
+{ shimmy, wobble,@ (an abnormal wobble in a motor vehicle (especially in the front wheels); "he could feel the shimmy in the steering wheel") }
+{ [ flop, verb.social:flop,+ ] [ bust, verb.contact:bust1,+ ] fizzle, failure,@ (a complete failure; "the play was a dismal flop") }
+{ turkey, [ bomb, verb.social:bomb,+ ] dud, flop,@ (an event that fails badly or is totally ineffectual; "the first experiment was a real turkey"; "the meeting was a dud as far as new business was concerned") }
+{ debacle2, fiasco2, collapse,@ (a sudden and violent collapse) }
+{ [ implosion, verb.change:implode,+ ] collapse,@ (a sudden inward collapse; "the implosion of a light bulb") }
+{ gravitational_collapse, implosion,@ (the implosion of a star resulting from its own gravity; the result is a smaller and denser celestial object) }
+{ [ stop, verb.motion:stop1,+ verb.stative:stop,+ verb.motion:stop,+ ] [ halt, verb.change:halt2,+ verb.social:halt,+ verb.motion:halt1,+ verb.motion:halt5,+ ] ending,@ (the event of something ending; "it came to a stop at the bottom of the hill") }
+{ [ stand, verb.stative:stand6,+ ] standstill, [ tie-up, verb.contact:tie_up4,+ ] stop,@ (an interruption of normal activity) }
+{ [ deviation, verb.stative:deviate,+ ] [ divergence, verb.stative:diverge1,+ ] [ departure1, verb.stative:depart,+ ] [ difference, verb.cognition:differentiate2,+ verb.cognition:differentiate1,+ verb.change:differentiate,+ ] variation1,@ (a variation that deviates from the standard or norm; "the deviation from the mean") }
+{ [ discrepancy, adj.all:discordant^discrepant,+ ] variance, [ variant, adj.all:different^variant,+ verb.stative:vary,+ ] deviation,@ (an event that departs from expectations) }
+{ [ driftage, verb.motion:drift4,+ ] deviation,@ noun.artifact:aircraft,;c (the deviation (by a vessel or aircraft) from its intended course due to drifting) }
+{ inflection, flection, flexion, deviation,@ (deviation from a straight or normal course) }
+{ malformation, [ miscreation, verb.cognition:miscreate,+ ] failure,@ (something abnormal or anomalous) }
+{ [ monstrosity, adj.all:evil^monstrous,+ ] malformation,@ (something hideous or frightful; "they regarded the atom bomb as a monstrosity") }
+{ [ dislocation, verb.change:dislocate1,+ verb.change:dislocate,+ ] disruption, interruption,@ (an event that results in a displacement or discontinuity) }
+{ [ break2, verb.change:break,+ ] separation,@ (the occurrence of breaking; "the break in the dam threatened the valley") }
+{ [ snap1, verb.change:snap,+ verb.contact:snap1,+ ] break2,@ (a sudden breaking) }
+{ interruption, [ break, verb.stative:break5,+ ] happening,@ (some abrupt occurrence that interrupts an ongoing activity; "the telephone is an annoying interruption"; "there was a break in the action when a player was hurt") }
+{ punctuation, interruption,@ (something that makes repeated and regular interruptions or divisions) }
+{ [ suspension, verb.change:suspend,+ ] respite, reprieve, hiatus, [ abatement1, verb.change:abate,+ ] interruption,@ (an interruption in the intensity or amount of something) }
+{ [ defervescence, adj.pert:defervescent,+ verb.change:defervesce,+ ] suspension,@ (abatement of a fever as indicated by a reduction in body temperature) }
+{ [ eclipse, verb.perception:eclipse,+ ] occultation, interruption,@ (one celestial body obscures another) }
+{ solar_eclipse, eclipse,@ (the moon interrupts light from the sun) }
+{ lunar_eclipse, eclipse,@ (the earth interrupts light shining on the moon) }
+{ annular_eclipse, solar_eclipse,@ (only a thin outer disk of the sun can be seen) }
+{ total_eclipse, eclipse,@ (an eclipse as seen from a place where the eclipsed body is completely obscured) }
+{ partial_eclipse, eclipse,@ (an eclipse in which the eclipsed body is only partially obscured) }
+{ [ augmentation, verb.change:augment1,+ verb.change:augment,+ ] increase,@ (the amount by which something increases) }
+{ [ adjustment, verb.change:adjust1,+ ] [ accommodation, verb.stative:accommodate,+ verb.change:accommodate1,+ verb.change:accommodate,+ ] [ fitting, verb.change:fit1,+ verb.change:fit,+ ] improvement,@ (making or becoming suitable; adjusting to circumstances) }
+{ shakedown, adjustment,@ (initial adjustments to improve the functioning or the efficiency and to bring to a more satisfactory state; "the new industry's economic shakedown") }
+{ [ entrance, verb.motion:enter,+ ] [ entering, verb.motion:enter,+ ] change_of_location,@ (a movement into or inward) }
+{ [ fall4, verb.motion:fall,+ rise2,! ] change_of_location,@ (a movement downward; "the rise and fall of the tides") }
+{ [ climb, verb.change:climb,+ ] [ climbing, verb.motion:climb,+ verb.change:climb1,+ ] [ mounting, verb.motion:mount,+ verb.change:mount,+ ] rise2,@ (an event that involves rising to a higher point (as in altitude or temperature or intensity etc.)) }
+{ [ elevation, verb.motion:elevate,+ ] [ lift, verb.motion:lift3,+ verb.motion:lift,+ ] [ raising, verb.motion:raise2,+ ] rise2,@ (the event of something being raised upward; "an elevation of the temperature in the afternoon"; "a raising of the land resulting from volcanic activity")}
+{ [ heave1, verb.motion:heave,+ ] [ heaving1, verb.motion:heave,+ ] rise2,@ (an upward movement (especially a rhythmical rising and falling); "the heaving of waves on a rough sea") }
+{ liftoff, rise2,@ (the initial ascent of a rocket from its launching pad) }
+{ [ sound, verb.perception:sound1,+ verb.perception:sound2,+ verb.perception:sound3,+ verb.perception:sound,+ ] happening,@ (the sudden occurrence of an audible event; "the sound awakened them") }
+{ fuss, trouble1, [ bother, verb.social:bother1,+ ] [ hassle, verb.emotion:hassle,+ ] perturbation,@ (an angry disturbance; "he didn't want to make a fuss"; "they had labor trouble"; "a spot of bother") }
+{ headway, [ head, verb.motion:head2,+ verb.motion:head1,+ verb.motion:head,+ ] progress,@ (forward movement; "the ship made little headway against the gale") }
+{ [ trial, verb.emotion:try1,+ ] [ tribulation, verb.emotion:tribulate,+ ] [ visitation, verb.communication:visit1,+ ] affliction,@ (an annoying or frustrating or catastrophic event; "his mother-in-law's visits were a great trial for him"; "life is full of tribulations"; "a visitation of the plague") }
+{ union, happening,@ (the occurrence of a uniting of separate parts; "lightning produced an unusual union of the metals") }
+{ amphimixis, union,@ noun.process:sexual_reproduction,#m (union of sperm and egg in sexual reproduction) }
+{ [ fusion, verb.change:fuse,+ ] [ merger, verb.change:merge2,+ ] [ unification, verb.change:unify1,+ verb.change:unify,+ ] union,@ (an occurrence that involves the production of a union) }
+{ [ combining, verb.stative:combine,+ verb.contact:combine3,+ ] [ combine, verb.stative:combine,+ verb.possession:combine,+ verb.contact:combine3,+ verb.contact:combine1,+ verb.change:combine2,+ verb.change:combine,+ ] union,@ (an occurrence that results in things being united) }
+{ [ recombination, verb.change:recombine1,+ verb.change:recombine,+ ] combining,@ noun.cognition:genetics,;c ((genetics) a combining of genes or characters different from what they were in the parents) }
+{ [ recombination1, verb.change:recombine3,+ ] combining,@ noun.cognition:physics,;c ((physics) a combining of charges or transfer of electrons in a gas that results in the neutralization of ions; important for ions arising from the passage of high-energy particles) }
+{ [ consolidation, verb.change:consolidate4,+ verb.change:consolidate3,+ ] combining,@ (combining into a solid mass) }
+{ [ mix, verb.contact:mix2,+ verb.change:mix1,+ verb.change:mix2,+ verb.contact:mix,+ verb.change:mix,+ ] [ mixture, verb.contact:mix,+ verb.change:mix1,+ ] combining,@ (an event that combines things in a mixture; "a gradual mixture of cultures") }
+{ [ concoction, verb.contact:concoct,+ ] mix,@ (an occurrence of an unusual mixture; "it suddenly spewed out a thick green concoction") }
+{ [ conglomeration, verb.change:conglomerate,+ ] [ conglobation, verb.change:conglobe,+ ] combining,@ (an occurrence combining miscellaneous things into a (more or less) rounded mass) }
+{ [ blend, verb.contact:blend,+ verb.change:blend,+ ] mix,@ (an occurrence of thorough mixing) }
+{ rapid_climb, rapid_growth, [ zoom, verb.motion:zoom3,+ ] rise2,@ (a rapid rise) }
+{ [ takeoff, verb.motion:take_off,+ ] rise2,@ (the initial ascent of an airplane as it becomes airborne) }
+{ [ upheaval, verb.contact:upheave,+ ] [ uplift, verb.motion:uplift2,+ ] upthrow, upthrust, rise2,@ noun.cognition:geology,;c ((geology) a rise of land to a higher elevation (as in the process of mountain building)) }
+{ [ uplifting, verb.motion:uplift,+ ] rise2,@ (the rise of something; "the uplifting of the clouds revealed the blue of a summer sky") }
+
+{ [ baa, verb.communication:baa,+ ] cry,@ (the cry made by sheep) }
+{ [ bang, verb.perception:bang,+ verb.motion:bang,+ ] [ clap, verb.contact:clap,+ ] eruption1, [ blast1, verb.perception:blast,+ ] bam, noise,@ (a sudden very loud noise) }
+{ bong, sound,@ (a dull resonant sound as of a bell) }
+{ banging, noise,@ (a continuing very loud noise) }
+{ [ bark, verb.communication:bark,+ ] cry,@ (the sound made by a dog) }
+{ [ bark2, verb.communication:bark1,+ ] noise,@ (a noise resembling the bark of a dog) }
+{ [ bay, verb.communication:bay,+ ] cry,@ (the sound of a hound on the scent) }
+{ [ beat1, verb.perception:beat1,+ verb.contact:beat,+ ] sound,@ (the sound of stroke or blow; "he heard the beat of a drum") }
+{ [ beep, verb.perception:beep,+ verb.communication:beep1,+ ] [ bleep, verb.perception:bleep,+ ] sound,@ (a short high tone produced as a signal or warning) }
+{ [ bell, verb.contact:bell,+ ] [ toll, verb.perception:toll,+ ] sound,@ (the sound of a bell being struck; "saved by the bell"; "she heard the distant toll of church bells") }
+{ [ blare, verb.perception:blare1,+ ] blaring, [ cacophony, adj.all:cacophonic,+ adj.all:cacophonous,+ ] [ clamor, adj.all:noisy^clamorous,+ ] [ din, verb.perception:din,+ ] noise,@ (a loud harsh or strident noise) }
+{ [ boom1, verb.perception:boom1,+ verb.perception:boom,+ ] [ roar, verb.communication:roar1,+ ] [ roaring, verb.communication:roar1,+ ] [ thunder, adj.all:loud^thunderous,+ verb.communication:thunder1,+ verb.communication:thunder,+ verb.motion:thunder,+ ] noise,@ (a deep prolonged loud noise) }
+{ [ bleat, verb.communication:bleat,+ ] cry,@ (the sound of sheep or goats (or any sound resembling this)) }
+{ [ bray, verb.communication:bray,+ verb.body:bray,+ ] cry,@ (the cry of an ass) }
+{ bow-wow, bark,@ (the bark of a dog) }
+{ [ buzz, verb.perception:buzz,+ verb.communication:buzz,+ ] [ bombilation, verb.perception:bombilate,+ ] [ bombination, verb.perception:bombinate,+ ] sound,@ (sound of rapid vibration; "the buzz of a bumble bee") }
+{ [ cackle, adj.all:cacophonous^cackly,+ verb.communication:cackle,+ ] cry,@ (the sound made by a hen after laying an egg) }
+{ [ caterwaul, verb.communication:caterwaul,+ ] cry,@ (the yowling sound made by a cat in heat) }
+{ [ caw, verb.communication:caw,+ ] cry,@ (the sound made by corvine birds) }
+{ [ chatter, verb.communication:chatter2,+ ] [ chattering, verb.communication:chatter2,+ ] noise,@ (the high-pitched continuing noise made by animals (birds or monkeys)) }
+{ chatter1, [ chattering1, verb.contact:chatter,+ ] noise,@ (the rapid series of noises made by the parts of a machine) }
+{ [ cheep, verb.communication:cheep,+ ] [ peep, verb.communication:peep,+ ] cry,@ (the short weak cry of a young bird) }
+{ [ chink, verb.perception:chink,+ ] [ click, verb.perception:click,+ verb.motion:click,+ ] [ clink, verb.perception:clink1,+ verb.perception:clink,+ ] sound,@ (a short light metallic sound) }
+{ [ chirp, adj.pert:chirpy,+ verb.creation:chirp,+ verb.communication:chirp,+ ] sound,@ (a sharp sound made by small birds or insects) }
+{ [ chirrup, verb.communication:chirrup,+ ] [ twitter, verb.communication:twitter,+ ] sound,@ (a series of chirps) }
+{ [ chorus, adj.pert:choral1,+ verb.communication:chorus,+ ] sound,@ (any utterance produced simultaneously by a group; "a chorus of boos") }
+{ [ chug, verb.perception:chug,+ ] noise,@ (the dull explosive noise made by an engine) }
+{ [ clack, verb.perception:clack,+ verb.communication:clack1,+ ] [ clap1, verb.contact:clap,+ ] noise,@ (a sharp abrupt noise as if two objects hit together; may be repeated) }
+{ [ clang, verb.perception:clang,+ ] [ clangor, adj.all:noisy^clangorous,+ verb.perception:clangor1,+ verb.perception:clangor,+ verb.perception:clang,+ ] [ clangour, verb.perception:clangour,+ ] clangoring, [ clank, verb.perception:clank,+ ] clash, [ crash1, verb.motion:crash1,+ ] noise,@ (a loud resonant repeating noise; "he could hear the clang of distant bells") }
+{ [ clatter, verb.perception:clatter,+ ] noise,@ (a rattling noise (often produced by rapid movement); "the shutters clattered against the house"; "the clatter of iron wheels on cobblestones") }
+{ click-clack, sound,@ (a succession of clicks) }
+{ clickety-clack, clickety-click, click-clack,@ (a fast and rhythmic click-clack; "the clickety-clack of the typewriters") }
+{ clip-clop, clippety-clop, clop, clopping, clunking, clumping, sound,@ (the sound of a horse's hoofs hitting on a hard surface) }
+{ [ cluck, verb.communication:cluck,+ ] clucking, cry,@ (the sound made by a hen (as in calling her chicks)) }
+{ cock-a-doodle-doo, crow,@ (an imitation of the crow of a cock) }
+{ [ coo, verb.communication:coo,+ ] cry,@ (the sound made by a pigeon) }
+{ crack, [ cracking, verb.perception:crack1,+ ] [ snap, verb.motion:snap1,+ verb.change:snap1,+ verb.motion:snap,+ ] noise,@ (a sudden sharp noise; "the crack of a whip"; "he heard the cracking of the ice"; "he can hear the snap of a twig") }
+{ [ crackle, verb.perception:crackle,+ ] [ crackling, verb.perception:crackle,+ ] [ crepitation, verb.perception:crepitate,+ ] noise,@ (the sharp sound of snapping noises) }
+{ [ creak, adj.all:noisy^creaky,+ verb.perception:creak,+ ] [ creaking, verb.perception:creak,+ ] noise,@ (a squeaking sound; "the creak of the floorboards gave him away") }
+{ crepitation_rale, rattle,@ noun.state:symptom,@ (the crackling sound heard on auscultation when patients with respiratory diseases inhale; associated with tuberculosis and pneumonia and congestive heart failure) }
+{ [ crow, verb.communication:crow2,+ ] cry,@ (the cry of a cock (or an imitation of it)) }
+{ [ crunch, verb.communication:crunch,+ ] noise,@ (the sound of something crunching; "he heard the crunch of footsteps on the gravel path") }
+{ [ cry, verb.communication:cry3,+ ] sound,@ (the characteristic utterance of an animal; "animal cries filled the night") }
+{ [ decrepitation, verb.change:decrepitate1,+ verb.change:decrepitate,+ ] crackle,@ (the crackling or breaking up of certain crystals when they are heated) }
+{ ding, sound,@ (a ringing sound) }
+{ drip1, dripping1, sound,@ (the sound of a liquid falling drop by drop; "the constant sound of dripping irritated him") }
+{ [ drum, verb.creation:drum,+ ] sound,@ (the sound of a drum; "he could hear the drums before he heard the fifes") }
+{ ding-dong, noise,@ (the noise made by a bell) }
+{ explosion2, noise,@ (the noise caused by an explosion; "the explosion was heard a mile away") }
+{ footfall, footstep, [ step, verb.motion:step4,+ verb.motion:step,+ ] sound,@ (the sound of a step of someone walking; "he heard footsteps on the porch") }
+{ [ gargle, verb.communication:gargle,+ ] sound,@ (the sound produced while gargling) }
+{ [ gobble, verb.communication:gobble,+ ] cry,@ (the characteristic sound made by a turkey cock) }
+{ grate, noise,@ (a harsh rasping sound made by scraping something) }
+{ [ grinding, verb.contact:grind,+ ] noise,@ (a harsh and strident sound (as of the grinding of gears)) }
+{ [ growl, verb.communication:growl,+ ] [ growling, verb.communication:growl,+ ] cry,@ (the sound of growling (as made by animals)) }
+{ [ grunt, verb.communication:grunt,+ ] oink, noise,@ (the short low gruff noise of the kind made by hogs) }
+{ [ gurgle, verb.perception:gurgle2,+ verb.perception:gurgle,+ ] sound,@ (the bubbling sound of water flowing from a bottle with a narrow neck) }
+{ [ hiss, verb.communication:hiss2,+ verb.communication:hiss1,+ verb.communication:hiss,+ ] [ hissing, verb.communication:hiss2,+ verb.communication:hiss1,+ verb.communication:hiss,+ ] hushing, fizzle1, [ sibilation, verb.communication:sibilate,+ ] noise,@ (a fricative sound (especially as an expression of disapproval); "the performers could not be heard over the hissing of the audience") }
+{ [ honk, verb.communication:honk,+ ] cry,@ (the cry of a goose (or any sound resembling this)) }
+{ [ howl, verb.communication:howl1,+ ] noise,@ (a loud sustained noise resembling the cry of a hound; "the howl of the wind made him restless") }
+{ [ howl2, verb.communication:howl3,+ ] cry,@ (the long plaintive cry of a hound or a wolf) }
+{ hubbub, [ uproar, adj.all:noisy^uproarious,+ ] brouhaha, katzenjammer, noise,@ (loud confused noise from many sources) }
+{ [ hum, verb.stative:hum,+ verb.perception:hum,+ verb.communication:hum1,+ ] [ humming, verb.stative:hum,+ verb.communication:hum1,+ ] noise,@ (a humming noise; "the hum of distant traffic") }
+{ [ jingle, adj.all:reverberant^jingly,+ verb.perception:jingle,+ ] [ jangle, adj.all:cacophonous^jangly,+ verb.perception:jangle,+ ] sound,@ (a metallic sound; "the jingle of coins"; "the jangle of spurs") }
+{ [ knell, verb.perception:knell1,+ verb.perception:knell,+ ] bell,@ (the sound of a bell rung slowly to announce a death or a funeral or the end of something) }
+{ [ knock1, verb.perception:knock1,+ verb.perception:knock,+ verb.contact:knock1,+ ] [ knocking, verb.perception:knock1,+ verb.contact:knock1,+ ] sound,@ (the sound of knocking (as on a door or in an engine or bearing); "the knocking grew louder") }
+{ [ meow, verb.communication:meow,+ ] [ mew, verb.communication:mew,+ ] [ miaou, verb.communication:miaou,+ ] [ miaow, verb.communication:miaow,+ ] miaul, cry,@ (the sound made by a cat (or any sound resembling this)) }
+{ [ moo, verb.communication:moo,+ ] cry,@ (the sound made by a cow or bull) }
+{ [ mutter, verb.communication:mutter1,+ noun.person:mutterer,+ ] [ muttering, verb.communication:mutter1,+ ] [ murmur, adj.all:soft4^murmurous,+ verb.communication:murmur,+ noun.person:murmurer,+ ] [ murmuring, verb.communication:murmur,+ ] [ murmuration, verb.communication:murmur,+ ] [ mussitation, verb.communication:mussitate,+ ] sound,@ (a low continuous indistinct sound; often accompanied by movement of the lips without the production of articulate speech) }
+{ [ neigh, verb.communication:neigh,+ ] [ nicker, verb.communication:nicker,+ ] [ whicker, verb.communication:whicker,+ ] [ whinny, verb.communication:whinny,+ ] cry,@ (the characteristic sounds made by a horse) }
+{ [ noise, verb.perception:noise,+ ] sound,@ (sound of any kind (especially unintelligible or dissonant sound); "he enjoyed the street noises"; "they heard indistinct noises of people talking"; "during the firework display that ended the gala the noise reached 98 decibels") }
+{ pant, noise,@ (the noise made by a short puff of steam (as from an engine)) }
+{ paradiddle, [ roll3, verb.perception:roll,+ ] drum_roll, sound,@ (the sound of a drum (especially a snare drum) beaten rapidly and continuously) }
+{ [ pat, verb.contact:pat,+ ] rap, [ tap, verb.motion:tap,+ verb.perception:tap1,+ verb.contact:tap,+ ] sound,@ (the sound made by a gentle blow) }
+{ [ patter, verb.perception:patter,+ ] sound,@ (a quick succession of light rapid sounds; "the patter of mice"; "the patter of tiny feet") }
+{ [ peal, verb.perception:peal1,+ verb.perception:peal,+ ] [ pealing, verb.perception:peal1,+ verb.perception:peal,+ ] [ roll, verb.perception:roll,+ ] [ rolling, verb.perception:roll,+ ] sound,@ (a deep prolonged sound (as of thunder or large bells))}
+{ [ ping, verb.perception:ping,+ verb.perception:ping1,+ verb.contact:ping,+ ] sound,@ (a sharp high-pitched resonant sound (as of a sonar echo or a bullet striking metal)) }
+{ [ pitter-patter, verb.perception:pitter-patter,+ ] pat,@ (a series of rapid tapping sounds; "she missed the pitter-patter of little feet around the house") }
+{ [ plonk, verb.contact:plonk,+ ] noise,@ (the noise of something dropping (as into liquid)) }
+{ [ plop, verb.motion:plop1,+ verb.motion:plop,+ ] noise,@ (the noise of a rounded object dropping into a liquid without a splash) }
+{ [ plump, verb.motion:plump1,+ ] noise,@ (the sound of a sudden heavy fall) }
+{ [ plunk, verb.perception:plunk,+ ] sound,@ (a hollow twanging sound) }
+{ [ pop, verb.change:pop3,+ verb.change:pop4,+ verb.perception:pop6,+ verb.competition:pop,+ verb.perception:pop,+ ] [ popping, verb.perception:pop,+ verb.competition:pop,+ ] sound,@ (a sharp explosive sound as from a gunshot or drawing a cork) }
+{ [ purr, verb.communication:purr,+ ] sound,@ (a low vibrating sound typical of a contented cat) }
+{ [ quack, verb.communication:quack,+ ] sound,@ (the harsh sound of a duck) }
+{ [ quaver, verb.communication:quaver1,+ ] sound,@ (a tremulous sound) }
+{ [ racket, adj.all:noisy^rackety,+ verb.perception:racket,+ verb.social:racket,+ ] noise,@ (a loud and disturbing noise) }
+{ rat-a-tat-tat, rat-a-tat, rat-tat, tapping,@ (a series of short sharp taps (as made by strokes on a drum or knocks on a door)) }
+{ [ rattle, verb.perception:rattle,+ ] [ rattling, verb.perception:rattle,+ verb.motion:rattle,+ ] rale, noise,@ (a rapid series of short loud sounds (as might be heard with a stethoscope in some types of respiratory disorders); "the death rattle") }
+{ report, noise,@ (a sharp explosive sound (especially the sound of a gun firing); "they heard a violent report followed by silence") }
+{ rhonchus, noise,@ (a sound like whistling or snoring that is heard with a stethoscope during expiration as air passes through obstructed channels) }
+{ [ ring, verb.communication:ring,+ verb.perception:ring1,+ verb.perception:ring,+ ] [ ringing, verb.perception:ring1,+ verb.perception:ring,+ ] [ tintinnabulation, verb.perception:tintinnabulate,+ ] sound,@ (the sound of a bell ringing; "the distinctive ring of the church bell"; "the ringing of the telephone"; "the tintinnabulation that so voluminously swells from the ringing and the dinging of the bells"--E. A. Poe) }
+{ [ roar1, verb.communication:roar5,+ ] cry,@ (the sound made by a lion) }
+{ rub-a-dub, rataplan, drumbeat, sound,@ (the sound made by beating a drum) }
+{ [ rumble, verb.communication:rumble,+ verb.perception:rumble,+ ] [ rumbling, verb.perception:rumble,+ verb.communication:rumble,+ ] [ grumble, verb.perception:grumble,+ verb.communication:grumble2,+ ] [ grumbling, verb.perception:grumble,+ verb.communication:grumble2,+ ] noise,@ (a loud low dull continuous noise; "they heard the rumbling of thunder") }
+{ [ rustle, verb.perception:rustle,+ ] [ rustling, verb.perception:rustle,+ ] whisper, whispering, noise,@ (a light noise, like the noise of silk clothing or leaves blowing in the wind) }
+{ scrape, scraping, [ scratch, adj.all:cacophonous^scratchy,+ ] scratching, noise,@ (a harsh noise made by scraping; "the scrape of violin bows distracted her") }
+{ [ screech, adj.all:high3^screechy,+ verb.perception:screech,+ ] [ screeching, verb.perception:screech,+ ] [ shriek, verb.communication:shriek,+ ] shrieking, [ scream, verb.perception:scream,+ ] [ screaming, verb.perception:scream,+ ] noise,@ (a high-pitched noise resembling a human cry; "he ducked at the screechings of shells"; "he heard the scream of the brakes") }
+{ [ scrunch, verb.perception:scrunch,+ ] noise,@ (a crunching noise) }
+{ [ shrilling, verb.communication:shrill,+ ] noise,@ (a continuing shrill noise; "the clash of swords and the shrilling of trumpets"--P. J. Searles) }
+{ [ sigh, verb.communication:sigh1,+ verb.body:sigh,+ ] sound,@ (a sound like a person sighing; "she heard the sigh of the wind in the trees") }
+{ sizzle, noise,@ (a sizzling noise) }
+{ [ skirl, verb.creation:skirl,+ verb.perception:skirl,+ ] sound,@ (the sound of (the chanter of) a bagpipe) }
+{ [ slam2, verb.contact:slam1,+ ] noise,@ (the noise made by the forceful impact of two objects) }
+{ [ snap2, verb.contact:snap2,+ verb.perception:snap,+ ] noise,@ (the noise produced by the rapid movement of a finger from the tip to the base of the thumb on the same hand; "servants appeared at the snap of his fingers") }
+{ [ snore, verb.body:snore,+ ] noise,@ (the rattling noise produced when snoring) }
+{ [ song, verb.communication:sing,+ ] sound,@ (a distinctive or characteristic sound; "the song of bullets was in the air"; "the song of the wind"; "the wheels sang their song as the train rocketed ahead") }
+{ spatter, spattering, [ splatter, verb.perception:splat,+ ] splattering, [ sputter, verb.perception:sputter,+ ] [ splutter, verb.communication:splutter,+ ] [ sputtering, verb.perception:sputter,+ ] noise,@ (the noise of something spattering or sputtering explosively; "he heard a spatter of gunfire") }
+{ [ splash, adj.pert:splashy,+ verb.perception:splash,+ verb.contact:splash,+ verb.contact:splash1,+ ] [ plash, verb.contact:plash,+ ] noise,@ (the sound like water splashing) }
+{ [ splat, verb.change:splat1,+ verb.perception:splat,+ ] splash,@ (a single splash; "he heard a splat as it hit the floor") }
+{ [ squawk, adj.all:cacophonous^squawky,+ verb.communication:squawk1,+ ] noise,@ (the noise of squawking; "she awoke to the squawk of chickens"; "the squawk of car horns") }
+{ [ squeak, adj.all:high3^squeaky,+ verb.perception:squeak,+ ] noise,@ (a short high-pitched noise; "the squeak of shoes on powdery snow") }
+{ [ squeal, verb.communication:squeal1,+ ] howl,@ (a high-pitched howl) }
+{ squish, noise,@ (the noise of soft mud being walked on) }
+{ [ stridulation, verb.perception:stridulate,+ ] noise,@ (a shrill grating or chirping noise made by some insects by rubbing body parts together) }
+{ [ strum, verb.perception:strum,+ ] sound,@ (sound of strumming; "the strum of a guitar") }
+{ [ susurration, verb.communication:susurrate,+ ] [ susurrus, verb.communication:susurrate,+ ] sound,@ (the indistinct sound of people whispering; "a soft susurrus of conversation") }
+{ [ swish, adj.all:noisy^swishy,+ verb.perception:swish,+ ] sound,@ (a brushing or rustling sound) }
+{ swoosh, whoosh, noise,@ (the noise produced by the sudden rush of a fluid (a gas or liquid)) }
+{ [ tapping, verb.perception:tap1,+ ] sound,@ (the sound of light blow or knock; "he heard the tapping of the man's cane") }
+{ throbbing1, sound,@ (a sound with a strong rhythmic beat; "the throbbing of the engines") }
+{ [ thump1, verb.perception:thump,+ ] [ thumping, verb.perception:thump,+ ] [ clump, verb.perception:clump,+ ] [ clunk, adj.all:audible^clunky,+ verb.perception:clunk,+ ] [ thud, verb.perception:thud1,+ verb.contact:thud,+ verb.perception:thud,+ ] sound,@ (a heavy dull sound (as made by impact of heavy objects)) }
+{ [ thrum, verb.perception:thrum2,+ ] sound,@ (a thrumming sound; "he could hear the thrum of a banjo") }
+{ [ thunder1, adj.all:stormy^thundery,+ verb.weather:thunder,+ ] noise,@ (a booming or crashing noise caused by air expanding along the path of a bolt of lightning) }
+{ thunderclap, thunder1,@ (a single sharp crash of thunder) }
+{ thunk, sound,@ (a dull hollow sound; "the basketball made a thunk as it hit the rim") }
+{ [ tick, verb.perception:tick,+ ] [ ticking, verb.perception:tick1,+ verb.perception:tick,+ ] sound,@ (a metallic tapping sound; "he counted the ticks of the clock") }
+{ [ ticktock, verb.perception:ticktock,+ ] tocktact, tictac, tick,@ (steady recurrent ticking sound as made by a clock) }
+{ [ ting, verb.perception:ting1,+ verb.perception:ting,+ ] [ tinkle, adj.all:reverberant^tinkly,+ verb.perception:tinkle,+ ] sound,@ (a light clear metallic sound as of a small bell) }
+{ [ toot, verb.perception:toot,+ ] sound,@ (a blast of a horn) }
+{ [ tootle, verb.perception:tootle,+ ] sound,@ (the sound of casual playing on a musical instrument; "he enjoyed hearing the tootles of their horns as the musicians warmed up") }
+{ tramp, footfall,@ (a heavy footfall; "the tramp of military boots") }
+{ [ trample, verb.motion:trample4,+ verb.body:trample,+ verb.motion:trample,+ ] [ trampling, verb.motion:trample,+ ] sound,@ (the sound of heavy treading or stomping; "he heard the trample of many feet") }
+{ [ twang, verb.contact:twang,+ verb.perception:twang,+ verb.perception:twang1,+ ] sound,@ (a sharp vibrating sound (as of a plucked string)) }
+{ [ tweet, verb.perception:tweet,+ ] chirp,@ (a weak chirping sound as of a small bird) }
+{ vibrato, sound,@ noun.communication:music,;c ((music) a pulsating effect in an instrumental or vocal tone produced by slight and rapid variations in pitch) }
+{ tremolo, vibrato,@ (vocal vibrato especially an excessive or poorly controlled one) }
+{ voice, sound,@ (a sound suggestive of a vocal utterance; "the noisy voice of the waterfall"; "the incessant voices of the artillery") }
+{ vroom, sound,@ (the roaring sound made by a motor that is running at high speed) }
+{ water_hammer, bang,@ (the banging sound of steam in pipes) }
+{ whack, sound,@ (the sound made by a sharp swift blow) }
+{ [ whir, verb.perception:whir,+ ] [ whirr, verb.perception:whirr,+ ] [ whirring, verb.perception:whir,+ ] [ birr, verb.perception:birr,+ ] sound,@ (sound of something in rapid motion; "whir of a bird's wings"; "the whir of the propellers") }
+{ [ whistle, verb.communication:whistle1,+ ] [ whistling, verb.perception:whistle,+ verb.communication:whistle1,+ ] sound,@ (the sound made by something moving rapidly or by steam coming out of a small aperture) }
+{ [ whiz, verb.perception:whiz,+ ] sound,@ (a buzzing or hissing sound as of something traveling rapidly through the air; "he heard the whiz of bullets near his head") }
+{ yip, [ yelp, verb.communication:yelp,+ ] [ yelping, verb.communication:yelp,+ ] cry,@ (a sharp high-pitched cry (especially by a dog)) }
+{ zing, sound,@ (a brief high-pitched buzzing or humming sound; "the zing of the passing bullet") }
+
+{ news_event, happening,@ (a newsworthy event) }
+{ [ pulse, verb.motion:pulse,+ verb.motion:pulsate,+ ] [ pulsation2, verb.motion:pulsate,+ ] heartbeat, [ beat, verb.motion:beat,+ ] periodic_event,@ (the rhythmic contraction and expansion of the arteries with each beat of the heart; "he could feel the beat of her heart") }
+{ [ diastole, adj.pert:diastolic,+ ] pulse,@ (the widening of the chambers of the heart between two contractions when the chambers fill with blood) }
+{ systole, pulse,@ (the contraction of the chambers of the heart (especially the ventricles) to drive blood into the aorta and pulmonary artery) }
+{ extrasystole, systole,@ (a premature systole resulting in a momentary cardiac arrhythmia) }
+{ [ throb, verb.motion:throb1,+ verb.perception:throb,+ ] [ throbbing, verb.perception:throb,+ ] [ pounding1, verb.motion:pound,+ ] pulse,@ (an instance of rapid strong pulsation (of the heart); "he felt a throbbing in his head") }
+{ [ high_tide, low_tide,! ] high_water, highwater, tide,@ (the tide when the water is highest) }
+{ [ ebb, verb.motion:ebb,+ ] reflux, flow,@ ebbtide,#p (the outward flow of the tide) }
+{ [ low_tide, high_tide,! ] low_water, tide,@ (the lowest (farthest) ebb of the tide) }
+{ [ ebbtide, flood_tide,! ] tide,@ (the tide while water is flowing out) }
+{ [ tide, adj.pert:tidal,+ verb.motion:tide2,+ verb.motion:tide3,+ ] periodic_event,@ (the periodic rise and fall of the sea level under the gravitational pull of the moon) }
+{ direct_tide, high_tide,@ (the occurrence of high tide on one side of the earth coinciding with high tide on the opposite side) }
+{ [ flood_tide, ebbtide,! ] flood, rising_tide, tide,@ (the occurrence of incoming water (between a low tide and the following high tide); "a tide in the affairs of men which, taken at the flood, leads on to fortune" -Shakespeare) }
+{ [ neap_tide, springtide,! ] neap, high_tide,@ (a less than average tide occurring at the first and third quarters of the moon) }
+{ [ springtide, neap_tide,! ] high_tide,@ (a greater than average tide occurring during the new and full moons) }
+{ leeward_tide, lee_tide, tide,@ (a tide that runs in the same direction as the wind is blowing; "a leeward tide is dangerous for small boats") }
+{ slack_water, slack_tide, tide,@ (the occurrence of relatively still water at the turn of the (low) tide) }
+{ tidal_bore, bore, eagre, aegir, eager, tidal_flow,@ (a high wave (often dangerous) caused by tidal flow (as by colliding tidal currents or in a narrow estuary)) }
+{ tidal_flow, tidal_current, current,@ tide,#p (the water current caused by the tides) }
+{ undertow, sea_puss, sea-puss, sea_purse, sea-purse, sea-poose, undertide,@ (the seaward undercurrent created after waves have broken on the shore) }
+{ riptide, rip_current, current,@ tide,#p (a strong surface current flowing outwards from a shore) }
+{ rip, riptide1, tide_rip, crosscurrent, countercurrent, noun.phenomenon:turbulence,@ (a stretch of turbulent water in a river or the sea caused by one current flowing into or across another current) }
+{ undertide, undercurrent, current,@ tide,#p (a current below the surface of a fluid) }
+{ [ slide, verb.motion:slide1,+ ] descent,@ noun.cognition:geology,;c ((geology) the descent of a large mass of earth or rocks or snow etc.) }
+{ [ avalanche, verb.motion:avalanche,+ ] slide,@ (a slide of large masses of snow and ice and mud down a mountain) }
+{ lahar, avalanche,@ (an avalanche of volcanic water and mud down the slopes of a volcano) }
+{ landslide, landslip, slide,@ (a slide of a large mass of dirt and rock down a mountain or cliff) }
+{ mudslide, landslide,@ (a landslide of mud) }
+{ Plinian_eruption, volcanic_eruption,@ (a volcanic eruption in which a stream of gas and ash is violently ejected to a height of several miles) }
+{ rockslide, landslide,@ (a landslide of rocks) }
+{ [ flow, verb.stative:flow,+ verb.motion:flow2,+ verb.motion:flow,+ ] [ flowing, verb.motion:flow,+ ] change_of_location,@ (the motion characteristic of fluids (liquids or gases)) }
+{ backflow, backflowing, flow,@ (a flow that returns toward its source) }
+{ [ regurgitation, verb.motion:regurgitate,+ ] backflow,@ (backflow of blood through a defective heart valve) }
+{ airflow, air_flow, flow_of_air, flow,@ (the flow of air; "she adjusted the fan so that the airflow was directed right at her") }
+{ current, [ stream, verb.motion:stream,+ ] flow,@ (a steady flow of a fluid (usually from natural causes); "the raft floated downstream on the current"; "he felt a stream of air"; "the hose ejected a stream of water") }
+{ freshet, spate, flow,@ (the occurrence of a water flow resulting from sudden rain or melting snow) }
+{ [ overflow, verb.motion:overflow,+ ] [ runoff, verb.motion:run_off4,+ ] overspill, flow,@ (the occurrence of surplus liquid (as water) exceeding the limit or capacity) }
+{ dripping, drippage, flow,@ (a liquid (as water) that flows in drops (as from the eaves of house)) }
+{ [ torrent, adj.pert:torrential,+ ] violent_stream, current,@ (a violently fast stream of water (or other liquid); "the houses were swept away in the torrent") }
+{ [ discharge1, verb.contact:discharge,+ ] outpouring, [ run, adj.all:liquid^runny,+ verb.motion:run1,+ ] flow,@ (the pouring forth of a fluid) }
+{ [ flux, verb.change:flux1,+ ] [ fluxion, verb.motion:flux,+ ] flow,@ (a flow or discharge) }
+{ airburst, explosion,@ (an explosion in the atmosphere) }
+{ [ blast, verb.competition:blast,+ ] explosion,@ (an explosion (as of dynamite)) }
+{ bomb_blast, blast,@ (the explosion of a bomb) }
+{ nuclear_explosion, atomic_explosion, bomb_blast,@ (the explosion of an atomic bomb) }
+{ backblast, back-blast, backfire1,@ (backfire from a recoilless weapon) }
+{ [ backfire, verb.perception:backfire,+ ] explosion,@ (a loud noise made by the explosion of fuel in the manifold or exhaust of an internal combustion engine) }
+{ big_bang, explosion,@ noun.cognition:cosmology,;c ((cosmology) the cosmic explosion that is hypothesized to have marked the origin of the universe) }
+{ blowback, backfire1, explosion,@ (the backward escape of gases and unburned gunpowder after a gun is fired) }
+{ [ fragmentation, verb.change:fragment,+ ] explosion,@ (the scattering of bomb fragments after the bomb explodes) }
+{ inflation, explosion,@ noun.cognition:cosmology,;c ((cosmology) a brief exponential expansion of the universe (faster than the speed of light) postulated to have occurred shortly after the big bang) }
+{ [ ricochet, verb.motion:ricochet,+ ] [ carom, verb.motion:carom,+ ] rebound,@ (a glancing rebound) }
+{ [ touch, verb.stative:touch1,+ verb.contact:touch4,+ verb.contact:touch1,+ verb.perception:touch,+ verb.contact:touch,+ ] [ touching, verb.perception:touch,+ ] contact,@ (the event of something coming in contact with the body; "he longed for the touch of her hand"; "the cooling touch of the night air") }
+{ [ concussion1, verb.motion:concuss,+ ] blow,@ (any violent blow) }
+{ [ rap1, verb.perception:rap,+ verb.contact:rap,+ ] [ strike, verb.contact:strike,+ verb.contact:strike1,+ ] [ tap1, verb.perception:tap1,+ verb.contact:tap,+ ] blow,@ (a gentle blow) }
+{ [ knock, verb.contact:knock4,+ ] [ bash, verb.contact:bash,+ ] [ bang1, verb.contact:bang,+ ] [ smash1, verb.contact:smash8,+ verb.change:smash,+ verb.contact:smash,+ ] [ belt, verb.contact:belt,+ ] blow,@ (a vigorous blow; "the sudden knock floored him"; "he took a bash right in his face"; "he got a bang on the head") }
+{ pounding, buffeting, blow,@ (repeated heavy blows) }
+{ sideswipe, blow,@ (a glancing blow from or on the side of something (especially motor vehicles)) }
+{ [ slap, verb.contact:slap,+ ] [ smack, verb.contact:smack2,+ ] blow,@ (a blow from a flat object (as an open hand)) }
+{ deflection, deflexion, refraction, bending,@ (the amount by which a propagating wave is bent) }
+{ simple_harmonic_motion, harmonic_motion,@ (periodic motion in which the restoring force is proportional to the displacement) }
+{ [ reversal, verb.change:reverse1,+ ] [ turn_around, verb.motion:turn_around,+ ] turning,@ (turning in an opposite direction or position; "the reversal of the image in the lens") }
+{ [ yaw, verb.motion:yaw,+ ] [ swerve, verb.motion:swerve,+ ] turning,@ (an erratic deflection from an intended course) }
+{ [ concussion, verb.motion:concuss,+ ] injury,@ (injury to the brain caused by a blow; usually resulting in loss of consciousness) }
+{ [ twinkle, verb.weather:twinkle,+ verb.perception:twinkle,+ ] [ scintillation, verb.weather:scintillate1,+ ] [ sparkling, verb.weather:sparkle,+ ] change,@ (a rapid change in brightness; a brief spark or flash) }
+{ [ shimmer, adj.all:bright^shimmery,+ verb.stative:shimmer,+ verb.weather:shimmer,+ ] [ play, verb.motion:play,+ ] change,@ (a weak and tremulous light; "the shimmer of colors on iridescent feathers"; "the play of light on the water") }
+{ [ flash, verb.change:flash4,+ ] happening,@ (a sudden intense burst of radiant energy) }
+{ [ flicker, verb.perception:flicker,+ verb.weather:flicker,+ ] [ spark1, verb.weather:spark,+ ] [ glint, verb.perception:glint,+ ] flash,@ (a momentary flash of light) }
+{ [ gleam, verb.perception:gleam,+ ] [ gleaming, verb.perception:gleam,+ ] [ glimmer, adj.all:bright^glimmery,+ verb.perception:glimmer,+ ] flash,@ (a flash of light (especially reflected light)) }
+{ [ glitter, adj.all:bright^glittery,+ ] [ sparkle, adj.all:bright^sparkly,+ verb.weather:sparkle2,+ verb.weather:sparkle,+ ] [ coruscation, verb.weather:coruscate,+ ] flash,@ (the occurrence of a small flash or spark) }
+{ heat_flash, flash,@ (a flash of intense heat (as released by an atomic explosion)) }
+{ lightning, flash,@ (the flash of light that accompanies an electric discharge in the atmosphere (or something resembling such a flash); can scintillate for a second or more) }
+{ heat_lightning, lightning,@ (bright flashes of light near the horizon without thunder (especially on hot evenings); usually attributed to distant lightning that is reflected by clouds) }
+{ sheet_lighting, lightning,@ (lightning that appears as a broad sheet; due to reflections of more distant lightning and to diffusion by the clouds) }
+{ streak, flash,@ (a sudden flash (as of lightning)) }
+{ [ brush, verb.contact:brush,+ ] light_touch, touch,@ (momentary contact) }
+{ [ stroke1, verb.contact:stroke,+ ] touch,@ (a light touch) }
+{ [ concentration, verb.change:concentrate3,+ verb.change:concentrate1,+ verb.change:concentrate,+ ] increase,@ (increase in density) }
+{ [ explosion1, verb.change:explode2,+ ] increase,@ (a sudden great increase; "the population explosion"; "the information explosion") }
+{ [ jump1, verb.change:jump,+ ] leap1, increase,@ (a sudden and decisive increase; "a jump in attendance") }
+{ runup, run-up, increase,@ (a substantial increase over a relatively short period of time; "a runup in interest rates"; "market runups are followed by corrections") }
+{ [ waxing, waning,! verb.change:wax1,+ verb.change:wax,+ ] increase,@ (a gradual increase in magnitude or extent; "the waxing of the moon") }
+{ [ convergence, adj.all:convergent,+ verb.motion:converge,+ verb.stative:converge,+ ] happening,@ (the occurrence of two or more things coming together) }
+{ [ meeting, verb.motion:meet1,+ ] [ encounter, verb.possession:encounter,+ ] convergence,@ (a casual or unexpected convergence; "he still remembers their meeting in Paris"; "there was a brief encounter in the hallway") }
+{ conjunction, alignment, meeting,@ noun.cognition:astronomy,;c ((astronomy) apparent meeting or passing of two or more celestial bodies in the same degree of the zodiac) }
+{ inferior_conjunction, conjunction,@ noun.cognition:astronomy,;c ((astronomy) the alignment of the Earth and a planet on the same side of the sun) }
+{ superior_conjunction, conjunction,@ noun.cognition:astronomy,;c ((astronomy) the alignment of the Earth and a planet on the opposite side of the sun) }
+{ [ conversion, verb.change:convert,+ ] [ transition, verb.change:transition1,+ ] [ changeover, verb.change:change_over2,+ ] transformation,@ (an event that results in a transformation) }
+{ glycogenesis, conversion,@ (the conversion of glucose to glycogen when the glucose in the blood exceeds the demand) }
+{ [ isomerization, verb.change:isomerize1,+ verb.change:isomerize,+ ] [ isomerisation, verb.change:isomerise1,+ verb.change:isomerise,+ ] conversion,@ (the conversion of a compound into an isomer of itself) }
+{ [ rectification, verb.change:rectify6,+ ] conversion,@ (the conversion of alternating current to direct current) }
+{ [ transmutation1, verb.change:transmute1,+ ] change,@ noun.cognition:physics,;c ((physics) the change of one chemical element into another (as by nuclear decay or radioactive bombardment); "the transmutation of base metals into gold proved to be impossible") }
+{ juncture, occasion, happening,@ (an event that occurs at a critical time; "at such junctures he always had an impulse to leave"; "it was needed only on special occasions") }
+{ [ climax, adj.all:climactic,+ verb.change:climax,+ ] flood_tide1, juncture,@ (the highest point of anything conceived of as growing or developing or unfolding; "the climax of the artist's career"; "in the flood tide of his success") }
+{ conjuncture, juncture,@ (a critical combination of events or circumstances) }
+{ [ emergency, adj.all:sudden^emergent,+ ] [ exigency, adj.all:imperative^exigent,+ ] pinch1, crisis,@ (a sudden unforeseen crisis (usually involving danger) that requires immediate action; "he never knew what to do in an emergency") }
+{ [ crisis, adj.all:crucial^critical,+ ] juncture,@ (a crucial stage or turning point in the course of something; "after the crisis the patient either dies or gets better") }
+{ landmark, turning_point, watershed, juncture,@ (an event marking a unique or important historical change of course or one on which important developments depend; "the agreement was a watershed in the history of both nations") }
+{ Fall_of_Man, landmark,@ noun.communication:Old_Testament,;c ((Judeo-Christian mythology) when Adam and Eve ate of the fruit of the tree of knowledge of good and evil in the Garden of Eden, God punished them by driving them out of the Garden of Eden and into the world where they would be subject to sickness and pain and eventual death) }
+{ road_to_Damascus, landmark,@ (a sudden turning point in a person's life (similar to the sudden conversion of the Apostle Paul on the road from Jerusalem to Damascus of arrest Christians)) }
+{ milestone, juncture,@ (a significant event in your life (or in a project)) }
+{ pass, head1, straits, juncture,@ (a difficult juncture; "a pretty pass"; "matters came to a head yesterday") }
+{ reality_check, juncture,@ (an occasion on which one is reminded of the nature of things in the real world; "this program is intended as a reality check for CEOs"; "after all those elaborate productions, I felt in need of a reality check") }
+{ [ compaction, verb.contact:compact9,+ ] compression2, [ concretion, verb.change:concrete,+ ] densification, concentration,@ (an increase in the density of something) }
+{ [ rarefaction, verb.change:rarefy3,+ verb.change:rarefy,+ ] concentration,@ (a decrease in the density of something; "a sound wave causes periodic rarefactions in its medium") }
+{ [ conservation, noun.person:conservationist,+ verb.possession:conserve2,+ ] preservation, improvement,@ (an occurrence of improvement by virtue of preventing loss or injury or other change) }
+{ [ recovery, verb.change:recover,+ ] improvement,@ (return to an original state; "the recovery of the forest after the fire was surprisingly rapid") }
+{ [ remission, verb.change:remit2,+ ] [ remittal, verb.change:remit2,+ ] [ subsidence2, verb.change:subside,+ ] suspension,@ (an abatement in intensity or degree (as in the manifestations of a disease); "his cancer is in remission") }
+{ resolution, remission,@ (the subsidence of swelling or other signs of inflammation (especially in a lung)) }
+{ curse, torment, affliction,@ (a severe affliction) }
+{ fire1, trial,@ (a severe trial; "he went through fire and damnation") }
+{ [ detriment, adj.all:harmful^detrimental,+ ] [ hurt1, verb.change:hurt4,+ ] damage,@ (a damage or loss) }
+{ expense, detriment,@ (a detriment or sacrifice; "at the expense of") }
+{ [ damage, verb.change:damage,+ ] [ harm1, verb.body:harm,+ ] [ impairment, verb.change:impair,+ ] change,@ (the occurrence of a change for the worse) }
+{ [ pulsation, verb.creation:pulsate,+ ] [ pulsing, verb.creation:pulse,+ ] [ pulse1, verb.creation:pulse,+ verb.creation:pulsate,+ ] impulse1, wave,@ noun.cognition:electronics,;c ((electronics) a sharp transient wave in the normal electrical state (or a series of such transients); "the pulsations seemed to be coming from a star") }
+{ [ breakdown1, verb.change:break_down,+ ] equipment_failure, failure,@ (a cessation of normal operation; "there was a power breakdown") }
+{ brake_failure, equipment_failure,@ (brakes fail to stop a vehicle) }
+{ engine_failure, equipment_failure,@ (engine does not run) }
+{ [ misfire, verb.competition:misfire,+ ] dud1, equipment_failure,@ (an explosion that fails to occur) }
+{ outage, equipment_failure,@ noun.artifact:computer,;c (a temporary suspension of operation (as of computers); "there will be a network outage from 8 to 10 a.m.") }
+{ power_outage, power_failure, equipment_failure,@ (equipment failure resulting when the supply of power fails; "the ice storm caused a power outage") }
+{ fault, equipment_failure,@ noun.cognition:electronics,;c ((electronics) equipment failure attributable to some defect in a circuit (loose connection or insulation failure or short circuit etc.); "it took much longer to find the fault than to fix it") }
+{ [ blackout, verb.change:black_out1,+ ] power_failure,@ (the failure of electric power for a general region) }
+{ flame-out, power_failure,@ noun.artifact:jet_engine,;c (the failure of a jet engine caused by an interruption of the fuel supply or by faulty combustion) }
+{ [ dwindling, verb.change:dwindle,+ ] dwindling_away, decrease,@ (a becoming gradually less; "there is no greater sadness that the dwindling away of a family") }
+{ [ waning, waxing,! verb.change:wane2,+ verb.change:wane1,+ verb.change:wane,+ ] decrease,@ (a gradual decrease in magnitude or extent; "the waning of his enthusiasm was obvious"; "the waxing and waning of the moon") }
+{ fading_away, dwindling,@ (gradually diminishing in brightness or loudness or strength) }
+{ [ turn1, verb.change:turn3,+ verb.change:turn4,+ verb.stative:turn,+ ] turn_of_events, twist, development1,@ (an unforeseen development; "events suddenly took an awkward turn") }
+{ [ development1, verb.change:develop3,+ ] change,@ (a recent event that has some relevance for the present situation; "recent developments in Iraq"; "what a revolting development!") }
+{ phenomenon, development1,@ (a remarkable development) }
+{ [ complication, verb.change:complicate,+ ] [ ramification, verb.change:ramify4,+ ] development1,@ (a development that complicates a situation; "the court's decision had many unforeseen ramifications") }
+{ [ revolution1, adj.all:new^revolutionary,+ noun.person:revolutionist,+ verb.cognition:revolutionize,+ verb.change:revolutionize,+ verb.cognition:revolutionise,+ verb.change:revolutionise,+ ] change,@ (a drastic and far-reaching change in ways of thinking and behaving; "the industrial revolution was also a cultural revolution") }
+{ Cultural_Revolution, Great_Proletarian_Cultural_Revolution, revolution1,@ noun.location:China,;r (a radical reform in China initiated by Mao Zedong in 1965 and carried out largely by the Red Guard; intended to eliminate counterrevolutionary elements in the government it resulted in purges of the intellectuals and socioeconomic chaos) }
+{ green_revolution, revolution1,@ (the introduction of pesticides and high-yield grains and better management during the 1960s and 1970s which greatly increased agricultural productivity) }
+{ [ mutation, adj.pert:mutational,+ verb.change:mutate,+ ] genetic_mutation, chromosomal_mutation, change,@ noun.cognition:genetics,;c ((genetics) any event that changes genetic structure; any alteration in the inherited nucleic acid sequence of the genotype of an organism) }
+{ sex_change, change,@ (a change in a person's physical sexual characteristics (as by surgery and hormone treatments)) }
+{ deletion, mutation,@ noun.cognition:genetics,;c ((genetics) the loss or absence of one or more nucleotides from a chromosome) }
+{ inversion, mutation,@ noun.cognition:genetics,;c ((genetics) a kind of mutation in which the order of the genes in a section of a chromosome is reversed) }
+{ transposition, mutation,@ noun.cognition:genetics,;c ((genetics) a kind of mutation in which a chromosomal segment is transfered to a new position on the same or another chromosome) }
+{ mutagenesis, cause,@ mutation,#p (an event capable of causing a mutation) }
+{ insertional_mutagenesis, mutagenesis,@ noun.cognition:genetics,;c ((genetics) a mutation caused by the insertion of exogenous DNA into a genome) }
+{ point_mutation, gene_mutation, mutation,@ noun.cognition:genetics,;c ((genetics) a mutation due to an intramolecular reorganization of a gene) }
+{ reversion, mutation,@ noun.cognition:genetics,;c ((genetics) a return to a normal phenotype (usually resulting from a second mutation)) }
+{ saltation, mutation,@ noun.cognition:genetics,;c ((genetics) a mutation that drastically changes the phenotype of an organism or species) }
+{ degeneration, retrogression, transformation,@ (passing from a more complex to a simpler biological form) }
+{ [ atrophy, verb.body:atrophy,+ ] [ withering, verb.change:wither1,+ ] weakening,@ (any weakening or degeneration (especially through lack of use)) }
+{ [ strengthening, verb.change:strengthen,+ weakening,! ] transformation,@ (becoming stronger) }
+{ [ weakening, verb.change:weaken,+ strengthening,! ] transformation,@ (becoming weaker) }
+{ [ attenuation, verb.change:attenuate,+ ] [ fading, verb.change:fade1,+ verb.body:fade,+ ] weakening,@ (weakening in force or intensity; "attenuation in the volume of the sound") }
+{ [ fall1, verb.social:fall,+ verb.social:fall2,+ rise,! ] downfall, weakening,@ (a sudden decline in strength or number or importance; "the fall of the House of Hapsburg") }
+{ [ anticlimax, adj.all:anticlimactic,+ ] fall1,@ (a disappointing decline after a previous rise; "the anticlimax of a brilliant career") }
+{ abiotrophy, degeneration,@ (a loss of vitality and a degeneration of cells and tissues not due to any apparent injury) }
+{ [ cataplasia, adj.pert:cataplastic,+ ] degeneration,@ noun.cognition:biology,;c ((biology) degenerative reversion of cells or tissue to a less differentiated or more primitive form) }
+{ perturbation, disturbance, noun.act:activity,@ (activity that is a malfunction, intrusion, or interruption; "the term `distress' connotes some degree of perturbation and emotional upset"; "he looked around for the source of the disturbance"; "there was a disturbance of neural function") }
+{ magnetic_storm, perturbation,@ (a sudden disturbance of the earth's magnetic field; caused by emission of particles from the sun) }
+{ earthquake, [ quake, verb.motion:quake2,+ ] temblor, [ seism, adj.all:unstable^seismic,+ adj.all:unstable^seismal,+ ] noun.phenomenon:geological_phenomenon,@ (shaking and vibration at the surface of the earth resulting from underground movement along a fault plane or from volcanic activity) }
+{ shock, seismic_disturbance, earthquake,@ (an instance of agitation of the earth's crust; "the first shock of the earthquake came shortly after noon while workers were at lunch") }
+{ [ tremor, verb.motion:tremor,+ ] earth_tremor, microseism, earthquake,@ (a small earthquake) }
+{ aftershock, tremor,@ (a tremor (or one of a series of tremors) occurring after the main shock of an earthquake) }
+{ foreshock, tremor,@ (a tremor preceding an earthquake) }
+{ seaquake, submarine_earthquake, earthquake,@ (an earthquake at the sea bed) }
+{ [ invasion, verb.motion:invade,+ verb.stative:invade,+ ] [ encroachment, verb.motion:encroach,+ ] intrusion, entrance,@ (any entry into an area not previously occupied; "an invasion of tourists"; "an invasion of locusts") }
+{ noise1, interference, disturbance1, trouble,@ (electrical or acoustic activity that can disturb communication) }
+{ background, background_signal, noise1,@ (extraneous signals that can be confused with the phenomenon to be observed or measured; "they got a bad connection and could hardly hear one another over the background signals") }
+{ background_noise, ground_noise, background,@ (extraneous noise contaminating sound measurements that cannot be separated from the desired signal) }
+{ surface_noise, background_noise,@ (noise produced by the friction of the stylus of a record player moving over the rotating record) }
+{ background_radiation, background,@ (radiation coming from sources other than those being observed) }
+{ crosstalk, XT, noise1,@ (the presence of an unwanted signal via an accidental coupling) }
+{ fadeout1, noise1,@ (a gradual temporary loss of a transmitted signal due to electrical disturbances) }
+{ jitter, noise1,@ (small rapid variations in a waveform resulting from fluctuations in the voltage supply or mechanical vibrations or other sources) }
+{ static, atmospherics, atmospheric_static, noise1,@ (a crackling or hissing noise caused by electrical interference) }
+{ white_noise, noise1,@ (a noise produced by a stimulus containing all of the audible frequencies of vibration; "white noise is a good masking agent") }
+{ radio_noise, static,@ (static at radio wavelengths) }
+{ [ seepage, verb.motion:seep,+ ] [ ooze, adj.all:leaky^oozy,+ verb.body:ooze,+ verb.motion:ooze,+ ] [ oozing, verb.motion:ooze,+ verb.body:ooze,+ ] flow,@ (the process of seeping) }
+{ [ exudation, verb.body:exude,+ ] [ transudation, verb.body:transude,+ ] seepage,@ (the process of exuding; the slow escape of liquids from blood vessels through pores or breaks in the cell membranes) }
+{ [ drip, adj.all:leaky^drippy,+ verb.contact:drip10,+ verb.motion:drip,+ ] [ trickle, verb.motion:trickle,+ ] [ dribble, verb.contact:dribble10,+ ] flow,@ (flowing in drops; the formation and falling of drops of liquid; "there's a drip through the roof") }
+{ intravenous_drip, drip,@ (slow continuous drip introducing solutions intravenously (a drop at a time)) }
+{ [ eddy, verb.motion:eddy,+ ] twist1, current,@ (a miniature whirlpool or whirlwind resulting when the current of a fluid doubles back on itself) }
+{ [ whirlpool, verb.motion:whirlpool,+ ] vortex, maelstrom, current,@ (a powerful circular current of water (usually the result of conflicting tides)) }
+{ Charybdis, whirlpool,@ noun.group:Greek_mythology,;c ((Greek mythology) a ship-devouring whirlpool lying on the other side of a narrow strait from Scylla) }
+{ [ dismemberment, verb.contact:dismember,+ ] taking_apart, mutilation,@ noun.act:torture,@ (the removal of limbs; being cut to pieces) }
+{ [ mutilation, verb.change:mutilate,+ verb.body:mutilate,+ ] injury,@ (an injury that causes disfigurement or that deprives you of a limb or other important body part) }
+{ emission, flow,@ (the occurrence of a flow of water (as from a pipe)) }
+{ distortion, [ deformation, verb.change:deform,+ ] damage,@ (a change for the worse) }
+{ warp, [ warping, verb.communication:warp,+ ] distortion,@ (a moral or mental distortion) }
+{ [ plunge, verb.motion:plunge,+ verb.motion:plunge1,+ ] drop,@ (a steep and rapid fall) }
+{ [ precipitation, verb.motion:precipitate1,+ verb.contact:precipitate,+ ] drop,@ (the act of casting down or falling headlong from a height) }
+{ [ fertilization1, verb.change:fertilize,+ ] fertilisation1, [ fecundation1, verb.change:fecundate,+ ] dressing, noun.act:enrichment,@ (making fertile as by applying fertilizer or manure) }
+{ top_dressing, dressing,@ (a layer of fertilizer or manure not plowed in) }
+{ [ dissilience, adj.all:nascent^dissilient,+ ] emergence,@ noun.cognition:botany,;c (the emergence of seeds as seed pods burst open when they are ripe) }
+{ outburst, burst, [ flare-up1, verb.change:flare_up,+ ] happening,@ (a sudden intense happening; "an outburst of heavy rain"; "a burst of lightning") }
+{ salvo, outburst,@ (an outburst resembling the discharge of firearms or the release of bombs) }
+{ outbreak, [ eruption3, verb.change:erupt2,+ ] [ irruption, verb.change:irrupt3,+ ] happening,@ (a sudden violent spontaneous occurrence (usually of some undesirable condition); "the outbreak of hostilities") }
+{ [ epidemic, adj.all:epidemic,+ ] outbreak,@ (a widespread outbreak of an infectious disease; many people are infected at the same time) }
+{ [ pandemic, adj.all:epidemic^pandemic,+ ] epidemic,@ (an epidemic that is geographically widespread; occurring throughout a region or even throughout the world) }
+{ [ recrudescence, adj.all:revived^recrudescent,+ verb.change:recrudesce1,+ ] outbreak,@ (a return of something after a period of abatement; "a recrudescence of racism"; "a recrudescence of the symptoms") }
+{ [ jet, verb.contact:jet,+ ] [ squirt, verb.contact:squirt10,+ verb.contact:squirt,+ ] [ spurt, verb.motion:spurt1,+ ] [ spirt, verb.motion:spirt1,+ ] discharge1,@ (the occurrence of a sudden discharge (as of liquid)) }
+{ [ rush1, verb.change:rush,+ ] outburst,@ (a sudden burst of activity; "come back after the rush") }
+{ volcanic_eruption, [ eruption, verb.change:erupt,+ ] discharge,@ (the sudden occurrence of a violent discharge of steam and volcanic material) }
+{ [ escape, verb.change:escape4,+ ] [ leak, adj.all:leaky,+ verb.change:leak4,+ verb.change:leak,+ ] [ leakage, verb.change:leak4,+ verb.change:leak,+ ] outflow, discharge1,@ (the discharge of a fluid from some container; "they tried to stop the escape of gas from the damaged pipe"; "he had to clean up the leak") }
+{ [ fertilization, verb.body:fertilize,+ ] fertilisation, [ fecundation, verb.body:fecundate,+ ] [ impregnation, verb.body:impregnate1,+ verb.body:impregnate,+ ] creation,@ (creation by the physical union of male and female gametes; of sperm and ova in an animal or pollen and ovule in a plant) }
+{ [ pollination, verb.body:pollinate,+ ] [ pollenation, verb.body:pollenate,+ ] fertilization,@ (transfer of pollen from the anther to the stigma of a plant) }
+{ [ cross-fertilization, verb.body:cross-fertilize1,+ verb.body:cross-fertilize,+ self-fertilization,! ] [ cross-fertilisation, verb.body:cross-fertilise1,+ verb.body:cross-fertilise,+ ] fertilization,@ (fertilization by the union of male and female gametes from different individual of the same species) }
+{ [ allogamy, adj.pert:allogamous,+ autogamy,!] cross-fertilization,@ (cross-fertilization in plants) }
+{ [ self-fertilization, cross-fertilization,! ] self-fertilisation, fertilization,@ (fertilization by the union of male and female gametes from the same individual) }
+{ superfecundation, fertilization,@ (fertilization of two or more ova released during the same menstrual cycle by sperm from separate acts of coitus (especially by different males)) }
+{ [ superfetation, verb.body:superfetate,+ ] fertilization,@ (fertilization of a second ovum after a pregnancy has begun; results in two fetuses of different ages in the uterus at the same time; "superfetation is normal in some animal species") }
+{ [ autogamy, adj.all:autogamic,+ adj.all:autogamous,+ allogamy,!] self-fertilization,@ (self-fertilization in plants) }
+{ [ cross-pollination, verb.body:cross-pollinate,+ self-pollination,! ] pollination,@ (fertilization by transfer of pollen from the anthers of one flower to the stigma of another) }
+{ [ self-pollination, cross-pollination,! ] pollination,@ (fertilization by transfer of pollen from the anthers to the stigma of the same flower) }
+{ cleistogamy, self-pollination,@ (the production of small nonopening self-pollinating flowers) }
+{ [ flap1, verb.motion:flap2,+ verb.motion:flap3,+ verb.motion:flap,+ verb.motion:flap1,+ ] [ flapping, verb.motion:flap3,+ verb.motion:flap2,+ verb.motion:flap1,+ verb.motion:flap,+ ] flutter1, [ fluttering, verb.motion:flutter1,+ ] wave,@ (the motion made by flapping up and down) }
+{ [ flush, verb.change:flush3,+ verb.change:flush2,+ verb.change:flush,+ ] [ gush, verb.motion:gush,+ ] outpouring1, flow,@ (a sudden rapid flow (as of water); "he heard the flush of a toilet"; "there was a little gush of blood"; "she attacked him with an outpouring of words") }
+{ [ radiation, verb.change:radiate5,+ ] noun.process:natural_process,@ spread,@ (the spread of a group of organisms into new habitats) }
+{ adaptive_radiation, radiation,@ (the development of many different forms from an originally homogeneous group of organisms as they fill different ecological niches) }
+{ rush, spate2, [ surge, verb.motion:surge1,+ verb.motion:surge3,+ ] upsurge, flow,@ (a sudden forceful flow) }
+{ debris_surge, debris_storm, rush,@ (the sudden spread of dust and debris from a collapsing building; "the destruction of the building produced an enormous debris surge") }
+{ onrush, rush,@ (a forceful forward rush or flow; "from the bow she stared at the mesmerising onrush of the sea where it split and foamed"; "the explosion interrupted the wild onrush of her thoughts") }
+{ springtide1, flush,@ (a swelling rush of anything; "he rose on the springtide of prosperity") }
+{ rotation, [ revolution, adj.pert:revolutionary2,+ verb.motion:revolve1,+ verb.motion:revolve,+ ] [ gyration, verb.motion:gyrate1,+ ] turning,@ (a single complete turn (axial or orbital); "the plane made three rotations before it crashed"; "the revolution of the earth about the sun takes one year") }
+{ [ dextrorotation, levorotation,! ] clockwise_rotation, rotation,@ (rotation to the right) }
+{ [ levorotation, dextrorotation,! ] counterclockwise_rotation, rotation,@ (rotation to the left) }
+{ axial_rotation, axial_motion, [ roll2, verb.motion:roll11,+ verb.body:roll6,+ verb.change:roll10,+ verb.contact:roll,+ verb.motion:roll1,+ verb.motion:roll,+ ] rotation,@ (rotary motion of an object around its own axis; "wheels in axial rotation") }
+{ orbital_rotation, orbital_motion, rotation,@ (motion of an object in an orbit around a fixed point; "satellites in orbital rotation") }
+{ [ whirl, verb.motion:whirl3,+ verb.motion:whirl1,+ verb.motion:whirl,+ ] commotion, movement,@ (confused movement; "he was caught up in a whirl of work"; "a commotion of people fought for the exits") }
+{ spin, rotation,@ (a swift whirling motion (usually of a missile)) }
+{ backspin, spin,@ (spin (usually of a moving ball) that retards or reverses the forward motion) }
+{ English, side, spin,@ noun.act:sport,;c ((sports) the spin given to a ball by striking it on one side or releasing it with a sharp twist) }
+{ topspin, spin,@ (forward spin (usually of a moving ball) that is imparted by an upward stroke) }
+
+{ [ wallow, verb.motion:wallow,+ ] roll2,@ (an indolent or clumsy rolling about; "a good wallow in the water") }
+{ [ run1, verb.change:run1,+ ] [ ladder, verb.change:ladder,+ ] [ ravel, verb.contact:ravel,+ verb.contact:ravel1,+ ] damage,@ (a row of unravelled stitches; "she got a run in her stocking") }
+{ [ relaxation, verb.change:relax5,+ verb.change:relax2,+ ] [ loosening, verb.change:loosen1,+ verb.change:loosen,+ ] [ slackening, verb.change:slacken1,+ ] weakening,@ (an occurrence of control or strength weakening; "the relaxation of requirements"; "the loosening of his grip"; "the slackening of the wind") }
+{ thaw, relaxation,@ (a relaxation or slackening of tensions or reserve; becoming less hostile; "the thaw between the United States and Russia has led to increased cooperation in world affairs") }
+{ [ substitution, verb.possession:substitute1,+ verb.possession:substitute,+ ] permutation, transposition1, [ replacement, verb.change:replace,+ ] [ switch, verb.possession:switch,+ verb.change:switch3,+ verb.change:switch,+ ] variation1,@ (an event in which one thing is substituted for another; "the replacement of lost blood by a transfusion of donor blood") }
+{ business_cycle, trade_cycle, variation1,@ (recurring fluctuations in economic activity consisting of recession and recovery and growth and decline) }
+{ daily_variation, variation1,@ (fluctuations that occur between one day and the next) }
+{ diurnal_variation, variation1,@ (fluctuations that occur during each day) }
+{ [ tide1, verb.motion:tide1,+ ] variation1,@ (something that may increase or decrease (like the tides of the sea); "a rising tide of popular interest") }
+{ [ shift, verb.change:shift2,+ verb.change:shift1,+ verb.change:shift,+ ] displacement, translation,@ (an event in which something is displaced without rotation) }
+{ amplitude, shift,@ noun.cognition:physics,;c ((physics) the maximum displacement of a periodic wave) }
+{ [ luxation, verb.change:luxate,+ ] displacement,@ (displacement or misalignment of a joint or organ) }
+{ [ subluxation, verb.body:subluxate,+ ] luxation,@ (partial displacement of a joint or organ) }
+{ [ progress, verb.motion:progress,+ ] progression, [ advance, adj.all:front^advance,+ verb.motion:advance,+ ] change_of_location,@ (a movement forward; "he listened for the progress of the troops") }
+{ [ rise2, verb.motion:rise8,+ verb.motion:rise,+ fall4,! ] [ rising, verb.motion:rise,+ ] [ ascent, verb.motion:ascend2,+ ] [ ascension, adj.pert:ascensional,+ verb.motion:ascend2,+ ] change_of_location,@ (a movement upward; "they cheered the rise of the hot-air balloon") }
+{ [ spread, verb.motion:spread2,+ verb.motion:spread,+ verb.communication:spread2,+ verb.communication:spread,+ verb.stative:spread,+ verb.contact:spread7,+ verb.contact:spread,+ ] [ spreading, verb.stative:spread,+ ] change_of_location,@ (process or result of distributing or extending over a wide expanse of space) }
+{ [ stampede, verb.motion:stampede1,+ ] change_of_location,@ (a wild headlong rush of frightened animals (horses or cattle)) }
+{ [ translation, verb.change:translate,+ ] change_of_location,@ (a uniform movement without rotation) }
+{ spray, jet,@ (a jet of vapor) }
+{ [ spritz, verb.contact:spritz,+ verb.contact:spritz2,+ ] jet,@ (a quick squirt of some liquid (usually carbonated water)) }
+{ angelus_bell, angelus, bell,@ (the sound of a bell rung in Roman Catholic churches to announce the time when the Angelus should be recited) }
+{ bell_ringing, ringing,@ (the sound of someone playing a set of bells) }
+{ [ return2, verb.change:return,+ ] coming_back, turning,@ (the occurrence of a change in direction back in the opposite direction) }
+{ volution, turning,@ (a rolling or revolving motion) }
+{ affair, occasion1, social_occasion, function, social_function, social_event,@ (a vaguely specified social event; "the party was quite an affair"; "an occasion arranged to honor the president"; "a seemingly endless round of social functions") }
+{ [ party, verb.social:party,+ ] affair,@ (an occasion on which people can assemble for social interaction and entertainment; "he planned a party to celebrate Bastille Day") }
+{ bash1, do, brawl, party,@ (an uproarious party) }
+{ birthday_party, party,@ (a party held on the anniversary of someone's birth) }
+{ bunfight, bun-fight, party,@ noun.location:Britain,;r noun.communication:slang,;u ((Briticism) a grand formal party on an important occasion) }
+{ ceilidh, party,@ noun.location:Scotland,;r noun.location:Ireland,;r (an informal social gathering at which there is Scottish or Irish folk music and singing and folk dancing and story telling) }
+{ cocktail_party, party,@ (an afternoon party at which cocktails are served) }
+{ [ dance, verb.creation:dance,+ ] party,@ (a party for social dancing) }
+{ ball, formal, dance,@ (a lavish dance requiring formal attire) }
+{ cotillion, cotilion, ball,@ (a ball at which young ladies are presented to society) }
+{ masked_ball, masquerade_ball, fancy-dress_ball, ball,@ noun.group:masquerade,@ (a ball at which guests wear costumes and masks) }
+{ promenade, prom, ball,@ (a formal ball held for a school class toward the end of the academic year) }
+{ barn_dance, dance,@ (a dance party featuring country dancing) }
+{ [ hop, verb.motion:hop,+ ] record_hop, dance,@ (an informal dance where popular music is played) }
+{ [ rave, verb.social:rave,+ ] dance,@ (a dance party that lasts all night and electronically synthesized music is played; "raves are very popular in Berlin") }
+{ [ fete, verb.social:fete,+ ] [ feast1, verb.consumption:feast1,+ verb.consumption:feast,+ ] fiesta, party,@ (an elaborate party (often outdoors)) }
+{ luau, fete,@ noun.location:Hawaii,;r (an elaborate Hawaiian feast or party (especially one accompanied by traditional foods and entertainment)) }
+{ house_party, party,@ (a party lasting over one or more nights at a large house) }
+{ [ jolly, adj.all:joyous^jolly,+ verb.communication:jolly,+ ] party,@ noun.location:Britain,;r (a happy party) }
+{ tea_party, party,@ (a party at which tea is served) }
+{ whist_drive, party,@ noun.location:Britain,;r (a progressive whist party) }
+{ [ celebration, verb.social:celebrate1,+ verb.social:celebrate,+ ] [ jubilation, verb.social:jubilate,+ ] affair,@ (a joyful occasion for special festivities to mark some happy event) }
+{ [ ceremony, adj.all:formal1^ceremonial,+ ] [ ceremonial, adj.all:formal1^ceremonial,+ ] ceremonial_occasion, [ observance1, verb.social:observe2,+ ] affair,@ (a formal event performed on a special occasion; "a ceremony commemorating Pearl Harbor") }
+{ circumstance, ceremony,@ (formal ceremony about important occasions; "pomp and circumstance") }
+{ [ funeral, adj.all:joyless^funereal,+ adj.pert:funerary,+ ] obsequy, ceremony,@ (a ceremony at which a dead person is buried or cremated; "hundreds of people attended his funeral") }
+{ [ burial, verb.social:bury,+ ] [ entombment, verb.social:entomb,+ ] [ inhumation, verb.social:inhume,+ ] [ interment, verb.social:inter,+ ] sepulture, funeral,@ (the ritual placing of a corpse in a grave) }
+{ sky_burial, funeral,@ (a traditional Tibetan funeral ritual in which the corpse is exposed to the open air to be eaten by sacred vultures) }
+{ [ wedding, verb.social:wed1,+ ] wedding_ceremony, nuptials, hymeneals, ceremony,@ (the social event at which the ceremony of marriage is performed) }
+{ pageant, pageantry, ceremony,@ (a rich and spectacular ceremony) }
+{ [ dedication, verb.social:dedicate,+ verb.communication:dedicate,+ verb.cognition:dedicate,+ ] ceremony,@ (a ceremony in which something (as a building) is dedicated to some goal or purpose) }
+{ [ rededication, verb.communication:rededicate,+ ] dedication,@ (a new dedication; "the rededication of the Temple of Jerusalem") }
+{ [ opening1, verb.social:open1,+ verb.social:open,+ ] ceremony,@ (a ceremony accompanying the start of some enterprise) }
+{ [ commemoration, verb.cognition:commemorate2,+ verb.cognition:commemorate,+ ] [ memorialization, verb.communication:memorialize,+ ] [ memorialisation, verb.communication:memorialise,+ ] ceremony,@ (a ceremony to honor the memory of someone or something) }
+{ military_ceremony, ceremony,@ noun.group:military,;c (a formal ceremony performed by military personnel) }
+{ [ initiation, verb.social:initiate1,+ ] [ induction, verb.social:induct1,+ verb.social:induct,+ ] [ installation, verb.social:install,+ ] ceremony,@ (a formal entry into an organization or position or office; "his initiation into the club"; "he was ordered to report for induction into the army"; "he gave a speech as part of his installation into the hall of fame") }
+{ [ coronation, verb.social:coronate,+ ] [ enthronement, verb.social:enthrone1,+ verb.social:enthrone,+ ] [ enthronization, verb.social:enthrone,+ ] [ enthronisation, verb.social:enthrone,+ ] [ investiture1, verb.social:invest2,+ verb.social:invest,+ ] initiation,@ (the ceremony of installing a new monarch) }
+{ [ bar_mitzvah, verb.social:bar_mitzvah,+ ] initiation,@ noun.cognition:Judaism,;c ((Judaism) an initiation ceremony marking the 13th birthday of a Jewish boy and signifying the beginning of religious responsibility; "a bar mitzvah is an important social event") }
+{ [ bat_mitzvah, verb.social:bat_mitzvah,+ ] bath_mitzvah, bas_mitzvah, initiation,@ noun.cognition:Judaism,;c ((Judaism) an initiation ceremony marking the 12th birthday of a Jewish girl and signifying the beginning of religious responsibility) }
+{ exercise1, ceremony,@ noun.communication:plural,;u ((usually plural) a ceremony that involves processions and speeches; "academic exercises") }
+{ fire_walking, ceremony,@ (the ceremony of walking barefoot over hot stones or a bed of embers) }
+{ commencement2, commencement_exercise, commencement_ceremony, [ graduation1, verb.possession:graduate1,+ verb.possession:graduate,+ ] graduation_exercise, exercise1,@ (an academic exercise in which diplomas are conferred) }
+{ [ formality, adj.all:official^formal,+ ] formalities, ceremony,@ (a requirement of etiquette or custom; "a mere formality") }
+{ Maundy, ceremony,@ noun.location:Great_Britain1,;r (a public ceremony on Maundy Thursday when the monarch distributes Maundy money) }
+{ potlatch, ceremony,@ fete,@ (a ceremonial feast held by some Indians of the northwestern coast of North America (as in celebrating a marriage or a new accession) in which the host gives gifts to tribesmen and others to display his superior wealth (sometimes, formerly, to his own impoverishment)) }
+{ fundraiser, affair,@ (a social function that is held for the purpose of raising money) }
+{ photo_opportunity, photo_op, affair,@ (an occasion that lends itself to (or is deliberately arranged for) taking photographs that provide favorable publicity for those who are photographed) }
+{ [ sleepover, verb.stative:sleep_over,+ ] affair,@ (an occasion of spending a night away from home or having a guest spend the night in your home (especially as a party for children)) }
+{ sellout, social_event,@ (an event for which all tickets are sold; "get your tickets for the concert early, it is sure to be a sellout") }
+{ contest, competition, social_event,@ (an occasion on which a winner is selected from among two or more contestants) }
+{ athletic_contest, athletic_competition, athletics, contest,@ (a contest between athletes) }
+{ bout, contest,@ (a contest or fight (especially between boxers or wrestlers)) }
+{ decathlon, athletic_contest,@ (an athletic contest consisting of ten different events) }
+{ Olympic_Games, Olympics, Olympiad, athletic_contest,@ (the modern revival of the ancient games held once every 4 years in a selected country) }
+{ Special_Olympics, athletic_contest,@ (an athletic contest modeled after the Olympic Games but intended for mentally or physically handicapped persons) }
+{ Winter_Olympic_Games, Winter_Olympics, Olympic_Games,@ (an Olympics for winter sports) }
+{ [ preliminary, adj.all:exploratory^preliminary,+ ] prelim, athletic_contest,@ (a minor match preceding the main event) }
+{ pentathlon, athletic_contest,@ (an athletic contest consisting of five different events) }
+{ championship, contest,@ (a competition at which a champion is chosen) }
+{ chicken, contest,@ (a foolhardy competition; a dangerous activity that is continued until one competitor becomes afraid and stops) }
+{ cliffhanger, contest,@ (a contest whose outcome is uncertain up to the very end) }
+{ dogfight, contest,@ (a fiercely disputed contest; "their rancor dated from a political dogfight between them"; "a real dogfight for third place"; "a prolonged dogfight over their rival bids for the contract") }
+{ [ race, adj.all:mobile^racy,+ verb.competition:race,+ ] contest,@ (a contest of speed; "the race is to the swift") }
+{ automobile_race, auto_race, car_race, race,@ (a race between (usually high-performance) automobiles) }
+{ Grand_Prix, automobile_race,@ (one of several international races) }
+{ rally1, automobile_race,@ (an automobile race run over public roads) }
+{ bicycle_race, bike_race, race,@ (a race between people riding bicycles) }
+{ Tour_de_France, bicycle_race,@ (a French bicycle race for professional cyclists that lasts three weeks and covers about 3,000 miles) }
+{ criterium, crit, bicycle_race,@ (a bicycle race held on a short course (usually less than 5 km or 3 miles)) }
+{ boat_race, race,@ (a race between people rowing or driving boats) }
+{ burnup, race,@ noun.location:Britain,;r noun.communication:slang,;u (a high-speed motorcycle race on a public road) }
+{ chariot_race, race,@ (a race between ancient chariots) }
+{ dog_racing, race,@ (a race between dogs; usually an occasion for betting on the outcome) }
+{ sailing-race, yacht_race, boat_race,@ (a race between crews of people in yachts) }
+{ footrace, foot_race, [ run2, verb.competition:run1,+ verb.motion:run5,+ verb.motion:run10,+ verb.motion:run,+ ] race,@ (a race run on foot; "she broke the record for the half-mile run") }
+{ funrun, fun_run, footrace,@ (a footrace run for fun (often including runners who are sponsored for a charity)) }
+{ [ marathon, noun.person:marathoner,+ ] footrace,@ (a footrace of 26 miles 385 yards) }
+{ freestyle, race,@ (a race (as in swimming) in which each contestant has a free choice of the style to use) }
+{ cross_country, race,@ (a long race run over open country) }
+{ Iditarod, Iditarod_Trail_Dog_Sled_Race, cross_country,@ (an important dogsled race run annually on the Iditarod Trail) }
+{ three-day_event, noun.act:equestrian_sport,@ (an equestrian competition; the first day is dressage; the second is cross-country jumping; the third is stadium jumping) }
+{ heat, race,@ (a preliminary race in which the winner advances to a more important race) }
+{ horse_race, race,@ (a contest of speed between horses; usually held for the purpose of betting) }
+{ claiming_race, horse_race,@ (a horse race in which each owner declares before the race at what price his horse will be offered for sale after the race) }
+{ selling_race, horse_race,@ (a horse race in which the winning horse must be put up for auction) }
+{ harness_race, harness_racing, horse_race,@ (a horse race between people riding in sulkies behind horses that are trotting or pacing) }
+{ Kentucky_Derby, thoroughbred_race,@ (an annual race for three-year-old horses; held at Churchill Downs in Louisville, Kentucky) }
+{ Preakness, thoroughbred_race,@ (an annual race for three-year-old horses; held at Pimlico in Baltimore, Maryland) }
+{ Belmont_Stakes, thoroughbred_race,@ (an annual race for three-year-old horses; held on Long Island at Elmont, New York) }
+{ stake_race, horse_race,@ (a horse race in which part of the prize is put up by the owners of the horses in the race) }
+{ steeplechase1, horse_race,@ (a horse race over an obstructed course) }
+{ Grand_National, steeplechase1,@ (an annual steeplechase run in Liverpool, England) }
+{ obstacle_race, footrace,@ (a race in which competitors must negotiate obstacles) }
+{ steeplechase2, footrace,@ (a footrace of usually 3000 meters over a closed track with hurdles and a water jump) }
+{ thoroughbred_race, horse_race,@ (a race between thoroughbred horses) }
+{ potato_race, race,@ (a novelty race in which competitors move potatoes from one place to another one at a time) }
+{ sack_race, race,@ (a novelty race in which competitors jump ahead with their feet confined in a sack) }
+{ scratch_race, race,@ (a race in which all contestants start from scratch (on equal terms)) }
+{ ski_race, skiing_race, race,@ (a race between people wearing skis) }
+{ downhill, ski_race,@ (a ski race down a trail) }
+{ [ slalom, verb.motion:slalom,+ ] ski_race,@ (a downhill race over a winding course defined by upright poles) }
+{ relay, relay_race, race,@ (a race between teams; each member runs or swims part of the distance) }
+{ repechage, race,@ (a race (especially in rowing) in which runners-up in the eliminating heats compete for a place in the final race) }
+{ torch_race, relay_race,@ noun.location:Greece,;r noun.time:antiquity,;c ((ancient Greece) in which a torch is passed from one runner to the next) }
+{ World_Cup, tournament,@ (a soccer tournament held every four years between national soccer teams to determine a world champion) }
+{ tournament, [ tourney, verb.competition:tourney,+ ] contest,@ (a sporting competition in which contestants play a series of games to decide the winner) }
+{ elimination_tournament, tournament,@ (a tournament in which losers are eliminated in successive rounds) }
+{ [ open, adj.all:unrestricted^open,+ ] tournament,@ (a tournament in which both professionals and amateurs may play) }
+{ [ playoff, verb.competition:play_off,+ ] contest,@ (any final competition to determine a championship) }
+{ rubber, contest,@ (a contest consisting of a series of successive matches between the same sides; "he won three out of five games to take the rubber") }
+{ series, contest,@ noun.act:sport,;c ((sports) several contests played successively by the same teams; "the visiting team swept the series") }
+{ home_stand, series,@ (a series of successive games played at a team's home field or court) }
+{ World_Series, series,@ playoff,@ (series that constitutes the playoff for the baseball championship; "we watched the World Series on TV") }
+{ boxing_match, match,@ (a match between boxers; usually held in a boxing ring) }
+{ chess_match, match,@ (a match between chess players) }
+{ cockfight, match,@ (a match in a cockpit between two fighting cocks heeled with metal gaffs) }
+{ cricket_match, match,@ (a match between two cricket teams) }
+{ diving, diving_event, match,@ swimming_meet,#p (an athletic competition that involves diving into water) }
+{ field_event, match,@ track_meet,#p (a competition that takes place on a field rather than on a running track) }
+{ [ final, adj.all:closing^final,+ ] match,@ elimination_tournament,#p (the final match between the winners of all previous matches in an elimination tournament) }
+{ cup_final, final,@ noun.act:soccer,;c (the final match of any cup competition (such as the annual final of the English soccer competition at Wembley)) }
+{ quarterfinal, match,@ elimination_tournament,#p (one of the four competitions in an elimination tournament whose winners go on to play in the semifinals) }
+{ [ semifinal, noun.person:semifinalist,+ ] semi, match,@ elimination_tournament,#p (one of the two competitions in the next to the last round of an elimination tournament) }
+{ round_robin, tournament,@ (a tournament in which every contestant plays every other contestant) }
+{ field_trial, contest,@ (a contest between gun dogs to determine their proficiency in pointing and retrieving) }
+{ [ meet, verb.competition:meet,+ verb.social:meet1,+ ] sports_meeting, athletic_contest,@ (a meeting at which a number of athletic contests are held) }
+{ gymkhana, meet,@ (a meet at which riders and horses display a range of skills and aptitudes) }
+{ race_meeting, meet,@ noun.location:Britain,;r (a regular occasion on which a number of horse races are held on the same track; "the Epsom race meeting was an important social event") }
+{ regatta, meet,@ (a meeting for boat races) }
+{ swimming_meet, swim_meet, meet,@ (a swimming competition between two or more teams) }
+{ track_meet, meet,@ (a track and field competition between two or more teams) }
+{ track_event, footrace,@ track_meet,#p (a footrace performed on a track (indoor or outdoor)) }
+{ dash, track_event,@ (a footrace run at top speed; "he is preparing for the 100-yard dash") }
+{ hurdles, [ hurdling, verb.motion:hurdle,+ ] hurdle_race, track_event,@ (a footrace in which contestants must negotiate a series of hurdles) }
+{ [ mile, noun.quantity:miler,+ noun.person:miler,+ ] track_event,@ (a footrace extending one mile; "he holds the record in the mile") }
+{ high_jump, field_event,@ (a competition that involves jumping as high as possible over a horizontal bar) }
+{ long_jump, broad_jump, field_event,@ (a competition that involves jumping as far as possible from a running start) }
+{ pole_vault, pole_vaulting, pole_jump, pole_jumping, field_event,@ (a competition that involves jumping over a high crossbar with the aid of a long pole) }
+{ shot_put, field_event,@ (an athletic competition in which a heavy metal ball is hurled as far as possible) }
+{ hammer_throw, field_event,@ (an athletic competition in which a heavy metal ball that is attached to a flexible wire is hurled as far as possible) }
+{ discus, field_event,@ (an athletic competition in which a disk-shaped object is thrown as far as possible) }
+{ javelin, field_event,@ (an athletic competition in which a javelin is thrown as far as possible) }
+{ swimming_event, match,@ swimming_meet,#p (an athletic competition that involves swimming) }
+{ [ match, verb.competition:match,+ ] contest,@ (a formal contest in which two or more persons or teams compete) }
+{ tennis_match, match,@ (a match between tennis players) }
+{ test_match, match_game, matched_game, match,@ (an international championship match) }
+{ wrestling_match, match,@ (a match between wrestlers) }
+{ fall2, pin, victory,@ wrestling_match,#p (when a wrestler's shoulders are forced to the mat) }
+{ takedown1, fall2,@ wrestling_match,#p noun.act:wrestling,;c ((amateur wrestling) being brought to the mat from a standing position; "a takedown counts two points") }
+{ sparring_match, boxing_match,@ (a practice or exhibition boxing match) }
+{ [ prizefight, verb.contact:prizefight,+ ] [ prize_fight, verb.contact:prizefight,+ ] boxing_match,@ (a boxing match between professional boxers for a cash prize) }
+{ triple_jump, hop-step-and-jump, athletic_contest,@ (an athletic contest in which a competitor must perform successively a hop and a step and a jump in continuous movement) }
+{ tug-of-war, athletic_contest,@ (a contest in which teams pull of opposite ends of a rope; the team dragged across a central line loses) }
+{ tournament1, contest,@ (a series of jousts between knights contesting for a prize) }
+{ [ joust, verb.competition:joust,+ ] [ tilt1, verb.competition:tilt,+ ] noun.act:struggle1,@ tournament1,#p (a combat between two mounted knights tilting against each other with blunted lances) }
+{ [ race1, verb.competition:race,+ ] contest,@ (any competition; "the race for the presidency") }
+{ arms_race, race1,@ (a competition between nations to have the most powerful armaments) }
+{ political_campaign, [ campaign, verb.competition:campaign1,+ ] [ run3, verb.competition:run6,+ ] race1,@ (a race between candidates for elective office; "I managed his campaign for governor"; "he is raising money for a Senate run") }
+{ governor's_race, campaign_for_governor, political_campaign,@ (a race for election to the governorship) }
+{ senate_campaign, senate_race, political_campaign,@ (a race for election to the senate) }
+{ [ victory, adj.all:undefeated^victorious,+ adj.all:successful^victorious,+ defeat,! ] [ triumph, verb.competition:triumph,+ ] ending,@ success,@ (a successful ending of a struggle or contest; "a narrow victory"; "the general always gets credit for his army's victory"; "clinched a victory"; "convincing victory"; "the agreement was a triumph for common sense") }
+{ independence, victory,@ (the successful ending of the American Revolution; "they maintained close relations with England even after independence") }
+{ landslide1, victory,@ (an overwhelming electoral victory; "Roosevelt defeated Hoover in a landslide") }
+{ last_laugh, victory,@ (ultimate success achieved after a near failure (inspired by the saying `he laughs best who laughs last'); "we had the last laugh after the votes were counted") }
+{ Pyrrhic_victory, victory,@ (a victory that is won by incurring terrible losses) }
+{ slam, sweep, victory,@ noun.act:bridge,#p (winning all or all but one of the tricks in bridge) }
+{ grand_slam, slam,@ (winning all of the tricks in a hand of bridge) }
+{ little_slam, small_slam, slam,@ (winning all but one of the tricks in a hand of bridge) }
+{ checkmate, victory,@ (complete victory) }
+{ runaway, blowout1, [ romp, verb.competition:romp,+ ] laugher, shoo-in, walkaway, victory,@ (an easy victory) }
+{ service_break, victory,@ noun.act:tennis,#p (a tennis game won on the opponent's service) }
+{ [ defeat, noun.person:defeatist,+ verb.social:defeat,+ victory,! ] licking1, ending,@ failure,@ (an unsuccessful ending to a struggle or contest; "it was a narrow defeat"; "the army's only defeat"; "they suffered a convincing licking") }
+{ walk-in, waltz, victory,@ (an assured victory (especially in an election)) }
+{ reverse1, reversal2, [ setback1, verb.social:set_back,+ ] blow2, black_eye, happening,@ (an unfortunate happening that hinders or impedes; something that is thwarting or frustrating) }
+{ whammy, reverse1,@ (a serious or devastating setback) }
+{ heartbreaker, defeat,@ (a narrow defeat or a defeat at the last minute) }
+{ [ lurch, verb.competition:lurch,+ ] defeat,@ (a decisive defeat in a game (especially in cribbage)) }
+{ [ rout, verb.competition:rout1,+ ] defeat,@ (an overwhelming defeat) }
+{ shutout, [ skunk, verb.competition:skunk,+ ] defeat,@ (a defeat in a game where one side fails to score) }
+{ [ thrashing, verb.contact:thrash2,+ ] [ walloping, verb.competition:wallop,+ ] debacle, [ drubbing, verb.contact:drub,+ ] slaughter, [ trouncing, verb.competition:trounce,+ ] [ whipping, verb.competition:whip,+ ] defeat,@ (a sound defeat) }
+{ waterloo, defeat,@ (a final crushing defeat; "he met his waterloo") }
+{ whitewash, defeat,@ (a defeat in which the losing person or team fails to score) }
+{ spelling_bee, spelldown, spelling_contest, contest,@ (a contest in which you are eliminated if you fail to spell a word correctly) }
+{ trial1, contest,@ noun.act:sport,;c ((sports) a preliminary competition to determine qualifications; "the trials for the semifinals began yesterday") }
+{ bite, success,@ noun.act:fishing,;c ((angling) an instance of a fish taking the bait; "after fishing for an hour he still had not had a bite") }
+{ boom2, bonanza, gold_rush, gravy, godsend, manna_from_heaven, windfall, bunce, happening,@ (a sudden happening that brings good fortune (as a sudden opportunity to make money); "the demand for testing has created a boom for those unregulated laboratories where boxes of specimen jars are processed like an assembly line") }
+{ [ crash2, verb.change:crash11,+ ] [ collapse1, verb.motion:collapse,+ verb.change:collapse,+ ] happening,@ (a sudden large decline of business or the prices of stocks (especially one that causes additional failures)) }
+{ loss_of_consciousness, change,@ (the occurrence of a loss of the ability to perceive and respond) }
+{ [ faint, adj.all:ill1^faint,+ verb.body:faint,+ ] [ swoon, verb.body:swoon,+ ] syncope, deliquium, loss_of_consciousness,@ (a spontaneous loss of consciousness caused by insufficient blood to the brain) }
+{ [ Fall3, verb.social:fall1,+ ] noun.Tops:event,@i (the lapse of mankind into sinfulness because of the sin of Adam and Eve; "women have been blamed ever since the Fall") }
+{ [ shipwreck1, verb.social:shipwreck1,+ verb.social:shipwreck,+ ] ruin,@ (an irretrievable loss; "that was the shipwreck of their romance") }
+{ [ crash3, verb.change:crash10,+ ] mishap,@ noun.cognition:computer_science,;c ((computer science) an event that causes a computer system to become inoperative; "the crash occurred during a thunderstorm and the system has been down ever since") }
+{ head_crash, crash3,@ noun.cognition:computer_science,;c ((computer science) a crash of a read/write head in a hard disk drive (usually caused by contact of the head with the surface of the magnetic disk)) }
+{ spike1, rise,@ (a sharp rise followed by a sharp decline; "the seismograph showed a sharp spike in response to the temblor") }
+{ [ supervention, verb.change:supervene,+ ] happening,@ (a following on in addition) }
+{ zap, noun.Tops:event,@ (a sudden event that imparts energy or excitement, usually with a dramatic impact; "they gave it another zap of radiation") }
+{ zizz, sound,@ noun.location:Britain,;r (a buzzing or whizzing sound; "a nasty zizz in the engine") }

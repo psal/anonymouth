@@ -1,0 +1,775 @@
+($RCSfile: noun.process,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:50 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.process)
+
+{ ablactation, bodily_process,@ (the cessation of lactation) }
+{ [ ablation, verb.change:ablate,+ ] erosion,@ (the erosive process that reduces the size of glaciers) }
+{ [ abrasion, verb.contact:abrade,+ ] [ attrition, adj.pert:attritional,+ ] [ corrasion, verb.contact:corrade,+ ] detrition, erosion,@ (erosion by friction) }
+{ abscission, shedding,@ (shedding of flowers and leaves and fruit following formation of scar tissue in a plant) }
+{ [ absorption, verb.contact:absorb,+ verb.contact:absorb1,+ ] soaking_up, sorption,@ noun.cognition:chemistry,;c ((chemistry) a process in which one substance permeates another; a fluid permeates or is dissolved by a liquid or solid) }
+{ [ absorption2, verb.weather:absorb,+ ] natural_process,@ extinction,#p noun.cognition:physics,;c ((physics) the process in which incident radiated energy is retained without reflection or transmission on passing through a medium; "the absorption of photons by atoms or molecules") }
+{ accession, increase,@ (a process of increasing by addition (as to a collection or group); "the art collection grew through accession") }
+{ [ acclimatization, verb.change:acclimatize,+ ] [ acclimatisation, verb.change:acclimatise,+ ] [ acclimation, verb.change:acclimate,+ ] adaptation,@ (adaptation to a new climate (a new temperature or altitude or environment)) }
+{ [ accretion, adj.all:increasing^accretionary,+ verb.change:accrete1,+ ] accumulation, increase,@ (an increase by natural growth or addition) }
+{ [ accretion1, adj.all:increasing^accretionary,+ ] increase,@ noun.cognition:geology,;c ((geology) an increase in land resulting from alluvial deposits or waterborne sediment) }
+{ [ accretion2, adj.all:increasing^accretionary,+ verb.change:accrete1,+ ] increase,@ noun.cognition:biology,;c ((biology) growth by addition as by the adhesion of parts or particles) }
+{ [ accretion3, adj.all:increasing^accretionary,+ ] increase,@ noun.cognition:astronomy,;c ((astronomy) the formation of a celestial object by the effect of gravity pulling together surrounding objects and gases) }
+{ [ acetylation, verb.change:acetylate,+ verb.change:acetylate1,+ ] acylation,@ (the process of introducing an acetyl group into a compound; "the acetylation of cyclooxygenase-2 by aspirin") }
+{ Acheson_process, industrial_process,@ (an industrial process for making graphite by heating a mixture of coke and clay) }
+{ acid-base_equilibrium, acid-base_balance, chemical_equilibrium,@ noun.cognition:physiology,;c ((physiology) the normal equilibrium between acids and alkalis in the body; "with a normal acid-base balance in the body the blood is slightly alkaline") }
+{ [ acidification, verb.change:acidify,+ ] natural_process,@ (the process of becoming acid or being converted into an acid) }
+{ [ activation, verb.change:activate3,+ verb.change:activate2,+ verb.change:activate1,+ verb.creation:activate,+ inactivation,! ] stimulation,@ (stimulation of activity in an organism or chemical) }
+{ active_birth, childbirth,@ (childbirth during which the mother is encouraged to be an active participant) }
+{ active_transport, transport,@ noun.artifact:drug,;c (transport of a substance (as a protein or drug) across a cell membrane against the concentration gradient; requires an expenditure of energy) }
+{ acylation, chemical_process,@ (the process of introducing an acyl group into a compound) }
+{ [ adaptation, verb.change:adapt2,+ ] [ adaption, verb.change:adapt2,+ ] [ adjustment, verb.change:adjust1,+ ] organic_process,@ (the process of adapting to something (such as environmental conditions)) }
+{ addition_reaction, chemical_reaction,@ (a chemical reaction in which one molecule is added to another) }
+{ adiabatic_process, natural_process,@ noun.cognition:thermodynamics,;c ((thermodynamics) any process that occurs without gain or loss of heat) }
+{ administrative_data_processing, business_data_processing, data_processing,@ (data processing in accounting or business management) }
+{ [ adsorption, verb.contact:adsorb,+ ] surface_assimilation, sorption,@ (the accumulation of molecules of a gas to form a thin film on the surface of a solid) }
+{ [ advection, verb.motion:advect,+ ] temperature_change,@ noun.cognition:meteorology,;c ((meteorology) the horizontal transfer of heat or other atmospheric properties) }
+{ [ aeration, verb.perception:aerate,+ ] natural_process,@ (the process of exposing to air (so as to purify); "the aeration of the soil") }
+{ agenesis, agenesia, nondevelopment,@ (imperfect development; nondevelopment of a part) }
+{ [ agglutination, verb.contact:agglutinate1,+ ] linguistic_process,@ (the building of words from component morphemes that retain their form and meaning in the process of combining) }
+{ [ agglutination1, verb.contact:agglutinate,+ ] organic_process,@ (a clumping of bacteria or red cells when held together by antibodies (agglutinins)) }
+{ agglutination2, agglutinating_activity, chemical_process,@ (the coalescing of small particles that are suspended in solution; these larger masses are then (usually) precipitated) }
+{ aging, ageing, [ senescence, adj.all:old2^senescent,+ ] organic_process,@ (the organic process of growing older and showing the effects of increasing age) }
+{ aldol_reaction, chemical_reaction,@ (a reaction of aldehydes resulting in an aldol) }
+{ alluvion, geological_process,@ (gradual formation of new land, by recession of the sea or deposit of sediment) }
+{ alpha_decay, decay3,@ (radioactive decay of an atomic nucleus that is accompanied by the emission of an alpha particle) }
+{ alternative_birth, alternative_birthing, childbirth,@ (a method of childbirth that avoids intrusive high-tech medicine in favor of more natural and homely settings) }
+{ amelogenesis, growth,@ (the developmental process of forming tooth enamel) }
+{ [ Americanization, verb.change:americanize1,+ verb.change:americanize,+ ] [ Americanisation, verb.change:americanise1,+ verb.change:americanise,+ ] assimilation2,@ (assimilation into American culture) }
+{ [ amitosis, adj.pert:amitotic,+ ] cell_division,@ (the direct method of cell division characterized by simple division of the nucleus without formation of chromosomes) }
+{ [ ammonification, verb.change:ammonify,+ ] permeation,@ (impregnation with ammonia or a compound of ammonia) }
+{ [ amylolysis, adj.pert:amylolytic,+ ] chemical_process,@ (conversion of starch to sugar) }
+{ [ anabolism, adj.pert:anabolic,+ adj.all:anabolic,+ catabolism,!] constructive_metabolism, assimilation1,@ metabolism,#p (the synthesis in living organisms of more complex substances (e.g., living tissue) from simpler ones together with the storage of energy) }
+{ [ anaglyphy, adj.pert:anaglyptic,+ adj.pert:anaglyphical,+ ] photography,@ (the process of producing pictures in contrasting colors that appear three-dimensional when superimposed and viewed through spectacles with one red and one green lens) }
+{ [ anamorphism, katamorphism,! ] metamorphism,@ (metamorphism that occurs deep under the earth's surface; changes simple minerals into complex minerals) }
+{ anamorphosis, anamorphism1, evolution,@ (the evolution of one type of organism from another by a long series of gradual changes) }
+{ [ anaphase, adj.pert:anaphasic,+ ] phase_of_cell_division,@ meiosis,#p (the stage of meiosis or mitosis when chromosomes move toward opposite ends of the nuclear spindle) }
+{ [ anastalsis, peristalsis,! ] bodily_process,@ (muscular action of the alimentary tract in a direction opposite to peristalsis) }
+{ [ androgenesis, adj.pert:androgenetic,+ adj.pert:androgenous,+ ] [ androgeny, adj.pert:androgenic,+ ] parthenogenesis,@ (male parthenogenesis in which the embryo contains only paternal chromosomes due to the failure of the egg nucleus to participate in fertilization) }
+{ angiogenesis, growth,@ (the formation of new blood vessels) }
+{ [ Anglicization, verb.change:anglicize,+ ] [ Anglicisation, verb.change:anglicise,+ ] assimilation2,@ (the act of anglicizing; making English in appearance) }
+{ [ anisogamy, adj.pert:anisogamous,+ ] sexual_reproduction,@ noun.cognition:biology,;c ((biology) reproduction by the union or fusion of two differing gametes (especially differing in size)) }
+{ [ anovulation, ovulation,! ] organic_process,@ (the absence of ovulation due to immaturity or post-maturity or pregnancy or oral contraceptive pills or dysfunction of the ovary) }
+{ [ anthropogenesis, adj.pert:anthropogenetic,+ ] [ anthropogeny, adj.pert:anthropogenetic,+ ] evolution,@ (the evolution or genesis of the human race) }
+{ antiredeposition, natural_process,@ (the process of preventing redeposition) }
+{ antisepsis, [ asepsis, adj.all:antiseptic^aseptic,+ ] organic_process,@ (the process of inhibiting the growth and multiplication of microorganisms) }
+{ [ aphaeresis, adj.pert:aphaeretic,+ ] [ apheresis, adj.pert:apheretic,+ ] omission,@ noun.cognition:linguistics,;c ((linguistics) omission at the beginning of a word as in `coon' for `raccoon' or `till' for `until') }
+{ [ aphesis, adj.pert:aphetic,+ ] omission,@ (the gradual disappearance of an initial (usually unstressed) vowel or syllable as in `squire' for `esquire') }
+{ [ apogamy, adj.pert:apogamic,+ adj.pert:apogamous,+ ] apomixis,@ noun.cognition:botany,;c ((botany) development of an embryo without fertilization; especially the development in some ferns of a sporophyte from the gametophyte without fertilization) }
+{ [ apomixis, adj.all:asexual^apomictic,+ adj.pert:apomictic,+ adj.pert:apomictical,+ ] asexual_reproduction,@ (any of several kinds of reproduction without fertilization) }
+{ apposition, growth,@ noun.cognition:biology,;c ((biology) growth in the thickness of a cell wall by the deposit of successive layers of material) }
+{ asexual_reproduction, [ agamogenesis, adj.all:asexual^agamogenetic,+ ] reproduction,@ (reproduction without the fusion of gametes) }
+{ [ assibilation, verb.change:assibilate,+ ] evolution1,@ (the development of a consonant phoneme into a sibilant) }
+{ [ assimilation, verb.change:assimilate2,+ ] linguistic_process,@ (a linguistic process by which a sound becomes similar to an adjacent sound) }
+{ [ assimilation1, verb.contact:assimilate,+ ] absorption1, organic_process,@ (the process of absorbing nutrients into the body after digestion) }
+{ [ assimilation2, verb.change:assimilate1,+ verb.change:assimilate,+ ] [ absorption3, verb.cognition:absorb,+ ] social_process,@ (the social process of absorbing one cultural group into harmony with another) }
+{ association, chemical_process,@ noun.cognition:chemistry,;c ((chemistry) any process of combination (especially in solution) that depends on relatively weak chemical bonding) }
+{ [ asynchronous_operation, synchronous_operation,! ] operation,@ (operations that occur without a regular or predictable time relation to other events) }
+{ [ attack, verb.body:attack,+ ] degeneration,@ (the onset of a corrosive or destructive process (as by a chemical agent); "the film was sensitive to attack by acids"; "open to attack by the elements") }
+{ [ autocatalysis, adj.pert:autocatalytic,+ ] catalysis,@ (catalysis in which the catalyst is one of the products of the reaction) }
+{ [ autolysis, adj.pert:autolytic,+ ] self-digestion, lysis,@ (lysis of plant or animal tissue by an internal process) }
+{ automatic_data_processing, ADP, data_processing,@ (data processing by a computer) }
+{ autoradiography, radiography,@ (producing a radiograph by means of the radiation emitted from the specimen being photographed) }
+{ [ autotype, adj.pert:autotypic,+ ] autotypy, photography,@ (process for producing permanent prints in a carbon pigment) }
+{ autoregulation, organic_process,@ noun.cognition:physiology,;c ((physiology) processes that maintain a generally constant physiological state in a cell or organism) }
+{ [ auxesis, adj.pert:auxetic,+ ] growth,@ (growth from increase in cell size without cell division) }
+{ auxiliary_operation, off-line_operation, operation,@ (a operation performed by off-line equipment not under the control of the central processing unit) }
+{ background_processing, backgrounding, priority_processing,@ (the execution of low priority programs while higher priority programs are not using the processing system) }
+{ [ backup, verb.contact:back_up,+ ] accretion,@ (an accumulation caused by clogging or a stoppage; "a traffic backup on the main street"; "he discovered a backup in the toilet") }
+{ [ bacteriolysis, adj.pert:bacteriolytic,+ ] lysis,@ (dissolution or destruction of bacteria) }
+{ [ bacteriostasis, adj.pert:bacteriostatic,+ ] organic_process,@ (inhibition of the growth of bacteria) }
+{ basal_metabolic_rate, BMR, noun.time:metabolic_rate,@ (the rate at which heat is produced by an individual in a resting state) }
+{ basal_metabolism, metabolism,@ (the amount of energy required to maintain the body of an individual in a resting state) }
+{ batch_processing, execution,@ (the serial execution of computer programs) }
+{ beach_erosion, erosion,@ (the erosion of beaches) }
+{ bed-wetting, enuresis,@ (enuresis during sleep; especially common in children (who usually outgrow it)) }
+{ Bessemer_process, industrial_process,@ steel_production,@ (an industrial process for making steel using a Bessemer converter to blast air through molten iron and thus burning the excess carbon and impurities; the first successful method of making steel in quantity at low cost) }
+{ beta_decay, decay3,@ (radioactive decay of an atomic nucleus that is accompanied by the emission of a beta particle) }
+{ biochemical_mechanism, mechanism,@ (a chemical mechanism involved in vital processes occurring in living organisms) }
+{ [ biosynthesis, adj.pert:biosynthetic,+ ] [ biogenesis, adj.pert:biogenous,+ ] synthesis,@ (production of a chemical compound by a living organism) }
+{ [ blastogenesis, adj.pert:blastogenetic,+ ] asexual_reproduction,@ (asexual reproduction by budding) }
+{ [ blaze, verb.weather:blaze,+ ] blazing, fire,@ (a strong flame that burns brightly; "the blaze spread rapidly") }
+{ blood_coagulation, blood_clotting, curdling,@ (a process in which liquid blood is changed into a semisolid mass (a blood clot)) }
+{ blooming, [ bloom, verb.change:bloom,+ ] organic_process,@ (the organic process of bearing flowers; "you will stop all bloom if you let the flowers go to seed") }
+{ blossoming, [ flowering, verb.change:flower,+ ] florescence, inflorescence, anthesis, [ efflorescence, adj.all:mature1^efflorescent,+ verb.change:effloresce,+ ] maturation,@ (the time and process of budding and unfolding of blossoms) }
+{ [ blowing, verb.change:blow8,+ ] processing,@ (processing that involves blowing a gas) }
+{ [ bluing, verb.change:blue,+ ] blueing, chemical_process,@ (a process that makes something blue (or bluish)) }
+{ bodily_process, body_process, bodily_function, [ activity, adj.all:active2,+ ] organic_process,@ (an organic process that takes place in the body; "respiratory activity") }
+{ boiling, heating,@ vaporization,@ (the application of heat to change something from a liquid to a gas) }
+{ boolean_operation, binary_operation, binary_arithmetic_operation, operation,@ (an operation that follows the rules of Boolean algebra; each operand and the result take one of two values) }
+{ bottom_fermentation, zymosis1,@ (a slow kind of alcoholic fermentation at a temperature low enough that the yeast cells can sink to the bottom of the fermenting liquid; used in the production of lager) }
+{ bowel_movement, movement, bm, defecation,@ noun.communication:euphemism,;u (a euphemism for defecation; "he had a bowel movement") }
+{ Bradley_method_of_childbirth, Bradley_method, natural_childbirth,@ (a method that prepares a mother for natural childbirth by providing education and exercises and nutrition and techniques of breathing and relaxation (with the assistance of the father)) }
+{ brooding, [ incubation, verb.body:incubate,+ ] parturition,@ (sitting on eggs so as to hatch them by the warmth of the body) }
+{ budding, asexual_reproduction,@ (reproduction of some unicellular organisms (such as yeasts) by growth and specialization followed by the separation by constriction of a part of the parent) }
+{ buildup, accretion,@ (the result of the process of accumulation; "the buildup of leaves blocked the drain pipes") }
+{ [ calcification, verb.change:calcify2,+ ] chemical_process,@ (a process that impregnates something with calcium (or calcium salts)) }
+{ [ calcination, verb.change:calcine,+ ] oxidation,@ (the conversion of metals into their oxides as a result of heating to a high temperature) }
+{ calving, parturition,@ (giving birth to a calf) }
+{ [ capture, verb.possession:capture1,+ ] natural_process,@ (any process in which an atomic or nuclear system acquires an additional particle) }
+{ capture1, natural_process,@ (a process whereby a star or planet holds an object in its gravitational field) }
+{ [ carbonation, verb.change:carbonate,+ ] permeation,@ (saturation with carbon dioxide (as soda water)) }
+{ carbon_cycle, thermonuclear_reaction,@ (a thermonuclear reaction in the interior of stars) }
+{ carbon_cycle1, organic_process,@ (the organic circulation of carbon from the atmosphere into organisms and back again) }
+{ [ carbonization, verb.change:carbonize,+ ] [ carbonisation, verb.change:carbonise,+ ] destructive_distillation,@ (the destructive distillation of coal (as in coke ovens)) }
+{ carriage_return, printing_operation,@ (the operation that prepares for the next character to be printed or displayed as the first character on a line) }
+{ catabiosis, aging,@ (normal aging of cells) }
+{ [ catabolism, adj.pert:catabolic,+ adj.all:catabolic,+ adj.pert:katabolic,+ adj.all:katabolic,+ verb.change:catabolize,+ anabolism,!] katabolism, dissimilation, destructive_metabolism, organic_process,@ metabolism,#p (breakdown in living organisms of more complex substances into simpler ones together with release of energy) }
+{ [ catalysis, adj.pert:catalytic,+ ] contact_action, chemical_process,@ (acceleration of a chemical reaction induced the presence of material that is chemically unchanged at the end of the reaction; "of the top 50 commodity chemicals, 30 are created directly by catalysis and another 6 are made from raw materials that are catalytically produced") }
+{ cavity, [ caries, adj.all:unhealthy^carious,+ ] dental_caries, tooth_decay, decay2,@ (soft decayed area in a tooth; progressive decay can lead to the death of a tooth) }
+{ cell_division, cellular_division, organic_process,@ (the process in reproduction and growth by which a cell divides to form daughter cells) }
+{ [ cenogenesis, adj.pert:cenogenetic,+ palingenesis,!] kenogenesis, caenogenesis, cainogenesis, kainogenesis, development1,@ (introduction during embryonic development of characters or structure not present in the earlier evolutionary history of the strain or species (such as the addition of the placenta in mammalian evolution)) }
+{ [ centrifugation, verb.motion:centrifuge,+ ] natural_process,@ (the process of separating substances of different densities by the use of a centrifuge) }
+{ chain_reaction1, chemical_reaction,@ (a series of chemical reactions in which the product of one is a reactant in the next) }
+{ chain_reaction2, nuclear_reaction,@ (a self-sustaining nuclear reaction; a series of nuclear fissions in which neutrons released by splitting one atom leads to the splitting of others) }
+{ [ chelation1, verb.stative:chelate,+ ] chemical_process,@ (the process of forming a ring by forming one or more hydrogen bonds) }
+{ [ chelation2, verb.stative:chelate,+ ] noun.Tops:process,@ noun.cognition:medicine,;c ((medicine) the process of removing a heavy metal from the bloodstream by means of a chelate as in treating lead or mercury poisoning) }
+{ chemical_equilibrium, [ equilibrium, verb.stative:equilibrate,+ verb.change:equilibrate,+ ] chemical_reaction,@ (a chemical reaction and its reverse proceed at equal rates) }
+{ chemical_process, chemical_change, chemical_action, natural_process,@ noun.cognition:chemistry,;c ((chemistry) any process determined by the atomic and molecular composition and structure of the substances involved) }
+{ chemical_reaction, [ reaction, verb.change:react,+ ] chemical_process,@ noun.cognition:chemistry,;c ((chemistry) a process in which one or more substances are changed into others; "there was a chemical reaction of the lime with the ground water") }
+{ [ chemisorption, verb.contact:chemisorb,+ ] [ chemosorption, verb.contact:chemisorb,+ ] adsorption,@ (adsorption (especially when irreversible) by means of chemical instead of physical forces; "chemisorption of gaseous nitrogen on iron catalysts") }
+{ chemosynthesis, synthesis,@ (synthesis of carbohydrate from carbon dioxide and water; limited to certain bacteria and fungi) }
+{ childbirth, [ childbearing, adj.pert:childbearing,+ ] accouchement, vaginal_birth, parturition,@ (the parturition process in human beings; having a baby; the process of giving birth to a child) }
+{ [ chlorination, verb.change:chlorinate,+ ] chemical_process,@ (the addition or substitution of chlorine in organic compounds) }
+{ [ chromatography, adj.pert:chromatographical,+ ] natural_process,@ (a process used for separating mixtures by virtue of differences in absorbency) }
+{ civilization, [ civilisation, verb.change:civilise1,+ ] social_process,@ (the social process whereby societies achieve an advanced stage of development and organization) }
+{ cleavage, segmentation, noun.state:gestation,#p cell_division,@ noun.cognition:embryology,;c ((embryology) the repeated division of a fertilised ovum) }
+{ cleavage1, chemical_process,@ (the breaking of a chemical bond in a molecule resulting in smaller molecules) }
+{ climate_change, global_climate_change, temperature_change,@ (a change in the world's climate) }
+{ [ clouding, verb.weather:cloud,+ ] clouding_up, vaporization,@ (the process whereby water particles become visible in the sky) }
+{ cohesion, growth,@ noun.cognition:botany,;c ((botany) the process in some plants of parts growing together that are usually separate (such as petals)) }
+{ cold_fusion, fusion,@ (nuclear fusion at or near room temperatures; claims to have discovered it are generally considered to have been mistaken) }
+{ column_chromatography, chromatography,@ (chromatography that uses selective adsorption by a column of powders) }
+{ [ combustion, verb.change:combust,+ ] burning, oxidation,@ (a process in which a substance reacts with oxygen to give heat and light) }
+{ [ deflagration, verb.change:deflagrate,+ ] combustion,@ (combustion that propagates through a gas or along the surface of an explosive at a rapid rate driven by the transfer of heat) }
+{ [ compensation, verb.stative:compensate3,+ ] defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism that conceals your undesirable shortcomings by exaggerating desirable behaviors) }
+{ computer_operation, machine_operation, operation,@ (an elementary operation that a computer is designed and built to perform) }
+{ concretion, natural_process,@ (the formation of stonelike objects within a body organ (e.g., the kidneys)) }
+{ concurrent_operation, operation,@ (two or more operations performed at the same time (or within a give interval)) }
+{ [ condensation, verb.change:condense3,+ verb.change:condense1,+ ] natural_process,@ (the process of changing from a gaseous to a liquid or solid state) }
+{ congealment, [ congelation, verb.change:congeal,+ ] hardening,@ (the process of congealing; solidification by (or as if by) freezing) }
+{ conspicuous_consumption, consumption,@ (buying expensive services and products in order to flaunt your wealth) }
+{ consumption, economic_consumption, usance, [ use, verb.consumption:use,+ ] use_of_goods_and_services, demand,@ noun.cognition:economics,;c ((economics) the utilization of economic goods to satisfy needs or in manufacturing; "the consumption of energy has increased steadily") }
+{ control_operation, control_function, operation,@ (an operation that controls the recording or processing or transmission of interpretation of data; "a control operation started the data processing") }
+{ [ convalescence, adj.all:ill1^convalescent,+ verb.body:convalesce,+ ] [ recuperation, verb.body:recuperate1,+ verb.body:recuperate,+ ] [ recovery, verb.body:recover,+ ] healing,@ (gradual healing (through rest) after sickness or injury) }
+{ convection1, temperature_change,@ (the transfer of heat through a fluid (liquid or gas) caused by molecular motion) }
+{ [ convection2, verb.motion:convect,+ ] natural_process,@ noun.cognition:meteorology,;c ((meteorology) the vertical movement of heat or other properties by massive motion within the atmosphere) }
+{ conversion, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism represses emotional conflicts which are then converted into physical symptoms that have no organic basis) }
+{ [ cooling, verb.change:cool1,+ verb.change:cool,+ ] [ chilling, verb.change:chill1,+ verb.change:chill,+ ] temperature_reduction, temperature_change,@ (the process of becoming cooler; a falling temperature) }
+{ [ corrosion, verb.change:corrode1,+ verb.change:corrode,+ ] [ corroding, verb.change:corrode1,+ verb.change:corrode,+ ] erosion1, chemical_process,@ (erosion by chemical action) }
+{ corruption, decay2,@ (decay of matter (as by rot or oxidation)) }
+{ cost-pull_inflation, inflation,@ (inflation caused by an increase in the costs of production) }
+{ [ cracking, verb.change:crack8,+ verb.change:crack7,+ ] chemical_process,@ (the process whereby heavy molecules of naphtha or petroleum are broken down into hydrocarbons of lower molecular weight (especially in the oil-refining process)) }
+{ crossing_over, crossover, organic_process,@ diplotene,#p (the interchange of sections between pairing homologous chromosomes during the prophase of meiosis) }
+{ [ cultivation, verb.creation:cultivate,+ ] growth,@ (the process of fostering the growth of something; "the cultivation of bees for honey") }
+{ [ curdling, verb.change:curdle2,+ verb.change:curdle1,+ verb.change:curdle,+ ] [ clotting, verb.change:clot4,+ verb.change:clot1,+ verb.change:clot,+ ] [ coagulation, verb.change:coagulate1,+ verb.change:coagulate,+ ] natural_process,@ (the process of forming semisolid lumps in a liquid) }
+{ cyanide_process, industrial_process,@ (an industrial process for extracting gold and silver by treating ore with a sodium cyanide solution) }
+{ [ cytogenesis, adj.pert:cytogenetic,+ ] cytogeny, development1,@ (the origin and development and variation of cells) }
+{ [ cytolysis, adj.pert:cytolytic,+ ] lysis,@ (pathological breakdown of cells by the destruction of their outer membrane) }
+{ data_mining, data_processing,@ (data processing using sophisticated data search capabilities and statistical algorithms to discover patterns and correlations in large preexisting databases; a way to discover new meaning in data) }
+{ data_processing, processing,@ noun.cognition:computer_science,;c ((computer science) a series of operations on data by a computer in order to retrieve or transform or classify information) }
+{ dealignment, noun.Tops:process,@ (a process whereby voters are moved toward nonpartisanship thus weakening the structure of political parties) }
+{ [ deamination, verb.change:deaminate,+ ] [ deaminization, verb.change:deaminize,+ ] chemical_process,@ (removal of the amino radical from an amino acid or other amino compound) }
+{ [ decalcification, verb.change:decalcify1,+ ] chemical_process,@ (loss of calcium from bones or teeth) }
+{ [ decarboxylation, verb.change:decarboxylate1,+ verb.change:decarboxylate,+ ] chemical_process,@ (the process of removing a carboxyl group from a chemical compound (usually replacing it with hydrogen)) }
+{ [ decay1, verb.change:decay1,+ ] decline1, decrease,@ (a gradual decrease; as of stored charge or current) }
+{ decay2, natural_process,@ (the process of gradually becoming inferior) }
+{ [ decay3, verb.change:decay1,+ ] radioactive_decay, [ disintegration2, verb.change:disintegrate3,+ verb.change:disintegrate1,+ ] nuclear_reaction,@ (the spontaneous disintegration of a radioactive substance along with the emission of ionizing radiation) }
+{ [ decentralization, verb.change:decentralize,+ ] decentalisation, social_process,@ (the social process in which population and industry moves from urban centers to outlying districts) }
+{ [ decline2, verb.change:decline,+ ] [ diminution, verb.change:diminish,+ ] decrease,@ (change toward something smaller or lower) }
+{ [ decoction, verb.change:decoct,+ ] extraction,@ noun.cognition:pharmacology,;c ((pharmacology) the extraction of water-soluble drug substances by boiling) }
+{ decoction_process, decoction_mashing, boiling,@ noun.act:brewing,;c ((brewing) a process in which part of the mash is removed and boiled and then returned) }
+{ [ decomposition, verb.change:decompose1,+ ] [ rot, verb.change:rot,+ ] [ rotting, verb.change:rot,+ ] [ putrefaction, verb.change:putrefy,+ ] [ breakdown, verb.change:break_down9,+ ] decay2,@ noun.cognition:biology,;c ((biology) the process of decay caused by bacterial or fungal action) }
+{ [ decomposition1, verb.change:decompose,+ ] decomposition_reaction, chemical_decomposition_reaction, chemical_reaction,@ noun.cognition:chemistry,;c ((chemistry) separation of a substance into two or more substances that may differ from each other and from the original substance) }
+{ [ decrease, verb.change:decrease,+ increase,!] [ decrement, increment,! ] noun.Tops:process,@ (a process of becoming smaller or shorter) }
+{ [ dedifferentiation, verb.change:dedifferentiate,+ ] adaptation,@ (the loss of specialization in form or function) }
+{ [ deepening, verb.change:deepen3,+ ] evolution1,@ (a process of becoming deeper and more profound) }
+{ [ defecation, verb.body:defecate,+ ] laxation, [ shitting, verb.body:shit,+ ] elimination,@ (the elimination of fecal waste through the anus) }
+{ defense_mechanism, defense_reaction, defence_mechanism, defence_reaction, defense, defence, psychoanalytic_process,@ noun.cognition:process1,@ noun.cognition:psychiatry,;c ((psychiatry) an unconscious process that tries to reduce the anxiety associated with instinctive desires) }
+{ [ deflation, adj.all:deflationary,+ verb.change:deflate11,+ verb.change:deflate10,+ inflation,! disinflation,!] economic_process,@ (a contraction of economic activity resulting in a decline of prices) }
+{ [ defoliation, verb.change:defoliate,+ ] organic_process,@ (the loss of foliage) }
+{ [ degaussing, verb.change:degauss,+ ] demagnetization,@ (the process of making a (steel) ship's hull nonmagnetic by producing an opposing magnetic field) }
+{ [ degeneration, verb.body:degenerate,+ ] [ devolution, evolution1,! ] noun.Tops:process,@ (the process of declining from a higher to a lower level of effective power or vitality or essential quality) }
+{ [ dehydration, verb.change:dehydrate2,+ verb.change:dehydrate1,+ verb.change:dehydrate,+ ] [ desiccation, verb.change:desiccate5,+ verb.change:desiccate4,+ ] drying_up, [ evaporation1, verb.change:evaporate,+ ] extraction,@ plastination,#p (the process of extracting moisture) }
+{ [ de-iodination, verb.change:de-iodinate,+ ] chemical_process,@ (the removal of iodine atoms from organic compounds) }
+{ [ demagnetization, verb.change:demagnetize,+ ] [ demagnetisation, verb.change:demagnetise,+ ] natural_process,@ (the process of removing magnetization) }
+{ [ demand, supply,!] economic_process,@ (the ability and desire to purchase goods and services; "the automobile reduced the demand for buggywhips"; "the demand exceeded the supply") }
+{ demand-pull_inflation, inflation,@ (inflation caused by an increase in demand or in the supply of money) }
+{ [ demineralization, verb.change:demineralize,+ ] [ demineralisation, verb.change:demineralise,+ ] chemical_process,@ (the removal of minerals and mineral salts from a liquid (especially from water)) }
+{ [ denazification, verb.change:denazify,+ ] de-Nazification, social_process,@ (social process of removing Nazis from official positions and giving up any allegiance to Nazism; "denazification was a slow process") }
+{ denial, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism that denies painful thoughts) }
+{ deossification, organic_process,@ (the loss of the mineral content of bone tissue) }
+{ deposition, deposit, accretion,@ (the natural process of laying down a deposit of something) }
+{ [ derivation, verb.change:derive1,+ ] linguistic_process,@ noun.cognition:descriptive_linguistics,;c ((descriptive linguistics) the process whereby new words are formed from existing words or bases by affixation; "`singer' from `sing' or `undo' from `do' are examples of derivations") }
+{ eponymy, derivation,@ (the derivation of a general name from that of a famous person) }
+{ [ desalination, verb.change:desalinate,+ ] [ desalinization, verb.change:desalinize,+ ] [ desalinisation, verb.change:desalinise,+ ] chemical_process,@ (the removal of salt (especially from sea water)) }
+{ desertification, geological_process,@ (the gradual transformation of habitable land into desert; is usually caused by climate change or by destructive use of the land; "the dust storms in Korea are the result of rapid desertification in China") }
+{ [ desensitization, verb.perception:desensitize,+ verb.change:desensitize,+ ] [ desensitisation, verb.perception:desensitise,+ verb.change:desensitise,+ ] decrease,@ (the process of reducing sensitivity; "the patient was desensitized to the allergen") }
+{ [ desorption, verb.change:desorb1,+ verb.change:desorb,+ ] natural_process,@ (changing from an adsorbed state on a surface to a gaseous or liquid state) }
+{ [ destalinization, verb.change:destalinize,+ ] de-Stalinization, [ destalinisation, verb.change:destalinise,+ ] de-Stalinisation, social_process,@ (social process of neutralizing the influence of Joseph Stalin by revising his policies and removing monuments dedicated to him and renaming places named in his honor; "his statue was demolished as part of destalinization") }
+{ destructive_distillation, fractionation,@ (heating a solid substance in a closed container and collecting the volatile products) }
+{ [ deterioration, verb.change:deteriorate,+ verb.body:deteriorate,+ ] decline_in_quality, [ declension, verb.change:decline1,+ ] [ worsening, verb.change:worsen,+ ] decline2,@ (process of changing to an inferior state) }
+{ detumescence, decline2,@ (diminution of swelling; the subsidence of anything swollen) }
+{ [ development, verb.perception:develop,+ ] [ developing, verb.perception:develop,+ ] processing,@ (processing a photosensitive material in order to make an image visible; "the development and printing of his pictures took only two hours") }
+{ [ development2, verb.change:develop10,+ ] [ evolution1, verb.change:evolve,+ devolution,! ] noun.Tops:process,@ (a process in which something passes by degrees to a different stage (especially a more advanced or mature stage); "the development of his ideas took many years"; "the evolution of Greek civilization"; "the slow development of her skill as a writer") }
+{ diakinesis, noun.time:phase,@ prophase2,#p (the final stage of the prophase of meiosis) }
+{ diastrophism, geological_process,@ (the process of deformation that produces continents and ocean basins in the earth's crust) }
+{ diffusion, natural_process,@ noun.cognition:physics,;c ((physics) the process in which there is movement of a substance from an area of high concentration of that substance to an area of lower concentration) }
+{ [ digestion, verb.consumption:digest,+ ] organic_process,@ (the organic process by which food is converted into substances that can be absorbed into the body) }
+{ [ digestion1, verb.change:digest4,+ ] chemical_process,@ (the process of decomposing organic matter (as in sewage) by bacteria or by chemical action or heat) }
+{ digital_photography, photography,@ (a photographic method that stores the image digitally for later reproduction) }
+{ [ dilapidation, verb.creation:dilapidate,+ ] [ ruin, verb.change:ruin,+ ] decay2,@ (the process of becoming dilapidated) }
+{ diplotene, noun.time:phase,@ prophase2,#p (the fourth stage of the prophase of meiosis) }
+{ [ discharge, verb.body:discharge,+ ] emission1, [ expelling, verb.body:expel,+ ] bodily_process,@ (any of several bodily processes by which substances go out of the body; "the discharge of pus") }
+{ [ disinflation, inflation,! deflation,!] economic_process,@ (a reduction of prices intended to improve the balance of payments) }
+{ displacement, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism that transfers affect or reaction from the original object to some more acceptable one) }
+{ displacement1, displacement_reaction, chemical_reaction,@ noun.cognition:chemistry,;c ((chemistry) a reaction in which an elementary substance displaces and sets free a constituent element from a compound) }
+{ [ dissimilation1, verb.change:dissimilate2,+ verb.change:dissimilate,+ ] linguistic_process,@ (a linguistic process by which one of two similar sounds in a word becomes less like the other; "the Old French MARBRE became the English MARBLE by dissimilation") }
+{ [ dissociation, verb.change:dissociate10,+ ] chemical_process,@ noun.cognition:chemistry,;c ((chemistry) the temporary or reversible process in which a molecule or ion is broken down into smaller molecules or ions) }
+{ [ dissolution, verb.change:dissolve8,+ ] [ disintegration1, verb.change:disintegrate,+ ] natural_process,@ (separation into component parts) }
+{ [ dissolving, verb.change:dissolve1,+ verb.change:dissolve,+ ] [ dissolution1, verb.change:dissolve1,+ verb.change:dissolve,+ ] liquefaction,@ (the process of going into solution; "the dissolving of salt in water") }
+{ [ distillation, verb.change:distill3,+ verb.change:distill2,+ verb.change:distill1,+ ] [ distillment, verb.change:distill3,+ verb.change:distill1,+ ] natural_process,@ (the process of purifying a liquid by boiling it and condensing its vapors) }
+{ distributed_data_processing, remote-access_data_processing, teleprocessing, data_processing,@ (data processing in which some of the functions are performed in different places and connected by transmission facilities) }
+{ dithering, video_digitizing,@ (the process of representing intermediate colors by patterns of tiny colored dots that simulate the desired color) }
+{ domestication, adaptation,@ (adaptation to intimate association with human beings) }
+{ double_decomposition, double_decomposition_reaction, metathesis, chemical_reaction,@ (a chemical reaction between two compounds in which parts of each are interchanged to form two new compounds (AB+CD=AD+CB)) }
+{ double_replacement_reaction, double_decomposition,@ (a chemical reaction between two compounds where the positive ion of one compound is exchanged with the positive ion of another compound) }
+{ [ doubling, verb.change:double,+ ] multiplication,@ (increase by a factor of two; "doubling with a computer took no time at all") }
+{ [ drift1, verb.motion:drift4,+ ] natural_process,@ noun.artifact:ship,;c noun.artifact:plane1,;c (the gradual departure from an intended course due to external influences (as a ship or plane)) }
+{ drift2, linguistic_process,@ (a process of linguistic change over a period of time) }
+{ dry_plate, dry_plate_process, photography,@ (a former photographic method that used a glass plate coated with a light-sensitive gelatinous emulsion) }
+{ [ melioration, verb.change:meliorate,+ ] drift2,@ (the linguistic process in which over a period of time a word grows more positive in connotation or more elevated in meaning) }
+{ dyadic_operation, operation,@ (an operation on exactly two operands) }
+{ [ ebb1, verb.change:ebb1,+ ] [ ebbing, verb.change:ebb1,+ ] [ wane, verb.change:wane2,+ verb.change:wane1,+ ] decline2,@ (a gradual decline (in size or strength or power or number)) }
+{ eburnation, organic_process,@ (a change that occurs in degenerative joint disease in which bone is converted into a dense smooth substance resembling ivory) }
+{ ecchymosis, organic_process,@ (the escape of blood from ruptured blood vessels into the surrounding tissue to form a purple or black-and-blue spot on the skin) }
+{ economic_growth, economic_process,@ (steady growth in the productive capacity of the economy (and so a growth of national income)) }
+{ economic_process, noun.Tops:process,@ (any process affecting the production and development and management of material wealth) }
+{ effacement, organic_process,@ noun.state:parturiency,#p (shortening of the uterine cervix and thinning of its walls as it is dilated during labor) }
+{ [ effervescence, adj.all:effervescent,+ verb.change:effervesce,+ ] natural_process,@ (the process of bubbling as gas escapes) }
+{ [ ejaculation, verb.body:ejaculate,+ ] discharge,@ (the discharge of semen in males) }
+{ electrodeposition, deposition,@ (the deposition of a substance on an electrode by the action of electricity (especially by electrolysis)) }
+{ [ electrolysis, adj.pert:electrolytic1,+ ] decomposition1,@ noun.cognition:chemistry,;c ((chemistry) a chemical decomposition reaction produced by passing an electric current through a solution containing ions) }
+{ electronic_data_processing, EDP, automatic_data_processing,@ (automatic data processing by electronic means without the use of tabulating cards or punched tapes) }
+{ [ electrophoresis, adj.pert:electrophoretic,+ ] [ cataphoresis, adj.pert:cataphoretic,+ ] dielectrolysis, ionophoresis, natural_process,@ (the motion of charged particles in a colloid under the influence of an electric field; particles with a positive charge go to the cathode and negative to the anode) }
+{ electrostatic_precipitation, industrial_process,@ (a process that removes suspended dust particles from a gas by applying a high voltage electrostatic charge to the particles and collecting them on charged plates) }
+{ [ elimination, verb.body:eliminate,+ ] [ evacuation, verb.body:evacuate,+ ] [ excretion, verb.body:excrete,+ ] [ excreting, verb.body:excrete,+ ] [ voiding, verb.body:void,+ ] discharge,@ (the bodily process of discharging waste matter) }
+{ elimination_reaction, chemical_reaction,@ (a chemical reaction in which a molecule decomposes to two different molecules) }
+{ [ elision, verb.cognition:elide,+ ] omission,@ (omission of a sound between two words (usually a vowel and the end of one word or the beginning of the next)) }
+{ ellipsis, eclipsis, omission,@ (omission or suppression of parts of words or sentences) }
+{ [ elution, verb.contact:elute,+ ] extraction,@ (the process of extracting one material from another by washing with a solvent to remove adsorbed material from an adsorbent (as in washing of loaded ion-exchange resins to remove captured ions); used to obtain uranium ions) }
+{ emergent_evolution, evolution,@ (the appearance of entirely new properties at certain critical stages in the course of evolution) }
+{ emission, release,@ (the release of electrons from parent atoms) }
+{ [ encapsulation, verb.contact:encapsulate,+ ] noun.Tops:process,@ (the process of enclosing (as in a capsule)) }
+{ endoergic_reaction, nuclear_reaction,@ (a nuclear reaction occurring with absorption of energy) }
+{ endothermic_reaction, chemical_reaction,@ (a chemical reaction accompanied by the absorption of heat) }
+{ enuresis, urinary_incontinence, incontinence,@ (inability to control the flow of urine and involuntary urination) }
+{ epigenesis, metamorphism,@ (a geological change in the mineral content of rock after the rock has formed) }
+{ epilation, loss,@ (loss of hair; the result of removing hair) }
+{ epitaxy, growing1,@ (growing a crystal layer of one mineral on the crystal base of another mineral in such a manner that its crystalline orientation is the same as that of the substrate) }
+{ [ erosion, verb.change:erode,+ ] [ eroding, verb.change:erode,+ ] eating_away, wearing, [ wearing_away, verb.change:wear_away,+ ] geological_process,@ noun.cognition:geology,;c ((geology) the mechanical process of wearing or grinding something down (as by particles washing over it)) }
+{ erosion2, decline2,@ (a gradual decline of something; "after the accounting scandal there was an erosion of confidence in the auditors") }
+{ [ erythropoiesis, adj.pert:erythropoietic,+ ] organic_process,@ (the process of producing red blood cells by the stem cells in the bone marrow) }
+{ establishment, ecesis, natural_process,@ noun.cognition:ecology,;c ((ecology) the process by which a plant or animal becomes established in a new habitat) }
+{ [ Europeanization, verb.change:europeanize1,+ ] [ Europeanisation, verb.change:europeanise1,+ ] assimilation2,@ (assimilation into European culture) }
+{ eutrophication, organic_process,@ (excessive nutrients in a lake or other body of water, usually caused by runoff of nutrients (animal waste, fertilizers, sewage) from the land, which causes a dense growth of plant life; the decomposition of the plants depletes the supply of oxygen, leading to the death of animal life; "he argued that the controlling factor in eutrophication is not nitrate but phosphate") }
+{ [ evolution, adj.pert:evolutionary,+ verb.change:evolve3,+ verb.change:evolve,+ ] organic_evolution, phylogeny, [ phylogenesis, adj.pert:phylogenetic,+ ] organic_process,@ noun.cognition:biology,;c ((biology) the sequence of events involved in the evolutionary development of a species or taxonomic group of organisms) }
+{ execution, instruction_execution, noun.Tops:process,@ data_processing,#p noun.cognition:computer_science,;c ((computer science) the process of carrying out an instruction by a computer) }
+{ exoergic_reaction, nuclear_reaction,@ (a nuclear reaction accompanied by the evolution of energy) }
+{ exothermic_reaction, chemical_reaction,@ (a chemical reaction accompanied by the evolution of heat) }
+{ [ expectoration, verb.body:expectorate,+ ] bodily_process,@ (the process of coughing up and spitting out) }
+{ exponential_decay, exponential_return, decay1,@ (a decrease that follows an exponential function) }
+{ [ expression, verb.perception:express9,+ ] organic_process,@ noun.cognition:genetics,;c ((genetics) the process of expressing a gene) }
+{ extinction, natural_process,@ (the reduction of the intensity of radiation as a consequence of absorption and radiation) }
+{ [ extraction, verb.contact:extract7,+ verb.change:extract,+ ] natural_process,@ (the process of obtaining something from a mixture or compound by chemical or physical or mechanical means) }
+{ [ extravasation, verb.contact:extravasate,+ ] organic_process,@ (the process of exuding or passing out of a vessel into surrounding tissues; said of blood or lymph or urine) }
+{ [ farrow, verb.body:farrow,+ ] [ farrowing, verb.body:farrow,+ ] parturition,@ (the production of a litter of pigs) }
+{ fat_metabolism, metabolism,@ (a metabolic process that breaks down ingested fats into fatty acids and glycerol and then into simpler compounds that can be used by cells of the body) }
+{ [ feedback, verb.possession:feed_back,+ ] natural_process,@ (the process in which part of the output of a system is returned to its input in order to regulate its further output) }
+{ [ feminization, verb.change:feminize1,+ ] [ feminisation, verb.change:feminise1,+ ] pathologic_process,@ (the process of becoming feminized; the development of female characteristics (loss of facial hair or breast enlargement) in a male because of hormonal disorders or castration) }
+{ [ festering, verb.body:fester,+ ] [ suppuration, verb.body:suppurate1,+ verb.body:suppurate,+ ] [ maturation2, verb.body:mature4,+ verb.body:maturate,+ ] bodily_process,@ noun.cognition:medicine,;c ((medicine) the formation of morbific matter in an abscess or a vesicle and the discharge of pus) }
+{ fibrinolysis, dissolution,@ (a normal ongoing process that dissolves fibrin and results in the removal of small blood clots; "drugs causing fibrinolysis have been utilized therapeutically") }
+{ field_emission, emission,@ (the emission of electrons that are stripped from parent atoms by a high electric field) }
+{ [ filling, verb.change:fill,+ ] flow,@ (flow into something (as a container)) }
+{ [ filtration, verb.contact:filter1,+ verb.contact:filter,+ ] natural_process,@ (the process whereby fluids pass through a filter or a filtering medium) }
+{ [ fire, adj.all:hot1^fiery,+ verb.possession:fire,+ verb.change:fire1,+ verb.change:fire,+ ] [ flame, verb.weather:flame,+ ] [ flaming, verb.weather:flame,+ ] combustion,@ (the process of combustion of inflammable materials producing heat and light and (often) smoke; "fire was one of our ancestors' first discoveries") }
+{ fission, nuclear_fission, nuclear_reaction,@ (a nuclear reaction in which a massive nucleus splits into smaller nuclei with the simultaneous release of energy) }
+{ fission1, asexual_reproduction,@ (reproduction of some unicellular organisms by division of the cell into two more or less equal parts) }
+{ fissiparity, asexual_reproduction,@ (reproduction of some multicellular organisms by division, as in the case of some starfish) }
+{ fixed-cycle_operation, operation,@ (an operation that is completed in a specified number of regularly timed execution cycles) }
+{ [ flare, verb.weather:flare1,+ verb.weather:flare,+ ] fire,@ (a sudden burst of flame) }
+{ floating-point_operation, flop, computer_operation,@ (an arithmetic operation performed on floating-point numbers; "this computer can perform a million flops per second") }
+{ [ flocculation, verb.stative:flocculate,+ ] natural_process,@ (the process of flocculating; forming woolly cloudlike aggregations) }
+{ [ flow, verb.stative:flow,+ verb.motion:flow2,+ ] natural_process,@ (any uninterrupted stream or discharge) }
+{ flowage, flow,@ (gradual internal motion or deformation of a solid body (as by heat); "rock fracture and rock flowage are different types of geological deformation") }
+{ [ focalization, verb.stative:focalize,+ ] [ focalisation, verb.stative:focalise,+ ] pathogenesis,@ (the confinement of an infection to a limited area) }
+{ fold, folding1, geological_process,@ (a geological process that causes a bend in a stratum of rock) }
+{ foliation, stratification,@ noun.cognition:geology,;c ((geology) the arrangement of leaflike layers in a rock) }
+{ [ foliation1, verb.change:foliate,+ ] leafing, growth,@ noun.cognition:botany,;c ((botany) the process of forming leaves) }
+{ foreground_processing, foregrounding, priority_processing,@ (the execution of a program that preempts the use of the processing system) }
+{ formation, natural_process,@ (natural process that causes something to form; "the formation of gas in the intestine"; "the formation of crystals"; "the formation of pseudopods") }
+{ [ fossilization, verb.change:fossilize,+ ] [ fossilisation, verb.change:fossilise,+ ] natural_process,@ (the process of fossilizing a plant or animal that existed in some earlier age; the process of being turned to stone) }
+{ fractional_distillation, fractionation,@ (fractionation of a liquid by distillation) }
+{ [ fractionation, verb.contact:fractionate1,+ verb.contact:fractionate,+ ] fractional_process, industrial_process,@ (a process that uses heat to separate a substance into its components) }
+{ [ fragmentation, verb.change:fragment,+ ] storage,@ noun.cognition:computer_science,;c ((computer science) the condition of a file that is broken up and stored in many different locations on a magnetic disk; "fragmentation slows system performance because it takes extra time to locate and assemble the parts of the fragmented file") }
+{ [ freeze1, verb.change:freeze2,+ verb.change:freeze,+ ] [ freezing, verb.weather:freeze10,+ verb.change:freeze4,+ verb.change:freeze2,+ verb.change:freeze,+ ] cooling,@ phase_change,@ (the withdrawal of heat to change something from a liquid to a solid) }
+{ freeze-drying, [ lyophilization, verb.change:lyophilize,+ ] [ lyophilisation, verb.change:lyophilise,+ ] freeze1,@ dehydration,@ (a method of drying food or blood plasma or pharmaceuticals or tissue without destroying their physical structure; material is frozen and then warmed in a vacuum so that the ice sublimes) }
+{ [ frost1, adj.all:cold1^frosty2,+ verb.contact:frost4,+ ] icing, freeze1,@ (the formation of frost or ice on a surface) }
+{ [ fructification, verb.change:fructify,+ verb.body:fructify,+ ] maturation,@ (the bearing of fruit) }
+{ fusion, nuclear_fusion, nuclear_fusion_reaction, nuclear_reaction,@ (a nuclear reaction in which nuclei combine to form more massive nuclei with the simultaneous release of energy) }
+{ fusion1, linguistic_process,@ (the merging of adjacent sounds or syllables or words) }
+{ galactosis, secretion,@ (the secretion of milk) }
+{ [ galvanization, verb.body:galvanize2,+ ] [ galvanisation, verb.body:galvanise2,+ ] stimulation,@ (stimulation with a galvanic current) }
+{ gametogenesis, growth,@ (the development and maturation of sex cells through meiosis) }
+{ [ gasification, verb.change:gasify,+ ] chemical_process,@ (the process of changing into gas; "coal gas is produced by the gasification of coal") }
+{ gassing, chemical_process,@ (the process of interacting with gas) }
+{ gastric_digestion, digestion,@ (the process of breaking down proteins by the action of the gastric juice in the stomach) }
+{ gastrulation, organic_process,@ growth,#p (the process in which a gastrula develops from a blastula by the inward migration of cells) }
+{ geological_process, geologic_process, natural_process,@ noun.cognition:geology,;c ((geology) a natural process whereby geological features are modified) }
+{ [ germination, verb.change:germinate1,+ verb.change:germinate,+ ] [ sprouting, verb.change:sprout,+ verb.body:sprout1,+ ] growth,@ (the process whereby seeds or spores sprout and begin to grow) }
+{ [ glaciation, adj.pert:glacial,+ verb.contact:glaciate,+ verb.change:glaciate,+ ] geological_process,@ (the process of covering the earth with glaciers or masses of ice) }
+{ Riss_glaciation, glaciation,@ (the next-to-last Pleistocene glaciation in the Alps and the deposits laid down at that time) }
+{ Saale_glaciation, glaciation,@ (the next-to-last Pleistocene glaciation in northern Europe and the deposits laid down at that time) }
+{ Wolstonian_glaciation, glaciation,@ (the next-to-last Pleistocene glaciation in Britain and the deposits laid down at that time) }
+{ [ globalization, verb.change:globalize,+ ] [ globalisation, verb.change:globalise,+ ] economic_process,@ (growth to a global or worldwide scale; "the globalization of the communication industry") }
+{ global_warming, heating,@ (an increase in the average temperature of the earth's atmosphere (especially a sustained increase that causes climatic changes)) }
+{ glycogenesis, organic_process,@ (the formation in animals of glycogen from glucose) }
+{ glycolysis, metabolism,@ (a metabolic process that breaks down carbohydrates and sugars through a series of reactions to either pyruvic acid or lactic acid and releases energy for the body in the form of ATP) }
+{ growing1, noun.act:production,@ noun.cognition:electronics,;c ((electronics) the production of (semiconductor) crystals by slow crystallization from the molten state) }
+{ [ growth, verb.change:grow2,+ verb.change:grow1,+ verb.change:grow4,+ ] [ growing, verb.change:grow4,+ verb.change:grow2,+ verb.change:grow1,+ ] [ maturation, adj.pert:maturational,+ verb.change:mature1,+ verb.change:maturate1,+ ] [ development1, adj.pert:developmental,+ verb.change:develop,+ verb.body:develop,+ nondevelopment,! ] [ ontogeny, adj.pert:ontogenetic,+ ] [ ontogenesis, adj.pert:ontogenetic,+ ] organic_process,@ noun.cognition:biology,;c ((biology) the process of an individual organism growing organically; a purely biological unfolding of events involved in an organism changing gradually from a simple to a more complex level; "he proposed an indicator of osseous development in children") }
+{ [ growth1, verb.change:grow4,+ ] evolution1,@ (a progression from simpler to more complex forms; "the growth of culture") }
+{ gynogenesis, parthenogenesis,@ (female parthenogenesis in which the embryo contains only maternal chromosomes due to the failure of the sperm to fuse with the egg nucleus) }
+{ Haber_process, Haber-Bosch_process, industrial_process,@ (an industrial process for producing ammonia from nitrogen and hydrogen by combining them under high pressure in the presence of an iron catalyst) }
+{ habit, growth,@ (the general form or mode of growth (especially of a plant or crystal); "a shrub of spreading habit") }
+{ [ hardening, verb.change:harden,+ ] [ solidifying, verb.change:solidify1,+ verb.change:solidify,+ ] [ solidification, verb.change:solidify1,+ verb.change:solidify,+ ] [ set, verb.change:set7,+ ] [ curing, verb.change:cure,+ ] natural_process,@ plastination,#p (the process of becoming hard or solid by cooling or drying or crystallization; "the hardening of concrete"; "he tested the set of the glue") }
+{ [ hatch, verb.body:hatch,+ verb.body:hatch1,+ ] [ hatching, verb.body:hatch1,+ ] parturition,@ (the production of young from an egg) }
+{ [ healing, verb.change:heal,+ verb.body:heal,+ ] bodily_process,@ (the natural process by which the body repairs itself) }
+{ heat_dissipation, cooling,@ (dissipation of heat) }
+{ [ heating, verb.change:heat,+ ] [ warming, verb.change:warm,+ ] temperature_change,@ (the process of becoming warmer; a rising temperature) }
+{ [ hemagglutination, verb.contact:hemagglutinate,+ ] [ haemagglutination, verb.contact:haemagglutinate,+ ] agglutination1,@ (agglutination of red blood cells) }
+{ hematochezia, haematochezia, defecation,@ (passage of stools containing blood (as from diverticulosis or colon cancer or peptic ulcer)) }
+{ [ hematopoiesis, adj.pert:hematopoietic,+ ] [ haematopoiesis, adj.pert:haematopoietic,+ ] [ hemopoiesis, adj.pert:hemopoietic,+ ] [ haemopoiesis, adj.pert:haemopoietic,+ ] hemogenesis, haemogenesis, hematogenesis, haematogenesis, sanguification, organic_process,@ (the formation of blood cells in the living body (especially in the bone marrow)) }
+{ [ hemimetamorphosis, adj.all:metamorphic^hemimetamorphous,+ ] [ hemimetabolism, adj.all:metamorphic^hemimetabolic,+ adj.all:metamorphic^hemimetabolous,+ ] [ hemimetaboly, adj.all:metamorphic^hemimetabolic,+ ] metamorphosis,@ (incomplete or partial metamorphosis in insects) }
+{ [ heterometabolism, adj.all:metamorphic^heterometabolic,+ ] [ heterometaboly, adj.all:metamorphic^heterometabolic,+ ] metamorphosis,@ (development of insects with incomplete metamorphosis in which no pupal stage precedes maturity) }
+{ [ hemolysis, adj.pert:hemolytic,+ ] [ haemolysis, adj.pert:haemolytic,+ ] hematolysis, haematolysis, lysis,@ (lysis of erythrocytes with the release of hemoglobin) }
+{ [ heredity, adj.all:inheritable^hereditary1,+ ] organic_process,@ (the biological process whereby genetic factors are transmitted from one generation to the next) }
+{ [ heterospory, adj.pert:heterosporous,+ ] sporulation,@ (the development of both microspores and megaspores) }
+{ [ holometabolism, adj.all:metamorphic^holometabolic,+ adj.all:metamorphic^holometabolous,+ ] [ holometaboly, adj.all:metamorphic^holometabolous,+ ] metamorphosis,@ noun.animal:insect,;c (complete metamorphosis in insects) }
+{ [ homospory, adj.pert:homosporous,+ ] sporulation,@ (the development of a single kind of asexual spores) }
+{ human_process, noun.Tops:process,@ (a process in which human beings are involved) }
+{ [ humification, verb.change:humify,+ ] organic_process,@ (the process of the formation of humus from plant remains) }
+{ [ hydration, verb.change:hydrate2,+ verb.change:hydrate,+ ] association,@ (the process of combining with water; usually reversible) }
+{ hydrocracking, cracking,@ (the process whereby hydrocarbon molecules of petroleum are broken down into kerosene and gasolene by the addition of hydrogen under high pressure in the presence of a catalyst) }
+{ [ hydrogenation, verb.change:hydrogenate,+ ] chemical_process,@ (a chemical process that adds hydrogen atoms to an unsaturated oil; "food producers use hydrogenation to keep fat from becoming rancid") }
+{ [ hydrolysis, verb.change:hydrolize1,+ verb.change:hydrolise1,+ ] chemical_reaction,@ (a chemical reaction in which water reacts with a compound to produce other compounds; involves the splitting of a bond and the addition of the hydrogen cation and the hydroxide anion from the water) }
+{ hyperhidrosis, hyperidrosis, polyhidrosis, perspiration,@ (excessive and profuse perspiration) }
+{ hypersecretion, secretion,@ (excessive secretion) }
+{ hypostasis, bodily_process,@ (the accumulation of blood in an organ) }
+{ hypostasis1, epistasis, organic_process,@ (the suppression of a gene by the effect of an unrelated gene) }
+{ idealization, [ idealisation, verb.cognition:idealise,+ ] defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism that splits something you are ambivalent about into two representations--one good and one bad) }
+{ [ ignition, verb.weather:ignite,+ ] fire,@ (the process of initiating combustion or catching fire) }
+{ [ imbibition, verb.contact:imbibe,+ ] absorption,@ noun.cognition:chemistry,;c ((chemistry) the absorption of a liquid by a solid or gel) }
+{ immunoelectrophoresis, electrophoresis,@ (electrophoresis to separate antigens and antibodies) }
+{ [ implantation, verb.contact:implant,+ ] nidation, organic_process,@ noun.cognition:embryology,;c ((embryology) the organic process whereby a fertilized egg becomes implanted in the lining of the uterus of placental mammals) }
+{ [ impregnation, verb.change:impregnate,+ ] saturation, permeation,@ plastination,#p (the process of totally saturating something with a substance; "the impregnation of wood with preservative"; "the saturation of cotton with ether") }
+{ [ inactivation, verb.change:inactivate,+ activation,! ] natural_process,@ (the process of rendering inactive; "the gene inactivation system"; "thermal inactivation of serum samples") }
+{ [ incontinence, adj.all:incontinent,+ ] [ incontinency, adj.all:incontinent,+ ] elimination,@ (involuntary urination or defecation) }
+{ [ increase, verb.change:increase2,+ verb.change:increase,+ decrease,!] [ increment, decrement,! ] [ growth2, verb.change:grow,+ ] noun.Tops:process,@ (a process of becoming larger or longer or more numerous or more important; "the increase in unemployment"; "the growth of population") }
+{ [ incrustation, verb.change:incrust,+ ] [ encrustation, verb.change:encrust,+ ] formation,@ (the formation of a crust) }
+{ induction_heating, heating,@ (the heating of a conducting material caused by an electric current induced in it) }
+{ industrial_process, noun.Tops:process,@ (a systematic series of mechanical or chemical operations that produce or manufacture something) }
+{ [ indweller, verb.stative:indwell,+ ] activation,@ (activation by an inner spirit or force or principle; "the Holy Spirit is the indweller of the church and its members") }
+{ [ infection, adj.pert:infectious,+ verb.body:infect,+ ] pathologic_process,@ noun.cognition:medicine,;c ((medicine) the invasion of the body by pathogenic microorganisms and their multiplication which can lead to tissue damage and disease) }
+{ infection1, linguistic_process,@ noun.cognition:phonetics,;c ((phonetics) the alteration of a speech sound under the influence of a neighboring sound) }
+{ [ inflation, adj.all:inflationary,+ verb.change:inflate11,+ verb.change:inflate10,+ deflation,! disinflation,!] rising_prices, economic_process,@ (a general and progressive increase in prices; "in inflation everything gets more valuable except money") }
+{ deflation1, erosion,@ noun.cognition:geology,;c ((geology) the erosion of soil as a consequence of sand and dust and loose rocks being removed by the wind; "a constant deflation of the desert landscape") }
+{ [ inflationary_spiral, deflationary_spiral,! ] spiral,@ (an episode of inflation in which prices and wages increase at an increasing rate and currency rapidly loses value) }
+{ [ deflationary_spiral, inflationary_spiral,! ] spiral,@ (an episode of deflation in which prices and wages decrease at an increasing rate and currency gains in value) }
+{ [ inflow, outflow,! ] [ influx, efflux,! ] flow,@ (the process of flowing in) }
+{ infructescence, maturation,@ (the fruiting stage of the inflorescence) }
+{ [ infusion, verb.change:infuse2,+ ] extraction,@ (the process of extracting certain active properties (as a drug from a plant) by steeping or soaking (usually in water)) }
+{ inhibition, organic_process,@ noun.cognition:physiology,;c ((physiology) the process whereby nerves can retard or prevent the functioning of an organ or part; "the inhibition of the heart by the vagus nerve") }
+{ inpouring, inpour, inrush, inflow,@ (an inflow; "an inpouring of spiritual comfort") }
+{ [ inspissation, verb.change:inspissate3,+ ] dehydration,@ (the process of thickening by dehydration) }
+{ [ insufflation, verb.body:insufflate1,+ ] blowing,@ noun.cognition:medicine,;c ((medicine) blowing air or medicated powder into the lungs (or into some other body cavity)) }
+{ integrated_data_processing, IDP, automatic_data_processing,@ (automatic data processing in which data acquisition and other stages or processing are integrated into a coherent system) }
+{ intellectualization, intellectualisation, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism that uses reasoning to block out emotional stress and conflict) }
+{ internal_combustion, combustion,@ (the combustion of fuel inside a cylinder (as in an internal-combustion engine)) }
+{ intrusion, geological_process,@ (the forcing of molten rock into fissures or between strata of an earlier rock formation) }
+{ intumescence, intumescency, swelling, chemical_process,@ (the increase in volume of certain substances when they are heated (often accompanied by release of water)) }
+{ intussusception, growth,@ noun.cognition:biology,;c ((biology) growth in the surface area of a cell by the deposit of new particles between existing particles in the cell wall) }
+{ [ invagination, verb.contact:invaginate,+ ] [ introversion, verb.contact:introvert,+ ] [ intussusception1, verb.contact:intussuscept,+ ] infolding, organic_process,@ (the folding in of an outer layer so as to form a pocket in the surface; "the invagination of the blastula") }
+{ inversion, chemical_process,@ (a chemical process in which the direction of optical rotation of a substance is reversed from dextrorotatory to levorotary or vice versa) }
+{ involution, organic_process,@ (reduction in size of an organ or part (as in the return of the uterus to normal size after childbirth)) }
+{ [ iodination, verb.change:iodize,+ verb.change:iodise,+ ] chemical_process,@ (the substitution or addition of iodine atoms in organic compounds) }
+{ ion_exchange, natural_process,@ (a process in which ions are exchanged between a solution and an insoluble (usually resinous) solid; widely used in industrial processing) }
+{ [ ionization, verb.change:ionize1,+ verb.change:ionize,+ ] [ ionisation, verb.change:ionise1,+ verb.change:ionise,+ ] natural_process,@ (the process of ionizing; the formation of ions by separating atoms or molecules or radicals or by adding or subtracting electrons from atoms by strong electric fields in a gas) }
+{ [ irreversible_process, reversible_process,! ] noun.Tops:process,@ (any process that is not reversible) }
+{ isoagglutination, agglutination1,@ (agglutination of an agglutinogen of one individual by a serum from another individual of the same species) }
+{ isogamy, sexual_reproduction,@ noun.cognition:biology,;c ((biology) reproduction by the union or fusion of gametes of the same size and structure) }
+{ [ isolation, verb.cognition:isolate5,+ ] defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism in which memory of an unacceptable act or impulse is separated from the emotion originally associated with it) }
+{ [ iteration, verb.communication:iterate,+ ] looping, noun.Tops:process,@ noun.cognition:computer_science,;c ((computer science) executing the same set of instructions a given number of times or until a specified result is obtained; "the solution is obtained by iteration") }
+{ [ iteration1, verb.communication:iterate,+ ] loop, noun.Tops:process,@ noun.cognition:computer_science,;c ((computer science) a single execution of a set of instructions that are to be repeated; "the solution took hundreds of iterations") }
+{ juvenescence, growth,@ (the process of growing into a youth) }
+{ cytokinesis, organic_process,@ mitosis,#p meiosis,#p (organic process consisting of the division of the cytoplasm of a cell following karyokinesis bringing about the separation into two daughter cells) }
+{ [ karyokinesis, adj.pert:karyokinetic,+ ] organic_process,@ mitosis,#p meiosis,#p (organic process consisting of the division of the nucleus of a cell during mitosis or meiosis) }
+{ karyolysis, lysis,@ (disintegration and dissolution of a cell nucleus when a cell dies) }
+{ [ katamorphism, anamorphism,! ] metamorphism,@ (metamorphism that occurs at or near the earth's surface; breaks down complex minerals into simpler ones) }
+{ [ keratinization, verb.change:keratinize,+ ] [ keratinisation, verb.change:keratinise,+ ] organic_process,@ (organic process by which keratin is deposited in cells and the cells become horny (as in nails and hair)) }
+{ Krebs_cycle, Krebs_citric_acid_cycle, citric_acid_cycle, tricarboxylic_acid_cycle, organic_process,@ metabolism,#p (in all plants and animals: a series of enzymatic reactions in mitochondria involving oxidative metabolism of acetyl compounds to produce high-energy phosphate compounds that are the source of cellular energy) }
+{ lacrimation, lachrymation, [ tearing, verb.body:tear,+ ] [ watering, verb.change:water4,+ ] bodily_process,@ (shedding tears) }
+{ [ lactation, verb.consumption:lactate,+ ] bodily_process,@ (the production and secretion of milk by the mammary glands) }
+{ Lamaze_method_of_childbirth, Lamaze_method, natural_childbirth,@ (a method that prepares a mother for natural childbirth; the pregnant woman (in classes and at home) practices (usually with the help of a coach) and learns about the physiology of childbirth and techniques of relaxation, concentration, and breathing) }
+{ laying, egg_laying, parturition,@ (the production of eggs (especially in birds)) }
+{ [ leach, verb.change:leach,+ verb.motion:leach,+ verb.motion:leach1,+ ] leaching, natural_process,@ (the process of leaching) }
+{ [ leak, adj.all:incontinent^leaky,+ ] wetting, making_water, passing_water, micturition,@ noun.communication:euphemism,;u (a euphemism for urination; "he had to take a leak") }
+{ Leboyer_method_of_childbirth, Leboyer_method, natural_childbirth,@ (a method of childbirth that tries to minimize the trauma for the newborn; delivery occurs in a quiet dimly lit room and the infant's head is not pulled and immediate bonding between mother and child is encouraged) }
+{ leeway, drift1,@ noun.artifact:ship,;c noun.artifact:plane1,;c ((of a ship or plane) sideways drift) }
+{ leptotene, noun.time:phase,@ prophase2,#p (the first stage of the prophase of meiosis) }
+{ [ lexicalization, verb.communication:lexicalize,+ ] lexicalisation, linguistic_process,@ (the process of making a word to express a concept) }
+{ [ libration, verb.motion:librate,+ ] oscillation,@ noun.phenomenon:variation,@ noun.cognition:astronomy,;c ((astronomy) a real or apparent slow oscillation of a moon or satellite; "the libration of the moon")}
+{ life_cycle, growth,@ (the course of developmental changes in an organism from fertilized zygote to maturity when another zygote can be produced) }
+{ light_reaction, photochemical_reaction,@ photosynthesis,#p (the first stage of photosynthesis during which energy from light is used for the production of ATP) }
+{ line_feed, printing_operation,@ (the operation that prepares for the next character to be printed or displayed on the next line) }
+{ linguistic_process, human_process,@ noun.cognition:linguistics,;c (a process involved in human language) }
+{ [ liquefaction, verb.weather:liquefy,+ verb.change:liquefy1,+ verb.change:liquefy,+ ] phase_change,@ (the conversion of a solid or a gas into a liquid) }
+{ list_processing, data_processing,@ (processing data that is given in the form of chained lists) }
+{ lithuresis, micturition,@ (passing small stones with the urine) }
+{ logic_operation, logical_operation, operation,@ noun.cognition:logic,;c (an operation that follows the rules of symbolic logic) }
+{ [ loss, adj.all:lossy,+ ] decline2,@ (gradual decline in amount or activity; "weight loss"; "a serious loss of business") }
+{ lymphopoiesis, organic_process,@ (the formation of lymphocytes in the bone marrow and lymph nodes and thymus and spleen) }
+{ lysis, dissolution,@ noun.cognition:biochemistry,;c ((biochemistry) dissolution or destruction of cells such as blood cells or bacteria) }
+{ lysis1, recuperation,@ (recuperation in which the symptoms of an acute disease gradually subside) }
+{ [ lysogenization, verb.change:lysogenize,+ ] lysogenisation, organic_process,@ (the process by which a bacterium acquires a phage that becomes integrated into its genome) }
+{ [ maceration, verb.change:macerate1,+ ] softening,@ (softening due to soaking or steeping) }
+{ macroevolution, evolution,@ (evolution on a large scale extending over geologic era and resulting in the formation of new taxonomic groups) }
+{ [ magnetization, verb.change:magnetize,+ ] [ magnetisation, verb.change:magnetise,+ ] magnetic_induction, natural_process,@ (the process that makes a substance magnetic (temporarily or permanently)) }
+{ majority_operation, threshold_operation,@ (a threshold operation in which each operand is 0 or 1; output is 1 if and only if more than half the operands have the value 1) }
+{ malabsorption, assimilation1,@ (abnormal absorption of nutrients from the digestive tract) }
+{ [ marginalization, verb.social:marginalize,+ ] [ marginalisation, verb.social:marginalise,+ ] social_process,@ (the social process of becoming or being made marginal (especially as a group within the larger society); "the marginalization of the underclass"; "the marginalization of literature") }
+{ market_forces, economic_process,@ (the interaction of supply and demand that shapes a market economy) }
+{ Markov_chain, Markoff_chain, Markov_process,@ (a Markov process for which the parameter is discrete time values) }
+{ Markov_process, Markoff_process, stochastic_process,@ (a simple stochastic process in which the distribution of future states depends only on the present state and not on how it arrived in the present state) }
+{ [ masculinization, verb.change:masculinize,+ ] masculinisation, [ virilization, verb.change:virilize,+ ] virilisation, growth,@ (the abnormal development of male sexual characteristics in a female (usually as the result of hormone therapies or adrenal malfunction)) }
+{ [ materialization, verb.change:materialize,+ ] [ materialisation, verb.change:materialise,+ ] natural_process,@ (the process of coming into being; becoming reality; "the materialization of her dream") }
+{ [ maturation1, adj.pert:maturational,+ verb.change:mature,+ verb.change:maturate,+ ] [ ripening, verb.change:ripen1,+ verb.change:ripen,+ ] [ maturement, verb.communication:mature,+ verb.change:mature4,+ verb.change:mature,+ ] organic_process,@ (coming to full development; becoming mature) }
+{ mechanism, chemical_mechanism, chemical_process,@ (the atomic process that occurs during a chemical reaction; "he determined unique mechanisms for the photochemical reactions") }
+{ [ meiosis, adj.pert:meiotic,+ ] miosis, reduction_division, cell_division,@ noun.cognition:genetics,;c ((genetics) cell division that produces reproductive cells in sexually reproducing organisms; the nucleus divides into four nuclei each containing half the chromosome number (leading to gametes in animals and spores in plants)) }
+{ [ mellowing, verb.change:mellow3,+ verb.change:mellow1,+ verb.change:mellow,+ ] ripening1,@ (the process of becoming mellow) }
+{ meltdown, nuclear_meltdown, overheating,@ (severe overheating of the core of a nuclear reactor resulting in the core melting and radiation escaping) }
+{ menorrhagia, hypermenorrhea, menstruation,@ noun.state:symptom,@ (abnormally heavy or prolonged menstruation; can be a symptom of uterine tumors and can lead to anemia if prolonged) }
+{ [ menstruation, verb.body:menstruate,+ ] menses, menstruum, [ catamenia, adj.pert:catamenial,+ ] period, [ flow1, verb.body:flow,+ ] discharge,@ (the monthly discharge of blood from the uterus of nonpregnant women from puberty to menopause; "the women were sickly and subject to excessive menstruation"; "a woman does not take the gout unless her menses be stopped"--Hippocrates; "the semen begins to appear in males and to be emitted at the same time of life that the catamenia begin to flow in females"--Aristotle) }
+{ [ metabolism, adj.pert:metabolic,+ verb.consumption:metabolize,+ ] metabolic_process, organic_process,@ noun.Tops:organism,;c (the organic processes (in a cell or organism) that are necessary for life) }
+{ metamorphism, geological_process,@ (change in the structure of rock by natural agencies such as pressure or heat or introduction of new chemical substances) }
+{ [ metamorphosis, adj.all:metamorphic,+ ] [ metabolism2, adj.all:metabolic,+ adj.all:metabolous,+ ] organic_process,@ (the marked and rapid transformation of a larva into an adult that occurs in some animals) }
+{ metaphase1, phase_of_cell_division,@ mitosis,#p (the second stage of mitosis) }
+{ metaphase2, phase_of_cell_division,@ meiosis,#p (the second stage of meiosis) }
+{ [ metastasis1, verb.body:metastasize,+ adj.pert:metastatic,+ ] pathologic_process,@ (the spreading of a disease (especially cancer) to another part of the body) }
+{ metathesis1, linguistic_process,@ (a linguistic process of transposition of sounds or syllables within a word or words within a sentence) }
+{ microevolution, evolution,@ (evolution resulting from small specific genetic changes that can lead to a new subspecies) }
+{ microphoning, transduction,@ (the transduction of sound waves into electrical waves (by a microphone)) }
+{ [ micturition, verb.body:micturate,+ ] [ urination, verb.body:urinate,+ ] elimination,@ (the discharge of urine) }
+{ [ mildew, verb.change:mildew,+ ] [ mold, verb.change:mold,+ ] mould, spoilage,@ (the process of becoming mildewed) }
+{ mineral_extraction, mineral_processing, mineral_dressing, ore_processing, ore_dressing, [ beneficiation, verb.change:beneficiate,+ ] extraction,@ (crushing and separating ore into valuable substances or waste by any of a variety of techniques) }
+{ mitosis, cell_division,@ (cell division in which the nucleus divides into nuclei containing the same number of chromosomes) }
+{ [ molt, verb.body:molt,+ ] [ molting, verb.body:molt,+ ] [ moult, verb.body:moult,+ ] [ moulting, verb.body:moult,+ ] ecdysis, shedding,@ (periodic shedding of the cuticle in arthropods or the outer skin in reptiles) }
+{ monadic_operation, unary_operation, operation,@ (an operation with exactly one operand) }
+{ monogenesis, [ sporulation, verb.creation:sporulate,+ ] asexual_reproduction,@ (asexual reproduction by the production and release of spores) }
+{ morphallaxis, regeneration,@ (regeneration on a reduced scale of a body part; observed especially in invertebrates such as certain lobsters) }
+{ morphogenesis, growth,@ noun.Tops:organism,;c (differentiation and growth of the structure of an organism (or a part of an organism)) }
+{ multiplex_operation, operation,@ (an operation in which two or more activities are interleaved) }
+{ [ multiplication, verb.change:multiply,+ ] increase,@ (a multiplicative increase; "repeated copying leads to a multiplication of errors"; "this multiplication of cells is a natural correlate of growth") }
+{ multiprocessing, parallel_processing, data_processing,@ (simultaneous processing by two or more processing units) }
+{ multiprogramming, concurrent_execution, execution,@ (the execution of two or more computer programs by a single computer) }
+{ myelinization, myelinisation, growth,@ (the development of a myelin sheath around a nerve fiber) }
+{ [ narrowing, widening,! ] decrease,@ (a decrease in width) }
+{ natural_childbirth, childbirth,@ (labor and childbirth without medical intervention; no drugs are given to relieve pain or aid the birth process; "natural childbirth is considered the safest for the baby") }
+{ natural_process, natural_action, action, [ activity1, adj.all:active10,+ adj.all:active4,+ ] noun.Tops:process,@ (a process existing in or produced by nature (rather than by the intent of human beings); "the action of natural forces"; "volcanic activity") }
+{ Nazification, social_process,@ (social process of adopting (or being forced to adopt) Nazism; "as the process of Nazification spread they paid less attention to public opinion") }
+{ necrolysis, lysis,@ (disintegration and dissolution of dead tissue) }
+{ negative_feedback, feedback,@ (feedback in opposite phase with (decreasing) the input) }
+{ neoplasia, pathologic_process,@ (the pathological process that results in the formation and growth of a tumor) }
+{ neurogenesis, growth,@ (the development of nerve tissues) }
+{ [ neutralization, verb.change:neutralize,+ ] [ neutralisation, verb.change:neutralise,+ ] neutralization_reaction, neutralisation_reaction, chemical_reaction,@ (a chemical reaction in which an acid and a base interact with the formation of a salt; with strong acids and bases the essential reaction is the combination of hydrogen ions with hydroxyl ions to form water) }
+{ new_line, printing_operation,@ (the operation that prepares for the next character to be printed or displayed as the first character on the next line) }
+{ [ nitrification, verb.change:nitrify2,+ verb.change:nitrify,+ ] oxidation,@ noun.Tops:plant,;c (the oxidation of ammonium compounds in dead organic material into nitrates and nitrites by soil bacteria (making nitrogen available to plants)) }
+{ [ nitrification1, verb.change:nitrify1,+ ] chemical_process,@ (the chemical process in which a nitro group is added to an organic compound (or substituted for another group in an organic compound)) }
+{ nitrogen_cycle, organic_process,@ (the circulation of nitrogen; nitrates from the soil are absorbed by plants which are eaten by animals that die and decay returning the nitrogen back to the soil) }
+{ nitrogen_fixation, organic_process,@ (the assimilation of atmospheric nitrogen by soil bacteria and its release for plant use on the death of the bacteria) }
+{ nocturia, nycturia, micturition,@ (excessive urination at night; especially common in older men) }
+{ nocturnal_emission, ejaculation,@ noun.cognition:wet_dream,#p (ejaculation during sleep (usually during a dream)) }
+{ [ nondevelopment, development1,! ] organic_process,@ (failure of normal development to occur) }
+{ nondisjunction, meiosis,@ (meiosis in which there is a failure of paired homologous chromosomes to separate; results in an abnormal number of chromosomes in the daughter cells) }
+{ nosedive, decline2,@ (a sudden sharp drop or rapid decline; "the stock took a nosedive") }
+{ nuclear_reaction, natural_process,@ noun.cognition:physics,;c ((physics) a process that alters the energy or structure or composition of atomic nuclei) }
+{ nucleosynthesis, synthesis,@ noun.cognition:astronomy,;c ((astronomy) the cosmic synthesis of atoms more complex than the hydrogen atom) }
+{ [ nutrition, adj.pert:nutritionary,+ adj.all:wholesome^nutritious,+ adj.pert:nutritional,+ noun.person:nutritionist,+ verb.consumption:nutrify,+ ] organic_process,@ noun.cognition:physiology,;c ((physiology) the organic process of nourishing or being nourished; the processes by which an organism assimilates food and uses it for growth and maintenance) }
+{ [ obsolescence, adj.all:noncurrent^obsolescent,+ verb.change:obsolesce,+ ] degeneration,@ (the process of becoming obsolete; falling into disuse or becoming out of date; "a policy of planned obsolescence") }
+{ oligomenorrhea, menstruation,@ (abnormally light or infrequent menstruation) }
+{ oliguria, micturition,@ (production of an abnormally small amount of urine) }
+{ omission, deletion, linguistic_process,@ (any process whereby sounds or words are left out of spoken words or phrases) }
+{ oogenesis, gametogenesis,@ (development of ova) }
+{ [ opacification, verb.change:opacify,+ ] natural_process,@ (the process of becoming cloudy or opaque) }
+{ open-hearth_process, steel_production,@ (a process for making steel using an open-hearth furnace) }
+{ operation, data_processing,@ noun.cognition:computer_science,;c ((computer science) data processing in which the result is completely specified by a rule (especially the processing that results from a single instruction); "it can perform millions of operations per second") }
+{ [ operation1, verb.contact:operate3,+ ] [ functioning, verb.contact:function,+ ] performance, noun.Tops:process,@ (process or manner of functioning or operating; "the power of its engine determines its operation"; "the plane's operation in high winds"; "they compared the cooking performance of each oven"; "the jet's performance conformed to high standards") }
+{ [ opsonization, verb.change:opsonize,+ ] [ opsonisation, verb.change:opsonize,+ ] bodily_process,@ (process whereby opsonins make an invading microorganism more susceptible to phagocytosis) }
+{ organic_process, biological_process, noun.Tops:process,@ (a process occurring in living organisms) }
+{ organification, organic_process,@ (the process of organ formation) }
+{ orogeny, geological_process,@ (the process of mountain formation (especially by the upward displacement of the earth's crust)) }
+{ [ oscillation, verb.stative:oscillate,+ ] natural_process,@ (the process of oscillating between states) }
+{ [ osmosis, adj.pert:osmotic,+ ] diffusion,@ noun.act:dialysis,#p noun.cognition:biology,;c noun.cognition:chemistry,;c ((biology, chemistry) diffusion of molecules through a semipermeable membrane from a place of higher concentration to a place of lower concentration until the concentration on both sides is equal) }
+{ reverse_osmosis, osmosis,@ noun.cognition:chemistry,;c ((chemistry) a method of producing pure water; a solvent passes through a semipermeable membrane in a direction opposite to that for natural osmosis when it is subjected to a hydrostatic pressure greater than the osmotic pressure) }
+{ ossification, organic_process,@ (the developmental process of bone formation) }
+{ [ ossification1, verb.change:ossify2,+ ] human_process,@ (the process of becoming rigidly fixed in a conventional pattern of thought or behavior) }
+{ [ ossification2, verb.change:ossify1,+ verb.change:ossify,+ ] calcification,@ (the calcification of soft tissue into a bonelike material) }
+{ osteolysis, lysis,@ (lysis of bone caused by disease or infection or inadequate blood supply) }
+{ [ outflow, inflow,! ] [ effluence, adj.all:outgoing^effluent,+ ] [ efflux, influx,! ] flow,@ (the process of flowing out) }
+{ [ overactivity, adj.all:active1^overactive,+ ] bodily_process,@ (excessive activity; "overactivity of the sebaceous glands causes the skin to become oily") }
+{ [ overcompensation, verb.stative:overcompensate,+ ] compensation,@ noun.cognition:psychiatry,;c ((psychiatry) an attempt to overcome a real or imagined defect or unwanted trait by overly exaggerating its opposite) }
+{ overflow_incontinence, enuresis,@ (urinary incontinence that occurs when the bladder is so full that it continually leaks urine; often attributable to a blocked urethra (e.g., due to prostate enlargement) or weak bladder muscles or nerve damage) }
+{ [ overheating, verb.change:overheat1,+ verb.change:overheat,+ ] heating,@ (excessive heating) }
+{ [ ovulation, verb.body:ovulate,+ anovulation,! ] organic_process,@ (the expulsion of an ovum from the ovary (usually midway in the menstrual cycle)) }
+{ [ oxidation, verb.change:oxidate1,+ verb.change:oxidate,+ ] [ oxidization, verb.change:oxidize1,+ verb.change:oxidize,+ ] [ oxidisation, verb.change:oxidise1,+ verb.change:oxidise,+ ] chemical_reaction,@ (the process of oxidizing; the addition of oxygen to a compound with a loss of electrons; always occurs accompanied by reduction) }
+{ oxidation-reduction, oxidoreduction, redox, chemical_reaction,@ (a reversible chemical reaction in which one reaction is an oxidation and the reverse is a reduction) }
+{ oxidative_phosphorylation, organic_process,@ Krebs_cycle,#p (an enzymatic process in cell metabolism that synthesizes ATP from ADP) }
+{ [ oxygenation, verb.change:oxygenate,+ ] natural_process,@ (the process of providing or combining or treating with oxygen; "the oxygenation of the blood") }
+{ pachytene, noun.time:phase,@ prophase2,#p (the third stage of the prophase of meiosis) }
+{ pair_production, pair_creation, pair_formation, natural_process,@ (the transformation of a gamma-ray photon into an electron and a positron when the photon passes close to an atomic nucleus) }
+{ [ palingenesis, adj.pert:palingenetic,+ cenogenesis,!] [ recapitulation, verb.creation:recapitulate1,+ ] development1,@ (emergence during embryonic development of various characters or structures that appeared during the evolutionary history of the strain or species) }
+{ paper_chromatography, chromatography,@ (chromatography that uses selective adsorption on a strip of paper) }
+{ paper_electrophoresis, carrier_electrophoresis, electrophoresis,@ (electrophoresis carried out on filter paper) }
+{ [ parallel_operation, serial_operation,! ] simultaneous_operation, operation,@ (the simultaneous execution of two or more operations) }
+{ parthenocarpy, apomixis,@ noun.cognition:botany,;c ((botany) the development of a fruit without fertilization or seeds) }
+{ [ parthenogenesis, adj.all:asexual^parthenogenetic,+ ] parthenogeny, apomixis,@ (process in which an unfertilized egg develops into a new individual; common among insects and some other arthropods) }
+{ parthenogenesis1, parthenogeny1, virgin_birth, asexual_reproduction,@ (human conception without fertilization by a man) }
+{ parturition, [ birth, verb.body:birth,+ ] giving_birth, birthing, organic_process,@ reproduction,#p (the process of giving birth) }
+{ passive_transport, transport,@ (transport of a substance across a cell membrane by diffusion; expenditure of energy is not required) }
+{ pathogenesis, pathologic_process,@ (the origination and development of a disease) }
+{ pathologic_process, pathological_process, organic_process,@ (an organic process occurring as a consequence of disease) }
+{ peace_process, social_process,@ (any social process undertaken by governments who want their citizens to believe they are trying to avoid armed hostilities) }
+{ [ peeing, verb.body:pee,+ ] [ pee, verb.body:pee,+ ] [ pissing, verb.body:piss,+ ] [ piss, verb.body:piss,+ ] micturition,@ noun.communication:obscenity,;u (informal terms for urination; "he took a pee") }
+{ [ peptization, verb.change:peptize,+ ] [ peptisation, verb.change:peptise,+ ] chemical_process,@ (the process of converting to a sol; bringing to a colloidal solution) }
+{ [ percolation, verb.motion:percolate,+ verb.contact:percolate3,+ verb.contact:percolate2,+ verb.contact:percolate,+ ] [ infiltration, verb.motion:infiltrate3,+ verb.motion:infiltrate1,+ ] filtration,@ (the slow passage of a liquid through a filtering medium; "the percolation of rainwater through the soil"; "the infiltration of seawater through the lava") }
+{ [ perennation, verb.stative:perennate,+ ] organic_process,@ noun.Tops:plant,;c (the process of living through a number of years (as a perennial plant)) }
+{ [ peristalsis, anastalsis,! ] vermiculation, bodily_process,@ (the process of wavelike muscle contractions of the alimentary tract that moves food along) }
+{ [ permeation, verb.contact:permeate2,+ verb.contact:permeate1,+ verb.contact:permeate,+ ] [ pervasion, verb.contact:pervade,+ ] [ suffusion, verb.change:suffuse,+ verb.change:suffuse1,+ ] diffusion,@ (the process of permeating or infusing something with a substance) }
+{ [ perspiration, verb.body:perspire,+ ] [ sweating, verb.body:sweat,+ ] [ diaphoresis, adj.pert:diaphoretic,+ ] [ sudation, verb.body:sudate,+ ] [ hidrosis, adj.pert:hidrotic,+ ] bodily_process,@ (the process of the sweat glands of the skin secreting a salty fluid; "perspiration is a homeostatic process") }
+{ [ petrifaction, verb.change:petrify,+ ] [ petrification, verb.change:petrify,+ ] fossilization,@ (the process of turning some plant material into stone by infiltration with water carrying mineral particles without changing the original shape) }
+{ phagocytosis, bodily_process,@ (process in which phagocytes engulf and digest microorganisms and cellular debris; an important defense against infection) }
+{ phase_change, phase_transition, state_change, physical_change, natural_process,@ (a change from one state (solid or liquid or gas) to another without a change in chemical composition) }
+{ phase_of_cell_division, noun.time:phase,@ (a stage in meiosis or mitosis) }
+{ photochemical_reaction, chemical_reaction,@ (a chemical reaction produced by the action of light) }
+{ photoelectric_emission, emission,@ (the release or absorption of quanta above a certain energy level) }
+{ [ photography, adj.pert:photographic,+ noun.artifact:photograph,+ ] noun.Tops:process,@ (the process of producing images of objects on photosensitive surfaces) }
+{ [ photomechanics, adj.pert:photomechanical,+ ] photoplate_making, photography,@ (the process whereby printing surfaces (plates or cylinders) are produced by photographic methods; "photomechanics revolutionized the practice of printing") }
+{ [ photosynthesis, adj.pert:photosynthetic,+ ] chemical_process,@ noun.Tops:plant,;c (synthesis of compounds with the aid of radiant energy (especially in plants)) }
+{ [ pigmentation, verb.change:pigment1,+ ] deposition,@ (the deposition of pigment in animals or plants or human beings) }
+{ pinocytosis, bodily_process,@ (process by which certain cells can engulf and incorporate droplets of fluid) }
+{ [ pitting, verb.contact:pit,+ ] roughness, [ indentation, verb.contact:indent,+ ] corrosion,@ (the formation of small pits in a surface as a consequence of corrosion) }
+{ placentation, bodily_process,@ (the formation of the placenta in the uterus) }
+{ [ planation, verb.contact:plane3,+ ] erosion,@ (the process of erosion whereby a level surface is produced) }
+{ [ plastination, verb.possession:plastinate,+ ] preservation,@ (a process involving fixation and dehydration and forced impregnation and hardening of biological tissues; water and lipids are replaced by curable polymers (silicone or epoxy or polyester) that are subsequently hardened; "the plastination of specimens is valuable for research and teaching") }
+{ [ polymerization, verb.change:polymerize2,+ verb.change:polymerize,+ ] [ polymerisation, verb.change:polymerise2,+ verb.change:polymerise,+ ] chemical_process,@ (a chemical process that combines several monomers to form a polymer or polymeric compound) }
+{ population_growth, increase,@ (increase in the number of people who inhabit a territory or state) }
+{ irruption, population_growth,@ (a sudden sharp increase in the relative numbers of a population) }
+{ positive_feedback, [ regeneration1, verb.change:regenerate6,+ ] feedback,@ (feedback in phase with (augmenting) the input) }
+{ [ potentiation, verb.change:potentiate,+ ] synergy,@ noun.cognition:medicine,;c ((medicine) the synergistic effect of two drugs given simultaneously) }
+{ powder_photography, powder_method, powder_technique, photography,@ (a process for identifying minerals or crystals; a small rod is coated with a powdered form of the substance and subjected to suitably modified X-rays; the pattern of diffracted rings is used for identification) }
+{ precession_of_the_equinoxes, natural_process,@ (a slow westward shift of the equinoxes along the plane of the ecliptic caused by precession of the Earth's axis of rotation) }
+{ prechlorination, chlorination,@ (chlorination prior to another chemical process) }
+{ [ precipitation, verb.change:precipitate,+ ] chemical_process,@ (the process of forming a chemical precipitate) }
+{ precocious_dentition, teething,@ (teething at an earlier age than expected) }
+{ premature_ejaculation, ejaculation,@ (ejaculation during the early stages of sexual excitement or soon after the insertion of the penis into the vagina) }
+{ preservation, organic_process,@ (a process that saves organic substances from decay) }
+{ printing_operation, operation,@ (an operation that controls the printing or display of information) }
+{ priority_processing, data_processing,@ (data processing in which the operations performed are determined by a system of priorities) }
+{ [ processing, verb.social:process1,+ verb.change:process,+ ] noun.Tops:process,@ (preparing or putting through a prescribed procedure; "the processing of newly arrived immigrants"; "the processing of ore to obtain minerals") }
+{ [ professionalization, verb.change:professionalize1,+ verb.change:professionalize,+ ] professionalisation, social_process,@ (the social process whereby people come to engage in an activity for pay or as a means of livelihood; "the professionalization of American sports"; "the professionalization of warfare") }
+{ projection, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism by which your own traits and emotions are attributed to someone else) }
+{ [ proliferation, verb.change:proliferate1,+ verb.change:proliferate,+ ] growth,@ (growth by the rapid multiplication of parts) }
+{ [ proliferation1, noun.act:nonproliferation,! noun.act:non-proliferation,! verb.change:proliferate1,+ verb.change:proliferate,+ ] increase,@ (a rapid increase in number (especially a rapid increase in the number of deadly weapons); "the proliferation of nuclear weapons") }
+{ prophase1, phase_of_cell_division,@ mitosis,#p (the first stage of mitosis) }
+{ prophase2, phase_of_cell_division,@ meiosis,#p (the first stage of meiosis) }
+{ [ proteolysis, adj.pert:proteolytic,+ ] chemical_process,@ (the hydrolysis of proteins into peptides and amino acids by cleavage of their peptide bonds) }
+{ psilosis, epilation,@ bodily_process,@ (falling out of hair) }
+{ psychoanalytic_process, human_process,@ (a process that is assumed to occur in psychoanalytic theory) }
+{ psychogenesis, growth,@ (a general term for the origin and development of almost any aspect of the mind) }
+{ psychogenesis1, growth,@ (the development in the life of an individual of some disorder that is caused by psychological rather than physiological factors) }
+{ psychomotor_development, growth,@ (progressive acquisition of skills involving both mental and motor activities) }
+{ psychosexual_development, growth,@ noun.act:psychoanalysis,;c ((psychoanalysis) the process during which personality and sexual behavior mature through a series of stages: first oral stage and then anal stage and then phallic stage and then latency stage and finally genital stage) }
+{ [ ptyalism, verb.body:ptyalize,+ ] salivation,@ (excessive flow of saliva) }
+{ [ pullulation, verb.change:pullulate1,+ ] increase,@ (a rapid and abundant increase) }
+{ [ pullulation1, verb.change:pullulate,+ ] gemmation, asexual_reproduction,@ (asexual reproduction in which a local growth on the surface or in the body of the parent becomes a separate individual) }
+{ pyrochemical_process, [ pyrochemistry, adj.pert:pyrochemical,+ ] chemical_process,@ (processes for chemical reactions at high temperatures) }
+{ [ quadrupling, verb.change:quadruple,+ ] multiplication,@ (increase by a factor of four) }
+{ quellung, quellung_reaction, organic_process,@ (the swelling of the capsule surrounding a microorganism after reaction with an antibody; the basis of certain tests for identifying microorganisms; "pneumococcus quellung") }
+{ quickening, organic_process,@ (the process of showing signs of life; "the quickening of seed that will become ripe grain") }
+{ [ quintupling, verb.change:quintuple,+ ] multiplication,@ (increasing by a factor of five)}
+{ radiant_heating, heating,@ (heating a building by radiation from panels containing hot water or electrical heaters) }
+{ radiation, [ radioactivity, adj.all:radioactive,+ ] emission,@ (the spontaneous emission of a stream of particles or electromagnetic rays in nuclear decay) }
+{ [ radiography, adj.pert:radiographic,+ noun.person:radiographer,+ ] skiagraphy, photography,@ (the process of making a radiograph; producing an image on a radiosensitive surface by radiation other than visible light) }
+{ radiolysis, lysis,@ (molecular disintegration resulting from radiation) }
+{ rain-wash, washout,@ (the washing away of soil or other loose material by rain) }
+{ [ rally, verb.change:rally,+ ] convalescence,@ (a marked recovery of strength or spirits during an illness) }
+{ random_walk, stochastic_process,@ (a stochastic process consisting of a sequence of changes each of whose characteristics (as magnitude or direction) is determined by chance) }
+{ rationalization, rationalisation, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism by which your true motivation is concealed by explaining your actions and feelings in a way that is not threatening) }
+{ reaction_formation, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism in which a person unconsciously develops attitudes and behavior that are the opposite of unacceptable repressed desires and impulses and serve to conceal them; "his strict morality is just a reaction formation to hide his sexual drive") }
+{ Read_method_of_childbirth, Read_method, natural_childbirth,@ (a method of natural childbirth that assumes it is a normal process and that the pain is largely psychological; involves education and breathing exercises to foster relaxation and other exercises) }
+{ real-time_processing, real-time_operation, data_processing,@ (data processing fast enough to keep up with an outside process) }
+{ [ rectification, verb.change:rectify5,+ ] refining,@ noun.cognition:chemistry,;c ((chemistry) the process of refinement or purification of a substance by distillation) }
+{ [ redeposition, verb.possession:redeposit,+ verb.contact:redeposit,+ ] deposition,@ (deposition from one deposit to another) }
+{ [ reducing1, verb.body:reduce,+ ] loss,@ (loss of excess weight (as by dieting); becoming slimmer; "a doctor supervised her reducing") }
+{ reduction, [ reducing, verb.change:reduce3,+ ] chemical_reaction,@ (any process in which electrons are added to an atom or ion (as by removing oxygen or adding hydrogen); always occurs accompanied by oxidation of the reducing agent) }
+{ [ refilling, verb.change:refill,+ ] [ replenishment, verb.change:replenish,+ ] replacement, renewal, filling,@ (filling again by supplying what has been used up) }
+{ [ refining, verb.change:refine,+ ] [ refinement, verb.change:refine2,+ verb.change:refine,+ ] [ purification, verb.change:purify,+ ] processing,@ (the process of removing impurities (as from oil or metals or sugar etc.)) }
+{ [ reflation, verb.change:reflate5,+ verb.change:reflate4,+ ] inflation,@ (inflation of currency after a period of deflation; restore the system to a previous state) }
+{ [ refrigeration, verb.change:refrigerate1,+ verb.change:refrigerate,+ ] infrigidation, cooling,@ preservation,@ (the process of cooling or freezing (e.g., food) for preservative purposes) }
+{ [ regeneration, verb.change:regenerate2,+ verb.body:regenerate1,+ ] organic_process,@ noun.cognition:biology,;c ((biology) growth anew of lost tissue or destroyed parts or organs) }
+{ regression, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) a defense mechanism in which you flee from reality by assuming a more infantile state) }
+{ regulation, organic_process,@ noun.cognition:embryology,;c ((embryology) the ability of an early embryo to continue normal development after its structure has been somehow damaged or altered) }
+{ relaxation, relaxation_behavior, exponential_decay,@ noun.cognition:physics,;c ((physics) the exponential return of a system to equilibrium after a disturbance) }
+{ [ relaxation1, verb.change:relax1,+ verb.body:relax,+ ] increase,@ noun.cognition:physiology,;c ((physiology) the gradual lengthening of inactive muscle or muscle fibers) }
+{ [ release, verb.body:release,+ verb.body:release1,+ ] natural_process,@ (a process that liberates or discharges something; "there was a sudden release of oxygen"; "the release of iodine from the thyroid gland") }
+{ [ replication, verb.creation:replicate1,+ ] organic_process,@ noun.cognition:genetics,;c ((genetics) the process whereby DNA makes a copy of itself before cell division) }
+{ repression, defense_mechanism,@ noun.cognition:psychiatry,;c ((psychiatry) the classical defense mechanism that protects you from impulses or ideas that would cause anxiety by preventing them from becoming conscious) }
+{ [ reproduction, verb.body:reproduce,+ ] organic_process,@ noun.cognition:biology,;c (the process of generating offspring)}
+{ [ resorption, verb.contact:resorb,+ ] [ reabsorption, verb.contact:reabsorb,+ ] organic_process,@ (the organic process in which the substance of some differentiated structure that has been produced by the body undergoes lysis and assimilation) }
+{ [ reticulation, verb.contact:reticulate,+ ] formation,@ noun.act:photography,;c ((photography) the formation of a network of cracks or wrinkles in a photographic emulsion) }
+{ retrieval, computer_operation,@ noun.cognition:computer_science,;c ((computer science) the operation of accessing information from the computer's memory) }
+{ stovepiping, retrieval,@ (retrieval of information from unconnected databases; the situation that exists when it is necessary to climb out of one database in order to climb down into another; sometimes used for protection against wandering hackers) }
+{ reuptake, re-uptake, uptake,@ (a process of using up or consuming again; "psychopharmacologists discovered that amine reuptake is a process that inactivates monoamine neurotransmitters") }
+{ [ reversible_process, irreversible_process,! ] noun.Tops:process,@ (any process in which a system can be made to pass through the same states in the reverse order when the process is reversed) }
+{ rigor_mortis, stiffening,@ (muscular stiffening that begins 2 to 4 hours after death and lasts for about 4 days) }
+{ ripening1, aging1, ageing1, organic_process,@ (acquiring desirable qualities by being left undisturbed for some time) }
+{ [ rooting, verb.change:root1,+ verb.change:root,+ ] growth,@ (the process of putting forth roots and beginning to grow) }
+{ [ rust, verb.change:rust2,+ verb.change:rust1,+ verb.change:rust,+ ] rusting, corrosion,@ oxidation,@ (the formation of reddish-brown ferric oxides on iron by low-temperature oxidation in the presence of water) }
+{ [ salivation, verb.body:salivate,+ ] secretion,@ (the secretion of saliva) }
+{ [ saltation, verb.motion:saltate1,+ ] natural_process,@ noun.cognition:geology,;c ((geology) the leaping movement of sand or soil particles as they are transported in a fluid medium over an uneven surface) }
+{ [ saponification, verb.change:saponify1,+ verb.change:saponify,+ ] chemical_reaction,@ (a chemical reaction in which an ester is heated with an alkali (especially the alkaline hydrolysis of a fat or oil to make soap)) }
+{ [ scanning, verb.motion:scan,+ ] photography,@ (the process of translating photographs into a digital form that can be recognized by a computer) }
+{ scattering, natural_process,@ extinction,#p (the physical process in which particles are deflected haphazardly as a result of collisions) }
+{ schizogony, fission1,@ (asexual reproduction by multiple fission; characteristic of many sporozoan protozoans) }
+{ search, lookup, operation,@ (an operation that determines whether one or more of a set of items has a specified property; "they wrote a program to do a table lookup") }
+{ secondary_emission, emission,@ (the emission of electrons from a surface that is bombarded by higher energy primary electrons) }
+{ [ secretion, verb.body:secrete,+ ] secernment, organic_process,@ (the organic process of synthesizing and releasing some substance) }
+{ segregation, organic_process,@ meiosis,#p noun.cognition:genetics,;c ((genetics) the separation of paired alleles during meiosis so that members of each pair of alleles appear in different gametes) }
+{ [ sensitization, verb.change:sensitize,+ ] sensitisation, noun.Tops:process,@ noun.cognition:psychology,;c ((psychology) the process of becoming highly sensitive to specific events or situations (especially emotional events or situations)) }
+{ [ sequestration, verb.change:sequester6,+ ] chemical_process,@ (the action of forming a chelate or other stable compound with an ion or atom or molecule so that it is no longer available for reactions) }
+{ [ serial_operation, parallel_operation,! ] sequential_operation, consecutive_operation, operation,@ (the sequential execution of operations one after another) }
+{ serial_processing, data_processing,@ (sequential processing by two or more processing units) }
+{ [ sericulture, adj.pert:sericultural,+ noun.person:sericulturist,+ ] natural_process,@ (raising silkworms in order to obtain raw silk) }
+{ sexual_reproduction, amphimixis, reproduction,@ (reproduction involving the union or fusion of a male and a female gamete) }
+{ [ shaping, verb.cognition:shape,+ ] [ defining, verb.stative:define3,+ ] noun.Tops:process,@ (any process serving to define the shape of something) }
+{ [ shedding, verb.body:shed,+ ] [ sloughing, verb.body:slough,+ ] organic_process,@ (the process whereby something is shed) }
+{ [ shit, verb.body:shit,+ verb.communication:shit9,+ ] dump, defecation,@ (a coarse term for defecation; "he took a shit") }
+{ [ sink, source,! ] natural_process,@ noun.cognition:engineering,;c ((technology) a process that acts to absorb or remove energy or a substance from a system; "the ocean is a sink for carbon dioxide") }
+{ sinking_spell, decline2,@ (a temporary decline in health or value) }
+{ slippage, decrease,@ (a decrease of transmitted power in a mechanical system caused by slipping) }
+{ [ slippage1, verb.change:slip,+ ] decline2,@ (decline from a standard level of performance or achievement) }
+{ [ slump, verb.change:slump,+ ] [ slack, verb.change:slack4,+ verb.change:slack5,+ verb.change:slack3,+ ] [ drop-off, verb.change:drop_off,+ ] [ falloff, verb.change:fall_off,+ verb.change:fall_off1,+ ] falling_off, deterioration,@ (a noticeable deterioration in performance or quality; "the team went into a slump"; "a gradual slack in output"; "a drop-off in attendance"; "a falloff in quality") }
+{ [ smoke, adj.all:smoky,+ verb.weather:smoke,+ ] [ smoking, verb.weather:smoke,+ ] vaporization,@ (a hot vapor containing fine particles of carbon being produced by combustion; "the fire produced a tower of black smoke that could be seen for miles") }
+{ [ soak, verb.change:soak,+ verb.contact:soak1,+ ] [ soakage, verb.contact:soak1,+ ] [ soaking, verb.contact:soak1,+ ] natural_process,@ (the process of becoming softened and saturated as a consequence of being immersed in water (or other liquid); "a good soak put life back in the wagon") }
+{ social_process, human_process,@ (a process involved in the formation of groups of persons) }
+{ [ softening, verb.change:soften1,+ verb.change:soften,+ ] natural_process,@ (the process of becoming softer; "refrigeration delayed the softening of the fruit"; "he observed the softening of iron by heat") }
+{ soil_erosion, erosion,@ (the washing away of soil by the flow of water) }
+{ [ solvation, verb.change:solvate1,+ verb.change:solvate,+ ] association,@ (a chemical process in which solvent molecules and molecules or ions of the solute combine to form a compound) }
+{ Solvay_process, industrial_process,@ (an industrial process for producing sodium carbonate from sodium chloride and ammonia and carbon dioxide) }
+{ [ sorption, verb.contact:sorb,+ ] natural_process,@ (the process in which one substance takes up or holds another (by either absorption or adsorption)) }
+{ [ sort, verb.cognition:sort,+ verb.social:sort,+ ] [ sorting, verb.cognition:sort,+ ] operation,@ (an operation that segregates items into groups according to a specified criterion; "the bottleneck in mail delivery is the process of sorting") }
+{ [ source, sink,! ] natural_process,@ noun.cognition:engineering,;c ((technology) a process by which energy or a substance enters a system; "a heat source"; "a source of carbon dioxide") }
+{ origin, source,@ (the source of something's existence or from which it derives or is derived; "the rumor had its origin in idle gossip"; "vegetable origins"; "mineral origin"; "origin in sensation") }
+{ [ souring, verb.change:sour1,+ ] spoilage,@ (the process of becoming sour) }
+{ spallation, nuclear_reaction,@ noun.cognition:physics,;c ((physics) a nuclear reaction in which a bombarded nucleus breaks up into many particles; "some astronomers believe that the solar system was formed by spallation when the sun was a very young star") }
+{ [ specialization, verb.change:specialize7,+ ] [ specialisation, verb.change:specialise7,+ ] [ differentiation, verb.change:differentiate1,+ ] adaptation,@ noun.cognition:biology,;c ((biology) the structural adaptation of some body part for a particular function; "cell differentiation in the developing embryo") }
+{ [ speciation, verb.change:speciate,+ ] evolution,@ (the evolution of a biological species) }
+{ spiral, economic_process,@ (a continuously accelerating change in the economy) }
+{ spermatogenesis, gametogenesis,@ (development of spermatozoa) }
+{ [ spoilage, verb.change:spoil,+ ] [ spoiling, verb.change:spoil,+ ] decay2,@ (the process of becoming spoiled) }
+{ spontaneous_combustion, ignition,@ (ignition of a substance (as oily rags) resulting from an internal oxidation process) }
+{ [ stagflation, adj.pert:stagflationary,+ ] inflation,@ (a period of slow economic growth and high unemployment (stagnation) while prices rise (inflation)) }
+{ [ Stalinization, verb.change:stalinize,+ ] [ Stalinisation, verb.change:stalinise,+ ] social_process,@ (social process of adopting (or being forced to adopt) the policies and practices of Joseph Stalin; "many Hungarians refused to take part in the Stalinization of their country") }
+{ stationary_stochastic_process, stochastic_process,@ (a stochastic process in which the distribution of the random variables is the same for any value of the variable parameter) }
+{ steel_production, noun.act:production,@ (making steel from pig iron) }
+{ [ stiffening, verb.change:stiffen1,+ ] [ rigidifying, verb.change:rigidify,+ ] [ rigidification, verb.change:rigidify,+ ] natural_process,@ (the process of becoming stiff or rigid) }
+{ stimulation, natural_process,@ noun.cognition:physiology,;c ((physiology) the effect of a stimulus (on nerves or organs etc.)) }
+{ stochastic_process, noun.cognition:model,@ (a statistical process involving a number of random variables depending on a variable parameter (which is usually time)) }
+{ storage, computer_operation,@ noun.cognition:computer_science,;c ((computer science) the process of storing information in a computer memory or on a magnetic tape or disk) }
+{ [ stratification, verb.contact:stratify,+ verb.change:stratify,+ ] geological_process,@ (forming or depositing in layers) }
+{ stress_incontinence, enuresis,@ (urinary incontinence that occurs when involuntary pressure is put on the bladder by coughing or laughing or sneezing or lifting or straining) }
+{ subduction, geological_process,@ (a geological process in which one edge of a crustal plate is forced sideways and downward into the mantle below another plate) }
+{ succession, ecological_succession, natural_process,@ noun.cognition:ecology,;c ((ecology) the gradual and orderly process of change in an ecosystem brought about by the progressive replacement of one community by another until a stable climax is established) }
+{ [ summation, adj.all:additive^summational,+ ] organic_process,@ noun.cognition:physiology,;c ((physiology) the process whereby multiple stimuli can produce a response (in a muscle or nerve or other part) that one stimulus alone does not produce) }
+{ superposition, deposition,@ noun.cognition:geology,;c ((geology) the deposition of one geological stratum on another) }
+{ [ supply, verb.social:supply,+ demand,!] economic_process,@ (offering goods and services for sale) }
+{ suppression, growth,@ (the failure to develop some part or organ) }
+{ survival, survival_of_the_fittest, natural_selection, selection, natural_process,@ (a natural process resulting in the evolution of organisms best adapted to the environment) }
+{ symphysis, organic_process,@ (a growing together of parts or structures) }
+{ synapsis, organic_process,@ leptotene,#p (the side by side pairing of homologous maternal and paternal chromosomes at the start of meiosis) }
+{ [ syncretism, adj.pert:syncretistic1,+ adj.pert:syncretic1,+ adj.pert:syncretical1,+ adj.pert:syncretical,+ adj.pert:syncretistical1,+ adj.pert:syncretistical,+ verb.change:syncretize,+ ] fusion1,@ (the fusion of originally different inflected forms (resulting in a reduction in the use of inflections)) }
+{ [ synchronous_operation, asynchronous_operation,! ] operation,@ (operations that are initiated predictably by a clock) }
+{ syneresis, synaeresis, chemical_process,@ (the separation of liquid from a gel that is caused by contraction (as in cheese making)) }
+{ syneresis1, synaeresis1, linguistic_process,@ (the contraction of two vowels into a diphthong) }
+{ [ synergy, adj.all:cooperative^synergetic,+ ] [ synergism, adj.all:cooperative^synergistic,+ adj.all:synergistic,+ noun.artifact:synergist,+ ] natural_process,@ (the working together of two things (muscles or drugs for example) to produce an effect greater than the sum of their individual effects) }
+{ synizesis, synezesis, organic_process,@ prophase2,#p (the contraction of chromatin towards one side of the nucleus during the prophase of meiosis) }
+{ [ synthesis, adj.all:synthetical3,+ verb.cognition:synthesise,+ ] chemical_process,@ (the process of producing a chemical compound (usually by the union of simpler chemical compounds)) }
+{ [ tanning, verb.body:tan,+ ] bodily_process,@ (process in which skin pigmentation darkens as a result of exposure to ultraviolet light) }
+{ [ teething, verb.body:teethe,+ ] dentition, odontiasis, growth,@ (the eruption through the gums of baby teeth) }
+{ telophase1, phase_of_cell_division,@ mitosis,#p (the final stage of mitosis) }
+{ telophase2, phase_of_cell_division,@ meiosis,#p (the final stage of meiosis when the chromosomes move toward opposite ends of the nuclear spindle) }
+{ temperature_change, natural_process,@ (a process whereby the degree of hotness of a body (or medium) changes) }
+{ teratogenesis, growth,@ (the development of defects in an embryo) }
+{ [ thaw, verb.change:thaw,+ ] [ melt, verb.change:melt,+ verb.change:melt1,+ ] [ thawing, verb.change:thaw,+ ] [ melting, verb.change:melt1,+ verb.change:melt,+ ] heating,@ phase_change,@ (the process whereby heat changes something from a solid to a liquid; "the power failure caused a refrigerator melt that was a disaster"; "the thawing of a frozen turkey takes several hours") }
+{ thermionic_emission, thermal_emission, emission,@ (the emission of electrons from very hot substances) }
+{ thermocoagulation, curdling,@ (congealing tissue by heat (as by electric current)) }
+{ thermonuclear_reaction, fusion,@ (a nuclear fusion reaction taking place at very high temperatures (as in the sun)) }
+{ threshold_operation, operation,@ (an operation performed on operands in order to obtain the value of a threshold function) }
+{ thrombolysis, lysis,@ (the process of breaking up and dissolving blood clots) }
+{ top_fermentation, zymosis1,@ (a violent kind of alcoholic fermentation at a temperature high enough to carry the yeast cells to the top of the fermenting liquid; used in the production of ale; "top fermentation uses a yeast that ferments at higher temperatures than that used for bottom fermentation") }
+{ [ transamination, verb.change:transaminate,+ ] chemical_process,@ (the process of transfering an amino group from one compound to another) }
+{ transamination1, chemical_process,@ (the process of transposing an amino group within a chemical compound) }
+{ [ transcription, verb.change:transcribe,+ ] organic_process,@ noun.cognition:genetics,;c ((genetics) the organic process whereby the DNA sequence in a gene is copied into mRNA; the process whereby a base sequence of messenger RNA is synthesized on a template of complementary DNA) }
+{ [ transduction, verb.change:transduce,+ ] natural_process,@ (the process whereby a transducer accepts energy in one form and gives back related energy in a different form; "the transduction of acoustic waves into voltages by a microphone") }
+{ transduction1, organic_process,@ noun.cognition:genetics,;c ((genetics) the process of transfering genetic material from one cell to another by a plasmid or bacteriophage) }
+{ [ translation, verb.communication:translate5,+ ] organic_process,@ noun.cognition:genetics,;c ((genetics) the process whereby genetic information coded in messenger RNA directs the formation of a specific protein at a ribosome in the cytoplasm) }
+{ protein_folding, folding, organic_process,@ (the process whereby a protein molecule assumes its intricate three-dimensional shape; "understanding protein folding is the next step in deciphering the genetic code") }
+{ [ translocation, verb.possession:translocate1,+ ] organic_process,@ noun.cognition:genetics,;c ((genetics) an exchange of chromosome parts; "translocations can result in serious congenital disorders") }
+{ translocation1, organic_process,@ (the transport of dissolved material within a plant) }
+{ [ transpiration, verb.change:transpire2,+ ] organic_process,@ (the emission of water vapor from the leaves of plants) }
+{ [ transpiration1, verb.motion:transpire,+ ] natural_process,@ (the passage of gases through fine tubes because of differences in pressure or temperature) }
+{ [ transpiration2, verb.body:transpire,+ ] bodily_process,@ (the process of giving off or exhaling water vapor through the skin or mucous membranes) }
+{ transport, diffusion,@ (an exchange of molecules (and their kinetic energy and momentum) across the boundary between adjacent layers of a fluid or across cell membranes) }
+{ [ tripling, verb.change:triple,+ ] multiplication,@ (increase by a factor of three) }
+{ [ tumefaction, verb.change:tumefy1,+ verb.change:tumefy,+ ] organic_process,@ (the process of tumefying; the organic process whereby tissue becomes swollen by the accumulation of fluid within it) }
+{ [ ulceration, verb.change:ulcerate,+ ] organic_process,@ (the process of ulcer formation; the process of becoming ulcerated) }
+{ [ ultracentrifugation, verb.motion:ultracentrifuge,+ ] centrifugation,@ (centrifugation at very high speeds) }
+{ [ underdevelopment, verb.perception:underdevelop,+ ] development,@ noun.act:photography,;c ((photography) inadequate processing of film resulting in inadequate contrast) }
+{ [ unfolding, verb.change:unfold,+ ] flowering1, evolution1,@ (a developmental process; "the flowering of antebellum culture") }
+{ union, [ conglutination, verb.contact:conglutinate1,+ verb.contact:conglutinate,+ ] healing,@ (healing process involving the growing together of the edges of a wound or the growing together of broken bones) }
+{ uptake, human_process,@ (a process of taking up or using up or consuming; "they developed paper napkins with a greater uptake of liquids") }
+{ [ urbanization, verb.change:urbanize,+ ] [ urbanisation, verb.change:urbanise,+ ] social_process,@ (the social process whereby cities grow and societies become more urban) }
+{ urge_incontinence, enuresis,@ (urinary incontinence that is generally attributable to involuntary contracts of the bladder muscle resulting in an urgent need to urinate accompanied by a sudden loss of urine; most common in people over 60 years of age) }
+{ urochesia, urochezia, defecation,@ (passage of urine from the anus) }
+{ variation, noun.Tops:process,@ (the process of varying or being varied) }
+{ [ vaporization, verb.change:vaporize1,+ verb.change:vaporize,+ ] [ vaporisation, verb.change:vaporise1,+ verb.change:vaporise,+ ] [ vapor, verb.change:evaporate2,+ verb.change:evaporate1,+ verb.change:evaporate,+ verb.change:vaporize1,+ verb.change:vaporize,+ verb.change:vaporise1,+ verb.change:vaporise,+ ] vapour, [ evaporation, verb.change:evaporate2,+ verb.change:evaporate1,+ ] phase_change,@ (the process of becoming a vapor) }
+{ [ vascularization, verb.change:vascularize1,+ verb.change:vascularize,+ ] vascularisation, organic_process,@ (the organic process whereby body tissue becomes vascular and develops capillaries) }
+{ [ vegetation, verb.change:vegetate1,+ verb.change:vegetate,+ ] growth,@ (the process of growth in plants) }
+{ [ vesiculation, verb.change:vesiculate1,+ verb.change:vesiculate,+ ] [ vesication, verb.change:vesicate,+ ] blistering, organic_process,@ (the formation of vesicles in or beneath the skin) }
+{ vicious_circle, vicious_cycle, positive_feedback,@ (one trouble leads to another that aggravates the first) }
+{ video_digitizing, photography,@ (the process of capturing and converting and storing video images for use by a computer) }
+{ [ vinification, verb.change:vinify,+ ] zymosis1,@ (the process whereby fermentation changes grape juice into wine) }
+{ [ vitrification, verb.change:vitrify,+ ] natural_process,@ (the process of becoming vitreous) }
+{ [ vulcanization, verb.change:vulcanize1,+ verb.change:vulcanize,+ ] [ vulcanisation, verb.change:vulcanise1,+ verb.change:vulcanise,+ ] processing,@ (process of treating rubber or rubberlike materials with sulphur at great heat to improve elasticity and strength or to harden them) }
+{ [ washout, verb.contact:wash_out,+ ] wash, soil_erosion,@ (the erosive process of washing away soil or gravel by water (as from a roadway); "from the house they watched the washout of their newly seeded lawn by the water") }
+{ [ wastage, verb.change:waste2,+ verb.change:waste1,+ verb.body:waste,+ ] decrease,@ (the process of wasting) }
+{ Westernization, Westernisation, assimilation2,@ (assimilation of Western culture; the social process of becoming familiar with or converting to the customs and practices of Western civilization) }
+{ [ widening, verb.change:widen,+ narrowing,! ] broadening, increase,@ (an increase in width) }
+{ word_processing, data_processing,@ noun.communication:printing,;c (rapid and efficient processing (storage and printing) of linguistic data for composition and editing) }
+{ zygotene, noun.time:phase,@ prophase2,#p (the second stage of the prophase of meiosis) }
+{ [ zymosis, adj.pert:zymotic,+ ] infection,@ noun.cognition:medicine,;c ((medicine) the development and spread of an infectious disease (especially one caused by a fungus)) }
+{ [ zymosis1, adj.pert:zymotic1,+ ] [ zymolysis, adj.pert:zymolytic,+ ] [ fermentation, verb.change:ferment1,+ verb.change:ferment,+ ] [ fermenting, verb.change:ferment1,+ ] [ ferment, verb.change:ferment1,+ verb.change:ferment,+ ] chemical_process,@ (a process in which an agent causes an organic substance to break down into simpler substances; especially, the anaerobic breakdown of sugar into alcohol) }

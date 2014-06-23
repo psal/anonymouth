@@ -1,0 +1,57 @@
+($RCSfile: noun.Tops,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:37 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.Tops)
+
+{ entity, (that which is perceived or known or inferred to have its own distinct existence (living or nonliving)) }
+{ physical_entity, entity,@ (an entity that has physical existence) }
+{ [ abstraction, verb.cognition:abstract,+ ] abstract_entity, entity,@ (a general concept formed by extracting common features from specific examples) }
+{ thing, physical_entity,@ (a separate and self-contained entity) }
+{ [ object, verb.change:objectify1,+ ] physical_object, physical_entity,@ (a tangible and visible entity; an entity that can cast a shadow; "it was full of rackets, balls and other objects") }
+{ [ whole, adj.all:undiversified^whole,+ ] [ unit, verb.contact:unify,+ verb.change:unify,+ verb.contact:unitize,+ verb.change:unitize,+ ] object,@ (an assemblage of parts that is regarded as a single entity; "how big is that part compared to the whole?"; "the team is a unit") }
+{ congener, whole,@ (a whole (a thing or person) of the same kind or category as another; "lard was also used, though its congener, butter, was more frequently employed"; "the American shopkeeper differs from his European congener") }
+{ living_thing, animate_thing, whole,@ (a living (or once living) entity) }
+{ [ organism, adj.pert:organismic,+ adj.all:organic2,+ adj.all:organic,+ ] [ being, verb.stative:be1,+ ] living_thing,@ (a living thing that has (or can develop) the ability to act or function independently) }
+{ [ benthos, adj.pert:benthonic,+ ] organism,@ (organisms (plants and animals) that live at or near the bottom of a sea) }
+{ dwarf, organism,@ (a plant or animal that is atypically small) }
+{ heterotroph, organism,@ (an organism that depends on complex organic substances for nutrition) }
+{ parent, organism,@ (an organism (plant or animal) from which younger ones are obtained) }
+{ life, living_thing,@ (living things collectively; "the oceans are teeming with life") }
+{ biont, living_thing,@ (a discrete unit of living matter) }
+{ [ cell, adj.pert:cellular,+ adj.all:cellular,+ ] living_thing,@ organism,#p noun.cognition:biology,;c ((biology) the basic structural and functional unit of all organisms; they may exist as independent units of life (as in monads) or may form colonies or tissues as in higher plants and animals) }
+{ causal_agent, [ cause, adj.all:causative^causal,+ verb.creation:cause,+ verb.communication:cause,+ ] causal_agency, physical_entity,@  (any entity that produces an effect or is responsible for events or results) }
+{ [ person, noun.attribute:personhood,+ verb.cognition:personify,+ ] [ individual, verb.change:individualize,+ ] someone, somebody, [ mortal, adj.all:mortal,+ ] soul, organism,@ causal_agent,@ noun.group:people,#m (a human being; "there was too much for one person to do") }
+{ [ animal, verb.creation:animalize,+ verb.creation:animalise,+ ] animate_being, [ beast, adj.all:inhumane^beastly,+ adj.all:inhumane^bestial,+ ] brute, [ creature, verb.creation:create,+ ] fauna, organism,@ noun.animal:kingdom_Animalia,#m (a living organism characterized by voluntary movement) }
+{ [ plant, adj.pert:plantal,+ noun.plant:plantlet,+ verb.contact:plant,+ ] [ flora, adj.pert:floral,+ ] plant_life, organism,@ noun.plant:kingdom_Plantae,#m noun.cognition:botany,;c ((botany) a living organism lacking the power of locomotion) }
+{ native, noun.Tops:organism,@ (indigenous plants and animals) }
+{ [ natural_object, artifact,! ] whole,@ (an object occurring naturally; not made by man) }
+{ [ substance, adj.all:substantial,+ ] matter,@  noun.relation:part,@ (the real physical matter of which a person or thing consists; "DNA is the substance of our genes") }
+{ substance1, matter,@ (a particular kind or species of matter with uniform properties; "shigella is one of the most toxic substances known to man") }
+{ matter, physical_entity,@ (that which has mass and occupies space; "physicists study both the nature of matter and the forces which govern it") }
+{ food, [ nutrient, adj.all:wholesome^nutrient,+ verb.consumption:nutrify,+ ] substance1,@ (any substance that can be metabolized by an animal to give energy and build tissue) }
+{ nutrient1, substance1,@ (any substance (such as a chemical element or inorganic compound) that can be taken in by a green plant and used in organic synthesis) }
+{ [ artifact, adj.pert:artifactual,+ natural_object,! ] [ artefact, adj.pert:artefactual,+ ] whole,@ (a man-made object taken as a whole) }
+{ article, artifact,@ (one of a class of artifacts; "an article of clothing") }
+{ psychological_feature, abstraction,@ (a feature of the mental life of a living organism) }
+{ cognition, knowledge, [ noesis, adj.all:mental^noetic,+ ] psychological_feature,@ (the psychological result of perception and learning and reasoning) }
+{ [ motivation, adj.pert:motivational,+ verb.creation:motivate,+ ] [ motive, adj.all:causative^motive2,+ verb.creation:motivate,+ ] need, psychological_feature,@ (the psychological feature that arouses an organism to action toward a desired goal; the reason for the action; that which gives purpose and direction to behavior; "we did not understand his motivation"; "he acted with the best of motives") }
+{ attribute, abstraction,@ (an abstraction belonging to or characteristic of an entity) }
+{ state, attribute,@ (the way something is with respect to its main attributes; "the current state of knowledge"; "his state of health"; "in a weak financial state") }
+{ [ feeling, verb.emotion:feel,+ ] state,@ (the experiencing of affective and emotional states; "she had a feeling of euphoria"; "he had terrible feelings of guilt"; "I disliked him and the feeling was mutual") }
+{ [ location, verb.stative:locate,+ verb.possession:locate1,+ verb.possession:locate,+ verb.change:locate,+ ] object,@ space,#p (a point or extent in space) }
+{ shape, form, attribute,@ (the spatial arrangement of something as distinct from its substance; "geometry is the mathematical science of shape") }
+{ time, attribute,@ (the continuum of experience in which events pass from the future through the present to the past; "he waited for along time"; "it took some time before he got an answer"; "time flies like an arrow") }
+{ [ space, adj.pert:spacial,+ adj.pert:spatial,+ ] infinite, attribute,@ (the unlimited expanse in which everything is located; "they tested his ability to locate objects in space"; "the boundless regions of the infinite") }
+{ absolute_space, space,@ (physical space independent of what occupies it) }
+{ phase_space, space,@ noun.cognition:physics,;c ((physics) an ideal space in which the coordinate dimensions represent the variables that are required to describe a system or substance; "a multidimensional phase space") }
+{ event, psychological_feature,@ (something that happens at a given place and time) }
+{ process, physical_process, noun.Tops:physical_entity,@ (a sustained phenomenon or one marked by gradual changes through a series of states; "events now in process"; "the process of calcification begins later for boys than for girls") }
+{ [ act, verb.creation:actuate2,+ verb.creation:actuate,+ verb.social:act,+ ] deed, human_action, human_activity, event,@ (something that people do or cause to happen) }
+{ [ group, verb.competition:group,+ verb.cognition:group,+ ] grouping, abstraction,@ (any number of entities (members) considered as a unit) }
+{ [ relation, noun.state:relationship,+ noun.relation:relationship1,+ noun.relation:relationship,+ verb.stative:relate1,+ verb.cognition:relate,+ ] abstraction,@ (an abstraction belonging to or characteristic of two entities or parts together) }
+{ possession, relation,@ (anything owned or possessed) }
+{ social_relation, relation,@ (a relation between living organisms (especially between people)) }
+{ [ communication, adj.all:communicative^communicational,+ verb.possession:communicate10,+ verb.communication:communicate8,+ verb.communication:communicate7,+ verb.communication:communicate2,+ verb.communication:communicate1,+ verb.communication:communicate,+ ] abstraction,@  (something that is communicated by or to or between people or groups) }
+{ [ measure, verb.cognition:measure1,+ verb.change:measure,+ verb.cognition:measure,+ ] quantity, [ amount, verb.stative:amount1,+ ] abstraction,@ (how much there is or how many there are of something that you can quantify) }
+{ phenomenon, process,@ (any state or process known through the senses rather than by intuition or reasoning) }
+

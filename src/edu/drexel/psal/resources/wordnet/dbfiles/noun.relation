@@ -1,0 +1,491 @@
+($RCSfile: noun.relation,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:51 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.relation)
+
+{ relations, [ dealings, verb.social:deal4,+ ] noun.Tops:social_relation,@ (mutual dealings or connections or communications among persons or groups) }
+{ [ causality, adj.all:causative^causal,+ ] noun.Tops:relation,@ (the relation between causes and effects) }
+{ [ relationship, noun.person:relation,+ noun.Tops:relation,+ ] human_relationship, noun.Tops:relation,@ (a relation between people; (`relationship' is often used where `relation' would serve, as in `the relationship between inflation and unemployment', but the preferred usage of `relationship' is for human relations or states of relatedness); "the relationship between mothers and their children") }
+{ function1, noun.Tops:relation,@ (a relation such that one thing is dependent on another; "height is a function of age"; "price is a function of supply and demand") }
+{ partnership, relationship,@ (a cooperative relationship between people or groups who agree to share responsibility for achieving some specific goal; "effective language learning is a partnership between school, teacher and student"; "the action teams worked in partnership with the government") }
+{ personal_relation, personal_relationship, relationship,@ (a relation between persons) }
+{ bonding, personal_relation,@ (a close personal relationship that forms between people (as between husband and wife or parent and child)) }
+{ [ obligation, verb.communication:oblige1,+ ] [ indebtedness, adj.all:obligated^indebted1,+ ] personal_relation,@ (a personal relation in which one is indebted for a service or favor) }
+{ female_bonding, bonding,@ (the formation of a close personal relationship between women) }
+{ male_bonding, bonding,@ (the formation of a close personal relationship between men; "the rituals known as male bonding do not necessarily involve drinking beer together") }
+{ maternal-infant_bonding, bonding,@ (the attachment that forms between an infant and its mother beginning at birth; "maternal-infant bonding influences the child's psychological and physical development") }
+{ [ association, verb.social:associate,+ ] noun.Tops:relation,@ (a relation resulting from interaction or dependence; "flints were found in association with the prehistoric remains of the bear"; "the host is not always injured by association with a parasite") }
+
+{ logical_relation, noun.Tops:relation,@ noun.cognition:logic,;c (a relation between propositions) }
+{ contradictory, logical_relation,@ (two propositions are contradictories if both cannot be true (or both cannot be false) at the same time) }
+{ contrary2, logical_relation,@ (a logical relation such that two propositions are contraries if both cannot be true but both can be false) }
+{ mathematical_relation, noun.Tops:relation,@ noun.cognition:math,;c (a relation between mathematical expressions (such as equality or inequality)) }
+{ function, mathematical_function, single-valued_function, [ map, verb.change:map,+ ] [ mapping, verb.change:map,+ ] mathematical_relation,@ noun.cognition:mathematics,;c ((mathematics) a mathematical relation such that each element of a given set (the domain of the function) is associated with an element of another set (the range of the function)) }
+{ expansion, function,@ noun.cognition:mathematics,;c (a function expressed as a sum or product of terms; "the expansion of (a+b)^2 is a^2 + 2ab + b^2") }
+{ inverse_function, function,@ (a function obtained by expressing the dependent variable of one function as the independent variable of another; f and g are inverse functions if f(x)=y and g(y)=x) }
+{ Kronecker_delta, function,@ (a function of two variables i and j that equals 1 when i=j and equals 0 otherwise) }
+{ metric_function, metric, function,@ noun.cognition:mathematics,;c noun.cognition:physics,;c (a function of a topological space that gives, for any two points in the space, a value equal to the distance between them) }
+{ [ transformation, verb.change:transform2,+ ] function,@ noun.cognition:math,;c ((mathematics) a function that changes the position or direction of the axes of a coordinate system) }
+{ reflection, transformation,@ noun.cognition:math,;c ((mathematics) a transformation in which the direction of one axis is reversed) }
+{ rotation, transformation,@ noun.cognition:math,;c ((mathematics) a transformation in which the coordinate axes are rotated by a fixed angle about the origin) }
+{ translation, transformation,@ noun.cognition:math,;c ((mathematics) a transformation in which the origin of the coordinate system is moved to another position but the direction of each axis remains the same) }
+{ affine_transformation, transformation,@ noun.cognition:math,;c ((mathematics) a transformation that is a combination of single transformations such as translation or rotation or reflection on an axis) }
+{ [ isometry, adj.pert:isometric,+ ] mapping,@ (a one-to-one mapping of one metric space into another metric space that preserves the distances between each pair of points; "the isometries of the cube") }
+{ operator, function,@ noun.cognition:math,;c ((mathematics) a symbol or function representing a mathematical operation) }
+{ linear_operator, operator,@ (an operator that obeys the distributive law: A(f+g) = Af + Ag (where f and g are functions)) }
+{ identity1, identity_element, identity_operator, operator,@ (an operator that leaves unchanged the element on which it operates; "the identity under numerical multiplication is 1") }
+{ trigonometric_function, circular_function, function,@ (function of an angle expressed as a ratio of the length of the sides of right-angled triangle containing the angle) }
+{ sine, sin, trigonometric_function,@ (ratio of the length of the side opposite the given angle to the length of the hypotenuse of a right-angled triangle) }
+{ arc_sine, arcsine, arcsin, inverse_sine, trigonometric_function,@ (the inverse function of the sine; the angle that has a sine equal to a given number) }
+{ cosine, cos, trigonometric_function,@ (ratio of the adjacent side to the hypotenuse of a right-angled triangle) }
+{ arc_cosine, arccosine, arccos, inverse_cosine, trigonometric_function,@ (the inverse function of the cosine; the angle that has a cosine equal to a given number) }
+{ [ tangent, adj.pert:tangential,+ ] tan, trigonometric_function,@ (ratio of the opposite to the adjacent side of a right-angled triangle) }
+{ arc_tangent, arctangent, arctan, inverse_tangent, trigonometric_function,@ (the inverse function of the tangent; the angle that has a tangent equal to a given number) }
+{ cotangent, cotan, trigonometric_function,@ (ratio of the adjacent to the opposite side of a right-angled triangle) }
+{ arc_cotangent, arccotangent, inverse_cotangent, trigonometric_function,@ (the inverse function of the cotangent; the angle that has a cotangent equal to a given number) }
+{ secant, sec, trigonometric_function,@ (ratio of the hypotenuse to the adjacent side of a right-angled triangle) }
+{ arc_secant, arcsecant, arcsec, inverse_secant, trigonometric_function,@ (the inverse function of the secant; the angle that has a secant equal to a given number) }
+{ cosecant, cosec, trigonometric_function,@ (ratio of the hypotenuse to the opposite side of a right-angled triangle) }
+{ arc_cosecant, arccosecant, inverse_cosecant, trigonometric_function,@ (the angle that has a cosecant equal to a given number) }
+{ threshold_function, function,@ (a function that takes the value 1 if a specified function of the arguments exceeds a given threshold and 0 otherwise) }
+{ [ exponential, adj.pert:exponential,+ ] exponential_function, function,@ (a function in which an independent variable appears as an exponent) }
+{ exponential_equation, noun.communication:equation,@ (an equation involving exponential functions of a variable) }
+{ exponential_curve, noun.communication:graph,@ (a graph of an exponential function) }
+{ exponential_expression, noun.communication:formula,@ (a mathematical expression consisting of a constant (especially e) raised to some power) }
+{ exponential_series, noun.cognition:series,@ (a series derived from the expansion of an exponential expression) }
+{ parity, mathematical_relation,@ noun.cognition:math,;c ((mathematics) a relation between a pair of integers: if both integers are odd or both are even they have the same parity; if one is odd and the other is even they have different parity; "parity is often used to check the integrity of transmitted data") }
+{ evenness, parity,@ (the parity of even numbers (divisible by two)) }
+{ [ oddness, adj.all:odd,+ ] parity,@ (the parity of odd numbers (not divisible by two)) }
+{ [ foundation, verb.cognition:found,+ ] noun.Tops:relation,@ (the basis on which something is grounded; "there is little foundation for his objections") }
+{ footing, basis, ground, foundation,@ (a relation that provides the foundation for something; "they were on a friendly footing"; "he worked on an interim basis") }
+{ common_ground, footing,@ (a basis agreed to by all parties for reaching a mutual understanding) }
+{ grass_roots, foundation,@ (the essential foundation or source; "the problem was attacked at the grass roots") }
+
+{ connection, connexion, [ connectedness, adj.all:on-line^connected2,+ adj.all:wired^connected,+ unconnectedness,!] noun.Tops:relation,@ (a relation between things or events (as in the case of one causing the other or sharing features with it); "there was a connection between eating that pickle and having that nightmare") }
+{ [ series, adj.all:asynchronous^serial,+ ] connection,@ noun.cognition:electronics,;c ((electronics) connection of components in such a manner that current flows first through one and then through the other; "the voltage divider consisted of a series of fixed resistors") }
+{ alliance, [ bond, verb.social:bond13,+ verb.contact:bond1,+ ] connection,@ (a connection based on kinship or marriage or common interest; "the shifting alliances within a large family"; "their friendship constitutes a powerful bond between them") }
+{ silver_cord, alliance,@ (the emotional bond between a mother and her offspring) }
+{ [ linkage, verb.cognition:link,+ ] connection,@ (an associative relation) }
+{ [ link, verb.contact:link2,+ verb.contact:link,+ ] nexus, linkage,@ (the means of connection between things linked in series) }
+{ [ communication, verb.contact:communicate,+ verb.communication:communicate1,+ ] connection,@ (a connection allowing access between persons or places; "how many lines of communication can there be among four people?"; "a secret passageway provided communication between the two rooms") }
+{ concatenation, connection,@ (the linking together of a consecutive series of symbols or events or ideas etc; "it was caused by an improbable concatenation of circumstances") }
+{ [ bridge, verb.stative:bridge,+ ] connection,@ (something resembling a bridge in form or function; "his letters provided a bridge across the centuries") }
+{ [ involvement, verb.stative:involve1,+ verb.stative:involve,+ ] connection,@ (a connection of inclusion or containment; "he escaped involvement in the accident"; "there was additional involvement of the liver and spleen") }
+{ [ implication, verb.stative:imply2,+ verb.stative:implicate1,+ ] involvement,@ (a relation implicated by virtue of involvement or close connection (especially an incriminating involvement); "he was suspected of implication in several robberies") }
+{ inclusion, [ comprehension, verb.stative:comprehend,+ ] involvement,@ (the relation of comprising something; "he admired the inclusion of so many ideas in such a short work") }
+{ [ unconnectedness, adj.all:unrelated1^unconnected,+ adj.all:unconnected,+ connectedness,!] noun.Tops:relation,@ (the lack of a connection between things) }
+
+{ [ relevance, adj.all:relevant,+ irrelevance,!] [ relevancy, adj.all:relevant,+ ] connectedness,@ (the relation of something to the matter at hand)}
+{ [ materiality, adj.all:material2,+ immateriality,!] relevance,@ (relevance requiring careful consideration) }
+{ [ cogency, adj.all:persuasive^cogent,+ ] relevance,@ (persuasive relevance) }
+{ point4, relevance,@ (a style in speech or writing that arrests attention and has a penetrating or convincing quality or effect) }
+{ [ germaneness, adj.all:relevant^germane,+ ] pertinence,@ (pertinence by virtue of a close relation to the matter at hand) }
+{ [ applicability, adj.all:relevant^applicable,+ inapplicability,!] [ pertinence, adj.all:relevant^pertinent,+ adj.all:apropos^pertinent,+ verb.stative:pertain1,+ ] [ pertinency, adj.all:relevant^pertinent,+ adj.all:apropos^pertinent,+ verb.stative:pertain1,+ ] relevance,@ (relevance by virtue of being applicable to the matter at hand) }
+{ [ relatedness, adj.all:related2,+ adj.all:related1,+ unrelatedness,!] connectedness,@ (a particular manner of connectedness; "the relatedness of all living things") }
+{ bearing1, relatedness,@ (relevant relation or interconnection; "those issues have no bearing on our situation") }
+
+{ [ irrelevance, adj.all:irrelevant,+ relevance,!] [ irrelevancy, adj.all:irrelevant,+ ] unconnectedness,@ (the lack of a relation of something to the matter at hand) }
+{ [ inapplicability, adj.all:irrelevant^inapplicable,+ applicability,!] irrelevance,@ (irrelevance by virtue of being inapplicable to the matter at hand) }
+{ [ immateriality, adj.all:unimportant^immaterial,+ adj.all:irrelevant^immaterial,+ adj.all:immaterial2,+ materiality,!] irrelevance,@ (complete irrelevance requiring no further consideration) }
+{ [ unrelatedness, adj.all:unrelated2,+ adj.all:unrelated1,+ relatedness,!] unconnectedness,@ (the lack of any particular manner of connectedness) }
+{ [ extraneousness, adj.all:extrinsic^extraneous2,+ adj.all:extrinsic^extraneous1,+ adj.all:irrelevant^extraneous,+ adj.all:adulterating^extraneous,+ ] unrelatedness,@ (unrelatedness by virtue of falling outside the matter at hand) }
+
+{ grammatical_relation, linguistic_relation,@ (a linguistic relation established by grammar) }
+{ linguistic_relation, noun.Tops:relation,@ (a relation between linguistic forms or constituents) }
+
+{ [ agreement3, verb.stative:agree3,+ ] [ concord, verb.contact:concord,+ ] grammatical_relation,@ (the determination of grammatical inflection on the basis of word relations) }
+{ number_agreement, agreement3,@ (agreement in number between words in the same grammatical construction (e.g., between adjectives and the nouns they modify)) }
+{ person_agreement, agreement3,@ (agreement in person between pronouns and verbs) }
+{ case_agreement, agreement3,@ (agreement in grammatical case between words in the same construction) }
+{ gender_agreement, agreement3,@ (agreement in grammatical gender between words in the same construction) }
+
+{ [ transitivity, adj.all:transitive,+ intransitivity,!] [ transitiveness, adj.all:transitive,+ ] grammatical_relation,@ (the grammatical relation created by a transitive verb) }
+{ [ intransitivity, adj.all:intransitive,+ transitivity,!] [ intransitiveness, adj.all:intransitive,+ ] grammatical_relation,@ (the grammatical relation created by an intransitive verb) }
+{ transitivity1, logical_relation,@ mathematical_relation,@ noun.cognition:logic,;c noun.cognition:mathematics,;c ((logic and mathematics) a relation between three elements such that if it holds between the first and second and it also holds between the second and third it must necessarily hold between the first and third) }
+{ [ reflexivity1, adj.all:backward1^reflexive,+ ] [ reflexiveness1, adj.all:backward1^reflexive,+ ] logical_relation,@ mathematical_relation,@ noun.cognition:logic,;c noun.cognition:mathematics,;c ((logic and mathematics) a relation such that it holds between an element and itself) }
+
+{ [ coreference, adj.pert:coreferential,+ adj.all:related2^coreferent,+ ] grammatical_relation,@ (the grammatical relation between two words that have a common referent) }
+{ reflexivity, reflexiveness, coreference,@ (the coreferential relation between a reflexive pronoun and its antecedent) }
+
+{ conjunction2, grammatical_relation,@ (the grammatical relation between linguistic units (words or phrases or clauses) that are connected by a conjunction) }
+{ coordinating_conjunction, conjunction2,@ (the coordination by conjunction of linguistic units of the same status) }
+{ subordinating_conjunction, conjunction2,@ (the subordination that occurs when a conjunction makes one linguistic unit a constituent of another) }
+{ copulative_conjunction, conjunction2,@ (the conjunctive relation of units that expresses the addition of their meanings) }
+{ disjunctive_conjunction, conjunction2,@ (the conjunctive relation of units that expresses the disjunction of their meanings) }
+{ adversative_conjunction, conjunction2,@ (the conjunctive relation of units that expresses the opposition of their meanings) }
+
+{ complementation, grammatical_relation,@ (the grammatical relation of a word or phrase to a predicate) }
+{ coordination, grammatical_relation,@ (the grammatical relation of two constituents having the same grammatical form) }
+{ subordination1, grammatical_relation,@ (the grammatical relation of a modifying word or phrase to its head) }
+
+{ [ modification, verb.change:modify1,+ ] [ qualifying, verb.change:qualify1,+ ] limiting, grammatical_relation,@ (the grammatical relation that exists when a word qualifies the meaning of the phrase) }
+{ restrictiveness, modification,@ (a grammatical qualification that makes the meaning more specific (`red hat' has a more specific meaning than `hat')) }
+{ [ apposition, adj.pert:appositional,+ ] modification,@ (a grammatical relation between a word and a noun phrase that follows; "`Rudolph the red-nosed reindeer' is an example of apposition") }
+
+{ mood, [ mode2, adj.pert:modal,+ ] [ modality1, adj.pert:modal,+ ] grammatical_relation,@ (verb inflections that express how the action or state is conceived by the speaker) }
+{ indicative_mood, indicative, declarative_mood, [ declarative, adj.pert:declarative,+ ] common_mood, fact_mood, mood,@ (a mood (grammatically unmarked) that represents the act or state as an objective fact) }
+{ subjunctive_mood, subjunctive, mood,@ (a mood that represents an act or state (not as a fact but) as contingent or possible) }
+{ optative_mood, optative, mood,@ noun.location:Greece,;r noun.communication:Sanskrit,;c (a mood (as in Greek or Sanskrit) that expresses a wish or hope; expressed in English by modal verbs) }
+{ imperative_mood, imperative, jussive_mood, imperative_form, mood,@ (a mood that expresses an intention to influence the listener's behavior) }
+{ interrogative_mood, interrogative, mood,@ (some linguists consider interrogative sentences to constitute a mood) }
+
+{ modality, mode, logical_relation,@ (a classification of propositions on the basis of whether they claim necessity or possibility or impossibility) }
+
+{ anaphoric_relation, grammatical_relation,@ (the relation between an anaphor and its antecedent) }
+
+{ voice, grammatical_relation,@ noun.cognition:linguistics,;c ((linguistics) the grammatical relation (active or passive) of the grammatical subject of a verb to the action that the verb denotes) }
+{ [ active_voice, passive_voice,! ] active, voice,@ (the voice used to indicate that the grammatical subject of the verb is performing the action or causing the happening denoted by the verb; "`The boy threw the ball' uses the active voice") }
+{ [ passive_voice, active_voice,! ] [ passive, adj.all:passive2,+ ] voice,@ (the voice used to indicate that the grammatical subject of the verb is the recipient (not the source) of the action denoted by the verb; "`The ball was thrown by the boy' uses the passive voice"; "`The ball was thrown' is an abbreviated passive") }
+
+{ [ inflection, adj.all:inflectional,+ verb.communication:inflect1,+ ] [ inflexion, verb.communication:inflect1,+ ] grammatical_relation,@ (a change in the form of a word (usually by adding a suffix) to indicate a change in its grammatical function) }
+{ [ conjugation, verb.communication:conjugate,+ ] inflection,@ (the inflection of verbs) }
+{ [ declension, verb.communication:decline1,+ ] inflection,@ (the inflection of nouns and pronouns and adjectives in Indo-European languages) }
+{ [ paradigm, adj.pert:paradigmatic1,+ ] inflection,@ (systematic arrangement of all the inflected forms of a word) }
+{ [ pluralization, verb.communication:pluralize,+ ] [ pluralisation, verb.communication:pluralise,+ ] inflection,@ (the act of pluralizing or attributing plurality to) }
+
+{ [ aspect, adj.pert:aspectual,+ ] grammatical_relation,@ (the beginning or duration or completion or repetition of the action of a verb) }
+{ perfective, perfective_aspect, aspect,@ (the aspect of a verb that expresses a completed action) }
+{ imperfective, imperfective_aspect, durative,@ (aspect without regard to the beginning or completion of the action of the verb) }
+{ durative, durative_aspect, aspect,@ (the aspect of a verb that expresses its duration) }
+{ progressive_aspect, durative,@ (the aspect of a verb that expresses its on-going action) }
+{ inchoative, inchoative_aspect, aspect,@ (aspect with regard to the beginning of the action of the verb) }
+{ iterative, iterative_aspect, aspect,@ (the aspect of the verb that expresses the repetition of an action) }
+
+{ progressive, progressive_tense, imperfect, imperfect_tense, continuous_tense, noun.communication:tense,@ (a tense of verbs used in describing action that is on-going) }
+{ present_progressive, present_progressive_tense, progressive,@ (a tense used to express action that is on-going at the time of utterance) }
+{ perfective1, perfective_tense, perfect, perfect_tense, noun.communication:tense,@ (a tense of verbs used in describing action that has been completed (sometimes regarded as perfective aspect)) }
+{ present_perfect, present_perfect_tense, perfect,@ (a perfective tense used to express action completed in the present; "`I have finished' is an example of the present perfect") }
+{ preterit, preterite, noun.communication:past_tense,@ (a term formerly used to refer to the simple past tense) }
+{ past_perfect, past_perfect_tense, pluperfect, pluperfect_tense, perfect,@ (a perfective tense used to express action completed in the past; "`I had finished' is an example of the past perfect") }
+{ past_progressive, past_progressive_tense, progressive,@ (a progressive tense used to describe on-going action in the past; "`I had been running' is an example of the past progressive") }
+{ future_perfect, future_perfect_tense, perfect,@ (a perfective tense used to describe action that will be completed in the future; "`I will have finished' is an example of the future perfect") }
+{ future_progressive, future_progressive_tense, progressive,@ (a progressive tense used to express action that will be on-going in the future; "`I will be running' is an example of the future progressive") }
+
+{ semantic_relation, linguistic_relation,@ (a relation between meanings) }
+{ hyponymy, subordination2, semantic_relation,@ (the semantic relation of being subordinate or belonging to a lower rank or class) }
+{ hypernymy, superordination, semantic_relation,@ (the semantic relation of being superordinate or belonging to a higher rank or class) }
+{ [ synonymy, noun.person:synonymist,+ ] [ synonymity, adj.all:synonymous,+ ] [ synonymousness, adj.all:synonymous,+ ] semantic_relation,@ (the semantic relation that holds between two words that can (in a given context) express the same meaning) }
+{ antonymy, semantic_relation,@ (the semantic relation that holds between two words that can (in a given context) express opposite meanings) }
+{ holonymy, whole_to_part_relation, semantic_relation,@ (the semantic relation that holds between a whole and its parts) }
+{ meronymy, part_to_whole_relation, semantic_relation,@ (the semantic relation that holds between a part and the whole) }
+{ troponymy, semantic_relation,@ (the semantic relation of being a manner of does something) }
+{ homonymy, linguistic_relation,@ (the relation between two words that are spelled the same way but differ in meaning or the relation between two words that are pronounced the same way but differ in meaning) }
+
+{ [ part, adj.all:incomplete^partial,+ ] portion, component_part, component, constituent, noun.Tops:relation,@ meronymy,#p (something determined in relation to something that includes it; "he wanted to feel a part of something bigger than himself"; "I read a portion of the manuscript"; "the smaller component is hard to reach"; "the animal constituent of plankton") }
+{ basis1, base, part,@ (the most important or necessary part of something; "the basis of this drink is orange juice") } 
+{ [ detail, verb.communication:detail,+ ] particular, [ item, verb.communication:itemize,+ ] part,@ (a small part that can be considered separately from the whole; "it was perfect in all details") }
+{ [ highlight, verb.change:highlight,+ ] high_spot, detail,@ (the most interesting or memorable part; "the highlight of the tour was our visit to the Vatican") }
+{ [ unit, verb.social:unitize,+ verb.change:unitize,+ ] part,@ (an individual or group or structure or other entity regarded as a structural or functional constituent of a whole; "the reduced the number of units and installations"; "the word is a basic linguistic unit") }
+{ [ member, noun.state:membership,+ noun.group:membership,+ ] part,@ (anything that belongs to a set or class; "snakes are members of the class Reptilia"; "members of the opposite sex") }
+{ [ remainder, verb.possession:remainder,+ verb.stative:remain5,+ ] balance, [ residual, adj.pert:residual,+ ] [ residue, adj.pert:residuary,+ adj.pert:residual,+ ] residuum, rest, part,@ (something left after other parts have been taken away; "there was no remainder"; "he threw away the rest"; "he took what he wanted and I got the balance") }
+{ leftover, [ remnant, verb.stative:remain5,+ ] remainder,@ (a small part or portion that remains after the main part no longer exists) }
+{ subpart, part,@ (a part of a part) }
+
+{ affinity3, kinship2, noun.Tops:relation,@ (a close connection marked by community of interests or similarity in nature or character; "found a natural affinity with the immigrants"; "felt a deep kinship with the other students"; "anthropology's kinship with the humanities") }
+{ rapport, [ resonance, verb.cognition:resonate,+ ] affinity3,@ (a relationship of mutual understanding or trust and agreement between people) }
+{ [ sympathy, verb.emotion:sympathize1,+ verb.emotion:sympathise1,+ ] affinity3,@ (a relation of affinity or harmony between people; whatever affects one correspondingly affects the other; "the two of them were in close sympathy") }
+{ mutual_understanding, mutual_affection, sympathy,@ (sympathy of each person for the other) }
+
+{ affinity2, phylogenetic_relation, kinship,@ noun.cognition:biology,;c ((biology) state of relationship between organisms or groups of organisms resulting in resemblance in structure or structural parts; "in anatomical structure prehistoric man shows close affinity with modern humans") }
+
+{ [ kinship, noun.person:kin,+ noun.group:kin,+ ] family_relationship, [ relationship1, noun.person:relation,+ noun.Tops:relation,+ ] noun.Tops:relation,@ noun.cognition:anthropology,;c ((anthropology) relatedness or connection by blood or marriage or adoption) }
+{ [ descent, verb.stative:descend,+ ] line_of_descent, lineage, [ filiation, verb.cognition:filiate,+ ] kinship,@ (the kinship relation between an individual and the individual's progenitors) }
+{ [ affinity1, adj.all:related1^affine,+ consanguinity,! ] kinship,@ noun.cognition:anthropology,;c ((anthropology) kinship by marriage or adoption; not a blood relationship) }
+{ steprelationship, affinity1,@ (a family relationship by virtue of remarriage) }
+{ [ consanguinity, adj.all:related1^consanguine,+ affinity1,! ] blood_kinship, cognation, kinship,@ noun.cognition:anthropology,;c ((anthropology) related by blood) }
+{ [ parentage, verb.social:parent,+ ] birth, kinship,@ (the kinship relation of an offspring to the parents) }
+{ fatherhood, [ paternity, adj.all:related1^paternal,+ ] kinship,@ (the kinship relation between an offspring and the father) }
+{ [ motherhood, noun.person:mother,+ ] maternity, kinship,@ (the kinship relation between an offspring and the mother) }
+{ [ sisterhood, noun.person:sister,+ ] sistership, kinship,@ (the kinship relation between a female offspring and the siblings) }
+{ brotherhood, kinship,@ (the kinship relation between a male offspring and the siblings) }
+{ bilateral_descent, descent,@ (line of descent traced through both the maternal and paternal sides of the family) }
+{ unilateral_descent, descent,@ (line of descent traced through one side of the family) }
+{ matrilineage, enation, cognation1, unilateral_descent,@ (line of descent traced through the maternal side of the family) }
+{ patrilineage, agnation, unilateral_descent,@ (line of descent traced through the paternal side of the family) }
+{ marital_relationship, marital_bed, kinship,@ (the relationship between wife and husband) }
+
+{ magnitude_relation, quantitative_relation, noun.Tops:relation,@ (a relation between magnitudes) }
+{ scale, magnitude_relation,@ (relative magnitude; "they entertained on a grand scale") }
+
+{ proportion1, ratio, quantitative_relation,@ (the relation between things (or parts of things) with respect to their comparative quantity, magnitude, or degree; "an inordinate proportion of the book is given over to quotations"; "a dry martini has a large proportion of gin") }
+{ [ proportion, verb.change:proportion,+ ] quotient,@ (the quotient obtained when the magnitude of a part is divided by the magnitude of the whole) }
+{ case-fatality_proportion, proportion,@ (the number of cases of a disease ending in death divided by the number of cases of the disease; usually expressed as a percentage or as the number of deaths per 1000 cases) }
+{ case-to-infection_proportion, case-to-infection_ratio, proportion,@ (the number of cases of a disease divided by the number of infections with the agent that causes the disease) }
+{ content, proportion,@ (the proportion of a substance that is contained in a mixture or alloy etc.) }
+{ rate, proportion,@ (a quantity or amount or measure considered as a proportion of another quantity or amount or measure; "the literacy rate"; "the retention rate"; "the dropout rate") }
+{ [ scale1, verb.change:scale1,+ verb.creation:scale,+ ] proportion,@ (the ratio between the size of something and a representation of it; "the scale of the map"; "the scale of the model") }
+{ golden_section, golden_mean, proportion,@ (the proportional relation between two divisions of line or two dimension of a plane figure such that short : long :: long : (short + long)) }
+{ [ commensurateness, adj.all:commensurate,+ ] [ correspondence1, adj.all:similar^correspondent,+ ] [ proportionateness, adj.all:commensurate^proportionate,+ adj.all:balanced^proportionate,+ adj.all:proportionate,+ ] proportionality,@ (the relation of corresponding in degree or size or amount) }
+{ percentage, percent, per_centum, pct, proportion,@ (a proportion in relation to a whole (which is usually the amount per hundred)) }
+{ absentee_rate, percentage,@ (the percentage of workers who do not report to work) }
+{ batting_average, hitting_average, average,@ noun.act:baseball,;c ((baseball) a measure of a batter's performance; the number of base hits divided by the number of official times at bat; "Ted Williams once had a batting average above .400") }
+{ batting_average1, proportion,@ noun.act:baseball,;c ((an extension of the baseball term) the proportion of times some effort succeeds; "the salesman's batting average was 7 out of 12") }
+{ fielding_average, average,@ noun.act:baseball,;c ((baseball) a measure of a fielder's performance; the number of assists and putouts divided by the number of chances) }
+{ occupancy_rate, percentage,@ (the percentage of all rental units (as in hotels) are occupied or rented at a given time) }
+{ hospital_occupancy, occupancy_rate,@ (occupancy rate for hospitals) }
+{ hotel_occupancy, occupancy_rate,@ (occupancy rate for hotels) }
+{ vacancy_rate, percentage,@ (the percentage of all rental units (as in hotels) that are unoccupied or not rented at a given time) }
+{ unemployment_rate, percentage,@ (the percentage of the work force that is unemployed at any given date) }
+
+{ ratio1, magnitude_relation,@ (the relative magnitudes of two quantities (usually expressed as a quotient)) }
+{ abundance, ratio1,@ noun.cognition:chemistry,;c ((chemistry) the ratio of the total mass of an element in the earth's crust to the total mass of the earth's crust; expressed as a percentage or in parts per million) }
+{ abundance1, ratio1,@ noun.cognition:physics,;c ((physics) the ratio of the number of atoms of a specific isotope of an element to the total number of isotopes present) }
+{ albedo, reflective_power, ratio1,@ (the ratio of reflected to incident light) }
+{ aspect_ratio, ratio1,@ (the ratio of the width to the height of a tv picture) }
+{ average, ratio1,@ noun.act:sport,;c ((sports) the ratio of successful performances to opportunities) }
+{ cephalic_index, breadth_index, cranial_index, ratio1,@ (ratio (in percent) of the maximum breadth to the maximum length of a skull) }
+{ efficiency, ratio1,@ (the ratio of the output to the input of any system) }
+{ figure_of_merit, efficiency,@ (a numerical expression representing the efficiency of a given system, material, or procedure) }
+{ facial_index, ratio1,@ (the ratio (in percent) of the maximum width to the maximum height of the face) }
+{ focal_ratio, f_number, stop_number, speed, ratio1,@ (the ratio of the focal length to the diameter of a (camera) lens system) }
+{ frequency, relative_frequency, ratio1,@ (the ratio of the number of observations in a statistical category to the total number of observations) }
+{ hematocrit, haematocrit, packed_cell_volume, ratio1,@ (the ratio of the volume occupied by packed red blood cells to the volume of the whole blood as measured by a hematocrit) }
+{ intelligence_quotient, IQ, I.Q., ratio1,@ (a measure of a person's intelligence as indicated by an intelligence test; the ratio of a person's mental age to their chronological age (multiplied by 100)) }
+{ adult_intelligence, intelligence_quotient,@ (the average IQ of the adults in a given population) }
+{ borderline_intelligence, intelligence_quotient,@ (the minimal IQ required for someone to function normally and independently in the world (without some form of institutional assistance)) }
+{ load_factor, ratio1,@ noun.cognition:aeronautics,;c ((aeronautics) the ratio of an external load to the weight of the aircraft (measured in g)) }
+{ loss_ratio, ratio1,@ (the ratio of the annual claims paid by an insurance company to the premiums received) }
+{ Mach_number, ratio1,@ (the ratio of the speed of a moving body to the speed of sound) }
+{ [ magnification, verb.change:magnify1,+ verb.change:magnify,+ ] ratio1,@ (the ratio of the size of an image to the size of the object) }
+{ mechanical_advantage, ratio1,@ (the ratio of the force exerted by a machine to the force applied to it) }
+{ mileage, fuel_consumption_rate, gasoline_mileage, gas_mileage, ratio1,@ (the ratio of the number of miles traveled to the number of gallons of gasoline burned) }
+{ odds, betting_odds, ratio1,@ (the ratio by which one better's wager is greater than that of another; "he offered odds of two to one") }
+{ order_of_magnitude, magnitude, ratio1,@ (a number assigned to the ratio of two quantities; two quantities are of the same order of magnitude if one is less than 10 times as large as the other; the number of magnitudes that the quantities differ is specified to within a power of 10) }
+{ output-to-input_ratio, ratio1,@ noun.attribute:frequency_response,#p (the output power of a transducer divided by the input power) }
+{ prevalence, ratio1,@ noun.cognition:epidemiology,;c ((epidemiology) the ratio (for a given time period) of the number of occurrences of a disease or event to the number of units at risk in the population) }
+{ price-to-earnings_ratio, P/E_ratio, ratio1,@ noun.artifact:stock_market,;c ((stock market) the price of a stock divided by its earnings) }
+{ productivity, ratio1,@ noun.cognition:economics,;c ((economics) the ratio of the quantity and quality of units produced to the labor per unit of time) }
+{ [ proportionality, adj.all:proportionate^proportional1,+ ] ratio1,@ (a ratio of two quantities that is constant) }
+{ quotient, ratio1,@ (the ratio of two quantities to be divided) }
+{ refractive_index, index_of_refraction, ratio1,@ (the ratio of the velocity of light in a vacuum to that in a medium) }
+{ relative_humidity, ratio1,@ (the ratio of the amount of water in the air at a given temperature to the maximum amount it could hold at that temperature; expressed as a percentage) }
+{ respiratory_quotient, ratio1,@ (the ratio of the volume of carbon dioxide expired to the volume of oxygen consumed by an organism or cell in a given period of time) }
+{ safety_factor, factor_of_safety, ratio1,@ (the ratio of the breaking stress of a structure to the estimated maximum stress in ordinary use) }
+{ signal-to-noise_ratio, signal-to-noise, signal/noise_ratio, signal/noise, S/N, ratio1,@ (the ratio of signal intensity to noise intensity) }
+{ [ stoichiometry, adj.pert:stoichiometric,+ ] ratio1,@ noun.cognition:chemistry,;c ((chemistry) the relation between the quantities of substances that take part in a reaction or form a compound (typically a ratio of whole integers)) }
+{ time_constant, ratio1,@ (the ratio of the inductance of a circuit in henries to its resistance in ohms) }
+{ employee_turnover, turnover_rate, turnover, ratio1,@ (the ratio of the number of workers that had to be replaced in a given time period to the average number of workers) }
+
+{ loading, ratio1,@ (the ratio of the gross weight of an airplane to some factor determining its lift) }
+{ power_loading, loading,@ (the ratio of the weight of an airplane to its engine power) }
+{ span_loading, loading,@ (the ratio of the weight of an airplane to its wingspan) }
+{ wing_loading, loading,@ (the ratio of the weight of an airplane to its wing area) }
+{ incidence, relative_incidence, frequency,@ (the relative frequency of occurrence of something) }
+{ morbidity, incidence,@ (the relative incidence of a particular disease) }
+
+{ control, noun.Tops:relation,@ (a relation of constraint of one entity (thing or person or group) by another; "measures for the control of disease"; "they instituted controls over drinking on campus") }
+
+{ direction, noun.attribute:spatial_relation,@ (the spatial relation between something and the course along which it points or moves; "he checked the direction and velocity of the wind") }
+{ [ frontage, verb.stative:front,+ ] direction,@ (the direction in which something (such as a building) faces) }
+{ orientation, direction,@ (position or alignment relative to points of the compass or other specific directions) }
+{ attitude, orientation,@ (position of aircraft or spacecraft relative to a frame of reference (the horizon or direction of motion)) }
+{ [ trim, verb.stative:trim5,+ verb.stative:trim6,+ ] attitude,@ (attitude of an aircraft in flight when allowed to take its own orientation) }
+{ [ horizontal, adj.all:horizontal,+ ] orientation,@ (something that is oriented horizontally) }
+{ [ vertical, adj.all:vertical,+ ] orientation,@ (something that is oriented vertically) }
+
+{ opposition, direction,@ (a direction opposite to another) }
+{ orthogonality, [ perpendicularity, adj.all:perpendicular4,+ adj.all:perpendicular,+ ] orthogonal_opposition, opposition,@ (the relation of opposition between things at right angles) }
+{ [ antipodal, adj.pert:antipodal,+ ] antipodal_opposition, diametrical_opposition, opposition,@ (the relation of opposition along a diameter) }
+{ enantiomorphism, mirror-image_relation, opposition,@ (the relation of opposition between crystals or molecules that are reflections of one another) }
+
+{ [ windward, leeward,!] direction,@ (the direction from which the wind is coming) }
+{ windward_side, weatherboard, weather_side, windward,@ (the side toward the wind) }
+{ [ leeward, windward,!] direction,@ (the direction in which the wind is blowing) }
+{ to_leeward, leeward_side, leeward,@ (the side sheltered from the wind) }
+{ seaward, direction,@ (the direction toward the sea) }
+
+{ quarter, orientation,@ (one of the four major division of the compass; "the wind is coming from that quarter") }
+{ compass_point, point, direction,@ (any of 32 horizontal directions indicated on the card of a compass; "he checked the point on his compass") }
+{ cardinal_compass_point, compass_point,@ (one of the four main compass points) }
+{ north, due_north, northward, N, cardinal_compass_point,@ (the cardinal compass point that is at 0 or 360 degrees) }
+{ north_by_east, NbE, compass_point,@ (the compass point that is one point east (clockwise) of due north) }
+{ north1, magnetic_north, compass_north, direction,@ (the direction in which a compass needle points) }
+{ north_northeast, nor'-nor'-east, NNE, compass_point,@ (the compass point that is midway between north and northeast) }
+{ northeast_by_north, NEbN, compass_point,@ (the compass point that is one point north of northeast) }
+{ northeast, nor'-east, northeastward, NE, compass_point,@ (the compass point midway between north and east; at 45 degrees) }
+{ northeast_by_east, NEbE, compass_point,@ (the compass point that is one point east of northeast) }
+{ east_northeast, ENE, compass_point,@ (the compass point midway between northeast and east) }
+{ east_by_north, EbN, compass_point,@ (the compass point that is one point north of due east) }
+{ east, due_east, eastward, E, cardinal_compass_point,@ (the cardinal compass point that is at 90 degrees) }
+{ east_by_south, EbS, compass_point,@ (the compass point that is one point south of due east) }
+{ east_southeast, ESE, compass_point,@ (the compass point midway between east and southeast) }
+{ southeast_by_east, SEbE, compass_point,@ (the compass point that is one point east of southeast) }
+{ southeast, sou'-east, southeastward, SE, compass_point,@ (the compass point midway between south and east; at 135 degrees) }
+{ southeast_by_south, SEbS, compass_point,@ (the compass point that is one point south of southeast) }
+{ south_southeast, sou'-sou'-east, SSE, compass_point,@ (the compass point midway between south and southeast) }
+{ south_by_east, SbE, compass_point,@ (the compass point that is one point east of due south) }
+{ south, due_south, southward, S, cardinal_compass_point,@ (the cardinal compass point that is at 180 degrees) }
+{ south_by_west, SbW, compass_point,@ (the compass point that is one point west of due south) }
+{ south_southwest, sou'-sou'-west, SSW, compass_point,@ (the compass point midway between south and southwest) }
+{ southwest_by_south, SWbS, compass_point,@ (the compass point that is one point south of southwest) }
+{ southwest, sou'-west, southwestward, SW, compass_point,@ (the compass point midway between south and west; at 225 degrees) }
+{ southwest_by_west, SWbW, compass_point,@ (the compass point that is one point west of southwest) }
+{ west_southwest, WSW, compass_point,@ (the compass point midway between west and southwest) }
+{ west_by_south, WbS, compass_point,@ (the compass point that is one point south of due west) }
+{ west, due_west, westward, W, cardinal_compass_point,@ (the cardinal compass point that is a 270 degrees) }
+{ west_by_north, WbN, compass_point,@ (the compass point that is one point north of due west) }
+{ west_northwest, WNW, compass_point,@ (the compass point midway between west and northwest) }
+{ northwest_by_west, NWbW, compass_point,@ (the compass point that is one point west of northwest) }
+{ northwest, nor'-west, northwestward, NW, compass_point,@ (the compass point midway between north and west; at 315 degrees) }
+{ northwest_by_north, NWbN, compass_point,@ (the compass point that is one point north of northwest) }
+{ north_northwest, nor'-nor'-west, NNW, compass_point,@ (the compass point that is midway between north and northwest) }
+{ north_by_west, NbW, compass_point,@ (the compass point that is one point west of due north) }
+{ north2, direction,@ (the direction corresponding to the northward cardinal compass point) }
+{ northeast2, direction,@ (the direction corresponding to the northeastward compass point) }
+{ east2, direction,@ (the direction corresponding to the eastward cardinal compass point) }
+{ southeast2, direction,@ (the direction corresponding to the southeastward compass point) }
+{ south2, direction,@ (the direction corresponding to the southward cardinal compass point) }
+{ southwest2, direction,@ (the direction corresponding to the southwestward compass point) }
+{ west2, direction,@ (the direction corresponding to the westward cardinal compass point) }
+{ northwest2, direction,@ (the direction corresponding to the northwestward compass point) }
+
+{ angular_position, noun.attribute:spatial_relation,@ (relation by which any position with respect to any other position is established) }
+{ elevation, EL, [ altitude, adj.pert:altitudinal,+ ] ALT, angular_position,@ (angular distance above the horizon (especially of a celestial object)) }
+{ depression, angular_position,@ (angular distance below the horizon (especially of a celestial object)) }
+
+{ business_relation, noun.Tops:relation,@ (a relation between different business enterprises) }
+{ competition1, business_relation,@ (a business relation in which two parties compete to gain customers; "business competition can be fiendish at times") }
+{ price_war, price_competition, competition1,@ (intense competition in which competitors cut retail prices to gain business) }
+{ clientage, business_relation,@ (relation of a client to a patron) }
+
+{ professional_relation, noun.Tops:social_relation,@ (the relation that exists when one person requests and is granted professional help from a qualified source) }
+{ medical_relation, professional_relation,@ (the professional relation between a health care professional and a patient) }
+{ doctor-patient_relation, medical_relation,@ (the responsibility of a physician to act in the best interests of the patient) }
+{ nurse-patient_relation, medical_relation,@ (the responsibility of a nurse to act in the best interests of the patient) }
+{ legal_relation, professional_relation,@ noun.group:law,;c (a professional relation that is regulated by law (as between a lawyer and a client)) }
+{ fiduciary_relation, legal_relation,@ noun.group:law,;c (the legal relation that exists when one person justifiably places reliance on another whose aid or protection is sought in some matter) }
+{ bank-depositor_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of a bank to act in the best interests of the depositors) }
+{ confidential_adviser-advisee_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of a confidential adviser to act in the best interest of the advisee) }
+{ conservator-ward_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of a conservator to act in the best interests of the ward) }
+{ director-stockholder_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of corporate directors to act in the best interests of stockholders) }
+{ executor-heir_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of an executor (or administrator) of an estate to act in the best interests of the heir) }
+{ lawyer-client_relation, attorney-client_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of a lawyer to act in the best interests of the client) }
+{ partner_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of partners to act in one another's best interests) }
+{ receiver-creditor_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of receiver or trustee in bankruptcy to act in the best interests of the creditor) }
+{ trustee-beneficiary_relation, fiduciary_relation,@ noun.group:law,;c (the responsibility of a trustee to act in the best interests of the beneficiary) }
+{ academic_relation, professional_relation,@ (a professional relation between instructors and those they instruct) }
+{ teacher-student_relation, academic_relation,@ (the academic relation between teachers and their students) }
+
+{ [ politics, noun.person:politician1,+ noun.person:politician,+ ] political_relation, noun.Tops:social_relation,@ (social relations involving intrigue to gain authority or power; "office politics is often counterproductive") }
+
+{ chemistry, interpersonal_chemistry, alchemy, noun.Tops:social_relation,@ (the way two individuals relate to each other; "their chemistry was wrong from the beginning -- they hated each other"; "a mysterious alchemy brought them together") }
+
+{ [ reciprocality, adj.all:reciprocal,+ ] [ reciprocity, adj.all:reciprocal,+ ] noun.Tops:relation,@ (a relation of mutual dependence or action or influence) }
+{ complementarity2, reciprocality,@ (the interrelation of reciprocity whereby one thing supplements or depends on the other; "the complementarity of the sexes") }
+{ [ correlation, adj.pert:correlational,+ verb.stative:correlate,+ verb.cognition:correlate,+ ] [ correlativity, adj.all:related2^correlative,+ adj.all:reciprocal^correlative,+ ] reciprocality,@ (a reciprocal relation between two or more things) }
+{ [ mutuality, adj.all:shared^mutual,+ adj.all:mutual,+ ] [ interdependence, adj.all:dependent^interdependent,+ verb.stative:interdepend,+ ] [ interdependency, adj.all:dependent^interdependent,+ verb.stative:interdepend,+ ] reciprocality,@ (a reciprocal relation between interdependent entities (objects or individuals or groups)) }
+{ commensalism, mutuality,@ (the relation between two different kinds of organisms when one receives benefits from the other without damaging it) }
+{ parasitism, mutuality,@ (the relation between two different kinds of organisms in which one receives benefits from the other by causing damage to it (usually not fatal damage)) }
+{ [ symbiosis, adj.all:dependent^symbiotic,+ ] mutualism, mutuality,@ (the relation between two different species of organisms that are interdependent; each gains benefits from the other) }
+{ trophobiosis, symbiosis,@ (a symbiotic relation in which one organism protects the other in return for some kind of food product) }
+{ additive_inverse, inverse2,@ noun.cognition:math,;c ((mathematics) one of a pair of numbers whose sum is zero; the additive inverse of -5 is +5) }
+{ multiplicative_inverse, reciprocal, inverse2,@ noun.cognition:math,;c ((mathematics) one of a pair of numbers whose product is 1: the reciprocal of 2/3 is 3/2; the multiplicative inverse of 7 is 1/7) }
+{ [ mutuality1, adj.all:shared^mutual,+ adj.all:mutual,+ ] [ mutualness, adj.all:mutual,+ ] reciprocality,@ (a reciprocality of sentiments; "the mutuality of their affection was obvious") }
+{ reciprocal1, reciprocality,@ (something (a term or expression or concept) that has an inverse relation to something else; "risk is the reciprocal of safety") }
+{ [ sharing, verb.stative:share,+ ] mutuality,@ (having in common; "the sharing of electrons creates molecules") }
+{ [ sharing1, verb.possession:share2,+ ] mutuality,@ (using or enjoying something jointly with others) }
+{ time_sharing, sharing1,@ noun.cognition:computer_science,;c ((computer science) the use of a central computer by many users simultaneously) }
+{ [ interrelation, noun.relation:interrelationship,+ verb.stative:interrelate,+ verb.cognition:interrelate,+ ] [ interrelationship, noun.relation:interrelation,+ ] [ interrelatedness, adj.all:reticulate^interrelated,+ ] noun.Tops:relation,@ (mutual or reciprocal relation or relatedness; "interrelationships of animal structure and function") }
+{ psychodynamics, interrelation,@ (the interrelation of conscious and unconscious processes and emotions that determine personality and motivation) }
+
+{ temporal_relation, noun.Tops:relation,@ (a relation involving time) }
+{ [ antecedent, adj.all:antecedent,+ ] forerunner, temporal_relation,@ (anything that precedes something similar in time; "phrenology was an antecedent of modern neuroscience") }
+{ [ chronology, adj.pert:chronological,+ verb.change:chronologize,+ ] temporal_relation,@ (an arrangement of events in time) }
+{ [ synchronism, asynchronism,!] [ synchrony, adj.all:synchronic4,+ adj.all:synchronous,+ verb.stative:synchronize,+ verb.communication:synchronize,+ verb.cognition:synchronize,+ verb.change:synchronize,+ verb.stative:synchronise,+ verb.cognition:synchronise,+ verb.change:synchronise,+ ] [ synchronicity, adj.all:synchronous^synchronic2,+ adj.all:synchronic4,+ ] [ synchroneity, adj.all:synchronous,+ ] [ synchronization, verb.stative:synchronize,+ desynchronization,! ] [ synchronisation, verb.stative:synchronise,+ ] [ synchronizing, verb.stative:synchronize,+ desynchronizing,! ] temporal_relation,@ (the relation that exists when things occur at the same time; "the drug produces an increased synchrony of the brain waves") }
+{ [ asynchronism, synchronism,!] asynchrony, [ desynchronization, verb.change:desynchronize,+ synchronization,! ] [ desynchronisation, verb.change:desynchronise,+ ] [ desynchronizing, verb.change:desynchronize,+ synchronizing,! ] temporal_relation,@ (the relation that exists when things occur at unrelated times; "the stimulus produced a desynchronizing of the brain waves") }
+
+{ first, number_one, noun.state:rank,@ (the first or highest in an ordering or series; "He wanted to be the first") }
+{ [ former, latter,! ] first,@ (the first of two or the first mentioned of two; "Tom and Dick were both heroes but only the former is remembered today") }
+{ [ second, adj.all:ordinal^second,+ ] noun.state:rank,@ (following the first in an ordering or series; "he came in a close second") }
+{ [ latter, former,! ] second,@ (the second of two or the second mentioned of two; "Tom and Dick were both heroes but only the latter is remembered today") }
+{ third, noun.state:rank,@ (following the second position in an ordering or series; "a distant third"; "he answered the first question willingly, the second reluctantly, and the third with resentment") }
+{ fourth, noun.state:rank,@ (following the third position; number four in a countable series) }
+{ [ fifth, adj.all:ordinal^fifth,+ ] noun.state:rank,@ (position five in a countable series of things; "he was fifth out of several hundred runners") }
+{ sixth, noun.state:rank,@ (position six in a countable series of things) }
+{ [ seventh, adj.all:ordinal^seventh,+ ] noun.state:rank,@ (position seven in a countable series of things) }
+{ eighth, noun.state:rank,@ (position eight in a countable series of things) }
+{ ninth, noun.state:rank,@ (position nine in a countable series of things; "going into the ninth they were a run ahead") }
+{ tenth, noun.state:rank,@ (position ten in a countable series of things) }
+{ eleventh, noun.state:rank,@ (position 11 in a countable series of things) }
+{ twelfth, noun.state:rank,@ (position 12 in a countable series of things) }
+{ thirteenth, noun.state:rank,@ (position 13 in a countable series of things) }
+{ fourteenth, noun.state:rank,@ (position 14 in a countable series of things) }
+{ [ fifteenth, adj.all:ordinal^fifteenth,+ ] noun.state:rank,@ (position 15 in a countable series of things) }
+{ sixteenth, noun.state:rank,@ (position 16 in a countable series of things) }
+{ [ seventeenth, adj.all:ordinal^seventeenth,+ ] noun.state:rank,@ (position 17 in a countable series of things) }
+{ eighteenth, noun.state:rank,@ (position 18 in a countable series of things) }
+{ nineteenth, noun.state:rank,@ (position 19 in a countable series of things) }
+{ twentieth, noun.state:rank,@ (position 20 in a countable series of things) }
+{ thirtieth, noun.state:rank,@ (position 30 in a countable series of things) }
+{ fortieth, noun.state:rank,@ (position 40 in a countable series of things) }
+{ [ fiftieth, adj.all:ordinal^fiftieth,+ ] noun.state:rank,@ (position 50 in a countable series of things) }
+{ sixtieth, noun.state:rank,@ (position 60 in a countable series of things) }
+{ [ seventieth, adj.all:ordinal^seventieth,+ ] noun.state:rank,@ (position 70 in a countable series of things) }
+{ eightieth, noun.state:rank,@ (position 80 in a countable series of things) }
+{ ninetieth, noun.state:rank,@ (position 90 in a countable series of things) }
+{ hundredth, noun.state:rank,@ (position 100 in a countable series of things) }
+{ thousandth, noun.state:rank,@ (position 1,000 in a countable series of things) }
+{ millionth, noun.state:rank,@ (position 1,000,000 in a countable series of things) }
+{ billionth, noun.state:rank,@ noun.location:US,;r (position 1,000,000,000 in a countable series of things) }
+{ last, noun.state:rank,@ (the last or lowest in an ordering or series; "he was the last to leave"; "he finished an inglorious last") }
+
+{ [ scale3, verb.change:scale1,+ verb.creation:scale,+ ] scale_of_measurement, graduated_table, ordered_series, noun.communication:standard,@ (an ordered reference standard; "judging on a scale of 1 to 10") }
+{ Beaufort_scale, wind_scale, scale3,@ (an international scale of wind force from 0 (calm air) to 12 (hurricane)) }
+{ [ index, verb.cognition:index,+ ] scale3,@ (a numerical scale used to compare variables with one another or with some reference number) }
+{ logarithmic_scale, scale3,@ (scale on which actual distances from the origin are proportional to the logarithms of the corresponding scale numbers) }
+{ Mercalli_scale, scale3,@ noun.cognition:geology,;c (a scale formerly used to describe the magnitude of an earthquake; an earthquake detected only by seismographs is a I and an earthquake that destroys all buildings is a XII) }
+{ Mohs_scale, scale3,@ (a scale of hardness of solids; talc is 0 and diamond is 10; ordering is determined by which substance can scratch another substance) }
+{ Richter_scale, scale3,@ noun.cognition:geology,;c (a logarithmic scale of 1 to 10 formerly used to express the magnitude of an earthquake on the basis of the size of seismograph oscillations) }
+{ moment_magnitude_scale, scale3,@ noun.cognition:geology,;c (a logarithmic scale of 1 to 10 (a successor to the Richter scale) that enables seismologists to compare the energy released by different earthquakes on the basis of the area of the geological fault that ruptured in the quake) }
+{ temperature_scale, scale3,@ noun.quantity:system_of_measurement,@ (a system of measuring temperature) }
+{ Celsius_scale, international_scale, centigrade_scale, temperature_scale,@ (a temperature scale that defines the freezing point of water as 0 degrees and the boiling point of water as 100 degrees) }
+{ Fahrenheit_scale, temperature_scale,@ (a temperature scale that defines the freezing point of water as 32 degrees and the boiling point of water a 212 degrees) }
+{ Kelvin_scale, absolute_scale, temperature_scale,@ (a temperature scale that defines absolute zero as 0 degrees; water freezes at 273.16 degrees and boils at 373.16 degrees) }
+{ Rankine_scale, temperature_scale,@ (a scale of absolute temperature in Fahrenheit degrees; the freezing point of water is 491.69 degrees and the boiling point of water is 671.69 degrees) }
+{ Reaumur_scale, temperature_scale,@ (a temperature scale on which water freezes at 0 degrees and boils at 80 degrees) }
+{ wage_scale, wage_schedule, scale3,@ (a schedule of wages paid for different jobs) }
+{ sliding_scale, wage_scale,@ (a wage scale that fluctuates in response to the cost-of-living index) }
+
+{ [ comparison, verb.cognition:compare,+ ] noun.Tops:relation,@ (relation based on similarities and differences) }
+{ imaginative_comparison, comparison,@ (the kind of mental comparison that is expressed in similes or metaphors or allegories) }
+
+{ [ gauge, verb.change:gauge,+ ] standard_of_measurement, noun.communication:standard,@ (accepted or approved instance or example of a quantity or quality against which others are judged or measured or compared) }
+{ baseline, noun.communication:standard,@ (an imaginary line or standard by which things are measured or compared; "the established a baseline for the budget") }
+{ norm, noun.communication:standard,@ (a standard or model or pattern regarded as typical; "the current middle-class norm of two children per family") }
+
+{ opposition2, [ oppositeness, adj.all:different^opposite2,+ adj.all:different^opposite,+ ] noun.Tops:relation,@ (the relation between opposed entities) }
+{ [ antipode, adj.pert:antipodean,+ ] opposition2,@ (direct opposite; "quiet: an antipode to focused busyness") }
+{ [ antithesis, adj.all:different^antithetic,+ adj.all:different^antithetical,+ ] opposition2,@ (exact opposite; "his theory is the antithesis of mine") }
+{ conflict, opposition2,@ (opposition in a work of drama or fiction between characters or forces (especially an opposition that motivates the development of the plot); "this form of conflict is essential to Mann's writing") }
+{ [ contrast, verb.stative:contrast,+ verb.cognition:contrast,+ ] direct_contrast, opposition2,@ (the opposition or dissimilarity of things that are compared; "in contrast to"; "by contrast") }
+{ flip_side, opposition2,@ noun.communication:figure_of_speech,;u (a different aspect of something (especially the opposite aspect); "the flip side of your positive qualities sometimes get out of control"; "on the flip side of partnerships he talked about their competition") }
+{ mutual_opposition, [ polarity1, adj.all:different^polar,+ ] opposition2,@ (a relation between two opposite attributes or tendencies; "he viewed it as a balanced polarity between good and evil") }
+{ gradable_opposition, opposition2,@ (an opposition that is capable of being graded) }
+{ polar_opposition, gradable_opposition,@ (an opposition that can be graded between two extremes or poles) }
+{ [ polarity, adj.all:charged^polar,+ ] sign, opposition2,@ (having an indicated pole (as the distinction between positive and negative electric charges); "he got the polarity of the battery reversed"; "charges of opposite sign") }
+{ [ positivity, negativity,! ] [ positiveness, negativeness,! ] polarity,@ (the character of the positive electric pole) }
+{ [ negativity, positivity,! ] [ negativeness, positiveness,! ] polarity,@ (the character of the negative electric pole) }
+{ ungradable_opposition, opposition2,@ (an opposition that has no intermediate grade; either one or the other) }
+{ complementarity1, ungradable_opposition,@ (a relation between two opposite states or principles that together exhaust the possibilities) }
+
+{ [ contradictoriness, adj.all:inconsistent^contradictory,+ adj.all:incompatible1^contradictory,+ adj.all:antonymous^contradictory,+ ] opposition2,@ (the relation that exists when opposites cannot coexist) }
+{ contradiction, opposition2,@ (opposition between two conflicting forces or ideas) }
+{ [ dialectic, adj.pert:dialectical,+ noun.person:dialectician,+ ] contradiction,@ (a contradiction of ideas that serves as the determining factor in their interaction; "this situation created the inner dialectic of American history") }
+{ [ incompatibility2, adj.all:inconsistent^incompatible,+ ] mutual_exclusiveness, inconsistency, [ repugnance, verb.communication:repugn,+ ] contradictoriness,@ (the relation between propositions that cannot both be true at the same time) }
+
+{ contrary, opposition2,@ (exact opposition; "public opinion to the contrary he is not guilty") }
+{ contrariety, opposition2,@ (the relation between contraries) }
+{ tertium_quid, opposition2,@ (some third thing similar to two opposites but distinct from both) }
+
+{ [ reverse, adj.all:backward1^reverse2,+ verb.communication:reverse,+ verb.change:reverse,+ ] contrary1, opposite3, opposition2,@ (a relation of direct opposition; "we thought Sue was older than Bill but just the reverse was true") }
+{ inverse2, opposite4, opposition2,@ (something inverted in sequence or character or effect; "when the direct approach failed he tried the inverse") }
+
+{ [ change, verb.change:change2,+ verb.change:change1,+ ] noun.Tops:relation,@ (a relational difference between states; especially between states before and after some event; "he attributed the change to their marriage") }
+{ [ difference, adj.pert:differential,+ verb.change:differentiate1,+ verb.change:differentiate,+ ] change,@ (a significant change; "the difference in her is amazing"; "his support made a real difference") }
+{ gradient, change,@ (a graded change in the magnitude of some physical quantity or dimension) }
+{ concentration_gradient, gradient,@ (a gradient in concentration of a solute as a function of distance through a solution; "the movement of a solute down its concentration gradient is called diffusion") }
+{ gravity_gradient, gradient,@ (a gradient in the gravitational forces acting on different parts of a nonspherical object; "the gravity gradient of the moon causes the ocean tides on Earth") }
+{ temperature_gradient, gradient,@ (change in temperature as a function of distance (especially altitude)) }
+{ [ implication1, adj.pert:implicational,+ verb.communication:imply1,+ verb.stative:implicate,+ ] logical_implication, conditional_relation, logical_relation,@ (a logical relation between propositions p and q of the form `if p then q'; if p is true then q cannot be false) }
+{ [ antagonism, adj.all:negative2^antagonistic,+ adj.all:hostile1^antagonistic,+ noun.person:antagonist,+ verb.social:antagonise,+ ] opposition2,@ (the relation between opposing principles or forces or factors; "the inherent antagonism of capitalism and socialism") }
+

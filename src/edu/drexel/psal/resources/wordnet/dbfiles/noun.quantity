@@ -1,0 +1,1570 @@
+($RCSfile: noun.quantity,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:50 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(noun.quantity)
+
+( TYPES OF QUANTITIES )
+{ fundamental_quantity, fundamental_measure, noun.Tops:measure,@ (one of the four quantities that are the basis of systems of measurement) }
+{ definite_quantity, noun.Tops:measure,@ (a specific measure of amount) }
+{ indefinite_quantity, noun.Tops:measure,@ (an estimated quantity) }
+{ relative_quantity, noun.Tops:measure,@ (a quantity relative to some purpose) }
+{ system_of_measurement, metric, noun.Tops:measure,@ (a system of related measures that facilitates the quantification of some particular characteristic) }
+{ system_of_weights_and_measures, system_of_measurement,@ (system of measurement for length and weight and duration) }
+{ British_Imperial_System, English_system, British_system, system_of_weights_and_measures,@ (a system of weights and measures based on the foot and pound and second and pint) }
+{ metric_system, system_of_weights_and_measures,@ (a decimal system of weights and measures based on the meter and the kilogram and the second) }
+{ cgs, cgs_system, metric_system,@ (system of measurement based on centimeters and grams and seconds) }
+{ Systeme_International_d'Unites, Systeme_International, SI_system, SI, SI_unit, International_System_of_Units, International_System, metric_system,@ (a complete metric system of units of measurement for scientists; fundamental quantities are length (meter) and mass (kilogram) and time (second) and electric current (ampere) and temperature (kelvin) and amount of matter (mole) and luminous intensity (candela); "Today the United States is the only country in the world not totally committed to the Systeme International d'Unites") }
+{ United_States_Customary_System, system_of_weights_and_measures,@ (the system of weights and measures based on the foot and pound and second and pint that dates back to colonial America but differs in some respects from the British Imperial System; today in the United States this system exists side by side with the SI system) }
+{ point_system, system_of_measurement,@ (a system of graduating sizes of type in multiples of the point) }
+{ information_measure, system_of_measurement,@ (a system of measurement of information based on the probabilities of the events that convey information) }
+{ bandwidth, information_measure,@ (a data transmission rate; the maximum amount of information (bits/second) that can be transmitted along a channel) }
+{ baud, baud_rate, information_measure,@ noun.cognition:computer_science,;c ((computer science) a data transmission rate (bits/second) for modems) }
+{ cordage, noun.Tops:measure,@ (the amount of wood in an area as measured in cords) }
+{ octane_number, octane_rating, noun.Tops:measure,@ (a measure of the antiknock properties of gasoline) }
+{ utility, system_of_measurement,@ noun.cognition:economics,;c ((economics) a measure that is to be maximized in any situation involving choice) }
+{ marginal_utility, utility,@ noun.cognition:economics,;c ((economics) the amount that utility increases with an increase of one unit of an economic good or service) }
+
+( * RELATIVE QUANTITIES * )
+{ [ enough, adj.all:sufficient^enough,+ ] [ sufficiency, adj.all:sufficient,+ verb.stative:suffice,+ ] relative_quantity,@ (an adequate quantity; a quantity that is large enough to achieve a purpose; "enough is as good as a feast"; "there is more than a sufficiency of lawyers in this country") }
+{ [ fill, verb.consumption:fill,+ verb.consumption:fill2,+ ] enough,@ (a quantity sufficient to satisfy; "he ate his fill of potatoes"; "she had heard her fill of gossip") }
+{ normality, N, relative_quantity,@ noun.substance:solution,;c ((of a solution) concentration expressed in gram equivalents of solute per liter) }
+{ [ majority, adj.all:major1,+ ] absolute_majority, relative_quantity,@ noun.act:election1,;c ((elections) more than half of the votes) }
+{ plurality, relative_majority, relative_quantity,@ noun.act:election1,;c ((in an election with more than 2 options) the number of votes for the candidate or party receiving the greatest number (but less that half of the votes)) }
+
+( * DEFINITE QUANTITIES * )
+{ absolute_value, numerical_value, definite_quantity,@ (a real number regardless of its sign) }
+{ acid_value, definite_quantity,@ noun.cognition:chemistry,;c ((chemistry) the amount of free acid present in fat as measured by the milligrams of potassium hydroxide needed to neutralize it; "as the glycerides in fat slowly decompose the acid value increases") }
+{ chlorinity, definite_quantity,@ (a measure of the quantity of chlorine or other halides in water (especially seawater)) }
+{ [ number, adj.pert:numerical,+ verb.change:number,+ verb.communication:number,+ verb.communication:number1,+ verb.communication:number3,+ verb.stative:number,+ ] definite_quantity,@ (a concept of quantity involving zero and units; "every number has a unique position in the sequence") }
+{ quire, definite_quantity,@ ream,#p (a quantity of paper; 24 or 25 sheets) }
+{ ream, definite_quantity,@ (a quantity of paper; 480 or 500 sheets; one ream equals 20 quires) }
+{ [ solubility, adj.all:soluble1,+ ] definite_quantity,@ noun.substance:solution,;c (the quantity of a particular substance that can dissolve in a particular solvent (yielding a saturated solution)) }
+{ [ toxicity, adj.all:toxic,+ ] definite_quantity,@ (the degree to which something is poisonous) }
+{ cytotoxicity, toxicity,@ (the degree to which something is toxic to living cells) }
+{ unit_of_measurement, [ unit, verb.social:unitize,+ verb.change:unitize,+ ] definite_quantity,@ (any division of quantity accepted as a standard of measurement or exchange; "the dollar is the United States unit of currency"; "a unit of wheat is a bushel"; "change per unit volume") }
+{ measuring_unit, measuring_block, unit_of_measurement,@ (a unit of measurement) }
+{ denier, unit_of_measurement,@ (a unit of measurement for the fineness of silk or nylon or rayon; "with an evening dress one wears 10 denier stockings") }
+{ diopter, dioptre, unit_of_measurement,@ (a unit of measurement of the refractive power of a lens which is equal to the reciprocal of the focal length measured in meters; used by oculists) }
+{ karat, carat2, kt, unit_of_measurement,@ (the unit of measurement for the proportion of gold in an alloy; 18-karat gold is 75% gold; 24-karat gold is pure gold) }
+{ [ decimal1, verb.change:decimalize,+ verb.change:decimalise,+ ] number,@ (a number in the decimal system) }
+{ constant, number,@ (a number representing a quantity assumed to have a fixed value in a specified mathematical context; "the velocity of light is a constant") }
+{ Avogadro's_number, Avogadro_number, constant,@ (the number of molecules in a mole of a substance (approximately 602,250,000,000,000,000,000,000)) }
+{ Boltzmann's_constant, constant,@ (constant used in the calculation of the ideal gas constant) }
+{ coefficient, constant,@ (a constant number that serves as a measure of some property or characteristic) }
+{ absorption_coefficient, coefficient_of_absorption, absorptance, coefficient,@ (a measure of the rate of decrease in the intensity of electromagnetic radiation (as light) as it passes through a given substance; the fraction of incident radiant energy absorbed per unit mass or thickness of an absorber; "absorptance equals 1 minus transmittance") }
+{ drag_coefficient, coefficient_of_drag, coefficient,@ (the ratio of the drag on a body moving through air to the product of the velocity and the surface area of the body) }
+{ coefficient_of_friction, coefficient,@ (the ratio of the weight of an object being moved along a surface and the force that maintains contact between the object and the surface) }
+{ coefficient_of_mutual_induction, mutual_inductance, coefficient,@ (a measure of the induction between two circuits; the ratio of the electromotive force in a circuit to the corresponding change of current in a neighboring circuit; usually measured in henries) }
+{ coefficient_of_self_induction, self-inductance, coefficient,@ (the ratio of the electromotive force produced in a circuit by self-induction to the rate of change of current producing it, expressed in henries) }
+{ modulus, coefficient,@ noun.cognition:physics,;c ((physics) a coefficient that expresses how much of a specified property is possessed by a specified substance) }
+{ coefficient_of_elasticity, modulus_of_elasticity, elastic_modulus, modulus,@ noun.cognition:physics,;c ((physics) the ratio of the applied stress to the change in shape of an elastic body) }
+{ bulk_modulus, coefficient_of_elasticity,@ (the ratio of the change in pressure acting on a volume to the fractional change in volume) }
+{ modulus_of_rigidity, coefficient_of_elasticity,@ (the coefficient of elasticity for a shearing force) }
+{ Young's_modulus, coefficient_of_elasticity,@ (a coefficient of elasticity applicable to the stretching of a wire) }
+{ coefficient_of_expansion, expansivity, coefficient,@ (the fractional change in length or area or volume per unit change in temperature at a given constant pressure) }
+{ coefficient_of_reflection, reflection_factor, reflectance, reflectivity, coefficient,@ (the fraction of radiant energy that is reflected from a surface) }
+{ transmittance, transmission, coefficient,@ (the fraction of radiant energy that passes through a substance) }
+{ coefficient_of_viscosity, absolute_viscosity, dynamic_viscosity, coefficient,@ (a measure of the resistance to flow of a fluid under an applied force) }
+{ [ weight2, verb.cognition:weight,+ ] weighting, coefficient,@ noun.cognition:statistics,;c ((statistics) a coefficient assigned to elements of a frequency distribution in order to represent their relative importance) }
+{ cosmological_constant, constant,@ (an arbitrary constant in the equations of general relativity theory) }
+{ equilibrium_constant, constant,@ noun.cognition:chemistry,;c ((chemistry) the ratio of concentrations when equilibrium is reached in a reversible reaction (when the rate of the forward reaction equals the rate of the reverse reaction)) }
+{ dissociation_constant, equilibrium_constant,@ (the equilibrium constant for a reversible dissociation) }
+{ gas_constant, universal_gas_constant, R1, constant,@ noun.cognition:physics,;c ((physics) the universal constant in the gas equation: pressure times volume = R times temperature; equal to 8.3143 joules per kelvin per mole) }
+{ gravitational_constant, universal_gravitational_constant, constant_of_gravitation, G8, constant,@ noun.cognition:law_of_gravitation,#p noun.cognition:physics,;c ((physics) the universal constant relating force to mass and distance in Newton's law of gravitation) }
+{ Hubble's_constant, Hubble_constant, Hubble's_parameter, Hubble_parameter, constant,@ noun.cognition:cosmology,;c ((cosmology) the ratio of the speed of recession of a galaxy (due to the expansion of the universe) to its distance from the observer; the Hubble constant is not actually a constant, but is regarded as measuring the expansion rate today) }
+{ ionic_charge, constant,@ (the charge on an ion is equal to a constant charge e multiplied by an integer from 1 to 15) }
+{ Planck's_constant, h1, factor_of_proportionality,@ (the constant of proportionality relating the energy of a photon to its frequency; approximately 6.626 x 10^-34 joule-second) }
+{ oxidation_number, oxidation_state, number,@ (the degree of oxidation of an atom or ion or molecule; for simple atoms or ions the oxidation number is equal to the ionic charge; "the oxidation number of hydrogen is +1 and of oxygen is -2") }
+{ cardinality, number,@ noun.cognition:mathematics,;c ((mathematics) the number of elements in a set or group (considered as a property of that grouping)) }
+{ count, number,@ (the total number counted; "a blood count") }
+{ complement, count,@ (a complete number or quantity; "a full complement") }
+{ blood_count, count,@ (the number of red and white corpuscles in a blood sample) }
+{ body_count, count,@ (a count of troops killed in an operation or time period; "the daily body count increased as the war went on") }
+{ [ circulation, verb.motion:circulate3,+ ] count,@ (number of copies of a newspaper or magazine that are sold; "by increasing its circulation the newspaper hoped to increase its advertising") }
+{ circulation1, count,@ noun.cognition:library_science,;c ((library science) the count of books that are loaned by a library over a specified period) }
+{ head_count, headcount, count,@ (number of people in a particular group) }
+{ pollen_count, count,@ (the number of pollen grains (usually ragweed) in a standard volume of air over a twenty-four hour period and a specified time and place) }
+{ sperm_count, count,@ (the number of sperm in an ejaculate; "the sperm count is used as an indicator of male fertility") }
+{ [ factor1, verb.cognition:factor,+ verb.cognition:factorize,+ ] number,@ (any of the numbers (or symbols) that form a product when multiplied together) }
+{ conversion_factor, factor1,@ (factor by which a quantity that is expressed in one set of units must be multiplied in order to convert it into another set of units) }
+{ factor_of_proportionality, constant_of_proportionality, factor1,@ constant,@ (the constant value of the ratio of two proportional quantities x and y; usually written y = kx, where k is the factor of proportionality) }
+{ Fibonacci_number, number,@ (a number in the Fibonacci sequence) }
+{ prime, prime_quantity, number,@ (a natural number that has exactly two distinct natural number divisors: 1 and itself) }
+{ prime_factor, divisor1,@ (the prime factors of a quantity are all of the prime quantities that will exactly divide the given quantity) }
+{ prime_number, prime,@ (an integer that has no integral factors but itself and 1) }
+{ composite_number, number,@ (an integer that is divisible without remainder by at least one positive integer other than itself and one) }
+{ [ score, verb.competition:score,+ ] number,@ (a number that expresses the accomplishment of a team or an individual in a game or contest; "the score was 7 to 0") }
+{ stroke, score,@ noun.act:golf,;c ((golf) the unit of scoring in golf is the act of hitting the ball with a club; "Nicklaus won by three strokes") }
+{ [ birdie, verb.contact:birdie,+ ] score,@ noun.act:golf,;c ((golf) a score of one stroke under par on a hole) }
+{ [ bogey, verb.contact:bogey,+ ] score,@ noun.act:golf,;c ((golf) a score of one stroke over par on a hole) }
+{ [ deficit, lead,! ] score,@ noun.act:sport,;c ((sports) the score by which a team or individual is losing) }
+{ [ double-bogey, verb.contact:double_bogey,+ ] score,@ noun.act:golf,;c ((golf) a score of two strokes over par for a hole) }
+{ duck, duck's_egg, score,@ noun.act:cricket,;c ((cricket) a score of nothing by a batsman) }
+{ [ eagle, verb.competition:eagle,+ ] score,@ noun.act:golf,;c ((golf) a score of two strokes under par on a hole) }
+{ double_eagle, score,@ noun.act:golf,;c ((golf) a score of three strokes under par on a hole) }
+{ game, score,@ noun.act:game,;c ((games) the score at a particular point or the score needed to win; "the game is 6 all"; "he is serving for the game") }
+{ [ lead, deficit,! ] score,@ noun.act:sport,;c ((sports) the score by which a team or individual is winning) }
+{ love, score,@ (a score of zero in tennis or squash; "it was 40 love") }
+{ match, score,@ (the score needed to win a match) }
+{ [ par, verb.competition:par,+ ] score,@ noun.act:golf,;c ((golf) the standard number of strokes set for each hole on a golf course, or for the entire course; "a par-5 hole"; "par for this course is 72") }
+{ record, number,@ (the number of wins versus losses and ties a team has had; "at 9-0 they have the best record in their league") }
+{ compound_number, number,@ (a quantity expressed in two different units; "one hour and ten minutes") }
+{ ordinal_number, [ ordinal, adj.all:ordinal,+ ] no., number,@ (the number designating place in an ordered sequence) }
+{ first, number_one, number_1", ordinal_number,@ (the first element in a countable series; "the first of the month") }
+{ cardinal_number, cardinal, number,@ (the number of elements in a mathematical set; denotes a quantity but not the order) }
+{ base, radix, number,@ noun.communication:numeration_system,;c ((numeration system) the positive integer that is equivalent to one in the next higher counting place; "10 is the radix of the decimal system") }
+{ floating-point_number, number,@ (a number represented in floating-point notation) }
+{ fixed-point_number, number,@ (a number represented in fixed-point notation) }
+{ [ frequency, adj.all:common1^frequent,+ adj.all:frequent,+ ] absolute_frequency, cardinal_number,@ (the number of observations in a given statistical category) }
+{ googol, cardinal_number,@ (a cardinal number represented as 1 followed by 100 zeros (ten raised to the power of a hundred)) }
+{ googolplex, cardinal_number,@ (a cardinal number represented as 1 followed by a googol of zeros (ten raised to the power of a googol)) }
+{ atomic_number, number,@ (the order of an element in Mendeleyev's table of the elements; equal to the number of protons in the nucleus or electrons in the neutral state of an atom of an element) }
+{ magic_number, atomic_number,@ (the atomic number of an extra stable strongly bound atomic nucleus: 2, 8, 20, 28, 50, 82 or 126) }
+{ baryon_number, number,@ (a number equal to the difference between the number of baryons and the number of antibaryons in any subatomic structure; it is conserved in all types of particle interactions) }
+{ quota, number,@ (a prescribed number; "all the salesmen met their quota for the month") }
+
+( ** UNITS OF MEASUREMENT ** )
+{ long_measure, linear_unit,@ (a measure of length) }
+{ [ magnetization, verb.communication:magnetize,+ verb.change:magnetize,+ ] magnetisation, noun.Tops:measure,@ (the extent or degree to which something is magnetized) }
+{ magnetic_flux, magnetization,@ (a measure of the strength of a magnetic field over a given area) }
+{ absorption_unit, unit_of_measurement,@ (a unit for measuring absorption) }
+{ acceleration_unit, unit_of_measurement,@ (a unit for measuring acceleration) }
+{ angular_unit, unit_of_measurement,@ (a unit of measurement for angles) }
+{ area_unit, square_measure, unit_of_measurement,@ (a system of units used to measure areas) }
+{ volume_unit, capacity_unit, capacity_measure, cubage_unit, cubic_measure, cubic_content_unit, displacement_unit, cubature_unit, unit_of_measurement,@ volume,#p (a unit of measurement of volume or capacity) }
+{ cubic_inch, cu_in, volume_unit,@ (the volume equal to a cube one inch on each side) }
+{ cubic_foot, cu_ft, volume_unit,@ (the volume equal to a cube one foot on each side) }
+{ computer_memory_unit, unit_of_measurement,@ (a unit for measuring computer memory) }
+{ [ cord, verb.contact:cord,+ ] volume_unit,@ (a unit of amount of wood cut for burning; 128 cubic feet) }
+{ electromagnetic_unit, emu, unit_of_measurement,@ (any of various systems of units for measuring electricity and magnetism) }
+{ explosive_unit, unit_of_measurement,@ (any unit for measuring the force of explosions) }
+{ force_unit, unit_of_measurement,@ (a unit of measurement of physical force) }
+{ linear_unit, linear_measure, unit_of_measurement,@ (a unit of measurement of length) }
+{ metric_unit, metric1, unit_of_measurement,@ (a decimal unit of measurement of the metric system (based on meters and kilograms and seconds); "convert all the measurements to metric units"; "it is easier to work in metric") }
+{ miles_per_gallon, unit_of_measurement,@ (the distance traveled in a vehicle powered by one gallon of gasoline or diesel fuel) }
+{ monetary_unit, unit_of_measurement,@ (a unit of money) }
+{ megaflop, MFLOP, million_floating_point_operations_per_second, unit_of_measurement,@ teraflop,#p noun.cognition:computer_science,;c ((computer science) a unit for measuring the speed of a computer system) }
+{ teraflop, trillion_floating_point_operations_per_second, unit_of_measurement,@ noun.cognition:computer_science,;c ((computer science) a unit for measuring the speed of a computer system) }
+{ MIPS, million_instructions_per_second, unit_of_measurement,@ noun.cognition:computer_science,;c ((computer science) a unit for measuring the execution speed of a computer's CPU (but not the whole system); "4 MIPS is 4,000,000 instructions per second") }
+{ pain_unit, unit_of_measurement,@ (a unit measuring the intensity of pain) }
+{ pressure_unit, unit_of_measurement,@ (a unit measuring force per unit area) }
+{ printing_unit, unit_of_measurement,@ (a unit of measurement for printing) }
+{ sound_unit, unit_of_measurement,@ (any acoustic unit of measurement) }
+{ telephone_unit, unit_of_measurement,@ (a unit of measurement for telephone use) }
+{ temperature_unit, unit_of_measurement,@ (a unit of measurement for temperature) }
+{ weight_unit, weight, unit_of_measurement,@ (a unit used to measure weight; "he placed two weights in the scale pan") }
+{ mass_unit, unit_of_measurement,@ (a unit of measurement for mass) }
+{ unit_of_viscosity, unit_of_measurement,@ (a unit of measurement for viscosity) }
+{ work_unit, heat_unit, energy_unit, unit_of_measurement,@ (a unit of measurement for work) }
+{ langley, unit_of_measurement,@ (unit of solar radiation) }
+{ Brinell_number, unit_of_measurement,@ (measure of the hardness of a material) }
+{ Brix_scale, system_of_measurement,@ (a system for measuring the concentration of sugar solutions) }
+{ point1, unit_of_measurement,@ score,#p (the unit of counting in scoring a game or contest; "he scored 20 points in the first half"; "a touchdown counts 6 points") }
+{ advantage, point1,@ noun.act:tennis,#p ((tennis) first point scored after deuce) }
+{ set_point, point1,@ noun.act:tennis,#p ((tennis) the final point needed to win a set in tennis) }
+{ match_point, point1,@ noun.act:tennis,;c ((tennis) the final point needed to win a match (especially in tennis)) }
+
+( *** ABSORPTION UNITS *** )
+{ sabin, absorption_unit,@ (a unit of acoustic absorption equivalent to the absorption by a square foot of a surface that absorbs all incident sound) }
+
+( *** ANGULAR UNITS *** )
+{ circular_measure, system_of_measurement,@ (measurement of angles in radians) }
+{ mil3, angular_unit,@ (an angular unit used in artillery; equal to 1/6400 of a complete revolution) }
+{ degree, arcdegree, angular_unit,@ oxtant,#p sextant,#p (a measure for arcs and angles; "there are 360 degrees in a circle") }
+{ second, arcsecond, angular_unit,@ minute,#p (a 60th part of a minute of arc; "the treasure is 2 minutes and 45 seconds south of here") }
+{ minute, arcminute, minute_of_arc, angular_unit,@ degree,#p (a unit of angular distance equal to a 60th of a degree) }
+{ microradian, angular_unit,@ milliradian,#p (a unit of angular distance equal to one thousandth of a milliradian) }
+{ milliradian, angular_unit,@ radian,#p (a unit of angular distance equal to one thousandth of a radian) }
+{ radian, rad1, angular_unit,@ (the unit of plane angle adopted under the Systeme International d'Unites; equal to the angle at the center of a circle subtended by an arc equal in length to the radius (approximately 57.295 degrees)) }
+{ grad, grade, angular_unit,@ noun.shape:right_angle,#p (one-hundredth of a right angle) }
+{ oxtant, angular_unit,@ (a unit of angular distance equal to half a quadrant) }
+{ sextant, angular_unit,@ noun.attribute:circumference1,#p (a unit of angular distance equal to 60 degrees) }
+{ straight_angle, angular_unit,@ noun.attribute:circumference1,#p (an angle of 180 degrees) }
+{ steradian, sr, angular_unit,@ noun.shape:sphere1,#p (the unit of solid angle adopted under the Systeme International d'Unites) }
+
+( *** AREA UNITS *** )
+{ square_inch, sq_in, area_unit,@ (a unit of area equal to one inch by one inch square) }
+{ square_foot, sq_ft, area_unit,@ (a unit of area equal to one foot by one foot square) }
+{ square_yard, sq_yd, area_unit,@ (a unit of area equal to one yard by one yard square) }
+{ square_meter, [ square_metre, noun.location:Canada,;r noun.location:Britain,;r ] centare, area_unit,@ (a centare is 1/100th of an are) }
+{ square_mile, area_unit,@ (an area of 640 acres) }
+{ section, square_mile,@ (a land unit equal to 1 square mile) }
+{ quarter_section, area_unit,@ (a land unit equal to a quarter of a section (160 acres) and measuring 1/2 mile on a side) }
+{ acre, area_unit,@ (a unit of area (4840 square yards) used in English-speaking countries) }
+{ are, ar, area_unit,@ hectare,#p (a unit of surface area equal to 100 square meters) }
+{ hectare, area_unit,@ ((abbreviated `ha') a unit of surface area equal to 100 ares (or 10,000 square meters)) }
+
+( *** MISCELLANEOUS AREA UNITS *** )
+{ arpent, area_unit,@ (a former French unit of area; equal approximately to an acre) }
+{ barn, b, area_unit,@ noun.cognition:atomic_physics,;c ((physics) a unit of nuclear cross section; the effective circular area that one particle presents to another as a target for an encounter) }
+{ dessiatine, area_unit,@ (a former Russian unit of area equal to 2.7 acres) }
+{ morgen, area_unit,@ (a South African unit of measure equal to about 2 acres) }
+{ perch2, rod2, pole2, area_unit,@ (a square rod of land) }
+
+( *** CAPACITY UNITS *** )
+{ liquid_unit, liquid_measure, capacity_unit,@ (a unit of capacity for liquids (for measuring the volumes of liquids or their containers)) }
+{ dry_unit, dry_measure, capacity_unit,@ (a unit of capacity for dry commodities (as fruit or grain)) }
+{ United_States_liquid_unit, liquid_unit,@ (a liquid unit officially adopted in the United States Customary System) }
+{ British_capacity_unit, Imperial_capacity_unit, liquid_unit,@ dry_unit,@ (a unit of measure for capacity officially adopted in the British Imperial System; British units are both dry and wet) }
+{ metric_capacity_unit, capacity_unit,@ metric_unit,@ (a capacity unit defined in metric terms) }
+
+( *** MISCELLANEOUS CAPACITY UNITS *** )
+{ ardeb, dry_unit,@ (a unit of dry measure used in Egypt) }
+{ arroba2, liquid_unit,@ (a liquid measure (with different values) used in some Spanish speaking countries) }
+{ bath, liquid_unit,@ homer,#p (an ancient Hebrew liquid measure equal to about 10 gallons) }
+{ cran, capacity_unit,@ (a capacity unit used for measuring fresh herring) }
+{ ephah, epha, dry_unit,@ homer,#p (an ancient Hebrew unit of dry measure equal to about a bushel) }
+{ field_capacity, capacity_unit,@ (the maximum amount of water that a particular soil can hold) }
+{ homer, kor, capacity_unit,@ (an ancient Hebrew unit of capacity equal to 10 baths or 10 ephahs) }
+{ hin, capacity_unit,@ (ancient Hebrew unit of liquid measure = 1.5 gallons) }
+{ fathom2, fthm2, volume_unit,@ noun.act:mining,;c ((mining) a unit of volume (equal to 6 cubic feet) used in measuring bodies of ore) }
+{ acre-foot, volume_unit,@ (the volume of water that would cover 1 acre to a depth of 1 foot; 43,560 cubic feet or 1233.5 cubic meters) }
+{ acre_inch, volume_unit,@ (one twelfth of an acre-foot) }
+{ board_measure, system_of_measurement,@ (a system of units for measuring lumber based on the board foot) }
+{ board_foot, volume_unit,@ (the volume of a piece of wood 1 foot square and 1 inch thick) }
+{ [ standard, verb.change:standardize,+ verb.change:standardise,+ ] volume_unit,@ (a board measure = 1980 board feet) }
+{ cubic_yard, yard1, volume_unit,@ (a unit of volume (as for sand or gravel)) }
+{ last1, capacity_unit,@ noun.location:Britain,;r (a unit of capacity for grain equal to 80 bushels) }
+{ mutchkin, liquid_unit,@ (a Scottish unit of liquid measure equal to 0.9 United States pint) }
+{ oka2, liquid_unit,@ (a Turkish liquid unit equal to 1.3 pints) }
+
+( ***** United StatesLIQUID UNITS **** )
+{ minim1, United_States_liquid_unit,@ fluidram1,#p (a United States liquid unit equal to 1/60 fluidram) }
+{ fluidram1, fluid_dram1, fluid_drachm1, drachm1, United_States_liquid_unit,@ fluidounce1,#p (a unit of capacity or volume in the apothecary system equal to one eighth of a fluid ounce) }
+{ fluidounce1, fluid_ounce1, United_States_liquid_unit,@ gill1,#p (a United States unit of capacity or volume equal to 1.804 cubic inches) }
+{ gill1, United_States_liquid_unit,@ cup2,#p (a United States liquid unit equal to 4 fluid ounces) }
+{ cup2, United_States_liquid_unit,@ pint1,#p (a United States liquid unit equal to 8 fluid ounces) }
+{ pint1, United_States_liquid_unit,@ quart1,#p (a United States liquid unit equal to 16 fluid ounces; two pints equal one quart) }
+{ fifth1, United_States_liquid_unit,@ (a quantity of liquor equal to one fifth of a United States gallon) }
+{ quart1, United_States_liquid_unit,@ gallon1,#p (a United States liquid unit equal to 32 fluid ounces; four quarts equal one gallon) }
+{ gallon1, gal, United_States_liquid_unit,@ barrel1,#p (United States liquid unit equal to 4 quarts or 3.785 liters) }
+{ barrel1, bbl1, United_States_liquid_unit,@ British_capacity_unit,@ hogshead1,#p (any of various units of capacity; "a barrel of beer is 31 gallons and a barrel of oil is 42 gallons") }
+
+( **** DRY UNITS **** )
+{ United_States_dry_unit, dry_unit,@ (a unit of measurement of capacity for dry substances officially adopted in the United States Customary System) }
+
+( ***** United StatesDRY UNITS ***** )
+{ pint3, dry_pint, United_States_dry_unit,@ quart3,#p (a United States dry unit equal to 0.5 quart or 33.6 cubic inches) }
+{ quart3, dry_quart, United_States_dry_unit,@ peck1,#p (a United States dry unit equal to 2 pints or 67.2 cubic inches) }
+{ peck1, United_States_dry_unit,@ bushel2,#p (a United States dry measure equal to 8 quarts or 537.605 cubic inches) }
+{ bushel2, United_States_dry_unit,@ (a United States dry measure equal to 4 pecks or 2152.42 cubic inches) }
+
+( **** BRITISH CAPACITY UNITS **** )
+{ minim2, British_capacity_unit,@ fluidram2,#p (a British imperial capacity measure (liquid or dry) equal to 1/60th fluid dram or 0.059194 cubic centimeters) }
+{ fluidram2, fluid_dram2, fluid_drachm2, drachm2, British_capacity_unit,@ fluidounce2,#p (a British imperial capacity measure (liquid or dry) equal to 60 minims or 3.5516 cubic centimeters) }
+{ fluidounce2, fluid_ounce2, British_capacity_unit,@ gill2,#p (a British imperial unit of capacity or volume (liquid or dry) equal to 8 fluid drams or 28.416 cubic centimeters (1.734 cubic inches)) }
+{ gill2, British_capacity_unit,@ pint2,#p (a British imperial capacity unit (liquid or dry) equal to 5 fluid ounces or 142.066 cubic centimeters) }
+{ pint2, British_capacity_unit,@ quart2,#p (a British imperial capacity measure (liquid or dry) equal to 4 gills or 568.26 cubic centimeters) }
+{ quart2, British_capacity_unit,@ gallon2,#p (a British imperial capacity measure (liquid or dry) equal to 2 pints or 1.136 liters) }
+{ gallon2, Imperial_gallon, congius, British_capacity_unit,@ bushel1,#p barrel1,#p firkin,#p (a British imperial capacity measure (liquid or dry) equal to 4 quarts or 4.545 liters) }
+{ peck2, British_capacity_unit,@ bushel1,#p (a British imperial capacity measure (liquid or dry) equal to 2 gallons) }
+{ bushel1, British_capacity_unit,@ quarter4,#p (a British imperial capacity measure (liquid or dry) equal to 4 pecks) }
+{ firkin, British_capacity_unit,@ kilderkin,#p (a British unit of capacity equal to 9 imperial gallons) }
+{ kilderkin, British_capacity_unit,@ (an obsolete British unit of capacity equal to 18 Imperial gallons) }
+{ quarter4, British_capacity_unit,@ hundredweight1,#p noun.location:Britain,;r (a quarter of a hundredweight (28 pounds)) }
+{ hogshead1, British_capacity_unit,@ (a British unit of capacity for alcoholic beverages) }
+{ chaldron, British_capacity_unit,@ (a British imperial capacity measure (liquid or dry) equal to 36 bushels) }
+
+( **** METRIC CAPACITY UNITS **** )
+{ cubic_millimeter, [ cubic_millimetre, noun.location:Canada,;r noun.location:Britain,;r ] metric_capacity_unit,@ milliliter,#p (a metric measure of volume or capacity equal to a cube 1 millimeter on each edge) }
+{ milliliter, millilitre, mil2, ml, cubic_centimeter, [ cubic_centimetre, noun.location:Canada,;r noun.location:Britain,;r ] cc, metric_capacity_unit,@ centiliter,#p (a metric unit of volume equal to one thousandth of a liter) }
+{ centiliter, centilitre, cl, metric_capacity_unit,@ deciliter,#p (a metric unit of volume equal to one hundredth of a liter) }
+{ deciliter, decilitre, dl, metric_capacity_unit,@ liter,#p (a metric unit of volume equal to one tenth of a liter) }
+{ liter, litre, l, cubic_decimeter, [ cubic_decimetre, noun.location:Canada,;r noun.location:Britain,;r ] metric_capacity_unit,@ dekaliter,#p (a metric unit of capacity, formerly defined as the volume of one kilogram of pure water under standard conditions; now equal to 1,000 cubic centimeters (or approximately 1.75 pints)) }
+{ dekaliter, dekalitre, decaliter, decalitre, dal, dkl, metric_capacity_unit,@ hectoliter,#p (a metric unit of volume or capacity equal to 10 liters) }
+{ hectoliter, hectolitre, hl, metric_capacity_unit,@ kiloliter,#p (a metric unit of volume or capacity equal to 100 liters) }
+{ kiloliter, kilolitre, cubic_meter, [ cubic_metre, noun.location:Canada,;r noun.location:Britain,;r ] metric_capacity_unit,@ cubic_kilometer,#p (a metric unit of volume or capacity equal to 1000 liters) }
+{ cubic_kilometer, [ cubic_kilometre, noun.location:Canada,;r noun.location:Britain,;r ] metric_capacity_unit,@ (a unit of capacity equal to the volume of a cube one kilometer on each edge) }
+
+( *** COMPUTER MEMORY UNITS *** )
+{ bit, unit_of_measurement,@ byte,#p (a unit of measurement of information (from binary + digit); the amount of information in a system having two equiprobable states; "there are 8 bits in a byte") }
+{ parity_bit, parity, check_bit, bit,@ noun.cognition:computer_science,;c ((computer science) a bit that is used in an error detection procedure in which a 0 or 1 is added to each group of bits so that it will have either an odd number of 1's or an even number of 1's; e.g., if the parity is odd then any group of bits that arrives with an even number of 1's must contain an error) }
+{ nybble, [ nibble, verb.consumption:nibble1,+ verb.contact:nibble,+ ] byte,#p computer_memory_unit,@ (a small byte) }
+{ byte, computer_memory_unit,@ word,#p (a sequence of 8 bits (enough to represent one character of alphanumeric data) processed as a single unit of information) }
+{ sector, computer_memory_unit,@ block,#p allocation_unit,#p (the minimum track length that can be assigned to store information; unless otherwise specified a sector of data consists of 512 bytes) }
+{ block, computer_memory_unit,@ noun.cognition:computer_science,;c ((computer science) a sector or group of sectors that function as the smallest data unit permitted; "since blocks are often defined as a single sector, the terms `block' and `sector' are sometimes used interchangeably") }
+{ bad_block, block,@ noun.cognition:computer_science,;c ((computer science) a block (usually one sector) that cannot reliably hold data) }
+{ allocation_unit, computer_memory_unit,@ (a group of sectors on a magnetic disk that can be reserved for the use of a particular file) }
+{ partition, computer_memory_unit,@ noun.cognition:computer_science,;c ((computer science) the part of a hard disk that is dedicated to a particular operating system or application and accessed as a single unit) }
+{ word, kilobyte,#p computer_memory_unit,@ (a string of bits stored in computer memory; "large computers use words up to 64 bits long") }
+
+( *** bits and bytes *** )
+
+{ kilobyte, kibibyte, K, KB, kB1, KiB, mebibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 bytes) }
+{ kilobyte1, K1, KB2, kB3, megabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 bytes) }
+{ kilobit, kbit, kb4, megabit,#p computer_memory_unit,@ (a unit of information equal to 1000 bits) }
+{ kibibit, kibit, mebibit,#p computer_memory_unit,@ (a unit of information equal to 1024 bits) }
+{ megabyte, mebibyte, M2, MB, MiB, gibibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 kibibytes or 2^20 (1,048,576) bytes) }
+{ megabyte1, M3, MB1, gigabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 kilobytes or 10^6 (1,000,000) bytes) }
+{ megabit, Mbit, Mb2, gigabit,#p computer_memory_unit,@ (a unit of information equal to 1000 kilobits or 10^6 (1,000,000) bits) }
+{ mebibit, Mibit, gibibit,#p computer_memory_unit,@ (a unit of information equal to 1024 kibibits or 2^20 (1,048,576) bits) }
+{ gigabyte, gibibyte, G2, GB2, GiB, tebibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 mebibytes or 2^30 (1,073,741,824) bytes) }
+{ gigabyte1, G3, GB3, terabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 megabytes or 10^9 (1,000,000,000) bytes) }
+{ gigabit, Gbit, Gb4, terabit,#p computer_memory_unit,@ (a unit of information equal to 1000 megabits or 10^9 (1,000,000,000) bits) }
+{ gibibit, Gibit, tebibit,#p computer_memory_unit,@ (a unit of information equal to 1024 mebibits or 2^30 (1,073,741,824) bits) }
+{ terabyte, tebibyte, TB, TiB, pebibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 gibibytes or 2^40 (1,099,511,627,776) bytes) }
+{ terabyte1, TB1, petabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 gigabytes or 10^12 (1,000,000,000,000) bytes) }
+{ terabit, Tbit, Tb2, petabit,#p computer_memory_unit,@ (a unit of information equal to 1000 gigabits or 10^12 (1,000,000,000,000) bits) }
+{ tebibit, Tibit, pebibit,#p computer_memory_unit,@ (a unit of information equal to 1024 gibibits or 2^40 (1,099,511,627,776) bits) }
+{ petabyte, pebibyte, PB, PiB, exbibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 tebibytes or 2^50 bytes) }
+{ petabyte1, PB1, exabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 terabytes or 10^15 bytes) }
+{ petabit, Pbit, Pb2, exabit,#p computer_memory_unit,@ (a unit of information equal to 1000 terabits or 10^15 bits) }
+{ pebibit, Pibit, exbibit,#p computer_memory_unit,@ (a unit of information equal to 1024 tebibits or 2^50 bits) }
+{ exabyte, exbibyte, EB, EiB, zebibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 pebibytes or 2^60 bytes) }
+{ exabyte1, EB1, zettabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 petabytes or 10^18 bytes) }
+{ exabit, Ebit, Eb2, zettabit,#p computer_memory_unit,@ (a unit of information equal to 1000 petabits or 10^18 bits) }
+{ exbibit, Eibit, zebibit,#p computer_memory_unit,@ (a unit of information equal to 1024 pebibits or 2^60 bits) }
+{ zettabyte, zebibyte, ZB, ZiB, yobibyte,#p computer_memory_unit,@ (a unit of information equal to 1024 exbibytes or 2^70 bytes) }
+{ zettabyte1, ZB1, yottabyte1,#p computer_memory_unit,@ (a unit of information equal to 1000 exabytes or 10^21 bytes) }
+{ zettabit, Zbit, Zb2, yottabit,#p computer_memory_unit,@ (a unit of information equal to 1000 exabits or 10^21 bits) }
+{ zebibit, Zibit, yobibit,#p computer_memory_unit,@ (a unit of information equal to 1024 exbibits or 2^70 bits) }
+{ yottabyte, yobibyte, YB, YiB, computer_memory_unit,@ (a unit of information equal to 1024 zebibytes or 2^80 bytes) }
+{ yottabyte1, YB1, computer_memory_unit,@ (a unit of information equal to 1000 zettabytes or 10^24 bytes) }
+{ yottabit, Ybit, Yb2, computer_memory_unit,@ (a unit of information equal to 1000 zettabits or 10^24 bits) }
+{ yobibit, Yibit, computer_memory_unit,@ (a unit of information equal to 1024 zebibits or 2^80 bits) }
+
+( *** ELECTROMAGNETIC UNITS *** )
+{ capacitance_unit, electromagnetic_unit,@ (a measure of the capacity of a circuit component to store charge) }
+{ charge_unit, quantity_unit, electromagnetic_unit,@ (a measure of the quantity of electricity (determined by the amount of an electric current and the time for which it flows)) }
+{ conductance_unit, electromagnetic_unit,@ (a measure of a material's ability to conduct an electrical charge) }
+{ current_unit, electromagnetic_unit,@ (a measure of the amount of electric charge flowing past a circuit point at a specific time) }
+{ elastance_unit, electromagnetic_unit,@ (the reciprocal of capacitance) }
+{ field_strength_unit, electromagnetic_unit,@ (an electromagnetic unit of magnetic intensity) }
+{ flux_density_unit, electromagnetic_unit,@ (a measure of the amount of flux per unit of cross sectional area) }
+{ flux_unit, magnetic_flux_unit, magnetic_flux,@ (a measure of the strength of a magnetic field per unit area) }
+{ inductance_unit, electromagnetic_unit,@ (a measure of the property of an electric circuit by which an electromotive force is induced in it) }
+{ light_unit, electromagnetic_unit,@ (a measure of the visible electromagnetic radiation) }
+{ magnetomotive_force_unit, electromagnetic_unit,@ (a unit of measurement of magnetomotive force) }
+{ potential_unit, electromagnetic_unit,@ (a measure of the potential energy of a unit charge at a given point in a circuit relative to a reference point (ground)) }
+{ power_unit, electromagnetic_unit,@ (a measure of electric power) }
+{ radioactivity_unit, electromagnetic_unit,@ (a measure of radioactivity) }
+{ resistance_unit, electromagnetic_unit,@ (the reciprocal of conductance) }
+
+( *** ELECTROSTATIC UNITS *** )
+{ electrostatic_unit, unit_of_measurement,@ (any of various units of electricity based on forces of interaction between electric charges) }
+
+( **** CAPACITANCE UNITS **** )
+{ picofarad, capacitance_unit,@ microfarad,#p (a unit of capacitance equal to one trillionth of a farad) }
+{ microfarad, capacitance_unit,@ millifarad,#p (a unit of capacitance equal to one millionth of a farad) }
+{ millifarad, capacitance_unit,@ farad,#p (a unit of capacitance equal to one thousandth of a farad) }
+{ farad, F, capacitance_unit,@ abfarad,#p (the capacitance of a capacitor that has an equal and opposite charge of 1 coulomb on each plate and a voltage difference of 1 volt between the plates) }
+{ abfarad, capacitance_unit,@ (a capacitance unit equal to one billion farads) }
+
+( **** CHARGE UNITS **** )
+{ coulomb, C, ampere-second, charge_unit,@ abcoulomb,#p ampere-minute,#p (a unit of electrical charge equal to the amount of charge transferred by a current of 1 ampere in 1 second) }
+{ abcoulomb, charge_unit,@ (a unit of electrical charge equal to 10 coulombs) }
+{ ampere-minute, charge_unit,@ ampere-hour,#p (a unit of charge equal to 60 coulombs) }
+{ ampere-hour, charge_unit,@ (a unit of charge equal to 3600 coulombs) }
+
+( **** CONDUCTANCE UNITS **** )
+{ mho, siemens, reciprocal_ohm, S, conductance_unit,@ (a unit of conductance equal to the reciprocal of an ohm) }
+
+( **** CURRENT UNITS **** )
+{ ampere, amp, A, current_unit,@ abampere,#p (the basic unit of electric current adopted under the Systeme International d'Unites; "a typical household circuit carries 15 to 50 amps") }
+{ milliampere, mA, current_unit,@ ampere,#p (one thousandth of an ampere) }
+{ abampere, abamp, current_unit,@ (a unit of current equal to 10 amperes) }
+{ ampere2, international_ampere, current_unit,@ (a former unit of electric current (slightly smaller than the SI ampere)) }
+
+( **** ELASTANCE UNITS **** )
+{ daraf, elastance_unit,@ (a unit of elastance equal to the reciprocal of a farad) }
+
+( **** FIELD STRENGTH UNITS **** )
+{ gamma, oersted,#p field_strength_unit,@ (a unit of magnetic field strength equal to one-hundred-thousandth of an oersted) }
+{ oersted, field_strength_unit,@ (the magnetic field strength 1 cm from a unit magnetic pole) }
+
+( **** FLUX UNITS **** )
+{ maxwell, Mx, flux_unit,@ weber,#p (a cgs unit of magnetic flux equal to the flux perpendicular to an area of 1 square centimeter in a magnetic field of 1 gauss) }
+{ weber, Wb, flux_unit,@ (a unit of magnetic flux equal to 100,000,000 maxwells) }
+
+( **** FLUX DENSITY UNITS **** )
+{ microgauss, flux_density_unit,@ gauss,#p (a unit of magnetic flux density equal to one millionth of a gauss) }
+{ gauss, flux_density_unit,@ tesla,#p (a unit of magnetic flux density equal to 1 maxwell per square centimeter) }
+{ tesla, flux_density_unit,@ (a unit of magnetic flux density equal to one weber per square meter) }
+
+( **** INDUCTANCE UNITS **** )
+{ abhenry, inductance_unit,@ henry,#p (a unit of inductance equal to one billionth of a henry) }
+{ millihenry, inductance_unit,@ henry,#p (a unit of inductance equal to one thousandth of a henry) }
+{ henry, H, inductance_unit,@ (a unit of inductance in which an induced electromotive force of one volt is produced when the current is varied at the rate of one ampere per second) }
+
+( **** LIGHT UNITS **** )
+{ illumination_unit, light_unit,@ (a measure of illumination) }
+{ luminance_unit, light_unit,@ (a measure of luminance) }
+{ luminous_flux_unit, light_unit,@ (a measure of luminous flux per unit area) }
+{ luminous_intensity_unit, candlepower_unit, light_unit,@ (a measure of luminous intensity) }
+{ [ exposure, verb.perception:expose1,+ ] light_unit,@ (the intensity of light falling on a photographic film or plate; "he used the wrong exposure") }
+
+( ***** ILLUMINATION UNITS ***** )
+{ footcandle, illumination_unit,@ (a unit of illuminance on a surface that is everywhere 1 foot from a point source of 1 candle) }
+{ lambert, L7, illumination_unit,@ (a cgs unit of illumination equal to the brightness of a perfectly diffusing surface that emits or reflects one lumen per square centimeter) }
+{ lux, lx1, illumination_unit,@ phot,#p (a unit of illumination equal to 1 lumen per square meter; 0.0929 foot candle)}
+{ phot, illumination_unit,@ (a unit of illumination equal to 1 lumen per square centimeter; 10,000 phots equal 1 lux) }
+
+( ***** LUMINANCE UNITS ***** )
+{ nit, luminance_unit,@ (a luminance unit equal to 1 candle per square meter measured perpendicular to the rays from the source) }
+{ foot-lambert, ft-L, luminance_unit,@ (a former luminance unit equal to one lumen per square foot) }
+
+( ***** LUMINOUS FLUX UNITS ***** )
+{ lumen, lm, luminous_flux_unit,@ (a unit of luminous flux equal to the amount of light given out through a solid angle of 1 steradian by a point source of 1 candela intensity radiating uniformly in all directions) }
+
+( ***** LUMINOUS INTENSITY UNITS ***** )
+{ [ candle, verb.perception:candle,+ ] candela, cd, standard_candle, luminous_intensity_unit,@ (the basic unit of luminous intensity adopted under the Systeme International d'Unites; equal to 1/60 of the luminous intensity per square centimeter of a black body radiating at the temperature of 2,046 degrees Kelvin) }
+{ international_candle, luminous_intensity_unit,@ (a former international unit of luminous intensity; now replaced by the candela) }
+
+( **** MAGNETOMOTIVE FORCE UNITS **** )
+{ gilbert, Gb1, Gi, magnetomotive_force_unit,@ (a unit of magnetomotive force equal to 0.7958 ampere-turns) }
+{ ampere-turn, magnetomotive_force_unit,@ (a unit of magnetomotive force equal to the magnetomotive force produced by the passage of 1 ampere through 1 complete turn of a coil; equal to 1.257 gilberts) }
+{ magneton, magnetomotive_force_unit,@ (a unit of magnetic moment of a molecular or atomic or subatomic particle) }
+
+( **** POTENTIAL UNITS **** )
+{ abvolt, potential_unit,@ volt,#p (a unit of potential equal to one-hundred-millionth of a volt) }
+{ millivolt, mV, potential_unit,@ volt,#p (a unit of potential equal to one thousandth of a volt) }
+{ microvolt, potential_unit,@ volt,#p (a unit of potential equal to one millionth of a volt) }
+{ nanovolt, potential_unit,@ volt,#p (a unit of potential equal to one billionth of a volt) }
+{ picovolt, potential_unit,@ volt,#p (a unit of potential equal to one trillionth of a volt) }
+{ femtovolt, potential_unit,@ volt,#p (a unit of potential equal to one quadrillionth of a volt (or one thousandth of a nanosecond)) }
+{ [ volt, adj.pert:voltaic,+ ] V, potential_unit,@ kilovolt,#p (a unit of potential equal to the potential difference between two points on a conductor carrying a current of 1 ampere when the power dissipated between the two points is 1 watt; equivalent to the potential difference across a resistance of 1 ohm when 1 ampere of current flows through it) }
+{ kilovolt, kV, potential_unit,@ (a unit of potential equal to a thousand volts) }
+
+{ rydberg, rydberg_constant, rydberg_unit, wave_number,@ (a wave number characteristic of the wave spectrum of each element) }
+{ wave_number, noun.time:frequency,@ (the reciprocal of the wavelength of a wave) }
+
+( **** POWER UNITS **** )
+{ abwatt, power_unit,@ milliwatt,#p (a power unit equal to the power dissipated when 1 abampere flows across a potential difference of 1 abvolt (one ten-thousandth of a milliwatt)) }
+{ milliwatt, power_unit,@ watt,#p (a unit of power equal to one thousandth of a watt) }
+{ watt, W, power_unit,@ kilowatt,#p horsepower,#p (a unit of power equal to 1 joule per second; the power dissipated by a current of 1 ampere flowing across a resistance of 1 ohm) }
+{ kilowatt, kW, power_unit,@ megawatt,#p (a unit of power equal to 1000 watts) }
+{ megawatt, power_unit,@ (a unit of power equal to one million watts) }
+{ horsepower, HP, H.P., power_unit,@ (a unit of power equal to 746 watts) }
+{ volt-ampere, var, power_unit,@ kilovolt-ampere,#p (a unit of electrical power in an AC circuit equal to the power dissipated when 1 volt produces a current of 1 ampere) }
+{ kilovolt-ampere, power_unit,@ (a unit of electrical power equal to 1000 volt-amperes) }
+
+( **** RADIOACTIVITY UNITS **** )
+{ millicurie, radioactivity_unit,@ curie,#p (a unit of radioactivity equal to one thousandth of a curie) }
+{ curie, Ci, radioactivity_unit,@ (a unit of radioactivity equal to the amount of a radioactive isotope that decays at the rate of 37,000,000,000 disintegrations per second) }
+{ gray, Gy, radioactivity_unit,@ (the SI unit of energy absorbed from ionizing radiation; equal to the absorption of one joule of radiation energy by one kilogram of matter; one gray equals 100 rad) }
+{ roentgen, R, radioactivity_unit,@ (a unit of radiation exposure; the dose of ionizing radiation that will produce 1 electrostatic unit of electricity in 1 cc of dry air) }
+{ rutherford, radioactivity_unit,@ (a unit strength of a radioactive source equal to one million disintegrations per second) }
+{ rem, radioactivity_unit,@ ((roentgen equivalent man) the dosage of ionizing radiation that will cause the same amount of injury to human tissue as 1 roentgen of X-rays) }
+{ mrem, millirem, radioactivity_unit,@ (a dosage of ionizing radiation equivalent to one thousandth (1/1000) of a rem) }
+{ rad, radioactivity_unit,@ (a unit of absorbed ionizing radiation equal to 100 ergs per gram of irradiated material) }
+
+( **** RESISTANCE UNITS **** )
+{ abohm, resistance_unit,@ ohm,#p (a unit of resistance equal to a billionth of an ohm) }
+{ [ ohm, adj.pert:ohmic,+ ] resistance_unit,@ megohm,#p (a unit of electrical resistance equal to the resistance between two points on a conductor when a potential difference of one volt between them produces a current of one ampere) }
+{ megohm, resistance_unit,@ (a unit of resistance equal to one million ohms) }
+
+( *** EXPLOSIVE UNITS *** )
+{ kiloton2, explosive_unit,@ (a measure of explosive power (of an atomic weapon) equal to that of 1000 tons of TNT) }
+{ megaton2, explosive_unit,@ (a measure of explosive power (of an atomic weapon) equal to that of one million tons of TNT) }
+
+( *** FORCE UNITS *** )
+{ dyne, force_unit,@ newton,#p (a unit of force equal to the force that imparts an acceleration of 1 cm/sec/sec to a mass of 1 gram) }
+{ newton, N1, force_unit,@ sthene,#p (a unit of force equal to the force that imparts an acceleration of 1 m/sec/sec to a mass of 1 kilogram; equal to 100,000 dynes) }
+{ sthene, force_unit,@ (a unit of force equal to 1000 newtons) }
+{ poundal, pdl, force_unit,@ (a unit of force equal to the force that imparts an acceleration of 1 foot/sec/sec to a mass of 1 pound; equal to 0.1382 newtons) }
+{ pound, lbf., force_unit,@ (a nontechnical unit of force equal to the mass of 1 pound with an acceleration of free fall equal to 32 feet/sec/sec) }
+{ pounder, force_unit,@ noun.communication:combining_form,;u ((used only in combination) something weighing a given number of pounds; "the fisherman caught a 10-pounder"; "their linemen are all 300-pounders") }
+{ g7, gee, g-force, force_unit,@ (a unit of force equal to the force exerted by gravity; used to indicate the force to which a body is subjected when it is accelerated) }
+{ gal1, acceleration_unit,@ (a unit of gravitational acceleration equal to one centimeter per second per second (named after Galileo)) }
+{ Beaufort_scale, system_of_measurement,@ (a scale from 0 to 12 for the force of the wind) }
+
+( *** LINEAR UNITS *** )
+{ astronomy_unit, linear_unit,@ (a linear unit used for astronomical distances) }
+{ metric_linear_unit, linear_unit,@ metric_unit,@ (a linear unit of distance in metric terms) }
+{ nautical_linear_unit, linear_unit,@ (a linear unit of distance used in navigation) }
+( *** ENGLISH LINEAR UNITS *** )
+{ [ inch, verb.motion:inch,+ ] in, linear_unit,@ foot,#p noun.location:US,;r noun.location:Britain,;r (a unit of length equal to one twelfth of a foot) }
+{ foot, ft, linear_unit,@ yard,#p (a linear unit of length equal to 12 inches or a third of a yard; "he is six feet tall") }
+{ footer, linear_unit,@ noun.communication:combining_form,;u ((used only in combinations) the height or length of something in feet; "he is a six-footer"; "the golfer sank a 40-footer"; "his yacht is a 60-footer") }
+{ yard, [ pace, verb.change:pace,+ ] linear_unit,@ fathom1,#p chain,#p rod1,#p lea,#p (a unit of length equal to 3 feet; defined as 91.44 centimeters; originally taken to be the average length of a stride) }
+{ yarder, linear_unit,@ noun.communication:combining_form,;u ((used only in combinations) the height or length of something in yards; "the golfer hit a 300-yarder to the green") }
+{ perch1, rod1, pole1, linear_unit,@ furlong,#p noun.location:Britain,;r (a linear measure of 16.5 feet) }
+{ furlong, linear_unit,@ mile1,#p (a unit of length equal to 220 yards) }
+{ [ mile1, noun.quantity:miler,+ noun.person:miler,+ ] statute_mile, stat_mi, land_mile, international_mile, mi, linear_unit,@ league,#p (a unit of length equal to 1,760 yards or 5,280 feet; exactly 1609.344 meters) }
+{ [ miler, noun.quantity:mile6,+ noun.quantity:mile5,+ noun.quantity:mile4,+ noun.quantity:mile3,+ noun.quantity:mile2,+ noun.quantity:mile1,+ noun.event:mile,+ ] linear_unit,@ noun.communication:combining_form,;u ((used only in combinations) the length of something in miles; "the race was a 30-miler") }
+{ half_mile, 880_yards, linear_unit,@ mile1,#p (a unit of length equal to half of 1 mile) }
+{ quarter_mile, 440_yards, linear_unit,@ mile1,#p (a unit of length equal to a quarter of 1 mile) }
+{ league, linear_unit,@ (an obsolete unit of distance of variable length (usually 3 miles)) }
+( *** CLOTHING-RELATED UNITS *** )
+{ ligne, linear_unit,@ inch,#p (a linear unit (1/40 inch) used to measure diameter of buttons) }
+{ nail, linear_unit,@ (a former unit of length for cloth equal to 1/16 of a yard) }
+( *** MISCELLANEOUS LINEAR UNITS *** )
+{ archine, linear_unit,@ (a Russian unit of length (71 cm)) }
+{ kos, coss, linear_unit,@ ((in India) a unit of length having different values in different localities) }
+{ vara, linear_unit,@ (a Spanish unit of length (about a yard) having different values in different localities) }
+{ verst, linear_unit,@ (a Russian unit of length (1.067 km)) }
+{ cable, cable_length, cable's_length, linear_unit,@ (a nautical unit of depth) }
+{ chain, linear_unit,@ (a unit of length) }
+{ Gunter's_chain, chain,@ furlong,#p (a unit of length (22 yards)) }
+{ engineer's_chain, chain,@ (a unit of length (100 ft)) }
+{ cubit, linear_unit,@ (an ancient unit of length based on the length of the forearm) }
+{ finger1, fingerbreadth, finger's_breadth, digit1, linear_unit,@ (the length of breadth of a finger used as a linear measure) }
+{ fistmele, linear_unit,@ (about seven inches; the breadth of a fist with the thumb stuck out (used especially in archery to give the correct distance of the string from the bow)) }
+{ body_length, linear_unit,@ (the length of your body) }
+{ extremum, [ peak, adj.all:high3^peaky,+ verb.motion:peak,+ ] limit,@ (the most extreme possible amount or value; "voltage peak") }
+{ hand, handbreadth,@ (a unit of length equal to 4 inches; used in measuring horses; "the horse stood 20 hands") }
+{ handbreadth, handsbreadth, linear_unit,@ (any unit of length based on the breadth of the human hand) }
+{ head, linear_unit,@ (the length or height based on the size of a human or animal head; "he is two heads taller than his little sister"; "his horse won by a head") }
+{ lea, linear_unit,@ (a unit of length of thread or yarn) }
+{ li, linear_unit,@ (Chinese distance measure; approximately 0.5 kilometers) }
+{ link1, linear_unit,@ chain,#p (a unit of length equal to 1/100 of a chain) }
+{ mesh, linear_unit,@ inch,#p (the number of openings per linear inch of a screen; measures size of particles; "a 100 mesh screen"; "100 mesh powdered cellulose") }
+{ mil1, linear_unit,@ inch,#p (a unit of length equal to one thousandth of an inch; used to specify thickness (e.g., of sheets or wire)) }
+{ [ mile2, noun.quantity:miler,+ noun.person:miler,+ ] mil5, Swedish_mile, linear_unit,@ (a Swedish unit of length equivalent to 10 km) }
+{ [ mile3, noun.quantity:miler,+ noun.person:miler,+ ] Roman_mile, linear_unit,@ (an ancient Roman unit of length equivalent to 1620 yards) }
+{ Roman_pace, linear_unit,@ (an ancient Roman unit of length (4.85 English feet) measured as the distance from the heel of one foot to the heel of the same foot when next it touches the ground) }
+{ geometric_pace, linear_unit,@ (a modern version of the Roman pace now taken to be 5 feet) }
+{ military_pace, linear_unit,@ (the length of a single step in marching (taken to be 30 inches for quick time or 36 inches for double time)) }
+{ [ palm, verb.contact:palm,+ ] linear_unit,@ (a linear unit based on the length or width of the human hand) }
+{ span1, linear_unit,@ (a unit of length based on the width of the expanded human hand (usually taken as 9 inches)) }
+{ survey_mile, linear_unit,@ (a U.S. unit of measure equal to 1609.347 meters; derived from the use of 39.37 inches as the conversion for one meter) }
+
+( **** ASTRONOMY UNITS **** )
+{ light_year, light-year, astronomy_unit,@ (the distance that light travels in a vacuum in 1 year; 5.88 trillion miles or 9.46 trillion kilometers) }
+{ light_hour, astronomy_unit,@ light_year,#p (the distance light travels in a vacuum in one hour; approximately one billion kilometers) }
+{ light_minute, astronomy_unit,@ light_year,#p (the distance light travels in a vacuum in one minute; approximately 18 million kilometers) }
+{ light_second, astronomy_unit,@ light_year,#p (the distance light travels in a vacuum in one second; approximately 300,000 kilometers) }
+{ Astronomical_Unit, AU, astronomy_unit,@ (a unit of length used for distances within the solar system; equal to the mean distance between the Earth and the Sun (approximately 93 million miles or 150 million kilometers)) }
+{ parsec, secpar, astronomy_unit,@ (a unit of astronomical length based on the distance from Earth at which stellar parallax is 1 second of arc; equivalent to 3.262 light years) }
+
+( **** METRIC LINEAR UNITS **** )
+{ femtometer, [ femtometre, noun.location:Canada,;r noun.location:Britain,;r ] fermi, metric_linear_unit,@ picometer,#p (a metric unit of length equal to one quadrillionth of a meter) }
+{ picometer, [ picometre, noun.location:Canada,;r noun.location:Britain,;r ] micromicron, metric_linear_unit,@ angstrom,#p (a metric unit of length equal to one trillionth of a meter) }
+{ angstrom, angstrom_unit, A1, metric_linear_unit,@ nanometer,#p (a metric unit of length equal to one ten billionth of a meter (or 0.0001 micron); used to specify wavelengths of electromagnetic radiation) }
+{ nanometer, [ nanometre, noun.location:Canada,;r noun.location:Britain,;r ] nm, millimicron, micromillimeter, [ micromillimetre, noun.location:Canada,;r noun.location:Britain,;r ] metric_linear_unit,@ micron,#p (a metric unit of length equal to one billionth of a meter) }
+{ micron, micrometer, metric_linear_unit,@ millimeter,#p (a metric unit of length equal to one millionth of a meter) }
+{ millimeter, [ millimetre, noun.location:Canada,;r noun.location:Britain,;r ] mm, metric_linear_unit,@ centimeter,#p (a metric unit of length equal to one thousandth of a meter) }
+{ centimeter, [ centimetre, noun.location:Canada,;r noun.location:Britain,;r ] cm, metric_linear_unit,@ decimeter,#p (a metric unit of length equal to one hundredth of a meter) }
+{ decimeter, [ decimetre, noun.location:Canada,;r noun.location:Britain,;r ] dm, metric_linear_unit,@ meter,#p (a metric unit of length equal to one tenth of a meter) }
+{ [ meter, adj.pert:metric,+ adj.pert:metrical,+ ] [ metre, adj.pert:metrical,+ noun.location:Canada,;r noun.location:Britain,;r ] m, metric_linear_unit,@ dekameter,#p (the basic unit of length adopted under the Systeme International d'Unites (approximately 1.094 yards)) }
+{ decameter, dekameter, [ decametre, noun.location:Canada,;r noun.location:Britain,;r ] [ dekametre, noun.location:Canada,;r noun.location:Britain,;r ] dam, dkm, metric_linear_unit,@ hectometer,#p (a metric unit of length equal to ten meters) }
+{ hectometer, [ hectometre, noun.location:Canada,;r noun.location:Britain,;r ] hm, metric_linear_unit,@ kilometer,#p (a metric unit of length equal to 100 meters) }
+{ kilometer, [ kilometre, noun.location:Canada,;r noun.location:Britain,;r ] km, klick, metric_linear_unit,@ myriameter,#p (a metric unit of length equal to 1000 meters (or 0.621371 miles)) }
+{ myriameter, [ myriametre, noun.location:Canada,;r noun.location:Britain,;r ] mym, metric_linear_unit,@ (a metric unit of length equal to 10,000 meters) }
+
+( **** NAUTICAL LINEAR UNITS **** )
+{ nautical_chain, chain,@ (a nautical unit of length (15 ft)) }
+{ [ fathom1, verb.change:fathom,+ ] fthm1, linear_unit,@ (a linear unit of measurement (equal to 6 feet) for water depth) }
+{ nautical_mile1, [ mile4, noun.quantity:miler,+ ] mi4, naut_mi, international_nautical_mile, air_mile, nautical_linear_unit,@ (a unit of length used in navigation; exactly 1,852 meters; historically based on the distance spanned by one minute of arc in latitude) }
+{ nautical_mile2, naut_mi1, [ mile6, noun.quantity:miler,+ ] mi5, geographical_mile, Admiralty_mile, nautical_linear_unit,@ (a former British unit of length equivalent to 6,080 feet (1,853.184 meters); 800 feet longer than a statute mile) }
+{ sea_mile, [ mile5, noun.quantity:miler,+ ] nautical_linear_unit,@ (a former British unit of length once used in navigation; equivalent to 6,000 feet (1828.8 meters)) }
+
+( *** $$$ MONETARY UNITS $$$ *** )
+
+{ halfpennyworth, ha'p'orth, worth,@ (the amount that can be bought for a halfpenny) }
+{ pennyworth, penn'orth, worth,@ (the amount that can be bought for a penny) }
+
+{ dollar, monetary_unit,@ (the basic monetary unit in many countries; equal to 100 cents) }
+{ euro, monetary_unit,@ (the basic monetary unit of most members of the European Union (introduced in 1999); in 2002 twelve European nations (Germany, France, Belgium, Luxembourg, the Netherlands, Italy, Spain, Portugal, Ireland, Greece, Austria, Finland) adopted the euro as their basic unit of money and abandoned their traditional currencies) }
+{ franc, monetary_unit,@ (the basic monetary unit in many countries; equal to 100 centimes) }
+{ fractional_monetary_unit, subunit, monetary_unit,@ (a monetary unit that is valued at a fraction (usually one hundredth) of the basic monetary unit) }
+
+{ Afghan_monetary_unit, monetary_unit,@ (monetary unit in the Islamic State of Afghanistan) }
+{ afghani, Afghan_monetary_unit,@ (the basic unit of money in Afghanistan) }
+{ pul, afghani,#p Afghan_monetary_unit,@ (100 puls equal 1 afghani in Afghanistan) }
+
+{ Argentine_monetary_unit, monetary_unit,@ (monetary unit in Argentina) }
+{ austral, Argentine_monetary_unit,@ (the basic unit of money in Argentina; equal to 100 centavos) }
+
+{ Thai_monetary_unit, monetary_unit,@ (monetary unit in Thailand) }
+{ baht, tical, Thai_monetary_unit,@ (the basic unit of money in Thailand) }
+{ satang, baht,#p Thai_monetary_unit,@ (100 satangs equal 1 baht in Thailand) }
+
+{ Panamanian_monetary_unit, monetary_unit,@ (monetary unit in Panama) }
+{ balboa, Panamanian_monetary_unit,@ (the basic unit of money in Panama; equal to 100 centesimos) }
+
+{ Ethiopian_monetary_unit, monetary_unit,@ (monetary unit in Ethiopia) }
+{ birr, Ethiopian_monetary_unit,@ (the basic unit of money in Ethiopia; equal to 100 cents) }
+
+{ cent, fractional_monetary_unit,@ birr,#p dollar,#p gulden1,#p leone,#p lilangeni,#p rand,#p Mauritian_rupee,#p Seychelles_rupee,#p Sri_Lanka_rupee,@ shilling1,#p (a fractional monetary unit of several countries) }
+{ centesimo, fractional_monetary_unit,@ balboa,#p Italian_lira,#p Uruguayan_peso,#p Chilean_peso,#p (a fractional monetary unit of several countries: Panama and Italy and Uruguay and Chile) }
+{ centimo, fractional_monetary_unit,@ bolivar,#p Costa_Rican_colon,#p guarani,#p peseta,#p (a fractional monetary unit of Venezuela and Costa Rica and Equatorial Guinea and Paraguay and Spain) }
+{ centavo, fractional_monetary_unit,@ austral,#p El_Salvadoran_colon,#p dobra,#p escudo1,#p escudo2,#p cordoba,#p lempira,#p metical,#p boliviano,#p peso3,#p peso4,#p peso5,#p peso6,#p peso7,#p peso8,#p peso10,#p quetzal,#p real1,#p sucre,#p (a fractional monetary unit of several countries: El Salvador and Sao Tome and Principe and Brazil and Argentina and Bolivia and Colombia and Cuba and the Dominican Republic and Ecuador and El Salvador and Guatemala and Honduras and Mexico and Nicaragua and Peru and the Philippines and Portugal) }
+{ centime, fractional_monetary_unit,@ franc,#p Algerian_dinar,#p Belgian_franc,#p Burkina_Faso_franc,#p Burundi_franc,#p Cameroon_franc,#p Chadian_franc,#p Congo_franc,#p Gabon_franc,#p Ivory_Coast_franc,#p Luxembourg_franc,#p Mali_franc,#p Moroccan_dirham,#p Niger_franc,#p Rwanda_franc,#p Senegalese_franc,#p Swiss_franc,#p Togo_franc,#p (a fractional monetary unit of several countries: France and Algeria and Belgium and Burkina Faso and Burundi and Cameroon and Chad and the Congo and Gabon and Haiti and the Ivory Coast and Luxembourg and Mali and Morocco and Niger and Rwanda and Senegal and Switzerland and Togo) }
+
+{ Venezuelan_monetary_unit, monetary_unit,@ (monetary unit of Venezuela) }
+{ bolivar, Venezuelan_monetary_unit,@ (the basic unit of money in Venezuela; equal to 100 centimos) }
+
+{ Ghanian_monetary_unit, monetary_unit,@ (monetary unit of Ghana) }
+{ cedi, Ghanian_monetary_unit,@ (the basic unit of money in Ghana) }
+{ pesewa, cedi,#p Ghanian_monetary_unit,@ (100 pesewas equal 1 cedi in Ghana) }
+
+{ Costa_Rican_monetary_unit, monetary_unit,@ (monetary unit in Costa Rica) }
+{ colon, Costa_Rican_colon, Costa_Rican_monetary_unit,@ (the basic unit of money in Costa Rica; equal to 100 centimos) }
+
+{ El_Salvadoran_monetary_unit, monetary_unit,@ (monetary unit in El Salvador) }
+{ colon1, El_Salvadoran_colon, El_Salvadoran_monetary_unit,@ (the basic unit of money in El Salvador; equal to 100 centavos) }
+
+{ Brazilian_monetary_unit, monetary_unit,@ (monetary unit in Brazil) }
+{ real1, Brazilian_monetary_unit,@ (the basic unit of money in Brazil; equal to 100 centavos) }
+
+{ Gambian_monetary_unit, monetary_unit,@ (monetary unit in Gambia) }
+{ dalasi, Gambian_monetary_unit,@ (the basic unit of money in Gambia) }
+{ butut, butat, dalasi,#p Gambian_monetary_unit,@ (100 bututs equal 1 dalasi in Gambia) }
+
+{ Algerian_monetary_unit, monetary_unit,@ (monetary unit in Algeria) }
+{ Algerian_dinar, dinar, Algerian_monetary_unit,@ (the basic unit of money in Algeria) }
+{ Algerian_centime, centime,@ Algerian_dinar,#p (100 centimes equal 1 dinar in Algeria) }
+
+{ Bahrainian_monetary_unit, monetary_unit,@ (monetary unit in Bahrain) }
+{ Bahrain_dinar, dinar1, Bahrainian_monetary_unit,@ (the basic unit of money in Bahrain; equal to 1,000 fils) }
+{ fils, fractional_monetary_unit,@ Bahrain_dinar,#p Iraqi_dinar,#p Jordanian_dinar,#p Kuwaiti_dirham,#p (a fractional monetary unit in Bahrain and Iraq and Jordan and Kuwait; equal to one thousandth of a dinar) }
+
+{ Iraqi_monetary_unit, monetary_unit,@ (monetary unit in Iraq) }
+{ Iraqi_dinar, dinar2, Iraqi_monetary_unit,@ (the basic unit of money in Iraq; equal to 1,000 fils) }
+
+{ Jordanian_monetary_unit, monetary_unit,@ (monetary unit in Jordan) }
+{ Jordanian_dinar, dinar3, Jordanian_monetary_unit,@ (the basic unit of money in Jordan; equal to 1,000 fils) }
+
+{ Kuwaiti_monetary_unit, monetary_unit,@ (monetary unit in Kuwait) }
+{ Kuwaiti_dinar, dinar4, Kuwaiti_monetary_unit,@ (the basic unit of money in Kuwait; equal 1,000 fils) }
+{ Kuwaiti_dirham, dirham1, Kuwaiti_monetary_unit,@ Kuwaiti_dinar,#p (worth one tenth of a Kuwaiti dinar; equal 100 fils) }
+
+{ Libyan_monetary_unit, monetary_unit,@ (monetary unit in Libya) }
+{ Libyan_dinar, dinar5, Libyan_monetary_unit,@ (the basic unit of money in Libya) }
+{ Libyan_dirham, dirham2, Libyan_monetary_unit,@ Libyan_dinar,#p (100 dirhams equal 1 dinar in Libya) }
+
+{ Tunisian_monetary_unit, monetary_unit,@ (monetary unit in Tunisia) }
+{ Tunisian_dinar, dinar7, Tunisian_monetary_unit,@ (the basic unit of money in Tunisia) }
+{ Tunisian_dirham, dirham3, Tunisian_monetary_unit,@ Tunisian_dinar,#p (100 dirhams equal 1 dinar in Tunisia) }
+{ millime, Tunisian_monetary_unit,@ Tunisian_dirham,#p (1,000 millimes equal 1 dinar in Tunisia) }
+
+{ Yugoslavian_monetary_unit, monetary_unit,@ (monetary unit in Yugoslavia) }
+{ Yugoslavian_dinar, dinar8, Yugoslavian_monetary_unit,@ (the basic unit of money in Yugoslavia) }
+{ para, Yugoslavian_monetary_unit,@ Yugoslavian_dinar,#p (100 para equal 1 dinar in Yugoslavia) }
+
+{ Moroccan_monetary_unit, monetary_unit,@ (monetary unit in Morocco) }
+{ Moroccan_dirham, dirham4, Moroccan_monetary_unit,@ (the basic unit of money in Morocco; equal to 100 centimes) }
+
+{ United_Arab_Emirate_monetary_unit, monetary_unit,@ (monetary unit in the United Arab Emirates) }
+{ United_Arab_Emirate_dirham, dirham5, United_Arab_Emirate_monetary_unit,@ (the basic unit of money in the United Arab Emirates; equal to 1,000 fils) }
+
+{ Australian_dollar, dollar,@ (the basic unit of money in Australia and Nauru) }
+{ Bahamian_dollar, dollar,@ (the basic unit of money in the Bahamas) }
+{ Barbados_dollar, dollar,@ (the basic unit of money in Barbados) }
+{ Belize_dollar, dollar,@ (the basic unit of money in Belize) }
+{ Bermuda_dollar, dollar,@ (the basic unit of money in Bermuda) }
+{ Brunei_dollar, dollar,@ (the basic unit of money in Brunei) }
+{ sen, fractional_monetary_unit,@ rupiah,#p riel,#p ringgit,#p yen,#p (a fractional monetary unit of Japan and Indonesia and Cambodia; equal to one hundredth of a yen or rupiah or riel) }
+{ Canadian_dollar, loonie, dollar,@ (the basic unit of money in Canada; "the Canadian dollar has the image of loon on one side of the coin") }
+{ Cayman_Islands_dollar, dollar,@ (the basic unit of money in the Cayman Islands) }
+{ Dominican_dollar, dollar,@ (the basic unit of money in Dominica) }
+{ Fiji_dollar, dollar,@ (the basic unit of money in Fiji) }
+{ Grenada_dollar, dollar,@ (the basic unit of money in Grenada) }
+{ Guyana_dollar, dollar,@ (the basic unit of money in Guyana) }
+{ Hong_Kong_dollar, dollar,@ (the basic unit of money in Hong Kong) }
+{ Jamaican_dollar, dollar,@ (the basic unit of money in Jamaica) }
+{ Kiribati_dollar, dollar,@ (the basic unit of money in Kiribati) }
+{ Liberian_dollar, dollar,@ (the basic unit of money in Liberia) }
+{ New_Zealand_dollar, dollar,@ (the basic unit of money in New Zealand) }
+{ Singapore_dollar, dollar,@ (the basic unit of money in Singapore) }
+{ Taiwan_dollar, dollar,@ (the basic unit of money in Taiwan) }
+{ Trinidad_and_Tobago_dollar, dollar,@ (the basic unit of money in Trinidad and Tobago) }
+{ Tuvalu_dollar, dollar,@ (the basic unit of money in Tuvalu) }
+{ United_States_dollar, dollar,@ (the basic unit of money in the United States) }
+{ Eurodollar, United_States_dollar,@ noun.possession:Eurocurrency,@ (a United States dollar deposited in a European bank and used as an international currency to finance trade) }
+{ Zimbabwean_dollar, dollar,@ (the basic unit of money in Zimbabwe) }
+
+{ Vietnamese_monetary_unit, monetary_unit,@ (monetary unit in Vietnam) }
+{ dong, Vietnamese_monetary_unit,@ (the basic unit of money in Vietnam) }
+{ hao, dong,#p Vietnamese_monetary_unit,@ (10 hao equal 1 dong in Vietnam) }
+
+{ Greek_monetary_unit, monetary_unit,@ (monetary unit in Greece) }
+{ drachma, Greek_drachma, Greek_monetary_unit,@ (formerly the basic unit of money in Greece) }
+{ lepton, drachma,#p Greek_monetary_unit,@ (100 lepta equal 1 drachma in Greece) }
+
+{ Sao_Thome_e_Principe_monetary_unit, monetary_unit,@ (monetary unit on Sao Tome e Principe) }
+{ dobra, Sao_Thome_e_Principe_monetary_unit,@ (the basic unit of money on Sao Tome e Principe) }
+
+{ Cape_Verde_monetary_unit, monetary_unit,@ (monetary unit on Cape Verde) }
+{ Cape_Verde_escudo, escudo1, Cape_Verde_monetary_unit,@ (the basic unit of money on Cape Verde; equal to 100 centavos) }
+
+{ Portuguese_monetary_unit, monetary_unit,@ (monetary unit in Portugal) }
+{ Portuguese_escudo, escudo2, Portuguese_monetary_unit,@ conto,#p (formerly the basic monetary unit of Portugal; equal to 100 centavo) }
+{ conto, Portuguese_monetary_unit,@ (1 conto equals 1,000 escudos in Portugal) }
+
+{ Hungarian_monetary_unit, monetary_unit,@ (monetary unit in Hungary) }
+{ forint, Hungarian_monetary_unit,@ (the basic unit of money in Hungary) }
+{ filler, forint,#p Hungarian_monetary_unit,@ (100 filler equal 1 forint in Hungary) }
+{ pengo, Hungarian_monetary_unit,@ (formerly the basic unit of money in Hungary until it was replaced by the forint in 1946) }
+
+{ Belgian_franc, franc,@ (formerly the basic unit of money in Belgium) }
+{ Benin_franc, franc,@ (the basic unit of money in Benin) }
+{ Burundi_franc, franc,@ (the basic unit of money in Burundi) }
+{ Cameroon_franc, franc,@ (the basic unit of money in Cameroon) }
+{ Central_African_Republic_franc, franc,@ (the basic unit of money in the Central African Republic) }
+{ Chadian_franc, franc,@ (the basic unit of money in Chad) }
+{ Congo_franc, franc,@ (the basic unit of money in the Congo) }
+{ Djibouti_franc, franc,@ (the basic unit of money in Djibouti) }
+{ French_franc, franc,@ (formerly the basic unit of money in France) }
+{ Gabon_franc, franc,@ (the basic unit of money in Gabon) }
+{ Ivory_Coast_franc, Cote_d'Ivoire_franc, franc,@ (the basic unit of money in the Ivory Coast) }
+{ Luxembourg_franc, franc,@ (formerly the basic unit of money in Luxembourg) }
+{ Madagascar_franc, franc,@ (the basic unit of money in Madagascar) }
+{ Mali_franc, franc,@ (the basic unit of money in Mali) }
+{ Niger_franc, franc,@ (the basic unit of money in Niger) }
+{ Rwanda_franc, franc,@ (the basic unit of money in Rwanda) }
+{ Senegalese_franc, franc,@ (the basic unit of money in Senegal) }
+{ Swiss_franc, franc,@ (the basic unit of money in Switzerland) }
+{ Togo_franc, franc,@ (the basic unit of money in Togo) }
+{ Burkina_Faso_franc, franc,@ (the basic unit of money in Burkina Faso) }
+
+{ Haitian_monetary_unit, monetary_unit,@ (the monetary unit in Haiti) }
+{ gourde, Haitian_monetary_unit,@ (the basic unit of money in Haiti) }
+{ Haitian_centime, centime,@ gourde,#p (100 centimes equal 1 gourde in Haiti) }
+
+{ Paraguayan_monetary_unit, monetary_unit,@ (monetary unit in Paraguay) }
+{ guarani, Paraguayan_monetary_unit,@ (the basic unit of money in Paraguay; equal to 100 centimos) }
+
+{ Dutch_monetary_unit, monetary_unit,@ (monetary unit in the Netherlands) }
+{ guilder1, gulden1, florin1, Dutch_florin, Dutch_monetary_unit,@ (formerly the basic unit of money in the Netherlands; equal to 100 cents) }
+
+{ Surinamese_monetary_unit, monetary_unit,@ (monetary unit in Suriname) }
+{ guilder2, gulden2, florin2, Surinamese_monetary_unit,@ (the basic unit of money in Suriname; equal to 100 cents) }
+
+{ Peruvian_monetary_unit, monetary_unit,@ (monetary unit in Peru) }
+{ inti, Peruvian_monetary_unit,@ (the basic unit of money in Peru) }
+
+{ Papuan_monetary_unit, monetary_unit,@ (monetary unit in Papua New Guinea) }
+{ kina, Papuan_monetary_unit,@ (the basic unit of money in Papua New Guinea) }
+{ toea, kina,#p Papuan_monetary_unit,@ (100 toea equal 1 kina in Papua New Guinea) }
+
+{ Laotian_monetary_unit, monetary_unit,@ (monetary unit in Laos) }
+{ kip, Laotian_monetary_unit,@ (the basic unit of money in Laos) }
+{ at, kip,#p Laotian_monetary_unit,@ (100 at equal 1 kip in Laos) }
+
+{ Czech_monetary_unit, monetary_unit,@ (monetary unit in Czech Republic) }
+{ koruna, Czech_monetary_unit,@ (the basic unit of money in Czech Republic) }
+{ haler, heller, koruna,#p Czech_monetary_unit,@ (100 halers equal 1 koruna in Czech Republic) }
+
+{ Slovakian_monetary_unit, monetary_unit,@ (monetary unit in Slovakia) }
+{ koruna1, Slovakian_monetary_unit,@ (the basic unit of money in Slovakia) }
+{ haler1, heller1, Slovakian_monetary_unit,@ koruna,#p (100 halers equal 1 koruna Slovakia) }
+
+{ Icelandic_monetary_unit, monetary_unit,@ (monetary unit in Iceland) }
+{ Icelandic_krona, krona1, Icelandic_monetary_unit,@ (the basic unit of money in Iceland) }
+{ eyrir, Icelandic_krona,#p Icelandic_monetary_unit,@ (100 aurar equal 1 krona in Iceland) }
+
+{ Swedish_monetary_unit, monetary_unit,@ (monetary unit in Sweden) }
+{ Swedish_krona, krona2, Swedish_monetary_unit,@ (the basic unit of money in Sweden) }
+
+{ ore, fractional_monetary_unit,@ Swedish_krona,#p krone1,#p krone2,#p (a monetary subunit in Denmark and Norway and Sweden; 100 ore equal 1 krona) }
+
+{ Danish_monetary_unit, monetary_unit,@ (monetary unit in Denmark) }
+{ Danish_krone, krone1, Danish_monetary_unit,@ (the basic unit of money in Denmark) }
+
+{ Norwegian_monetary_unit, monetary_unit,@ (monetary unit in Norway) }
+{ Norwegian_krone, krone2, Norwegian_monetary_unit,@ (the basic unit of money in Norway) }
+
+{ Malawian_monetary_unit, monetary_unit,@ (monetary unit in Malawi) }
+{ Malawi_kwacha, kwacha1, Malawian_monetary_unit,@ (the basic unit of money in Malawi) }
+{ tambala, Malawi_kwacha,#p Malawian_monetary_unit,@ (100 tambala equal 1 kwacha in Malawi) }
+
+{ Zambian_monetary_unit, monetary_unit,@ (monetary unit in Zambia) }
+{ Zambian_kwacha, kwacha2, Zambian_monetary_unit,@ (the basic unit of money in Zambia) }
+{ ngwee, Zambian_kwacha,#p Zambian_monetary_unit,@ (100 ngwee equal 1 kwacha in Zambia) }
+
+{ Angolan_monetary_unit, monetary_unit,@ (monetary unit in Angola) }
+{ kwanza, Angolan_monetary_unit,@ (the basic unit of money in Angola) }
+{ lwei, kwanza,#p Angolan_monetary_unit,@ (100 lwei equal 1 kwanza in Angola) }
+
+{ Myanmar_monetary_unit, monetary_unit,@ noun.location:Burma,;r (monetary unit in the Union of Burma) }
+{ kyat, Myanmar_monetary_unit,@ (the basic unit of money in Myanmar) }
+{ pya, kyat,#p Myanmar_monetary_unit,@ (100 pyas equal 1 kyat in Myanmar) }
+
+{ Albanian_monetary_unit, monetary_unit,@ (monetary unit in Albania) }
+{ lek, Albanian_monetary_unit,@ (the basic unit of money in Albania) }
+{ qindarka, qintar, lek,#p Albanian_monetary_unit,@ (100 qindarka equal 1 lek in Albania) }
+
+{ Honduran_monetary_unit, monetary_unit,@ (monetary unit in Honduras) }
+{ lempira, Honduran_monetary_unit,@ (the basic unit of money in Honduras; equal to 100 centavos) }
+
+{ Sierra_Leone_monetary_unit, monetary_unit,@ (monetary unit in Sierra Leone) }
+{ leone, Sierra_Leone_monetary_unit,@ (the basic unit of money in Sierra Leone; equal to 100 cents) }
+
+{ Romanian_monetary_unit, monetary_unit,@ (monetary unit in Romania) }
+{ leu, Romanian_monetary_unit,@ (the basic unit of money in Romania) }
+{ ban, leu,#p Romanian_monetary_unit,@ (100 bani equal 1 leu in Romania) }
+
+{ Bulgarian_monetary_unit, monetary_unit,@ (monetary unit in Bulgaria) }
+{ lev, Bulgarian_monetary_unit,@ (the basic unit of money in Bulgaria) }
+{ stotinka, lev,#p Bulgarian_monetary_unit,@ (100 stotinka equal 1 lev in Bulgaria) }
+
+{ Swaziland_monetary_unit, monetary_unit,@ (monetary unit in Swaziland) }
+{ lilangeni, Swaziland_monetary_unit,@ (the basic unit of money in Swaziland; equal to 100 cents) }
+
+{ Italian_monetary_unit, monetary_unit,@ (monetary unit in Italy) }
+{ lira1, Italian_lira, Italian_monetary_unit,@ (formerly the basic unit of money in Italy; equal to 100 centesimi) }
+
+{ British_monetary_unit, monetary_unit,@ (monetary unit in Great Britain) }
+{ British_pound, pound1, British_pound_sterling, pound_sterling, quid, British_monetary_unit,@ (the basic unit of money in Great Britain and Northern Ireland; equal to 100 pence) }
+{ British_shilling, shilling1, bob, British_monetary_unit,@ (a former monetary unit in Great Britain) }
+
+{ Turkish_monetary_unit, monetary_unit,@ (monetary unit in Turkey) }
+{ lira2, Turkish_lira, Turkish_monetary_unit,@ (the basic unit of money in Turkey) }
+{ kurus, piaster1, piastre1, lira2,#p Turkish_monetary_unit,@ (100 kurus equal 1 lira in Turkey) }
+{ asper, kurus,#p Turkish_monetary_unit,@ (20 aspers equal 1 kurus in Turkey) }
+
+{ Lesotho_monetary_unit, monetary_unit,@ (monetary unit in Lesotho) }
+{ loti, Lesotho_monetary_unit,@ (the basic unit of money in Lesotho) }
+{ sente, loti,#p Lesotho_monetary_unit,@ (100 lisente equal 1 loti in Lesotho; one sente is worth one-hundredth of a loti) }
+
+{ German_monetary_unit, monetary_unit,@ (monetary unit in Germany) }
+{ mark, German_mark, Deutsche_Mark, Deutschmark, German_monetary_unit,@ (formerly the basic unit of money in Germany) }
+{ pfennig, German_monetary_unit,@ mark,#p (100 pfennigs formerly equaled 1 Deutsche Mark in Germany) }
+
+{ Finnish_monetary_unit, monetary_unit,@ (monetary unit in Finland) }
+{ markka, Finnish_mark, Finnish_monetary_unit,@ (formerly the basic unit of money in Finland) }
+{ penni, markka,#p Finnish_monetary_unit,@ (100 pennia formerly equaled 1 markka in Finland) }
+
+{ Mozambique_monetary_unit, monetary_unit,@ (monetary unit in Mozambique) }
+{ metical, Mozambique_monetary_unit,@ (the basic unit of money in Mozambique; equal to 100 centavos) }
+
+{ Nigerian_monetary_unit, monetary_unit,@ (monetary unit in Nigeria) }
+{ naira, Nigerian_monetary_unit,@ (the basic unit of money in Nigeria) }
+{ kobo, naira,#p Nigerian_monetary_unit,@ (100 kobos equal 1 naira in Nigeria) }
+
+{ Bhutanese_monetary_unit, monetary_unit,@ (monetary unit in Bhutan) }
+{ ngultrum, Bhutanese_monetary_unit,@ (the basic unit of money in Bhutan) }
+{ chetrum, ngultrum,#p Bhutanese_monetary_unit,@ (100 chetrums equal 1 ngultrum in Bhutan) }
+
+{ Mauritanian_monetary_unit, monetary_unit,@ (monetary unit in Mauritania) }
+{ ouguiya, Mauritanian_monetary_unit,@ (the basic unit of money in Mauritania) }
+{ khoum, ouguiya,#p Mauritanian_monetary_unit,@ (5 khoums equal 1 ouguiya in Mauritania) }
+
+{ Tongan_monetary_unit, monetary_unit,@ (monetary unit in Tonga) }
+{ pa'anga, Tongan_monetary_unit,@ (the basic unit of money in Tonga) }
+{ seniti, pa'anga,#p Tongan_monetary_unit,@ (100 seniti equal 1 pa'anga in Tonga) }
+
+{ Macao_monetary_unit, monetary_unit,@ (monetary unit in Macao) }
+{ pataca, Macao_monetary_unit,@ (the basic unit of money in Macao) }
+{ avo, pataca,#p Macao_monetary_unit,@ (100 avos equal 1 pataca in Macao) }
+
+{ Spanish_monetary_unit, monetary_unit,@ (monetary unit in Spain) }
+{ peseta, Spanish_peseta, Spanish_monetary_unit,@ (formerly the basic unit of money in Spain; equal to 100 centimos) }
+
+{ Bolivian_monetary_unit, monetary_unit,@ (monetary unit in Bolivia) }
+{ boliviano, Bolivian_monetary_unit,@ (the basic unit of money in Bolivia; equal to 100 centavos) }
+
+{ Nicaraguan_monetary_unit, monetary_unit,@ (monetary unit in Nicaragua) }
+{ cordoba, Nicaraguan_monetary_unit,@ (the basic unit of money in Nicaragua; equal to 100 centavos) }
+
+{ Chilean_monetary_unit, monetary_unit,@ (monetary unit in Chile) }
+{ Chilean_peso, peso9, Chilean_monetary_unit,@ (the basic unit of money in Chile; equal to 100 centesimos) }
+
+{ Colombian_monetary_unit, monetary_unit,@ (monetary unit in Colombia) }
+{ Colombian_peso, peso3, Colombian_monetary_unit,@ (the basic unit of money in Colombia; equal to 100 centavos) }
+
+{ Cuban_monetary_unit, monetary_unit,@ (monetary unit in Cuba) }
+{ Cuban_peso, peso4, Cuban_monetary_unit,@ (the basic unit of money in Cuba; equal to 100 centavos) }
+
+{ Dominican_monetary_unit, monetary_unit,@ (monetary unit in the Dominican Republic) }
+{ Dominican_peso, peso5, Dominican_monetary_unit,@ (the basic unit of money in the Dominican Republic; equal to 100 centavos) }
+
+{ Guinea-Bissau_monetary_unit, monetary_unit,@ (monetary unit in Guinea-Bissau) }
+{ Guinea-Bissau_peso, peso10, Guinea-Bissau_monetary_unit,@ (the basic unit of money in Guinea-Bissau; equal to 100 centavos) }
+
+{ Mexican_monetary_unit, monetary_unit,@ (monetary unit in Mexico) }
+{ Mexican_peso, peso6, Mexican_monetary_unit,@ (the basic unit of money in Mexico; equal to 100 centavos) }
+
+{ Philippine_monetary_unit, monetary_unit,@ (monetary unit in the Philippines) }
+{ Philippine_peso, peso7, Philippine_monetary_unit,@ (the basic unit of money in the Philippines; equal to 100 centavos) }
+
+{ Uruguayan_monetary_unit, monetary_unit,@ (monetary unit in Uruguay) }
+{ Uruguayan_peso, peso8, Uruguayan_monetary_unit,@ (the basic unit of money in Uruguay; equal to 100 centesimos) }
+
+{ Cypriot_monetary_unit, monetary_unit,@ (monetary unit in Cyprus) }
+{ Cypriot_pound, pound2, Cypriot_monetary_unit,@ (the basic unit of money in Cyprus; equal to 100 cents) }
+{ mil4, Cypriot_pound,#p Cypriot_monetary_unit,@ (a Cypriot monetary unit equal to one thousandth of a pound) }
+
+{ Egyptian_monetary_unit, monetary_unit,@ (monetary unit in Egypt) }
+{ Egyptian_pound, pound3, Egyptian_monetary_unit,@ (the basic unit of money in Egypt; equal to 100 piasters) }
+
+{ piaster, piastre, fractional_monetary_unit,@ Egyptian_pound,#p Lebanese_pound,#p Sudanese_pound,#p Syrian_pound,#p (a fractional monetary unit in Egypt and Lebanon and Sudan and Syria) }
+{ penny, fractional_monetary_unit,@ Irish_pound,#p British_pound,#p (a fractional monetary unit of Ireland and the United Kingdom; equal to one hundredth of a pound) }
+
+{ Irish_monetary_unit, monetary_unit,@ (monetary unit in Eire) }
+{ Irish_pound, Irish_punt, punt, pound4, Irish_monetary_unit,@ (formerly the basic unit of money in Ireland; equal to 100 pence) }
+
+{ Lebanese_monetary_unit, monetary_unit,@ (monetary unit in Lebanon) }
+{ Lebanese_pound, pound5, Lebanese_monetary_unit,@ (the basic unit of money in Lebanon; equal to 100 piasters) }
+
+{ Maltese_monetary_unit, monetary_unit,@ (monetary unit on Malta) }
+{ lira3, Maltese_lira, Maltese_monetary_unit,@ (the basic unit of money on Malta; equal to 100 cents) }
+
+{ Sudanese_monetary_unit, monetary_unit,@ (monetary unit in the Sudan) }
+{ Sudanese_pound, pound7, Sudanese_monetary_unit,@ (the basic unit of money in the Sudan; equal to 100 piasters) }
+
+{ Syrian_monetary_unit, monetary_unit,@ (monetary unit in Syria) }
+{ Syrian_pound, pound8, Syrian_monetary_unit,@ (the basic unit of money in Syria; equal to 100 piasters) }
+
+{ Botswana_monetary_unit, monetary_unit,@ (monetary unit in Botswana) }
+{ pula, Botswana_monetary_unit,@ (the basic unit of money in Botswana) }
+{ thebe, pula,#p Botswana_monetary_unit,@ (100 thebe equal 1 pula in Botswana) }
+
+{ Guatemalan_monetary_unit, monetary_unit,@ (monetary unit in Guatemala) }
+{ quetzal, Guatemalan_monetary_unit,@ (the basic unit of money in Guatemala; equal to 100 centavos) }
+
+{ South_African_monetary_unit, monetary_unit,@ (monetary unit in South Africa) }
+{ rand, South_African_monetary_unit,@ (the basic unit of money in South Africa; equal to 100 cents) }
+
+{ Iranian_monetary_unit, monetary_unit,@ (monetary unit in Iran) }
+{ Iranian_rial, rial1, Iranian_monetary_unit,@ (the basic unit of money in Iran) }
+{ Iranian_dinar, dinar9, Iranian_monetary_unit,@ Iranian_rial,#p (100 dinars equal 1 rial in Iran) }
+
+{ Omani_monetary_unit, monetary_unit,@ (monetary unit in Oman) }
+{ riyal-omani, Omani_rial, rial2, Omani_monetary_unit,@ (the basic unit of money in Oman) }
+{ baiza, baisa, Omani_monetary_unit,@ riyal-omani,#p (1,000 baiza equal 1 riyal-omani in Oman) }
+
+{ Yemeni_monetary_unit, monetary_unit,@ (monetary unit in Yemen) }
+{ Yemeni_rial, rial, Yemeni_monetary_unit,@ (the basic unit of money in Yemen; equal to 100 fils) }
+{ Yemeni_fils, fils1, Yemeni_monetary_unit,@ (100 Yemeni fils are worth one Yemeni rial) }
+
+{ Cambodian_monetary_unit, monetary_unit,@ (monetary unit in Cambodia) }
+{ riel, Cambodian_monetary_unit,@ (the basic unit of money in Cambodia; equal to 100 sen) }
+
+{ Malaysian_monetary_unit, monetary_unit,@ (monetary unit is Malaysia) }
+{ ringgit, Malaysian_monetary_unit,@ (the basic unit of money in Malaysia; equal to 100 sen) }
+
+{ Qatari_monetary_unit, monetary_unit,@ (monetary unit in Qatar) }
+{ Qatari_riyal, riyal2, Qatari_monetary_unit,@ (the basic unit of money in Qatar) }
+{ Qatari_dirham, dirham6, Qatari_monetary_unit,@ Qatari_riyal,#p (100 dirhams equal 1 riyal in Qatar) }
+
+{ Saudi_Arabian_monetary_unit, monetary_unit,@ (monetary unit in Saudi Arabia) }
+{ Saudi_Arabian_riyal, riyal3, Saudi_Arabian_monetary_unit,@ (the basic unit of money in Saudi Arabia) }
+{ qurush, Saudi_Arabian_riyal,#p Saudi_Arabian_monetary_unit,@ (20 qurush equal 1 riyal in Saudi Arabia) }
+
+{ Russian_monetary_unit, monetary_unit,@ (monetary unit in Russia) }
+{ ruble, rouble, Russian_monetary_unit,@ (the basic unit of money in Russia) }
+{ kopek, kopeck, copeck, ruble,#p Russian_monetary_unit,@ (100 kopecks equal 1 ruble in Russia) }
+
+{ Armenian_monetary_unit, monetary_unit,@ (monetary unit in Armenia) }
+{ dram, Armenian_monetary_unit,@ (the basic unit of money in Armenia) }
+{ lumma, Armenian_monetary_unit,@ (100 lumma equal 1 dram in Armenia) }
+
+{ Azerbaijani_monetary_unit, monetary_unit,@ (monetary unit in Azerbaijan) }
+{ manat, Azerbaijani_monetary_unit,@ (the basic unit of money in Azerbaijan) }
+{ qepiq, Azerbaijani_monetary_unit,@ (100 qepiq equal 1 manat in Azerbaijan) }
+
+{ Belarusian_monetary_unit, monetary_unit,@ (monetary unit in Belarus) }
+{ rubel, Belarusian_monetary_unit,@ (the basic unit of money in Belarus) }
+{ kapeika, Belarusian_monetary_unit,@ (100 kapeikas equal 1 rubel in Belarus) }
+ 
+{ Estonian_monetary_unit, monetary_unit,@ (monetary unit in Estonia) }
+{ kroon, Estonian_monetary_unit,@ (the basic unit of money in Estonia) }
+{ sent, Estonian_monetary_unit,@ (100 senti equal 1 kroon in Estonia) }
+
+{ Georgian_monetary_unit, monetary_unit,@ (monetary unit in Georgia) }
+{ lari, Georgian_monetary_unit,@ (the basic unit of money in Georgia) }
+{ tetri, Georgian_monetary_unit,@ lari,#p (100 tetri equal 1 lari in Georgia) }
+
+{ Kazakhstani_monetary_unit, monetary_unit,@ (monetary unit in Kazakhstan) }
+{ tenge, Kazakhstani_monetary_unit,@ (the basic unit of money in Kazakhstan) }
+{ tiyin, Kazakhstani_monetary_unit,@ (100 tiyin equal 1 tenge in Kazakhstan) }
+
+{ Latvian_monetary_unit, monetary_unit,@ (monetary unit in Latvia) }
+{ lats, Latvian_monetary_unit,@ (the basic unit of money in Latvia) } 
+{ santims, Latvian_monetary_unit,@ (100 santimi equal 1 lats in Latvia) }
+
+{ Lithuanian_monetary_unit, monetary_unit,@ (monetary unit in Lithuania) }
+{ litas, Lithuanian_monetary_unit,@ (the basic unit of money in Lithuania) }
+{ centas, Lithuanian_monetary_unit,@ (100 centas equal 1 litas in Lithuania) }
+
+{ Kyrgyzstani_monetary_unit, monetary_unit,@ (monetary unit in Kyrgyzstan) }
+{ som, Kyrgyzstani_monetary_unit,@ (the basic unit of money in Kyrgyzstan) }
+{ tyiyn, Kyrgyzstani_monetary_unit,@ (100 tyiyn equal 1 som in Kyrgyzstan) }
+
+{ Moldovan_monetary_unit, monetary_unit,@ (monetary unit in Moldova) }
+{ leu1, Moldovan_monetary_unit,@ (the basic unit of money in Moldova) }
+{ ban1, moldovan_monetary_unit,@ (100 bani equal 1 leu in Moldova) }
+
+{ Tajikistani_monetary_unit, monetary_unit,@ (monetary unit in Tajikistan) }
+{ ruble1, Tajikistani_monetary_unit,@ (the basic unit of money in Tajikistan) }
+{ tanga, Tajikistani_monetary_unit,@ (100 tanga equal 1 Tajikistani ruble) }
+
+{ Turkmen_monetary_unit, monetary_unit,@ (monetary unit in Turkmenistan) }
+{ manat1, Turkmen_monetary_unit,@ (the basic unit of money in Turkmenistan) }
+{ tenge1, Turkmen_monetary_unit,@ (100 tenge equal 1 manat in Turkmenistan) }
+
+{ Ukranian_monetary_unit, monetary_unit,@ (monetary unit in Ukraine) }
+{ hryvnia, Ukranian_monetary_unit,@ (the basic unit of money in Ukraine) }
+{ kopiyka, Ukranian_monetary_unit,@ hryvnia,#p (100 kopiykas equal 1 hryvnia in Ukraine) }
+
+{ Uzbekistani_monetary_unit, monetary_unit,@ (monetary unit in Uzbekistan) }
+{ som1, Uzbekistani_monetary_unit,@ (the basic unit of money in Uzbekistan) }
+{ tiyin1, Uzbekistani_monetary_unit,@ (100 tiyin equal 1 som in Uzbekistan) }
+
+{ Indian_monetary_unit, monetary_unit,@ (monetary unit in India) }
+{ Indian_rupee, rupee1, Indian_monetary_unit,@ (the basic unit of money in India; equal to 100 paise) }
+{ paisa, fractional_monetary_unit,@ Indian_rupee,#p Nepalese_rupee,#p Pakistani_rupee,#p taka,#p (a fractional monetary unit in Bangladesh and India and Nepal and Pakistan) }
+
+{ Pakistani_monetary_unit, monetary_unit,@ (monetary unit in Pakistan) }
+{ Pakistani_rupee, rupee2, Pakistani_monetary_unit,@ (the basic unit of money in Pakistan; equal to 100 paisa) }
+{ anna, Pakistani_monetary_unit,@ Indian_monetary_unit,@ (a former copper coin of Pakistan and India) }
+
+{ Mauritian_monetary_unit, monetary_unit,@ (monetary unit in Mauritius) }
+{ Mauritian_rupee, rupee3, Mauritian_monetary_unit,@ (the basic unit of money in Mauritius; equal to 100 cents) }
+
+{ Nepalese_monetary_unit, monetary_unit,@ (monetary unit in Nepal) }
+{ Nepalese_rupee, rupee4, Nepalese_monetary_unit,@ (the basic unit of money in Nepal; equal to 100 paisa) }
+
+{ Seychelles_monetary_unit, monetary_unit,@ (monetary unit in Seychelles) }
+{ Seychelles_rupee, rupee5, Seychelles_monetary_unit,@ (the basic unit of money in Seychelles; equal to 100 cents) }
+
+{ Sri_Lankan_monetary_unit, monetary_unit,@ (monetary unit in Sri Lanka) }
+{ Sri_Lanka_rupee, rupee6, Sri_Lankan_monetary_unit,@ (the basic unit of money in Sri Lanka; equal to 100 cents) }
+
+{ Indonesian_monetary_unit, monetary_unit,@ (monetary unit in Indonesia) }
+{ rupiah, Indonesian_monetary_unit,@ (the basic unit of money in Indonesia; equal to 100 sen) }
+
+{ Austrian_monetary_unit, monetary_unit,@ (monetary unit in Austria) }
+{ schilling, Austrian_schilling, Austrian_monetary_unit,@ (formerly the basic unit of money in Austria) }
+{ groschen, schilling,#p Austrian_monetary_unit,@ (100 groschen equal 1 schilling in Austria) }
+
+{ Israeli_monetary_unit, monetary_unit,@ (monetary unit in Israel) }
+{ shekel, Israeli_monetary_unit,@ (the basic unit of money in Israel) }
+{ agora, shekel,#p Israeli_monetary_unit,@ (100 agorot equal 1 shekel in Israel) }
+
+{ Kenyan_monetary_unit, monetary_unit,@ (monetary unit in Kenya) }
+{ Kenyan_shilling, shilling2, kenyan_monetary_unit,@ (the basic unit of money in Kenya; equal to 100 cents) }
+
+{ Somalian_monetary_unit, monetary_unit,@ (monetary unit in Somalia) }
+{ Somalian_shilling, shilling3, Somalian_monetary_unit,@ (the basic unit of money in Somalia; equal to 100 cents) }
+
+{ Tanzanian_monetary_unit, monetary_unit,@ (monetary unit in Tanzania) }
+{ Tanzanian_shilling, shilling4, Tanzanian_monetary_unit,@ (the basic unit of money in Tanzania; equal to 100 cents) }
+
+{ Ugandan_monetary_unit, monetary_unit,@ (monetary unit in Uganda) }
+{ Ugandan_shilling, shilling5, Ugandan_monetary_unit,@ (the basic unit of money in Uganda; equal to 100 cents) }
+
+{ Ecuadoran_monetary_unit, monetary_unit,@ (monetary unit in Ecuador) }
+{ sucre, Ecuadoran_monetary_unit,@ (the basic unit of money in Ecuador; equal to 100 centavos) }
+
+{ Guinean_monetary_unit, monetary_unit,@ (monetary unit in Guinea) }
+{ Guinean_franc, franc,@ (the basic unit of money in Guinea) }
+
+{ Bangladeshi_monetary_unit, monetary_unit,@ (monetary unit in Bangladesh) }
+{ taka, Bangladeshi_monetary_unit,@ (the basic unit of money in Bangladesh; equal to 100 paisa) }
+
+{ Western_Samoan_monetary_unit, monetary_unit,@ (monetary unit in Western Samoa) }
+{ tala, Western_Samoan_monetary_unit,@ (the basic unit of money in Western Samoa) }
+{ sene, tala,#p Western_Samoan_monetary_unit,@ (100 sene equal 1 tala in Western Samoa) }
+
+{ Mongolian_monetary_unit, monetary_unit,@ (monetary unit in Mongolia) }
+{ tugrik, tughrik, Mongolian_monetary_unit,@ (the basic unit of money in Mongolia) }
+{ mongo, tugrik,#p Mongolian_monetary_unit,@ (100 mongo equal 1 tugrik in Mongolia) }
+
+{ North_Korean_monetary_unit, monetary_unit,@ (monetary unit in North Korea) }
+{ North_Korean_won, won1, North_Korean_monetary_unit,@ (the basic unit of money in North Korea) }
+{ chon1, North_Korean_monetary_unit,@ North_Korean_won,#p (100 chon equal 1 won in North Korea) }
+
+{ South_Korean_monetary_unit, monetary_unit,@ (monetary unit in South Korea) }
+{ South_Korean_won, won2, South_Korean_monetary_unit,@ (the basic unit of money in South Korea) }
+{ chon2, South_Korean_monetary_unit,@ South_Korean_won,#p (100 chon equal 1 won in South Korea) }
+
+{ Japanese_monetary_unit, monetary_unit,@ (monetary unit in Japan) }
+{ yen, Japanese_monetary_unit,@ (the basic unit of money in Japan; equal to 100 sen) }
+
+{ Chinese_monetary_unit, monetary_unit,@ (the monetary unit in the People's Republic of China) }
+{ yuan, kwai, Chinese_monetary_unit,@ (the basic unit of money in China) }
+{ jiao, yuan,#p Chinese_monetary_unit,@ (10 jiao equal 1 yuan in China) }
+{ fen, Chinese_monetary_unit,@ jiao,#p (100 fen equal 1 yuan in China) }
+
+{ Zairese_monetary_unit, monetary_unit,@ (monetary unit in Zaire) }
+{ zaire, Zairese_monetary_unit,@ (the basic unit of money in Zaire) }
+{ likuta, zaire,#p Zairese_monetary_unit,@ (100 makuta equal 1 zaire in Zaire) }
+
+{ Polish_monetary_unit, monetary_unit,@ (monetary unit in Poland) }
+{ zloty, Polish_monetary_unit,@ (the basic unit of money in Poland) }
+{ grosz, zloty,#p Polish_monetary_unit,@ (100 groszy equal 1 zloty in Poland) }
+
+( *** PAIN UNITS *** )
+{ dol, pain_unit,@ (a unit of pain intensity) }
+
+( *** PRESSURE UNITS *** )
+{ standard_atmosphere, atmosphere, atm, standard_pressure, pressure_unit,@ (a unit of pressure: the pressure that will support a column of mercury 760 mm high at sea level and 0 degrees centigrade) }
+{ pascal, Pa, pressure_unit,@ (a unit of pressure equal to one newton per square meter) }
+{ torr, millimeter_of_mercury, mm_Hg, pressure_unit,@ (a unit of pressure equal to 0.001316 atmosphere; named after Torricelli) }
+{ pounds_per_square_inch, psi, pressure_unit,@ (a unit of pressure) }
+{ millibar, pressure_unit,@ bar,#p (a unit of atmospheric pressure equal to one thousandth of a bar; "atmospheric pressure at sea level is 1013 millibars") }
+{ bar, pressure_unit,@ noun.cognition:meteorology,;c ((meteorology) a unit of pressure equal to a million dynes per square centimeter; "unfortunately some writers have used bar for one dyne per square centimeter") }
+{ barye, bar_absolute, microbar, pressure_unit,@ bar,#p (the absolute unit of pressure equal to one dyne per square centimeter) }
+
+( *** PRINTING UNITS *** )
+{ point, linear_unit,@ pica,#p (a linear unit used to measure the size of type; approximately 1/72 inch) }
+{ em2, pica_em, pica, linear_unit,@ inch,#p (a linear unit (1/6 inch) used in printing) }
+{ en, nut, linear_unit,@ em2,#p (half the width of an em) }
+{ em1, em_quad, mutton_quad, area_unit,@ (a quad with a square body; "since `em quad' is hard to distinguish from `en quad', printers sometimes called it a `mutton quad'") }
+{ cicero, linear_unit,@ (a linear unit of the size of type slightly larger than an em) }
+{ agate_line, line, area_unit,@ (space for one line of print (one column wide and 1/14 inch deep) used to measure advertising) }
+{ milline, printing_unit,@ (an advertising measure; one agate line appearing in one million copies of a publication) }
+{ column_inch, inch2, area_unit,@ (a unit of measurement for advertising space) }
+{ linage, lineage, number,@ (the number of lines in a piece of printed material) }
+
+( *** SOUND UNITS *** )
+( *** INTENSITY UNITS *** )
+{ Bel, B3, sound_unit,@ (a logarithmic unit of sound intensity equal to 10 decibels) }
+{ decibel, dB, sound_unit,@ (a logarithmic unit of sound intensity; 10 times the logarithm of the ratio of the sound intensity to some reference intensity) }
+( *** LOUDNESS UNITS *** )
+{ sone, sound_unit,@ phon,#p (a unit of perceived loudness equal to the loudness of a 1000-hertz tone at 40 dB above threshold) }
+{ phon, sound_unit,@ (a unit of subjective loudness) }
+
+( *** TELEPHONE UNITS *** )
+{ Erlang, telephone_unit,@ (a unit of traffic intensity in a telephone system) }
+
+( *** TEMPERATURE UNITS *** )
+{ degree3, temperature_unit,@ (a unit of temperature on a specified scale; "the game was played in spite of the 40-degree temperature") }
+{ millidegree, temperature_unit,@ (a unit of temperature equal to one-thousandth of a degree) }
+{ degree_centigrade, degree_Celsius, C2, degree3,@ (a degree on the centigrade scale of temperature) }
+{ degree_Fahrenheit, F2, degree3,@ (a degree on the Fahrenheit scale of temperature) }
+{ kelvin, K5, temperature_unit,@ (the basic unit of thermodynamic temperature adopted under the Systeme International d'Unites) }
+{ Rankine, temperature_unit,@ (a unit of temperature on the Rankine scale) }
+{ degree_day, temperature_unit,@ (a unit used in estimating fuel requirements for heating a building) }
+{ standard_temperature, degree_centigrade,@ (exactly zero degrees centigrade) }
+
+( *** VISCOSITY UNIT *** )
+{ poise, unit_of_viscosity,@ (a cgs unit of dynamic viscosity equal to one dyne-second per square centimeter; the viscosity of a fluid in which a force of one dyne per square centimeter maintains a velocity of 1 centimeter per second) }
+
+( *** WEIGHT AND MASS UNITS *** )
+{ atomic_mass_unit, mass_unit,@ (unit of mass for expressing masses of atoms or molecules) }
+{ mass_number, nucleon_number, mass_unit,@ (the sum of the number of neutrons and protons in an atomic nucleus) }
+{ system_of_weights, weight1, system_of_measurement,@ (a system of units used to express the weight of something) }
+{ avoirdupois, avoirdupois_weight, system_of_weights,@ (a system of weights based on the 16-ounce pound (or 7,000 grains)) }
+{ avoirdupois_unit, mass_unit,@ avoirdupois_weight,#p English_system,#p (any of the units of the avoirdupois system of weights) }
+{ troy, troy_weight, system_of_weights,@ (a system of weights used for precious metals and gemstones; based on a 12-ounce pound and an ounce of 480 grains) }
+{ troy_unit, weight_unit,@ troy_weight,#p (any of the unit of the troy system of weights) }
+{ apothecaries'_unit, apothecaries'_weight, weight_unit,@ (any weight unit used in pharmacy; an ounce is equal to 480 grains and a pound is equal to 12 ounces) }
+{ metric_weight_unit, weight_unit2, mass_unit,@ metric_unit,@ metric_system,#p (a decimal unit of weight based on the gram) }
+
+( *** MISCELLANEOUS WEIGHT UNITS *** )
+{ arroba1, weight_unit,@ (a unit of weight used in some Spanish speaking countries) }
+{ catty, cattie, weight_unit,@ noun.location:China,;r (any of various units of weight used in southeastern Asia (especially a Chinese measure equal to 500 grams)) }
+{ crith, weight_unit,@ (the weight of a liter of hydrogen (at 0 centigrade and 760 millimeters pressure)) }
+{ frail, weight_unit,@ (the weight of a frail (basket) full of raisins or figs; between 50 and 75 pounds) }
+{ last2, weight_unit,@ (a unit of weight equal to 4,000 pounds) }
+{ maund, weight_unit,@ (a unit of weight used in Asia; has different values in different countries; "the official maund in India is 82.6 pounds avoirdupois") }
+{ obolus, weight_unit,@ gram,#p (a Greek unit of weight equal to one tenth of a gram) }
+{ oka1, weight_unit,@ (a Turkish unit of weight equal to about 2.75 pounds) }
+{ picul, weight_unit,@ (a unit of weight used in some parts of Asia; approximately equal to 133 pounds (the load a grown man can carry)) }
+{ pood, weight_unit,@ (a Russian unit of weight equal to approximately 36 pounds) }
+{ rotl, weight_unit,@ (a unit of weight used in some Moslem countries near the Mediterranean; varies between one and five pounds) }
+{ slug, mass_unit,@ (a unit of mass equal to the mass that accelerates at 1 foot/sec/sec when acted upon by a force of 1 pound; approximately 14.5939 kilograms) }
+{ tael, weight_unit,@ (a unit of weight used in east Asia approximately equal to 1.3 ounces) }
+{ tod, weight_unit,@ noun.location:Britain,;r (a unit of weight for wool equal to about 28 pounds) }
+{ welterweight, weight_unit,@ (a weight of 28 pounds; sometimes imposed as a handicap in a horse race (such as a steeplechase)) }
+
+( **** AVOIRDUPOIS UNITS **** )
+{ grain1, avoirdupois_unit,@ dram1,#p (1/7000 pound; equals a troy grain or 64.799 milligrams) }
+{ dram1, avoirdupois_unit,@ ounce1,#p (1/16 ounce or 1.771 grams) }
+{ ounce1, oz., avoirdupois_unit,@ pound9,#p (a unit of weight equal to one sixteenth of a pound or 16 drams or 28.349 grams) }
+{ pound9, lb, avoirdupois_unit,@ stone,#p quarter2,#p (16 ounces avoirdupois; "he got a hernia when he tried to lift 100 pounds") }
+{ pound10, force_unit,@ (a unit of apothecary weight equal to 12 ounces troy) } 
+{ half_pound, avoirdupois_unit,@ pound9,#p (8 ounces avoirdupois) }
+{ quarter_pound, avoirdupois_unit,@ pound,#p (4 ounces avoirdupois) }
+{ stone, avoirdupois_unit,@ quarter2,#p noun.location:Britain,;r (an avoirdupois unit used to measure the weight of a human body; equal to 14 pounds; "a heavy chap who must have weighed more than twenty stone") }
+{ quarter2, avoirdupois_unit,@ hundredweight2,#p (a quarter of a hundredweight (25 pounds)) }
+{ hundredweight1, cwt1, long_hundredweight, avoirdupois_unit,@ long_ton,#p (a British unit of weight equivalent to 112 pounds) }
+{ hundredweight2, cwt2, short_hundredweight, centner1, cental, quintal1, avoirdupois_unit,@ short_ton,#p (a United States unit of weight equivalent to 100 pounds) }
+{ long_ton, ton1, gross_ton, avoirdupois_unit,@ (a British unit of weight equivalent to 2240 pounds) }
+{ short_ton, ton2, net_ton, avoirdupois_unit,@ kiloton,#p (a United States unit of weight equivalent to 2000 pounds) }
+{ kiloton, avoirdupois_unit,@ megaton,#p (one thousand tons) }
+{ megaton, avoirdupois_unit,@ (one million tons) }
+
+( **** TROY / APOTHECARIES' UNITS **** )
+{ grain2, troy_unit,@ apothecaries'_unit,@ pennyweight,#p scruple,#p (1/60 dram; equals an avoirdupois grain or 64.799 milligrams) }
+{ scruple, apothecaries'_unit,@ dram2,#p (a unit of apothecary weight equal to 20 grains) }
+{ pennyweight, troy_unit,@ ounce2,#p (a unit of apothecary weight equal to 24 grains) }
+{ dram2, drachm, drachma2, apothecaries'_unit,@ ounce2,#p (a unit of apothecary weight equal to an eighth of an ounce or to 60 grains) }
+{ ounce2, troy_ounce, apothecaries'_ounce, apothecaries'_unit,@ troy_unit,@ troy_pound,#p (a unit of apothecary weight equal to 480 grains or one twelfth of a troy pound) }
+{ troy_pound, apothecaries'_pound, apothecaries'_unit,@ troy_unit,@ (an apothecary weight equal to 12 ounces or 373.242 grams) }
+
+( **** METRIC WEIGHT UNITS **** )
+{ microgram, mcg, metric_weight_unit,@ milligram,#p (one millionth (1/1,000,000) gram) }
+{ milligram, mg, metric_weight_unit,@ grain3,#p (one thousandth (1/1,000) gram) }
+{ nanogram, ng, metric_weight_unit,@ microgram,#p (one billionth (1/1,000,000,000) gram) }
+{ grain3, metric_grain, metric_weight_unit,@ decigram,#p (a weight unit used for pearls or diamonds: 50 mg or 1/4 carat) }
+{ decigram, dg, metric_weight_unit,@ carat,#p (1/10 gram) }
+{ carat, metric_weight_unit,@ gram,#p (a unit of weight for precious stones = 200 mg) }
+{ gram, gramme, gm, g, metric_weight_unit,@ dekagram,#p (a metric unit of weight equal to one thousandth of a kilogram) }
+{ gram_atom, gram-atomic_weight, metric_weight_unit,@ (the quantity of an element whose weight in grams is numerically equal to the atomic weight of the element) }
+{ gram_molecule, [ mole, adj.pert:molal,+ adj.pert:molar2,+ adj.pert:molar,+ ] mol, metric_weight_unit,@ (the molecular weight of a substance expressed in grams; the basic unit of amount of substance adopted under the Systeme International d'Unites) }
+{ dekagram, decagram, dkg, dag, metric_weight_unit,@ hectogram,#p (10 grams) }
+{ hectogram, hg, metric_weight_unit,@ kilogram,#p (100 grams) }
+{ kilogram, kg, kilo, metric_weight_unit,@ myriagram,#p (one thousand grams; the basic unit of mass adopted under the Systeme International d'Unites; "a kilogram is approximately 2.2 pounds") }
+{ key, kilogram,@ noun.communication:slang,;u (a kilogram of a narcotic drug; "they were carrying two keys of heroin") }
+{ myriagram, myg, metric_weight_unit,@ centner2,#p (one ten thousandth of a centner) }
+{ centner2, metric_weight_unit,@ hundredweight3,#p (in some European countries: a unit of weight equivalent to 50 kilograms) }
+{ hundredweight3, metric_hundredweight, doppelzentner, centner3, metric_weight_unit,@ quintal2,#p (a unit of weight equal to 100 kilograms) }
+{ quintal2, metric_weight_unit,@ metric_ton,#p (a unit of weight equal to 100 kilograms) }
+{ metric_ton, MT, tonne, t1, metric_weight_unit,@ (a unit of weight equivalent to 1000 kilograms) }
+
+( *** WORK UNITS *** )
+{ erg, work_unit,@ joule,#p (a cgs unit of work or energy; the work done by a force of one dyne acting over a distance of one centimeter) }
+{ electron_volt, eV, work_unit,@ (a unit of energy equal to the work done by an electron accelerated through a potential difference of 1 volt) }
+{ joule, J, watt_second, work_unit,@ (a unit of electrical energy equal to the work done when a current of one ampere passes through a resistance of one ohm for one second) }
+{ [ calorie1, adj.pert:caloric,+ ] gram_calorie, small_calorie, work_unit,@ Calorie2,#p (unit of heat defined as the quantity of heat required to raise the temperature of 1 gram of water by 1 degree centigrade at atmospheric pressure) }
+{ [ Calorie2, adj.pert:caloric2,+ ] kilogram_calorie, kilocalorie, large_calorie, nutritionist's_calorie, work_unit,@ (a unit of heat equal to the amount of heat required to raise the temperature of one kilogram of water by one degree at one atmosphere pressure; used by nutritionists to characterize the energy-producing potential in food) }
+{ British_thermal_unit, BTU, B.Th.U., work_unit,@ therm,#p (a unit of heat equal to the amount of heat required to raise one pound of water one degree Fahrenheit at one atmosphere pressure; equivalent to 251.997 calories) }
+{ therm, work_unit,@ (a unit of heat equal to 100,000 British thermal units) }
+{ watt-hour, work_unit,@ kilowatt_hour,#p (a unit of energy equal to the power of one watt operating for one hour) }
+{ kilowatt_hour, kW-hr, Board_of_Trade_unit, B.T.U., work_unit,@ (a unit of energy equal to the work done by a power of 1000 watts operating for one hour) }
+{ foot-pound, work_unit,@ foot-ton,#p (a unit of work equal to a force of one pound moving through a distance of one foot) }
+{ foot-ton, work_unit,@ (2240 foot-pounds) }
+{ foot-poundal, work_unit,@ (a unit of work equal to a force of one poundal moving through a distance of one foot) }
+{ horsepower-hour, work_unit,@ (a unit of work equal to the work done by one horsepower in one hour) }
+{ kilogram-meter, work_unit,@ (a unit of work equal to the work done by a one kilogram force operating through a distance of one meter) }
+
+( ** NUMBERS ** )
+{ natural_number, number,@ (the number 1 and any other number obtained by adding 1 to it repeatedly) }
+{ integer, whole_number, number,@ (any of the natural numbers (positive or negative) or zero; "an integer is a number that is not a fraction") }
+{ addend, number,@ (a number that is added to another number (the augend)) }
+{ augend, number,@ (a number to which another number (the addend) is added) }
+{ minuend, number,@ (the number from which the subtrahend is subtracted) }
+{ subtrahend, number,@ (the number to be subtracted from the minuend) }
+{ remainder, difference, number,@ (the number that remains after subtraction; the number that when added to the subtrahend gives the minuend) }
+{ complex_number, complex_quantity, imaginary_number, imaginary, number,@ noun.cognition:mathematics,;c ((mathematics) a number of the form a+bi where a and b are real numbers and i is the square root of -1) }
+{ complex_conjugate, complex_number,@ (either of two complex numbers whose real parts are identical and whose imaginary parts differ only in sign) }
+{ real_number, real, complex_number,@ (any rational or irrational number) }
+{ pure_imaginary_number, complex_number,@ (an imaginary number of the form a+bi where a is 0) }
+{ imaginary_part, imaginary_part_of_a_complex_number, pure_imaginary_number,@ complex_number,#p (the part of a complex number that has the square root of -1 as a factor) }
+{ modulus1, absolute_value,@ (the absolute value of a complex number) }
+{ rational_number, rational, real_number,@ (an integer or a fraction) }
+{ irrational_number, irrational, real_number,@ (a real number that cannot be expressed as a rational number) }
+{ transcendental_number, irrational_number,@ (an irrational number that is not algebraic) }
+{ algebraic_number, irrational_number,@ (root of an algebraic equation with rational coefficients) }
+{ [ square, verb.cognition:square,+ ] second_power, number,@ (the product of two equal terms; "nine is the second power of three"; "gravity is inversely proportional to the square of the distance") }
+{ [ cube, verb.cognition:cube,+ ] third_power, number,@ (the product of three equal terms) }
+{ [ biquadrate, adj.pert:biquadratic,+ ] [ biquadratic, adj.pert:biquadratic,+ ] quartic, fourth_power, number,@ (an algebraic equation or function of the fourth degree) }
+{ radical, noun.Tops:measure,@ noun.cognition:mathematics,;c ((mathematics) a quantity expressed as the root of another quantity) }
+{ root, number,@ (a number that, when multiplied by itself some number of times, equals a given number) }
+{ square_root, root,@ (a number that when multiplied by itself equals a given number) }
+{ cube_root, root,@ (a number that when multiplied three times equals a given number) }
+
+( *** RATIONAL NUMBERS *** )
+{ [ fraction, verb.cognition:fraction,+ ] rational_number,@ (the quotient of two rational numbers) }
+
+( **** FRACTIONS **** )
+{ common_fraction, simple_fraction, fraction,@ (the quotient of two integers) }
+{ numerator, dividend,@ (the dividend of a fraction) }
+{ dividend, number,@ (a number to be divided by another number) }
+{ denominator, divisor,@ (the divisor of a fraction) }
+{ divisor, number,@ (the number by which a dividend is divided) }
+{ quotient, number,@ (the number obtained by division) }
+{ divisor1, [ factor, verb.cognition:factor,+ verb.cognition:factorize,+ ] integer,@ (one of two or more integers that can be exactly divided into another integer; "what are the 4 factors of 6?") }
+{ remainder1, number,@ (the part of the dividend that is left over when the dividend is not evenly divisible by the divisor) }
+{ [ multiplier, verb.cognition:multiply,+ ] multiplier_factor, number,@ (the number by which a multiplicand is multiplied) }
+{ multiplicand, number,@ (the number that is multiplied by the multiplier) }
+{ scale_factor, multiplier,@ (a number used as a multiplier in scaling) }
+{ time-scale_factor, scale_factor,@ noun.cognition:simulation,;c (the ratio of the simulation time to the time of the real process) }
+{ equivalent-binary-digit_factor, divisor1,@ (the average number of binary digits needed to express one radix digit in a numeration system that is not binary; on the average a number that can be expressed in N decimal digits takes 3.3N binary digits) }
+{ [ aliquot, adj.all:fractional^aliquot,+ aliquant,! ] aliquot_part, divisor,@ (an integer that is an exact divisor of some quantity; "4 is an aliquot part of 12") }
+{ [ aliquant, aliquot,! ] aliquant_part, divisor,@ (an integer that is not an exact divisor of some quantity; "5 is an aliquant part of 12") }
+{ common_divisor, common_factor, common_measure, divisor1,@ (an integer that divides two (or more) other integers evenly) }
+{ greatest_common_divisor, greatest_common_factor, highest_common_factor, common_divisor,@ (the largest integer that divides without remainder into a set of integers) }
+{ common_multiple, integer,@ (an integer that is a multiple of two or more other integers) }
+{ common_denominator, denominator,@ (an integer that is a common multiple of the denominators of two or more fractions) }
+{ modulus2, integer,@ (an integer that can be divided without remainder into the difference between two other integers; "2 is a modulus of 5 and 9") }
+{ improper_fraction, fraction,@ (a fraction whose numerator is larger than the denominator) }
+{ proper_fraction, fraction,@ (a fraction with a numerator smaller than the denominator) }
+{ complex_fraction, compound_fraction, fraction,@ (a fraction with fractions in the numerator or denominator) }
+{ decimal_fraction, [ decimal, verb.change:decimalize1,+ verb.change:decimalise1,+ ] proper_fraction,@ (a proper fraction whose denominator is a power of 10) }
+{ circulating_decimal, recurring_decimal, repeating_decimal, decimal_fraction,@ (a decimal with a sequence of digits that repeats itself indefinitely) }
+{ continued_fraction, fraction,@ (a fraction whose numerator is an integer and whose denominator is an integer plus a fraction whose numerator is an integer and whose denominator is an integer plus a fraction and so on) }
+{ one-half, half, common_fraction,@ (one of two equal parts of a divisible whole; "half a loaf"; "half an hour"; "a century and one half") }
+{ fifty_percent, one-half,@ (a half expressed as a percentage) }
+{ moiety, mediety, one-half,@ (one of two (approximately) equal parts) }
+{ one-third, third, tierce, common_fraction,@ (one of three equal parts of a divisible whole; "it contains approximately a third of the minimum daily requirement") }
+{ two-thirds, common_fraction,@ (two of three equal parts of a divisible whole) }
+{ one-fourth, fourth, one-quarter, [ quarter1, verb.contact:quarter1,+ verb.social:quarter,+ ] fourth_part, twenty-five_percent, quartern, common_fraction,@ (one of four equal parts; "a quarter of a pound") }
+{ three-fourths, three-quarters, common_fraction,@ (three of four equal parts; "three-fourths of a pound") }
+{ one-fifth, fifth, fifth_part, twenty_percent, common_fraction,@ (one part in five equal parts) }
+{ one-sixth, sixth, common_fraction,@ (one part in six equal parts) }
+{ one-seventh, seventh, common_fraction,@ (one part in seven equal parts) }
+{ one-eighth, eighth, common_fraction,@ (one part in eight equal parts) }
+{ one-ninth, ninth, common_fraction,@ (one part in nine equal parts) }
+{ one-tenth, tenth, tenth_part, ten_percent, common_fraction,@ (a tenth part; one part in ten equal parts) }
+{ one-twelfth, twelfth, twelfth_part, duodecimal, common_fraction,@ (one part in twelve equal parts) }
+{ one-sixteenth, sixteenth, sixteenth_part, common_fraction,@ (one part in sixteen equal parts) }
+{ one-thirty-second, thirty-second, thirty-second_part, common_fraction,@ (one part in thirty-two equal parts) }
+{ one-sixtieth, sixtieth, common_fraction,@ (one part in sixty equal parts) }
+{ one-sixty-fourth, sixty-fourth, common_fraction,@ (one part in sixty-four equal parts) }
+{ one-hundredth, hundredth, one_percent, common_fraction,@ (one part in a hundred equal parts) }
+{ one-thousandth, thousandth, common_fraction,@ (one part in a thousand equal parts) }
+{ one-ten-thousandth, ten-thousandth, common_fraction,@ (one part in ten thousand equal parts) }
+{ one-hundred-thousandth, common_fraction,@ (one part in a hundred thousand equal parts) }
+{ one-millionth, millionth, common_fraction,@ (one part in a million equal parts) }
+{ one-hundred-millionth, common_fraction,@ (one part in a hundred million equal parts) }
+{ one-billionth, billionth, common_fraction,@ (one part in a billion equal parts) }
+{ one-trillionth, trillionth, common_fraction,@ (one part in a trillion equal parts) }
+{ one-quadrillionth, quadrillionth, common_fraction,@ (one part in a quadrillion equal parts) }
+{ one-quintillionth, quintillionth, common_fraction,@ (one part in a quintillion equal parts) }
+{ nothing, nil, nix, nada, null, aught, cipher, cypher, goose_egg, naught, [ zero2, verb.change:zero1,+ ] zilch, zip, zippo, relative_quantity,@ (a quantity of no importance; "it looked like nothing I had ever seen before"; "reduced to nil all the work we had done"; "we racked up a pathetic goose egg"; "it was all for naught"; "I didn't hear zilch about it") }
+{ nihil, nothing,@ noun.communication:Latin,;c ((Latin) nil; nothing (as used by a sheriff after an unsuccessful effort to serve a writ); "nihil habet") }
+{ bugger_all, fuck_all, Fanny_Adams, sweet_Fanny_Adams, nothing,@ noun.location:Britain,;r noun.communication:obscenity,;u (little or nothing at all; "I asked for a raise and they gave me bugger-all"; "I know sweet Fanny Adams about surgery") }
+
+( **** INTEGERS **** )
+{ [ digit, verb.change:digitize,+ verb.change:digitise,+ verb.change:digitalize,+ ] figure, integer,@ (one of the elements that collectively form a system of numeration; "0 and 1 are digits") }
+{ binary_digit, digit,@ (either 0 or 1 in binary notation) }
+{ octal_digit, digit,@ (a digit from 0 to 7 in octal notation) }
+{ decimal_digit, digit,@ (a digit from 0 to 9 in decimal notation) }
+{ duodecimal_digit, digit,@ (a digit from 0 to 11 in duodecimal notation) }
+{ hexadecimal_digit, digit,@ (a digit from 0 to 15 in hexadecimal notation) }
+{ significant_digit, significant_figure, digit,@ (any digit of a number that is known with certainty; any digit of a number beginning with the leftmost non-zero digit and ending with the rightmost non-zero digit (or a zero considered to be the exact value); "he calculated the answer to four significant figures") }
+
+( ***** DIGITS ***** )
+{ [ zero1, verb.change:zero1,+ ] 0", nought, [ cipher1, verb.cognition:cipher,+ ] [ cypher1, verb.cognition:cypher,+ ] digit,@ (a mathematical element that when added to another number yields the same number) }
+{ one, 1", I, ace, single, unity, digit,@ (the smallest whole number or a numeral representing this number; "he has the one but will need a two and three to go with it"; "they had lunch at one") }
+{ monad, monas, one,@ (a singular metaphysical entity from which material properties are said to derive) }
+{ singleton, one,@ (a single object (as distinguished from a pair)) }
+{ mate, fellow, singleton,@ couple,#p (one of a pair; "he lost the mate to his shoe"; "one eye was blue but its fellow was brown") }
+{ two, 2", II, deuce, digit,@ (the cardinal number that is the sum of one and one or a numeral representing this number) }
+{ craps, snake_eyes, two,@ (expressions used when when two dice are thrown and both come up showing one spot) }
+{ [ couple, verb.contact:couple2,+ ] [ pair, verb.contact:pair3,+ verb.contact:pair4,+ ] twosome, twain, brace, span2, yoke, couplet, distich, duo, duet, dyad, duad, two,@ (two items of the same kind) }
+{ doubleton, couple,@ noun.act:bridge,;c ((bridge) a pair of playing cards that are the only cards in their suit in the hand dealt to a player) }
+{ three, 3", III, trio, threesome, tierce1, leash, troika, triad, trine, trinity, ternary, ternion, triplet, tercet, terzetto, trey, deuce-ace, digit,@ (the cardinal number that is the sum of one and one and one) }
+{ four, 4", IV, tetrad, quatern, quaternion, quaternary, quaternity, quartet, quadruplet, foursome, Little_Joe, digit,@ (the cardinal number that is the sum of three and one) }
+{ five, 5", V2, cinque, quint, quintet, fivesome, quintuplet, pentad, fin, Phoebe, Little_Phoebe, digit,@ (the cardinal number that is the sum of four and one) }
+{ six, 6", VI, sixer, sise, Captain_Hicks, half_a_dozen, sextet, sestet, sextuplet, hexad, digit,@ (the cardinal number that is the sum of five and one) }
+{ [ seven, adj.all:cardinal^seven,+ ] 7", VII, sevener, heptad, septet, septenary, digit,@ (the cardinal number that is the sum of six and one) }
+{ eight, 8", VIII, eighter, eighter_from_Decatur, octad, ogdoad, octonary, octet, digit,@ (the cardinal number that is the sum of seven and one) }
+{ nine, 9", IX, niner, Nina_from_Carolina, ennead, digit,@ (the cardinal number that is the sum of eight and one) }
+( Separate specialized meanings? [dice, cards, people, etc.} )
+
+( ***** LARGE INTEGERS ***** )
+{ large_integer, integer,@ (an integer equal to or greater than ten) }
+{ double_digit, integer,@ (a two-digit integer; from 10 to 99) }
+{ ten, 10", X, tenner, decade, large_integer,@ (the cardinal number that is the sum of nine and one; the base of the decimal system) }
+{ eleven, 11", XI, large_integer,@ (the cardinal number that is the sum of ten and one) }
+{ twelve, 12", XII, [ dozen, adj.all:cardinal^dozen,+ ] large_integer,@ (the cardinal number that is the sum of eleven and one) }
+{ boxcars, twelve,@ noun.communication:plural,;u ((usually plural) an expression used when two dice are thrown and both come up showing six spots) }
+{ teens, large_integer,@ (all the numbers that end in -teen) }
+{ thirteen, 13", XIII, baker's_dozen, long_dozen, large_integer,@ (the cardinal number that is the sum of twelve and one) }
+{ fourteen, 14", XIV, large_integer,@ (the cardinal number that is the sum of thirteen and one) }
+{ [ fifteen, adj.all:cardinal^fifteen,+ ] 15", XV, large_integer,@ (the cardinal number that is the sum of fourteen and one) }
+{ sixteen, 16", XVI, large_integer,@ (the cardinal number that is the sum of fifteen and one) }
+{ [ seventeen, adj.all:cardinal^seventeen,+ ] 17", XVII, large_integer,@ (the cardinal number that is the sum of sixteen and one) }
+{ eighteen, 18", XVIII, large_integer,@ (the cardinal number that is the sum of seventeen and one) }
+{ [ nineteen, adj.all:cardinal^nineteen,+ ] 19", XIX, large_integer,@ (the cardinal number that is the sum of eighteen and one) }
+{ twenty, 20", XX, large_integer,@ (the cardinal number that is the sum of nineteen and one) }
+{ twenty-one, 21", XXI, large_integer,@ (the cardinal number that is the sum of twenty and one) }
+{ twenty-two, 22", XXII, large_integer,@ (the cardinal number that is the sum of twenty-one and one) }
+{ twenty-three, 23", XXIII, large_integer,@ (the cardinal number that is the sum of twenty-two and one) }
+{ twenty-four, 24", XXIV, two_dozen, large_integer,@ (the cardinal number that is the sum of twenty-three and one) }
+{ twenty-five, 25", XXV, large_integer,@ (the cardinal number that is the sum of twenty-four and one) }
+{ twenty-six, 26", XXVI, large_integer,@ (the cardinal number that is the sum of twenty-five and one) }
+{ twenty-seven, 27", XXVII, large_integer,@ (the cardinal number that is the sum of twenty-six and one) }
+{ twenty-eight, 28", XXVIII, large_integer,@ (the cardinal number that is the sum of twenty-seven and one) }
+{ twenty-nine, 29", XXIX, large_integer,@ (the cardinal number that is the sum of twenty-eight and one) }
+{ thirty, 30", XXX, large_integer,@ (the cardinal number that is the product of ten and three) }
+{ forty, 40", XL, large_integer,@ (the cardinal number that is the product of ten and four) }
+{ [ fifty, adj.all:cardinal^fifty,+ ] 50", L6, large_integer,@ (the cardinal number that is the product of ten and five) }
+{ sixty, 60", LX, large_integer,@ (the cardinal number that is the product of ten and six) }
+{ [ seventy, adj.all:cardinal^seventy,+ ] 70", LXX, large_integer,@ (the cardinal number that is the product of ten and seven) }
+{ seventy-eight, 78", LXXVIII, large_integer,@ (the cardinal number that is the sum of seventy and eight) }
+{ eighty, 80", LXXX, fourscore, large_integer,@ (the cardinal number that is the product of ten and eight) }
+{ ninety, 90", XC, large_integer,@ (the cardinal number that is the product of ten and nine) }
+{ hundred, 100", C1, century, one_C, large_integer,@ (ten 10s) }
+{ gross, 144", large_integer,@ (twelve dozen) }
+{ long_hundred, great_hundred, 120", large_integer,@ (the cardinal number that is the product of ten and twelve) }
+{ five_hundred, 500", D, large_integer,@ (the cardinal number that is the product of one hundred and five) }
+{ thousand, one_thousand, 1000", M1, K6, chiliad, G1, grand, thou, yard2, large_integer,@ (the cardinal number that is the product of 10 and 100) }
+{ millenary, thousand,@ (a sum or aggregate of one thousand (especially one thousand years)) }
+{ great_gross, 1728", large_integer,@ (a cardinal number equal to one dozen gross) }
+{ ten_thousand, 10000", myriad, large_integer,@ (the cardinal number that is the product of ten and one thousand) }
+{ hundred_thousand, 100000", lakh, large_integer,@ (the cardinal number that is the fifth power of ten) }
+{ million, 1000000", one_thousand_thousand, meg, large_integer,@ (the number that is represented as a one followed by 6 zeros) }
+{ crore, large_integer,@ noun.location:India,;r (the number that is represented as a one followed by 7 zeros; ten million) }
+{ [ billion, adj.all:cardinal^billion,+ ] one_thousand_million, 1000000000", large_integer,@ noun.location:US,;r (the number that is represented as a one followed by 9 zeros) }
+{ milliard, billion,@ noun.location:Britain,;r (a billion; "in England they call one thousand million a milliard") }
+{ [ billion1, adj.all:cardinal^billion1,+ ] one_million_million, 1000000000000", large_integer,@ noun.location:Britain,;r (the number that is represented as a one followed by 12 zeros; in the United Kingdom the usage followed in the United States is frequently seen) }
+{ trillion, one_million_million1, 1000000000000"1, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 12 zeros; "in England they call a trillion a billion") }
+{ trillion1, one_million_million_million, large_integer,@ noun.location:Britain,;r noun.location:Germany,;r (the number that is represented as a one followed by 18 zeros; "in England they call a quintillion a trillion") }
+{ quadrillion, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 15 zeros) }
+{ quadrillion1, large_integer,@ noun.location:Britain,;r noun.location:Germany,;r (the number that is represented as a one followed by 24 zeros; "in England they call a septillion a quadrillion") }
+{ quintillion, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 18 zeros) }
+{ sextillion, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 21 zeros) }
+{ septillion, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 24 zeros) }
+{ octillion, large_integer,@ noun.location:US,;r noun.location:France,;r (the number that is represented as a one followed by 27 zeros) }
+{ aleph-null, aleph-nought, aleph-zero, large_integer,@ (the smallest infinite integer) }
+
+( *** TRANSCENDENTAL NUMBERS *** )
+{ pi, transcendental_number,@ (the ratio of the circumference to the diameter of a circle; approximately equal to 3.14159265358979323846...) }
+{ e, transcendental_number,@ (the base of the natural system of logarithms; approximately equal to 2.718282...) }
+
+( * INDEFINITE QUANTITIES * )
+{ addition, [ increase, verb.change:increase2,+ verb.change:increase,+ ] gain, indefinite_quantity,@ (a quantity that is added; "there was an addition to property taxes this year"; "they recorded the cattle's gain in weight over a period of weeks") }
+{ [ accretion, adj.all:increasing^accretionary,+ ] addition,@ (something contributing to growth or increase; "he scraped away the accretions of paint"; "the central city surrounded by recent accretions") }
+{ [ bag1, verb.contact:bag1,+ ] indefinite_quantity,@ (the quantity of game taken in a particular period (usually by one person); "his bag included two deer") }
+{ breakage, indefinite_quantity,@ (the quantity broken; "the total breakage was huge") }
+{ [ capacity1, adj.all:large^capacious,+ ] indefinite_quantity,@ noun.cognition:computer_science,;c ((computer science) the amount of information (in bytes) that can be stored on a disk drive; "the capacity of a hard disk drive is usually expressed in megabytes") }
+{ formatted_capacity, capacity1,@ noun.cognition:computer_science,;c ((computer science) the usable capacity of a disk drive; the amount of space that is left after the sector headings and boundary definitions and timing information have been added by formatting the disk) }
+{ unformatted_capacity, capacity1,@ noun.cognition:computer_science,;c ((computer science) the total number of bytes on a disk including the space that will be required to format it) }
+{ [ catch, verb.contact:catch3,+ ] haul, indefinite_quantity,@ (the quantity that was caught; "the catch was only 10 fish") }
+{ correction, fudge_factor, indefinite_quantity,@ (a quantity that is added or subtracted in order to increase the accuracy of a scientific measure) }
+{ containerful, indefinite_quantity,@ (the quantity that a container will hold) }
+{ footstep, [ pace1, verb.change:pace,+ verb.motion:pace1,+ verb.motion:pace,+ ] [ step, verb.change:step,+ verb.motion:step3,+ verb.motion:step1,+ verb.motion:step,+ ] [ stride, verb.motion:stride3,+ verb.motion:stride,+ ] indefinite_quantity,@ (the distance covered by a step; "he stepped off ten paces from the old tree and began to dig") }
+{ headspace, indefinite_quantity,@ (the volume left at the top of a filled container (bottle or jar or tin) before sealing) }
+
+{ large_indefinite_quantity, large_indefinite_amount, indefinite_quantity,@ (an indefinite quantity that is above the average in size or magnitude) }
+{ chunk, large_indefinite_quantity,@ (a substantial amount; "we won a chunk of money") }
+{ limit, limitation, indefinite_quantity,@ (the greatest amount of something that is possible or allowed; "there are limits on the amount you can bet"; "it is growing rapidly with no limitation in sight") }
+{ limit1, limit_point, point_of_accumulation, indefinite_quantity,@ (the mathematical value toward which a function goes as the independent variable approaches infinity) }
+{ output, [ yield, verb.possession:yield,+ verb.creation:yield,+ ] production, indefinite_quantity,@ (the quantity of something (as a commodity) that is created (usually within a given period of time); "production was up in the second quarter") }
+{ cutoff, limit,@ (a designated limit beyond which something cannot function or must be terminated) }
+{ region, neighborhood, indefinite_quantity,@ (the approximate amount of something (usually used prepositionally as in `in the region of'); "it was going to take in the region of two or three months to finish the job"; "the price is in the neighborhood of $100") }
+{ outage, indefinite_quantity,@ (the amount of something (as whiskey or oil) lost in storage or transportation) }
+{ picking, [ pick, verb.contact:pick1,+ ] output,@ (the quantity of a crop that is harvested; "he sent the first picking of berries to the market"; "it was the biggest peach pick in years") }
+{ reserve, indefinite_quantity,@ noun.cognition:medicine,;c ((medicine) potential capacity to respond in order to maintain vital functions) }
+{ pulmonary_reserve, reserve,@ (the additional volume of air that the lungs can inhale and exhale when breathing to the limit of capacity in times of stress) }
+{ run, indefinite_quantity,@ (the production achieved during a continuous period of operation (of a machine or factory etc.); "a daily run of 100,000 gallons of paint") }
+{ small_indefinite_quantity, small_indefinite_amount, indefinite_quantity,@ (an indefinite quantity that is below average size or magnitude) }
+{ crumb, small_indefinite_quantity,@ (a very small quantity of something; "he gave only a crumb of information about his plans"; "there were few crumbs of comfort in the report") }
+{ [ dab, verb.contact:dab1,+ ] [ splash, verb.contact:splash6,+ ] [ splatter, verb.contact:splatter1,+ ] small_indefinite_quantity,@ (a small quantity of something moist or liquid; "a dab of paint"; "a splatter of mud"; "just a splash of whiskey") }
+{ spot, [ bit1, adj.all:small^bitty,+ ] small_indefinite_amount,@ (a small piece or quantity of something; "a spot of tea"; "a bit of paper"; "a bit of lint"; "I gave him a bit of my mind") }
+{ hair's-breadth, hairsbreadth, hair, whisker, small_indefinite_quantity,@ (a very small distance or space; "they escaped by a hair's-breadth"; "they lost the election by a whisker") }
+{ modicum, small_indefinite_quantity,@ (a small or moderate or token amount; "England still expects a modicum of eccentricity in its artists"- Ian Jack) }
+{ scattering, [ sprinkling, verb.contact:sprinkle1,+ ] small_indefinite_quantity,@ (a small number (of something) dispersed haphazardly; "the first scatterings of green"; "a sprinkling of grey at his temples") }
+{ shoestring, shoe_string, small_indefinite_quantity,@ (a small amount of money; "he managed it on a shoestring") }
+{ spray, [ spraying, verb.contact:spray,+ ] small_indefinite_quantity,@ (a quantity of small objects flying through the air; "a spray of bullets") }
+{ [ nose, verb.competition:nose,+ ] small_indefinite_quantity,@ (a small distance; "my horse lost the race by a nose") }
+{ [ step1, verb.change:step,+ ] stone's_throw, small_indefinite_quantity,@ (a short distance; "it's only a step to the drugstore") }
+{ little, small_indefinite_quantity,@ (a small amount or duration; "he accepted the little they gave him") }
+{ shtik, shtick, schtik, schtick, small_indefinite_quantity,@ noun.communication:Yiddish,;c ((Yiddish) a little; a piece; "give him a shtik cake"; "he's a shtik crazy"; "he played a shtik Beethoven") }
+{ shtikl, shtickl, schtikl, schtickl, shtik,@ (a really little shtik; "have a shtikl cake") }
+{ tad, shade, small_indefinite_quantity,@ (a slight amount or degree of difference; "a tad too expensive"; "not a tad of difference"; "the new model is a shade better than the old one") }
+{ [ minimum, verb.communication:minimize1,+ verb.communication:minimize,+ verb.change:minimize,+ verb.communication:minimise1,+ verb.change:minimise,+ maximum,!] lower_limit, extremum,@ small_indefinite_quantity,@ (the smallest possible quantity) }
+{ skeleton, minimum,@ (something reduced to its minimal form; "the battalion was a mere skeleton of its former self"; "the bare skeleton of a novel") }
+{ spillage, indefinite_quantity,@ (the amount that has spilled) }
+{ spoilage, indefinite_quantity,@ (the amount that has spoiled) }
+{ tankage, indefinite_quantity,@ (the quantity contained in (or the capacity of) a tank or tanks) }
+{ ullage, indefinite_quantity,@ (the amount that a container (as a wine bottle or tank) lacks of being full) }
+{ top-up, indefinite_quantity,@ noun.location:Britain,;r (an amount needed to restore something to its former level) }
+{ [ worth, adj.all:valuable^worth,+ ] indefinite_quantity,@ (an indefinite quantity of something having a specified value; "10 dollars worth of gasoline") }
+
+( ** CONTAINERSFUL ** )
+{ armful, containerful,@ (the quantity that can be contained in the arms) }
+{ bag, bagful, containerful,@ (the quantity that a bag will hold; "he ate a large bag of popcorn") }
+{ [ barrel4, verb.contact:barrel,+ ] barrelful, containerful,@ (the quantity that a barrel (of any size) will hold) }
+{ barrow, barrowful, containerful,@ (the quantity that a barrow will hold) }
+{ barnful, containerful,@ (the quantity that a barn will hold) }
+{ basin, basinful, containerful,@ (the quantity that a basin will hold; "a basinful of water") }
+{ basket, basketful, containerful,@ (the quantity contained in a basket) }
+{ bin, binful, containerful,@ (the quantity contained in a bin) }
+{ [ bottle, verb.contact:bottle,+ ] bottleful, containerful,@ (the quantity contained in a bottle) }
+{ bowl, bowlful, containerful,@ (the quantity contained in a bowl) }
+{ box, boxful, containerful,@ (the quantity contained in a box; "he gave her a box of chocolates") }
+{ [ bucket, verb.contact:bucket,+ ] bucketful, containerful,@ (the quantity contained in a bucket) }
+{ busload, large_indefinite_quantity,@ (the quantity of cargo or the number of passengers that a bus can carry) }
+{ can, canful, containerful,@ (the quantity contained in a can) }
+{ capful, containerful,@ (the quantity that a cap will hold) }
+{ carful, containerful,@ (the quantity that a car will hold) }
+{ cartload, containerful,@ (the quantity that a cart holds) }
+{ carton, cartonful, containerful,@ (the quantity contained in a carton) }
+{ [ case, verb.contact:case1,+ ] caseful, containerful,@ (the quantity contained in a case) }
+{ cask, caskful, containerful,@ (the quantity a cask will hold) }
+{ crate, crateful, containerful,@ (the quantity contained in a crate) }
+{ [ cup1, verb.change:cup1,+ ] cupful, containerful,@ (the quantity a cup will hold; "he drank a cup of coffee"; "he borrowed a cup of sugar") }
+{ [ dish, verb.consumption:dish,+ ] dishful, containerful,@ (the quantity that a dish will hold; "they served me a dish of rice") }
+{ dustpan, dustpanful, containerful,@ (the quantity that a dustpan will hold) }
+{ flask, flaskful, containerful,@ (the quantity a flask will hold) }
+{ [ glass, verb.change:glass1,+ ] glassful, containerful,@ (the quantity a glass will hold) }
+{ handful, fistful, containerful,@ (the quantity that can be held in the hand) }
+{ hatful, containerful,@ (as many or as much as a hat will hold) }
+{ headful, containerful,@ (the quantity of information that a head will hold; "he has a headful of baseball statistics") }
+{ houseful, containerful,@ (as many as a house will accommodate; "they entertained a houseful of guests") }
+{ [ jar, verb.contact:jar10,+ ] jarful, containerful,@ (the quantity contained in a jar; "he drank a jar of beer") }
+{ [ jug, verb.change:jug,+ ] jugful, containerful,@ (the quantity contained in a jug) }
+{ keg, kegful, containerful,@ (the quantity contained in a keg) }
+{ kettle, kettleful, containerful,@ (the quantity a kettle will hold) }
+{ lapful, containerful,@ (the quantity that can be held in the lap) }
+{ mouthful, containerful,@ (the quantity that can be held in the mouth) }
+{ mug, mugful, containerful,@ (the quantity that can be held in a mug) }
+{ pail, pailful, containerful,@ (the quantity contained in a pail) }
+{ pipeful, containerful,@ (the quantity of tobacco that can be smoked in a pipe at one time) }
+{ pitcher, pitcherful, containerful,@ (the quantity contained in a pitcher) }
+{ plate, plateful, containerful,@ (the quantity contained in a plate) }
+{ pocketful, containerful,@ (the quantity a pocket will hold) }
+{ pot, potful, containerful,@ (the quantity contained in a pot) }
+{ roomful, containerful,@ (the quantity a room will hold) }
+{ [ sack, verb.contact:sack,+ ] sackful, containerful,@ (the quantity contained in a sack) }
+{ [ scoop, verb.contact:scoop1,+ ] scoopful, containerful,@ (the quantity a scoop will hold) }
+{ shelfful, containerful,@ (the amount that a shelf will hold; "he bought a shelfful of books") }
+{ shoeful, containerful,@ (the amount that a shoe will hold; "he emptied out a shoeful of water") }
+{ skinful, indefinite_quantity,@ noun.communication:slang,;u (a quantity of alcoholic drink sufficient to make you drunk; "someone had to drive me home last night because I had a skinful") }
+{ [ shovel, verb.contact:shovel,+ ] shovelful, spadeful, containerful,@ (the quantity a shovel can hold) }
+{ skepful, containerful,@ (the quantity a skep can hold) }
+{ split, bottle,@ (a bottle containing half the usual amount) }
+{ [ spoon, verb.contact:spoon,+ ] spoonful, containerful,@ (as much as a spoon will hold; "he added two spoons of sugar") }
+{ tablespoon1, tablespoonful1, containerful,@ (as much as a tablespoon will hold) }
+{ dessertspoon, dessertspoonful, containerful,@ (as much as a dessert spoon will hold) }
+{ [ tank, verb.possession:tank,+ ] tankful, containerful,@ (as much as a tank will hold) }
+{ teacup, teacupful, containerful,@ (as much as a teacup will hold) }
+{ teaspoon1, teaspoonful1, containerful,@ (as much as a teaspoon will hold) }
+{ thimble, thimbleful, containerful,@ (as much as a thimble will hold) }
+{ tub, tubful, containerful,@ (the amount that a tub will hold; "a tub of water") }
+
+( ** SMALL INDEFINITE QUANTITIES ** )
+{ morsel, small_indefinite_quantity,@ (a small quantity of anything; "a morsel of paper was all he needed") }
+{ handful1, smattering, small_indefinite_quantity,@ (a small number or amount; "only a handful of responses were received") }
+{ couple1, small_indefinite_quantity,@ (a small indefinite number; "he's coming for a couple of days") }
+{ [ drop, noun.quantity:droplet,+ verb.contact:drop12,+ ] drib, driblet, small_indefinite_quantity,@ (a small indefinite quantity (especially of a liquid); "he had a drop too much to drink"; "a drop of each sample was analyzed"; "there is not a drop of pity in that man"; "years afterward, they would pay the blood-money, driblet by driblet"--Kipling) }
+{ [ droplet, noun.shape:drop,+ noun.quantity:drop,+ ] drop,@ (a tiny drop) }
+{ eyedrop, eye-drop, drop,@ (a drop from an eye dropper) }
+{ dollop, small_indefinite_quantity,@ (a small measure (usually of food)) }
+{ [ dose, verb.change:dose,+ ] [ dosage, verb.change:dose,+ verb.body:dose,+ ] indefinite_quantity,@ (the quantity of an active agent (substance or radiation) taken in or absorbed at any one time) }
+{ load1, indefinite_quantity,@ noun.communication:colloquialism,;u (an amount of alcohol sufficient to intoxicate; "he got a load on and started a brawl") }
+{ load, loading, indefinite_quantity,@ (a quantity that can be processed or transported at one time; "the system broke down under excessive loads") }
+{ [ precipitation, verb.weather:precipitate,+ ] indefinite_quantity,@ (the quantity of water falling to earth at a specific place within a specified period of time; "the storm brought several inches of precipitation") }
+{ trainload, load,@ (quantity that can be carried by a train) }
+{ dreg, small_indefinite_quantity,@ (a small amount of residue) }
+{ jack, doodly-squat, diddly-squat, diddlysquat, diddly-shit, diddlyshit, diddly, diddley, squat, shit, small_indefinite_quantity,@ (a small worthless amount; "you don't know jack") }
+{ nip, shot, small_indefinite_quantity,@ (a small drink of liquor; "he poured a shot of whiskey") }
+{ [ trace, verb.perception:trace,+ ] hint1, tint, suggestion, small_indefinite_quantity,@ (a just detectable amount; "he speaks French with a trace of an accent"; "a hint mockery in her manner"; "a tint of glamour") }
+{ [ spark, verb.creation:spark,+ ] trace,@ (a small but noticeable trace of some quality that might become stronger; "a spark of interest"; "a spark of decency") }
+{ [ shred, verb.contact:shred,+ ] scintilla, whit, iota, tittle, smidgen, smidgeon, smidgin, smidge, small_indefinite_quantity,@ (a tiny or scarcely detectable amount) }
+{ tot, small_indefinite_quantity,@ (a small amount (especially of a drink); "a tot of rum") }
+{ snuff, touch,@ (a pinch of smokeless tobacco inhaled at a single time) }
+{ touch, hint, tinge, mite, pinch, jot, speck, soupcon, small_indefinite_quantity,@ (a slight but appreciable amount; "this dish could use a touch of garlic") }
+
+( ** LARGE INDEFINITE QUANTITIES ** )
+{ barrels, large_indefinite_quantity,@ (the amount that many barrels might hold) }
+{ batch, deal, flock, good_deal, great_deal, hatful2, [ heap, verb.change:heap,+ verb.possession:heap,+ ] lot, mass, mess, mickle, mint, mountain, muckle, passel, peck, [ pile, verb.motion:pile,+ ] [ plenty, adj.all:abundant^plenteous,+ ] pot1, quite_a_little, raft, sight, slew, spate, stack, tidy_sum, [ wad, verb.contact:wad,+ ] large_indefinite_quantity,@ ((often followed by `of') a large number or amount or extent; "a batch of letters"; "a deal of trouble"; "a lot of money"; "he made a mint on the stock market"; "see the rest of the winners in our huge passel of photos"; "it must have cost plenty"; "a slew of journalists"; "a wad of money") }
+{ battalion, large_number, [ multitude, adj.all:incalculable^multitudinous,+ ] plurality1, pack, large_indefinite_quantity,@ (a large indefinite number; "a battalion of ants"; "a multitude of TV antennas"; "a plurality of religions") }
+{ billyo, billyoh, billy-ho, all_get_out, large_indefinite_quantity,@ (an unimaginably large amount; "British say `it rained like billyo' where Americans say `it rained like all get out'") }
+{ boatload, shipload, carload, large_indefinite_quantity,@ (the amount of cargo that can be held by a boat or ship or a freight car; "he imported wine by the boatload") }
+{ [ flood, verb.possession:flood,+ ] [ inundation, verb.contact:inundate,+ ] [ deluge, verb.communication:deluge,+ ] [ torrent, adj.all:uncontrolled^torrential,+ ] batch,@ (an overwhelming number or amount; "a flood of requests"; "a torrent of abuse") }
+{ haymow, batch,@ (a mass of hay piled up in a barn for preservation) }
+{ infinitude, large_indefinite_quantity,@ (an infinite quantity) }
+{ [ maximum, verb.change:maximize1,+ verb.change:maximize,+ verb.change:maximise1,+ verb.change:maximise,+ minimum,!] upper_limit, extremum,@ large_indefinite_quantity,@ (the largest possible quantity) }
+{ mile7, large_indefinite_quantity,@ (a large distance; "he missed by a mile") }
+{ million1, billion2, trillion2, zillion, jillion, gazillion, bazillion, large_indefinite_quantity,@ (a very large indefinite number (usually hyperbole); "there were millions of flies") }
+{ much, large_indefinite_quantity,@ (a great amount or extent; "they did much for humanity") }
+{ [ myriad1, adj.all:incalculable^myriad,+ ] large_indefinite_quantity,@ (a large indefinite number; "he faced a myriad of details") }
+{ reservoir, supply,@ (a large or extra supply of something; "a reservoir of talent") }
+{ [ ocean, adj.all:unlimited^oceanic,+ ] sea, large_indefinite_quantity,@ (anything apparently limitless in quantity or volume) }
+{ ream1, large_indefinite_quantity,@ (a large quantity of written matter; "he wrote reams and reams") }
+{ small_fortune, large_indefinite_quantity,@ (a large sum of money; "he made a small fortune in the commodities market") }
+{ [ supply, verb.consumption:supply,+ verb.social:supply,+ verb.possession:supply,+ ] indefinite_quantity,@ (an amount of something available for use) }
+{ tons, dozens, heaps, lots, piles, scores, stacks, loads, rafts, slews, wads, oodles, gobs, scads, lashings, large_indefinite_quantity,@ (a large number or amount; "made lots of new friends"; "she amassed stacks of newspapers") }
+
+{ [ room, adj.all:commodious^roomy,+ ] way, elbow_room, noun.attribute:spatial_relation,@ (space for movement; "room to pass"; "make way for"; "hardly enough elbow room to turn around") }
+{ breathing_room, breathing_space, room,@ (sufficient room for easy breathing or movement; "moved to the country to find breathing room") }
+{ headroom, headway, clearance, room,@ (vertical space available to allow easy passage under something) }
+{ houseroom, room,@ (space for accommodation in a house; "I wouldn't give that table houseroom") }
+{ living_space, lebensraum, room,@ (space sought for occupation by a nation whose population is expanding) }
+{ [ parking, verb.contact:park,+ ] room,@ (space in which vehicles can be parked; "there is plenty of parking behind the store") }
+{ sea_room, room,@ (space for maneuver at sea) }
+{ swath, noun.shape:space,@ (the space created by the swing of a scythe or the cut of a mowing machine) }
+{ [ volume, adj.all:large^voluminous,+ ] noun.Tops:quantity,@ (the amount of 3-dimensional space occupied by an object; "the gas expanded to twice its original volume") }
+{ volume1, noun.Tops:quantity,@ (a relative amount; "mix one volume of the solution with ten volumes of water") }
+{ [ capacity, adj.all:large^capacious,+ ] [ content, verb.stative:contain13,+ ] volume,@ (the amount that can be contained; "the gas tank has a capacity of 12 gallons") }
+{ vital_capacity, capacity,@ noun.cognition:diagnostic_test,@ (the maximum amount of air that can be exhaled after a maximum inhalation (usually tested with a spirometer); used to determine the condition of lung tissue) }
+
+{ population, integer,@ (the number of inhabitants (either the total number or the number of a particular race or class) in a given place (country or city etc.); "people come and go, but the population of this town has remained approximately constant for the past decade"; "the African-American population of Salt Lake City has been increasing") }
+
+{ proof, noun.Tops:measure,@ (a measure of alcoholic strength expressed as an integer twice the percentage of alcohol present (by volume)) }
+
+{ STP, s.t.p., standard_temperature,@ standard_pressure,@ (standard temperature and pressure) }
+
+
+

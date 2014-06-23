@@ -1,0 +1,87 @@
+($RCSfile: verb.weather,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:17:00 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.weather)
+
+
+{ [ rain, noun.substance:rain,+ noun.phenomenon:rain,+ ] rain_down, precipitate,@ frames: 3,11 (precipitate as rain; "If it rains much more, we can expect some flooding") }
+{ [ precipitate, noun.quantity:precipitation,+ noun.phenomenon:precipitation,+ ] come_down, fall, verb.change:condense1,* frames: 1,8 (fall from clouds; "rain, snow and sleet were falling"; "Vesuvius precipitated its fiery, destructive rage on Herculaneum") }
+{ spat, fall,@ frames: 1 (come down like raindrops; "Bullets were spatting down on us") }
+{ [ liquefy, adj.all:liquid^liquefiable,+ noun.process:liquefaction,+ ] verb.change:change_state,@ frames: 1  (become liquid; "The garden air overnight liquefied into a morning dew") }
+{ [ drizzle, noun.phenomenon:drizzle,+ ] [ mizzle, noun.phenomenon:mizzle,+ ] rain,@ frames: 3 (rain lightly; "When it drizzles in summer, hiking can be pleasant") }
+{ [ shower, noun.phenomenon:shower,+ noun.event:shower,+ ] shower_down, rain,@ frames: 3 (rain abundantly; "Meteors showered down over half of Australia") }
+{ [ sprinkle, noun.phenomenon:sprinkle,+ noun.phenomenon:sprinkling,+ ] spit, spatter, patter, pitter-patter, rain,@ frames: 3 (rain gently; "It has only sprinkled, but the roads are slick") }
+{ pour, [ pelt, noun.phenomenon:pelter,+ ] stream, rain_cats_and_dogs, rain_buckets, rain,@ frames: 3 (rain heavily; "Put on your rain coat-- it's pouring outside!") }
+{ sheet, pour,@ frames: 3 (come down as if in sheets; "The rain was sheeting down during the monsoon") }
+{ [ sluice, noun.artifact:sluice,+ ] sluice_down, pour,@ frames: 1,4 (pour as if from a sluice; "An aggressive tide sluiced across the barrier reef") }
+{ ice_up, frost_over, ice_over, freeze10,* verb.change:change,@ frames: 1,3 (become covered with a layer of ice; of a surface such as a window; "When the wings iced up, the pilot was forced to land his plane") }
+{ [ freeze10, noun.phenomenon:freeze,+ noun.process:freezing,+ ] frames: 3 (be very cold, below the freezing point; "It is freezing in Kalamazoo") }
+{ [ snow, noun.substance:snow,+ noun.phenomenon:snow,+ ] precipitate,@ frames: 3 (fall as snow; "It was snowing all night") }
+{ [ hail, noun.phenomenon:hail,+ ] precipitate,@ frames: 3 (precipitate as small ice particles; "It hailed for an hour") }
+{ [ sleet, noun.phenomenon:sleet,+ ] precipitate,@ frames: 3 (precipitate as a mixture of rain and snow; "If the temperature rises above freezing, it will probably sleet")}
+{ [ flame, noun.process:flame,+ noun.process:flaming,+ ] verb.change:burn,@ frames: 1 (be in flames or aflame; "The sky seemed to flame in the Hawaiian sunset") }
+{ [ ignite, adj.all:combustible^ignitible,+ adj.all:combustible^ignitable,+ noun.process:ignition,+ noun.act:ignition,+ noun.substance:igniter,+ noun.artifact:igniter,+ noun.substance:ignitor,+ noun.artifact:ignitor,+ extinguish,! ] [ light, noun.artifact:light1,+ noun.substance:lighter,+ noun.artifact:lighter,+ ] verb.change:burn,> burn2,@ frames: 8,11   (cause to start burning; subject to fire or great heat; "Great heat can ignite almost any dry matter"; "Light a cigarette") }
+{ set_ablaze, set_aflame, set_on_fire1, set_afire, ignite,* burn2,@ frames: 8,11 (set fire to; cause to start burning; "Lightening set fire to the forest") }
+{ reignite, ignite,@ frames: 8 (ignite anew, as of something burning; "The strong winds reignited the cooling embers") }
+{ douse, put_out, extinguish,@ frames: 8 (put out, as of a candle or a light; "Douse the lights") }
+{ erupt, [ ignite1, adj.all:combustible^ignitible,+ adj.all:combustible^ignitable,+ noun.act:ignition,+ ] catch_fire, take_fire, [ combust, adj.all:combustible,+ adj.all:combustible^combustive,+ ] conflagrate, verb.change:change_state,@ frames: 1     (start to burn or burst into flames; "Marsh gases ignited suddenly"; "The oily rags combusted spontaneously") }
+{ blow_out1, erupt,@ frames: 1 (erupt in an uncontrolled manner; "The oil well blew out")}
+{ catch4, ignite1,@ frames: 1 (start burning; "The fire caught") }
+{ light_up1, ignite1,@ frames: 1 (start to burn with a bright flame; "The coal in the BBQ grill finally lit up") }
+{ kindle, enkindle, conflagrate1, [ inflame, noun.act:inflammation1,+ ] ignite,@ frames: 8,11 (cause to start burning; "The setting sun kindled the sky with oranges and reds") }
+{ rekindle, kindle,@ frames: 8 (kindle anew, as of a fire) }
+{ [ kindle1, noun.substance:kindling,+ noun.act:kindling,+ ] [ inflame1, noun.act:inflammation1,+ ] flare_up,@ frames: 1 (catch fire; "The dried grass of the prairie kindled, spreading the flames for miles") }
+{ snuff_out, blow_out, [ extinguish, noun.act:extinction1,+ noun.artifact:extinguisher,+ noun.act:extinguishing,+ ignite,! ] [ quench, noun.act:quenching,+ ] frames: 8,11 (put out, as of fires, flames, or lights; "Too big to be extinguished at once, the forest fires at best could be contained"; "quench the flames"; "snuff out the candles")}
+{ black_out, extinguish,@ frames: 8,11 (obliterate or extinguish; "Some life-forms were obliterated by the radiation, others survived") }
+{ [ burn2, adj.all:combustible^burnable,+ ] [ combust2, adj.all:combustible,+ adj.all:combustible^combustive,+ noun.act:combustion,+ ] verb.change:burn,> combust,$ frames: 8,11    (cause to burn or combust; "The sun burned off the fog"; "We combust coal and other fossil fuels") }
+{ [ flare, noun.process:flare,+ ] flame_up, blaze_up, burn_up, verb.change:burn,@ frames: 1 (burn brightly; "Every star seemed to flare with new intensity") }
+{ [ flare1, noun.process:flare,+ ] [flame1, flame_up,^ ] shine,@ frames: 1 (shine with a sudden light; "The night sky flared with the massive bombardment") }
+{ outshine, shine,@ frames: 11 (shine brighter than; "What star outshines the sun?") }
+{ [ shine3, noun.attribute:shine,+ ] shine,> frames: 8,21 (throw or flash the light of (a lamp); "Shine the light on that window, please") }
+{ [ shimmer, noun.event:shimmer,+ ] shine,@ frames: 1 (shine with a weak or fitful light; "Beech leaves shimmered in the moonlight") }
+{ [ flicker, noun.event:flicker,+ ] flick, shine,@ frames: 1 (shine unsteadily; "The candle flickered") }
+{ [ shine, noun.attribute:shine,+ ] [ beam3, noun.phenomenon:beam,+ ] frames: 1 (emit light; be bright, as of the sun or a light; "The sun shone bright that day"; "The fire beamed on their faces") }
+{ light_up2, ignite,@ frames: 1 (ignite; "The sky lit up quickly above the raging volcano") }
+{ flare_up, ignite,@ frames: 1 (ignite quickly and suddenly, especially after having died down; "the fire flared up and died down once again") }
+{ [ blaze, noun.process:blaze,+ blaze_up,^ ] verb.change:burn,@ frames:1 (burn brightly and intensely; "The summer sun alone can cause a pine to blaze") }
+{ [ blaze1, noun.attribute:blaze,+ ] shine,@ frames: 1 (shine brightly and intensively; "Meteors blazed across the atmosphere") }
+{ [ twinkle, noun.event:twinkle,+ noun.object:twinkler,+ ] winkle, [ scintillate, adj.all:bright^scintillant,+ noun.attribute:scintillation1,+ noun.object:scintilla,+ ] shine,@ noun.object:celestial_body,;c frames: 1  (emit or reflect light in a flickering manner; "Does a constellation twinkle more brightly than a single star?") }
+{ glare1, reflect,@ frames: 1 (be sharply reflected; "The moon glared back at itself from the lake's surface") }
+{ [ opalesce, adj.all:bright^opalescent,+ noun.attribute:opalescence,+ ] reflect,@ frames: 1  (reflect light or colors like an opal; "Distant clouds opalesce like pale brocade"; "raindrops caught in a sunbeam seem to opalesce") }
+{ [ absorb, adj.all:absorptive,+ adj.all:absorbent,+ adj.all:absorbable,+ noun.process:absorption2,+ emit,! ] take_in, frames: 8,11    (suck or take up or in; "A black star absorbs all matter") }
+{ [ suck, noun.act:suck,+ noun.act:suction,+ ] suck_in, absorb,@ frames: 11 (attract by using an inexorable force, inducement, etc.; "The current boom in the economy sucked many workers in from abroad") }
+{ [ reflect, adj.all:reflective,+ ] [ shine1, noun.object:shiner,+ noun.attribute:shine,+ ] emit,@ frames: 1  (be bright by reflecting or casting light; "Drive carefully--the wet road reflects") }
+{ [ luminesce, adj.all:light6^luminescent,+ noun.phenomenon:luminescence,+ noun.attribute:luminescence,+ ] shine1,@ frames: 1  (be or become luminescent; exhibit luminescence)}
+{ [ sparkle, noun.attribute:sparkle,+ noun.event:sparkle,+ noun.possession:sparkler,+ noun.event:sparkling,+ ] [ scintillate3, adj.all:bright^scintillant,+ noun.attribute:scintillation,+ ] [ coruscate, adj.all:bright^coruscant,+ noun.event:coruscation,+ ] shine1,@ frames: 1   (reflect brightly; "Unquarried marble sparkled on the hillside") }
+{ [ spark, noun.object:spark,+ noun.phenomenon:spark,+ noun.event:spark1,+ ] [ sparkle2, noun.event:sparkle,+ ] emit,@ frames: 1 (emit or produce sparks; "A high tension wire, brought down by a storm, can continue to spark") }
+{ [ mirror, noun.cognition:mirror,+ noun.artifact:mirror,+ ] verb.perception:reflect,@ frames: 11,10 (reflect as if in a mirror; "The smallest pond at night mirrors the firmament above") }
+{ [ radiate, adj.all:bright^radiant,+ noun.phenomenon:radiation,+ noun.attribute:radiancy,+ noun.attribute:radiance,+ ] emit,@ frames: 1,11  (send out rays or waves; "The sun radiates heat") }
+{ [ emit, noun.act:emission,+ noun.artifact:emitter,+ absorb,! ] give_out, give_off, frames: 8,11 (give off, send forth, or discharge; as of light, heat, or radiation, vapor, etc.; "The ozone layer blocks some harmful rays which the sun emits") }
+{ [ scintillate1, noun.event:scintillation,+ ] scintillate,$ emit,@ frames: 11 (give off; "the substance scintillated sparks and flashes")}
+{ [ fume, noun.phenomenon:fume,+ ] [ smoke, noun.process:smoke,+ noun.phenomenon:smoke,+ noun.process:smoking,+ ] emit,@ frames: 1 (emit a cloud of fine particles; "The chimney was fuming") }
+{ reek, emit,@ frames: 1 (give off smoke, fumes, warm vapour, steam, etc.; "Marshes reeking in the sun") }
+{ shoot, emit,@ frames: 11 (emit (as light, flame, or fumes) suddenly and forcefully; "The dragon shot fumes and flames out of its mouth") }
+{ [ ray, noun.phenomenon:ray,+ ] emit,@ frames: 11 (emit as rays; "That tower rays a laser beam for miles across the sky") }
+{ steam, emit,@ frames: 1,2 (emit steam; "The rain forest was literally steaming") }
+{ [ shadow, noun.location:shadow,+ noun.state:shadow1,+ ] [ shade, noun.state:shade,+ ] shade_off, verb.change:darken1,@ frames: 11,10,9 (cast a shadow over) }
+{ burn1, [ glow, noun.phenomenon:glow,+ ] shine,@ frames: 1 (shine intensely, as if with heat; "The coals were glowing in the dark"; "The candles were burning") }
+{ gutter, burn1,@ frames: 1 (burn unsteadily, feebly, or low; flicker; "The cooling lava continued to gutter toward lower ground") }
+{ [ blow, noun.phenomenon:blow,+ ] frames: 1,3,4 (be blowing or storming; "The wind blew from the West") }
+{ [ breeze, noun.phenomenon:breeze,+ ] blow,@ frames: 1,3,4 (blow gently and lightly; "It breezes most evenings at the shore") }
+{ set_in, blow,@ frames: 1 (blow toward the shore; "That gale could set in on us with the next high tide") }
+{ waft, blow,@ frames: 1,4 (blow gently; "A breeze wafted through the door") }
+{ [ storm, noun.phenomenon:storm,+ ] blow,@ frames: 3 (blow hard; "It was storming all night") }
+{ [ squall, noun.phenomenon:squall,+ ] blow,@ frames: 1 (blow in a squall; "When it squalls, a prudent sailor reefs his sails") }
+{ [ storm1, noun.phenomenon:storm,+ ] rain,* frames: 3 (rain, hail, or snow hard and be very windy, often with thunder or lightning; "If it storms, we'll need shelter") }
+{ [ bluster, noun.phenomenon:bluster,+ ] blow,@ frames: 3 (blow hard; be gusty, as of wind; "A southeaster blustered onshore"; "The flames blustered") }
+{ [ thunder, noun.event:thunder1,+ ] boom, storm,* frames: 3 (be the case that thunder is being heard; "Whenever it thunders, my dog crawls under the bed") }
+{ [ overcast, noun.state:overcast1,+ noun.state:overcast,+ clear_up,! ] [ cloud, noun.object:cloud,+ noun.process:clouding,+ cloud_over,^ cloud_up,^ ] verb.change:darken1,@ frames: 11 (make overcast or cloudy; "Fall weather often overcasts our beaches") }
+{ overcloud, cloud_over, cloud_up, verb.change:darken,@ frames: 1,3 (become covered with clouds; "The sky clouded over") }
+{ [clear_up, overcast,! ] clear, light_up, brighten, frames: 3,1 (become clear; "The sky cleared after the storm") }
+{ [ blight, noun.state:blight1,+ noun.state:blight,+ ] [ plague, noun.group:plague,+ noun.state:plague1,+ noun.state:plague,+ ] verb.change:afflict,@ frames: 10,11 (cause to suffer a blight; "Too much rain may blight the garden with mold") }
+{ [ swamp, noun.object:swamp,+ ] drench, verb.change:flood,@ frames: 1,11 (drench or submerge or be drenched or submerged; "The tsunami swamped every boat in the harbor") }
+{ run_dry, dry_out1, verb.change:dry,@ frames: 1 (become empty of water; "The river runs dry in the summer") }
+{ fog_up, overcast,@ frames: 3,1 (get foggy; "The windshield fogged up") }
+{ [ char, noun.substance:char,+ ] [ coal, noun.substance:coal,+ noun.object:coal,+ ] burn2,@ frames: 8 (burn to charcoal; "Without a drenching rain, the forest fire will char everything") }
+{ [ haze, noun.phenomenon:haze,+ ] overcast,@ frames: 1 (become hazy, dull, or cloudy)}
+{ [deflagrate, noun.process:deflagration,+ ] burn2,@ frames: 8,11 (cause to burn rapidly and with great intensity; "care must be exercised when this substance is to be deflagrated")}

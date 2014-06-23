@@ -1,0 +1,703 @@
+($RCSfile: verb.cognition,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:55 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.cognition)
+
+{ grok, [get_the_picture, frames: 2] [ comprehend, adj.all:comprehensible,+ adj.all:comprehendible,+ noun.cognition:comprehension,+ ] [ savvy, noun.cognition:savvy,+ ] dig, [ grasp, noun.cognition:grasp,+ noun.cognition:grasping,+ ] compass, [ apprehend, adj.all:comprehensible^apprehensible,+ adj.all:perceptive^apprehensive,+ noun.cognition:apprehension,+ noun.person:apprehender1,+ ] understand,@ frames: 8,26 (get the meaning of something; "Do you comprehend the meaning of this letter?") }
+{ lie_low, verb.perception:hide1,@ frames: 2 (to try to avoid detection especially by police; "After we knock off that liquor store we'll have to lay low for a while") }
+{ [ understand, adj.all:comprehensible^understandable,+ noun.cognition:understanding1,+ ] frames: 8,9,2,26 (know and comprehend the nature or meaning of; "She did not understand her husband"; "I understand what she means") }
+{ [ sense2, adj.all:sensitive2,+ noun.cognition:sense4,+ ] understand,@ frames: 8,26 (comprehend; "I sensed the real meaning of his letter")}
+{ smell, smell_out, [ sense3, adj.all:aware^sensible,+ adj.all:sensitive2,+ noun.cognition:sense5,+ ] perceive,@ frames: 8,26 (become aware of not through the senses but instinctively; "I sense his hostility"; "I smell trouble"; "smell out corruption")}
+{ follow14, understand,@ frames: 2,8,9 (grasp the meaning; "Can you follow her argument?"; "When he lectures, I cannot follow") }
+{ catch3, get9, understand,@ frames: 1 (grasp with the mind or develop an understanding of; "did you catch that allusion?"; "We caught something of his theory in the lecture"; "don't catch your meaning"; "did you get it?"; "She didn't get the joke"; "I just don't get him") }
+{ figure2, comprehend,@ noun.communication:colloquialism,;u frames: 8,9 (understand; "He didn't figure her") }
+{ catch_on, get_wise, [get_onto, frames: 8] tumble, latch_on, cotton_on, twig, get_it, comprehend,@ frames: 2,22 (understand, usually after some initial difficulty; "She didn't know what her classmates were plotting but finally caught on") }
+{ touch, understand,@ frames: 8 (comprehend; "He could not touch the meaning of the poem") }
+{ [ intuit, adj.all:illogical^intuitive,+ noun.cognition:intuition1,+ noun.cognition:intuition,+ ] grasp,@ frames: 8,26 (know or grasp by intuition or feeling) }
+{ [ digest, noun.cognition:digestion,+ noun.communication:digest,+ noun.communication:digest1,+ ] comprehend,@ frames: 8 (arrange and integrate in the mind; "I cannot digest all this information") }
+{ [ understand1, adj.all:comprehensible^understandable,+ noun.cognition:understanding1,+ ] [ realize, noun.cognition:realization,+ ] [ realise, noun.cognition:realisation,+ ] see1, verb.creation:see,$ verb.perception:see5,$ frames: 2,8,26 (perceive (an idea or situation) mentally; "Now I see!"; "I just can't see your point"; "Does she realize how important this decision is?"; "I don't understand the idea")}
+{ [ perceive, adj.all:perceptible,+ adj.all:perceptive,+ adj.all:discerning^percipient,+ noun.cognition:perception,+ ] realize,@ frames: 8,26 (become conscious of; "She finally perceived the futility of her protest") }
+{ click13, get_through, dawn13, come_home13, get_across, sink_in, penetrate1, fall_into_place, understand,> frames: 1 (become clear or enter one's consciousness or emotions; "It dawned on him that she had betrayed him"; "she was penetrated with sorrow")}
+{ [ resonate, noun.relation:resonance,+ ] come_across, understand,> frames: 1,7 (be received or understood)}
+{ strike_a_chord, resonate,@ frames: 2,4 (create an emotional response; "The music struck a chord with the listeners") }
+{ [ appreciate, noun.person:appreciator,+ ] [take_account12, frames: 22] realize,@ frames: 8,26 (be fully aware of; realize fully; "Do you appreciate the full meaning of this letter?") }
+{ do_justice, verb.possession:appreciate,@ frames: 8,9,12 (show due and full appreciation; "The diners did the food and wine justice") }
+{ [ expect5, noun.cognition:expectation,+ ] consider,@ frames: 8 (consider reasonable or due; "I'm expecting a full explanation as to why these files were destroyed") }
+{ [ acknowledge9, noun.state:acknowledgment,+ noun.communication:acknowledgment,+ ] recognize2, recognise2, know6, accept,@ frames: 8,9 (accept (someone) to be what is claimed or accept his power and authority; "The Crown Prince was acknowledged as the true heir to the throne"; "We do not recognize your gods") }
+{ attorn, verb.communication:acknowledge,@ noun.group:law,;c frames: 2 (acknowledge a new land owner as one's landlord; "he was attorned by the tenants") }
+{ write_off, verb.communication:acknowledge,@ frames: 8,9 (concede the loss or worthlessness of something or somebody; "write it off as a loss")}
+{ understand2, infer1, believe,@ frames: 26 (believe to be the case; "I understand you have no previous experience?") }
+{ [ extrapolate1, noun.cognition:extrapolation1,+ ] infer,@ noun.cognition:logic1,;c frames: 26,8 (gain knowledge of (an area not known or experienced) by extrapolating) }
+{ [ understand3, adj.all:comprehensible^understandable,+ ] read4, interpret2, translate, understand,@ frames: 8,9,26 (make sense of a language; "She understands French"; "Can you read Greek?") }
+{ [ sympathize, noun.cognition:sympathy,+ ] [ sympathise, noun.cognition:sympathy,+ ] [ empathize, noun.feeling:empathy,+ ] [ empathise, noun.feeling:empathy,+ ] [ understand4, adj.all:comprehensible^understandable,+ noun.cognition:understanding3,+ ] frames: 8,9 (be understanding of; "You don't need to explain--I understand!") }
+{ know, frames: 8,9 (be familiar or acquainted with a person or an object; "She doesn't know this composer"; "Do you know my sister?"; "We know this movie"; "I know him under a different name"; "This flower is known as a Peruvian Lily")}
+{ [ know1, adj.all:knowable,+ noun.person:knower,+ noun.cognition:knowing,+ ignore1,! ] [ cognize, adj.pert:cognitive,+ adj.all:cognizant,+ noun.cognition:cognizance,+ ] [ cognise, adj.all:cognisant,+ noun.cognition:cognisance,+ ] know2,$ frames: 2, 8,26 (be cognizant or aware of a fact or a specific piece of information; possess knowledge or information about; "I know that the President lied to the people"; "I want to know who is winning the game!"; "I know it's time") }
+{ [keep_track, lose_track,!] know1,@ frames: 2,22 (keep informed of fully aware; "I keep track of the stock market developments" )}
+{ [lose_track, keep_track,!] verb.social:fail2,@ frames: 2,22 (fail to keep informed or aware; "She has so many books, she just lost track and cannot find this volume" )}
+{ [ ignore1, noun.cognition:ignorance,+ know1,! ] frames: 8,26 (be ignorant of or in the dark about) }
+{ [ know2, adj.all:knowable,+ ] frames: 8,26 (be aware of the truth of something; have a belief or faith in something; regard as true beyond any doubt; "I know that I left the key on the table"; "Galileo knew that the earth moves around the sun") }
+{ know3, frames: 28 (know how to do or perform something; "She knows how to knit"; "Does your husband know how to cook?")}
+{ [ know15, adj.all:knowable,+ ] frames: 8 (have fixed in the mind; "I know Latin"; "This student knows her irregular verbs"; "Do you know the poem well enough to recite it?") }
+{ have_down, know15,@ frames: 8 (have (something) mastered; "She has the names of the fifty states down pat")}
+{ know_the_score, be_with_it, be_on_the_ball, know_what's_going_on, know_what's_what, know3,@ frames: 2 (be well-informed) }
+{ [ know4, adj.all:knowable,+ ] [ experience, noun.cognition:experience,+ ] live, verb.perception:experience1,@ frames: 8 (have firsthand knowledge of states, situations, emotions, or sensations; "I know the feeling!"; "have you ever known hunger?"; "I have lived a kind of hell when I was a drug addict"; "The holocaust survivors have lived a nightmare"; "I lived through two divorces") }
+{ [ taste5, noun.event:taste,+ ] know4,@ frames: 8 (experience briefly; "The ex-slave tasted freedom shortly before she died" )}
+{ [ relive, noun.cognition:reliving,+ ] live_over, experience,@ frames: 8 (experience again, often in the imagination; "He relived the horrors of war") }
+{ [ master, noun.person:master,+ ] [ control, noun.cognition:control1,+ ] understand,* know3,@ frames: 8 (have a firm understanding or knowledge of; be on top of; "Do you control these data?") }
+{ [ master1, noun.person:master,+ noun.cognition:mastery,+ noun.cognition:mastering,+ ] [get_the_hang, frames: 2,22] practice,* learn,* know3,@ frames: 8 (be or become completely proficient or skilled in; "She mastered Japanese in less than two years") }
+{ [ learn, noun.person:learner1,+ noun.person:learner,+ ] larn, [ acquire, noun.cognition:acquisition1,+ noun.cognition:acquisition,+ ] frames: 2,22,28,8 (gain knowledge or skills; "She learned dancing from her sister"; "I learned Sanskrit"; "Children acquire language at an amazing rate")}
+{ relearn, learn,@ frames: 8 (learn something again, as after having forgotten or neglected it; "After the accident, he could not walk for months and had to relearn how to walk down stairs") }
+{ unlearn, verb.possession:discard,@ frames: 8,28 (discard something previously learnt, like an old habit) }
+{ unlearn1, forget1,@ frames: 8,28 (try to forget; put out of one's memory or knowledge) }
+{ catch_up, learn,@ frames: 2 (learn belatedly; find out about something after it happened; "I'm trying to catch up with the latest developments in molecular biology")}
+{ [learn1, frames: 26] [hear, frames: 26] [get_word, frames: 2] [get_wind1, frames: 22] pick_up, find_out, [get_a_line, frames: 22] [ discover1, noun.communication:discovery,+ noun.cognition:discovery,+ noun.act:discovery,+ frames: 26] [see2, frames: 26] frames: 8 (get to know or become aware of, usually accidentally; "I learned that she has two grown-up children"; "I see that you have been promoted") }
+{ get_the_goods, learn1,@ frames: 22 (discover some bad or hidden information about; "She got the goods on her co-worker after reading his e-mail")}
+{ wise_up, learn1,@ frames: 2,22 (get wise to; "They wised up to it") }
+{ wise_up1, verb.communication:inform,@ frames: 9,20 (cause someone to become aware of something) }
+{ [trip_up, noun.act:trip-up,+] catch, find_out,@ frames: 9 (detect a blunder or misstep; "The reporter tripped up the senator") }
+{ learn2, [ study, noun.cognition:study2,+ noun.cognition:study3,+ noun.communication:studying1,+ ] read5, take2, frames: 8 (be a student of a certain subject; "She is reading for the bar exam") }
+{ [ audit, noun.person:auditor2,+ ] study,@ frames: 2,8 (attend academic courses without getting credit) }
+{ [ absorb3, noun.cognition:absorption,+ ] [ engross, noun.cognition:engrossment1,+ noun.cognition:engrossment,+ noun.attribute:engrossment,+ ] engage, [ occupy, noun.act:occupation4,+ noun.act:occupation,+ ] verb.emotion:interest,@ frames: 9,10 (consume all of one's attention or time; "Her interest in butterflies absorbs her completely") }
+{ [ involve, noun.cognition:involvement,+ ] engross,@ frames: 10 (occupy or engage the interest of; "His story completely involved me during the entire afternoon") }
+{ consume, absorb3,@ frames: 10,11 (engage fully; "The effort to pass the exam consumed all his energy") }
+{ steep, [ immerse, noun.cognition:immersion,+ ] engulf, plunge, [ engross2, noun.cognition:engrossment1,+ noun.cognition:engrossment,+ noun.attribute:engrossment,+ ] [ absorb6, noun.cognition:absorption1,+ frames: 8] [soak_up, frames: 8] concentrate,@ frames: 9,20 (devote (oneself) fully to; "He immersed himself into his studies") }
+{ plunge1, [ immerse1, noun.act:immersion1,+ ] plunge,$ immerse,> frames: 9 (cause to be immersed; "The professor plunged his students into the study of the Italian text") }
+{ welter, frames: 22 (be immersed in; "welter in work") }
+{ swallow, believe,@ frames: 8,26 (believe or accept without questioning or challenge; "Am I supposed to swallow that story?")}
+{ espouse, [ embrace, noun.act:embrace1,+ ] [ adopt4, noun.act:adoption1,+ ] sweep_up, accept,@ frames: 8 (take up the cause, ideology, practice, method, of someone and use it as one's own; "She embraced Catholicism"; "They adopted the Jewish faith") }
+{ [take_up, frames: 8] latch_on3, fasten_on, hook_on, seize_on, embrace,@ frames: 22 (adopt; "take up new ideas") }
+{ [ absorb, noun.process:absorption3,+ ] [ assimilate, noun.cognition:assimilation1,+ noun.cognition:assimilation,+ noun.person:assimilator,+ ] ingest, take_in, learn,@ frames: 8 (take up mentally; "he absorbed the knowledge or beliefs of his tribe") }
+{ imbibe, absorb,@ frames: 8 (receive into the mind and retain; "Imbibe ethical principles") }
+{ [ apprentice, noun.person:apprentice,+ ] train,@ frames: 8,2,22 (be or work as an apprentice; "She apprenticed with the great master") }
+{ [ train, noun.person:trainee,+ ] [ prepare, adj.all:preceding^preparatory,+ noun.act:preparation1,+ ] learn2,@ frames: 27 (undergo training or instruction in preparation for a particular role, function, or profession; "She is training to be a teacher"; "He trained as a legal aid") }
+{ retrain, train,@ frames: 2 (train again; "He is retraining to become an IT worker")}
+{ [ train1, noun.person:trainee,+ noun.person:trainer,+ noun.act:training,+ ] develop, [ prepare1, adj.all:preceding^preparatory,+ noun.act:preparation,+ ] [ educate, adj.all:instructive^educative,+ noun.cognition:education1,+ noun.cognition:education,+ noun.act:education1,+ noun.act:education,+ ] train,$ verb.social:train,$ verb.communication:teach,@ frames: 9 (create by training and teaching; "The old master is training world-class violinists"; "we develop the leaders for the future") }
+{ [ retrain1, noun.act:retraining,+ ] train1,@ frames: 9 (teach new skills; "We must retrain the linguists who cannot find employment")}
+{ drill3, train1,@ frames: 9 (train in the military, e.g., in the use of weapons) }
+{ [ drill4, noun.act:drill1,+ ] train,@ frames: 2 (undergo military training or do military exercises)}
+{ housebreak, house-train, train1,@ frames: 8 (train (a pet) to live cleanly in a house) }
+{ roughhouse, verb.social:play3,@ frames: 2 (engage in rough or disorderly play)}
+{ toilet-train, train1,@ frames: 9 (train (a small child) to use the toilet) }
+{ [ memorize, noun.cognition:memorization,+ noun.person:memorizer,+ noun.cognition:memory2,+ noun.cognition:memory1,+ noun.cognition:memory,+ ] [ memorise, noun.cognition:memorisation,+ noun.person:memoriser,+ noun.cognition:memory2,+ noun.cognition:memory1,+ ] con, learn3, study1,@ frames: 8 (commit to memory; learn by heart; "Have you memorized your lines for the play yet?") }
+{ [ understudy, noun.person:understudy,+ ] [ alternate, noun.person:alternate,+ ] memorize,@ frames: 2 (be an understudy or alternate for a role) }
+{ [ indoctrinate, noun.cognition:doctrine,+ noun.act:indoctrination,+ ] verb.communication:teach,@ frames: 9 (teach doctrines to; teach uncritically; "The Moonies indoctrinate their disciples") }
+{ [ revolutionize, noun.event:revolution1,+ ] [ revolutionise, noun.event:revolution1,+ ] [ inspire, noun.person:inspirer,+ ] indoctrinate,@ frames: 9,10 (fill with revolutionary ideas) }
+{ [ infect1, noun.communication:infection,+ ] verb.emotion:affect,@ frames: 9,10 (affect in a contagious way; "His laughter infects everyone who is in the same room")}
+{ brainwash, indoctrinate,@ frames: 9 (submit to brainwashing; indoctrinate forcibly) }
+{ [ cram, noun.person:crammer,+ noun.communication:crammer,+ ] grind_away, drum, bone_up, [ swot, noun.person:swot,+ ] get_up, mug_up, swot_up, bone, study1,@ frames: 2,21 (study intensively, as before an exam; "I had to bone up on my Latin verbs before the final exam") }
+{ [ drill, noun.act:drill,+ ] [ exercise, noun.act:exercise2,+ ] [ practice, noun.act:practice2,+ ] practise, learn2,@ frames: 2,8 (learn by repetition; "We drilled French verbs every day"; "Pianists practice scales") }
+{ [ drill1, noun.act:drill,+ ] verb.communication:teach,@ frames: 9 (teach by repetition) }
+{ hammer_in, drill_in, ram_down, beat_in, drill1,@ frames: 8 (teach by drills and repetition) }
+{ [ inculcate, noun.act:inculcation,+ ] [ instill1, noun.act:instilling,+ ] infuse, drill1,@ frames: 8,21 (teach and impress by frequent repetitions or admonitions; "inculcate values into the young generation") }
+{ din, inculcate,@ frames: 8 (instill (into a person) by constant repetition; "he dinned the lessons into his students") }
+{ [hold10, frames: 22] believe4,@ frames: 8 (remain committed to; "I hold to these ideas") }
+{ [ study1, noun.cognition:study3,+ noun.communication:studying1,+ ] hit_the_books, read,* learn,@ frames: 2,8 (learn by reading books; "He is studying geology in his room"; "I have an exam next week; I must hit the books now") }
+{ [ study3, noun.cognition:study2,+ noun.cognition:study3,+ noun.person:student,+ ] frames: 2,8 (be a student; follow a course of study; be enrolled at an institute of learning) }
+{ [ major9, noun.person:major1,+ noun.cognition:major,+ ] study3,@ frames: 22 (have as one's principal field of study; "She is majoring in linguistics") }
+{ minor, study3,@ frames: 22 (have as one's secondary field of study; "in collee she minored in mathematics")}
+{ [ remember, noun.cognition:remembrance,+ noun.cognition:remembering,+ forget,! ] [ retrieve, noun.cognition:retrieval,+ ] [ recall, noun.cognition:recall,+ ] call_back, call_up4, [ recollect, adj.all:recollective,+ noun.cognition:recollection1,+ ] [ think2, noun.cognition:thought1,+ noun.cognition:think,+ think_back,^ ] frames: 8,33,26 (recall knowledge from memory; have a recollection; "I can't remember saying any such thing"; "I can't think what her last name was"; "can you remember her phone number?"; "Do you remember that he once loved you?"; "call up memories") }
+{ know14, know,$ remember,@ frames: 8,9 (perceive as familiar; "I know this voice!") }
+{ [ know12, adj.all:knowable,+ ] distinguish,@ frames: 8 (be able to distinguish, recognize as being different; "The child knows right from wrong") }
+{ know11, recognize1,@ frames: 8,9 (know the nature or character of; "we all knew her as a big show-off") }
+{ [ think8, noun.cognition:think,+ noun.cognition:thought1,+ ] frames: 2 (be capable of conscious thought; "Man is the only creature that thinks") }
+{ [ slip1, noun.act:slip5,+ ] slip_one's_mind, forget,@ frames: 1 (pass out of one's memory) }
+{ [forget, remember,! ] [ block, noun.cognition:block,+ frames: 8,9,26] blank_out, draw_a_blank, frames: 2 (be unable to remember; "I'm drawing a blank"; "You are blocking the name of your first wife!") }
+{ come_to_mind, spring_to_mind, verb.change:appear,@ frames: 1 (be remembered; "His name comes to mind when you mention the strike") }
+{ [ mind, noun.cognition:mind1,+ noun.cognition:mind,+ forget3,! ] bear_in_mind, remember1,@ frames: 8,26,9 (keep in mind) }
+{ [ remember1, noun.cognition:remembrance,+ forget1,! ] think_of, frames: 8,26 (keep in mind for attention or consideration; "Remember the Alamo"; "Remember to call your mother every day!"; "Think of the starving children in India!") }
+{ [ retain, adj.all:retentive,+ noun.cognition:retention,+ ] remember1,@ frames: 8 (keep in one's mind; "I cannot retain so much information") }
+{ [forget1, remember1,!] bury, frames: 8,9,26 (dismiss from the mind; stop remembering; "I tried to bury these unpleasant memories") }
+{ [ recognize, noun.cognition:recognition,+ ] recognise, know,* remember,@ frames: 8,9 (perceive to be the same) }
+{ [ remind, noun.cognition:reminder,+ noun.communication:reminder,+ ] remember,> frames: 24,10,18,9 (put in the mind of someone; "Remind me to call Mother")}
+{ take_back, remind,@ frames: 10,20 (cause someone to remember the past; "This photo takes me back to the good old days") }
+{ nag, remind,@ frames: 24,9 (remind or urge constantly; "she nagged to take a vacation")}
+{ [ reminisce, adj.all:mindful^reminiscent,+ noun.cognition:reminiscence2,+ noun.cognition:reminiscence1,+ ] remember2,@ frames: 2,22 (recall the past; "The grandparents sat there, reminiscing all afternoon") }
+{ [ remember2, noun.cognition:remembrance,+ noun.cognition:remembering,+ ] think_back, frames: 2,8 (recapture the past; indulge in memories; "he remembered how he used to pick flowers")}
+{ [ commemorate, adj.pert:commemorative,+ noun.event:commemoration,+ ] [ remember9, noun.cognition:remembrance,+ ] frames: 9,8 (call to remembrance; keep alive the memory of someone or something, as in a ceremony; "We remembered the 50th anniversary of the liberation of Auschwitz"; "Remember the dead of the First World War") }
+{ [ remember8, noun.cognition:remembrance,+ noun.cognition:remembering,+ ] associate,@ frames: 2 (exercise, or have the power of, memory; "After the shelling, many people lost the ability to remember"; "some remember better than others") }
+{ [ commemorate1, adj.pert:commemorative,+ noun.communication:commemoration,+ ] [ memorialize, noun.communication:memorial,+ noun.artifact:memorial,+ ] memorialise, immortalize, immortalise, remind,@ frames: 10,11,8,9 (be or provide a memorial to a person or an event; "This sculpture commemorates the victims of the concentration camps"; "We memorialized the Dead") }
+{ monumentalize, monumentalise, memorialize,@ frames: 8,9,10,11 (record or memorialize lastingly with a monument) }
+{ [ commemorate2, adj.pert:commemorative,+ noun.event:commemoration,+ ] mark1, verb.social:observe2,@ frames: 8 (celebrate by some ceremony or observation; "The citizens mark the anniversary of the revolution with a march and a parade") }
+{ [ suppress, noun.act:suppression3,+ ] repress, forget1,@ noun.cognition:psychiatry,;c frames: 8,9,26 (put out of one's consciousness) }
+{ forget2, leave2, verb.possession:lose1,@ frames: 8,21,9 (leave behind unintentionally; "I forgot my umbrella in the restaurant"; "I left my keys inside the car and locked the doors") }
+{ [ jilt, noun.person:jilt,+ ] leave5,@ frames: 9 (cast aside capriciously or unfeelingly; "jilt a lover or a bride") }
+{ [ abandon1, noun.act:abandonment3,+ ] give_up, verb.motion:give13,$ verb.motion:give,$ frames: 8 (stop maintaining or insisting on; of ideas or claims; "He abandoned the thought of asking for her hand in marriage"; "Both sides have to give up some claims in these negotiations") }
+{ [ sell_out, noun.act:sellout,+ noun.person:sellout,+ ] abandon1,@ frames: 2 (abandon one's principles for expedience or financial gain) }
+{ [ leave5, noun.act:leave,+ ] leave2,$ frames: 8,9,10 (go and leave behind, either intentionally or by neglect or forgetfulness; "She left a mess when she moved out"; "His good luck finally left him"; "her husband left her after 20 years of marriage"; "she wept thinking she had been left behind") }
+{ [ abandon, noun.act:abandonment1,+ ] [ forsake, noun.act:forsaking1,+ ] [ desolate, noun.feeling:desolation2,+ ] [ desert, noun.act:desertion,+ noun.person:deserter1,+ noun.person:deserter,+ ] leave5,@ frames: 8,9,10 (leave someone who needs or counts on you; leave in the lurch; "The mother deserted her children") }
+{ [ expose3, noun.act:exposure1,+ ] abandon,@ frames: 9,10 (abandon by leaving out in the open air; "The infant was exposed by the teenage mother"; "After Christmas, many pets get abandoned")}
+{ walk_out3, abandon,@ frames: 22 (leave suddenly, often as an expression of disapproval; "She walked out on her husband and children") }
+{ [forget3, mind,! ] neglect,@ frames: 28 (forget to do something; "Don't forget to call the chairman of the board to the meeting!")}
+{ [ neglect, noun.act:neglect,+ noun.person:neglecter,+ attend_to,! ] [ pretermit, noun.cognition:pretermission,+ ] [ omit, adj.all:incidental^omissible,+ adj.pert:omissive,+ noun.cognition:omission,+ noun.act:omission1,+ ] drop, miss, leave_out, overlook, overleap, frames: 28,8,9 (leave undone or leave out; "How could I miss that typo?"; "The workers on the conveyor belt miss one out of ten")}
+{ [ elide, noun.process:elision,+ noun.cognition:elision,+ ] omit1,@ frames: 8 (leave or strike out; "This vowel is usually elided before a single consonant") }
+{ drop6, elide,@ frames: 8 (omit (a letter or syllable) in speaking or writing; "New Englanders drop their post-vocalic r's")}
+{ [ exclude1, adj.all:unshared^exclusive,+ noun.cognition:exclusion,+ include,!] [ except, noun.cognition:exception,+ ] leave_out1, leave_off, [ omit1, adj.all:incidental^omissible,+ noun.act:omission1,+ ] take_out, verb.change:eliminate1,@ frames: 8,10 (prevent from being included or considered or accepted; "The bad results were excluded from the report"; "Leave off the top piece") }
+{ [ neglect5, adj.all:negligent,+ noun.attribute:neglect,+ noun.act:neglect2,+ noun.cognition:neglect,+ noun.person:neglecter,+ ] frames: 8,9 (fail to attend to; "he neglects his children") }
+{ [ slack, noun.act:slacking,+ ] neglect5,@ frames: 8 (be inattentive to, or neglect; "He slacks his attention") }
+{ jump, pass_over, skip1, skip_over, miss,@ frames: 8 (bypass; "He skipped a row in the text and so the sentence was incomprehensible") }
+{ [attend_to, neglect,! ] take_to_heart, mind,@ frames: 8,9 (get down to; pay attention to; take seriously; "Attend to your duties, please") }
+{ [ neglect1, adj.all:negligent,+ noun.cognition:neglect,+ noun.person:neglecter,+ ] ignore3, [ disregard, noun.act:disregard1,+ noun.cognition:disregard,+ ] frames: 8,9 (give little or no attention to; "Disregard the errors")}
+{ [ receive8, adj.all:pervious^receptive,+ adj.all:receptive,+ ] regard,@ frames: 9,8 (regard favorably or with disapproval; "Her new collection of poems was not well received")}
+{ [ pretermit1, noun.cognition:pretermission,+ ] neglect1,@ frames: 8 (disregard intentionally or let pass)}
+{ [ slight, noun.act:slight,+ ] [ cold-shoulder, noun.act:cold_shoulder,+ ] verb.communication:dismiss,@ frames: 8,9 (pay no attention to, disrespect; "She cold-shouldered her ex-fiance")}
+{ misremember, remember2,* err,@ frames: 8,9 (remember incorrectly; "I misremembered the date") }
+{ [ err, noun.attribute:errancy,+ noun.attribute:error,+ noun.act:error2,+ ] [ mistake1, noun.communication:mistake,+ noun.cognition:mistake,+ noun.act:mistake,+ ] [ slip, noun.act:slip5,+ slip_up,^] frames: 2 (to make a mistake or be incorrect) }
+{ [ stumble, noun.act:stumble1,+ noun.person:stumbler1,+ ] [slip_up, noun.act:slip-up1,+] [trip_up1, noun.act:trip-up,+] err,@ frames: 2 (make an error; "She slipped up and revealed the name")}
+{ [ mistake2, noun.communication:mistaking,+ ] misidentify, identify2,@ frames: 8,9 (identify incorrectly; "Don't mistake her for her twin sister") }
+{ [ identify2, noun.attribute:identity2,+ ] recognize,@ frames: 8,9 (consider to be equal or the same; "He identified his brother as one of the fugitives") }
+{ [ type, noun.person:type,+ noun.cognition:type,+ ] typecast, identify2,@ frames: 8,9 (identify as belonging to a certain type; "Such people can practically be typed") }
+{ [ identify, adj.all:identifiable,+ noun.state:identification,+ noun.cognition:identification,+ noun.cognition:identity,+ noun.attribute:identity,+ ] place, determine1,@ frames: 8,9 (recognize as being; establish the identity of someone or something; "She identified the man on the `wanted' poster") }
+{ [ date, noun.time:date3,+ noun.time:date5,+ noun.time:date,+ noun.act:dating,+ ] determine1,@ frames: 8 (assign a date to; determine the (probable) date of; "Scientists often cannot date precisely archeological or prehistorical findings") }
+{ [ misdate, noun.time:misdating,+ ] date,@ frames: 8 (assign the wrong date to) }
+{ [ confuse2, noun.act:confusion,+ ] confound1, confuse1,$ mistake2,@ frames: 8,9,21 (mistake one thing for another; "you are confusing me with the other candidate"; "I mistook her for the secretary") }
+{ [ misconstrue1, noun.communication:misconstruction1,+ noun.communication:misconstrual,+ ] [ misinterpret2, noun.communication:misinterpretation,+ ] [ misconceive1, noun.cognition:misconception,+ ] [ misunderstand1, noun.communication:misunderstanding,+ noun.cognition:misunderstanding,+ ] [ misapprehend1, noun.cognition:misapprehension,+ ] be_amiss1, interpret,@ frames: 8 (interpret in the wrong way; "Don't misinterpret my comments as criticism"; "She misconstrued my remarks") }
+{ read8, understand,@ frames: 8,9 (to hear and understand; "I read you loud and clear!") }
+{ [ stump, noun.communication:stumper,+ ] mix_up, perplex,@ frames: 10 (cause to be perplexed or confounded; "This problem stumped her") }
+{ addle, [ muddle, noun.state:muddle,+ ] puddle, verb.creation:confuse,@ frames: 8 (mix up or confuse; "He muddled the issues") }
+{ confuse1, blur, obscure, obnubilate, confuse2,$ verb.change:change1,@ frames: 8,11 (make unclear, indistinct, or blurred; "Her remarks confused the debate"; "Their words obnubilate their intentions") }
+{ muddy, confuse1,@ frames: 11 (cause to become muddy; "These data would have muddied the prediction") }
+{ clear, clear_up, shed_light_on, crystallize, crystallise, crystalize, crystalise, straighten_out, sort_out1, enlighten, [ illuminate, noun.communication:illumination,+ ] [ elucidate, adj.all:instructive^elucidative,+ noun.state:lucidity,+ noun.attribute:lucidity,+ noun.communication:elucidation1,+ noun.communication:elucidation,+ ] verb.communication:clarify,@ frames: 8 (make free from confusion or ambiguity; make clear; "Could you clarify these remarks?"; "Clear up the question of who is at fault")}
+{ read_between_the_lines, interpret,@ frames: 2,8,26 (read what is implied but not expressed on the surface) }
+{ puzzle_over, think,@ frames: 8 (try to solve) }
+{ [ confuse3, noun.cognition:confusion,+ ] throw, fox, [ befuddle, noun.cognition:befuddlement,+ ] fuddle, bedevil, confound2, [ discombobulate, noun.feeling:discombobulation,+ ] verb.stative:be3,@ frames: 9,10,11 (be confusing or perplexing to; cause to be unable to think clearly; "These questions confuse even the experts"; "This question completely threw me"; "This question befuddled even the teacher") }
+{ [ demoralize, noun.state:demoralization,+ ] confuse3,@ frames: 9,10 (confuse or put into disorder; "the boss's behavior demoralized everyone in the office")}
+{ perplex, vex2, stick, get10, [ puzzle, noun.communication:puzzle,+ noun.cognition:puzzlement,+ noun.communication:puzzler,+ puzzle_over,^ puzzle_out,^ ] [ mystify, noun.artifact:mystification,+ noun.act:mystification,+ noun.communication:mystifier,+ noun.cognition:mystery,+ ] [ baffle, noun.cognition:bafflement,+ ] beat, [ pose9, noun.communication:poser,+ ] [ bewilder, noun.cognition:bewilderment,+ ] flummox, [ stupefy, noun.feeling:stupefaction,+ ] nonplus, gravel, amaze1, dumbfound, confuse3,@ frames: 10 (be a mystery or bewildering to; "This beats me!"; "Got me--I don't know the answer!"; "a vexing problem"; "This question really stuck me") }
+{ [ riddle1, noun.communication:riddle,+ ] puzzle,@ frames: 1,10 (set a difficult problem or riddle; "riddle me a riddle") }
+{ [ interpret, noun.communication:interpretation,+ noun.cognition:interpretation1,+ noun.cognition:interpretation,+ ] [ construe, noun.communication:construal,+ verb.stative:construe_with,^ ] see13, understand,@ frames: 8 (make sense of; assign a meaning to; "What message do you see in this letter?"; "How do you interpret his behavior?") }
+{ mythicize, mythicise, interpret,@ frames: 8 (interpret as a myth or in terms of mythology; "mythicize the ancient stories")}
+{ [ literalize, spiritualize,!] literalise, interpret,@ frames: 8 (make literal; "literalize metaphors") }
+{ [ spiritualize, noun.act:spiritualization,+ literalize,!] [ spiritualise, noun.act:spiritualisation,+ ] interpret,@ frames: 8 (give a spiritual meaning to; read in a spiritual sense) }
+{ [ reinterpret, noun.cognition:reinterpretation,+ ] interpret,@ frames: 8 (assign a new or different meaning to) }
+{ [ allegorize, noun.communication:allegory2,+ noun.communication:allegory1,+ noun.communication:allegory,+ ] [ allegorise, noun.communication:allegory2,+ noun.communication:allegory1,+ noun.communication:allegory,+ ] interpret,@ frames: 8 (interpret as an allegory) }
+{ take7, [ read9, noun.communication:reading1,+ ] read8,$ read2,$ interpret,@ frames: 21 (interpret something in a certain way; convey a particular meaning or impression; "I read this address as a satire"; "How should I take this message?") }
+{ [ misread, noun.communication:misreading,+ ] [ misinterpret1, noun.communication:misinterpretation,+ ] read9,@ frames: 8 (interpret wrongly; "I misread Hamlet all my life!") }
+{ [ idealize1, noun.cognition:ideal,+ ] [ idealise1, noun.cognition:ideal,+ ] verb.creation:think_up,@ frames: 2 (form ideals; "Man has always idealized") }
+{ [ read, noun.communication:read,+ noun.person:reader3,+ noun.person:reader,+ noun.cognition:reading,+ ] read1,$ verb.stative:read,$ interpret,@ frames: 2,8,26 (interpret something that is written or printed; "read the advertisement"; "Have you read Salman Rushdie?")}
+{ [ anagram, noun.communication:anagram,+ ] [ anagrammatize, noun.communication:anagram,+ ] [ anagrammatise, noun.communication:anagram,+ ] read,@ frames: 2 (read letters out of order to discover a hidden meaning) }
+{ reread, read,@ frames: 8 (read anew; read again; "He re-read her letters to him") }
+{ dip_into, read,@ frames: 8 (read selectively; read only certain passages from a text) }
+{ empanel, impanel, [ panel, noun.group:panel,+ noun.group:panel1,+ ] select,@ frames: 9 (select from a list; "empanel prospective jurors") }
+{ decipher, trace4, read,@ frames: 8 (read with difficulty; "Can you decipher this letter?"; "The archeologist traced the hieroglyphs")}
+{ make_out, understand,@ frames: 8 (comprehend; "I cannot make out what this politician is saying") }
+{ [ read1, noun.person:reader3,+ noun.person:reader,+ noun.communication:reading2,+ ] verb.communication:speak,@ frames: 2,8,14,15,27 (look at, interpret, and say out loud something that is written or printed; "The King will read the proclamation at noon")}
+{ [ numerate, noun.communication:numeration1,+ ] read1,@ frames: 8 (read out loud as words written numbers)}
+{ [ dictate, noun.person:dictator2,+ noun.communication:dictation2,+ noun.communication:dictation,+ ] read1,@ frames: 8 (say out loud for the purpose of recording; "He dictated a report to his secretary") }
+{ read2, read9,$ verb.communication:predict,@ frames: 8 (interpret the significance of, as of palms, tea leaves, intestines, the sky; also of human behavior; "She read the sky and predicted rain"; "I can't read his strange behavior"; "The fortune teller read his fate in the crystal ball") }
+{ scry, read2,@ frames: 2,8 (divine by gazing into crystals)}
+{ read6, scan, interpret,@ frames: 8,11 (obtain data from magnetic tapes or other digital sources; "This dictionary can be read by the computer") }
+{ [ misread2, noun.communication:misreading,+ ] read6,@ frames: 8 (read or interpret wrongly; "He misread the data") }
+{ [ skim, noun.communication:skim,+ noun.person:skimmer,+ noun.communication:skimming,+ ] skim_over, read,@ frames: 8 (read superficially) }
+{ [ lipread, noun.act:lipreading,+ ] lip-read, speech-read, read,@ frames: 2,8 (interpret by lipreading; of deaf people) }
+{ [ copyread, noun.person:copyreader,+ ] [ subedit, noun.person:subeditor,+ ] copyedit, verb.change:edit,@ frames: 2,8 (edit and correct (written or printed material))}
+{ [ proofread, noun.person:proofreader,+ ] [ proof, noun.communication:proof1,+ ] read,* check2,@ frames: 2,8 (read for errors; "I should proofread my manuscripts") }
+{ [ think, noun.cognition:thought,+ noun.cognition:think,+ noun.person:thinker,+ noun.person:thinker1,+ noun.cognition:thinking,+ think_over,^ think_out,^ verb.creation:think_up,^ ] [ cogitate, adj.all:thoughtful^cogitative,+ adj.pert:cogitative,+ noun.cognition:cogitation,+ ] [ cerebrate, noun.cognition:cerebration,+ ] frames: 2 (use or exercise the mind or one's power of reason in order to make inferences, decisions, or arrive at a solution or judgments; "I've been thinking all day and getting nowhere") }
+{ [ rationalize, noun.act:rationalization,+ ] [ rationalise, noun.act:rationalisation,+ ] cogitate,@ frames: 2 (think rationally; employ logic or reason; "When one wonders why one is doing certain things, one should rationalize")}
+{ rationalize_away, rationalise_away, reason,@ frames: 8 (substitute a natural for a supernatural explanation of; "you can rationalize away all the strange noises you hear--there is no poltergeist in the house!")}
+{ [ think14, noun.cognition:think,+ noun.cognition:thought1,+ ] think,@ frames: 8 (have or formulate in the mind; "think good thoughts") }
+{ think_out, plan1,@ frames: 8 (consider carefully and rationally; "Every detail has been thought out") }
+{ [ philosophize, noun.person:philosophizer,+ noun.cognition:philosophy,+ noun.communication:philosophizing,+ ] [ philosophise, noun.person:philosophiser,+ noun.cognition:philosophy,+ ] think,@ frames: 2 (reason philosophically) }
+{ [ brainstorm, noun.act:brainstorming,+ noun.cognition:brainstorm,+ ] think,@ frames: 2 (try to solve a problem by thinking intensely about it) }
+{ [chew_over, frames: 8 ] [think_over, frames: 8 ] [ meditate, adj.all:thoughtful^meditative,+ noun.cognition:meditation,+ ] [ ponder, noun.person:ponderer,+ ] [ excogitate, adj.all:thoughtful^excogitative,+ ] [ contemplate1, adj.all:thoughtful^contemplative,+ noun.cognition:contemplation,+ ] [ muse, noun.cognition:muse,+ noun.person:muser,+ noun.cognition:musing,+ ] [ reflect, adj.all:thoughtful^reflective,+ adj.all:intellectual^reflective,+ ] [ mull, noun.person:muller6,+ ] mull_over, [ ruminate, adj.all:thoughtful^ruminative,+ noun.cognition:rumination,+ noun.person:ruminator,+ ] [ speculate, adj.all:curious^speculative,+ noun.cognition:speculation1,+ ] think,@ frames: 22 (reflect deeply on a subject; "I mulled over the events of the afternoon"; "philosophers have speculated on the question of God for thousands of years"; "The scientist must stop to observe and start to excogitate") }
+{ premeditate1, meditate,@ frames: 2 (think or reflect beforehand or in advance; "I rarely premeditate, which is a mistake")}
+{ [ theologize, noun.person:theologizer,+ ] [ theologise, noun.person:theologiser,+ ] speculate,@ frames: 2 (make theoretical speculations about theology or discuss theological subjects)}
+{ [ introspect, adj.all:introspective,+ noun.cognition:introspection,+ ] reflect,@ frames: 2 (reflect on one's own thoughts and feelings) }
+{ [think3, noun.cognition:thought3,+ noun.cognition:thought1,+ ][ opine2, noun.cognition:opinion,+ ] [ suppose, noun.cognition:supposition1,+ noun.cognition:supposal1,+ ] imagine1, reckon2, [ guess, noun.communication:guess,+ noun.cognition:guess,+ noun.person:guesser,+ ] expect,@ frames: 26,24 (expect, believe, or suppose; "I imagine she earned a lot of money with her new novel"; "I thought to find her in a bad state"; "he didn't think to find her in the kitchen"; "I guess she is angry at me for standing her up") }
+{ [ assume, adj.all:acknowledged^assumptive,+ noun.communication:assumption,+ noun.cognition:assumption,+ noun.act:assumption1,+ ] [ presume, adj.all:probable^presumptive,+ adj.all:credible^presumptive,+ noun.cognition:presumption1,+ noun.cognition:presumption,+ noun.act:presumption,+ ] take_for_granted, expect,@ frames: 26,8,11 (take to be the case or to be true; accept without verification or proof; "I assume his train was late")}
+{ [ reason, noun.cognition:reason,+ noun.person:reasoner,+ noun.cognition:reasoning,+ ] think,@ frames: 2,26 (think logically; "The children must learn to reason") }
+{ [ theorize1, noun.cognition:theorization,+ ] reason,@ frames: 2 (form or construct theories; "he thinks and theorizes all day")}
+{ [ theorize2, noun.cognition:theorization,+ ] theorize1,$ reason,@ frames: 8 (construct a theory about; "Galileo theorized the motion of the stars")}
+{ [ ratiocinate, adj.all:logical^ratiocinative,+ noun.cognition:ratiocination,+ noun.cognition:rationale,+ noun.person:ratiocinator,+ ] reason,@ frames: 2 (reason methodologically and logically)}
+{ [ speculate1, adj.all:theoretical^speculative,+ noun.cognition:speculation,+ noun.person:speculator1,+ ] [ theorize, noun.person:theorizer,+ noun.cognition:theory2,+ noun.cognition:theory1,+ ] [ theorise, noun.person:theoriser,+ noun.cognition:theorisation,+ noun.cognition:theory2,+ noun.cognition:theory1,+ ] [ conjecture, noun.cognition:conjecture1,+ noun.cognition:conjecture,+ ] [ hypothesize, noun.communication:hypothesis1,+ noun.communication:hypothesis,+ noun.cognition:hypothesis,+ ] hypothesise, [ hypothecate, noun.communication:hypothesis1,+ noun.cognition:hypothesis,+ ] [ suppose1, noun.cognition:supposition1,+ noun.cognition:supposal1,+ ] expect,@ frames: 26 (to believe especially on uncertain or tentative grounds; "Scientists supposed that large dinosaurs lived in swamps") }
+{ [ reconstruct, noun.cognition:reconstruction,+ ] construct, retrace, speculate1,@ frames: 8,26 (reassemble mentally; "reconstruct the events of 20 years ago") }
+{ [ etymologize, noun.communication:etymology,+ noun.cognition:etymology,+ noun.communication:etymologizing,+ ] etymologise, reconstruct,@ noun.cognition:linguistics,;c frames: 2 (construct the history of words) }
+{ [ reason1, noun.state:reason,+ noun.cognition:reason,+ noun.motive:reason,+ noun.person:reasoner,+ ] reason_out, [ conclude, adj.all:conclusive,+ noun.act:conclusion1,+ ] think,@ frames: 26 (decide by reasoning; draw or come to a conclusion; "We reasoned that it was cheaper to rent than to buy a house") }
+{ [ solve, noun.act:solution,+ noun.person:solver,+ noun.communication:solvent,+ noun.act:solving,+ ] work_out4, figure_out, puzzle_out, lick, [ work13, adj.all:possible^workable,+ ] understand,@ reason,* frames: 8 (find the solution to (a problem or question) or understand the meaning of; "did you solve the problem?"; "Work out your problems with the boss"; "this unpleasant situation isn't going to work itself out"; "did you get it?"; "Did you get my meaning?"; "He could not work the math problem") }
+{ [ answer3, adj.all:soluble2^answerable,+ ] resolve4, solve,@ frames: 8,11 (understand the meaning of; "The question concerning the meaning of life cannot be answered") }
+{ riddle, solve,@ frames: 8 (explain a riddle) }
+{ [ cinch, noun.act:cinch1,+ ] master,@ frames: 8 (get a grip on; get mastery of) }
+{ strike, solve,@ frames: 8 (arrive at after reckoning, deliberating, and weighing; "strike a balance"; "strike a bargain") }
+{ [ guess2, noun.person:guesser,+ ] infer2, solve,@ frames: 8,26 (guess correctly; solve by guessing; "He guessed the right number of beans in the jar and won the prize") }
+{ [ answer, noun.communication:answer2,+ ] solve,@ frames: 8 (give the correct answer or solution to; "answer a question"; "answer the riddle") }
+{ [ induce, noun.cognition:induction,+ ] reason1,@ noun.cognition:logic1,;c frames: 26 (reason or establish by induction) }
+{ [ deduce, adj.all:deductive,+ noun.cognition:deduction,+ ] [ infer, noun.cognition:inference,+ ] [ deduct, noun.cognition:deduction,+ ] [ derive, noun.cognition:derivation,+ ] reason1,@ noun.cognition:logic1,;c frames: 26 (reason by deduction; establish by deduction) }
+{ establish3, [ base, noun.cognition:base,+ ] [ ground, noun.motive:ground,+ ] [ found, noun.relation:foundation,+ noun.cognition:foundation,+ ] frames: 21 (use as a basis for; found on; "base a claim on some observation") }
+{ build3, base,@ frames: 8 (found or ground; "build a defense on nothing but the accused person's reputation") }
+{ [ calculate, adj.all:calculable,+ noun.cognition:calculus,+ noun.cognition:calculation,+ noun.act:calculation,+ noun.person:calculator,+ noun.artifact:calculator,+ ] [ cipher, noun.quantity:cipher1,+ ] [ cypher, noun.quantity:cypher1,+ ] [ compute, noun.cognition:computation,+ noun.act:computation,+ noun.person:computer,+ noun.artifact:computer,+ ] work_out6, [ reckon1, noun.person:reckoner,+ noun.cognition:reckoning,+ reckon5,^ ] [ figure, noun.attribute:figure1,+ noun.possession:figure,+ noun.person:figurer,+ noun.cognition:figuring,+ figure_out,^ ] noun.cognition:mathematics,;c reason,@ frames: 8,26 (make a mathematical calculation or computation) }
+{ [ quantize, noun.act:quantization,+ ] [ quantise, noun.act:quantisation,+ ] calculate,@ noun.cognition:physics,;c frames: 8 (apply quantum theory to; restrict the number of possible values of (a quantity) or states of (a physical entity or system) so that certain variables can assume only certain discrete magnitudes that are integral multiples of a common factor; "Quantize gravity")}
+{ work_out7, work_out6,$ verb.stative:amount1,@ frames: 1 (be calculated; "The fees work out to less than $1,000")}
+{ extract2, calculate,@ noun.cognition:mathematics,;c frames: 8 (calculate the root of a number) }
+{ [ process, noun.artifact:processor,+ ] calculate,@ frames: 8 (perform mathematical and logical operations on (data) according to programmed instructions in order to obtain the required information; "The results of the elections were still being processed when he gave his acceptance speech") }
+{ [ prorate, noun.act:proration,+ ] calculate,@ frames: 8 (divide or assess proportionally; "The rent was prorated for the rest of the month") }
+{ [ prorate1, noun.act:proration,+ ] prorate,$ verb.possession:settle,@ frames: 2 (make a proportional settlement or distribution)}
+{ [ miscalculate, noun.act:miscalculation,+ ] [ misestimate, noun.act:misestimation,+ ] calculate,@ noun.cognition:arithmetic,;c frames: 2 (calculate incorrectly; "I miscalculated the number of guests at the wedding") }
+{ [ recalculate, noun.act:recalculation,+ ] calculate,@ noun.cognition:arithmetic,;c frames: 8 (calculate anew; "The costs had to be recalculated") }
+{ get3, calculate,* frames: 8 (reach by calculation; "What do you get when you add up these numbers?") }
+{ [ average, noun.cognition:average,+ ] average_out, noun.cognition:arithmetic,;c calculate,@ frames: 8 (compute the average of) }
+{ [ square, noun.quantity:square,+ ] multiply,@ noun.cognition:arithmetic,;c frames: 8 (raise to the second power) }
+{ [ cube, noun.quantity:cube,+ ] multiply,@ noun.cognition:arithmetic,;c frames: 8 (raise to the third power) }
+{ [ factor, noun.quantity:factor,+ noun.quantity:factor1,+ noun.cognition:factorization,+ noun.cognition:factorisation,+ noun.cognition:factoring,+ ] factor_in, factor_out, calculate,@ noun.cognition:arithmetic,;c frames: 8 (resolve into factors; "a quantum computer can factor the number 15") }
+{ factor1, factor_in1, factor_out1, verb.perception:consider,@ frames: 8 (consider as relevant when making a decision; "You must factor in the recent developments")}
+{ [ add, adj.all:additive,+ adj.all:additive^addable,+ noun.act:addition1,+ noun.artifact:adder,+ subtract,! verb.stative:add_up3,^ ] add_together, verb.communication:add,$ calculate,@ noun.cognition:arithmetic,;c frames: 2,8 (make an addition by combining numbers; "Add 27 and 49, please!") }
+{ foot, foot_up, add,@ noun.cognition:arithmetic,;c frames: 8 (add a column of numbers)}
+{ [ subtract, adj.all:subtractive,+ noun.act:subtraction1,+ noun.act:subtraction,+ add,!] [ deduct1, noun.act:deduction,+ ] take_off, calculate,@ noun.cognition:arithmetic,;c frames: 2,8 (make a subtraction; "subtract this amount from my paycheck") }
+{ carry_back, deduct1,@ frames: 8 (deduct a loss or an unused credit from taxable income for a prior period) }
+{ [ multiply, adj.all:increasing^multiplicative,+ noun.act:multiplication,+ noun.quantity:multiplier,+ divide,!] calculate,@ noun.cognition:arithmetic,;c frames: 8 (combine by multiplication; "multiply 10 by 15")}
+{ raise, multiply,@ noun.cognition:arithmetic,;c frames: 8 (multiply (a number) by itself a specified number of times: 8 is 2 raised to the power 3) }
+{ [ divide, adj.all:divisible,+ noun.act:division1,+ multiply,! frames: 8 ] [ fraction, noun.quantity:fraction,+ ] calculate,@ noun.cognition:arithmetic,;c frames: 2 (perform a division; "Can you divide 49 by seven?") }
+{ halve, divide,@ noun.cognition:arithmetic,;c frames: 8,11 (divide by two; divide into halves; "Halve the cake") }
+{ [ quarter, noun.act:quartering,+ ] divide,@ noun.cognition:arithmetic,;c frames: 8,11 (divide by four; divide into quarters) }
+{ [ interpolate, noun.cognition:interpolation,+ ] [ extrapolate, noun.cognition:extrapolation,+ ] calculate,@ noun.cognition:mathematics,;c frames: 8 (estimate the value of) }
+{ [ differentiate, noun.act:differentiation1,+ integrate,! frames: 2 ] calculate,@ noun.cognition:mathematics,;c frames: 8 (calculate a derivative; take the derivative) }
+{ [ integrate, noun.cognition:integral,+ noun.act:integration3,+ noun.artifact:integrator,+ differentiate,! frames: 2 ] calculate,@ noun.cognition:mathematics,;c frames: 8 (calculate the integral of; calculate by integration) }
+{ [ analyze3, noun.person:analyst1,+ noun.act:analysis1,+ ] analyse2, [ psychoanalyze, noun.person:psychoanalyst,+ ] psychoanalyse, verb.body:treat,@ noun.cognition:psychiatry,;c frames: 9,8 (subject to psychoanalytic treatment; "I was analyzed in Vienna by a famous psychiatrist") }
+{ [ analyze1, noun.person:analyst,+ noun.artifact:analyzer,+ synthesize,!] [ analyse1, noun.artifact:analyser,+ ] [break_down, noun.cognition:breakdown,+ ] [ dissect, noun.cognition:dissection,+ noun.act:dissection2,+ ] take_apart, frames: 8 (make a mathematical, chemical, or grammatical analysis of; break down into components or essential features; "analyze a specimen"; "analyze a sentence"; "analyze a chemical compound") }
+{ parse, analyze1,@ noun.cognition:grammar,;c frames: 8 (analyze syntactically by assigning a constituent structure to (a sentence)) }
+{ [ synthesize, noun.person:synthesizer,+ noun.artifact:synthesizer,+ analyze1,!] [ synthesise, noun.person:synthesiser,+ noun.artifact:synthesiser,+ noun.process:synthesis,+ noun.cognition:synthesis1,+ noun.cognition:synthesis,+ ] verb.change:combine2,@ frames: 8 (combine so as to form a more complex, product; "his operas synthesize music and drama in perfect harmony"; "The liver synthesizes vitamins")}
+{ synthesize1, verb.change:change,@ frames: 1 (combine and form a synthesis; "Vitamin D only synthesizes when sunlight is available")}
+{ [ analyze, noun.person:analyst,+ noun.cognition:analysis,+ ] [ analyse, noun.artifact:analyser,+ ] [ study2, noun.act:study,+ ] [ examine, noun.cognition:examination3,+ ] canvass2, frames: 8 (consider in detail and subject to an analysis in order to discover essential features or meaning; "analyze a sonnet by Shakespeare"; "analyze the evidence in a criminal trial"; "analyze your real motives") }
+{ [ anatomize, noun.act:anatomy,+ ] analyze,@ frames: 8 (analyze down to the smallest detail; "This writer anatomized the depth of human behavior")}
+{ [ botanize, noun.cognition:botany,+ ] [ botanise, noun.cognition:botany,+ ] analyze1,@ frames: 2 (collect and study plants) }
+{ [ diagnose, noun.act:diagnosis,+ noun.act:diagnosing,+ ] name, analyze,@ frames: 8 (determine or distinguish the nature of a problem or an illness through a diagnostic analysis)}
+{ [ diagnose1, noun.act:diagnosis,+ noun.act:diagnosing,+ ] analyze,@ noun.act:medicine,;c frames: 9 (subject to a medical analysis)}
+{ [ explore3, adj.all:exploratory,+ noun.act:exploration,+ ] diagnose1,@ noun.act:medicine,;c frames: 8 (examine (organs) for diagnostic purposes) }
+{ put_out_feelers, explore3,@ frames: 1,2 (make some preliminary investigations or test the waters) }
+{ [ explore2, adj.all:exploratory,+ noun.cognition:exploration,+ noun.act:exploration,+ ] explore3,$ diagnose,@ frames: 8 (examine minutely) }
+{ plumb2, explore2,@ frames: 8 (examine thoroughly and in great depth)}
+{ [ survey, noun.communication:survey,+ noun.act:survey2,+ ] appraise, analyze,@ frames: 8 (consider in a comprehensive way; "He appraised the situation carefully before acting") }
+{ [ survey1, noun.act:survey1,+ noun.person:surveyor,+ noun.act:surveying,+ ] verb.change:measure,* calculate,@ frames: 8 (plot a map of (land)) }
+{ [ triangulate, noun.act:triangulation,+ noun.shape:triangle,+ ] survey1,@ frames: 8 (survey by triangulation; "The land surveyor worked by triangulating the plot")}
+{ [ measure, adj.all:measurable,+ noun.artifact:measure,+ noun.Tops:measure,+ noun.act:measure,+ noun.act:measurement,+ noun.person:measurer,+ noun.act:measuring,+ ] [ mensurate, noun.act:mensuration,+ ] measure_out, determine,@ frames: 8 (determine the measurements of something or somebody, take measurements of; "Measure the length of the wall") }
+{ shoot, measure,@ frames: 8 (measure the altitude of by using a sextant; "shoot a star")}
+{ [ triangulate1, noun.cognition:triangulation,+ ] measure,@ frames: 8 (measure by using trigonometry; "triangulate the angle") }
+{ [ caliper, noun.artifact:caliper,+ ] [ calliper, noun.artifact:calliper,+ ] measure,@ frames: 8 (measure the diameter of something with calipers) }
+{ [ survey2, noun.person:surveyor1,+ ] study2,@ frames: 8 (make a survey of; for statistical purposes) }
+{ [ prospect, noun.person:prospector,+ ] search,@ frames: 2 (explore for useful or valuable things or substances, such as minerals) }
+{ [ research, noun.cognition:research,+ noun.act:research,+ noun.person:researcher,+ ] [ search, noun.act:search2,+ noun.person:searcher,+ ] [ explore, adj.all:explorative,+ adj.all:exploratory,+ noun.cognition:exploration,+ ] verb.communication:investigate,@ frames: 8 (inquire into; "the students had to research the history of the Second World War for their history project"; "He searched for information on his relatives on the web"; "Scientists are exploring the nature of consciousness") }
+{ [google, noun.communication:Google,+] search,@ noun.cognition:computing,;c frames: 2,8,9 (search the internet (for information) using the Google search engine; "He googled the woman he had met at the party"; "My children are googling all day")}
+{ mapquest, search,@ noun.cognition:computing,;c frames: 8 (search for a location and directions by means of the MapQuest program; "you can just mapquest the restaurant")}
+{ re-explore, explore,@ frames: 8 (explore anew; "We need to re-explore Colonialism") }
+{ cast_about, beat_about, cast_around, search,@ frames: 2,22 (search anxiously) }
+{ [ explore1, adj.all:explorative,+ adj.all:exploratory,+ noun.cognition:exploration,+ noun.act:exploration2,+ noun.person:explorer,+ ] verb.communication:investigate,@ frames: 8 (travel to or penetrate into; "explore unknown territory in biology") }
+{ [ pioneer, noun.person:pioneer,+ ] explore1,@ frames: 8 (open up and explore a new area; "pioneer space")}
+{ [ cave, noun.object:cave,+ ] [ spelunk, noun.person:spelunker,+ ] explore1,@ frames: 2 (explore natural caves) }
+{ [ discriminate, adj.all:discriminating^discriminative,+ adj.all:discriminating^discriminatory,+ noun.cognition:discrimination,+ noun.person:discriminator,+ ] know_apart, distinguish,@ frames: 8,21 (recognize or perceive the difference) }
+{ subtilize, discriminate,@ frames: 8 (mark fine distinctions and subtleties, as among words) }
+{ [ distinguish, noun.cognition:distinction,+ ] separate1, [ differentiate1, noun.event:difference,+ noun.attribute:difference,+ noun.cognition:differentiation,+ noun.person:differentiator,+ ] secern1, secernate, severalize, severalise, tell1, tell_apart, compare,* identify,@ frames: 8,9,16 (mark as different; "We distinguish several kinds of maple") }
+{ [ label, noun.substance:label,+ ] distinguish,@ frames: 8 (distinguish (an element or atom) by using a radioactive isotope or an isotope of unusual mass for tracing through chemical reactions) }
+{ treat, react,@ frames: 21 (regard or consider in a specific way; "I treated his advances as a joke")}
+{ bristle, react,@ frames: 22 (react in an offended or angry manner; "He bristled at her suggestion that he should teach her how to use the program") }
+{ [ label1, noun.substance:label,+ ] distinguish,@ frames: 8 (distinguish (as a compound or molecule) by introducing a labeled atom) }
+{ [ sex, noun.group:sex,+ noun.attribute:sex,+ ] tell1,@ frames: 8 (tell the sex (of young chickens)) }
+{ [ individualize, noun.cognition:individualization,+ noun.person:individual,+ ] [ individualise, noun.cognition:individualisation,+ ] distinguish,@ frames: 8 (make or mark or treat as individual; "The sounds were individualized by sharpness and tone") }
+{ distinguish2, [ mark9, noun.communication:mark2,+ noun.communication:marker,+ ] [ differentiate2, noun.event:difference,+ noun.attribute:difference,+ noun.cognition:differentiation,+ ] verb.communication:mark2,$ verb.communication:characterize,@ frames: 10,11 (be a distinctive feature, attribute, or trait; sometimes in a very positive sense; "His modesty distinguishes him from his peers") }
+{ [ identify1, adj.all:identifiable,+ noun.act:identification,+ noun.cognition:identity,+ ] discover3, key, key_out, distinguish1, describe, [ name1, noun.communication:name,+ noun.communication:naming,+ ] classify,* frames: 8,9,11 (identify as in botany or biology, for example) }
+{ [ catalogue, noun.communication:catalogue1,+ noun.communication:catalogue,+ noun.person:cataloguer,+ noun.person:cataloger,+ ] [ catalog, noun.communication:catalog1,+ noun.communication:catalog,+ ] classify,@ frames: 8 (make an itemized list or catalog of; classify; "He is cataloguing his photographic negatives") }
+{ [ compare, noun.attribute:compare,+ noun.relation:comparison,+ noun.act:comparison,+ noun.act:comparing,+ ] verb.stative:compare,$ analyze,@ frames: 8,9,11,21 (examine and note the similarities or differences of; "John compared his haircut to his friend's"; "We compared notes after we had both seen the movie") }
+{ [ analogize, noun.cognition:analogy,+ noun.act:analogy,+ ] [ analogise, noun.cognition:analogy,+ noun.act:analogy,+ ] compare,@ frames: 2 (make an analogy) }
+{ [ syllogize, noun.person:syllogizer,+ noun.cognition:syllogism,+ ] [ syllogise, noun.person:syllogiser,+ noun.cognition:syllogism,+ ] reason1,@ frames: 2 (reason by syllogisms) }
+{ [ compare1, adj.pert:comparative,+ noun.attribute:compare,+ noun.attribute:comparison,+ noun.act:comparing,+ ] liken, [ equate, noun.person:equal,+ noun.act:equation,+ noun.act:equating,+ ] verb.perception:consider,@ frames: 20,21 (consider or describe as similar, equal, or analogous; "We can compare the Han dynasty to the Romans"; "You cannot equate success in financial matters with greed") }
+{ [ reconsider, noun.communication:reconsideration,+ noun.cognition:reconsideration,+ ] consider,@ frames: 8,33 (consider again; give new consideration to; usually with a view to changing; "Won't you reconsider your decision?")}
+{ reconsider1, reconsider,$ noun.act:legislation,;c consider,@ frames: 8 (consider again (a bill) that had been voted upon before, with a view to altering it)}
+{ come_round, come_around, reconsider,* verb.change:change,@ frames: 2,22 (change one's position or opinion; "He came around to our point of view") }
+{ [ classify, adj.pert:classificatory,+ noun.group:class5,+ noun.group:class2,+ noun.group:class1,+ noun.group:classification,+ noun.cognition:classification,+ noun.act:classification,+ noun.person:classifier,+ noun.group:class,+ ] [ class, noun.group:class,+ ] [ sort, noun.cognition:sort,+ noun.process:sort,+ noun.person:sorter,+ noun.artifact:sorter,+ noun.process:sorting,+ noun.act:sorting,+ ] [ assort, noun.act:assortment,+ ] sort_out, separate, categorize,@ compare,* frames: 8,9 (arrange or order by classes or categories; "How would you classify these pottery shards--are they prehistoric?")}
+{ [ isolate5, adj.all:separate^isolable,+ noun.process:isolation,+ ] separate,@ noun.cognition:psychology,;c frames: 8 (separate (experiences) from the emotions relating to them)}
+{ [ refer, noun.cognition:reference1,+ ] classify,@ frames: 21 (think of, regard, or classify under a subsuming principle or with a general group or in relation to another; "This plant can be referred to a known species") }
+{ reclassify, classify,@ frames: 8 (classify anew, change the previous classification; "The zoologists had to reclassify the mollusks after they found new species") }
+{ [ size, noun.attribute:size1,+ noun.attribute:size,+ ] sort,@ frames: 8 (sort according to size) }
+{ [ dichotomize, noun.act:dichotomization,+ noun.group:dichotomy,+ ] [ dichotomise, noun.act:dichotomisation,+ ] classify,@ frames: 8,11 (divide into two opposing groups or kinds) }
+{ [ pigeonhole, noun.cognition:pigeonhole,+ noun.cognition:pigeonholing,+ ] [ stereotype, noun.cognition:stereotype,+ ] [ stamp, noun.group:stamp,+ ] classify,@ frames: 9,8,20,21 (treat or classify according to a mental stereotype; "I was stereotyped as a lazy Southern European")}
+{ [ group, noun.Tops:group,+ noun.act:grouping,+ ] classify,@ frames: 8,9 (arrange into a group or groups; "Can you group these shapes together?") }
+{ regroup, group,@ frames: 8 (reorganize into new groups) }
+{ [ bracket, noun.group:bracket,+ ] group,@ frames: 31 (classify or group) }
+{ [ collocate, noun.act:collocation,+ ] [ lump13, noun.person:lumper,+ noun.object:lump,+ ] [ chunk13, noun.group:chunk,+ noun.cognition:chunking,+ ] group,@ frames: 8,9 (group or chunk together in a certain order or place side by side) }
+{ [ categorize, noun.group:categorization,+ noun.cognition:categorization,+ noun.act:categorization,+ noun.group:category,+ noun.cognition:category2,+ ] categorise, compare,* reason,@ frames: 8,9 (place into or assign to a category; "Children learn early on to categorize") }
+{ [ grade, noun.cognition:grade,+ noun.state:gradation,+ noun.act:gradation,+ noun.act:grading1,+ ] classify,@ frames: 8 (determine the grade of or assign a grade to) }
+{ [ grade5, noun.act:gradation,+ noun.person:grader,+ noun.act:grading1,+ ] [ score5, noun.cognition:score,+ noun.person:scorer2,+ noun.act:scoring,+ ] [ mark, noun.act:marking,+ ] evaluate,@ frames: 2,8 (assign a grade or rank to, according to one's evaluation; "grade tests"; "score the SAT essays"; "mark homework") }
+{ rate, [ rank, noun.state:rank,+ ] range, [ order, noun.attribute:order1,+ noun.act:ordering,+ ] [ grade3, noun.cognition:grade,+ noun.state:grade,+ noun.state:gradation,+ noun.act:gradation,+ noun.person:grader,+ noun.act:grading,+ ] [ place1, noun.communication:place2,+ ] judge,@ frames: 8,9 (assign a rank or rating to; "how would you rank these students?"; "The restaurant is rated highly in the food guide") }
+{ superordinate, rank,@ frames: 8,11,9,10 (place in a superior order or rank; "These two notions are superordinated to a third")}
+{ shortlist, rank,@ frames: 8,9 (put someone or something on a short list) }
+{ [ seed, noun.person:seed,+ ] rank,@ noun.act:sport,;c frames: 9 (distribute (players or teams) so that outstanding teams or players will not meet in the early rounds) }
+{ [ reorder, noun.act:reordering,+ ] order,@ frames: 8,9 (assign a new order to) }
+{ countermarch, reorder,@ frames: 2 (change the order of soldiers during a march) }
+{ outclass, subordinate,@ noun.act:sport,;c frames: 9,8 (cause to appear in a lower class; "The Yankees outclassed Cincinnati") }
+{ [ subordinate, noun.person:subordinate,+ noun.state:subordination,+ ] rank,@ frames: 8 (rank or order as less important or consider of less value; "Art is sometimes subordinated to Science in these schools") }
+{ [ place3, noun.communication:place2,+ ] come_in, come_out, rank13,@ frames: 6,7 (take a place in a competition; often followed by an ordinal; "Jerry came in third in the Marathon") }
+{ come13, rank13,@ frames: 4,22 (have a certain priority; "My family comes first") }
+{ [ rank13, noun.state:rank,+ noun.person:ranker1,+ noun.person:ranker,+ noun.state:ranking,+ ] verb.stative:be3,@ frames: 8,11 (take or have a position relative to others; "This painting ranks among the best in the Western World") }
+{ [ prioritize, noun.state:priority,+ noun.attribute:priority,+ ] prioritise, order,@ frames: 8 (assign a priority to; "we have too many things to do and must prioritize") }
+{ [ sequence, noun.act:sequence,+ noun.group:sequence,+ noun.attribute:sequence,+ noun.artifact:sequencer,+ ] order,@ frames: 8 (arrange in a sequence) }
+{ [downgrade, upgrade,! ] rate,@ frames: 8 (rate lower; lower in value or esteem) }
+{ [upgrade, downgrade,!] rate,@ frames: 8 (rate higher; raise in value or esteem) }
+{ [ rate1, noun.cognition:rating,+ noun.act:rating,+ ] value2, evaluate,@ frames: 8 (estimate the value of; "How would you rate his chances to become President?"; "Gold was rated highly among the Romans") }
+{ [ contrast, noun.relation:contrast,+ noun.cognition:contrast1,+ noun.act:contrast,+ ] distinguish,@ frames: 8 (put in opposition to show or emphasize differences; "The middle school teacher contrasted her best student's work with that of her weakest student")}
+{ [ have_the_distinction, noun.attribute:distinction,+ ] distinguish,@ frames: 8 (be distinguished from others of a similar type by virtue of a notable characteristic; "it has the distinction of being the cheapest restaurant in town")}
+{ severalize1, severalise1, distinguish,@ frames: 8 (distinguish or separate) }
+{ [ contradistinguish, noun.cognition:contradistinction,+ ] distinguish,@ frames: 8 (distinguish by contrasting qualities) }
+{ [ collate, noun.act:collation1,+ ] compare,@ frames: 8 (compare critically; of texts) }
+{ [ check, noun.cognition:check,+ noun.act:check5,+ noun.person:checker,+ ] check_up_on, look_into, [check_out, noun.act:checkout,+ ] suss_out, check_over, go_over1, check_into, examine,@ frames: 8 (examine so as to determine accuracy, quality, or condition; "check the brakes"; "Check out the engine") }
+{ [ check1, noun.communication:check1,+ ] check_off, mark8, mark_off, tick_off, tick, check,$ check2,$ verify1,@ frames: 8 (put a check mark on or near or next to; "Please check each name on the list"; "tick off the items"; "mark off the units") }
+{ [ receipt, noun.communication:receipt,+ ] mark8,@ frames: 8 (mark or stamp as paid) }
+{ [see3, frames: 28] [ check2, noun.cognition:check1,+ noun.act:check5,+ ] insure, see_to_it, ensure, control1, ascertain, assure, verb.communication:see,$ verify1,@ frames: 26 (be careful or certain to do something; make certain of something; "He verified that the valves were closed"; "See that the curtains are closed"; "control the quality of the product") }
+{ [ control11, noun.person:controller,+ noun.cognition:control2,+ ] noun.communication:archaism,;u check2,@ frames: 8 (verify by using a duplicate register for comparison; "control an account") }
+{ [ check12, noun.act:check5,+ ] check2,$ verify1,@ frames: 8 (verify by consulting a source or authority; "check the spelling of this word"; "check your facts") }
+{ [double-check, noun.cognition:double_check,+] check2,@ frames: 2,8 (check once more to be absolutely sure) }
+{ cross-check, check2,@ frames: 8,26 (check out conflicting sources; crosscheck facts, for example) }
+{ cinch1, assure,@ frames: 8 (make sure of) }
+{ [ card, noun.communication:card1,+ ] check2,@ frames: 9 (ask someone for identification to determine whether he or she is old enough to consume liquor; "I was carded when I tried to buy a beer!") }
+{ [spot-check, noun.act:spot_check,+] check2,@ frames: 2,8 (pick out random samples for examination in order to ensure high quality) }
+{ [ authenticate, noun.communication:authentication,+ noun.act:authentication,+ noun.person:authenticator,+ ] verify1,* verb.communication:certify,@ frames: 8,11 (establish the authenticity of something) }
+{ [ verify1, adj.all:supportive^verificatory,+ adj.all:objective^verifiable,+ adj.all:empirical^verifiable,+ noun.cognition:verification,+ noun.person:verifier,+ ] confirm,@ frames: 8,26,11 (confirm the truth of; "Please verify that the doors are closed"; "verify a claim") }
+{ [prove, disprove,!] [ demonstrate, adj.all:instructive^demonstrative,+ ] [ establish, noun.cognition:establishment,+ ] show, shew, confirm,@ frames: 8,11,26 (establish the validity of something, as by an example, explanation or experiment; "The experiment demonstrated the instability of the compound"; "The mathematician showed the validity of the conjecture")}
+{ prove_oneself, prove,@ frames: 2 (show one's ability or courage) }
+{ explode1, disprove,@ frames: 8,11 (show (a theory or claim) to be baseless, or refute and make obsolete) }
+{ lay_down, establish2, make13, verb.creation:create,@ frames: 8,26 (institute, enact, or establish; "make laws") }
+{ prove2, prove,@ noun.cognition:mathematics,;c frames: 8 (prove formally; demonstrate by a mathematical, formal proof) }
+{ prove1, authenticate,@ noun.group:law,;c frames: 8 (obtain probate of; "prove a will") }
+{ [ confirm, adj.all:supportive^confirmative,+ adj.all:supportive^confirmatory,+ noun.communication:confirmation,+ noun.cognition:confirmation,+ ] [ corroborate, adj.all:supportive^corroborative,+ adj.all:supportive^corroboratory,+ noun.communication:corroboration,+ ] [ sustain, adj.pert:sustainable,+ ] [ substantiate, adj.all:supportive^substantiative,+ noun.cognition:substantiation,+ noun.act:substantiation,+ ] [ support, noun.act:support2,+ ] [ affirm, adj.all:possible^affirmable,+ noun.act:affirmation,+ negate,!] frames: 8,26,11 (establish or strengthen as with new evidence or facts; "his story confirmed my doubts"; "The evidence supports the defendant") }
+{ [ document, noun.communication:document,+ noun.communication:documentation,+ noun.act:documentation,+ ] support,@ frames: 8,11 (support or supply with references; "Can you document your claims?") }
+{ [ source, noun.communication:source1,+ noun.communication:source,+ ] document,@ frames: 8 (specify the origin of; "The writer carefully sourced her report")}
+{ [ negate, adj.all:negative1,+ affirm,!] contradict, prove,@ noun.cognition:logic1,;c frames: 8,11,26 (prove negative; show to be false) }
+{ [invalidate, validate,! ] nullify, negate,@ frames: 8,11 (show to be invalid) }
+{ [ validate, adj.all:supportive^validatory,+ noun.cognition:validation,+ noun.act:validation,+ invalidate,! ] confirm,@ frames: 8,11 (prove valid; show or confirm the validity of something) }
+{ [ disprove, noun.person:disprover,+ prove,!] [ confute, adj.all:deniable^confutative,+ noun.person:confuter,+ noun.communication:confutation,+ noun.cognition:confutation,+ ] negate,@ frames: 8,11,26 (prove to be false; "The physicist disproved his colleagues' theories") }
+{ [ refute, noun.cognition:refutation,+ noun.act:refutation,+ noun.person:refuter,+ ] [ rebut, noun.person:rebutter,+ ] controvert, disprove,@ frames: 8,11 (prove to be false or incorrect) }
+{ [ falsify, noun.cognition:falsification,+ noun.state:falsity,+ noun.act:falsifying,+ ] disprove,@ frames: 8,11 (prove false; "Falsify a claim") }
+{ digest3, [ endure, noun.attribute:endurance,+ ] stick_out, stomach, [ bear, adj.all:tolerable^bearable,+ ] stand, [ tolerate, adj.all:patient^tolerant,+ adj.all:forgiving^tolerant,+ noun.attribute:toleration,+ noun.act:tolerance,+ ] support4, brook, [ abide, noun.act:abidance,+ ] [ suffer, noun.attribute:sufferance2,+ ] [put_up, frames: 22] verb.communication:permit,@ frames: 8,9 (put up with something or somebody unpleasant; "I cannot bear his constant criticism"; "The new secretary had to endure a lot of unprofessional remarks"; "he learned to tolerate the heat"; "She stuck out two years in a miserable marriage")}
+{ [ accept3, noun.attribute:acceptance,+ ] live_with, swallow3, tolerate,@ frames: 8 (tolerate or accommodate oneself to; "I shall have to accept these unpleasant working conditions"; "I swallowed the insult"; "She has learned to live with her husband's little idiosyncrasies") }
+{ stand_for, hold_still_for, tolerate,@ frames: 8 (tolerate or bear; "I won't stand for this kind of behavior!")}
+{ bear_up, endure,@ frames: 2 (endure cheerfully; "She bore up under the enormous strain") }
+{ take_lying_down, endure,@ frames: 8 (suffer without protest; suffer or endure passively; "I won't take this insult lying down") }
+{ take_it_on_the_chin, verb.social:fail,@ frames: 2 (undergo failure or defeat)}
+{ take_a_joke, put_up,@ frames: 2 (listen to a joke at one's own expense; "Can't you take a joke?") }
+{ [ take9, noun.person:taker1,+ ] [ submit12, noun.act:submission1,+ frames: 22] verb.perception:take,$ verb.perception:undergo4,@ frames: 8 (accept or undergo, often unwillingly; "We took a pay cut") }
+{ [ test6, noun.communication:test,+ noun.act:test3,+ noun.act:test2,+ noun.person:testee,+ ] verb.competition:test,$ verb.communication:test,$ take9,@ frames: 7 (undergo a test; "She doesn't test well") }
+{ sit_out, endure,@ frames: 8 (endure to the end) }
+{ [ evaluate1, adj.all:critical2^evaluative,+ ] pass_judgment, [ judge, noun.person:judge1,+ noun.act:judgment2,+ noun.cognition:judging,+ ] cogitate,@ frames: 8,9,5,24,26 (form a critical opinion of; "I cannot judge some works of modern art"; "How do you evaluate this grant proposal?"; "We shouldn't pass judgment on other people") }
+{ [ stand1, noun.cognition:stand,+ noun.cognition:stance,+ ] judge,@ frames: 22 (have or maintain a position or stand on an issue; "Where do you stand on the War?") }
+{ misjudge, err,@ frames: 8,9 (judge incorrectly) }
+{ [ underestimate1, noun.cognition:underestimation,+ overestimate,!] [ underrate, noun.cognition:underrating,+ ] misjudge,@ frames: 8,9 (make too low an estimate of; "he underestimated the work that went into the renovation"; "Don't underestimate the danger of such a raft trip on this river") }
+{ sell_short, underestimate1,@ frames: 8,9 (underestimate the real value or ability of; "Don't sell your students short--they are just shy and don't show off their knowledge")}
+{ overcapitalize, overcapitalise, overestimate,@ frames: 8,11 (overestimate the market value of; "overcapitalize a property") }
+{ [ overestimate, noun.communication:overestimate,+ noun.communication:overestimation,+ noun.cognition:overestimation,+ underestimate1,! ] [ overrate, noun.cognition:overrating,+ ] misjudge,@ frames: 8,9 (make too high an estimate of; "He overestimated his own powers") }
+{ [ judge2, noun.person:judge1,+ noun.act:judgment2,+ ] decide1,@ frames: 8 (determine the result of (a competition)) }
+{ [ estimate, noun.communication:estimate1,+ noun.communication:estimate,+ noun.cognition:estimate,+ noun.communication:estimation,+ noun.cognition:estimation,+ noun.act:estimation1,+ overestimate,^ underestimate,^ ] gauge, [ approximate, adj.all:inexact^approximative,+ ] [ guess1, noun.communication:guess,+ noun.person:guesser,+ ] [ judge1, noun.person:judge1,+ noun.cognition:judgment,+ noun.cognition:judging,+ ] figure,@ frames: 8,22,26 (judge tentatively or form an estimate of (quantities or time); "I estimate this chicken to weigh three pounds") }
+{ [ quantize1, noun.act:quantization,+ ] quantise1, approximate,@ noun.cognition:telecommunication,;c frames: 8 (approximate (a signal varying continuously in amplitude) by one whose amplitude is restricted to a prescribed set of discrete values)}
+{ misgauge, gauge,@ frames: 8 (gauge something incorrectly or improperly) }
+{ place13, put13, set13, estimate,@ frames: 8 (estimate; "We put the time of arrival at 8 P.M.") }
+{ give, estimate,@ frames: 14 (estimate the duration or outcome of something; "He gave the patient three months to live"; "I gave him a very good chance at success") }
+{ lowball, [ underestimate, noun.cognition:underestimate,+ noun.cognition:underestimation,+ ] estimate,@ frames: 8 (make a deliberately low estimate; "The construction company wanted the contract badly and lowballed") }
+{ [ approve, adj.all:favorable2^approbative,+ adj.all:favorable2^approbatory,+ noun.feeling:approbation,+ noun.communication:approbation,+ noun.feeling:approval,+ disapprove,! ] judge,@ frames: 2,8,9 (judge to be right or commendable; think well of) }
+{ frown_on, frown_upon, disapprove,@ frames: 8 (look disapprovingly upon) }
+{ [ disapprove, noun.feeling:disapproval,+ approve,! ] judge,@ frames: 2,8,9 (consider bad or wrong) }
+{ rubberstamp, approve,@ frames: 8 (approve automatically) }
+{ [choose, frames: 2] take1, [ select, adj.all:exclusive^selective,+ adj.all:discriminating^selective,+ noun.act:selection,+ noun.person:selector,+ ] pick_out, decide,@ frames: 8,9 (pick out, select, or choose from a number of alternatives; "Take any one of these cards"; "Choose a good husband for your daughter"; "She selected a pair of shoes from among the dozen the salesgirl had shown her")}
+{ anoint, choose,@ frames: 10,9 (choose by or as if by divine intervention; "She was anointed the head of the Christian fundamentalist group")}
+{ field, select,@ frames: 9 (select (a team or individual player) for a game; "The Buckeyes fielded a young new quarterback for the Rose Bowl")}
+{ sieve, sift, select,@ frames: 9 (distinguish and separate out; "sift through the job candidates")}
+{ [ draw13, noun.artifact:draw,+ noun.artifact:draw1,+ ] select,@ frames: 20,21 (select or take in from a given group or region; "The participants in the experiment were drawn from a representative population")}
+{ [ dial, noun.artifact:dial1,+ ] select,@ frames: 8 (choose by means of a dial; "dial a telephone number") }
+{ plump12, go12, choose,@ frames: 8,9 (give support (to) or make a choice (of) one out of a group or number; "I plumped for the losing candidates") }
+{ [ pick, noun.act:pick,+ noun.group:pick,+ noun.cognition:pick,+ noun.person:picker1,+ ] choose,@ frames: 8,9,22 (select carefully from a group; "She finally picked her successor"; "He picked his way carefully") }
+{ hand-pick, pick,@ frames: 8,9 (pick personally and very carefully; "the director hand-picked his new team")}
+{ [ elect, adj.all:optional^elective,+ ] choose,@ frames: 8,9,28 (choose; "I elected to have my funds deposited automatically") }
+{ [ excerpt, noun.communication:excerpt,+ ] [ extract, noun.communication:extract,+ ] take_out1, select,@ frames: 8,21 (take out of a literary work in order to cite or copy) }
+{ cull_out, winnow, pick_out,@ frames: 11 (select desirable parts from a group or list; "cull out the interesting letters from the poet's correspondence"; "winnow the finalists from the long list of applicants") }
+{ cream_off, skim_off, select,@ frames: 8,9 (pick the best) }
+{ sieve_out, pick_over, select,@ frames: 8 (separate or remove; "The customer picked over the selection") }
+{ [ assign, noun.act:assignment3,+ ] [ specify5, noun.communication:specification1,+ ] set_apart, select,@ frames: 20,21 (select something or someone for a specific purpose; "The teacher assigned him to lead his classmates in the exercise")}
+{ [ dedicate, noun.event:dedication,+ ] assign,@ frames: 8 (set apart to sacred uses with solemn rites, of a church) }
+{ [ detail, noun.group:detail,+ noun.group:detail1,+ ] assign,@ frames: 21 (assign to a specific task; "The ambulances were detailed to the fire station") }
+{ [ schedule, noun.cognition:schedule,+ noun.act:scheduling,+ ] plan,@ frames: 8,9,20,21 (plan for an activity or event; "I've scheduled a concert next week") }
+{ [ time, noun.time:time6,+ noun.attribute:timing,+ ] schedule,@ frames: 8,9,20,21 (assign a time for an activity or event; "The candidate carefully timed his appearance at the disaster scene") }
+{ [ book, noun.person:booker,+ noun.act:booking1,+ ] schedule,@ frames: 8,9,20,21 (engage for a performance; "Her agent had booked her for several concerts in Tokyo") }
+{ [ calendar, noun.group:calendar,+ noun.communication:calendar1,+ ] schedule,@ frames: 8,9 (enter into a calendar) }
+{ [ slot, noun.time:slot,+ ] schedule,@ frames: 8 (assign a time slot; "slot a television program") }
+{ single_out, choose,@ frames: 8,9 (select from a group; "She was singled out for her outstanding performance") }
+{ choose2, [ prefer, noun.act:preferment,+ noun.cognition:preference1,+ ] [ opt, adj.pert:optative1,+ noun.act:option,+ ] compare,* frames: 8,26 (select as an alternative over another; "I always choose the fish over the meat courses in this restaurant"; "She opted for the job on the East coast") }
+{ opt_out, [cop_out, noun.act:copout,+] choose2,@ frames: 2,22 (choose not to do something, as out of fear of failing; "She copped out when she was supposed to get into the hang glider") }
+{ choose1, judge,@ frames: 26,28 (see fit or proper to act in a certain way; decide to act in a certain way; "She chose not to attend classes and now she failed the exam") }
+{ [ prejudice, noun.cognition:prejudice1,+ ] [ prepossess, noun.cognition:prepossession,+ ] verb.social:influence,@ frames: 10,9 (influence (somebody's) opinion in advance) }
+{ [ bias, noun.cognition:bias,+ ] predetermine1, prejudice,@ frames: 10,9 (cause to be biased) }
+{ [ slant, noun.cognition:slant,+ ] angle, [ weight, noun.quantity:weight2,+ ] bias,@ frames: 8,9 (present with a bias; "He biased his presentation so as to please the share holders") }
+{ [ predispose, noun.cognition:predisposition,+ ] dispose,@ frames: 10 (make susceptible; "This illness predisposes you to gain weight") }
+{ [ dispose, noun.cognition:disposition1,+ indispose,!] [ incline3, noun.feeling:inclination,+ noun.cognition:inclination,+ ] influence,@ frames: 24,10 (make receptive or willing towards an action or attitude or belief; "Their language inclines us to believe them") }
+{ [ indispose, noun.attribute:indisposition,+ dispose,!] [ disincline, noun.attribute:disinclination,+ ] influence,@ frames: 10,24 (make unwilling) }
+{ [ prejudge, noun.cognition:prejudgement,+ ] judge,@ frames: 8,9 (judge beforehand, especially without sufficient evidence) }
+{ [ measure1, noun.artifact:measure,+ noun.act:measure,+ noun.Tops:measure,+ ] [ evaluate, adj.all:critical2^evaluative,+ noun.possession:value,+ noun.attribute:value,+ noun.cognition:evaluation,+ noun.act:evaluation,+ noun.person:evaluator,+ ] [ valuate, noun.cognition:valuation,+ noun.possession:value,+ noun.attribute:value,+ noun.person:valuator,+ ] [ assess, adj.all:taxable^assessable,+ noun.cognition:assessment,+ noun.person:assessor,+ ] [ appraise1, noun.person:appraiser2,+ noun.person:appraiser1,+ noun.cognition:appraisal,+ ] [ value, noun.possession:value,+ noun.person:valuer,+ ] judge,@ frames: 8 (evaluate or estimate the nature, quality, ability, extent, or significance of; "I will have the family jewels appraised by a professional"; "access all the factors when taking a risk") }
+{ [ assess1, adj.all:taxable^assessable,+ noun.attribute:assessment,+ ] assess,$ estimate,@ frames: 8 (estimate the value of (property) for taxation; "Our house hasn't been assessed in years")} 
+{ [ standardize, noun.act:standardization1,+ ] [ standardise, noun.act:standardisation,+ ] evaluate,@ frames: 8 (evaluate by comparing with a standard)}
+{ [ reappraise, noun.cognition:reappraisal,+ ] judge,@ frames: 8 (appraise anew; "Homes in our town are reappraised every five years and taxes are increased accordingly")}
+{ [ reassess, noun.cognition:reassessment,+ ] [ reevaluate, noun.cognition:reevaluation,+ ] assess,@ frames: 8 (revise or renew one's assessment) }
+{ [ censor, noun.person:censor,+ ] evaluate,@ frames: 8 (subject to political, religious, or moral censorship; "This magazine is censored by the government")}
+{ bethink, ponder,@ frames: 8,29 (consider or ponder something carefully; "She bethought her of their predicament") }
+{ [ believe, adj.all:believable4,+ noun.cognition:belief,+ disbelieve,! ] accept,@ frames: 8,26,9 (accept as true; take to be true; "I believed his report"; "We didn't believe his stories from the War"; "She believes in spirits") }
+{ buy9, believe,@ frames: 8 (accept as true; "I can't buy this story") }
+{ hold8, verb.communication:affirm,@ frames: 26 (assert or affirm; "Rousseau's philosophy holds that people are inherently good") }
+{ credit, trust,@ frames: 8,9 (have trust in; trust in the truth or veracity of) }
+{ [ believe2, adj.all:believable4,+ ] credit,@ frames: 9,8 (credit with veracity; "You cannot believe this man"; "Should we believe a publication like the National Enquirer?") }
+{ [ believe1, noun.person:believer,+ ] believe,@ noun.cognition:religion,;c frames: 2,22 (follow a credo; have a faith; be a believer; "When you hear his sermons, you will be able to believe, too") }
+{ [ misbelieve, noun.person:misbeliever,+ ] believe1,@ noun.cognition:religion,;c frames: 2 (hold a false or unorthodox belief) }
+{ [ disbelieve, believe,! ] discredit, reject,@ frames: 8,9 (reject as false; refuse to accept) }
+{ [ include, adj.all:inclusive,+ noun.act:inclusion,+ exclude1,!] consider,@ frames: 8 (consider as part of something; "I include you in the list of culprits") }
+{ count, include,@ frames: 20,21 (include as if by counting; "I can count my colleagues in the opposition") }
+{ [ subsume1, noun.cognition:subsumption,+ ] [ colligate, noun.cognition:colligation,+ ] include,@ frames: 8,21 (consider (an instance of something) as part of a general rule or principle) }
+{ rule_out, eliminate, winnow_out, reject2, frames: 8,9 (dismiss from consideration or a contest; "John was ruled out as a possible suspect because he had a strong alibi"; "This possibility can be eliminated from our consideration") }
+{ [ reject, adj.all:rejective,+ noun.act:rejection,+ accept,! ] judge,@ frames: 8,26,9 (refuse to accept or acknowledge; "I reject the idea of starting a war"; "The journal rejected the student's paper")}
+{ [ repudiate, adj.all:rejective^repudiative,+ noun.communication:repudiation1,+ ] reject,@ frames: 8,11 (refuse to acknowledge, ratify, or recognize as valid; "The woman repudiated the divorce settlement") }
+{ [ recuse, noun.act:recusation1,+ ] reject,@ noun.group:law,;c frames: 9,10 (challenge or except to a judge as being incompetent or interested, in canon and civil law) }
+{ [ accept, adj.all:receptive^acceptant,+ noun.state:acceptation,+ noun.communication:acceptation,+ noun.cognition:acceptance,+ reject,! ] accept1,$ judge,@ frames: 8,26 (consider or hold as true; "I cannot accept the dogma of this church"; "accept an argument") }
+{ [ receive, adj.all:pervious^receptive,+ adj.all:receptive,+ ] accept,@ frames: 8,9 (accept as true or valid; "He received Christ") }
+{ [ approbate, noun.feeling:approbation,+ noun.communication:approbation,+ reprobate,!] accept,@ frames: 8 (accept (documents) as valid) }
+{ [reprobate, approbate,!] reject,@ frames: 8 (reject (documents) as invalid) }
+{ [ doubt, noun.cognition:doubt,+ noun.person:doubter1,+ noun.person:doubter,+ frames: 26 ] disbelieve,@ frames: 8,9 (consider unlikely or have doubts about; "I doubt that she will accept his proposal of marriage") }
+{ [ doubt1, noun.attribute:doubt,+ ] distrust,@ frames: 8,9 (lack confidence in or have doubts about; "I doubt these reports"; "I suspect her true motives"; "she distrusts her stepmother")}
+{ [ discredit1, noun.state:discredit,+ ] verb.communication:dismiss,@ frames: 8 (cause to be distrusted or disbelieved; "The paper discredited the politician with its nasty commentary") }
+{ [ distrust, noun.attribute:distrust,+ noun.cognition:distrust,+ trust,!] [ mistrust, noun.attribute:mistrust,+ noun.cognition:mistrust,+ trust,!] [ suspect, noun.person:suspect,+ noun.cognition:suspicion,+ ] disbelieve,@ frames: 8,9 (regard as untrustworthy; regard with suspicion; have no faith or confidence in) }
+{ lean10, trust,@ frames: 9,10 (rely on for support; "We can lean on this man") }
+{ [ trust, noun.cognition:trust1,+ mistrust,! distrust,! ] believe,@ frames: 22 (have confidence or faith in; "We can trust in our government") }
+{ [ rethink, noun.cognition:rethink,+ frames: 8 ] think1,@ frames: 2 (change one's mind; "He rethought his decision to take a vacation") }
+{ backpedal, rethink,@ frames: 2 (modify one's opinion, make it less strong) }
+{ [ about-face, noun.act:about-face1,+ ] rethink,@ frames: 2 (change one's mind and assume the opposite viewpoint) }
+{ [ surmise, noun.communication:surmise,+ noun.communication:surmisal,+ ] infer,@ frames: 8,26 (infer from incomplete evidence) }
+{ [think1, noun.cognition:thought3,+ noun.cognition:thought1,+ ] believe4, [ consider8, noun.communication:consideration,+ noun.cognition:consideration,+ ] conceive, judge,@ frames: 5,9 (judge or regard; look upon; judge; "I think he is very smart"; "I believe her to be very smart"; "I think that he is her boyfriend"; "The racist conceives such people to be inferior")}
+{ [think15, noun.cognition:thought2,+ ] think1,@ frames: 2 (dispose the mind in a certain way; "Do you really think so?") }
+{ think_of1, [ repute, noun.state:reputation1,+ noun.state:reputation,+ noun.cognition:reputation,+ noun.state:repute,+ ] know_as1, be_known_as1, regard_as, look_upon, look_on, esteem, take_to_be, think1,@ frames: 8,9 (look on as or consider; "she looked on this affair as a joke"; "He thinks of himself as a brilliant musician"; "He is reputed to be intelligent")}
+{ [ feel1, noun.feeling:feelings,+ ] believe4,@ frames: 5,24,20,21 (have a feeling or perception about oneself in reaction to someone's behavior or attitude; "She felt small and insignificant"; "You make me feel naked"; "I made the students feel different about themselves")}
+{ see, consider, reckon, [ view, noun.communication:view,+ noun.cognition:view4,+ noun.cognition:view2,+ ] regard, see13,$ think1,@ frames: 8,5,20,21 (deem to be; "She views this quite differently from me"; "I consider her to be shallow"; "I don't see the situation quite as negatively as you do") }
+{ [ consider5, noun.attribute:consideration,+ noun.act:consideration2,+ ] regard,@ frames: 5,20,21 (regard or treat with consideration, respect, and esteem; "Please consider your family")}
+{ call5, consider,@ frames: 8,9 (consider or regard as being; "I would not call her beautiful") }
+{ like, see,@ frames: 8 (feel about or towards; consider, evaluate, or regard; "How did you like the President's speech last night?") }
+{ relativize, relativise, consider,@ frames: 8 (consider or treat as relative) }
+{ [ identify4, noun.attribute:identification,+ noun.attribute:identity2,+ ] consider,@ frames: 2,22,17 (consider (oneself) as similar to somebody else; "He identified with the refugees") }
+{ [ favor, noun.feeling:favor,+ noun.attribute:favor,+ ] favour, consider,@ frames: 8,10,9,11 (consider as the favorite; "The local team was favored") }
+{ [ abstract, adj.all:theoretical^abstractive,+ noun.cognition:abstraction,+ noun.Tops:abstraction,+ noun.cognition:abstraction2,+ noun.cognition:abstract,+ ] consider,@ frames: 8 (consider a concept without thinking of a specific example; consider abstractly or theoretically) }
+{ [ reify, noun.act:reification,+ ] consider,@ frames: 8 (consider an abstract concept to be real) }
+{ [ hypostatize, noun.act:hypostatization,+ noun.cognition:hypostasis,+ ] [ hypostatise, noun.act:hypostatisation,+ ] reify,@ frames: 8 (construe as a real existence, of a conceptual entity)}
+{ [ idealize, noun.act:idealization,+ noun.cognition:ideal,+ ] [ idealise, noun.process:idealisation,+ noun.cognition:ideal,+ ] consider,@ frames: 8,9 (consider or render as ideal; "She idealized her husband after his death") }
+{ [ romanticize, noun.act:romanticization,+ ] [ romanticise, noun.act:romanticisation,+ ] glamorize1, glamourise1, idealize,@ frames: 8,9 (interpret romantically; "Don't romanticize this uninteresting and hard work!") }
+{ [ deify, noun.person:deification,+ noun.state:deification,+ noun.act:deification,+ noun.person:deity,+ ] idealize,@ frames: 9,8 (consider as a god or godlike; "These young men deify financial success") }
+{ [ apotheosize, noun.person:apotheosis,+ ] [ apotheosise, noun.person:apotheosis,+ ] apotheose, deify,@ frames: 9 (deify or glorify) }
+{ deem, hold1, view_as, take_for, hold8,$ consider,@ frames: 14,5,26 (keep in mind or convey as a conviction or view; "take for granted"; "view as important"; "hold these truths to be self-evident"; "I hold him personally responsible")}
+{ [ respect, noun.act:respect3,+ noun.cognition:respect1,+ noun.state:respect,+ noun.person:respecter,+ disrespect,!] [ esteem1, noun.cognition:esteem,+ noun.feeling:esteem,+ noun.state:esteem,+ disesteem,!] [ value1, adj.all:worthy^valuable,+ noun.cognition:value1,+ ] prize, prise, consider,@ frames: 8,9 (regard highly; think much of; "I respect his judgement"; "We prize his creativity") }
+{ think_the_world_of, respect,@ frames: 9 (esteem very highly; "She thinks the world of her adviser") }
+{ [ disrespect, noun.attribute:disrespect,+ respect,!] [ disesteem, noun.state:disesteem,+ esteem1,!] consider,@ frames: 8,9 (have little or no respect for; hold in contempt) }
+{ [ undervalue1, noun.cognition:undervaluation,+ ] disrespect,@ frames: 8,9 (esteem lightly) }
+{ [ assay, noun.act:assay,+ noun.person:assayer,+ ] analyze,@ frames: 8 (analyze (chemical substances)) }
+{ [ bioassay, noun.cognition:bioassay,+ ] assay,@ frames: 8 (subject to a bio-assay) }
+{ [ value3, noun.possession:value,+ noun.person:valuer,+ ] determine1,@ frames: 21 (fix or determine the value of; assign a value to; "value the jewelry and art work in the estate") }
+{ [ overvalue, noun.communication:overvaluation,+ noun.cognition:overvaluation,+ undervalue,!] [ overestimate2, noun.communication:overestimate,+ noun.cognition:overestimate,+ noun.communication:overestimation,+ underestimate2,!] value3,@ frames: 8 (assign too high a value to; "You are overestimating the value of your old car") }
+{ [ undervalue, noun.cognition:undervaluation,+ overvalue,!] [ underestimate2, noun.cognition:underestimate,+ noun.cognition:underestimation,+ overestimate2,!] value3,@ frames: 8 (assign too low a value to; "Don't underestimate the value of this heirloom-you may sell it at a good price") }
+{ float, value3,@ frames: 8 (allow (currencies) to fluctuate; "The government floated the ruble for a few months") }
+{ [ review, noun.act:review3,+ noun.act:review,+ noun.cognition:review,+ noun.person:reviewer,+ ] [ reexamine, noun.act:reexamination,+ ] examine,@ frames: 8 (look at again; examine again; "let's review your situation") }
+{ [ review1, noun.communication:review,+ ] look_back, [ retrospect, adj.all:retrospective,+ noun.communication:retrospection,+ noun.cognition:retrospection,+ noun.cognition:retrospect,+ ] remember2,@ frames: 8 (look back upon (a period of time, sequence of events); remember; "she reviewed her achievements with pride")}
+{ [ review2, noun.act:review2,+ ] go_over, [ survey3, noun.act:survey2,+ ] verb.perception:inspect,@ frames: 8,9 (hold a review (of troops)) }
+{ [ review4, noun.act:review1,+ ] [brush_up, noun.act:brushup,+ frames: 22] [ refresh, noun.act:refresher,+ ] remember,@ frames: 8 (refresh one's memory; "I reviewed the material before the test") }
+{ [ audit1, noun.person:auditor,+ noun.possession:audit,+ ] [ scrutinize, noun.person:scrutinizer,+ noun.act:scrutiny1,+ noun.act:scrutiny,+ ] [ scrutinise, noun.person:scrutiniser,+ noun.act:scrutiny1,+ noun.act:scrutiny,+ ] [ inspect, noun.person:inspector,+ ] examine,@ frames: 8 (examine carefully for accuracy with the intent of verification; "audit accounts and tax returns") }
+{ [ screen, noun.person:screener,+ noun.act:screening1,+ ] verb.change:eliminate1,* examine,@ frames: 8,9 (examine methodically; "screen the suitcases") }
+{ [ decide, adj.all:decisive1,+ noun.act:decision,+ noun.cognition:deciding,+ frames: 26,29,2 ] [make_up_one's_mind, frames: 2] [ determine, adj.all:decisive^determinant,+ noun.cognition:determination,+ noun.act:determination1,+ frames: 26,29] verb.communication:deliberate,* frames: 8 (reach, make, or come to a decision about something; "We finally decided after lengthy deliberations") }
+{ make12, make,$ estimate,@ frames: 5 (calculate as being; "I make the height about 100 feet") }
+{ make10, make12,$ consider,@ frames: 5 (consider as being; "It wasn't the problem some people made it") }
+{ [ will1, noun.cognition:will1,+ noun.cognition:will,+ noun.act:willing,+ ] determine,@ frames: 8 (determine by choice; "This action was willed and intended") }
+{ [ design6, noun.cognition:design3,+ ] intend,@ frames: 28 (intend or have as a purpose; "She designed to go far in the world of business") }
+{ [ seal, noun.communication:seal,+ ] decide,@ frames: 8,26 (decide irrevocably; "sealing dooms") }
+{ [ decide1, adj.all:decisive1,+ noun.cognition:deciding,+ ] [ settle, noun.communication:settlement,+ noun.person:settler2,+ ] [ resolve1, noun.communication:resolve,+ ] [ adjudicate, adj.pert:adjudicative,+ adj.pert:adjudicatory,+ noun.person:judge,+ ] verb.change:end1,@ frames: 8,11 (bring to an end; settle conclusively; "The case was decided"; "The judge decided the case in favor of the plaintiff"; "The father adjudicated when the sons were quarreling over their inheritance") }
+{ [ adjust, noun.possession:adjustment,+ noun.person:adjustor,+ ] decide1,@ frames: 8 (decide how much is to be paid on an insurance claim)}
+{ decide2, decide,> verb.communication:induce,@ frames: 10 (cause to decide; "This new development finally decided me!") }
+{ [ purpose, noun.attribute:purpose1,+ ] [ resolve2, noun.communication:resolve,+ noun.act:resolution,+ ] decide,@ frames: 26,28 (reach a decision; "he resolved never to drink again") }
+{ [ determine1, noun.cognition:determination,+ noun.act:determination1,+ ] [ set4, noun.cognition:set1,+ ] frames: 8,11,26,27 (fix conclusively or authoritatively; "set the rules") }
+{ [ filiate, noun.relation:filiation,+ ] determine1,@ noun.group:law,;c frames: 8 (fix the paternity of; "The court filiated the child born out of wedlock")}
+{ [ format10, noun.communication:format,+ noun.communication:formatting,+ ] determine1,@ frames: 8 (determine the arrangement of (data) for storage and display (in computer science))}
+{ [ charge12, noun.possession:charge2,+ ] set4,@ frames: 8 (set or ask for a certain price; "How much do you charge for lunch?"; "This fellow charges $100 for a massage") }
+{ [ determine3, noun.act:determination,+ ] verb.stative:define,@ frames: 11 (fix in scope; fix the boundaries of; "the tree determines the border of the property") }
+{ [ initialize, noun.communication:initialization,+ ] initialise, determine1,@ frames: 8 (assign an initial value to a computer program) }
+{ [ determine2, noun.cognition:determinant,+ ] [ shape, noun.cognition:shape,+ noun.cognition:shape1,+ noun.process:shaping,+ ] mold, [ influence, noun.phenomenon:influence,+ noun.person:influence,+ noun.act:influence,+ ] [ regulate, noun.act:regulation,+ ] verb.creation:cause,@ frames: 11,29 (shape or influence; give direction to; "experience often determines ability"; "mold public opinion")}
+{ [ miscreate, noun.event:miscreation,+ ] shape,@ frames: 8,11 (shape or form or make badly; "Our miscreated fantasies")}
+{ carry_weight, influence,@ frames: 1,2 (have influence to a specified degree; "Her opinion carries a lot of weight")}
+{ [ decide6, adj.all:decisive,+ ] determine2,@ frames: 11 (influence or determine; "The vote in New Hampshire often decides the outcome of the Presidential election") }
+{ reshape, shape,@ frames: 8 (shape anew or differently; "The new foreign minister reshaped the foreign policy of his country") }
+{ [ time1, noun.time:time6,+ noun.artifact:timer,+ ] determine2,@ frames: 8,11 (set the speed, duration, or execution of; "we time the process to manufacture our cars very precisely") }
+{ [ index, noun.relation:index,+ noun.act:indexation,+ ] regulate,@ frames: 8 (adjust through indexation; "The government indexes wages and prices") }
+{ [ pace, noun.time:pace1,+ noun.attribute:pace1,+ noun.animal:pacer2,+ ] determine2,@ frames: 8,9 (regulate or set the pace of; "Pace your efforts") }
+{ [ predetermine, noun.cognition:predetermination,+ noun.act:predetermination,+ ] determine2,@ frames: 11,26,29 (determine beforehand) }
+{ [ predestine, noun.event:predestination,+ ] [ foreordain, noun.cognition:foreordination,+ ] [ preordain, noun.cognition:preordination,+ ] predetermine,@ frames: 26,29,11 (foreordain or determine beforehand) }
+{ [ jinx, noun.person:jinx,+ ] predestine,@ frames: 10 (foredoom to failure; "This project is jinxed!") }
+{ [ predestine1, noun.cognition:predestination,+ ] predestinate, [ foreordain1, noun.cognition:foreordination,+ ] predetermine,@ noun.cognition:theology,;c frames: 9,10,26 (foreordain by divine will or decree) }
+{ [ cogitate1, adj.all:thoughtful^cogitative,+ noun.cognition:cogitation1,+ noun.cognition:cogitation,+ ] ponder,@ frames: 8,29 (consider carefully and deeply; reflect upon; turn over in one's mind) }
+{ see8, verb.communication:deliberate1,@ frames: 29 (deliberate or decide; "See whether you can come tomorrow"; "let's see--which movie should we see tonight?") }
+{ [ contemplate2, noun.cognition:contemplation,+ ] consider1,@ frames: 8,33 (consider as a possibility; "I contemplated leaving school and taking a full-time job") }
+{ [ premeditate, noun.cognition:premeditation1,+ noun.cognition:premeditation,+ ] verb.communication:deliberate1,@ frames: 8 (consider, ponder, or plan (an action) beforehand; "premeditated murder") }
+{ [brood, frames: 2 ] [dwell, verb.stative:dwell_on,^ ] verb.emotion:worry12,@ frames: 22 (think moodily or anxiously about something) }
+{ [ study4, noun.cognition:study1,+ noun.cognition:study4,+ ] [ meditate2, adj.all:thoughtful^meditative,+ noun.cognition:meditation1,+ noun.cognition:meditation,+ ] [ contemplate, adj.all:thoughtful^contemplative,+ noun.cognition:contemplation,+ ] think,@ frames: 2 (think intently and at length, as for spiritual purposes; "He is meditating in his study") }
+{ [ plan, noun.cognition:plan1,+ noun.cognition:plan,+ noun.artifact:planner,+ noun.person:planner,+ noun.act:planning,+ ] think,@ frames: 8,33 (make plans for something; "He is planning a trip with his family") }
+{ chart, plan,@ frames: 8 (plan in detail; "Bush is charting a course to destroy Saddam Hussein") }
+{ plan1, be_after, intend,@ frames: 8,28,33 (have the will and intention to carry out some action; "He plans to be in graduate school next year"; "The rebels had planned turmoil and confusion") }
+{ [draw_a_bead_on, frames: 8] [ aspire, adj.all:ambitious^aspirant,+ noun.feeling:aspiration,+ noun.attribute:aspiration,+ noun.person:aspirant,+ noun.person:aspirer,+ ] aim, [shoot_for, frames: 8 ] plan1,@ frames: 28 (have an ambitious plan or a lofty goal) }
+{ [ overshoot, noun.act:overshoot,+ ] aim,@ frames: 8 (aim too high; "The plan overshoots its aim") }
+{ overrun3, overshoot,@ frames: 1,11 (run beyond or past; "The plane overran the runway")}
+{ [ hope, noun.person:hoper,+ ] go_for, plan1,@ frames: 8,33 (intend with some possibility of fulfilment; "I hope to have finished this work by tomorrow evening")}
+{ project, [ propose, noun.person:proposer,+ noun.communication:proposition1,+ ] plan,@ frames: 8,28,33 (present for consideration, examination, criticism, etc.; "He proposed a new plan for dealing with terrorism"; "She proposed a new theory of relativity"; "The candidate projects himself as a moderate and a reformer") }
+{ [ offer, noun.communication:offering,+ ] propose,@ frames: 8 (put forward for consideration; "He offered his opinion") }
+{ introduce, propose,@ frames: 8 (put before (a body); "introduce legislation") }
+{ [ frame, noun.person:framer,+ noun.act:framing,+ ] compose, draw_up, plan,@ frames: 8 (make up plans or basic details for; "frame a policy") }
+{ [ conspire, adj.pert:conspirative,+ noun.person:conspirator,+ noun.cognition:conspiracy,+ ] [ cabal, noun.cognition:cabal,+ ] complot, conjure, [ machinate, noun.cognition:machination,+ noun.person:machinator,+ ] plot,@ frames: 2,22 (engage in plotting or enter into a conspiracy, swear together; "They conspired to overthrow the government") }
+{ [ coconspire, noun.person:coconspirator,+ ] conspire,@ frames: 2 (conspire together; "The two men coconspired to cover up the Federal investigation")}
+{ [ counterplot, noun.cognition:counterplot,+ ] plot,@ frames: 2,8 (make a plot in response to another plot) }
+{ [ conspire1, adj.pert:conspirative,+ noun.communication:conspiracy,+ ] [ collude, adj.all:covert^collusive,+ noun.communication:collusion,+ noun.cognition:collusion,+ ] verb.social:interact,@ frames: 1,2,28 (act in unison or agreement and in secret towards a deceitful or illegal purpose; "The two companies conspired to cause the value of the stock to fall") }
+{ scheme, [ intrigue, noun.cognition:intrigue,+ ] [ connive, noun.communication:connivance,+ ] plot,@ frames: 2,22 (form intrigues (for) in an underhand manner) }
+{ [ plot, noun.person:plotter1,+ noun.cognition:plot,+ ] plan,@ frames: 2,8 (plan secretly, usually something illegal; "They plotted the overthrow of the government") }
+{ [ scheme1, noun.cognition:scheme2,+ noun.cognition:scheme1,+ noun.person:schemer,+ ] plan,@ frames: 8,33 (devise a system or form a scheme for) }
+{ [ intend, noun.act:intention,+ noun.cognition:intent,+ ] mean, think6, frames: 28,8 (have in mind as a purpose; "I mean no harm"; "I only meant to help you"; "She didn't think to harm me"; "We thought to return early that night") }
+{ mean5, intend1,@ frames: 21 (destine or designate for a certain purpose; "These flowers were meant for you")}
+{ [ aim1, noun.cognition:aim1,+ noun.cognition:aim,+ ] [ purpose1, noun.attribute:purpose1,+ noun.cognition:purpose,+ ] [ purport, noun.communication:purport,+ ] propose1, intend,@ frames: 28 (propose or intend; "I aim to arrive at noon") }
+{ [ want1, noun.person:wanter,+ noun.feeling:want,+ ] verb.contact:want,$ verb.communication:demand,@ frames: 9 (wish or demand the presence of; "I want you here at noon!") }
+{ intend1, [ destine, noun.cognition:destination,+ ] designate, specify, plan,@ frames: 24 (design or destine; "She was intended to become the director") }
+{ [ design, noun.artifact:design1,+ noun.cognition:design1,+ noun.act:design,+ ] intend1,@ frames: 21,8 (plan something for a specific role or purpose or effect; "This room is not designed for work") }
+{ slate, designate,@ frames: 24,9 (designate or schedule; "He slated his talk for 9 AM"; "She was slated to be his successor") }
+{ [ mastermind, noun.person:mastermind,+ ] [ engineer, noun.person:engineer,+ ] [ direct, adj.all:leading^directive,+ ] [ organize, noun.person:organizer1,+ noun.group:organization1,+ noun.act:organization1,+ noun.act:organization,+ ] [ organise, noun.act:organisation1,+ noun.group:organisation1,+ noun.act:organisation,+ ] [ orchestrate, noun.act:orchestration2,+ ] plan,@ frames: 8 (plan and direct (a complex undertaking); "he masterminded the robbery") }
+{ choreograph, mastermind,@ frames: 8 (plan and oversee the development and details of; "The meeting between the two Presidents had been carefully choreographed")}
+{ [ map1, noun.artifact:map,+ ] explore1,@ frames: 8 (explore or survey for the purpose of making a map; "We haven't even begun to map the many galaxies that we know exist") }
+{ [ chart13, noun.artifact:chart,+ ] verb.creation:map,@ frames:8 (make a chart of; "chart the territory") }
+{ plat, [ plot1, noun.communication:plot1,+ ] verb.creation:map,@ frames: 8 (make a plat of; "Plat the town")}
+{ [lay_out, noun.act:layout,+] plan,@ frames: 8 (provide a detailed plan or design; "She laid out her plans for the new house") }
+{ block_out, lay_out,@ frames: 8 (plan where and when songs should be inserted into a theatrical production, or plan a theatrical production in general) }
+{ loft, lay_out,@ frames: 2 (lay out a full-scale working drawing of the lines of a vessel's hull) }
+{ [ engineer1, noun.person:engineer,+ noun.act:engineering1,+ ] verb.creation:design,@ frames: 8 (design as an engineer; "He engineered the water supply project") }
+{ entertain, think_of3, toy_with, flirt_with, think_about3, contemplate2,@ frames: 33,8 (take into consideration, have in view; "He entertained the notion of moving to South America") }
+{ dally1, trifle1, play1, consider1,@ frames: 22 (consider not very seriously; "He is trifling with her"; "She plays with the thought of moving to Tasmania") }
+{ [ calculate3, adj.all:calculable,+ noun.act:calculation,+ ] [ estimate1, noun.person:estimator,+ ] reckon3, count_on1, figure1, [ forecast, noun.communication:forecast,+ noun.person:forecaster,+ ] judge,@ frames: 8,26 (judge to be probable) }
+{ [ miscalculate1, noun.act:miscalculation,+ ] misestimate1, misjudge,@ frames: 2,8 (judge incorrectly; "I had misestimated his determination") }
+{ reckon13, count12, estimate,@ frames: 22 (take account of; "You have to reckon with our opponents"; "Count on the monsoon") }
+{ count2, bet, [ depend, noun.state:dependency,+ ] swear10, [ rely11, adj.all:dependent^reliant,+ noun.state:reliance,+ noun.cognition:reliance,+ ] bank2, look2, calculate5, reckon5, trust,@ frames: 8,9 (have faith or confidence in; "you can count on me to help you any time"; "Look to your friends for support"; "You can bet on that!"; "Depend on your family in times of crisis") }
+{ calculate2, aim2, direct1, intend1,@ frames: 8 (specifically design a product, event, or activity for a certain public) }
+{ [ associate, adj.all:associative,+ adj.all:associative^associable,+ adj.all:associatory,+ noun.state:association2,+ noun.cognition:association,+ dissociate,! ] tie_in, [ relate, noun.Tops:relation,+ ] [ link, noun.state:link,+ noun.relation:linkage,+ ] [ colligate2, noun.state:colligation,+ noun.cognition:colligation,+ ] link_up, [ connect, adj.all:conjunctive^connective,+ noun.cognition:connection,+ noun.cognition:connexion,+ ] think,@ frames: 17,31 (make a logical or causal connection; "I cannot connect these two pieces of evidence in my mind"; "colligate these facts"; "I cannot relate these events at all")}
+{ [ interrelate, noun.relation:interrelation,+ ] verb.stative:interrelate,$ relate,@ frames: 8 (place into a mutual relationship; "I cannot interrelate these two events")}
+{ [ correlate, adj.all:related2^correlative,+ noun.relation:correlation,+ noun.cognition:correlation1,+ noun.cognition:correlation,+ ] verb.stative:correlate,$ relate,@ frames: 8,11 (bring into a mutual, complementary, or reciprocal relation; "I cannot correlate these two pieces of information")}
+{ decouple, [ dissociate, adj.all:divisible^dissociative,+ noun.state:dissociation,+ noun.act:dissociation,+ associate,!] distinguish,@ frames: 8 (regard as unconnected; "you must dissociate these two events!"; "decouple our foreign policy from ideology") }
+{ [ identify3, noun.act:identification,+ ] associate,@ frames: 17,31 (conceive of as united or associated; "Sex activity is closely identified with the hypothalamus") }
+{ free-associate, associate,@ noun.act:psychotherapy,;c frames: 17,31 (associate freely; "Let's associate freely to bring up old memories") }
+{ [ debate, noun.communication:debate1,+ noun.person:debater,+ ] verb.communication:deliberate1,@ frames: 2,9 (argue with one another; "We debated the question of abortion"; "John debated Mary") }
+{ [ conclude1, noun.act:conclusion,+ ] verb.change:terminate1,@ frames: 8,11 (bring to a close; "The committee concluded the meeting")}
+{ find10, [ feel, noun.cognition:feel,+ noun.cognition:feeling3,+ ] verb.communication:find1,$ conclude,@ frames: 26 (come to believe on the basis of emotion, intuitions, or indefinite grounds; "I feel that he doesn't like me"; "I find him to be obnoxious"; "I found the movie rather entertaining")}
+{ pin_down, peg_down, nail_down, narrow_down, narrow, [ specify2, noun.person:specifier,+ ] determine3,@ frames: 8,21 (define clearly; "I cannot narrow down the rules for this game") }
+{ concretize, specify2,@ frames: 8,11 (make something concrete) }
+{ [ rule, noun.communication:rule,+ noun.person:ruler,+ verb.stative:rule_out,^ ] [ decree, noun.communication:decree,+ ] decide,@ frames: 26 (decide with authority; "The King decreed that all firstborn males should be killed") }
+{ overrule, overturn, override, overthrow, [ reverse, noun.act:reversal6,+ ] rule,@ frames: 8,11 (rule against; "The Republicans were overruled when the House voted on the bill")}
+{ presuppose, suppose5, verb.communication:imply1,@ noun.cognition:logic,;c frames: 11 (require as a necessary antecedent or precondition; "This step presupposes two prior ones") }
+{ [ presuppose1, noun.cognition:presupposition,+ ] suppose6, assume,@ frames: 26 (take for granted or as a given; suppose beforehand; "I presuppose that you have done your work") }
+{ [ postulate, noun.communication:postulate,+ noun.communication:postulation,+ noun.person:postulator,+ ] [ posit, noun.communication:posit,+ noun.act:position4,+ ] presuppose1,@ frames: 8,11,26 (take as a given; assume as a postulate or axiom; "He posited three basic laws of nature")}
+{ insist, [ assert, adj.all:possible^assertable,+ noun.communication:assertion1,+ ] postulate,@ frames: 8 (postulate positively and assertively; "The letter asserts a free society") }
+{ [ premise, noun.communication:premise,+ ] [ premiss, noun.communication:premiss,+ ] presuppose1,@ frames: 8 (take something as preexisting and given) }
+{ [ react, adj.all:sensitive1^reactive,+ noun.phenomenon:reaction1,+ noun.act:reaction,+ ] [ respond, adj.all:responsive,+ adj.all:responsive^respondent,+ noun.person:responder,+ noun.person:respondent,+ ] verb.social:act,@ frames: 2,12,22 (show a response or a reaction to something) }
+{ flip, flip_out, react,@ frames: 2 (react in an excited, delighted, or surprised way; "he flipped when he heard that he was accepted into Princeton University")}
+{ [ overreact, noun.act:overreaction,+ ] react,@ frames: 2,12,22 (show an exaggerated response to something; "Don't overreact to the bad news--take it easy")}
+{ [ answer5, noun.act:answer,+ ] react,@ frames: 1,4 (react to a stimulus or command; "The steering of my new car answers to the slightest touch") }
+{ accept8, respond,@ frames: 11 (be sexually responsive to, used of a female domesticated mammal; "The cow accepted the bull") }
+{ stool, react,@ frames: 1 (react to a decoy, of wildfowl) }
+{ [ respond1, noun.person:responder,+ ] respond,@ frames: 1,2 (respond favorably or as hoped; "The cancer responded to the aggressive therapy") }
+{ greet, react,@ frames: 5,17,20,21 (react to in a certain way; "The President was greeted with catcalls") }
+{ explode, react,@ frames: 2 (show a violent emotional reaction; "The boss exploded when he heard of the resignation of the secretary") }
+{ [ accept1, adj.all:receptive^acceptive,+ adj.all:acceptive,+ adj.all:receptive^acceptant,+ noun.state:acceptation,+ noun.act:acceptation,+ noun.state:acceptance,+ noun.act:acceptance,+ ] react,@ frames: 8,9 (react favorably to; consider right and proper; "People did not accept atonal music at that time"; "We accept the idea of universal health care") }
+{ [ answer2, noun.act:answer,+ ] respond,@ frames: 8 (respond to a signal; "answer the door"; "answer the telephone") }
+{ [ expect, adj.all:hopeful^expectant,+ noun.feeling:expectation,+ noun.cognition:expectation,+ ] anticipate, judge,@ frames: 8,26,28 (regard something as probable or likely; "The meteorologists are expecting rain for tomorrow") }
+{ [ expect1, adj.all:hopeful^expectant,+ noun.state:expectation,+ noun.cognition:expectancy,+ ] [look, frames: 28] await, [ wait, noun.person:waiter1,+ frames: 28] expect,$ frames: 8,9,33 (look forward to the probable occurrence of; "We were expecting a visit from our relatives"; "She is looking to a promotion"; "he is waiting to be drafted")}
+{ look_forward, expect1,@ frames: 22 (expect or hope for; "I look to hear from you soon") }
+{ look_to1, expect1,@ frames: 8,9,11 (turn one's interests or expectations towards; "look to the future"; "this method looks to significant wavings") }
+{ [ anticipate1, noun.person:anticipator,+ ] [ previse, noun.cognition:prevision2,+ ] foreknow, foresee, know2,@ frames: 26 (realize beforehand) }
+{ tell, guess2,@ frames: 2,8,26 (discern or comprehend; "He could tell that she was unhappy") }
+{ [ believe3, noun.cognition:belief1,+ ] [ trust2, noun.cognition:trust,+ noun.person:truster,+ ] expect,@ frames: 26 (be confident about something; "I believe that he will come back from the war") }
+{ [ ascertain1, adj.all:determinable^ascertainable,+ ] learn1,@ frames: 26 (learn or discover with certainty) }
+{ [ discover, noun.communication:discovery,+ noun.cognition:discovery,+ noun.act:discovery,+ ] [ find9, noun.act:find,+ find_out,^ ] learn1,@ frames: 26 (make a discovery; "She found that he had lied to her"; "The story is false, so far as I can discover") }
+{ rake_up, discover,@ frames: 8,26 (bring to light; "He raked up the misdeeds of his predecessor")}
+{ [ price, noun.possession:price,+ noun.cognition:pricing,+ ] ascertain1,@ frames: 8 (ascertain or learn the price of; "Have you priced personal computers lately?") }
+{ ferret_out, ferret, discover,@ frames: 8,26 (search and discover through persistent investigation; "She ferreted out the truth") }
+{ [ concentrate, noun.cognition:concentration,+ noun.attribute:concentration1,+ frames: 2] [ focus, noun.cognition:focus,+ noun.cognition:focussing,+ noun.cognition:focusing,+ ] [ center, noun.cognition:center1,+ noun.cognition:centering,+ ] [ centre, noun.location:Canada,;r noun.location:Britain,;r ] pore, rivet, think,@ frames: 13 (direct one's attention on something; "Please focus on your studies and not on your hobbies") }
+{ rivet1, rivet,$ engross,@ frames: 11,10 (hold (someone's attention); "The discovery of the skull riveted the paleontologists")}
+{ recall6, focus,@ frames: 2,9,10 (cause one's (or someone else's) thoughts or attention to return from a reverie or digression; "She was recalled by a loud laugh") }
+{ [ think9, noun.cognition:thought1,+ noun.cognition:think,+ ] concentrate,@ frames: 7 (focus one's attention on a certain state; "Think big"; "think thin") }
+{ think_of4, choose,@ frames: 8 (choose in one's mind; "Think of any integer between 1 and 25") }
+{ occur, come14, verb.stative:become,@ frames: 4 (come to one's mind; suggest itself; "It occurred to me that we should hire another secretary"; "A great idea then came to her") }
+{ [ allow, adj.all:admissible^allowable,+ ] take_into_account, calculate3,@ frames: 8,24 (allow or plan for a certain possibility; concede the truth or validity of something; "I allow for this possibility"; "The seamstress planned for 5% shrinkage after the first wash") }
+{ budget_for, allow,@ frames: 8,9 (calculate enough money for; provide for in the budget; "I have not budgeted for these expensive meals") }
+{ [ budget, noun.possession:budget3,+ noun.possession:budget2,+ ] calculate,@ frames: 22,2 (make a budget) }
+{ [ allow1, noun.possession:allowance,+ ] [ appropriate, adj.all:alienable^appropriable,+ ] [ earmark, noun.attribute:earmark,+ ] set_aside, [ reserve, noun.possession:reserve,+ ] verb.possession:assign1,@ frames: 8,15 (give or assign a resource to a particular person or cause; "I will earmark this money for your research"; "She sets aside time for meditation every day" ) }
+{ [ mind2, noun.cognition:mind3,+ noun.cognition:mind6,+ ] think_about5,@ frames: 8,9 (be concerned with or about something or somebody) }
+{ [beware, frames: 2] mind3, verb.perception:watch1,@ frames: 8 (be on one's guard; be cautious or wary about; be alert to; "Beware of telephone salesmen") }
+{ [ amaze, noun.feeling:amazement,+ ] [ astonish, noun.feeling:astonishment,+ ] astound, surprise,@ frames: 9,10 (affect with wonder; "Your ability to speak six languages amazes me!") }
+{ dazzle, amaze,@ frames: 9,10 (amaze or bewilder, as with brilliant wit or intellect or skill; "Her arguments dazzled everyone"; "The dancer dazzled the audience with his turns and jumps")}
+{ [ surprise, noun.act:surprise,+ noun.event:surprise,+ noun.feeling:surprise,+ noun.act:surprisal,+ ] verb.emotion:affect,@ frames: 9,10 (cause to be surprised; "The news really surprised me") }
+{ explode_a_bombshell, surprise,@ frames: 9,10 (utter or do something surprising; "Father exploded a bombshell when he forbade us to go to the prom")}
+{ catch1, surprise,@ frames: 9 (discover or come upon accidentally, suddenly, or unexpectedly; catch somebody doing something or in a certain state; "She caught her son eating candy"; "She was caught shoplifting") }
+{ catch10, catch1,$ verb.perception:see2,@ frames: 9,8 (become aware of; "he caught her staring out the window") }
+{ flabbergast, boggle, bowl_over, surprise,@ frames: 9,10 (overcome with amazement; "This boggles the mind!")}
+{ [ impute, noun.cognition:imputation,+ ] [ ascribe, adj.all:attributable^ascribable,+ noun.cognition:ascription,+ ] assign2, [ attribute, adj.all:attributable,+ ] judge,@ frames: 15,21 (attribute or credit to; "We attributed this quotation to Shakespeare"; "People impute great cleverness to cats") }
+{ [ impute1, noun.communication:imputation,+ ] impute,$ attribute,@ frames: 15,21 (attribute (responsibility or fault) to a cause or source; "The teacher imputed the student's failure to his nervousness")}
+{ sensualize, [ carnalize, adj.pert:carnal,+ ] impute,@ frames: 8 (ascribe to an origin in sensation) }
+{ [ credit1, noun.communication:credit,+ ] attribute,@ frames: 15,17 (give someone credit for something; "We credited her for saving our jobs") }
+{ reattribute, attribute,@ frames: 8,15 (attribute to another source) }
+{ [ anthropomorphize, noun.cognition:anthropomorphism,+ ] [ anthropomorphise, noun.cognition:anthropomorphism,+ ] attribute,@ frames: 15 (ascribe human features to something) }
+{ [ personify, noun.act:personification,+ noun.body:person,+ noun.Tops:person,+ ] personate, impute,@ frames: 8 (attribute human qualities to something; "The Greeks personated their gods ridiculous") }
+{ accredit, [ credit12, noun.communication:credit2,+ noun.communication:credit1,+ frames: 22] attribute,@ frames: 9,10 (ascribe an achievement to; "She was not properly credited in the program") }
+{ [ blame, adj.all:guilty^blameable,+ adj.all:guilty^blamable,+ noun.communication:blame1,+ ] charge10, attribute,@ frames: 8 (attribute responsibility to; "We blamed the accident on her"; "The tragedy was charged to her inexperience") }
+{ register, verb.perception:register,$ verb.body:affect,@ frames: 1 (enter into someone's consciousness; "Did this event register in your parents' minds?") }
+{ [ impress, adj.all:effective^impressive,+ ] ingrain, [ instill, noun.act:instilling,+ ] verb.emotion:affect,@ frames: 21 (produce or try to produce a vivid impression of; "Mother tried to ingrain respect for our elders in us") }
+{ recognize1, recognise1, [ realize1, noun.cognition:realization,+ ] [ realise1, noun.cognition:realisation,+ ] agnize, agnise, know1,@ frames: 8,26 (be fully aware or cognizant of) }
+{ elicit, deduce,@ noun.cognition:logic1,;c frames: 8,26 (derive by reason; "elicit a solution") }
+{ [ penetrate, adj.all:perceptive^penetrative,+ noun.cognition:penetration,+ ] fathom, bottom, understand,@ frames: 8,26,9 (come to understand) }
+{ trace, follow, verb.social:follow2,$ verb.change:follow1,$ study2,@ frames: 8 (follow, discover, or ascertain the course of development of something; "We must follow closely the economic development is Cuba"; "trace the student's progress"; "trace one's ancestry") }
+{ [ wonder, noun.cognition:wonder,+ noun.person:wonderer1,+ ] [ inquire, adj.all:inquiring^inquisitive,+ adj.all:curious^inquisitive,+ ] enquire2, verb.communication:question,@ frames: 29 (have a wish or desire to know something; "He wondered who had built this beautiful church") }
+{ project1, externalize, externalise, attribute,@ noun.cognition:psychology,;c frames: 8,21 (regard as objective) }
+{ [ internalize, noun.cognition:internalization,+ ] [ internalise, noun.cognition:internalisation,+ ] [ interiorize, noun.location:interior1,+ ] interiorise, attribute,@ noun.cognition:psychology,;c frames: 8,21 (incorporate within oneself; make subjective or personal; "internalize a belief") }
+{ think_of2, have_in_mind1, mean1, associate,@ frames: 8,9 (intend to refer to; "I'm thinking of good food when I talk about France"; "Yes, I meant you when I complained about people who gossip!") }
+{ [ demarcate, noun.location:demarcation,+ ] [ delimit, noun.location:delimitation,+ ] [ delimitate, noun.location:delimitation,+ ] verb.change:limit1,@ frames: 8,11 (set, mark, or draw the boundaries of something) }
+{ [ demarcate1, noun.location:demarcation,+ noun.cognition:demarcation,+ ] distinguish,@ frames: 8,11 (separate clearly, as if by boundaries) }
+{ [ plumb, noun.act:plumbing,+ ] verb.change:measure,@ frames: 8 (measure the depth of something) }
+{ draw, make, verb.creation:create_mentally,@ frames: 8 (make, formulate, or derive in the mind; "I draw a line here"; "draw a conclusion"; "draw parallels"; "make an estimate"; "What do you make of his remarks?") }
+{ capitalize, [ capitalise, noun.possession:capital1,+ ] consider,@ frames: 8 (consider expenditures as capital assets rather than expenses) }
+{ [ capitalize1, noun.act:capitalization3,+ noun.possession:capital1,+ ] [ capitalise1, noun.act:capitalisation3,+ noun.possession:capital1,+ noun.possession:capital,+ ] compute,@ frames: 8 (compute the present value of a business or an income) }
+{ overcapitalize1, overcapitalise1, capitalize1,@ frames: 8 (estimate the capital value of (a company) at an unreasonably or unlawfully high level) }
+{ find_out1, catch_out, verb.perception:detect,@ frames: 9 (trap; especially in an error or in a reprehensible act; "He was caught out"; "She was found out when she tried to cash the stolen checks") }
+{ concenter, [ concentre, noun.location:Canada,;r noun.location:Britain,;r ] [ focalize, noun.act:focalization1,+ ] [ focalise, noun.act:focalisation1,+ ] [ focus1, noun.attribute:focus3,+ noun.cognition:focus,+ noun.act:focusing,+ ] verb.change:align,@ frames: 8 (bring into focus or alignment; to converge or cause to converge; of ideas or emotions) }
+{ [ refocus, noun.act:refocusing,+ ] focus1,@ frames: 8 (focus anew; "The group needs to refocus its goals")}
+{ give2, pay, devote, think,@ frames: 15,21 (dedicate; "give thought to"; "give priority to"; "pay attention to") }
+{ [ resign, noun.feeling:resignation,+ ] reconcile, submit, accept,@ frames: 20 (accept as inevitable; "He resigned himself to his fate") }
+{ [ observe, noun.communication:observation,+ noun.cognition:observation2,+ noun.cognition:observation,+ noun.act:observation1,+ noun.act:observation,+ ] keep, maintain, frames: 8 (stick to correctly or closely; "The pianist kept time with the metronome"; "keep count"; "I cannot keep track of all my employees") }
+{ discountenance, disapprove,@ frames: 8 (show disapproval by discouraging; "any measure tending to fuse invalids into a class with special privileges should be discountenanced") }
+{ [ resolve3, noun.act:resolution1,+ ] [ solve1, noun.person:solver,+ noun.act:solving,+ frames: 22 ] compute,@ frames: 8 (find the solution; "solve an equation"; "solve for x") }
+{ [ factorize, noun.cognition:factorization,+ noun.quantity:factor1,+ noun.quantity:factor,+ noun.cognition:factor,+ ] [ factorise, noun.cognition:factorisation,+ ] resolve3,@ frames: 8 (resolve (a polynomial) into factors) }
+{ [ misgive, noun.feeling:misgiving,+ noun.cognition:misgiving2,+ ] verb.emotion:worry1,@ frames: 10 (suggest fear or doubt; "Her heart misgave her that she had acted inexcusably") }
+{ [ align, noun.group:alignment,+ ] array, stand1,@ frames: 9 (align oneself with a group or a way of thinking) }
+{ fall_in_line12, align,@ frames: 22 (agree on (a position))}
+{ believe_in1, believe,@ frames: 8,33 (have a firm conviction as to the goodness of something; "John believes in oat bran") }
+{ [ consider1, noun.cognition:consideration1,+ ] take3, [deal10, frames: 22] look_at, think_about5,@ frames: 8 (take into consideration for exemplifying purposes; "Take the case of China"; "Consider the following case") }
+{ think_about5, think,@ frames: 8,9 (have on one's mind, think about actively; "I'm thinking about my friends abroad"; "She always thinks about her children first") }
+{ [ abstract1, adj.all:theoretical^abstractive,+ noun.cognition:abstract,+ ] consider1,@ frames: 22 (consider apart from a particular case or instance; "Let's abstract away from this particular example") }
+{ plant, implant, verb.communication:communicate1,@ frames: 21 (put firmly in the mind; "Plant a thought in the students' minds") }
+{ [ date1, noun.time:date5,+ noun.time:date,+ ] verb.possession:provide,@ frames: 8 (provide with a dateline; mark with a date; "She wrote the letter on Monday but she dated it Saturday so as not to reveal that she procrastinated") }
+{ [ dateline, noun.communication:dateline,+ ] datemark, date-mark, date1,@ frames: 8 (mark with a date and place; "dateline a newspaper article") }
+{ [ date2, noun.time:date5,+ noun.time:date,+ ] date_stamp, date1,@ verb.contact:stamp1,@ frames: 8 (stamp with a date; "The package is dated November 24") }
+{ arrange, set_up, put, [ order1, noun.group:order,+ noun.group:ordering,+ ] verb.social:organize,@ frames: 8 (arrange thoughts, ideas, temporal events; "arrange my schedule"; "set up one's life"; "I put these memories with those of bygone times") }
+{ [ synchronize, noun.relation:synchrony,+ ] [ synchronise, noun.relation:synchrony,+ ] contemporize, contemporise, arrange,@ frames: 8 (arrange or represent events so that they co-occur; "synchronize biblical events") }
+{ awaken, verb.emotion:affect,@ frames: 9,10 (make aware; "They were awakened to the sad facts") }
+{ [ analyze4, noun.person:analyst2,+ noun.act:analysis,+ noun.artifact:analyzer,+ ] analyse4, frames: 8 (break down into components or essential features; "analyze today's financial market") }
+{ factor_analyse, [factor_analyze, noun.cognition:factor_analysis,+ ] analyze4,@ frames: 8 (to perform a factor analysis of correlational data) }
+{ [ hold4, noun.attribute:hold,+ ] verb.emotion:capture,@ frames: 9,11 (hold the attention of; "The soprano held the audience"; "This story held our interest"; "She can hold an audience spellbound") }
+{ [ re-create, noun.act:re-creation,+ ] verb.creation:create_mentally,@ frames: 8 (form anew in the imagination; recollect and re-form in the mind; "His mind re-creates the entire world") }
+{ drink_in, drink, absorb6,@ frames: 8 (be fascinated or spell-bound by; pay close attention to; "The mother drinks in every word of her son on the stage") }
+{ keep_note, remember1,@ frames: 22 (maintain in the forefront of one's awareness; "He kept note of the location of the soldiers") }
+{ swallow1, verb.change:keep11,@ frames: 8 (keep from expressing; "I swallowed my anger and kept quiet") }
+{ grab, seize, verb.stative:intrigue,@ frames: 10,11 (capture the attention or imagination of; "This story will grab you"; "The movie seized my imagination") }
+{ seize4, [ clutch4, noun.state:clutch,+ ] get_hold_of, verb.emotion:sweep_over,@ frames: 10 (affect; "Fear seized the prisoners"; "The patient was seized with unbearable pains"; "He was seized with a dreadful disease")}
+{ [ pay3, noun.person:payer,+ ] endure,@ frames: 8,22 (bear (a cost or penalty), in recompense for some action; "You'll pay for this!"; "She had to pay the penalty for speaking out rashly"; "You'll pay for this opinion later") }
+{ take_one's_lumps, get_one's_lumps, pay3,@ frames: 2 (suffer the results or consequences of one's behavior or actions)}
+{ break5, solve,@ frames:8 (find the solution or key to; "break the code") }
+{ break6, break5,$ verb.contact:destroy,@ frames: 11,8 (find a flaw in; "break an alibi"; "break down a proof") }
+{ call, verb.communication:challenge1,@ frames: 9 (challenge the sincerity or truthfulness of; "call the speaker on a question of fact") }
+{ [ call13, noun.person:caller3,+ noun.communication:call2,+ ] verb.communication:call9,$ verb.communication:utter2,@ frames: 8 (utter in a loud voice or announce; "He called my name"; "The auctioneer called the bids") }
+{ carry12, include,@ frames: 10 (include, as on a list; "How many people are carried on the payroll?") }
+{ [ think13, noun.cognition:think,+ noun.cognition:thought,+ noun.cognition:thought1,+ ] think,@ frames: 29,8 (ponder; reflect on, or reason about; "Think the matter through"; "Think how hard life in Russia must be these days") }
+{ [ think12, noun.cognition:think,+ noun.cognition:thinking,+ ] think13,$ think,@ frames: 8 (decide by pondering, reasoning, or reflecting; "Can you think what to do next?") }
+{ [ calibrate2, noun.attribute:caliber1,+ ] measure,@ frames: 8 (measure the caliber of; "calibrate a gun") }
+{ [ relegate2, noun.act:relegation2,+ ] [ classify1, adj.pert:classificatory,+ noun.group:class5,+ noun.group:class1,+ noun.group:class,+ noun.group:classification,+ noun.cognition:classification,+ noun.act:classification,+ noun.communication:classifier,+ noun.person:classifier,+ noun.group:class2,+ ] assign3,@ frames: 21 (assign to a class or kind; "How should algae be classified?"; "People argue about how to relegate certain mushrooms")}
+{ [ assign3, noun.act:assignment2,+ ] [ attribute1, noun.cognition:attribution,+ ] judge,@ frames: 21 (decide as to where something belongs in a scheme; "The biologist assigned the mushroom to the proper class")}
+{ truncate, approximate,@ noun.cognition:mathematics,;c frames: 8 (approximate by ignoring all terms beyond a chosen one; "truncate a series")}
+{ acknowledge2, accept,@ frames: 8 (accept as legally binding and valid; "acknowledge the deed")}

@@ -1,0 +1,761 @@
+($RCSfile: verb.stative,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:17:00 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.stative)
+
+{ [ exist, adj.all:existent4,+ adj.all:existent2,+ adj.all:existent,+ noun.state:existence,+ ] [ be, noun.state:being,+ ] frames: 1,2,22 (have an existence, be extant; "Is there a God?") }
+{ [ preexist, adj.all:antecedent^preexistent,+ adj.all:antecedent^pre-existent,+ noun.state:preexistence,+ ] exist,@ frames: 1 (exist beforehand or prior to a certain point in time; "Did this condition pre-exist?") }
+{ kick_around, knock_about, kick_about, exist,@ frames: 1,2 (be around; be alive or active; "Does the old man still kick around?")}
+{ [ coexist, adj.all:synchronous^coexistent,+ ] cohabit1, exist,@ frames: 1,2 (exist together)}
+{ [ coexist1, adj.all:synchronous^coexistent,+ noun.state:coexistence,+ ] coexist,@ frames: 1,2 (coexist peacefully, as of nations) }
+{ be3, frames: 8,9,7,6,4,22 (have the quality of being; (copula, used with an adjective or a predicate noun); "John is rich"; "This is not a good answer") }
+{ account1, be3,@ frames: 11 (be the sole or primary factor in the existence, acquisition, supply, or disposal of something; "Passing grades account for half of the grades given in this exam") }
+{ cut_across, be3,@ frames: 11 (be contrary to ordinary procedure or limitations; "Opinions on bombing the Serbs cut across party lines") }
+{ [ stretch, noun.object:stretch,+ ] stretch_along, be5,@ frames: 4 (occupy a large, elongated area; "The park stretched beneath the train line") }
+{ [ neighbor, noun.object:neighbor,+ ] [ neighbour, noun.object:neighbour,+ ] verb.contact:adjoin2,@ frames: 11 (be located near or adjacent to; "Pakistan neighbors India") }
+{ [ neighbor1, noun.person:neighbor,+ ] [ neighbour1, noun.person:neighbour,+ ] dwell,@ frames: 2 (live or be located as a neighbor; "the neighboring house") }
+{ [begin, end,!] [ start, noun.act:start,+ noun.time:start,+ noun.event:start,+ ] frames: 1,4,11 (have a beginning, in a temporal, spatial, or evaluative sense; "The DMZ begins right over the hill"; "The second movement begins after the Allegro"; "Prices for these homes start at $250,000") }
+{ begin3, [ start3, noun.act:start,+ noun.event:start,+ ] begin,$ begin2,$ be3,@ frames: 4 (have a beginning characterized in some specified way; "The novel begins with a murder"; "My property begins with the three maple trees"; "Her day begins with a workout"; "The semester begins with a convocation ceremony")}
+{ begin4, begin,$ verb.change:begin1,$ be3,@ frames: 4 (have a beginning, of a temporal event; "WW II began in 1939 when Hitler marched into Poland"; "The company's Asia tour begins next month")}
+{ set_in, kick_in, begin,@ frames: 1 (enter a particular state; "Laziness set in"; "After a few moments, the effects of the drug kicked in") }
+{ [ dawn1, noun.time:dawn1,+ noun.event:dawn1,+ ] begin,@ frames: 1 (appear or develop; "The age of computers had dawned") }
+{ [ end, noun.communication:end,+ noun.location:end1,+ noun.location:end2,+ noun.state:end,+ noun.cognition:end,+ noun.event:end,+ noun.time:end,+ noun.location:end,+ begin,!] stop13, [ finish, noun.event:finish2,+ noun.time:finish,+ noun.act:finish,+ ] [ terminate, adj.all:closing^terminative,+ noun.location:terminus,+ ] cease13, frames: 1,4 (have an end, in a temporal, spatial, or quantitative sense; either spatial or metaphorical; "the bronchioles terminate in a capillary bed"; "Your rights stop where you infringe upon the rights of other"; "My property ends by the bushes"; "The symphony ends in a pianissimo") }
+{ conclude2, [ close, noun.time:close,+ noun.act:close,+ noun.communication:closing,+ noun.act:closing2,+ ] end,@ frames: 1,4 (come to a close; "The concert closed with a nocturne by Chopin") }
+{ turn_out2, come_out, end,@ frames: 1 (result or end; "How will the game turn out?") }
+{ [ eventuate, noun.phenomenon:event1,+ ] come_out,@ frames: 1 (come out in the end) }
+{ work_out, turn_out2,@ frames: 1 (happen in a certain way, leading to, producing, or resulting in a certain outcome, often well; "Things worked out in an interesting way"; "Not everything worked out in the end and we were disappointed") }
+{ [ stand4, noun.cognition:stand,+ stand_for,^ stand_out2,^ stand_out,^ stand_by,^ stand_by1,^ verb.competition:stand_firm,^ ] be3,@ frames: 6,7 (be in some specified state or condition; "I stand corrected") }
+{ specify, define, [ delineate, noun.communication:delineation1,+ ] delimit, delimitate, be3,@ frames: 11 (determine the essential quality of) }
+{ [ redefine, noun.communication:redefinition,+ ] define,@ frames: 8 (give a new or different definition to; "She redefined his duties") }
+{ fall4, shine, strike, verb.change:occur,@ frames: 11 (touch or seem as if touching visually or audibly; "Light fell on her face"; "The sun shone on the fields"; "The light struck the golden necklace"; "A strange sound struck my ears") }
+{ run6, occur3,@ frames: 4 (occur persistently; "Musical talent runs in the family") }
+{ occur3, verb.change:appear2,@ frames: 4 (to be found to exist; "sexism occurs in many workplaces"; "precious stones occur in a large area in Brazil") }
+{ collocate, occur3,@ frames: 1 (have a strong tendency to occur side by side; "The words `new' and `world' collocate")}
+{ [ attend, noun.person:attendant1,+ noun.person:attender1,+ noun.person:attender,+ noun.act:attendance,+ miss1,!] go_to, be5,@ noun.act:church,;c frames: 8 (be present at (meetings, church services, university), etc.; "She attends class regularly"; "I rarely attend services at my church"; "did you go to the meeting?") }
+{ sit_in, attend,@ frames: 22 (attend as a visitor; "Can I sit in on your Intermediate Hittite class?")}
+{ [ worship, noun.act:worship,+ noun.person:worshiper,+ noun.person:worshipper,+ ] attend,@ frames: 1,22 (attend religious services; "They worship in the traditional manner") }
+{ [ offer, noun.communication:offer1,+ noun.act:offering,+ ] offer_up, worship,@ frames: 8 (present as an act of worship; "offer prayers to the gods") }
+{ [miss1, attend,!] verb.social:fail2,@ frames: 8 (fail to attend an event or activity; "I missed the concert"; "He missed school for a week") }
+{ cut, [ skip, noun.act:skip,+ noun.person:skipper2,+ ] miss1,@ frames: 8 (intentionally fail to attend; "cut class") }
+{ bunk_off, play_hooky, cut,@ noun.communication:slang,;u frames: 2 (play truant from work or school; "The boy often plays hooky")}
+{ [ be1, noun.Tops:being,+ ] [ live, noun.state:living,+ ] frames: 1,2 (have life, be alive; "Our great leader is no more"; "My grandfather lived until the end of war") }
+{ [ live6, noun.person:liver1,+ noun.cognition:living,+ ] be,* frames: 22 (lead a certain kind of life; live in a certain style; "we had to live frugally after the war") }
+{ [ dissipate4, noun.act:dissipation1,+ ] live6,@ frames: 2 (live a life of pleasure, especially with respect to alcoholic consumption)}
+{ live7, live6,$ frames: 2 (pursue a positive and satisfying existence; "You must accept yourself and others if you really want to live")}
+{ swing1, live6,@ frames: 2 (live in a lively, modern, and relaxed style; "The Woodstock generation attempted to swing freely") }
+{ unlive, live_down, live6,@ frames: 8 (live so as to annul some previous behavior; "You can never live this down!") }
+{ [ wanton1, noun.person:wanton,+ ] live6,@ frames: 2 (indulge in a carefree or voluptuous way of life) }
+{ [ vegetate, adj.pert:vegetative1,+ noun.act:vegetation,+ ] live6,@ frames: 2 (lead a passive existence without using one's body or mind) }
+{ [ pig, noun.animal:pig,+ noun.person:pig,+ ] pig_it, live6,@ frames: 2,22 (live like a pig, in squalor) }
+{ [ bushwhack, noun.person:bushwhacker1,+ ] live6,@ frames: 2 (live in the bush as a fugitive or as a guerilla) }
+{ [ buccaneer, noun.person:buccaneer,+ ] live6,@ frames: 2 (live like a buccaneer) }
+{ [ bachelor, noun.person:bachelor,+ ] bach, live6,@ frames: 2 (lead a bachelor's existence) }
+{ eke_out, live6,@ frames: 8 (live from day to day, as with some hardship; "He eked out his years in great poverty") }
+{ be6, frames: 8,11 (be identical to; be someone or something; "The president of the company is John Smith"; "This is my house")}
+{ [ rusticate, noun.person:rustic,+ noun.state:rustication,+ noun.act:rustication,+ ] reside,@ frames: 2,22 (live in the country and lead a rustic life) }
+{ exist1, [ survive, noun.state:survival,+ ] live1, [ subsist, noun.person:subsister,+ noun.state:subsistence1,+ ] live4,$ frames: 1,2,22,13 (support oneself; "he could barely exist on such a low wage"; "Can you live on $2000 a month in New York City?"; "Many people in the world have to subsist on $1 a day") }
+{ breathe, exist1,@ frames: 1,2 (be alive; "Every creature that breathes") }
+{ [indwell, noun.process:indweller,+] exist,@ frames: 11 (to exist as an inner activating spirit, force, or principle) }
+{ [ freewheel, noun.person:freewheeler,+ ] drift, live1,@ frames: 2 (live unhurriedly, irresponsibly, or freely; "My son drifted around for years in California before going to law school") }
+{ do, fare, make_out, come2, get_along, verb.change:go1,@ frames: 6,7 (proceed or get along; "How is she doing in her new job?"; "How are you making out in graduate school?"; "He's come a long way")}
+{ [ go3, noun.act:going,+ go_with,^ ] frames: 1 (pass, fare, or elapse; of a certain state of affairs or action; "How is it going?"; "The day went well until I got your call") }
+{ go7, be3,@ frames: 6,7 (be or continue to be in a certain condition; "The children went hungry that day") }
+{ [ survive1, noun.state:survival,+ ] last1, live4, live_on, go14, [ endure, noun.state:endurance,+ ] hold_up, hold_out, be1,* live,$ frames: 1,2,8 (continue to live and avoid dying; "We went without water and food for 3 days"; "These superstitions survive in the backwaters of America"; "The race car driver lived through several very serious accidents"; "how long can a person last without food and water?" "One crash victim died, the other lived") }
+{ stand_up, hold_up1, hold_water, last1,@ frames: 1 (resist or withstand wear, criticism, etc.; "Her shoes won't hold up"; "This theory won't hold water") }
+{ [ perennate, noun.plant:perennial,+ noun.process:perennation,+ ] survive1,@ frames: 1 (survive from season to season, of plants) }
+{ live_out, live4,@ frames: 8 (live out one's life; live to the end) }
+{ last_out, [ stay3, noun.animal:stayer,+ ] ride_out, outride, frames: 8 (hang on during a trial of endurance; "ride out the storm") }
+{ outstay1, stay3,@ frames: 11,9 (surpass in staying power; "They outstayed their competitors") }
+{ [ visit4, noun.act:visit3,+ noun.person:visitor,+ ] stay1,@ frames: 9 (stay with as a guest; "Every summer, we visited our relatives in the country for a month")}
+{ make_sense, add_up, be3,@ frames: 1,34 (be reasonable or logical or comprehensible) }
+{ outlive, outlast, [ survive3, noun.person:survivor2,+ ] be1,* frames: 8,9,10,11 (live longer than; "She outlived her husband by many years") }
+{ [ survive2, noun.person:survivor3,+ noun.state:survival,+ succumb,! frames: 8 ] pull_through, pull_round, come_through, make_it, verb.body:recuperate,* verb.competition:overcome3,@ frames: 2 (continue in existence after (an adversity, etc.); "He survived the cancer against all odds") }
+{ fall, verb.possession:fall5,$ verb.change:die,@ frames: 1,2,22 (die, as in battle or in a hunt; "Many soldiers fell at Verdun"; "Several deer have fallen to the same gun"; "The shooting victim fell dead") }
+{ [ succumb, survive2,! ] yield5, verb.change:die,@ frames: 2,22 (be fatally overwhelmed) }
+{ [ constitute, adj.all:essential^constituent,+ ] represent, [make_up, noun.attribute:makeup,+ ] comprise3, be2, frames: 8,11 (form or compose; "This money is my only income"; "The stone wall was the backdrop for the performance"; "These constitute my entire belonging"; "The children made up the chorus"; "This sum represents my entire income for a year"; "These few men comprise his entire army") }
+{ make15, constitute,@ frames: 10 (constitute the essence of; "Clothes make the man") }
+{ [ compose, noun.cognition:component,+ ] make_up,@ frames: 11 (form the substance of; "Greed and ambition composed his personality") }
+{ [ form, noun.communication:form2,+ ] [ constitute3, noun.attribute:constitution,+ noun.artifact:constituent,+ ] make5, be2,@ frames: 11 (to compose or represent; "This wall forms the background of the stage setting"; "The branches made a roof"; "This makes a fine introduction") }
+{ [ chelate, noun.process:chelation2,+ noun.process:chelation1,+ noun.substance:chelate,+ ] form,@ frames: 1 (form a chelate, in chemistry) }
+{ separate, [ divide, noun.location:divide,+ noun.artifact:divider,+ ] frames: 11 (act as a barrier between; stand between; "The mountain range divides the two countries") }
+{ hang_together, [ interdepend, adj.all:dependent^interdependent,+ noun.relation:interdependency,+ noun.relation:interdependence,+ ] verb.contact:connect,@ frames: 1 (be connected; "In my heart I can make the world hang together") }
+{ [ connect2, adj.all:conjunctive^connective,+ ] [ link1, noun.state:link,+ noun.artifact:linkage,+ ] link_up, [ join1, noun.act:jointure,+ noun.shape:juncture,+ noun.act:joining,+ ] unite2, frames: 1,2 (be or become joined or united or linked; "The two streets connect to become a highway"; "Our paths joined"; "The travelers linked up again at the airport") }
+{ articulate, unite2,@ frames: 4 (unite by forming a joint or joints; "the ankle bone articulates with the leg bones to form the ankle bones")}
+{ intercommunicate, interconnect,@ frames: 1 (be interconnected, afford passage; "These rooms intercommunicate")}
+{ [ complect, noun.group:complexion,+ ] [ interconnect, noun.state:interconnection,+ ] interlink, connect2,@ frames: 1 (be interwoven or interconnected; "The bones are interconnected via the muscle")}
+{ [ bridge, noun.relation:bridge,+ bridge_over1,^ ] bridge_over, verb.contact:connect,@ frames: 11 (connect or reduce the distance between) }
+{ tide_over, bridge_over1, keep_going, suffice,@ frames: 10 (suffice for a period between two points; "This money will keep us going for another year") }
+{ become, frames: 1 (come into existence; "What becomes has duration") }
+{ [ root, noun.location:root,+ noun.location:rootage,+ ] become,@ frames: 1,2 (come into existence, originate; "The problem roots in her depression")}
+{ [ form2, noun.act:formation2,+ ] take_form, take_shape, spring, become,@ frames: 1,2,4,22 (develop into a distinctive entity; "our plans began to take shape") }
+{ head4, verb.change:form5,@ frames: 1 (form a head or come or grow to a head; "The wheat headed early this year")}
+{ [ originate, adj.all:original^originative,+ noun.event:origin,+ noun.event:origination,+ noun.act:origination,+ ] arise, rise1, develop, uprise2, spring_up, [ grow, noun.event:growth1,+ ] become,@ frames: 1 (come into existence; take on form or shape; "A new religious movement originated in that country"; "a love that sprang up from friendship"; "the idea for the book grew out of a short story"; "An interesting phenomenon uprose") }
+{ [ resurge, adj.all:revived^resurgent,+ noun.act:resurgence,+ ] rise1,@ frames: 1 (rise again; "His need for a meal resurged"; "The candidate resurged after leaving politics for several years")}
+{ come_forth, [ emerge, adj.all:nascent^emergent,+ noun.act:emersion1,+ ] arise,@ frames: 1 (happen or occur as a result of something) }
+{ break14, emerge,@ frames: 4 (come forth or begin from a state of latency; "The first winter storm broke over New York") }
+{ come4, follow4, come5,$ originate,@ frames: 4 (to be the product or result; "Melons come from a vine"; "Understanding comes from experience") }
+{ [ bead, noun.shape:bead,+ ] verb.change:form5,@ frames: 1,4 (form into beads, as of water or sweat, for example) }
+{ [ reticulate, noun.artifact:reticulation,+ noun.body:reticulum,+ ] verb.change:change,@ frames: 1 (form a net or a network) }
+{ arise1, come_up, bob_up, become,@ frames: 1 (originate or come into being; "a question arose") }
+{ [ flocculate, adj.all:soft1^flocculent,+ noun.process:flocculation,+ ] verb.change:change,@ frames: 11 (form into an aggregated lumpy or fluffy mass; "the protoplasms flocculated") }
+{ [ flocculate1, adj.all:soft1^flocculent,+ ] verb.change: change1,@ frames: 11 (cause to become a fluffy or lumpy aggregate; "The chemist flocculated the suspended material")}
+{ [ nucleate, noun.body:nucleus,+ ] become1,@ frames: 1 (form into a nucleus; "Some cells had nucleated") }
+{ well_up, swell3, arise,@ frames: 1,4 (come up (as of feelings and thoughts, or other ephemeral things); "Strong emotions welled up"; "Smoke swelled from it") }
+{ become1, [ turn, noun.event:turn1,+ ] verb.change:transform3,@ frames: 9,11 (undergo a change or development; "The water turned into ice"; "Her former friend became her worst enemy"; "He turned traitor") }
+{ turn13, become1,$ verb.change:change1,@ frames: 9,10,8,11 (cause to change or turn into something different;assume new characteristics; "The princess turned the frog into a prince by kissing him"; "The alchemists tried to turn lead into gold") }
+{ [ carbonate, noun.substance:carbonic_acid,+ noun.substance:carbon,+ noun.substance:carbonate,+ ] verb.change:change,@ frames: 11 (turn into a carbonate) }
+{ come11, add_up1, amount, become1,@ frames: 11 (develop into; "This idea will never amount to anything"; "nothing came of his grandiose plans") }
+{ [ aggregate, noun.artifact:aggregate,+ ] amount,@ frames: 11 (amount in the aggregate to) }
+{ originate_in, frames: 11,10 (come from)}
+{ [ stem, noun.communication:stem1,+ ] originate_in,@ frames: 11 (grow out of, have roots in, originate in; "The increase in the national debt stems from the last war") }
+{ [ necessitate, noun.state:necessity,+ noun.object:necessity,+ obviate,! frames: 34 ] ask, postulate, [ need, noun.object:need,+ ] [ require, noun.cognition:requirement1,+ frames: 24,34 ] take, involve7, call_for, [ demand, noun.cognition:demand,+ noun.state:demand,+ ] verb.communication:take,$ frames: 11 (require as useful, just, or proper; "It takes nerve to do what she did"; "success usually requires hard work"; "This job asks a lot of patience and skill"; "This position demands a lot of personal sacrifice"; "This dinner calls for a spectacular dessert"; "This intervention does not postulate a patient's consent") }
+{ govern, require,@ frames: 11 (require to be in a certain grammatical case, voice, or mood; "most transitive verbs govern the accusative case in German")}
+{ draw2, require,@ frames: 11 (require a specified depth for floating; "This boat draws 70 inches") }
+{ [ cost1, noun.attribute:cost1,+ ] demand,@ frames: 14 (require to lose, suffer, or sacrifice; "This mistake cost him his job") }
+{ cry_out_for, cry_for, need,@ frames: 11 (need badly or desperately; "This question cries out for an answer") }
+{ [ obviate, noun.act:obviation,+ necessitate,! ] rid_of, eliminate1, frames: 11 (do away with) }
+{ [ preclude, adj.all:preventive^preclusive,+ ] rule_out, close_out, obviate,@ frames: 11 (make impossible, especially beforehand) }
+{ [ incorporate, noun.act:incorporation,+ ] contain, comprise, include,@ frames: 11,21 (include or contain; have as a component; "A totally new idea is comprised in this paper"; "The record contains many old songs from the 1930's") }
+{ embrace, [ encompass, noun.state:encompassment,+ ] [ comprehend, adj.all:inclusive^comprehensive,+ adj.all:comprehensive,+ noun.relation:comprehension,+ ] cover2, verb.communication:cover1,$ include,@ frames: 11 (include in scope; include as part of something broader; have as one's sphere or territory; "This group encompasses a wide range of people from different backgrounds"; "this should cover everyone in the group") }
+{ [have, lack,! ] [ feature, noun.body:feature,+ noun.cognition:feature,+ ] verb.possession:have,$ verb.possession:have4,$ frames: 11 (have as a feature; "This restaurant features the most famous chefs in France") }
+{ carry8, feature,@ frames: 11 (be equipped with (a mast or sail); "This boat can only carry a small sail")}
+{ bear1, have,@ frames: 8,11 (have; "bear a resemblance"; "bear a signature") }
+{ give_off, have,@ frames: 11,8 (have as a by-product; "The big cities gave off so many wonderful American qualities") }
+{ unite1, [ combine, noun.event:combine,+ noun.event:combining,+ ] have,@ frames: 31 (have or possess in combination; "she unites charm with a good business sense") }
+{ [ star, noun.person:star2,+ noun.person:star,+ ] feature,@ frames: 10 (feature as the star; "The movie stars Dustin Hoffman as an autistic man") }
+{ [ co-star, noun.person:co-star,+ ] star,@ frames: 10 (feature as the co-star in a performance) }
+{ sport, [ feature1, noun.artifact:feature,+ noun.communication:feature1,+ ] boast, have,@ frames: 11 (wear or display in an ostentatious or proud manner; "she was sporting a new hat") }
+{ [ exhibit, noun.act:exhibition,+ ] possess,@ frames: 11 (show an attribute, property, knowledge, or skill; "he exhibits a great talent") }
+{ [ phosphoresce, adj.all:light6^phosphorescent,+ noun.phenomenon:phosphorescence,+ ] exhibit,@ frames: 11 (to exhibit phosphorescence) }
+{ possess, have,@ frames: 11,8 (have as an attribute, knowledge, or skill; "he possesses great knowledge about the Middle East") }
+{ [miss, have,! ] [ lack, noun.state:lack,+ ] frames: 11,8 (be without; "This soup lacks salt"; "There is something missing in my jewelry box!") }
+{ [ want1, noun.person:wanter,+ noun.state:want1,+ noun.state:want,+ noun.object:want,+ ] miss,@ frames: 8,11 (be without, lack; be deficient in; "want courtesy"; "want the strength to go on living"; "flood victims wanting food and shelter") }
+{ miss2, frames: 1,2 (be absent; "The child had been missing for a week") }
+{ [ include, exclude,! ] have,* frames: 11 (have as a part, be made up out of; "The list includes the names of many famous writers") }
+{ involve2, include,@ frames: 11 (contain as a part; "Dinner at Joe's always involves at least six courses") }
+{ consist1, comprise1, be3,@ frames: 11 (be composed of; "The land he conquered comprised several provinces"; "What does this dish consist of?")}
+{ [ equate, noun.state:equation,+ noun.communication:equation,+ frames: 11] [ correspond4, adj.all:similar^correspondent,+ ] equal,@ frames: 4 (be equivalent or parallel, in mathematics) }
+{ [ exclude, include,!] lack,@ frames: 11,8 (lack or fail to include; "The cost for the trip excludes food and beverages") }
+{ prove, turn_out, turn_up3, be3,@ frames: 6,7,28,34 (be shown or be found to be; "She proved to be right"; "The medicine turned out to save her life"; "She turned up HIV positive") }
+{ turn_out1, verb.change:happen,@ frames: 34 (prove to be in the result or end; "It turns out that he was right") }
+{ [ result, adj.all:subsequent^resultant,+ noun.phenomenon:result,+ noun.event:result,+ noun.state:resultant,+ ] [ensue, frames: 34] turn_out,@ frames: 1 (issue or terminate (in a specified way, state, etc.); end; "result in tragedy") }
+{ [be_due, frames: 4] flow_from, result,@ frames: 11 (be the result of)}
+{ [ subsume, noun.cognition:subsumption,+ ] include,@ frames: 11 (contain or include; "This new system subsumes the old one") }
+{ entail, [ implicate, noun.relation:implication1,+ noun.cognition:implication1,+ noun.cognition:implication,+ ] lead12,@ frames: 11 (impose, involve, or imply as a necessary accompaniment or result; "What does this move entail?")}
+{ account_for, be3,@ frames: 11 (be the reason or explanation for; "The recession accounts for the slow retail business") }
+{ [ entail1, noun.cognition:entailment,+ ] [ imply, adj.all:connotative^implicative,+ noun.cognition:implication1,+ ] mean, necessitate1,@ frames: 11 (have as a logical consequence; "The water shortage means that we have to stop taking long showers") }
+{ compel, necessitate,@ frames: 11 (necessitate or exact; "the water shortage compels conservation")}
+{ necessitate1, lead12,@ frames: 11 (cause to be a concomitant) }
+{ leave, [ result2, adj.all:subsequent^resultant,+ noun.phenomenon:result,+ noun.event:resultant,+ ] lead4, leave3,$ verb.creation:produce3,@ frames: 11 (produce as a result or residue; "The water left a mark on the silk dress"; "Her blood left a stain on the napkin") }
+{ lead12, result2,@ frames: 4 (tend to or result in; "This remark lead to further arguments among the guests") }
+{ [ imply1, noun.cognition:implication1,+ ] [ involve, noun.relation:involvement,+ ] have,@ frames: 11 (have as a necessary feature; "This decision involves many changes")}
+{ carry2, imply1,@ frames: 11 (be necessarily associated with or result in or involve; "This crime carries a penalty of five years in prison") }
+{ [ carry12, noun.act:carry,+ ] verb.possession:have,@ frames: 8 (have or possess something abstract; "I carry her image in my mind's eye"; "I will carry the secret to my grave"; "I carry these thoughts in the back of my head"; "I carry a lot of life insurance")}
+{ get_into, tangle_with, verb.change:change_state,@ frames: 1,2 (get involved in or with) }
+{ [ incriminate, adj.all:inculpatory^incriminatory,+ noun.communication:incrimination,+ noun.act:crime1,+ noun.act:crime,+ ] [ imply2, noun.relation:implication,+ noun.communication:implication,+ ] [ inculpate, adj.all:inculpative,+ adj.all:inculpatory,+ noun.communication:inculpation,+ ] verb.communication:suggest1,@ frames: 10 (suggest that someone is guilty) }
+{ bide, [ abide1, noun.act:abidance1,+ ] [ stay1, noun.act:stay,+ ] remain3,@ noun.communication:archaism,;u frames: 22 (dwell; "You can stay with me while you are in town"; "stay a bit longer--the day is still young") }
+{ overstay, outstay, stay1,@ frames: 8 (stay too long; "overstay or outstay one's welcome") }
+{ [ remain5, noun.relation:remainder,+ noun.artifact:remainder,+ noun.relation:remnant,+ ] be3,@ frames: 1 (be left; of persons, questions, problems, results, evidence, etc.; "There remains the question of who pulled the trigger"; "Carter remains the only President in recent history under whose Presidency the U.S. did not fight a war") }
+{ [ wait, noun.act:wait,+ noun.person:waiter1,+ noun.act:waiting,+ ] frames: 2,22 (stay in one place and anticipate or expect something; "I had to wait on line for an hour to get the tickets")}
+{ kick_one's_heels, cool_one's_heels, wait,@ frames: 1,4,2,22 (wait or pass the time aimlessly or futilely; be kept waiting; "She kicked her heels for hours at the gate of the Embassy") }
+{ [stand_by2, noun.artifact:standby,+ noun.person:standby,+] stick_around, stick_about, wait,@ frames: 2 (be available or ready for a certain function or service) }
+{ stand_by1, stick_by, [stick, frames: 21] adhere1, be3,@ frames: 8,9 (be loyal to; "She stood by her husband in times of trouble"; "The friends stuck together through the war") }
+{ [ adhere2, noun.act:adhesion,+ noun.person:adherent,+ ] stick5, verb.possession:follow,@ frames: 22 (be a devoted follower or supporter; "The residents of this village adhered to Catholicism"; "She sticks to her principles")}
+{ [ loiter, noun.person:loiterer,+ ] [ lounge, noun.person:lounger,+ ] footle, lollygag, loaf, lallygag, hang_around, mess_about, tarry, [ linger, noun.person:lingerer,+ ] lurk, mill_about, mill_around, be3,@ frames: 2,22 (be about; "The high school students like to loiter in the Central Square"; "Who is this man that is hanging around the department?") }
+{ [ prowl, noun.act:prowl,+ ] lurch, loiter,@ frames: 2,22 (loiter about, with no apparent aim) }
+{ bum, bum_around, bum_about, arse_around, arse_about, fuck_off, [ loaf1, noun.person:loafer,+ ] frig_around, waste_one's_time, lounge_around, loll, loll_around, lounge_about, verb.social:idle,@ frames: 2,22 (be lazy or idle; "Her son is just bumming around all day") }
+{ lie_about, lie_around, verb.social:idle,@ frames: 2,22 (hang around idly; "She did all the work while he lay around") }
+{ [ lurk1, noun.person:lurker,+ ] [ skulk, noun.person:skulker,+ ] verb.perception:hide,@ frames: 22 (lie in wait, lie in ambush, behave in a sneaky and secretive manner) }
+{ dwell_on, linger_over, hesitate,@ frames: 8 (delay) }
+{ boggle, hesitate,@ frames: 2 (hesitate when confronted with a problem, or when in doubt or fear) }
+{ [ hesitate, adj.all:indecisive1^hesitant,+ noun.cognition:hesitation,+ noun.attribute:hesitation1,+ noun.person:hesitater,+ noun.attribute:hesitancy,+ noun.person:hesitator,+ ] [ waver, noun.act:waver1,+ noun.person:waverer,+ noun.cognition:wavering,+ ] [ waffle, noun.person:waffler,+ ] verb.cognition:doubt1,* frames: 2,28,29 (pause or hold back in uncertainty or unwillingness; "Authorities hesitate to quote exact figures") }
+{ hover1, linger1, hesitate,@ frames: 22 (move to and fro; "The shy student lingered in the corner") }
+{ [ hesitate1, noun.act:hesitation,+ noun.person:hesitater,+ ] [ pause, noun.act:pause,+ noun.time:pause,+ ] delay,@ frames: 2,29 (interrupt temporarily an activity before continuing; "The speaker paused")}
+{ [ scruple, noun.cognition:scruple,+ noun.feeling:scruple,+ ] hesitate1,@ frames: 2 (hesitate on moral grounds; "The man scrupled to perjure himself") }
+{ [ wait1, noun.time:wait,+ noun.person:waiter1,+ ] hold_off, hold_back, verb.social:act,@ frames: 2,8,33 (wait before acting; "the scientists held off announcing their results until they repeated the experiment") }
+{ [hold_out2, noun.person:holdout,+ noun.communication:holdout,+ ] wait1,@ frames: 2,22 (wait uncompromisingly for something desirable; "He held out for the dessert and did not touch the cheeses") }
+{ [ delay, noun.time:delay,+ ] wait1,@ frames: 8 (act later than planned, scheduled, or required; "Don't delay your application to graduate school or else it won't be considered") }
+{ [ procrastinate, noun.act:procrastination,+ noun.person:procrastinator,+ ] [ stall, noun.act:stall,+ ] drag_one's_feet, drag_one's_heels, [ shillyshally2, noun.act:shillyshally,+ ] dilly-dally, [ dillydally, noun.person:dillydallier,+ ] delay,@ frames: 2 (postpone doing what one should be doing; "He did not want to write the letter and procrastinated for days") }
+{ [ procrastinate1, noun.attribute:procrastination,+ ] procrastinate,@ delay,@ frames: 8,11 (postpone or delay needlessly; "He procrastinated the matter until it was almost too late")}
+{ [ postpone, noun.act:postponement,+ noun.person:postponer,+ ] [ prorogue, noun.act:prorogation,+ ] hold_over2, put_over, table, [ shelve, noun.person:shelver,+ ] set_back1, [ defer, noun.act:deferment,+ noun.act:deferral1,+ ] remit, [put_off, noun.communication:putoff,+ ] verb.social:cancel3,* verb.communication:reschedule,* delay,@ frames: 8,21 (hold back to a later time; "let's postpone the exam") }
+{ [hold_over1, noun.person:holdover,+ ] stay2,@ frames: 2 (continue a term of office past the normal period of time)} 
+{ call9, postpone,@ frames: 8 (stop or postpone because of adverse conditions, such as bad weather; "call a football game") }
+{ [ hold12, noun.time:hold,+ ] defer,@ frames: 11 (stop dealing with; "hold all calls to the President's office while he is in a meeting") }
+{ suspend, defer,@ frames: 8 (render temporarily ineffective; "the prison sentence was suspended") }
+{ [ probate, noun.time:probation,+ noun.act:probation,+ ] defer,@ frames: 9 (put a convicted person on probation by suspending his sentence) }
+{ [ reprieve, noun.act:reprieve,+ noun.communication:reprieve,+ ] [ respite1, noun.act:respite1,+ ] postpone,@ frames: 9 (postpone the punishment of a convicted criminal, such as an execution) }
+{ [ predominate, adj.all:frequent^predominant,+ noun.state:predomination,+ noun.state:predominance,+ ] dominate, rule, [ reign, noun.time:reign1,+ ] [ prevail2, noun.attribute:prevalence1,+ ] frames: 1,4,2,22 (be larger in number, quantity, power, status or importance; "Money reigns supreme here"; "Hispanics predominate in this neighborhood") }
+{ [ override3, noun.act:override,+ ] predominate,@ frames: 11 (prevail over; "health considerations override financial concerns")}
+{ overarch, dominate,@ frames: 11 (be central or dominant; "This scene overarches the entire first act") }
+{ outnumber, number,@ frames: 8,9,11 (be larger in number) }
+{ [ total, noun.artifact:total,+ noun.cognition:total,+ ] [ number, noun.communication:number1,+ noun.quantity:number,+ noun.attribute:number,+ ] add_up3, come12, [ amount1, noun.cognition:amount,+ noun.Tops:amount,+ ] be3,@ frames: 11 (add up in number or quantity; "The bills amounted to $2,000"; "The bill came to $2,000") }
+{ [ average, noun.cognition:average,+ ] average_out, number,@ frames: 11 (amount to or come to an average, without loss or gain; "The number of hours I work per work averages out to 40") }
+{ [ preponderate, adj.all:dominant1^preponderant,+ noun.attribute:preponderance2,+ noun.attribute:preponderance1,+ noun.attribute:preponderance,+ ] outweigh, overbalance, outbalance, predominate,@ frames: 1 (weigh more heavily; "these considerations outweigh our wishes")}
+{ count, [ matter, noun.cognition:matter,+ noun.attribute:matter,+ matter_to,^ ] weigh3, be3,@ frames: 1,34 (have weight; have import, carry weight; "It does not matter much") }
+{ weigh4, press1, weigh3,@ frames: 4 (to be oppressive or burdensome; "weigh heavily on the mind"; "Something pressed on his mind") }
+{ [ rate1, noun.state:rating,+ ] be3,@ frames: 11,6 (be worthy of or have a certain rating; "This bond rates highly") }
+{ deserve, [ merit4, adj.all:worthy^meritable,+ noun.attribute:merit2,+ ] be3,@ frames: 8,11 (be worthy or deserving; "You deserve a promotion after all the hard work you have done" )}
+{ have_it_coming, deserve,@ frames: 2 (deserve (either good or bad); "It's too bad he got fired, but he sure had it coming")}
+{ [ buy, noun.possession:buy,+ ] be3,@ frames: 11 (be worth or be capable of buying; "This sum will buy you a ride on the train") }
+{ [ dominate1, adj.all:dominant1,+ noun.state:dominion,+ noun.state:domination,+ noun.act:domination,+ noun.state:dominance,+ ] verb.social:influence,@ frames: 1,2 (be in control; "Her husband completely dominates her")}
+{ overbear, dominate1,@ frames: 8,9 (overcome; "overbear criticism, protest, or arguments") }
+{ possess2, dominate1,@ frames: 10 (enter into and control, as of emotions or ideas; "What possessed you to buy this house?"; "A terrible rage possessed her") }
+{ [ prevail, noun.attribute:prevalence,+ ] [ persist, adj.all:persistent,+ ] [die_hard, noun.person:diehard,+] run3, endure8, run6,$ verb.change:continue10,@ frames: 1 (continue to exist; "These stories die hard"; "The legend of Elvis endures") }
+{ stick4, persist1,@ frames: 1 (endure; "The label stuck to her for the rest of her life")}
+{ [ reverberate, noun.phenomenon:reverberation,+ ] persist,@ frames: 8 (have a long or continuing effect; "The discussions with my teacher reverberated throughout my adult life")}
+{ run5, run_for, last,@ frames: 11 (extend or continue for a certain period of time; "The film runs 5 hours") }
+{ [ perpetuate, noun.act:perpetuation,+ ] continue,@ frames: 8 (cause to continue or prevail; "perpetuate a myth")}
+{ eternize, perpetuate,@ frames: 8 (cause to continue indefinitely) }
+{ prevail1, hold2, obtain, exist,@ frames: 1 (be valid, applicable, or true; "This theory still holds") }
+{ [ occupy, noun.act:occupation1,+ noun.person:occupier,+ noun.person:occupant,+ noun.act:occupancy,+ ] [ reside1, adj.all:resident,+ noun.person:resident,+ noun.act:residency,+ noun.act:residence,+ ] lodge_in, dwell,@ frames: 8,11 (live (in a certain place); "She resides in Princeton"; "he occupies two rooms on the top floor")}
+{ [ occupy1, noun.time:occupation,+ ] fill, be5,@ frames: 11 (occupy the whole of; "The liquid fills the container") }
+{ douse9, dowse9, verb.change:wet,@ frames: 11 (wet thoroughly)}
+{ [ crowd, noun.group:crowd,+ noun.state:crowding,+ ] occupy1,@ frames: 8,11 (fill or occupy to the point of overflowing; "The students crowded the auditorium") }
+{ take_up, occupy1,@ frames: 11 (take up time or space; "take up the slack") }
+{ stay_at1, reside1,@ frames: 8 (reside temporarily; "I'm staying at the Hilton") }
+{ [ squat, noun.person:squatter1,+ ] occupy,@ frames: 2,22 (occupy (a dwelling) illegally) }
+{ [ populate, noun.group:population,+ ] [ dwell, noun.person:dweller,+ noun.artifact:dwelling,+ ] [ live8, adj.all:liveable,+ adj.all:livable,+ noun.person:liver,+ verb.consumption:live_in,^ verb.consumption:live_out,^ ] [ inhabit, noun.act:inhabitation,+ noun.person:inhabitant,+ noun.act:inhabitancy,+ ] be5,@ frames: 22 (be an inhabitant of or reside in; "People lived in Africa millions of years ago"; "The people inhabited the islands that are now deserted"; "this kind of fish dwells near the bottom of the ocean"; "deer are populating the woods")} 
+{[ reside, adj.all:resident,+ noun.person:resident,+ noun.act:residency,+ noun.act:residence,+ ] [ shack, noun.artifact:shack,+ ] domicile, domiciliate, dwell,@ frames: 22 (make one's home in a particular place or community; "may parents reside in Florida")}
+{[ people, noun.group:people3,+ noun.group:people1,+ noun.group:people,+ ] dwell,@ frames: 22 (furnish with people; "The plains are sparsely populated")}
+{ [ overpopulate, noun.group:overpopulation,+ ] populate,@ frames: 22 (cause to have too great a population; "Some towns in New Jersey are becoming overpopulated")}
+{ [ cohabit, noun.act:cohabitation,+ ] live_together, shack_up, dwell,@ frames: 2,22 (share living quarters; usually said of people who are not married and live together as a couple) }
+{ [ lodge, noun.artifact:lodge2,+ noun.artifact:lodgings,+ noun.act:lodging,+ lodge_in,^ ] [ accommodate1, noun.artifact:accommodation,+ noun.act:accommodation,+ ] verb.social:house,@ frames: 9,20 (provide housing for; "We are lodging three foreign students this semester")}
+{ [ barrack, noun.artifact:barrack,+ ] lodge,@ frames: 9,10 (lodge in barracks)}
+{ keep1, lodge,@ frames: 8,9 (supply with room and board; "He is keeping three women in the guest cottage"; "keep boarders") }
+{ keep12, verb.creation:raise3,@ frames: 8 (raise; "She keeps a few chickens in the yard"; "he keeps bees")}
+{ [ herd, noun.group:herd1,+ noun.group:herd,+ noun.person:herder,+ ] keep12,@ frames: 8 (keep, move, or drive animals; "Who will be herding the cattle when the cowboy dies?")}
+{ [ wrangle, noun.person:wrangler,+ ] herd,@ frames: 8 (herd and care for; "wrangle horses")}
+{ [ lodge2, noun.person:lodger,+ noun.artifact:lodge2,+ noun.artifact:lodge1,+ noun.artifact:lodgings,+ noun.act:lodging,+ ] dwell,@ frames: 22 (be a lodger; stay temporarily; "Where are you lodging in Paris?")}
+{ sleep_over, stay_over, lodge2,@ frames: 2,22 (stay overnight; "The boy's friends were allowed to sleep over after the birthday party") }
+{ [lay_over, noun.act:layover,+] [stop_over, noun.act:stopover,+] verb.motion:stop2,@ frames: 1,2 (interrupt a journey temporarily, e.g., overnight; "We had to stop over in Venezuela on our flight back from Brazil") }
+{ [ quarter, noun.artifact:quarters,+ noun.artifact:quartering,+ ] [ billet, noun.artifact:billet,+ ] [ canton, noun.artifact:cantonment,+ ] lodge,@ noun.group:military,;c frames: 2,9 (provide housing for (military personnel)) }
+{ dwell1, consist, [ lie1, noun.location:lie,+ ] lie_in, exist,@ frames: 4 (originate (in); "The problems dwell in the social injustices in this country")}
+{ [ inhere, adj.all:intrinsic^inherent,+ adj.all:implicit^inherent,+ noun.state:inherence,+ ] belong6,@ frames: 4 (be inherent in something) }
+{ [ pertain, adj.all:relevant^pertinent,+ ] [ appertain, adj.all:supportive^appurtenant,+ noun.artifact:appurtenance,+ ] belong6,@ frames: 12 (be a part or attribute of) }
+{ go6, frames: 10,11 (be awarded; be allotted; "The first prize goes to Mary"; "Her money went on clothes") }
+{ [ camp, noun.artifact:camp1,+ noun.artifact:camp,+ noun.person:camper,+ noun.act:camping,+ ] [ encamp, noun.act:encampment,+ ] camp_out, [ bivouac, noun.location:bivouac,+ noun.artifact:bivouac,+ ] [ tent, noun.act:tenting,+ noun.artifact:tent,+ ] dwell,@ frames: 2,22 (live in or as if in a tent; "Can we go camping again this summer?"; "The circus tented near the town"; "The houseguests had to camp in the living room")}
+{ [ inhabit2, noun.act:inhabitation,+ ] be5,@ frames: 8 (be present in; "sweet memories inhabit this house") }
+{ infest, inhabit2,@ frames: 4 (live on or in a host, as of parasites) }
+{ [ invade, noun.event:invasion,+ ] overrun, [ infest2, noun.state:infestation,+ noun.group:infestation,+ ] inhabit2,@ frames: 4,11 (occupy in large numbers or live on a host; "the Kudzu plant infests much of the South and is spreading to the North")}
+{ [ nest, noun.animal:nester,+ noun.object:nest,+ ] inhabit,@ frames: 1 (inhabit a nest, usually after building; "birds are nesting outside my window every Spring") }
+{ be5, frames: 1,22 (occupy a certain position or area; be somewhere; "Where is my umbrella?"; "The toolshed is in the back"; "What is behind this behavior?") }
+{ stand_back, keep_one's_eyes_off, keep_one's_distance, keep_one's_hands_off, stay_away, be5,@ frames: 2,22 (stay clear of, avoid; "Keep your hands off my wife!"; "Keep your distance from this man--he is dangerous") }
+{ shine4, be3,@ frames: 1 (be clear and obvious; "A shining example") }
+{ [ chamber, noun.artifact:chamber2,+ noun.artifact:chamber,+ ] verb.social:house,@ frames: 8,9 (place in a chamber) }
+{ [ harbor, noun.artifact:harbor,+ noun.location:harborage,+ ] [ harbour, noun.artifact:harbour,+ noun.location:harbourage,+ ] shelter,@ frames: 8,9 (secretly shelter (as of fugitives or criminals)) }
+{ [ shelter, noun.possession:shelter,+ noun.state:shelter,+ noun.artifact:shelter1,+ noun.artifact:shelter,+ ] verb.possession:provide,@ frames: 9,8,10,11 (provide shelter for; "After the earthquake, the government could not provide shelter for the thousands of homeless people") }
+{ [ board, noun.food:board,+ noun.artifact:board1,+ noun.person:boarder1,+ ] [ room, noun.artifact:room,+ noun.person:roomer,+ ] inhabit,@ frames: 22 (live and take one's meals at or in; "she rooms in an old boarding house")}
+{ take_in, verb.social:house,@ frames: 8 (provide with shelter) }
+{ crash, occupy,@ frames: 8 (occupy, usually uninvited; "My son's friends crashed our house last weekend") }
+{ [ match, noun.artifact:match1,+ ] fit4, [ correspond, adj.all:similar^correspondent,+ noun.attribute:correspondence2,+ ] check8, jibe, gibe, tally, [ agree, adj.all:consistent^agreeable,+ noun.attribute:agreement,+ disagree,!] agree1,$ equal,@ frames: 1,4 (be compatible, similar or consistent; coincide in their characteristics; "The two stories don't agree in many details"; "The handwriting checks with the signature on the check"; "The suspect's fingerprints don't match those on the gun")}
+{ [ consist2, noun.attribute:consistency2,+ noun.attribute:consistence2,+ ] agree,@ frames: 1 (be consistent in form, tenor, or character; be congruous; "Desires are to be satisfied only so far as consists with an approved end")}
+{ [ check9, noun.act:check5,+ ] check_out6, check8,$ frames: 1 (be verified or confirmed; pass inspection; "These stories don't check!") }
+{ look2, match,@ frames: 8,11 (accord in appearance with; "You don't look your age!") }
+{ answer, match,@ frames: 11,4 (match or correspond; "The drawing of the suspect answers to the description the victim gave") }
+{ [ coincide1, adj.all:congruent^coincident,+ ] match,@ frames: 1 (be the same; "our views on this matter coincided") }
+{ [ align, noun.act:alignment,+ ] match,@ frames: 4 (be or come into adjustment with) }
+{ [ correlate, adj.all:related2^correlative,+ noun.relation:correlation,+ noun.cognition:correlation1,+ noun.cognition:correlation,+ noun.cognition:correlate,+ ] correspond,@ frames: 1 (to bear a reciprocal or mutual relation; "Do these facts correlate?") }
+{ [ parallel, noun.attribute:parallel,+ ] correspond,@ frames: 11 (be parallel to; "Their roles are paralleled by ours") }
+{ [ twin, noun.artifact:twin,+ ] duplicate, parallel1, match,@ frames: 11 (duplicate or match; "The polished surface twinned his face and chest in reverse") }
+{ square, agree,@ frames: 1 (be compatible with; "one idea squares with another") }
+{ square1, verb.change:adjust1,@ frames: 8,9 (cause to match, as of ideas or acts) }
+{ [ fit2, noun.attribute:fit,+ noun.act:fitting,+ ] go5, go11,$ fit3,@ frames: 1 (be the right size or shape; fit correctly or as desired; "This piece won't fit into the puzzle")}
+{ tessellate, fit2,@ frames: 1 (fit together exactly, of identical shapes; "triangles tessellate")}
+{ [ joint, noun.artifact:joint1,+ noun.shape:joint,+ ] fit2,@ frames: 1 (fit as if by joints; "The boards fit neatly") }
+{ [ dovetail, noun.artifact:dovetail,+ ] fit2,> verb.change:fit1,@ frames: 8 (fit together tightly, as if by means of a dovetail) }
+{ [ coincide, adj.all:synchronous^coincident,+ ] co-occur, [ cooccur, noun.event:co-occurrence,+ cooccur_with,^ ] coexist,@ frames: 1,4 (go with, fall together) }
+{ [ overlap3, noun.attribute:overlap,+ noun.cognition:overlap,+ ] coincide,@ frames: 1,8,4 (coincide partially or wholly; "Our vacations overlap") }
+{ collocate_with, construe_with, cooccur_with, co-occur_with, go_with, accompany,@ frames: 11 (go or occur together; "The word `hot' tends to cooccur with `cold'") }
+{ fall2, verb.change:fall,$ be3,@ frames: 4 (be due; "payments fall on the 1st of the month") }
+{ scan, conform6,@ noun.communication:poetry2,;c frames: 1 (conform to a metrical pattern) }
+{ [ deviate, adj.all:abnormal^deviant,+ noun.person:deviate,+ noun.event:deviation,+ noun.cognition:deviation,+ noun.attribute:deviation1,+ noun.act:deviation,+ noun.person:deviant,+ conform6,!] [ vary, adj.all:different^variant,+ noun.phenomenon:variation,+ noun.person:variation,+ noun.act:variation,+ noun.event:variant,+ noun.act:variance,+ ] [ diverge1, adj.all:different^divergent,+ noun.event:divergence,+ ] [ depart, noun.event:departure1,+ ] differ,@ frames: 1,4 (be at variance with; be out of line with) }
+{ [ aberrate, noun.state:aberration1,+ noun.phenomenon:aberration,+ noun.state:aberrance,+ ] deviate,@ noun.cognition:optics,;c frames: 1 (diverge or deviate from the straight path; produce aberration; "The surfaces of the concave lens may be proportioned so as to aberrate exactly equal to the convex lens")}
+{ [ aberrate1, noun.state:aberration1,+ noun.state:aberration,+ noun.person:aberrant,+ noun.state:aberrance,+ ] deviate,@ frames: 2 (diverge from the expected; "The President aberrated from being a perfect gentleman")}
+{ [ vary1, adj.all:varied^variable,+ adj.all:variable,+ adj.all:variable^variant,+ adj.all:different^variant,+ noun.shape:variation,+ noun.phenomenon:variation,+ noun.event:variation1,+ noun.cognition:variate,+ ] differ,@ frames: 1 (be subject to change in accordance with a variable; "Prices vary"; "His moods vary depending on the weather") }
+{ [co-vary, noun.cognition:covariance,+ noun.cognition:covariation,+] vary1,@ noun.cognition:statistics,;c frames: 1 (vary in the same time period (of two random variables))} 
+{ drift3, verb.change:drift10,$ vary1,@ frames: 1 (vary or move from a fixed point or course; "stock prices are drifting higher")}
+{ [ conform6, noun.act:conformation1,+ noun.attribute:conformance,+ deviate,! ] frames: 1,4,27 (be similar, be in line with) }
+{ [ contradict, adj.all:unsupportive^contradictory,+ adj.all:inconsistent^contradictory,+ adj.all:incompatible1^contradictory,+ adj.all:antonymous^contradictory,+ ] belie, [ negate, noun.communication:negation2,+ ] vary,@ frames: 11 (be in contradiction with) }
+{ [ corroborate, adj.all:supportive^corroborative,+ adj.all:supportive^corroboratory,+ noun.communication:corroboration,+ ] underpin, bear_out, [ support, noun.act:support2,+ ] agree,@ frames: 8,11 (support with evidence or authority or make more certain or confirm; "The stories and claims were born out by the evidence") }
+{ repose_on, rest_on, build_on, build_upon, depend_on,@ frames: 11 (be based on; of theories and claims, for example; "What's this new evidence based on?") }
+{ depend_on1, rely_on2, frames: 9,8 (be dependent on, as for support or maintenance; "elderly parents often depend on their adult children") }
+{ depend_on2, depend_upon2, rely_on, rely_upon, frames: 8,9 (put trust in with confidence; "she is someone you can really rely on when times get rough"; "you can rely on his discretion") }
+{ [ depend, adj.all:conditional^dependent,+ adj.all:conditional^dependant,+ ] be3,@ frames: 1 (be contingent upon (something that is elided); "That depends") }
+{ hang_by_a_thread, hang_by_a_hair, depend,@ frames: 2 (depend on a small thing or be at risk; "His life now hangs by a thread") }
+{ underlie, be3,@ frames: 11 (be or form the base for) }
+{ rest12, reside12, repose12, inhere_in,@ frames: 4 (be inherent or innate in) }
+{ [ equal, differ,! ] be7, frames: 11,9 (be identical or equivalent to; "One dollar equals 1,000 rubles these days!") }
+{ amount3, frames: 11 (be tantamount or equivalent to; "Her action amounted to a rebellion") }
+{ make11, make12,$ amount3,@ frames: 11 (amount to; "This salary increase makes no difference to my standard of living") }
+{ [ resemble, noun.attribute:resemblance,+ ] match,@ frames: 11,9,8,10 (appear like; be similar or bear a likeness to; "She resembles her mother very much"; "This paper resembles my own work") }
+{ look_like, resemble,@ frames: 11,9,8,10 (bear a physical resemblance to; "She looks like her mother") }
+{ come_to_life, resemble,@ frames: 1,2 (be lifelike, as of a painting; "If you look at it long enough, this portrait comes to life!") }
+{ take_after, resemble,@ frames: 9 (be similar to a relative; "She takes after her father!") }
+{ [ approximate, adj.all:inexact^approximative,+ ] [come_close, frames: 4] resemble,@ frames: 11 (be close or similar; "Her results approximate my own") }
+{ [ differ, adj.all:other^different1,+ adj.all:unusual^different,+ adj.all:other^different,+ adj.all:different,+ noun.attribute:difference,+ equal,! ] frames: 1,4 (be different; "These two tests differ in only one respect") }
+{ oppose, [ counterbalance, noun.artifact:counterbalance,+ ] contrast,@ frames: 11,9 (contrast with equal weight or force)}
+{ [ counterweight, noun.artifact:counterweight,+ ] [ counterpoise, noun.artifact:counterpoise,+ ] counterpose, counterbalance,@ frames: 11,21 (constitute a counterweight or counterbalance to) }
+{ [ contrast, adj.all:different^contrastive,+ adj.all:antonymous^contrastive,+ noun.relation:contrast,+ noun.cognition:contrast1,+ noun.act:contrast,+ ] counterpoint, differ,@ frames: 1,4 (to show differences when compared; be different; "the students contrast considerably in their artistic abilities") }
+{ [ conflict, noun.state:conflict,+ noun.feeling:conflict,+ noun.attribute:conflict,+ ] contrast,@ frames: 1,4 (be in conflict; "The two proposals conflict!") }
+{ [come_in, go_out,!] verb.change:change,@ noun.cognition:fashion,;c frames: 1 (come into fashion; become fashionable) }
+{ [go_out, come_in,!] verb.change:change,@ noun.cognition:fashion,;c frames: 1 (go out of fashion; become unfashionable) }
+{ [ clash, noun.state:clash,+ ] jar, [ collide, noun.communication:collision,+ ] conflict,@ frames: 1,2,4,22 (be incompatible; be or come into conflict; "These colors clash") }
+{ fit_the_bill, fill_the_bill, verb.consumption:meet,@ frames: 1,2 (be what is needed or be good enough for what is required; "Does this restaurant fit the bill for the celebration?")}
+{ behoove, behove, be3,@ frames: 34 (be appropriate or necessary; "It behooves us to reflect on this matter") }
+{ [ violate, adj.all:violable,+ adj.all:offending^violative,+ noun.act:violation4,+ conform_to,! ] go_against, break, frames: 8,11 (fail to agree with; be in violation of; as of rules or patterns; "This sentence violates the rules of syntax") }
+{ fly_in_the_face_of, fly_in_the_teeth_of, violate,@ frames: 11 (go against; "This action flies in the face of the agreement")}
+{ [ conform_to, violate,! ] verb.social:comply,@ frames: 4,22 (observe; "conform to the rules") }
+{ [ exceed, adj.all:immoderate^excessive,+ noun.attribute:exceedance,+ ] [ transcend1, adj.all:superior2^transcendent,+ noun.state:transcendency2,+ noun.state:transcendence2,+ ] overstep, pass4, go_past, [ top, noun.state:top,+ noun.person:topper2,+ noun.communication:topper,+ ] surpass,@ frames: 11,8 (be superior or better than some standard; "She exceeded our expectations"; "She topped her performance of last year") }
+{ exceed1, [ transcend, adj.all:superior2^transcendent,+ noun.state:transcendence2,+ ] surpass1, frames: 11 (be greater in scope or size than some standard; "Their loyalty exceeds their national bonds") }
+{ overgrow2, exceed1,@ frames: 1 (grow too large)}
+{ [ suffice, adj.all:sufficient,+ noun.state:sufficiency,+ noun.quantity:sufficiency,+ noun.attribute:sufficiency,+ frames: 34] do1, answer2, serve12, satisfy,@ frames: 1 (be sufficient; be adequate, either in quality or quantity; "A few words would answer"; "This car suits my purpose well"; "Will $100 do?"; "A `B' grade doesn't suffice to get me into medical school"; "Nothing else will serve") }
+{ go_a_long_way, suffice,@ frames: 1 (suffice or be adequate for a while or to a certain extent) }
+{ serve1, serve2,$ verb.creation:effect,@ frames: 28,4 (contribute or conduce to; "The scandal served to increase his popularity") }
+{ [ serve2, noun.state:servant,+ ] serve_well, verb.communication:foster,@ frames: 10,11,8 (promote, benefit, or be useful or beneficial to; "Art serves commerce"; "Their interests are served"; "The lake serves recreation"; "The President's wisdom has served the country well") }
+{ serve3, [ function12, noun.attribute:function,+ ] verb.social:serve,$ do1,@ frames: 1,11,2,9 (serve a purpose, role, or function; "The tree stump serves as a table"; "The female students served as a control group"; "This table would serve very well"; "His freedom served him well"; "The table functions as a desk") }
+{ [ admit3, adj.all:admissible^admittible,+ adj.all:admissible^admittable,+ noun.possession:admission,+ ] serve,@ frames: 11,10 (serve as a means of entrance; "This ticket will admit one adult to the show") }
+{ [ prelude, noun.event:prelude,+ ] serve3,@ frames: 11 (serve as a prelude or opening to) }
+{ act_as, serve3,@ frames: 11,9,8 (function as or act like; "This heap of stones will act as a barrier") }
+{ [fall_short_of, satisfy,!] frames: 11 (fail to satisfy, as of expectations, for example) }
+{ [ satisfy, adj.all:good1^satisfactory,+ adj.all:satisfactory,+ noun.act:satisfaction,+ noun.object:satisfier,+ fall_short_of,! ] [ fulfill, noun.act:fulfillment,+ ] [ fulfil, noun.act:fulfilment,+ ] live_up_to, verb.consumption:meet,@ frames: 11,8 (meet the requirements or expectations of) }
+{ [ equal1, noun.person:equal,+ ] touch2, rival, [ match1, noun.person:match,+ ] verb.competition:compete,@ frames: 11,9 (be equal to in quality or ability; "Nothing can rival cotton for durability"; "Your performance doesn't even touch that of your colleagues"; "Her persistence and ambition only matches that of her parents") }
+{ [ compensate, noun.act:compensation,+ ] [ counterbalance1, noun.possession:counterbalance,+ noun.artifact:counterbalance,+ ] [ correct3, adj.all:bettering^corrective,+ ] make_up3, even_out, even_off, even_up, balance,@ frames: 11 (adjust for; "engineers will work to correct the effects or air resistance") }
+{ cover14, [ compensate3, noun.process:compensation,+ ] [ overcompensate, noun.process:overcompensation,+ ] verb.communication:cover,$ compensate,@ frames: 11 (make up for shortcomings or a feeling of inferiority by exaggerating good qualities; "he is compensating for being a bad father")}
+{ [ balance, noun.state:balance,+ unbalance,!] [ equilibrate, noun.state:equilibrium,+ noun.shape:equilibrium,+ noun.process:equilibrium,+ noun.cognition:equilibrium,+ ] [ equilibrize, noun.state:equilibrium,+ noun.shape:equilibrium,+ ] equilibrise, verb.contact:balance,$ balance1,$ verb.change:match1,@ frames: 8,11 (bring into balance or equilibrium; "She has to balance work and her domestic duties"; "balance the two weights") }
+{ [unbalance, balance,!] frames: 8,11 (throw out of balance or equilibrium; "The tax relief unbalanced the budget"; "The prima donna unbalances the smooth work in our department") }
+{ rank, [outrank, frames: 9 ] surpass,@ frames: 2 (take precedence or surpass others in rank) }
+{ [ excel, adj.all:superior2^excellent,+ noun.attribute:excellence,+ ] stand_out, surpass, frames: 1,2 (distinguish oneself; "She excelled in math") }
+{ [ stink, noun.artifact:stinker,+ ] be3,@ frames: 1,2 (be extremely bad in quality or in one's performance; "This term paper stinks!") }
+{ suck, blow, be3,@ frames: 1 (be inadequate or objectionable; "this sucks!"; "this blows!")}
+{ shine_at, excel_at, excel,@ frames: 8,33 (be good at; "She shines at math") }
+{ leap_out, jump_out, jump, stand_out2, stick_out2, verb.perception:appear,@ frames:1,4,34 (be highly noticeable)}
+{ make, become,@ frames: 9,11 (be or be capable of being changed or made into; "He makes a great host"; "He will make a fine father") }
+{ imitate, resemble,@ frames: 9,11 (appear like, as in behavior or appearance; "Life imitate art") }
+{ [ ape, noun.person:ape1,+ noun.person:aper,+ noun.act:apery,+ ] imitate,@ frames: 9,11 (imitate uncritically and in every aspect; "Her little brother apes her behavior") }
+{ [ emulate1, noun.cognition:emulation,+ ] imitate,@ noun.cognition:computer_science,;c frames: 11 (imitate the function of (another system), as by modifying the hardware or the software) }
+{ [ echo, noun.attribute:echo,+ ] recall, resemble,@ frames: 11,10 (call to mind; "His words echoed John F. Kennedy") }
+{ follow_suit, imitate,@ frames: 2 (do what someone else is doing)}
+{ [ emulate, noun.feeling:emulation,+ noun.act:emulation,+ noun.person:emulator,+ ] verb.creation:imitate,@ frames: 8,9 (strive to equal or match, especially by imitating; "He is emulating the skating skills of his older sister") }
+{ cover, satisfy,@ frames: 8,11 (provide for; "The grant doesn't cover my salary") }
+{ [ refer, noun.cognition:reference,+ frames: 4] [ pertain1, adj.all:apropos^pertinent,+ noun.relation:pertinency,+ noun.relation:pertinence,+ frames: 4] [relate, frames: 4] concern, come_to3, bear_on, touch, touch_on, have_to_do_with, verb.communication:touch9,$ frames: 10,11 (be relevant to; "There were lots of questions referring to her talk"; "My remark pertained to your earlier comments") }
+{ focus_on, center_on, revolve_around, revolve_about, concentrate_on, [ center, noun.cognition:center1,+ noun.cognition:centering,+ frames: 4,22 ] relate,@ frames: 11, 10 (center upon; "Her entire attention centered on her children"; "Our day revolved around our work") }
+{ [ apply, adj.all:practical^applicative,+ adj.all:relevant^applicable,+ ] hold4, [go_for, frames: 11,10] apply1,$ relate,@ frames: 1,4 (be pertinent or relevant or applicable; "The same laws apply to you!"; "This theory holds for all irrational numbers"; "The same rules go for everyone")}
+{ [ involve1, noun.relation:involvement,+ ] affect, [ regard, noun.cognition:regard,+ ] concern,@ frames: 11,10,9 (connect closely and often incriminatingly; "This new ruling affects your business") }
+{ [ implicate1, noun.relation:implication,+ noun.communication:implication,+ ] involve1,@ frames: 11,10,8,9 (bring into intimate and incriminating connection; "He is implicated in the scheme to defraud the government")}
+{ [ involve4, noun.act:involution2,+ noun.state:involvement1,+ noun.act:involvement,+ ] verb.social:include3,@ frames: 9,20 (engage as a participant; "Don't involve me in your family affairs!") }
+{ [ embroil, noun.state:embroilment,+ ] tangle, sweep, sweep_up, drag, drag_in, involve4,@ frames: 9,20 (force into some kind of situation, condition, or course of action; "They were swept up by the events"; "don't drag me into this business") }
+{ disinvolve, disembroil, [ disentangle, noun.act:disentanglement1,+ ] verb.social:free2,@ frames: 9,10 (free from involvement or entanglement; "How can I disentangle myself from her personal affairs?") }
+{ [ entangle, noun.artifact:entanglement,+ ] mire, involve4,@ frames: 10,11 (entrap; "Our people should not be mired in the past") }
+{ [ concern1, noun.feeling:concern1,+ noun.cognition:concern1,+ ] [ interest1, noun.cognition:interest,+ ] [ occupy4, noun.act:occupation4,+ ] worry, frames: 10,9 (be on the mind of; "I worry about the second Germanic consonant shift") }
+{ matter_to, [ interest, noun.attribute:interest2,+ ] relate,@ frames: 10,11 (be of importance or consequence; "This matters to me!")}
+{ intrigue, [ fascinate, noun.state:fascination,+ noun.attribute:fascination,+ ] interest,@ frames: 10,9 (cause to be interested or curious) }
+{ [ qualify, noun.attribute:qualification,+ noun.state:quality,+ noun.attribute:quality2,+ noun.person:qualifier,+ noun.act:qualifying,+ ] measure_up, suffice,@ frames: 1,2 (prove capable or fit; meet requirements) }
+{ [ begin2, noun.cognition:beginning,+ ] frames: 11 (be the first item or point, constitute the beginning or start, come first in a series; "The number `one' begins the sequence"; "A terrible murder begins the novel"; "The convocation ceremony officially begins the semester") }
+{ [ prolong, noun.attribute:prolongation1,+ noun.act:prolongation,+ ] [ sustain1, adj.pert:sustainable,+ noun.person:sustainer,+ noun.act:sustenance,+ ] keep_up, continue,@ frames: 11,8 (lengthen or extend in duration or space; "We sustained the diplomatic negotiations as long as possible"; "prolong the treatment of the patient"; "keep up the good work") }
+{ [continue, discontinue,! ] [ uphold, noun.person:upholder,+ ] carry_on, bear_on1, [ preserve, noun.state:preservation,+ ] verb.stative:continue1,$ verb.motion:continue,$ keep,@ frames: 8,11 (keep or maintain in unaltered condition; cause to remain or last; "preserve the peace in the family"; "continue the family tradition"; "Carry on the old traditions")}
+{ [ mummify, noun.state:mummification,+ ] preserve,@ frames: 8 (preserve while making lifeless; "mummified ideas and institutions should be gotten rid of")}
+{ shut_off, close_off, discontinue,@ frames: 8,9,11 (stem the flow of; "shut off the gas when you leave for a vacation") }
+{ cheese, stop,@ frames: 8 (used in the imperative (get away, or stop it); "Cheese it!") }
+{ [ discontinue, noun.act:discontinuation,+ noun.act:discontinuance,+ continue,! ] [ stop, noun.act:stop2,+ noun.act:stop,+ noun.event:stop,+ noun.act:stoppage,+ frames: 28] [ cease, noun.event:cessation,+ noun.time:cease,+ frames: 28] give_up, quit4, lay_off, frames: 11,8,33 (put an end to a state or an activity; "Quit teasing your little brother") }
+{ call_it_quits, call_it_a_day, stop,@ frames: 2 (stop doing what one is doing; "At midnight, the student decided to call it quits and closed his books")}
+{ break3, quit4,@ frames: 8 (give up; "break cigarette smoking") }
+{ break4, break3,$ break3,> frames: 9 (cause to give up a habit; "She finally broke herself of smoking cigarettes") }
+{ [keep, verb.social:keep_in,^ verb.social:keep_out,^ verb.consumption:keep_off,^ keep_up,^ verb.communication:keep_off,^ verb.change:keep_down,^ verb.change:keep_apart,^ verb.competition:keep_up,^ ] [ maintain, adj.all:reparable^maintainable,+ noun.person:maintainer,+ ] [hold, verb.competition:hold_back,^ verb.competition:hold_out,^ hold_over,^ hold_out,^ verb.change:hold_up,^ ] frames: 5,20,21 (cause to continue in a certain state, position, or activity; e.g., `keep clean'; "hold in place"; "She always held herself as a lady"; "The students keep me on my toes") }
+{ [hold_over, noun.act:holdover,+ ] keep,@ frames: 8 (keep in a position or state from an earlier period of time)}
+{ [ conserve, noun.cognition:conservation,+ ] keep,@ frames: 8,11 (keep constant through physical or chemical reactions or evolutionary change; "Energy is conserved in this process")}
+{ preserve7, keep,@ frames: 8 (keep undisturbed for personal or private use for hunting, shooting, or fishing; "preserve the forest and the lakes")}
+{ carry14, verb.consumption:maintain,@ frames: 9 (keep up with financial support; "The Federal Government carried the province for many years") }
+{ [ distance, noun.feeling:distance,+ ] keep,@ frames: 8,9 (keep at a distance; "we have to distance ourselves from these events in order to continue living") }
+{ [ housekeep, noun.person:housekeeper,+ noun.act:housekeeping,+ ] keep,@ frames: 2 (maintain a household; take care of all business related to a household) }
+{ hold1, continue1,@ frames: 1,22 (remain in a certain state, position, or condition; "The weather held"; "They held on the road and kept marching") }
+{ taper_off, peter_out, fizzle_out, fizzle, discontinue1,@ frames: 1 (end weakly; "The music just petered out--there was no proper ending") }
+{ [ discontinue1, continue1,! ] end,@ frames: 1 (come to or be at an end; "the support from our sponsoring agency will discontinue after March 31") }
+{ leave_off, discontinue1,@ frames: 4 (come to an end, stop or cease; "the road leaves off at the edge of the forest"; "leave off where you started") }
+{ run_on, keep_going2, verb.communication:keep_going,$ continue1,@ frames: 1,2 (continue uninterrupted; "The disease will run on unchecked"; "The party kept going until 4 A.M.") }
+{ ramble_on, [ ramble, noun.person:rambler1,+ ] jog, verb.communication:go_on,@ frames: 1,2 (continue talking or writing in a desultory manner; "This novel rambles on and jogs") }
+{ [ ride, noun.act:ride,+ ] continue1,@ frames: 1 (continue undisturbed and without interference; "Let it ride") }
+{ run_out, [ expire, noun.time:expiration,+ ] discontinue1,@ frames: 1 (lose validity; "My passports expired last month") }
+{ [ continue1, noun.attribute:continuation,+ noun.act:continuation,+ noun.act:continuance,+ discontinue1,! frames: 1,2 ] [go_on, frames: 1,2 ] proceed, go_along, keep7, verb.social:act,@ frames: 33 (continue a certain state, condition, or activity; "Keep on working!"; "We continued to work into the night"; "Keep smiling"; "We went on working until well past midnight")}
+{ cross, traverse, [ span, noun.attribute:span,+ ] [ sweep3, noun.attribute:sweep,+ ] extend1,@ frames: 11 (to cover or extend over an area or time period; "Rivers traverse the valley floor"; "The parking lot spans 3 acres"; "The novel spans three centuries") }
+{ [ reach, noun.location:reach,+ reach_out,^ reach_into,^ ] extend_to, [ touch1, noun.event:touch,+ ] be5,@ frames: 11,4 (to extend as far as; "The sunlight reached the wall"; "Can he reach?"; "The chair must not touch the wall") }
+{ [run, run_along,^ ] go, pass8, lead, [ extend3, noun.attribute:extent,+ extend_to,^ ] run7,$ be5,@ frames: 4 (stretch out over a distance, space, time, or scope; run or extend between two points or beyond a certain point; "Service runs all the way to Cranbury"; "His knowledge doesn't go very far"; "My memory extends back to my fourth year of life"; "The facts extend beyond a consideration of her personal assets") }
+{ go8, lead3, be5,@ frames: 4 (lead, extend, or afford access; "This door goes to the basement"; "The road runs South") }
+{ run8, lead2, verb.motion:pass4,@ verb.contact:run1,$ frames: 21 (cause something to pass or lead somewhere; "Run the wire behind the cabinet") }
+{ come3, run,@ frames: 4 (extend or reach; "The water came up to my waist"; "The sleeves come to your knuckles") }
+{ [ radiate, noun.body:radiation,+ noun.act:radiation,+ ] [ ray, noun.shape:ray,+ ] extend3,@ frames: 1,8 (extend or spread outward from a center or focus or inward towards a center; "spokes radiate from the hub of the wheel"; "This plants radiate spines in all directions") }
+{ [ roll, noun.shape:roll,+ ] undulate, frames: 1,4 (occur in soft rounded shapes; "The hills rolled past") }
+{ [lead1, frames: 9,11,8,10] [ top11, noun.state:top,+ noun.person:topper2,+ ] verb.competition:compete,* frames: 2,22 (be ahead of others; be the first; "she topped her class every year") }
+{ rim, run_along,@ frames: 11 (run around the rim of; "Sugar rimmed the dessert plate") }
+{ [ beard, noun.body:beard,+ noun.animal:beard1,+ ] rim,@ frames: 11 (go along the rim, like a beard around the chin; "Houses bearded the top of the heights") }
+{ cover1, continue6, [ extend1, noun.attribute:extent,+ ] verb.competition:cover1,$ be5,@ frames: 11 (span an interval of distance, space or time; "The war extended over five years"; "The period covered the turn of the century"; "My land extends over the hills on the horizon"; "This farm covers some 200 acres"; "The Archipelago continues for another 500 miles") }
+{ [ sweep10, noun.attribute:sweep,+ ] cover1,@ frames: 8 (cover the entire range of)}
+{ rake10, sweep10,@ frames: 8 (sweep the length of; "The gunfire raked the coast")}
+{ enfilade, rake10,@ frames: 8 (rake or be in a position to rake with gunfire in a lengthwise direction)}
+{ [ overlap1, noun.artifact:overlap,+ noun.artifact:overlapping,+ ] cover1,@ frames: 1,8 (extend over and cover a part of; "The roofs of the houses overlap in this crowded city") }
+{ [ imbricate, noun.artifact:imbrication,+ ] overlap1,@ frames: 1 (overlap; "The roof tiles imbricate")}
+{ [ imbricate1, noun.artifact:imbrication,+ ] imbricate,$ verb.contact:place,@ frames: 8 (place so as to overlap; "imbricate the roof tiles")}
+{ [ spread, noun.act:spread,+ noun.attribute:spread,+ noun.event:spread,+ noun.event:spreading,+ ] overspread, cover1,@ frames: 11 (spread across or over; "A big oil spot spread across the water") }
+{ [ transgress, noun.phenomenon:transgression,+ ] overspread,@ frames: 1 (spread over land, especially along a subsiding shoreline; "The sea transgresses along the West coast of the island")}
+{ [ ridge, noun.object:ridge1,+ noun.object:ridge,+ ] extend1,@ frames: 1 (extend in ridges; "The land ridges towards the South") }
+{ [ dot, noun.shape:dot,+ ] [ stud, noun.artifact:stud1,+ ] [ constellate, noun.cognition:constellation,+ ] cover1,@ frames: 11 (scatter or intersperse like dots or studs; "Hills constellated with lights")}
+{ [ extend2, adj.all:extensible,+ adj.all:long1^extendible,+ ] poke_out, reach_out, be5,@ frames: 1,4 (reach outward in space; "The awning extends several feet over the sidewalk") }
+{ reach_into, extend_to,@ frames: 11 (run into or up to) }
+{ [ range, noun.attribute:range,+ ] straddle2, be2,@ frames: 11 (range or extend over; occupy a certain area; "The plants straddle the entire state") }
+{ spread-eagle, straddle2,@ frames: 11 (stretch over; "His residences spread-eagle the entire county") }
+{ [ lie, noun.location:lie,+ ] lie2,$ be5,@ frames: 1,4 (be located or situated somewhere; occupy a certain position) }
+{ sit5, be5,@ frames: 4 (be located or situated somewhere; "The White House sits on Pennsylvania Avenue")}
+{ nestle, lie,@ frames: 4 (lie in a sheltered position; "The little cottage nestles in the forest")}
+{ intervene, lie,@ frames: 4,1 (be placed or located between other things or extend between spaces and events; "This interludes intervenes between the two movements"; "Eight days intervened")}
+{ [ top2, noun.location:top1,+ ] lie,@ frames: 11 (be at the top of or constitute the top or highest point; "A star tops the Christmas Tree")}
+{ mediate, lie,@ frames: 1 (occupy an intermediate or middle position or form a connecting link or stage between two others; "mediate between the old and the new")}
+{ ride2, lie,@ frames: 4 (lie moored or anchored; "Ship rides at anchor") }
+{ [ lap, noun.artifact:lap,+ ] lie,@ frames: 4 (lie partly over or alongside of something or of one another) }
+{ localize, localise, [ focalize, noun.process:focalization,+ ] [ focalise, noun.process:focalisation,+ ] lie,@ frames: 4 (concentrate on a particular place or spot; "The infection has localized in the left eye") }
+{ [ slant, noun.attribute:slant,+ ] lie,@ frames: 4 (lie obliquely; "A scar slanted across his face") }
+{ [ precede1, adj.all:preceding^precedent,+ noun.act:precession,+ noun.communication:precedent2,+ ] predate1, lie,@ frames: 11 (come before; "Most English adjectives precede the noun they modify") }
+{ sit, sit_around, be5,@ frames: 1,4 (be around, often idly or without specific purpose; "The object sat in the corner"; "We sat around chatting for another hour") }
+{ underlie1, lie,@ frames: 11 (lie underneath) }
+{ cap, [ crest, noun.location:crest1,+ noun.location:crest,+ ] lie,@ frames: 11 (lie at the top of; "Snow capped the mountains") }
+{ [ front, noun.location:front2,+ noun.location:front,+ noun.relation:frontage,+ back,! ] look, face, face2,$ lie,@ frames: 11 (be oriented in a certain direction, often with respect to another reference point; be opposite to; "The house looks north"; "My backyard look onto the pond"; "The building faces the park") }
+{ face2, be5,@ frames: 22,4 (be opposite; "the facing page"; "the two sofas face each other") }
+{ subtend, delimit1, be3,@ frames: 11 (be opposite to; of angles and sides, in geometry) }
+{ [ back, noun.artifact:back,+ front,! ] lie,@ frames: 11 (be in back of; "My garage backs their yard")}
+{ [ flank, noun.shape:flank,+ noun.person:flanker1,+ noun.person:flanker,+ ] lie,@ frames: 11,10,9 (be located at the sides of something or somebody) }
+{ [ head, noun.location:head2,+ noun.communication:header,+ noun.location:head,+ noun.communication:heading,+ ] lie,@ frames: 11,8 (be in the front of or on top of; "The list was headed by the name of the president") }
+{ surmount, head,@ frames: 11 (be on top of; "The scarf surmounted the gown")}
+{ crown, head,@ frames: 11 (form the topmost part of; "A weather vane crowns the building") }
+{ [ pinnacle, noun.artifact:pinnacle,+ ] surmount,@ frames: 11 (surmount with a pinnacle; "pinnacle a pediment") }
+{ [ situate, noun.location:situation,+ ] [ locate, noun.person:locater,+ noun.act:location1,+ noun.Tops:location,+ noun.person:locator,+ ] verb.communication:determine,@ frames: 8 (determine or indicate the place, site, or limits of, as if by an instrument or by a survey; "Our sense of sight enables us to locate objects in space"; "Locate the boundaries of the property") }
+{ acquire, locate,@ frames: 8,11 (locate (a moving entity) by means of a tracking system such as radar )}
+{ [ radiolocate, noun.artifact:radiolocation,+ ] locate,@ frames: 8,11,10,9 (locate by means of radar; "The pilot managed to radiolocate the lost aircraft")}
+{ [ map, noun.act:mapping,+ ] locate,@ frames: 8 (locate within a specific region of a chromosome in relation to known DNA or gene sequences; "map the genes") }
+{ [ place, noun.attribute:placement,+ ] [ localize1, noun.act:localization,+ noun.location:locale,+ ] [ localise1, noun.act:localisation,+ ] situate,@ frames: 8 (identify the location or place of; "We localized the source of the infection")}
+{ dominate2, command, [ overlook, noun.location:overlook,+ ] overtop, lie,@ frames: 11 (look down on; "The villa dominates the town") }
+{ [ shadow, noun.state:shadow,+ ] overshadow1, [ dwarf, noun.person:dwarf,+ ] dominate2,@ frames: 11 (make appear small by comparison; "This year's debt dwarfs that of last year") }
+{ loom, [ tower, noun.shape:tower,+ ] [ predominate1, noun.attribute:predomination,+ ] [ hulk, noun.person:hulk,+ ] rise,@ frames: 1,4 (appear very large or occupy a commanding position; "The huge sculpture predominates over the fountain"; "Large shadows loomed on the canyon wall") }
+{ [ rise, noun.attribute:rise1,+ ] lift1, rear, verb.perception:appear,@ frames: 1,4 (rise up; "The building rose before them") }
+{ loom2, verb.perception:appear,@ frames: 1,4 (come into view indistinctly, often threateningly; "Another air plane loomed into the sky")}
+{ endanger, [ jeopardize, noun.state:jeopardy,+ ] [ jeopardise, noun.state:jeopardy,+ ] [ menace, noun.state:menace,+ ] [threaten, frames: 28] imperil, [ peril, noun.state:peril1,+ noun.state:peril,+ ] be,@ frames: 10,11 (pose a threat to; present a danger to; "The pollution is endangering the crops") }
+{ [ overhang, noun.artifact:overhang,+ ] beetle, verb.contact:hang3,@ frames: 11 (be suspended over or hang over; "This huge rock beetles over the edge of the town") }
+{ [ dote, noun.person:dotard,+ ] verb.change:age,@ frames: 2 (be foolish or senile due to old age)}
+{ embody, be8, [ personify, noun.cognition:persona,+ noun.attribute:persona,+ ] verb.communication:represent2,@ frames: 11,8 (represent, as of a character on stage; "Derek Jacobi was Hamlet") }
+{ [ characterize1, noun.cognition:character,+ ] [ characterise1, noun.cognition:character,+ ] verb.cognition:distinguish2,@ frames: 10,11 (be characteristic of; "What characterizes a Venetian painting?")}
+{ [ individuate, noun.cognition:individuation,+ noun.attribute:individuation,+ ] characterize1,@ frames: 10,11 (give individual character to) }
+{ define1, characterize1,@ frames: 10,11 (determine the nature of; "What defines a good wine?")}
+{ [ incarnate, noun.person:incarnation,+ ] body_forth, [ embody1, noun.act:embodiment,+ ] substantiate, be3,@ frames: 8,11 (represent in bodily form; "He embodies all that is evil wrong with the system"; "The painting substantiates the feelings of the artist") }
+{ [ reincarnate, noun.person:reincarnation,+ ] [ transmigrate, noun.event:transmigration,+ ] verb.change:be_born,@ noun.cognition:religion,;c frames: 2 (be born anew in another body after death; "Hindus believe that we transmigrate") }
+{ [ body, noun.body:body2,+ ] [ personify1, noun.person:personification,+ noun.communication:personification,+ noun.body:person,+ ] embody,@ frames: 8,11 (invest with or as with a body; give body to) }
+{ [ typify, noun.cognition:typification,+ noun.person:type,+ noun.group:type1,+ noun.cognition:type,+ ] [ epitomize, noun.communication:epitome,+ noun.cognition:epitome,+ ] [ epitomise, noun.communication:epitome,+ noun.cognition:epitome,+ ] verb.communication:represent2,@ frames: 11,8 (embody the essential characteristics of or be a typical example of; "The fugue typifies Bach's style of composition") }
+{ [ represent2, noun.act:representation,+ ] stand_for, [ correspond1, adj.all:similar^correspondent,+ frames: 4] be7,@ frames: 11 (take the place of or be parallel or equivalent to; "Because of the sound changes in the course of history, an `h' in Greek stands for an `s' in Latin") }
+{ [ homologize, noun.attribute:homology,+ ] correspond,@ frames: 11 (be homologous; "A person's arms homologize with a quadruped's forelimbs") }
+{ befit, suit, beseem, match,@ frames: 10,11 (accord or comport with; "This kind of behavior does not suit a young woman!") }
+{ [ harmonize, noun.state:harmony,+ noun.attribute:harmony1,+ ] harmonise, consort, [ accord, adj.all:accordant,+ noun.attribute:accord,+ ] [ concord, noun.state:concord,+ ] fit_in, [ agree1, adj.all:consistent^agreeable,+ ] match,@ frames: 2,1,4 (go together; "The colors don't harmonize"; "Their ideas concorded") }
+{ blend, go11, blend_in, harmonize,@ frames: 1,4 (blend or harmonize; "This flavor will blend with those in your dish"; "This sofa won't go with the chairs") }
+{ go12, frames: 1 (be sounded, played, or expressed; "How does this song go again?") }
+{ go13, frames: 11 (be contained in; "How many times does 18 go into 54?") }
+{ [ hold13, noun.artifact:hold2,+ ] bear14, [ carry3, noun.act:carry,+ ] [ contain13, adj.all:continent,+ noun.quantity:content,+ noun.artifact:container,+ ] include,@ frames: 11 (contain or hold; have within; "The jar carries wine"; "The canteen holds fresh water"; "This can contains water")}
+{ contain14, take15, [ hold14, noun.artifact:hold2,+ ] hold5,$ hold13,$ be3,@ frames: 11 (be capable of holding or containing; "This box won't take all the items"; "The flask holds one gallon")}
+{ [ sleep, noun.time:sleep,+ noun.artifact:sleeper2,+ noun.artifact:sleeper,+ ] accommodate3,@ frames: 10 (be able to accommodate for sleeping; "This tent sleeps six people") }
+{ [ retain, adj.all:retentive,+ ] hold13,@ frames: 8,11 (hold back within; "This soil retains water"; "I retain this drug for a long time"; "the dam retains the water") }
+{ [ house2, noun.artifact:housing1,+ ] accommodate3,@ frames: 11,10 (contain or cover; "This box houses the gears") }
+{ [ seat, noun.artifact:seat1,+ noun.location:seat1,+ noun.artifact:seating,+ ] accommodate3,@ frames: 11 (be able to seat; "The theater seats 2,000")}
+{ [ stand, noun.cognition:stand,+ yield,! ] remain_firm, verb.competition:stand,$ verb.competition:resist,@ frames: 2,1 (hold one's ground; maintain a position; be steadfast or upright; "I am standing my ground and won't give in!") }
+{ [ stand1, noun.location:stand,+ ] measure,@ frames: 4 (be tall; have a height of; copula; "She stands 6 feet tall") }
+{ [ cost, noun.attribute:cost,+ noun.possession:cost,+ frames: 14] be9, be3,@ frames: 11 (be priced at; "These shoes cost $100") }
+{ set_back, knock_back, put_back, cost,@ frames: 10 (cost a certain amount; "My daughter's wedding set me back $20,000") }
+{ suit5, [ accommodate, adj.all:noncompetitive^accommodative,+ noun.event:accommodation,+ ] [ fit5, noun.person:fitter,+ ] verb.consumption:meet,@ frames: 10 (be agreeable or acceptable to; "This suits my needs")}
+{ stand2, verb.change:continue10,@ frames: 1 (be in effect; be or remain in force; "The law stands!") }
+{ wash12, stand2,@ frames: 1 (admit to testing or proof; "This silly excuse won't wash in traffic court") }
+{ [ yield, stand,! ] relent, soften, frames: 1,2 (give in, as to influence or pressure) }
+{ [ truckle, noun.person:truckler,+ ] yield,@ frames: 21 (yield to out of weakness) }
+{ [ line, noun.group:line1,+ ] run_along, lie,@ frames: 11 (be in line with; form a line along; "trees line the riverbank") }
+{ skirt, border,@ frames: 11 (form the edge of) }
+{ [ verge1, noun.attribute:verge,+ noun.shape:verge,+ ] border,@ frames: 11 (border on; come close to; "His behavior verges on the criminal") }
+{ border_on, [ approach, noun.attribute:approach1,+ ] approximate,@ frames: 11 (come near or verge on, resemble, come nearer in quality, or character; "This borders on discrimination!"; "His playing approaches that of Horowitz") }
+{ line_up, verb.contact:arrange,@ frames: 1,2,4,22 (form a line; "The buildings all line up neatly") }
+{ [ measure, noun.artifact:measure,+ noun.act:measure,+ measure_up,^ ] be3,@ frames: 11 (have certain dimensions; "This table surfaces measures 20inches by 36 inches") }
+{ [ weigh, noun.person:weigher,+ ] librate, weigh1,$ verb.change:measure,@ frames: 8,9,11 (determine the weight of; "The butcher weighed the chicken") }
+{ weigh1, measure,@ frames: 11,8 (have a certain weight) }
+{ last, endure6, measure,@ frames: 11 (persist for a specified period of time; "The bad weather lasted for three days") }
+{ [ wear, adj.all:wearable,+ ] hold_out1, endure1, last,@ frames: 6,11 (last and be usable; "This dress wore well for almost ten years") }
+{ outwear, verb.competition:surpass,@ frames: 11 (last longer than others; "This material outwears all others") }
+{ drag_on, drag_out, last,@ frames: 1,4 (last unnecessarily long) }
+{ inhere_in, attach_to, include,@ frames: 11 (be part of; "This problem inheres in the design") }
+{ fall_into, fall_under, be2,@ frames: 11 (be included in or classified as; "This falls under the rubric `various'") }
+{ [ straddle, noun.cognition:straddle,+ ] frames: 2 (be noncommittal) }
+{ [ straddle1, noun.act:straddle,+ noun.act:straddle2,+ ] be5,@ frames: 8,11 (sit or stand astride of) }
+{ hover, vibrate3, [ vacillate, adj.all:irresolute^vacillant,+ noun.cognition:vacillation,+ noun.person:vacillator,+ ] [ oscillate, noun.process:oscillation,+ ] waver,@ frames: 2 (be undecided about something; waver between conflicting positions or courses of action; "He oscillates between accepting the new position and retirement") }
+{ shillyshally, vacillate,@ frames: 2 (be uncertain and vague) }
+{ [ shimmer, noun.event:shimmer,+ ] verb.perception:shine1,@ frames: 1 (give off a shimmering reflection, as of silk) }
+{ [ hum, noun.event:hum,+ noun.event:humming,+ ] [ buzz, noun.act:buzz,+ ] seethe, be3,@ frames: 1 (be noisy with activity; "This office is buzzing with activity") }
+{ [ defy, adj.all:defiant,+ ] [ withstand, noun.person:withstander,+ ] hold8, hold_up2, verb.competition:resist,@ frames: 11,8 (resist or confront with resistance; "The politician defied public opinion"; "The new material withstands even the greatest wear and tear"; "The bridge held")}
+{ [ stand6, noun.event:stand,+ ] verb.change:remain,@ frames: 1 (remain inactive or immobile; "standing water") }
+{ weather, endure4, [ brave, noun.group:brave,+ ] brave_out, defy,@ frames: 11,8 (face and withstand with courage; "She braved the elements") }
+{ [ lend_oneself, defy1,! ] [ apply1, adj.all:practical^applicative,+ adj.all:relevant^applicable,+ adj.all:practical^applicatory,+ noun.act:application2,+ ] frames: 4 (be applicable to; as to an analysis; "This theory lends itself well to our new data") }
+{ beggar, defy1,@ frames: 11 (be beyond the resources of; "This beggars description!") }
+{ [ defy1, lend_oneself,! ] resist1, refuse, elude,@ frames: 11 (elude, especially in a baffling way; "This behavior defies explanation") }
+{ [ weekend, noun.time:weekend,+ noun.person:weekender,+ noun.artifact:weekender,+ ] spend,@ frames: 2 (spend the weekend) }
+{ piddle, wanton, wanton_away, piddle_away, [ trifle, noun.act:trifling,+ ] verb.possession:spend,@ frames: 2 (waste time; spend one's time idly or inefficiently) }
+{ misspend, verb.possession:spend,@ frames: 8 (spend time badly or unwisely; "He misspent his youth") }
+{ spend, pass, frames: 8 (use up a period of time in a specific way; "how are you spending your summer vacation?")}
+{ [ vacation, noun.time:vacation,+ noun.person:vacationist,+ noun.person:vacationer,+ noun.act:vacationing,+ ] [ holiday, noun.time:holiday,+ ] spend,@ frames: 2,22 (spend or take a vacation) }
+{ [ honeymoon, noun.time:honeymoon,+ noun.person:honeymooner,+ ] vacation,@ frames: 2,22 (spend a holiday after one's marriage; "they plan to honeymoon in Hawai'i")}
+{ serve, do2, spend,@ frames: 22,8 (spend time in prison or in a labor camp; "He did six years for embezzlement") }
+{ while_away, get_through, spend,@ frames: 8 (spend or pass, as with boredom or in a pleasant manner; of time) }
+{ [ sojourn, noun.person:sojourner,+ noun.act:sojourn,+ ] spend,@ frames: 8 (spend a certain length of time; reside temporarily) }
+{ [ winter, noun.time:winter,+ ] overwinter, spend,@ frames: 2,22 (spend the winter; "We wintered on the Riviera"; "Shackleton's men overwintered on Elephant Island")}
+{ [ summer, noun.time:summer,+ ] spend,@ frames: 2,22 (spend the summer; "We summered in Kashmir")}
+{ [ diverge, adj.all:divergent,+ noun.act:divergency,+ converge,! ] frames: 1 (extend in a different direction; "The lines start to diverge here"; "Their interests diverged")}
+{ divaricate, diverge,@ frames: 1 (branch off; "The road divaricates here") }
+{ [ breast, noun.body:breast1,+ ] meet2,@ frames: 11,9,10,8 (meet at breast level; "The runner breasted the tape") }
+{ [ converge, adj.all:convergent,+ noun.act:convergency,+ noun.act:converging,+ noun.event:convergence,+ diverge,! ] meet2, verb.contact:meet,$ frames: 1,4 (be adjacent or come together; "The lines converge at this point") }
+{ [ bound, noun.shape:boundary,+ noun.location:boundary,+ noun.shape:bound,+ noun.location:bound,+ ] [ border, noun.shape:border,+ noun.location:border1,+ noun.location:border,+ border_on,^ ] enclose,@ frames: 11 (form the boundary of; be contiguous to) }
+{ [ shore, noun.object:shore,+ ] bound,@ frames: 11 (serve as a shore to; "The river was shored by trees") }
+{ [ enclose, noun.object:enclosure,+ noun.artifact:enclosure,+ ] hold_in, [ confine, noun.state:confinement,+ ] hold13,@ frames: 11 (close in; "darkness enclosed him") }
+{ [ embank, noun.artifact:embankment,+ ] enclose,@ frames: 8 (enclose with banks, as for support or protection; "The river was embanked with a dyke")}
+{ [ rail, noun.artifact:rail,+ noun.artifact:rail2,+ noun.artifact:railing,+ ] rail_in, enclose,@ frames: 8,11 (enclose with rails; "rail in the old graves")}
+{ box_in, box_up, confine,@ frames: 8,11 (enclose or confine as if in a box) }
+{ [ frame, noun.person:framer1,+ noun.artifact:framing,+ ] enclose,@ frames: 8 (enclose in a frame, as of a picture) }
+{ depend_on, devolve_on, depend_upon, ride7, turn_on, hinge_on, hinge_upon, frames: 11,10 (be contingent on; "The outcomes rides on the results of the election"; "Your grade will depends on your homework")}
+{ [ pattern, noun.location:pattern,+ noun.act:pattern,+ noun.cognition:pattern,+ ] match,@ frames: 1,4 (form a pattern; "These sentences pattern like the ones we studied before") }
+{ [ predate, postdate,! ] [ precede, adj.all:preceding^precedent,+ noun.act:precession,+ noun.cognition:precedent,+ noun.attribute:precedency,+ noun.attribute:precedence,+ ] forego, forgo, [ antecede, noun.attribute:antecedency,+ noun.event:antecedent,+ noun.attribute:antecedence,+ ] antedate, frames: 11 (be earlier in time; go back further; "Stone tools precede bronze tools") }
+{ [ postdate, predate,! ] follow, frames: 11 (be later in time; "Tuesday always follows Monday") }
+{ orient1, orient,> verb.motion:position,@ frames: 21 (cause to point; "Orient the house towards the West")}
+{ [ stem3, noun.act:stem,+ ] orient1,@ frames: 8 (cause to point inward; "stem your skis")}
+{ orient, [ point, noun.communication:pointer,+ noun.artifact:pointer,+ ] lie,@ frames: 4 (be oriented; "The weather vane points North"; "the dancers toes pointed outward") }
+{ stick_out1, [ protrude, adj.all:extensile^protrusible,+ adj.all:protrusive,+ noun.act:protrusion,+ ] jut_out, [ jut, noun.act:jutting,+ ] [ project, noun.act:projection2,+ ] frames: 1,4 (extend out or project in space; "His sharp nose jutted out"; "A single rock sticks out from the cliff") }
+{ [ overhang1, noun.artifact:overhang,+ ] project,@ frames: 1,4 (project over) }
+{ [ thrust, noun.phenomenon:thrust,+ ] push_up, project,@ frames: 1,4 (push upward; "The front of the trains that had collided head-on thrust up into the air") }
+{ [ thrust1, noun.phenomenon:thrust,+ ] thrust,$ noun.cognition:geology,;c frames: 11 (force (molten rock) into pre-existing rock)}
+{ [ spear, noun.artifact:spear,+ ] spear_up, project,@ frames: 1,4 (thrust up like a spear; "The branch speared up into the air") }
+{ [ bulge, noun.shape:bulge,+ ] bag, project,@ frames: 1,4 (bulge out; form a bulge outward, or be so full as to appear to bulge) }
+{ [ protuberate, adj.all:protrusive^protuberant,+ noun.state:protuberance,+ ] bulge,@ frames: 1 (form a rounded prominence; "The starved child's belly protuberated")}
+{ [ protuberate1, adj.all:protrusive^protuberant,+ noun.shape:protuberance,+ ] protuberate,$ frames: 11 (cause to bulge out or project)}
+{ [ cantilever, noun.artifact:cantilever,+ ] project,@ frames: 1 (project as a cantilever) }
+{ [teem, teem_in,^ frames: 1 ] pullulate, [ swarm, noun.group:swarm,+ noun.group:swarm1,+ ] hum,@ frames: 4 (be teeming, be abuzz; "The garden was swarming with bees"; "The plaza is teeming with undercover policemen"; "her mind pullulated with worries") }
+{ [ abound, adj.all:abundant,+ noun.attribute:abundance,+ abound_in,^ ] be3,@ frames: 1,4 (be abundant or plentiful; exist in large quantities) }
+{ bristle2, have,@ frames: 4 (have or be thickly covered with or as if with bristles; "bristling leaves")}
+{ abound1, [ burst, noun.act:burst2,+ ] bristle, have,@ frames: 8 (be in a state of movement or action; "The room abounded with screaming children"; "The garden bristled with toddlers")}
+{ brim, have,@ frames: 4 (be completely full; "His eyes brimmed with tears") }
+{ abound_in, teem_in, pullulate_with, occur3,@ frames: 10,11 (exist in large quantity) }
+{ crawl, swarm,@ frames: 4 (be full of; "The old cheese was crawling with maggots") }
+{ attach_to1, [ accompany, noun.event:accompaniment,+ ] come_with, go_with1, frames: 11,10 (be present or associated with an event or entity; "French fries come with the hamburger"; "heart attacks are accompanied by distruction of heart tissue"; "fish usually goes with white wine"; "this kind of vein accompanies certain arteries") }
+{ attend1, accompany,@ frames: 11 (to accompany as a circumstance or follow as a result; "Menuhin's playing was attended by a 15-minute standing ovation") }
+{ [ company, noun.group:company6,+ ] [ companion, noun.person:companion2,+ noun.person:companion1,+ noun.person:companion,+ ] [ accompany1, noun.act:accompaniment,+ ] keep_company, verb.social:associate2,@ frames: 9,10 (be a companion to somebody) }
+{ rule1, accompany,@ frames: 11 (have an affinity with; of signs of the zodiac) }
+{ [ carry1, noun.act:carry,+ ] pack, take10, carry12,$ have,@ frames: 8 (have with oneself; have on one's person; "She always takes an umbrella"; "I always carry money"; "She packs a gun when she goes into the mountains") }
+{ [ bag1, noun.artifact:bagging,+ ] verb.motion:sag,@ frames: 1 (hang loosely, like an empty bag) }
+{ dangle, [ swing, noun.artifact:swing,+ noun.act:swinging,+ ] drop4, verb.contact:hang3,@ frames: 1,4 (hang freely; "the ornaments dangled from the tree"; "The light dropped from the ceiling") }
+{ [ droop, noun.shape:droop,+ ] loll1, drop4,@ frames: 1 (hang loosely or laxly; "His tongue lolled") }
+{ cancel, [ offset, noun.possession:offset,+ ] set_off, balance,@ frames: 11 (make up for; "His skills offset his opponent's superior strength") }
+{ [ offset1, noun.possession:offset,+ ] countervail, balance,@ frames: 11 (compensate for or counterbalance; "offset deposits and withdrawals") }
+{ adhere, agree,@ frames: 8 (be compatible or in accordance with; "You must adhere to the rules") }
+{ [ share, noun.relation:sharing,+ ] overlap3,@ frames: 8,9,11,31 (have in common; "Our children share a love of music"; "The two countries share a long border") }
+{ [ disagree, agree,! ] disaccord, [ discord, adj.all:inharmonious^discordant,+ adj.all:discordant,+ noun.state:discord,+ noun.act:discordance,+ ] be3,@ frames: 1 (be different from one another)}
+{ gape, yawn, yaw, be3,@ frames: 1 (be wide open; "the deep gaping canyon") }
+{ [ bifurcate, noun.act:fork,+ noun.shape:bifurcation1,+ noun.act:bifurcation,+ ] diverge,@ frames: 1,4 (split or divide into two) }
+{ [ sulk, noun.feeling:sulk,+ ] [ pout, noun.person:pouter,+ ] brood, verb.emotion:resent,* frames: 2 (be in a huff and display one's displeasure; "She is pouting because she didn't get what she wanted") }
+{ take_kindly_to, lean1,@ frames: 8 (be willing or inclined to accept; "He did not take kindly to my critical remarks")}
+{ [ tend1, noun.feeling:tendency,+ noun.cognition:tendency,+ ] be_given, lean1, [ incline1, noun.feeling:inclination,+ noun.cognition:inclination,+ noun.attribute:inclination,+ ] run1, be3,@ frames: 28 (have a tendency or disposition to do or be something; be inclined; "She tends to be nervous before her lectures"; "These dresses run small"; "He inclined to corpulence") }
+{ suffer4, tend1,@ frames: 22 (be given to; "She suffers from a tendency to talk too much")}
+{ belong_to, belong6, frames: 11,9,10 (be a part or adjunct; "the uniform looks like it belonged to a museum collection"; "These pages don't belong") }
+{ follow5, fall_out2, ensue,@ frames: 1,34 (come as a logical consequence; follow logically; "It follows that your assertion is false"; "the theorem falls out nicely")}
+{ follow1, come_after, follow,$ follow2,$ result,@ frames: 11 (come after in time, as a result; "A terrible tsunami followed the earthquake") }
+{ follow2, be5,@ frames: 1,2,22 (be next; "Mary plays best, with John and Sue following") }
+{ follow3, follow2,> frames: 8 (to bring something about at a later time than; "She followed dinner with a brandy"; "He followed his lecture with a question and answer period") }
+{ run2, incur,@ frames: 8 (be affected by; be subjected to; "run a temperature"; "run a risk")}
+{ [ incur, noun.act:incursion2,+ noun.act:incurring,+ noun.act:incurrence,+ ] verb.perception:subject3,@ frames: 8 (make oneself subject to; bring upon oneself; become liable to; "People who smoke incur a great danger to their health") }
+{ run4, go2, be3,@ frames: 1 (have a particular form; "the story or argument runs as follows"; "as the saying goes...") }
+{ leave1, allow_for, allow, [provide, frames: 22] allow7,$ verb.possession:give5,@ frames: 8,11 (make a possibility or provide opportunity for; permit to be attainable or cause to remain; "This leaves no room for improvement"; "The evidence allows only one conclusion"; "allow for mistakes"; "leave lots of time for the trip"; "This procedure provides for lots of leeway" ) }
+{ come_up1, verb.change:arise,@ frames: 1,2 (be mentioned; "These names came up in the discussion") }
+{ look_out_on, look_out_over, [ overlook1, noun.location:overlook,+ ] look_across, lie,@ frames: 11 (be oriented in a certain direction; "The house looks out on a tennis court"; "The apartment overlooks the Hudson") }
+{ figure, enter, be3,@ frames: 4,22 (be or play a part of or in; "Elections figure prominently in every government program"; "How do the elections figure in the current pattern of internal politics?") }
+{ play, frames: 2 (be received or accepted or interpreted in a specific way; "This speech didn't play well with the American public"; "His remarks played to the suspicions of the committee") }
+{ present, pose, constitute,@ frames: 11 (introduce; "This poses an interesting question") }
+{ [ press, noun.state:pressure,+ ] be3,@ frames: 1 (be urgent; "This is a pressing problem") }
+{ [ rage, noun.state:rage1,+ ] be3,@ frames: 1 (be violent; as of fires and storms) }
+{ [ ramp, adj.all:uncontrolled^rampant,+ noun.act:rampage,+ ] [ rage1, noun.state:rage,+ noun.feeling:rage,+ ] [ storm, noun.state:storm,+ ] verb.body:act,@ frames: 2 (behave violently, as if in state of a great anger) }
+{ [ elude, adj.all:unidentifiable^elusive,+ adj.all:impalpable^elusive,+ ] escape, verb.cognition:baffle,@ frames: 10 (be incomprehensible to; escape understanding by; "What you are seeing in him eludes me") }
+{ center_on1, be5,@ frames: 11 (have as a center; "The region centers on Charleston") }
+{ do_well, had_best, verb.social:act,@ frames: 32 (act in one's own or everybody's best interest; "You will do well to arrive on time tomorrow!") }
+{ [ exemplify, noun.cognition:exemplification,+ noun.cognition:example2,+ noun.cognition:example,+ ] represent1, be8,@ frames: 11,10 (be characteristic of; "This compositional style is exemplified by this fugue")}
+{ go_back, date_back, date_from, verb.creation:originate,@ frames: 11,8 (belong to an earlier time; "This story dates back 200 years") }
+{ [ cloister, noun.artifact:cloister1,+ ] verb.contact:surround,@ frames: 8,11 (surround with a cloister, as of a garden) }
+{ become3, suit1, verb.change:embellish,@ frames: 10 (enhance the appearance of; "Mourning becomes Electra"; "This behavior doesn't suit you!") }
+{ [ relate1, noun.act:relation,+ noun.Tops:relation,+ frames: 4] [ interrelate, noun.relation:interrelation,+ ] be3,@ frames: 1,2 (be in a relationship with; "How are these two observations related?") }
+{ [ rut, noun.state:rut,+ ] be3,@ frames: 1 (be in a state of sexual excitement; of male mammals) }
+{ [ stagnate, adj.all:standing2^stagnant,+ noun.state:stagnation1,+ noun.state:stagnancy1,+ ] be3,@ frames: 1 (cease to flow; stand without moving; "Stagnating waters"; "blood stagnates in the capillaries")}
+{ [ stagnate2, adj.all:standing2^stagnant,+ noun.state:stagnation,+ noun.state:stagnation1,+ noun.state:stagnancy1,+ ] stagnate,$ verb.change:change,@ frames: 11 (cause to stagnate; "There are marshes that stagnate the waters")}
+{ [ stagnate1, adj.all:undynamic^stagnant,+ noun.state:stagnation,+ ] be3,@ frames: 1 (stand still; "Industry will stagnate if we do not stimulate our economy")}
+{ come_in_handy, be3,@ frames: 1 (be useful for a certain purpose) }
+{ squat1, be3,@ frames: 1,8 (be close to the earth, or be disproportionately wide; "The building squatted low") }
+{ [refrain, verb.social:act,!] [ forbear, noun.act:forbearance,+ ] frames: 22 (resist doing something; "He refrained from hitting him back"; "she could not forbear weeping") }
+{ forbear1, hold_back1, refrain,@ frames: 2 (refrain from doing; "she forbore a snicker")}
+{ help_oneself, help8, refrain,@ frames: 2,33 (abstain from doing; always used with a negative; "I can't help myself--I have to smoke"; "She could not help watching the sad spectacle") }
+{ stand_by, refrain,@ frames: 2,1 (not act or do anything; "He just stood by when the police beat up the demonstrators") }
+{ sit_out, refrain,@ noun.act:sport,;c frames: 8 (not participate in (an activity, such as a dance or a sports event); "He sat out the game") }
+{ [ hoodoo, noun.person:hoodoo,+ noun.artifact:hoodoo,+ noun.artifact:hoodoo2,+ ] be3,@ frames: 2,1 (bring bad luck; be a source of misfortune) }
+{ [ impend, noun.state:impendency,+ noun.state:impendence,+ ] be3,@ frames: 1 (be imminent or about to happen; "Changes are impending") }
+{ [ range1, noun.group:range,+ noun.location:range1,+ noun.attribute:range,+ ] run7, run8,$ be3,@ frames: 11 (change or be different within limits; "Estimates for the losses in the earthquake range as high as $2 billion"; "Interest rates run from 5 to 10 percent"; "The instruments ranged from tuba to cymbals"; "My students range from very bright to dull") }
+{ [ stay2, noun.act:stay,+ ] stay_on, [ continue10, noun.attribute:continuation,+ ] remain3, be3,@ frames: 2,22 (continue in a place, position, or situation; "After graduation, she stayed on in Cambridge as a student adviser"; "Stay with me, please"; "despite student protests, he remained Dean for another year"; "She continued as deputy mayor for another year")}
+{ [ sell, noun.act:sell,+ noun.act:selling,+ ] verb.possession:sell,$ verb.possession:sell1,$ be3,@ frames: 1,4 (be sold at a certain price or in a certain way; "These books sell like hot cakes") }
+{ [ translate, noun.communication:translation,+ ] verb.communication:translate,$ be3,@ frames: 1,4 (be translatable, or be translatable in a certain way; "poetry often does not translate"; "Tolstoy's novels translate well into English") }
+{ [ scale, noun.artifact:scale2,+ noun.act:scalage,+ noun.act:scaling1,+ ] measure,@ frames: 11 (measure by or as if by a scale; "This bike scales only 25 pounds") }
+{ [ retail, noun.act:retail,+ noun.act:retailing,+ ] verb.possession:retail,$ sell,@ noun.act:commerce,;c frames: 4 (be sold at the retail level; "These gems retail at thousands of dollars each") }
+{ [ trade, noun.act:trade2,+ noun.act:trade5,+ ] sell,@ noun.act:commerce,;c frames: 1,4 (be traded at a certain price or under certain conditions; "The stock traded around $20 a share") }
+{ [ head1, noun.location:head2,+ noun.group:head,+ noun.person:head,+ ] head_up, verb.motion:head2,$ be3,@ frames: 8,9 (be the first or leading member of (a group) and excel; "This student heads the class") }
+{ come_in_for, be3,@ frames: 11,8 (be subject to or the object of; "The governor came in for a lot of criticism") }
+{ leave2, leave,$ verb.change:make,@ frames: 5,10 (act or be so as to become in a specified state; "The inflation left them penniless"; "The president's remarks left us speechless") }
+{ [ compare, noun.attribute:compare,+ ] be3,@ frames: 1 (be comparable; "This car does not compare with our line of Mercedes") }
+{ go10, compare,@ frames: 1 (be ranked or compare; "This violinist is as good as Juilliard-trained violinists go") }
+{ fall3, come, be3,@ frames: 4,22 (come under, be classified or included; "fall into a category"; "This comes under a new heading") }
+{ leave3, verb.possession:have1,@ frames: 11,10 (have left or have as a remainder; "That left the four of us"; "19 minus 8 leaves 11") }
+{ run_into1, encounter, be3,@ frames: 11 (be beset by; "The project ran into numerous financial difficulties") }
+{ [ feel, noun.state:feel,+ ] verb.perception:feel,$ verb.perception:appear,@ frames: 6,7 (be felt or perceived in a certain way; "The ground feels shaky"; "The sheets feel soft")}
+{ crawl1, feel,@ frames: 1 (feel as if crawling with insects; "My skin crawled--I was terrified") }
+{ [ read, noun.communication:read,+ ] say, have,@ frames: 11,6 (have or contain a certain wording or form; "The passage reads as follows"; "What does the law say?") }
+{ [ persist1, adj.all:persistent,+ ] remain1, stay4, frames: 1,4 (stay behind; "The smell stayed in the room"; "The hostility remained long after they made up") }
+{ linger2, stay4,@ frames: 1,4 (remain present although waning or gradually dying; "Her perfume lingered on") }
+{ [ lie2, noun.location:lie,+ ] rest, be5,@ frames: 11 (have a place in relation to something else; "The fate of Bosnia lies in the hands of the West"; "The responsibility rests with the Allies") }
+{ count1, [ number1, noun.group:number,+ ] verb.cognition:classify,@ frames: 21,20 (put into a group; "The academy counts several Nobel Prize winners among its members") }
+{ owe, build_on,@ frames: 21,15 (be indebted to, in an abstract or intellectual sense; "This new theory owes much to Einstein's Relativity Theory") }
+{ [ gravitate, noun.cognition:gravitation,+ ] be3,@ frames: 4,22 (be attracted to; "Boys gravitate towards girls at that age") }
+{ [ gravitate1, noun.cognition:gravitation,+ ] tend1,@ frames: 4 (move toward; "The conversation gravitated towards politics") }
+{ pay, be3,@ frames: 34 (be worth it; "It pays to go through the trouble") }
+{ [ converge1, noun.cognition:convergency,+ noun.cognition:convergence,+ diverge2,!] approach,@ noun.cognition:math,;c frames: 1 (approach a limit as the number of terms increases without limit) }
+{ [ diverge2, noun.cognition:divergency,+ noun.cognition:divergence,+ converge,!] be3,@ noun.cognition:math,;c frames: 1 (have no limits as a mathematical series) }
+{ accommodate3, hold5, [ admit4, adj.all:admissible^admittible,+ ] frames: 10,11 (have room for; hold without crowding; "This hotel can accommodate 250 guests"; "The theater admits 300 people"; "The auditorium can't hold more than 500 people") }
+{ keep2, [ preserve1, noun.location:preserve,+ noun.act:preservation,+ noun.person:preserver1,+ ] verb.competition:protect,@ frames: 9 (maintain in safety from injury, harm, or danger; "May God keep you") }
+{ shine1, be3,@ frames: 1,2 (be distinguished or eminent; "His talent shines") }
+{ [ resplend, adj.all:beautiful^resplendent,+ noun.attribute:resplendency,+ noun.attribute:resplendence,+ ] verb.weather:shine1,@ frames: 1 (be resplendent or radiant; to shine brightly; "The Queen's garments resplended in velvet and jewels")}
+{ go_far, go_deep, extend3,@ frames: 1 (extend in importance or range; "His accomplishments go far") }
+{ go_down, frames: 22,4 (be recorded or remembered; "She will go down as the first feminist") }
+{ [ iridesce, adj.all:colorful^iridescent,+ adj.all:bright^iridescent,+ noun.attribute:iridescence,+ ] be3,@ frames: 1 (be iridescent; "The corals iridesced under the surface of the clear water") }
+{ [ opalesce, adj.all:bright^opalescent,+ noun.attribute:opalescence,+ ] iridesce,@ frames: 1 (exhibit a play of colors like that of an opal; "This nitrate opalesces under certain conditions")}
+{ [ lie3, noun.location:lie,+ ] be3,@ frames: 6,7 (be and remain in a particular state or condition; "lie dormant") }
+{ [ stand3, noun.cognition:stand,+ ] be3,@ frames: 4,22 (occupy a place or location, also metaphorically; "We stand on common ground")}
+{ [ photograph, noun.artifact:photograph,+ ] frames: 1,2 (undergo being photographed in a certain way; "Children photograph well") }
+{ keep3, stay_fresh, verb.change:stay,@ frames: 1 (fail to spoil or rot; "These potatoes keep for a long time") }
+{ hang, be3,@ frames: 4 (be menacing, burdensome, or oppressive; "This worry hangs on my mind"; "The cloud of suspicion hangs over her") }
+{ [ litter, noun.substance:litter,+ noun.person:litterer,+ ] be3,@ frames: 11 (strew; "Cigar butts littered the ground") }
+{ suit2, be3,@ frames: 10,11 (be agreeable or acceptable; "This time suits me") }
+{ [ end1, noun.communication:end,+ noun.state:end,+ noun.cognition:end,+ noun.time:end,+ noun.event:end,+ noun.time:ending,+ noun.event:ending,+ ] [ terminate5, adj.all:closing^terminative,+ noun.cognition:terminus,+ ] be3,@ frames: 11 (be the end of; be the last or concluding part of; "This sad scene ended the movie")}
+{ fit3, be3,@ frames: 5,6 (conform to some shape or size; "How does this shirt fit?")}
+{ [ help, noun.attribute:help,+ noun.act:help,+ frames: 35] [ facilitate, noun.act:facilitation,+ frames: 35] serve1,@ frames: 2,34,28 (be of use; "This will help to prevent accidents") }
+{ tie_in, relate1,@ frames: 4 (be in connection with something relevant; "This ties in closely with his earlier remarks")}
+{ go_into, frames: 11 (be used or required for; "A lot of energy went into the organization of this banquet") }
+{ lend, be3,@ frames: 20,21 (have certain characteristics of qualities for something; be open or vulnerable to; "This story would lend itself well to serialization on television"; "The current system lends itself to great abuse") }
+{ partake, share,@ frames: 11 (have some of the qualities or attributes of something) }
+{ [ define3, noun.attribute:definition,+ noun.process:defining,+ ] [ delineate1, adj.all:representational^delineative,+ noun.artifact:delineation,+ noun.act:delineation,+ ] verb.perception: show,@ frames: 11 (show the form or outline of; "The tree was clearly defined by the light"; "The camera could define the smallest object") }
+{ let_go, be3,@ frames: 2 (be relaxed; "Don't be so worried all the time--just let go!") }
+{ [ derive, adj.all:derived^derivative,+ noun.location:derivation,+ noun.attribute:derivation,+ ] come15, [ descend, noun.relation:descent,+ noun.group:descent,+ noun.person:descendent,+ noun.person:descendant,+ ] come9,$ frames: 22,4 (come from; be connected by a relationship of blood, for example; "She was descended from an old Italian noble family"; "he comes from humble origins") }
+{ belong1, be3,@ frames: 4,22 (be rightly classified in a class or category; "The whales belong among the mammals") }
+{ belong2, be3,@ frames: 1,2,4,22 (be suitable or acceptable; "This student somehow doesn't belong") }
+{ belong3, go4, be5,@ frames: 4,22 (be in the right place or situation; "Where do these books belong?"; "Let's put health care where it belongs--under the control of the government"; "Where do these books go?") }
+{ go_around, suffice,@ frames: 1 (be sufficient; "There's not enough to go around") }
+{ fry, verb.change:heat_up1,@ frames: 2 (be excessively hot; "If the children stay out on the beach for another hour, they'll be fried") }
+{ circumvolute, wind,@ frames: 1,4 (wind or turn in volutions, especially in an inward spiral, as of snail)}
+{ [ spiral, noun.shape:spiral1,+ noun.shape:spiral,+ ] wind,@ frames: 1,4 (form a spiral; "The path spirals up the mountain")}
+{ wind, twist, [ curve, noun.attribute:curve,+ noun.artifact:curve,+ ] be3,@ frames: 1,4 (extend in curves and turns; "The road winds around the lake"; "the path twisted through the forest") }
+{ [ snake, noun.artifact:snake,+ ] wind,@ frames: 4 (form a snake-like pattern; "The river snakes through the valley") }
+{ [ miscegenate, noun.act:miscegenation,+ ] cohabit,@ frames: 2 (marry or cohabit with a person of another race) }
+{ [ synchronize, noun.relation:synchronization,+ noun.relation:synchrony,+ noun.relation:synchronizing,+ ] [ synchronise, noun.relation:synchronisation,+ noun.relation:synchrony,+ ] contemporize, contemporise, verb.change:happen,@ frames: 1 (happen at the same time) }
+{ [meet, frames: 4,22] encounter2, [ receive, adj.all:pervious^receptive,+ adj.all:receptive,+ ] verb.change:experience,@ frames: 8,11 (experience as a reaction; "My proposal met with much opposition") }
+{ [ foil, noun.cognition:foil,+ ] contrast,@ frames: 8,11 (enhance by contrast; "In this picture, the figures are foiled against the background") }
+{ [ jumble, noun.cognition:jumble,+ noun.state:jumble,+ ] mingle, be3,@ frames: 1,4 (be all mixed up or jumbled together; "His words jumbled") }
+{ wear1, have,@ frames: 11,8 (have in one's aspect; wear an expression of one's attitude or personality; "He always wears a smile") }
+{ falter, [ waver2, noun.person:waverer,+ ] hesitate,@ frames: 1,2 (be unsure or weak; "Their enthusiasm is faltering") }
+{ [ embody2, noun.cognition:embodiment1,+ ] verb.communication:represent,@ frames: 11 (represent or express something abstract in tangible form; "This painting embodies the feelings of the Romantic period") }
+{ [ promise, noun.cognition:promise,+ ] be3,@ frames: 11,8 (give grounds for expectations; "The new results were promising"; "The results promised fame and glory") }
+{ have12, frames: 8 (be confronted with; "What do we have here?"; "Now we have a fine mess") }
+{ hold_one's_own, frames: 2 (be sufficiently competent in a certain situation; "He can hold his own in graduate school") }
+{ hang1, frames: 1,2,4,22 (be exhibited; "Picasso hangs in this new wing of the museum") }
+{ [ range3, noun.location:range1,+ noun.cognition:range,+ ] frames: 4 (have a range; be capable of projecting over a certain distance, as of a gun; "This gun ranges over two miles") }
+{ [ carry15, noun.act:carry,+ ] range3,@ frames: 1 (be conveyed over a certain distance; "Her voice carries very well in this big opera house") }
+{ accept, take3, be3,@ frames: 11 (be designed to hold or take; "This surface will not take the dye") }
+{ admit, frames: 4 (give access or entrance to; "The French doors admit onto the yard") }
+{ [ agree3, noun.relation:agreement3,+ ] noun.cognition:grammar,;c frames: 1,4 (show grammatical agreement; "Subjects and verbs must always agree in English") }
+{ [ clean, noun.act:cleaning,+ ] be3,@ frames: 1,4 (be cleanable; "This stove cleans easily")}
+{ draw, verb.motion:draw,$ be3,@ frames: 1 (allow a draft; "This chimney draws very well") }
+{ [ drive, noun.artifact:drive1,+ noun.artifact:drive,+ noun.act:drive,+ ] [ ride3, noun.act:ride,+ ] frames: 6 (have certain properties when driven; "This car rides smoothly"; "My new truck drives well") }
+{ mean3, frames: 11,8 (have a specified degree of importance; "My ex-husband means nothing to me"; "Happiness means everything") }
+{ [ confront, noun.communication:confrontation,+ noun.act:confrontation,+ ] face,@ frames: 8,9 (be face to face with; "The child screamed when he confronted the man in the Halloween costume") }
+{ [ wash, adj.all:washable,+ noun.act:wash1,+ ] be3,@ frames: 1,6 (be capable of being washed; "Does this material wash?") }
+{ [ balance1, noun.state:balance,+ noun.animal:balancer,+ noun.person:balancer,+ ] be3,@ frames: 2,1 (be in equilibrium; "He was balancing on one foot") }
+{ hail, come9, be3,@ frames: 22 (be a native of; "She hails from Kalamazoo") }
+{ [ originate2, noun.location:origin,+ noun.event:origin,+ noun.event:origination,+ ] begin,@ frames: 4 (begin a trip at a certain point, as of a plane, train, bus, etc.; "The flight originates in Calcutta") }
+{ come5, be5,@ frames: 22 (exist or occur in a certain point in a series; "Next came the student from France") }
+{ [ flow, noun.time:flow,+ noun.event:flow,+ noun.process:flow,+ noun.act:flow,+ ] be,@ frames: 4 (be abundantly present; "The champagne flowed at the wedding") }
+{ issue_forth, come13, frames: 1,4 (come forth; "A scream came from the woman's mouth"; "His breath came hard") }
+{ brood1, hover5, loom6, bulk_large, hang,@ frames: 4 (hang over, as of something threatening, dark, or menacing; "The terrible vision brooded over her all day long") }
+{ overshadow, dominate3, eclipse, loom6,@ frames: 11 (be greater in significance than; "the tragedy overshadowed the couple's happiness")}
+{ [ afford, adj.all:cheap^affordable,+ ] frames: 8 (have the financial means to do something or buy something; "We can't afford to send our children to college"; "Can you afford this car?") }
+{ [ open, noun.object:opening,+ noun.body:opening,+ noun.artifact:opening1,+ ] frames: 4 (have an opening or passage or outlet; "The bedrooms open into the hall") }
+{ be13, verb.change:remain,@ frames: 9 (to remain unmolested, undisturbed, or uninterrupted -- used only in infinitive form; "let her be")}
+{ [ act, adj.all:actable,+ noun.communication:act2,+ noun.act:acting,+ ] verb.creation:act3,$ be3,@ frames: 6 (be suitable for theatrical performance; "This scene acts well") }
+{ [ add, adj.all:additive,+ ] verb.change:add,$ form,@ frames: 11 (constitute an addition; "This paper will add to her reputation") }
+{ make12, verb.social:make1,$ amount1,@ noun.cognition:arithmetic,;c frames: 11 (add up to; "four and four make eight") }
+{ [ admit6, adj.all:receptive^admissive,+ ] [ allow7, adj.all:admissible^allowable,+ ] frames: 4 (afford possibility; "This problem admits of no solution"; "This short story allows of several different interpretations") }
+{ [ test, noun.act:test,+ noun.act:testing3,+ ] be3,@ frames: 7 (show a certain characteristic when tested; "He tested positive for HIV") }
+{ seem, be3,@ frames: 11 (appear to exist; "There seems no reason to go ahead with the project now") }
+{ answer1, be3,@ frames: 22 (be liable or accountable; "She must answer for her actions") }
+{ beat, be3,@ frames: 11 (be superior; "Reading beats watching television"; "This sure beats work!") }
+{ hold7, be3,@ frames: 11 (have as a major characteristic; "The novel holds many surprises"; "The book holds in store much valuable advise") }
+{ [ break5, noun.event:break,+ ] verb.change:change2,@ frames: 11 (vary or interrupt a uniformity or continuity; "The flat plain was broken by tall mesas") }
+{ break15, end,@ frames: 1 (come to an end; "The heat wave finally broke yesterday") }
+{ [ carry13, noun.person:carrier,+ ] carry2,$ have,@ frames: 11 (have as an inherent or characteristic feature or have as a consequence; "This new washer carries a two year guarantee"; "The loan carries a high interest rate"; "this undertaking carries many dangers"; "She carries her mother's genes"; "These bonds carry warrants"; "The restaurant carries an unusual name") }
+{ count4, be3,@ frames: 4 (have a certain value or carry a certain weight; "each answer counts as three points")}
+{ contain6, be3,@ noun.cognition:arithmetic,;c frames: 11 (be divisible by; "24 contains 6") }
+{ [connect5, noun.act:connection1,+ noun.act:connexion1,+ ] be3,@ frames: 4,1 (be scheduled so as to provide continuing service, as in transportation; "The local train does not connect with the Amtrak train"; "The planes don't connect and you will have to wait for four hours") }
+{ [ continue11, noun.attribute:continuation,+ noun.act:continuation,+ ] continue1,$ verb.social:act,@ frames: 2,1 (continue after an interruption; "The demonstration continued after a break for lunch") }
+{ [ continue12, noun.act:continuation,+ ] persist_in, verb.social:continue,$ verb.social:act,@ frames: 8,11 (do something repeatedly and showing no intention to stop; "We continued our research into the cause of the illness"; "The landlord persists in asking us to move") }
+{ [ sell13, noun.act:sell,+ ] be3,@ frames: 11 (be responsible for the sale of; "All her publicity sold the products") }
+{ sell14, be3,@ frames: 1 (be approved of or gain acceptance; "The new idea sold well in certain circles") }
+{ [ kill, noun.act:kill,+ ] be3,@ frames: 1 (be fatal; "cigarettes kill"; "drunken driving kills") }
+{ [ make13, noun.artifact:making,+ ] be3,@ frames: 11,9 (be suitable for; "Wood makes good furniture") }
+{ [ make9, noun.artifact:making,+ noun.act:making,+ ] verb.change:change,@ frames: 4 (undergo fabrication or creation; "This wool makes into a nice sweater") }
+{ deck, [ adorn, noun.artifact:adornment,+ ] [ decorate, adj.all:nonfunctional^decorative,+ noun.artifact:decoration,+ noun.act:decoration,+ ] [ grace, noun.attribute:grace1,+ ] embellish, [ beautify, noun.act:beautification,+ noun.attribute:beauty,+ ] be3,@ frames: 11 (be beautiful to look at; "Flowers adorned the tables everywhere") }
+{ [ ornament, noun.state:ornamentation,+ ] verb.creation:ornament,$ adorn,@ frames: 11 (be an ornament to; "stars ornamented the Christmas tree")}
+{ [ blanket, noun.object:blanket,+ ] verb.contact:cover1,@ frames: 11 (form a blanket-like cover (over))}
+{ [ carpet, noun.artifact:carpet,+ ] verb.contact:cover1,@ frames: 11 (form a carpet-like cover (over))}
+{ smother, verb.contact:cover1,@ frames: 11 (form an impenetrable cover over; "the butter cream smothered the cake") }
+{ [ shroud2, noun.artifact:shroud,+ ] verb.contact:cover1,@ frames:11 (form a cover like a shroud; "Mist shrouded the castle")}
+{ be4, frames: 1,2,4,22 (happen, occur, take place; "I lost my wallet; this was during the visit to my parents' house"; "There were two hundred people at his funeral"; "There was a lot of noise in the kitchen")}
+{ ride4, verb.motion:float4,@ frames: 22 (be sustained or supported or borne; "His glasses rode high on his nose"; "The child rode on his mother's hips"; "She rode a wave of popularity"; "The brothers rode to an easy victory on their father's political name") }
+{ [ rhyme, noun.communication:rhyme,+ ] [ rime, noun.communication:rime,+ ] correspond,@ frames: 1 (be similar in sound, especially with respect to the last syllable; "hat and cat rhyme")}
+{ [ assonate, adj.all:same^assonant,+ adj.all:rhymed^assonant,+ noun.communication:assonance,+ ] rhyme,@ frames: 1 (correspond in vowel sounds; rhyme in assonance; "The accented vowels assonated in this poem")}
+{ consist4, be3,@ frames: 22 (have its essential character; be comprised or contained in; be embodied in; "The payment consists in food"; "What does love consist in?")}
+{ [ osculate, noun.state:osculation,+ ] share,@ noun.cognition:math,;c frames: 1,11 (have at least three points in common with; "one curve osculates the other"; "these two surfaces osculate")}
+{ work10, verb.contact:work,$ be3,@ frames: 6 (behave in a certain way when handled; "This dough does not work easily"; "The soft metal works well")}
+{ ascend2, go_back,@ frames: 1 (go back in order of genealogical succession; "Inheritance may not ascend linearly")}
+{ [ lubricate, noun.state:lubrication,+ noun.substance:lubricant,+ noun.substance:lubricator,+ ] be3,@ frames: 1 (have lubricating properties; "the liquid in this can lubricates well")}
+{ breathe1, be3,@ frames: 1 (allow the passage of air through; "Our new synthetic fabric breathes and is perfect for summer wear")}
+{ [ trim5, noun.relation:trim,+ ] be3,@ frames: 1 (be in equilibrium during a flight; "The airplane trimmed")}
+{ [ trim6, noun.relation:trim,+ ] trim5,$ balance,@ frames: 8 (balance in flight by regulating the control surfaces; "trim an airplane")}
+{ [ swing10, noun.communication:swing1,+ noun.attribute:swing,+ ] be3,@ frames: 1 (have a certain musical rhythm; "The music has to swing")}
+{ osculate3, be3,@ frames: 1 (be intermediate between two taxonomic groups; "These species osculate")}
+{ [ retard, noun.time:retardation,+ noun.attribute:retardation,+ noun.act:retardation,+ ] be3,@ frames: 1 (be delayed)}
+{ [ summarize, noun.communication:summarization1,+ ] [ summarise, noun.communication:summarisation1,+ ] [ sum, noun.communication:summation,+ ] sum_up, verb.communication:summarize,$ verb.communication:state,@ frames: 11 (be a summary of; "The abstract summarizes the main ideas in the paper")}
+{ [ supplement, noun.attribute:supplement,+ ] verb.possession:supplement,$ constitute,@ frames: 1 (serve as a supplement to; "Vitamins supplemented his meager diet")}
+{ translate3, be7,@ frames: 4 (be equivalent in effect; "the growth in income translates into greater purchasing power")}
+{ [ transplant, noun.act:transplant1,+ ] verb.motion:transplant,$ be3,@ frames: 1 (be transplantable; "These delicate plants do not transplant easily")}
+{ [ cohere, adj.all:coherent,+ ] be3,@ frames: 1 (have internal elements or parts logically connected so that aesthetic consistency results; "the principles by which societies cohere" )}
+{ [ cohere1, adj.all:united^cohesive,+ adj.all:coherent,+ ] cohere,> verb.change:change1,@ frames: 11 (cause to form a united, orderly, and aesthetically consistent whole; "Religion can cohere social groups" )}
+{ [ object, noun.act:objection1,+ ] be3,@ frames: 4,22 (be averse to or express disapproval of; "My wife objects to modern furniture")}
+{ stick7, be3,@ frames: 1 (be or become fixed; "The door sticks--we will have to plane it")}
+{ recognize, be3,@ frames: 11 (exhibit recognition for (an antigen or a substrate))}
+{ close1, trade,@ frames: 4 (be priced or listed when trading stops; "The stock market closed high this Friday"; "My new stocks closed at $59 last night")}
+{ head5, originate,@ frames: 4 (take its rise; "These rivers head from a mountain range in the Himalayas")}
+{ distribute, be3,@ frames: 1 (be mathematically distributive)}
+{ distribute1, be,@ frames: 1 (be distributed or spread, as in statistical analyses; "Values distribute")}
+{ distribute2, distribute1,$ verb.motion:spread,@ frames: 11 (spread throughout a given area; "the function distributes the values evenly")}
+{ [ resist4, adj.all:unsusceptible^resistant,+ ] reject4, refuse4, verb.cognition:react,@ frames: 11 (resist immunologically the introduction of some foreign tissue or organ; "His body rejected the liver of the donor")}
+{ cash_out, live6,@ frames: 2 (choose a simpler life style after questioning personal and career satisfaction goals; "After 3 decades in politics, she cashed out and moved to Polynesia")}
+{ put_out, be3,@ frames: 2 (be sexually active; "She is supposed to put out")}
+{ bake, broil, be3,@ frames: 1,2 (be very hot, due to hot weather or exposure to the sun; "The town was broiling in the sun"; "the tourists were baking in the heat")} 
+{ dwell3, inhabit3, exist,@ frames: 11 (exist or be situated within; "Strange notions inhabited her mind")}
+{ swim, drown, be3,@ frames: 4 (be covered with or submerged in a liquid; "the meat was swimming in a fatty gravy")}
+{ swim2, be3,@ frames: 2 (be dizzy or giddy; "my brain is swimming after the bottle of champagne")}
+{ base4, situate,@ frames: 8,9,10,11 (situate as a center of operations; "we will base this project in the new lab")}
+{ belong7, be3,@ frames: 2,4,22 (be a member, adherent, inhabitant, etc. (of a group, organization, or place); "They belong to the same political party")}
+{underrun, run,@ frames: 11 (run or pass below) }

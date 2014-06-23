@@ -1,0 +1,854 @@
+($RCSfile: verb.possession,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:59 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.possession)
+
+{ [ give, noun.person:giver,+ noun.act:giving1,+ noun.act:giving,+ take,! give_back,^ ] have,> transfer,@ frames: 14,15 (transfer possession of something concrete or abstract to somebody; "I gave her my money"; "can you give me lessons?"; "She gave the children lots of love and tender loving care") }
+{ cough_up, pony_up, spit_up, give,@ frames: 8 (give reluctantly; "He coughed up some money for his children's tuition") }
+{ give2, turn_over,@ frames: 14 (leave with; give temporarily; "Can I give you my keys while I go in the pool?"; "Can I give you the children for the weekend?")}
+{ [ give1, noun.person:giver,+ noun.act:giving1,+ ] [ gift, noun.act:gift,+ noun.possession:gift,+ ] [ present, noun.person:presenter,+ ] frames: 15,14 (give as a present; make a gift of; "What will you give her for her birthday?") }
+{ regift, gift,@ frames: 2,8 (give a present that one has received to someone else; "she regifted that ugly scarf she received from her aunt"; "when I regift I hope the person likes the gift better than I do")}
+{ take8, frames: 8 (to get into a position of having, e.g., safety, comfort; "take shelter from the storm") }
+{ [ endow, noun.possession:endowment,+ noun.act:endowment,+ frames: 17] [ dower, noun.possession:dower,+ noun.possession:dower1,+ noun.possession:dowery,+ ] give1,@ frames: 9 (furnish with an endowment; "When she got married, she got dowered")}
+{ [ benefice, noun.person:beneficiary,+ noun.possession:benefice,+ ] endow,@ frames: 17 (endow with a benefice) }
+{ [ distribute1, adj.all:distributive,+ ] give_out, hand_out, pass_out, give1,@ frames: 8,15,14 (give to several people; "The teacher handed out the exams") }
+{ give_away, give1,@ frames: 8 (make a gift of; "She gave away her antique furniture")}
+{ [ raffle, noun.act:raffle,+ ] raffle_off, give1,@ frames: 8 (dispose of in a lottery; "We raffled off a trip to the Bahamas") }
+{ [ tip, noun.possession:tip,+ noun.person:tipper,+ ] fee1, bung, give1,@ frames: 9,14 (give a tip or gratuity to in return for a service, beyond the compensation agreed on; "Remember to tip the waiter"; "fee the steward") }
+{ [ keep, noun.act:keeping2,+ lose2,! keep_back,^ keep_back1,^ ] [hold_on, frames: 22] keep9,$ have,@ frames: 8 (retain possession of; "Can I keep my old stuffed animals?"; "She kept her maiden name after she married") }
+{ carry_over, hold_over, keep,@ frames: 8 (hold over goods to be sold for the next season) }
+{ [ keep1, noun.person:keeper2,+ noun.person:keeper,+ noun.act:keeping,+ ] verb.stative:keep2,$ have,@ frames: 8,9 (look after; be the keeper of; have charge of; "He keeps the shop when I am gone") }
+{ keep10, maintain10, have,@ frames: 8 (maintain for use and service; "I keep a car in the countryside"; "She keeps an apartment in Paris for her shopping trips")}
+{ [ have, noun.person:have,+ ] have_got, [ hold, noun.possession:holding,+ ] frames: 8,9,11 (have or possess, either in a concrete or an abstract sense; "She has $1,000 in the bank"; "He has got two beautiful daughters"; "She holds a Master's degree from Harvard") }
+{ keep12, have,@ frames: 8 (have as a supply; "I always keep batteries in the freezer"; "keep food for a week in the pantry"; "She keeps a sixpack and a week's worth of supplies in the refrigerator")}
+{ keep13, keep12,$ store2,@ frames: 8 (store or keep customarily; "Where do you keep your gardening tools?")}
+{ [ monopolize, noun.person:monopolist,+ noun.act:monopolization,+ noun.person:monopolizer,+ noun.state:monopoly2,+ noun.state:monopoly1,+ ] [ monopolise, noun.person:monopolist,+ noun.act:monopolisation,+ noun.person:monopoliser,+ noun.state:monopoly2,+ noun.state:monopoly1,+ ] have,@ frames: 8 (have or exploit a monopoly of; "OPEC wants to monopolize oil") }
+{ wield, exert, maintain1, hold,@ frames: 8 (have and exercise; "wield power and authority") }
+{ [ own, noun.person:owner,+ noun.person:owner2,+ ] [ have4, noun.person:have,+ ] [ possess, adj.all:dominant1^possessive,+ adj.all:acquisitive^possessive,+ noun.act:possession,+ noun.person:possessor,+ ] frames: 8 (have ownership or possession of; "He owns three houses in Florida"; "How many cars does she have?")}
+{ prepossess, possess,@ frames: 8 (possess beforehand) }
+{ have1, frames: 8 (have left; "I have two years left"; "I don't have any money left"; "They have two more years before they retire") }
+{ [ take, give,! take_out,^ take_back,^ verb.social:take_in,^ ] frames: 16,8,9 (take into one's possession; "We are taking an orphan from Romania"; "I'll take three salmon steaks") }
+{ take_away1, take,@ frames: 8,9,20,21 (take from a person or place; "We took the abused child away from its parents") }
+{ take_back, [ repossess3, noun.act:repossession,+ ] take,@ frames: 8 (regain possession of something) }
+{ come_by, come_into, get,@ frames: 8 (obtain, especially accidentally) }
+{ [ kite, noun.possession:kite,+ ] obtain,@ frames: 2,8 (get credit or money by using a bad check; "The businessman kited millions of dollars") }
+{ [ kite1, noun.possession:kite1,+ ] verb.change:increase2,@ frames: 8 (increase the amount (of a check) fraudulently; "He kited many checks")}
+{ stumble10, hit5, come_by,@ frames: 22 (encounter by chance; "I stumbled across a long-lost cousin last night in a restaurant") }
+{ take1, frames: 8,16 (take by force; "Hitler took the Baltic Republics"; "The army took the fort on the hill") }
+{ rescue, take1,@ frames: 9 (take forcibly from legal custody; "rescue prisoners") }
+{ [ scale, noun.act:scaling3,+ ] take1,@ frames: 8,11 (take by attacking with scaling ladders; "The troops scaled the walls of the fort") }
+{ [ buy, noun.possession:buy,+ noun.person:buyer,+ noun.act:buying,+ sell,! buy_in,^ buy_up,^ buy_out,^ ] [ purchase, noun.possession:purchase,+ noun.act:purchase,+ noun.person:purchaser,+ noun.act:purchasing,+ ] verb.stative:buy,$ pay,* verb.cognition:choose,* get,@ noun.act:commerce,;c frames: 16,8,2 (obtain by purchase; acquire by means of a financial transaction; "The family purchased a new car"; "The conglomerate acquired a new company"; "She buys for the big department store")}
+{ [buy_back, noun.act:buyback,+ ] [repurchase, noun.act:repurchase,+ ] buy,@ frames: 8 (buy what had previously been sold, lost, or given away; "He bought back the house that his father sold years ago")}
+{ [ take2, take_out,^ ] buy,@ noun.act:commerce,;c frames: 8 (buy, select; "I'll take a pound of that sausage") }
+{ [ get13, noun.act:getting,+ ] buy,@ noun.act:commerce,;c frames: 8 (purchase; "What did you get at the toy store?") }
+{ clear9, sell,@ noun.act:commerce,;c frames: 8 (sell; "We cleared a lot of the old model cars") }
+{ [ lease, noun.time:lease,+ noun.communication:lease,+ ] [ rent, noun.possession:rent,+ noun.person:renter,+ noun.act:rental,+ ] hire, [ charter, noun.communication:charter1,+ ] engage, take3, get,@ frames: 16,8,9 (engage for service under a term of contract; "We took an apartment on a quiet street"; "Let's rent a car"; "Shall we take a guide in Rome?")}
+{ [ lease1, noun.possession:lease,+ noun.communication:lease,+ noun.time:lease,+ ] [ let, noun.person:letter,+ noun.person:lessor,+ ] [ rent1, noun.possession:rent,+ noun.person:renter1,+ rent_out,^ ] give,@ frames: 14,15,8 (grant use or occupation of under a term of contract; "I am leasing my country estate to some foreigners") }
+{ [ sublet, noun.possession:sublet,+ ] [ sublease, noun.possession:sublease,+ ] let,@ frames: 8,15 (lease or rent all or part of (a leased or rented property) to another person; "We sublet our apartment over the summer") }
+{ hire_out, rent_out, farm_out, lend,@ frames: 8,15,9 (grant the services of or the temporary use of, for a fee; "We rent out our apartment to tourists every year"; "He hired himself out as a cook") }
+{ [ subscribe, noun.person:subscriber1,+ frames: 2] subscribe_to, [ take4, noun.possession:take,+ ] buy,@ frames: 8 (receive or obtain regularly; "We take the Times every day")}
+{ take15, [ accept12, adj.all:good1^acceptable,+ adj.all:fit2^acceptable,+ ] frames: 8 (make use of or accept for some purpose; "take a risk"; "take an opportunity") }
+{ [ receive, noun.act:reception,+ noun.person:receiver,+ noun.person:recipient,+ ] have3, get,@ frames: 16,8,9 (get something; come into possession of; "receive payment"; "receive a gift"; "receive letters from the front") }
+{ hustle1, receive,@ frames: 8 (get by trying hard; "she hustled a free lunch from the waiter")}
+{ [ accept7, noun.state:acceptation,+ ] receive,@ frames: 8 (receive (a report) officially, as from a committee) }
+{ [ fence, noun.person:fence,+ ] receive,@ frames: 2 (receive stolen goods)}
+{ [ get, noun.act:getting,+ ] [ acquire, adj.all:acquisitive,+ adj.all:available^acquirable,+ noun.act:acquiring,+ noun.cognition:acquisition1,+ noun.act:acquisition,+ noun.group:acquirer2,+ noun.person:acquirer,+ noun.group:acquirer1,+ noun.group:acquirer,+ ] frames: 8,9,16 (come into the possession of something concrete or abstract; "She got a lot of paintings from her uncle"; "They acquired a new pet"; "Get your results the next day"; "Get permission to take a few days off from work") }
+{ turn13, get,@ noun.act:commerce,;c frames: 8 (get by buying and selling; "the company turned a good profit after a year")}
+{ buy3, get,@ frames: 8 (acquire by trade or sacrifice or exchange; "She wanted to buy his love with her dedication to him and his work") }
+{ find3, get,@ frames: 8 (obtain through effort or management; "She found the time and energy to take care of her aging parents"; "We found the money to send our sons to college") }
+{ glom13, get,@ frames: 22 (seize upon or latch onto something; "The Republicans glommed onto Whitewater") }
+{ enter_upon, come_upon1, luck_into, get,@ frames: 8,9,16 (take possession of; "She entered upon the estate of her rich relatives") }
+{ [ deny, noun.person:denier,+ allow,!] [ refuse1, noun.communication:refusal1,+ ] keep,@ frames: 14 (refuse to let have; "She denies me every pleasure"; "he denies her her weekly allowance") }
+{ [ deny4, noun.person:denier,+ noun.act:denial1,+ ] [ abnegate, noun.act:abnegation,+ ] deny,$ verb.social:control1,@ frames: 14 (deny oneself (something); restrain, especially from indulging in some pleasure; "She denied herself wine and spirits") }
+{ line_up, [get_hold, frames: 22] [ come_up, frames: 22] find1, get,@ frames: 8,9 (get something or somebody for a specific purpose; "I found this gadget that will serve as a bottle opener"; "I got hold of these tools to fix our plumbing"; "The chairman got hold of a secretary on Friday night to type the urgent letter") }
+{ [ withhold, noun.person:withholder1,+ noun.person:withholder,+ noun.act:withholding1,+ ] keep_back, deny,@ frames: 16 (hold back; refuse to hand over or share; "The father is withholding the allowance until the son cleans his room")}
+{ keep_to_oneself, withhold,@ frames: 8 (withhold information; "I kept your little secret to myself all these years")}
+{ [ deny1, noun.person:denier,+ noun.communication:denial,+ ] withhold,@ frames: 8,14 (refuse to grant, as of a petition or request; "The dean denied the students' request for more physics courses"; "the prisoners were denied the right to exercise for more than 2 hours a day") }
+{ [ reserve3, noun.possession:reserve,+ noun.act:reservation,+ ] withhold,@ frames: 8 (hold back or set aside, especially for future use or contingency; "they held back their applause in anticipation")}
+{ devote, reserve3,@ frames: 8 (set aside or apart for a specific purpose or use; "this land was devoted to mining")}
+{ immobilize, immobilise, withhold,@ frames: 8 (hold as reserve or withdraw from circulation; of capital) }
+{ [ withhold1, noun.person:withholder1,+ noun.possession:withholding,+ noun.act:withholding,+ ] [ deduct, adj.all:deductible,+ ] recoup1, keep,@ frames: 8,16 (retain and refrain from disbursing; of payments; "My employer is withholding taxes") }
+{ dock, deduct,@ frames: 8 (deduct from someone's wages) }
+{ annex, take_over7,@ frames: 8,11 (take (territory) as if by conquest; "Hitler annexed Lithuania") }
+{ [ fund, noun.possession:fund,+ noun.possession:funding,+ noun.act:funding,+ ] support,@ finance,* frames: 8,9 (furnish money for; "The government funds basic research in many areas")}
+{ fund3, fund,$ accumulate,@ frames: 8,11 (accumulate a fund for the discharge of a recurrent liability; "fund a medical care plan")}
+{ [ fund4, noun.group:fund,+ ] invest,@ frames: 8 (invest money in government securities)}
+{ [ fund5, noun.group:fund,+ ] provide,@ frames: 8 (provide a fund for the redemption of principal or payment of interest)}
+{ [ grubstake, noun.possession:grubstake,+ ] fund,@ frames: 8,9 (supply with funds in return for a promised share of profits) }
+{ bankroll, fund,@ frames: 8 (provide with sufficient funds; finance; "Who will bankroll the restoration of the former East German economy?")}
+{ absorb, take_over, fund,@ frames: 8,11 (take up, as of debts or payments; "absorb the costs for something")}
+{ [ subsidize, noun.possession:subsidization,+ noun.act:subsidization,+ noun.person:subsidizer,+ noun.possession:subsidy,+ ] [ subsidise, noun.possession:subsidisation,+ noun.act:subsidisation,+ noun.person:subsidiser,+ noun.possession:subsidy,+ ] support,@ frames: 8,9 (support through subsidies; "The arts in Europe are heavily subsidized") }
+{ [ subsidize1, noun.possession:subsidization,+ noun.act:subsidization,+ ] [ subsidise1, noun.possession:subsidisation,+ noun.act:subsidisation,+ ] pay,@ frames: 8,9,10,11 (secure the assistance of by granting a subsidy, as of nations or military forces)}
+{ [ finance, noun.act:finance1,+ noun.cognition:finance,+ noun.act:finance,+ noun.act:financing,+ ] pay,@ frames: 8 (obtain or provide money for; "Can we finance the addition to our home?") }
+{ seed, finance,@ frames: 8,9 (help (an enterprise) in its early stages of development by providing seed money)}
+{ [ back, noun.person:backer,+ noun.possession:backing,+ noun.act:backing,+ ] finance,@ frames: 8 (support financial backing for; "back this enterprise")}
+{ [ finance1, noun.act:finance1,+ noun.act:finance,+ ] credit,@ frames: 8 (sell or provide on credit) }
+{ fund-raise, fund_raise, fundraise, raise,@ frames: 2,28,22 (raise money for a cause or project; "We are fundraising for AIDS research") }
+{ [ collect1, adj.all:due^collectible,+ noun.person:collector,+ ] take_in9, take,@ frames: 16,8 (call for and obtain payment of; "we collected over a million dollars in outstanding debts"; "he collected the rent")}
+{ [farm, farm_out,^ ] collect1,@ frames: 8 (collect fees or profits) }
+{ refinance, finance,@ frames: 8 (renew the financing of) }
+{ [ fund1, noun.possession:fund,+ ] collect,@ frames: 8 (place or store up in a fund for accumulation) }
+{ [ computerize, noun.artifact:computer,+ ] [ computerise, noun.artifact:computer,+ ] store,@ frames: 8 (store in a computer; "computerized dictionary") }
+{ fund2, finance,@ frames: 8 (convert (short-term floating debt) into long-term debt that bears fixed interest and is represented by bonds) }
+{ [ support, noun.possession:support1,+ noun.possession:support,+ noun.act:support4,+ ] give,@ frames: 8,9 (support materially or financially; "he does not support his natural children"; "The scholarship supported me when I was in college") }
+{ [ provide8, noun.act:provision1,+ ] bring_home_the_bacon, support,@ frames: 22 (supply means of subsistence; earn a living; "He provides for his large family by working three jobs"; "Women nowadays not only take care of the household but also bring home the bacon")}
+{ see_through, support,@ frames: 8,9 (support financially through a period of time; "The scholarship saw me through college"; "This money will see me through next month") }
+{ [ sponsor, noun.person:sponsor1,+ noun.person:sponsor,+ ] [ patronize, noun.person:patron1,+ ] [ patronise, noun.person:patron1,+ ] support,@ frames: 8,9 (assume sponsorship of) }
+{ [ sponsor1, noun.person:sponsor,+ ] verb.social:support,@ frames: 8,11 (assume responsibility for or leadership of; "The senator announced that he would sponsor the health care plan") }
+{ cosponsor, sponsor,@ frames: 8,9 (sponsor together with another sponsor) }
+{ [ transfer, noun.act:transfer2,+ noun.person:transferer,+ noun.person:transferrer,+ noun.person:transferor,+ noun.act:transference,+ ] verb.motion:move1,* change_hands,> frames: 8,12,15,16 (cause to change ownership; "I transferred my stock holdings to my children") }
+{ demise, transfer,@ frames: 8 (transfer by a lease or by a will)}
+{ alien, [ alienate, adj.all:alienable,+ ] transfer,@ frames: 8 (transfer property or ownership; "The will aliened the property to the heirs")}
+{ negociate, transfer,@ frames: 8 (transfer by endorsement to another in return for value received; "negociate a bond")}
+{ negociate2, sell,@ noun.act:commerce,;c frames: 8 (sell or discount; "negociate securities")}
+{ [ convey, adj.all:alienable^conveyable,+ noun.act:conveying,+ noun.act:conveyance,+ ] transfer,@ noun.group:law,;c frames: 8,12,14 (transmit a title or property)}
+{ pass2, verb.change:change,@ frames: 1,4 (transfer to another; of rights or property; "Our house passed under his official control") }
+{ desacralize, [ secularize, noun.act:secularization,+ ] transfer,@ frames: 8 (transfer from ecclesiastical to civil possession, use, or control) }
+{ change_hands, change_owners, verb.motion:move1,@ frames: 1 (be transferred to another owner; "This restaurant changed hands twice last year") }
+{ vest3, vest2,$ change_hands,@ frames: 4 (become legally vested; "The property vests in the trustees")}
+{ [ discard, noun.act:discard,+ noun.object:discard,+ ] [ fling2, noun.act:fling2,+ ] toss, toss_out, toss_away, chuck_out, cast_aside, [ dispose, noun.act:disposition,+ noun.act:disposal,+ ] throw_out, cast_out, throw_away, cast_away, put_away, get_rid_of1,@ frames: 8 (throw or cast away; "Put away your worries") }
+{ slough_off, get_rid_of1,@ frames: 9 (discard as undesirable; "the candidate sloughed off his former campaign workers")}
+{ deep-six, give_it_the_deep_six, discard,@ frames: 8 (toss out; get rid of; "deep-six these old souvenirs!") }
+{ jettison, discard,@ frames: 8 (throw away, of something encumbering) }
+{ [ trash, noun.substance:trash,+ ] [ junk, noun.substance:junk,+ ] [ scrap, noun.substance:scrap,+ ] discard,@ frames: 8 (dispose of (something useless or old); "trash these old chairs"; "junk an old car"; "scrap your old computer") }
+{ [ waste1, noun.substance:waste,+ ] discard,@ frames: 8 (get rid of; "We waste the dirty water by channeling it into the sewer") }
+{ weed_out, [comb_out, noun.act:comb-out1,+] get_rid_of1,@ frames: 9,8,11 (remove unwanted elements; "The company weeded out the incompetent people"; "The new law weeds out the old inequities") }
+{ work_off, get_rid_of1,@ frames: 8 (cause to go away through effort or work; "work off the extra pounds you have gained over the holidays"; "we must work off the debt")}
+{ get_rid_of1, [ remove, noun.act:removal,+ ] frames: 8,9,10,11 (dispose of; "Get rid of these old shoes!"; "The company got rid of all the dead wood") }
+{ [ cull, noun.cognition:cull,+ ] remove,@ frames: 2,8 (remove something that has been rejected; "cull the sick members of the herd")}
+{ dump2, ditch3, get_rid_of1,@ frames: 8,9 (sever all ties with, usually unceremoniously or irresponsibly; "The company dumped him after many years of service"; "She dumped her boyfriend when she fell in love with a rich man") }
+{ [ dump, noun.location:dump,+ ] discard,@ frames: 8,11 (throw away as refuse; "No dumping in these woods!")}
+{ retire, discard,@ frames: 8 (dispose of (something no longer useful or needed); "She finally retired that old coat") }
+{ [ save, noun.person:saver,+ ] [ preserve1, noun.state:preserve,+ ] keep,@ frames: 8 (to keep up and reserve for personal or special use; "She saved the old family photographs in a drawer") }
+{ [ stint1, noun.person:stinter,+ ] skimp1, scant, supply,@ frames: 2 (supply sparingly and with restricted quantities; "stint with the allowance") }
+{ [ fin, noun.artifact:fin3,+ ] equip,@ frames: 8 (equip (a car) with fins) }
+{ [ motorize3, noun.act:motorization,+ noun.artifact:motor,+ ] equip,@ frames: 8 (equip with a motor; "motorized scooters are now the rage")}
+{ [ motorize5, noun.act:motorization,+ noun.artifact:motor,+ ] equip,@ frames: 8 (equip with a motor vehicle; "The police around here are not motorized and patrol the streets on horseback")}
+{ [ terrace, noun.artifact:terrace,+ ] terrasse, supply,@ noun.act:architecture,;c frames: 8 (provide (a house) with a terrace; "We terrassed the country house") }
+{ dado, supply,@ noun.act:carpentry,;c frames: 8 (provide with a dado; "The owners wanted to dado their dining room")}
+{ [ innervate, noun.attribute:innervation,+ ] supply,@ frames: 8 (supply nerves to (some organ or body part))}
+{ [ reclaim3, noun.act:reclamation2,+ ] recover6, verb.consumption:recycle,@ save,* frames: 8 (reuse (materials from waste products)) }
+{ [ embalm, noun.act:embalmment,+ noun.person:embalmer,+ ] preserve,@ frames: 8,9 (preserve a dead body) }
+{ [ mummify, noun.act:mummification,+ noun.body:mummy,+ ] verb.change:mummify,$ embalm,@ frames: 8,9 (remove the organs and dry out (a dead body) in order to preserve it; "Th Egyptians mummified their pharaohs") }
+{ chuck, ditch1, abandon,@ noun.communication:slang,;u frames: 8 (throw away; "Chuck these old notes")}
+{ foreswear, [ renounce, adj.all:nonindulgent^renunciant,+ noun.communication:renunciation,+ ] quit, [ relinquish, noun.act:relinquishment,+ noun.communication:relinquishing,+ ] abandon1,@ frames: 8,9 (turn away from; give up; "I am foreswearing women forever") }
+{ [ abandon1, noun.act:abandonment3,+ ] give_up, frames: 8,9 (give up with the intent of never claiming again; "Abandon your life to God"; "She gave up her children to her ex-husband when she moved to Tahiti"; "We gave the drowning victim up for dead") }
+{ [ abandon, noun.act:abandonment2,+ ] discard,@ frames: 8,9 (forsake, leave behind; "We abandoned the old car in the empty parking lot") }
+{ ditch, verb.cognition:abandon,@ frames: 9 (forsake; "ditch a lover") }
+{ [ maroon, noun.person:maroon,+ ] strand, verb.cognition:abandon,@ frames: 9 (leave stranded or isolated with little hope of rescue; "the travellers were marooned")}
+{ [ assign, adj.all:alienable^assignable,+ noun.possession:assignment2,+ noun.communication:assignment2,+ noun.person:assignee,+ ] transfer,@ frames: 14,15 (transfer one's right to) }
+{ [ assign1, noun.act:assignation1,+ ] allot1, [ portion, noun.act:portion,+ ] distribute,@ frames: 14,15 (give out; "We were assigned new uniforms") }
+{ [ reallot, noun.act:reallotment,+ ] allot2,@ frames: 8,14,15 (allot again; "They were realloted additional farm land")}
+{ [bequeath, disinherit,! ] [ will, noun.communication:will,+ ] leave1, give1,@ frames: 14,15 (leave or give by will after one's death; "My aunt bequeathed me all her jewelry"; "My grandfather left me his entire estate") }
+{ [ devise, noun.possession:devise2,+ noun.person:devisee,+ ] bequeath,@ frames: 8 (give by will, especially real property)}
+{ fall13, return13, pass13, devolve13, change_hands,@ frames: 10 (be inherited by; "The estate fell to my sister"; "The land returned to the family"; "The estate devolved to an heir that everybody had assumed to be dead") }
+{ fall8, light12, devolve13,@ frames: 24,10 (fall to somebody by assignment or lot; "The task fell to me"; "It fell to me to notify the parents of the victims") }
+{ [ accrue10, noun.act:accrual,+ ] fall9, fall8,$ fall13,$ change_hands,@ frames: 10 (come into the possession of; "The house accrued to the oldest son") }
+{ pass_on, bequeath,@ frames: 15,8 (give to or transfer possession of; "She passed the family jewels on to her daughter-in-law") }
+{ [ propagate, noun.act:propagation,+ ] pass_on,@ frames: 8,15 (transmit from one generation to the next; "propagate these characteristics") }
+{ hand_down, pass_on,@ frames: 8,15 (passed on, as by inheritance; "This ring was handed down through many generations") }
+{ [ pass, noun.act:passage2,+ verb.social:pass_on,^ pass_on,^ pass_on3,^ verb.communication:pass_on,^ ] [ hand, noun.body:hand,+ hand_out,^ hand_down,^ hand_over,^ ] reach, pass_on1, turn_over, give6, transfer,@ frames: 14,15,9 (place into the hands or custody of; "hand me the spoon, please"; "Turn the files over to me, please"; "He turned over the prisoner to his lawyers") }
+{ slip10, sneak10, pass,@ frames: 14,15 (pass on stealthily; "He slipped me the key when nobody was looking") }
+{ [ pass1, noun.person:passer,+ noun.act:pass2,+ noun.act:passing3,+ ] verb.contact:throw,@ frames: 2,14,15,8 (throw (a ball) to another player; "Smith passed")}
+{ convey10, [ transmit10, adj.all:inheritable^transmissible1,+ adj.all:infectious^transmissible,+ noun.event:transmission,+ noun.object:transmitter,+ ] [ communicate10, noun.Tops:communication,+ ] transfer1,@ frames: 8,15 (transfer to another; "communicate a disease") }
+{ load12, transfer1,@ noun.cognition:computer_science,;c frames: 8 (transfer from a storage device to a computer's memory)} 
+{ [ offset1, noun.communication:offset,+ ] transfer1,@ frames: 8 (cause (printed matter) to transfer or smear onto another surface)}
+{ [ transfer1, noun.act:transfer,+ noun.act:transfer3,+ noun.person:transferrer,+ noun.act:transferral,+ ] verb.motion:move1,@ frames: 8,9 (move from one place to another; "transfer the data"; "transmit the news"; "transfer the patient to another hospital") }
+{ [import1, export1,!] transfer1,@ noun.cognition:computing,;c frames: 8 (transfer (electronic data) into a database or document)}
+{ [export1, import1,!] transfer1,@ noun.cognition:computing,;c frames: 8 (transfer (electronic data) out of a database or document in a format that can be used by other programs)}
+{ offload, transfer1,@ frames: 8 (transfer to a peripheral device, of computer data)}
+{ post5, [ carry13, noun.act:carry,+ ] transfer1,@ frames: 8 (transfer (entries) from one account book to another)}
+{ [ FTP, noun.communication:FTP,+ ] transfer1,@ frames: 8 (use the file transfer protocol to transfer data from one computer to another; "You can FTP these data") }
+{ spool, transfer1,@ noun.cognition:computer_science,;c frames: 8 (transfer data intended for a peripheral device (usually a printer) into temporary storage)}
+{ [download, upload,!] transfer1,@ frames: 8 (transfer a file or program from a central computer to a smaller computer or to a computer at a remote location) }
+{ [upload, download,!] transfer1,@ frames: 8 (transfer a file or program to a central computer from a smaller computer or a computer at a remote location) }
+{ [ allocate, adj.all:distributive^allocatable,+ adj.all:distributive^allocable,+ noun.act:allocation1,+ noun.possession:allocation,+ noun.act:allocation,+ noun.person:allocator,+ ] [ apportion1, adj.all:distributive^apportionable,+ noun.act:apportionment,+ ] assign1,@ frames: 8,15 (distribute according to a plan or set apart for a special purpose; "I am allocating a loaf of bread to everyone on a daily basis"; "I'm allocating the rations for the camping trip") }
+{ [ reapportion, noun.act:reapportionment,+ ] [ reallocate, noun.possession:reallocation,+ noun.act:reallocation,+ ] apportion1,@ frames: 8,15 (allocate, distribute, or apportion anew; "Congressional seats are reapportioned on the basis of census data")}
+{ [ ration, noun.food:ration1,+ noun.possession:ration,+ ] ration_out, allocate,@ frames: 8,15 (distribute in rations, as in the army; "Cigarettes are rationed") }
+{ [ ration1, noun.possession:ration,+ noun.food:ration1,+ noun.act:rationing,+ ] verb.change:restrict2,@ frames: 8 (restrict the consumption of a relatively scarce commodity, as during war; "Bread was rationed during the siege of the city") }
+{ [ surrender, noun.act:surrender1,+ noun.person:surrenderer,+ ] [ cede, noun.act:cession,+ ] deliver2, give_up1, give1,@ frames: 8,15 (relinquish possession or control over; "The squatters had to surrender the building after the police moved in") }
+{ yield_up, surrender,@ frames: 8,9 (surrender, as a result of pressure or force) }
+{ sell2, surrender,@ frames: 8,15,14 (give up for a price or reward; "She sold her principles for a successful career") }
+{ [ give7, noun.communication:giving,+ ] verb.communication:state,@ frames: 8 (convey or reveal information; "Give one's name")}
+{ cast13, give7,@ frames: 8 (deposit; "cast a vote"; "cast a ballot")}
+{ [ accept, noun.act:acceptation,+ noun.act:acceptance3,+ refuse,!] [ take5, noun.person:taker2,+ take_over,^ take_over6,^ take_up,^ verb.stative:take_in,^ ] have5, have3,$ get,@ frames: 8,9,16 (receive willingly something given or offered; "The only girl who would have him was the miller's daughter"; "I won't have this dog in my house!"; "Please accept my present") }
+{ accept3, admit, take7, take_on, take5,@ frames: 9,10 (admit into a group or community; "accept students for graduate study"; "We'll have to vote on whether or not to admit a new member")}
+{ [ refuel, noun.act:refueling,+ ] fuel3,@ frames: 1,2 (take on more fuel, as of a plane, ship, or car) }
+{ [ fuel3, noun.substance:fuel,+ noun.act:fueling,+ ] verb.contact:take_in2,@ frames: 1,4 (take in fuel, as of a ship; "The tanker fueled in Bahrain") }
+{ [ welcome, noun.communication:welcome,+ ] accept,@ frames: 8,9 (accept gladly; "I welcome your proposals") }
+{ [ refuse, noun.communication:refusal,+ accept,!] [ reject, noun.act:rejection,+ ] pass_up, [turn_down, noun.act:turndown,+ ] [ decline, noun.communication:declination,+ ] frames: 8,16 (refuse to accept; "He refused my offer of hospitality") }
+{ [ honor, noun.state:honor,+ dishonor,!] honour, accept,@ frames: 8 (accept as pay; "we honor checks and drafts") }
+{ put_up1, [ contribute2, noun.act:contribution,+ ] verb.possession:pay,@ frames: 8,11 (provide; "The city has to put up half the required amount") }
+{ [dishonor, honor,!] dishonour, refuse,@ frames: 8 (refuse to accept; "dishonor checks and drafts") }
+{ [ obtain, adj.all:available^obtainable,+ noun.act:obtention,+ noun.act:obtainment,+ ] get,@ frames: 16,8 (come into possession of; "How did you obtain the visa?")}
+{ [source, noun.artifact:source,+ ] obtain,@ frames: 8,1 (get (a product) from another country or business; "She sourced a supply of carpet"; "They are sourcing from smaller companies")}
+{ [ procure, noun.act:procurement,+ noun.person:procurer1,+ noun.act:procurance,+ noun.act:procural,+ ] [ secure, noun.person:securer,+ ] obtain,@ frames: 16,8 (get by special effort; "He procured extra cigarettes even though they were rationed") }
+{ extract, obtain,@ frames: 8 (get despite difficulties or obstacles; "I extracted a promise from the Dean for two new positions") }
+{ take_out2, obtain,@ frames: 8 (obtain by legal or official process; "take out a license"; "take out a patent") }
+{ get_in1, [get_into, frames: 8] obtain,@ frames: 2 (secure a place in a college, university, etc.)}
+{ [ copyright, noun.communication:copyright,+ ] secure,@ frames: 8 (secure a copyright on a written work; "did you copyright your manuscript?") }
+{ [ patent, noun.communication:patent1,+ noun.person:patentee,+ ] secure,@ frames: 8 (obtain a patent for; "Should I patent this invention?") }
+{ eke_out, squeeze_out, obtain,@ frames: 22 (obtain with difficulty; "He eked out some information from the archives") }
+{ eke_out1, squeeze_out1, make1,@ frames: 8 (make by laborious and precarious means; "He eked out a living as a painter") }
+{ engage1, enlist, secure,@ frames: 8,16 (hire for work or assistance; "engage aid, help, services, or support") }
+{ [ recruit, noun.act:recruitment,+ ] engage1,@ frames: 9,8 (seek to employ; "The lab director recruited an able crew of assistants") }
+{ [ seek, noun.act:seeking1,+ ] verb.emotion:want,@ frames: 8 (try to get or reach; "seek a position"; "seek an education"; "seek happiness") }
+{ [ bid4, noun.communication:bid,+ noun.act:bid,+ ] seek,@ frames: 8,11 (make a serious effort to attain something; "His campaign bid for the attention of the poor population") }
+{ [ quest, noun.act:quest,+ noun.person:quester,+ ] seek,@ frames: 1,2 (make a search (for); "Things that die with their eyes open and questing"; "The animal came questing through the forest") }
+{ [ extort, noun.possession:extortion,+ noun.act:extortion,+ ] [ squeeze3, noun.act:squeeze1,+ ] rack, [ gouge, noun.person:gouger,+ ] wring, overcharge,@ frames: 16 (obtain by coercion or intimidation; "They extorted money from the executive by threatening to reveal his past to the company boss"; "They squeezed money from the owner of the business by threatening him") }
+{ gazump1, verb.social:cheat,@ frames: 9 (raise the price of something after agreeing on a lower price) }
+{ [ extort1, noun.act:extortion1,+ ] take1,@ noun.act:crime,;c frames: 16 (obtain through intimidation) }
+{ [ blackmail, noun.act:blackmail,+ noun.person:blackmailer,+ ] extort1,@ noun.act:crime,;c frames: 9 (obtain through threats) }
+{ [ scalp, noun.person:scalper,+ ] sell,@ noun.act:crime,;c frames: 8 (sell illegally, as on the black market) }
+{ [ bootleg, noun.food:bootleg,+ noun.person:bootlegger,+ ] sell,@ noun.act:crime,;c frames: 2,8 (sell illicit products such as drugs or alcohol; "They were bootlegging whiskey") }
+{ [ run6, noun.act:run4,+ ] [ black_market, noun.group:black_market,+ noun.act:black_market,+ ] verb.motion:run9,$ trade1,@ noun.act:crime,;c frames: 8 (deal in illegally, such as arms or liquor) }
+{ [ sell, noun.act:sell,+ noun.person:seller,+ noun.act:selling,+ buy,! ] give,* exchange,@ noun.act:commerce,;c frames: 14,15,8 (exchange or deliver for money or its equivalent; "He sold his house in January"; "She sells her body to survive and support her drug habit")}
+{ sell_short, sell,@ noun.act:commerce,;c frames: 2,8 (sell securities or commodities or foreign currency that is not actually owned by the seller, who hopes to cover (buy back) the sold items at a lower price and thus to earn a profit)}
+{ [ remainder, noun.relation:remainder,+ ] sell,@ noun.act:commerce,;c frames: 8 (sell cheaply as remainders; "The publisher remaindered the books") }
+{ resell, sell,@ noun.act:commerce,;c frames: 8 (sell (something) again after having bought it) }
+{ [ syndicate, noun.group:syndicate2,+ noun.act:syndication1,+ ] sell,@ frames: 8 (sell articles, television programs, or photos to several publications or independent broadcasting stations) }
+{ deaccession, sell,@ noun.act:art,;c noun.act:commerce,;c frames: 8 (sell (art works) from a collection, especially in order to raise money for the purchase of other art works; "The museum deaccessioned several important works of this painter") }
+{ [sell_off, noun.act:selloff,+] sell,@ frames: 8 (get rid of by selling, usually at reduced prices; "The store sold off the surplus merchandise")} 
+{ foist_off, palm_off, fob_off, sell,@ noun.act:crime,;c noun.act:commerce,;c frames: 19 (sell as genuine, sell with the intention to deceive) }
+{ [ realize, noun.act:realization1,+ ] [ realise, noun.act:realisation1,+ ] sell,@ noun.act:commerce,;c frames: 8 (convert into cash; of goods and property) }
+{ [ auction, noun.act:auction,+ noun.person:auctioneer,+ ] auction_off, [ auctioneer, noun.person:auctioneer,+ ] sell,@ noun.act:commerce,;c frames: 8 (sell at an auction) }
+{ [ deal, noun.person:dealer3,+ noun.act:deal2,+ noun.person:dealer2,+ noun.group:dealer,+ noun.act:dealings,+ noun.act:dealing2,+ deal_out,^ trade1,^ ] [ sell1, noun.act:sell,+ noun.person:seller,+ noun.act:selling,+ ] [ trade11, noun.act:trade2,+ noun.act:trade5,+ noun.act:trading,+ ] transact14,@ noun.act:commerce,;c frames: 22,8 (do business; offer for sale as for one's livelihood; "She deals in gold"; "The brothers sell shoes") }
+{ [ push, noun.person:pusher1,+ ] sell1,@ noun.act:crime,;c frames: 8 (sell or promote the sale of (illegal goods such as drugs); "The guy hanging around the school is pushing drugs")}
+{ [ transact14, noun.act:transaction,+ noun.person:transactor,+ ] verb.social:interact,@ noun.act:commerce,;c frames: 22 (conduct business; "transact with foreign governments") }
+{ [ deal11, noun.group:dealer,+ noun.act:deal2,+ noun.person:dealer,+ ] deal,$ sell1,@ noun.act:commerce,;c frames: 8 (sell; "deal hashish") }
+{ [ black_marketeer, noun.person:black_marketeer,+ ] deal,@ noun.act:crime,;c frames: 2 (deal on the black market) }
+{ pyramid1, deal,@ noun.act:crime,;c frames: 8 (use or deal in (as of stock or commercial transaction) in a pyramid deal) }
+{ [ deal2, noun.act:deal,+ noun.group:deal,+ noun.person:dealer1,+ ] distribute,@ noun.act:cards,;c frames: 2 (distribute cards to the players in a game; "Who's dealing?") }
+{ [ deal6, noun.person:dealer1,+ noun.group:deal,+ noun.act:deal,+ ] deal2,$ give6,@ noun.act:cards,;c frames: 15 (give (a specific card) to a player; "He dealt me the Queen of Spades") }
+{ [ misdeal, noun.act:misdeal,+ ] deal2,@ noun.act:cards,;c frames: 8 (deal cards wrongly) }
+{ [ retail, noun.person:retailer,+ noun.act:retail,+ noun.act:retailing,+ wholesale,! ] sell,@ noun.act:commerce,;c frames: 8 (sell on the retail market) }
+{ [ wholesale, noun.act:wholesale,+ noun.person:wholesaler,+ retail,! ] sell,@ noun.act:commerce,;c frames: 8 (sell in large quantities) }
+{ fetch, bring_in, bring, change_hands,* frames: 11 (be sold for a certain price; "The painting brought $10,000"; "The old print fetched a high price at the auction") }
+{ [ sell_out, noun.act:sellout1,+ ] sell_up, liquidize, sell,* discard,@ noun.act:commerce,;c frames: 2,8 (sell or get rid of all one's merchandise)}
+{ de-access, discard,@ frames: 8 (dispose of by selling; "the museum sold off its collection of French impressionists to raise money"; "the publishing house sold off one of its popular magazines") }
+{ [ recover, noun.person:recoverer,+ noun.act:recovery,+ ] [ retrieve, noun.act:retrieval,+ ] find15, [ regain, noun.act:regaining,+ ] get,@ frames: 8,16 (get or find back; recover the use of; "She regained control of herself"; "She found her voice and replied quickly") }
+{ catch, verb.possession:get,@ frames: 8 (get or regain something necessary, usually quickly or briefly; "Catch some sleep"; "catch one's breath") }
+{ [ find2, noun.act:find,+ noun.person:finder,+ ] happen12, chance12, bump12, [ encounter, noun.event:encounter,+ ] frames: 8 (come upon, as if by accident; meet with; "We find this idea in Plato"; "I happened upon the most wonderful bakery not very far from here"; "She chanced upon an interesting book in the bookstore the other day") }
+{ [ access, noun.artifact:access1,+ ] retrieve,@ noun.cognition:computer_science,;c frames: 8 (obtain or retrieve from a storage device; as of information on a computer) }
+{ [address, noun.communication:address4,+] access,@ noun.cognition:computer_science,;c frames: 8 (access or locate by address)}
+{ [log_in, log_out,!] log_on, log-in, access,@ frames: 2 (enter a computer; "Have you logged in lately?") }
+{ [log_out, log_in,!] log_off, verb.motion:exit,@ frames: 2 (exit a computer; "Please log off before you go home") }
+{ recover1, recoup, recuperate, get,@ frames: 8 (regain or make up for; "recuperate one's losses") }
+{ recoup2, [ reimburse1, noun.possession:reimbursement,+ ] compensate,@ frames: 9,20 (reimburse or compensate (someone), as for a loss) }
+{ [ compensate, noun.possession:compensation,+ noun.act:compensation,+ ] [ recompense, noun.act:recompense,+ noun.possession:recompense,+ ] [ remunerate, adj.all:profitable^remunerative,+ adj.all:paid^remunerative,+ noun.possession:remuneration,+ noun.act:remuneration,+ noun.person:remunerator,+ ] pay,@ frames: 9 (make payment to; compensate; "My efforts were not remunerated") }
+{ [ overpay, noun.possession:overpayment,+ noun.act:overpayment,+ underpay,!] pay,@ frames: 9,22 (pay too much) }
+{ [ underpay, noun.act:underpayment,+ overpay,!] pay,@ frames: 9,22 (pay too little) }
+{ [ prepay, noun.act:prepayment,+ ] pay,@ frames: 2,8 (pay for something before receiving it) }
+{ go_Dutch, pay,@ frames: 2 (share expenses equally and split the cost of something; "My boyfriend and I always go Dutch")}
+{ [ compensate1, noun.possession:compensation,+ noun.act:compensation,+ ] recompense1, [ repair, noun.possession:reparation1,+ noun.act:reparation,+ ] [ indemnify, noun.possession:indemnification,+ noun.act:indemnification,+ noun.possession:indemnity,+ ] pay,@ frames: 8,15 (make amends for; pay compensation for; "One can never fully repair the suffering and losses of the Jews in the Third Reich"; "She was compensated for the loss of her arm in the accident") }
+{ [ insure, noun.state:insurance,+ ] verb.competition:protect,@ frames: 8,9,10,11 (take out insurance for)}
+{ [ indemnify1, noun.state:indemnity1,+ noun.state:indemnity,+ ] verb.communication:insure,@ frames: 10,11,8,9 (secure against future loss, damage, or liability; give security for; "This plan indemnifies workers against wages lost through illness") }
+{ reinsure, insure,@ frames: 8,11,9,10 (provide additional insurance for) }
+{ [ coinsure, noun.possession:coinsurance,+ ] insure,@ frames: 9,8 (take out coinsurance) }
+{ [ pay, noun.possession:pay1,+ noun.possession:payment,+ noun.act:payment,+ noun.person:payee,+ noun.person:payer,+ fund,^ pay_off,^ pay_off3,^ pay_off1,^ pay_out,^ ] give,@ frames: 2,8,9,14,15,17 (give money, usually in exchange for goods or services; "I paid four dollars for this sandwich"; "Pay the waitress, please") }
+{ [ tithe2, noun.person:tither,+ ] pay,@ frames: 2 (pay a tenth of one's income, especially to the church; "Although she left the church officially, she still tithes")}
+{ [ tithe3, noun.person:tither,+ ] tithe2,$ frames: 8 (pay one tenth of; pay tithes on, especially to the church; "He tithed his income to the Church")}
+{ [pay_up, default,! ] ante_up, [ pay4, noun.possession:pay1,+ noun.possession:payment,+ noun.act:payment,+ ] pay14,@ frames: 2,8 (cancel or discharge a debt; "pay up, please!") }
+{ [ pay14, noun.possession:payment,+ noun.act:payment,+ noun.person:payer,+ ] settle,@ frames: 8 (discharge or settle; "pay a debt"; "pay an obligation") }
+{ square, settle,@ frames: 22 (pay someone and settle a debt; "I squared with him") }
+{ [ pay2, noun.possession:pay1,+ noun.person:payee,+ noun.person:payer,+ verb.competition:pay_back,^ verb.competition:pay_off,^ ] pay_off4, make_up, [ compensate2, noun.possession:compensation,+ noun.act:compensation,+ ] settle,@ frames: 20 (do or give something to somebody in return; "Does she pay you for the work you are doing?") }
+{ [ default, noun.possession:default,+ noun.possession:default2,+ noun.person:defaulter1,+ pay_up,!] default_on, owe,* verb.social:fail2,@ frames:2,22 (fail to pay up) }
+{ [owe, frames: 15 ] verb.stative:be3,@ frames: 2,11,8 (be in debt; "She owes me $200"; "I still owe for the car"; "The thesis owes much to his adviser") }
+{ owe1, frames: 8,14,15 (be obliged to pay or repay) }
+{ [ settle, noun.act:settlement,+ ] verb.communication:arrange4,@ frames: 2,22 (dispose of; make a financial settlement) }
+{ liquidate3, settle,@ frames: 8 (settle the affairs of by determining the debts and applying the assets to pay them off; "liquidate a company")}
+{ clean_up, settle,@ frames: 8 (dispose of; "settle the bills") }
+{ bounce1, bounce,> refuse,@ frames: 8,11 (refuse to accept and send back; "bounce a check") }
+{ bounce, bounce1,$ verb.motion:return,@ frames: 1,4 (come back after being refused; "the check bounced") }
+{ [ remit, noun.possession:remitment,+ noun.possession:remittance,+ noun.possession:remittal,+ ] pay,@ transfer,* frames: 8,14,15 (send (money) in payment; "remit $25") }
+{ [ accord, noun.act:accordance,+ ] allot, [ grant, noun.attribute:grant,+ ] give,@ frames: 14,15 (allow to have; "grant a privilege") }
+{ [allow, deny,!] [ grant1, noun.person:granter,+ noun.attribute:grant,+ ] give,@ frames: 14 (let have; "grant permission"; "Mandela was allowed few visitors in prison") }
+{ vouchsafe, grant1,@ frames: 8,14 (grant in a condescending manner) }
+{ [ allowance, noun.possession:allowance,+ ] allow,@ frames: 14 (put on a fixed allowance, as of food) }
+{ [ grant2, noun.possession:grant2,+ noun.person:grantee,+ noun.person:grantor,+ ] deed_over, give1,@ frames: 8,15 (transfer by deed; "grant land")}
+{ prize, [ value, adj.all:worthy^valuable,+ adj.all:valuable,+ ] [ treasure, noun.possession:treasure1,+ ] [ appreciate, adj.all:discriminating^appreciative,+ ] verb.cognition:consider,@ frames: 8 (hold dear; "I prize these old photographs") }
+{ [ cash, adj.all:convertible^cashable,+ noun.possession:cash,+ cash_in_on,^ ] cash_in, exchange,@ frames: 8 (exchange for cash; "I cashed the check as soon as it arrived in the mail") }
+{ liquidate2, cash_in,@ frames: 8 (convert into cash; "I had to liquidate my holdings to pay off my ex-husband")}
+{ [ redeem, noun.person:redeemer1,+ ] cash,@ frames: 9 (convert into cash; of commercial papers) }
+{ [ redeem1, noun.possession:redemption,+ noun.person:redeemer1,+ ] pay_off3, pay,@ frames: 8 (pay off (loans or promissory notes)) }
+{ [ ransom, noun.act:ransom,+ noun.act:ransom1,+ noun.possession:ransom,+ ] [ redeem3, noun.act:redemption,+ noun.person:redeemer1,+ ] exchange,@ noun.act:crime,;c frames: 9,8 (exchange or buy back for money; under threat) }
+{ redeem4, exchange,@ frames: 9,8 (to turn in (vouchers or coupons) and receive something in exchange) }
+{ [ exchange, noun.act:exchange3,+ ] change, [ interchange, noun.act:interchange1,+ ] transfer,@ frames: 8,21 (give to, and receive from, one another; "Would you change places with me?"; "We have been exchanging letters for a year") }
+{ [ substitute, noun.cognition:substitute,+ noun.event:substitution,+ noun.act:substitution,+ ] [ replace, noun.act:replacement,+ ] interchange1, exchange2, verb.change:change1,@ frames: 8,31,21 (put in the place of another; switch seemingly equivalent items; "the con artist replaced the original with a fake Rembrandt"; "substitute regular milk for fat-free milk"; "synonyms can be interchanged without a changing the context's meaning") }
+{ [ reduce4, adj.all:reducible,+ ] substitute,@ noun.cognition:mathematics,;c frames: 8 (simplify the form of a mathematical equation of expression by substituting one term for another) }
+{ [ truncate, noun.act:truncation1,+ ] replace,@ noun.cognition:geometry,;c frames: 8 (replace a corner by a plane) }
+{ [ substitute1, noun.person:substitute,+ noun.person:substitute1,+ noun.cognition:substitute,+ noun.event:substitution,+ noun.act:substituting,+ ] [ sub, noun.act:subbing,+ ] [stand_in, noun.person:stand-in,+] [fill_in, noun.person:fill-in,+] exchange,@ frames: 2,22 (be a substitute; "The young teacher had to substitute for the sick colleague"; "The skim milk substitutes for cream--we are on a strict diet") }
+{ [ trade2, noun.act:trade3,+ ] [ swap, noun.act:swap,+ ] [ swop, noun.act:swop,+ ] [ switch, noun.event:switch,+ noun.act:switching,+ ] exchange,@ frames: 2,8,21 (exchange or give (something) in exchange for) }
+{ [ barter, noun.person:barterer,+ noun.act:barter,+ ] exchange,@ frames: 2,22 (exchange goods without involving money) }
+{ beat_down, bargain_down, haggle,@ frames: 9 (persuade the seller to accept a lower price; "She beat the merchant down $100") }
+{ [ haggle, noun.person:haggler,+ noun.communication:haggling,+ noun.communication:haggle,+ ] higgle, chaffer, [ huckster1, noun.person:huckster,+ ] bargain,@ frames: 2,22 (wrangle (over a price, terms of an agreement, etc.); "Let's not haggle over a few dollars") }
+{ dicker, [ bargain, noun.possession:bargain1,+ noun.communication:bargain,+ noun.person:bargainer1,+ noun.communication:bargaining,+ ] verb.communication:negotiate,@ frames: 2,22 (negotiate the terms of an exchange; "We bargained for a beautiful rug in the bazaar")}
+{ [ trade, noun.act:trade2,+ noun.act:trade3,+ noun.act:trade5,+ ] [trade_in, noun.possession:trade-in,+] exchange,@ noun.act:commerce,;c frames: 8,21 (turn in as payment or part payment for a purchase; "trade in an old car for a new one") }
+{ [ trade1, noun.act:trade2,+ noun.act:trade5,+ noun.person:trader,+ ] [ merchandise, noun.person:merchandiser,+ noun.act:merchandising,+ noun.artifact:merchandise,+ ] buy,* sell,* noun.act:commerce,;c frames: 8 (engage in the trade of; "he is merchandising telephone sets") }
+{ [ traffic1, noun.act:traffic1,+ noun.person:trafficker,+ ] trade1,@ noun.act:commerce,;c frames: 2,21 (trade or deal a commodity; "They trafficked with us for gold")}
+{ [ arbitrage, noun.person:arbitrager,+ noun.act:arbitrage,+ ] trade1,@ noun.act:commerce,;c frames: 2 (practice arbitrage, as in the stock market) }
+{ [ traffic, noun.act:traffic1,+ ] trade1,@ noun.act:crime,;c frames: 8 (deal illegally; "traffic drugs") }
+{ [turn_over1, noun.attribute:turnover,+ ] transact14,@ noun.act:commerce,;c frames: 8,11 (do business worth a certain amount of money; "The company turns over ten million dollars a year") }
+{ [ broker, noun.group:brokerage1,+ noun.group:brokerage,+ noun.artifact:brokerage,+ noun.person:broker,+ ] verb.communication:negociate,@ noun.act:commerce,;c frames: 2,8 (act as a broker) }
+{ [ treat, noun.event:treat,+ ] verb.consumption:treat,$ give1,@ frames: 9 (provide with a gift or entertainment; "Grandmother always treated us to the circus"; "I like to treat myself to a day at a spa when I am depressed")}
+{ [ award, noun.possession:award,+ noun.communication:award,+ ] [ present2, noun.act:presentation1,+ ] allocate,@ frames: 14,15 (give, especially as an honor or reward; "bestow honors and prizes at graduation") }
+{ [ certificate, noun.possession:certificate,+ noun.communication:certificate,+ ] present2,@ frames: 9 (present someone with a certificate) }
+{ award1, [ grant3, noun.possession:grant,+ noun.person:grantee,+ ] give3,@ frames: 14,15 (give as judged due or on the basis of merit; "the referee awarded a free kick to the team"; "the jury awarded a million dollars to the plaintiff"; "Funds are granted to qualified researchers")}
+{ [ pension, noun.person:pensionary1,+ noun.person:pensioner,+ noun.possession:pension,+ ] pension_off1, grant3,@ frames: 9 (grant a pension to) }
+{ [ present1, noun.possession:present,+ noun.act:presentation1,+ noun.person:presenter2,+ ] submit, give,@ frames: 15,17,8 (hand over formally) }
+{ bring_in3, submit,@ frames: 8 (submit (a verdict) to a court) }
+{ [ donate, noun.possession:donation,+ noun.act:donation,+ ] give1,@ frames: 8,15,22 (give to a charity or good cause; "I donated blood to the Red Cross for the victims of the earthquake"; "donate money to the orphanage"; "She donates to her favorite charity every month")}
+{ [ confer, noun.act:conferment,+ noun.person:conferee1,+ noun.act:conferral,+ ] [ bestow, noun.act:bestowment,+ noun.act:bestowal,+ ] award,@ frames: 19 (present; "The university conferred a degree on its most famous former student, who never graduated"; "bestow an honor on someone") }
+{ [ bestow2, noun.possession:bestowment,+ ] give,@ frames: 19 (give as a gift) }
+{ [ heap, noun.quantity:heap,+ ] give,@ frames: 19,17 (bestow in large quantities; "He heaped him with work"; "She heaped scorn upon him") }
+{ [ miter, noun.artifact:miter,+ ] confer,@ frames: 10,9 (confer a miter on (a bishop)) }
+{ bless, confer,@ frames: 9,10 (confer prosperity or happiness on) }
+{ [ graduate1, noun.event:graduation1,+ noun.act:graduation1,+ noun.person:graduate,+ ] graduate,> confer,@ frames: 9 (confer an academic degree upon; "This school graduates 2,000 students each year") }
+{ [ graduate, noun.event:graduation1,+ noun.act:graduation1,+ noun.person:graduate,+ ] receive,@ frames: 2 (receive an academic degree upon completion of one's studies; "She graduated in 1990") }
+{ lavish, shower, verb.consumption:squander,@ frames: 19 (expend profusely; also used with abstract nouns; "He was showered with praise") }
+{ [ credit, noun.possession:credit1,+ noun.person:creditor,+ debit,!] account,@ frames: 15,17,8 (accounting: enter as credit; "We credit your account with $100") }
+{ [ balance, noun.possession:balance,+ ] account,@ frames: 8 (compute credits and debits of an account) }
+{ overbalance, account,@ frames: 8 (cause to be off balance; "It is not desirable to overbalance the budget") }
+{ [ account, noun.communication:account2,+ noun.person:accountant,+ noun.possession:accounting1,+ noun.possession:accounting,+ noun.cognition:accounting,+ noun.act:accounting,+ ] [ calculate, noun.cognition:calculation,+ noun.act:calculation,+ ] frames: 22 (keep an account of) }
+{ [ debit, noun.possession:debit1,+ credit,! ] account,@ noun.cognition:accounting,;c frames: 17,8,15 (enter as debit) }
+{ trust1, lend,@ noun.act:commerce,;c noun.communication:archaism,;u frames: 9 ((chiefly archaic) extend credit to; "don't trust my ex-wife; I won't pay her debts anymore") }
+{ compound, account,@ frames: 8 (calculate principal and interest) }
+{ [save1, noun.possession:savings,+ frames:2 ] lay_aside, save_up, frames: 8 (accumulate money for future use; "He saves half his salary") }
+{ blow, blow2,$ spend,@ frames: 8,19 (spend lavishly or wastefully on; "He blew a lot of money on his new home theater") }
+{ [overspend, underspend,!] verb.consumption:squander,@ frames: 2 (spend at a high rate) }
+{ wanton1, wanton_away, trifle_away, spend,@ frames: 8 (spend wastefully; "wanton one's money away") }
+{ [underspend, overspend,!] spend,@ frames: 2 (spend at less than the normal rate) }
+{ misspend, spend,@ frames: 8 (spend (money or other resources) unwisely) }
+{ penny-pinch, nickel-and-dime, spend,@ frames: 2 (spend money frugally; spend as little as possible) }
+{ [ save2, noun.person:saver,+ ] buy,* frames: 8,19 (spend less; buy at a reduced price) }
+{ [ spend, noun.person:spender1,+ noun.act:spending,+ ] [ expend, adj.all:expensive,+ noun.person:expender,+ noun.possession:expenditure,+ noun.act:expenditure,+ noun.act:expending,+ ] drop, pay,@ frames: 8,19 (pay out; "spend money")}
+{ [ spend1, noun.person:spender2,+ noun.act:spending,+ ] verb.consumption:use_up,@ frames: 8,19 (spend completely; "I spend my pocket money in two days") }
+{ [overspend1, underspend1,!] spend1,@ frames: 8 (spend more than available of (a budget)) }
+{ [underspend1, overspend1,!] spend1,@ frames: 8 (spend less than the whole of (a budget, for example)) }
+{ take6, [ occupy8, noun.time:occupation,+ ] use_up2, verb.consumption:consume1,$ verb.consumption:use,@ frames: 8,11 (require (time or space); "It took three hours to get to work this morning"; "This event occupied a very short time") }
+{ be, take6,@ frames: 8,11 (spend or use time; "I may be an hour") }
+{ [ waste, noun.attribute:waste,+ noun.act:waste,+ noun.person:waster,+ conserve,!] blow2, [ squander1, noun.person:squanderer,+ ] verb.consumption:use,@ frames: 8 (spend thoughtlessly; throw away; "He wasted his inheritance on his insincere friends"; "You squandered the opportunity to get and advanced degree") }
+{ tighten_one's_belt, save4,@ frames: 2 (live frugally and use less resources; "In the new economy, we all have to learn to tighten our belts")}
+{ burn1, waste,@ frames: 8 (spend (significant amounts of money); "He has money to burn") }
+{ splurge, [ fling1, noun.act:fling,+ ] verb.consumption:squander,@ frames: 2,22 (indulge oneself; "I splurged on a new TV") }
+{ [conserve, waste,!] husband, [ economize, noun.person:economizer,+ noun.cognition:economy1,+ noun.attribute:economy,+ noun.act:economy,+ ] [ economise, noun.person:economiser,+ ] save,@ frames: 8 (use cautiously and frugally; "I try to economize my spare time"; "conserve your energy for the ascent to the summit") }
+{ [ rationalize, noun.act:rationalization2,+ ] [ rationalise, noun.act:rationalisation2,+ ] verb.social:organize,@ frames: 8 (structure and run according to rational or scientific principles in order to achieve desired results; "We rationalized the factory's production and raised profits")}
+{ [ retrench, noun.act:retrenchment,+ ] economize,@ frames: 2 (tighten one's belt; use resources carefully) }
+{ [ scrounge, noun.person:scrounger,+ ] [ forage, noun.act:forage,+ noun.act:foraging,+ ] verb.competition:hunt,@ frames: 2,22,1 (collect or look around for (food)) }
+{ rustle2, forage,@ frames: 2 (forage food)}
+{ schnorr, shnorr, [ scrounge1, noun.person:scrounger,+ ] [ cadge1, noun.person:cadger,+ ] beg,@ frames: 2,16 (obtain or seek to obtain by cadging or wheedling; "he is always shnorring cigarettes from his friends") }
+{ [ mooch, noun.person:moocher,+ ] [ bum, noun.person:bum3,+ ] [ cadge, noun.person:cadger,+ ] grub, [ sponge, noun.person:sponge,+ noun.person:sponger,+ ] obtain,@ frames: 2,8 (ask for and get free; be a parasite)}
+{ [ freeload, noun.person:freeloader,+ ] sponge,@ frames: 2 (live off somebody's generosity; "This young man refuses to work and is freeloading")}
+{ [ beg, noun.communication:beggary,+ ] verb.communication:request1,@ frames: 2,20 (ask to obtain free; "beg money and food") }
+{ [ panhandle, noun.person:panhandler,+ ] beg,@ frames: 2,9,8 (beg by accosting people in the street and asking for money) }
+{ [ invest, noun.possession:investment,+ noun.act:investment,+ noun.person:investor,+ noun.act:investing,+ divest,!] put, [ commit5, noun.act:commitment2,+ ] place3, spend,@ frames: 8,21 (make an investment; "Put money into bonds")}
+{ [ roll_over, noun.act:rollover,+ ] invest,@ frames: 8 (re-invest (a previous investment) into a similar fund or security; "She rolled over her IRA")}
+{ roll_over1, verb.communication:renegociate,@ frames: 8 (negociate to repay a loan at a later date for an additional fee; "roll over a loan")}
+{ shelter, invest,@ frames: 8 (invest (money) so that it is not taxable )}
+{ tie_up, invest,@ frames: 8 (invest so as to make unavailable for other purposes; "All my money is tied up in long-term investments")}
+{ [ speculate, adj.all:unsound^speculative,+ noun.possession:speculation,+ noun.person:speculator,+ ] job, invest,@ frames: 2,22 (invest at a risk; "I bought this house not because I want to live in it but to sell it later at a good price, so I am speculating") }
+{ [ bull, noun.person:bull1,+ ] speculate,@ noun.act:investing,;c frames: 8 (try to raise the price of stocks through speculative buying) }
+{ [ appropriate, adj.pert:appropriative,+ noun.person:appropriator,+ ] [ capture, noun.act:capture,+ ] [ seize1, noun.act:seizure1,+ ] [ conquer, noun.act:conquering,+ ] take_over7,@ frames: 8,16 (take possession of by force, as after an invasion; "the invaders seized the land and property of the inhabitants"; "The army seized the town"; "The militia captured the castle") }
+{ reconquer, retake,@ frames: 8 (conquer anew; "The country reconquered the territory lost in the previous war")}
+{ [ preoccupy, noun.act:preoccupation,+ ] take_over7,@ frames: 8 (occupy or take possession of beforehand or before another or appropriate for use in advance; "the army preoccupied the hills")}
+{ [ impound, noun.act:impoundment,+ noun.act:impounding,+ ] [ attach, noun.communication:attachment,+ ] [ sequester, noun.act:sequestration1,+ ] [ confiscate1, noun.act:confiscation,+ ] [ seize2, noun.act:seizure,+ ] take,@ frames: 8 (take temporary possession of as a security, by legal authority; "The FBI seized the drugs"; "The customs agents impounded the illegal shipment"; "The police confiscated the stolen artwork") }
+{ condemn, impound,@ frames: 8 (appropriate (property) for public use; "the county condemned the land to build a highway")}
+{ sequester1, sequester,$ take,@ frames: 8 (requisition forcibly, as of enemy property; "the estate was sequestered")}
+{ garnishee, [ garnish, noun.communication:garnishment,+ ] attach,@ frames: 8 (take a debtor's wages on legal orders, such as for child support; "His employer garnished his wages in order to pay his debt") }
+{ [take_over3, noun.act:takeover1,+ ] [buy_out, noun.act:buyout,+ ] buy_up, buy,@ frames: 8,11 (take over ownership of; of corporations and companies) }
+{ [ assume, noun.act:assumption,+ ] [ usurp, noun.act:usurpation,+ noun.person:usurper,+ ] seize7, [take_over7, noun.act:takeover2,+ ] [ arrogate, noun.act:arrogation,+ noun.person:arrogator,+ ] take1,@ frames: 8 (seize and take control without authority and possibly with force; take as one's right or possession; "He assumed to himself the right to fill all positions in the town"; "he usurped my rights"; "She seized control of the throne after her husband died") }
+{ hijack, seize7,@ frames: 8 (seize control of; "they hijacked the judicial process")}
+{ [ raid2, noun.act:raid1,+ noun.group:raider,+ ] take_over7,@ frames: 8 (take over (a company) by buying a controlling interest of its stock; "T. Boone Pickens raided many large companies")}
+{ [ claim, noun.communication:claim,+ noun.person:claimant,+ forfeit,! ] [lay_claim, frames: 22] [ arrogate2, noun.person:arrogator,+ ] verb.communication:request1,@ frames: 8 (demand as being one's due or property; assert one's right or title to; "He claimed his suitcases at the airline counter"; "Mr. Smith claims special tax exemptions because he is a foreign resident") }
+{ [ pretend3, noun.person:pretender2,+ noun.communication:pretension,+ noun.attribute:pretense,+ ] claim,@ frames: 8 (put forward a claim and assert right or possession of; "pretend the title of King")}
+{ [ requisition, noun.communication:requisition,+ derequisition,!] claim,@ frames: 9 (demand and take for use or service, especially by military or public authority for public service) }
+{ [derequisition, requisition,!] release,@ frames: 8 (release from government control) }
+{ reclaim, repossess, get,@ frames: 8,16 (claim back) }
+{ distrain2, repossess,@ frames: 22 (legally take something in place of a debt payment) }
+{ [ foreclose, noun.act:foreclosure,+ ] reclaim,@ frames: 8 (subject to foreclosing procedures; take away the right of mortgagors to redeem their mortgage) }
+{ [ arrogate1, noun.person:arrogator,+ ] assign2, claim,@ frames: 15 (make undue claims to having) }
+{ [ pilfer, noun.person:pilferer,+ noun.act:pilferage,+ ] [ cabbage, noun.possession:cabbage,+ ] purloin, pinch, abstract, snarf, swipe, hook, sneak, filch, nobble, [ lift, noun.person:lifter1,+ ] steal,@ frames: 8,16 (make off with belongings of others) }
+{ [ rustle, noun.person:rustler,+ noun.act:rustling,+ frames: 2] lift3, steal,@ noun.act:crime,;c frames: 8 (take illegally; "rustle cattle") }
+{ [ shoplift, noun.person:shoplifter,+ noun.act:shoplifting,+ ] steal,@ noun.act:crime,;c frames: 2,8 (steal in a store) }
+{ [hold_up, noun.act:holdup,+ ] [stick_up, noun.act:stickup,+ ] verb.competition:assault,* rob,@ noun.act:crime,;c frames: 9 (rob at gunpoint or by means of some other threat) }
+{ [ mug, noun.person:muggee,+ noun.person:mugger,+ noun.act:mugging,+ ] hold_up,@ noun.act:crime,;c frames: 9 (rob at gunpoint or with the threat of violence; "I was mugged in the streets of New York last night") }
+{ [ pirate, noun.person:pirate1,+ noun.act:piracy1,+ ] steal,@ noun.act:crime,;c frames: 8,16 (copy illegally; of published material) }
+{ [ plagiarize, noun.person:plagiarist,+ noun.person:plagiarizer,+ noun.act:plagiarization,+ noun.communication:plagiarism,+ noun.act:plagiarism,+ ] [ plagiarise, noun.person:plagiarist,+ noun.person:plagiariser,+ noun.act:plagiarisation,+ noun.communication:plagiarism,+ noun.act:plagiarism,+ ] lift1, steal,@ noun.act:crime,;c frames: 2,8,16 (take without referencing from someone else's writing or speech; of intellectual property) }
+{ crib, plagiarize,@ noun.act:crime,;c frames: 8 (take unauthorized (intellectual material)) }
+{ [ pocket, noun.artifact:pocket,+ ] take,@ frames: 8,16 (put in one's pocket; "He pocketed the change") }
+{ line_one's_pockets, profit,@ frames: 2,22 (make a lot of money) }
+{ [ profit, noun.possession:profit,+ lose6,! break_even,! ] turn_a_profit, gain,@ frames: 2,22 (make a profit; gain money or materially; "The company has not profited from the merger") }
+{ turn_a_nice_dime, turn_a_nice_penny, turn_a_nice_dollar, profit,@ frames: 1,2 (make a satisfactory profit; "The company turned a nice dime after a short time")}
+{ [clean_up4, noun.possession:cleanup,+] profit,@ frames: 2 (make a big profit; often in a short period of time; "The investor really cleaned up when the stock market went up") }
+{ cash_in_on, gain2,@ frames: 8 (take advantage of or capitalize on) }
+{ [ profiteer, noun.person:profiteer,+ ] profit2,@ frames: 2 (make an unreasonable profit, as on the sale of difficult to obtain goods) }
+{ [ capitalize, noun.act:capitalization,+ ] [ capitalise, noun.act:capitalisation,+ ] take_advantage, profit2,@ frames: 22 (draw advantages from; "he is capitalizing on her mistake"; "she took advantage of his absence to meet her lover") }
+{ [break_even, profit,! lose6,! ] frames: 2 (make neither profit nor loss)}
+{ [ conserve2, noun.event:conservation,+ noun.act:conservation,+ ] [ preserve, adj.all:protective^preservative,+ noun.act:preservation,+ ] [ maintain, noun.act:maintenance,+ ] keep_up, keep1,@ frames: 8 (keep in safety and protect from harm, decay, loss, or destruction; "We preserve these archeological findings"; "The old lady could not keep up the building"; "children must be taught to conserve our national heritage"; "The museum curator conserved the ancient manuscripts")}
+{ [plastinate, noun.process:plastination,+ ] preserve,@ frames: 8 (preserve (tissue) with plastics, as for teaching and research purposes; "The doctor plastinates bodies to teach anatomy to his students")}
+{ run_down, [ exhaust, noun.act:exhaustion,+ ] play_out, [ sap, noun.person:sapper1,+ ] tire, verb.consumption:deplete,@ frames: 8 (deplete; "exhaust one's savings"; "We quickly played out our strength") }
+{ [ store, noun.possession:store,+ noun.act:storage1,+ ] hive_away, lay_in, put_in, salt_away, stack_away, stash_away, keep,@ frames: 8 (keep or lay aside for future use; "store grain for the winter"; "The bear stores fat for the period of hibernation when he doesn't eat") }
+{ [ victual, noun.food:victual,+ ] lay_in,@ frames: 1,2 (lay in provisions; "The vessel victualled before the long voyage") }
+{ [ mothball, noun.artifact:mothball,+ ] store2,@ frames: 8 (put into long-term storage) }
+{ [ reposit, noun.act:reposition,+ noun.act:repositing,+ ] store2,@ frames: 8 (put (something) in a place for storage; "the treasure found in the ancient tomb was reposited in the museum")}
+{ [ wharf, noun.artifact:wharf,+ ] store2,@ frames: 8 (store on a wharf; "Wharf the merchandise")}
+{ [ tank, noun.quantity:tank,+ noun.artifact:tank,+ noun.act:tankage,+ ] store2,@ frames: 8 (store in a tank by causing (something) to flow into it) }
+{ [ loft, noun.artifact:loft2,+ noun.artifact:loft,+ ] store2,@ frames: 8 (store in a loft) }
+{ [ warehouse, noun.artifact:warehouse,+ noun.person:warehouser,+ noun.act:warehousing,+ ] store2,@ frames: 8 (store in a warehouse) }
+{ [ store2, noun.artifact:store1,+ noun.act:storage1,+ ] keep,@ frames: 8 (find a place for and put away for storage; "where should we stow the vegetables?"; "I couldn't store all the books in the attic so I sold some") }
+{ [ garage, noun.artifact:garage,+ ] store2,@ frames: 8 (keep or store in a garage; "we don't garage our car") }
+{ [ bottle, noun.artifact:bottle,+ ] store2,@ frames: 8 (store (liquids or gases) in bottles) }
+{ [ ensile, noun.food:ensilage,+ ] store2,@ frames: 8 (store in a silo; "ensile fodder for the cows") }
+{ [ retain, noun.act:retention,+ ] [ hold2, noun.act:holding,+ ] keep_back1, hold_back, keep,@ frames: 8 (secure and keep for possible future use or application; "The landlord retained the security deposit"; "I reserve the right to disagree") }
+{ hold_down, retain,@ frames: 8 (keep; "She manages to hold down two jobs") }
+{ keep_open, hold_open, keep9, save3, verb.social:reserve,@ frames: 8 (retain rights to; "keep my job for me while I give birth"; "keep my seat, please"; "keep open the possibility of a merger") }
+{ [ advance, noun.possession:advance,+ ] loan,@ frames: 8,14,15 (pay in advance; "Can you advance me some money?") }
+{ [ bribe, adj.all:corrupt^bribable,+ noun.person:briber,+ noun.act:bribery,+ noun.possession:bribe,+ ] [ corrupt, adj.all:corrupt^corruptible,+ ] buy2, grease_one's_palms, pay,@ noun.act:crime,;c frames: 9 (make illegal payments to in exchange for favors or influence; "This judge can be bought") }
+{ [ sop, noun.communication:sop,+ ] bribe,@ frames: 9 (give a conciliatory gift or bribe to) }
+{ buy_into, invest,@ noun.act:investment,;c frames: 8 (buy stocks or shares of a company) }
+{ [rake_off, noun.possession:rake-off,+ ] take_in,@ noun.act:crime,;c frames: 8 (take money from an illegal transaction) }
+{ buy_off, pay_off1, bribe,@ noun.act:crime,;c frames: 9 (pay someone with influence in order to receive a favor) }
+{ [ refund, noun.act:refund,+ noun.possession:refund,+ ] return, [ repay, noun.possession:repayment,+ noun.act:repayment,+ ] give_back, pay,@ frames: 8,15,14 (pay back; "Please refund me my money") }
+{ [ reimburse, noun.possession:reimbursement,+ ] refund,@ frames: 8,14 (pay back for some expense incurred; "Can the company reimburse me for my professional travel?")}
+{ [ stock, noun.possession:stock1,+ noun.artifact:stock,+ noun.person:stockist,+ ] carry, [ stockpile, noun.group:stockpile,+ noun.possession:stockpile,+ noun.act:stockpiling,+ ] have,@ frames: 8 (have on hand; "Do you carry kerosene heaters?") }
+{ [ find, noun.person:finder1,+ noun.act:find,+ noun.person:finder,+ lose1,! ] regain1, find15,$ find3,$ get,@ frames: 8,9 (come upon after searching; find the location of something that was missed or lost; "Did you find your glasses?"; "I cannot find my gloves!") }
+{ [ feel, noun.animal:feeler2,+ noun.animal:feeler1,+ ] find,@ frames: 8 (find by testing or cautious exploration; "He felt his way around the dark room") }
+{ [ locate, noun.act:location1,+ noun.Tops:location,+ ] turn_up, verb.contact:turn_up3,$ find,@ frames: 8,9,20,21 (discover the location of; determine the place of; find by searching or examining; "Can you locate your cousins in the Midwest?"; "My search turned up nothing") }
+{ unearth1, locate,@ frames: 9,8 (bring to light; "The CIA unearthed a plot to kill the President") }
+{ fall_upon13, strike, come_upon9, light_upon, chance_upon, come_across2, chance_on, happen_upon, attain13, [ discover, noun.communication:discovery,+ noun.act:discovery,+ ] find,@ frames: 8 (find unexpectedly; "the archeologists chanced upon an old tomb"; "she struck a goldmine"; "The hikers finally struck the main path to the lake") }
+{ pick_up, buy,@ noun.act:commerce,;c frames: 8 (buy casually or spontaneously; "I picked up some food for a snack")}
+{ foot, pick, pay,@ frames: 2 (pay for something; "pick up the tab"; "pick up the burden of high-interest mortgages"; "foot the bill") }
+{ [ pinpoint, noun.attribute:pinpoint,+ ] nail, locate,@ frames: 8,11,20,21 (locate exactly; "can you pinpoint the position of the enemy?"; "The chemists could not nail the identity of the chromosome")}
+{ [ lose1, noun.possession:losings,+ find,! ] frames: 8 (miss from one's possessions; lose sight of; "I've lost my glasses again!")}
+{ [lose2, keep,!] frames: 8,11 (fail to keep or to maintain; cease to have, either physically or in an abstract sense; "She lost her purse when she left it unattended on her seat")}
+{ sleep_off, lose2,@ frames: 8 (get rid of by sleeping; "sleep off a hangover") }
+{ [lose, win,! ] frames: 8,15 (fail to get or obtain; "I lost the opportunity to spend a year abroad") }
+{ acquire6, [ win, noun.person:winner1,+ noun.possession:win,+ noun.person:winner2,+ noun.possession:winnings,+ noun.act:winning,+ lose,! ] [ gain1, noun.person:gainer,+ ] get,@ frames: 8,16 (win something through one's efforts; "I acquired a passing knowledge of Chinese"; "Gain an understanding of international finance"; "win someone's confidence and friendship") }
+{ [ cozen, noun.act:cozenage,+ ] win,@ verb.social:cheat,@ frames: 8,21,22 (cheat or trick; "He cozened the money out of the old man") }
+{ [ lose6, noun.person:loser,+ noun.possession:losings,+ profit,! break_even,! ] turn_a_loss, frames: 2,22 (fail to make money in a business; make a loss or fail to profit; "I lost thousands of dollars on that bad investment!"; "The company turned a loss after the first year") }
+{ [ clear7, bounce,!] frames: 1 (be debited and credited to the proper bank accounts; "The check will clear within 2 business days") }
+{ [ gain, noun.person:gainer,+ ] take_in, clear, make1, [ earn1, noun.person:earner,+ ] realize1, realise1, pull_in, bring_in1, clear4,$ get,@ frames: 8 (earn on some commercial or business transaction; earn as salary or wages; "How much do you make a month in your new job?"; "She earns a lot in her new job"; "this merger brought in lots of money"; "He clears $5,000 each month") }
+{ take_home, bring_home, earn1,@ frames: 8 (earn as a salary or wage; "How much does your wife take home after taxes and other deductions?") }
+{ rake_in, shovel_in, earn1,@ frames: 8 (earn large sums of money; "Since she accepted the new position, she has been raking it in") }
+{ [ earn3, noun.possession:earnings,+ ] garner1, win6, acquire,@ frames: 8 (acquire or deserve by one's efforts or actions; "its beauty won Paris the name 'City of Lights'") }
+{ [ letter, noun.communication:letter2,+ ] earn3,@ frames: 2,8 (win an athletic letter) }
+{ [ profit2, noun.attribute:profit,+ ] [ gain2, noun.person:gainer,+ ] [ benefit, noun.attribute:benefit,+ ] get,@ frames: 2,22 (derive a benefit from; "She profited from his vast experience") }
+{ pyramid, gain2,@ noun.act:investment,;c frames: 2 (enlarge one's holdings on an exchange on a continued rise by using paper profits as margin to buy additional amounts) }
+{ [ benefit1, adj.all:beneficent,+ noun.attribute:benefit,+ ] [ do_good, noun.person:do-gooder,+ ] verb.body:help,@ frames: 10,11 (be beneficial for; "This will do you good") }
+{ agree2, verb.stative:suit2,@ frames: 4 (be agreeable or suitable; "White wine doesn't agree with me") }
+{ net, sack1, sack_up, clear4, profit2,@ frames: 8 (make as a net profit; "The company cleared $1 million") }
+{ [ gross, noun.possession:gross,+ ] earn1,@ frames: 8 (earn before taxes, expenses, etc.) }
+{ [ net1, noun.possession:net,+ ] clear3, clear4,$ yield,@ frames: 11 (yield as a net profit; "This sale netted me $1 million") }
+{ [ yield, noun.artifact:yield,+ noun.act:yield,+ ] [ pay1, noun.possession:pay1,+ ] bear1, earn1,@ noun.possession:investment,;c frames: 11 (bring in; "interest-bearing accounts"; "How much does this savings certificate pay annually?") }
+{ pay_off2, yield,@ frames: 1 (yield a profit or result; "His efforts finally paid off") }
+{ derive, gain3, obtain,@ frames: 8,16 (obtain; "derive pleasure from one's garden")}
+{ rout_up, rout_out, verb.perception:search,* find,@ frames: 8,9 (get or find by searching; "What did you rout out in the library?")}
+{ [ pocket1, noun.artifact:pocket,+ ] bag1, steal,@ frames: 8 (take unlawfully) }
+{ [ embezzle, noun.act:embezzlement,+ noun.person:embezzler,+ ] [ defalcate, noun.act:defalcation,+ noun.person:defalcator,+ ] [ peculate, noun.act:peculation,+ noun.person:peculator,+ ] [ misappropriate, noun.act:misappropriation,+ ] [ malversate, noun.act:malversation,+ ] steal,@ frames: 8,16 (appropriate (as property entrusted to one's care) fraudulently to one's own use; "The accountant embezzled thousands of dollars while working for the wealthy family") }
+{ fiddle, embezzle,@ frames: 2 (commit fraud and steal from one's employer; "We found out that she had been fiddling for years")}
+{ reap, draw, verb.emotion:draw1,$ derive,@ frames: 8,16 (get or derive; "He drew great benefits from his membership in the association") }
+{ [hand_over, noun.act:handover,+ ] fork_over, fork_out, fork_up, turn_in, [ deliver1, noun.person:deliverer1,+ noun.act:delivery1,+ ] render3, pass,@ frames: 8,9,15 (to surrender someone or something to another; "the guard delivered the criminal to the police"; "render up the prisoners"; "render the town to the enemy"; "fork over the money") }
+{ [ bail, noun.act:bailment,+ noun.person:bailee,+ ] deliver1,@ frames: 8 (deliver something in trust to somebody for a special purpose and for a limited period) }
+{ give_away1, hand_over,@ frames: 9 (formally hand over to the bridegroom in marriage; of a bride by her father) }
+{ barter_away, trade,@ noun.act:commerce,;c frames: 8 (trade in in a bartering transaction) }
+{ [ share, noun.act:share,+ noun.person:sharer,+ noun.act:sharing,+ ] divvy_up, portion_out, [ apportion, adj.all:distributive^apportionable,+ ] [ deal7, noun.act:deal1,+ ] verb.contact:divide,* distribute1,@ frames: 8,21 (give out as one's portion or share) }
+{ [ distribute, noun.act:distribution,+ noun.person:distributor1,+ noun.artifact:distributer,+ ] administer, mete_out, [ deal1, noun.act:deal1,+ ] parcel_out, lot, [ dispense, noun.possession:dispensation,+ noun.act:dispensation,+ noun.person:dispenser,+ noun.artifact:dispenser,+ ] shell_out, deal_out, dish_out, [ allot2, noun.act:allotment,+ ] dole_out, give,@ frames: 8,15 (administer or bestow, as in small portions; "administer critical remarks to everyone present"; "dole out some money"; "shell out pocket money for the children"; "deal a blow to someone"; "the machine dispenses soft drinks") }
+{ admeasure, apportion,* verb.communication:determine,@ frames: 8 (determine the quantity of someone's share) }
+{ [ partake, noun.person:partaker,+ frames: 2] [ share1, noun.act:share,+ noun.possession:share,+ noun.person:sharer,+ ] partake_in, get,@ frames: 8 (have, give, or receive a share of; "We shared the cake") }
+{ cut_in, share1,@ frames: 9 (allow someone to have a share or profit) }
+{ [ share2, noun.relation:sharing1,+ ] verb.consumption:use1,@ frames: 2,8 (use jointly or in common) }
+{ double_up, share2,@ frames: 1,2 (share a room or a bed designed for only one person) }
+{ [ pool, noun.possession:pool,+ ] share2,@ frames: 2,8 (combine into a common fund; "We pooled resources") }
+{ [ communalize, adj.all:common2^communal,+ adj.pert:communal2,+ ] communalise, share2,@ frames: 8 (make something the property of the commune or community) }
+{ [ impart, noun.communication:impartation,+ noun.communication:imparting,+ ] leave2, [ give9, noun.communication:giving,+ ] pass_on3, give7,$ leave1,$ verb.communication:tell,@ frames: 8,15 (transmit (knowledge or skills); "give a secret to the Russians"; "leave your name and address here"; "impart a new skill to the students") }
+{ [ tender, noun.communication:tender,+ ] offer,@ frames: 8 (make a tender of; in legal settlements) }
+{ tender1, present,@ frames: 8,14,15 (offer or present for acceptance) }
+{ [ offer2, noun.communication:offer1,+ ] provide,@ frames: 8,11,15,14 (make available or accessible, provide or furnish; "The conference center offers a health spa"; "The hotel offers private meeting rooms") }
+{ [ signalize, noun.communication:signal,+ ] signalise, provide,@ frames: 8 (provide with traffic signals; "signalize a busy intersection") }
+{ [ offer, noun.communication:offer1,+ noun.person:offerer,+ noun.person:offeror,+ ] [ proffer, noun.communication:proffer,+ ] give,@ frames: 8,15,14 (present for acceptance or rejection; "She offered us all a cold drink")}
+{ offer3, market,@ frames: 8 (make available for sale; "The stores are offering specials on sweaters this week")}
+{ put_up, offer3,@ frames: 8 (make available for sale at an auction; "The dealer put up three of his most valuable paintings for auction")}
+{ [ offer9, noun.communication:offer1,+ noun.communication:offering1,+ frames: 14] extend4, verb.communication:give1,@ frames: 8,15 (offer verbally; "extend my greetings"; "He offered his sympathy") }
+{ extend5, [ offer10, noun.communication:offer1,+ frames: 14] extend4,$ provide,@ frames: 8,15 (make available; provide; "extend a loan"; "The bank offers a good deal on new mortgages") }
+{ [ market, adj.all:salable^marketable2,+ adj.all:exportable^marketable,+ noun.group:market,+ noun.act:market,+ noun.person:marketer,+ ] trade1,@ noun.act:commerce,;c frames: 8 (engage in the commercial promotion, sale, or distribution of; "The company is marketing its new line of beauty products") }
+{ [ market1, noun.artifact:market,+ noun.act:marketing1,+ noun.act:marketing,+ ] deal,@ noun.act:commerce,;c frames: 2,22 (deal in a market) }
+{ [ offer1, noun.communication:offer,+ ] [ bid, noun.communication:bid,+ noun.person:bidder,+ ] [ tender2, noun.communication:tender,+ ] bargain,* noun.act:auction,;c frames: 2,8,21 (propose a payment; "The Swiss dealer offered $2 million for the painting") }
+{ by-bid, bid,@ noun.act:auction,;c frames: 2 (bid on behalf of someone else) }
+{ subscribe1, offer1,@ noun.act:investment,;c frames: 8 (offer to buy, as of stocks and shares; "The broker subscribed 500 shares") }
+{ [ pledge4, noun.person:pledger,+ ] [ subscribe4, noun.act:subscription,+ noun.person:subscriber,+ ] donate,@ frames: 8 (pay (an amount of money) as a contribution to a charity or service, especially at regular intervals; "I pledged $10 a month to my favorite radio station")}
+{ [overbid, underbid,!] bid,@ noun.act:auction,;c frames: 2 (bid more than the object is worth) }
+{ [underbid, overbid,!] bid,@ noun.act:auction,;c frames: 2 (bid too low) }
+{ [outbid, underbid1,!] bid,@ noun.act:auction,;c frames: 9 (bid higher than others) }
+{ [underbid1, outbid,!] bid,@ noun.act:auction,;c frames: 9 (bid lower than a competing bidder) }
+{ [ bid1, noun.communication:bid1,+ noun.person:bidder1,+ noun.communication:bidding1,+ ] [ call5, noun.person:caller5,+ ] verb.competition:play,@ noun.act:cards,;c frames: 2 (make a demand, as for a card or a suit or a show of hands; "He called his trump") }
+{ [ double3, noun.act:double1,+ ] call5,@ frames: 8 (bridge: make a demand for (a card or suit))}
+{ [ declare, noun.person:declarer,+ noun.communication:declaration4,+ ] verb.competition:play3,@ noun.act:bridge,;c frames: 8 (designate (a trump suit or no-trump) with the final bid of a hand)}
+{ outcall, bid1,@ frames: 9 (make a higher bid than (the previous bid or player); in a card game) }
+{ underbid2, bid1,@ frames: 8 (bid (a hand of cards) at less than the strength of the hand warrants) }
+{ outbid1, bid1,@ noun.act:bridge,;c frames: 2 (bid over an opponent's bid when one's partner has not bid or doubled) }
+{ [ overbid1, noun.communication:overbid,+ noun.communication:overbid1,+ ] bid1,@ noun.act:bridge,;c frames: 2 (to bid for more tricks than one can expect to win,) }
+{ [ preempt1, adj.all:preventive^preemptive,+ noun.person:preemptor,+ ] bid1,@ noun.act:bridge,;c frames: 8 (make a preemptive bid in the game of bridge) }
+{ [ disburse, noun.possession:disbursement,+ noun.act:disbursement,+ noun.person:disburser,+ noun.act:disbursal,+ ] pay_out, pay,@ frames: 8,15 (expend, as from a fund) }
+{ [ belong, noun.possession:belongings,+ ] verb.stative:be3,@ frames: 10 (be owned by; be in the possession of; "This book belongs to me") }
+{ bear2, take_over6, accept1, [ assume1, noun.act:assumption,+ ] take,@ frames: 8 (take on as one's own the expenses or debts of another person; "I'll accept the charges"; "She agreed to bear the responsibility") }
+{ face_the_music, [ carry_the_can, noun.location:Britain,;r ] bear2,@ frames: 2 (accept the unpleasant consequences of one's actions)}
+{ [ bear, noun.person:bearer2,+ ] [ hold4, noun.person:holder,+ ] have,@ frames: 8 (have rightfully; of rights, titles, and offices; "She bears the title of Duchess"; "He held the governorship for almost a decade") }
+{ [ preempt, adj.all:preventive^preemptive,+ noun.attribute:preemption,+ noun.act:preemption,+ noun.person:preemptor1,+ ] acquire,@ frames: 8 (acquire for oneself before others can do so) }
+{ preempt2, acquire,@ frames: 8 (gain possession of by prior right or opportunity, especially so as to obtain the right to buy (land))}
+{ [ peddle, noun.person:peddler1,+ noun.person:peddler,+ noun.act:peddling,+ ] [ monger, noun.person:monger,+ ] [ huckster, noun.person:huckster,+ ] [ hawk, noun.person:hawker,+ noun.act:hawking,+ ] [ vend, adj.all:salable^vendible,+ adj.all:salable^vendable,+ noun.act:vendition,+ noun.person:vender,+ noun.person:vendor,+ noun.act:vending,+ ] [ pitch, noun.location:pitch,+ noun.communication:pitch,+ ] sell1,@ frames: 8 (sell or offer for sale from place to place) }
+{ dispense_with, abandon,@ frames: 8 (forgo or do or go without) }
+{ [ forfeit, noun.possession:forfeiture1,+ noun.possession:forfeiture,+ noun.act:forfeiture,+ noun.possession:forfeit1,+ noun.possession:forfeit,+ noun.act:forfeit,+ claim,! ] give_up2, throw_overboard, [ waive, noun.act:waiver,+ ] forgo, forego, abandon,@ frames: 8 (lose (s.th.) or lose the right to (s.th.) by some error, offense, or crime; "you've forfeited your right to name your successor"; "forfeited property") }
+{ [ lapse, noun.time:lapse,+ ] forfeit,@ frames: 8 (let slip; "He lapsed his membership") }
+{ carry4, capture,@ frames: 8 (capture after a fight; "The troops carried the town after a brief fight") }
+{ [ recapture, noun.act:recapture,+ ] [ retake, noun.act:retaking,+ ] take1,@ frames: 8,16 (take back by force, as after a battle; "The military forces managed to recapture the fort") }
+{ [ capture1, noun.process:capture,+ ] verb.change:change1,@ frames: 11 (bring about the capture of an elementary particle or celestial body and causing it enter a new orbit; "This nucleus has captured the slow-moving neutrons"; "The star captured a comet")}
+{ [ fall5, noun.act:fall2,+ ] verb.competition:yield,@ frames: 1 (be captured; "The cities fell to the enemy") }
+{ snap_up, snaffle, [ grab, noun.act:grab,+ ] take,@ frames: 8 (get hold of or seize quickly and easily; "I snapped up all the good buys during the garage sale") }
+{ [ hog, noun.person:hog,+ ] grab,@ frames: 8 (take greedily; take more than one's share) }
+{ roll_up3, [ collect, noun.act:collection,+ noun.act:collecting,+ ] [ accumulate, adj.all:additive^accumulative,+ adj.all:acquisitive^accumulative,+ noun.group:accumulation,+ noun.act:accumulation,+ ] pile_up, amass, [ compile, noun.communication:compilation,+ noun.act:compilation,+ ] hoard, store,@ frames: 8 (get or gather together; "I am accumulating evidence for the man's unfaithfulness to his wife"; "She is amassing a lot of data for her thesis"; "She rolled up a small fortune") }
+{ collect3, [pick_up1, noun.act:pickup,+ ] gather_up, call_for, get,@ frames: 9,8 (gather or collect; "You can get the results on Monday"; "She picked up the children at the day care center"; "They pick up our trash twice a week") }
+{ [ hoard1, noun.possession:hoard,+ noun.person:hoarder,+ ] [ stash, noun.possession:stash,+ ] [ cache, noun.possession:cache,+ noun.artifact:cache,+ ] lay_away, hive_up, squirrel_away, save1,@ frames: 8 (save up as for future use) }
+{ [ hive3, noun.artifact:hive,+ hive_away,^ hive_up,^ ] store,@ frames: 8 (store, like bees; "bees hive honey and pollen"; "He hived lots of information") }
+{ raise, collect1,@ frames: 8 (collect funds for a specific purpose; "The President raised several million dollars for his college") }
+{ [ levy, noun.possession:levy,+ ] [ impose, noun.act:imposition2,+ ] charge3,@ frames: 8 (impose and collect; "levy a fine")}
+{ [ toll, noun.possession:toll,+ ] levy,@ frames: 8 (charge a fee for using; "Toll the bridges into New York City")}
+{ tithe, levy,@ frames: 8 (levy a tithe on (produce or a crop); "The wool was tithed") }
+{ tithe1, tithe,$ charge3,@ frames: 9,10 (exact a tithe from; "The church was tithed")}
+{ [ reimpose, noun.act:reimposition,+ ] impose,@ frames: 8 (impose anew; "The fine was reimposed")}
+{ lay, impose,@ frames: 21,8,11 (impose as a duty, burden, or punishment; "lay a responsibility on someone") }
+{ [ mulct, noun.possession:mulct,+ ] levy,@ frames: 9,33 (impose a fine on; "he was fined for littering") }
+{ [ tax, adj.all:taxable,+ noun.possession:tax,+ noun.possession:taxation1,+ noun.possession:taxation,+ noun.act:taxation,+ noun.person:taxer,+ ] levy,@ frames: 8,9 (levy a tax on; "The State taxes alcohol heavily"; "Clothing is not taxed in our state") }
+{ [ excise, noun.possession:excise,+ ] tax,@ frames: 8,9 (levy an excise tax on)}
+{ [ tariff, noun.possession:tariff,+ ] tax,@ frames: 8 (charge a tariff; "tariff imported goods") }
+{ [ surtax, noun.possession:surtax,+ ] tax,@ frames: 8,9 (levy an extra tax on; "surtax luxury items that cost more than $1,000") }
+{ overtax, tax,@ frames: 9 (tax excessively; "Don't overtax my constituents!") }
+{ tax1, [ assess, noun.possession:assessment,+ ] verb.cognition:determine1,@ frames: 8 (set or determine the amount of (a payment such as a fine)) }
+{ [ assess1, noun.possession:assessment,+ noun.person:assessee,+] assess,$ charge3,@ frames: 9 (charge (a person or a property) with a payment, such as a tax or a fine)}
+{ [ contribute, noun.act:contribution2,+ noun.act:contribution,+ noun.person:contributor,+ ] [ give8, noun.act:giving1,+ noun.act:giving,+ ] chip_in, kick_in, give,@ frames: 2,8,15 (contribute to some cause; "I gave at the office") }
+{ [ combine, noun.event:combine,+ noun.act:combining,+ ] contribute,@ frames: 8 (add together from different sources; "combine resources") }
+{ give14, apply, give13,$ verb.possession:administer,@ frames: 15 (give or convey physically; "She gave him First Aid"; "I gave him a punch in the nose") }
+{ give13, verb.body:administer,@ frames: 15 (give (as medicine); "I gave him the drug") }
+{ [ tread, noun.artifact:tread2,+ ] apply,@ frames: 8 (apply (the tread) to a tire) }
+{ administer1, give14,@ verb.social:execute,* frames: 8,15 (perform (a church sacrament) ritually; "administer the last unction") }
+{ [ insufflate, noun.act:insufflation,+ ] administer1,@ frames: 8,9 (breathe or blow onto as a ritual or sacramental act, especially so as to symbolize the action of the Holy Spirit)}
+{ render, [ return8, noun.act:return2,+ ] give,@ frames: 14,15,8 (give back; "render money") }
+{ [feed_back, noun.process:feedback,+] resubmit, return8,@ frames: 21,15,8 (submit (information) again to a program or automatic system) }
+{ render1, submit1, present,@ noun.group:law,;c frames: 8,15 (make over as a return; "They had to render the estate") }
+{ [ restore, noun.act:restoration1,+ ] [ restitute, noun.act:restitution,+ ] return,@ frames: 8,15 (give or bring back; "Restore the stolen painting to its rightful owner") }
+{ [ cover, noun.possession:cover,+ ] verb.stative:be3,@ frames: 22 (be sufficient to meet, defray, or offset the charge or cost of; "Is this enough to cover the check?") }
+{ [ deposit, noun.possession:deposit1,+ noun.person:depositor,+ withdraw,! ] [ bank, adj.all:acceptable^bankable,+ noun.group:bank,+ noun.artifact:bank,+ noun.act:banking,+ ] give,@ frames: 8 (put into a bank account; "She deposits her paycheck every month") }
+{ [ redeposit, noun.process:redeposition,+ ] deposit,@ frames: 8 (deposit once again; "redeposit a cheque")}
+{ [ cheque, noun.possession:cheque,+ ] check_out2, withdraw,@ frames: 8 (withdraw money by writing a check) }
+{ [ withdraw, noun.person:withdrawer,+ noun.act:withdrawal3,+ deposit,! ] [ draw1, noun.person:drawee,+ noun.person:drawer1,+ ] take_out, draw_off4, verb.motion:draw,$ verb.change:remove,@ frames: 8,22 (remove (a commodity) from (a supply source); "She drew $2,000 from the account"; "The doctors drew medical supplies from the hospital's emergency bank") }
+{ dip12, withdraw,@ frames: 20,21,22 (take a small amount from; "I had to dip into my savings to buy him this present")}
+{ divert, hive_off, withdraw,@ frames: 8 (withdraw (money) and move into a different location, often secretly and with dishonest intentions)}
+{ overdraw, draw1,@ frames: 8 (draw more money from than is available; "She overdrew her account") }
+{ tap, withdraw,@ frames: 8,11,21 (draw from or dip into to get something; "tap one's memory"; "tap a source of money") }
+{ [ recall, noun.communication:recall2,+ ] call_in, [call_back, noun.communication:callback,+ ] withdraw1, take,@ frames: 8 (cause to be returned; "recall the defective auto tires"; "The manufacturer tried to call back the spoilt yoghurt") }
+{ decommission, withdraw1,@ frames: 8 (withdraw from active service; "The warship was decommissioned in 1998")}
+{ relieve, take1,@ frames: 18 (take by stealing; "The thief relieved me of $100") }
+{ relieve1, free2,@ frames: 18 (free from a burden, evil, or distress) }
+{ smooth, smooth_out, free2,@ frames: 8,11 (free from obstructions; "smooth the way towards peace negotiations") }
+{ [ deprive, noun.act:deprivation,+ ] withhold,@ frames: 9,18 (keep from having, keeping, or obtaining) }
+{ tongue-tie, deprive,@ frames: 10,9 (deprive of speech; "When he met his idol, the young man was tongue-tied")}
+{ dock1, deprive,@ frames: 9,18 (deprive someone of benefits, as a penalty) }
+{ bilk, deprive,@ frames: 9 (evade payment to; "He bilked his creditors") }
+{ [ divest, noun.act:divestiture,+ invest,!] [ disinvest, noun.act:disinvestment,+ ] withdraw,@ frames: 2,8,22 (reduce or dispose of; cease to hold (an investment); "The company decided to divest"; "the board of trustees divested $20 million in real estate property"; "There was pressure on the university to disinvest in South Africa") }
+{ [ deprive1, noun.state:deprivation,+ noun.act:deprivation,+ ] strip3, [ divest1, noun.communication:divestiture,+ ] take,@ frames: 18 (take away possessions from someone; "The Nazis stripped the Jews of all their assets")}
+{ [ dispossess, noun.act:dispossession,+ ] deprive1,@ frames: 9 (deprive of the possession of real estate)}
+{ clean_out, strip3,@ frames: 9,10 (deprive completely of money or goods; "The robbers cleaned us out in a couple of hours") }
+{ unclothe, divest1,@ frames: 18 (strip; "unclothe your heart of envy") }
+{ deplume, displume, strip,@ frames: 9,10 (strip of honors, possessions, or attributes) }
+{ unsex, deprive1,@ frames: 10,9 (deprive of sex or sexual powers) }
+{ [ orphan, noun.state:orphanage,+ noun.artifact:orphanage,+ noun.person:orphan,+ ] deprive1,@ frames: 9,10 (deprive of parents) }
+{ [ bereave, noun.state:bereavement,+ ] deprive1,@ frames: 18 (deprive through death) }
+{ [ inherit, noun.person:inheritor,+ noun.act:inheritance,+ ] get,@ frames: 8,16 (obtain from someone after their death; "I inherited a castle from my French grandparents")}
+{ [inherit1, noun.attribute:inheritance2,+ ] inherit,$ receive,@ frames: 8 (receive by genetic transmission; "I inherited my good eyesight from my mother")}
+{ inherit2, inherit,$ frames: 8 (receive from a predecessor; "The new chairman inherited many problems from the previous chair")}
+{ [ disinherit, noun.act:disinheritance,+ bequeath,! ] [ disown, noun.communication:disownment,+ noun.communication:disowning,+ ] deprive,@ frames: 9 (prevent deliberately (as by making a will) from inheriting) }
+{ [ release, noun.act:release5,+ noun.communication:release1,+ ] [ relinquish1, noun.communication:relinquishment,+ noun.act:relinquishing,+ ] resign4, free1, give_up3, give6,@ frames: 8,15 (part with a possession or right; "I am relinquishing my bedroom to the long-term house guest"; "resign a claim to the throne") }
+{ [ concede, noun.communication:concession2,+ noun.communication:conceding,+ ] yield1, [ cede1, noun.act:cession,+ ] grant4, give,@ frames: 8,15 (give over; surrender or relinquish to the physical control of another) }
+{ give3, give5,$ frames: 14 (cause to have, in the abstract sense or physical sense; "She gave him a black eye"; "The draft gave me a cold")}
+{ [ grant5, noun.person:granter,+ noun.person:grantee,+ ] give11, frames: 14,15 (bestow, especially officially; "grant a degree"; "give a divorce"; "This bill grants us new rights") }
+{ [ charge1, noun.communication:charge3,+ pay_cash,!] pay,@ frames: 8,15,21 (pay with a credit card; pay with plastic money; postpone payment by recording a purchase as a debt; "Will you pay cash or charge the purchase?")}
+{ [pay_cash, charge1,! ] pay,@ frames: 2 (pay (for something) with cash) }
+{ [ impoverish, noun.act:impoverishment,+ enrich,! ] deprive,@ frames: 10,9 (make poor) }
+{ reduce, impoverish,@ frames: 11,10 (lessen and make more modest; "reduce one's standard of living") }
+{ [ beggar, noun.person:beggar,+ ] [ pauperize, noun.state:pauperization,+ noun.act:pauperization,+ noun.person:pauper,+ ] [ pauperise, noun.act:pauperisation,+ ] impoverish,@ frames: 10 (reduce to beggary) }
+{ [ bankrupt, noun.state:bankruptcy,+ ] ruin, break7, smash, impoverish,@ frames: 9,10 (reduce to bankruptcy; "My daughter's fancy wedding is going to break me!"; "The slump in the financial markets smashed him") }
+{ [ fail, noun.state:failure2,+ ] frames: 1,2 (become bankrupt or insolvent; fail financially and close; "The toy company went bankrupt after the competition hired cheap Mexican labor"; "A number of banks failed that year")}
+{ [ enrich, noun.possession:enrichment,+ impoverish,! ] verb.change:add,@ frames: 10,9 (make wealthy or richer; "the oil boom enriched a lot of local people")}
+{ feather_one's_nest, enrich,@ frames: 9 (enrich oneself by taking advantage of one's position; "The congressmen feathered his nest through his connection with big business")}
+{ [ overcharge, noun.possession:overcharge,+ undercharge,!] soak, surcharge, gazump, fleece, plume, pluck, rob1, hook2, verb.social:cheat,@ charge3,* frames: 9 (rip off; ask an unreasonable price) }
+{ [ undercharge, noun.possession:undercharge,+ overcharge,!] charge3,@ frames: 9 (charge (someone) too little money) }
+{ [ discount, noun.possession:discount,+ noun.act:discount,+ noun.artifact:discounter,+ ] mark_down,@ frames: 8 (give a reduction in price on; "I never discount these books-they sell like hot cakes")}
+{ allow1, discount,@ frames: 14 (grant as a discount or in exchange; "The camera store owner allowed me $50 on my old camera") }
+{ [ mark_up, noun.possession:markup,+ mark_down,! ] price,@ frames: 8 (increase the price of) }
+{ hold_the_line, maintain,@ frames: 13 (hold the line on prices; keep the price of something constant) }
+{ [mark_down, mark_up,!] shave,@ frames: 8 (reduce the price of) }
+{ [ rebate, noun.possession:rebate,+ ] discount,@ frames: 2 (give a reduction in the price during a sale; "The store is rebating refrigerators this week") }
+{ [ charge3, noun.possession:charge2,+ noun.communication:charge3,+ ] [ bill, noun.communication:bill1,+ ] account,@ frames: 9,8,14 (demand payment; "Will I get charged for this service?"; "We were billed for 4 nights in the hotel, although we stayed only 3 nights")}
+{ [ surcharge1, noun.possession:surcharge,+ ] charge3,@ frames: 9 (charge an extra fee, as for a special service) }
+{ [ invoice, noun.communication:invoice,+ ] bill,@ frames: 9 (send an bill to; "She invoiced the company for her expenses") }
+{ [ charge2, noun.possession:charge2,+ noun.possession:charge1,+ noun.communication:charge3,+ ] charge3,$ debit,@ frames: 8,15 (enter a certain amount as a charge; "he charged me $15")}
+{ chalk_up, run_up, owe1,@ frames: 8 (accumulate as a debt; "he chalked up $100 in the course of the evening") }
+{ [ rob, noun.person:robber1,+ noun.act:robbery,+ ] steal,@ frames: 9,8,16 (take something away by force or without the consent of the owner; "The burglars robbed him of all his money") }
+{ [ pick1, noun.act:pickings,+ ] rob,@ frames: 8 (pilfer or rob; "pick pockets") }
+{ [ steal, noun.person:stealer,+ noun.act:stealing,+ ] rip_off, rip, take1,@ frames: 8,16 (take without the owner's consent; "Someone stole my wallet on the train"; "This author stole entire paragraphs from my dissertation") }
+{ hook1, [ snitch, noun.person:snitcher1,+ ] [ thieve, noun.act:thieving,+ noun.act:thievery,+ ] cop, knock_off, glom, steal,@ frames: 8 (take by theft; "Someone snitched my wallet!") }
+{ walk_off, steal,@ frames: 22 (take without permission; "he walked off with my wife!"; "The thief walked off with my gold watch") }
+{ [ hustle, noun.person:hustler1,+ noun.person:hustler,+ ] pluck1, roll, steal,@ frames: 16,8 (sell something to or obtain something from by energetic and especially underhanded activity) }
+{ plant, stock2,@ noun.act:animal_husbandry,;c frames: 8 (place into a river; "plant fish") }
+{ restock, stock2,@ noun.act:animal_husbandry,;c frames: 8 (stock again; "He restocked his land with pheasants") }
+{ [ stock2, noun.possession:stock1,+ noun.person:stockist,+ noun.act:stocking,+ ] supply,@ frames: 21 (provide or furnish with a stock of something; "stock the larder with meat")}
+{ [ stock1, noun.artifact:stock,+ noun.possession:stock1,+ noun.person:stockist,+ ] buy_in, stock_up, supply,@ noun.act:commerce,;c frames: 8 (amass so as to keep for future use or sale or for a particular occasion or use; "let's stock coffee as long as prices are low")}
+{ [overstock, understock,!] stock1,@ frames: 2,8 (stock excessively) }
+{ [understock, overstock,!] stock1,@ frames: 2,8 (stock with less than the usual or desirable number or quantity) }
+{ [ caption, noun.communication:caption1,+ noun.communication:caption,+ ] provide,@ frames: 8 (provide with a caption, as of a photograph or a drawing) }
+{ [ borrow, noun.person:borrower,+ lend,!] get,@ frames: 8, 16 (get temporarily; "May I borrow your lawn mower?") }
+{ [ lend, adj.all:available^lendable,+ noun.person:lender,+ borrow,!] [ loan, noun.possession:loan,+ ] give,@ frames: 14,15 (give temporarily; let have for a limited time; "I will lend you my car"; "loan me some money")}
+{ lend1, impart1, bestow1, contribute1, [ add, noun.artifact:addition,+ ] bring2, verb.change:change1,@ frames: 11,8,15,4 (bestow a quality on; "Her presence lends a certain cachet to the company"; "The music added a lot to the play"; "She brings a special atmosphere to our meetings"; "This adds a light note to the program") }
+{ factor, contribute1,@ frames: 4 (be a contributing factor; "make things factor into a company's profitability")}
+{ instill, transfuse, lend1,@ frames: 11,8,15,4 (impart gradually; "Her presence instilled faith into the children"; "transfuse love of music into the students") }
+{ breathe, instill,@ frames: 21 (impart as if by breathing; "He breathed new life into the old house") }
+{ [ tinsel, noun.artifact:tinsel1,+ ] impart1,@ frames: 4,15 (impart a cheap brightness to; "his tinseled image of Hollywood") }
+{ [ sacrifice1, noun.act:sacrifice,+ noun.person:sacrificer,+ ] verb.stative:offer,@ frames: 8,9,15 (make a sacrifice of; in religious rituals) }
+{ [ immolate, noun.act:immolation,+ ] sacrifice1,@ frames: 8,9 (offer as a sacrifice by killing or by giving up to destruction; "The Aztecs immolated human victims"; "immolate the valuables at the temple")}
+{ [ shop, noun.artifact:shop,+ noun.person:shopper,+ noun.act:shopping,+ ] buy,* obtain,@ noun.act:commerce,;c frames: 2,22 (do one's shopping; "She goes shopping every Friday") }
+{ [ market5, noun.artifact:market,+ ] shop,@ noun.act:commerce,;c frames: 2 (buy household supplies; "We go marketing every Saturday")}
+{ [ shop1, noun.artifact:shop,+ noun.person:shopper,+ noun.act:shopping,+ ] [ browse, noun.person:browser,+ ] verb.contact:search,@ noun.act:commerce,;c frames: 2,22 (shop around; not necessarily buying; "I don't need help, I'm just browsing") }
+{ comparison-shop, shop1,@ noun.act:commerce,;c frames: 2 (compare prices for a given item) }
+{ [ antique, noun.artifact:antique,+ ] shop1,@ noun.act:commerce,;c frames: 2,22 (shop for antiques; "We went antiquing on Saturday") }
+{ take_out1, buy_food, buy,@ frames: 8 (purchase prepared food to be eaten at home) }
+{ window-shop, shop1,@ frames: 2,22 (examine the shop windows; shop with the eyes only) }
+{ [ supply, noun.act:supply,+ noun.quantity:supply,+ noun.person:supplier,+ noun.act:supplying,+ ] [ provide, noun.act:provision1,+ noun.person:provider,+ ] render2, furnish, give,@ frames: 8,9,17,31,11,10 (give something useful or necessary to; "We provided the room with an electrical heater") }
+{ [ tube, noun.body:tube,+ ] provide,@ frames: 8 (provide with a tube or insert a tube into) }
+{ [ ticket1, noun.communication:ticket1,+ ] provide,@ frames: 9 (provide with a ticket for passage or admission; "Ticketed passengers can board now")}
+{ [ stock5, noun.group:stock,+ ] supply,@ noun.act:animal_husbandry,;c frames: 8 (supply with livestock; "stock a farm")}
+{ [ stock6, noun.possession:stock1,+ ] stock5,$ supply,@ noun.act:animal_husbandry,;c frames: 8 (supply with fish; "stock a lake")}
+{ [ stock7, noun.artifact:stock2,+ ] equip,@ frames: 8 (equip with a stock; "stock a rifle")}
+{ [ rim, noun.shape:rim,+ ] furnish,@ frames: 8 (furnish with a rim; "rim a hat")}
+{ [ fret, noun.artifact:fret,+ ] provide,@ frames: 8 (provide (a musical instrument) with frets; "fret a guitar")}
+{ [ step, noun.artifact:step,+ ] furnish,@ noun.act:architecture,;c frames: 8 (furnish with steps; "The architect wants to step the terrace")}
+{ [ rail, noun.artifact:rail,+ noun.artifact:rail2,+ noun.artifact:railing,+ ] provide,@ noun.act:architecture,;c frames: 8 (provide with rails; "The yard was railed")}
+{ [ grate, noun.artifact:grate1,+ noun.artifact:grate,+ noun.artifact:grating1,+ ] furnish,@ frames: 8 (furnish with a grate; "a grated fireplace")}
+{ capitalize2, [ capitalise2, noun.possession:capital1,+ ] supply,@ frames: 8 (supply with capital, as of a business by using a combination of capital used by investors and debt capital provided by lenders)}
+{ [ alphabetize, noun.communication:alphabet,+ ] provide,@ noun.communication:language,;c frames: 9,10,8,11 (provide with an alphabet; "Cyril and Method alphabetized the Slavic languages")}
+{ [ wharf1, noun.artifact:wharf,+ noun.artifact:wharfage,+ ] provide,@ frames: 8 (provide with a wharf; "Wharf the mouth of the river")}
+{ air-cool, [ air-condition, noun.artifact:air_conditioner,+ noun.artifact:air_conditioning,+ ] provide,@ noun.act:architecture,;c frames: 8,11 (equip with an apparatus for controlling the humidity and temperature; "Our house is not air-conditioned")}
+{ [ air-condition1, noun.artifact:air_conditioner,+ noun.artifact:air_conditioning,+ ] verb.change:treat1,@ frames: 8,11 (control the humidity and temperature of; "The room was cool because it had been air-conditioned")}
+{ [ uniform, noun.artifact:uniform,+ ] supply,@ frames: 9 (provide with uniforms; "The guards were uniformed")}
+{ [ railroad, noun.artifact:railroad,+ noun.artifact:railroad1,+ noun.act:railroading,+ ] supply,@ frames: 8 (supply with railroad lines; "railroad the West")}
+{ partner, provide,@ frames: 9 (provide with a partner) }
+{ bewhisker, [ whisker, noun.animal:whisker,+ ] furnish,@ frames: 8 (furnish with whiskers; "a whiskered jersey") }
+{ [ subtitle, noun.communication:subtitle1,+ ] supply,@ noun.cognition:performing_arts,;c frames: 8 (supply (a movie) with subtitles) }
+{ [ headline, noun.communication:headline,+ noun.person:headliner,+ ] provide,@ noun.act:publishing,;c frames: 8,11 (provide (a newspaper page or a story) with a headline) }
+{ match, supply,@ frames: 8,11,9 (provide funds complementary to; "The company matched the employees' contributions") }
+{ [ hobnail, noun.artifact:hobnail,+ ] provide,@ frames: 8 (supply with hobnails) }
+{ wive, provide,@ frames: 9 (provide with a wife; marry (someone) to a wife) }
+{ [ victual2, noun.food:victual,+ noun.person:victualer2,+ noun.person:victualer1,+ noun.person:victualler2,+ noun.person:victualler1,+ ] supply,@ frames: 8,9 (supply with food; "The population was victualed during the war") }
+{ [ surfeit, noun.act:surfeit,+ noun.state:surfeit1,+ ] cloy, supply,@ frames: 8 (supply or feed to surfeit) }
+{ [ heat, adj.all:hot1^heatable,+ noun.artifact:heat,+ noun.cognition:heat,+ noun.attribute:heat1,+ noun.phenomenon:heat,+ noun.artifact:heater,+ noun.artifact:heating,+ ] provide,@ frames: 8 (provide with heat; "heat the house") }
+{ steam-heat, heat,@ frames: 8 (heat by means of steam) }
+{ [ locate1, noun.act:location2,+ noun.Tops:location,+ ] [ place, noun.act:place,+ noun.location:place4,+ noun.attribute:placement,+ ] [ site, noun.location:site,+ ] verb.competition:station,@ frames: 8,10,9,11 (assign a location to; "The company located some of their agents in Los Angeles") }
+{ [ seat, noun.artifact:seat,+ noun.location:seat1,+ noun.artifact:seat1,+ ] supply,@ noun.act:architecture,;c frames: 8 (provide with seats; "seat a concert hall") }
+{ reseat, seat,@ noun.act:architecture,;c frames: 8 (provide with new seats; "reseat Carnegie Hall") }
+{ [ seat1, noun.location:seat1,+ noun.artifact:seat1,+ ] supply,@ noun.act:cabinetry,;c frames: 8 (put a seat on a chair) }
+{ reseat1, seat1,@ noun.act:cabinetry,;c frames: 8 (provide with a new seat; "reseat the old broken chair") }
+{ [ ramp, noun.artifact:ramp1,+ noun.artifact:ramp,+ ] furnish,@ noun.act:architecture,;c frames: 8 (furnish with a ramp; "The ramped auditorium") }
+{ [ munition, noun.artifact:munition,+ ] arm,@ frames: 8,9 (supply with weapons) }
+{ [ arm, noun.artifact:armament,+ noun.artifact:arm1,+ ] supply,@ frames: 8,9 (supply with arms; "The U.S. armed the freedom fighters in Afghanistan") }
+{ [ rearm, noun.act:rearmament,+ ] arm,@ frames: 8,9,10,11 (arm again; "After the war, the defeated country was not rearmed by the victors") }
+{ interleave, provide,@ frames: 8 (provide (books) with blank leaves) }
+{ [ glass, noun.substance:glass,+ ] [ glaze, noun.person:glazier,+ ] provide,@ frames: 8 (furnish with glass; "glass the windows") }
+{ double-glaze, glaze,@ frames: 8 (provide with two sheets of glass) }
+{ crenel, [ crenelate, noun.artifact:crenelle,+ noun.artifact:crenel,+ noun.artifact:crenelation,+ noun.act:crenelation,+ ] [ crenellate, noun.artifact:crenelle,+ noun.artifact:crenel,+ noun.artifact:crenellation,+ noun.act:crenellation,+ ] furnish,@ noun.act:architecture,;c frames: 8 (supply with battlements) }
+{ causeway, provide,@ frames: 8 (provide with a causeway; "A causewayed swamp") }
+{ [ canal, noun.act:canalisation,+ noun.act:canalization,+ noun.artifact:canal,+ ] [ canalize, noun.act:canalization,+ noun.artifact:canal,+ ] [ canalise, noun.act:canalisation,+ noun.artifact:canal,+ ] provide,@ frames: 8 (provide (a city) with a canal) }
+{ [ bush, noun.artifact:bushing1,+ noun.artifact:bushing,+ ] provide,@ frames: 8 (provide with a bushing) }
+{ brattice, furnish,@ frames: 8 (supply with a brattice, to ventilate mines) }
+{ [ furnish1, noun.artifact:furniture,+ ] provide,@ frames: 8 (provide or equip with furniture; "We furnished the house in the Biedermeyer style") }
+{ [ slat, noun.artifact:slat,+ ] provide,@ frames: 8 (equip or bar with slats; "Slat the windows") }
+{ refurnish, furnish1,@ frames: 8 (furnish with new or different furniture; "We refurnished the living room") }
+{ [ berth, noun.location:berth,+ noun.artifact:berth,+ ] provide,@ frames: 9 (provide with a berth) }
+{ [ bed, noun.artifact:bed,+ ] provide,@ frames: 8 (furnish with a bed; "The inn keeper could bed all the new arrivals") }
+{ [ bunk, noun.artifact:bunk2,+ ] bed,@ frames: 9 (provide with a bunk; "We bunked the children upstairs") }
+{ [ computerize1, noun.artifact:computer,+ ] [ computerise1, noun.artifact:computer,+ ] provide,@ frames: 8 (provide with computers; "Our office is fully computerized now") }
+{ [ costume, noun.person:costumer,+ ] supply,@ noun.cognition:performing_arts,;c frames: 8,9 (furnish with costumes; as for a film or play) }
+{ [ bottom, noun.location:bottom1,+ noun.location:bottom,+ ] provide,@ noun.act:cabinetry,;c frames: 8 (provide with a bottom or a seat; "bottom the chairs") }
+{ [ rafter, noun.artifact:rafter,+ ] provide,@ noun.act:architecture,;c frames: 8 (provide (a ceiling) with rafters) }
+{ [ tool, noun.artifact:tool,+ ] furnish,@ frames: 8,9 (furnish with tools) }
+{ retool, replace,@ frames: 8,9 (provide (a workshop or factory) with new tools) }
+{ [ key, noun.artifact:key,+ ] provide,@ frames: 9 (provide with a key; "We were keyed after the locks were changed in the building")}
+{ [ fuel, noun.substance:fuel,+ noun.act:fueling,+ ] supply,@ frames: 8 (provide with a combustible substance that provides energy; "fuel aircraft, ships, and cars") }
+{ gas_up, fuel,@ frames: 8 (fill with gasoline; "Gas up the car") }
+{ [ refuel1, noun.act:refueling,+ ] fuel,@ frames: 8 (provide with additional fuel, as of aircraft, ships, and cars) }
+{ bunker, fuel,@ frames: 8 (fill (a ship's bunker) with coal or oil) }
+{ [ provision, noun.act:provision1,+ noun.possession:provision,+ noun.person:provisioner,+ ] [ purvey, noun.person:purveyor,+ noun.act:purveyance,+ ] supply,@ frames: 8,9 (supply with provisions) }
+{ yield2, give5, afford, supply,@ frames: 11 (be the cause or source of; "He gave me a lot of trouble"; "Our meeting afforded much interesting information") }
+{ [ equip, noun.artifact:equipment,+ noun.artifact:equipage1,+ noun.act:equipping,+ ] [ fit, noun.artifact:fitting1,+ ] fit_out, [ outfit, noun.artifact:outfit,+ noun.artifact:outfit1,+ noun.person:outfitter,+ noun.act:outfitting,+ ] supply,@ frames: 8,9,17 (provide with (something) usually for a specific purpose; "The expedition was equipped with proper clothing, food, and other necessities")}
+{ horseshoe, equip,@ frames: 8 (equip (a horse) with a horseshoe or horseshoes)}
+{ [turn_out3, noun.artifact:turnout2,+ ] equip,@ frames: 8,9,10,11 (outfit or equip, as with accessories; "The actors were turned out lavishly")}
+{ [ instrument, noun.act:instrument,+ noun.artifact:instrumentation,+ noun.act:instrumentation,+ ] equip,@ frames: 8,10 (equip with instruments for measuring, recording, or controlling)}
+{ [ transistorize, noun.artifact:transistor,+ ] transistorise, provide,@ frames: 8 (equip (an electronic circuit or device) with transistors)}
+{ [ muzzle, unmuzzle,! noun.artifact:muzzle2,+ noun.person:muzzler,+ ] equip,@ frames: 8 (fit with a muzzle; "muzzle the dog to prevent it from biting strangers")}
+{ [unmuzzle, muzzle,!] remove,@ frames: 8 (remove the muzzle from (a dog)) }
+{ kit_out, kit_up, [ kit, noun.artifact:kit,+ noun.artifact:kit1,+ ] equip,@ frames: 17,9,8 (supply with a set of articles or tools) }
+{ appoint, equip,@ frames: 8,9,17 (furnish; "a beautifully appointed house") }
+{ re-equip, rejig, equip,@ frames: 8 (re-equip a factory or plant) }
+{ refit, fit,@ frames: 8,9,17 (fit out again) }
+{ [ armor, noun.artifact:armor,+ ] [ armour, noun.artifact:armour,+ ] equip,@ frames: 8,9 (equip with armor) }
+{ [ upholster, noun.person:upholsterer,+ noun.artifact:upholstery,+ noun.act:upholstery,+ ] provide,@ noun.act:cabinetry,;c frames: 8 (provide furniture with padding, springs, webbing, and covers) }
+{ accouter, accoutre, equip,@ frames: 8,9 (provide with military equipment) }
+{ [ supplement, noun.artifact:supplement,+ noun.attribute:supplement,+ noun.attribute:supplementation,+ ] verb.change:add,@ supply,* frames: 8,31 (add as a supplement to what seems insufficient; "supplement your diet") }
+{ [ vitaminize, noun.substance:vitamin,+ ] vitaminise, supplement,@ frames: 8 (add vitamins as a supplement; "vitaminized processed foods") }
+{ eke_out2, fill_out, supplement,@ frames: 8 (supplement what is thought to be deficient; "He eked out his meager pay by giving private lessons"; "Braque eked out his collages with charcoal") }
+{ thrive, prosper, fly_high, flourish, verb.change:change_state,@ frames: 1,2 (make steady progress; be at the high point in one's career or reach a high point in historical significance or importance; "The new student is thriving") }
+{ [ bank1, adj.all:acceptable^bankable,+ noun.person:banker,+ noun.group:bank,+ noun.artifact:bank,+ noun.act:banking1,+ ] verb.social:work,@ frames: 2 (be in the banking business) }
+{ bank3, bank1,$ verb.competition:act,@ frames: 2 (act as the banker in a game or in gambling)}
+{ [ bank2, adj.all:acceptable^bankable,+ noun.group:bank,+ noun.artifact:bank,+ noun.act:banking,+ ] transact14,@ frames: 22 (do business with a bank or keep an account at a bank; "Where do you bank in this town?") }
+{ [ sacrifice, noun.act:sacrifice1,+ ] give10, verb.cognition:give2,$ verb.communication:give3,$ relinquish1,@ frames: 8,15 (endure the loss of; "He gave his life for his children"; "I gave two sons to the war")}
+{ sign_away, sign_over, give_up1,@ frames: 8,15 (formally assign ownership of; "She signed away her rights") }
+{ [ sacrifice2, noun.possession:sacrifice,+ ] sell,@ frames: 8 (sell at a loss) }
+{ [ requite, noun.act:requital,+ ] [ repay1, noun.possession:repayment,+ noun.act:repayment,+ ] give,@ frames: 8 (make repayment for or return something) }
+{ pay13, verb.competition:pay_back,$ requite,@ frames: 8 (make a compensation for; "a favor that cannot be paid back") }
+{ [ reward, noun.event:reward,+ ] repay2, pay_back, verb.social:act,@ frames: 8,9,17 (act or give recompense in recognition of someone's behavior or actions) }
+{ [ plunder, noun.person:plunderer,+ noun.possession:plunder,+ noun.act:plundering,+ ] [ despoil, noun.act:despoilment,+ noun.act:despoliation,+ noun.person:despoiler,+ ] [ loot, noun.person:looter,+ noun.possession:loot,+ noun.act:looting,+ ] reave, strip, rifle, ransack, [ pillage, noun.possession:pillage,+ noun.person:pillager,+ noun.act:pillaging,+ ] foray, take1,@ frames: 8 (steal goods; take as spoils; "During the earthquake people looted the stores that were deserted by their owners") }
+{ [ sack, noun.act:sack1,+ ] [ plunder1, noun.person:plunderer,+ noun.possession:plunder,+ noun.act:plunderage,+ noun.act:plundering,+ ] verb.contact:destroy,* take1,@ frames: 8 (plunder (a town) after capture; "the barbarians sacked Rome") }
+{ loot1, [ plunder2, noun.possession:plunder,+ ] steal,@ noun.act:crime,;c frames: 2,8,9 (take illegally; of intellectual property; "This writer plundered from famous authors")}
+{ scrimp, [ stint, noun.person:stinter,+ ] skimp, save2,@ frames: 13 (subsist on a meager allowance; "scratch and scrimp") }
+{ spare, give_up5, part_with, dispense_with1, give,@ frames: 8 (give up what is not strictly needed; "he asked if they could spare one of their horses to speed his journey") }
+
+{ [ smuggle, noun.person:smuggler,+ noun.act:smuggling,+ ] export,@ import,@ noun.act:crime,;c noun.act:commerce,;c frames: 2,8,9,20,21 (import or export without paying customs duties; "She smuggled cigarettes across the border") }
+{ [ import, noun.artifact:importation,+ noun.act:importation,+ noun.person:importee,+ noun.person:import,+ noun.artifact:import,+ noun.person:importer,+ noun.act:importing,+ export,!] trade1,@ noun.act:commerce,;c frames: 8,21 (bring in from abroad) }
+{ [ export, noun.artifact:exportation,+ noun.act:exportation,+ noun.artifact:export,+ noun.person:exporter,+ noun.act:exporting,+ import,!] trade1,@ noun.act:commerce,;c frames: 8,16,21 (sell or transfer abroad; "we export less than we import and have a negative trade balance") }
+{ [ adopt, adj.all:adoptive4,+ noun.act:adoption1,+ ] borrow1, take_over5, take_up, accept,@ frames: 8,16 (take up and practice as one's own) }
+{ [ adopt2, noun.act:adoption,+ ] [ follow, noun.group:following,+ ] [ espouse, noun.act:espousal,+ ] verb.social:follow,$ verb.cognition:choose,@ frames: 8 (choose and follow; as of theories, ideas, policies, strategies or plans; "She followed the feminist movement"; "The candidate espouses Republican ideals") }
+{ [ pawn, noun.act:pawn,+ noun.possession:pawn,+ ] soak3, [ hock, noun.animal:hock,+ ] consign,@ noun.act:commerce,;c frames: 8 (leave as a guarantee in return for money; "pawn your grandfather's gold watch") }
+{ [ check, noun.person:checker1,+ ] consign,@ frames: 15 (hand over something to somebody as for temporary safekeeping; "Check your coat at the door") }
+{ [ consign, noun.person:consigner,+ noun.person:consignee,+ ] [ charge4, noun.person:charge,+ ] entrust,@ frames: 15 (give over to another for care or safekeeping; "consign your baggage") }
+{ check13, check,$ consign,@ frames: 8 (consign for shipment on a vehicle; "check your luggage before boarding") }
+{ recommit, entrust,@ frames: 8,15 (commit again; "It was recommitted into her custody") }
+{ [ obligate, noun.state:obligation,+ ] commit,@ frames: 8 (commit in order to fulfill an obligation; "obligate money")}
+{ [ consign1, noun.act:consignment,+ noun.person:consignor,+ ] abandon,@ frames: 21 (commit forever; commit irrevocably) }
+{ [ consign2, noun.act:consignment1,+ ] verb.contact:deliver,@ frames: 8,21 (send to an address) }
+{ [ commit2, noun.act:commitment1,+ noun.act:committal,+ ] [ institutionalize, noun.artifact:institution1,+ ] [ institutionalise, noun.artifact:institution1,+ noun.act:institution,+ ] send, charge5, transfer1,@ frames: 20 (cause to be admitted; of persons to an institution; "After the second episode, she had to be committed"; "he was committed to prison") }
+{ [ hospitalize, noun.time:hospitalization,+ noun.state:hospitalization,+ noun.act:hospitalization,+ noun.group:hospital,+ noun.artifact:hospital,+ ] [ hospitalise, noun.act:hospitalisation,+ ] send,@ frames: 9 (admit into a hospital; "Mother had to be hospitalized because her blood pressure was too high") }
+{ entrust, intrust, [ trust, noun.state:trust,+ noun.attribute:trust,+ noun.person:trustee1,+ noun.person:trustee,+ ] [ confide, noun.state:confidence3,+ ] [ commit, noun.group:committee,+ ] give6,@ frames: 15 (confer a trust upon; "The messenger was entrusted with the general's secret"; "I commit my soul to God") }
+{ shave, knock_off3, verb.change:reduce,@ frames: 8 (cut the price of) }
+{ secure1, verb.communication:guarantee,@ frames: 8,11 (assure payment of) }
+{ [ certify2, noun.act:certification1,+ noun.possession:certificate,+ ] secure1,@ frames: 8 (guarantee payment on; of checks) }
+{ [ defray, noun.act:defrayment,+ noun.act:defrayal,+ ] pay,@ frames: 8 (bear the expenses of) }
+{ harbor, harbour, keep,@ frames: 8 (keep in one's possession; of animals) }
+{ [ rid, noun.act:riddance1,+ verb.stative:rid_of,^ ] free2, [ disembarrass, noun.event:disembarrassment,+ ] frames: 18 (relieve from; "Rid the house of pests")}
+{ [ clear12, noun.act:clearing1,+ ] rid,@ frames: 8,11 (clear from impurities, blemishes, pollution, etc.; "clear the water before it can be drunk") }
+{ [ disinfest, noun.act:disinfestation,+ ] rid,@ frames: 8,11 (rid of vermin; "The exterminator disinfests the house") }
+{ disembody, rid,@ frames: 10 (free from a body or physical form or reality) }
+{ [ dump1, noun.act:dumping,+ ] underprice, sell,@ frames: 8,21 (sell at artificially low prices) }
+{ [ price, noun.possession:price,+ noun.cognition:pricing,+ ] verb.cognition:determine1,@ frames: 8 (determine the price of; "The grocer priced his wares high") }
+{ [ rig, noun.act:rig,+ ] manipulate, price,@ frames: 8 (manipulate in a fraudulent manner; "rig prices") }
+{ overprice, price,@ frames: 8 (price excessively high) }
+{ [ undersell, noun.person:underseller,+ ] undercut, sell,@ discount,* frames: 9 (sell cheaper than one's competition) }
+{ underquote, price,@ frames: 8 (offer for sale at a price lower than the market price) }
+{ [ mortgage, noun.person:mortgagee,+ noun.person:mortgager,+ noun.person:mortgagor,+ noun.possession:mortgage,+ ] owe,@ frames: 8 (put up as security or collateral)}
+{ [ bond, noun.possession:bond2,+ ] mortgage,@ frames: 8 (issue bonds on) }
+{ [ liquidate, noun.act:liquidation,+ ] pay_off, pay_up,@ frames: 8 (eliminate by paying off (debts)) }
+{ lift2, pay_off,@ frames: 8 (pay off (a mortgage)) }
+{ [ amortize, noun.act:amortization,+ ] [ amortise, noun.act:amortisation,+ ] liquidate,@ frames: 8 (liquidate gradually) }
+{ [ cleat, noun.artifact:cleat2,+ ] provide,@ frames: 8 (provide with cleats; "cleat running shoes for better traction") }
+{ [close_out, noun.act:closeout,+] discard,@ frames: 8 (terminate by selling off or disposing of; "He closed out his line of sports cars") }
+{ [ coal, noun.substance:coal,+ ] supply,@ frames: 8,9,10,11 (supply with coal) }
+{ [ corbel, noun.artifact:corbel,+ ] supply,@ noun.cognition:architecture,;c frames: 8 (furnish with a corbel) }
+{ [ cornice, noun.artifact:cornice,+ noun.artifact:cornice2,+ ] supply,@ noun.cognition:architecture,;c frames: 8 (furnish with a cornice) }
+{ snag, obtain,@ frames: 8 (get by acting quickly and smartly; "snag a bargain") }
+{ [ constitutionalize, noun.communication:constitution,+ ] provide,@ frames: 8 (provide with a constitution, as of a country; "The United States were constitutionalized in the late 18th century")}
+{ copper-bottom, provide,@ frames: 8 (provide with a copper bottom; "copper-bottom a frying pan") }
+{ [ curtain, noun.artifact:curtain,+ ] provide,@ frames: 8 (provide with drapery; "curtain the bedrooms") }
+{ distrain, confiscate1,@ frames: 8 (confiscate by distress) }
+{ distrain1, levy,@ frames: 8,9 (levy a distress on) }
+{ [ gate, noun.artifact:gate,+ ] provide,@ noun.act:architecture,;c frames: 8 (supply with a gate; "The house was gated") }
+{ impulse-buy, buy,@ noun.act:commerce,;c frames: 8 (buy on impulse without proper reflection) }
+{ [ index, noun.communication:index,+ noun.person:indexer,+ noun.act:indexing,+ ] provide,@ noun.act:publishing,;c frames: 8 (provide with an index; "index the book") }
+{ [ joint, noun.shape:joint,+ noun.artifact:jointer,+ ] [ articulate, noun.shape:articulation,+ noun.body:articulation,+ noun.act:articulation,+ ] provide,@ noun.act:carpentry,;c frames: 8 (provide with a joint; "the carpenter jointed two pieces of wood") }
+{ [ wire, noun.artifact:wire1,+ noun.person:wirer,+ noun.artifact:wiring,+ ] equip,@ frames: 8 (provide with electrical circuits; "wire the addition to the house") }
+{ rewire, wire,@ frames: 8 (provide with new wiring; "the university rewired the dormitories when most students brought computers and television sets") }
+{ [ dispose11, noun.act:disposition,+ ] sell,@ frames: 8,11 (give, sell, or transfer to another; "She disposed of her parents' possessions") }
+{ [ redispose, noun.act:redisposition,+ ] dispose11,@ frames: 8,11 (dispose anew; "The goods were redisposed at a great loss")}
+{ [kick_back, noun.possession:kickback,+ ] pay,@ noun.act:crime,;c frames: 8,15 (pay a kickback; make an illegal payment) }
+{ pick_up2, get,@ frames: 8,11 (get in addition, as an increase; "The candidate picked up thousands of votes after his visit to the nursing home") }
+{ have2, get1, make2, verb.competition:score,@ frames: 8,11 (achieve a point or goal; "Nicklaus had a 70"; "The Brazilian team got 4 goals"; "She made 29 points that day") }
+{ pour, supply,@ frames: 21 (supply in large amounts or quantities; "We poured money into the education of our children") }
+{ move, sell,@ frames: 8 (dispose of by selling; "The chairman of the company told the salesmen to move the computers") }
+{ pump, supply,@ frames: 21 (supply in great quantities; "Pump money into a project") }
+{ entrust1, leave6, turn_over,@ frames: 15 (put into the care or protection of someone; "He left the decision to his deputy"; "leave your child in the nurse's care") }
+{ [ fuel1, noun.substance:fuel,+ ] [ fire, noun.process:fire,+ ] supply,@ frames: 11 (provide with fuel; "Oil fires the furnace") }
+{ [ remember, noun.communication:remembrance,+ ] leave1,@ frames: 9 (show appreciation to; "He remembered her in his will") }
+{ [ flood, noun.quantity:flood,+ ] [ oversupply, noun.attribute:oversupply,+ ] [ glut, noun.attribute:glut,+ ] supply,@ frames: 11,8,17 (supply with an excess of; "flood the market with tennis shoes"; "Glut the country with cheap imports from the Orient") }
+{ throw_in, add,@ frames: 8 (add as an extra or as a gratuity) }
+{ [ return3, noun.communication:return2,+ ] verb.social:reciprocate,@ frames: 8 (return in kind; "return a compliment"; "return her love") }
+{ [ save4, noun.person:saver,+ ] [ economize2, noun.person:economizer,+ noun.cognition:economy1,+ noun.attribute:economy,+ noun.act:economy,+ ] [ economise2, noun.person:economiser,+ ] spend,@ frames: 2,11 (spend sparingly, avoid the waste of; "This move will save money"; "The less fortunate will have to economize now") }
+{ [ toggle, noun.artifact:toggle,+ noun.artifact:toggle1,+ ] provide,@ frames: 8 (provide with a toggle or toggles) }
+{ [ patch, noun.attribute:patch,+ noun.act:patching,+ ] provide,@ frames: 8 (provide with a patch; also used metaphorically; "The field was patched with snow") }
+{ [ water, noun.substance:water,+ noun.person:waterer1,+ noun.person:waterer,+ ] provide,@ frames: 8 (provide with water; "We watered the buffalo") }
+{ afford1, [ open4, noun.cognition:open,+ noun.body:opening,+ ] give15, frames: 4 (afford access to; "the door opens to the patio"; "The French doors give onto a terrace") }
+{ grab3, obtain,@ frames: 8 (obtain illegally or unscrupulously; "Grab power") }
+{ deliver7, drive_home, give3,@ frames: 8,15 (carry out or perform; "deliver an attack"; "deliver a blow"; "The boxer drove home a solid left") }
+{ land, deliver7,@ frames: 21 (deliver (a blow); "He landed several blows on his opponent's head") }
+{ fall3, fall8,$ frames: 4 (to be given by assignment or distribution; "The most difficult task fell on the youngest member of the team"; "The onus fell on us"; "The pressure to succeed fell on the youngest student") }
+{ fall12, fall3,$ frames: 4 (to be given by right or inheritance; "The estate fell to the oldest daughter") }
+{ [ call9, adj.all:due^callable,+ noun.communication:call8,+ ] call_in2, verb.communication:call12,$ verb.communication:demand2,@ frames: 8 (demand payment of (a loan); "Call a loan") }
+{ carry10, verb.stative:bear1,@ frames: 8 (have on the surface or on the skin; "carry scars") }
+{ get14, verb.cognition:get3,$ verb.cognition:get9,$ get,@ frames: 8 (acquire as a result of some effort or action; "You cannot get water out of a stone"; "Where did she get these news?") }
+{ give12, recompense1,@ frames: 20 (deliver in exchange or recompense; "I'll give you three books for four CDs") }
+{ [ leverage, noun.act:leverage,+ ] provide,@ frames: 8,9 (provide with leverage; "We need to leverage this company") }
+{ [ leverage1, noun.act:leverage,+ ] supplement,@ frames: 8,11 (supplement with leverage; "leverage the money that is already available") }
+{ bleed9, extort,@ frames: 9,16 (get or extort (money or other possessions) from someone; "They bled me dry--I have nothing left!") }
+{ unburden, take,@ frames: 18 (free or relieve (someone) of a burden) }
+{ [ tap4, noun.artifact:tap1,+ noun.person:tapper1,+ ] provide,@ frames: 8 (furnish with a tap or spout, so as to be able to draw liquid from it; "tap a cask of wine")}
+{ [ top, noun.location:top1,+ noun.person:topper1,+ ] top_out, provide,@ frames: 8 (provide with a top or finish the top (of a structure); "the towers were topped with conical roofs")}
+{ reflectorize, reflectorise, provide,@ frames: 8 (provide with reflectors, such as chemicals; "the driveway was reflectorized for safety reasons")}
+{ [ subrogate, noun.act:subrogation,+ ] substitute,@ frames: 9 (substitute one creditor for another, as in the case where an insurance company sues the person who caused an accident for the insured)}
+{ outsource, source,@ frames: 2 (obtain goods or services from an outside supplier; to contract work out; "Many companies outsource and hire consultants in order to maintain a flexible workforce")}
+{ retrofit, provide,@ frames: 8,31 (provide with parts, devices, or equipment not available or in use at the time of the original manufacture; "They car companies retrofitted all the old models with new carburetors")}
+{ border, [ edge, noun.artifact:edge,+ noun.location:edge,+ noun.person:edger,+ noun.artifact:edger,+ ] provide,@ frames: 8 (provide with a border or edge; "edge the tablecloth with embroidery")}
+{ [ machicolate, noun.artifact:machicolation,+ ] provide,@ noun.act:architecture,;c frames: 8 (supply with projecting galleries; "machicolate the castle walls")}
+{ [ sanitate, noun.state:sanitation,+ ] provide,@ noun.act:architecture,;c frames: 8 (provide with sanitary facilities or appliances)}
+{ translocate, transfer1,@ frames: 8 (move from one place to another, especially of wild animals; "The endangered turtles were translocated to a safe environment")}
+{ [ translocate1, noun.process:translocation,+ ] verb.motion:transfer,@ frames: 8 (transfer (a chromosomal segment) to a new position)}
+{ co-opt, take15,@ frames: 8 (take or assume for one's own use; "He co-opted the criticism and embraced it")}
+{ [ shaft, noun.artifact:shaft3,+ ] equip,@ frames: 8 (equip with a shaft) }
+{ [ spar, noun.artifact:spar,+ ] equip,@ frames: 8 (furnish with spars)}
+{ [ stave, noun.artifact:stave2,+ ] equip,@ frames: 8 (furnish with staves; "stave a ladder")}
+{ vest2, give,@ frames: 8 (place (authority, property, or rights) in the control of a person or group of persons; "She vested her vast fortune in her two sons")}
+{ [ hat, noun.artifact:hat,+ ] provide,@ frames: 8,9 (furnish with a hat )}
+{ fee-tail, entail, bequeath,@ frames: 8 (limit the inheritance of property to a specific class of heirs)} 
+{ [enfeoff, noun.communication:enfeoffment,+ ] give,@ frames: 17 (put in possession of land in exchange for a pledge of service, in feudal society; "He enfeoffed his son-in-law with a large estate in Scotland")}
+{ theme, provide,@ frames: 8 (provide with a particular theme or motive; "the restaurant often themes its menus")}
+{ [check_out, noun.artifact:checkout,+ ] buy,* frames: 2,8 (record, add up, and receive payment for items purchased; "She was checking out the apples that the customer had put on the conveyer belt")}
+{ deaerate, de-aerate, remove,@ frames: 8 (remove air or gas from)}
+{ decaffeinate, remove,@ frames: 8 (remove caffeine from (coffee))}
+{ decarbonate, remove,@ frames: 8 (remove carbon dioxide from)}
+{ decerebrate, remove,@ noun.cognition:surgery,;c frames: 9 (remove the cerebrum from (a human body))}
+{ dechlorinate, remove,@ frames: 8 (remove chlorine from (water))}
+{ defat, remove,@ frames: 8 (remove the fat from)}
+{ defibrinate, remove,@ frames: 8 (remove fibrin from (blood))}
+{ degrease, remove,@ frames: 8 (remove grease or oil from (a pan))}
+{ deionize, remove,@ frames: 8 (remove ions from)}
+{ delist, remove,@ frames: 8 (remove (a security) from listing at a stock exchange)}
+{ delocalize, remove,@ frames: 8 (remove from the proper or usual locality)}
+{ deoxygenate, remove,@ frames: 8 (remove oxygen from (water))}
+{ destain, remove,@ frames: 8 (remove stain from (a laboratory specimen) to enhance contrast)}
+{ desulfurize, desulphurize, remove,@ frames: 8 (remove sulfur from)}
+{ detick, remove,@ frames: 8 (free (a pet) of ticks)}
+{ devein, remove,@ frames: 8 (remove the dark dorsal vein of (a shrimp))}
+{ fettle, remove,@ frames: 8 (remove mold marks or sand from (a casting))}
+{ flesh, remove,@ frames: 8 (remove adhering flesh from (hides) when preparing leather manufacture)}
+{ flense, remove,@ frames: 8 (strip the blubber or skin from (a whale or seal))}
+{ [kern, kern1,!] remove,@ noun.communication:printing,;c frames: 8 (remove a portion of space between (adjacent letters))}
+{ [kern1, kern,!] supply,@ noun.communication:printing,;c frames: 8 (furnish with a kern)}
+{ [pith, noun.plant:pith,+] remove,@ frames: 8 (remove the pith from (a plant))}
+{ [scum, noun.artifact:scum,+] remove,@ frames: 8 (remove the scum from)}
+{ [unbridle, verb.contact:bridle,!] remove,@ frames: 8 (remove the bridle from (a horse or mule))}
+{ lay_out, expend,@ frames: 8 (spend or invest; "lay out thousands on gold"; "he laid out a fortune in the hope of making a huge profit")}
+{ embattle, verb.contact:fortify,@ frames: 8 (fortify by furnishing with battlements for defense; "an embattled castle")}
+{ headquarter, provide,@ frames: 8,9 (provide with headquarters; "the compnay is headquartered in New Jersey")}

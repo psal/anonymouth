@@ -1,0 +1,466 @@
+($RCSfile: verb.perception,v $ $Revision: 9.0 $ $Date: 2011/02/06 21:16:59 $ $Name:  $ $State: Rel $)
+(Copyright (c) 1988-2011 by Princeton University)
+
+(verb.perception)
+
+{ record, register, register1,$ perceive,* frames: 8,9,11 (be aware of; "Did you register any change when I pressed the button?")}
+{ [ feel, noun.attribute:feel,+ noun.cognition:feeling1,+ ] [ sense, adj.all:perceptible^sensible,+ adj.all:sensible,+ adj.all:sensitive4,+ adj.all:sensitive1,+ noun.cognition:sense2,+ noun.cognition:sensation1,+ noun.cognition:sensation,+ noun.artifact:sensor,+ noun.act:sensing,+ ] perceive,@ frames: 8,9 (perceive by a physical sensation, e.g., coming from the skin or muscles; "He felt the wind"; "She felt an object brushing her arm"; "He felt his flesh crawl"; "She felt the heat when she got out of the car") }
+{ [ perceive, adj.all:perceptible,+ adj.all:noticeable^perceptible,+ adj.pert:perceptive,+ noun.act:perception,+ noun.person:perceiver,+ ] [ comprehend, noun.cognition:comprehension,+ ] frames: 8,9 (to become aware of through the senses; "I could perceive the ship coming over the horizon") }
+{ [ apperceive, noun.cognition:apperception,+ ] perceive,@ noun.cognition:psychology,;c frames: 8,9 (perceive in terms of a past experience) }
+{ pick_up1, [ receive, adj.all:afferent^receptive,+ noun.artifact:receiver,+ noun.body:receptor,+ ] perceive,@ frames: 11 (register (perceptual input); "pick up a signal") }
+{ hear1, receive,@ frames: 22 (receive a communication from someone; "We heard nothing from our son for five years") }
+{ [ divine, adj.all:prophetic^divinatory,+ noun.communication:divination,+ noun.cognition:divination,+ noun.person:diviner,+ ] perceive,@ frames: 8,26 (perceive intuitively or through some inexplicable perceptive powers) }
+{ [ chiromance, noun.cognition:chiromancy,+ noun.person:chiromancer,+ ] divine,@ frames: 8,2 (divine by reading someone's palms; "The Gypsies chiromanced"; "She refused to chiromance my fate")}
+{ [ experience, noun.event:experience,+ noun.cognition:experience,+ ] receive3, have6, get, perceive,* undergo4,@ frames: 8,11 (go through (mental or physical states or experiences); "get an idea"; "experience vertigo"; "get nauseous"; "receive injuries"; "have a feeling") }
+{ undergo4, verb.change:change,@ frames: 8,11 (pass through; "The chemical undergoes a sudden change"; "The fluid undergoes shear"; "undergo a strange sensation")}
+{ get14, receive15, get9,$ frames: 8 (receive as a retribution or punishment; "He got 5 years in prison") }
+{ hit, strike, come_to, frames: 10 (cause to experience suddenly; "Panic struck me"; "An interesting idea hit her"; "A thought came to me"; "The thought struck terror in our minds"; "They were struck with fear") }
+{ take, experience,@ frames: 8 (experience or feel or submit to; "Take a test"; "Take the plunge") }
+{ [suffer1, enjoy,!] endure, experience1,@ frames: 8 (undergo or be subjected to; "He suffered the penalty"; "Many saints suffered martyrdom") }
+{ tolerate, suffer1,@ noun.cognition:medicine,;c frames: 8 (have a tolerance for a poison or strong drug or pathogen or environmental condition; "The patient does not tolerate the anti-inflammatory drugs we gave him")}
+{ catch9, get9, verb.change:catch,$ suffer,@ frames: 8 (suffer from the receipt of; "She will catch hell for this behavior!") }
+{ [die, noun.event:death,+ noun.phenomenon:death,+ noun.time:death1,+ noun.person:Death,+ noun.state:death,+ noun.act:death,+ ] suffer1,@ frames: 2 (suffer or face the pain of death; "Martyrs may die every day for their faith") }
+{ suffer2, meet, experience1,@ frames: 8 (undergo or suffer; "meet a violent death"; "suffer a terrible fate")}
+{ [ experience1, noun.event:experience,+ noun.cognition:experience1,+ ] see12, go_through, undergo4,@ frames: 8 (undergo or live through a difficult experience; "We had many trials to go through"; "he saw action in Viet Nam") }
+{ [ feel1, noun.state:feeling,+ ] experience1,@ frames: 8,11 (undergo passive experience of; "We felt the effects of inflation"; "her fingers felt their way through the string quartet"; "she felt his contempt of her") }
+{ [enjoy, suffer1,!] experience1,@ frames: 11 (have for one's benefit; "The industry enjoyed a boom") }
+{ subject3, experience1,> verb.change:affect,@ frames: 21,20 (cause to experience or suffer or make liable or vulnerable to; "He subjected me to his awful poetry"; "The sergeant subjected the new recruits to many drills"; "People in Chernobyl were subjected to radiation")}
+{ vitriol, subject3,@ frames: 8,9 (expose to the effects of vitriol or injure with vitriol)}
+{ put13, subject3,@ frames: 20 (cause (someone) to undergo something; "He put her to the torture") }
+{ [ shipwreck, noun.artifact:shipwreck,+ ] subject3,@ noun.act:seafaring1,;c frames: 9,10,8,11 (cause to experience shipwreck; "They were shipwrecked in one of the mysteries at sea") }
+{ [ refract, adj.all:crooked1^refractive,+ adj.pert:refractive,+ noun.phenomenon:refraction,+ ] subject3,@ noun.cognition:optics,;c frames: 8,11 (subject to refraction; "refract a light beam") }
+{ [ expose2, noun.attribute:exposure,+ noun.act:exposure6,+ ] subject3,@ frames: 9,20 (expose or make accessible to some action or influence; "Expose your students to art"; "expose the blanket to sunshine")}
+{ [ ventilate, noun.artifact:ventilator,+ noun.artifact:ventilation,+ ] expose2,@ frames: 8 (expose to the circulation of fresh air so as to retard spoilage; "Wheat should be well ventilated")}
+{ [ sun, noun.phenomenon:sun,+ ] [ insolate, noun.state:insolation,+ noun.phenomenon:insolation,+ noun.act:insolation,+ ] [ solarize, noun.attribute:solarization,+ ] [ solarise, noun.attribute:solarisation,+ ] expose2,@ frames: 8 (expose to the rays of the sun or affect by exposure to the sun; "insolated paper may turn yellow and crumble"; "These herbs suffer when sunned")}
+{ air_out, air, [ aerate, noun.substance:air,+ noun.process:aeration,+ ] expose2,@ frames: 8 (expose to fresh air; "aerate your old sneakers") }
+{ [ overexpose, noun.act:overexposure1,+ underexpose,!] expose2,@ noun.act:photography,;c frames: 9,20 (expose excessively; "As a child, I was overexposed to French movies") }
+{ [underexpose, overexpose,!] expose2,@ noun.act:photography,;c frames: 9,10 (expose insufficiently; "The child was underexposed to language") }
+{ [ expose1, noun.quantity:exposure,+ noun.act:exposure2,+ ] subject3,@ noun.act:photography,;c frames: 8 (expose to light, of photographic film) }
+{ [ overexpose1, noun.act:overexposure,+ underexpose1,!] expose1,@ noun.act:photography,;c frames: 8 (expose to too much light; "the photographic film was overexposed and there is no image") }
+{ solarize1, solarise1, overexpose1,@ noun.act:photography,;c frames: 8 (overexpose to sunlight; "be careful not to solarize the photographic film")}
+{ solarize2, solarise2, solarize1,$ verb.change:change,@ noun.act:photography,;c frames: 1 (become overexposed; "The film solarized")}
+{ [ underexpose1, noun.act:underexposure,+ overexpose1,!] expose1,@ noun.act:photography,;c frames: 8 (expose to too little light; "The film is underexposed, so the image is very dark") }
+{ solarize3, solarise3, solarize1,$ solarise2,$ develop,@ noun.act:photography,;c frames: 11 (reverse some of the tones of (a negative or print) and introduce pronounced outlines of highlights, by exposing it briefly to light, then washing and redeveloping it)}
+{ photosensitize, photosensitise, sensitize,@ frames: 8,11 (make (an organism or substance) sensitive to the influence of radiant energy and especially light) }
+{ [ desensitize, noun.process:desensitization,+ sensitize,! ] [ desensitise, noun.process:desensitisation,+ sensitise,! ] verb.change:change1,@ frames: 8,9,10 (cause not to be sensitive; "The war desensitized many soldiers"; "The photographic plate was desensitized")}
+{ numb, benumb, blunt, dull1, desensitize,@ frames: 8,9,10 (make numb or insensitive; "The shock numbed her senses") }
+{ [ stun, noun.person:stunner,+ ] bedaze, [ daze, noun.feeling:daze,+ ] desensitize,@ frames: 9,10 (overcome as with astonishment or disbelief; "The news stunned her") }
+{ besot, [ stupefy, noun.act:stupefaction,+ ] desensitize,@ frames: 9,10 (make dull or stupid or muddle with drunkenness or infatuation) }
+{ [sensitize, desensitize,!] [ sensitise, desensitise,! ] sense,> frames: 8,9,10 (cause to sense; make sensitive; "She sensitized me with respect to gender differences in this traditional male-dominated society"; "My tongue became sensitized to good wine") }
+{ [ stimulate, adj.all:stimulative,+ adj.all:stimulative^stimulant,+ noun.cognition:stimulus,+ ] [ excite, adj.all:stimulative^excitant,+ noun.state:excitement1,+ noun.state:excitation1,+ ] [ stir, noun.feeling:stir,+ ] sensitize,@ frames: 8,9,10 (stir feelings in; "stimulate my appetite"; "excite the audience"; "stir emotions")}
+{ [ horripilate, noun.act:horripilation,+ ] stimulate,@ frames: 9,10 (cause (someone's) hair to stand on end and to have goosebumps; "Hitchcock movies horripilate me")}
+{ [ horripilate1, noun.act:horripilation,+ ] horripilate,$ experience,@ frames: 2 (have one's hair stand on end and get goosebumps; "I horripilate when I see violence on television")}
+{ work10, verb.emotion:work10,$ verb.consumption:work10,$ excite,@ frames: 9,10 (provoke or excite; "The rock musician worked the crowd of young girls into a frenzy")}
+{ [ fellate, noun.act:fellation,+ ] suck, blow8, go_down_on, stimulate,@ frames: 9 (provide sexual gratification through oral stimulation) }
+{ [ thrill, noun.feeling:thrill,+ noun.communication:thriller,+ ] stimulate,@ frames: 9,10 (cause to be thrilled by some perceptual input; "The men were thrilled by a loud whistle blow")}
+{ whet, quicken, stimulate,@ frames: 8 (make keen or more acute; "whet my appetite") }
+{ [ hallucinate, adj.all:unreal^hallucinatory,+ noun.state:hallucination,+ noun.cognition:hallucination1,+ noun.cognition:hallucination,+ ] perceive,@ frames: 2,8 (perceive what is not there; have illusions) }
+{ misperceive, perceive,@ frames: 2,8 (perceive incorrectly) }
+{ catch1, pick_up, perceive,@ frames: 8 (perceive with the senses quickly, suddenly, or momentarily; "I caught the aroma of coffee"; "He caught the allusion in her glance"; "ears open to catch every sound"; "The dog picked up the scent"; "Catch a glimpse") }
+{ [ dream, noun.cognition:dream1,+ noun.person:dreamer2,+ noun.cognition:dreaming,+ ] verb.body:sleep,* perceive,@ frames: 2,8,26 (experience while sleeping; "She claims to never dream"; "He dreamt a strange scene") }
+{ [ notice, adj.all:perceptible^noticeable,+ adj.all:noticeable,+ noun.cognition:notice,+ noun.person:noticer1,+ ignore,! ] [ mark, noun.communication:mark5,+ ] note, perceive,* frames: 8,9,26 (notice or perceive; "She noted that someone was following her"; "mark my words")}
+{ take_notice, notice,@ frames: 22 (observe with special attention; "Take notice of the great architecture")}
+{ note2, [take_note, frames: 2] [ observe1, adj.all:noticeable^observable,+ adj.all:attentive^observant,+ noun.person:observer,+ noun.communication:observation,+ noun.cognition:observation2,+ noun.cognition:observation,+ noun.act:observation,+ ] perceive,* frames: 8,9 (observe with care or pay close attention to; "Take note of this chemical reaction") }
+{ [ignore, notice,!] frames: 8,9,26 (fail to notice) }
+{ pass_up, ignore,@ frames: 9 (fail to acknowledge; "he passed me up in the street") }
+{ [ glimpse, noun.cognition:glimpse,+ noun.act:glimpse,+ ] see,@ frames: 8 (catch a glimpse of or see briefly; "We glimpsed the Queen as she got into her limousine") }
+{ [ chafe, noun.state:chafe,+ ] [ gall, noun.state:gall,+ noun.state:gall1,+ ] [ fret, noun.attribute:fret,+ ] verb.body:irritate,@ frames: 1,8,10,11 (become or make sore by or as if by rubbing) }
+{ [ rub, noun.act:rub,+ ] [ scratch, noun.state:scratch,+ noun.person:scratcher,+ ] [ itch1, noun.cognition:itch,+ noun.state:itch,+ ] verb.body:irritate,@ frames: 1,8,10,11 (scrape or rub as if to relieve itching; "Don't scratch your insect bites!") }
+{ [ tickle, noun.act:tickle,+ noun.cognition:tickle,+ noun.act:tickling,+ ] [ titillate, noun.act:titillation,+ ] [ vellicate, noun.state:vellication,+ ] itch,@ frames: 9,10,11 (touch (a body part) lightly so as to excite the surface nerves and cause uneasiness, laughter, or spasmodic movements) }
+{ bite, [ sting2, noun.state:sting,+ noun.animal:stinger,+ noun.act:stinger,+ ] [ burn, noun.state:burn,+ ] burn4,$ ache,@ frames: 10,11 (cause a sharp or stinging pain or discomfort; "The sun burned his face")}
+{ [ nettle, noun.plant:nettle,+ ] [ urticate, noun.cognition:urtication,+ ] sting2,@ frames: 11 (sting with or as with nettles and cause a stinging pain or sensation)}
+{ urticate1, urticate,$ verb.contact:whip2,@ frames: 8,9,10,11 (whip with or as with nettles)}
+{ [ burn4, noun.state:burn,+ ] ache,@ frames: 1 (feel hot or painful; "My eyes are burning")}
+{ [ itch, noun.state:itch,+ noun.cognition:itch,+ noun.cognition:itching,+ ] ache,@ frames: 1,23,10,22 (have or perceive an itch; "I'm itching--the air is so dry!") }
+{ itch2, frames: 1 (cause to perceive an itch; "his skin itched")}
+{ [ hurt1, noun.state:hurt,+ noun.state:hurting,+ ] [ ache1, noun.state:ache,+ noun.state:aching,+ ] [ suffer, noun.person:sufferer,+ noun.state:suffering,+ noun.feeling:suffering1,+ ] perceive,@ frames: 2 (feel physical pain; "Were you hurting after the accident?") }
+{ [ twinge1, noun.cognition:twinge,+ ] hurt1,@ frames: 1 (feel a sudden sharp, local pain) }
+{ [ hunger, noun.state:hunger,+ ] ache,@ frames: 2 (feel the need to eat)}
+{ [ thirst, noun.state:thirst,+ ] ache,@ frames: 2 (feel the need to drink) }
+{ [ ache, noun.state:ache,+ noun.state:aching,+ ] [ smart, noun.state:smarting,+ noun.state:smart,+ ] [ hurt, noun.feeling:hurt2,+ noun.state:hurting,+ ] cause_to_be_perceived,@ frames: 1,23 (be the source of pain) }
+{ act_up, ache,@ frames: 1,23 (make itself felt as a recurring pain; "My arthritis is acting up again") }
+{ [ throb, noun.event:throb,+ noun.state:throb,+ noun.event:throbbing,+ ] ache,@ frames: 1,23 (pulsate or pound with abnormal force; "my head is throbbing"; "Her heart was throbbing") }
+{ twang2, throb,@ frames: 1 (twitch or throb with pain) }
+{ [ tingle, noun.cognition:tingle,+ noun.feeling:tingle,+ noun.cognition:tingling,+ ] [ prickle, noun.cognition:prickling,+ ] itch,@ frames: 1,23 (cause a stinging or tingling sensation)}
+{ shoot, ache,@ frames: 4 (cause a sharp and sudden pain in; "The pain shot up her leg") }
+{ [ prickle1, noun.cognition:prickling,+ ] prick1, sting,@ frames: 1,23 (cause a prickling sensation) }
+{ prick, [ sting, noun.state:sting,+ noun.animal:stinger,+ noun.act:stinger,+ noun.state:stinging,+ ] [ twinge, noun.cognition:twinge,+ ] hurt1,@ frames: 10,11 (cause a stinging pain; "The needle pricked his skin") }
+{ [ smell, noun.act:smell,+ noun.cognition:smell1,+ noun.cognition:smell2,+ noun.attribute:smell,+ smell_up,^ ] cause_to_be_perceived,@ frames: 1,2,6,7 (emit an odor; "The soup smells good") }
+{ cause_to_be_perceived, frames: 1,2 (have perceptible qualities) }
+{ [ reek, noun.cognition:reek,+ ] [ stink, noun.cognition:stink,+ noun.artifact:stinker1,+ stink_up,^ stink_out,^ ] smell2,@ frames: 1,2 (smell badly and offensively; "The building reeks of smoke") }
+{ [ smell2, noun.cognition:smell2,+ ] smell,@ frames: 1,2 (smell bad; "He rarely washes, and he smells") }
+{ salute, smell2,@ frames: 10,11 (become noticeable; "a terrible stench saluted our nostrils")}
+{ reach_one's_nostrils, smell,* frames: 1,2 (be smelled; have a strong odor) }
+{ [ smell1, noun.act:smell,+ noun.cognition:smell1,+ noun.attribute:smell,+ noun.cognition:smell2,+ noun.act:smelling,+ ] perceive,@ frames: 8,9 (inhale the odor of; perceive by the olfactory sense) }
+{ [ sniff, noun.act:sniff,+ noun.person:sniffer,+ sniff_out,^ ] whiff, smell1,@ frames: 8,9 (perceive by inhaling through the nose; "sniff the perfume")}
+{ [ scent1, noun.attribute:scent,+ noun.cognition:scent,+ scent_out,^ ] [ nose1, noun.cognition:nose,+ noun.body:nose,+ ] wind, smell1,@ frames: 8,9 (catch the scent of; get wind of; "The dog nosed out the drugs") }
+{ sniff_out, scent_out, smell_out, nose_out, smell1,* frames: 8,9 (recognize or detect by or as if by smelling; "He can smell out trouble") }
+{ [ odorize, noun.cognition:odor,+ noun.attribute:odor,+ deodorize,!] [ odourise, noun.cognition:odor,+ noun.attribute:odor,+ deodourise,! ] [ scent2, noun.cognition:scent1,+ noun.attribute:scent,+ noun.cognition:scent,+ ] smell,> cause_to_be_perceived,@ frames: 8 (cause to smell or be smelly) }
+{ stink_up, smell_up, stink_out, odorize,@ frames: 8 (cause to smell bad; fill with a bad smell) }
+{ [ snuff, noun.act:snuff,+ ] snuffle, smell1,@ frames: 8 (sniff or smell inquiringly) }
+{ get_a_noseful, get_a_whiff, smell1,@ frames: 22 (smell strongly and intensely) }
+{ [ perfume, noun.cognition:perfume,+ noun.artifact:perfume,+ noun.artifact:perfumery2,+ ] [ aromatize, noun.cognition:aroma1,+ noun.attribute:aroma,+ ] [ aromatise, noun.cognition:aroma1,+ noun.attribute:aroma,+ ] odorize,@ frames: 8,11 (fill or impregnate with an odor; "orange blossoms perfumed the air in the garden") }
+{ cense, [ incense, noun.substance:incense,+ noun.cognition:incense,+ ] [ thurify, noun.substance:thus,+ ] odorize,@ frames: 8,11 (perfume especially with a censer) }
+{ [ deodorize, noun.artifact:deodorant,+ odorize,! ] deodorise, [ deodourise, noun.artifact:deodourant,+ ] verb.change:change1,@ frames: 8,11 (eliminate the odor from; "This stick will deodorize your armpits")}
+{ [ fumigate, noun.phenomenon:fume,+ noun.act:fumigation,+ noun.substance:fumigant,+ noun.person:fumigator,+ noun.artifact:fumigator,+ ] fume, verb.change:treat1,@ frames: 8 (treat with fumes, expose to fumes, especially with the aim of disinfecting or eradicating pests)}
+{ [ touch, noun.cognition:touch2,+ noun.cognition:touch1,+ noun.event:touch,+ noun.event:touching,+ ] perceive,@ frames: 8,9 (perceive via the tactile sense; "Helen Keller felt the physical world by touching people and objects around her") }
+{ [ feel10, noun.attribute:feel,+ ] verb.contact:feel,$ verb.contact:feel1,$ verb.contact:feel11,$ touch,* verb.contact:search,@ frames: 8,9 (grope or feel in search of something; "He felt for his wallet")}
+{ miss, lose1, frames: 8,9 (fail to perceive or to catch with the senses or the mind; "I missed that remark"; "She missed his point"; "We lost part of what he said") }
+{ [ discover, noun.communication:discovery,+ noun.cognition:discovery,+ noun.act:discovery,+ ] perceive,* frames: 8,9 (see for the first time; make a discovery; "Who discovered the North Pole?") }
+{ [ witness, noun.person:witness3,+ noun.person:witness2,+ noun.person:witness,+ noun.person:witnesser,+ ] watch,@ frames: 8 (be a witness to; "She witnessed the accident and had to testify in court") }
+{ [eyewitness, noun.person:eyewitness,+] witness,@ frames: 8 (be present at an event and see it with one's own eyes)}
+{ [ watch2, noun.person:watcher2,+ noun.act:watch,+ noun.act:watching,+ frames: 8] look_on, see,* frames: 2 (observe with attention; "They watched as the murderer was executed") }
+{ [ witness1, noun.person:witness1,+ ] [ find1, noun.person:finder,+ ] see2, find5,$ verb.cognition:see2,$ experience1,@ frames: 24,26 (perceive or be contemporaneous with; "We found Republicans winning the offices"; "You'll see a lot of cheating in this school"; "The 1960's saw the rebellion of the younger generation against established traditions"; "I want to see results")}
+{ [ see, noun.person:seer2,+ noun.cognition:seeing2,+ noun.cognition:seeing1,+ ] see3,$ see11,$ perceive,@ frames: 2,8,9 (perceive by sight or have the power to perceive by sight; "You have to be a good observer to see all the details"; "Can you see the bird in that tree?"; "He is blind--he cannot see")}
+{ [ see5, noun.cognition:seeing1,+ ] see,@ frames: 2 (see and understand, have a good eye; "The artist must first learn to see") }
+{ catch_sight, get_a_look, catch_a_glimpse, see,@ frames: 2,22 (see something for a brief time) }
+{ lose_sight_of, frames: 8,9 (be no longer able to see; "We lost sight of the tower as pulled out of the harbor")}
+{ [ behold, noun.person:beholder,+ ] lay_eyes_on, see,@ frames: 8,9 (see with attention; "behold Christ!") }
+{ [ view, noun.cognition:view2,+ noun.artifact:viewer,+ ] [ consider8, noun.cognition:consideration,+ ] look_at1, verb.cognition:study2,@ frames: 8 (look at carefully; study mentally; "view a problem") }
+{ [ look, noun.person:looker1,+ noun.act:look,+ look_back,^ look_away,^ look_after,^ look_on,^ verb.emotion:look_up_to,^ verb.contact:look_for,^ verb.cognition:look_into,^ verb.cognition:look_back,^ verb.communication:look_up,^ ] see,* frames: 2,22 (perceive with attention; direct one's gaze towards; "She looked over the expanse of land"; "Look at your child!"; "Look--a deer in the backyard!") }
+{ [ examine, noun.act:examination,+ noun.person:examiner,+ ] see13, look,* frames: 8 (observe, check out, and look over carefully or inspect; "The customs agent examined the baggage"; "I must see your passport before you can enter the country") }
+{ take_a_look, have_a_look, get_a_load, look,@ frames: 2,22 (look at with attention; "Have a look at this!"; "Get a load of this pretty woman!") }
+{ [ watch3, noun.act:watch,+ ] frames: 29 (observe or determine by looking; "Watch how the dog chases the cats away") }
+{ look_back, look_backward, look,@ frames: 1,2,22,4 (look towards one's back; "don't look back while you walk") }
+{ look_away, look,@ frames: 2,22 (avert one's gaze; "She looked away when the nurse pricked her arm with the needle") }
+{ look_around, look,@ frames: 2,22 (look about oneself; "look around to see whether you can find the missing document") }
+{ see_double, see,* misperceive,@ frames: 2 (see things as if they were there twice; "After taking the drug, John saw double") }
+{ [ gaze, noun.act:gaze,+ ] [ stare, noun.act:stare,+ noun.person:starer,+ ] look,@ frames: 2,22 (look at with fixed eyes; "The students stared at the teacher with amazement") }
+{ stare_down, outstare, outface, stare,@ frames: 8,9 (overcome or cause to waver or submit by (or as if by) staring; "He simply stared down his opponent") }
+{ [ regard, noun.act:regard,+ ] consider4, look,@ frames: 8 (look at attentively) }
+{ [ stargaze, noun.person:stargazer,+ noun.act:stargazing,+ ] gaze,@ noun.cognition:astronomy,;c frames: 2 (observe the stars)}
+{ [ look1, noun.state:look,+ noun.attribute:look1,+ noun.attribute:look,+ ] [ appear, noun.cognition:appearance,+ ] seem, verb.stative:be3,@ frames: 6,7,28 (give a certain impression or have a certain outward aspect; "She seems to be sleeping"; "This appears to be a very difficult problem"; "This project looks fishy"; "They appeared like people who had not eaten or slept for a long time")}
+{ make12, appear,@ frames: 28,2 (appear to begin an activity; "He made to speak but said nothing in the end"; "She made as if to say hello to us") }
+{ cut3, look1,@ frames: 8 (give the appearance or impression of; "cut a nice figure") }
+{ [ feel9, noun.state:feel,+ ] seem,@ frames: 6 (produce a certain impression; "It feels nice to be home again") }
+{ pass_off, appear,@ frames: 4,22 (be accepted as something or somebody in a false character or identity; "She passed off as a Russian agent") }
+{ [ appear1, adj.all:superficial^apparent,+ adj.all:obvious^apparent,+ ] seem1, verb.stative:be3,@ frames: 34 (seem to be true, probable, or apparent; "It seems that he is very gifted"; "It appears that the weather in California is very bad")}
+{ sound6, seem,@ frames: 6,7 (appear in a certain way; "This sounds interesting") }
+{ [ sound3, noun.phenomenon:sound,+ noun.event:sound,+ noun.cognition:sound,+ noun.attribute:sound,+ ] frames: 6,7 (give off a certain sound or sounds; "This record sounds scratchy") }
+{ [ dissonate, adj.all:inharmonious^dissonant2,+ ] sound3,@ frames: 1 (be dissonant or harsh; "The violins in this piece dissonated disturbingly")}
+{ pierce, sound3,@ frames: 11 (sound sharply or shrilly; "The scream pierced the night") }
+{ speak, sound3,@ frames: 1 (make a characteristic or natural sound; "The drums spoke") }
+{ blow, blow1,$ blow5,$ sound1,@ frames: 8 (play or sound a wind instrument; "She blew the horn") }
+{ [ blow1, noun.act:blow2,+ ] sound,@ frames: 1 (make a sound as if blown; "The whistle blew") }
+{ [ ting, noun.event:ting,+ ] sound,@ frames: 1 (make a light, metallic sound; go `ting') }
+{ come_across, appear,@ frames: 4,22 (be perceived in a certain way; make a certain impression) }
+{ [ reflect, noun.artifact:reflector,+ ] [ reverberate4, adj.all:reverberant,+ ] noun.cognition:acoustics,;c frames: 8,11 (to throw or bend back (from a surface); "Sound is reflected well in this auditorium") }
+{ [ reverberate6, adj.all:reverberant,+ ] reverberate4,$ reflect,@ frames:1 (be reflected as heat, sound, or light or shock waves; "the waves reverberate as far away as the end of the building")}
+{ reflect2, show,@ noun.cognition:optics,;c frames: 11 (show an image of; "her sunglasses reflected his image")}
+{ reflect1, verb.communication:indicate3,@ frames: 11 (manifest or bring back; "This action reflects his true beliefs") }
+{ redound, verb.possession:return3,@ frames: 4 (return or recoil; "Fame redounds to the heroes") }
+{ [show, hide,! show_off,^ ] see,> frames: 8,9,11,14,15 (make visible or noticeable; "She showed her talent for cooking"; "Show me your etchings, please") }
+{ peep1, show,@ frames: 8 (cause to appear; "he peeped his head through the window")}
+{ disclose, [ expose3, noun.act:exposure5,+ ] uncover1, reveal,@ frames: 11 (reveal to view as by removing a cover; "The curtain rose to disclose a stunning set") }
+{ [ face4, noun.artifact:face1,+ noun.location:face,+ ] disclose,@ frames: 8 (turn so as to expose the face; "face a playing card")}
+{ [ project1, noun.communication:projection,+ noun.artifact:projector,+ ] verb.change:appear,> show,@ frames: 8,11 (project on a screen; "The images are projected onto the screen") }
+{ [ silhouette, noun.location:silhouette,+ ] project1,@ frames: 8,9,10,11 (project on a background, such as a screen, like a silhouette) }
+{ do_justice, show,@ frames: 8,9,12 (bring out fully or to advantage; "This photograph does not do her justice") }
+{ [ flash2, noun.time:flash,+ noun.person:flasher,+ ] show,@ frames: 2,8 (expose or show briefly; "he flashed a $100 bill")}
+{ [ develop, noun.process:development,+ noun.artifact:developer,+ noun.process:developing,+ ] verb.change:change1,@ noun.process:photography,;c noun.act:photography,;c frames: 8 (make visible by means of chemical solutions; "Please develop this roll of film for me") }
+{ [ underdevelop, noun.process:underdevelopment,+ ] develop,@ noun.process:photography,;c noun.act:photography,;c frames: 8 (process (a film or photographic plate) less than the required time or in an ineffective solution or at an insufficiently high temperature; "These photos are underdeveloped")}
+{ redevelop, develop,@ noun.process:photography,;c frames: 8 (develop for a second time, in order to improve the contrast, colour, etc., of a negative or print) }
+{ show1, show_up, verb.change:appear,@ frames: 1,4 (be or become visible or noticeable; "His good upbringing really shows"; "The dirty side will show") }
+{ register1, show1,@ frames: 11,8 (show in one's face; "Her surprise did not register") }
+{ [ screen, noun.artifact:screen6,+ noun.communication:screening,+ ] show,@ frames: 8 (project onto a screen for viewing; "screen a film") }
+{ [ expose, noun.act:exposure5,+ ] [ exhibit1, noun.act:exhibit,+ noun.act:exhibition,+ ] [ display, noun.act:display,+ ] show,@ frames: 8,9,10,11 (to show, make visible or apparent; "The Metropolitan Museum is exhibiting Goya's works this month"; "Why don't you show your nice legs and wear shorter skirts?"; "National leaders will have to display the highest skills of statesmanship") }
+{ [open10, close10,!] display,@ frames: 8 (display the contents of a file or start an application as on a computer) }
+{ [ close10, noun.act:closure,+ noun.act:closing1,+ open10,!] verb.stative:end1,@ frames: 8 (cause a window or an application to disappear on a computer desktop) }
+{ fly, show,@ frames: 8 (display in the air or cause to float; "fly a kite"; "All nations fly their flags in front of the U.N.") }
+{ [ produce1, noun.act:production1,+ ] bring_forth, expose,@ frames: 8 (bring out for display; "The proud father produced many pictures of his baby"; "The accused brought forth a letter in court that he claims exonerates him") }
+{ turn_on, produce1,@ frames: 8 (produce suddenly or automatically; "Turn on the charm"; "turn on the waterworks") }
+{ hold_up, expose,@ frames: 8,11,9,10 (hold up something as an example; hold up one's achievements for admiration) }
+{ bench, exhibit1,@ frames: 8 (exhibit on a bench; "bench the poodles at the dog show") }
+{ [ moon, noun.object:moon2,+ ] expose,@ frames: 8,9 (expose one's buttocks to; "moon the audience") }
+{ [ flaunt, noun.communication:flaunt,+ ] flash1, [show_off, noun.person:show-off,+ ] [ ostentate, noun.communication:ostentation,+ noun.attribute:ostentation,+ ] swank, display,@ frames: 8,9 (display proudly; act ostentatiously or pretentiously; "he showed off his new sports car") }
+{ flex, show_off,@ frames: 8 (exhibit the strength of; "The victorious army flexes its invincibility")}
+{ [ splurge, noun.communication:splurge,+ ] flash1,@ frames: 2 (be showy or ostentatious)}
+{ brandish, exhibit1,@ frames: 8 (exhibit aggressively; "brandish a sword") }
+{ [ model, noun.person:model2,+ ] display,@ frames: 2,8 (display (clothes) as a mannequin; "model the latest fashion") }
+{ [ model1, noun.person:model,+ ] [ pose, noun.attribute:pose1,+ noun.person:poser,+ noun.act:posing,+ ] [ sit, noun.person:sitter2,+ noun.act:sitting1,+ ] [ posture, noun.attribute:posture,+ ] expose,@ noun.act:art,;c frames: 2 (assume a posture as for artistic purposes; "We don't know the woman who posed for Leonardo so often") }
+{ [ ramp, adj.all:erect^rampant,+ ] pose,@ noun.cognition:heraldry,;c frames: 1 (be rampant; "the lion is rampant in this heraldic depiction") }
+{ bring_out, unveil, reveal, show,@ frames: 8,11 (make visible; "Summer brings out bright clothes"; "He brings out the best in her")}
+{ [ excavate, noun.location:excavation,+ noun.artifact:excavation,+ noun.act:excavation1,+ ] unearth, reveal,@ frames: 7 (recover through digging; "Schliemann excavated Troy"; "excavate gold")}
+{ dig, dig_up, dig_out, excavate,@ frames: 8,11 (remove, harvest, or recover by digging; "dig salt"; "dig coal")}
+{ trot_out, bring_out,@ frames: 8 (bring out and show for inspection and admiration; "His novel trots out a rich heiress"; "always able to trot out some new excuse") }
+{ unfold, reveal,@ frames: 11 (open to the view; "A walk through town will unfold many interesting buildings") }
+{ [ reveal4, adj.all:prophetic^revelatory,+ noun.communication:revelation1,+ noun.communication:revelation,+ ] verb.communication:disclose,@ noun.cognition:theology,;c frames: 8 (disclose directly or through prophets; "God rarely reveal his plans for Mankind")}
+{ [ express9, noun.process:expression,+ ] verb.creation:realize,@ frames: 11 (manifest the effects of (a gene or genetic trait); "Many of the laboratory animals express the trait")}
+{ [ stamp, noun.group:stamp,+ noun.shape:stamp,+ ] verb.communication:characterize,@ frames: 20,21 (reveal clearly as having a certain character; "His playing stamps him as a Romantic")}
+{ [hide, show,! ] [ conceal1, noun.state:concealment,+ noun.act:concealing,+ ] frames: 8,9,10,11 (prevent from being seen or discovered; "hide the money") }
+{ [ secrete2, adj.all:uncommunicative^secretive,+ ] hide,@ frames: 8 (place out of sight; keep secret; "The money was secreted from his children")}
+{ occult, conceal,@ frames: 11 (hide from view; "The lids were occulting her eyes") }
+{ obstruct4, [ block, noun.act:blockage,+ ] hide,@ frames: 11 (shut out from view or get in the way so as to hide from sight; "The thick curtain blocked the action on the stage"; "The trees obstruct my view of the mountains") }
+{ hide1, [hide_out, noun.location:hideout,+] frames: 1,2 (be or go into hiding; keep out of sight, as for protection and safety; "Probably his horse would be close to where he was hiding"; "She is hiding out in a cabin in Montana") }
+{ [stow_away, noun.person:stowaway,+ ] hide1,@ frames: 2 (hide aboard a ship or a plane to get free transportation; "The illegal immigrants stowed away on board the freighter")}
+{ hunker_down, hide1,@ frames: 2,22 (take shelter; "During the sandstorm, they hunkered down in a small hut")}
+{ hole_up, hide1,@ frames: 1 (remain secluded or in hiding; "He is writing his book and is holing up in his study") }
+{ lie_low, hide1,@ frames: 1,2 (keep a low profile, try to be inconspicuous) }
+{ [ conceal, noun.act:concealment,+ noun.act:concealing,+ ] hold_back, hold_in, frames: 8 (hold back; keep from being perceived by others; "She conceals her anger well") }
+{ [ earth, noun.substance:earth,+ ] hide1,@ frames: 1 (hide in the earth like a hunted animal)}
+{ [ cover14, noun.act:cover,+ noun.artifact:cover2,+ noun.act:covering2,+ noun.act:covering,+ ] conceal1,@ frames: 1 (spread over a surface to conceal or protect; "This paint covers well") }
+{ [ bosom, noun.state:bosom,+ noun.body:bosom1,+ ] hide,@ frames: 8,21 (hide in one's bosom; "She bosomed his letters") }
+{ [bury, frames: 16] hide,@ frames: 8,21 (cover from sight; "Afghani women buried under their burkas") }
+{ dissemble, [ cloak, noun.artifact:cloak1,+ ] [ mask, noun.act:mask,+ noun.act:masking,+ ] disguise,@ frames: 8,9,10,11 (hide under a false appearance; "He masked his disappointment") }
+{ [ dissimulate, adj.all:insincere^dissimulative,+ noun.act:dissimulation,+ ] disguise,@ frames: 8 (hide (feelings) from other people) }
+{ [ masquerade, noun.artifact:masquerade,+ noun.group:masquerade,+ noun.person:masquerader,+ ] disguise,@ frames: 9 (take part in a masquerade) }
+{ [ whitewash, noun.act:whitewash,+ ] gloss_over, sleek_over, hush_up, cover12,@ frames: 8,9,10 (cover up a misdemeanor, fault, or error; "Let's not whitewash the crimes of Stalin"; "She tried to gloss over her mistakes") }
+{ [ cover12, noun.act:covering2,+ ] [cover_up, noun.act:cover-up,+] hide,@ frames: 8 (hide from view or knowledge; "The President covered the fact that he bugged the offices in the White House") }
+{ harbor, harbour, shield, hide,@ frames: 8,9,10,11 (hold back a thought or feeling about; "She is harboring a grudge against him") }
+{ [ show2, noun.act:show,+ noun.communication:show,+ noun.communication:showing1,+ noun.act:showing,+ ] [ demo, noun.communication:demo,+ ] [ exhibit, noun.person:exhibitor,+ ] [ present, noun.act:presentment2,+ noun.communication:presentation1,+ noun.communication:presentation,+ noun.act:presentation,+ ] [ demonstrate1, noun.communication:demonstration,+ noun.act:demonstration,+ noun.person:demonstrator2,+ ] show,@ frames: 8,11,14,15,17 (give an exhibition of to an interested audience; "She shows her dogs frequently"; "We will demo the new software in Washington") }
+{ [ condemn, noun.state:condemnation,+ noun.communication:condemnation,+ ] verb.communication:demonstrate,@ frames: 10,9 (demonstrate the guilt of (someone); "Her strange behavior condemned her")}
+{ attaint, condemn,@ frames: 9 (condemn by attainder; "the man was attainted") }
+{ occult2, verb.change:change,@ frames: 1 (become concealed or hidden from view or have its light extinguished; "The beam of light occults every so often") }
+{ [ x-ray, noun.act:x-raying,+ ] examine,@ frames: 8,9 (examine by taking x-rays) }
+{ [ candle, noun.quantity:candle,+ ] examine,@ frames: 8 (examine eggs for freshness by holding them against a light) }
+{ [ autopsy, noun.act:autopsy,+ ] examine,@ noun.cognition:medicine,;c frames: 2 (perform an autopsy on a dead body; do a post-mortem) }
+{ [ auscultate, noun.act:auscultation,+ ] examine,@ noun.cognition:medicine,;c frames: 9,8 (examine by auscultation) }
+{ [ survey, noun.act:survey2,+ ] examine,@ look,* frames: 8 (look over carefully or inspect; "He surveyed his new classmates") }
+{ [ watch, noun.act:watch,+ noun.person:watcher2,+ ] look,* frames: 2,8,9 (look attentively; "watch a basketball game") }
+{ [ rubberneck, noun.person:rubberneck,+ noun.act:rubber-necking,+ ] watch,@ frames: 2 (strain to watch; stare curiously; "The cars slowed down and the drivers rubbernecked after the accident") }
+{ [ watch5, noun.act:watch,+ ] [ view2, adj.all:visible^viewable,+ noun.location:view,+ noun.act:view,+ noun.cognition:view1,+ noun.person:viewer1,+ ] [ see3, noun.person:seer2,+ ] catch2, take_in6, watch,@ frames: 8 (see or watch; "view a show on television"; "This program will be seen all over the world"; "view an exhibition"; "Catch a show on Broadway"; "see a movie")}
+{ visualize, visualise, view2,@ noun.cognition:medicine,;c frames: 8 (view the outline of by means of an X-ray; "The radiologist can visualize the cancerous liver")}
+{ image3, visualize,@ frames: 8 (render visible, as by means of MRI)}
+{ [ spectate, noun.person:spectator,+ ] watch5,@ frames: 2 (be a spectator in a sports event) }
+{ [ preview, noun.communication:preview,+ ] watch5,@ frames: 8 (watch (a movie or play) before it is released to the general public) }
+{ [ watch1, noun.person:watcher1,+ noun.person:watch,+ ] [look_out, noun.person:lookout,+ noun.location:lookout,+ noun.artifact:lookout,+ noun.act:lookout,+ ] watch_out, frames: 2,22 (be vigilant, be on the lookout or be careful; "Watch out for pickpockets!") }
+{ scan, [ skim, noun.communication:skim,+ noun.communication:skimming,+ ] rake, glance_over, run_down, examine,@ frames: 8,9 (examine hastily; "She scanned the newspaper headlines while waiting for the taxi") }
+{ [ scan1, noun.artifact:scan,+ noun.act:scan,+ ] examine,@ frames: 8,9 (examine minutely or intensely; "the surgeon scanned the X-ray")}
+{ [ glass, noun.artifact:glass3,+ ] scan1,@ frames: 8 (scan (game in the forest) with binoculars) }
+{ [ peruse, noun.communication:perusing,+ noun.communication:perusal,+ ] examine,@ frames: 8 (examine or consider with attention and in detail; "Please peruse this report at your leisure")}
+{ flick10, flip10, thumb10, riffle10, [ leaf10, noun.communication:leaf,+ ] riff10, peruse,@ frames: 22 (look through a book or other written material; "He thumbed through the report"; "She leafed through the volume") }
+{ zoom_in, verb.cognition:pore,@ frames: 22 (examine closely; focus one's attention on; "He zoomed in on the book") }
+{ size_up, take_stock, [ scrutinize, noun.person:scrutinizer,+ noun.act:scrutiny1,+ noun.act:scrutiny,+ ] [ scrutinise, noun.person:scrutiniser,+ noun.act:scrutiny1,+ noun.act:scrutiny,+ ] examine,@ frames: 8,9 (to look at critically or searchingly, or in minute detail; "he scrutinized his likeness in the mirror") }
+{ [ search, noun.act:search,+ noun.person:searcher1,+ noun.person:searcher,+ ] look2, examine,@ frames: 8,9 (search or seek; "We looked all day and finally found the child in the forest"; "Look elsewhere for the perfect gift!") }
+{ cruise, search,@ frames: 2,8 (look for a sexual partner in a public place; "The men were cruising the park")}
+{ [ prospect, noun.state:prospect,+ ] search,@ frames: 8 (search for something desirable; "prospect a job")}
+{ descry, [ spot, noun.person:spotter3,+ noun.person:spotter,+ noun.act:spotting,+ ] [ espy, noun.act:espial,+ ] [ spy, noun.act:spying2,+ ] sight,@ frames: 8,9 (catch sight of) }
+{ [ detect, noun.act:detection,+ noun.artifact:detector1,+ noun.artifact:detector,+ noun.act:detecting,+ ] [ observe2, adj.all:noticeable^observable,+ adj.all:perceptive^observant,+ noun.person:observer,+ noun.communication:observation,+ noun.cognition:observation2,+ noun.act:observation1,+ noun.cognition:observance,+ ] [ find2, noun.act:find,+ noun.person:finder,+ noun.object:finding,+ noun.act:finding,+ ] [ discover3, noun.person:discoverer,+ noun.communication:discovery,+ noun.cognition:discovery,+ noun.act:discovery,+ ] [ notice4, noun.cognition:notice,+ ] verb.creation:find,$ sight,@ frames: 8,9,26 (discover or determine the existence, presence, or fact of; "She detected high levels of lead in her drinking water"; "We found traces of lead in the paint") }
+{ [ sense2, adj.all:sensitive1,+ noun.cognition:sense2,+ ] detect,@ frames: 11 (detect some circumstance or entity automatically; "This robot can sense the presence of people in the room"; "particle detectors sense ionization")}
+{ [ instantiate, noun.event:instance,+ noun.cognition:instance,+ noun.cognition:instantiation,+ ] find2,@ frames: 2 (find an instance of (a word or particular usage of a word); "The linguists could not instantiate this sense of the noun that he claimed existed in a certain dialect")}
+{ [ instantiate1, noun.event:instance,+ noun.cognition:instance,+ noun.cognition:instantiation,+ ] instantiate,$ verb.social:represent2,@ frames: 11 (represent by an instance; "This word instantiates the usage that the linguists claimed to be typical for a certain dialect")}
+{ [ trace, noun.communication:trace2,+ noun.quantity:trace,+ ] find2,@ frames: 8 (discover traces of; "She traced the circumstances of her birth")}
+{ see11, detect,@ frames: 11,10 (observe as if with an eye; "The camera saw the burglary and recorded it")}
+{ [ rediscover, noun.act:rediscovery,+ ] discover,@ frames: 8,9 (discover again; "I rediscovered the books that I enjoyed as a child") }
+{ [ vanish, noun.person:vanisher,+ noun.act:vanishing,+ ] [ disappear, noun.event:disappearance,+ noun.act:disappearance1,+ ] go_away, verb.stative:end,@ frames: 1,2,22 (become invisible or unnoticeable; "The effect vanished when day broke")}
+{ clear5, vanish,@ frames: 1 (go away or disappear; "The fog cleared in the afternoon") }
+{ bob_under, vanish,@ frames: 1,2 (disappear suddenly, as if under the surface of a body of water) }
+{ [ produce, noun.communication:production,+ noun.act:production,+ noun.person:producer2,+ ] bring_on, bring_out1, verb.change:appear,> frames: 8,9 (bring onto the market or release; "produce a movie"; "bring out a book"; "produce a new play") }
+{ offer6, produce,@ frames: 8 (produce or introduce on the stage; "The Shakespeare Company is offering `King Lear' this month") }
+{ crop_up, pop_up, [pop4, frames: 22] verb.change:appear,@ frames: 1 (appear suddenly or unexpectedly; "The farm popped into view as we turned the corner"; "He suddenly popped up out of nowhere") }
+{ obscure, befog, becloud, obnubilate, haze_over, [ fog, noun.cognition:fog,+ noun.state:fog1,+ ] cloud, mist, hide,@ frames: 11 (make less visible or unclear; "The stars are obscured by the clouds"; "the big elm tree obscures our view of the valley")}
+{ film_over, glaze_over, [ blur1, noun.cognition:blur,+ ] frames: 1 (become glassy; lose clear vision; "Her eyes glazed over from lack of sleep") }
+{ overshadow, obscure,@ frames: 11 (cast a shadow upon; "The tall tree overshadowed the house") }
+{ [ eclipse, noun.event:eclipse,+ ] occult1, overshadow,@ frames: 11 (cause an eclipse of (a celestial body) by intervention; "The Sun eclipses the moon today"; "Planets and stars often are occulted by other celestial bodies") }
+{ [ disguise, noun.act:disguise,+ noun.artifact:disguise,+ ] mask1, hide,@ frames: 8,9,10,11 (make unrecognizable; "The herb masks the garlic taste"; "We disguised our faces before robbing the bank")}
+{ [ camouflage, noun.artifact:camouflage1,+ noun.artifact:camouflage,+ noun.act:camouflage,+ ] disguise,@ frames: 11,8,10,9 (disguise by camouflaging; exploit the natural surroundings to disguise something; "The troops camouflaged themselves before they went into enemy territory") }
+{ [orient, disorient,! ] orientate, verb.cognition:determine,@ frames: 9 (determine one's position with reference to another point; "We had to orient ourselves in the forest") }
+{ [ guide, noun.person:guide2,+ noun.person:guide1,+ ] guide_on, orient,@ frames: 11,8 (use as a guide; "They had the lights to guide on") }
+{ reorientate, [ reorient, noun.cognition:reorientation,+ ] orient,@ frames: 9,10 (orient once again, after a disorientation) }
+{ [ disorient, noun.cognition:disorientation1,+ orient,!] disorientate, verb.cognition:confuse3,@ frames: 10 (cause to be lost or disoriented) }
+{ [ flash, noun.attribute:flash,+ noun.artifact:flasher1,+ ] [ blink, noun.communication:blinker,+ noun.artifact:blinker,+ ] wink, [ twinkle, noun.event:twinkle,+ noun.object:twinkler,+ ] winkle, radiate,@ frames: 1,8 (gleam or glow intermittently; "The lights were flashing")}
+{ [ flicker, noun.event:flicker,+ ] flick, flash,@ frames: 1 (flash intermittently; "The lights flicked on and off") }
+{ beat_down, verb.weather:shine,@ frames: 1 (shine hard; "The sun beat down on the hikers") }
+{ [ beacon, noun.communication:beacon,+ noun.artifact:beacon1,+ ] verb.weather:shine,@ frames: 1 (shine like a beacon) }
+{ [ radiate, adj.all:bright^radiant,+ noun.attribute:radiance,+ ] cause_to_be_perceived,@ frames: 1 (cause to be seen by emitting light as if in rays; "The sun is radiating")}
+{ [ gleam, noun.event:gleam,+ noun.event:gleaming,+ ] [ glimmer, noun.event:glimmer,+ ] radiate,@ frames: 1 (shine brightly, like a star or a light)}
+{ [ glow, noun.attribute:glow,+ ] radiate,@ frames: 1 (emit a steady even light without flames; "The fireflies were glowing and flying about in the garden") }
+{ [ fluoresce, adj.all:light6^fluorescent,+ adj.all:colorful^fluorescent,+ noun.phenomenon:fluorescence,+ ] glow,@ frames: 1 (exhibit or undergo fluorescence) }
+{ [ scintillate, noun.phenomenon:scintillation,+ ] fluoresce,@ frames: 1 (physics: fluoresce momentarily when struck by a charged particle or high-energy photon; "the phosphor fluoresced")}
+{ [ glow1, noun.attribute:glow1,+ ] beam3, radiate5, shine6, appear,@ frames: 2,1 (have a complexion with a strong bright color, such as red or pink; "Her face glowed when she came out of the sauna") }
+{ [ blur, noun.cognition:blur,+ focus,! ] verb.change:change1,@ frames: 8,11 (to make less distinct or clear; "The haze blurs the hills") }
+{ [ focus, noun.phenomenon:focus,+ noun.attribute:focus1,+ noun.act:focusing,+ blur,!] sharpen,@ frames: 8,11 (cause to converge on or toward a central point; "Focus the light on this image") }
+{ [ refocus, noun.act:refocusing,+ ] focus,@ frames: 8,11 (focus once again; "The physicist refocused the light beam")}
+{ dim1, dip, change_intensity,@ frames: 8 (switch (a car's headlights) from a higher to a lower beam) }
+{ [ dazzle, noun.attribute:dazzle,+ ] bedazzle, [ daze1, noun.cognition:daze,+ ] blind1,@ frames: 8,9 (to cause someone to lose clear vision, especially from intense light; "She was dazzled by the bright headlights") }
+{ [ glare1, noun.attribute:glare,+ ] verb.weather:shine,@ frames: 1 (shine intensely; "The sun glared down on us") }
+{ beat3, glare1,@ frames: 4 (glare or strike with great intensity; "The sun was beating down on us")}
+{ [ glitter, noun.attribute:glitter,+ ] [ glisten, noun.attribute:glisten,+ ] [ glint, noun.event:glint,+ ] gleam1, shine1, appear,@ frames: 1 (be shiny, as if wet; "His eyes were glistening")}
+{ [ spangle, noun.artifact:spangle,+ ] glitter,@ frames: 1 (glitter as if covered with spangles) }
+{ [ monitor, noun.artifact:monitor,+ noun.person:monitor1,+ noun.act:monitoring,+ ] [ supervise, noun.act:supervision,+ noun.person:supervisor,+ ] observe,@ frames: 8,9 (keep tabs on; keep an eye on; keep under surveillance; "we are monitoring the air quality"; "the police monitor the suspect's moves") }
+{ monitor1, observe,@ frames: 8,10 (check, track, or observe by means of a receiver)}
+{ spy1, [ sight, noun.act:sight,+ noun.cognition:sight2,+ noun.cognition:sight,+ noun.communication:sight,+ noun.cognition:sight1,+ noun.act:sighting,+ ] perceive,@ frames: 8,9 (catch sight of; to perceive with the eyes; "he caught sight of the king's men coming over the ridge") }
+{ [ ogle, noun.person:ogler,+ ] look,@ frames: 8,9 (look at with amorous intentions) }
+{ give_the_glad_eye, look,@ frames: 9 (look seductively at someone) }
+{ [ leer, noun.attribute:leer,+ noun.communication:leer,+ ] look,@ frames: 2,22 (look suggestively or obliquely; look or gaze with a sly, immodest, or malign expression; "The men leered at the young women on the beach") }
+{ goggle, [ gape, noun.act:gape1,+ noun.communication:gape,+ ] gawp, gawk, look,@ frames: 2,22 (look with amazement; look stupidly) }
+{ [ admire, noun.person:admirer2,+ noun.person:admirer,+ ] look,@ frames: 8,9 (look at with admiration) }
+{ [ contemplate, noun.cognition:contemplation,+ noun.act:contemplation1,+ ] look_at1,@ frames: 8 (look at thoughtfully; observe deep in thought; "contemplate one's navel") }
+{ groak, look_at1,@ frames: 8,11 (look or stare at longingly; "The dog was groaking his master who was eating a sausage")}
+{ [ peep, noun.act:peep,+ noun.person:peeper,+ ] look,@ frames: 22 (look furtively; "He peeped at the woman through the window" ) }
+{ [ glance, noun.act:glance,+ ] [ peek2, noun.act:peek,+ ] glint2, look,@ frames: 22 (throw a glance at; take a brief look at; "She only glanced at the paper"; "I only peeked--I didn't see anything interesting") }
+{ inspect, examine,@ frames: 8,9 (look over carefully; "Please inspect your father's will carefully") }
+{ [ perambulate, noun.act:perambulation1,+ ] inspect,@ frames: 8 (make an official inspection on foot of (the bounds of a property); "Selectmen are required by law to perambulate the bounds every five years") }
+{ case, inspect,@ frames: 8 (look over, usually with the intention to rob; "They men cased the housed") }
+{ vet, inspect,@ frames: 8 (examine carefully; "Someone should vet this report before it goes out") }
+{ overlook, survey,@ frames: 8,9 (watch over; "I am overlooking her work") }
+{ overlook1, miss,@ frames: 8,9 (look past, fail to notice) }
+{ [ study, noun.cognition:study1,+ noun.act:study,+ ] [ consider, noun.communication:consideration,+ noun.cognition:consideration1,+ noun.cognition:consideration,+ ] verb.cognition:reflect,@ frames: 8,9,29 (give careful consideration to; "consider the possibility of moving") }
+{ bethink, consider,> frames: 9 (cause oneself to consider something) }
+{ [ gloat, noun.feeling:gloat,+ noun.feeling:gloating,+ ] look,@ frames: 2,22 (gaze at or think about something with great self-satisfaction, gratification, or joy) }
+{ [ eye, noun.cognition:eye1,+ noun.cognition:eye,+ noun.body:eye,+ ] [ eyeball, noun.body:eyeball,+ ] look,@ frames: 8,9 (look at) }
+{ keep_one's_eyes_peeled, keep_one's_eyes_skinned, keep_one's_eyes_open, watch1,@ noun.communication:colloquialism,;u frames: 2,22 (pay attention; be watchful; "Keep your eyes peeled for any policemen") }
+{ look_after, watch1,@ frames: 8,9 (keep under careful scrutiny; "Keep an eye on this prisoner!") }
+{ [ scout, noun.person:scout,+ noun.person:scout2,+ noun.person:scouter,+ noun.act:scouting,+ ] [ reconnoiter, noun.act:reconnaissance1,+ noun.act:reconnoitering,+ ] [ reconnoitre, noun.act:reconnaissance1,+ noun.act:reconnoitring,+ ] observe,@ frames: 2,8 (explore, often with the goal of finding something or somebody) }
+{ give_the_eye, give_the_once_over, look,@ frames: 8,9 (look at with a critical eye; "When the movie star entered, all the women gave him the once over") }
+{ [ squint, noun.state:squint,+ ] look,@ frames: 2 (be cross-eyed; have a squint or strabismus) }
+{ [ blind, noun.group:blind,+ ] verb.change:change1,@ frames: 9,10 (make blind by putting the eyes out; "The criminals were punished and blinded") }
+{ abacinate, blind,@ frames: 9 (blind by holding a red-hot metal plate before someone's eyes; "The prisoners were abacinated by their captors")}
+{ [ blind1, noun.artifact:blinder,+ noun.group:blind,+ ] frames: 10 (render unable to see) }
+{ seel, blind1,@ noun.cognition:falconry,;c frames: 8 (sew up the eyelids of hawks and falcons) }
+{ snow-blind, blind1,@ frames: 10 (affect with snow blindness; "the glare of the sun snow-blinded her") }
+{ peer, look,@ frames: 22 (look searchingly; "We peered into the back of the shop to see whether a salesman was around") }
+{ intrude, horn_in, [ pry, noun.cognition:prying,+ ] [ nose, noun.cognition:nose1,+ nose_out,^ ] poke, search,@ frames: 22 (search or inquire in a meddlesome way; "This guy is always nosing around the office") }
+{ [ observe, adj.all:noticeable^observable,+ noun.communication:observation,+ noun.cognition:observation2,+ noun.cognition:observation,+ noun.act:observation,+ noun.act:observance,+ ] watch,@ frames: 2,8,9 (watch attentively; "Please observe the reaction of these two chemicals") }
+{ [ hear, adj.all:hearable,+ noun.cognition:hearing,+ ] perceive,@ frames: 2,8,9 (perceive (sound) via the auditory sense)}
+{ [ listen, noun.person:listener,+ noun.act:listening,+ listen_in,^ ] hear,* perceive,@ frames: 2,22 (hear with intention; "Listen to the sound of this cello") }
+{ hear_out, listen,@ frames: 8,9 (listen to every detail and give a full hearing to) }
+{ listen_in1, listen,@ frames: 2 (listen quietly, without contributing to the conversation) }
+{ [ attend, adj.all:attentive4,+ adj.all:attentive,+ noun.cognition:attention2,+ noun.cognition:attention1,+ noun.cognition:attention,+ noun.person:attender2,+ ] [hang, frames: 22] [ advert, adj.all:attentive^advertent,+ noun.cognition:advertency,+ noun.cognition:advertence,+ ] pay_heed, give_ear, listen,@ frames: 2 (give heed (to); "The children in the audience attended the recital quietly"; "She hung on his every word"; "They attended to everything he said") }
+{ [ fixate, noun.cognition:fixation,+ ] attend,@ frames: 22 (pay attention to exclusively and obsessively; "The media are fixating on Princess Diana's death")}
+{ [ listen1, noun.person:listener,+ noun.act:listening,+ ] [ hear5, noun.person:hearer,+ noun.act:hearing,+ ] take_heed, verb.cognition:concentrate,@ frames: 2,22 (listen and pay attention; "Listen to your father"; "We must hear the expert before we make a decision")}
+{ [ incline, noun.act:inclining,+ ] listen1,@ frames: 8 (bend or turn (one's ear) towards a speaker in order to listen well; "He inclined his ear to the wise old man")}
+{ tune_in, verb.change:tune1,@ frames: 8 (regulate (a radio or television set) in order to receive a certain station or program) }
+{ whine, [ squeak, noun.event:squeak,+ noun.artifact:squeaker,+ ] [ screech, noun.event:screech,+ noun.event:screeching,+ ] [ creak, noun.event:creaking,+ noun.event:creak,+ ] screak, skreak, make_noise,@ frames: 1,2 (make a high-pitched, screeching noise; "The door creaked when I opened it slowly"; "My car engine makes a whining noise") }
+{ [ racket, noun.event:racket,+ ] make_noise,@ frames: 2,1 (make loud and annoying noises) }
+{ [ clatter, noun.event:clatter,+ ] [ clack, noun.event:clack,+ ] brattle, make_noise,@ frames: 1,2 (make a rattling sound; "clattering dishes") }
+{ [ stridulate, noun.event:stridulation,+ ] clitter, make_noise,@ frames: 1,11 (make a shrill creaking noise by rubbing together special bodily structures; "male insects such as crickets or grasshoppers stridulate") }
+{ drown_out, make_noise,@ frames: 11,10 (make imperceptible; "The noise from the ice machine drowned out the music") }
+{ [ jingle, noun.event:jingle,+ ] jingle-jangle, [ jangle, noun.event:jangle,+ ] make_noise,@ frames: 1 (make a sound typical of metallic objects; "The keys were jingling in his pocket") }
+{ make_noise, resound, [ noise, noun.cognition:noise,+ noun.event:noise,+ ] sound,@ frames: 1,2 (emit a noise) }
+{ [ scream, noun.event:scream,+ noun.event:screaming,+ ] noise,@ frames: 1 (make a loud, piercing sound; "Fighter planes are screaming through the skies") }
+{ [ splat, noun.event:splat,+ noun.event:splatter,+ ] sound,@ frames: 1 (give off the sound of a bullet flattening on impact) }
+{ [ backfire, noun.event:backfire,+ ] noise,@ frames: 1 (emit a loud noise as a result of undergoing a backfire; "My old car backfires all the time") }
+{ [ twang, noun.event:twang,+ ] sound,@ frames: 1 (sound with a twang; "the bowstring was twanging") }
+{ [ twang1, noun.event:twang,+ ] sound1,@ frames: 8,11 (cause to sound with a twang; "He twanged the guitar string") }
+{ [ clang, noun.event:clang,+ noun.event:clangor,+ noun.act:clanger,+ ] [ clangor1, noun.event:clangor,+ ] sound,@ frames: 1,8,11 (make a loud noise; "clanging metal") }
+{ [ clank, noun.event:clank,+ ] sound,@ frames: 1,8,11 (make a clank; "the train clanked through the village") }
+{ [ clangor, noun.event:clangor,+ ] [ clangour, noun.event:clangour,+ ] sound,@ frames: 1,8,11 (make a loud resonant noise; "the alarm clangored throughout the building") }
+{ [ boom1, noun.event:boom1,+ ] boom_out, sound,@ frames: 8,11 (make a deep hollow sound; "Her voice booms out the words of the song") }
+{ [ drum, noun.person:drummer,+ ] [ beat, noun.communication:beat,+ ] thrum, sound,@ frames: 1,4 (make a rhythmic sound; "Rain drummed against the windshield"; "The drums beat all night") }
+{ [ rattle, noun.event:rattle,+ noun.event:rattling,+ verb.communication:rattle_off,^ verb.communication:rattle_down,^ verb.communication:rattle_on,^ ] sound,@ frames: 1,4 (make short successive sounds) }
+{ ruckle, rattle,@ frames: 1,2 (make a hoarse, rattling sound) }
+{ [ crepitate, noun.event:crepitation,+ ] [ crackle, noun.event:crackle,+ noun.event:crackling,+ ] rattle,@ frames: 1 (make a crackling sound; "My Rice Krispies crackled in the bowl") }
+{ [ tick1, noun.animal:tick,+ noun.artifact:ticker1,+ noun.event:ticking,+ ] [ ticktock, noun.event:ticktock,+ ] ticktack, [ beat1, noun.event:beat1,+ ] sound,@ frames: 1 (make a sound like a clock or a timer; "the clocks were ticking"; "the grandfather clock beat midnight") }
+{ ring_out, resound,@ frames: 1 (sound loudly; "a shot rang out") }
+{ [ resonate, noun.artifact:resonator2,+ noun.artifact:resonator,+ noun.phenomenon:resonance,+ noun.attribute:resonance1,+ noun.attribute:resonance,+ ] [ vibrate, adj.all:moving2^vibratory,+ adj.all:reverberant^vibrant,+ noun.attribute:vibrancy,+ ] sound,@ frames: 1,11 (sound with resonance; "The sound resonates well in this theater") }
+{ [ sound, noun.communication:sound,+ noun.event:sound,+ noun.phenomenon:sound,+ noun.attribute:sound,+ ] go, cause_to_be_perceived,@ frames: 6,7,1,2 (make a certain noise or sound; "She went `Mmmmm'"; "The gun went `bang'")}
+{ crash, sound,@ frames: 1 (make a sudden loud sound; "the waves crashed on the shore and kept us awake all night")}
+{ [ tweet, noun.event:tweet,+ noun.artifact:tweeter,+ ] twirp, sound,@ frames: 1,2 (make a weak, chirping sound; "the small bird was tweeting in the tree")}
+{ [ skirl, noun.event:skirl,+ ] sound,@ frames: 1 (make a shrill, wailing sound; "skirling bagpipes")}
+{ [ gurgle2, noun.event:gurgle,+ ] gurgle,$ sound,@ frames: 1,2 (make sounds similar to gurgling water; "The baby gurgled with satisfaction when the mother tickled it") }
+{ glug, sound,@ frames: 1,2 (make a gurgling sound as of liquid issuing from a bottle; "the wine bottles glugged")}
+{ blow5, sound,@ frames: 1 (sound by having air expelled through a tube; "The trumpets blew") }
+{ whish, sound,@ frames: 1,2 (make a sibilant sound) }
+{ guggle1, sound,@ frames: 1,2 (make a sound like a liquid that is being poured from a bottle) }
+{ [ ping, noun.event:ping,+ ] sound,@ frames: 1 (make a short high-pitched sound; "the bullet pinged when they struck the car") }
+{ pink3, [ ping1, noun.event:ping,+ ] [ knock1, noun.event:knock1,+ noun.event:knocking,+ ] sound,@ frames: 1 (sound like a car engine that is firing too early; "the car pinged when I put in low-octane gasoline"; "The car pinked when the ignition was too far retarded") }
+{ [ trump, noun.artifact:trump1,+ ] sound,@ frames: 1,2 (produce a sound as if from a trumpet) }
+{ squelch, sound,@ frames: 1,2 (make a sucking sound) }
+{ [ chug, noun.event:chug,+ ] sound,@ frames: 1 (make a dull, explosive sound; "the engine chugged down the street") }
+{ [ sound1, noun.event:sound,+ noun.phenomenon:sound,+ noun.cognition:sound,+ noun.attribute:sound,+ verb.creation:sound_off,^ ] sound,> frames: 8,11 (cause to sound; "sound the bell"; "sound a certain note")}
+{ [ prepare, noun.communication:preparation,+ ] sound1,@ noun.communication:music,;c frames: 8 (lead up to and soften by sounding the dissonant note in it as a consonant note in the preceding chord; "prepare the discord in bar 139")}
+{ [ gong, noun.artifact:gong1,+ noun.artifact:gong,+ ] sound1,@ frames: 8 (sound a gong) }
+{ [ ting1, noun.event:ting,+ ] sound1,@ frames: 8 (cause to make a ting) }
+{ [ strum, noun.event:strum,+ ] [ thrum2, noun.event:thrum,+ ] sound1,@ frames: 8 (sound the strings of (a stringed instrument); "strum a guitar") }
+{ [ sound2, noun.communication:sound1,+ noun.communication:sound,+ noun.event:sound,+ noun.phenomenon:sound,+ noun.cognition:sound,+ noun.attribute:sound,+ ] verb.communication:announce,@ frames: 8 (announce by means of a sound; "sound the alarm") }
+{ [ project, noun.phenomenon:projection,+ ] cause_to_be_perceived,@ frames: 8,11,2,1 (cause to be heard; "His voice projects well") }
+{ [ ring, noun.event:ring,+ noun.event:ringing,+ ring_out,^] [ peal1, noun.event:peal,+ noun.event:pealing,+ ] sound,@ frames: 1 (sound loudly and sonorously; "the bells rang") }
+{ ding, dong, dingdong, ring,@ frames: 1 (go `ding dong', like a bell) }
+{ [ tintinnabulate, noun.event:tintinnabulation,+ ] ring,@ frames: 1 (ring or sound like a small bell) }
+{ [ peal, noun.event:peal,+ noun.event:pealing,+ ] ring,@ frames: 1 (ring recurrently; "bells were pealing") }
+{ [ ring1, noun.event:ring,+ noun.person:ringer2,+ noun.event:ringing,+ frames: 2] [ knell1, noun.event:knell,+ ] sound,> sound1,@ frames: 8,11 (make (bells) ring, often for the purposes of musical edification; "Ring the bells"; "My uncle rings every Sunday at the local church") }
+{ [ knell, noun.event:knell,+ ] ring,@ frames: 1 (ring as in announcing death) }
+{ [ toll, noun.event:toll,+ noun.person:toller1,+ ] ring1,@ frames: 8 (ring slowly; "For whom the bell tolls") }
+{ [ buzz, noun.event:buzz,+ noun.artifact:buzzer1,+ noun.artifact:buzzer,+ ] [ bombinate, noun.event:bombination,+ ] [ bombilate, noun.event:bombilation,+ ] sound,@ frames: 1 (make a buzzing sound; "bees were buzzing around the hive") }
+{ [ chime, noun.artifact:chime,+ verb.communication:chime_in,^ ] sound,@ frames: 1 (emit a sound; "bells and gongs chimed") }
+{ [ blast, noun.event:blast1,+ ] [ blare1, noun.event:blare,+ ] make_noise,@ frames: 1 (make a strident sound; "She tended to blast when speaking into a microphone")}
+{ [ rustle, noun.event:rustle,+ noun.event:rustling,+ ] sound,@ frames: 1 (make a dry crackling sound; "rustling silk"; "the dry leaves were rustling in the breeze") }
+{ [ snap, noun.act:snap3,+ noun.event:snap2,+ ] [ crack, noun.artifact:cracker,+ ] sound,@ frames: 1,8 (make a sharp sound; "his fingers snapped") }
+{ [ crack1, noun.artifact:cracker1,+ noun.event:cracking,+ ] sound,@ frames: 1 (make a very sharp explosive sound; "His gun cracked") }
+{ [ honk, noun.person:honker,+ ] blare, [ beep, noun.event:beep,+ noun.artifact:beeper,+ ] [ claxon, noun.artifact:claxon,+ ] [ toot, noun.event:toot,+ ] sound,@ frames: 1,2,8 (make a loud noise; "The horns of the taxis blared") }
+{ [ tootle, noun.event:tootle,+ ] toot,@ frames: 2,1,8 (play (a musical instrument) casually; "the saxophone player was tootling a sad melody") }
+{ [ whistle, noun.person:whistler,+ noun.event:whistling,+ ] sound,@ frames: 2 (make whistling sounds; "He lay there, snoring and whistling") }
+{ [ resound1, adj.all:reverberant^resonant,+ ] [ echo, noun.attribute:echo,+ ] [ ring4, noun.attribute:ring,+ noun.attribute:ringing,+ ] [ reverberate, adj.all:reverberant^reverberative,+ adj.all:reverberant,+ noun.attribute:reverberation,+ noun.attribute:reverberance,+ ] sound,@ frames: 1,22 (ring or echo with sound; "the hall resounded with laughter") }
+{ [ consonate, noun.attribute:consonance,+ ] resound1,@ frames: 1 (sound in sympathy) }
+{ reecho, echo,@ frames: 1 (repeat or return an echo again or repeatedly; send (an echo) back) }
+{ reecho1, echo,@ frames: 1,11 (echo repeatedly, echo again and again) }
+{ bong, reverberate,@ frames: 1 (ring loudly and deeply; "the big bell bonged") }
+{ [ thud, noun.event:thud,+ ] [ thump, noun.event:thump1,+ noun.event:thumping,+ ] sound,@ frames: 1 (make a dull sound; "the knocker thudded against the front door")}
+{ crump, [ thud1, noun.event:thud,+ ] [ scrunch, noun.event:scrunch,+ ] verb.communication:crunch,@ frames: 1 (make a noise typical of an engine lacking lubricants)}
+{ clop, [ clump, noun.event:clump,+ ] [ clunk, noun.event:clunk,+ ] [ plunk, noun.event:plunk,+ ] sound,@ frames: 1,22 (make or move along with a sound as of a horse's hooves striking the ground) }
+{ [ patter, noun.event:patter,+ ] [ pitter-patter, noun.event:pitter-patter,+ ] sound,@ frames: 1,22 (make light, rapid and repeated sounds; "gently pattering rain") }
+{ [ tap1, noun.event:tap1,+ noun.act:tap,+ noun.event:tap,+ noun.event:tapping,+ ] [ rap, noun.event:rap1,+ ] [ knock, noun.event:knock1,+ ] pink, sound,@ frames: 1,22 (make light, repeated taps on a surface; "he was tapping his fingers on the table impatiently")}
+{ [ click, noun.event:click,+ ] [ tick, noun.event:tick,+ noun.event:ticking,+ ] sound,@ frames: 1,8,22 (make a clicking or ticking sound; "The clock ticked away") }
+{ chatter, click1, sound,@ frames: 1 (click repeatedly or uncontrollably; "Chattering teeth") }
+{ [ pop, noun.event:pop,+ noun.event:popping,+ ] sound,@ frames: 1 (make a sharp explosive noise; "The cork of the champagne bottle popped") }
+{ [ pop6, noun.event:pop,+ ] pop,$ sound1,@ frames: 8 (cause to make a sharp explosive sound; "He popped the champagne bottle")}
+{ [ sputter, noun.event:sputter,+ noun.event:sputtering,+ ] pop,@ frames: 1 (make an explosive sound; "sputtering engines") }
+{ [ tinkle, noun.event:tinkle,+ ] tink, [ clink, noun.event:clink,+ ] [ chink, noun.event:chink,+ ] sound,@ frames: 1 (make or emit a high sound; "tinkling bells") }
+{ [ clink1, noun.event:clink,+ ] clink,> sound1,@ frames: 8 (make a high sound typical of glass; "champagne glasses clinked to make a toast") }
+{ [ splash, noun.event:splash,+ ] splosh, slosh, slush, sound,@ frames: 1,22 (make a splashing sound; "water was splashing on the floor") }
+{ [ hum, noun.event:hum,+ ] thrum1, sound,@ frames: 1,2,8 (sound with a monotonous hum) }
+{ [ bleep, noun.event:bleep,+ ] sound,@ frames: 1 (emit a single short high-pitched signal; "The computer bleeped away") }
+{ [ rumble, noun.event:rumble,+ noun.event:rumbling,+ ] [ grumble, noun.event:grumble,+ noun.event:grumbling,+ ] sound,@ frames: 1,2 (make a low noise; "rumbling thunder") }
+{ [ boom, noun.event:boom1,+ ] [ din, noun.event:din,+ ] sound,@ frames: 1 (make a resonant sound, like artillery; "His deep voice boomed through the hall") }
+{ [ bang, noun.event:bang,+ noun.artifact:banger,+ ] sound,@ frames: 1,8 (to produce a sharp often metallic explosive or percussive sound; "One of them banged the sash of the window nearest my bed") }
+{ [ ripple, noun.event:ripple,+ ] babble, guggle, burble, [ bubble, noun.object:bubble,+ noun.artifact:bubbler,+ ] [ gurgle, noun.event:gurgle,+ ] sound,@ frames: 1,22 (flow in an irregular current with a bubbling noise; "babbling brooks") }
+{ lap, [ swish, noun.event:swish,+ ] swosh, swoosh, sound,@ frames: 1,22 (move with or cause to move with a whistling or hissing sound; "The bubbles swoshed around in the glass"; "The curtain swooshed open") }
+{ [ drone, noun.communication:droning,+ ] sound,@ frames: 1 (make a monotonous low dull sound; "The harmonium was droning on") }
+{ whizz, [ whiz, noun.event:whiz,+ ] [ whirr, noun.event:whirr,+ ] [ whir, noun.event:whir,+ noun.event:whirring,+ ] [ birr, noun.event:birr,+ ] purr, sound,@ frames: 1 (make a soft swishing sound; "the motor whirred"; "the car engine purred") }
+{ [ wiretap, noun.act:wiretap,+ noun.person:wiretapper,+ ] [ tap, noun.act:tap1,+ noun.person:tapper,+ ] intercept, [ bug, noun.artifact:bug,+ ] eavesdrop,@ frames: 8 (tap a telephone or telegraph wire to get information; "The FBI was tapping the phone line of the suspected spy"; "Is this hotel room bugged?")}
+{ catch, take_in, overhear, hear,@ listen,* frames: 8,25 (hear, usually without the knowledge of the speakers; "We overheard the conversation at the next table") }
+{ catch12, get13, catch,$ hear,@ frames: 8 (perceive by hearing; "I didn't catch your name"; "She didn't get his name when they met the first time") }
+{ hark, harken, hearken, listen,@ frames: 2,22 (listen; used mostly in the imperative) }
+{ listen_in, [ eavesdrop, noun.person:eavesdropper,+ ] listen,@ frames: 2,22 (listen without the speaker's knowledge; "the jealous man was eavesdropping on his wife's conversations") }
+{ deafen, [ deaf, noun.group:deaf,+ ] desensitize,@ frames: 10,9 (make or render deaf; "a deafening noise") }
+{ deafen1, make_noise,* frames: 9,10 (be unbearably loud; "a deafening noise") }
+{ [quieten, louden,!] [ hush, noun.attribute:hush,+ ] [ quiet, noun.attribute:quiet2,+ ] [ quiesce, adj.all:dormant^quiescent,+ ] quiet_down, pipe_down, change_intensity,@ frames: 2,1 (become quiet or quieter; "The audience fell silent when the speaker entered") }
+{ [louden, quieten,!] verb.change:louden,$ change_intensity,@ frames: 1,2 (become louder; "The room loudened considerably") }
+{ [soften, sharpen,!] change_intensity,@ frames: 8,10,11 (make (images or sounds) soft or softer) }
+{ [sharpen, soften,! ] change_intensity,@ frames: 8,10,11 (make (images or sounds) sharp or sharper) }
+{ [ gag, noun.artifact:gag,+ ] [ muzzle, noun.artifact:muzzle,+ ] verb.change:silence,@ frames: 8,9 (prevent from speaking out; "The press was gagged") }
+{ change_intensity, verb.change:change1,@ frames: 1,2 (increase or decrease in intensity) }
+{ [ muffle, noun.artifact:muffler2,+ noun.artifact:muffler1,+ ] [ mute, noun.artifact:mute,+ ] dull, [ damp, noun.artifact:damper,+ ] dampen, tone_down, soften,@ frames: 8,11 (deaden (a sound or noise), especially by wrapping) }
+{ [ taste, noun.act:taste,+ noun.cognition:taste4,+ noun.cognition:taste2,+ noun.act:tasting,+ ] perceive,@ frames: 8,2 (perceive by the sense of taste; "Can you taste the garlic?") }
+{ [ season, noun.person:seasoner,+ noun.food:seasoner,+ noun.food:seasoning,+ noun.act:seasoning,+ ] [ flavor, noun.cognition:flavor,+ noun.food:flavorer,+ noun.food:flavoring,+ ] [ flavour, noun.cognition:flavour,+ noun.food:flavourer,+ noun.food:flavouring,+ ] taste2,> noun.act:cooking,;c frames: 8,11 (lend flavor to; "Season the chicken breast after roasting it") }
+{ [ curry, noun.food:curry,+ ] season,@ noun.act:cooking,;c frames: 8 (season with a mixture of spices; typical of Indian cooking)}
+{ [ resinate, noun.substance:resin,+ ] flavor,@ noun.act:viniculture,;c frames: 8 (impregnate with resin to give a special flavor to; "Greek wines are often resinated") }
+{ [ zest, noun.attribute:zest1,+ ] [ spice, noun.attribute:spice,+ noun.food:spice,+ noun.substance:spice,+ noun.attribute:spicery,+ ] spice_up, season,@ noun.act:cooking,;c frames: 8 (add herbs or spices to) }
+{ [ ginger, noun.food:ginger2,+ noun.food:ginger,+ ] spice,@ noun.act:cooking,;c frames: 8 (add ginger to in order to add flavor; "ginger the soup") }
+{ [ taste1, noun.act:taste,+ noun.cognition:taste4,+ noun.cognition:taste2,+ noun.person:taster,+ ] taste,* verb.cognition:identify2,@ frames: 8 (distinguish flavors; "We tasted wines last night") }
+{ spot2, recognize1, recognise1, distinguish, [ discern, adj.all:perceptible^discernible,+ adj.all:noticeable^discernible,+ adj.all:discernible,+ noun.cognition:discernment2,+ ] pick_out, make_out, tell_apart, perceive,* frames: 8,9 (detect with the senses; "The fleeing convicts were picked out of the darkness by the watchful prison guards"; "I can't make out the faces in this photograph") }
+{ [ resolve, noun.cognition:resolving,+ ] distinguish,@ noun.cognition:optics,;c frames: 8 (make clearly visible; "can this image be resolved?") }
+{ [ discriminate, adj.all:discriminating^discriminative,+ adj.all:discriminating^discriminatory,+ noun.cognition:discrimination,+ ] discern,@ frames: 2 (distinguish; "I could not discriminate the different tastes in this complicated dish") }
+{ [ savor, noun.act:savoring,+ ] [ savour, noun.cognition:savour,+ noun.act:savouring,+ ] taste,@ frames: 8 (taste appreciatively; "savor the soup") }
+{ [ savor1, noun.cognition:savor,+ ] [ savour1, noun.cognition:savour,+ ] season,@ noun.act:cooking,;c frames: 8,11 (give taste to) }
+{ [ taste2, noun.act:taste,+ noun.cognition:taste4,+ noun.cognition:taste2,+ ] [ savor2, noun.cognition:savor,+ ] [ savour2, noun.cognition:savour,+ ] frames: 1,6 (have flavor; taste of something) }
+{ [ smack12, noun.cognition:smack,+ ] [ taste12, noun.act:taste,+ noun.cognition:taste4,+ noun.cognition:taste2,+ noun.act:tasting,+ ] taste2,@ frames: 11 (have a distinctive or characteristic taste; "This tastes of nutmeg") }
+{ smack13, reek13, smell3, verb.communication:suggest1,@ frames: 11 (have an element suggestive (of something); "his speeches smacked of racism"; "this passage smells of plagiarism")}
+{ [ disgust, noun.feeling:disgust,+ ] gross_out, revolt, [ repel, adj.all:ugly^repulsive,+ adj.all:offensive1^repulsive,+ adj.all:unpleasant^repellant,+ adj.all:offensive1^repellant,+ adj.all:offensive1^repellent,+ ] stimulate,@ frames: 9,10 (fill with distaste; "This spoilt food disgusts me") }
+{ sicken, [ nauseate, noun.state:nausea,+ noun.feeling:nausea,+ noun.artifact:nauseant,+ ] turn_one's_stomach, disgust,@ frames: 10 (upset and make nauseated; "The smell of the food turned the pregnant woman's stomach"; "The mold on the food sickened the diners") }
+{ [ sweeten, noun.food:sweetener,+ noun.food:sweetening,+ noun.act:sweetening,+ sour,!] dulcify, edulcorate, dulcorate, change_taste,@ frames: 1,8,11 (make sweeter in taste) }
+{ [ bitter, noun.attribute:bitter,+ ] change_taste,@ frames: 8,11 (make bitter) }
+{ [ honey, noun.food:honey,+ ] sweeten,@ frames: 8 (sweeten with honey) }
+{ [ sugar, noun.food:sugar,+ ] saccharify, sweeten,@ frames: 8 (sweeten with sugar; "sugar your tea") }
+{ [ pepper, noun.food:pepper1,+ ] spice,@ noun.act:cooking,;c frames: 8 (add pepper to; "pepper the soup") }
+{ [ salt, noun.cognition:salt,+ noun.food:salt,+ noun.person:salter1,+ noun.act:salting,+ ] season,@ noun.act:cooking,;c frames: 8 (add salt to) }
+{ sugarcoat, [ glaze, noun.food:glaze,+ ] candy, sweeten,@ frames: 8,11 (coat with something sweet, such as a hard sugar glaze) }
+{ [ mull, noun.artifact:muller1,+ ] sweeten,@ frames: 8,11 (heat with sugar and spices to make a hot drink; "mulled cider") }
+{ [ sour, noun.attribute:sour,+ noun.cognition:sour,+ sweeten,! ] [ acidify, noun.substance:acid,+ ] [ acidulate, noun.substance:acid,+ ] [ acetify, noun.food:acetum,+ noun.substance:acetum,+ ] change_taste,@ frames: 1,8,11 (make sour or more sour) }
+{ change_taste, verb.change:change1,@ frames: 1 (alter the flavor of) }
+{ lose, frames: 9,8 (allow to go out of sight or mind; "The detective lost the man he was shadowing after he had to stop at a red light"; "lose the crowds by climbing a mountain"; "the lost tribe") }
+{ get_off, verb.emotion:enjoy1,@ frames: 22 (enjoy in a sexual way; "He gets off on shoes") }
+{ [ come, noun.act:coming,+ ] experience1,@ frames: 2 (experience orgasm; "she could not come because she was too upset") }
+{ greet, frames: 11,10 (be perceived by; "Loud music greeted him when he entered the apartment") }
+{ [ track, noun.object:track,+ ] verb.perception:observe,@ frames: 8,9 (observe or plot the moving path of something; "track a missile") }
+{ find5, perceive,@ frames: 20 (perceive oneself to be in a certain condition or place; "I found myself in a difficult situation"; "When he woke up, he found himself in a hospital room") }
+{ [ roll, noun.event:roll3,+ noun.event:roll,+ noun.event:rolling,+ ] sound,@ frames: 1 (emit, produce, or utter with a deep prolonged reverberating sound; "The thunder rolled"; "rolling drums")}
+{ seem2, appear1,@ frames: 28 (appear to one's own mind or opinion; "I seem to be misunderstood by everyone"; "I can't seem to learn these Chinese characters") }
+{ [ block5, noun.artifact:blocker,+ ] verb.body:anaesthetize,@ frames: 8,11 (interrupt the normal function of by means of anesthesia; "block a nerve"; "block a muscle") }
+{ surveil, follow13, survey13, verb.motion:pursue,$ frames: 9,10 (keep under surveillance; "The police had been following him for weeks but they could not prove his involvement in the bombing") }
+{ [ kill, noun.cognition:killer,+ ] hurt1,@ frames: 10,11 (be the source of great pain for; "These new shoes are killing me!") }
+{ see_through, perceive,@ frames: 8,9 (perceive the true nature of; "We could see through her apparent calm")}
+{ etch, show,@ frames: 11 (cause to stand out or be clearly defined or visible; "a face etched with pain"; "the leafless branches etched against the sky")}
+{ sight3, verb.competition:take_aim,@ frames: 2 (take aim by looking through the sights of a gun (or other device))}
+{ flush, glow,@ frames: 1,11 (glow or cause to glow with warm color or light; "the sky flushed with rosy splendor")}
