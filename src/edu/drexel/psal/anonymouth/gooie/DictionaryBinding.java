@@ -3,6 +3,8 @@ package edu.drexel.psal.anonymouth.gooie;
 //import edu.drexel.psal.anonymouth.utils.POS;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,11 +20,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
@@ -32,8 +37,8 @@ import javax.swing.plaf.metal.MetalIconFactory;
 import com.jgaap.JGAAPConstants;
 
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
-
 /*
 import com.wintertree.wthes.CompressedThesaurus;
 import com.wintertree.wthes.LicenseKey;
@@ -47,7 +52,7 @@ import edu.smu.tspell.wordnet.WordNetDatabase;
 /**
  * Provides the support needed for the DictionaryConsole to function - hense, its name. 
  * @author Andrew W.E. McDonald
- *
+ * 
  */
 public class DictionaryBinding {
 	
@@ -59,7 +64,6 @@ public class DictionaryBinding {
 	protected static String currentWord = "";
 	protected static boolean isFirstGramSearch = true;
 	protected static ArrayList<String> allWords = new ArrayList<String>();
-	protected static int tabCount = 0;
 	
 	public static void init() {
 		System.setProperty("wordnet.database.dir", //ANONConstants.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet" );
@@ -120,8 +124,7 @@ public class DictionaryBinding {
 					}
 					System.out.println(wordSynSetResult);
 					wordSynSetUpdated = true;
-					createTab("SynSet \""+ currentWord + "\"", wordSynSetResult,dc,tabCount);
-					tabCount = tabCount + 1;
+					createTab("SynSet \""+ currentWord + "\"", wordSynSetResult,dc);
 				}
 			}			
 		});
@@ -134,8 +137,10 @@ public class DictionaryBinding {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				Logger.logln(NAME+"User typing in word field");
+				dc.wordField.setForeground(Color.black);
 				dc.wordSearchButton.setSelected(true);
 				dc.gramSearchButton.setSelected(false);
+				dc.gramStartSearchButton.setSelected(false);
 			}
 		});
 		
@@ -147,11 +152,29 @@ public class DictionaryBinding {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				Logger.logln(NAME+"User typing in gram field.");
+				dc.gramField.setForeground(Color.black);
 				dc.gramSearchButton.setSelected(true);
 				dc.wordSearchButton.setSelected(false);
+				dc.gramStartSearchButton.setSelected(false);
 			}
 		});	
 
+		dc.gramStartField.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {}
+			@Override
+			public void keyReleased(KeyEvent arg0) {}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				Logger.logln(NAME+"User typing in gram field.");
+				dc.gramStartField.setForeground(Color.black);
+				dc.gramStartSearchButton.setSelected(true);
+				dc.wordSearchButton.setSelected(false);
+				dc.gramSearchButton.setSelected(false);
+			}
+			
+		});
+		
 		dc.gramSearchButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -194,6 +217,13 @@ public class DictionaryBinding {
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"Dictionary is being disposed of.. ");
 				dc.dispose();
+				dc.gramField.setText("char gram (e.g. ns )");
+				dc.gramField.setForeground(Color.gray);
+				dc.wordField.setText("word");
+				dc.wordField.setForeground(Color.gray);
+				dc.gramStartField.setText("char gram (e.g. ns )");
+				dc.gramStartField.setForeground(Color.gray);
+				dc.viewerTP.removeAll();
 				//EditorDriver.dictDead = true;
 			}
 		});
@@ -251,40 +281,44 @@ public class DictionaryBinding {
 			}
 
 		}
-		createTab(tabTitle, gramFindings, dc, tabCount);
-		tabCount = tabCount + 1;
+		createTab(tabTitle, gramFindings, dc);
 		buff.close();
 		System.out.println("Done reading the word list");
 		return true;
 	}
 	
-	public static void createTab (String title, String resultsList, final DictionaryConsole dc, final int tabCount) {
+	public static void createTab (String title, String resultsList, final DictionaryConsole dc) {
+		
+		//create the structure to hold the actual information of the tab
 		JTextPane textPane = new JTextPane();
 		textPane.setText(resultsList);
-	//	ImageIcon icon = (ImageIcon) MetalIconFactory.getInternalFrameCloseIcon(16);
+		final JScrollPane content = new JScrollPane(textPane);
 		
-		ImageIcon icon2 = new ImageIcon ("edu/drexel/psal/resources/graphics/icon16.jpg", "blablab");
-		System.out.println("Supposed to create icon");
-		dc.viewerTP.addTab (title, new JScrollPane(textPane));
+		//create an icon appropriate to later form a button based on it
+		Icon icon = new ImageIcon(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+"closeIcon16.png"));
+		
+		//create a close button for each new tab and add a listener to it
+		JButton button = new JButton(icon);	
+		button.setPreferredSize(new Dimension(12,12));
+		button.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int closeTabNumber = dc.viewerTP.indexOfComponent(content);
+				dc.viewerTP.removeTabAt(closeTabNumber);
+			}	
+		});
+		
+		//add the button and the title to each tab component
+		final JPanel tab = new JPanel();
+		tab.add(button);
+		tab.add(new JLabel(title));
+		
+		int tabCount = dc.viewerTP.getTabCount();
+		//add each complete tab to the tabbed pane in the specified position 
+		dc.viewerTP.addTab (title, content);
+		dc.viewerTP.setTabComponentAt(tabCount, tab);
 		dc.viewerTP.setSelectedIndex(tabCount);					//set the focus on the new tab
-		
-		//from now on all this is to add a close button to each tab
-//		JButton button = new JButton(icon);
-		
-//		button.setMargin(new Insets(0,0,0,0));
-//		button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1));
-//		button.setVisible(true);
-//		
-//		button.addActionListener(new ActionListener() {		
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				dc.viewerTP.removeTabAt(tabCount);
-//			}
-			
-//		});
-		
-//		Component tabComp = dc.viewerTP.getTabComponentAt(tabCount);
-	//	tabComp.add(button);
+
 	}
 	
 	
@@ -305,9 +339,7 @@ public class DictionaryBinding {
 		return true;
 	}
 	
-	//NOTE: Someone had begun work on passing in an additional String that represented the part of speech, but was not yet implemented in
-	//the body of the method. As such, I removed it from the parameters for now just to get the DriverEditor words to remove and add
-	//back online
+	//probably more refinement work needs to be done
 	@SuppressWarnings("unused")
 	public static String[] getSynonyms(String wordToFind) {
 		wordSynSetResult = "";
@@ -325,7 +357,6 @@ public class DictionaryBinding {
 			int j;
 			for (j = 0; j < wfs.length; j++) {
 				try {
-					//wordSynSetResult = wordSynSetResult+"Synonym number ("+(j+1)+"): "+wfs[j]+"  => usage (if specified): "+use[j]+"\n";
 					if(!wordToFind.contains(wfs[j].toLowerCase())){
 						wordSynSetResult = wordSynSetResult+"("+synNumber+"): "+wfs[j]+"\n";
 						//Logger.logln(NAME+"Results for: "+wordToFind+"\n"+wordSynSetResult);
@@ -336,7 +367,6 @@ public class DictionaryBinding {
 					Logger.logln(NAME+"Caught an exception...");					
 				}
 			}
-			//wordSynSetResult = wordSynSetResult+"\n";
 			return wfs;		
 		}
 		return null;//BIG PROBLEM

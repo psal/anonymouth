@@ -1,4 +1,5 @@
 package edu.drexel.psal.anonymouth.gooie;
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.ButtonGroup;
@@ -80,7 +81,7 @@ public class DictionaryConsole extends javax.swing.JFrame {
 		initGUI();
 	}
 	
-	private void initGUI() {
+	 void initGUI() {
 		try {
 			Logger.logln(NAME+"Dictionary GUI intializing");
 			GroupLayout thisLayout = new GroupLayout((JComponent)getContentPane());
@@ -93,10 +94,12 @@ public class DictionaryConsole extends javax.swing.JFrame {
 			{
 				wordField = new JTextField();
 				wordField.setText("word");
+				wordField.setForeground(Color.gray);
 			}
 			{
 				gramField = new JTextField();
 				gramField.setText("char gram (e.g. ns )");
+				gramField.setForeground(Color.gray);
 			}
 			{
 				wordSearchButton = new JButton();
@@ -114,6 +117,7 @@ public class DictionaryConsole extends javax.swing.JFrame {
 			{
 				gramStartField = new JTextField();
 				gramStartField.setText("char gram (e.g. ns )");
+				gramStartField.setForeground(Color.gray);
 			}
 			{
 				componentNameLabel = new JLabel();
@@ -241,6 +245,12 @@ public class DictionaryConsole extends javax.swing.JFrame {
 		}
 	}
 
+	
+	public void openWindow() {
+		this.setLocationRelativeTo(null); // makes it form in the center of the screen
+		this.setVisible(true);
+	}
+	
 }
 
 

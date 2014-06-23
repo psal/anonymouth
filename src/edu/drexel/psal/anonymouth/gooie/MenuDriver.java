@@ -38,6 +38,7 @@ public class MenuDriver {
 	protected ActionListener saveAsTestDocListener;
 	protected ActionListener aboutListener;
 	protected ActionListener viewClustersListener;
+	protected ActionListener viewDictionaryListener;
 	protected ActionListener faqListener;
 	protected ActionListener helpClustersListener;
 	protected ActionListener undoListener;
@@ -186,6 +187,15 @@ public class MenuDriver {
         	}
         };
         main.viewClustersMenuItem.addActionListener(viewClustersListener);
+        
+        viewDictionaryListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Logger.logln(NAME+"View Dictionary menu item clicked");
+				main.dictionaryConsole.openWindow();
+			}	
+        };
+        main.viewDictionary.addActionListener(viewDictionaryListener);
         
         faqListener = new ActionListener() {
         	@Override

@@ -187,6 +187,7 @@ public class GUIMain extends JFrame {
 	protected JMenuItem viewHideAnonymityBar;
 	protected JMenuItem viewHideSuggestions;
 	protected JMenuItem viewClustersMenuItem;
+	protected JMenuItem viewDictionary;
 	public JMenuItem viewEnterFullScreenMenuItem;
 	protected JMenuItem helpMenu;
 	protected JMenuItem fileMenu;
@@ -199,6 +200,7 @@ public class GUIMain extends JFrame {
 	//Pull down selections
 	protected PreferencesWindow preferencesWindow;
 	protected ClustersWindow clustersWindow;
+	protected DictionaryConsole dictionaryConsole;
 	protected FAQWindow faqWindow;
 	protected ClustersTutorial clustersTutorial;
 	public VersionControl versionControl; //Undo/Redo
@@ -389,7 +391,7 @@ public class GUIMain extends JFrame {
 		menuBar = new JMenuBar();
 		preferencesWindow = new PreferencesWindow(this); //The Preferences Window (in "Anonymouth" for OS X, "Window" for others)
 		clustersWindow = new ClustersWindow(); //The Clusters Viewer Window in the "View" pull-down menu for OS X, "Window" for others
-
+		dictionaryConsole = new DictionaryConsole();
 		//--------------------------------------------
 		
 		fileMenu = new JMenu("File");
@@ -444,6 +446,8 @@ public class GUIMain extends JFrame {
 		viewClustersMenuItem = new JMenuItem("Clusters");
 		windowMenu.add(viewClustersMenuItem);
 		
+		viewDictionary = new JMenuItem("Dictionary");
+		windowMenu.add(viewDictionary);
 		//--------------------------------------------
 		
 		helpMenu = new JMenu("Help");
