@@ -22,7 +22,7 @@ import javax.swing.SwingUtilities;
 
 import edu.drexel.psal.jstylo.generics.Logger;
 
-
+//autocrlf
 /**
  * Extends JFrame and allows searching Princeton's Wordnet for both sets of synonyms, as well as words that include specified character grams. 
  * 
@@ -62,8 +62,8 @@ public class DictionaryConsole extends javax.swing.JFrame {
 		}
 	}
 
-	/**
-	* Auto-generated main method to display this JFrame
+	
+	// Auto-generated main method to display this JFrame
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -75,7 +75,7 @@ public class DictionaryConsole extends javax.swing.JFrame {
 		});
 	}
 	
-*/	
+
 	public DictionaryConsole() {
 		super();
 		initGUI();

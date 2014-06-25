@@ -3,6 +3,7 @@ package edu.drexel.psal.anonymouth.gooie;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,8 @@ import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -25,7 +28,6 @@ import edu.drexel.psal.jstylo.generics.*;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.anonymouth.engine.Clipboard;
 import edu.drexel.psal.anonymouth.engine.DocumentProcessor;
-import edu.drexel.psal.anonymouth.engine.SearchBar;
 import edu.drexel.psal.anonymouth.engine.VersionControl;
 import edu.drexel.psal.anonymouth.helpers.DisableFocus;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
@@ -211,7 +213,8 @@ public class GUIMain extends JFrame {
 	public UndoManager undoManager;
 	public UndoAction undoAction;
 	public RedoAction redoAction;
-	private JTextField searchBar;
+	protected JTextField searchBar;
+	protected JButton searchButton;
 	//=====================================================================
 	//---------------------------METHODS-----------------------------------
 	//=====================================================================
@@ -514,20 +517,6 @@ public class GUIMain extends JFrame {
 		initWordSuggestionsTab();
 		initTranslationsTab();
 		
-		//Adding a search bar on top of the editor pane!
-		searchBar = new JTextField();
-		searchBar.addKeyListener(new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {}
-			@Override
-			public void keyReleased(KeyEvent arg0) {}
-			@Override
-			public void keyTyped(KeyEvent arg0) {
-				Logger.logln(NAME+"User typing in word field");
-			}
-			
-		});
-		
 		
 		//Now we organize all these tabs and fit them into the window
 		//Adding multiple tabs to areas where it is needed (i.e., same location)
@@ -542,7 +531,6 @@ public class GUIMain extends JFrame {
 				"wrap 3, gap 10 10",//layout constraints
 				"[][grow, fill][shrink]", //column constraints
 				"[grow, fill]"));	// row constraints
-		this.add(searchBar, "width 60:100:150, span 3");
 		this.add(anonymityPanel, "width 80!, spany, shrinkprio 1");		//LEFT 		(Anonymity bar, results)
 		this.add(editorTabPane, "width 100:400:, grow, shrinkprio 3");	//MIDDLE	(Editor)
 		this.add(helpersTabPane, "width :353:353, spany, shrinkprio 1");//RIGHT		(Word Suggestions, Translations, etc.)
@@ -851,8 +839,8 @@ public class GUIMain extends JFrame {
 			redoAction = new RedoAction();
 			System.out.println("Before adding undoAction to edit Menu - -After creating redoAction");
 			editMenu.add(undoAction);
-			System.out.println("Before adding redoAction to edit MEnu - After adding Undo Action")
-;			editMenu.add(redoAction);
+			System.out.println("Before adding redoAction to edit MEnu - After adding Undo Action");
+			editMenu.add(redoAction);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
 			documentScrollPane.setViewportView(documentPane);
 			
@@ -916,6 +904,54 @@ public class GUIMain extends JFrame {
 
 			anonymityPanel.add(anonymityHoldingPanel, "width 80!");
 			anonymityPanel.add(resultsButton, "dock south, gapbottom 9");
+			
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
+			
+			searchButton = new JButton("Search");
+			
+			
+			searchBar = new JTextField();
+			searchBar.setText("search...");
+			searchBar.setForeground(Color.gray);
+			searchBar.setEnabled(true);
+			searchBar.setEditable(true);
+			searchBar.setVisible(true);
+	
+			searchBar.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("MouseClick detected");
+				}
+			});
+			
+			searchBar.addKeyListener(new KeyListener() {
+				@Override
+				public void keyPressed(KeyEvent arg0) {}
+				@Override
+				public void keyReleased(KeyEvent arg0) {}
+				@Override
+				public void keyTyped(KeyEvent arg0) {
+					Logger.logln(NAME+"User typing in word field");
+				}
+				
+			});
+		
+			searchBar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					Logger.logln(NAME+"User typing in word field");
+				}
+			});
+			
+			searchButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					String text = searchBar.getText();
+				}
+				
+			});
+			
+			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
+			anonymityPanel.add(searchButton, "dock north, width 40:60:80");
 		}
 	}
 	
@@ -985,6 +1021,7 @@ public class GUIMain extends JFrame {
 				elementsToRemoveTable.setEnabled(enable);
 				documentPane.setEnabled(enable);
 				clipboard.setEnabled(enable);
+				searchBar.setEnabled(enable);
 				
 				if (PropertiesUtil.getDoTranslations() && enable) {
 					translateSentenceButton.setEnabled(true);
