@@ -1022,6 +1022,7 @@ public class GUIMain extends JFrame {
 				documentPane.setEnabled(enable);
 				clipboard.setEnabled(enable);
 				searchBar.setEnabled(enable);
+				reProcessButton.setEnabled(enable);
 				
 				if (PropertiesUtil.getDoTranslations() && enable) {
 					translateSentenceButton.setEnabled(true);

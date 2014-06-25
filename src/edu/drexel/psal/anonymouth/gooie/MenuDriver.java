@@ -276,7 +276,7 @@ public class MenuDriver {
         		main.versionControl.redo();
         	}
         };
-        //main.editRedoMenuItem.addActionListener(redoListener);
+        main.editRedoMenuItem.addActionListener(redoListener);
         
         hideAnonymityBarListener = new ActionListener() {
         	@Override
