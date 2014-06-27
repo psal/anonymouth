@@ -32,6 +32,7 @@ public class WordSuggestionsDriver {
 	private ListSelectionListener elementsToAddListener;
 	private ActionListener clearRemoveListener;
 	private ActionListener highlightAllRemoveListener;
+	private ActionListener refreshSuggestionsListener;
 	
 	//Instances and misc. variables
 	private GUIMain main;
@@ -239,5 +240,13 @@ public class WordSuggestionsDriver {
 			}
 		};
 		main.highlightAllRemoveHighlights.addActionListener(highlightAllRemoveListener);
+		
+		refreshSuggestionsListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.editorDriver.updateSuggestions();
+			}
+		};
+		main.refreshSuggestions.addActionListener(refreshSuggestionsListener);
 	}
 }

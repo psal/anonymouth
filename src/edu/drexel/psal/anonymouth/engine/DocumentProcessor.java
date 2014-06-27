@@ -144,7 +144,6 @@ public class DocumentProcessor {
 					documentMagician.runWeka();
 					dataAnalyzer.runClusterAnalysis(documentMagician);
 					ClustersDriver.initializeClusterViewer(main,false);
-					pw.setText("Loading the word suggestions...");
 					
 				} catch(Exception e) {
 					pw.stop();
@@ -174,7 +173,6 @@ public class DocumentProcessor {
 						ClustersDriver.initializeClusterViewer(main,false);
 						pw.setText("Classifying Documents...");
 						documentMagician.runWeka();
-						pw.setText("Loading the word suggestions...");
 						
 					} catch (Exception e) {
 						pw.stop();
@@ -208,8 +206,12 @@ public class DocumentProcessor {
 			main.anonymityBar.showFill(true);
 			
 			// get data for Word Suggestion's lists and Anonymity Bar
+			pw.setText("Loading Word Suggestions");
 			editorDriver.updateSuggestionsThread.execute();
 			editorDriver.updateBarThread.execute();
+					
+			//Wait for the Word Suggestions thread to finish
+			editorDriver.updateSuggestionsThread.get();
 			
 			main.enableEverything(true);	
 			
@@ -227,9 +229,9 @@ public class DocumentProcessor {
 			main.documentScrollPane.getViewport().setViewPosition(new java.awt.Point(0, 0));
 			main.processed = true;
 			main.reprocessing = false;
-			
-			//pw.stop();
-			//main.showGUIMain();
+
+			pw.stop();
+			main.showGUIMain();
 		} catch (Exception e) {
 			// Get current size of heap in bytes
 			long heapSize = Runtime.getRuntime().totalMemory();
