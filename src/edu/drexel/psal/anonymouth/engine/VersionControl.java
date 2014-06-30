@@ -128,8 +128,8 @@ public class VersionControl {
 		curCharBackupBuffer++;
 
 		if (forceBackup) {
-			addVersion(pastTaggedDoc, priorCaretPosition);
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
+			addVersion(pastTaggedDoc, priorCaretPosition);
 			curCharBackupBuffer = 0;
 		} else if (curCharBackupBuffer >= CHARS_TIL_BACKUP) {
 			pastTaggedDoc = new TaggedDocument(taggedDoc);
@@ -204,6 +204,7 @@ public class VersionControl {
 		if (undo.size() == 0) {
 			System.out.println("!!!!Undo stack size is 0 - Undo is disabled");
 			main.enableUndo(false);
+			curCharBackupBuffer = CHARS_TIL_BACKUP - 1;
 		}
 		
 //		synchronized(MenuDriver.class) {
@@ -242,6 +243,7 @@ public class VersionControl {
 		}
 		if (undo.size() == 0) {
 			main.enableUndo(false);
+			curCharBackupBuffer = CHARS_TIL_BACKUP - 1;
 		}
 		
 //		synchronized(MenuDriver.class) {

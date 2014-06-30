@@ -44,6 +44,7 @@ public class ConsolidationStation {
 	private static double oldStartingValue = 0;
 	private static ArrayList<Word> oldWords = new ArrayList<Word>();
 	private static ArrayList<Double> oldDat = new ArrayList<Double>();
+	private static FunctionWords functionWords = new FunctionWords();
 	
 	/**
 	 * constructor for ConsolidationStation. Depends on target values, and should not be called until they have been selected.
@@ -548,22 +549,39 @@ public class ConsolidationStation {
 		ArrayList<Word> tempWords = wordsFromDoc;
 		
 		//start searching for qualified words
-		FunctionWords functionWords = new FunctionWords();
 		functionWords.run();
 		for (Word w : tempWords) {
-			String word = w.getUntagged();
-			if (!word.substring(0, 1).equals(word.substring(0, 1).toUpperCase())) // not including names (Kawasaki Disease, Jack, Ministry of Defense, etc.), since there's no alternatives for most of them
-				if (!functionWords.isWordInTrie(word)) // not including function words, since it's hard to modify the doc with them
-					search:
-						for ( int i = 0; i < w.wordLevelFeaturesFound.length(); i++)
-							for (int j = 0; j < DataAnalyzer.topAttributes.length; j++)
-								if (w.wordLevelFeaturesFound.references.get(i).index == DataAnalyzer.topAttributes[j].getIndexNumberInInstancesObject()) { // not including words without features in question
-									newWordsSize++;
-									newWords.add(w);
-									break search;
-								}
+			if (includeWord(w))
+				search:
+					for ( int i = 0; i < w.wordLevelFeaturesFound.length(); i++)
+						for (int j = 0; j < DataAnalyzer.topAttributes.length; j++)
+							if (w.wordLevelFeaturesFound.references.get(i).index == DataAnalyzer.topAttributes[j].getIndexNumberInInstancesObject()) { // not including words without features in question
+								newWordsSize++;
+								newWords.add(w);
+								break search;
+							}
 		}
 		
 		return newWords;
+	}
+	
+	/**
+	 * Helper function for getFilteredWordList
+	 * Determines whether or not a word should be included in word suggestions
+	 * @param w
+	 * @return false if the word is a special character, function word, proper noun
+	 *         true otherwise
+	 */
+	private static boolean includeWord(Word w) {
+		if (w.getUntagged().matches("[\\W|\\d]*")) //Exclude non-word character sequences (e.g. punctuation) and numbers 
+			return false;
+		else if(functionWords.isWordInTrie(w.getUntagged())) //Exclude function words
+			return false;
+		else if (w.partOfSpeech.contains("NNP")) //Exclude proper nouns
+			return false;
+		else if (w.partOfSpeech.contains("NNPS"))  //Exclude plural proper nouns
+			return false;
+		else
+			return true;
 	}
 }
