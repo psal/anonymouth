@@ -252,7 +252,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 		initComponents();			//All of the window's Swing Components
 		initClassesAndListeners();	//Other class instances and their listeners/drivers
 				
-		DisableFocus.removeAllFocus(this); //Now that everything's added, let's disable focus traversal
+	//	DisableFocus.removeAllFocus(this); //Now that everything's added, let's disable focus traversal
 	}
 	
 	/**
