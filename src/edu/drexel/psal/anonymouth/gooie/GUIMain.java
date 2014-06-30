@@ -855,7 +855,6 @@ public class GUIMain extends JFrame implements DocumentListener {
 				
 			});
 			
-			Icon icon = new ImageIcon(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+"closeIcon16.png"));
 			JButton clearButton = new JButton("Clear");
 			clearButton.addActionListener(new ActionListener() {
 				@Override
@@ -865,50 +864,22 @@ public class GUIMain extends JFrame implements DocumentListener {
 			});
 			
 			searchBar = new JTextField();
-			searchBar.setText("please");
-			searchBar.setForeground(Color.black);
+			searchBar.setText("enter word...");
+			searchBar.setForeground(Color.gray);
 			searchBar.setEnabled(true);
 			searchBar.setEditable(true);
 			searchBar.setVisible(true);
 			searchBar.requestFocusInWindow();
-			searchBar.getDocument().addDocumentListener(this);
 			
 			searchBar.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("MouseClick detected");
+					if (searchBar.getText().equals("enter word...")) {
+						searchBar.setText("");
+					}
+					searchBar.setForeground(Color.black);
 				}
 			});
-			
-			searchBar.getDocument().addDocumentListener(new DocumentListener() {
-				@Override
-				public void changedUpdate(DocumentEvent arg0) {
-					System.out.println("Writing in searchBar. YAYYY!!!!!");
-				}
-
-				@Override
-				public void insertUpdate(DocumentEvent arg0) {
-					System.out.println("Clicked!");
-				}
-
-				@Override
-				public void removeUpdate(DocumentEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
 				
-			});
-			searchBar.addKeyListener(new KeyListener() {
-				@Override
-				public void keyPressed(KeyEvent arg0) {}
-				@Override
-				public void keyReleased(KeyEvent arg0) {}
-				@Override
-				public void keyTyped(KeyEvent arg0) {
-					Logger.logln(NAME+"User typing in word field");
-				}
-				
-			});
-		
 			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
 			anonymityPanel.add(searchButton, "dock north, width 40:60:80");
 			anonymityPanel.add(clearButton, "dock north , width 40:60:80");
