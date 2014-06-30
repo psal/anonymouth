@@ -391,6 +391,10 @@ public class TaggedDocument implements Serializable {
 			}
 		}
 		
+		//If the TaggedDocument doesn't end in an EOS character, then we have an end sentence
+		if(!specialCharTracker.isSentenceEndAtIndex(length - 1))
+			endSentenceExists = true;
+		
 		return taggedSentences;
 	}
 

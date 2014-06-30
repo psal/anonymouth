@@ -169,6 +169,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected JButton clearRemoveHighlights;
 	protected JButton highlightAllRemoveHighlights;
+	protected JButton refreshSuggestions;
 	
 	//Translations
 	public TranslationsPanel translationsPanel;
@@ -665,6 +666,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 			
 			highlightAllRemoveHighlights = new JButton("Highlight All");
 			clearRemoveHighlights = new JButton("Clear All");
+			refreshSuggestions = new JButton("Refresh");
 		}
 		
 		//Adding everything in...
@@ -672,8 +674,9 @@ public class GUIMain extends JFrame implements DocumentListener {
 		wordSuggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
 		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
-		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split, w 50%");
-		wordSuggestionsPanel.add(clearRemoveHighlights, "w 50%");
+		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split, w 33%");
+		wordSuggestionsPanel.add(clearRemoveHighlights, "w 33%");
+		wordSuggestionsPanel.add(refreshSuggestions, "w 33%");
 	}
 
 	/**
@@ -1002,6 +1005,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 				clipboard.setEnabled(enable);
 				searchBar.setEnabled(enable);
 				reProcessButton.setEnabled(enable);
+				refreshSuggestions.setEnabled(enable);
 				
 				if (PropertiesUtil.getDoTranslations() && enable) {
 					translateSentenceButton.setEnabled(true);

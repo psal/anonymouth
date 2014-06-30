@@ -322,6 +322,13 @@ public class ConsolidationStation {
 				System.out.println("The wordlist is: " + wordList);
 			} while (wordList.isEmpty());
 			wordsSuggestion = getFilteredWordList(wordList);
+			//If there are no valid words (or we're using a feature set without word level features)
+			//just return empty lists for words to add/remove
+			if (wordsSuggestion.isEmpty()) {
+				toReturn.put("wordsToAdd", new ArrayList<String[]>());
+				toReturn.put("wordsToRemove", new ArrayList<String[]>());
+				return toReturn;
+			}
 		
 			// what we do here is create a "ghost" document by eliminating a word in author's document, then evaluate the new document 
 			//(most parts are copied from DocumentMagician with some modifications to reduce runtime to acceptable level without making the program broken down)

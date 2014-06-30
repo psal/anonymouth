@@ -45,7 +45,7 @@ public class ThePresident {
 	public static String sessionName = "";
 	public static boolean classifier_Saved = false;
 	public static int max_Features_To_Consider = PropertiesUtil.defaultFeatures;
-	public static int num_Tagging_Threads = 6;// PropertiesUtil.defaultThreads;
+	public static int num_Tagging_Threads = PropertiesUtil.defaultThreads;
 	public static boolean should_Keep_Auto_Saved_Anonymized_Docs = PropertiesUtil.defaultVersionAutoSave;
 	public static boolean autosave_Latest_Version = PropertiesUtil.defaultAutoSave;
 	public static boolean canDoQuickStart = false;

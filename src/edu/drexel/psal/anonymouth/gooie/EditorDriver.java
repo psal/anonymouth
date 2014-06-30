@@ -394,7 +394,15 @@ public class EditorDriver {
                 updateSuggestionsThread = new SwingWorker<Void, Void>() {
                         @Override
                         public Void doInBackground() throws Exception {
-                        	System.out.println("In thread prepareWrodSuggestions - doInBackGround!!!!!!!!!!!");
+                        	System.out.println("In thread prepareWordSuggestions - doInBackGround!!!!!!!!!!!");
+                        		//If we're not doing the first process or reprocessing, 
+                        		//Then we're just refreshing, and we have to show the progress window
+                        		if (main.processed && !main.reprocessing && !main.documentProcessor.pw.isVisible()) {
+                        			main.documentProcessor.pw.run();
+                        			main.documentProcessor.pw.setText("Loading Word Suggestions");
+                        		}
+                                main.enableEverything(false);
+                                ignoreChanges = true;
                                 main.wordSuggestionsDriver.placeSuggestions();
                                 return null;
                         }
@@ -409,8 +417,13 @@ public class EditorDriver {
                                                 highlighterEngine.addAutoRemoveHighlights(highlightIndices[0]+whiteSpace, highlightIndices[1], highlightIndices[2], highlightIndices[3]);
                                         }
                                 }
-                                main.documentProcessor.pw.stop();
-                                main.showGUIMain();
+                                main.enableEverything(true);
+                                ignoreChanges = false;
+                                //If we're not processing or reprocessing, we're just refreshing
+                                //and we have to stop the ProgressWindow here
+                                if (main.processed && !main.reprocessing && main.documentProcessor.pw.isVisible()) {
+                        			main.documentProcessor.pw.stop();
+                        		}
                         }
                 };
         }
@@ -668,8 +681,6 @@ public class EditorDriver {
 	                        
 	                        tempIndex++;
 	                }
-	                
-	                updateSuggestions();
                         
                 /**
                  * Otherwise the user's just entering a single character, in which case we
@@ -684,7 +695,6 @@ public class EditorDriver {
                                                 taggedDoc.endSentenceExists = false;
                                         }
                                         taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
-                                        updateSuggestions();
                                 }
                                 
                                 taggedDoc.watchForEOS = -1;
@@ -692,7 +702,6 @@ public class EditorDriver {
                         } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {        
                                 if (isWhiteSpace(newChar)) {
                                         taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
-                                        updateSuggestions();
                                 }
                                 
                                 taggedDoc.watchForLastSentenceEOS = -1;
@@ -1030,7 +1039,7 @@ public class EditorDriver {
         /**
          * Updates the suggestions in a thread (if done from previous update)
          */
-        private void updateSuggestions() {
+        protected void updateSuggestions() {
                 if (updateSuggestionsThread.isDone()) {
                         prepareWordSuggestionsThread();
                         updateSuggestionsThread.execute();
