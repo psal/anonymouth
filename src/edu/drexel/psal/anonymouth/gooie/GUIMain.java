@@ -3,6 +3,8 @@ package edu.drexel.psal.anonymouth.gooie;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Shape;
 import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -34,9 +36,17 @@ import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.table.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Highlighter.HighlightPainter;
 import javax.swing.undo.UndoManager;
 
 import net.miginfocom.swing.MigLayout;
@@ -53,7 +63,7 @@ import com.apple.eawt.FullScreenListener;
  * @author Marc Barrowclift
  */
 
-public class GUIMain extends JFrame {
+public class GUIMain extends JFrame implements DocumentListener {
 
 	private final String icon = "icon48.jpg";
 	private static final long serialVersionUID = 1L;
@@ -211,85 +221,15 @@ public class GUIMain extends JFrame {
 	protected RightClickMenu rightClickMenu; //Not really menu bar, but it's a menu
 	protected Clipboard clipboard; //Edit > Copy/Paste/Cut
 	public UndoManager undoManager;
-	public UndoAction undoAction;
-	public RedoAction redoAction;
 	protected JTextField searchBar;
 	protected JButton searchButton;
 	//=====================================================================
 	//---------------------------METHODS-----------------------------------
 	//=====================================================================
 	// ------------Undo / Redo class definition- --------------------------
+	private Highlighter hilit;
+	private DefaultHighlightPainter painter;
 	
-	public class UndoListener implements UndoableEditListener {
-
-		@Override
-		public void undoableEditHappened(UndoableEditEvent e) {
-			undoManager.addEdit(e.getEdit());
-			undoAction.update();
-			redoAction.update();
-		}
-	}
-		public class UndoAction extends AbstractAction {
-
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public UndoAction() {
-				System.out.println("!!!!!!!!!!");
-				this.putValue(Action.NAME, undoManager.getUndoPresentationName());
-				this.setEnabled(false);
-			}
-		
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("!!!!!!!!!!In UndoAction: this.isEnabled() = " + this.isEnabled());
-				if (this.isEnabled()) {
-					undoManager.undo();
-					System.out.println("!!!!!!!!!!!!!!After the undomanager");
-					undoAction.update();
-					System.out.println("After the undoActionUpdate");
-					redoAction.update();
-					System.out.println("After the redoActionUpdate");
-				}
-			}
-			
-			public void update() {
-				this.putValue(Action.NAME, undoManager.getUndoPresentationName());
-				this.setEnabled(undoManager.canUndo());			
-			}
-		}
-		
-		public class RedoAction extends AbstractAction {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			public RedoAction () {
-				this.putValue(Action.NAME, undoManager.getRedoPresentationName());
-				this.setEnabled(false);
-			}
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (this.isEnabled()) {
-					undoManager.redo();
-					undoAction.update();
-					redoAction.update();
-				}
-			}
-			
-			public void update() {
-				this.putValue(Action.NAME, undoManager.getRedoPresentationName());
-				this.setEnabled(undoManager.canRedo());
-			}
-		}
-	
-	
-	//======================================================================
-	//----------------------------------------------------------------------
-	//======================================================================
 	
 	/** 
 	 * Constructor, constructs nearly everything used by Anonymouth including
@@ -813,6 +753,10 @@ public class GUIMain extends JFrame {
 			"[grow, fill]"
 		));
 		
+		hilit = new DefaultHighlighter();
+		painter = new DefaultHighlightPainter(Color.lightGray); 
+		
+		
 		//The document the user will Anonymize
 		documentPanel = new JPanel();
 		MigLayout EBPLayout = new MigLayout(
@@ -828,20 +772,8 @@ public class GUIMain extends JFrame {
 			documentPane.setFont(normalFont);
 			documentPane.setEnabled(true); // Original was false!!!!
 			documentPane.setBorder(BorderFactory.createEmptyBorder(1,3,1,3));
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			System.out.println("Before undomanager created !!!!!!!!");
-			undoManager = new UndoManager();
-			System.out.println("Document pane get document!!!!!!!!");
-			documentPane.getDocument().addUndoableEditListener(new UndoListener());
-			System.out.println("After get Documentt --!!!!!!!!!!!- Before UndoAction Called");
-			undoAction = new UndoAction();
-			System.out.println("After UndoAction -!!!!!!!!! Before RedoAction created");
-			redoAction = new RedoAction();
-			System.out.println("Before adding undoAction to edit Menu - -After creating redoAction");
-			editMenu.add(undoAction);
-			System.out.println("Before adding redoAction to edit MEnu - After adding Undo Action");
-			editMenu.add(redoAction);
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
+			documentPane.setHighlighter(hilit);
+			
 			documentScrollPane.setViewportView(documentPane);
 			
 			originalDocScrollPane = new JScrollPane();
@@ -908,21 +840,60 @@ public class GUIMain extends JFrame {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!			
 			
 			searchButton = new JButton("Search");
+			searchButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						search();
+					} catch (BadLocationException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			});
 			
+			Icon icon = new ImageIcon(ImageLoader.class.getClass().getResource(ANONConstants.GRAPHICS+"closeIcon16.png"));
+			JButton clearButton = new JButton("Clear");
+			clearButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					hilit.removeAllHighlights();
+				}
+			});
 			
 			searchBar = new JTextField();
-			searchBar.setText("search...");
-			searchBar.setForeground(Color.gray);
+			searchBar.setText("please");
+			searchBar.setForeground(Color.black);
 			searchBar.setEnabled(true);
 			searchBar.setEditable(true);
 			searchBar.setVisible(true);
-	
+			searchBar.requestFocusInWindow();
+			searchBar.getDocument().addDocumentListener(this);
+			
 			searchBar.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("MouseClick detected");
 				}
 			});
 			
+			searchBar.getDocument().addDocumentListener(new DocumentListener() {
+				@Override
+				public void changedUpdate(DocumentEvent arg0) {
+					System.out.println("Writing in searchBar. YAYYY!!!!!");
+				}
+
+				@Override
+				public void insertUpdate(DocumentEvent arg0) {
+					System.out.println("Clicked!");
+				}
+
+				@Override
+				public void removeUpdate(DocumentEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 			searchBar.addKeyListener(new KeyListener() {
 				@Override
 				public void keyPressed(KeyEvent arg0) {}
@@ -935,25 +906,33 @@ public class GUIMain extends JFrame {
 				
 			});
 		
-			searchBar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					Logger.logln(NAME+"User typing in word field");
-				}
-			});
-			
-			searchButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					String text = searchBar.getText();
-				}
-				
-			});
-			
 			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
 			anonymityPanel.add(searchButton, "dock north, width 40:60:80");
+			anonymityPanel.add(clearButton, "dock north , width 40:60:80");
+
+		}
+		
+		
+	}
+	
+	public void search() throws BadLocationException {
+		hilit.removeAllHighlights();
+		String s = searchBar.getText().toLowerCase();
+		if (s.length() <= 0) {
+			System.out.println("Nothing to search!");
+			return;
+		}
+		
+		String content = documentPane.getText().toLowerCase();
+		int index = content.indexOf(s,0);
+		
+		while ((index = content.indexOf(s, index)) > -1) {	
+			int end = index + s.length();
+			hilit.addHighlight(index, end, painter);
+			index = end;
 		}
 	}
+
 	
 	/**
 	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel
@@ -1078,5 +1057,23 @@ public class GUIMain extends JFrame {
 		} catch (Exception e) {
 			Logger.logln(NAME + "Failed initializing Anonymouth for full-screen", LogOut.STDERR);
 		}
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
