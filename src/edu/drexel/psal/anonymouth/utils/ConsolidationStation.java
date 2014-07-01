@@ -74,7 +74,7 @@ public class ConsolidationStation {
 	 * @param word
 	 */
 	public static void setWordFeatures(Word word){
-		String wordString=word.word;
+		String wordString=word.word.toLowerCase();
 		int attribLen=DataAnalyzer.lengthTopAttributes;
 		for(int i=0;i<attribLen;i++){
 				String stringInBrace=DataAnalyzer.topAttributes[i].getStringInBraces();
@@ -478,6 +478,8 @@ public class ConsolidationStation {
 		int wordLength = word.length();
 		int textLength = text.length();
 		word = word.trim();
+		word = word.toLowerCase();
+		text = text.toLowerCase();
 	
 		while (location != -1 && location < textLength) {
 			location = text.indexOf(word, location);
@@ -519,16 +521,18 @@ public class ConsolidationStation {
 	public static ArrayList<Word> removeDuplicateWords(ArrayList<Word> unMerged){
 		HashMap<String,Word> mergingMap = new HashMap<String,Word>((unMerged.size()));//Guessing there will be at least an average of 3 duplicate words per word -> 1/3 of the size is needed
 		for(Word w: unMerged){
-			if(mergingMap.containsKey(w.word) == true) {
-				if(w.equals(mergingMap.get(w.word))) {
-					if(!w.wordLevelFeaturesFound.equals(mergingMap.get(w.word).wordLevelFeaturesFound)) //check is sparse ref the same
+			Word wlc = new Word(w);
+			wlc.setLowerCase(); //needed to catch upper case/lower case versions of the same word
+			if(mergingMap.containsKey(wlc.word) == true) {
+				if(wlc.equals(mergingMap.get(wlc.word))) {
+					if(!wlc.wordLevelFeaturesFound.equals(mergingMap.get(wlc.word).wordLevelFeaturesFound)) //check is sparse ref the same
 						Logger.logln("(ConsolidationStation) - The wordLevelFeaturesFound in the words are not equal.",Logger.LogOut.STDERR);
 				}
 				else
 					Logger.logln("(ConsolidationStation) - Problem in mergeWords--Words objects not equal",Logger.LogOut.STDERR);
 			}
 			else
-				mergingMap.put(w.word,new Word(w));
+				mergingMap.put(wlc.word,new Word(wlc));
 		}
 		Set<String> mergedWordKeys = mergingMap.keySet();
 		ArrayList<Word> mergedWords = new ArrayList<Word>(mergedWordKeys.size());

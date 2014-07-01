@@ -143,8 +143,8 @@ public class HighlighterEngine {
 	 * @param wordToHighlight - The word you want to highlight
 	 */
 	public void addAllAddHighlights(String wordToHighlight) {
-		ArrayList<int[]> index = IndexFinder.findIndices(main.documentPane.getText(), wordToHighlight);
-		int indexSize = index.size();		
+		ArrayList<int[]> index = IndexFinder.findIndices(main.documentPane.getText().toLowerCase(), wordToHighlight.toLowerCase());
+		int indexSize = index.size();
 		
 		for (int i = 0; i < indexSize; i++) {
 			try {
@@ -187,7 +187,7 @@ public class HighlighterEngine {
 		}
 		
 		String text = main.documentPane.getText();
-		ArrayList<int[]> index = IndexFinder.findIndices(text, wordToHighlight);
+		ArrayList<int[]> index = IndexFinder.findIndices(text.toLowerCase(), wordToHighlight.toLowerCase());
 		int indexSize = index.size();
 
 		for (int i = 0; i < indexSize; i++) {
@@ -304,8 +304,8 @@ public class HighlighterEngine {
 							wordToRemove = test[1].substring(0, test.length-2);
 						}
 
-						if (words[i].equals(wordToRemove)) {
-							index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText(), wordToRemove, start, end));
+						if (words[i].toLowerCase().equals(wordToRemove.toLowerCase())) {
+							index.addAll(IndexFinder.findIndicesInSection(main.documentPane.getText().toLowerCase(), wordToRemove.toLowerCase(), start, end));
 						}
 					}
 				}
