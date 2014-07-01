@@ -880,13 +880,13 @@ public class GUIMain extends JFrame implements DocumentListener {
 				}
 			});
 				
+			searchBar.setFocusAccelerator('f');
+			
 			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
 			anonymityPanel.add(searchButton, "dock north, width 40:60:80");
 			anonymityPanel.add(clearButton, "dock north , width 40:60:80");
 
 		}
-		
-		
 	}
 	
 	public void search() throws BadLocationException {
