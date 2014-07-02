@@ -32,6 +32,8 @@ public class WordSuggestionsDriver {
 	private ListSelectionListener elementsToAddListener;
 	private ActionListener clearRemoveListener;
 	private ActionListener highlightAllRemoveListener;
+	private ActionListener clearAddListener;
+	private ActionListener highlightAllAddListener;
 	private ActionListener refreshSuggestionsListener;
 	
 	//Instances and misc. variables
@@ -240,6 +242,27 @@ public class WordSuggestionsDriver {
 			}
 		};
 		main.highlightAllRemoveHighlights.addActionListener(highlightAllRemoveListener);
+		
+		clearAddListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				main.editorDriver.highlighterEngine.removeAllAddHighlights();
+				main.elementsToAddPane.clearSelection();
+			}
+		};
+		main.clearAddHighlights.addActionListener(clearAddListener);
+		
+		highlightAllAddListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.editorDriver.highlighterEngine.removeAllAddHighlights();
+				for (int i = 0; i < addSize; i++) {
+					main.editorDriver.highlighterEngine.addAllAddHighlights(topToAdd.get(i)[0]);
+				}
+				main.elementsToAddPane.clearSelection();
+			}
+		};
+		main.highlightAllAddHighlights.addActionListener(highlightAllAddListener);
 		
 		refreshSuggestionsListener = new ActionListener() {
 			@Override

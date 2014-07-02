@@ -169,6 +169,8 @@ public class GUIMain extends JFrame implements DocumentListener {
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected JButton clearRemoveHighlights;
 	protected JButton highlightAllRemoveHighlights;
+	protected JButton clearAddHighlights;
+	protected JButton highlightAllAddHighlights;
 	protected JButton refreshSuggestions;
 	
 	//Translations
@@ -668,17 +670,21 @@ public class GUIMain extends JFrame implements DocumentListener {
 			
 			highlightAllRemoveHighlights = new JButton("Highlight All");
 			clearRemoveHighlights = new JButton("Clear All");
-			refreshSuggestions = new JButton("Refresh");
+			highlightAllAddHighlights = new JButton("Highlight All");
+			clearAddHighlights = new JButton("Clear All");
+			refreshSuggestions = new JButton("Refresh Suggestions");
 		}
 		
 		//Adding everything in...
 		wordSuggestionsPanel.add(elementsToAddLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
+		wordSuggestionsPanel.add(highlightAllAddHighlights, "split 2, w 50%");
+		wordSuggestionsPanel.add(clearAddHighlights, "w 50%");
 		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
-		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split, w 33%");
-		wordSuggestionsPanel.add(clearRemoveHighlights, "w 33%");
-		wordSuggestionsPanel.add(refreshSuggestions, "w 33%");
+		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split 2, w 50%");
+		wordSuggestionsPanel.add(clearRemoveHighlights, "w 50%");
+		wordSuggestionsPanel.add(refreshSuggestions);
 	}
 
 	/**
