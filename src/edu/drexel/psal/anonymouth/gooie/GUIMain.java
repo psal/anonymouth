@@ -264,6 +264,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 				setExtendedState(MAXIMIZED_BOTH);
 				setLocationRelativeTo(null);
 				main.setVisible(true);
+				documentPane.requestFocusInWindow();
 			}
 		});
 		
@@ -846,11 +847,13 @@ public class GUIMain extends JFrame implements DocumentListener {
 			searchButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					try {
-						search();
-					} catch (BadLocationException e) {
-						e.printStackTrace();
+					editorDriver.highlighterEngine.removeAllSearchHighlights();
+					String s = searchBar.getText();
+					if (s.length() <= 0) {
+						System.out.println("Nothing to search!");
+						return;
 					}
+					editorDriver.highlighterEngine.addAllSearchHighlights(s);
 				}
 				
 			});
@@ -859,7 +862,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 			clearButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					hilit.removeAllHighlights();
+					editorDriver.highlighterEngine.removeAllSearchHighlights();
 				}
 			});
 			
@@ -869,7 +872,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 			searchBar.setEnabled(true);
 			searchBar.setEditable(true);
 			searchBar.setVisible(true);
-			searchBar.requestFocusInWindow();
+
 			
 			searchBar.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
@@ -889,24 +892,6 @@ public class GUIMain extends JFrame implements DocumentListener {
 		}
 	}
 	
-	public void search() throws BadLocationException {
-		hilit.removeAllHighlights();
-		String s = searchBar.getText().toLowerCase();
-		if (s.length() <= 0) {
-			System.out.println("Nothing to search!");
-			return;
-		}
-		
-		String content = documentPane.getText().toLowerCase();
-		int index = content.indexOf(s,0);
-		
-		while ((index = content.indexOf(s, index)) > -1) {	
-			int end = index + s.length();
-			hilit.addHighlight(index, end, painter);
-			index = end;
-		}
-	}
-
 	
 	/**
 	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel

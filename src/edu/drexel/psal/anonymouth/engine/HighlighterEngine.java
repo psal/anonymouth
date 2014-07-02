@@ -33,10 +33,12 @@ public class HighlighterEngine {
 	private ArrayList<HighlightMapper> selectedAddElements = new ArrayList<HighlightMapper>();
 	private ArrayList<HighlightMapper> selectedRemoveElements = new ArrayList<HighlightMapper>();
 	private ArrayList<HighlightMapper> elementsToRemoveInSentence = new ArrayList<HighlightMapper>();
+	private ArrayList<HighlightMapper> selectedSearchElements = new ArrayList<HighlightMapper>();
 	
 	private DefaultHighlighter.DefaultHighlightPainter painterRemove = new DefaultHighlighter.DefaultHighlightPainter(new Color(255,0,0,128));
 	private DefaultHighlighter.DefaultHighlightPainter painterAdd = new DefaultHighlighter.DefaultHighlightPainter(new Color(0,255,0,128));
 	private DefaultHighlighter.DefaultHighlightPainter painterHighlight = new DefaultHighlighter.DefaultHighlightPainter(PropertiesUtil.getHighlightColor());
+	private DefaultHighlighter.DefaultHighlightPainter painterSearch = new DefaultHighlighter.DefaultHighlightPainter(Color.LIGHT_GRAY);
 	
 	/**
 	 * Constructor
@@ -74,6 +76,7 @@ public class HighlighterEngine {
 		clearSuggestions();
 		removeAutoRemoveHighlights();
 		removeSentenceHighlight();
+		removeAllSearchHighlights();
 	}
 	
 	/**
@@ -327,5 +330,28 @@ public class HighlighterEngine {
 				}
 			}
 		}
+	}
+	
+	public void addAllSearchHighlights(String s) {
+		s = s.toLowerCase();
+		String content = main.documentPane.getText().toLowerCase();
+		int index = content.indexOf(s,0);
+		
+		while ((index = content.indexOf(s, index)) > -1) {	
+			int end = index + s.length();
+			try {
+				selectedSearchElements.add(new HighlightMapper(index, end, mainHighlight.addHighlight(index, end, painterSearch)));
+			} catch (BadLocationException e) {
+				Logger.logln(NAME+"Problem occurred while trying to highlight search at indices "+index+"-"+end, LogOut.STDERR);
+			}
+			index = end;
+		}
+	}
+	
+	public void removeAllSearchHighlights() {
+		int size = selectedSearchElements.size();
+		for (int i = 0; i < size; i++)
+			mainHighlight.removeHighlight(selectedSearchElements.get(i).getHighlightedObject());
+		selectedSearchElements.clear();
 	}
 }
