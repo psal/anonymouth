@@ -518,18 +518,18 @@ public class GUIMain extends JFrame implements DocumentListener {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				
-				int confirm2 = JOptionPane.showOptionDialog(main, 
-						"Are you sure you want to close this Application?\n", 
-						"Unsaved Changes Warning", 
-						JOptionPane.YES_NO_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, 
-						UIManager.getIcon("OptionPane.warningIcon"), null, null);
-				
-				if (!main.documentSaved) {
+				if (!main.documentSaved && PropertiesUtil.getWarnQuit()) {
+					int confirm2 = JOptionPane.showOptionDialog(main, 
+							"Are you sure you want to close this Application?\n", 
+							"Unsaved Changes Warning", 
+							JOptionPane.YES_NO_OPTION, 
+							JOptionPane.QUESTION_MESSAGE, 
+							UIManager.getIcon("OptionPane.warningIcon"), null, null);
 					
 					if (confirm2 == 0) {   //PropertiesUtil.getWarnQuit() && 
 						main.toFront();
 						main.requestFocus();
+						menuDriver.save(main);
 /*
 						confirm = JOptionPane.showOptionDialog(main,							//showOptionalDialog (main,
 							"Close Application?\nYou will lose all unsaved changes.", //Change to "Would you like to save to a specific document before closing?
@@ -543,19 +543,20 @@ public class GUIMain extends JFrame implements DocumentListener {
 						//int returnVal = chooser.showSaveDialog(main);
 						//if (returnVal == JFileChooser.APPROVE_OPTION) {
 						//	System.out.println("You chose to save the file " + chooser.getSelectedFile().getName());
-							menuDriver.save(main);
+						//	menuDriver.save(main);
 						//}
 						System.exit(0);
 					}
-					
+/*					
 				} 
-				  else if (main.documentSaved) {  //PropertiesUtil.getAutoSave() && 
+				else if (main.documentSaved) {  //PropertiesUtil.getAutoSave() && 
 
 					if (confirm2 == 0) {
 						//Logger.logln(NAME+"Auto-saving document");
 						//menuDriver.save(main);
 						System.exit(0);
 					}
+*/
 				} else {
 					System.exit(0);
 				}
