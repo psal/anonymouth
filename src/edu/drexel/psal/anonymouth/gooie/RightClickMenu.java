@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JMenuItem;
@@ -13,6 +14,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
+import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -105,18 +107,28 @@ public class RightClickMenu extends JPopupMenu {
 				String text = main.documentPane.getText();
 				//main.editorDriver.taggedDoc = new TaggedDocument(main, text, true,); /***************************/
 				
+				//Force an undo/redo update, so sentence combine can be undone
+				main.versionControl.updateUndoRedo(main.editorDriver.taggedDoc, popupListener.start, true);
+				
 				for (int i = popupListener.start; i < popupListener.stop; i++) {
 					if (EOS.contains(text.charAt(i))) {
 						main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(i, true);
 					}
 				}
 				
-
+				int[][] sentIndices = main.editorDriver.getSentencesIndices(popupListener.start, popupListener.stop);
+				ArrayList<TaggedSentence> sentsToCombine = new ArrayList<TaggedSentence>();
+				
+				for (int i = sentIndices[0][0]; i <= sentIndices[1][0]; i++) {
+					sentsToCombine.add(main.editorDriver.taggedDoc.getSentenceNumber(i));
+				}
+				TaggedSentence combinedSent = main.editorDriver.taggedDoc.concatSentences(sentsToCombine);
+				
+				main.editorDriver.taggedDoc.removeMultipleAndReplace(sentsToCombine, combinedSent);
+				
 				main.editorDriver.newCaretPosition[0] = popupListener.start;
 				main.editorDriver.newCaretPosition[1] = main.editorDriver.newCaretPosition[0];
 				main.editorDriver.sentIndices[0] = 0;
-				
-				main.editorDriver.taggedDoc.makeAndTagSentences(text, true);
 				
 				main.editorDriver.syncTextPaneWithTaggedDoc();
 			}
