@@ -30,9 +30,6 @@ public class EditorDriver {
         //============Assorted=================================================
 
         private final String NAME = "( " + this.getClass().getSimpleName() + " )- ";
-        private final char NEWLINE = System.lineSeparator().charAt(0);
-        private final char TAB = '\t';
-        private final char SPACE = ' ';
         private GUIMain main;
         public SentenceMaker sentenceMaker;
 
@@ -654,13 +651,13 @@ public class EditorDriver {
 	                while (tempIndex < newCaretPosition[0]) {
 	                        newChar = main.documentPane.getText().charAt(tempIndex);
 	                        if (taggedDoc.watchForEOS != -1) {
-	                                if (isWhiteSpace(newChar)) {
+	                                if (Character.isWhitespace(newChar)) {
 	                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForEOS, false);
 	                                }
 	                                
 	                                taggedDoc.watchForEOS = -1;
 	                        } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {
-	                                if (isWhiteSpace(newChar)) {
+	                                if (Character.isWhitespace(newChar)) {
 	                                        taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
 	                                }
 	                                
@@ -690,7 +687,7 @@ public class EditorDriver {
                 		newChar = main.documentPane.getText().charAt(priorCaretPosition);
                         //If we're keeping an eye out for a possible end of sentence...
                         if (taggedDoc.watchForEOS != -1) {
-                                if (isWhiteSpace(newChar)) {
+                                if (Character.isWhitespace(newChar)) {
                                         if (sentNum == taggedDoc.numOfSentences - 1) {
                                                 taggedDoc.endSentenceExists = false;
                                         }
@@ -700,7 +697,7 @@ public class EditorDriver {
                                 taggedDoc.watchForEOS = -1;
                         //If we're keeping an eye out for a possible end of sentence at the VERY END of the document
                         } else if (taggedDoc.watchForLastSentenceEOS != -1 && newCaretPosition[0] == taggedDoc.length) {        
-                                if (isWhiteSpace(newChar)) {
+                                if (Character.isWhitespace(newChar)) {
                                         taggedDoc.specialCharTracker.setIgnoreEOS(taggedDoc.watchForLastSentenceEOS, false);
                                 }
                                 
@@ -750,26 +747,6 @@ public class EditorDriver {
                 } else if (taggedDoc.specialCharTracker.isSquiggly(newChar)) {
                         taggedDoc.specialCharTracker.addSquiggly(position, newChar);
                 }
-        }
-
-        /**
-         * Determines whether or not the character is considered whitespace
-         * (meaning it checks if it's a space, newline, or tab)
-         *
-         * @param unknownChar
-         * The character you want to test
-         *
-         * @return
-         *                 Whether or not the character is white space
-         */
-        public boolean isWhiteSpace(char unknownChar) {
-                boolean result = false;
-
-                if (unknownChar == SPACE || unknownChar == NEWLINE || unknownChar == TAB) {
-                        result = true;
-                }
-
-                return result;
         }
 
         /**
