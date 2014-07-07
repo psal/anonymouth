@@ -290,8 +290,8 @@ public class SentenceMaker implements Serializable  {
 			if (EOSFound) {
 				sents.add(text.substring(pastIndex, index));
 				pastText = "";
+				pastIndex = index;
 			}
-			pastIndex = index;
 		}
 		if (sents.isEmpty()) {
 			sents.add(text);

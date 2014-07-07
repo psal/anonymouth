@@ -36,7 +36,6 @@ public class FunctionWords implements Runnable {
 
 	//Constants
 	private final String NAME = "( FuncitonWords ) - ";
-	private final int NUM_OF_WORDS=486; //The number of words we will add
 
 	//Variables
 	private ArrayList<String> functionWordList; //The initial list 
@@ -53,10 +52,11 @@ public class FunctionWords implements Runnable {
 		Logger.logln(NAME+"Beginning to initialize function words...");
 
 		functionWordList = FileHelper.arrayListFromFile(ANONConstants.KOPPEL_FUNCTION_WORDS, 1000);
-		functionWordArray = new String[NUM_OF_WORDS];
+		int numWords = functionWordList.size();
+		functionWordArray = new String[numWords];
 
 		//We only want to use a predetermined number of words from the ArrayList we obtained
-		for (int i = 0; i < NUM_OF_WORDS; i++) {
+		for (int i = 0; i < numWords; i++) {
 			functionWordArray[i] = functionWordList.get(i);
 		}
 
@@ -119,7 +119,7 @@ public class FunctionWords implements Runnable {
 		for (int i = 0; i < size; i++) {
 			wordToFind = functionWords.getWordAt(i);
 			success = functionWords.isWordInTrie(wordToFind);
-			System.out.println("   >>> " + success);
+			System.out.println("   >>> " + wordToFind + ": " + success);
 			if (!success)
 				break;
 		}
