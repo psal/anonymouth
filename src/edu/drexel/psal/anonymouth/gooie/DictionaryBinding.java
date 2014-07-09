@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
@@ -144,6 +146,22 @@ public class DictionaryBinding {
 			}
 		});
 		
+		dc.wordField.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+				if (dc.wordField.getText().equals("word or phrase")) {
+					dc.wordField.setText("");
+				}
+				dc.wordField.setForeground(Color.black);
+			}
+			
+			public void focusLost(FocusEvent e) {
+				if (dc.wordField.getText().isEmpty()) {
+					dc.wordField.setText("word or phrase");
+					dc.wordField.setForeground(Color.gray);
+				}
+			}
+		});
+		
 		dc.gramField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {}
@@ -157,7 +175,23 @@ public class DictionaryBinding {
 				dc.wordSearchButton.setSelected(false);
 				dc.gramStartSearchButton.setSelected(false);
 			}
-		});	
+		});
+		
+		dc.gramField.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+				if (dc.gramField.getText().equals("char gram (e.g. ns )")) {
+					dc.gramField.setText("");
+				}
+				dc.gramField.setForeground(Color.black);
+			}
+			
+			public void focusLost(FocusEvent e) {
+				if (dc.gramField.getText().isEmpty()) {
+					dc.gramField.setText("char gram (e.g. ns )");
+					dc.gramField.setForeground(Color.gray);
+				}
+			}
+		});
 
 		dc.gramStartField.addKeyListener(new KeyListener() {
 			@Override
@@ -173,6 +207,22 @@ public class DictionaryBinding {
 				dc.gramSearchButton.setSelected(false);
 			}
 			
+		});
+		
+		dc.gramStartField.addFocusListener(new FocusListener() {
+			public void focusGained(FocusEvent e) {
+				if (dc.gramStartField.getText().equals("char gram (e.g. ns )")) {
+					dc.gramStartField.setText("");
+				}
+				dc.gramStartField.setForeground(Color.black);
+			}
+			
+			public void focusLost(FocusEvent e) {
+				if (dc.gramStartField.getText().isEmpty()) {
+					dc.gramStartField.setText("char gram (e.g. ns )");
+					dc.gramStartField.setForeground(Color.gray);
+				}
+			}
 		});
 		
 		dc.gramSearchButton.addActionListener(new ActionListener() {
@@ -220,7 +270,7 @@ public class DictionaryBinding {
 				dc.dispose();
 				dc.gramField.setText("char gram (e.g. ns )");
 				dc.gramField.setForeground(Color.gray);
-				dc.wordField.setText("word");
+				dc.wordField.setText("word or phrase");
 				dc.wordField.setForeground(Color.gray);
 				dc.gramStartField.setText("char gram (e.g. ns )");
 				dc.gramStartField.setForeground(Color.gray);
@@ -293,6 +343,7 @@ public class DictionaryBinding {
 		//create the structure to hold the actual information of the tab
 		JTextPane textPane = new JTextPane();
 		textPane.setText(resultsList);
+		textPane.setEditable(false);
 		final JScrollPane content = new JScrollPane(textPane);
 		
 		//create an icon appropriate to later form a button based on it

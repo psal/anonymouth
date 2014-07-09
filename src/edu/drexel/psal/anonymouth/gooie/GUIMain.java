@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -879,17 +881,25 @@ public class GUIMain extends JFrame implements DocumentListener {
 			searchBar.setEnabled(true);
 			searchBar.setEditable(true);
 			searchBar.setVisible(true);
-
 			
-			searchBar.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
+			
+			searchBar.addFocusListener(new FocusListener() {
+				public void focusGained(FocusEvent e) {
 					if (searchBar.getText().equals("enter word...")) {
 						searchBar.setText("");
 					}
 					searchBar.setForeground(Color.black);
 				}
-			});
 				
+				public void focusLost(FocusEvent e) {
+					if (searchBar.getText().isEmpty()) {
+						searchBar.setText("enter word...");
+						searchBar.setCaretPosition(0);
+						searchBar.setForeground(Color.gray);
+					}
+				}
+			});
+			
 			searchBar.setFocusAccelerator('f');
 			
 			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
