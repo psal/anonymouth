@@ -148,7 +148,7 @@ public class SpecialCharTracker implements Serializable {
 			}
 			
 			allTextWrapperSizes[curIndex]++;
-			allTextWrappers.get(curIndex).add(specialCharTracker.allTextWrappers.get(curIndex).get(i));
+			allTextWrappers.get(curIndex).add(new TextWrapper(specialCharTracker.allTextWrappers.get(curIndex).get(i)));
 		}
 	}
 	
