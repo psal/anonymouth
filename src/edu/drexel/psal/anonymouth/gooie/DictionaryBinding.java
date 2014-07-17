@@ -364,6 +364,7 @@ public class DictionaryBinding {
 		final JPanel tab = new JPanel();
 		tab.add(button);
 		tab.add(new JLabel(title));
+		tab.setOpaque(false);
 		
 		int tabCount = dc.viewerTP.getTabCount();
 		//add each complete tab to the tabbed pane in the specified position 
