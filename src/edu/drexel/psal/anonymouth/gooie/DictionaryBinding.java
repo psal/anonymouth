@@ -303,7 +303,7 @@ public class DictionaryBinding {
 	
 	public static boolean readInAndScan(String nGram, boolean wordStart, DictionaryConsole dc) throws IOException {
 		Logger.logln(NAME+"reading in comprehensive word list");
-		FileReader fr = new FileReader(new File("./allWords.txt"));
+		FileReader fr = new FileReader(new File(ANONConstants.EXTERNAL_RESOURCE_PACKAGE + "words.txt"));
 		BufferedReader buff = new BufferedReader(fr);
 		String temp;
 		gramFindings = "";
@@ -317,14 +317,14 @@ public class DictionaryBinding {
 				if (wordStart == false) {
 					if (token.contains(nGram)) {
 						gramFindings = gramFindings+ token+"\n";
-						System.out.println(token);
+						//System.out.println(token);
 						tabTitle = "Contains \"" + nGram +"\"";
 					}
 					allWords.add(token);
 				} else {
 					if (token.substring(0).startsWith(nGram) == true) {
 						gramFindings = gramFindings+ token+"\n";
-						System.out.println(token);
+						//System.out.println(token);
 						tabTitle = "Starts with \"" + nGram +"\"";
 					}
 					allWords.add(token);
