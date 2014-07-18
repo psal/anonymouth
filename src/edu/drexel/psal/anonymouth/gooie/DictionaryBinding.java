@@ -62,7 +62,6 @@ public class DictionaryBinding {
 
 	protected static boolean wordSynSetUpdated = false;
 	protected static String wordSynSetResult = "";
-	protected static String gramFindings = "";
 	protected static String currentWord = "";
 	protected static boolean isFirstGramSearch = true;
 	protected static ArrayList<String> allWords = new ArrayList<String>();
@@ -70,6 +69,12 @@ public class DictionaryBinding {
 	public static void init() {
 		System.setProperty("wordnet.database.dir", //ANONConstants.WORKING_DIR +"src"+JGAAPConstants.JGAAP_RESOURCE_PACKAGE+"wordnet" );
 												   ANONConstants.WORKING_DIR +"src/edu/drexel/psal/resources/wordnet");
+		try {
+			readInAllWords();
+		} catch (IOException e) {
+			Logger.logln(NAME+"Failed to read in word list");
+			e.printStackTrace();
+		}
 	}
 	
 	public static void initDictListeners (final DictionaryConsole dc) {
@@ -229,17 +234,13 @@ public class DictionaryBinding {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Logger.logln(NAME+"Preparing to search for character grams");
+				long startTime = System.currentTimeMillis();
 				String theGram = dc.gramField.getText();
-				if (theGram.trim().equals("") == false) {
-						try {
-							readInAndScan(theGram, false, dc);
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						isFirstGramSearch = false;
-					} else {
-						scanAllWords(theGram);
-					}
+				if (!theGram.trim().equals("")) {
+					scanAllWords(theGram,false,dc);
+				}
+				long endTime = System.currentTimeMillis();
+				Logger.logln(NAME+"Search took " + (endTime - startTime) + "ms");
 			}
 		});
 		
@@ -248,16 +249,13 @@ public class DictionaryBinding {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Logger.logln(NAME+"Preparing to search for character grams in the beginnning of the word");
+				long startTime = System.currentTimeMillis();
 				String theGram = dc.gramStartField.getText();
-				if (theGram.trim().equals("") == false) {
-					try {
-						readInAndScan(theGram, true, dc);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					scanAllWords(theGram);
+				if (!theGram.trim().equals("")) {
+					scanAllWords(theGram,true,dc);
 				}
+				long endTime = System.currentTimeMillis();
+				Logger.logln(NAME+"Search took " + (endTime - startTime) + "ms");
 			}
 			
 		});
@@ -301,38 +299,20 @@ public class DictionaryBinding {
 		
 	}
 	
-	public static boolean readInAndScan(String nGram, boolean wordStart, DictionaryConsole dc) throws IOException {
+	public static boolean readInAllWords() throws IOException {
 		Logger.logln(NAME+"reading in comprehensive word list");
 		FileReader fr = new FileReader(new File(ANONConstants.EXTERNAL_RESOURCE_PACKAGE + "words.txt"));
 		BufferedReader buff = new BufferedReader(fr);
 		String temp;
-		gramFindings = "";
-		String tabTitle ="";
 		
 		while ((temp = buff.readLine()) != null) {
 			StringTokenizer st = new StringTokenizer(temp);
 			while (st.hasMoreTokens()) {
 				String token = st.nextToken();
-			
-				if (wordStart == false) {
-					if (token.contains(nGram)) {
-						gramFindings = gramFindings+ token+"\n";
-						//System.out.println(token);
-						tabTitle = "Contains \"" + nGram +"\"";
-					}
-					allWords.add(token);
-				} else {
-					if (token.substring(0).startsWith(nGram) == true) {
-						gramFindings = gramFindings+ token+"\n";
-						//System.out.println(token);
-						tabTitle = "Starts with \"" + nGram +"\"";
-					}
-					allWords.add(token);
-				}
+				allWords.add(token);
 			}
 
 		}
-		createTab(tabTitle, gramFindings, dc);
 		buff.close();
 		System.out.println("Done reading the word list");
 		return true;
@@ -375,20 +355,33 @@ public class DictionaryBinding {
 	}
 	
 	
-	public static boolean scanAllWords(String nGram) {
+	public static boolean scanAllWords(String nGram, boolean wordStart, DictionaryConsole dc) {
 		Logger.logln(NAME+"Scanning all words for occurances of '"+nGram+"'");
 		int i = 0;
 		int max = allWords.size();
-		gramFindings = "";
+		String tabTitle;
+		if (wordStart)
+			tabTitle = "Starts with \"" + nGram +"\"";
+		else
+			tabTitle = "Contains \"" + nGram +"\"";
+		
+		StringBuilder builder = new StringBuilder();
 		
 		while (i < max) {
 			String temp = allWords.get(i);
-			if (temp.contains(nGram)) {
-				gramFindings = gramFindings + temp +"\n";
-			System.out.println("The gramFinding: " + temp);
+			if (wordStart) {
+				if (temp.startsWith(nGram)) {
+					builder.append(temp + "\n");
+				}
+			} else {
+				if (temp.contains(nGram)) {
+					builder.append(temp + "\n");
+				}
 			}
 			i++;
 		}
+		
+		createTab(tabTitle, builder.toString(), dc);
 		return true;
 	}
 	
