@@ -93,7 +93,7 @@ public class DictionaryConsole extends javax.swing.JFrame {
 			}
 			{
 				wordField = new JTextField();
-				wordField.setText("word");
+				wordField.setText("word or phrase");
 				wordField.setForeground(Color.gray);
 			}
 			{

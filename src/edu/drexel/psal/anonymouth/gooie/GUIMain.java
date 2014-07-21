@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -169,6 +171,8 @@ public class GUIMain extends JFrame implements DocumentListener {
 	protected JScrollPane elementsToRemoveScrollPane;
 	protected JButton clearRemoveHighlights;
 	protected JButton highlightAllRemoveHighlights;
+	protected JButton clearAddHighlights;
+	protected JButton highlightAllAddHighlights;
 	protected JButton refreshSuggestions;
 	
 	//Translations
@@ -264,6 +268,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 				setExtendedState(MAXIMIZED_BOTH);
 				setLocationRelativeTo(null);
 				main.setVisible(true);
+				documentPane.requestFocusInWindow();
 			}
 		});
 		
@@ -517,18 +522,18 @@ public class GUIMain extends JFrame implements DocumentListener {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				
-				int confirm2 = JOptionPane.showOptionDialog(main, 
-						"Are you sure you want to close this Application?\n", 
-						"Unsaved Changes Warning", 
-						JOptionPane.YES_NO_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, 
-						UIManager.getIcon("OptionPane.warningIcon"), null, null);
-				
-				if (!main.documentSaved) {
+				if (!main.documentSaved && PropertiesUtil.getWarnQuit()) {
+					int confirm2 = JOptionPane.showOptionDialog(main, 
+							"Are you sure you want to close this Application?\n", 
+							"Unsaved Changes Warning", 
+							JOptionPane.YES_NO_OPTION, 
+							JOptionPane.QUESTION_MESSAGE, 
+							UIManager.getIcon("OptionPane.warningIcon"), null, null);
 					
 					if (confirm2 == 0) {   //PropertiesUtil.getWarnQuit() && 
 						main.toFront();
 						main.requestFocus();
+						menuDriver.save(main);
 /*
 						confirm = JOptionPane.showOptionDialog(main,							//showOptionalDialog (main,
 							"Close Application?\nYou will lose all unsaved changes.", //Change to "Would you like to save to a specific document before closing?
@@ -542,19 +547,20 @@ public class GUIMain extends JFrame implements DocumentListener {
 						//int returnVal = chooser.showSaveDialog(main);
 						//if (returnVal == JFileChooser.APPROVE_OPTION) {
 						//	System.out.println("You chose to save the file " + chooser.getSelectedFile().getName());
-							menuDriver.save(main);
+						//	menuDriver.save(main);
 						//}
 						System.exit(0);
 					}
-					
+/*					
 				} 
-				  else if (main.documentSaved) {  //PropertiesUtil.getAutoSave() && 
+				else if (main.documentSaved) {  //PropertiesUtil.getAutoSave() && 
 
 					if (confirm2 == 0) {
 						//Logger.logln(NAME+"Auto-saving document");
 						//menuDriver.save(main);
 						System.exit(0);
 					}
+*/
 				} else {
 					System.exit(0);
 				}
@@ -666,17 +672,21 @@ public class GUIMain extends JFrame implements DocumentListener {
 			
 			highlightAllRemoveHighlights = new JButton("Highlight All");
 			clearRemoveHighlights = new JButton("Clear All");
-			refreshSuggestions = new JButton("Refresh");
+			highlightAllAddHighlights = new JButton("Highlight All");
+			clearAddHighlights = new JButton("Clear All");
+			refreshSuggestions = new JButton("Refresh Suggestions");
 		}
 		
 		//Adding everything in...
 		wordSuggestionsPanel.add(elementsToAddLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToAddScrollPane, "growx, height 50%");
+		wordSuggestionsPanel.add(highlightAllAddHighlights, "split 2, w 50%");
+		wordSuggestionsPanel.add(clearAddHighlights, "w 50%");
 		wordSuggestionsPanel.add(elementsToRemoveLabel, "h " + BANNER_HEIGHT + "!");
 		wordSuggestionsPanel.add(elementsToRemoveScrollPane, "growx, height 50%");
-		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split, w 33%");
-		wordSuggestionsPanel.add(clearRemoveHighlights, "w 33%");
-		wordSuggestionsPanel.add(refreshSuggestions, "w 33%");
+		wordSuggestionsPanel.add(highlightAllRemoveHighlights, "split 2, w 50%");
+		wordSuggestionsPanel.add(clearRemoveHighlights, "w 50%");
+		wordSuggestionsPanel.add(refreshSuggestions);
 	}
 
 	/**
@@ -846,11 +856,13 @@ public class GUIMain extends JFrame implements DocumentListener {
 			searchButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					try {
-						search();
-					} catch (BadLocationException e) {
-						e.printStackTrace();
+					editorDriver.highlighterEngine.removeAllSearchHighlights();
+					String s = searchBar.getText();
+					if (s.length() <= 0) {
+						System.out.println("Nothing to search!");
+						return;
 					}
+					editorDriver.highlighterEngine.addAllSearchHighlights(s);
 				}
 				
 			});
@@ -859,7 +871,7 @@ public class GUIMain extends JFrame implements DocumentListener {
 			clearButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					hilit.removeAllHighlights();
+					editorDriver.highlighterEngine.removeAllSearchHighlights();
 				}
 			});
 			
@@ -869,17 +881,25 @@ public class GUIMain extends JFrame implements DocumentListener {
 			searchBar.setEnabled(true);
 			searchBar.setEditable(true);
 			searchBar.setVisible(true);
-			searchBar.requestFocusInWindow();
 			
-			searchBar.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
+			
+			searchBar.addFocusListener(new FocusListener() {
+				public void focusGained(FocusEvent e) {
 					if (searchBar.getText().equals("enter word...")) {
 						searchBar.setText("");
 					}
 					searchBar.setForeground(Color.black);
 				}
-			});
 				
+				public void focusLost(FocusEvent e) {
+					if (searchBar.getText().isEmpty()) {
+						searchBar.setText("enter word...");
+						searchBar.setCaretPosition(0);
+						searchBar.setForeground(Color.gray);
+					}
+				}
+			});
+			
 			searchBar.setFocusAccelerator('f');
 			
 			anonymityPanel.add(searchBar, "dock north, width 40:60:80");
@@ -889,24 +909,6 @@ public class GUIMain extends JFrame implements DocumentListener {
 		}
 	}
 	
-	public void search() throws BadLocationException {
-		hilit.removeAllHighlights();
-		String s = searchBar.getText().toLowerCase();
-		if (s.length() <= 0) {
-			System.out.println("Nothing to search!");
-			return;
-		}
-		
-		String content = documentPane.getText().toLowerCase();
-		int index = content.indexOf(s,0);
-		
-		while ((index = content.indexOf(s, index)) > -1) {	
-			int end = index + s.length();
-			hilit.addHighlight(index, end, painter);
-			index = end;
-		}
-	}
-
 	
 	/**
 	 * Updates the anonymity bar variables for the new width and height of the anonymityPanel

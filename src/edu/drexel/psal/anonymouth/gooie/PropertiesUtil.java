@@ -29,7 +29,7 @@ public class PropertiesUtil {
 	protected static String defaultFontSize = "14";
 	protected static String defaultProbSet = "";
 	protected static Boolean defaultAutoSave = false;
-	protected static Boolean defaultWarnQuit = false;
+	protected static Boolean defaultWarnQuit = true;
 	protected static Boolean defaultBarTutorial = true;
 	protected static Boolean defaultHighlightSents = true;
 	protected static Boolean defaultAutoHighlight = true;

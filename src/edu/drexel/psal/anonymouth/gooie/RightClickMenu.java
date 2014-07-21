@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JMenuItem;
@@ -12,7 +13,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 
+import edu.drexel.psal.anonymouth.utils.ConsolidationStation;
 import edu.drexel.psal.anonymouth.utils.TaggedDocument;
+import edu.drexel.psal.anonymouth.utils.TaggedSentence;
 import edu.drexel.psal.jstylo.generics.Logger;
 
 /**
@@ -33,6 +36,7 @@ public class RightClickMenu extends JPopupMenu {
 	private JMenuItem paste;
 	private JSeparator separator;
 	private JMenuItem combineSentences;
+	private JMenuItem resetSentences;
 	private JMenuItem resetHighlighter;
 	private GUIMain main;
 	
@@ -41,6 +45,7 @@ public class RightClickMenu extends JPopupMenu {
 	private ActionListener copyListener;
 	private ActionListener pasteListener;
 	private ActionListener combineSentencesListener;
+	private ActionListener resetSentencesListener;
 	private ActionListener resetHighlighterListener;
 	private PopupListener popupListener;
 
@@ -53,6 +58,7 @@ public class RightClickMenu extends JPopupMenu {
 		paste = new JMenuItem("Paste");
 		separator = new JSeparator();
 		combineSentences = new JMenuItem("Make a single sentence");
+		resetSentences = new JMenuItem("Reset sentence boundaries");
 		resetHighlighter = new JMenuItem("Reset Highlighter");
 		
 		EOS = new HashSet<Character>(3);
@@ -65,6 +71,7 @@ public class RightClickMenu extends JPopupMenu {
 		this.add(paste);
 		this.add(separator);
 		this.add(combineSentences);
+		this.add(resetSentences);
 		this.add(resetHighlighter);
 		this.main = main;
 		
@@ -105,34 +112,65 @@ public class RightClickMenu extends JPopupMenu {
 				String text = main.documentPane.getText();
 				//main.editorDriver.taggedDoc = new TaggedDocument(main, text, true,); /***************************/
 				
+				//Force an undo/redo update, so sentence combine can be undone
+				main.versionControl.updateUndoRedo(main.editorDriver.taggedDoc, popupListener.start, true);
+				
 				for (int i = popupListener.start; i < popupListener.stop; i++) {
 					if (EOS.contains(text.charAt(i))) {
 						main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(i, true);
 					}
 				}
 				
-
+				int[][] sentIndices = main.editorDriver.getSentencesIndices(popupListener.start, popupListener.stop);
+				ArrayList<TaggedSentence> sentsToCombine = new ArrayList<TaggedSentence>();
+				
+				for (int i = sentIndices[0][0]; i <= sentIndices[1][0]; i++) {
+					sentsToCombine.add(main.editorDriver.taggedDoc.getSentenceNumber(i));
+				}
+				TaggedSentence combinedSent = main.editorDriver.taggedDoc.concatSentences(sentsToCombine);
+				
+				main.editorDriver.taggedDoc.removeMultipleAndReplace(sentsToCombine, combinedSent);
+				
 				main.editorDriver.newCaretPosition[0] = popupListener.start;
 				main.editorDriver.newCaretPosition[1] = main.editorDriver.newCaretPosition[0];
 				main.editorDriver.sentIndices[0] = 0;
-				
-				main.editorDriver.taggedDoc.makeAndTagSentences(text, true);
 				
 				main.editorDriver.syncTextPaneWithTaggedDoc();
 			}
 		};
 		combineSentences.addActionListener(combineSentencesListener);
 		
+		resetSentencesListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					//Force an undo/redo update, so sentence reset can be undone
+					main.versionControl.updateUndoRedo(main.editorDriver.taggedDoc, popupListener.start, true);
+					
+					main.editorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
+					
+					//Make a new TaggedDocument from the text in the document pane
+					String text = main.documentPane.getText();
+					TaggedDocument newDoc = new TaggedDocument(main, text, true);
+					newDoc.makeAndTagSentences(text, true);
+					
+					ConsolidationStation.toModifyTaggedDocs.set(0, newDoc);
+					main.editorDriver.syncTextPaneWithTaggedDoc();
+				} catch (Exception e1) {
+					Logger.logln(NAME+"Editor reset FAILED");
+					Logger.logln(e1);
+				}
+			}
+		};
+		resetSentences.addActionListener(resetSentencesListener);
+		
 		resetHighlighterListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					main.editorDriver.taggedDoc.specialCharTracker.resetEOSCharacters();
-					//main.editorDriver.taggedDoc = new TaggedDocument(main, main.documentPane.getText(), false);
-					main.editorDriver.syncTextPaneWithTaggedDoc();
-					main.versionControl.init();
+					main.editorDriver.highlighterEngine.clearAll();
 				} catch (Exception e1) {
-					Logger.logln(NAME+"Editor reset FAILED");
+					Logger.logln(NAME+"Highlighter reset FAILED");
 					Logger.logln(e1);
 				}
 			}

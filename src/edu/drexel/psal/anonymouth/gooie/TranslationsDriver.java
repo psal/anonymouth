@@ -197,13 +197,13 @@ public class TranslationsDriver implements MouseListener {
 		int lastSentence = -1;
 		for (int i = 0; i < sentChars.length; i++) {
 			if (main.editorDriver.taggedDoc.watchForEOS != -1) {
-				if (main.editorDriver.isWhiteSpace(sentChars[i])) {
+				if (Character.isWhitespace(sentChars[i])) {
 					main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(main.editorDriver.taggedDoc.watchForEOS, false);
 				}
 				
 				main.editorDriver.taggedDoc.watchForEOS = -1;
 			} else if (main.editorDriver.taggedDoc.watchForLastSentenceEOS != -1 && main.editorDriver.newCaretPosition[0] == main.editorDriver.taggedDoc.length) {
-				if (main.editorDriver.isWhiteSpace(sentChars[i])) {
+				if (Character.isWhitespace(sentChars[i])) {
 					main.editorDriver.taggedDoc.endSentenceExists = false;
 					main.editorDriver.taggedDoc.specialCharTracker.setIgnoreEOS(main.editorDriver.taggedDoc.watchForLastSentenceEOS, false);
 				}
