@@ -17,7 +17,7 @@ Drexel University, Philadelphia PA<br>
 	- [How to Build and Run](#how-to-build-and-run)
 2. Development	
 	- [Basic Logic Flow](#basic-logic-flow)
-	- [Basic Class Strucutre](#basic-class-structure)
+	- [Basic Class Structure](#basic-class-structure)
 	- [To Do List](#to-do-list)
 	- [Known Bugs](#known-bugs)
 3. Credits
@@ -30,7 +30,7 @@ Drexel University, Philadelphia PA<br>
 
 Anonymouth is a Java-based application that aims to give users to tools and knowledge needed to begin anonymizing documents they have written.
 
-It does this by firing up JStylo libraries (an author detection application also develped by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
+It does this by firing up JStylo libraries (an author detection application also developed by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
 
 Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
@@ -50,7 +50,7 @@ If you are unsure whether or not you have it installed, follow these steps to se
 
 If you are using Eclipse, also make sure that Java 7 is your selected compiler by checking `Preferences/Java/Compiler` and is an included Library in your java Build Path (Not sure how to do this? Google is your friend).
 
-Anonymouth requires the included `jsan_resources` directory in it's running directory (The main Anonymouth directory containing lib, src, etc.). It should be in the correct directy by default.
+Anonymouth requires the included `jsan_resources` directory in it's running directory (The main Anonymouth directory containing lib, src, etc.). It should be in the correct directory by default.
 
 Anonymouth requires a corpus (basically a database of other authors and documents they have written) to run. It needs this so it can classify your documents with respect to these other documents and their styles so that Anonymouth can give you an idea of how anonymous it thinks your document is and what features to remove/add to help you get there. Three different corpi are included in the project directory for you to choose and are located at:
 
@@ -58,7 +58,7 @@ Anonymouth requires a corpus (basically a database of other authors and document
 * `./anonymouth/jsan_resources/corpora/drexel_1`
 * `./anonymouth/jsan_resources/enron_demo`
 
-Though we included corpi, you are more than welcome to use any other corpus you may have. It is recommended to use many different combinations of authors so you can get the best posisble picture of where your document stands anonymously with respect to others.
+Though we included corpi, you are more than welcome to use any other corpus you may have. It is recommended to use many different combinations of authors so you can get the best possible picture of where your document stands anonymously with respect to others.
 
 Anonymouth also needs the following jars in the lib directory (everything should already be included):
 
@@ -118,9 +118,11 @@ This is currently the only ready way to compile and run Anonymouth. We will be i
 
 ###<a id="how-to-build-and-run"></a>How to Build and Run
 
+In order for Anonymouth to run properly the Java Heap size needs to be extended. This can be done by going to Run > Run Configurations. In the Window that appears, "ThePresident" needs to be selected on the left pane. On the right pane, the "Arguments" tab needs to be selected, and in the VM Arguments, the extended size needs to be specified (ex. -Xmx1024M). 
+
 Once Anonymouth is all set up in Eclipse, you need only run `ThePresident` from the package `edu.drexel.psal.anonymouth.gooie` to begin using it.
 
-Please note that there are two main package categories, JStylo and Anonymouth. The majority of Anonymouth developement should be in the Anonymouth packages as Anonymouth simply uses the JStylo libraries for parts of the initial document process, so beginners need only concern themselves with the Anonymouth packages.
+Please note that there are two main package categories, JStylo and Anonymouth. The majority of Anonymouth development should be in the Anonymouth packages as Anonymouth simply uses the JStylo libraries for parts of the initial document process, so beginners need only concern themselves with the Anonymouth packages.
 
 [Back to top](#top)
 
@@ -150,20 +152,20 @@ The first window that shows up (not counting the splash screen) when Anonymouth 
 
 <b>Initial document processing begins immediately with: </b>`anonymouth.engine.DocumentProcessor`
 
-Inititalized within GUIMain as should nearly all Anonymouth class instances, this holds the main method and thread that handles processing and reprocessing documents. All processing events can be traced back to this class.
+Initialized within GUIMain as should nearly all Anonymouth class instances, this holds the main method and thread that handles processing and reprocessing documents. All processing events can be traced back to this class.
 
 #####↓ ---PROCESSING COMPLETE---
 
 <b>Main GUI Code:</b> `anonymouth.gooie.GUIMain`
 
-The main gui window is displayed. This is also the central "hub" for Anonymouth. This should be the main instance center, and anytime you want to access code from other classes from another class you more than likely will be going through this.
+The main GUI window is displayed. This is also the central "hub" for Anonymouth. This should be the main instance center, and anytime you want to access code from other classes from another class you more than likely will be going through this.
 
 - Houses and initialized nearly all class instances in Anonymouth
 - Lays out and creates the main Anonymouth window
 
 <b>From here the logic flow depends largely on what the user does:</b>
 
-- If they're editing in the editor, the main class handling that is `anonymouth.googie.EditorDriver`
+- If they're editing in the editor, the main class handling that is `anonymouth.gooie.EditorDriver`
 - If they are using translations the main class handling that is `anonymouth.gooie.TranslationsPanel`
 - If they are using word suggestions, the main class handling that is `anonymouth.gooie.WordSuggestionsDriver`
 - If they are changing Preferences, the main class handling that is `anonymouth.gooie.PreferencesWindow`
@@ -182,23 +184,23 @@ For the most part, Anonymouth splits UI objects into two classes: [Class name]Pa
 - Handles assert methods (if any)
 - Handles UI update/panel switch methods (if any)
 
-While the cooresponding Driver class:
+While the corresponding Driver class:
 
 - Handles all listeners
-- Hanldes most backend/data manipulation and updating
+- Handles most back-end/data manipulation and updating
 
 Again, these are just general guidelines. Sometimes it makes more sense to just have one class handle everything if it's a small object, or sometimes it doesn't make sense to have a seperate Panel/Window class but it does to have a Driver class, etc. You just need to use your best judgement on what will make things more organized and easier to understand.
 
 #####---Package / Organizing Convention---
 
-Anonymouth loosly follows these guidelines for class organization in packages:
+Anonymouth loosely follows these guidelines for class organization in packages:
 
 - `anonymouth.engine` For all processing code and any classes you deem "enginey" (for example, `HighlighterEngine`, `VersionControl`, etc.)
 - `anonymouth.gooie` For all classes displaying or creating swing components and their respective Driver classes
 - `anonymouth.helpers` For classes that aren't necessarily Anonymouth specific, but are used by Anonymouth for general purposes and tasks (for example, `FileHelper`, `ScrollToTop`, `ImageLoader`, etc.)
-- `anonymouth.utils` For classes that serve only as a means for storing and manupulating data (For example, `TaggedSentence`, `TaggedDocument`, `Word`, `TextWrapper`, etc.)
+- `anonymouth.utils` For classes that serve only as a means for storing and manipulating data (For example, `TaggedSentence`, `TaggedDocument`, `Word`, `TextWrapper`, etc.)
 
-There are still quite a few classes that are clearly where they don't belong, so feel free to oragnize Anonymouth so that it best fits these guidelines.
+There are still quite a few classes that are clearly where they don't belong, so feel free to organize Anonymouth so that it best fits these guidelines.
 
 [Back to top](#top)
 
@@ -206,8 +208,8 @@ There are still quite a few classes that are clearly where they don't belong, so
 Add features as they are conceived and ~~strikethrough~~ as they are completed ([1] means most important and [5] means relatively small and not particularly a priority at the moment)
 
 - [1] AUTOMATE AS MUCH OF THE ANONYMIZATION PROCESS AS POSSIBLE. This should be the top priority as of now, see Andrew for the plan and details.
-- [1] An internal  thesaurus must be implemented to help users change words to remove (that or nicely implement the one built into the system, preferable if possible)
-- [2] An intelligent method to search and filter through words to add (start with simple search box, then possibly extend to automatic filtering based on synonyms?)
+- ~~[1] An internal thesaurus must be implemented to help users change words to remove (that or nicely implement the one built into the system, preferable if possible)~~
+- ~~[2] An intelligent method to search and filter through words to add (start with simple search box, then possibly extend to automatic filtering based on synonyms?)~~
 - [5] The clusters window should be updated to be easier to understand and use (it's hidden away in `Window > Clusters`)
 
 [Back to top](#top)
@@ -215,11 +217,11 @@ Add features as they are conceived and ~~strikethrough~~ as they are completed (
 ###<a id="known-bugs"></a>Known Bugs
 Add bugs as they are discovered and ~~strikethrough~~ as they are completed ([1] means fatal or breaks usability and [5] means relatively small and does not have much of an impact on usability)
 
-- [1] During processing on OS X (though the problem may extend to other operating systems as well) the Stanford POS tagger is extremely prone to breaking due to a fatal threading issue which results in heap space or out of memory exceptions. This absolutely MUST be fixed.
+- ~~[1] During processing on OS X (though the problem may extend to other operating systems as well) the Stanford POS tagger is extremely prone to breaking due to a fatal threading issue which results in heap space or out of memory exceptions. This absolutely MUST be fixed.~~
 - [2] The threading with the words to add refresh is not that great, fails to refresh at times and throws exceptions every once in a while.
 - [3] For whatever reason, Anonymouth does not seem to process or recognize all cap words LIKE THIS when working in the editor.
-- [5] The max features slider in Preferences does not work as expected at times and is a little finicky.
-- [5] Currently Anonymouth is all running on the initial thread which <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html">should NOT be the case</a>. This should be done in a GUI creation and show task thread, though when I tried this in the past it breaks the slash screen.
+- [5] The max features slider in Preferences does not work as expected at times and is a little whimsical.
+- ~~[5] Currently Anonymouth is all running on the initial thread which <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html">should NOT be the case</a>. This should be done in a GUI creation and show task thread, though when I tried this in the past it breaks the slash screen.~~
 
 [Back to top](#top)
 
