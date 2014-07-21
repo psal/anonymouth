@@ -416,7 +416,7 @@ public class ConsolidationStation {
 	    //get Words-To-Remove and Words-To-Add lists
 	    ArrayList<String[]> returnWordsToRemove = new ArrayList<String[]>();
 	    int h = 0;
-	    while (newDat.get((int)toSort[h][1]) < newStartingValue) {
+	    while (h < newDat.size() && newDat.get((int)toSort[h][1]) < newStartingValue) {
 	    	String word = wordsSuggestion.get((int)toSort[h][1]).getUntagged();
 	    	int occurances = getWordOccurances(toModifyDoc.getUntaggedDocument(), word);
 			if (occurances != 0)
@@ -426,7 +426,7 @@ public class ConsolidationStation {
 		toReturn.put("wordsToRemove", returnWordsToRemove);
 	    ArrayList<String[]> returnWordsToAdd = new ArrayList<String[]>();
 	    h = newDat.size() - 1;
-	    while (newDat.get((int)toSort[h][1]) > newStartingValue) {
+	    while (h >= 0 && newDat.get((int)toSort[h][1]) > newStartingValue) {
 	    	String word = wordsSuggestion.get((int)toSort[h][1]).getUntagged();
 	    	int occurances = getWordOccurances(toModifyDoc.getUntaggedDocument(), word);
 			if (occurances != 0)
