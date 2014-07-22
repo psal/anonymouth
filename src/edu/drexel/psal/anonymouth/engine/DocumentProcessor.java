@@ -202,7 +202,11 @@ public class DocumentProcessor {
 			sendResultsToResultsChart(wekaResults);
 			
 			// update Anonymity Bar
-			main.anonymityBar.updateBar();
+			editorDriver.updateBarThread.execute();
+			
+			//Wait for Anonymity Bar to finish updating
+			editorDriver.updateBarThread.get();
+			
 			main.anonymityBar.showFill(true);
 			
 			// get data for Word Suggestions lists

@@ -560,14 +560,10 @@ public class ConsolidationStation {
 		functionWords.run();
 		for (Word w : tempWords) {
 			if (includeWord(w))
-				search:
-					for ( int i = 0; i < w.wordLevelFeaturesFound.length(); i++)
-						for (int j = 0; j < DataAnalyzer.topAttributes.length; j++)
-							if (w.wordLevelFeaturesFound.references.get(i).index == DataAnalyzer.topAttributes[j].getIndexNumberInInstancesObject()) { // not including words without features in question
-								newWordsSize++;
-								newWords.add(w);
-								break search;
-							}
+				if (!w.wordLevelFeaturesFound.references.isEmpty()) { // not including words without features in question
+					newWordsSize++;
+					newWords.add(w);
+				}
 		}
 		
 		return newWords;
