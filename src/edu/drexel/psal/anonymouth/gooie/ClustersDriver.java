@@ -137,6 +137,7 @@ public class ClustersDriver {
 
 	public static void initializeClusterViewer(GUIMain main, boolean showMessage) {
 		Logger.logln("Initializing ClusterViewer");
+		main.clustersWindow.clusterHolderPanel.removeAll(); //Remove any panels already in the viewer
 		int numPanels = clusterPanels.length;
 		for (int i = 0; i < numPanels; i++) {
 			//if (clusterPanels[i] == null) {
