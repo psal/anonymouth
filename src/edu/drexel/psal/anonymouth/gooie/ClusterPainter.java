@@ -70,15 +70,12 @@ public class ClusterPainter extends JPanel {
 		int width = getWidth();
 		int height = getHeight();
 		yoffset = height/2;
-		double tooDamnBigOffset = 1;
 		g2.draw(new Line2D.Double(xoffset,yoffset,width-xoffset,yoffset));
 		if(maximum <1 )
 			maximum = 1.0; // prevent divide by zero, or creating too large a scale by dividing by a decimal.... FIXME - there is probably a better way...
-		else if(maximum >width)
-			tooDamnBigOffset = maximum/width;
 		if(minimum <0)
 			minimum = 0;
-		scale = (double) (((double)width/tooDamnBigOffset)-2*xoffset)/(maximum-minimum);
+		scale = (double) ((double)width-2*xoffset)/(maximum-minimum);
 		int i=0;
 		double transAuthorMin = transform(authorMin,false);
 		double transAuthorMax = transform(authorMax,false);
