@@ -113,7 +113,7 @@ public class DataAnalyzer{
 		double theMax;
 		double[] featureRay;
 		
-		for (i=1;i<lengthTopAttributes;i++) { // i runs through each instance (row)
+		for (i=0;i<lengthTopAttributes;i++) { // i runs through each instance (row)
 			j=0;
 			featureRay = topAttributes[i].getTrainVals();
 			theMin=featureRay[j];
