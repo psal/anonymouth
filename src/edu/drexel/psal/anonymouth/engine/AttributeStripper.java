@@ -14,8 +14,9 @@ public class AttributeStripper {
 	
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
 	
-	private static Pattern bracketPat = Pattern.compile("\\{[^-{1}]+\\}");
+	private static Pattern bracketPat = Pattern.compile("\\{[^-]+\\}");
 	private static Pattern someString = Pattern.compile("\\{.*\\}"); // use this pattern, and if an exception is thrown, 
+	private static Pattern attribNumber = Pattern.compile("-\\d+\\{"); //used to strip out attribute numbers
 	
 	/**
 	 * strips the input string
@@ -30,7 +31,11 @@ public class AttributeStripper {
 		if(histTest.find() == true) {
 			Matcher m = someString.matcher(input);
 			m.find();
-			output = input.substring(m.start()+1,input.indexOf('}'));
+			String inBraces = input.substring(m.start()+1,input.indexOf('}'));
+			Matcher n = attribNumber.matcher(input);
+			n.find();
+			String attribName = input.substring(input.indexOf("'")+1,n.start());
+			output = attribName + " " + inBraces;
 		}
 		else {
 			if (!input.contains("authorName"))
