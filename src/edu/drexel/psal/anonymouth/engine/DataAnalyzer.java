@@ -423,6 +423,22 @@ public class DataAnalyzer{
 		Logger.logln(NAME+"Targets have been set, and they are:\n"+targetSaver);
 	}
 	
+	/**
+	 * Updates the toModifyValues of all attributes in the top attributes array, 
+	 * so the current document's positions in the clusters window will update properly
+	 */
+	public void updateToModifyValues(DocumentMagician magician) {
+		Logger.logln(NAME+"called updateToModifyValues");
+		//Get new instance from DocumentMagician
+		HashMap<String,Double[][]> attribsAndInstances = magician.getPackagedInstanceData();
+		toModifyInstancesArray = attribsAndInstances.get("modify");
+		for (int i = 0; i < lengthTopAttributes; i++) {
+			String attribName = topAttributes[i].getFullName();
+			int toModifyIndex = allAttribs.indexOf(AttributeStripper.strip(attribName));
+			topAttributes[i].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
+		}
+	}
+	
 	
 	
 	/**
@@ -468,6 +484,8 @@ public class DataAnalyzer{
 	 */
 	public void reRunModified(DocumentMagician magician) throws Exception {
 		magician.reRunModified();
+		Logger.logln(NAME+"Updating toModify values for top attributes");
+		updateToModifyValues(magician);
 		Logger.logln(NAME+"Calling makeViewer in ClusterViewer after re-running modified.");
 		ClustersDriver.makePanels(topAttributes);
 		Logger.logln(NAME+"viewer made");

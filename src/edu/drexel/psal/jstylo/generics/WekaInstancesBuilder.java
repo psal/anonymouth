@@ -592,9 +592,6 @@ public class WekaInstancesBuilder {
 		for (i=0; i<unknownDocs.size(); i++)
 			unknown.add(cfd.createEventSets(unknownDocs.get(i)));
 
-		// apply event cullers
-		unknown = CumulativeEventCuller.cullWithRespectToKnown(cfd, known, unknown);
-
 		// initialize number of sets per document and number of vectors
 		final int numOfFeatureClasses = unknown.get(0).size();
 		final int numOfVectors = unknown.size();
@@ -711,8 +708,7 @@ public class WekaInstancesBuilder {
 		if (cfd == null)
 			prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
 		unknown.add(cfd.createEventSets(unknownDocs.get(0)));
-		unknown = CumulativeEventCuller.cullWithRespectToKnown(cfd, known, unknown);
-
+		
 		final int numOfFeatureClasses = unknown.get(0).size();
 		List<List<EventHistogram>> eventHists = new ArrayList<List<EventHistogram>>(1);
 		List<EventHistogram> histograms;
