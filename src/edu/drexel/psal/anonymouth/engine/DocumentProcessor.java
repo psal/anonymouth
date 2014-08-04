@@ -100,7 +100,6 @@ public class DocumentProcessor {
 		//Initialize all arraylists needed for feature processing
 		int sizeOfCfd = main.ppAdvancedDriver.cfd.numOfFeatureDrivers();
 		ArrayList<String> featuresInCfd = new ArrayList<String>(sizeOfCfd);
-		ArrayList<FeatureList> yesCalcHistFeatures = new ArrayList<FeatureList>(sizeOfCfd);
 
 		for (int i = 0; i < sizeOfCfd; i++) {
 			String theName = main.ppAdvancedDriver.cfd.featureDriverAt(i).getName();
@@ -108,7 +107,6 @@ public class DocumentProcessor {
 			//Capitalize the name and replace all " " and "-" with "_"
 			theName = theName.replaceAll("[ -]","_").toUpperCase(); 
 			main.ppAdvancedDriver.cfd.featureDriverAt(i).isCalcHist();
-			yesCalcHistFeatures.add(FeatureList.valueOf(theName));
 			featuresInCfd.add(i,theName);
 		}
 

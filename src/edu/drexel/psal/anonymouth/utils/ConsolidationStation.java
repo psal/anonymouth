@@ -35,8 +35,6 @@ public class ConsolidationStation {
 	
 	public static final String NAME = "( ConsolidationStation ) - ";
 	static HashMap<String,ArrayList<TreeData>> parsed;
-	static ArrayList<Triple> toAdd=new ArrayList<Triple>(400);
-	static ArrayList<Triple> toRemove=new ArrayList<Triple>(400);
 	public static ArrayList<TaggedDocument> otherSampleTaggedDocs;//initialized in backendInterfaces.
 	public static ArrayList<TaggedDocument> authorSampleTaggedDocs;
 	public static ArrayList<TaggedDocument> toModifyTaggedDocs;//init in editor Tab Driver
@@ -45,16 +43,6 @@ public class ConsolidationStation {
 	private static ArrayList<Word> oldWords = new ArrayList<Word>();
 	private static ArrayList<Double> oldDat = new ArrayList<Double>();
 	private static FunctionWords functionWords = new FunctionWords();
-	
-	/**
-	 * constructor for ConsolidationStation. Depends on target values, and should not be called until they have been selected.
-	 * @param attribs
-	 * @param parsed
-	 */
-	public ConsolidationStation() {
-		toAdd = new ArrayList<Triple>(400);
-		toRemove = new ArrayList<Triple>(400);		
-	}
 	
 	/**
 	 * Adds the features present to each word in the taggedSentence

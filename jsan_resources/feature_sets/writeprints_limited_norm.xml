@@ -255,10 +255,8 @@
 	</feature>
 	<feature name="word bigrams" calc_hist="true">
 		<description value="Frequencies of various word bigrams in the text, case insensitive and without punctuations."/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.ListRegexpEventDriver">
-			<param name="whiteList" value=""/>
-			<param name="keepLexiconInMem" value=""/>
-			<param name="filename" value=""/>
+		<event-driver class="com.jgaap.eventDrivers.WordNGramEventDriver">
+			<param name="N" value="2"/>
 		</event-driver>
 		<canonicizers>
 			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
@@ -276,10 +274,8 @@
 	</feature>
 	<feature name="word trigrams" calc_hist="true">
 		<description value="Frequencies of various word trigrams in the text, case insensitive and without punctuations."/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.ListRegexpEventDriver">
-			<param name="whiteList" value=""/>
-			<param name="keepLexiconInMem" value=""/>
-			<param name="filename" value=""/>
+		<event-driver class="com.jgaap.eventDrivers.WordNGramEventDriver">
+			<param name="N" value="3"/>
 		</event-driver>
 		<canonicizers>
 			<canonicizer class="com.jgaap.canonicizers.UnifyCase">

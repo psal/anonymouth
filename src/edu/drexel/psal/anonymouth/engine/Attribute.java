@@ -15,7 +15,7 @@ public class Attribute {
 	private final String NAME = "( "+this.getClass().getSimpleName()+" ) - ";
 	private int indexNumberInInstancesObject;
 	private int featuresOriginalInstancesIndexNumber;
-	private FeatureList genericName;
+	private String genericName;
 	private String concatGenNameAndStrInBraces;
 	private String fullName;
 	private double infoGain;
@@ -93,7 +93,7 @@ public class Attribute {
 		
 		
 		Logger.logln(NAME+"Generic name: "+tempFeatName.replace("-","_").toUpperCase());
-		genericName = FeatureList.valueOf(tempFeatName.replace("-","_").toUpperCase());
+		genericName = tempFeatName.replace("-","_").toUpperCase();
 		
 	}
 	
@@ -123,7 +123,7 @@ public class Attribute {
 	 * @return
 	 *  generic feature name
 	 */
-	public FeatureList getGenericName(){
+	public String getGenericName(){
 		return genericName;
 	}
 	
