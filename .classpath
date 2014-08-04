@@ -14,6 +14,6 @@
 	<classpathentry kind="lib" path="lib/org.annolab.tt4j-1.0.15.jar"/>
 	<classpathentry kind="lib" path="lib/stanford-postagger-2012-01-06.jar"/>
 	<classpathentry kind="lib" path="lib/ui.jar"/>
-	<classpathentry kind="lib" path="lib/weka_3_7_9.jar"/>
+	<classpathentry kind="lib" path="lib/jstylo.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
