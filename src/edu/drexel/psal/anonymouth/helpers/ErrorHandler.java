@@ -42,7 +42,7 @@ public class ErrorHandler {
 			Logger.logln(e);
 		
 		int ans = JOptionPane.showOptionDialog(parent,
-				"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
+				"Anonymouth has encountered a fatal error and will have to close since it can no\n" +
 						"longer run properly.\n\n" +
 						"If you wish to save any current work before Anonymouth closes, you may click\n" +
 						"\"Wait\" and close Anonymouth afterwards manually.",

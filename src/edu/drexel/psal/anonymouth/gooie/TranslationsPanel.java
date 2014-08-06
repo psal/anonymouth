@@ -78,7 +78,7 @@ public class TranslationsPanel {
 		if (TranslatorThread.noInternet || TranslatorThread.accountsUsed || !PropertiesUtil.getDoTranslations()) {
 			if (TranslatorThread.noInternet) {
 				main.notTranslated.setText("Translations unavailable: No Internet connection\n\n" +
-						"If you wish to recieve translation suggestions you must connect to the internet" +
+						"If you wish to recieve translation suggestions you must connect to the internet " +
 						"and re-process your document.");
 				main.translationsHolderPanel.add(main.notTranslated, "");
 				main.translateSentenceButton.setEnabled(false);
