@@ -547,11 +547,10 @@ public class ConsolidationStation {
 		//start searching for qualified words
 		functionWords.run();
 		for (Word w : tempWords) {
-			if (includeWord(w))
-				if (!w.wordLevelFeaturesFound.references.isEmpty()) { // not including words without features in question
-					newWordsSize++;
-					newWords.add(w);
-				}
+			if (includeWord(w)) {
+				newWordsSize++;
+				newWords.add(w);
+			}
 		}
 		
 		return newWords;
