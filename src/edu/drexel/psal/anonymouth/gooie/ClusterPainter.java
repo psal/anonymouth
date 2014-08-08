@@ -13,6 +13,7 @@ public class ClusterPainter extends JPanel {
 
 	@SuppressWarnings("unused")
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	private final double MINWIDTH = 7;
 	
 	//double[] features = {3.3, 3.5, 2.1, 7.8, 9.5, 5.5, 6.1,14.9, 18.0,19.6};
 	
@@ -112,7 +113,7 @@ public class ClusterPainter extends JPanel {
 			 */
 			if (i == selectedCluster-1) {
 				g2.setColor(highlightColor);
-				g2.fill(new Ellipse2D.Double(minValue,yoffset*.68,maxValue - minValue,yoffset*.75));
+				g2.fill(new Ellipse2D.Double(minValue,yoffset*.68,Math.max(maxValue-minValue,MINWIDTH),yoffset*.75));
 			}
 //			else {
 //				g2.setColor(Color.green);
@@ -125,7 +126,7 @@ public class ClusterPainter extends JPanel {
 		}
 		
 		g2.setColor(transRed);
-		g2.fill(new Ellipse2D.Double(transAuthorMin,yoffset*.78,transAuthorMax-transAuthorMin,yoffset*.5));
+		g2.fill(new Ellipse2D.Double(transAuthorMin,yoffset*.78,Math.max(transAuthorMax-transAuthorMin,MINWIDTH),yoffset*.5));
 		
 		g2.setColor(Color.black);
 		dim = 7;
