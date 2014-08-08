@@ -194,15 +194,15 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 			
 			try {
 				if (!done) {
-					instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+					instance.ib.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
 					done = true;
 				}
-				instance.wid.prepareTestSetReducedVersion(toModifySet);
+				instance.ib.prepareTestSetReducedVersion(toModifySet);
 			} catch(Exception e) {
 				e.printStackTrace();
 				ErrorHandler.StanfordPOSError();
 			}
-			toSort[i][0] = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+			toSort[i][0] = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.ib.getTestSet())[0];
 			toSort[i][1] = i;
 		}
 

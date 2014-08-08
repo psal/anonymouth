@@ -366,16 +366,16 @@ public class ConsolidationStation {
 				
 				try {
 					if (firstTime) {
-						instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+						instance.ib.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
 						firstTime = false;
 					}
-					instance.wid.prepareTestSetReducedVersion(toModifySet);
+					instance.ib.prepareTestSetReducedVersion(toModifySet);
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();
 					ErrorHandler.StanfordPOSError();
 				}
-				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.ib.getTestSet())[0];
 				if (currValue == newStartingValue)
 					wordsSuggestion.remove(k);
 				else {

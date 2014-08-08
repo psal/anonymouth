@@ -139,7 +139,7 @@ public class MenuDriver {
 					FileHelper.goodSave.setDirectory(savedPath);
 				} else {
 					try {
-						FileHelper.goodSave.setDirectory(new File(main.preProcessWindow.ps.getTestDocs().get(ANONConstants.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
+						FileHelper.goodSave.setDirectory(new File(main.preProcessWindow.ps.getTestAuthorMap().get(ANONConstants.DUMMY_NAME).get(0).getFilePath()).getCanonicalPath());
 					} catch (IOException e1) {
 						Logger.logln(NAME+"Something went wrong while trying to set the opening directory for the JFileChooser", LogOut.STDERR);
 					}

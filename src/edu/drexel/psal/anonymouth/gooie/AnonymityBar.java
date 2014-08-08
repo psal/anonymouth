@@ -240,13 +240,13 @@ public class AnonymityBar extends JPanel {
 		
 		try {
 			if (!main.processed || main.reprocessing)
-				instance.wid.prepareTrainingSet(main.documentProcessor.documentMagician.getTrainSet(), main.ppAdvancedDriver.cfd);
-			instance.wid.prepareTestSetReducedVersion(toModifySet);
+				instance.ib.prepareTrainingSet(main.documentProcessor.documentMagician.getTrainSet(), main.ppAdvancedDriver.cfd);
+			instance.ib.prepareTestSetReducedVersion(toModifySet);
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();
 		}
-		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.ib.getTestSet())[0];
 
 		updateTubeFill(); //update the other variables
 		

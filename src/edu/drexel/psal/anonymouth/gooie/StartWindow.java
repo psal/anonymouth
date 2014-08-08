@@ -434,7 +434,7 @@ public class StartWindow extends JFrame {
 				
 				//main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle(), 0);
 				
-				String testDocFilePath = main.preProcessWindow.ps.getTestDoc().getFilePath();
+				String testDocFilePath = main.preProcessWindow.ps.getTestDocs().get(0).getFilePath();
 				String trainDocFilePath = main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath();
 				if (!ANONConstants.IS_MAC) { // We do this so it works for both OS X and Windows
 					testDocFilePath = testDocFilePath.replace('/', '\\');
