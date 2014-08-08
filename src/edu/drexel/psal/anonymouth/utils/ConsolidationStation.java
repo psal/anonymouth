@@ -21,7 +21,9 @@ import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
@@ -366,10 +368,41 @@ public class ConsolidationStation {
 				
 				try {
 					if (firstTime) {
-						instance.ib.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+						ProblemSet ps = new ProblemSet();
+						for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
+							ps.addTrainDoc(d.getAuthor(), d);
+						}
+						for (Document d : toModifySet) {
+							ps.addTestDoc(d.getAuthor(), d);
+						}
+						CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+						instance.jstylo.getUnderlyingInstancesBuilder().reset();
+						instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+						instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+						instance.jstylo.prepareInstances();
 						firstTime = false;
+					} else {
+						ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+						
+						//reset test data
+						List<String> toRemove = new ArrayList<String>();
+						for (String author :  ps.getTestAuthorMap().keySet()){
+							toRemove.add(author);
+						}
+						for (String s : toRemove){
+							ps.removeTestAuthor(s);
+						}
+						
+						//add in new test data
+						for (Document d : toModifySet) {
+							ps.addTestDoc(d.getAuthor(), d);
+						}
+						CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+						instance.jstylo.getUnderlyingInstancesBuilder().reset();
+						instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+						instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+						instance.jstylo.prepareInstances();
 					}
-					instance.ib.prepareTestSetReducedVersion(toModifySet);
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();

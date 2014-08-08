@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.File;
@@ -22,7 +23,9 @@ import com.jgaap.generics.Document;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 /**
  * The template for the new and improved Anonymity bar!<br><br>
@@ -240,9 +243,40 @@ public class AnonymityBar extends JPanel {
 		
 		try {
 			if (!main.processed || main.reprocessing){
-				instance.ib.prepareTrainingSet(main.documentProcessor.documentMagician.getTrainSet(), main.ppAdvancedDriver.cfd);
+				ProblemSet ps = new ProblemSet();
+				for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
+					ps.addTrainDoc(d.getAuthor(), d);
+				}
+				for (Document d : toModifySet) {
+					ps.addTestDoc(d.getAuthor(), d);
+				}
+				CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+				instance.jstylo.getUnderlyingInstancesBuilder().reset();
+				instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+				instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+				instance.jstylo.prepareInstances();
+			} else {
+				ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+				
+				//reset test data
+				List<String> toRemove = new ArrayList<String>();
+				for (String author :  ps.getTestAuthorMap().keySet()){
+					toRemove.add(author);
+				}
+				for (String s : toRemove){
+					ps.removeTestAuthor(s);
+				}
+				
+				//add in new test data
+				for (Document d : toModifySet) {
+					ps.addTestDoc(d.getAuthor(), d);
+				}
+				CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+				instance.jstylo.getUnderlyingInstancesBuilder().reset();
+				instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+				instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+				instance.jstylo.prepareInstances();
 			}
-			instance.ib.prepareTestSetReducedVersion(toModifySet);
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();

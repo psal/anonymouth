@@ -20,6 +20,8 @@ import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
@@ -194,10 +196,41 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 			
 			try {
 				if (!done) {
-					instance.ib.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
+					ProblemSet ps = new ProblemSet();
+					for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
+						ps.addTrainDoc(d.getAuthor(), d);
+					}
+					for (Document d : toModifySet) {
+						ps.addTestDoc(d.getAuthor(), d);
+					}
+					CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+					instance.jstylo.getUnderlyingInstancesBuilder().reset();
+					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+					instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+					instance.jstylo.prepareInstances();
 					done = true;
+				} else {
+					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+					
+					//reset test data
+					List<String> toRemove = new ArrayList<String>();
+					for (String author :  ps.getTestAuthorMap().keySet()){
+						toRemove.add(author);
+					}
+					for (String s : toRemove){
+						ps.removeTestAuthor(s);
+					}
+					
+					//add in new test data
+					for (Document d : toModifySet) {
+						ps.addTestDoc(d.getAuthor(), d);
+					}
+					CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+					instance.jstylo.getUnderlyingInstancesBuilder().reset();
+					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+					instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+					instance.jstylo.prepareInstances();
 				}
-				instance.ib.prepareTestSetReducedVersion(toModifySet);
 			} catch(Exception e) {
 				e.printStackTrace();
 				ErrorHandler.StanfordPOSError();
