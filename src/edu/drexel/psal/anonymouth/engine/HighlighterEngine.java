@@ -315,7 +315,7 @@ public class HighlighterEngine {
 			}
 		} catch (Exception e) {
 			Logger.logln(NAME+"Threading issue occurred in addAutoRemoveHighlights, should not have happened.", LogOut.STDERR);
-			Logger.logln(e);
+			Logger.logln(e.getMessage());
 		}
 
 		int indexSize = index.size();

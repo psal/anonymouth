@@ -39,7 +39,7 @@ public class ErrorHandler {
 	 */
 	public static void fatalError(Component parent, Exception e) {
 		if (e != null)
-			Logger.logln(e);
+			Logger.logln(e.getMessage());
 		
 		int ans = JOptionPane.showOptionDialog(parent,
 				"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
@@ -67,7 +67,7 @@ public class ErrorHandler {
 			@Override
 			public void run() {
 				if (e != null)
-					Logger.logln(e);
+					Logger.logln(e.getMessage());
 				
 				Toolkit.getDefaultToolkit().beep();
 				JOptionPane.showMessageDialog(null,
