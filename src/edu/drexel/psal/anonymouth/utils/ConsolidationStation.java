@@ -375,7 +375,7 @@ public class ConsolidationStation {
 					e.printStackTrace();
 					ErrorHandler.StanfordPOSError();
 				}
-				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.ib.getTestSet())[0];
+				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.jstylo.getTestInstances())[0];
 				if (currValue == newStartingValue)
 					wordsSuggestion.remove(k);
 				else {

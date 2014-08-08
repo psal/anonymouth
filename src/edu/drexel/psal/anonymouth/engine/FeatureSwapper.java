@@ -86,6 +86,7 @@ public class FeatureSwapper {
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
 			Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
+			
 			keyIter = (wekaResultMap.keySet()).iterator();
 			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);
 			if (keyIter.hasNext()){

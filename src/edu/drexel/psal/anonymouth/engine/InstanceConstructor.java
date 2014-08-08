@@ -75,6 +75,8 @@ public class InstanceConstructor {
 	
 	private boolean printStuff, useSparse;
 	
+	public FullAPI jstylo;
+	
 	/**
 	 * Constructor for InstanceConstructor, accepts boolean variable that tells WekaInstancesBuilder whether to expect sparse data or not. (if unsure, set false) 
 	 * @param isSparse - boolean, true if expecting sparse data, false otherwise or if unsure.
@@ -101,7 +103,7 @@ public class InstanceConstructor {
 	public boolean runInstanceBuilder(List<Document> trainDocs,List<Document> testDocs){
 		Logger.logln(NAME+"Running JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
 		int eye = 0;
-		FullAPI jstylo = null;
+		jstylo = null;
 		if (printStuff == true) {
 			char[] cRay = testDocs.get(0).getProcessedText();
 			System.out.println("PRE-INSTANCE BUILDING:\n");
@@ -144,7 +146,7 @@ public class InstanceConstructor {
 	}
 	
 	public boolean onlyBuildTrain(List<Document> trainDocs, boolean withAuthor) {
-		FullAPI jstylo = null;
+		jstylo = null;
 		if (withAuthor)
 			Logger.logln(NAME+"Only building train set");
 		else

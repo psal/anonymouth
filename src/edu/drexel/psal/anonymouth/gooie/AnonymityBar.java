@@ -239,8 +239,9 @@ public class AnonymityBar extends JPanel {
 			}
 		
 		try {
-			if (!main.processed || main.reprocessing)
+			if (!main.processed || main.reprocessing){
 				instance.ib.prepareTrainingSet(main.documentProcessor.documentMagician.getTrainSet(), main.ppAdvancedDriver.cfd);
+			}
 			instance.ib.prepareTestSetReducedVersion(toModifySet);
 		} catch(Exception e) {
 			e.printStackTrace();
