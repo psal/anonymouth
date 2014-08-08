@@ -6,7 +6,12 @@ import java.util.List;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.FullAPI;
+import edu.drexel.psal.jstylo.generics.FullAPI.analysisType;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
+
 import com.jgaap.generics.*;
 
 import weka.core.Instances;
@@ -66,13 +71,9 @@ public class InstanceConstructor {
 	
 	private CumulativeFeatureDriver theseFeaturesCfd;
 	
-	
 	Instances trainingDat,testingDat;
 	
-	private boolean printStuff;
-	
-	public WekaInstancesBuilder wid;
-	
+	private boolean printStuff, useSparse;
 	
 	/**
 	 * Constructor for InstanceConstructor, accepts boolean variable that tells WekaInstancesBuilder whether to expect sparse data or not. (if unsure, set false) 
@@ -80,9 +81,10 @@ public class InstanceConstructor {
 	 * @param cfd - cumulative feature driver. Contains all features that will be extracted from the documents
 	 */
 	public InstanceConstructor(boolean isSparse, CumulativeFeatureDriver cfd, boolean printStuff){
-		wid = new WekaInstancesBuilder(isSparse);
-		wid.setNumCalcThreads(ThePresident.num_Tagging_Threads);
+		//ib = new InstancesBuilder.Builder().cfd(cfd).isSparse(isSparse).numThreads(ThePresident.num_Tagging_Threads).build();
+		//jstylo = new FullAPI.Builder().cfd(cfd).isSparse(isSparse).numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).build();
 		theseFeaturesCfd = cfd;
+		useSparse = isSparse;
 		this.printStuff =printStuff;
 		Logger.logln(NAME+"InstanceConstuctor constructed");
 	}
@@ -99,6 +101,7 @@ public class InstanceConstructor {
 	public boolean runInstanceBuilder(List<Document> trainDocs,List<Document> testDocs){
 		Logger.logln(NAME+"Running JStylo WekaInstancesBuilder from runInstanceBuilder in InstanceConstructor");
 		int eye = 0;
+		FullAPI jstylo = null;
 		if (printStuff == true) {
 			char[] cRay = testDocs.get(0).getProcessedText();
 			System.out.println("PRE-INSTANCE BUILDING:\n");
@@ -108,15 +111,23 @@ public class InstanceConstructor {
 		}
 		
 		try {
-			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
-			wid.prepareTestSet(testDocs);
+			ProblemSet ps = new ProblemSet();
+			for (Document d :  trainDocs){
+				ps.addTrainDoc(d.getAuthor(), d);
+			}
+			for (Document d : testDocs){
+				ps.addTestDoc(d.getAuthor(), d);
+			}
+			jstylo = new FullAPI.Builder().cfd(theseFeaturesCfd).isSparse(useSparse).ps(ps).
+					numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).build();
+			jstylo.prepareInstances();
 		} catch(Exception e) {
 			ErrorHandler.StanfordPOSError();
 		}
 
 		// Initialize two new instances to hold training and testing instances (attributes and data)
-		trainingDat=wid.getTrainingSet();
-		testingDat=wid.getTestSet();
+		trainingDat=jstylo.getTrainingInstances();
+		testingDat=jstylo.getTestInstances();
 		setAttributes=getAttributes(trainingDat);
 		trainingInstances=getInstances(trainingDat);
 		testingInstances=getInstances(testingDat);
@@ -133,18 +144,25 @@ public class InstanceConstructor {
 	}
 	
 	public boolean onlyBuildTrain(List<Document> trainDocs, boolean withAuthor) {
+		FullAPI jstylo = null;
 		if (withAuthor)
 			Logger.logln(NAME+"Only building train set");
 		else
 			Logger.logln(NAME+"Building train set with author");
 		
 		try {
-			wid.prepareTrainingSet(trainDocs, theseFeaturesCfd);
+			ProblemSet ps = new ProblemSet();
+			for (Document d :  trainDocs){
+				ps.addTrainDoc(d.getAuthor(), d);
+			}
+			jstylo = new FullAPI.Builder().cfd(theseFeaturesCfd).isSparse(useSparse).ps(ps).
+					numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).build();
+			jstylo.prepareInstances();
 		} catch(Exception e) {
 			ErrorHandler.StanfordPOSError();
 		}
 		
-		trainingDat=wid.getTrainingSet();
+		trainingDat=jstylo.getTrainingInstances();
 		setAttributes=getAttributes(trainingDat);
 		trainingInstances=getInstances(trainingDat);
 		return true;
