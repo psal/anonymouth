@@ -675,7 +675,17 @@ public class PreProcessDriver {
 
 				if (test.length == 2) { //renaming author
 					String author = ((DefaultMutableTreeNode)test[test.length-1]).toString();
-					preProcessWindow.ps.renameAuthor(author, renamedNode);
+					List<Document> dstrain = preProcessWindow.ps.getTrainDocs(author);
+					List<Document> dstest = preProcessWindow.ps.getTestAuthorMap().get(author);
+					preProcessWindow.ps.removeAuthor(author);
+					for (Document d : dstrain){
+						d.setAuthor(renamedNode);
+						preProcessWindow.ps.addTrainDoc(renamedNode,d);
+					}
+					for (Document d : dstest){
+						d.setAuthor(renamedNode);
+						preProcessWindow.ps.addTestDoc(renamedNode,d);
+					}
 					List<String> docs = titles.remove(author);
 					titles.put(renamedNode, docs);
 				}

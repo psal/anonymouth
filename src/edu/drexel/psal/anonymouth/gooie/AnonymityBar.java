@@ -247,7 +247,7 @@ public class AnonymityBar extends JPanel {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();
 		}
-		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.ib.getTestSet())[0];
+		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.jstylo.getTrainingInstances())[0];
 
 		updateTubeFill(); //update the other variables
 		
