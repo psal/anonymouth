@@ -122,6 +122,10 @@ public class TranslatorThread implements Runnable {
 	public void run() {
 		stop = false; //Just making sure stop is now false since this is a new document translation (if it the code below that turns it off wasn't run).
 		
+		//Lock the editor to prevent crashes
+		main.enableEverything(false);
+		main.editorDriver.ignoreChanges = true;
+		
 		// set up the progress bar
 		main.translationsProgressBar.setIndeterminate(false);
 		main.translationsProgressBar.setMaximum(sentences.size() * translationFetcher.getUsedLangs().length);
@@ -147,14 +151,22 @@ public class TranslatorThread implements Runnable {
 							translationsEnded();
 							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
-						} else if (translation.equals("account")) {
+						} else {
+							noInternet = false;
+						}
+						
+						if (translation.equals("account")) {
 							Logger.logln(NAME+"Account used up", LogOut.STDERR);
 							reset();
 							accountsUsed = true;
 							translationsEnded();
 							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
 							return;
-						} else if (stop) {
+						} else {
+							accountsUsed = false;
+						}
+						
+						if (stop) {
 							stop = false;
 							translationsEnded();
 							main.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
@@ -216,7 +228,8 @@ public class TranslatorThread implements Runnable {
 		currentSentNum = 1;
 		main.translationsProgressBar.setIndeterminate(false);
 		main.translationsProgressBar.setValue(0);
-		main.reProcessButton.setEnabled(true);
+		main.enableEverything(true);
+		main.editorDriver.ignoreChanges = false;
 		
 		transThread.interrupt();
 	}

@@ -70,25 +70,22 @@ public class TranslationsPanel {
 	 */
 	public void updateTranslationsPanel(TaggedSentence sentence) {
 		// remove all the current translations shown
-		if (main.documentPane.isEnabled()) {
-			main.translationsHolderPanel.removeAll();
-		}
+		main.translationsHolderPanel.removeAll();
 		
 		//If any of these conditions are met, we just want to clear things that need to be cleared and return.
 		if (TranslatorThread.noInternet || TranslatorThread.accountsUsed || !PropertiesUtil.getDoTranslations()) {
 			if (TranslatorThread.noInternet) {
 				main.notTranslated.setText("Translations unavailable: No Internet connection\n\n" +
 						"If you wish to recieve translation suggestions you must connect to the internet " +
-						"and re-process your document.");
+						"and try again.");
 				main.translationsHolderPanel.add(main.notTranslated, "");
-				main.translateSentenceButton.setEnabled(false);
+				switchToButtonPanel();
 			} else if (TranslatorThread.accountsUsed) {
 				main.notTranslated.setText("The account used for translations has expired.\n\n" +
 						"In order to continue recieving translations, you must restart in order for the " +
 						"account change to be reflected.");
 				main.translationsHolderPanel.add(main.notTranslated, "");
-				main.translateSentenceButton.setEnabled(false);
-				main.resetTranslator.setEnabled(false);
+				switchToButtonPanel();
 			} else {
 				main.notTranslated.setText("");
 				main.translationsHolderPanel.add(main.notTranslated, "");

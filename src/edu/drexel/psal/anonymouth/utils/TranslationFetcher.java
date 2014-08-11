@@ -206,6 +206,7 @@ public class TranslationFetcher {
 		Translate.setClientId(clients.get(current));
 		Translate.setClientSecret(secrets.get(current));
 
+		tries = MAXNUMOFTRIES; //reset so we can check internet connection again
 		while (tries > 0) {
 			try {
 				String translatedText = Translate.execute(original, Language.ENGLISH,other);
