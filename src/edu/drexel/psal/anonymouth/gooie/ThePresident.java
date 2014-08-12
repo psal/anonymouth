@@ -4,6 +4,7 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 import java.awt.Image;
 import java.io.File;
@@ -88,7 +89,7 @@ public class ThePresident {
 			
 			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
-			
+			ProblemSet.setDummyAuthor("~* you *~");
 			app = Application.getApplication();
 			app.setDockIconImage(logo);
 			
