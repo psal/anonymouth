@@ -420,21 +420,21 @@ public class StartWindow extends JFrame {
 	 * @param path - The absolute path to the problem set we want to load
 	 */
 	public void loadProblemSet(String path) {
+		
 		Logger.logln(NAME+"Trying to load problem set at: " + path);
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
+			
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
 			main.ppAdvancedWindow.setFeature(PropertiesUtil.getFeature());
 			main.preProcessDriver.titles.clear();
-			
 			boolean probSetReady = main.preProcessWindow.documentsAreReady();
 			if (main.preProcessDriver.updateAllComponents() && probSetReady) {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
-				
 				//main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle(), 0);
 				
-				String testDocFilePath = main.preProcessWindow.ps.getTestDocs().get(0).get(0).getFilePath();
+				String testDocFilePath = main.preProcessWindow.ps.getAllTestDocs().get(0).getFilePath();
 				String trainDocFilePath = main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath();
 				if (!ANONConstants.IS_MAC) { // We do this so it works for both OS X and Windows
 					testDocFilePath = testDocFilePath.replace('/', '\\');

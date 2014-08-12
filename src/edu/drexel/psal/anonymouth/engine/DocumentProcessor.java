@@ -248,7 +248,7 @@ public class DocumentProcessor {
 			long heapFreeSize = Runtime.getRuntime().freeMemory();
 			Logger.logln(NAME+"ERROR WHILE PROCESSING. Here are the total, max, and free heap sizes:", LogOut.STDERR);
 			Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize, LogOut.STDERR);
-			
+			e.printStackTrace();
 			ErrorHandler.fatalProcessingError(e);
 		}
 	}
