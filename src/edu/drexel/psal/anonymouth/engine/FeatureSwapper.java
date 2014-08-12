@@ -9,6 +9,7 @@ import java.util.Set;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
+import edu.drexel.psal.jstylo.generics.FullAPI;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import weka.core.Instance;
@@ -28,7 +29,6 @@ import weka.core.Instances;
 public class FeatureSwapper {
 	
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
-	WekaAnalyzer waz;
 	Instances toAnonymize;
 	ClusterGroup[] clusterGroups;
 	WekaResults[] wekaResultsArray;
@@ -40,7 +40,6 @@ public class FeatureSwapper {
 		toAnonymize = magician.getToModifyDat();
 		toAnonymizeTitlesList = magician.getToModifyTitlesList();
 		trainSetAuthors = magician.getTrainSetAuthors();
-		waz = new WekaAnalyzer(ANONConstants.PATH_TO_CLASSIFIER);
 		this.clusterGroups = clusterGroups;
 		if (clusterGroups == null)
 			Logger.logln(NAME+"Damn.");
@@ -85,7 +84,7 @@ public class FeatureSwapper {
 				alteredInstance.setValue(indexInInstance, tempCG_centroids[j]);
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
-			Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
+			//Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
 			
 			keyIter = (wekaResultMap.keySet()).iterator();
 			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);

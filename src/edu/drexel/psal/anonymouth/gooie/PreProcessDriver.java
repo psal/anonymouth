@@ -62,7 +62,7 @@ public class PreProcessDriver {
 	private boolean initialProcess;//to fix the problem when loading problem set
 
 	//Variables
-	protected HashMap<String, List<String>> titles;
+	protected Map<String, List<String>> titles;
 	private GUIMain main;
 	private String lastDirectory;
 	private String trainDocsDirectory;

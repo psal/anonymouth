@@ -375,7 +375,7 @@ public class ConsolidationStation {
 						for (Document d : toModifySet) {
 							ps.addTestDoc(d.getAuthor(), d);
 						}
-						CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+						CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
 						instance.jstylo.getUnderlyingInstancesBuilder().reset();
 						instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
 						instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
@@ -397,7 +397,7 @@ public class ConsolidationStation {
 						for (Document d : toModifySet) {
 							ps.addTestDoc(d.getAuthor(), d);
 						}
-						CumulativeFeatureDriver cfd = instance.jstylo.getCFD();
+						CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
 						instance.jstylo.getUnderlyingInstancesBuilder().reset();
 						instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
 						instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
