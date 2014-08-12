@@ -84,8 +84,14 @@ public class FeatureSwapper {
 				alteredInstance.setValue(indexInInstance, tempCG_centroids[j]);
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
-			//Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
 			
+			//Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
+			FullAPI jstylo = new FullAPI.Builder().build();
+			jstylo.setTrainingInstances(null);
+			jstylo.setTestingInstances(hopefullyAnonymizedInstances);
+			jstylo.setClassifier(null);
+			jstylo.run();
+			Map<String,Map<String,Double>> wekaResultMap = jstylo.getUnderlyingAnalyzer().getLastResults();
 			keyIter = (wekaResultMap.keySet()).iterator();
 			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);
 			if (keyIter.hasNext()){
