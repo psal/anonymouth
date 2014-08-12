@@ -73,7 +73,8 @@ public class ThePresident {
 	public ThePresident() {
 		splash = new SplashScreen();
 		splash.showSplashScreen();
-		
+		Logger.setFileDirPath("anonymouth_log");
+		Logger.setFilePrefix("anonymouth");
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
