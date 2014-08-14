@@ -172,7 +172,7 @@ public class ThePresident {
 	
 	/**
 	 * TEST METHOD
-	 * will print "sayThis" and then read and return a line from the user. Useful for stopping the progam at spots.
+	 * will print "sayThis" and then read and return a line from the user. Useful for stopping the program at spots.
 	 * @param sayThis
 	 * @return
 	 */
@@ -183,7 +183,7 @@ public class ThePresident {
 
 	/**
 	 * TEST METHOD
-	 * will print "System waiting for user input:" and then read and return a line from the user. Useful for stopping the progam at spots.
+	 * will print "System waiting for user input:" and then read and return a line from the user. Useful for stopping the program at spots.
 	 * @return
 	 */
 	public String read(){

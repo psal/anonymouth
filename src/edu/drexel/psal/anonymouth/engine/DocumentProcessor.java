@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -25,6 +26,7 @@ import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 /**
  * The class that manages all document processing and all relating classes.
@@ -113,7 +115,16 @@ public class DocumentProcessor {
 		}
 
 		dataAnalyzer = new DataAnalyzer(main.preProcessWindow.ps);
+		//FIXME
 		documentMagician = new DocumentMagician(false);
+		//need to find and fill in the Classifier
+		try {
+			dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		documentMagician.runPrimaryDocOps(main.ppAdvancedDriver.cfd);
+		documentMagician.runSecondaryDocOps();
 		Logger.logln(NAME+"Beginning main process...");
 	}
 	
@@ -137,7 +148,8 @@ public class DocumentProcessor {
 				Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
 				pw.setText("Extracting and Clustering Features...");
 				try {
-					dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+					//TODO figure out why this isn't run earlier.
+					//dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
 					pw.setText("Initializing Tagger...");
 					Tagger.initTagger();
 					pw.setText("Classifying Documents...");
@@ -183,7 +195,9 @@ public class DocumentProcessor {
 			
 			if (!main.processed) {
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
-				List<Document> sampleDocs = documentMagician.getDocumentSets().get(0);
+				List<Document> sampleDocs = null;
+
+				sampleDocs = documentMagician.getDocumentSets().get(0);
 				int size = sampleDocs.size();
 				ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
 				for (int i = 0; i < size; i++) {

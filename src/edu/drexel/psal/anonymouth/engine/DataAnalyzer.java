@@ -451,8 +451,10 @@ public class DataAnalyzer{
 	public void runInitial(DocumentMagician magician, CumulativeFeatureDriver cfd, Classifier classifier) throws Exception {
 		Logger.logln(NAME+"called runIntitial in DataAnalyzer");
 		List<Document> tempTestDocs = pSet.getAllTestDocs(); // get the document(s) to anonymize
+		pSet.removeTestDocAt((String) pSet.getTestAuthorMap().keySet().toArray()[0], tempTestDocs.get(0).getTitle());
 		for (Document d:tempTestDocs) {
 			d.setAuthor(ANONConstants.DUMMY_NAME);
+			pSet.addTestDoc(ANONConstants.DUMMY_NAME, d);
 		}
 		
 		magician.initialDocToData(pSet,cfd, classifier);

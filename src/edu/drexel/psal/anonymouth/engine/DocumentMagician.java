@@ -414,8 +414,8 @@ public class DocumentMagician {
 	public void initialDocToData(ProblemSet pSet,CumulativeFeatureDriver cfd, Classifier classifier ){//,List<Map<String,Document>> forTraining, List<Document> forTesting){
 		Logger.logln(NAME+"Entered initialDocToData in DocumentMagician");
 		theClassifier = classifier;
-		
-		ProblemSet pSetCopy = new ProblemSet(pSet);
+		ProblemSet pSetCopy = pSet;
+		//ProblemSet pSetCopy = new ProblemSet(pSet);
 		trainSet = pSetCopy.getAllTrainDocs();
 		
 		toModifySet = pSetCopy.getAllTestDocs(); // docToModify is the test doc already

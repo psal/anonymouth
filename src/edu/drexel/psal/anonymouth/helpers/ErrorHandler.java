@@ -50,6 +50,7 @@ public class ErrorHandler {
 				RESTART_OPTIONS, RESTART_OPTIONS[0]);
 		if (ans == 1) {
 			Logger.logln(NAME+"Fatal error encountered and the user chose to immediately quit, will exit now...", LogOut.STDERR);
+			e.printStackTrace();
 			System.exit(FATAL_ERROR);
 		}
 	}

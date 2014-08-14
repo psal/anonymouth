@@ -352,6 +352,10 @@ public class TaggedDocument implements Serializable {
 		 * length of the string as the TaggedDocument length and format
 		 * the String since it's our main document
 		 */
+		if (Tagger.mt == null){
+			System.out.println("In TaggedDocument and tagger has not yet been initialized!");
+			Tagger.initTagger();
+		}
 		
 		if (length == 0 ) {
 			untagged = formatDocument(untagged);

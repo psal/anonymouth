@@ -229,6 +229,7 @@ public class StartWindow extends JFrame {
 	/**
 	 * Initializes the listeners
 	 */
+	//TODO looking here to try to track down the flow of info to discover why it's crashing.
 	private void initListeners() {
 		startListener = new ActionListener() {
 			@Override
