@@ -224,20 +224,30 @@ public class DataAnalyzer{
 			//}
 		
 			String stringInBraces;
-			boolean calcHist;
-			try {
+			boolean calcHist = false;
+			if (attrib.contains("{") && attrib.contains("}")) {
 				stringInBraces = attrib.substring(attrib.indexOf('{')+1,attrib.indexOf('}'));
-			} catch(IllegalStateException e) { // if no match is found, set 'stringInBraces == to an empty string
+			} else { // if no match is found, set 'stringInBraces == to an empty string
 				stringInBraces = "";
 			}
 			
 			if (stringInBraces.equals("") || stringInBraces.equals("-")) {
 				stringInBraces = "";
 				calcHist = false;
-			} else
+			} else {
 				calcHist = true;
-			
+				
+			}
+			//try {
 			topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
+			/*} catch (Exception e){
+				System.out.println("i: "+i+" j: "+j);
+				System.out.println("stringInBraces:"+stringInBraces+":");
+				System.out.println("allInfoGain: "+allInfoGain[i][1]);
+				System.out.println("calcHist: "+calcHist);
+				e.printStackTrace();
+				System.exit(0);
+			}*/
 			topAttribs[j].setInfoGain(allInfoGain[j][0]);
 			topAttribs[j].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
 			featuresForClusterAnalyzer.add(topAttribs[j].getConcatGenNameAndStrInBraces());

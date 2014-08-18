@@ -120,9 +120,7 @@ public class InstanceConstructor {
 			for (Document d : testDocs){
 				ps.addTestDoc(d.getAuthor(), d);
 			}
-			jstylo = new FullAPI.Builder().cfd(theseFeaturesCfd).isSparse(useSparse).ps(ps).
-					numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).build();
-			jstylo.prepareInstances();
+			buildJStylo(ps);
 		} catch(Exception e) {
 			ErrorHandler.StanfordPOSError();
 		}
@@ -143,6 +141,12 @@ public class InstanceConstructor {
 			System.exit(7);
 		}
 		return true;
+	}
+	
+	public void buildJStylo(ProblemSet ps){
+		jstylo = new FullAPI.Builder().cfd(theseFeaturesCfd).isSparse(useSparse).ps(ps).
+				numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).build();
+		jstylo.prepareInstances();
 	}
 	
 	public boolean onlyBuildTrain(List<Document> trainDocs, boolean withAuthor) {

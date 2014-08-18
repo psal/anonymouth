@@ -24,8 +24,10 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.FullAPI;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
+import edu.drexel.psal.jstylo.generics.FullAPI.analysisType;
 
 /**
  * The template for the new and improved Anonymity bar!<br><br>
@@ -248,7 +250,14 @@ public class AnonymityBar extends JPanel {
 					ps.addTrainDoc(d.getAuthor(), d);
 				}
 				for (Document d : toModifySet) {
+					d.setAuthor("~* you *~");
 					ps.addTestDoc(d.getAuthor(), d);
+				}
+				if (instance.jstylo == null){
+
+				}
+				if (instance.jstylo == null){
+					instance.buildJStylo(ps);
 				}
 				CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
 				instance.jstylo.getUnderlyingInstancesBuilder().reset();
