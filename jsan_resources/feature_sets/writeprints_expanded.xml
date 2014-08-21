@@ -1,31 +1,7 @@
 <?xml version="1.0"?>
-<feature-set name="WritePrints (Limited Normalized)">
+<feature-set name="WritePrints Expanded">
 	<description value="A (partial) set of features used by Zheng et al. Feature classes with many features (e.g. character bigrams etc.) are limited to top 50."/>
-	<feature name="total words" calc_hist="false">
-		<description value="Total number of words in the document."/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.WordCounterEventDriver">
-		</event-driver>
-		<canonicizers>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="NONE"/>
-		<factor value="1.0"/>
-	</feature>
-	<feature name="char per word" calc_hist="false">
-		<description value="Average number of letters per word in the document: total number of letters over total number of words."/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="1.0"/>
-	</feature>
-	<feature name="total characters" calc_hist="false">
+	<feature name="Character count" calc_hist="false">
 		<description value="The total number of characters in the document."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver">
 		</event-driver>
@@ -36,7 +12,18 @@
 		<norm value="NONE"/>
 		<factor value="1.0"/>
 	</feature>
-	<feature name="letters" calc_hist="true">
+	<feature name="Average characters per word" calc_hist="false">
+		<description value="Average number of characters per word in the document: total number of characters over total number of words."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterCounterEventDriver">
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="WORDS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Letters" calc_hist="true">
 		<description value="Frequency of letters (a-z, case insensitive)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver">
 			<param name="N" value="1"/>
@@ -47,10 +34,10 @@
 		</canonicizers>
 		<cullers>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="letter bigrams" calc_hist="true">
+	<feature name="Top Letter bigrams" calc_hist="true">
 		<description value="Most common letter bigrams (e.g. aa, ab etc.), case insensitive. Bigrams are taken only within words (do not cross adjacent words)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver">
 			<param name="N" value="2"/>
@@ -60,14 +47,14 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="letter trigrams" calc_hist="true">
+	<feature name="Top Letter trigrams" calc_hist="true">
 		<description value="Most common letter trigrams (e.g. aaa, aab etc.), case insensitive. Trigrams are taken only within words (do not cross adjacent words)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.LetterNGramEventDriver">
 			<param name="N" value="3"/>
@@ -77,14 +64,50 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="digits" calc_hist="true">
+	<feature name="Digits Percentage" calc_hist="false">
+		<description value="Percentage of digits out of the total character count in the document."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
+			<param name="regexp" value="\d"/>
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="CHARS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Letters Percentage" calc_hist="false">
+		<description value="Percentage of letters out of the total character count in the document."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
+			<param name="regexp" value="[A-Za-z]"/>
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="CHARS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Uppercase Letters Percentage" calc_hist="false">
+		<description value="Percentage of uppercase letters out of the total characters in the document."/>
+		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
+			<param name="regexp" value="[A-Z]"/>
+		</event-driver>
+		<canonicizers>
+		</canonicizers>
+		<cullers>
+		</cullers>
+		<norm value="CHARS_IN_DOC"/>
+		<factor value="1.0"/>
+	</feature>
+	<feature name="Digits" calc_hist="true">
 		<description value="Frequency of digits in the document (0,1,...,9)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpEventDriver">
 			<param name="regexp" value="\d"/>
@@ -93,10 +116,10 @@
 		</canonicizers>
 		<cullers>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="digit bigrams" calc_hist="true">
+	<feature name="Two Digit Numbers" calc_hist="true">
 		<description value="Frequencies of 2 digit numbers (e.g. 11, 99 etc.)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpEventDriver">
 			<param name="regexp" value="\d\d"/>
@@ -104,14 +127,11 @@
 		<canonicizers>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
-			</culler>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="digit trigrams" calc_hist="true">
+	<feature name="Three Digit Numbers" calc_hist="true">
 		<description value="Frequencies of 3 digit numbers (e.g. 100, 209 etc.)."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpEventDriver">
 			<param name="regexp" value="\d\d\d"/>
@@ -119,14 +139,11 @@
 		<canonicizers>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
-			</culler>
 		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="word lengths" calc_hist="true">
+	<feature name="Word Lengths" calc_hist="true">
 		<description value="Frequency of words of different lengths (excluding punctuation)."/>
 		<event-driver class="com.jgaap.eventDrivers.WordLengthEventDriver">
 		</event-driver>
@@ -155,8 +172,8 @@
 		<norm value="NONE"/>
 		<factor value="1.0"/>
 	</feature>
-	<feature name="function words" calc_hist="true">
-		<description value="Most frequent out of 512 common function words, used by Koppel et al. in Koppel, 2005."/>
+	<feature name="Function Words" calc_hist="true">
+		<description value="512 common function words, used by Koppel et al. in Koppel, 2005."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.ListEventDriver">
 			<param name="sort" value="false"/>
 			<param name="whiteList" value="true"/>
@@ -171,12 +188,12 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="300"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
 	<feature name="Punctuation" calc_hist="true">
 		<description value="Punctuation symbols like . , ! etc."/>
@@ -201,11 +218,14 @@
 		<canonicizers>
 		</canonicizers>
 		<cullers>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
+			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="POS bigrams" calc_hist="true">
+	<feature name="POS Bigrams" calc_hist="true">
 		<description value="Part-Of-Speech tag bigrams extracted by the Stanford POS Maxent Tagger."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.MaxentPOSNGramsEventDriver">
 			<param name="N" value="2"/>
@@ -213,14 +233,14 @@
 		<canonicizers>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="POS trigrams" calc_hist="true">
+	<feature name="POS Trigrams" calc_hist="true">
 		<description value="Part-Of-Speech tag trigrams extracted by the Stanford POS Maxent Tagger."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.MaxentPOSNGramsEventDriver">
 			<param name="N" value="3"/>
@@ -228,15 +248,15 @@
 		<canonicizers>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="bag-of-words" calc_hist="true">
-		<description value="Frequencies of various words in the text, case insensitive and without punctuation."/>
+	<feature name="Words" calc_hist="true">
+		<description value="Frequencies of various words in the text, case insensitive and without punctuations."/>
 		<event-driver class="com.jgaap.eventDrivers.NaiveWordEventDriver">
 		</event-driver>
 		<canonicizers>
@@ -246,14 +266,14 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="300"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
 		<norm value="NONE"/>
 		<factor value="1.0"/>
 	</feature>
-	<feature name="word bigrams" calc_hist="true">
+	<feature name="Word Bigrams" calc_hist="true">
 		<description value="Frequencies of various word bigrams in the text, case insensitive and without punctuations."/>
 		<event-driver class="com.jgaap.eventDrivers.WordNGramEventDriver">
 			<param name="N" value="2"/>
@@ -265,14 +285,14 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="word trigrams" calc_hist="true">
+	<feature name="Word Trigrams" calc_hist="true">
 		<description value="Frequencies of various word trigrams in the text, case insensitive and without punctuations."/>
 		<event-driver class="com.jgaap.eventDrivers.WordNGramEventDriver">
 			<param name="N" value="3"/>
@@ -284,14 +304,14 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
 		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
+		<norm value="NONE"/>
+		<factor value="1.0"/>
 	</feature>
-	<feature name="misspellings" calc_hist="true">
+	<feature name="Misspelled Words" calc_hist="true">
 		<description value="Frequencies of misspelled words out of a list of 5,513 common misspellings."/>
 		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.ListEventDriver">
 			<param name="sort" value="true"/>
@@ -307,136 +327,9 @@
 			</canonicizer>
 		</canonicizers>
 		<cullers>
-			<culler class="edu.drexel.psal.jstylo.eventCullers.MostCommonEventsExtended">
-				<param name="N" value="50"/>
+			<culler class="edu.drexel.psal.jstylo.eventCullers.MinAppearances">
+				<param name="N" value="2"/>
 			</culler>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="unique words count" calc_hist="false">
-		<description value=""/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.UniqueWordsCounterEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="large words count" calc_hist="false">
-		<description value="counting number of words of length > 4"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
-			<param name="regexp" value="\S\S\S\S\S+"/>
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="% of digits" calc_hist="false">
-		<description value=""/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
-			<param name="regexp" value="\d"/>
-		</event-driver>
-		<canonicizers>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="% of letters" calc_hist="false">
-		<description value=""/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
-			<param name="regexp" value="[A-Za-z]"/>
-		</event-driver>
-		<canonicizers>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="% of uppercase letters" calc_hist="false">
-		<description value=""/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.RegexpCounterEventDriver">
-			<param name="regexp" value="[A-Z]"/>
-		</event-driver>
-		<canonicizers>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="CHARS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="hapax legomena" calc_hist="false">
-		<description value="number of words used once"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.UniqueWordsCounterEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="dis legomena" calc_hist="false">
-		<description value="number of words used twice"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.WordsUsedTwiceEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="WORDS_IN_DOC"/>
-		<factor value="100.0"/>
-	</feature>
-	<feature name="yule's k" calc_hist="false">
-		<description value="Yule's characteristic K"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.YulesKEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
-		</cullers>
-		<norm value="NONE"/>
-		<factor value="1.0"/>
-	</feature>
-	<feature name="simpson's diversity index" calc_hist="false">
-		<description value="Simpson's diversity index"/>
-		<event-driver class="edu.drexel.psal.jstylo.eventDrivers.SimpsonsDiversityIndexEventDriver">
-		</event-driver>
-		<canonicizers>
-			<canonicizer class="com.jgaap.canonicizers.UnifyCase">
-			</canonicizer>
-			<canonicizer class="edu.drexel.psal.jstylo.canonicizers.StripEdgesPunctuation">
-			</canonicizer>
-		</canonicizers>
-		<cullers>
 		</cullers>
 		<norm value="NONE"/>
 		<factor value="1.0"/>

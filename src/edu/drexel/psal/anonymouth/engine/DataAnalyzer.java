@@ -238,16 +238,17 @@ public class DataAnalyzer{
 				calcHist = true;
 				
 			}
-			//try {
-			topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
-			/*} catch (Exception e){
+			try {
+				topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
+			} catch (Exception e){
+				System.out.println("topAttribs size: "+topAttribs.length);
 				System.out.println("i: "+i+" j: "+j);
 				System.out.println("stringInBraces:"+stringInBraces+":");
 				System.out.println("allInfoGain: "+allInfoGain[i][1]);
 				System.out.println("calcHist: "+calcHist);
 				e.printStackTrace();
 				System.exit(0);
-			}*/
+			}
 			topAttribs[j].setInfoGain(allInfoGain[j][0]);
 			topAttribs[j].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
 			featuresForClusterAnalyzer.add(topAttribs[j].getConcatGenNameAndStrInBraces());
