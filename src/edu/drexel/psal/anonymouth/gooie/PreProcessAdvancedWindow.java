@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -34,7 +35,6 @@ import weka.classifiers.functions.SMO;
 import weka.classifiers.lazy.IBk;
 import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.J48;
-
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -602,17 +602,25 @@ public class PreProcessAdvancedWindow extends JDialog {
 		presetCFDs = new ArrayList<CumulativeFeatureDriver>();
 
 		try {
+			InputStream inputStream = PreProcessAdvancedWindow.class.getResourceAsStream("feature_sets.txt");
+//			File[] featureSetFiles = new File(ANONConstants.FEATURESETS_PREFIX).listFiles(new FilenameFilter() {
+
 			File[] featureSetFiles = new File(ANONConstants.FEATURESETS_PREFIX).listFiles(new FilenameFilter() {
+			
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".xml");
 				}
 			});
-
+		
 			String path;
 			for (File f: featureSetFiles) {
 				path = f.getAbsolutePath();
+				
+				System.out.println("path in preprocessed advanced window is: " + path);
 				presetCFDs.add(new CumulativeFeatureDriver(path));
 			}
+			
+			System.out.println("After the loop in preProcessAdvancedWindow");
 
 			String[] presetCFDsNames = new String[presetCFDs.size()];
 			for (int i = 0; i < presetCFDs.size(); i++)

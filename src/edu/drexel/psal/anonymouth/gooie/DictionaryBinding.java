@@ -17,9 +17,17 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import javax.swing.AbstractButton;
@@ -35,6 +43,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.plaf.metal.MetalIconFactory;
+
+import org.apache.poi.util.IOUtils;
 
 import com.jgaap.JGAAPConstants;
 
@@ -97,7 +107,7 @@ public class DictionaryBinding {
 						ThePresident.aboutLogo);			
 			}
 		});
-		
+		//!!!!!!!!!!!!!!!!! add the word Forms - VERY IMPORTANT
 		dc.wordSearchButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +119,7 @@ public class DictionaryBinding {
 					Synset[] testSet = wnd.getSynsets(currentWord);
 					int synNumber =1;
 					int i;
-					for(i = 0; i< testSet.length; i++){
+					for(i = 0; i< testSet.length; i++) {
 						String [] wfs = testSet[i].getWordForms();
 						String def = testSet[i].getDefinition();
 						String [] use = testSet[i].getUsageExamples();
@@ -122,7 +132,7 @@ public class DictionaryBinding {
 						}
 						for (j = 0; j < wfs.length; j++) {
 							try {
-								//System.out.println("j = " + j);
+								System.out.println("Wfs is: " + wfs[j]);
 								wordSynSetResult = wordSynSetResult + wfs[j]+" => "+ use[j]+"\n";
 								synNumber++;
 							} catch (ArrayIndexOutOfBoundsException aioobe) {}
@@ -299,10 +309,16 @@ public class DictionaryBinding {
 		
 	}
 	
+	
 	public static boolean readInAllWords() throws IOException {
 		Logger.logln(NAME+"reading in comprehensive word list");
-		FileReader fr = new FileReader(new File(ANONConstants.EXTERNAL_RESOURCE_PACKAGE + "words.txt"));
-		BufferedReader buff = new BufferedReader(fr);
+//		FileReader fr = new FileReader(new File(ANONConstants.EXTERNAL_RESOURCE_PACKAGE + "words.txt"));
+//		FileReader fr = new FileReader(new File("./jsan_resources/words.txt"));
+		
+		InputStream inputStream = DictionaryBinding.class.getResourceAsStream("words.txt");
+		
+//		BufferedReader buff = new BufferedReader(fr);
+		BufferedReader buff = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 		String temp;
 		
 		while ((temp = buff.readLine()) != null) {
@@ -314,6 +330,7 @@ public class DictionaryBinding {
 
 		}
 		buff.close();
+				    
 		System.out.println("Done reading the word list");
 		return true;
 	}
@@ -385,12 +402,11 @@ public class DictionaryBinding {
 		return true;
 	}
 	
-	//probably more refinement work needs to be done
-	@SuppressWarnings("unused")
+	// THIS IS UNUSED !!!!!!!!!!!!!!!!!!
+	/*
 	public static String[] getSynonyms(String wordToFind) {
 		wordSynSetResult = "";
 		wordToFind = wordToFind.trim().toLowerCase();
-		System.setProperty("wordnet.database.dir", "./bin/com/jgaap/resources/wordnet");
 		WordNetDatabase wnd = WordNetDatabase.getFileInstance();
 		Synset[] testSet = wnd.getSynsets(wordToFind);
 		int synNumber =1;
@@ -398,14 +414,12 @@ public class DictionaryBinding {
 		
 		for(int i = 0; i < testSet.length; i++) {
 			wfs = testSet[i].getWordForms();
-			
-			//String [] use = testSet[i].getUsageExamples();
+			System.out.println("Word Forms: " + wfs);
 			int j;
 			for (j = 0; j < wfs.length; j++) {
 				try {
 					if(!wordToFind.contains(wfs[j].toLowerCase())){
 						wordSynSetResult = wordSynSetResult+"("+synNumber+"): "+wfs[j]+"\n";
-						//Logger.logln(NAME+"Results for: "+wordToFind+"\n"+wordSynSetResult);
 						synNumber++;
 					}
 				} catch(ArrayIndexOutOfBoundsException e) {
@@ -417,6 +431,5 @@ public class DictionaryBinding {
 		}
 		return null;//BIG PROBLEM
 	}
-
-	
-}
+*/
+}	

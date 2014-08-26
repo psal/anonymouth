@@ -699,6 +699,7 @@ public class TaggedDocument implements Serializable {
 		for (int i = 0; i < numOfSentences; i++) {
 			if (!taggedSentences.get(i).isTranslated()) {
 				result = false;
+				System.out.println("Sentence not translated!!");
 				break;
 			}
 		}
