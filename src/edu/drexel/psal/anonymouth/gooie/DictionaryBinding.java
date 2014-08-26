@@ -130,16 +130,18 @@ public class DictionaryBinding {
 						else {
 							wordSynSetResult=wordSynSetResult+"Synonym set "+i+" does not appear to have a defintion attached\n";
 						}
-						for (j = 0; j < wfs.length; j++) {
+						for (j = 0; j < wfs.length; j++) { 						// synonyms for each wordform
 							try {
-								System.out.println("Wfs is: " + wfs[j]);
-								wordSynSetResult = wordSynSetResult + wfs[j]+" => "+ use[j]+"\n";
+								wordSynSetResult = wordSynSetResult + wfs[j] + "\n";   
 								synNumber++;
 							} catch (ArrayIndexOutOfBoundsException aioobe) {}
 						}
-						wordSynSetResult = wordSynSetResult+"\n";
+						wordSynSetResult = wordSynSetResult + "\n";
+						for (int k = 0; k < use.length; k++) { 					// example sentences
+							wordSynSetResult = wordSynSetResult + use[k] + "\n";
+						}
+						wordSynSetResult = wordSynSetResult+"\n\n";
 					}
-					System.out.println(wordSynSetResult);
 					wordSynSetUpdated = true;
 					createTab("SynSet \""+ currentWord + "\"", wordSynSetResult,dc);
 				}
