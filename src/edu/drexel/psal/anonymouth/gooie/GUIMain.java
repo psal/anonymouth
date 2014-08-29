@@ -182,6 +182,8 @@ public class GUIMain extends JFrame implements DocumentListener {
 	protected JButton resetTranslator;
 	public JButton translateSentenceButton;
 	public JButton translationHelpButton;
+	public JButton translationPauseButton;
+	public JButton translationResumeButton;
 	public ScrollablePanel translationsHolderPanel;
 	protected JScrollPane translationsScrollPane;
 	public JProgressBar translationsProgressBar;
@@ -704,6 +706,8 @@ public class GUIMain extends JFrame implements DocumentListener {
 			//----------- Top Portion (Translate button, progress bar, etc.) -------------
 			translateSentenceButton = new JButton("Translate Sentence");
 			translationHelpButton = new JButton("?");
+			translationPauseButton = new JButton("Pause Translation");
+			translationResumeButton = new JButton("Resume Translation");
 			resetTranslator = new JButton("Reset Translator");
 			
 			if (!PropertiesUtil.getDoTranslations())

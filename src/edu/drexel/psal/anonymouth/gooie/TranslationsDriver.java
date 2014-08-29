@@ -35,10 +35,12 @@ public class TranslationsDriver implements MouseListener {
 	private ActionListener resetTranslatorListener;
 	private ActionListener translateSentenceListener;
 	private ActionListener helpTranslationListener;
+	private ActionListener stopTranslationListener;
+	private ActionListener resumeTranslationListener;
 	
 	//Anonymouth class instances
 	private GUIMain main;
-	protected TranslatorThread translator;
+	//protected TranslatorThread translator;
 	private TranslationsPanel translationsPanel;
 	
 	//Others
@@ -58,7 +60,7 @@ public class TranslationsDriver implements MouseListener {
 	public TranslationsDriver(TranslationsPanel translationsPanel, GUIMain main) {
 		this.main = main;
 		this.translationsPanel = translationsPanel;
-		translator = new TranslatorThread(main);
+		//translator = new TranslatorThread(main);
 		
 		initListeners();
 	}
@@ -84,7 +86,9 @@ public class TranslationsDriver implements MouseListener {
 					}
 				});
 				
-				translator.load(main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
+				translationsPanel.current = main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum);
+				translationsPanel.current.translator = new TranslatorThread(main);
+				translationsPanel.current.translator.load(main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
 				translationsPanel.updateTranslationsPanel(
 						main.editorDriver.taggedDoc.getSentenceNumber(main.editorDriver.sentNum));
 			}
@@ -105,7 +109,7 @@ public class TranslationsDriver implements MouseListener {
 					main.notTranslated.setText("Sentence has not been translated yet, please wait or work on already translated sentences.");
 					main.translationsHolderPanel.add(main.notTranslated, "");
 					main.translateSentenceButton.setEnabled(true);
-					translator.reset();
+					translationsPanel.current.translator.reset();
 					main.editorDriver.taggedDoc.clearAllTranslations();
 					
 					try {
@@ -117,6 +121,30 @@ public class TranslationsDriver implements MouseListener {
 			}
 		};
 		main.resetTranslator.addActionListener(resetTranslatorListener);
+		
+		stopTranslationListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				translationsPanel.current.translator.suspendTranslations();
+				main.translationsTopPanel.remove(main.translationPauseButton);
+				main.translationsTopPanel.add(main.translationResumeButton, 0);
+				main.translationsTopPanel.revalidate();
+				main.translationsTopPanel.repaint();
+			}
+		};
+		main.translationPauseButton.addActionListener(stopTranslationListener);
+		
+		resumeTranslationListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				translationsPanel.current.translator.resumeTranslations();
+				main.translationsTopPanel.remove(main.translationResumeButton);
+				main.translationsTopPanel.add(main.translationPauseButton, 0);
+				main.translationsTopPanel.revalidate();
+				main.translationsTopPanel.repaint();
+			}
+		};
+		main.translationResumeButton.addActionListener(resumeTranslationListener);
 		
 		helpTranslationListener = new ActionListener() {
 			@Override
@@ -165,6 +193,9 @@ public class TranslationsDriver implements MouseListener {
 		Logger.logln(NAME+"User clicked the Translation swap-in arrow button");
 		actionCommand = ((SwapButtonPanel)e.getComponent()).getActionCommand();
 		String newSentence = translationsPanel.translationsMap.get(actionCommand).getUntagged();
+		if (!translationsPanel.current.translator.finished) {
+			translationsPanel.current.translator.stopTranslations();
+		}
 		
 		//We don't want to display translations for this sentence anymore since the sentence is changing
 		SwingUtilities.invokeLater(new Runnable() {

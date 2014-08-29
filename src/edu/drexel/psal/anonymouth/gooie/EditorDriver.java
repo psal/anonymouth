@@ -1034,7 +1034,7 @@ public class EditorDriver {
          */
         private void prepareForReprocessing() {
                 resetToDefaults();
-                main.translationsDriver.translator.reset();
+                //main.translationsDriver.translator.reset();
                 main.translationsPanel.reset();
         }
 

@@ -69,6 +69,13 @@ public class TranslationsPanel {
 	 * 		The TaggedSentence to show the translations for
 	 */
 	public void updateTranslationsPanel(TaggedSentence sentence) {
+		current = sentence;
+		//Update progress bar to reflect currently selected sentence
+		if (current.translator != null)
+			main.translationsProgressBar.setValue(current.translator.getCurrentProgress());
+		else
+			main.translationsProgressBar.setValue(0);
+		
 		// remove all the current translations shown
 		main.translationsHolderPanel.removeAll();
 		
@@ -98,18 +105,16 @@ public class TranslationsPanel {
 			return;
 		}
 		
-		if (sentence.hasTranslations()) {
-			Logger.logln(NAME+"Showing translations for sentence: " + sentence.getUntagged());
+		if (current.hasTranslations()) {
+			Logger.logln(NAME+"Showing translations for sentence: " + current.getUntagged());
 			
-			boolean translated = sentence.isTranslated();
+			boolean translated = current.isTranslated();
 			if (translated && main.translationsTopPanelShown != ANONConstants.TRANSLATIONS.DONE) {
 				switchToEmptyPanel();
 			}
 			if (!translated && main.translationsTopPanelShown != ANONConstants.TRANSLATIONS.PROCESSING) {
 				switchToProgressPanel();
 			}
-
-			current = sentence;
 
 			// retrieve the translation information
 			ArrayList<String> translationNames = current.getTranslationNames();
@@ -147,7 +152,7 @@ public class TranslationsPanel {
 				translationTextAreas[i].setFocusable(false);
 
 				translationButtons[i] = new SwapButtonPanel(this);
-				translationButtons[i].setColor(i, numTranslations);
+				translationButtons[i].setColor(i, numTranslations, current.getTranslationAnonymity().get(i));
 				translationButtons[i].setActionCommand(translationNames.get(i));
 				translationButtons[i].addMouseListener(driver);
 
@@ -218,7 +223,13 @@ public class TranslationsPanel {
 		main.translationsTopPanel.setLayout(new MigLayout(
 				"wrap, ins 0, gap 0",
 				"[grow, fill]",
-				"[]"));
+				"[][]"));
+		
+		if (current.translator.suspended)
+			main.translationsTopPanel.add(main.translationResumeButton);
+		else
+			main.translationsTopPanel.add(main.translationPauseButton);
+		
 		main.translationsTopPanel.add(main.translationsProgressBar, "grow, h 30!");
 		main.translationsTopPanel.revalidate();
 		main.translationsTopPanel.repaint();
@@ -276,6 +287,9 @@ class SwapButtonPanel extends JPanel {
 	private int[] arrow_Y = {this.getHeight()/2, (this.getHeight()/2)-15, (this.getHeight()/2)+15};
 	private final Color BAD_ARROW_COLOR = Color.RED;
 	private final Color GOOD_ARROW_COLOR = Color.GREEN;
+	private final Color MID_ARROW_COLOR = new Color((BAD_ARROW_COLOR.getRed()+GOOD_ARROW_COLOR.getRed())/2,
+													(BAD_ARROW_COLOR.getGreen()+GOOD_ARROW_COLOR.getGreen())/2,
+													(BAD_ARROW_COLOR.getBlue()+GOOD_ARROW_COLOR.getBlue())/2);
 	private final int ANIMATION_FRAMES = 50;
 	private final int ANIMATION_SPEED = 3;
 	
@@ -495,19 +509,19 @@ class SwapButtonPanel extends JPanel {
 	 * @param numTranslations
 	 * 		The number of other translations (anywhere from 1 to 15)
 	 */
-	public void setColor(int position, int numTranslations) {
+	public void setColor(int position, int numTranslations, double anonymity) {
 		double curPercent = (double)position / (double)numTranslations;
 		translationNum = position;
 		
-		if (curPercent <= 0) {
-			default_Arrow_Color = new Color(0, 255, 0);
-		} else if (curPercent >= 100) {
-			default_Arrow_Color = new Color(255, 0, 0);
-		} else {
-			int r = (int)(BAD_ARROW_COLOR.getRed() * curPercent + GOOD_ARROW_COLOR.getRed() * (1 - curPercent));
-			int g = (int)(BAD_ARROW_COLOR.getGreen() * curPercent + GOOD_ARROW_COLOR.getGreen() * (1 - curPercent));
-			int b = (int)(BAD_ARROW_COLOR.getBlue() * curPercent + GOOD_ARROW_COLOR.getBlue() * (1 - curPercent));
-			
+		if (anonymity <= GUIMain.inst.anonymityBar.getAnonymityBarValue()) { //Increase in anonymity
+			int r = (int)(GOOD_ARROW_COLOR.getRed() * (1 - curPercent) + MID_ARROW_COLOR.getRed() * curPercent);
+			int g = (int)(GOOD_ARROW_COLOR.getGreen() * (1 - curPercent) + MID_ARROW_COLOR.getGreen() * curPercent);
+			int b = (int)(GOOD_ARROW_COLOR.getBlue() * (1 - curPercent) + MID_ARROW_COLOR.getBlue() * curPercent);
+			default_Arrow_Color = new Color(r, g, b);
+		} else { //Decrease in anonymity
+			int r = (int)(BAD_ARROW_COLOR.getRed() * curPercent + MID_ARROW_COLOR.getRed() * (1 - curPercent));
+			int g = (int)(BAD_ARROW_COLOR.getGreen() * curPercent + MID_ARROW_COLOR.getGreen() * (1 -curPercent));
+			int b = (int)(BAD_ARROW_COLOR.getBlue() * curPercent + MID_ARROW_COLOR.getBlue() * (1 - curPercent));
 			default_Arrow_Color = new Color(r, g, b);
 		}
 		

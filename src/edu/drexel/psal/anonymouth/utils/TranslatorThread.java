@@ -21,13 +21,15 @@ public class TranslatorThread implements Runnable {
 	private final String NAME = "( TranslatorThread ) - ";
 
 	//Static variables
-	public static Boolean finished = false;
 	public static Boolean noInternet = false;
 	public static Boolean accountsUsed = false;
-	public static Boolean stop = false;
-	public static boolean addSent = false;
 
 	//Variables
+	public Boolean finished = false;
+	public Boolean stop = false;
+	public Boolean suspended = false;
+	public boolean addSent = false;
+	
 	private ArrayList<TaggedSentence> sentences = new ArrayList<TaggedSentence>(); // essentially the priority queue
 	private TranslationFetcher translationFetcher;
 	private GUIMain main;
@@ -112,6 +114,7 @@ public class TranslatorThread implements Runnable {
 		finished = false;
 		noInternet = false;
 		accountsUsed = false;
+		suspended = false;
 		addSent = false;
 	}
 
@@ -173,6 +176,18 @@ public class TranslatorThread implements Runnable {
 							return;
 						}
 						
+						if (suspended) {
+							synchronized(this) {
+								while(suspended) {
+									try {
+										wait();
+									} catch (InterruptedException e) {
+										translationsEnded();
+									}
+								}
+							}
+						}
+						
 						currentLangNum++;
 						TaggedSentence taggedTrans = new TaggedSentence(translation);
 						taggedTrans.tagAndGetFeatures();
@@ -185,8 +200,9 @@ public class TranslatorThread implements Runnable {
 						if (one.equals(two))
 							main.translationsPanel.updateTranslationsPanel(sentences.get(currentSentNum-1));
 						
-						if (main.translationsProgressBar.getValue() + 1 <= main.translationsProgressBar.getMaximum())
-							main.translationsProgressBar.setValue(main.translationsProgressBar.getValue() + 1);
+						//if (main.translationsProgressBar.getValue() + 1 <= main.translationsProgressBar.getMaximum())
+						//	main.translationsProgressBar.setValue(main.translationsProgressBar.getValue() + 1);
+						main.translationsProgressBar.setValue(currentLangNum-1);
 						
 						if (addSent) {
 							addSent = false;
@@ -213,6 +229,46 @@ public class TranslatorThread implements Runnable {
 	}
 	
 	/**
+	 * Returns the current progress of the translator to update the progress bar
+	 */
+	public int getCurrentProgress() {
+		return (currentLangNum - 1);
+	}
+	
+	/**
+	 * Stops the translator thread but allows it to resume where it left off.
+	 */
+	public synchronized void suspendTranslations() {
+		suspended = true;
+		main.enableEverything(true);
+		main.editorDriver.ignoreChanges = false;
+		Logger.logln(NAME+"Suspending translations");
+	}
+	
+	/**
+	 * Resumes the translation thread if it has been stopped
+	 */
+	public synchronized void resumeTranslations() {
+		suspended = false;
+		main.enableEverything(false);
+		main.editorDriver.ignoreChanges = true;
+		notify();
+		Logger.logln(NAME+"Resuming translations");
+	}
+	
+	public void stopTranslations() {
+		if(suspended) {
+			resumeTranslations();
+		}
+		stop = true;
+		try {
+			transThread.join(); //Make sure the thread's actually dead before we return
+		} catch (InterruptedException e) {
+		}
+		reset();
+	}
+	
+	/**
 	 * Cleans up resources used by the translator at the end of translating all sentences.
 	 */
 	private void translationsEnded() {
@@ -232,5 +288,7 @@ public class TranslatorThread implements Runnable {
 		main.editorDriver.ignoreChanges = false;
 		
 		transThread.interrupt();
+		
+		Logger.logln(NAME+"Translations ended");
 	}
 }

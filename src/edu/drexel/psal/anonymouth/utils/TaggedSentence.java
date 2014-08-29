@@ -19,6 +19,7 @@ import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
 import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
+import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
@@ -41,6 +42,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	protected ArrayList<Word> wordsInSentence;
 	protected ArrayList<String> translationNames = new ArrayList<String>();
 	protected ArrayList<TaggedSentence> translations = new ArrayList<TaggedSentence>();
+	protected ArrayList<Double> translationAnonymity = new ArrayList<Double>();
 
 	private final int PROBABLE_MAX = 3;
 
@@ -54,6 +56,8 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	
 	private InstanceConstructor instance;
 	private boolean done = false;
+	
+	public TranslatorThread translator;
 
 	/*
 	private TaggedSentence(int numWords, int numTranslations) {
@@ -147,6 +151,21 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public void setTranslationNames(ArrayList<String> set) {
 		translationNames = set;
 	}
+	
+	/**
+	 * Gets the Anonymity Index for each corresponding translation for this tagged sentence.
+	 */
+	public ArrayList<Double> getTranslationAnonymity() {
+		return translationAnonymity;
+	}
+	
+	/**
+	 * Sets the Anonymity Index each translation in this tagged sentence
+	 * @param set - ArrayList of anonymity indices
+	 */
+	public void setTranslationAnonymity(ArrayList<Double> set) {
+		translationAnonymity = set;
+	}
 
 	/**
 	 * Sorts the translations of this tagged sentence by Anonymity Index.
@@ -214,13 +233,16 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 
 		ArrayList<TaggedSentence> sortedTrans = new ArrayList<TaggedSentence>(numTranslations);
 		ArrayList<String> sortedTranNames = new ArrayList<String>(numTranslations);
+		ArrayList<Double> sortedTranAnonymity = new ArrayList<Double>(numTranslations);
 		for(i = 0; i<numTranslations; i++){
 			sortedTrans.add(i,translations.get((int)toSort[i][1]));
 			sortedTranNames.add(i,translationNames.get((int)toSort[i][1]));
+			sortedTranAnonymity.add(i,toSort[i][0]);
 		}
 
 		translations = sortedTrans; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
-		translationNames = sortedTranNames; // set translations to be the same list of translated sentences, but now in order of Anonymity Index		
+		translationNames = sortedTranNames; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
+		translationAnonymity = sortedTranAnonymity;
 	}
 
 	/**
@@ -328,6 +350,12 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		sentenceTokenized = null;
 		toke = null;
 		tlp = null;
+		translator = null;
+		
+		//update the translations panel to reflect the deletion/replacement, in case the sentence had translations in progress
+		if (PropertiesUtil.getDoTranslations()) {
+			GUIMain.inst.translationsPanel.updateTranslationsPanel(new TaggedSentence(""));
+		}
 	}
 
 	/**
