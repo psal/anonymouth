@@ -103,6 +103,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		for(i = 0; i < numTranslations; i++)
 			translations.add(new TaggedSentence(ts.translations.get(i)));
 		translationNames = ts.translationNames;
+		translationAnonymity = ts.translationAnonymity;
 		translator = ts.translator;
 
 		// copy the ArrayLists of ArrayLists of grammar related concepts
@@ -250,6 +251,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public void resetTranslations() {
 		translator.reset();
 		translations.clear();
+		translationAnonymity.clear();
 	}
 
 	/**

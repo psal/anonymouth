@@ -194,6 +194,7 @@ public class VersionControl {
 		editor.newCaretPosition[0] = indicesUndo.pop();
 		editor.newCaretPosition[1]= editor.newCaretPosition[0];
 		editor.syncTextPaneWithTaggedDoc();
+		main.translationsPanel.updateTranslationsPanel(editor.taggedDoc.getSentenceNumber(editor.sentNum));
 		
 		main.enableRedo(true);
 		
@@ -235,6 +236,7 @@ public class VersionControl {
 		editor.newCaretPosition[0] = indicesRedo.pop();
 		editor.newCaretPosition[1] = editor.newCaretPosition[0];
 		editor.syncTextPaneWithTaggedDoc();
+		main.translationsPanel.updateTranslationsPanel(editor.taggedDoc.getSentenceNumber(editor.sentNum));
 
 		main.enableUndo(true);	
 		
