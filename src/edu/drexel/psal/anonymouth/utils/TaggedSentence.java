@@ -74,6 +74,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	public TaggedSentence(String untagged) {
 		sentenceLevelFeaturesFound = new SparseReferences(10); // probably won't find more than 10 features in the sentence.
 		wordsInSentence = new ArrayList<Word>(10);
+		translator = new TranslatorThread(GUIMain.inst);
 		this.untagged = untagged;
 	}
 	
@@ -102,6 +103,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		for(i = 0; i < numTranslations; i++)
 			translations.add(new TaggedSentence(ts.translations.get(i)));
 		translationNames = ts.translationNames;
+		translator = ts.translator;
 
 		// copy the ArrayLists of ArrayLists of grammar related concepts
 		// first tenses
@@ -243,6 +245,11 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		translations = sortedTrans; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
 		translationNames = sortedTranNames; // set translations to be the same list of translated sentences, but now in order of Anonymity Index
 		translationAnonymity = sortedTranAnonymity;
+	}
+
+	public void resetTranslations() {
+		translator.reset();
+		translations.clear();
 	}
 
 	/**

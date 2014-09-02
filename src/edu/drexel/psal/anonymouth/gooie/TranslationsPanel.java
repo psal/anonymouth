@@ -71,10 +71,7 @@ public class TranslationsPanel {
 	public void updateTranslationsPanel(TaggedSentence sentence) {
 		current = sentence;
 		//Update progress bar to reflect currently selected sentence
-		if (current.translator != null)
-			main.translationsProgressBar.setValue(current.translator.getCurrentProgress());
-		else
-			main.translationsProgressBar.setValue(0);
+		main.translationsProgressBar.setValue(current.translator.getCurrentProgress());
 		
 		// remove all the current translations shown
 		main.translationsHolderPanel.removeAll();
@@ -266,6 +263,8 @@ public class TranslationsPanel {
 	 */
 	public void reset() {
 		Logger.logln(NAME+"Reset");
+		// remove all the current translations shown
+		main.translationsHolderPanel.removeAll();
 		switchToEmptyPanel();
 	}
 }

@@ -1034,7 +1034,9 @@ public class EditorDriver {
          */
         private void prepareForReprocessing() {
                 resetToDefaults();
-                //main.translationsDriver.translator.reset();
+                for (int i = 0; i < taggedDoc.numOfSentences; i++) {
+                	taggedDoc.getSentenceNumber(i).resetTranslations();
+                }
                 main.translationsPanel.reset();
         }
 
