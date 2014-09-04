@@ -80,8 +80,7 @@ public class ConsolidationStation {
 		int attribLen=DataAnalyzer.lengthTopAttributes;
 		for(int i=0;i<attribLen;i++){
 				String stringInBrace=DataAnalyzer.topAttributes[i].getStringInBraces();
-				String fullName = DataAnalyzer.topAttributes[i].getFullName();
-				String nameWithoutStringInBraces = fullName.substring(0, fullName.indexOf('{'));
+				String nameWithoutStringInBraces = DataAnalyzer.topAttributes[i].getTrimmedAttrib();
 				if(wordString.contains(stringInBrace) && !stringInBrace.equals("")){//checks for a possible match
 					if (nameWithoutStringInBraces.contains("Words"))
 						if (!wordString.equals(stringInBrace))
