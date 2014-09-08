@@ -123,8 +123,6 @@ public class DocumentProcessor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		documentMagician.runPrimaryDocOps(main.ppAdvancedDriver.cfd);
-		documentMagician.runSecondaryDocOps();
 		Logger.logln(NAME+"Beginning main process...");
 	}
 	

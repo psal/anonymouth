@@ -201,13 +201,17 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 						ps.addTrainDoc(d.getAuthor(), d);
 					}
 					for (Document d : toModifySet) {
+						d.setAuthor(ANONConstants.DUMMY_NAME);
 						ps.addTestDoc(d.getAuthor(), d);
 					}
-					CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-					instance.jstylo.getUnderlyingInstancesBuilder().reset();
-					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-					instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-					instance.jstylo.prepareInstances();
+					if (instance.jstylo == null){
+						instance.buildJStylo(ps);
+					}
+					//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
+					//instance.jstylo.getUnderlyingInstancesBuilder().reset();
+					//instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+					//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+					//instance.jstylo.prepareInstances();
 					done = true;
 				} else {
 					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
@@ -223,13 +227,14 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 					
 					//add in new test data
 					for (Document d : toModifySet) {
+						d.setAuthor(ANONConstants.DUMMY_NAME);
 						ps.addTestDoc(d.getAuthor(), d);
 					}
-					CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-					instance.jstylo.getUnderlyingInstancesBuilder().reset();
+					//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
+					//instance.jstylo.getUnderlyingInstancesBuilder().reset();
 					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-					instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-					instance.jstylo.prepareInstances();
+					//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
+					instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
