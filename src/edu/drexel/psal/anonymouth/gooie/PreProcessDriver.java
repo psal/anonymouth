@@ -938,7 +938,7 @@ public class PreProcessDriver {
 							titles.remove(curAuthor.toString());
 							
 							preProcessWindow.ps.removeAuthor(curAuthor.toString());
-							removeTrainNode(curAuthor.toString(), false);
+							removeTrainNode(curAuthor);
 							msg += "\t\t> " + curAuthor.toString() + "\n";
 						}
 					} else if (removingAuthor) {
@@ -947,7 +947,7 @@ public class PreProcessDriver {
 							titles.remove(author.toString());
 
 							preProcessWindow.ps.removeAuthor(author.toString());
-							removeTrainNode(author.toString(), false);
+							removeTrainNode(author);
 							msg += "\t\t> "+author.toString()+"\n";
 						}
 					} else {
@@ -964,7 +964,7 @@ public class PreProcessDriver {
 							titles.get(author).remove(title);
 							
 							preProcessWindow.ps.removeTrainDocAt(author, doc.toString());
-							removeTrainNode(doc.toString(), true);
+							removeTrainNode(doc);
 							msg += "\t\t> "+doc.toString()+"\n";
 						}
 					}
@@ -977,6 +977,10 @@ public class PreProcessDriver {
 					} else if (!preProcessWindow.trainDocsReady()) {
 						preProcessWindow.trainNextButton.setEnabled(false);
 						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.trainAddButton);
+					} else {
+						preProcessWindow.trainNextButton.setEnabled(true);
+						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.trainNextButton);
+						preProcessWindow.trainNextButton.requestFocusInWindow();
 					}
 					
 					preProcessWindow.revalidate();
@@ -1333,10 +1337,10 @@ public class PreProcessDriver {
 	
 	/**
 	 * Removes a given node from the Train docs tree
-	 * @param nodeTitle - The title of the node to remove
+	 * @param node - The node to remove
 	 * @param file - Whether or not the node to remove is an author or a document
 	 */
-	private void removeTrainNode(String nodeTitle, boolean file) {
+	private void removeTrainNode(DefaultMutableTreeNode node) {
 		int[] selectedIndex = preProcessWindow.trainDocsTree.getSelectionRows();
 		int min = -1;
 		for (int i = 0; i < selectedIndex.length; i++) {
@@ -1344,35 +1348,8 @@ public class PreProcessDriver {
 				min = selectedIndex[i];
 		}
 		
-		int numAuthors = preProcessWindow.trainTreeTop.getChildCount();
-		
-		for (int a = 0; a < numAuthors; a++) {
-			DefaultMutableTreeNode curAuthor = (DefaultMutableTreeNode)preProcessWindow.trainTreeModel.getChild(preProcessWindow.trainTreeTop, a);
-			String curAuthorName = curAuthor.toString();
-			
-			if (file) {
-				int numDocs = curAuthor.getChildCount();
-				DefaultMutableTreeNode curDoc;
-				String curDocTitle;
-				
-				for (int d = 0; d < numDocs; d++) {
-					curDoc = (DefaultMutableTreeNode)curAuthor.getChildAt(d);
-					curDocTitle = curDoc.toString();
-					
-					if (curDocTitle.equals(nodeTitle)) {
-						preProcessWindow.trainTreeModel.removeNodeFromParent(curDoc);
-						preProcessWindow.trainTreeModel.reload(curAuthor);
-						break;
-					}
-				}
-			} else {
-				if (curAuthorName.equals(nodeTitle)) {
-					preProcessWindow.trainTreeModel.removeNodeFromParent(curAuthor);
-					preProcessWindow.trainTreeModel.reload(preProcessWindow.trainTreeTop);
-					break;
-				}
-			}
-		}
+		preProcessWindow.trainTreeModel.removeNodeFromParent(node);
+		preProcessWindow.trainTreeModel.reload(node.getParent());
 		
 		int size = preProcessWindow.trainDocsTree.getRowCount();
 		while (min >= size) {

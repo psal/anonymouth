@@ -571,10 +571,13 @@ public class PreProcessWindow extends JDialog {
 					if (curAuthor.equals(ANONConstants.DUMMY_NAME))
 						continue;
 					
-					if (ps.numTrainDocs(curAuthor) < 0) { //!!!CHANGE BACK TO ORIGINAL (2) - imitation(4)
-						System.out.println("THE number of trained documents is less than 0");
+					if (ps.numTrainDocs(curAuthor) < 2) { //!!!CHANGE BACK TO ORIGINAL (2) - imitation(4)
 						numGoodAuthors--;
-
+						if(ps.numTrainDocs(curAuthor) <= 0) {
+							System.out.println("THE number of trained documents is less than or equal to 0");
+							result = false;
+							break;
+						}
 						if (numGoodAuthors < 2) { //!!CHANGE BACK TO ORIGINAL (4) - imitation (2)
 							System.out.println("The nubmer of good authors is less than 2");
 							result = false;
