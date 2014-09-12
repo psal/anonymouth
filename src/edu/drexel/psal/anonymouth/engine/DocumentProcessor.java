@@ -130,21 +130,20 @@ public class DocumentProcessor {
 	 * Main process method
 	 */
 	private void processDocuments() {
+		pw = new ProgressWindow("Processing...", main);
+		pw.run();
+		
 		if (!main.processed) {
+			Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
+			pw.setText("Extracting and Clustering Features...");
 			prepareForFirstProcess();
 		}
 		
 		try {
-			pw = new ProgressWindow("Processing...", main);
-			pw.run();
-
 			DocumentMagician.numProcessRequests++;
 			String tempDoc = "";
 			if (!main.processed) {
-						
 				tempDoc = main.documentPane.getText();
-				Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
-				pw.setText("Extracting and Clustering Features...");
 				try {
 					//TODO figure out why this isn't run earlier.
 					//dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
@@ -277,7 +276,7 @@ public class DocumentProcessor {
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();
 		Map<String,Double> tempMap = resultMap.get(mapKeyIter.next()); 
 
-		int numAuthors = DocumentMagician.numSampleAuthors+1;
+		int numAuthors = DocumentMagician.numSampleAuthors+2; //Used to be +1, workaround for JStylo adding an "_Unknown_" author to the Weka instances
 
 		Object[] authors = (tempMap.keySet()).toArray();
 
