@@ -678,13 +678,17 @@ public class PreProcessDriver {
 					List<Document> dstrain = preProcessWindow.ps.getTrainDocs(author);
 					List<Document> dstest = preProcessWindow.ps.getTestAuthorMap().get(author);
 					preProcessWindow.ps.removeAuthor(author);
-					for (Document d : dstrain){
-						d.setAuthor(renamedNode);
-						preProcessWindow.ps.addTrainDoc(renamedNode,d);
+					if (dstrain != null) {
+						for (Document d : dstrain){
+							d.setAuthor(renamedNode);
+							preProcessWindow.ps.addTrainDoc(renamedNode,d);
+						}
 					}
-					for (Document d : dstest){
-						d.setAuthor(renamedNode);
-						preProcessWindow.ps.addTestDoc(renamedNode,d);
+					if (dstest != null) {
+						for (Document d : dstest){
+							d.setAuthor(renamedNode);
+							preProcessWindow.ps.addTestDoc(renamedNode,d);
+						}
 					}
 					List<String> docs = titles.remove(author);
 					titles.put(renamedNode, docs);
