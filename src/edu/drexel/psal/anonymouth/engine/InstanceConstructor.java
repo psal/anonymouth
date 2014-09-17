@@ -223,7 +223,7 @@ public class InstanceConstructor {
 		int i=0;
 		int j=0;
 		int placeHolder;
-		int numAttribs = setAttributes.size();
+		int numAttribs = currentInstance.numAttributes();
 		int numInstances = currentInstance.numInstances();
 		String tempString;
 		String otherTempString;
