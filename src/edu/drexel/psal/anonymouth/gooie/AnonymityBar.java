@@ -209,7 +209,7 @@ public class AnonymityBar extends JPanel {
 	 */
 	public void updateBar() {
 		if (!main.processed || main.reprocessing) {
-			instance = new InstanceConstructor(false,main.ppAdvancedDriver.cfd,false);
+			instance = main.documentProcessor.documentMagician.getInstanceConstructor();
 		}
 		String doc; 
 		do {
@@ -244,46 +244,24 @@ public class AnonymityBar extends JPanel {
 			}
 		
 		try {
-			if (!main.processed || main.reprocessing){
-				ProblemSet ps = new ProblemSet();
-				for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
-					ps.addTrainDoc(d.getAuthor(), d);
-				}
-				for (Document d : toModifySet) {
-					d.setAuthor(ANONConstants.DUMMY_NAME);
-					ps.addTestDoc(d.getAuthor(), d);
-				}
-				if (instance.jstylo == null){
-					instance.buildJStylo(ps);
-				}
-				//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-				//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-				//instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-				//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-				//instance.jstylo.prepareInstances();
-			} else {
-				ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
-				
-				//reset test data
-				List<String> toRemove = new ArrayList<String>();
-				for (String author :  ps.getTestAuthorMap().keySet()){
-					toRemove.add(author);
-				}
-				for (String s : toRemove){
-					ps.removeTestAuthor(s);
-				}
-				
-				//add in new test data
-				for (Document d : toModifySet) {
-					d.setAuthor(ANONConstants.DUMMY_NAME);
-					ps.addTestDoc(d.getAuthor(), d);
-				}
-				//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-				//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-				instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-				//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-				instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+			ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+			
+			//reset test data
+			List<String> toRemove = new ArrayList<String>();
+			for (String author :  ps.getTestAuthorMap().keySet()){
+				toRemove.add(author);
 			}
+			for (String s : toRemove){
+				ps.removeTestAuthor(s);
+			}
+			
+			//add in new test data
+			for (Document d : toModifySet) {
+				d.setAuthor(ANONConstants.DUMMY_NAME);
+				ps.addTestDoc(d.getAuthor(), d);
+			}
+			instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+			instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();

@@ -2,24 +2,18 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.jgaap.generics.Document;
-
-import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.gooie.GUIMain;
-import edu.drexel.psal.anonymouth.gooie.ThePresident;
-import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
-import edu.drexel.psal.jstylo.generics.FullAPI;
-import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.ProblemSet;
-import edu.drexel.psal.jstylo.generics.FullAPI.analysisType;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
+import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
+import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * Swaps original feature values out of the original feature vector of the documen to anonymize, 
@@ -77,21 +71,6 @@ public class FeatureSwapper {
 		int numTopFeatures = DataAnalyzer.topAttributes.length;
 		wekaResultsArray = new WekaResults[numClusterGroups];
 		
-		FullAPI jstylo = new FullAPI.Builder().cfd(GUIMain.inst.ppAdvancedDriver.cfd).isSparse(false).ps(GUIMain.inst.preProcessWindow.ps).
-				numThreads(ThePresident.num_Tagging_Threads).analysisType(analysisType.TRAIN_TEST_UNKNOWN).
-				classifier(GUIMain.inst.ppAdvancedWindow.classifiers.get(0)).build();
-		//jstylo.setTrainingInstances(GUIMain.inst.documentProcessor.documentMagician.getAuthorAndTrainDat());
-		ProblemSet ps = new ProblemSet();
-		for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
-			ps.addTrainDoc(d.getAuthor(), d);
-		}
-		for (Document d : GUIMain.inst.documentProcessor.documentMagician.getDocumentSets().get(2)) {
-			d.setAuthor(ANONConstants.DUMMY_NAME);
-			ps.addTestDoc(d.getAuthor(), d);
-		}
-		jstylo.setProblemSet(ps);
-		jstylo.prepareInstances();
-		
 		int i,j;
 		for(i = 0; i < numClusterGroups; i++){ // for each cluster group
 			Instances hopefullyAnonymizedInstances = new Instances(toAnonymize);
@@ -107,23 +86,20 @@ public class FeatureSwapper {
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
 			
-			//Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
-			try {
-				jstylo.setTestingInstances(hopefullyAnonymizedInstances);
-				jstylo.getUnderlyingInstancesBuilder().initializeAttributes();
-				jstylo.run();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Map<String,Map<String,Double>> wekaResultMap = jstylo.getUnderlyingAnalyzer().getLastResults();
-			keyIter = (wekaResultMap.keySet()).iterator();
-			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);
-			if (keyIter.hasNext()){
-				wekaResultsArray[i] = new WekaResults(wekaResultMap.get(keyIter.next()),i); // there should never be more that one key in this map. We only test one document.
-			}
-			else
-				ErrorHandler.fatalProcessingError(null);
+
 			
+			Map<String,Double> res = new HashMap<String,Double>();
+			try {
+				Classifier classifier = (Classifier)weka.core.SerializationHelper.read(ANONConstants.PATH_TO_CLASSIFIER);
+				double[] probs = classifier.distributionForInstance(hopefullyAnonymizedInstances.instance(0));
+				for (int k = 0; k < probs.length; k++) {
+					String authorName = hopefullyAnonymizedInstances.attribute("authorName").value(k);
+					res.put(authorName, probs[k]);
+				}
+			} catch (Exception e) {
+				ErrorHandler.fatalProcessingError(e);
+			}
+			wekaResultsArray[i] = new WekaResults(res,i);
 		}
 				
 		Arrays.sort(wekaResultsArray);

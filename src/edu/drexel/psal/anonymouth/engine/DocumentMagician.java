@@ -154,6 +154,9 @@ public class DocumentMagician {
 		modifiedDocument = theDoc;
 	}
 	
+	public InstanceConstructor getInstanceConstructor() {
+		return instanceSet;
+	}
 	
 	/**
 	 * Constructor for DocumentMagician

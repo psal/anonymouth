@@ -55,7 +55,6 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 	protected transient TreebankLanguagePack tlp = new PennTreebankLanguagePack(); 
 	
 	private InstanceConstructor instance;
-	private boolean done = false;
 
 	/*
 	private TaggedSentence(int numWords, int numTranslations) {
@@ -157,8 +156,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		int numTranslations = translations.size();
 		double[][]  toSort = new double[translations.size()][2]; // [Anonymity Index][index of specific translation] => will sort by col 1 (AI)
 		int i;
-		if (!done)
-			instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
+		instance = GUIMain.inst.documentProcessor.documentMagician.getInstanceConstructor();
 		for(i = 0; i < numTranslations; i++){
 			String doc; 
 			do {
@@ -195,47 +193,24 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 				}
 			
 			try {
-				if (!done) {
-					ProblemSet ps = new ProblemSet();
-					for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
-						ps.addTrainDoc(d.getAuthor(), d);
-					}
-					for (Document d : toModifySet) {
-						d.setAuthor(ANONConstants.DUMMY_NAME);
-						ps.addTestDoc(d.getAuthor(), d);
-					}
-					if (instance.jstylo == null){
-						instance.buildJStylo(ps);
-					}
-					//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-					//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-					//instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-					//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-					//instance.jstylo.prepareInstances();
-					done = true;
-				} else {
-					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
-					
-					//reset test data
-					List<String> toRemove = new ArrayList<String>();
-					for (String author :  ps.getTestAuthorMap().keySet()){
-						toRemove.add(author);
-					}
-					for (String s : toRemove){
-						ps.removeTestAuthor(s);
-					}
-					
-					//add in new test data
-					for (Document d : toModifySet) {
-						d.setAuthor(ANONConstants.DUMMY_NAME);
-						ps.addTestDoc(d.getAuthor(), d);
-					}
-					//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-					//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-					//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-					instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+				ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+				
+				//reset test data
+				List<String> toRemove = new ArrayList<String>();
+				for (String author :  ps.getTestAuthorMap().keySet()){
+					toRemove.add(author);
 				}
+				for (String s : toRemove){
+					ps.removeTestAuthor(s);
+				}
+				
+				//add in new test data
+				for (Document d : toModifySet) {
+					d.setAuthor(ANONConstants.DUMMY_NAME);
+					ps.addTestDoc(d.getAuthor(), d);
+				}
+				instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+				instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 			} catch(Exception e) {
 				e.printStackTrace();
 				ErrorHandler.StanfordPOSError();

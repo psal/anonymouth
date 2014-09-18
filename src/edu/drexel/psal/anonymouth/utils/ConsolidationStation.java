@@ -329,7 +329,7 @@ public class ConsolidationStation {
 			//(most parts are copied from DocumentMagician with some modifications to reduce runtime to acceptable level without making the program broken down)
 			String docToUse = toModifyDoc.getUntaggedDocument();
 			List<Document> toModifySet = new LinkedList<Document>();
-			InstanceConstructor instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
+			InstanceConstructor instance = GUIMain.inst.documentProcessor.documentMagician.getInstanceConstructor();
 
 			firstTime = true;
 			int k = 0;
@@ -366,47 +366,24 @@ public class ConsolidationStation {
 				}
 				
 				try {
-					if (firstTime) {
-						ProblemSet ps = new ProblemSet();
-						for (Document d : GUIMain.inst.documentProcessor.documentMagician.getTrainSet()) {
-							ps.addTrainDoc(d.getAuthor(), d);
-						}
-						for (Document d : toModifySet) {
-							d.setAuthor(ANONConstants.DUMMY_NAME);
-							ps.addTestDoc(d.getAuthor(), d);
-						}
-						if (instance.jstylo == null){
-							instance.buildJStylo(ps);
-						}
-						//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-						//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-						//instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-						//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-						//instance.jstylo.prepareInstances();
-						firstTime = false;
-					} else {
-						ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
-						
-						//reset test data
-						List<String> toRemove = new ArrayList<String>();
-						for (String author :  ps.getTestAuthorMap().keySet()){
-							toRemove.add(author);
-						}
-						for (String s : toRemove){
-							ps.removeTestAuthor(s);
-						}
-						
-						//add in new test data
-						for (Document d : toModifySet) {
-							d.setAuthor(ANONConstants.DUMMY_NAME);
-							ps.addTestDoc(d.getAuthor(), d);
-						}
-						//CumulativeFeatureDriver cfd = instance.jstylo.getUnderlyingInstancesBuilder().getCFD();
-						//instance.jstylo.getUnderlyingInstancesBuilder().reset();
-						instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-						//instance.jstylo.getUnderlyingInstancesBuilder().setCumulativeFeatureDriver(cfd);
-						instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+					
+					//reset test data
+					List<String> toRemove = new ArrayList<String>();
+					for (String author :  ps.getTestAuthorMap().keySet()){
+						toRemove.add(author);
 					}
+					for (String s : toRemove){
+						ps.removeTestAuthor(s);
+					}
+					
+					//add in new test data
+					for (Document d : toModifySet) {
+						d.setAuthor(ANONConstants.DUMMY_NAME);
+						ps.addTestDoc(d.getAuthor(), d);
+					}
+					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+					instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();
