@@ -29,6 +29,7 @@ import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 public class FeatureSwapper {
 	
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
+	Classifier classifier;
 	Instances toAnonymize;
 	ClusterGroup[] clusterGroups;
 	WekaResults[] wekaResultsArray;
@@ -43,7 +44,13 @@ public class FeatureSwapper {
 		this.clusterGroups = clusterGroups;
 		if (clusterGroups == null)
 			Logger.logln(NAME+"Damn.");
-
+		
+		try {
+			classifier = (Classifier)weka.core.SerializationHelper.read(ANONConstants.PATH_TO_CLASSIFIER);
+		} catch (Exception e){
+			Logger.logln(NAME+"Could not load saved classifier", Logger.LogOut.STDERR);
+			ErrorHandler.fatalProcessingError(e);
+		}
 	}
 	
 	/**
@@ -86,11 +93,8 @@ public class FeatureSwapper {
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
 			
-
-			
 			Map<String,Double> res = new HashMap<String,Double>();
 			try {
-				Classifier classifier = (Classifier)weka.core.SerializationHelper.read(ANONConstants.PATH_TO_CLASSIFIER);
 				double[] probs = classifier.distributionForInstance(hopefullyAnonymizedInstances.instance(0));
 				for (int k = 0; k < probs.length; k++) {
 					String authorName = hopefullyAnonymizedInstances.attribute("authorName").value(k);
