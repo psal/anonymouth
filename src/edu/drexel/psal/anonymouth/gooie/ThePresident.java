@@ -4,6 +4,7 @@ import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.anonymouth.utils.About;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 import java.awt.Image;
 import java.io.File;
@@ -73,7 +74,8 @@ public class ThePresident {
 	public ThePresident() {
 		splash = new SplashScreen();
 		splash.showSplashScreen();
-		
+		Logger.setFileDirPath("anonymouth_log");
+		Logger.setFilePrefix("anonymouth");
 		logo = ImageLoader.getImage(ANONYMOUTH_LOGO_LARGE);
 		aboutLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO);
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
@@ -87,7 +89,7 @@ public class ThePresident {
 			
 			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
-			
+			ProblemSet.setDummyAuthor("~* you *~");
 			app = Application.getApplication();
 			app.setDockIconImage(logo);
 			
@@ -170,7 +172,7 @@ public class ThePresident {
 	
 	/**
 	 * TEST METHOD
-	 * will print "sayThis" and then read and return a line from the user. Useful for stopping the progam at spots.
+	 * will print "sayThis" and then read and return a line from the user. Useful for stopping the program at spots.
 	 * @param sayThis
 	 * @return
 	 */
@@ -181,7 +183,7 @@ public class ThePresident {
 
 	/**
 	 * TEST METHOD
-	 * will print "System waiting for user input:" and then read and return a line from the user. Useful for stopping the progam at spots.
+	 * will print "System waiting for user input:" and then read and return a line from the user. Useful for stopping the program at spots.
 	 * @return
 	 */
 	public String read(){

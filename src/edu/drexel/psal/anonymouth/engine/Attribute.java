@@ -79,8 +79,12 @@ public class Attribute {
 	 */
 	public void setGenericName(){
 		// manipulate fullName to match the feature's value in it's FeatureList representation. calcHist is a big factor in how this is done. 
-		trimmedAttrib = fullName.substring(fullName.indexOf("'")+1,fullName.indexOf("{"));// saves ONLY the actual feature name
-		String tempFeatName = trimmedAttrib;	
+		if (fullName.contains("{"))
+			trimmedAttrib = fullName.substring(fullName.indexOf("'")+1,fullName.indexOf("{"));// saves ONLY the actual feature name
+		else
+			trimmedAttrib = fullName.substring(fullName.indexOf("'")+1,fullName.lastIndexOf("'"));
+		String tempFeatName = trimmedAttrib;
+		/*
 		try{
 			Pattern findDigit = Pattern.compile("\\d");// find a digit (shoudnt be in the genericName);
 			Matcher m = findDigit.matcher(fullName);
@@ -90,10 +94,10 @@ public class Attribute {
 		}
 		catch (Exception e){
 		}
+		*/
 		
-		
-		Logger.logln(NAME+"Generic name: "+tempFeatName.replace("-","_").toUpperCase());
-		genericName = tempFeatName.replace("-","_").toUpperCase();
+		Logger.logln(NAME+"Generic name: "+tempFeatName.replaceAll("[ -]","_").toUpperCase());
+		genericName = tempFeatName.replaceAll("[ -]","_").toUpperCase();
 		
 	}
 	

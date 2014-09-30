@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.File;
@@ -22,7 +23,11 @@ import com.jgaap.generics.Document;
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.FullAPI;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
+import edu.drexel.psal.jstylo.generics.FullAPI.analysisType;
 
 /**
  * The template for the new and improved Anonymity bar!<br><br>
@@ -204,7 +209,7 @@ public class AnonymityBar extends JPanel {
 	 */
 	public void updateBar() {
 		if (!main.processed || main.reprocessing) {
-			instance = new InstanceConstructor(false,main.ppAdvancedDriver.cfd,false);
+			instance = main.documentProcessor.documentMagician.getInstanceConstructor();
 		}
 		String doc; 
 		do {
@@ -239,14 +244,29 @@ public class AnonymityBar extends JPanel {
 			}
 		
 		try {
-			if (!main.processed || main.reprocessing)
-				instance.wid.prepareTrainingSet(main.documentProcessor.documentMagician.getTrainSet(), main.ppAdvancedDriver.cfd);
-			instance.wid.prepareTestSetReducedVersion(toModifySet);
+			ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+			
+			//reset test data
+			List<String> toRemove = new ArrayList<String>();
+			for (String author :  ps.getTestAuthorMap().keySet()){
+				toRemove.add(author);
+			}
+			for (String s : toRemove){
+				ps.removeTestAuthor(s);
+			}
+			
+			//add in new test data
+			for (Document d : toModifySet) {
+				d.setAuthor(ANONConstants.DUMMY_NAME);
+				ps.addTestDoc(d.getAuthor(), d);
+			}
+			instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+			instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();
 		}
-		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+		newValue = main.documentProcessor.documentMagician.getAuthorAnonimity(instance.jstylo.getTestInstances())[0];
 
 		updateTubeFill(); //update the other variables
 		

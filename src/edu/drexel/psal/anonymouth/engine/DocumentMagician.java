@@ -59,9 +59,7 @@ public class DocumentMagician {
 	private List<Document> noAuthorTrainSet;
 	private List<Document> authorSamplesSet;
 	private Map<String,Map<String,Double>> wekaResultMap;
-	private InstanceConstructor instanceSet; 
-	private InstanceConstructor authorInstanceConstructor;
-	private InstanceConstructor noAuthorTrainInstanceConstructor;
+	private InstanceConstructor instanceSet;
 	private ArrayList<String> attributeSet;
 	private ArrayList<String> noAuthorTrainAttributeSet;
 	private ArrayList<String> authorAttributeSet;
@@ -156,6 +154,9 @@ public class DocumentMagician {
 		modifiedDocument = theDoc;
 	}
 	
+	public InstanceConstructor getInstanceConstructor() {
+		return instanceSet;
+	}
 	
 	/**
 	 * Constructor for DocumentMagician
@@ -266,20 +267,35 @@ public class DocumentMagician {
 	 */
 	public void buildAuthorAndNoAuthorTrainInstances(){
 		Logger.logln(NAME+"Building author and no author train instances");
-		authorInstanceConstructor = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
-		noAuthorTrainInstanceConstructor = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
-		int i;
-		int authSampleSetSize = authorSamplesSet.size();
-		noAuthorTrainInstanceConstructor.onlyBuildTrain(noAuthorTrainSet, false);
-		noAuthorTrainAttributeSet = noAuthorTrainInstanceConstructor.getAttributeSet();
-		trainingInstances = noAuthorTrainInstanceConstructor.getTrainingInstances();
-		noAuthorTrainDat = noAuthorTrainInstanceConstructor.getFullTrainData();
+		noAuthorTrainDat = new Instances(authorAndTrainDat);
+		int i = 0;
+		while (i < noAuthorTrainDat.numInstances()) {
+			Instance inst = authorAndTrainDat.get(i);
+			if (inst.stringValue(noAuthorTrainDat.attribute("authorName")).equals(ANONConstants.DUMMY_NAME)) {
+				noAuthorTrainDat.delete(i);
+			} else {
+				i++;
+			}
+		}
+		authorOnlyDat = new Instances(authorAndTrainDat);
+		i = 0;
+		while (i < authorOnlyDat.numInstances()) {
+			Instance inst = authorOnlyDat.get(i);
+			if (!inst.stringValue(authorOnlyDat.attribute("authorName")).equals(ANONConstants.DUMMY_NAME)) {
+				authorOnlyDat.delete(i);
+			} else {
+				i++;
+			}
+		}
 		
-		authorInstanceConstructor.onlyBuildTrain(authorSamplesSet, true);
-		authorAttributeSet = authorInstanceConstructor.getAttributeSet();
-		authorInstances = authorInstanceConstructor.getTrainingInstances();
-		authorOnlyDat = authorInstanceConstructor.getFullTrainData();
-		for(i=0;i<authSampleSetSize;i++){
+		//Use an instance constructor to get the instance arrays and attribute sets from the new instances
+		InstanceConstructor ic = new InstanceConstructor(isSparse,theseFeaturesCfd,false);
+		trainingInstances = ic.getInstances(noAuthorTrainDat);
+		authorInstances = ic.getInstances(authorOnlyDat);
+		noAuthorTrainAttributeSet = ic.getAttributes(noAuthorTrainDat);
+		authorAttributeSet = ic.getAttributes(authorOnlyDat);
+		
+		for(i=0;i<authorSamplesSet.size();i++){
 			if(authorSamplesSet.get(i).getAuthor().equals(ANONConstants.DUMMY_NAME))
 				authorSamplesSet.get(i).setAuthor(authorToRemove);
 		}
@@ -414,8 +430,8 @@ public class DocumentMagician {
 	public void initialDocToData(ProblemSet pSet,CumulativeFeatureDriver cfd, Classifier classifier ){//,List<Map<String,Document>> forTraining, List<Document> forTesting){
 		Logger.logln(NAME+"Entered initialDocToData in DocumentMagician");
 		theClassifier = classifier;
-		
-		ProblemSet pSetCopy = new ProblemSet(pSet);
+		ProblemSet pSetCopy = pSet;
+		//ProblemSet pSetCopy = new ProblemSet(pSet);
 		trainSet = pSetCopy.getAllTrainDocs();
 		
 		toModifySet = pSetCopy.getAllTestDocs(); // docToModify is the test doc already

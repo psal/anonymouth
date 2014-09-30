@@ -27,21 +27,40 @@ public class AttributeStripper {
 	public static String strip(String input){
 		String output = "";
 		Matcher histTest = bracketPat.matcher(input);
-
-		if(histTest.find() == true) {
-			Matcher m = someString.matcher(input);
-			m.find();
-			String inBraces = input.substring(m.start()+1,input.indexOf('}'));
-			Matcher n = attribNumber.matcher(input);
-			n.find();
-			String attribName = input.substring(input.indexOf("'")+1,n.start());
-			output = attribName + " " + inBraces;
+		
+		if (histTest.find() == true) {
+			if (input.contains("{")) {
+				//Matcher m = someString.matcher(input);
+				//m.find();
+				int n = input.indexOf('{');
+				String inBraces = input.substring(input.indexOf('{')+1, input.indexOf('}'));
+				if (input.contains("'")) {
+					//Matcher n = attribNumber.matcher(input);
+					//n.find();
+					String attribName = input.substring(input.indexOf(" '") + 2, n);
+					output = attribName + " " + inBraces;
+				} else {
+					output = inBraces;
+				}
+			} else {
+				Matcher m = someString.matcher(input);
+				m.find();
+				Matcher n = attribNumber.matcher(input);
+				n.find();
+				String attribName = input.substring(input.indexOf("'") + 1, n.start());
+				output = attribName;
+			}
+			
+		} else {
+			if (!input.contains("authorName")){
+				
+				if (input.contains("{")){
+					output = input.substring(input.indexOf("'")+1,input.indexOf("{"));
+				} else {
+					output = input.substring(input.indexOf("'")+1);
+				}
+			}
 		}
-		else {
-			if (!input.contains("authorName"))
-				output = input.substring(input.indexOf("'")+1,input.indexOf("{"));
-		}
-
 		return output;
 	}
 

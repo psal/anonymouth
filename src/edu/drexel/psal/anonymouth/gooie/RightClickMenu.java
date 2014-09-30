@@ -158,7 +158,7 @@ public class RightClickMenu extends JPopupMenu {
 					main.editorDriver.syncTextPaneWithTaggedDoc();
 				} catch (Exception e1) {
 					Logger.logln(NAME+"Editor reset FAILED");
-					Logger.logln(e1);
+					Logger.logln(e1.getMessage());
 				}
 			}
 		};
@@ -171,7 +171,7 @@ public class RightClickMenu extends JPopupMenu {
 					main.editorDriver.highlighterEngine.clearAll();
 				} catch (Exception e1) {
 					Logger.logln(NAME+"Highlighter reset FAILED");
-					Logger.logln(e1);
+					Logger.logln(e1.getMessage());
 				}
 			}
 		};
@@ -248,7 +248,7 @@ class PopupListener extends MouseAdapter {
 			showPopup(e);
 		} catch (Exception e1) {
 			Logger.logln(NAME+"Error occurred while attempting to show popup, will force show");
-			Logger.logln(e1);
+			Logger.logln(e1.getMessage());
 			
 			rightClickMenu.enableCombineSentences(false);
 			popup.show(e.getComponent(), e.getX(), e.getY());

@@ -195,7 +195,7 @@ public class WordSuggestionsDriver {
 			}
 		} catch (Exception e) {
 			Logger.logln(NAME+"An error occured while obtaining and placing Word Suggestions");
-			Logger.logln(e);
+			Logger.logln(e.getMessage());
 		}
 	}
 

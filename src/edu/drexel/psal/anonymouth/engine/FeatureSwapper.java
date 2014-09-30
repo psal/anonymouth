@@ -2,17 +2,18 @@ package edu.drexel.psal.anonymouth.engine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import edu.drexel.psal.ANONConstants;
-import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
-import edu.drexel.psal.jstylo.analyzers.WekaAnalyzer;
-import edu.drexel.psal.jstylo.generics.Logger;
-import edu.drexel.psal.jstylo.generics.Logger.LogOut;
+import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
+import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
  * Swaps original feature values out of the original feature vector of the documen to anonymize, 
@@ -28,7 +29,7 @@ import weka.core.Instances;
 public class FeatureSwapper {
 	
 	private final String NAME = "( "+this.getClass().getName()+" ) - ";
-	WekaAnalyzer waz;
+	Classifier classifier;
 	Instances toAnonymize;
 	ClusterGroup[] clusterGroups;
 	WekaResults[] wekaResultsArray;
@@ -40,11 +41,16 @@ public class FeatureSwapper {
 		toAnonymize = magician.getToModifyDat();
 		toAnonymizeTitlesList = magician.getToModifyTitlesList();
 		trainSetAuthors = magician.getTrainSetAuthors();
-		waz = new WekaAnalyzer(ANONConstants.PATH_TO_CLASSIFIER);
 		this.clusterGroups = clusterGroups;
 		if (clusterGroups == null)
 			Logger.logln(NAME+"Damn.");
-
+		
+		try {
+			classifier = (Classifier)weka.core.SerializationHelper.read(ANONConstants.PATH_TO_CLASSIFIER);
+		} catch (Exception e){
+			Logger.logln(NAME+"Could not load saved classifier", Logger.LogOut.STDERR);
+			ErrorHandler.fatalProcessingError(e);
+		}
 	}
 	
 	/**
@@ -71,6 +77,7 @@ public class FeatureSwapper {
 		int indexInInstance;
 		int numTopFeatures = DataAnalyzer.topAttributes.length;
 		wekaResultsArray = new WekaResults[numClusterGroups];
+		
 		int i,j;
 		for(i = 0; i < numClusterGroups; i++){ // for each cluster group
 			Instances hopefullyAnonymizedInstances = new Instances(toAnonymize);
@@ -85,15 +92,18 @@ public class FeatureSwapper {
 				alteredInstance.setValue(indexInInstance, tempCG_centroids[j]);
 			}
 			hopefullyAnonymizedInstances.add(alteredInstance);
-			Map<String,Map<String,Double>> wekaResultMap = waz.classifyWithPretrainedClassifier(hopefullyAnonymizedInstances, toAnonymizeTitlesList, trainSetAuthors);
-			keyIter = (wekaResultMap.keySet()).iterator();
-			System.out.println(wekaResultMap.keySet().toString()+" -- current cluster group num: "+i);
-			if (keyIter.hasNext()){
-				wekaResultsArray[i] = new WekaResults(wekaResultMap.get(keyIter.next()),i); // there should never be more that one key in this map. We only test one document.
-			}
-			else
-				ErrorHandler.fatalProcessingError(null);
 			
+			Map<String,Double> res = new HashMap<String,Double>();
+			try {
+				double[] probs = classifier.distributionForInstance(hopefullyAnonymizedInstances.instance(0));
+				for (int k = 0; k < probs.length; k++) {
+					String authorName = hopefullyAnonymizedInstances.attribute("authorName").value(k);
+					res.put(authorName, probs[k]);
+				}
+			} catch (Exception e) {
+				ErrorHandler.fatalProcessingError(e);
+			}
+			wekaResultsArray[i] = new WekaResults(res,i);
 		}
 				
 		Arrays.sort(wekaResultsArray);

@@ -224,20 +224,31 @@ public class DataAnalyzer{
 			//}
 		
 			String stringInBraces;
-			boolean calcHist;
-			try {
+			boolean calcHist = false;
+			if (attrib.contains("{") && attrib.contains("}")) {
 				stringInBraces = attrib.substring(attrib.indexOf('{')+1,attrib.indexOf('}'));
-			} catch(IllegalStateException e) { // if no match is found, set 'stringInBraces == to an empty string
+			} else { // if no match is found, set 'stringInBraces == to an empty string
 				stringInBraces = "";
 			}
 			
 			if (stringInBraces.equals("") || stringInBraces.equals("-")) {
 				stringInBraces = "";
 				calcHist = false;
-			} else
+			} else {
 				calcHist = true;
-			
-			topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
+				
+			}
+			try {
+				topAttribs[j] = new Attribute((int)allInfoGain[i][1],attrib,stringInBraces,calcHist);
+			} catch (Exception e){
+				System.out.println("topAttribs size: "+topAttribs.length);
+				System.out.println("i: "+i+" j: "+j);
+				System.out.println("stringInBraces:"+stringInBraces+":");
+				System.out.println("allInfoGain: "+allInfoGain[i][1]);
+				System.out.println("calcHist: "+calcHist);
+				e.printStackTrace();
+				System.exit(0);
+			}
 			topAttribs[j].setInfoGain(allInfoGain[j][0]);
 			topAttribs[j].setToModifyValue(toModifyInstancesArray[0][toModifyIndex]);
 			featuresForClusterAnalyzer.add(topAttribs[j].getConcatGenNameAndStrInBraces());
@@ -451,8 +462,10 @@ public class DataAnalyzer{
 	public void runInitial(DocumentMagician magician, CumulativeFeatureDriver cfd, Classifier classifier) throws Exception {
 		Logger.logln(NAME+"called runIntitial in DataAnalyzer");
 		List<Document> tempTestDocs = pSet.getAllTestDocs(); // get the document(s) to anonymize
+		pSet.removeTestDocAt((String) pSet.getTestAuthorMap().keySet().toArray()[0], tempTestDocs.get(0).getTitle());
 		for (Document d:tempTestDocs) {
 			d.setAuthor(ANONConstants.DUMMY_NAME);
+			pSet.addTestDoc(ANONConstants.DUMMY_NAME, d);
 		}
 		
 		magician.initialDocToData(pSet,cfd, classifier);
