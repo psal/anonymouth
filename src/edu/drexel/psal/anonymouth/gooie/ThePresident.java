@@ -81,6 +81,8 @@ public class ThePresident {
 		dialogLogo = ImageLoader.getImageIcon(ANONYMOUTH_LOGO_SMALL);
 		dialogIcon = ImageLoader.getIcon(ANONYMOUTH_LOGO_SMALL);
 		
+		ProblemSet.setDummyAuthor(ANONConstants.DUMMY_NAME);
+		
 	//	System.out.println("Free Heap size is: " + Runtime.getRuntime().freeMemory()/(1024*1024));
 	//	System.out.println("Total Heap Size is: "  + Runtime.getRuntime().totalMemory()/(1024*1024));
 	//	System.out.println("Maximum Heap size is :" + Runtime.getRuntime().maxMemory()/(1024*1024));
@@ -89,7 +91,6 @@ public class ThePresident {
 			
 			Logger.logln(NAME+"We're on a Mac!");
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
-			ProblemSet.setDummyAuthor("~* you *~");
 			app = Application.getApplication();
 			app.setDockIconImage(logo);
 			
