@@ -240,6 +240,11 @@ public class StartWindow extends JFrame {
 				 * It Used to be handed upon adding, but better for the user if they never have to worry about it
 				 */
 				main.preProcessWindow.assertUniqueTitles();
+				/*
+				 * makes sure the user's sample documents are properly chunked.
+				 * Relies on the cache of user's sample document words being up-to-date (see ProblemSet)
+				 */
+				main.preProcessWindow.chunkSampleDocuments();
 				main.documentProcessor.process();
 			}
 		};
@@ -423,6 +428,8 @@ public class StartWindow extends JFrame {
 		Logger.logln(NAME+"Trying to load problem set at: " + path);
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
+			main.preProcessWindow.updateSampleCache();
+			main.preProcessWindow.updateSampleStatus();
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
 			main.ppAdvancedWindow.setFeature(PropertiesUtil.getFeature());
 			main.preProcessDriver.titles.clear();

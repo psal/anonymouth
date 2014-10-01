@@ -1,16 +1,23 @@
 package edu.drexel.psal.anonymouth.gooie;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -24,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -32,6 +40,7 @@ import javax.swing.tree.TreeCellEditor;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
@@ -66,6 +75,16 @@ public class PreProcessWindow extends JDialog {
 	private int width = 500, height = 410;
 	protected Container currentContainer;
 	protected boolean saved = false;
+	
+	/*
+	 * This is used to cache the words array of all user sample documents before chunking,
+	 * so the user can know before hitting the Start button if there are not enough
+	 * words. This cache should be updated in 3 places:
+	 *     1) in setLastDocumentSet (in StartWindow)
+	 *     2) in loadProblemSet (which is called by setLastDocumentSet, in StartWindow)
+	 *     3) When user hits X button on preprocess window
+	 */
+	protected String[] sampleCache = null;
 	
 	//Doc to anonymize
 	private JPanel testAddRemovePanel;
@@ -106,6 +125,8 @@ public class PreProcessWindow extends JDialog {
 	private JPanel sampleNextPanel;
 	protected JButton samplePreviousButton;
 	protected JButton sampleNextButton;
+	protected JPanel sampleStatusPanel;
+	protected JLabel sampleStatusLabel;
 	//Test documents by other authors
 	protected JPanel trainMainPanel;
 	protected JPanel trainTopPanel;
@@ -260,8 +281,9 @@ public class PreProcessWindow extends JDialog {
 	 * Initializes the Sample Docs panel, which allows the user to add other documents they have written to a list
 	 */
 	private void initSampleDocPanel() {
-		sampleMainPanel = new JPanel(new BorderLayout());
+		sampleMainPanel = new JPanel();
 		sampleMainPanel.setBorder(new EmptyBorder(10, 5, 5, 5));
+		sampleMainPanel.setLayout(new BoxLayout(sampleMainPanel, BoxLayout.Y_AXIS));
 		sampleTopPanel = new JPanel();
 		sampleTopPanel.setLayout(new BoxLayout(sampleTopPanel, BoxLayout.Y_AXIS));
 		
@@ -274,7 +296,7 @@ public class PreProcessWindow extends JDialog {
 		sampleTopPanel.add(sampleBarPanel);
 		
 		sampleTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		sampleLabel = new JLabel("<html><center>Enter at least 2 other documents<br>written by you</center></html>");
+		sampleLabel = new JLabel("<html><center>Enter at least two other<br>documents you've written.</center></html>");
 		sampleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		sampleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		sampleLabel.setFont(HELVETICA);
@@ -282,7 +304,8 @@ public class PreProcessWindow extends JDialog {
 		sampleTextPanel.add(sampleLabel);
 		sampleTopPanel.add(sampleTextPanel);
 		
-		samplePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		samplePanel = new JPanel(); //new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		samplePanel.setLayout(new BoxLayout(samplePanel, BoxLayout.Y_AXIS));
 		sampleDocsListModel = new DefaultListModel<String>();
 		sampleDocsList = new JList<String>(sampleDocsListModel);
 		sampleDocsScrollPane = new JScrollPane(sampleDocsList);
@@ -295,9 +318,10 @@ public class PreProcessWindow extends JDialog {
 		sampleAddButton = new JButton("+");
 		sampleAddRemovePanel.add(sampleAddButton);
 		
-		sampleMiddlePanel = new JPanel(new BorderLayout());
-		sampleMiddlePanel.add(samplePanel, BorderLayout.NORTH);
-		sampleMiddlePanel.add(sampleAddRemovePanel, BorderLayout.SOUTH);
+		sampleMiddlePanel = new JPanel();
+		sampleMiddlePanel.setLayout(new BoxLayout(sampleMiddlePanel, BoxLayout.Y_AXIS));
+		sampleMiddlePanel.add(samplePanel);
+		sampleMiddlePanel.add(sampleAddRemovePanel);
 		sampleTopPanel.add(sampleMiddlePanel);
 		
 		sampleNextButton = new JButton("Next");
@@ -312,8 +336,18 @@ public class PreProcessWindow extends JDialog {
 		sampleNextPanel.add(sampleNextButton);
 		samplePrevNextPanel.add(sampleNextPanel);
 		
-		sampleMainPanel.add(sampleTopPanel, BorderLayout.NORTH);
-		sampleMainPanel.add(samplePrevNextPanel, BorderLayout.SOUTH);
+		sampleMainPanel.add(sampleTopPanel);
+		sampleMainPanel.add(samplePrevNextPanel);
+		
+		sampleStatusPanel = new JPanel();
+		sampleStatusPanel.setBorder(
+				BorderFactory.createCompoundBorder(new EmptyBorder(5, 0, 0, 0), new BevelBorder(BevelBorder.LOWERED)));
+		sampleStatusPanel.setLayout(new GridLayout());
+		sampleStatusLabel = new JLabel("0/" + ANONConstants.REQUIRED_NUM_OF_WORDS + " words loaded.");
+		sampleStatusLabel.setForeground(Color.RED);
+		sampleStatusLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		sampleStatusPanel.add(sampleStatusLabel);
+		sampleMainPanel.add(sampleStatusPanel);
 	}
 	
 	/**
@@ -441,6 +475,26 @@ public class PreProcessWindow extends JDialog {
 	}
 	
 	/**
+	 * Get the cached array of words in the user's sample documents.
+	 * @return An array of words within the user's sample documents.
+	 */
+	public String[] getSampleCache() {
+		return sampleCache;
+	}
+	
+	protected void updateSampleStatus() {
+		String[] words = getSampleCache();
+		int currentWordCount = words == null ? 0 : words.length;
+		int requiredWordCount = ANONConstants.REQUIRED_NUM_OF_WORDS;
+		sampleStatusLabel.setText(currentWordCount + "/" + requiredWordCount + " words loaded.");
+		if (currentWordCount < requiredWordCount) {
+			sampleStatusLabel.setForeground(Color.RED);
+		} else {
+			sampleStatusLabel.setForeground(Color.BLACK);
+		}
+	}
+	
+	/**
 	 * Goes through all titles in the train docs part of the problem set and changes the Anonymouth-reference titles of those that
 	 * Have the same title
 	 * 
@@ -490,6 +544,102 @@ public class PreProcessWindow extends JDialog {
 	}
 	
 	/**
+	 * Sets the sample document word cache.
+	 * Will contain an array of words within the user's sample documents
+	 * 
+	 * @return true if the user's sample documents have enough words to proceed.
+	 */
+	public boolean updateSampleCache() {
+		StringBuilder docsCollective = new StringBuilder();
+		List<Document> sampleDocs = ps.getSampleDocs();
+		if (sampleDocs == null) {
+			sampleCache = null;
+			return false;
+		}
+		for (Document doc : sampleDocs) {
+			docsCollective.append(FileHelper.readFile(doc.getFilePath()));
+			docsCollective.append(" ");
+		}
+		String docsString = docsCollective.toString();
+		if (docsString.isEmpty()) {
+			sampleCache = null;
+			return false;
+		}
+		sampleCache = docsString.split("\\s+");
+		
+		// Alert the user if there are not enough words in their sample documents.
+		// Though it seems like it may be good to decouple this logic from any UI stuff..
+		//  so return false and let the calling function decide what to do.
+		if (sampleCache.length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Chunk the docs into separate, temporary docs of 500 words each
+	 * @param docs	The documents to split up
+	 * @param words (can be null) cached array of words. If null, will recreate from docs.
+	 * @return List of Documents pointing to these temp files, which will be deleted when the application terminates
+	 */
+	public void chunkSampleDocuments() {
+		if (null == ps.getSampleDocs()) {
+				// || 0 == words.length) {
+			updateSampleCache();
+		}
+		String[] words = getSampleCache();
+		if (words.length < ANONConstants.REQUIRED_NUM_OF_WORDS)
+			return;
+		ArrayList<Document> documentList = new ArrayList<Document>();
+		Path tempDir = null;
+		try {
+			tempDir = Files.createTempDirectory("anonymouth_");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (tempDir == null) {
+			Logger.logln("Failed to create temporary directory.");
+			return;
+		}
+		Logger.logln("tempDir created: " + tempDir.toString());
+		tempDir.toFile().deleteOnExit();
+		
+		int maxChunks = words.length / 500 + 1; // will have 1 less if the last chunk is less than 475 words
+		for (int i = 0; i < maxChunks; i++) {
+			// will chop off anything after the last multiple of 500 (if that last chunk is less than 475 words)
+			int nWords = (i < maxChunks - 1) ? 500: words.length % 500;
+			if (nWords < 475) // TODO: magic numbers
+				break;
+			StringBuilder sb = new StringBuilder();
+			for (int j = 0; j < nWords; j++) {
+				sb.append(words[500 * i + j]);
+				sb.append(" ");
+			}
+			Path tempPath = null;
+			try {
+				tempPath = Files.createTempFile(tempDir, "sample_docs_", "_" + i + ".txt");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (tempPath == null) {
+				Logger.logln("Failed to create temporary file.");
+				return;
+			}
+			File tempFile = tempPath.toFile();
+			// have to specify deletion of files in directory AFTER calling on directory (see javadocs)
+			tempFile.deleteOnExit();
+			
+			FileHelper.writeToFile(tempPath.toString(), sb.toString().trim());
+			documentList.add(new Document(tempPath.toAbsolutePath().toString(),ProblemSet.getDummyAuthor(),tempFile.getName()));
+		}
+		
+		ps.setTrainDocs(ANONConstants.DUMMY_NAME, documentList);
+		//return documentList;
+	}
+	
+	/**
 	 * Determines whether or not all the various parts of the document set are ready to begin
 	 * @return
 	 */
@@ -526,7 +676,7 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected boolean sampleDocsReady() {
 		try {
-			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2)
+			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2 && getSampleCache().length >= ANONConstants.REQUIRED_NUM_OF_WORDS)
 				return true;
 			else
 				return false;

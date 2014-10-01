@@ -68,7 +68,8 @@ public class FileHelper {
 	 * @return
 	 */
 	public static String readFile(String path) {
-		String contents = null;
+		String contents = ""; // initializing this to null puts text "null" at beginning of every file
+							  // (when contents = contents + line, contents is null the first time)
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(path));

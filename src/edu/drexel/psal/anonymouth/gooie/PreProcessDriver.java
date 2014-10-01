@@ -113,7 +113,9 @@ public class PreProcessDriver {
 		FileHelper.goodSave.setModalityType(ModalityType.DOCUMENT_MODAL);
 		FileHelper.goodSave.setMode(FileDialog.SAVE);
 		
-		initListeners();	
+		initListeners();
+		preProcessWindow.updateSampleCache();
+		preProcessWindow.updateSampleStatus();
 	}
 	
 	public void updateTitles() {
@@ -138,6 +140,19 @@ public class PreProcessDriver {
 			public void windowClosing(WindowEvent e) {
 				//if the user is closing the window via "X", we should check to see if they have completed the doc set or not
 				//and update accordingly
+				
+				if (!preProcessWindow.updateSampleCache()) {
+					// warn the user that there are not enough words in Samples to proceed
+					Logger.logln("Too few words in user's sample documents.");
+					/*
+					JOptionPane.showMessageDialog(preProcessWindow,
+							"There are too few words in the sample documents that you\n" +
+							"provided. Please add more documents written by you.",
+							"Needs More of Your Writing", 
+							JOptionPane.WARNING_MESSAGE,
+							ThePresident.dialogLogo);*/
+				}
+				
 				if (preProcessWindow.documentsAreReady()) {
 					if (preProcessWindow.saved)
 						ThePresident.startWindow.setReadyToStart(true, true);
@@ -283,7 +298,7 @@ public class PreProcessDriver {
 				 * In case something starts to go wrong with the FileDialogs (they are older and
 				 * may be deprecated as some point). If this be the case, just swap in this code instead
 				 */
-				/*
+				
 				FileHelper.load = setOpeningDir(FileHelper.load, false);
 				FileHelper.load.setName("Load Other Documents Written By You");
 				FileHelper.load.setFileFilter(ANONConstants.TXT);
@@ -294,9 +309,12 @@ public class PreProcessDriver {
 
 				if (answer == JFileChooser.APPROVE_OPTION) {
 					File[] files = FileHelper.load.getSelectedFiles();
-					*/
-				
-				FileHelper.goodLoad.setTitle("Load Other Documents Written By You");
+					
+				/**
+				 * Allow a user to select a directory, so use code above instead...
+				 */
+					
+				/*FileHelper.goodLoad.setTitle("Load File With Other Documents Written By You");
 				FileHelper.goodLoad = setOpeningDir(FileHelper.goodLoad, false);
 				FileHelper.goodLoad.setMultipleMode(true);
 				FileHelper.goodLoad.setFilenameFilter(ANONConstants.TXT);
@@ -304,7 +322,8 @@ public class PreProcessDriver {
 				FileHelper.goodLoad.setVisible(true);
 				
 				File[] files = FileHelper.goodLoad.getFiles();
-				if (files.length != 0) {
+				if (files.length != 0) { */
+					
 					String msg = "Trying to load User Sample documents:\n";
 					
 					for (File file: files)
@@ -319,57 +338,18 @@ public class PreProcessDriver {
 						allUserSampleDocPaths.add(doc.getFilePath());
 					for (File file: files) {
 						path = file.getAbsolutePath();
-						if (allUserSampleDocPaths.contains(path))
-							continue;
-
-						if (isEmpty(path, file.getName())) {
-							continue;
-						}
-						
-						if (titles.get(ProblemSet.getDummyAuthor()) == null) {
-							titles.put(ProblemSet.getDummyAuthor(), new ArrayList<String>());
-						}
-						
-						if (titles.get(ProblemSet.getDummyAuthor()).contains(file.getName())) {
-							int response = JOptionPane.showOptionDialog(preProcessWindow,
-									"An older file named \""+file.getName()+"\" already exists in your\n" +
-									"documents. Do you want to replace it with the new one you're moving?",
-									"Duplicate Name",
-									JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, ThePresident.dialogLogo,
-									duplicateName, "Replace");
-							
-							if (response == REPLACE) {
-								preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), file.getName());
-								preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
-								addSampleDoc(file.getName());
-							} else if (response == KEEP_BOTH) {
-								int addNum = 1;
-
-								String newTitle = file.getName();
-								while (titles.get(ProblemSet.getDummyAuthor()).contains(newTitle)) {
-									newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
-									newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
-									addNum++;
-								}
-
-								preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path, ProblemSet.getDummyAuthor(), newTitle));	
-								titles.get(ProblemSet.getDummyAuthor()).add(newTitle);
-								addSampleDoc(newTitle);
-							} else {
-								return;
-							}
-						} else {
-							preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
-							titles.get(ProblemSet.getDummyAuthor()).add(file.getName());
-							addSampleDoc(file.getName());
-						}
+						prepareAndAddSampleDoc(file, allUserSampleDocPaths, true);
 					}
 
 					updateOpeningDir(path, false);
+					preProcessWindow.updateSampleCache();
+					preProcessWindow.updateSampleStatus();
 					updateBar(preProcessWindow.sampleBarPanel);
 					
-					if (preProcessWindow.sampleDocsReady()) {
+					if (!preProcessWindow.sampleDocsEmpty()) {
 						preProcessWindow.sampleRemoveButton.setEnabled(true);
+					}
+					if (preProcessWindow.sampleDocsReady()) {
 						preProcessWindow.sampleNextButton.setEnabled(true);
 						preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.sampleNextButton);
 						preProcessWindow.sampleNextButton.requestFocusInWindow();
@@ -440,6 +420,76 @@ public class PreProcessDriver {
 			public void keyReleased(KeyEvent e) {}
 		};
 		preProcessWindow.sampleDocsList.addKeyListener(sampleDeleteListener);
+	}
+	
+	/**
+	 * Prepare (and add) the sample doc pointed to by "file".
+	 * @param file						The sample document to add 
+	 * @param allUserSampleDocPaths		List of all documents (to ensure it is not added if already in test set or training set)
+	 * @param recursive					Whether or not it should descend recursively into directories
+	 */
+	private void prepareAndAddSampleDoc(File file, ArrayList<String> allUserSampleDocPaths, boolean recursive) {
+		if (!file.exists())
+			return;
+		String path = file.getAbsolutePath();
+	
+		if (file.isDirectory()) {
+			if (!recursive)
+				return;
+			File[] sampleFileList = file.listFiles();
+			for (File sampleFile: sampleFileList) {
+				prepareAndAddSampleDoc(sampleFile, allUserSampleDocPaths, true);
+			}
+			return;
+		}
+		
+		// TODO: would like to remove the need for this method to have allUserSampleDocPaths, but it is
+		// necessary to check here, since allUserSampleDocPaths contains files, not directories
+		if (allUserSampleDocPaths.contains(path))
+			return; // essentially continues previous behavior of "continuing"
+
+		if (isEmpty(path, file.getName())) {
+			return;
+		}
+		
+		if (titles.get(ProblemSet.getDummyAuthor()) == null) {
+			titles.put(ProblemSet.getDummyAuthor(), new ArrayList<String>());
+		}
+		
+		if (titles.get(ProblemSet.getDummyAuthor()).contains(file.getName())) {
+			int response = JOptionPane.showOptionDialog(preProcessWindow,
+					"An older file named \""+file.getName()+"\" already exists in your\n" +
+					"documents. Do you want to replace it with the new one you're moving?",
+					"Duplicate Name",
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, ThePresident.dialogLogo,
+					duplicateName, "Replace");
+			
+			if (response == REPLACE) {
+				preProcessWindow.ps.removeTrainDocAt(ProblemSet.getDummyAuthor(), file.getName());
+				preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
+				addSampleDoc(file.getName());
+			} else if (response == KEEP_BOTH) {
+				int addNum = 1;
+
+				String newTitle = file.getName();
+				while (titles.get(ProblemSet.getDummyAuthor()).contains(newTitle)) {
+					newTitle = newTitle.replaceAll(" copy_\\d*.[Tt][Xx][Tt]|.[Tt][Xx][Tt]", "");
+					newTitle = newTitle.concat(" copy_"+Integer.toString(addNum)+".txt");
+					addNum++;
+				}
+
+				preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path, ProblemSet.getDummyAuthor(), newTitle));	
+				titles.get(ProblemSet.getDummyAuthor()).add(newTitle);
+				addSampleDoc(newTitle);
+			} else {
+				return; // TODO: previously broke out of for loop - now just continues to next
+			}
+		} else {
+			preProcessWindow.ps.addTrainDoc(ProblemSet.getDummyAuthor(), new Document(path,ProblemSet.getDummyAuthor(),file.getName()));
+			titles.get(ProblemSet.getDummyAuthor()).add(file.getName());
+			addSampleDoc(file.getName());
+		}
+		return;
 	}
 	
 	/**
@@ -843,7 +893,6 @@ public class PreProcessDriver {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				preProcessWindow.setVisible(false);
-				
 				if (preProcessWindow.documentsAreReady()) {
 					if (preProcessWindow.saved)
 						ThePresident.startWindow.setReadyToStart(true, true);
@@ -877,6 +926,8 @@ public class PreProcessDriver {
 		}
 
 		Logger.log(msg);
+		preProcessWindow.updateSampleCache();
+		preProcessWindow.updateSampleStatus();
 		updateBar(preProcessWindow.sampleBarPanel);
 		
 		if (preProcessWindow.sampleDocsEmpty()) {
@@ -1094,11 +1145,13 @@ public class PreProcessDriver {
 	protected void resetAllComponents() {
 		preProcessWindow.saved = false;
 		preProcessWindow.ps = new ProblemSet();
+		preProcessWindow.updateSampleCache();
 		preProcessWindow.ps.setTrainCorpusName(preProcessWindow.DEFAULT_TRAIN_TREE_NAME);
 		PropertiesUtil.setProbSet("");
 		
 		//Resets the test document textPane
 		preProcessWindow.testDocPane.setText("");
+		preProcessWindow.updateSampleStatus();
 		main.mainDocPreview = new Document();
 		
 		//Reset the sample document list
