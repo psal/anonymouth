@@ -229,6 +229,7 @@ public class StartWindow extends JFrame {
 	/**
 	 * Initializes the listeners
 	 */
+	//TODO looking here to try to track down the flow of info to discover why it's crashing.
 	private void initListeners() {
 		startListener = new ActionListener() {
 			@Override
@@ -425,23 +426,23 @@ public class StartWindow extends JFrame {
 	 * @param path - The absolute path to the problem set we want to load
 	 */
 	public void loadProblemSet(String path) {
+		
 		Logger.logln(NAME+"Trying to load problem set at: " + path);
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
+			ProblemSet.setDummyAuthor(ANONConstants.DUMMY_NAME);
 			main.preProcessWindow.updateSampleCache();
 			main.preProcessWindow.updateSampleStatus();
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
 			main.ppAdvancedWindow.setFeature(PropertiesUtil.getFeature());
 			main.preProcessDriver.titles.clear();
-			
 			boolean probSetReady = main.preProcessWindow.documentsAreReady();
 			if (main.preProcessDriver.updateAllComponents() && probSetReady) {
 				setReadyToStart(true, true);
 				ThePresident.canDoQuickStart = true;
-				
 				//main.updateDocLabel(main.preProcessWindow.ps.getTestDoc().getTitle(), 0);
 				
-				String testDocFilePath = main.preProcessWindow.ps.getTestDoc().getFilePath();
+				String testDocFilePath = main.preProcessWindow.ps.getAllTestDocs().get(0).getFilePath();
 				String trainDocFilePath = main.preProcessWindow.ps.getAllTrainDocs().get(0).getFilePath();
 				if (!ANONConstants.IS_MAC) { // We do this so it works for both OS X and Windows
 					testDocFilePath = testDocFilePath.replace('/', '\\');

@@ -626,7 +626,7 @@ public class EditorDriver {
                                         Logger.logln(NAME+"\t" + taggedDoc.getUntaggedSentences().get(i), LogOut.STDERR);
                                 }
 
-                                Logger.logln(e);
+                                Logger.logln(e.getMessage());
                                 return;
                         }
                 }
@@ -857,7 +857,7 @@ public class EditorDriver {
                                 results[positionNumber] = new int[]{selectedSentence, startIndex, endIndex};
                         } catch (Exception e) {
                                 Logger.logln(NAME+"Something went dreadfully wrong calculating the sentence indices");
-                                Logger.logln(e);
+                                Logger.logln(e.getMessage());
                         }
                 }
 
@@ -921,7 +921,7 @@ public class EditorDriver {
                         }
                 } catch (Exception e1) {
                         Logger.logln(NAME+"Problem moving highlight", LogOut.STDERR);
-                        Logger.logln(e1);
+                        Logger.logln(e1.getMessage());
                 }
         }
 

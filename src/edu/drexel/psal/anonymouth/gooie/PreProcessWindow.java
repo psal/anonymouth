@@ -551,7 +551,7 @@ public class PreProcessWindow extends JDialog {
 	 */
 	public boolean updateSampleCache() {
 		StringBuilder docsCollective = new StringBuilder();
-		List<Document> sampleDocs = ps.getSampleDocs();
+		List<Document> sampleDocs = ps.getTrainDocs(ProblemSet.getDummyAuthor());
 		if (sampleDocs == null) {
 			sampleCache = null;
 			return false;
@@ -583,7 +583,7 @@ public class PreProcessWindow extends JDialog {
 	 * @return List of Documents pointing to these temp files, which will be deleted when the application terminates
 	 */
 	public void chunkSampleDocuments() {
-		if (null == ps.getSampleDocs()) {
+		if (null == ps.getTrainDocs(ProblemSet.getDummyAuthor())) {
 				// || 0 == words.length) {
 			updateSampleCache();
 		}

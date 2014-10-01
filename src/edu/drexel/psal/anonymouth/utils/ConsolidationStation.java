@@ -21,7 +21,9 @@ import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
+import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.Logger;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
 /**
@@ -66,8 +68,7 @@ public class ConsolidationStation {
 		int attribLen=DataAnalyzer.lengthTopAttributes;
 		for(int i=0;i<attribLen;i++){
 				String stringInBrace=DataAnalyzer.topAttributes[i].getStringInBraces();
-				String fullName = DataAnalyzer.topAttributes[i].getFullName();
-				String nameWithoutStringInBraces = fullName.substring(0, fullName.indexOf('{'));
+				String nameWithoutStringInBraces = DataAnalyzer.topAttributes[i].getTrimmedAttrib();
 				if(wordString.contains(stringInBrace) && !stringInBrace.equals("")){//checks for a possible match
 					if (nameWithoutStringInBraces.contains("Words"))
 						if (!wordString.equals(stringInBrace))
@@ -316,7 +317,7 @@ public class ConsolidationStation {
 			//(most parts are copied from DocumentMagician with some modifications to reduce runtime to acceptable level without making the program broken down)
 			String docToUse = toModifyDoc.getUntaggedDocument();
 			List<Document> toModifySet = new LinkedList<Document>();
-			InstanceConstructor instance = new InstanceConstructor(false,GUIMain.inst.ppAdvancedDriver.cfd,false);
+			InstanceConstructor instance = GUIMain.inst.documentProcessor.documentMagician.getInstanceConstructor();
 
 			firstTime = true;
 			int k = 0;
@@ -353,17 +354,30 @@ public class ConsolidationStation {
 				}
 				
 				try {
-					if (firstTime) {
-						instance.wid.prepareTrainingSet(GUIMain.inst.documentProcessor.documentMagician.getTrainSet(), GUIMain.inst.ppAdvancedDriver.cfd);
-						firstTime = false;
+					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+					
+					//reset test data
+					List<String> toRemove = new ArrayList<String>();
+					for (String author :  ps.getTestAuthorMap().keySet()){
+						toRemove.add(author);
 					}
-					instance.wid.prepareTestSetReducedVersion(toModifySet);
+					for (String s : toRemove){
+						ps.removeTestAuthor(s);
+					}
+					
+					//add in new test data
+					for (Document d : toModifySet) {
+						d.setAuthor(ANONConstants.DUMMY_NAME);
+						ps.addTestDoc(d.getAuthor(), d);
+					}
+					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
+					instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();
 					ErrorHandler.StanfordPOSError();
 				}
-				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.wid.getTestSet())[0];
+				double currValue = GUIMain.inst.documentProcessor.documentMagician.getAuthorAnonimity(instance.jstylo.getTestInstances())[0];
 				if (currValue == newStartingValue)
 					wordsSuggestion.remove(k);
 				else {

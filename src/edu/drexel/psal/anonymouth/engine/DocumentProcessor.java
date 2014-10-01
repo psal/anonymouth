@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
@@ -25,6 +26,7 @@ import edu.drexel.psal.anonymouth.utils.TaggedDocument;
 import edu.drexel.psal.anonymouth.utils.Tagger;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
+import edu.drexel.psal.jstylo.generics.ProblemSet;
 
 /**
  * The class that manages all document processing and all relating classes.
@@ -111,7 +113,14 @@ public class DocumentProcessor {
 		}
 
 		dataAnalyzer = new DataAnalyzer(main.preProcessWindow.ps);
+		//FIXME
 		documentMagician = new DocumentMagician(false);
+		//need to find and fill in the Classifier
+		try {
+			dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Logger.logln(NAME+"Beginning main process...");
 	}
 	
@@ -119,23 +128,23 @@ public class DocumentProcessor {
 	 * Main process method
 	 */
 	private void processDocuments() {
+		pw = new ProgressWindow("Processing...", main);
+		pw.run();
+		
 		if (!main.processed) {
+			Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
+			pw.setText("Extracting and Clustering Features...");
 			prepareForFirstProcess();
 		}
 		
 		try {
-			pw = new ProgressWindow("Processing...", main);
-			pw.run();
-
 			DocumentMagician.numProcessRequests++;
 			String tempDoc = "";
 			if (!main.processed) {
-						
 				tempDoc = main.documentPane.getText();
-				Logger.logln(NAME+"Process button pressed for first time (initial run) in editor tab");
-				pw.setText("Extracting and Clustering Features...");
 				try {
-					dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
+					//TODO figure out why this isn't run earlier.
+					//dataAnalyzer.runInitial(documentMagician, main.ppAdvancedDriver.cfd, main.ppAdvancedWindow.classifiers.get(0));
 					pw.setText("Initializing Tagger...");
 					Tagger.initTagger();
 					pw.setText("Classifying Documents...");
@@ -181,7 +190,9 @@ public class DocumentProcessor {
 			
 			if (!main.processed) {
 				ConsolidationStation.toModifyTaggedDocs.get(0).makeAndTagSentences(main.documentPane.getText(), true);
-				List<Document> sampleDocs = documentMagician.getDocumentSets().get(0);
+				List<Document> sampleDocs = null;
+
+				sampleDocs = documentMagician.getDocumentSets().get(0);
 				int size = sampleDocs.size();
 				ConsolidationStation.otherSampleTaggedDocs = new ArrayList<TaggedDocument>();
 				for (int i = 0; i < size; i++) {
@@ -246,7 +257,7 @@ public class DocumentProcessor {
 			long heapFreeSize = Runtime.getRuntime().freeMemory();
 			Logger.logln(NAME+"ERROR WHILE PROCESSING. Here are the total, max, and free heap sizes:", LogOut.STDERR);
 			Logger.logln(NAME+"Total: "+heapSize+" Max: "+heapMaxSize+" Free: "+heapFreeSize, LogOut.STDERR);
-			
+			e.printStackTrace();
 			ErrorHandler.fatalProcessingError(e);
 		}
 	}
@@ -263,7 +274,7 @@ public class DocumentProcessor {
 		Iterator<String> mapKeyIter = resultMap.keySet().iterator();
 		Map<String,Double> tempMap = resultMap.get(mapKeyIter.next()); 
 
-		int numAuthors = DocumentMagician.numSampleAuthors+1;
+		int numAuthors = DocumentMagician.numSampleAuthors+2; //Used to be +1, workaround for JStylo adding an "_Unknown_" author to the Weka instances
 
 		Object[] authors = (tempMap.keySet()).toArray();
 

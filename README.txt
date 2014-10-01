@@ -1,3 +1,9 @@
+NOTE:
+This branch is not yet runnable! It is a development branch for updating anonymouth to
+a more proper version of JStlyo which has a large number of subtle bug fixes as well as a
+clean API which it can use to extract information. Do not attempt to use this branch until it has been completed.
+
+
 Anonymouth
 -Document Anonymization Tool
 -Version: 0.5

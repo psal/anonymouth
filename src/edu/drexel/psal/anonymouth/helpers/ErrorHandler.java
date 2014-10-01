@@ -39,10 +39,10 @@ public class ErrorHandler {
 	 */
 	public static void fatalError(Component parent, Exception e) {
 		if (e != null)
-			Logger.logln(e);
+			Logger.logln(e.getMessage());
 		
 		int ans = JOptionPane.showOptionDialog(parent,
-				"Anonymouth has encountered a fatal error and will have to close since it can no\n" +
+				"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
 						"longer run properly.\n\n" +
 						"If you wish to save any current work before Anonymouth closes, you may click\n" +
 						"\"Wait\" and close Anonymouth afterwards manually.",
@@ -50,6 +50,7 @@ public class ErrorHandler {
 				RESTART_OPTIONS, RESTART_OPTIONS[0]);
 		if (ans == 1) {
 			Logger.logln(NAME+"Fatal error encountered and the user chose to immediately quit, will exit now...", LogOut.STDERR);
+			e.printStackTrace();
 			System.exit(FATAL_ERROR);
 		}
 	}
@@ -67,11 +68,11 @@ public class ErrorHandler {
 			@Override
 			public void run() {
 				if (e != null)
-					Logger.logln(e);
+					Logger.logln(e.getMessage());
 				
 				Toolkit.getDefaultToolkit().beep();
 				JOptionPane.showMessageDialog(null,
-						"Anonymouth has encountered a fatar error and will have to close since it can no\n" +
+						"Anonymouth has encountered a fatal error and will have to close since it can no\n" +
 						"longer run properly.\n\n" +
 						"We apologize for the inconvenience and are hard at work to solve the issue.",
 						"Fatal Error", JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
