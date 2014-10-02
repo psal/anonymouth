@@ -430,7 +430,6 @@ public class StartWindow extends JFrame {
 		Logger.logln(NAME+"Trying to load problem set at: " + path);
 		try {
 			main.preProcessWindow.ps = new ProblemSet(path);
-			ProblemSet.setDummyAuthor(ANONConstants.DUMMY_NAME);
 			main.preProcessWindow.updateSampleCache();
 			main.preProcessWindow.updateSampleStatus();
 			main.ppAdvancedWindow.setClassifier(PropertiesUtil.getClassifier());
