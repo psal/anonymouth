@@ -27,6 +27,7 @@ public class ANONConstants {
 	public static final String CORPORA_PREFIX = EXTERNAL_RESOURCE_PACKAGE+"corpora/";
 	public static final String PROBLEMSETS_PREFIX = EXTERNAL_RESOURCE_PACKAGE+"problem_sets/";
 	public static final String FEATURESETS_PREFIX = EXTERNAL_RESOURCE_PACKAGE+"feature_sets/";
+	public static final String CACHE_PREFIX = EXTERNAL_RESOURCE_PACKAGE+".cache/";
 	public static final String JGAAP_RESOURCE_WORDNET = "/com/jgaap/resources/wordnet/";
 	public static final String DOC_MAGICIAN_WRITE_DIR = WORKING_DIR + ".edited_documents/";
 	public static final String KOPPEL_FUNCTION_WORDS = EXTERNAL_RESOURCE_PACKAGE+"koppel_function_words.txt";
