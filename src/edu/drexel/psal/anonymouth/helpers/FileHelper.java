@@ -3,7 +3,6 @@ package edu.drexel.psal.anonymouth.helpers;
 import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 
@@ -176,38 +174,4 @@ public class FileHelper {
 					JOptionPane.ERROR_MESSAGE, UIManager.getIcon("OptionPane.errorIcon"));
 		}
 	}
-	
-	/**
-     * Recursively delete contents of a directory (if f is a directory),
-     * then delete f.
-     * @param dir   the file/directory to delete
-     * @return true if f was successfully deleted, false otherwise
-	 * @throws Exception 
-     */
-    public static boolean deleteRecursive(File f) throws Exception {
-    	File baseDir = new File(ANONConstants.WORKING_DIR);
-		if (!f.getCanonicalPath().startsWith(baseDir.getCanonicalPath())) {
-			throw new Exception("Tried to delete a directory outside of working directory.");
-		}
-        return deleteRecursiveUnsafe(f);
-    }
-    
-    /**
-     * Deletes a file/directory without first checking to ensure it is in the working directory
-     * @param f
-     * @return
-     */
-    private static boolean deleteRecursiveUnsafe(File f) {
-    	if (f.exists()) {
-            File[] files = f.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    deleteRecursiveUnsafe(files[i]);
-                } else {
-                    files[i].delete();
-                }
-            }
-        }
-        return f.delete();
-    }
 }

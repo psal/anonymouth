@@ -268,8 +268,6 @@ public class DocumentMagician {
 	public void buildAuthorAndNoAuthorTrainInstances(){
 		Logger.logln(NAME+"Building author and no author train instances");
 		noAuthorTrainDat = new Instances(authorAndTrainDat);
-		authorOnlyDat = new Instances(authorAndTrainDat);
-		
 		int i = 0;
 		while (i < noAuthorTrainDat.numInstances()) {
 			Instance inst = authorAndTrainDat.get(i);
@@ -279,7 +277,7 @@ public class DocumentMagician {
 				i++;
 			}
 		}
-		
+		authorOnlyDat = new Instances(authorAndTrainDat);
 		i = 0;
 		while (i < authorOnlyDat.numInstances()) {
 			Instance inst = authorOnlyDat.get(i);
@@ -421,26 +419,6 @@ public class DocumentMagician {
 			}
 			
 		return res;
-	}
-	
-	/**
-	 * Create a map from authors to their documents, given a set of documents.
-	 * @return a map from authors to their documents
-	 */
-	public static HashMap<String, List<Document>> mapToAuthor(List<Document> documents) {
-		HashMap<String, List<Document>> map = new HashMap<String, List<Document>>();
-		for (Document d : documents) {
-			String author = d.getAuthor();
-			if (map.containsKey(author)) {
-				map.get(author).add(d);
-			}
-			else {
-				ArrayList<Document> list = new ArrayList<Document>();
-				list.add(d);
-				map.put(author, list);
-			}
-		}
-		return map;
 	}
 	
 	/**
