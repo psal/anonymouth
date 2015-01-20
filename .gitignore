@@ -9,5 +9,6 @@ JStylo_prop.prop
 
 anonymouth_log
 build.xml
+auto_javac.sh
 dist
 /bin
