@@ -103,7 +103,6 @@ public class PreProcessWindow extends JDialog {
 	private JPanel testMiddlePanel;
 	private JPanel testPrevNextPanel;
 	private JPanel testNextPanel;
-	protected JButton testPreviousButton;
 	protected JButton testNextButton;
 	//Other sample documents written by the author
 	protected JPanel sampleMainPanel;
@@ -261,11 +260,8 @@ public class PreProcessWindow extends JDialog {
 		testTopPanel.add(testMiddlePanel);
 
 		testNextButton = new JButton("Next");
-		testPreviousButton = new JButton("Previous");
-		testPreviousButton.setAlignmentX(Container.LEFT_ALIGNMENT);
 		testPrevNextPanel = new JPanel();
 		testPrevNextPanel.setLayout(new BoxLayout(testPrevNextPanel, BoxLayout.X_AXIS));
-		testPrevNextPanel.add(testPreviousButton);
 		testNextButton.setAlignmentX(Container.RIGHT_ALIGNMENT);
 		testNextPanel = new JPanel();
 		testNextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
@@ -789,7 +785,6 @@ public class PreProcessWindow extends JDialog {
 			this.getRootPane().setDefaultButton(testAddButton);
 		}
 		
-		testPreviousButton.setEnabled(false);
 		testRemoveButton.setEnabled(areEnabled);
 		testAddButton.setEnabled(!areEnabled);
 		testNextButton.setEnabled(areEnabled);
