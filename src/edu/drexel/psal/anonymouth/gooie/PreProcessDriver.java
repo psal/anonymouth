@@ -946,10 +946,10 @@ public class PreProcessDriver {
 		
 		if (preProcessWindow.sampleDocsEmpty()) {
 			preProcessWindow.sampleRemoveButton.setEnabled(false);
-		} else if (!preProcessWindow.sampleDocsReady()) {
+		} else if (!preProcessWindow.sampleDocsReady() || preProcessWindow.getSampleCache().length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
 			preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.sampleAddButton);
 			preProcessWindow.sampleAddButton.requestFocusInWindow();
-			preProcessWindow.sampleNextButton.setEnabled(false);
+			JOptionPane.showMessageDialog(preProcessWindow, "Consider adding more documents for better results.", "Low Word Count", JOptionPane.WARNING_MESSAGE);
 		}
 		preProcessWindow.revalidate();
 		preProcessWindow.repaint();	

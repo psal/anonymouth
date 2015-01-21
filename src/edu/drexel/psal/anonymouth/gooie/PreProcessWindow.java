@@ -676,7 +676,7 @@ public class PreProcessWindow extends JDialog {
 	 */
 	protected boolean sampleDocsReady() {
 		try {
-			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2 && getSampleCache().length >= ANONConstants.REQUIRED_NUM_OF_WORDS)
+			if (ps.getTrainDocs(ProblemSet.getDummyAuthor()).size() >= 2)
 				return true;
 			else
 				return false;
