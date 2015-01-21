@@ -397,6 +397,9 @@ public class PreProcessDriver {
 		sampleNextListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (preProcessWindow.getSampleCache() == null || preProcessWindow.getSampleCache().length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
+					JOptionPane.showMessageDialog(preProcessWindow, "Consider adding more documents for better results.", "Low Word Count", JOptionPane.WARNING_MESSAGE);
+				}
 				preProcessWindow.switchingToTrain();
 				updateBar(preProcessWindow.trainBarPanel);
 				preProcessWindow.revalidate();
@@ -946,10 +949,10 @@ public class PreProcessDriver {
 		
 		if (preProcessWindow.sampleDocsEmpty()) {
 			preProcessWindow.sampleRemoveButton.setEnabled(false);
-		} else if (!preProcessWindow.sampleDocsReady() || preProcessWindow.getSampleCache().length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
+		} else if (!preProcessWindow.sampleDocsReady()) {
 			preProcessWindow.getRootPane().setDefaultButton(preProcessWindow.sampleAddButton);
 			preProcessWindow.sampleAddButton.requestFocusInWindow();
-			JOptionPane.showMessageDialog(preProcessWindow, "Consider adding more documents for better results.", "Low Word Count", JOptionPane.WARNING_MESSAGE);
+			preProcessWindow.sampleNextButton.setEnabled(false);
 		}
 		preProcessWindow.revalidate();
 		preProcessWindow.repaint();	
