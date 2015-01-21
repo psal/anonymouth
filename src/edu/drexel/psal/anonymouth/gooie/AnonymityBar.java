@@ -25,6 +25,7 @@ import edu.drexel.psal.anonymouth.engine.InstanceConstructor;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
 import edu.drexel.psal.jstylo.generics.FullAPI;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.FullAPI.analysisType;
@@ -260,8 +261,13 @@ public class AnonymityBar extends JPanel {
 				d.setAuthor(ANONConstants.DUMMY_NAME);
 				ps.addTestDoc(d.getAuthor(), d);
 			}
-			instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-			instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+			InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
+			boolean useCache = builder.validateCFDCache();
+			if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
+				useCache = false;
+			}
+			builder.setProblemSet(ps);
+			builder.createTestInstancesThreaded(useCache);
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();

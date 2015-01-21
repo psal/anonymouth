@@ -22,6 +22,7 @@ import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.PropertiesUtil;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.process.Tokenizer;
@@ -180,6 +181,12 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		double[][]  toSort = new double[translations.size()][2]; // [Anonymity Index][index of specific translation] => will sort by col 1 (AI)
 		int i;
 		instance = GUIMain.inst.documentProcessor.documentMagician.getInstanceConstructor();
+		
+		InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
+		boolean useCache = builder.validateCFDCache();
+		if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
+			useCache = false;
+		}
 		for(i = 0; i < numTranslations; i++){
 			String doc; 
 			do {
@@ -216,7 +223,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 				}
 			
 			try {
-				ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+				ProblemSet ps = builder.getProblemSet();
 				
 				//reset test data
 				List<String> toRemove = new ArrayList<String>();
@@ -232,8 +239,8 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 					d.setAuthor(ANONConstants.DUMMY_NAME);
 					ps.addTestDoc(d.getAuthor(), d);
 				}
-				instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-				instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+				builder.setProblemSet(ps);
+				builder.createTestInstancesThreaded(useCache);
 			} catch(Exception e) {
 				e.printStackTrace();
 				ErrorHandler.StanfordPOSError();

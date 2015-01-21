@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.jgaap.generics.Document;
+
 import edu.drexel.psal.ANONConstants;
 import edu.drexel.psal.anonymouth.engine.Attribute;
 import edu.drexel.psal.anonymouth.engine.DataAnalyzer;
@@ -22,6 +23,7 @@ import edu.drexel.psal.anonymouth.gooie.GUIMain;
 import edu.drexel.psal.anonymouth.gooie.ThePresident;
 import edu.drexel.psal.anonymouth.helpers.ErrorHandler;
 import edu.drexel.psal.jstylo.generics.CumulativeFeatureDriver;
+import edu.drexel.psal.jstylo.generics.InstancesBuilder;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
@@ -321,6 +323,11 @@ public class ConsolidationStation {
 
 			firstTime = true;
 			int k = 0;
+			InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
+			boolean useCache = builder.validateCFDCache();
+			if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
+				useCache = false;
+			}
 			while (k < wordsSuggestion.size()) {
 				String doc = docToUse;
 				doc = removeWord(doc,wordsSuggestion.get(k).getUntagged());
@@ -354,7 +361,7 @@ public class ConsolidationStation {
 				}
 				
 				try {
-					ProblemSet ps = instance.jstylo.getUnderlyingInstancesBuilder().getProblemSet();
+					ProblemSet ps = builder.getProblemSet();
 					
 					//reset test data
 					List<String> toRemove = new ArrayList<String>();
@@ -370,8 +377,8 @@ public class ConsolidationStation {
 						d.setAuthor(ANONConstants.DUMMY_NAME);
 						ps.addTestDoc(d.getAuthor(), d);
 					}
-					instance.jstylo.getUnderlyingInstancesBuilder().setProblemSet(ps);
-					instance.jstylo.getUnderlyingInstancesBuilder().createTestInstancesThreaded();
+					builder.setProblemSet(ps);
+					builder.createTestInstancesThreaded(useCache);
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();
