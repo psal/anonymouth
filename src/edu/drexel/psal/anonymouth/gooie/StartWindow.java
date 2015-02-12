@@ -251,6 +251,7 @@ public class StartWindow extends JFrame {
 				main.preProcessWindow.assertUniqueTitles();
 				main.preProcessWindow.updateSampleCache();
 				main.preProcessWindow.updateSampleStatus();
+				Chunker.shouldChunkTrainDocs(false);
 
 				main.documentProcessor.process();
 			}
