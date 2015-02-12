@@ -8,11 +8,18 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -40,8 +47,10 @@ import javax.swing.tree.TreeCellEditor;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.helpers.ImageLoader;
+import edu.drexel.psal.jstylo.generics.Engine;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
 
@@ -339,7 +348,7 @@ public class PreProcessWindow extends JDialog {
 		sampleStatusPanel.setBorder(
 				BorderFactory.createCompoundBorder(new EmptyBorder(5, 0, 0, 0), new BevelBorder(BevelBorder.LOWERED)));
 		sampleStatusPanel.setLayout(new GridLayout());
-		sampleStatusLabel = new JLabel("0/" + ANONConstants.REQUIRED_NUM_OF_WORDS + " words loaded.");
+		sampleStatusLabel = new JLabel("0/" + JSANConstants.REQUIRED_NUM_OF_WORDS + " words loaded.");
 		sampleStatusLabel.setForeground(Color.RED);
 		sampleStatusLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		sampleStatusPanel.add(sampleStatusLabel);
@@ -481,7 +490,7 @@ public class PreProcessWindow extends JDialog {
 	protected void updateSampleStatus() {
 		String[] words = getSampleCache();
 		int currentWordCount = words == null ? 0 : words.length;
-		int requiredWordCount = ANONConstants.REQUIRED_NUM_OF_WORDS;
+		int requiredWordCount = JSANConstants.REQUIRED_NUM_OF_WORDS;
 		sampleStatusLabel.setText(currentWordCount + "/" + requiredWordCount + " words loaded.");
 		if (currentWordCount < requiredWordCount) {
 			sampleStatusLabel.setForeground(Color.RED);
@@ -566,73 +575,10 @@ public class PreProcessWindow extends JDialog {
 		// Alert the user if there are not enough words in their sample documents.
 		// Though it seems like it may be good to decouple this logic from any UI stuff..
 		//  so return false and let the calling function decide what to do.
-		if (sampleCache.length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
+		if (sampleCache.length < JSANConstants.REQUIRED_NUM_OF_WORDS) {
 			return false;
 		}
 		return true;
-	}
-	
-	/**
-	 * Chunk the docs into separate, temporary docs of 500 words each
-	 * @param docs	The documents to split up
-	 * @param words (can be null) cached array of words. If null, will recreate from docs.
-	 * @return List of Documents pointing to these temp files, which will be deleted when the application terminates
-	 */
-	public void chunkSampleDocuments() {
-		if (null == ps.getTrainDocs(ProblemSet.getDummyAuthor())) {
-				// || 0 == words.length) {
-			updateSampleCache();
-		}
-		String[] words = getSampleCache();
-		if (words.length < ANONConstants.REQUIRED_NUM_OF_WORDS)
-			return;
-		ArrayList<Document> documentList = new ArrayList<Document>();
-		Path tempDir = null;
-		try {
-			tempDir = Files.createTempDirectory("anonymouth_");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (tempDir == null) {
-			Logger.logln("Failed to create temporary directory.");
-			return;
-		}
-		Logger.logln("tempDir created: " + tempDir.toString());
-		tempDir.toFile().deleteOnExit();
-		
-		int maxChunks = words.length / 500 + 1; // will have 1 less if the last chunk is less than 475 words
-		for (int i = 0; i < maxChunks; i++) {
-			// will chop off anything after the last multiple of 500 (if that last chunk is less than 475 words)
-			int nWords = (i < maxChunks - 1) ? 500: words.length % 500;
-			if (nWords < 475) // TODO: magic numbers
-				break;
-			StringBuilder sb = new StringBuilder();
-			for (int j = 0; j < nWords; j++) {
-				sb.append(words[500 * i + j]);
-				sb.append(" ");
-			}
-			Path tempPath = null;
-			try {
-				tempPath = Files.createTempFile(tempDir, "sample_docs_", "_" + i + ".txt");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (tempPath == null) {
-				Logger.logln("Failed to create temporary file.");
-				return;
-			}
-			File tempFile = tempPath.toFile();
-			// have to specify deletion of files in directory AFTER calling on directory (see javadocs)
-			tempFile.deleteOnExit();
-			
-			FileHelper.writeToFile(tempPath.toString(), sb.toString().trim());
-			documentList.add(new Document(tempPath.toAbsolutePath().toString(),ProblemSet.getDummyAuthor(),tempFile.getName()));
-		}
-		
-		ps.setTrainDocs(ANONConstants.DUMMY_NAME, documentList);
-		//return documentList;
 	}
 	
 	/**

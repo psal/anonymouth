@@ -324,10 +324,8 @@ public class ConsolidationStation {
 			firstTime = true;
 			int k = 0;
 			InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
-			boolean useCache = builder.validateCFDCache();
-			if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
-				useCache = false;
-			}
+			if (builder.isUsingCache())
+				builder.validateCFDCache();
 			while (k < wordsSuggestion.size()) {
 				String doc = docToUse;
 				doc = removeWord(doc,wordsSuggestion.get(k).getUntagged());
@@ -378,7 +376,7 @@ public class ConsolidationStation {
 						ps.addTestDoc(d.getAuthor(), d);
 					}
 					builder.setProblemSet(ps);
-					builder.createTestInstancesThreaded(useCache);
+					builder.createTestInstancesThreaded();
 				} catch(Exception e) {
 					System.out.println("!!!!!!ConsolidationStation 374 - in the catch bolck after try and perptest....");
 					e.printStackTrace();

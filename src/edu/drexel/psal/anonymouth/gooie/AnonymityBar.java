@@ -262,12 +262,10 @@ public class AnonymityBar extends JPanel {
 				ps.addTestDoc(d.getAuthor(), d);
 			}
 			InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
-			boolean useCache = builder.validateCFDCache();
-			if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
-				useCache = false;
-			}
+			if (builder.isUsingCache())
+				builder.validateCFDCache();
 			builder.setProblemSet(ps);
-			builder.createTestInstancesThreaded(useCache);
+			builder.createTestInstancesThreaded();
 		} catch(Exception e) {
 			e.printStackTrace();
 			ErrorHandler.StanfordPOSError();

@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -28,8 +31,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import com.jgaap.generics.Document;
+
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
+import edu.drexel.psal.jstylo.generics.Chunker;
+import edu.drexel.psal.jstylo.generics.Engine;
 import edu.drexel.psal.jstylo.generics.Logger;
 import edu.drexel.psal.jstylo.generics.Logger.LogOut;
 import edu.drexel.psal.jstylo.generics.ProblemSet;
@@ -241,11 +249,9 @@ public class StartWindow extends JFrame {
 				 * It Used to be handed upon adding, but better for the user if they never have to worry about it
 				 */
 				main.preProcessWindow.assertUniqueTitles();
-				/*
-				 * makes sure the user's sample documents are properly chunked.
-				 * Relies on the cache of user's sample document words being up-to-date (see ProblemSet)
-				 */
-				main.preProcessWindow.chunkSampleDocuments();
+				main.preProcessWindow.updateSampleCache();
+				main.preProcessWindow.updateSampleStatus();
+
 				main.documentProcessor.process();
 			}
 		};

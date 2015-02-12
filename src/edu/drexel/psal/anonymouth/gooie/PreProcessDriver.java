@@ -38,6 +38,7 @@ import javax.swing.tree.TreePath;
 import com.jgaap.generics.Document;
 
 import edu.drexel.psal.ANONConstants;
+import edu.drexel.psal.JSANConstants;
 import edu.drexel.psal.anonymouth.helpers.FileHelper;
 import edu.drexel.psal.anonymouth.helpers.ScrollToTop;
 import edu.drexel.psal.jstylo.generics.Logger;
@@ -144,14 +145,8 @@ public class PreProcessDriver {
 				if (!preProcessWindow.updateSampleCache()) {
 					// warn the user that there are not enough words in Samples to proceed
 					Logger.logln("Too few words in user's sample documents.");
-					/*
-					JOptionPane.showMessageDialog(preProcessWindow,
-							"There are too few words in the sample documents that you\n" +
-							"provided. Please add more documents written by you.",
-							"Needs More of Your Writing", 
-							JOptionPane.WARNING_MESSAGE,
-							ThePresident.dialogLogo);*/
 				}
+				preProcessWindow.updateSampleStatus();
 				
 				if (preProcessWindow.documentsAreReady()) {
 					if (preProcessWindow.saved)
@@ -397,7 +392,7 @@ public class PreProcessDriver {
 		sampleNextListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (preProcessWindow.getSampleCache() == null || preProcessWindow.getSampleCache().length < ANONConstants.REQUIRED_NUM_OF_WORDS) {
+				if (preProcessWindow.getSampleCache() == null || preProcessWindow.getSampleCache().length < JSANConstants.REQUIRED_NUM_OF_WORDS) {
 					JOptionPane.showMessageDialog(preProcessWindow, "Consider adding more documents for better results.", "Low Word Count", JOptionPane.WARNING_MESSAGE);
 				}
 				preProcessWindow.switchingToTrain();

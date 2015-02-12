@@ -183,10 +183,8 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 		instance = GUIMain.inst.documentProcessor.documentMagician.getInstanceConstructor();
 		
 		InstancesBuilder builder = instance.jstylo.getUnderlyingInstancesBuilder();
-		boolean useCache = builder.validateCFDCache();
-		if (!edu.drexel.psal.JSANConstants.USE_CACHE) {
-			useCache = false;
-		}
+		if (builder.isUsingCache())
+			builder.validateCFDCache();
 		for(i = 0; i < numTranslations; i++){
 			String doc; 
 			do {
@@ -240,7 +238,7 @@ public class TaggedSentence implements Comparable<TaggedSentence>, Serializable 
 					ps.addTestDoc(d.getAuthor(), d);
 				}
 				builder.setProblemSet(ps);
-				builder.createTestInstancesThreaded(useCache);
+				builder.createTestInstancesThreaded();
 			} catch(Exception e) {
 				e.printStackTrace();
 				ErrorHandler.StanfordPOSError();
