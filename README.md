@@ -28,7 +28,7 @@ Drexel University, Philadelphia PA<br>
 
 ###<a id="introduction"></a>Introduction
 
-Anonymouth is a Java-based application that aims to give users to tools and knowledge needed to begin anonymizing documents they have written.
+Anonymouth is a Java-based application that aims to give users the tools and knowledge needed to begin anonymizing documents they have written.
 
 It does this by firing up JStylo libraries (an author detection application also develped by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
 
