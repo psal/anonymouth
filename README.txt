@@ -24,7 +24,7 @@ Developed by:
 ====================================================
 
 Anonymouth is a Java-based application that aims to
-give users to tools and knowledge needed to begin
+give users the tools and knowledge needed to begin
 anonymizing documents they have written.
 
 It does this by firing up JStylo libraries (an
