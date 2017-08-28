@@ -28,10 +28,10 @@ give users to tools and knowledge needed to begin
 anonymizing documents they have written.
 
 It does this by firing up JStylo libraries (an
-author detection application also develped by PSAL)
+author detection application also developed by PSAL)
 to detect stylometric patterns and determine
 features (like word length, bigrams, trigrams, etc.)
-that the user should remove/add to help obsure their
+that the user should remove/add to help obscure their
 style and identity.
 
 Though Anonymouth and it's team works hard to
@@ -53,7 +53,7 @@ direction.
 -------------------INSTALLATION---------------------
 ====================================================
 
-There quickest and easiest way to install Anonymouth
+The quickest and easiest way to install Anonymouth
 is to clone or download the zip of the Anonymouth
 github project here:
 
@@ -64,9 +64,9 @@ into Eclipse (or clone and import directly within
 Eclipse if you have the Eclipse eGit plugin).
 
 This is currently the only ready way to compile and
-run Anonymouth. We will be including a updated build
+run Anonymouth. We will be including an updated build
 file soon so that you may build and run Anonymouth
-easily within the command land, but sadly it hasn't
+easily within the command line, but sadly it hasn't
 been done yet so this is the only option currently
 
 ====================================================
