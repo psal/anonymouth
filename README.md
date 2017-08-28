@@ -30,9 +30,9 @@ Drexel University, Philadelphia PA<br>
 
 Anonymouth is a Java-based application that aims to give users to tools and knowledge needed to begin anonymizing documents they have written.
 
-It does this by firing up JStylo libraries (an author detection application also develped by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
+It does this by firing up JStylo libraries (an author detection application also developed by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obscure their style and identity.
 
-Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
+Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
 [Back to top](#top)
 
@@ -58,7 +58,7 @@ Anonymouth requires a corpus (basically a database of other authors and document
 * `./anonymouth/jsan_resources/corpora/drexel_1`
 * `./anonymouth/jsan_resources/enron_demo`
 
-Though we included corpi, you are more than welcome to use any other corpus you may have. It is recommended to use many different combinations of authors so you can get the best posisble picture of where your document stands anonymously with respect to others.
+Though we included corpi, you are more than welcome to use any other corpus you may have. It is recommended to use many different combinations of authors so you can get the best possible picture of where your document stands anonymously with respect to others.
 
 Anonymouth also needs the following jars in the lib directory (everything should already be included):
 
@@ -108,11 +108,11 @@ Anonymouth also needs the following jars in the lib directory (everything should
 
 ###<a id="installation"></a>Installation
 
-There quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
+The quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
 
 And then import this project as an existing project into Eclipse (or clone and import directly within Eclipse if you have the Eclipse eGit plugin).
 
-This is currently the only ready way to compile and run Anonymouth. We will be including a updated build file soon so that you may build and run Anonymouth easily within the command land, but sadly it hasn't been done yet so this is the only option currently
+This is currently the only ready way to compile and run Anonymouth. We will be including an updated build file soon so that you may build and run Anonymouth easily within the command line, but sadly it hasn't been done yet so this is the only option currently
 
 [Back to top](#top)
 
@@ -150,7 +150,7 @@ The first window that shows up (not counting the splash screen) when Anonymouth 
 
 <b>Initial document processing begins immediately with: </b>`anonymouth.engine.DocumentProcessor`
 
-Inititalized within GUIMain as should nearly all Anonymouth class instances, this holds the main method and thread that handles processing and reprocessing documents. All processing events can be traced back to this class.
+Initialized within GUIMain as should nearly all Anonymouth class instances, this holds the main method and thread that handles processing and reprocessing documents. All processing events can be traced back to this class.
 
 #####↓ ---PROCESSING COMPLETE---
 
@@ -163,7 +163,7 @@ The main gui window is displayed. This is also the central "hub" for Anonymouth.
 
 <b>From here the logic flow depends largely on what the user does:</b>
 
-- If they're editing in the editor, the main class handling that is `anonymouth.googie.EditorDriver`
+- If they are editing in the editor, the main class handling that is `anonymouth.googie.EditorDriver`
 - If they are using translations the main class handling that is `anonymouth.gooie.TranslationsPanel`
 - If they are using word suggestions, the main class handling that is `anonymouth.gooie.WordSuggestionsDriver`
 - If they are changing Preferences, the main class handling that is `anonymouth.gooie.PreferencesWindow`
