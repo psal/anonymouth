@@ -1,6 +1,6 @@
 #<a id="top"></a>Anonymouth
 
-![](src/edu/drexel/psal/resources/graphics/readme_Logo.png)
+![](src/main/resources/graphics/readme_Logo.png)
 
 Document Anonymization Tool, Version 0.5<br>
 
@@ -38,17 +38,19 @@ Though Anonymouth and it's team works hard to provide you with tools to help rem
 
 ###<a id="dependencies"></a>Dependencies
 
-Java 7 is required to run Anonymouth. If you don't yet have it, get it at <a href="http://java.com/en/download/index.jsp">Oracle's website here</a> and follow the installation instructions provided there.
+Java 7 (or higher) and Maven are required to run Anonymouth. If you don't yet have it, get it at <a href="http://java.com/en/download/index.jsp">Oracle's website here</a> and [Maven Download](https://maven.apache.org/download.cgi). Follow the installation instructions provided there.
 
 If you are unsure whether or not you have it installed, follow these steps to see:
-* OS X:
-	1.  Open up Terminal (Applications/Utilities)
-	2.  Type "java -version" without the quotes
-	3.  If you see something like `java version "1.7.x_xx"` then you're ready to go! If not, then that means you most likely don't have Java 7 installed, in which case you should go to the download link above
-* Windows:
-	1.  Follow the instructions here: http://www.java.com/en/download/help/version_manual.xml. if you have version "1.7.x_xx", then you're good to go! If not, then that means you most likely don't have Java 7 installed, in which case you should go to the download link above
+1. Open up a terminal
+    Linux: Bash/ZSH/...
+    OS X: Applications/Utilities
+    Windows: Press Windows key + R and execute cmd
+2. Type `java -version`
+3. If you don't see something like `java version "1.7.x_xx" or "1.8.x_xx"` then please install the required Java version
+4. Check if Maven installed by running `mvn`. Note that Maven sometimes comes bundled within your favorite IDE.
+    If not please install it using [this](https://maven.apache.org/install.html)
 
-If you are using Eclipse, also make sure that Java 7 is your selected compiler by checking `Preferences/Java/Compiler` and is an included Library in your java Build Path (Not sure how to do this? Google is your friend).
+Please make sure that you import the project as Maven project in your favorite IDE.
 
 Anonymouth requires the included `jsan_resources` directory in it's running directory (The main Anonymouth directory containing lib, src, etc.). It should be in the correct directy by default.
 
