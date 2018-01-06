@@ -32,7 +32,7 @@ Anonymouth is a Java-based application that aims to give users to tools and know
 
 It does this by firing up JStylo libraries (an author detection application also develped by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
 
-Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
+Though Anonymouth and its team work hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you its best guess, its best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
 [Back to top](#top)
 
@@ -50,7 +50,7 @@ If you are unsure whether or not you have it installed, follow these steps to se
 
 If you are using Eclipse, also make sure that Java 7 is your selected compiler by checking `Preferences/Java/Compiler` and is an included Library in your java Build Path (Not sure how to do this? Google is your friend).
 
-Anonymouth requires the included `jsan_resources` directory in it's running directory (The main Anonymouth directory containing lib, src, etc.). It should be in the correct directy by default.
+Anonymouth requires the included `jsan_resources` directory in its running directory (The main Anonymouth directory containing lib, src, etc.). It should be in the correct directy by default.
 
 Anonymouth requires a corpus (basically a database of other authors and documents they have written) to run. It needs this so it can classify your documents with respect to these other documents and their styles so that Anonymouth can give you an idea of how anonymous it thinks your document is and what features to remove/add to help you get there. Three different corpi are included in the project directory for you to choose and are located at:
 
@@ -108,11 +108,11 @@ Anonymouth also needs the following jars in the lib directory (everything should
 
 ###<a id="installation"></a>Installation
 
-There quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
+The quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
 
 And then import this project as an existing project into Eclipse (or clone and import directly within Eclipse if you have the Eclipse eGit plugin).
 
-This is currently the only ready way to compile and run Anonymouth. We will be including a updated build file soon so that you may build and run Anonymouth easily within the command land, but sadly it hasn't been done yet so this is the only option currently
+This is currently the only ready way to compile and run Anonymouth. We will be including a updated build file soon so that you may build and run Anonymouth easily within the command line, but sadly it hasn't been done yet so this is the only option currently
 
 [Back to top](#top)
 
@@ -133,7 +133,7 @@ Please note that there are two main package categories, JStylo and Anonymouth. T
 
 <b>Setup and start up:</b> `anonymouth.gooie.ThePresident`
 
-Should never be accessed in any other class (or at least limit it). It's only purpose is to initialize the main class and other start up classes.
+Should never be accessed in any other class (or at least limit it). Its only purpose is to initialize the main class and other start up classes.
 
 - Readies and displays splash screen
 - Prepares the Logger
@@ -191,7 +191,7 @@ Again, these are just general guidelines. Sometimes it makes more sense to just 
 
 #####---Package / Organizing Convention---
 
-Anonymouth loosly follows these guidelines for class organization in packages:
+Anonymouth loosely follows these guidelines for class organization in packages:
 
 - `anonymouth.engine` For all processing code and any classes you deem "enginey" (for example, `HighlighterEngine`, `VersionControl`, etc.)
 - `anonymouth.gooie` For all classes displaying or creating swing components and their respective Driver classes
