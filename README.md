@@ -1,6 +1,6 @@
-#<a id="top"></a>Anonymouth
+# Anonymouth
 
-![](src/edu/drexel/psal/resources/graphics/readme_Logo.png)
+![logo](src/edu/drexel/psal/resources/graphics/readme_Logo.png)
 
 Document Anonymization Tool, Version 0.5<br>
 
@@ -9,7 +9,7 @@ Drexel University, Philadelphia PA<br>
 <http://psal.cs.drexel.edu/>
 
 
-#Index
+# Index
 1. Set Up
 	- [Introduction](#introduction)
 	- [Dependencies](#dependencies)
@@ -24,9 +24,9 @@ Drexel University, Philadelphia PA<br>
 	- [Developers](#developers)
 	- [License](#license)
 
-#Set Up
+# Set Up
 
-###<a id="introduction"></a>Introduction
+### <a id="introduction"></a>Introduction
 
 Anonymouth is a Java-based application that aims to give users to tools and knowledge needed to begin anonymizing documents they have written.
 
@@ -34,9 +34,9 @@ It does this by firing up JStylo libraries (an author detection application also
 
 Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="dependencies"></a>Dependencies
+### <a id="dependencies"></a>Dependencies
 
 Java 7 is required to run Anonymouth. If you don't yet have it, get it at <a href="http://java.com/en/download/index.jsp">Oracle's website here</a> and follow the installation instructions provided there.
 
@@ -104,9 +104,9 @@ Anonymouth also needs the following jars in the lib directory (everything should
   </tr>
 </table>
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="installation"></a>Installation
+### <a id="installation"></a>Installation
 
 There quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
 
@@ -114,21 +114,21 @@ And then import this project as an existing project into Eclipse (or clone and i
 
 This is currently the only ready way to compile and run Anonymouth. We will be including a updated build file soon so that you may build and run Anonymouth easily within the command land, but sadly it hasn't been done yet so this is the only option currently
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="how-to-build-and-run"></a>How to Build and Run
+### <a id="how-to-build-and-run"></a>How to Build and Run
 
 Once Anonymouth is all set up in Eclipse, you need only run `ThePresident` from the package `edu.drexel.psal.anonymouth.gooie` to begin using it.
 
 Please note that there are two main package categories, JStylo and Anonymouth. The majority of Anonymouth developement should be in the Anonymouth packages as Anonymouth simply uses the JStylo libraries for parts of the initial document process, so beginners need only concern themselves with the Anonymouth packages.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-#Development
+# Development
 
-###<a id="basic-logic-flow"></a>Basic Logic Flow
+### <a id="basic-logic-flow"></a>Basic Logic Flow
 
-#####↓ ---LAUNCH---
+##### ↓ ---LAUNCH---
 
 
 <b>Setup and start up:</b> `anonymouth.gooie.ThePresident`
@@ -140,19 +140,19 @@ Should never be accessed in any other class (or at least limit it). It's only pu
 - Initializes the `GUIMain` instance (and with it all Anonymouth class instances)
 - Displays the start window, which from there it takes over
 
-#####↓ ---AUTOMATICALLY DISPLAYS---
+##### ↓ ---AUTOMATICALLY DISPLAYS---
 
 <b>Start up window:</b> `anonymouth.gooie.StartWindow`
 
 The first window that shows up (not counting the splash screen) when Anonymouth loads up. Allows the user to change advanced processing settings, access the pre process set up wizard, or start Anonymouth
 
-#####↓ ---USER CLICKED START BUTTON---
+##### ↓ ---USER CLICKED START BUTTON---
 
 <b>Initial document processing begins immediately with: </b>`anonymouth.engine.DocumentProcessor`
 
 Inititalized within GUIMain as should nearly all Anonymouth class instances, this holds the main method and thread that handles processing and reprocessing documents. All processing events can be traced back to this class.
 
-#####↓ ---PROCESSING COMPLETE---
+##### ↓ ---PROCESSING COMPLETE---
 
 <b>Main GUI Code:</b> `anonymouth.gooie.GUIMain`
 
@@ -169,11 +169,11 @@ The main gui window is displayed. This is also the central "hub" for Anonymouth.
 - If they are changing Preferences, the main class handling that is `anonymouth.gooie.PreferencesWindow`
 - etc.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="basic-class-structure"></a>Basic Class Structure
+### <a id="basic-class-structure"></a>Basic Class Structure
 
-#####---Naming Convention---
+##### ---Naming Convention---
 
 For the most part, Anonymouth splits UI objects into two classes: [Class name]Panel/Window and [Class name]Driver.  By convention and a general guideline, the Panel/Window class:
 
@@ -189,7 +189,7 @@ While the cooresponding Driver class:
 
 Again, these are just general guidelines. Sometimes it makes more sense to just have one class handle everything if it's a small object, or sometimes it doesn't make sense to have a seperate Panel/Window class but it does to have a Driver class, etc. You just need to use your best judgement on what will make things more organized and easier to understand.
 
-#####---Package / Organizing Convention---
+##### ---Package / Organizing Convention---
 
 Anonymouth loosly follows these guidelines for class organization in packages:
 
@@ -200,9 +200,9 @@ Anonymouth loosly follows these guidelines for class organization in packages:
 
 There are still quite a few classes that are clearly where they don't belong, so feel free to oragnize Anonymouth so that it best fits these guidelines.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="to-do-list"></a>To Do List
+### <a id="to-do-list"></a>To Do List
 Add features as they are conceived and ~~strikethrough~~ as they are completed ([1] means most important and [5] means relatively small and not particularly a priority at the moment)
 
 - [1] AUTOMATE AS MUCH OF THE ANONYMIZATION PROCESS AS POSSIBLE. This should be the top priority as of now, see Andrew for the plan and details.
@@ -210,9 +210,9 @@ Add features as they are conceived and ~~strikethrough~~ as they are completed (
 - [2] An intelligent method to search and filter through words to add (start with simple search box, then possibly extend to automatic filtering based on synonyms?)
 - [5] The clusters window should be updated to be easier to understand and use (it's hidden away in `Window > Clusters`)
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="known-bugs"></a>Known Bugs
+### <a id="known-bugs"></a>Known Bugs
 Add bugs as they are discovered and ~~strikethrough~~ as they are completed ([1] means fatal or breaks usability and [5] means relatively small and does not have much of an impact on usability)
 
 - [1] During processing on OS X (though the problem may extend to other operating systems as well) the Stanford POS tagger is extremely prone to breaking due to a fatal threading issue which results in heap space or out of memory exceptions. This absolutely MUST be fixed.
@@ -221,11 +221,11 @@ Add bugs as they are discovered and ~~strikethrough~~ as they are completed ([1]
 - [5] The max features slider in Preferences does not work as expected at times and is a little finicky.
 - [5] Currently Anonymouth is all running on the initial thread which <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html">should NOT be the case</a>. This should be done in a GUI creation and show task thread, though when I tried this in the past it breaks the slash screen.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-#Credits
+# Credits
 
-###<a id="developers"></a>Developers
+### <a id="developers"></a>Developers
 
 P.I. Dr. Rachel Greenstadt:
 
@@ -240,10 +240,10 @@ Developed by:
   - Jeff Ulman
   - Joe Muoio
   
-[Back to top](#top)
+[Back to top](#anonymouth)
 
-###<a id="license"></a>License
+### <a id="license"></a>License
 
 Anonymouth was released by the Privacy, Security and Automation lab at Drexel University in 2011 under the AGPLv3 license. A copy of this license is included with the repository/program. If for some reason it is absent, it can be viewed <a href="http://www.gnu.org/licenses/agpl.html">here</a>.
 
-[Back to top](#top)
+[Back to top](#anonymouth)
