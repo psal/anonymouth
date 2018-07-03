@@ -34,7 +34,7 @@ It does this by firing up JStylo libraries (an author detection application also
 
 Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="dependencies"></a>Dependencies
 
@@ -104,7 +104,7 @@ Anonymouth also needs the following jars in the lib directory (everything should
   </tr>
 </table>
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="installation"></a>Installation
 
@@ -114,7 +114,7 @@ And then import this project as an existing project into Eclipse (or clone and i
 
 This is currently the only ready way to compile and run Anonymouth. We will be including a updated build file soon so that you may build and run Anonymouth easily within the command land, but sadly it hasn't been done yet so this is the only option currently
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="how-to-build-and-run"></a>How to Build and Run
 
@@ -122,7 +122,7 @@ Once Anonymouth is all set up in Eclipse, you need only run `ThePresident` from 
 
 Please note that there are two main package categories, JStylo and Anonymouth. The majority of Anonymouth developement should be in the Anonymouth packages as Anonymouth simply uses the JStylo libraries for parts of the initial document process, so beginners need only concern themselves with the Anonymouth packages.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 # Development
 
@@ -169,7 +169,7 @@ The main gui window is displayed. This is also the central "hub" for Anonymouth.
 - If they are changing Preferences, the main class handling that is `anonymouth.gooie.PreferencesWindow`
 - etc.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="basic-class-structure"></a>Basic Class Structure
 
@@ -200,7 +200,7 @@ Anonymouth loosly follows these guidelines for class organization in packages:
 
 There are still quite a few classes that are clearly where they don't belong, so feel free to oragnize Anonymouth so that it best fits these guidelines.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="to-do-list"></a>To Do List
 Add features as they are conceived and ~~strikethrough~~ as they are completed ([1] means most important and [5] means relatively small and not particularly a priority at the moment)
@@ -210,7 +210,7 @@ Add features as they are conceived and ~~strikethrough~~ as they are completed (
 - [2] An intelligent method to search and filter through words to add (start with simple search box, then possibly extend to automatic filtering based on synonyms?)
 - [5] The clusters window should be updated to be easier to understand and use (it's hidden away in `Window > Clusters`)
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="known-bugs"></a>Known Bugs
 Add bugs as they are discovered and ~~strikethrough~~ as they are completed ([1] means fatal or breaks usability and [5] means relatively small and does not have much of an impact on usability)
@@ -221,7 +221,7 @@ Add bugs as they are discovered and ~~strikethrough~~ as they are completed ([1]
 - [5] The max features slider in Preferences does not work as expected at times and is a little finicky.
 - [5] Currently Anonymouth is all running on the initial thread which <a href="http://docs.oracle.com/javase/tutorial/uiswing/concurrency/initial.html">should NOT be the case</a>. This should be done in a GUI creation and show task thread, though when I tried this in the past it breaks the slash screen.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 # Credits
 
@@ -240,10 +240,10 @@ Developed by:
   - Jeff Ulman
   - Joe Muoio
   
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
 
 ### <a id="license"></a>License
 
 Anonymouth was released by the Privacy, Security and Automation lab at Drexel University in 2011 under the AGPLv3 license. A copy of this license is included with the repository/program. If for some reason it is absent, it can be viewed <a href="http://www.gnu.org/licenses/agpl.html">here</a>.
 
-[Back to top](#Anonymouth)
+[Back to top](#anonymouth)
