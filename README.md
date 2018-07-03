@@ -1,4 +1,4 @@
-# <a id="top"></a>Anonymouth
+# <a id="top">Anonymouth</a>
 
 ![](src/edu/drexel/psal/resources/graphics/readme_Logo.png)
 
