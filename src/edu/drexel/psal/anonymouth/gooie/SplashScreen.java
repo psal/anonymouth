@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.GraphicsDevice;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -99,19 +101,25 @@ public class SplashScreen extends JFrame {
 			@Override
 			protected Void doInBackground() throws Exception {
 				Logger.logln(NAME+"Displaying Splash Screen");
-				splashScreen.setOpacity(0.0f);
-				splashScreen.setVisible(true);
-				for (int i = 0; i <= ANIMATION_FRAMES; i++) {
-					splashScreen.setOpacity((float)i/(float)ANIMATION_FRAMES);
-					
-					try {
-						Thread.sleep(ANIMATION_SPEED);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+				GraphicsDevice gd = ge.getScreenDevices()[0];
+				// Make sure display supports translucency before attempting fade animation
+				if (gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
+					Logger.logln(NAME+"Translucency Supported--Playing Animation");
+					splashScreen.setOpacity(0.0f);
+					splashScreen.setVisible(true);
+					for (int i = 0; i <= ANIMATION_FRAMES; i++) {
+						splashScreen.setOpacity((float)i/(float)ANIMATION_FRAMES);
+
+						try {
+							Thread.sleep(ANIMATION_SPEED);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 				splashScreen.setOpacity(1.0f);
-				
+
 				return null;
 			}
 		};
@@ -150,13 +158,19 @@ public class SplashScreen extends JFrame {
 	 */
 	public void hideSplashScreen() {
 		Logger.logln(NAME+"Closing Splash Screen");
-		for (int i = ANIMATION_FRAMES; i >= 0; i--) {
-			splashScreen.setOpacity((float)i/(float)ANIMATION_FRAMES);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getScreenDevices()[0];
+		// Make sure display supports translucency before attempting fade animation
+		if (gd.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.TRANSLUCENT)) {
+			Logger.logln(NAME+"Translucency Supported--Playing Animation");
+			for (int i = ANIMATION_FRAMES; i >= 0; i--) {
+				splashScreen.setOpacity((float)i/(float)ANIMATION_FRAMES);
 
-			try {
-				Thread.sleep(ANIMATION_SPEED);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				try {
+					Thread.sleep(ANIMATION_SPEED);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		splashScreen.setVisible(false);
