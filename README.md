@@ -32,7 +32,7 @@ Anonymouth is a Java-based application that aims to give users to tools and know
 
 It does this by firing up JStylo libraries (an author detection application also develped by PSAL) to detect stylometric patterns and determine features (like word length, bigrams, trigrams, etc.) that the user should remove/add to help obsure their style and identity.
 
-Though Anonymouth and it's team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you it's best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
+Though Anonymouth and its team works hard to provide you with tools to help remove your identity from documents you have written, WE CAN IN NO WAY GUARANTEE THAT YOUR DOCUMENT IS ANONYMOUS OR NOT ANONYMOUS. Anonymouth is always giving you its best guess, it's best idea of where your document stands, though that should not any any time be taken as an absolute (for example, you could have forgotten to remove your name from the document and Anonymouth has no way to know that that's your name and should remove it). What we can say is Anonymouth is only as good as you make it, and when used right can be helpful in guiding your document towards the right direction.
 
 [Back to top](#top)
 
@@ -42,8 +42,8 @@ Java 7 is required to run Anonymouth. If you don't yet have it, get it at <a hre
 
 If you are unsure whether or not you have it installed, follow these steps to see:
 * OS X:
-	1.  Open up Terminal (Applications/Utilities)
-	2.  Type "java -version" without the quotes
+	1.  Open Terminal (Applications/Utilities)
+	2.  Type ```java -version``` and press enter
 	3.  If you see something like `java version "1.7.x_xx"` then you're ready to go! If not, then that means you most likely don't have Java 7 installed, in which case you should go to the download link above
 * Windows:
 	1.  Follow the instructions here: http://www.java.com/en/download/help/version_manual.xml. if you have version "1.7.x_xx", then you're good to go! If not, then that means you most likely don't have Java 7 installed, in which case you should go to the download link above
@@ -108,7 +108,7 @@ Anonymouth also needs the following jars in the lib directory (everything should
 
 ###<a id="installation"></a>Installation
 
-There quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github project here</a>
+There quickest and easiest way to install Anonymouth is to clone or download the zip of the <a href="https://github.com/psal/anonymouth">Anonymouth github repository here</a>
 
 And then import this project as an existing project into Eclipse (or clone and import directly within Eclipse if you have the Eclipse eGit plugin).
 
