@@ -1,18 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/jaws-bin.jar"/>
-	<classpathentry kind="lib" path="lib/Jama-1.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/stanford-postagger-2012-01-06.jar"/>
-	<classpathentry kind="lib" path="lib/fasttag_v2.jar"/>
-	<classpathentry kind="lib" path="lib/jgaap-5.2.0-lite.jar"/>
-	<classpathentry kind="lib" path="lib/org.annolab.tt4j-1.0.15.jar" sourcepath="C:/Users/Mordio/.m2/repository/org/annolab/tt4j/org.annolab.tt4j/1.0.15/org.annolab.tt4j-1.0.15-sources.jar"/>
-	<classpathentry kind="lib" path="lib/miglayout-4.0-swing.jar"/>
-	<classpathentry kind="lib" path="lib/microsoft-translator-java-api-0.6.1-jar-with-dependencies.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.14.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-1.0.17.jar"/>
-	<classpathentry kind="lib" path="lib/weka_3_7_9.jar"/>
-	<classpathentry kind="lib" path="lib/ui.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="jsan_resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

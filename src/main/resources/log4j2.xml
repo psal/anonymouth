@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="log.dir">./anonymouth_log</Property>
+        <Property name="console.pattern">( %logger{1} ) - %msg%n</Property>
+    </Properties>
+    
+    <Appenders>
+        <!-- Console appender for stdout -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${console.pattern}"/>
+        </Console>
+        
+        <!-- File appender -->
+        <File name="FileAppender" fileName="${log.dir}/Anonymouth_log4j2.txt">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    
+    <Loggers>
+        <!-- Root logger -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

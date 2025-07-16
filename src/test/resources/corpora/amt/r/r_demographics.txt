@@ -1,0 +1,9 @@
+
+
+Age: 17
+Language: English
+Gender: female
+Education: Some college
+Occupation: None
+Background: N,N,N,N,N
+

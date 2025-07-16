@@ -1,0 +1,9 @@
+
+
+Age: 44
+Language: English
+Gender: female
+Education: Bachelor's Degree
+Occupation: Social Work
+Background: N,N,N,N,N
+

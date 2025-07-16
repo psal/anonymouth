@@ -1,0 +1,9 @@
+
+
+Age: 25
+Language: English
+Gender: female
+Education: Some Graduate School
+Occupation: Unemployed Spanish Teacher
+Background: Y,Y,Y,Y,Y
+

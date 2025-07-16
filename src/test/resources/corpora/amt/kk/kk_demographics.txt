@@ -1,0 +1,9 @@
+
+
+Age: 37
+Language: English
+Gender: female
+Education: Masters degree
+Occupation: chemist
+Background: N,N,N,N,N
+

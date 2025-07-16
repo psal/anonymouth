@@ -1,0 +1,26 @@
+Dear Colleagues,
+
+I am writing to express my growing concern about the increasing tendency in our field to use anthropomorphic language when discussing computer systems and programs. This practice, while seemingly harmless, represents a fundamental misconception about the nature of computation and poses serious obstacles to clear thinking about our discipline.
+
+When we say that a computer "thinks," "knows," "remembers," "decides," or "understands," we are not merely using convenient metaphors—we are perpetuating a dangerous confusion between the mechanical processes of computation and the cognitive processes of human intelligence. This anthropomorphization leads to sloppy reasoning and impedes our ability to construct reliable systems.
+
+A computer does not "think" about a problem; it executes instructions according to precisely defined rules. It does not "know" the contents of its memory; it simply has states that can be accessed and modified. It does not "decide" between alternatives; it follows deterministic procedures that produce outputs based on inputs and current state.
+
+The persistence of this anthropomorphic language reveals a deeper problem: many of my colleagues have not fully grasped the mechanical nature of computation. They continue to project human characteristics onto machines, perhaps because they find it easier to reason about systems in terms of familiar human behaviors rather than confronting the stark reality of mechanical symbol manipulation.
+
+This linguistic imprecision has practical consequences. When we attribute intelligence or understanding to programs, we become less rigorous in our analysis of their behavior. We may fail to consider edge cases or exceptional conditions because we unconsciously assume the program will "figure out" what we meant. We may neglect proper specification because we believe the program will "understand" our intentions.
+
+Furthermore, this anthropomorphic language contributes to public misunderstanding about the capabilities and limitations of computer systems. When we carelessly speak of machines that "think" or "learn," we fuel unrealistic expectations and promote confusion about what computers can and cannot do.
+
+I propose that we adopt a more disciplined vocabulary. Instead of saying a program "knows" something, we should say it "has access to" or "can retrieve" information. Instead of claiming a system "understands" a problem, we should say it "processes" or "transforms" data according to specified rules. Instead of describing a computer as "thinking," we should speak of it "computing" or "executing algorithms."
+
+This is not merely a matter of pedantic precision. Clear language is essential for clear thinking, and clear thinking is essential for reliable systems. If we cannot speak precisely about what our programs do, how can we hope to reason correctly about their behavior?
+
+I urge you to join me in this effort to purge anthropomorphic language from our technical discourse. Our field will be stronger and more rigorous for it.
+
+The mechanization of mathematics and logic has been one of the great intellectual achievements of our age. Let us not diminish this achievement by pretending that our mechanical servants possess the spark of consciousness that remains the unique province of living beings.
+
+Yours in the pursuit of clarity,
+Edsger W. Dijkstra
+
+Nuenen, 1985

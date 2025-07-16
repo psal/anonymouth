@@ -1,0 +1,28 @@
+Dear Fellow Educators,
+
+I am compelled to write to you about what I perceive as a crisis in computer science education. Having observed the field's evolution from its mathematical origins to its current state, I am deeply troubled by the direction we have taken in preparing the next generation of computing professionals.
+
+The root of the problem lies in our abandonment of mathematical rigor in favor of what I can only describe as vocational training. Too many of our programs have become mere preparation for industrial programming, focusing on the latest fashionable programming languages and development tools rather than the fundamental principles that should form the intellectual foundation of our discipline.
+
+Students graduate knowing how to use particular software packages or programming environments, but they cannot reason about the correctness of their programs. They can implement algorithms they have memorized, but they cannot derive new ones or prove that their implementations are correct. They have been trained to be consumers of technology rather than masters of the underlying science.
+
+This situation has arisen because we have allowed the computing industry to define the curriculum. We have mistaken the transient demands of the marketplace for the eternal principles of the discipline. Every few years, we scramble to update our courses to include the latest programming language or development methodology, never pausing to ask whether these additions contribute to genuine understanding or merely add to the confusion.
+
+Mathematics is not an optional luxury in computer science education—it is the very essence of our field. A student who cannot construct a formal proof cannot truly understand why a program works. A student who is not comfortable with discrete mathematics cannot appreciate the elegance of algorithmic design. A student who has not mastered the art of abstraction cannot hope to tackle the complexity of real systems.
+
+We must return to first principles. Our curricula should be built upon a solid foundation of mathematics, logic, and formal methods. Students should learn to think precisely and reason rigorously before they are introduced to any particular programming language or system. They should understand the theory of computation before they learn to implement data structures. They should master the art of specification before they attempt to write code.
+
+I am not advocating for a return to purely theoretical education divorced from practical concerns. Rather, I am calling for an education that prepares students to think clearly about practical problems. A student who truly understands the mathematical foundations of computer science will be able to adapt to any programming language or development environment. A student who has learned only the superficial aspects of current technology will be helpless when that technology becomes obsolete.
+
+The mediocrity I observe in recent graduates is not a reflection of their innate abilities but of our failure to provide them with proper intellectual tools. We have taught them to copy and modify existing code rather than to create new solutions from first principles. We have encouraged them to rely on trial and error rather than mathematical analysis. We have rewarded speed of implementation over correctness of reasoning.
+
+This must change. We must have the courage to resist the pressure to make our curricula "relevant" to current industry practices. We must insist on mathematical rigor even when it is difficult or unpopular. We must remember that our primary obligation is not to the computing industry but to the intellectual integrity of our discipline.
+
+The students we graduate today will shape the future of computing. If we continue to provide them with superficial training rather than deep understanding, we will be responsible for the decline of our field. But if we have the wisdom to return to sound educational principles, we can prepare a generation of computer scientists who will advance the art and science of computation in ways we can barely imagine.
+
+I call upon each of you to examine your own courses and ask whether they contribute to genuine understanding or merely add to the accumulation of facts and techniques. The future of computer science depends upon our answer to this question.
+
+Yours in the cause of educational excellence,
+Edsger W. Dijkstra
+
+Austin, 1988

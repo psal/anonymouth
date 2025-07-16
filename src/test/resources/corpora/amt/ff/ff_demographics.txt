@@ -1,0 +1,9 @@
+
+
+Age: 41
+Language: English
+Gender: male
+Education: Bachelor Arts
+Occupation: Tutor
+Background: N,N,N,N,N
+

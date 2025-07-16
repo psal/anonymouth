@@ -1,0 +1,46 @@
+<problem-set>
+	<training name="Authors">
+		<author name="aa">
+			<document
+                title="aa_01_1.txt"
+            >src/test/resources/corpora/amt/aa/aa_01_1.txt</document>
+			<document
+                title="aa_02_1_2.txt"
+            >src/test/resources/corpora/amt/aa/aa_02_1_2.txt</document>
+			<document
+                title="aa_03_2.txt"
+            >src/test/resources/corpora/amt/aa/aa_03_2.txt</document>
+		</author>
+		<author name="bass-e">
+			<document
+                title="5.txt"
+            >src/test/resources/corpora/enron_demo/bass-e/5.txt</document>
+			<document
+                title="6.txt"
+            >src/test/resources/corpora/enron_demo/bass-e/6.txt</document>
+			<document
+                title="7.txt"
+            >src/test/resources/corpora/enron_demo/bass-e/7.txt</document>
+		</author>
+		<author name="h">
+			<document
+                title="h_01.txt"
+            >src/test/resources/corpora/drexel_1/h/h_01.txt</document>
+			<document
+                title="h_02.txt"
+            >src/test/resources/corpora/drexel_1/h/h_02.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="1.txt">src/test/resources/corpora/nietzsche/1.txt</document>
+			<document title="2.txt">src/test/resources/corpora/nietzsche/2.txt</document>
+			<document title="3.txt">src/test/resources/corpora/nietzsche/3.txt</document>
+		</author>
+	</training>
+	<test>
+		<author name="~* you *~">
+			<document
+                title="1.txt"
+            >src/test/resources/problems/vangogh/1.txt</document>
+		</author>
+	</test>
+</problem-set>

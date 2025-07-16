@@ -1,0 +1,9 @@
+
+
+Age: 25
+Language: English
+Gender: male
+Education: BA
+Occupation: Copywriter
+Background: Y,Y,Y,Y,Y
+

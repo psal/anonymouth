@@ -1,0 +1,9 @@
+
+
+Age: 18
+Language: English
+Gender: male
+Education: some college
+Occupation: student
+Background: Y,Y,Y,Y,Y
+

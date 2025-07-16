@@ -1,0 +1,14 @@
+#User Preferences
+#Mon Jul 14 08:39:43 IRST 2025
+maxFeatures=500
+recentProbSet=
+filterAddSuggestions=true
+translate=false
+autoHighlight=true
+warnQuit=false
+versionAutoSave=true
+highlightSents=true
+autoSave=true
+highlightColor=0
+fontSize=14
+numOfThreads=4

@@ -1,0 +1,9 @@
+
+
+Age: 60
+Language: English
+Gender: female
+Education: BS
+Occupation: Retired RN
+Background: N,N,N,N,N
+

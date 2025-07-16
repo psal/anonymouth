@@ -1,0 +1,9 @@
+
+
+Age: 22
+Language: English
+Gender: male
+Education: College
+Occupation: Teacher
+Background: Y,Y,Y,Y,Y
+

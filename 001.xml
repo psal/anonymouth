@@ -1,0 +1,26 @@
+<problem-set>
+	<training name="Authors">
+		<author name="beethoven">
+			<document title="1.txt">./src/test/resources/corpora/beethoven/1.txt</document>
+			<document title="2.txt">./src/test/resources/corpora/beethoven/2.txt</document>
+			<document title="3.txt">./src/test/resources/corpora/beethoven/3.txt</document>
+		</author>
+		<author name="dijkstra">
+			<document title="1.txt">./src/test/resources/corpora/dijkstra/1.txt</document>
+			<document title="2.txt">./src/test/resources/corpora/dijkstra/2.txt</document>
+		</author>
+		<author name="mozart">
+			<document title="1.txt">./src/test/resources/corpora/mozart/1.txt</document>
+			<document title="3.txt">./src/test/resources/corpora/mozart/3.txt</document>
+		</author>
+		<author name="~* you *~">
+			<document title="2.txt">./src/test/resources/problems/vangogh/2.txt</document>
+			<document title="3.txt">./src/test/resources/problems/vangogh/3.txt</document>
+		</author>
+	</training>
+	<test>
+		<author name="~* you *~">
+			<document title="1.txt">./src/test/resources/problems/vangogh/1.txt</document>
+		</author>
+	</test>
+</problem-set>

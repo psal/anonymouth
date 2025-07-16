@@ -1,0 +1,9 @@
+
+
+Age: 28
+Language: English
+Gender: female
+Education: Bachelor of Arts
+Occupation: Housewife
+Background: N,N,N,N,N
+

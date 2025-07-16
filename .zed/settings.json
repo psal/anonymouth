@@ -1,0 +1,36 @@
+{
+    "lsp": {
+        "jdtls": {
+            "initialization_options": {
+                "settings": {
+                    "home": "/home/amadeus/.sdkman/candidates/java/24.0.1-tem",
+                    "jdt": {
+                        "ls": {
+                            "lombokSupport": {
+                                "enabled": false
+                            }
+                        }
+                    },
+                    "referencesCodeLens": {
+                        "enabled": true
+                    },
+                    "signatureHelp": {
+                        "enabled": true
+                    },
+                    "implementationsCodeLens": {
+                        "enabled": true
+                    },
+                    "format": {
+                        "enabled": true
+                    },
+                    "saveActions": {
+                        "organizeImports": true
+                    },
+                    "autobuild": {
+                        "enabled": false
+                    }
+                }
+            }
+        }
+    }
+}
